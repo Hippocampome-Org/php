@@ -41,10 +41,18 @@ Once you have made some changes that you are ready to commit to the dev site:
 `git add .`
 - Commit the changes to your local master branch  
 `git commit -m "COMMIT MESSAGE HERE"`
+- Fetch down any updates that might have occurred while you were working
+`git fetch`
+- Rebase to apply your changes to the newest version that was just pulled down
+`git rebase origin/master`
+- An alternative to rebase is to use merge here
+`git merge origin/master`
 - Push the changes up to the github version of the dev branch  
 `git push`
 
 In order for `git push` to work here, you must be added as a collaborator on the Hippocampome Github account.  That's because you'll be actually writing to the account's php repo.
+
+*NOTE: `git push` will fail if someone else has pushed to the remote since you branched off of it and you have not yet incorporated their changes.  This will prevent you from overwriting changes other people made.  In order to incorporate any changes made by others while you were working, you perform a `git fetch` followed by a `git rebase` or `git merge`.  The `fetch` retrieves their work, and the `rebase` or `merge` incorporates it into your own.  `rebase` and `merge` do similar things, but rebase does it in a way that keeps the history cleaner.  You should never use rebase for changes that you've already pushed-- use merge instead.  Just use rebase when you want to apply private changes you've been working on to the most recent version of the central repo. More on rebase/merge differences [here](http://git-scm.com/book/en/Git-Branching-Rebasing)*
 
 ## Git and Github
 
@@ -116,4 +124,8 @@ The above provides the bare minimum of information.  If you want to know more, y
 - [Remote Repos](http://gitref.org/remotes/)
 - [Inspecting and Comparing Repos](http://gitref.org/inspect/)
 
-[Here](http://git-scm.com/book/en/Git-Branching-Remote-Branches) is a much more in-depth look at the mechanics of remotes and branching
+[Here](http://git-scm.com/book/en/Git-Branching-Remote-Branches) is a much more in-depth look at the mechanics of remotes and branching  
+
+[Here](http://git-scm.com/book/en/Git-Branching-Rebasing) is a good reference for understanding the difference between rebase and merge
+
+
