@@ -1,6 +1,6 @@
 ## Hippocampome Development Model
 
-Source code for all aspects of the Hippocampome project is maintained on GitHub under the "hippocampome" account(https://github.com/blog/674-introducing-organizations) (this is distinct from a personal account).  Individual repositories under this account are accessible using the URL scheme `http://github.com/REPOSITORY_NAME`.  These repositories are public-- anyone can read from them.
+Source code for all aspects of the Hippocampome project is maintained on GitHub under the "hippocampome" account.  Individual repositories under this account are accessible using the URL scheme `http://github.com/REPOSITORY_NAME`.  These repositories are public-- anyone can read from them.
 
 A repository is maintained on Github for each aspect of the project.  At present the only repository is 'php', which contains PHP portal code.  Eventually the database import code will be added.  A 'wrapper' repository named 'hippocampome' that contains the others as submodules may also be added at some point.
 
