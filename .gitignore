@@ -3,3 +3,5 @@ access_db.php
 .buildpath
 .project
 .settings/
+error_log
+hits.txt
