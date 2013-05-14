@@ -1,12 +1,10 @@
 <?php
-session_start();
 include ("access_db.php");
 include ("simphp-2.0.php");
 $_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
 
-$password = $_REQUEST['password'];
-if ($password)
+if ($_REQUEST['password'])
 {
 	$query = "SELECT permission FROM user WHERE password = '$password'";
 	$rs = mysql_query($query);
