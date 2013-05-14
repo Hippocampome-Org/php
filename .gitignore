@@ -1,2 +1,5 @@
 .DS_Store
 access_db.php
+.buildpath
+.project
+.settings/
