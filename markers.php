@@ -293,7 +293,8 @@ function check_color($variable, $unvetted, $conflict_note)
 	if ($variable == 'unknown')
 	{
 		$link[0] = "<img src='images/unknown.png' border='0' width='15px' />";
-		$link[1] = $variable;
+		//$link[1] = $variable;
+		$link[1] = NULL;
 	}	
 	
 	if ($variable == 'nothing')
