@@ -7,7 +7,7 @@ function remove_table_by_tyme()  // after 2 hours:
 
 	$time_1 = time();
 
-	$query = "SHOW TABLES from hippodevome ";
+	$query = "SHOW TABLES from {$GLOBALS['DB_NAME']} ";
 	$rs2 = mysql_query($query);			
 	$n_table = 0;
 	while ($row = mysql_fetch_row($rs2))
