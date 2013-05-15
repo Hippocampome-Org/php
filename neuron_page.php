@@ -479,11 +479,16 @@ if ($text_file_creation)
 					{
 						if($v==sizeof($auth_name)-1)
 						{
-							print(" $auth_name[$v].<br/>");
+							$f_auth=substr($auth_name[$v],0,1);
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>.<br/>");
+							/*<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' target='_blank' class='$font_col'>
+							$part
+							</a>*/
 						}
 						else
 						{
-							print(" $auth_name[$v],");
+							$f_auth=substr($auth_name[$v],0,1);
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>,");
 						}
 
 					}		
@@ -754,6 +759,7 @@ if ($text_file_creation)
 				sort ($auth_pos);
 			
 			$name_authors = NULL;
+			$name_authors_representative=NULL;
 			for ($ii3=0; $ii3<$n_author; $ii3++)
 			{
 				$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
@@ -761,10 +767,23 @@ if ($text_file_creation)
 				
 				$author -> retrive_by_id($id_author);
 				$name_a = $author -> getName_author_array(0);
-				
+				//$name_b=trim($name_a);
+				$f_auth1=substr($name_a,0,1);
+				$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth1&new=1&see_result=1' target='_blank'>$name_a</a>";
+				if($name_authors_representative!=null)
+				{
+					$name_authors_representative = $name_authors_representative.', '.$name_b;
+				}
+				else 
+				{
+					$name_authors_representative=$name_b;
+				}
+		
 				$name_authors = $name_authors.', '.$name_a;
 			}
 			$name_authors[0] = '';
+			$name_auhors_representative[0]= '';
+			$name_auhors_representative=trim($name_auhors_representative);
 			$name_authors = trim($name_authors);				
 
 			$pages= $first_page." - ".$last_page;
@@ -814,7 +833,7 @@ if ($text_file_creation)
 							</td>
 							<td align='left' width='80%' class='table_neuron_page2'>
 								<font color='#000000'><strong>$title</strong></font> <br>
-								$name_authors <br>
+								$name_authors_representative <br>
 								$publication, $year, $volume $issue_tot pages: $pages <br>
 								$string_pmid <font class='font13'>$pmid_isbn</font></a>; $doi_tot
 							</td>
