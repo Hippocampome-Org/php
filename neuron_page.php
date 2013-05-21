@@ -1366,6 +1366,43 @@ if ($text_file_creation)
       //sort($net_targets);
 */
 
+      // potential sources of input
+      $result = mysql_query($dendrite_query);
+      $dendrite_parcels = result_set_to_array($result, 'object');
+      //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
+
+      $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
+      //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
+
+      $result = mysql_query($explicit_source_query);
+      $explicit_sources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
+
+	  if (count($explicit_sources) >= 1) {
+			$list_explicit_sources = array_unique($explicit_sources);
+			$list_explicit_sources = get_sorted_records($list_explicit_sources);
+	  }
+	  
+      $result = mysql_query($explicit_nonsource_query);
+      $explicit_nonsources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
+
+	  if (count($explicit_nonsources) >= 1) {
+			$list_explicit_nonsources = array_unique($explicit_nonsources);
+			$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
+	  }
+	  
+      $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      $list_potential_sources = array_unique($list_potential_sources);
+      $list_potential_sources = get_sorted_records($list_potential_sources);
+/*
+      $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
+
+      $net_sources = array_unique($net_sources);
+      $net_sources = get_sorted_records($net_sources);
+*/
+      
 // Start R 2C connectivity changes
       // print it out
       print connection_table_head("Known targets of output");
@@ -1394,7 +1431,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_sources as $target) { print name_row($target); }
+			foreach($list_explicit_sources as $source) { print name_row($source); }
 	  print connection_table_foot();
 
       print connection_table_head("Potential sources of input");
@@ -1409,7 +1446,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_nonsources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_nonsources as $target) { print name_row($target); }
+			foreach($list_explicit_nonsources as $source) { print name_row($source); }
 	  print connection_table_foot();
 
 // End R 2C connectivity changes
