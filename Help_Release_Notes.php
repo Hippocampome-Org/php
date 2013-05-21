@@ -129,7 +129,7 @@ font-family:"Arial","sans-serif"'>v1.0&alpha; R 3A:</span></p>
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed the missing connectivity information on the Neuron pages.
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Replaced missing code, which fixes the missing connectivity information on the Neuron pages.
 (21 May 2013)
 </span></p>
 
