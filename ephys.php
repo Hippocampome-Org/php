@@ -532,13 +532,12 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 				
 				// original code, pre-Vrest minus sign kludge
 				if ($ephys2[Vrest] != NULL)
-					$unit = 'mV';
+					$formatted_value = number_format($ephys2[Vrest],1);
 				else
-					$unit = '';					
+					$formatted_value = NULL;
 					
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vrest]&id_neuron=$id_type&ep=Vrest' target='_blank' class='$color_unvetted'>$ephys2[Vrest] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vrest]&id_neuron=$id_type&ep=Vrest' target='_blank' class='$color_unvetted'>$ephys2[Vrest]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vrest]&id_neuron=$id_type&ep=Vrest' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+
 				//
 				// start of Vrest minus sign kludge code
 				//if ($ephys2[Vrest] != NULL){
@@ -558,13 +557,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';
 					
 				if ($ephys2[Rin] != NULL)
-					$unit = 'M&Omega;';
+					$formatted_value = number_format($ephys2[Rin],1);
 				else
-					$unit = '';	
-											
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Rin]&id_neuron=$id_type&ep=Rin' target='_blank' class='$color_unvetted'>$ephys2[Rin] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Rin]&id_neuron=$id_type&ep=Rin' target='_blank' class='$color_unvetted'>$ephys2[Rin]</a>");
-				print ("</td>");
+					$formatted_value = NULL;
+				
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Rin]&id_neuron=$id_type&ep=Rin' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 	
 
 
@@ -573,15 +570,13 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4_unvetted';
 					else	
 						$color_unvetted = 'font4';
-						
+
 				if ($ephys2[tm] != NULL)
-					$unit = 'ms';
+					$formatted_value = number_format($ephys2[tm],1);
 				else
-					$unit = '';							
-					
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[tm]&id_neuron=$id_type&ep=tau' target='_blank' class='$color_unvetted'>$ephys2[tm] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[tm]&id_neuron=$id_type&ep=tau' target='_blank' class='$color_unvetted'>$ephys2[tm]</a>");
-				print ("</td>");		
+					$formatted_value = NULL;
+													
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[tm]&id_neuron=$id_type&ep=tau' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");		
 
 
 				
@@ -593,13 +588,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';
 
 				if ($ephys2[Vthresh] != NULL)
-					$unit = 'mV';
+					$formatted_value = number_format($ephys2[Vthresh],1);
 				else
-					$unit = '';	
+					$formatted_value = NULL;
 															
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vthresh]&id_neuron=$id_type&ep=V-thresh' target='_blank' class='$color_unvetted '>$ephys2[Vthresh] $unit </a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vthresh]&id_neuron=$id_type&ep=V-thresh' target='_blank' class='$color_unvetted '>$ephys2[Vthresh]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vthresh]&id_neuron=$id_type&ep=V-thresh' target='_blank' class='$color_unvetted '>$formatted_value</a></td>");
 
 
 
@@ -610,13 +603,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';					
 
 				if ($ephys2[fast_AHP] != NULL)
-					$unit = 'mV';
+					$formatted_value = number_format($ephys2[fast_AHP],1);
 				else
-					$unit = '';	
-										
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[fast_AHP]&id_neuron=$id_type&ep=Fast AHP' target='_blank' class='$color_unvetted'>$ephys2[fast_AHP] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[fast_AHP]&id_neuron=$id_type&ep=Fast AHP' target='_blank' class='$color_unvetted'>$ephys2[fast_AHP]</a>");
-				print ("</td>");
+					$formatted_value = NULL;
+														
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[fast_AHP]&id_neuron=$id_type&ep=Fast AHP' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 
 
 
@@ -628,13 +619,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';
 
 				if ($ephys2[AP_ampl] != NULL)
-					$unit = 'mV';
+					$formatted_value = number_format($ephys2[AP_ampl],1);
 				else
-					$unit = '';	
+					$formatted_value = NULL;
 					
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_ampl]&id_neuron=$id_type&ep=AP ampl' target='_blank' class='$color_unvetted'>$ephys2[AP_ampl] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_ampl]&id_neuron=$id_type&ep=AP ampl' target='_blank' class='$color_unvetted'>$ephys2[AP_ampl]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_ampl]&id_neuron=$id_type&ep=AP ampl' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 
 
 				
@@ -645,13 +634,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';				
 
 				if ($ephys2[AP_width] != NULL)
-					$unit = 'ms';
+					$formatted_value = number_format($ephys2[AP_width],2);
 				else
-					$unit = '';	
+					$formatted_value = NULL;
 											
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_width]&id_neuron=$id_type&ep=AP width' target='_blank' class='$color_unvetted'>$ephys2[AP_width] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_width]&id_neuron=$id_type&ep=AP width' target='_blank' class='$color_unvetted'>$ephys2[AP_width]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_width]&id_neuron=$id_type&ep=AP width' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 
 
 
@@ -662,13 +649,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';					
 				
 				if ($ephys2[max_fr] != NULL)
-					$unit = 'Hz';
+					$formatted_value = number_format($ephys2[max_fr],1);
 				else
-					$unit = '';	
+					$formatted_value = NULL;
 									
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[max_fr]&id_neuron=$id_type&ep=Max F.R.' target='_blank' class='$color_unvetted'>$ephys2[max_fr] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[max_fr]&id_neuron=$id_type&ep=Max F.R.' target='_blank' class='$color_unvetted'>$ephys2[max_fr]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[max_fr]&id_neuron=$id_type&ep=Max F.R.' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 
 
 				
@@ -679,13 +664,11 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						$color_unvetted = 'font4';					
 
 				if ($ephys2[slow_AHP] != NULL)
-					$unit = 'mV';
+					$formatted_value = number_format($ephys2[slow_AHP],2);
 				else
-					$unit = '';	
+					$formatted_value = NULL;
 					
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[slow_AHP]&id_neuron=$id_type&ep=Slow AHP' target='_blank' class='$color_unvetted'>$ephys2[slow_AHP] $unit</a>");
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[slow_AHP]&id_neuron=$id_type&ep=Slow AHP' target='_blank' class='$color_unvetted'>$ephys2[slow_AHP]</a>");
-				print ("</td>");
+				print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[slow_AHP]&id_neuron=$id_type&ep=Slow AHP' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 		
 		
 		
@@ -693,10 +676,14 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 					if ($unvetted_ephys2[sag_ratio] == 1)
 						$color_unvetted = 'font4_unvetted';				
 					else	
-						$color_unvetted = 'font4';					
-									
-					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[sag_ratio]&id_neuron=$id_type&ep=Sag-ratio' target='_blank' class='$color_unvetted'>$ephys2[sag_ratio]</a>");
-				print ("</td>");
+						$color_unvetted = 'font4';
+										
+					if ($ephys2[sag_ratio] != NULL)
+						$formatted_value = number_format($ephys2[sag_ratio],2);
+					else
+						$formatted_value = NULL;
+					
+					print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[sag_ratio]&id_neuron=$id_type&ep=Sag-ratio' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
 				
 				
 				
