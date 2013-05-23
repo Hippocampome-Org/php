@@ -142,8 +142,8 @@ if ($page)
 	$color = $_REQUEST['color'];
 
 
-	if ($val_property == 'Sub_P')							// CLR modified this line
-		$val_property = 'Sub P';								// CLR modified this line
+	if ($val_property == 'sub_P')
+		$val_property = 'Sub P';
 	if ($val_property == 'GABAa_alfa')
 		$val_property = 'Gaba-a-alpha';	
 	if ($val_property == 'a-act2')
@@ -152,8 +152,6 @@ if ($page)
 		$val_property = 'GAT-1';	
  	if ($val_property == 'mGluR2_3')
 		$val_property = 'mGluR2/3';	  		
- 	if ($val_property == '5HT_3')					// CLR modified (added) this line
-		$val_property = '5HT-3';						// CLR modified (added) this line
 
 	$_SESSION['id_neuron'] = $id_neuron;
 	$_SESSION['val_property'] = $val_property;	
@@ -577,7 +575,9 @@ function show_only_authors(link, color)
 				<td align="left" width="80%" class="table_neuron_page2">
 					&nbsp; 
 					<?php			
-						 print $type->getName(); 
+						 $id=$type->getId();
+								 $name=$type->getName();
+					print("<a href='neuron_page.php?id=$id'>$name</a>");
 					 ?>
 				</td>				
 			</tr>	
