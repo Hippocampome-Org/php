@@ -228,8 +228,10 @@ for ($i1=0; $i1<$n_epdata; $i1++)
 		
 		$author -> retrive_by_id($id_author);
 		$name_a = $author -> getName_author_array(0);
+		$f_auth=substr($name_a,0,1);
+		$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth&new=1&see_result=1' target='_blank'>$name_a</a>";
 		
-		$name_authors = $name_authors.', '.$name_a;
+		$name_authors = $name_authors.', '.$name_b;
 	}
 	$name_authors[0] = '';		
 
@@ -284,7 +286,9 @@ $res=show_ephys($ep);
 					Neuron Type
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; <?php print $type->getName(); ?>
+					&nbsp; <?php $id=$type->getId();
+								 $name=$type->getName();
+					print("<a href='neuron_page.php?id=$id'>$name</a>"); ?>
 				</td>				
 			</tr>							
 		</table>
@@ -352,9 +356,9 @@ $res=show_ephys($ep);
 				</td>								
 				<td align='left' width='85%' class='table_neuron_page2'>");
 				if ($res[0]=='Sag ratio')
-					print ("<strong>$complete_name:</strong> ");
+					print ("<strong>$complete_name:</strong>");
 				else
-				  print ("<strong>$complete_name ($res[0]):</strong> ");
+				  print ("<strong>$complete_name ($res[0]):</strong>");
 			
 				// *************************************************************************************************
 				// *************************************************************************************************
@@ -368,20 +372,15 @@ $res=show_ephys($ep);
 				// both value1 and value2:
 				if ($value1[$i1] && $value2[$i1] && !$istim[$i1])
 				{
-					if ($res[2] != '')
-    					$meas ="[$value1[$i1], $value2[$i1]] $res[2]";
-					else
-					    $meas ="[$value1[$i1], $value2[$i1]]";
+					
+					$meas =" [$value1[$i1], $value2[$i1]] $res[2] ";
 				}
 				// no value2, but has value1 and error:
 				if ($value1[$i1] && $error[$i1] && !$istim[$i1])
 				{
 					// original code, pre-Vrest minus sign kludge
-					if ($res[2] != '')
-    					$meas="$value1[$i1] &plusmn; $error[$i1] $res[2]";
-					else
-					    $meas="$value1[$i1] &plusmn; $error[$i1]";
-							
+					$meas=" $value1[$i1] &plusmn; $error[$i1] $res[2] ";
+					
 					// start of Vrest minus sign kludge
 					//if ($res[0] == 'V<small><sub>rest</small></sub>')
 					//	$meas =" -$value1[$i1] &plusmn; $error[$i1] $res[2] ";
@@ -392,7 +391,7 @@ $res=show_ephys($ep);
 				// no value2, but has value1 and error:
 				if ($value1[$i1] && !$value2[$i1] && !$error[$i1] && !$istim[$i1])
 				{ 	
-						$meas ="$value1[$i1] $res[2]";
+						$meas =" $value1[$i1] $res[2] ";
 				}				
 				// istim field
 				if (($istim[$i1]) and ($istim[$i1] !='unknown' ))
@@ -408,33 +407,16 @@ $res=show_ephys($ep);
 						$mean_value = "$value1[$i1]";	
 						$range = "";
 					}
-					
 					if ($error[$i1])
 						$error_value = "&plusmn; $error[$i1]";
-					else
-					  $error_value = "";
 					if ($time[$i1])
-						 $time_val = ", $time[$i1] ms";
-					else
-					   $time_val = "";
+						$time_val = ", $time[$i1] ms";	
 					if ($istim[$i1])
-						$istim_show =", $istim[$i1] pA";
-					else
-					  $istim_show ="";
+						$istim_show =", ".$istim[$i1];
 
-					if ($res[2] != '')	
-							$meas ="$mean_value $range $error_value $res[2]$istim_show$time_val";
-					else
-							{
-							    if ($error_value=='' && $range == '')
-									    $meas="$mean_value$istim_show$time_val";
-									elseif ($error_value=='')
-    									$meas="$mean_value $range$istim_show$time_val";
-									elseif ($range == '')
-											$meas="$mean_value $error_value$istim_show$time_val";
-							}
+					$meas =" $mean_value $range $error_value $res[2]$istim_show pA$time_val";
 				}				
-			
+				
 
 				if ($error[$i1])
 				{
@@ -457,10 +439,10 @@ $res=show_ephys($ep);
 					$N = "(n=1)";	// R 2C (n=1)
 				  
 
-				print ("$meas $N$std_sem_value");	
+				print ("$meas  $N$std_sem_value ");	
 				print ("</td></tr></table>");
 				
-			// ... END CLR modifications		
+						
 
 			print ("<br>");
 

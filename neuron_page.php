@@ -490,11 +490,16 @@ if ($text_file_creation)
 					{
 						if($v==sizeof($auth_name)-1)
 						{
-							print(" $auth_name[$v].<br/>");
+							$f_auth=substr($auth_name[$v],0,1);
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>.<br/>");
+							/*<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' target='_blank' class='$font_col'>
+							$part
+							</a>*/
 						}
 						else
 						{
-							print(" $auth_name[$v],");
+							$f_auth=substr($auth_name[$v],0,1);
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>,");
 						}
 
 					}		
@@ -765,6 +770,7 @@ if ($text_file_creation)
 				sort ($auth_pos);
 			
 			$name_authors = NULL;
+			$name_authors_representative=NULL;
 			for ($ii3=0; $ii3<$n_author; $ii3++)
 			{
 				$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
@@ -772,10 +778,23 @@ if ($text_file_creation)
 				
 				$author -> retrive_by_id($id_author);
 				$name_a = $author -> getName_author_array(0);
-				
+				//$name_b=trim($name_a);
+				$f_auth1=substr($name_a,0,1);
+				$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth1&new=1&see_result=1' target='_blank'>$name_a</a>";
+				if($name_authors_representative!=null)
+				{
+					$name_authors_representative = $name_authors_representative.', '.$name_b;
+				}
+				else 
+				{
+					$name_authors_representative=$name_b;
+				}
+		
 				$name_authors = $name_authors.', '.$name_a;
 			}
 			$name_authors[0] = '';
+			$name_auhors_representative[0]= '';
+			$name_auhors_representative=trim($name_auhors_representative);
 			$name_authors = trim($name_authors);				
 
 			$pages= $first_page." - ".$last_page;
@@ -825,7 +844,7 @@ if ($text_file_creation)
 							</td>
 							<td align='left' width='80%' class='table_neuron_page2'>
 								<font color='#000000'><strong>$title</strong></font> <br>
-								$name_authors <br>
+								$name_authors_representative <br>
 								$publication, $year, $volume $issue_tot pages: $pages <br>
 								$string_pmid <font class='font13'>$pmid_isbn</font></a>; $doi_tot
 							</td>
@@ -1381,6 +1400,43 @@ if ($text_file_creation)
       //sort($net_targets);
 */
 
+      // potential sources of input
+      $result = mysql_query($dendrite_query);
+      $dendrite_parcels = result_set_to_array($result, 'object');
+      //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
+      
+      $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
+      //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
+      
+      $result = mysql_query($explicit_source_query);
+      $explicit_sources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
+      
+      if (count($explicit_sources) >= 1) {
+      	$list_explicit_sources = array_unique($explicit_sources);
+      	$list_explicit_sources = get_sorted_records($list_explicit_sources);
+      }
+       
+      $result = mysql_query($explicit_nonsource_query);
+      $explicit_nonsources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
+      
+      if (count($explicit_nonsources) >= 1) {
+      	$list_explicit_nonsources = array_unique($explicit_nonsources);
+      	$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
+      }
+       
+      $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      $list_potential_sources = array_unique($list_potential_sources);
+      $list_potential_sources = get_sorted_records($list_potential_sources);
+      /*
+       $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
+      
+      $net_sources = array_unique($net_sources);
+      $net_sources = get_sorted_records($net_sources);
+      */
+      
       // potential sources of input
       $result = mysql_query($dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
