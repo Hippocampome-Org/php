@@ -590,7 +590,9 @@ function show_only_morphology(link, start1, stop1)
 					Neuron Type
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; <?php print $type->getName(); ?>
+					&nbsp; <?php $id=$type->getId();
+								 $name=$type->getName();
+					print("<a href='neuron_page.php?id=$id'>$name</a>"); ?>
 				</td>				
 			</tr>
 			<tr>
@@ -1020,10 +1022,27 @@ function show_only_morphology(link, start1, stop1)
 				
 					// retrieve information about the authors, journals and otehr by using name of article:
 					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
-					$rs = mysql_query($query);					
+					$rs = mysql_query($query);	
+					$auth=array();	
+							
 					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysql_fetch_row($rs))
-					{						
+					{			
+						$auth=array();
+						$authors2="";
+						$f_auth="";
 						$authors1 = $authors;
+						$temp=explode(",", $authors);
+						$auth=array_merge($auth,$temp);
+						for($x=0;$x<sizeof($auth);$x++)
+						{
+							$f_auth=substr(trim($auth[$x]),0,1);
+							$auth_final=trim($auth[$x]);
+							if($x!=sizeof($auth)-1)
+								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1' target='_blank'>$auth[$x]</a>,";	
+							else 
+								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1' target='_blank'>$auth[$x]</a>";
+						}
+						
 						$year1 = $year;
 						$publication1 = $publication;
 						$PMID1 = $PMID;
@@ -1103,7 +1122,7 @@ function show_only_morphology(link, start1, stop1)
 							<td align='left' width='85%' class='table_neuron_page2'>
 							
 							<font color='#000000'><strong>$title_temp[$i]</strong></font> <br>
-							$authors1 <br>
+							$authors2 <br>
 							$publication1, $year1, $volume1 $issue_tot pages: $pages1 <br>
 							$string_pmid <font class='font13'>$PMID1</font></a>; $doi_tot
 							</td>	

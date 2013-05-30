@@ -59,6 +59,27 @@ if ($_REQUEST['searching'])
 	$_SESSION['and_or'] = $and_or;
 		
 }
+
+
+if($_REQUEST['new'])
+{
+	$ip_address = $_SERVER['REMOTE_ADDR'];
+	$ip_address = str_replace('.', '_', $ip_address);
+	$time_t = time();
+		
+	$name_temporary_table ='search1_'.$ip_address."__".$time_t;
+	$_SESSION['name_temporary_table'] = $name_temporary_table;
+		
+	$temporary ->setName_table($name_temporary_table);
+
+	$temporary -> create_temp_table ($name_temporary_table);
+	$temporary -> insert_temporary($_GET["first_author"], $_GET["name_author"]);
+	$temporary_search=0;
+		
+	$and_or = 'AND';
+	$_SESSION['and_or'] = $and_or;
+}
+	
 // ------------------------------------------------------------------------------------------------------
 
 // update tha letter in the temporary table: ------------------------------------------------------------
@@ -231,6 +252,8 @@ if ($_REQUEST['clear_all'])
 }
 // -------------------------------------------------------
 
+
+
 ?>
 
 
@@ -289,6 +312,10 @@ $(document).ready(function(){
 <!-- COPY IN ALL PAGES -->
 <?php include ("function/title.php"); ?>
 
+
+
+
+
 	<div id="menu_main_button_new">
 	<form action="index.php" method="post" style='display:inline'>
 		<input type="submit" name='index' value='Home' class="main_button"/> 
@@ -338,6 +365,7 @@ $(document).ready(function(){
 		<tr>		
 			<td width="100%" align="left">
 			<?php
+
 			
 				if ($and_or == 'AND')
 				{
