@@ -32,67 +32,78 @@ function show_ephys($var)
 	{	
 		$name_show = 'V<small><sub>rest</small></sub>';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}
 	if($var == 'Rin')
 	{	
 		$name_show = 'R<small><sub>in</small></sub>';
 		$flag = 2;
-		$units='M&Omega;';
+		$units = 'M&Omega;';
+		$num_decimals = 1;
 	}
 	if($var == 'tm')
 	{	
 		$name_show = '&tau;<small><sub>m</small></sub>';
 		$flag = 1;
-		$units='ms';
+		$units = 'ms';
+		$num_decimals = 1;
 	}
 	if($var == 'Vthresh')
 	{	
 		$name_show = 'V<small><sub>thresh</small></sub>';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}	
 	if($var == 'fast_AHP')
 	{	
     //		$name_show = 'Fast AHP<small><sub>ampl</small></sub>';
 		$name_show = 'Fast AHP';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}	
 	if($var == 'AP_ampl')
 	{	
 		$name_show = 'AP<small><sub>ampl</small></sub>';
 		$flag = 1;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}		
 	if($var == 'AP_width')
 	{	
 		$name_show = 'AP<small><sub>width</small></sub>';
 		$flag = 1;
-		$units='ms';
+		$units = 'ms';
+		$num_decimals = 2;
 	}		
 	if($var == 'max_fr')
 	{	
 		$name_show = 'Max F.R.';
 		$flag = 1;
-		$units='Hz';
+		$units = 'Hz';
+		$num_decimals = 1;
 	}		
 	if($var == 'slow_AHP')
 	{	
 		$name_show = 'Slow AHP';
 		$flag = 1;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 2;
 	}
 	if($var == 'sag_ratio')
 	{	
 		$name_show = 'Sag ratio';
 		$flag = 1;
-		$units='';
+		$units = '';
+		$num_decimals = 2;
 	}
 
-	$res[0]= $name_show;    //name showed
-	$res[1] =$flag;
-	$res[2] =$units;
+	$res[0] = $name_show;    //name showed
+	$res[1] = $flag;
+	$res[2] = $units;
+	$res[3] = $num_decimals;
 
 	return($res);
 }
@@ -1052,12 +1063,16 @@ if ($text_file_creation)
 
 							$epdata -> retrive_all_information($epdata_id);
 							$value1 = $epdata -> getValue1();
+							if($value1)
+								$value1 = number_format($value1,$res[3]);
 							$value2 = $epdata -> getValue2();
+							if($value2)
+								$value2 = number_format($value2,$res[3]);
 							$error = $epdata -> getError();
 							$n_measurement = $epdata -> getN();
 							$istim =  $epdata -> getIstim();	
 							$time =  $epdata -> getTime();	
-							$std_sem =  $epdata -> getStd_sem();	
+							$std_sem =  $epdata -> getStd_sem();
               array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations
 							
 							// -------------------------------------------------------------------------------------
@@ -1385,6 +1400,43 @@ if ($text_file_creation)
       //sort($net_targets);
 */
 
+      // potential sources of input
+      $result = mysql_query($dendrite_query);
+      $dendrite_parcels = result_set_to_array($result, 'object');
+      //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
+
+      $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
+      //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
+
+      $result = mysql_query($explicit_source_query);
+      $explicit_sources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
+
+	  if (count($explicit_sources) >= 1) {
+			$list_explicit_sources = array_unique($explicit_sources);
+			$list_explicit_sources = get_sorted_records($list_explicit_sources);
+	  }
+	  
+      $result = mysql_query($explicit_nonsource_query);
+      $explicit_nonsources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
+
+	  if (count($explicit_nonsources) >= 1) {
+			$list_explicit_nonsources = array_unique($explicit_nonsources);
+			$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
+	  }
+	  
+      $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      $list_potential_sources = array_unique($list_potential_sources);
+      $list_potential_sources = get_sorted_records($list_potential_sources);
+/*
+      $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
+
+      $net_sources = array_unique($net_sources);
+      $net_sources = get_sorted_records($net_sources);
+*/
+      
 // Start R 2C connectivity changes
       // print it out
       print connection_table_head("Known targets of output");
@@ -1413,7 +1465,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_sources as $target) { print name_row($target); }
+			foreach($list_explicit_sources as $source) { print name_row($source); }
 	  print connection_table_foot();
 
       print connection_table_head("Potential sources of input");
@@ -1428,7 +1480,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_nonsources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_nonsources as $target) { print name_row($target); }
+			foreach($list_explicit_nonsources as $source) { print name_row($source); }
 	  print connection_table_foot();
 
 // End R 2C connectivity changes
