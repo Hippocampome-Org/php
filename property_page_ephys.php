@@ -30,67 +30,78 @@ function show_ephys($var)
 	{	
 		$name_show = 'V<small><sub>rest</small></sub>';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}
 	if($var == 'Rin')
 	{	
 		$name_show = 'R<small><sub>in</small></sub>';
 		$flag = 2;
-		$units='M&Omega;';
+		$units = 'M&Omega;';
+		$num_decimals = 1;
 	}
 	if($var == 'tm')
 	{	
 		$name_show = '&tau;<small><sub>m</small></sub>';
 		$flag = 1;
-		$units='ms';
+		$units = 'ms';
+		$num_decimals = 1;
 	}
 	if($var == 'Vthresh')
 	{	
 		$name_show = 'V<small><sub>thresh</small></sub>';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}	
 	if($var == 'fast_AHP')
 	{	
     //		$name_show = 'Fast AHP<small><sub>ampl</small></sub>';
 		$name_show = 'Fast AHP';
 		$flag = 2;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}	
 	if($var == 'AP_ampl')
 	{	
 		$name_show = 'AP<small><sub>ampl</small></sub>';
 		$flag = 1;
-		$units='mV';
+		$units = 'mV';
+		$num_decimals = 1;
 	}		
 	if($var == 'AP_width')
 	{	
 		$name_show = 'AP<small><sub>width</small></sub>';
 		$flag = 1;
-		$units='ms';
+		$units = 'ms';
+		$num_decimals = 2;
 	}		
 	if($var == 'max_fr')
 	{	
 		$name_show = 'Max F.R.';
 		$flag = 1;
-		$units='Hz';
+		$units = 'Hz';
+		$num_decimals = 1;
 	}		
 	if($var == 'slow_AHP')
 	{	
 		$name_show = 'Slow AHP';
 		$flag = 1;
-		$units='mV ';
+		$units = 'mV';
+		$num_decimals = 2;
 	}
 	if($var == 'sag_ratio')
 	{	
 		$name_show = 'Sag ratio';
 		$flag = 1;
-		$units='';
+		$units = '';
+		$num_decimals = 2;
 	}
 
-	$res[0]= $name_show;    //name showed
-	$res[1] =$flag;
-	$res[2] =$units;
+	$res[0] = $name_show;    //name showed
+	$res[1] = $flag;
+	$res[2] = $units;
+	$res[3] = $num_decimals;
 
 	return($res);
 }
@@ -352,6 +363,11 @@ $res=show_ephys($ep);
 				// *************************************************************************************************
 				// *************************************************************************************************
 				
+				// BEGIN CLR modifications...
+				if ($value1[$i1])
+					$value1[$i1] = number_format($value1[$i1],$res[3]);
+				if ($value2[$i1])
+					$value2[$i1] = number_format($value2[$i1],$res[3]);
 				
 				// both value1 and value2:
 				if ($value1[$i1] && $value2[$i1] && !$istim[$i1])
