@@ -5,3 +5,5 @@ access_db.php
 .settings/
 error_log
 hits.txt
+figure
+figure_pdf
