@@ -1104,112 +1104,71 @@ if ($text_file_creation)
 							
 							// -------------------------------------------------------------------------------------
 							
-							// BEGIN CLR modifications...
+							// BEGIN DWW Istimul-Tstimul modifications
 								
-								// both value1 and value2: 
-								if ($value1 && $value2 && !$istim)
-								{
-								  if ($res[2] != '')
-    									$meas="[$value1, $value2] $res[2]";
-									else
-									    $meas="[$value1, $value2]";
-								}
-								// no value2, but has value1 and error:
-								if ($value1 && $error && !$istim)
-								{
-									// original code, pre-Vrest minus sign kludge
-									if ($res[2] != '')
-									    $meas="$value1 &plusmn; $error $res[2]";
-									else
-									    $meas="$value1 &plusmn; $error";
+							if ($value2)
+							{
+								$mean_value = ($value1 + $value2) / 2;
+								$range = "[$value1 - $value2]";
+							}
+							else
+							{
+								$mean_value = "$value1";	
+								$range = "";
+							}
 									
-									// start of Vrest minus sign kludge
-									//if ($res[0] == 'V<small><sub>rest</small></sub>')
-									//	$meas=" -$value1 &plusmn; $error $res[2] ";
-									//else
-									//	$meas=" $value1 &plusmn; $error $res[2] ";
-									// end of Vrest minus sign kludge
-								}
-								// no value2, but has value1 and error:
-								if ($value1 && !$value2 && !$error && !$istim)
-								{
-								  if ($res[2] != '')
-										$meas="$value1 $res[2]";
-									else
-									  $meas="$value1";
-								}		
-										
-								// istim field
-								if (($istim) and ($istim != "unknown"))
-								{
-									
-									if ($value2)
-									{
-										$mean_value = ($value1 + $value2) / 2;
-										$range = "[$value1 - $value2]";
-									}
-									else
-									{
-										$mean_value = "$value1";	
-										$range = "";
-									}
-									if ($error)
-										$error_value = "&plusmn; $error";
-									else
-									  $error_value = "";
-									
-									if ($time)
-										$time_val = ", $time ms";	
-									else 
-									  $time_val = "";
-									//if ($res[2])
-										//$res_2_1 = $res[2];
-										
-									//if ($istim)
-										//$istim_show =" $istim";	
-										
-									if ($istim)
-											$istim_show =", $istim pA";  //										$istim_show =", ".$istim;			
-								  else
-									    $istim_show ="";
-				
-									
-									if ($res[2] != '')
-    									$meas="$mean_value $range $error_value $res[2]$istim_show$time_val";
-									else
-									{
-									    if ($error_value=='' && $range == '')
-											    $meas="$mean_value$istim_show$time_val";
-											elseif ($error_value=='')
-    											$meas="$mean_value $range$istim_show$time_val";
-											elseif ($range == '')
-													$meas="$mean_value $error_value$istim_show$time_val";
-									}    		
-								}
+							if ($error)
+							{
+								$error_value = "&plusmn; $error";
 								
-																
-								if ($error)
+								if ($std_sem == 'std')
 								{
-									if ($std_sem == 'std')
-										$std_sem_value = ", Mean &plusmn; SD";
-									else if ($std_sem == 'sem')	
-										$std_sem_value = ", Mean &plusmn; SEM";
-									else
-										$std_sem_value ='';
-										
-									$n_error = 1;	
+									$std_sem_value = ", Mean &plusmn; SD";
+									array_push($abbreviations, $std_sem);
+								}
+								elseif ($std_sem == 'sem')	
+								{
+									$std_sem_value = ", Mean &plusmn; SEM";
+									array_push($abbreviations, $std_sem);
 								}
 								else
 									$std_sem_value ='';
+									
+								$n_error = 1;	
+							}
+							else
+							{
+							  	$error_value = "";
+							  	
+								$std_sem_value = "";
+							}
+							
+							if ($n_measurement)
+								$N = " (n=$n_measurement)";
+							else
+						  		$N = "";	
+					
+							if ($istim && ($istim != "unknown"))
+							{
+								$istim_show =", Istimul=$istim pA"; 			
+								array_push($abbreviations, 'istim');
+							}
+						  	else
+							    $istim_show ="";
 								
-								if ($n_measurement)
-									$N = "(n=$n_measurement)";
-								else 	 						// R 2C (n=1)
-								  $N = "(n=1)";	// R 2C (n=1)	
+							if ($time && ($time != "unknown"))
+							{
+								$time_val = ", Tstimul=$time ms";
+								array_push($abbreviations, 'time');
+							}
+							else 
+							  $time_val = "";
+
+    							$meas="$mean_value $range $error_value $res[2]$N$std_sem_value$istim_show$time_val";
+																
+							// END DWW Istimul-Tstimul modifications
 							
-							// ... END CLR modifications
-							
-							// -------------------------------------------------------------------------------------
+              				// -------------------------------------------------------------------------------------
 
 							$id_ephys2 = $epdata_id;						
 						}					
@@ -1238,7 +1197,7 @@ if ($text_file_creation)
 						    print ("<strong>$complete_name ($res[0]):</strong> ");
 						  print ("
 								<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject' target='_blank' class='$font_col'>
-								$meas $N$std_sem_value 
+								$meas
 								</a>
 								</td>					
 							</tr>							

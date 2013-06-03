@@ -296,6 +296,7 @@ $res=show_ephys($ep);
 		<br />				
 		
 		<?php
+		$abbreviations = array();	// DWW initialize array
 		
 		for ($i1=0; $i1<$n_article; $i1++)
 		{		
@@ -363,95 +364,95 @@ $res=show_ephys($ep);
 				// *************************************************************************************************
 				// *************************************************************************************************
 				
-				// BEGIN CLR modifications...
-				if ($value1[$i1])
-					$value1[$i1] = number_format($value1[$i1],$res[3]);
+				// BEGIN DWW Istimul-Tstimul modifications
+				
 				if ($value2[$i1])
-					$value2[$i1] = number_format($value2[$i1],$res[3]);
-				
-				// both value1 and value2:
-				if ($value1[$i1] && $value2[$i1] && !$istim[$i1])
 				{
-					
-					$meas =" [$value1[$i1], $value2[$i1]] $res[2] ";
-				}
-				// no value2, but has value1 and error:
-				if ($value1[$i1] && $error[$i1] && !$istim[$i1])
-				{
-					// original code, pre-Vrest minus sign kludge
-					$meas=" $value1[$i1] &plusmn; $error[$i1] $res[2] ";
-					
-					// start of Vrest minus sign kludge
-					//if ($res[0] == 'V<small><sub>rest</small></sub>')
-					//	$meas =" -$value1[$i1] &plusmn; $error[$i1] $res[2] ";
-					//else
-					//	$meas =" $value1[$i1] &plusmn; $error[$i1] $res[2] ";
-					// end of Vrest minus sign kludge
-				}
-				// no value2, but has value1 and error:
-				if ($value1[$i1] && !$value2[$i1] && !$error[$i1] && !$istim[$i1])
-				{ 	
-						$meas =" $value1[$i1] $res[2] ";
-				}				
-				// istim field
-				if (($istim[$i1]) and ($istim[$i1] !='unknown' ))
-				{ 
-					
-					if ($value2[$i1])
-					{
-						$mean_value = ($value1[$i1] + $value2[$i1]) / 2;
-						$range = "[$value1[$i1] - $value2[$i1]]";
-					}
-					else
-					{
-						$mean_value = "$value1[$i1]";	
-						$range = "";
-					}
-					if ($error[$i1])
-						$error_value = "&plusmn; $error[$i1]";
-					if ($time[$i1])
-						$time_val = ", $time[$i1] ms";	
-					if ($istim[$i1])
-						$istim_show =", ".$istim[$i1];
-
-					$meas =" $mean_value $range $error_value $res[2]$istim_show pA$time_val";
-				}				
-				
-
-				if ($error[$i1])
-				{
-					if ($std_sem[$i1] == 'std')
-						$std_sem_value = ", Mean &plusmn; SD";
-					else if ($std_sem[$i1] == 'sem')	
-						$std_sem_value = ", Mean &plusmn; SEM";
-					else
-						$std_sem_value ='';
-						
-					$n_error=1;	
+					$mean_value = ($value1[$i1] + $value2[$i1]) / 2;
+					$range = "[$value1[$i1] - $value2[$i1]]";
 				}
 				else
-					$std_sem_value ='';		
+				{
+					$mean_value = "$value1[$i1]";	
+					$range = "";
+				}
 				
+				if ($error[$i1])
+				{
+					$error_value = "&plusmn; $error[$i1]";
+
+					if ($std_sem[$i1] == 'std')
+					{
+						$std_sem_value = ", Mean &plusmn; SD";
+						array_push($abbreviations, $std_sem[$i1]);
+					}
+					elseif ($std_sem[$i1] == 'sem')	
+					{
+						$std_sem_value = ", Mean &plusmn; SEM";
+						array_push($abbreviations, $std_sem[$i1]);
+					}
+					else
+						$std_sem_value = "";
+
+					$n_error=1;							
+				}
+				else
+				{
+					$error_value = "";
+					
+					$std_sem_value = "";
+				}
 				
 				if ($n_measurement[$i1])
-					$N = "(n=$n_measurement[$i1])";
-				else 	 						// R 2C (n=1)
-					$N = "(n=1)";	// R 2C (n=1)
+					$N = " (n=$n_measurement[$i1])";
+				else
+					$N = "";
 				  
+				if ($istim[$i1] && ($istim[$i1] != "unknown"))
+				{
+					$istim_show =", Istimul=$istim[$i1] pA";
+					array_push($abbreviations, 'istim');
+				}
+				else
+					$istim_show ="";
 
-				print ("$meas  $N$std_sem_value ");	
-				print ("</td></tr></table>");
+				if ($time[$i1] && ($time[$i1] != "unknown"))
+				{
+					$time_val = ", Tstimul=$time[$i1] ms";
+					array_push($abbreviations, 'time');
+				}
+				else 
+					$time_val = "";
 				
-						
+				$meas = " $mean_value $range $error_value $res[2]$N$std_sem_value$istim_show$time_val";
+				
+				print ("$meas");	
+				
+				// END DWW Istimul-Tstimul modifications
 
-			print ("<br>");
+				print ("</td></tr></table>");
+						
+				print ("<br>");
 
 		} // end FOR $i1		
+
     // Abbreviation Definition Box
+	$abbreviations = array_unique($abbreviations);
+	
+	/* BEGIN DWW commented out section
     if (array_unique($std_sem)) {  // checks for non-null vals
       $definitions = get_abbreviation_definitions($std_sem);
-      $definition_str = implode('; ', $definitions);
-      print "<table align='center' width='80%' border='0' cellspacing='2' cellpadding='2'>
+    END DWW commented out section */
+	
+	// BEGIN DWW new code to check abbreviations list
+	if ($abbreviations) // checks for non-null vals
+	{
+      	$definitions = get_abbreviation_definitions($abbreviations);
+    // END DWW new code to check abbreviations list
+    
+      	$definition_str = implode('; ', $definitions);
+
+		print "<table align='center' width='80%' border='0' cellspacing='2' cellpadding='2'>
         <tr>
         <td width='10%' align='right'>
         </td>

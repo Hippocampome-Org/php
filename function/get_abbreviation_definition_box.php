@@ -5,7 +5,9 @@
 
 $definition_table = array(
   'std' => 'SD: standard deviation',
-  'sem' => 'SEM: standard error from the mean'
+  'sem' => 'SEM: standard error from the mean',
+  'istim' => 'Istimul: amplitude of current step stimulus',  // DWW new abbreviation definition
+  'time' => 'Tstimul: duration of current step stimulus'		// DWW new abbreviation definition
 );
 
 function get_abbreviation_definition_box($abbreviation_list) {
