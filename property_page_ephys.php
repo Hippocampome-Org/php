@@ -406,7 +406,7 @@ $res=show_ephys($ep);
 				if ($n_measurement[$i1])
 					$N = " (n=$n_measurement[$i1])";
 				else
-					$N = "";
+					$N = " (n=1)";
 				  
 				if ($istim[$i1] && ($istim[$i1] != "unknown"))
 				{

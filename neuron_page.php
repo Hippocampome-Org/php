@@ -1146,7 +1146,7 @@ if ($text_file_creation)
 							if ($n_measurement)
 								$N = " (n=$n_measurement)";
 							else
-						  		$N = "";	
+						  		$N = " (n=1)";	
 					
 							if ($istim && ($istim != "unknown"))
 							{
