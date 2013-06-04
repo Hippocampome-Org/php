@@ -364,6 +364,7 @@ $res=show_ephys($ep);
 				// *************************************************************************************************
 				
 
+
 				// BEGIN CLR modifications...
 				if ($value1[$i1])
 					$value1[$i1] = number_format($value1[$i1],$res[3]);

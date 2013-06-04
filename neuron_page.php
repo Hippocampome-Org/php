@@ -903,6 +903,7 @@ if ($text_file_creation)
 				</tr>	
 				<?php
 				// retrive information for POSITIVE AND WEAK-POSITIVE in property table.
+				$marker_pos_disp_counter = 0;
 				for ($i=0; $i<$n; $i++)
 				{
 					$property -> retrive_by_id($property_id[$i]);
@@ -930,7 +931,9 @@ if ($text_file_creation)
 								</a>	
 								</td>					
 							</tr>							
-						");										
+						");
+	
+						$marker_pos_disp_counter++;									
 					}
 
 					else;
@@ -962,10 +965,20 @@ if ($text_file_creation)
 								</a>
 								</td>					
 							</tr>							
-						");										
+						");
+
+						$marker_pos_disp_counter++;									
 					}
 					else;
-				}								
+				}
+				if ($marker_pos_disp_counter == 0) {
+					print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
+							</tr>
+							");
+				}
 				?>
 			</table>	
 	
@@ -980,6 +993,7 @@ if ($text_file_creation)
 				</tr>	
 				<?php
 				// retrive information for NEGATIVE in property table.
+				$marker_neg_disp_counter = 0;
 				for ($i=0; $i<$n; $i++)
 				{
 					$property -> retrive_by_id($property_id[$i]);
@@ -988,15 +1002,15 @@ if ($text_file_creation)
 					{
 						$part = $property -> getPart();
 						
-					// retrieve UNVETTED:
-					$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
-					$unvetted = $evidencepropertyyperel -> getUnvetted();
-					
-					if ($unvetted == 1)
-						$font_col = 'font4_unvetted';
-					else
-						$font_col = 'font4';
-												
+						// retrieve UNVETTED:
+						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
+						$unvetted = $evidencepropertyyperel -> getUnvetted();
+						
+						if ($unvetted == 1)
+							$font_col = 'font4_unvetted';
+						else
+							$font_col = 'font4';
+													
 						print ("
 							<tr>
 								<td width='20%' align='right'>
@@ -1007,10 +1021,21 @@ if ($text_file_creation)
 								</a>
 								</td>					
 							</tr>							
-						");										
+						");		
+
+						$marker_neg_disp_counter++;								
 					}
 					else;
-				}				
+				}	
+					
+				if ($marker_neg_disp_counter == 0) {
+					print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
+							</tr>
+							");
+				}	
 				?>
 				</table>	
 	
@@ -1028,7 +1053,9 @@ if ($text_file_creation)
 
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<?php		
-      $abbreviations = array();
+      		$abbreviations = array();
+      		
+      		$ephys_disp_counter = 0;
 			for ($i=0; $i<$n; $i++)
 			{
 				$property -> retrive_by_id($property_id[$i]);
@@ -1073,7 +1100,7 @@ if ($text_file_creation)
 							$istim =  $epdata -> getIstim();	
 							$time =  $epdata -> getTime();	
 							$std_sem =  $epdata -> getStd_sem();
-              array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations
+              				array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations
 							
 							// -------------------------------------------------------------------------------------
 							
@@ -1215,29 +1242,40 @@ if ($text_file_creation)
 								</a>
 								</td>					
 							</tr>							
-						");								
-            $meas = NULL;
+						");	
+							
+            			$meas = NULL;
+            			$ephys_disp_counter++;
 					}
 				}		
 			}
-
-      // Abbreviations Box
-      $abbreviations = array_unique($abbreviations);
-      if ($abbreviations) {  // checks for non-null vals
-        $definitions = get_abbreviation_definitions($abbreviations);
-        $definition_str = implode('; ', $definitions);
+			
+			if ($ephys_disp_counter == 0) {
 				print ("
-				<tr>
-					<td width='20%' align='right'>
-					</td>
-					<td align='left' width='80%' class='table_neuron_page2'>
-						<br>
-            $definition_str
-					</td>					
-				</tr>							
-				");	
-			}
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
+							</tr>
+							");
+			}			
 
+	      // Abbreviations Box
+	      $abbreviations = array_unique($abbreviations);
+	      if ($abbreviations) {  // checks for non-null vals
+		        $definitions = get_abbreviation_definitions($abbreviations);
+		        $definition_str = implode('; ', $definitions);
+				print ("
+					<tr>
+						<td width='20%' align='right'>
+						</td>
+						<td align='left' width='80%' class='table_neuron_page2'>
+							<br>
+	            			$definition_str
+						</td>					
+					</tr>							
+					");	
+			}
+					
 		?>
 		</table>	
 
@@ -1400,6 +1438,43 @@ if ($text_file_creation)
       //sort($net_targets);
 */
 
+      // potential sources of input
+      $result = mysql_query($dendrite_query);
+      $dendrite_parcels = result_set_to_array($result, 'object');
+      //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
+      
+      $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
+      //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
+      
+      $result = mysql_query($explicit_source_query);
+      $explicit_sources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
+      
+      if (count($explicit_sources) >= 1) {
+      	$list_explicit_sources = array_unique($explicit_sources);
+      	$list_explicit_sources = get_sorted_records($list_explicit_sources);
+      }
+       
+      $result = mysql_query($explicit_nonsource_query);
+      $explicit_nonsources = result_set_to_array($result, "t1_id");
+      //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
+      
+      if (count($explicit_nonsources) >= 1) {
+      	$list_explicit_nonsources = array_unique($explicit_nonsources);
+      	$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
+      }
+       
+      $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      $list_potential_sources = array_unique($list_potential_sources);
+      $list_potential_sources = get_sorted_records($list_potential_sources);
+      /*
+       $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
+      
+      $net_sources = array_unique($net_sources);
+      $net_sources = get_sorted_records($net_sources);
+      */
+      
       // potential sources of input
       $result = mysql_query($dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
