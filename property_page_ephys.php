@@ -365,6 +365,12 @@ $res=show_ephys($ep);
 				// *************************************************************************************************
 				
 				// BEGIN DWW Istimul-Tstimul modifications
+
+				// BEGIN CLR modifications...
+				if ($value1[$i1])
+					$value1[$i1] = number_format($value1[$i1],$res[3]);
+				if ($value2[$i1])
+					$value2[$i1] = number_format($value2[$i1],$res[3]);
 				
 				if ($value2[$i1])
 				{
