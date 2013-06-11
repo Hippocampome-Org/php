@@ -695,7 +695,7 @@ $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` 
 		}			
 			if($o==1)
 			{
-				print("no type");
+				print("(to be determined)");
 			}	
 			
 				print ("</td></tr>");
