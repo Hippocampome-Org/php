@@ -140,15 +140,15 @@ function check_unvetted1($id, $id_property, $evidencepropertyyperel)
 				
 function check_color($variable, $unvetted, $conflict_note)
 {
-//	if ($variable == 'weak_positive')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/weak_positive_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/weak_positive.png' border='0' width='15px' />";	
-//		
-//		$link[1] = $variable;
-//	}
+	if ($variable == 'weak_positive')
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
+		else
+			$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";	
+		
+		$link[1] = $variable;
+	}
 	if ($variable == 'negative')
 	{
 		if ($unvetted == 1)
