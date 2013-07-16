@@ -11,7 +11,7 @@ function part($n, $property)
 			$part = 'Axon';
 	}
 
-	if ($property == 'Markers')
+	if ($property == 'Molecular markers')
 	{
 		if ($n == 0)
 			$part = 'CB';

@@ -309,9 +309,8 @@ $(document).ready(function(){
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 					
 			<a href="search.php?searching=1"><font class="font7">Neuron</font></a> <font class="font7_A">|</font> 
-			<font class="font7_B"> Author</font><font class="font7_A">|</font> 
-			<a href="find_pmid.php?searching=1"><font class="font7"> PMID/ISBN</font> </a><font class="font7_A">|</font> 
-			</font>	
+			<font class="font7_B">Author</font> <font class="font7_A">|</font> 
+			<a href="find_pmid.php?searching=1"><font class="font7">PMID/ISBN</font></a> 
 		</td>
 	</tr>
 	</table>

@@ -49,15 +49,13 @@ $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_ty
 	</div>
 		
 <div class='sub_menu'>
-	<table width="90%" border="0" cellspacing="0" cellpadding="0">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="100%" align="left">
-			<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
-			<a href='morphology.php'><font class="font7">Morphology</font> <font class="font7_A">|</font> 
-			<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
-			<a href='ephys.php'><font class="font7"> Electrophysiology</font> </a><font class="font7_A">|</font> 
-			<font class="font7_B"> Connectivity</font>
-			</font>	
+		<td align="left">
+			<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
+			<a href='markers.php'><font class="font7">Molecular Markers</font></a> <font class="font7_A">|</font> 
+			<a href='ephys.php'><font class="font7">Electrophysiology</font></a><font class="font7_A">|</font> 
+			<font class="font7_B">Connectivity</font>
 		</td>
 	</tr>
 	</table>
