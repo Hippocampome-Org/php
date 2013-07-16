@@ -12,16 +12,26 @@ require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.evidenceevidencerel.php');
 require_once('class/class.epdataevidencerel.php');
 require_once('class/class.epdata.php');
+require_once('class/class.typetyperel.php');
 
 include ("function/name_ephys.php");
 include ("function/stm_lib.php");
 
 $type = new type($class_type);
+$type -> retrive_id();
+$number_type = $type->getNumber_type();
 $property_1 = new property($class_property);
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 $evidenceevidencerel = new evidenceevidencerel($class_evidenceevidencerel);
 $epdataevidencerel = new epdataevidencerel($class_epdataevidencerel);
 $epdata = new epdata($class_epdata);
+$typetyperel = new typetyperel();
+
+$morphology_properties_query =
+"SELECT DISTINCT t.name, t.subregion, t.nickname, p.subject, p.predicate, p.object, eptr.Type_id, eptr.Property_id
+      FROM EvidencePropertyTypeRel eptr
+      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      WHERE predicate = 'in' AND object REGEXP ':'";
 
 
 // Function to create the temporary table for the search field: ++++++++++++++++++++++++++++++++++
@@ -104,7 +114,7 @@ function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $
 		$property_id = $property_1 -> getProperty_id($i1);
 
 	
-		$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);	
+		$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
 		$n_type_id = $evidencepropertyyperel -> getN_Type_id();
 	
 		for ($i2=0; $i2<$n_type_id; $i2++)
@@ -192,7 +202,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 			
 	} // END $i
 	
-		return $new_type_id;
+	return $new_type_id;
 }
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -237,12 +247,12 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 			
 			$id_epdata = $epdataevidencerel -> getEpdata_id();
 			
-      // STM this must be fixed later... temporary hack to make ephys search work
+    	// STM this must be fixed later... temporary hack to make ephys search work
 			//$value_1 = str_replace(' mV', '', $value);
-      //$value_1 = str_replace(' ms', '', $value1);
-      //$value_1 = str_replace(' Hz', '', $value1);
-      //$value_1 = str_replace(' mOm', '', $value1);
-      $value_1 = preg_replace('/[^\d\.\-]/', '', $value);
+      		//$value_1 = str_replace(' ms', '', $value1);
+      		//$value_1 = str_replace(' Hz', '', $value1);
+      		//$value_1 = str_replace(' mOm', '', $value1);
+      		$value_1 = preg_replace('/[^\d\.\-]/', '', $value);
 			
 			$epdata -> retrive_all_information($id_epdata);
 			$epdata_value1 = $epdata -> getValue1();
@@ -292,6 +302,102 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 	
 	return $new_type_id;
 }
+
+
+// SEARCH Function for CONNECTIVITY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function connectivity_search ($evidencepropertyyperel, $property_1, $type, $part, $rel, $val)
+{	
+	$id = $type -> getId();
+	$evidencepropertyyperel -> retrive_evidence_id2($id);
+	$n_evidence_id_3 = $evidencepropertyyperel -> getN_evidence_id();
+	
+	$morphology_properties_query =
+	"SELECT DISTINCT t.name, t.subregion, t.nickname, p.subject, p.predicate, p.object, eptr.Type_id, eptr.Property_id
+		      FROM EvidencePropertyTypeRel eptr
+		      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+		      WHERE predicate = 'in' AND object REGEXP ':'";
+	
+	$explicit_target_and_source_base_query =
+	"SELECT
+		      t1.id as t1_id, t1.subregion as t1_subregion, t1.nickname as t1_nickname,
+		      t2.id as t2_id, t2.subregion as t2_subregion, t2.nickname as t2_nickname
+		      FROM TypeTypeRel ttr
+		      JOIN (Type t1, Type t2) ON ttr.Type1_id = t1.id AND ttr.Type2_id = t2.id";
+	
+	$one_type_query = $morphology_properties_query . " AND eptr.Type_id = '$id'";
+	
+	if (strpos($rel,'known to come from') === 0) {
+		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
+		$result = mysql_query($explicit_target_query);
+		$explicit_targets = result_set_to_array($result, "t2_id");
+		$conn_search_result_array = $explicit_targets;
+	}
+	elseif (strpos($rel,'known not to come from') === 0) {
+		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
+		$result = mysql_query($explicit_nontarget_query);
+		$explicit_nontargets = result_set_to_array($result, "t2_id");
+		$conn_search_result_array = $explicit_nontargets;
+	}
+	elseif (strpos($rel,'known to target') === 0) {
+		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
+		$result = mysql_query($explicit_source_query);
+		$explicit_sources = result_set_to_array($result, "t1_id");
+		$conn_search_result_array = $explicit_sources;
+	}
+	elseif (strpos($rel,'known not to target') === 0) {
+		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
+		$result = mysql_query($explicit_nonsource_query);
+		$explicit_nonsources = result_set_to_array($result, "t1_id");
+		$conn_search_result_array = $explicit_nonsources;
+	}
+	elseif (strpos($rel,'potentially from') === 0) {
+		$axon_query = $one_type_query . " AND subject = 'axons'";
+		$result = mysql_query($axon_query);
+		$axon_parcels = result_set_to_array($result, 'object');
+		$possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
+		
+		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
+		$result = mysql_query($explicit_target_query);
+		$explicit_targets = result_set_to_array($result, "t2_id");
+		
+		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
+		$result = mysql_query($explicit_nontarget_query);
+		$explicit_nontargets = result_set_to_array($result, "t2_id");		
+		$conn_search_result_array = array_merge(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
+	}
+	elseif (strpos($rel,'potentially targeting') === 0) {	
+		$dendrite_query = $one_type_query . " AND subject = 'dendrites'";
+		$result = mysql_query($dendrite_query);
+		$dendrite_parcels = result_set_to_array($result, 'object');
+		$possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
+				
+		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
+		$result = mysql_query($explicit_source_query);
+		$explicit_sources = result_set_to_array($result, "t1_id");
+		
+		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
+		$result = mysql_query($explicit_nonsource_query);
+		$explicit_nonsources = result_set_to_array($result, "t1_id");		
+		$conn_search_result_array = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+	}
+			
+	if ($conn_search_result_array != NULL) {
+		$conn_search_result_array = array_unique($conn_search_result_array);
+		$conn_search_result_array = get_sorted_records($conn_search_result_array);
+	}
+	
+	$n_tot = 0;
+	for ($i2=0; $i2<count($conn_search_result_array); $i2++) {
+		$type_id[$n_tot] = $conn_search_result_array[$i2]['id'];//$evidencepropertyyperel -> getType_id_array($i2);
+		$n_tot = $n_tot + 1;
+	} // END for $i2
+	
+	// Now, the program must remove the double or more type_id:	
+	if ($type_id != NULL)
+		$new_type_id=array_unique($type_id);
+	
+	return $new_type_id;
+}
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -316,8 +422,8 @@ while(list($id) = mysql_fetch_row($rs))
 }
 
 // 2) The program MUST separate the AND and the OR: --------------------------------------
-$a = 0;
-$b = 0;
+$a = 0;	// stores the number of OR lines
+$b = 0; // stores the number of AND lines + 1 (for the first line)
 for ($i=0; $i<$n_line; $i++)
 {
 	$query = "SELECT id, operator FROM $name_temporary_table_search WHERE id = '$id_line[$i]'";
@@ -353,9 +459,10 @@ $name_temporary_table_result = "search_result_table_".$ip_address."__".$time_t;
 create_result_table_result($name_temporary_table_result);
 
 $n_res1 = 0;
+
 for ($i=0; $i<=$a; $i++)   // Count for each OR
 {
-	$id_type_res = array(); // Arrays where will be inseted the results of ID TYPE 	
+	$id_type_res = array(); // Arrays where will be inseted the results of ID TYPE
 
 	$n_b = count($id_res[$i]);
 	
@@ -371,7 +478,6 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		$part = $varr[1];
 		$relation = $varr[2];
 		$value = $varr[3];
-
 
 		if ($relation == 'is found in')
 			$predicate = 'in';			
@@ -419,7 +525,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 			$res_marker = markers_search($evidencepropertyyperel, $property_1, $type, $subject, $predicate);
 		
 			if ($res_marker != NULL)
-				$id_type_res = array_merge($id_type_res, $res_marker); 			
+				$id_type_res = array_merge($id_type_res, $res_marker);
 		}
 		// END Script for MARKERS +++++++++++++++++++++++++++++++++++++++		
 		
@@ -434,6 +540,33 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 				$id_type_res = array_merge($id_type_res, $res_ephys); 	
 		}
 		// END Script for ELETROPHISIOLOGY +++++++++++++++++++++++++++++++++++++++			
+		
+		// Script for CONNECTIVITY +++++++++++++++++++++++++++++++++++++++++++
+		if ($property == 'Connectivity')
+		{
+			$colPos = strpos($value, ':');
+			$theSubregion = substr($value, 0, $colPos);
+			$theNickname = substr($value, $colPos+1, strlen($value)-1);
+						
+			$aSubregion = '';
+			$aNickname = '';
+			$aType = 0;
+			
+			while ( !(($aSubregion == $theSubregion) And ($aNickname == $theNickname)) And ($aType < $number_type)) {
+				$id_type_row = $type->getID_array($aType);
+				$type -> retrive_by_id($id_type_row);
+				$aSubregion = $type->getSubregion();
+				$aNickname = $type->getNickname();
+				$aType = $aType + 1;
+			}
+			
+			$res_connectivity = connectivity_search($evidencepropertyyperel, $property_1, $type, $part, $relation, $value);
+			
+			if ($res_connectivity != NULL)
+				$id_type_res = array_merge($id_type_res, $res_connectivity);
+		}
+		// END Script for CONNECTIVITY +++++++++++++++++++++++++++++++++++++++
+				
 	}  // End FOR $i1 (AND)
 
 
@@ -468,7 +601,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 $time2 = microtime_float();
 $delta_time = $time2 - $time1;
 
-$delta_time_format = number_format($delta_time,5,'.',',');
+$delta_time_format = number_format($delta_time,2,'.',',');
 ?>
 
 
@@ -482,7 +615,6 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 <title>Find Neurons</title>
 
  <script type="text/javascript" src="style/resolution.js"></script>
-
 
 </head>
 
@@ -550,17 +682,20 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 			} // END While
 			
 			$full_search_string = $_SESSION['full_search_string'];
+			$full_search_string_to_print = str_replace('OR', '<br>OR', $full_search_string);
+			$full_search_string_to_print = str_replace('AND', '<br>AND', $full_search_string_to_print);
+			print ($full_search_string_to_print . "<br><br>");
 			
-			if ($n_result_tot < 2)
-				print ("<font class='font3'> $n_result_tot Result ($delta_time_format seconds)  [$full_search_string]</font>");
+			if ($n_result_tot == 1)
+				print ("<font class='font3'> Your search returned $n_result_tot result ($delta_time_format seconds)</font><br><br>");
 			else
-				print ("<font class='font3'> $n_result_tot Results ($delta_time_format seconds)  [$full_search_string]</font>");
+				print ("<font class='font3'> Your search returned $n_result_tot results ($delta_time_format seconds)</font><br><br>");
 		?>
 		<br /><br />
 
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 		<tr>
-			<td align="center" width="10%">  </td>
+			<td align="center" width="5%">  </td>
 			<td align="center" width="10%">  </td>
 			
 			<?php
@@ -573,34 +708,16 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 						print ("<td align='center' width='30%' class='table_neuron_page3'> Neurons </td>");
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> $part : ($relation $value) </td>");
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> Is Expressed / Is Not Expressed </td>");
-					}
-
-					// Search is assembled in a non-editable box for the user's benefit:
-					//$query_string = "SELECT N, operator, property, part, relation, value FROM $name_temporary_table";
-					//print ("$part : ($relation $value) ");
-					//$rs = mysql_query($query);
-					//$n9=0;
-					//while(list($N, $operator, $property, $part, $relation, $value) = mysql_fetch_row($rs))
-					//{
-					//	if (($part == '-') || ($part == NULL));
-					//	else
-					//	{
-					//		if ($n9 == 0)
-					//			print ("$part : ($relation $value) ");
-					//		else
-					//			print ("$operator $part : ($relation $value) ");
-					//	}
-					//	$n9 = $n9 + 1;
-					//}
+					}					
 				}
 				else
 				{
 					if($n_result_tot)
-						print ("<td align='center' width='30%' class='table_neuron_page3'> Neurons </td>");
+						print ("<td align='center' width='30%' class='table_neuron_page3'> Neuron Types </td>");
 				}
 			
 			?>
-			<td align="right" width="50%"> </td>
+			<td align="right" width="55%"> </td>
 		</tr>
 		</table>
 		
@@ -615,14 +732,14 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 					$i9=$i+1;
 					print ("
 							<tr>
-								<td align='center' width='10%'>  </td>
+								<td align='center' width='5%'>  </td>
 								<td align='center' width='10%' class='table_neuron_page4'> $i9 </td>
 								<td align='center' width='30%' class='table_neuron_page4'> 
 									<a href='neuron_page.php?id=$id_t[$i]' target='_blank'>
 										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>
 									</a>
 								</td>
-								<td align='right' width='50%'> </td>
+								<td align='right' width='55%'> </td>
 							</tr>				
 					");
 				}		
@@ -638,10 +755,10 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 				print ("
 					<table border='0' cellspacing='3' cellpadding='0' class='table_result'>
 						<tr>
-							<td align='center' width='10%'>  </td>
+							<td align='center' width='5%'>  </td>
 							<td align='center' width='10%'>  </td>
 							<td align='center' width='30%' class='table_neuron_page3'> Unknown </td>
-							<td align='right' width='50%'> </td>
+							<td align='right' width='55%'> </td>
 						</tr>
 					</table>
 				");
@@ -653,14 +770,14 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 						$i9=$i+1;
 						print ("
 								<tr>
-									<td align='center' width='10%'>  </td>
+									<td align='center' width='5%'>  </td>
 									<td align='center' width='10%' class='table_neuron_page4'> $i9 </td>
 									<td align='center' width='30%' class='table_neuron_page4'> 
 										<a href='neuron_page.php?id=$id_t_unknown[$i]' target='_blank'>
 											<font class='font13'>$subregion_type_unknown[$i]  $name_type_unknown[$i] </font>
 										</a>
 									</td>
-									<td align='right' width='50%'> </td>
+									<td align='right' width='55%'> </td>
 								</tr>				
 						");
 					}		
@@ -670,48 +787,63 @@ $delta_time_format = number_format($delta_time,5,'.',',');
 
 		<br /><br /><br />
 
-		<table border="0" cellspacing="3" cellpadding="3" class='table_result'>
-		<tr>
-			<td align="center" width="20%">  </td>	
-			<td align="left"  class='table_neuron_page3' width="75%" colspan="3">
-				<?php
-				if ($n_result_tot == 1)
-					print ("View Result in a Matrix");
-				else
-					print ("View Results in a Matrix");	
-				?>
-			</td>		
-		</tr>
-		<tr>
-			<td align="center" width="20%">  </td>
-			<td align="center" width="25%">
-			<form action="morphology.php" method="post" style="display:inline" target="_blank">
-				<input type="submit" name='morpology_matrix' value='MORPHOLOGY' />
-				<input type="hidden" name='table_result' value='<?php print $name_temporary_table_result; ?>'  />
-				<input type="hidden" name='research' value='1'  />
-			</form>	
-			</td>			
-			<td align="center" width="25%"> 
-			<form action="markers.php" method="post" style="display:inline" target="_blank">
-				<input type="submit" name='markers_matrix' value='MARKERS' />
-				<input type="hidden" name='table_result' value='<?php print $name_temporary_table_result; ?>'  />
-				<input type="hidden" name='research' value='1'  />
-			</form>				
-			</td>
-			<td align="center" width="25%"> 
-			<form action="ephys.php" method="post" style="display:inline" target="_blank">
-				<input type="submit" name='ephys_matrix' value='EPHYS' />
-				<input type="hidden" name='table_result' value='<?php print $name_temporary_table_result; ?>'  />
-				<input type="hidden" name='research' value='1'  />
-			</form>	
-			</td>
-			<td align="right" width="10%"> </td>
-		</tr>
-		</table>
-		<br /><br />
-		</td>
-	</tr>
+		<?php
+		if ($n_result_tot == 0);
+		else {
+		
+			print ("<table border='0' cellspacing='3' cellpadding='3' class='table_result'>
+				<tr>
+					<td align='center' width='20%'>  </td>	
+					<td align='left'  class='table_neuron_page3' width='75%' colspan='4'> ");
+			
+			if ($n_result_tot == 1)
+				print ("View Result in a Matrix");
+			else
+				print ("View Results in a Matrix");	
+			
+			print ("
+				</td>		
+				</tr>
+				<tr>
+					<td align='center' width='20%'>  </td>
+					<td align='center' width='18%'>
+					<form action='morphology.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='morpology_matrix' value='MORPHOLOGY' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1' />
+					</form>	
+					</td>			
+					<td align='center' width='18%'> 
+					<form action='markers.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='markers_matrix' value='MARKERS' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1' />
+					</form>				
+					</td>
+					<td align='center' width='18%'> 
+					<form action='ephys.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='ephys_matrix' value='EPHYS' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1'  />
+					</form>	
+					</td>
+					<td align='center' width='18%'> 
+					<form action='connectivity.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='connectivity_matrix' value='CONNECTIVITY' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1'  />
+					</form>	
+					</td>			
+					<td align='right' width='10%'> </td>
+				</tr>
+				</table> <br /><br />");
+			}
+		?>
+		
+	</td>
+  </tr>
 </table>
+</div>
 
 </body>
 </html>

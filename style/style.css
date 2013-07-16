@@ -651,6 +651,17 @@ width:1026px;
 		font-weight:500;
 	}
 
+.font_cell_3 {
+	color:#770000;
+	font-size:10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+	.font_cell_3:hover {
+		color:#CC3366;
+		font-size:10px;
+	}
+
 
 /* Change with resolution ------------------------------------------------------------- */	
 .font22 {
@@ -660,8 +671,8 @@ width:1026px;
 
 
 .vText {	
-	 -moz-transform: rotate(-90deg) translate(0, 100%);
-   -moz-transform-origin: 0% 100%;
+   -moz-transform: rotate(-90deg) translate(0, 100%);
+   -moz-transform-origin: bottom left;
    -o-transform: rotate(-90deg) translate(0, 100%);
    -o-transform-origin: 0% 100%;
    -webkit-transform: rotate(-90deg) translate(0, 100%);
@@ -670,14 +681,13 @@ width:1026px;
    transform-origin: 0% 100%;
     	 
    display: inline-block;
-   max-height: 15px;
-   width: 10px;
-   padding: 2px;
+   max-height: 500px;
+   height: 200px;
+   width: 30px;
+   padding: 0;
    border-spacing: 0;
-   border: 1px solid black;
+   border: 0;
    font-family: Verdana, Arial, Helvetica, sans-serif;
-   font-size: 12px;		
-   color: #111;	 
 }
 
 

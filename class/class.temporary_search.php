@@ -50,8 +50,10 @@ class temporary_search
 			$query = "UPDATE $name_temporary_table SET part = '$part', relation = NULL, value = NULL WHERE  id = '$N' ";
 		if ($flag == 3)  // Update Relation
 			$query = "UPDATE $name_temporary_table SET relation = '$relation' WHERE id = '$N' ";	
-		if ($flag == 4)  // Update Value
-			$query = "UPDATE $name_temporary_table SET value = '$value' WHERE id = '$N' ";	
+		if ($flag == 4) { // Update Value 
+			$value = str_replace('( )', '(+)', $value);	// hack to replace plus signs
+			$query = "UPDATE $name_temporary_table SET value = '$value' WHERE id = '$N' ";
+		}			
 		
 		$rs2 = mysql_query($query);	
 	}		

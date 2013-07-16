@@ -1,4 +1,5 @@
 <?php
+
 function value($n, $property, $min, $max)
 {
 	if ($property == 'Morphology')
@@ -110,8 +111,17 @@ function value($n, $property, $min, $max)
 function value_ephys($n, $property, $min, $max, $unit) {	
   $range = $max - $min;
   $step = $range / 10.;
-  $value = ($min + $n * $step) . $unit;
+  $value = ($min + $n * $step) . ' ' . $unit;
   return $value;
+}
+
+function value_connectivity($n, $type) {	
+	$id = $type->getID_array($n);
+	$type -> retrive_by_id($id);
+	$nickname_type = $type->getNickname();
+	$subregion_type = $type->getSubregion();
+	$value = $subregion_type . ":" . $nickname_type;
+	return $value;
 }
 
 ?>
