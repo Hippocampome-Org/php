@@ -22,9 +22,15 @@ function relation($n, $property)
 	if ($property == 'Electrophysiology')
 	{
 		if ($n == 0)
-			$relation = '<';		
+			$relation = '=';
 		if ($n == 1)
-			$relation = '>';							
+			$relation = '<';		
+		if ($n == 2)
+			$relation = '<=';
+		if ($n == 3)
+			$relation = '>';
+		if ($n == 4)
+			$relation = '>=';
 	}
 	
 	return $relation;
