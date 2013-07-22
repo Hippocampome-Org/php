@@ -378,7 +378,7 @@ function operator(link, i0)
 			if ($property1 == 'Markers')
 				$n_relation = 3;
 			if ($property1 == 'Electrophysiology')
-				$n_relation = 2;	
+				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
 				$n_relation = 3;
 			
