@@ -105,6 +105,14 @@ function part($n, $property)
 			$part = 'Sag ratio';						
 	}
 	
+	if ($property == 'Connectivity')
+	{	
+		if ($n == 0)
+			$part = 'Pre-synaptic input';
+		if ($n == 1)
+			$part = 'Post-synaptic output';
+	}
+	
 	return $part;
 }
 ?>

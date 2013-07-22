@@ -1,5 +1,5 @@
 <?php
-function relation($n, $property)
+function relation($n, $property, $part)
 {
 	if ($property == 'Morphology')
 	{
@@ -31,6 +31,27 @@ function relation($n, $property)
 			$relation = '>';
 		if ($n == 4)
 			$relation = '>=';
+	}
+	
+	if ($property == 'Connectivity')
+	{
+		if (strpos($part,'input') == true) {
+			if ($n == 0)
+				$relation = 'potentially from';
+			if ($n == 1)
+				$relation = 'known to come from';
+			if ($n == 2)
+				$relation = 'known not to come from';
+		}
+		elseif (strpos($part,'output') == true) {
+			if ($n == 0)
+				$relation = 'potentially targeting';
+			if ($n == 1)
+				$relation = 'known to target';
+			if ($n == 2)
+				$relation = 'known not to target';
+		}	
+
 	}
 	
 	return $relation;
