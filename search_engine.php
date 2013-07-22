@@ -247,6 +247,16 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 			$epdata -> retrive_all_information($id_epdata);
 			$epdata_value1 = $epdata -> getValue1();
 			
+			if ($predicate == '=')
+			{
+				if ((float) $epdata_value1 == (float) $value_1)
+				{
+					$id_epdata_result[$n_epdata_result]=$id_epdata;
+					$id_evidence_result[$n_epdata_result]=$evidence_id;
+					$n_epdata_result = $n_epdata_result + 1;
+				}
+				else;
+			}
 			if ($predicate == '<')
 			{
 				if ((float) $epdata_value1 < (float) $value_1)
@@ -257,6 +267,16 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 				}
 				else;	
 			}
+			if ($predicate == '<=')
+			{
+				if ((float) $epdata_value1 <= (float) $value_1)
+				{
+					$id_epdata_result[$n_epdata_result]=$id_epdata;
+					$id_evidence_result[$n_epdata_result]=$evidence_id;
+					$n_epdata_result = $n_epdata_result + 1;
+				}
+				else;
+			}			
 			if ($predicate == '>')
 			{
 				if ((float) $epdata_value1 > (float) $value_1)
@@ -267,6 +287,16 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 				}
 				else;				
 			}
+			if ($predicate == '>=')
+			{
+				if ((float) $epdata_value1 >= (float) $value_1)
+				{
+					$id_epdata_result[$n_epdata_result]=$id_epdata;
+					$id_evidence_result[$n_epdata_result]=$evidence_id;
+					$n_epdata_result = $n_epdata_result + 1;
+				}
+				else;
+			}			
 			
 		} // END $i2
 

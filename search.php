@@ -375,7 +375,7 @@ function operator(link, i0)
 					if ($property1 == 'Molecular markers')
 						$n_relation = 3;
 					if ($property1 == 'Electrophysiology')
-						$n_relation = 2;						
+						$n_relation = 5;						
 																
 					print ("<td width='20%' align='center' class='table_neuron_page1'>");
 					print ("<select name='relation' size='1' cols='10' class='select1' onChange=\"relation(this, $id1)\">");
