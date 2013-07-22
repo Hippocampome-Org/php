@@ -119,9 +119,8 @@ else
 		<td width="100%" align="left">
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 			<a href="search.php?searching=1"><font class="font7">Neuron</font></a> <font class="font7_A">|</font> 
-			<a href="find_author.php?searching=1"><font class="font7">  Author</font></a><font class="font7_A">|</font> 
-			<font class="font7_B"> PMID/ISBN</font><font class="font7_A">|</font> 
-			</font>	
+			<a href="find_author.php?searching=1"><font class="font7">Author</font></a> <font class="font7_A">|</font> 
+			<font class="font7_B">PMID/ISBN</font>
 		</td>
 	</tr>
 	</table>

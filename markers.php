@@ -422,7 +422,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Markers Matrix</title>
+<title>Molecular Markers Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -458,15 +458,13 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 		else
 		{
 	?>
-			<table width="90%" border="0" cellspacing="0" cellpadding="0">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td width="100%" align="left">
-					<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
+				<td align="left"> 
 					<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
-					<font class="font7_B"> Markers</font> <font class="font7_A">|</font> 
-					<a href='ephys.php'><font class="font7">Electrophysiology</font> </a><font class="font7_A">|</font> 
-					<a href='connectivity.php'><font class="font7"> Connectivity</font></a>
-					</font>	
+					<font class="font7_B">Molecular Markers</font> <font class="font7_A">|</font> 
+					<a href='ephys.php'><font class="font7">Electrophysiology</font></a><font class="font7_A">|</font> 
+					<a href='connectivity.php'><font class="font7">Connectivity</font></a>	
 				</td>
 			</tr>
 			</table>
@@ -485,7 +483,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
     <td>
 		<!-- ****************  BODY **************** -->
 		
-		<font class='font1'>Markers matrix</font>
+		<font class='font1'>Molecular markers matrix</font>
 		<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];

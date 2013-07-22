@@ -406,7 +406,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		
 		
 		// Script for MARKERS +++++++++++++++++++++++++++++++++++++++++++		
-		if ($property == 'Markers')
+		if ($property == 'Molecular markers')
 		{
 			// ********** devo inserire ciclo IF per legare i nomi dei Markers ai reali nomi presenti nel database ***********
 			$subject = $part;	

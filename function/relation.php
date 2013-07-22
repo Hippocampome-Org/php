@@ -9,7 +9,7 @@ function relation($n, $property)
 			$relation = 'is not found in';
 	}
 
-	if ($property == 'Markers')
+	if ($property == 'Molecular markers')
 	{
 		if ($n == 0)
 			$relation = 'is expressed';

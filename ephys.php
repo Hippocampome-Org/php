@@ -121,15 +121,13 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 		else
 		{
 	?>
-			<table width="90%" border="0" cellspacing="0" cellpadding="0">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td width="100%" align="left">
-					<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
-					<a href='morphology.php'><font class="font7">Morphology</font> <font class="font7_A">|</font> 
-					<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
+				<td align="left">
+					<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
+					<a href='markers.php'><font class="font7">Molecular Markers</font></a> <font class="font7_A">|</font> 
 					<font class="font7_B">Electrophysiology</font> <font class="font7_A">|</font> 
-					<a href='connectivity.php'><font class="font7"> Connectivity</font></a>
-					</font>	
+					<a href='connectivity.php'><font class="font7">Connectivity</font></a>
 				</td>
 			</tr>
 			</table>

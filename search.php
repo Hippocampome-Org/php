@@ -109,7 +109,7 @@ $N = $_REQUEST['N'];
 		$relation3 = $temporary_search -> getRelation();
 		$value3 = $temporary_search -> getValue();	
 					
-		if ($property3 == 'Markers')
+		if ($property3 == 'Molecular markers')
 		{
 			if ( ($property3 != NULL) && ($part3 != NULL) && ($relation3 != NULL )
 			&& ($property3 != '-') && ($part3 != '-') && ($relation3 != '-' ) )
@@ -245,9 +245,8 @@ function operator(link, i0)
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 		
 			<font class="font7_B">Neuron</font> <font class="font7_A">|</font> 
-			<a href="find_author.php?searching=1"><font class="font7"> Author</font> </a> <font class="font7_A">|</font> 
-			<a href="find_pmid.php?searching=1"><font class="font7"> PMID/ISBN</font> </a><font class="font7_A">|</font> 
-			</font>	
+			<a href="find_author.php?searching=1"><font class="font7">Author</font></a> <font class="font7_A">|</font> 
+			<a href="find_pmid.php?searching=1"><font class="font7">PMID/ISBN</font></a>
 		</td>
 	</tr>
 	</table>
@@ -341,7 +340,7 @@ function operator(link, i0)
 				
 					if ($property1 == 'Morphology')
 						$n_part = 3;
-					if ($property1 == 'Markers')
+					if ($property1 == 'Molecular markers')
 						$n_part = 33;
 					if ($property1 == 'Electrophysiology')
 						$n_part = 10;						
@@ -373,7 +372,7 @@ function operator(link, i0)
 				// Relation **************************************************************************************************
 					if ($property1 == 'Morphology')
 						$n_relation = 2;
-					if ($property1 == 'Markers')
+					if ($property1 == 'Molecular markers')
 						$n_relation = 3;
 					if ($property1 == 'Electrophysiology')
 						$n_relation = 2;						
@@ -467,7 +466,7 @@ function operator(link, i0)
 							
 					if ($property1 == 'Morphology')
 						$n_value = 32;
-					if ($property1 == 'Markers')
+					if ($property1 == 'Molecular markers')
 						$n_value = 0;
 					if ($property1 == 'Electrophysiology')
 						$n_value = 11;						
