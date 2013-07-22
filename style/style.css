@@ -383,6 +383,20 @@ border:none;
 	}
 
 /* Change with resolution ------------------------------------------------------------- */	
+.font10a {
+	color:#339900;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+
+/* Change with resolution ------------------------------------------------------------- */	
+	.font10a:hover {
+	color:#009900;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	}
+
+/* Change with resolution ------------------------------------------------------------- */	
 .font11 {
 	color:#CC0000;
 	font-family:Verdana, Arial, Helvetica, sans-serif;

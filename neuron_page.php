@@ -1292,7 +1292,7 @@ if ($text_file_creation)
           <td width='20%' align='left'>
           </td>	
           <td width='800%' align='left'>
-          <font color='#009900' face='Verdana, Arial, Helvetica, sans-serif' size='2'>Excitatory </font> or  
+          <font color='#339900' face='Verdana, Arial, Helvetica, sans-serif' size='2'>Excitatory </font> or  
           <font color='#CC0000' face='Verdana, Arial, Helvetica, sans-serif' size='2'>Inhibitory </font>
           </td>		
           </tr>			
@@ -1304,7 +1304,7 @@ if ($text_file_creation)
 
       function get_excit_inhib_font_class($name) {
         if (strpos($name, '(+)')) {
-          $font_class = 'font10';
+          $font_class = 'font10a';
         } else { // is (-)
           $font_class = 'font11';
         }
