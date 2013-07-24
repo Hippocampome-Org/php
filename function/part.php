@@ -84,11 +84,11 @@ function part($n, $property)
 	if ($property == 'Electrophysiology')
 	{
 		if ($n == 0)
-			$part = 'Vrest';
+			$part = 'V rest';
 		if ($n == 1)
-			$part = 'Rin';
+			$part = 'R in';
 		if ($n == 2)
-			$part = 'tau';
+			$part = 'tau m';
 		if ($n == 3)
 			$part = 'V thresh';
 		if ($n == 4)

@@ -407,8 +407,12 @@ function operator(link, i0)
 			// Value **************************************************************************************************				
 			if ($property1 == 'Electrophysiology') {	
 				// in case Electrophysiology is need to have the max, min and mean of value1 from table Epdata------------
-				if ($part1 == 'tau')
+				if ($part1 == 'tau m')
 					$part2 = 'tm';
+				else if ($part1 == 'R in')
+					$part2 = 'Rin';		
+				else if ($part1 == 'V rest')
+					$part2 = 'Vrest';
 				else if ($part1 == 'V thresh')
 					$part2 = 'Vthresh';
 				else if ($part1 == 'Fast AHP')
