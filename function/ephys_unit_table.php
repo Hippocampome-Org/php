@@ -10,5 +10,6 @@ $ephys_unit_table = array(
   'slow_AHP' => 'mV',
   'sag_ratio' => '',
   'Rin' => 'MOhm'
+  //'Rin' => 'M&Omega;' // problem on search page
 );
 ?>

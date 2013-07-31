@@ -7,6 +7,7 @@ if ($perm == NULL)
 include ("access_db.php");
 include ("function/name_ephys.php");
 include ("function/name_ephys_for_evidence.php");
+include ("function/show_ephys.php");
 include ("function/get_abbreviation_definition_box.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
@@ -23,88 +24,6 @@ require_once('class/class.markerdata.php');
 require_once('class/class.evidenceevidencerel.php');
 require_once('class/class.epdata.php');
 require_once('class/class.epdataevidencerel.php');
-
-function show_ephys($var)
-{
-	if($var == 'Vrest')
-	{	
-		$name_show = 'V<small><sub>rest</small></sub>';
-		$flag = 2;
-		$units = 'mV';
-		$num_decimals = 1;
-	}
-	if($var == 'Rin')
-	{	
-		$name_show = 'R<small><sub>in</small></sub>';
-		$flag = 2;
-		$units = 'M&Omega;';
-		$num_decimals = 1;
-	}
-	if($var == 'tm')
-	{	
-		$name_show = '&tau;<small><sub>m</small></sub>';
-		$flag = 1;
-		$units = 'ms';
-		$num_decimals = 1;
-	}
-	if($var == 'Vthresh')
-	{	
-		$name_show = 'V<small><sub>thresh</small></sub>';
-		$flag = 2;
-		$units = 'mV';
-		$num_decimals = 1;
-	}	
-	if($var == 'fast_AHP')
-	{	
-    //		$name_show = 'Fast AHP<small><sub>ampl</small></sub>';
-		$name_show = 'Fast AHP';
-		$flag = 2;
-		$units = 'mV';
-		$num_decimals = 1;
-	}	
-	if($var == 'AP_ampl')
-	{	
-		$name_show = 'AP<small><sub>ampl</small></sub>';
-		$flag = 1;
-		$units = 'mV';
-		$num_decimals = 1;
-	}		
-	if($var == 'AP_width')
-	{	
-		$name_show = 'AP<small><sub>width</small></sub>';
-		$flag = 1;
-		$units = 'ms';
-		$num_decimals = 2;
-	}		
-	if($var == 'max_fr')
-	{	
-		$name_show = 'Max F.R.';
-		$flag = 1;
-		$units = 'Hz';
-		$num_decimals = 1;
-	}		
-	if($var == 'slow_AHP')
-	{	
-		$name_show = 'Slow AHP';
-		$flag = 1;
-		$units = 'mV';
-		$num_decimals = 2;
-	}
-	if($var == 'sag_ratio')
-	{	
-		$name_show = 'Sag ratio';
-		$flag = 1;
-		$units = '';
-		$num_decimals = 2;
-	}
-
-	$res[0] = $name_show;    //name showed
-	$res[1] = $flag;
-	$res[2] = $units;
-	$res[3] = $num_decimals;
-
-	return($res);
-}
 
 
 $id_neuron = $_REQUEST['id_neuron'];

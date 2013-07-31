@@ -102,7 +102,7 @@ function part($n, $property)
 		if ($n == 8)
 			$part = 'Slow AHP';
 		if ($n == 9)
-			$part = 'Sag ratio';						
+			$part = 'Sag ratio';
 	}
 	
 	if ($property == 'Connectivity')
