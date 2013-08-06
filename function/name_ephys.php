@@ -27,22 +27,27 @@ function real_name_ephys($name)
 		$real_name = 'slow_AHP';
 		return $real_name;
 	}
+	else if ($name == 'V rest')
+	{
+		$real_name = 'Vrest';
+		return $real_name;
+	}
 	else if ($name == 'V thresh')
 	{
 		$real_name = 'Vthresh';
 		return $real_name;
 	}
-	else if ($name == 'V-thresh')
+	else if ($name == 'R in')
 	{
-		$real_name = 'Vthresh';
+		$real_name = 'Rin';
 		return $real_name;
 	}	
-	else if ($name == 'tau')
+	else if ($name == 'tau m')
 	{
 		$real_name = 'tm';
 		return $real_name;
 	}	
-	else if ($name == 'Sag-ratio')
+	else if ($name == 'Sag ratio')
 	{
 		$real_name = 'sag_ratio';
 		return $real_name;
