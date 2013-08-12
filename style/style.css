@@ -67,16 +67,6 @@ border:none;
 	background:none;
 }
 
-/* Change with resolution ------------------------------------------------------------- */
-.image_brain{
-	position:absolute; top: 180px; left: 700px;
-	width:auto;
-	height:auto;		
-	opacity:.30;
-	filter:alpha(opacity=30); /* For IE8 and earlier */
-	-moz-opacity:.30;
-}
-
 
 /* MAIN MENU BUTTONS */
 /* Change with resolution ------------------------------------------------------------- */
@@ -141,6 +131,12 @@ border:none;
 	position:absolute; top: 91px; left: 59%;
 }
 
+
+.index_table {
+	position:absolute; top: 180px; left: 50px;
+	border:none;
+	margin:auto;
+}
 
 
 .body_table {

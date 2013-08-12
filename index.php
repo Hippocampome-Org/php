@@ -38,67 +38,35 @@ remove_table_by_tyme();
 
 <body>
 
-  <?php include ("function/title.php"); ?>
-
-<?php 
-if ($permission1 != 0)
-{
-?>	
-  <div id="menu_main_button_new">
-  <form action="morphology.php" method="post" style='display:inline'>
-  <input type="submit" name='browsing' value='Browse' class="main_button"/> 
-  </form>
-  <form action="search.php" method="post" style='display:inline'>	
-  <input type="submit" name='searching' value='Search' class="main_button" /> 
-  </form>
-  <form action="help.php" method="post" style='display:inline'>	
-  <input type="submit" name='help' value='Help' class="main_button"/>
-  </form>
-  </div>
 <?php
-  }
+	include ("function/title.php"); 
+	if ($permission1 != 0) {
 ?>	
 
+<div id="menu_main_button_new">
+<form action="morphology.php" method="post" style='display:inline'>
+<input type="submit" name='browsing' value='Browse' class="main_button"/> 
+</form>
+<form action="search.php" method="post" style='display:inline'>	
+<input type="submit" name='searching' value='Search' class="main_button" /> 
+</form>
+<form action="help.php" method="post" style='display:inline'>	
+<input type="submit" name='help' value='Help' class="main_button"/>
+</form>
+</div>
 
-  <br /><br /><br /><br /><br /><br /><br />
+<?php } ?>	
 
 
-  <table width="85%" border="0" class='body_table'>
+<br /><br /><br /><br /><br /><br /><br />
+
+<table width=1000 class='index_table'>
   <tr height="0">
-  <td></td>
+    <td></td>
   </tr>
   <tr>		
-  <td width="50%">
-  <!-- ****************  BODY **************** -->
-  <!--						
-  <script type="text/javascript">
-      if ((w == 1280) && (h == 1024))
-      {
-        document.write("<img src='images/welcome.gif' width='450px'/>");
-      }
-      else if ((w == 1280) && (h == 800))
-      {
-        document.write("<img src='images/welcome.gif'/ width='450px'>");
-      }			
-      else if ((w == 1680) && (h == 1050))
-      {
-        document.write("<img src='images/welcome.gif' width='550px'/>");
-      }				
-      else if ((w == 1152) && (h == 864))
-      {
-        document.write("<img src='images/welcome.gif' width='500px'/>");
-      }		
-      else if ((w == 1024) && (h == 768))
-      {
-        document.write("<img src='images/welcome.gif' width='350px'/>");
-      }						
-      else
-      {
-        document.write("<img src='images/welcome.gif' />");
-      }			
-      </script>				
--->
-
+    <td width="55%">
+    <!-- ****************  BODY **************** -->
       <font class='font1' color='#000000'>
       WELCOME TO THE HIPPOCAMPOME PORTAL
       </font>
@@ -134,58 +102,30 @@ if ($permission1 != 0)
 
       <br><br>
 
-<?php
-      if ($permission1 == 0)
-      {
-?>
-  <form action="index.php" method="post">
-  <font class='font2'> Please insert password: </font><br />
-  <input type="password" size="50" name='password' class='select1'/>
-  <input type="submit" name='ok' value=' OK ' />
-  </form>
-<?php
-      }
-      else;
-?>
-  <br>
+      <?php
+      	if ($permission1 == 0) {
+      ?>
 
-  </td>
+      <form action="index.php" method="post">
+      	<font class='font2'> Please insert password: </font><br />
+      	<input type="password" size="50" name='password' class='select1'/>
+      	<input type="submit" name='ok' value=' OK ' />
+      </form>
 
-  <td width="50%">
-  <div class='image_brain'>
-  <script type="text/javascript">
-      if ((w == 1280) && (h == 1024))
-      {
-        document.write("<img src='images/brain3.gif' width='450px'/>");
-      }
-      else if ((w == 1280) && (h == 800))
-      {
-        document.write("<img src='images/brain3.gif' width='450px'/>");  // change in future
-      }		
-      else if ((w == 1680) && (h == 1050))
-      {
-        document.write("<img src='images/brain3.gif' width='500px'/>");
-      }			
-      else if ((w == 1152) && (h == 864))
-      {
-        document.write("<img src='images/brain3.gif' width='400px'/>");
-      }	
-      else if ((w == 1024) && (h == 768))
-      {
-        document.write("<img src='images/brain3.gif' width='350px'/>");
-      }					
-      else
-      {
-        document.write("<img src='images/brain3.gif' width='500px'/>");
-      }			
-      </script>	
+      <?php
+      	}
+      	else;
+      ?>
 
-      </div>
+      <br>
     </td>
 
-    </tr>
+    <td width="45%" style='vertical-align:top; padding-top:100px; padding-left:50px'>
+      <img src='images/brain4.gif' width='450px'/>
+    </td>
+  </tr>
 
-    <tr>
+  <tr>
     <td colspan="2">
         <!--			<div class='version'> -->
         <div class='version2'>
@@ -200,8 +140,8 @@ if ($permission1 != 0)
           <br />
         </div>
     </td>		
-    </tr>
-  </table>
+  </tr>
+</table>
 
 </body>
 </html>
