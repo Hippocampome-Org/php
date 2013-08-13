@@ -365,7 +365,7 @@ if ($name_show_only_article_var)
 } // end if $name_show_only_article
 
 
-// JUORNAL OPTION
+// JOURNAL OPTION
 $name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
 if ($name_show_only_journal_var)
 {
@@ -635,14 +635,15 @@ function show_only_morphology(link, start1, stop1)
 			{
 				if ($n_interraction == 1)
 				{	
-					// Axons or Dentrides
-					// Retrive property_id from Property by using Type_id
+					// Axons or Dendrites
+					// Retrieve property_id from Property by using Type_id
 					$property  -> retrive_ID(1, $part, 'in', $val_property);
-					$n_property_id = $property -> getNumber_type();									
+					$n_property_id = $property -> getNumber_type();				
+					print("$n_property_id");					
 				}
 				else
 				{
-					// Axons and Dentrides
+					// Axons and Dendrites
 					if ($tt == 0)
 					{
 						$part1[$tt] = 'Axons';
@@ -666,7 +667,7 @@ function show_only_morphology(link, start1, stop1)
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				}
 												
-				$n_article = 0; // <-- Number of article
+				$n_article = 0; // <-- Number of articles
 				for ($i=0; $i<$n_evidence_id; $i++)
 				{
 					$evidence_id[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
@@ -679,6 +680,7 @@ function show_only_morphology(link, start1, stop1)
 					for ($i1=0; $i1<$n_fragment_id; $i1++)
 					{
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
+						print("$fragment_id");
 						$n_article = $n_article + 1;
 					}
 				}
@@ -692,7 +694,8 @@ function show_only_morphology(link, start1, stop1)
 					$page_location = $fragment -> getPage_location();
 				
 					// retrieve article_id from ArticleEvidenceRel by using Evidence_id
-					$articleevidencerel -> retrive_article_id($fragment_id[$i]);
+					//$articleevidencerel -> retrive_article_id($fragment_id[$i]);
+					$articleevidencerel -> retrive_article_id($evidence_id[$i]);
 					$id_article = $articleevidencerel -> getArticle_id_array(0);
 		
 					// retrieve all information from article table by using article_id
@@ -1013,9 +1016,9 @@ function show_only_morphology(link, start1, stop1)
 				<br />
 
 			<?php	
-				// There are not results:
+				// There are no results available:
 				if ($n_id == 0)
-					print ("<br><font class='font12'>There are not results</font><br><br>");
+					print ("<br><font class='font12'>There are no results available.</font><br><br>");
 									
 				for ($i=0; $i<$n_id; $i++)
 				{	
