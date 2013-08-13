@@ -639,7 +639,6 @@ function show_only_morphology(link, start1, stop1)
 					// Retrieve property_id from Property by using Type_id
 					$property  -> retrive_ID(1, $part, 'in', $val_property);
 					$n_property_id = $property -> getNumber_type();				
-					print("$n_property_id");					
 				}
 				else
 				{
@@ -680,7 +679,6 @@ function show_only_morphology(link, start1, stop1)
 					for ($i1=0; $i1<$n_fragment_id; $i1++)
 					{
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
-						print("$fragment_id");
 						$n_article = $n_article + 1;
 					}
 				}

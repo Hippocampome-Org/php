@@ -40,6 +40,21 @@ class evidencefragmentrel
 			$n = $n +1;
 		}
 		$this->setN_fragment_id($n);	
+    }	
+
+	public function retrieve_evidence_id($fragment_id)
+    {
+		$table=$this->getName_table();
+	
+		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Fragment_id = '$fragment_id'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setEvidence_id_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setN_evidence_id($n);	
 	}	
 
 	// SET -------------------------------------
@@ -63,7 +78,12 @@ class evidencefragmentrel
 		  $this->_fragment_id = $val1;
     }
 			
- 	public function setN_Fragment_id($val1)
+ 	public function setEvidence_id($val1)
+    {
+		  $this->_evidence_id = $val1;
+    }
+			
+    public function setN_Fragment_id($val1)
     {
 		  $this->_n_fragment_id = $val1;
     }
@@ -88,6 +108,11 @@ class evidencefragmentrel
     public function getFragment_id()
     {
     	return $this->_fragment_id;
+    }
+			
+    public function getEvidence_id()
+    {
+    	return $this->_evidence_id;
     }
 			
     public function getN_Fragment_id()
