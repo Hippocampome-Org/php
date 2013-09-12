@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 session_start();
 
@@ -7,7 +8,6 @@ if ($perm == NULL)
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -86,26 +86,12 @@ ul
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
-
-	<div id="menu_main_button_new">
-
-  	<form action="index.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='index' value='Home' class="main_button"/> 
-  	</form>
-  	<form action="morphology.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='browsing' value='Browse' class="main_button"/>
-  	</form>
-  	<form action="search.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='searching' value='Search' class="main_button" />
-  	</form>
-  	<form action="help.php" method="post" style='display:inline'>
-  		<input type="submit" name='help' value='Help' class="main_button"/>
-  	</form>
-
-	</div>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>
 		
-			  <BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR>
 	
 <div class=WordSection1>
 

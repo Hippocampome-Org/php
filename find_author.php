@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 include ("access_db.php");
@@ -55,8 +57,8 @@ if ($_REQUEST['searching'])
 	
 	$temporary_search=0;
 	
-	$and_or = 'AND';
-	$_SESSION['and_or'] = $and_or;
+	//$and_or = 'AND';
+	//$_SESSION['and_or'] = $and_or;
 		
 }
 
@@ -257,7 +259,6 @@ if ($_REQUEST['clear_all'])
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript">
@@ -310,25 +311,16 @@ $(document).ready(function(){
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
+	
+<div class='title_area'>
+	<font class="font1">Search by author</font>
+</div>	
 
-
-
-
-
-	<div id="menu_main_button_new">
-	<form action="index.php" method="post" style='display:inline'>
-		<input type="submit" name='index' value='Home' class="main_button"/> 
-	</form>
-	<form action="morphology.php" method="post" style='display:inline' target="_blank">	
-		<input type="submit" name='browsing' value='Browse' class="main_button"/> 
-	</form>
-	<form action="help.php" method="post" style='display:inline' target="_blank">
-		<input type="submit" name='help' value='Help' class="main_button"/>
-	</form>
-	</div>
-		
-
+<!-- submenu no tabs
 <div class='sub_menu'>
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -336,12 +328,14 @@ $(document).ready(function(){
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 					
 			<a href="search.php?searching=1"><font class="font7">Neuron</font></a> <font class="font7_A">|</font> 
-			<font class="font7_B">Author</font> <font class="font7_A">|</font> 
-			<a href="find_pmid.php?searching=1"><font class="font7">PMID/ISBN</font></a> 
+			<font class="font7_B"> Author</font><font class="font7_A">|</font> 
+			<a href="find_pmid.php?searching=1"><font class="font7"> PMID/ISBN</font> </a><font class="font7_A">|</font> 
+			</font>	
 		</td>
 	</tr>
 	</table>
 </div>
+-->
 <!-- ------------------------ -->
 
 <div class="table_position_search_page">
@@ -349,17 +343,7 @@ $(document).ready(function(){
   <tr>
     <td width="80%">
 		<!-- ****************  BODY **************** -->
-		<font class='font1'>Find Author</font> &nbsp;
-		
-		<!-- clear all tab -->
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-		<form action="find_author.php" method="post" style='display:inline'>	
-		<input type='submit' name='clear_all' value='CLEAR ALL' />
-		</form>
-		<!-- ---- -->
-		
-		
-		<br /><br />
+		<br /><br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>		
 			<td width="100%" align="left">
@@ -403,7 +387,7 @@ $(document).ready(function(){
 						print ("<font class='font12'> $n_tot_id_results articles have been found</font>");
 				}
 				else
-					print ("<font class='font12'> Searching...</font>");
+					//print ("<font class='font12'> Searching...</font>");
 			?>
 			
 			</td>
@@ -549,11 +533,18 @@ $(document).ready(function(){
 	<br /><br /><br />
 
 	<div align="center" >
-		<form action='find_author.php' method='post' style='display:inline'> 
-		<input type="submit" name='see_result' value='SEE RESULTS' />
-		<input type="hidden" name='id_results' value='<?php print $article_id ?>' />
-		</form>
-
+	<table width='400px'>
+		<tr>
+		<td><form action="find_author.php" method="post" style='display:inline'>	
+			<input type='submit' name='clear_all' value='CLEAR ALL' />
+		</form></td>
+		<td width='20%'></td>
+		<td width='40%'><form action='find_author.php' method='post' style='display:inline'> 
+			<input type="submit" name='see_result' value='SEE RESULTS' />
+			<input type="hidden" name='id_results' value='<?php print $article_id ?>' />			
+		</form></td>
+		</tr>
+	</table>
 	
 	<br /><br /><br />
 	<?php

@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -491,7 +493,7 @@ $articleauthorrel = new articleauthorrel($class_articleauthorrel);
 $author = new author($class_author);
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -558,8 +560,17 @@ function show_only_morphology(link, start1, stop1)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
-		
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>
+
+<div class='title_area'>
+	<font class="font1">Morphology evidence page</font>
+</div>
+
+
+<!-- 
 <div align="center" class="title_3">
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -569,6 +580,7 @@ function show_only_morphology(link, start1, stop1)
 	</tr>
 	</table>
 </div>
+-->
 
 <br><br /><br><br />
 
@@ -1039,9 +1051,9 @@ function show_only_morphology(link, start1, stop1)
 							$f_auth=substr(trim($auth[$x]),0,1);
 							$auth_final=trim($auth[$x]);
 							if($x!=sizeof($auth)-1)
-								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1' target='_blank'>$auth[$x]</a>,";	
+								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>,";	
 							else 
-								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1' target='_blank'>$auth[$x]</a>";
+								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>";
 						}
 						
 						$year1 = $year;

@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -164,7 +166,8 @@ $res=show_ephys($ep);
 
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -176,8 +179,16 @@ $res=show_ephys($ep);
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>
+
+<div class='title_area'>
+	<font class="font1">Electrophysiology evidence page</font>
+</div>
 		
+<!-- 		
 <div align="center" class="title_3">
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -187,6 +198,7 @@ $res=show_ephys($ep);
 	</tr>
 	</table>
 </div>
+-->
 
 <br><br /><br><br />
 

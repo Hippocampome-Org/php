@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 include ("access_db.php");
 include ("simphp-2.0.php");
@@ -25,7 +27,7 @@ remove_table_by_tyme();
 // ------------------------------------------------------------
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -38,32 +40,15 @@ remove_table_by_tyme();
 
 <body>
 
-<?php
-	include ("function/title.php"); 
-	if ($permission1 != 0) {
+<?php 
+	include ("function/title.php");
+	if ($permission1 != 0)
+		include ("function/menu_main.php");
 ?>	
-
-<div id="menu_main_button_new">
-<form action="morphology.php" method="post" style='display:inline'>
-<input type="submit" name='browsing' value='Browse' class="main_button"/> 
-</form>
-<form action="search.php" method="post" style='display:inline'>	
-<input type="submit" name='searching' value='Search' class="main_button" /> 
-</form>
-<form action="help.php" method="post" style='display:inline'>	
-<input type="submit" name='help' value='Help' class="main_button"/>
-</form>
-</div>
-
-<?php } ?>	
-
 
 <br /><br /><br /><br /><br /><br /><br />
 
-<table width=1000 class='index_table'>
-  <tr height="0">
-    <td></td>
-  </tr>
+<table width=1100 class='index_table'>
   <tr>		
     <td width="55%">
     <!-- ****************  BODY **************** -->

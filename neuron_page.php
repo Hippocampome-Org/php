@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -71,7 +73,7 @@ if ($text_file_creation)
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php include ("function/icon.html"); ?>
@@ -160,9 +162,16 @@ if ($text_file_creation)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 
-		
+<div class='title_area'>
+	<font class="font1"><?php print $type->getSubregion(); print " "; print $type->getNickname(); ?></font>
+</div>
+
+<!-- 
 <div align="center" class="title_3">
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -172,7 +181,7 @@ if ($text_file_creation)
 	</tr>
 	</table>
 </div>
-
+-->
 
 <!-- ---------------------- -->
 
@@ -411,15 +420,15 @@ if ($text_file_creation)
 						if($v==sizeof($auth_name)-1)
 						{
 							$f_auth=substr($auth_name[$v],0,1);
-							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>.<br/>");
-							/*<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' target='_blank' class='$font_col'>
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1'><font clont13'> $auth_name[$v]</font></a>.<br/>");
+							/*<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' class='$font_col'>
 							$part
 							</a>*/
 						}
 						else
 						{
 							$f_auth=substr($auth_name[$v],0,1);
-							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1' target='_blank'><font class='font13'> $auth_name[$v]</font></a>,");
+							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1'><font clont13'> $auth_name[$v]</font></a>,");
 						}
 
 					}		
@@ -581,7 +590,7 @@ if ($text_file_creation)
         <td width='20%' align='right'>
         </td>
         <td align='left' width='80%' class='table_neuron_page2'>
-        <a href='property_page_morphology.php?id_neuron=$id&val_property=$parcel_for_url&color=$color&page=1' target='_blank'>
+        <a href='property_page_morphology.php?id_neuron=$id&val_property=$parcel_for_url&color=$color&page=1'>
         <font class='font4'> $parcel </font>
         </a> 
         </td>					
@@ -704,7 +713,7 @@ if ($text_file_creation)
 				$name_a = $author -> getName_author_array(0);
 				//$name_b=trim($name_a);
 				$f_auth1=substr($name_a,0,1);
-				$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth1&new=1&see_result=1' target='_blank'>$name_a</a>";
+				$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth1&new=1&see_result=1'>$name_a</a>";
 				if($name_authors_representative!=null)
 				{
 					$name_authors_representative = $name_authors_representative.', '.$name_b;
@@ -850,7 +859,7 @@ if ($text_file_creation)
 								<td width='20%' align='right'>
 								</td>
 								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' target='_blank' class='$font_col'>
+								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' class='$font_col'>
 								$part 
 								</a>	
 								</td>					
@@ -884,7 +893,7 @@ if ($text_file_creation)
 								<td width='20%' align='right'>
 								</td>
 								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=weak_positive' target='_blank' class='$font_col'>
+								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=weak_positive' class='$font_col'>
 								$part (Weak Positive)
 								</a>
 								</td>					
@@ -940,7 +949,7 @@ if ($text_file_creation)
 								<td width='20%' align='right'>
 								</td>
 								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=negative' target='_blank' class='$font_col'>
+								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=negative' class='$font_col'>
 								$part
 								</a>
 								</td>					
@@ -1169,7 +1178,7 @@ if ($text_file_creation)
 						    else
 						    	print ("<strong>$complete_name ($res[0]):</strong> ");
 						    
-							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject' target='_blank' class='$font_col'>$print_str</a>");
+							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject' class='$font_col'>$print_str</a>");
 							print ("</td></tr>");
 											
 							$mean_value = NULL;				
@@ -1292,7 +1301,7 @@ if ($text_file_creation)
           "<tr>
             <td width='20%' align='right'/>
             <td align='left' width='80%' class='table_neuron_page2'>
-              <a href='neuron_page.php?id=$id' target='_blank' class='$font_class'>
+              <a href='neuron_page.php?id=$id' class='$font_class'>
                 $name
               </a>
             </td>					

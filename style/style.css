@@ -9,7 +9,7 @@ body {
 	position:absolute; top: 0px; left: 0px;
 	background-color:#98AFC7;
 	width:1276px;
-	height:120px;
+	height:80px;
 }
 .main_bar_clr {
 	position:absolute; top: 0px; left: 0px;
@@ -57,14 +57,18 @@ border:none;
 .hippocampo_immage {
 	position:absolute; top: 5px; left: 15px;
 	width:auto;
-	height:160px;
+	height:80px;
 	background:none;
 }
-.hippocampo_image_clr {
-	position:absolute; top: 5px; left: 15px;
+
+/* Change with resolution ------------------------------------------------------------- */
+.image_brain{
+	position:absolute; top: 180px; left: 700px;
 	width:auto;
-	height:60px;
-	background:none;
+	height:auto;		
+	opacity:.30;
+	filter:alpha(opacity=30); /* For IE8 and earlier */
+	-moz-opacity:.30;
 }
 
 
@@ -77,8 +81,8 @@ border:none;
 }
 
 #menu_main_button_new_clr{
-	position:absolute; top: 25px; left: 600px;
-	width:600px;
+	position:absolute; top: 10px; left: 900px;
+	width:350px;
 	border:none;
 }
 
@@ -131,9 +135,8 @@ border:none;
 	position:absolute; top: 91px; left: 59%;
 }
 
-
 .index_table {
-	position:absolute; top: 180px; left: 50px;
+	position:absolute; top: 120px; left: 88px;
 	border:none;
 	margin:auto;
 }
@@ -229,6 +232,13 @@ border:none;
 	font-size:22px;
 	font-stretch:expanded;
 	font-weight:500;
+}
+
+/* Change with resolution ------------------------------------------------------------- */	
+.font1a {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:20px;
+	font-weight:200;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
@@ -384,7 +394,7 @@ border:none;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:11px;
 }
-
+ 
 /* Change with resolution ------------------------------------------------------------- */	
 	.font10a:hover {
 	color:#009900;
@@ -500,8 +510,14 @@ width:1026px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .sub_menu {
-	position:absolute; top: 130px; left: 100px;
+	position:absolute; top: 100px; left: 80px;
 	text-align:center;
+	width: 700px;
+	border:none;
+}
+
+.title_area {
+	position:absolute; top: 120px; left: 50px;
 	width: 700px;
 	border:none;
 }
@@ -515,14 +531,14 @@ width:1026px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position {
-	position:absolute; top: 180px; left: 120px;
+	position:absolute; top: 150px; left: 50px;
 	width:auto;	
 	border:none;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position_search_page {
-	position:absolute; top: 200px; left: 30px;
+	position:absolute; top: 150px; left: 30px;
 	width:auto;	
 	border:none;	
 }
@@ -728,7 +744,7 @@ width:1026px;
 
 
 .clr-subnav-tabs{
-	border-bottom:1px solid #ddd;
+	border-bottom:2px solid #ddd;
 	margin:12px 0;
 }
 
@@ -747,7 +763,7 @@ width:1026px;
 
 .clr-subnav-tabs ul.ui-tabs li a{
 	color:#000;
-	background:#eaf4fd url('../images/bg-tabs-inactive.png') 0 100% repeat-x;
+	background:#eaf4fd;
 	border-style:solid;
 	border-color:#bcd1e2 #bcd1e2 #ddd;
 	border-width:1px;
@@ -759,9 +775,21 @@ width:1026px;
 
 .clr-subnav-tabs ul.ui-tabs li.active a{
 	border-color:#ddd #ddd #fff;
-	background:#fff;
+	background:#000099;
+	color:#ffffff;
 }
 
+.clr-subnav-tabs ul.ui-tabs li.title {
+	margin:0 4px 0 0;
+	border-color:#fff #fff #fff;
+	background:#ffffff;
+	color:#000000;
+	font-size:14px;
+	font-weight:700;
+	padding:0 10px;
+	display:block;
+	padding:10px 12px 8px;
+}
 
 .table_clr_internal {
   position:absolute;

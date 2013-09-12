@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -402,7 +404,8 @@ $property = new property($class_property);
 
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script language="javascript">
@@ -429,42 +432,31 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 
-	<div id="menu_main_button_new">
-	<?php
-		if ($research);
-		else
-		{
-	?>		
-			<form action="index.php" method="post" style='display:inline'>
-				<input type="submit" name='index' value='Home' class="main_button"/> 
-			</form>
-			<form action="search.php" method="post" style='display:inline' target="_blank">	
-				<input type="submit" name='searching' value='Search' class="main_button"/> 
-			</form>				
-			<form action="help.php" method="post" style='display:inline' target="_blank">
-				<input type="submit" name='help' value='Help' class="main_button"/>
-			</form>
-	<?php
-		}
-	?>	
-	</div>
+<div class='title_area'>
+	<font class="font1">Browse molecular markers matrix</font>
+</div>
 
-
+<!-- Submenu no tabs
 <div class='sub_menu'>
 	<?php
 		if ($research);
 		else
 		{
 	?>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td align="left"> 
+				<td width="100%" align="left">
+					<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
 					<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
-					<font class="font7_B">Molecular Markers</font> <font class="font7_A">|</font> 
-					<a href='ephys.php'><font class="font7">Electrophysiology</font></a><font class="font7_A">|</font> 
-					<a href='connectivity.php'><font class="font7">Connectivity</font></a>	
+					<font class="font7_B"> Markers</font> <font class="font7_A">|</font> 
+					<a href='ephys.php'><font class="font7">Electrophysiology</font> </a><font class="font7_A">|</font> 
+					<a href='connectivity.php'><font class="font7"> Connectivity</font></a>
+					</font>	
 				</td>
 			</tr>
 			</table>
@@ -472,18 +464,14 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 		}
 	?>		
 </div>
+ -->
 <!-- ------------------------ -->
 
 <div class="table_position">
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr height="20">
-    <td></td>
-  </tr>
   <tr>
     <td>
 		<!-- ****************  BODY **************** -->
-		
-		<font class='font1'>Molecular markers matrix</font>
 		<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];
@@ -887,7 +875,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 				print ("<input type='checkbox' name='$select_nick_name2' value='$select_nick_name2' onClick=\"ctr('$select_nick_name2', '$bkcolor', '$select_nick_name_check')\" id='$select_nick_name_check' />");
 				print ("</td>");	
 				print ("<td width='24%' align='center'>	");
-					print ("<a href='neuron_page.php?id=$id' target='_blank' class='font_cell'>");
+					print ("<a href='neuron_page.php?id=$id' class='font_cell'>");
 					
 					if (strpos($nickname, '(+)') == TRUE)
 						print ("<font color='#339900'>$nickname</font>");
@@ -912,7 +900,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 							print ("$color[0] $unvetted_act2 ");	
 						else	
 						{
-							print ("<a href='property_page_markers.php?id_neuron=$id&val_property=a-act2&color=$color[1]&page=markers' target='_blank'>");	
+							print ("<a href='property_page_markers.php?id_neuron=$id&val_property=a-act2&color=$color[1]&page=markers'>");	
 							print ($color[0]);	
 							print ("</a>");
 						}
@@ -931,7 +919,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 								print "$color[0]";	
 							else	
 							{
-								print ("<a href='property_page_markers.php?id_neuron=$id&val_property=$name_markers[$f1]&color=$color[1]&page=markers' target='_blank'>  ");	
+								print ("<a href='property_page_markers.php?id_neuron=$id&val_property=$name_markers[$f1]&color=$color[1]&page=markers'>  ");	
 								print ($color[0]);
 								print ("</a>");
 							}

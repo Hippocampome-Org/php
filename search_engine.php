@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 include ("access_db.php");
@@ -635,7 +637,6 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -651,10 +652,16 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php
+<?php 
 	include ("function/title.php");
-?>
-		
+	include ("function/menu_main.php");
+?>	
+
+<div class='title_area'>
+	<font class="font1">Search by neuron type results</font>
+</div>
+
+<!-- 
 <div align="center" class="title_3">
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -664,7 +671,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 	</tr>
 	</table>
 </div>
-
+ -->
 <!-- ------------------------ -->
 
 <div class="table_position_search_page">
@@ -714,12 +721,14 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 			$full_search_string = $_SESSION['full_search_string'];
 			$full_search_string_to_print = str_replace('OR', '<br>OR', $full_search_string);
 			$full_search_string_to_print = str_replace('AND', '<br>AND', $full_search_string_to_print);
-			print ($full_search_string_to_print . "<br><br>");
+			
+			print ("<br><br>" . $full_search_string_to_print . "<br><br>");
 			
 			if ($n_result_tot == 1)
-				print ("<font class='font3'> Your search returned $n_result_tot result ($delta_time_format seconds)</font><br><br>");
+				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
 			else
-				print ("<font class='font3'> Your search returned $n_result_tot results ($delta_time_format seconds)</font><br><br>");
+				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
+
 		?>
 		<br /><br />
 
@@ -765,7 +774,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 								<td align='center' width='5%'>  </td>
 								<td align='center' width='10%' class='table_neuron_page4'> $i9 </td>
 								<td align='center' width='30%' class='table_neuron_page4'> 
-									<a href='neuron_page.php?id=$id_t[$i]' target='_blank'>
+									<a href='neuron_page.php?id=$id_t[$i]'>
 										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>
 									</a>
 								</td>
@@ -787,7 +796,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 						<tr>
 							<td align='center' width='5%'>  </td>
 							<td align='center' width='10%'>  </td>
-							<td align='center' width='30%' class='table_neuron_page3'> Unknown </td>
+							<td align='center' width='30%' class='table_neuron_page3'> Neurons with unknown expression </td>
 							<td align='right' width='55%'> </td>
 						</tr>
 					</table>
@@ -803,7 +812,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 									<td align='center' width='5%'>  </td>
 									<td align='center' width='10%' class='table_neuron_page4'> $i9 </td>
 									<td align='center' width='30%' class='table_neuron_page4'> 
-										<a href='neuron_page.php?id=$id_t_unknown[$i]' target='_blank'>
+										<a href='neuron_page.php?id=$id_t_unknown[$i]'>
 											<font class='font13'>$subregion_type_unknown[$i]  $name_type_unknown[$i] </font>
 										</a>
 									</td>

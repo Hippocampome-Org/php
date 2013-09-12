@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 	session_start();
 	$perm = $_SESSION['perm'];
@@ -51,7 +52,6 @@
 ?>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -69,32 +69,30 @@
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 
-	<div id="menu_main_button_new">
-	<form action="index.php" method="post" style='display:inline'>
-		<input type="submit" name='index' value='Home' class="main_button"/> 
-	</form>
-	<form action="search.php" method="post" style='display:inline' target="_blank">	
-		<input type="submit" name='searching' value='Search' class="main_button" /> 
-	</form>
-	<form action="help.php" method="post" style='display:inline' target="_blank">
-		<input type="submit" name='help' value='Help' class="main_button"/>
-	</form>
-	</div>
-		
+<div class='title_area'>
+	<font class="font1">Browse connectivity matrix</font>
+</div>
+	
+<!-- submenu no tabs 	
 <div class='sub_menu'>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td align="left">
-			<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
-			<a href='markers.php'><font class="font7">Molecular Markers</font></a> <font class="font7_A">|</font> 
-			<a href='ephys.php'><font class="font7">Electrophysiology</font></a><font class="font7_A">|</font> 
-			<font class="font7_B">Connectivity</font>
+		<td width="100%" align="left">
+			<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp;
+			<a href='morphology.php'><font class="font7">Morphology</font> </a> <font class="font7_A">|</font> 
+			<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
+			<a href='ephys.php'><font class="font7"> Electrophysiology</font> </a><font class="font7_A">|</font> 
+			<font class="font7_B"> Connectivity</font>
 		</td>
 	</tr>
 	</table>
 </div>
+ -->
 <!-- ------------------------ -->
 
 <div class="clr_table_position">
@@ -249,7 +247,7 @@
 				
 					print ("<th bgcolor='#E0FFFF' style='vertical-align:bottom; width:20px; max-height:175px;'>");
 					
-					print ("<a href='neuron_page.php?id=$id' target='_blank' class='font_cell_3'>");	
+					print ("<a href='neuron_page.php?id=$id' class='font_cell_3'>");	
 
 					/* needed for .png images of text */
 					$type_name_image_path = str_replace(':', '_', $subregion_nickname_type);
@@ -315,7 +313,7 @@
 						
 					print ("<tr><td bgcolor='#E0FFFF' style='text-align:right; vertical-align:middle; max-width:175px; height:20px;'>");
 														
-					print ("<a href='neuron_page.php?id=$id_type_row' target='_blank' class='font_cell_3'>");
+					print ("<a href='neuron_page.php?id=$id_type_row' class='font_cell_3'>");
 
 					/* needed for .png images of text */
 					$type_name_image_path = str_replace(':', '_', $subregion_nickname_type_row);

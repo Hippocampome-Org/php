@@ -1,3 +1,4 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -48,7 +49,7 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 	if ($number_type - $i <= 4)
 		$span_class_str = $span_class_str . '_bottom';	
 	
-	print ("<span class=$span_class_str><a href='property_page_ephys.php?id_ephys=$id_ephys2[$param_str]&id_neuron=$id_type&ep=$param_str' target='_blank' class='$color_unvetted'>$formatted_value");
+	print ("<span class=$span_class_str><a href='property_page_ephys.php?id_ephys=$id_ephys2[$param_str]&id_neuron=$id_type&ep=$param_str' class='$color_unvetted'>$formatted_value");
 	
 	//if ($nn_ephys2[$param_str] == 1)
 	//	$print_str = $formatted_value . ' ' . $units;
@@ -116,7 +117,8 @@ $epdataevidencerel = new epdataevidencerel($class_epdataevidencerel);
 $epdata = new epdata($class_epdata);
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script language="javascript">
@@ -143,41 +145,31 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
-
-	<div id="menu_main_button_new">
-	<?php
-		if ($research);
-		else
-		{
-	?>		
-			<form action="index.php" method="post" style='display:inline'>
-				<input type="submit" name='index' value='Home' class="main_button"/> 
-			</form>
-			<form action="search.php" method="post" style='display:inline' target="_blank">	
-				<input type="submit" name='searching' value='Search' class="main_button"/> 
-			</form>				
-			<form action="help.php" method="post" style='display:inline' target="_blank">
-				<input type="submit" name='help' value='Help' class="main_button"/>
-			</form>
-	<?php
-		}
-	?>	
-	</div>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 		
+<div class='title_area'>
+	<font class="font1">Browse electrophysiology matrix</font>
+</div>
+
+<!--  submenu no tabs
 <div class='sub_menu'>
 	<?php
 		if ($research);
 		else
 		{
 	?>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td align="left">
-					<a href='morphology.php'><font class="font7">Morphology</font></a> <font class="font7_A">|</font> 
-					<a href='markers.php'><font class="font7">Molecular Markers</font></a> <font class="font7_A">|</font> 
+				<td width="100%" align="left">
+					<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
+					<a href='morphology.php'><font class="font7">Morphology</font> <font class="font7_A">|</font> 
+					<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
 					<font class="font7_B">Electrophysiology</font> <font class="font7_A">|</font> 
-					<a href='connectivity.php'><font class="font7">Connectivity</font></a>
+					<a href='connectivity.php'><font class="font7"> Connectivity</font></a>
+					</font>	
 				</td>
 			</tr>
 			</table>
@@ -185,18 +177,14 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 		}
 	?>		
 </div>
+-->
 <!-- ------------------------ -->
 
 <div class="table_position">
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr height="30">
-    <td></td>
-  </tr>
   <tr>
     <td>
 		<!-- ****************  BODY **************** -->
-
-		<font class='font1'>Electrophysiology matrix</font>
 		<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];
@@ -567,7 +555,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 			
 				print ("<td width='23.5%' align='center'>	");
 
-					print ("<a href='neuron_page.php?id=$id_type' target='_blank' class='font_cell'>");
+					print ("<a href='neuron_page.php?id=$id_type' class='font_cell'>");
 					
 					if (strpos($nickname_type, '(+)') == TRUE)
 						print ("<font color='#339900'>$nickname_type</font>");
@@ -580,34 +568,34 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 			// ---------------------------------------------------------------------------------------------------------------------------------------------		
 				print_ephys_value_and_hover('Vrest', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
 //				                   property_page_ephys.php?id_ephys=                 &id_neuron=        &ep=Vrest
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vrest]&id_neuron=$id_type&ep=Vrest' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vrest]&id_neuron=$id_type&ep=Vrest' class='$color_unvetted'>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('Rin', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Rin]&id_neuron=$id_type&ep=Rin' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Rin]&id_neuron=$id_type&ep=Rin' class='$color_unvetted'>$formatted_value</a></td>");
 	
 				print_ephys_value_and_hover('tm', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[tm]&id_neuron=$id_type&ep=tau' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");		
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[tm]&id_neuron=$id_type&ep=tau' class='$color_unvetted'>$formatted_value</a></td>");		
 
 				print_ephys_value_and_hover('Vthresh', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vthresh]&id_neuron=$id_type&ep=V-thresh' target='_blank' class='$color_unvetted '>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[Vthresh]&id_neuron=$id_type&ep=V-thresh' class='$color_unvetted '>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('fast_AHP', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[fast_AHP]&id_neuron=$id_type&ep=Fast AHP' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[fast_AHP]&id_neuron=$id_type&ep=Fast AHP' class='$color_unvetted'>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('AP_ampl', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_ampl]&id_neuron=$id_type&ep=AP ampl' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_ampl]&id_neuron=$id_type&ep=AP ampl' class='$color_unvetted'>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('AP_width', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_width]&id_neuron=$id_type&ep=AP width' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[AP_width]&id_neuron=$id_type&ep=AP width' class='$color_unvetted'>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('max_fr', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[max_fr]&id_neuron=$id_type&ep=Max F.R.' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[max_fr]&id_neuron=$id_type&ep=Max F.R.' class='$color_unvetted'>$formatted_value</a></td>");
 
 				print_ephys_value_and_hover('slow_AHP', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[slow_AHP]&id_neuron=$id_type&ep=Slow AHP' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+				//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[slow_AHP]&id_neuron=$id_type&ep=Slow AHP' class='$color_unvetted'>$formatted_value</a></td>");
 		
 				print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2);
-					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[sag_ratio]&id_neuron=$id_type&ep=Sag-ratio' target='_blank' class='$color_unvetted'>$formatted_value</a></td>");
+					//print ("<a href='property_page_ephys.php?id_ephys=$id_ephys2[sag_ratio]&id_neuron=$id_type&ep=Sag-ratio' class='$color_unvetted'>$formatted_value</a></td>");
 								
 			print ("</tr>");
 		}

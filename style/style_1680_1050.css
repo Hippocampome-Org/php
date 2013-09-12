@@ -9,7 +9,7 @@ body {
 	position:absolute; top: 0px; left: 0px;
 	background-color:#98AFC7;
 	width:1672px;
-	height:126px;
+	height:80px;
 }
 
 	.title_table {
@@ -51,6 +51,7 @@ border:none;
 .hippocampo_immage {
 	position:absolute; top: 5px; left: 50px;
 	width:auto;
+	height:80px;
 	background:none;
 }
 
@@ -70,6 +71,12 @@ border:none;
 #menu_main_button_new{
 	position:absolute; top: 80px; left: 600px;
 	width:700px;
+	border:none;
+}
+
+#menu_main_button_new_clr{
+	position:absolute; top: 25px; left: 1200px;
+	width:450px;
 	border:none;
 }
 
@@ -205,6 +212,14 @@ border:none;
 	font-size:22px;
 	font-stretch:expanded;
 	font-weight:500;
+}
+
+
+/* Change with resolution ------------------------------------------------------------- */	
+.font1a {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:20px;
+	font-weight:200;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
@@ -429,6 +444,12 @@ width:1450px;
 	border:none;
 }
 
+.title_area {
+	position:absolute; top: 120px; left: 50px;
+	width: 700px;
+	border:none;
+}
+
 /* Change with resolution ------------------------------------------------------------- */	
 .title_3 {
 	position:absolute; top: 130px; left: 120px;
@@ -438,7 +459,7 @@ width:1450px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position {
-	position:absolute; top: 180px; left: 120px;
+	position:absolute; top: 150px; left: 50px;
 	width:auto;	
 	border:none;
 }
@@ -558,6 +579,20 @@ width:1450px;
 	}
 
 /* Change with resolution ------------------------------------------------------------- */	
+.font10a {
+	color:#339900;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
+ 
+/* Change with resolution ------------------------------------------------------------- */	
+	.font10a:hover {
+	color:#009900;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	}
+
+/* Change with resolution ------------------------------------------------------------- */	
 .font11 {
 	color:#CC0000;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
@@ -620,4 +655,238 @@ width:1450px;
 .font22 {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:12px;
+}
+
+.clr-page-tabs{
+	float:left;
+	clear:both;
+	width:100%;
+}
+
+.clr-page-tabs ul.ui-tabs{
+	font-family:verdana,sans-serif;
+	font-size:11px;
+	/*overflow:hidden;*/
+	overflow:auto;
+}
+
+.clr-page-tabs ul.ui-tabs li{
+	float:left;
+}
+
+.clr-page-tabs ul.ui-tabs li a{
+	float:left;
+	font-weight:700;
+	cursor:pointer;
+}
+
+
+
+.clr-subnav-tabs{
+	border-bottom:1px solid #ddd;
+	margin:12px 0;
+}
+
+.clr-subnav-tabs ul.ui-tabs{
+	padding:0 12px;
+	margin:0 0 -1px;
+	font-family:helvetica,arial,sans-serif;
+	float:left;
+	list-style-type: none;
+}
+
+.clr-subnav-tabs ul.ui-tabs li{
+	margin:0 4px 0 0;
+	list-style-type:none;
+}
+
+.clr-subnav-tabs ul.ui-tabs li a{
+	color:#000;
+	background:#eaf4fd url('../images/bg-tabs-inactive.png') 0 100% repeat-x;
+	border-style:solid;
+	border-color:#bcd1e2 #bcd1e2 #ddd;
+	border-width:1px;
+	font-size:14px;
+	padding:0 10px;
+	display:block;
+	padding:10px 12px 8px;
+}
+
+.clr-subnav-tabs ul.ui-tabs li.active a{
+	border-color:#ddd #ddd #fff;
+	background:#000099;
+	color:#ffffff;
+}
+
+
+span.link_left {
+	position: relative;
+}
+				
+span.link_left a span {
+	display: none;
+}
+				
+span.link_left a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_left a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: -5px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+span.link_left_bottom {
+	position: relative;
+}
+				
+span.link_left_bottom a span {
+	display: none;
+}
+				
+span.link_left_bottom a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_left_bottom a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: -75px;
+	margin-left: -5px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+
+span.link_middle {
+	position: relative;
+}
+				
+span.link_middle a span {
+	display: none;
+}
+				
+span.link_middle a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_middle a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: -25px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+
+span.link_middle_bottom {
+	position: relative;
+}
+				
+span.link_middle_bottom a span {
+	display: none;
+}
+				
+span.link_middle_bottom a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_middle_bottom a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: -75px;
+	margin-left: -25px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+
+span.link_right {
+	position: relative;
+}
+				
+span.link_right a span {
+	display: none;
+}
+				
+span.link_right a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_right a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: -40px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
+}
+
+
+span.link_right_bottom {
+	position: relative;
+}
+				
+span.link_right_bottom a span {
+	display: none;
+}
+				
+span.link_right_bottom a:hover {
+	/*font-size: 99%;*/
+	/*font-color: #FF00FF;*/
+}
+				
+span.link_right_bottom a:hover span {
+	display: block;
+	position: absolute;
+	margin-top: -75px;
+	margin-left: -40px;
+	width: 90px; 
+	padding: 5px;
+	z-index: 100;
+	color: #000000;
+	background: #FFFFAA;
+	font: 12px "Arial", sans-serif;
+	text-align: left;
+	text-decoration: none;
 }

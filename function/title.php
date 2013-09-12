@@ -12,19 +12,19 @@
 		<script type="text/javascript">
 		if ((w == 1280) && (h == 1024))
 		{
-			 document.write("<img src='images/hippo_title.gif' width='350px'/>");
+			 document.write("<a href='\index.php'><img src='images/hippo_title.gif' height='70px' border=0/></a>");
 		}
 		else if ((w == 1152) && (h == 864))
 		{
-			  document.write("<img src='images/hippo_title.gif' width='290px'/>");
+			  document.write("<a href='\index.php'><img src='images/hippo_title.gif' height='70px' border=0/></a>");
 		}	
 		else if ((w == 1024) && (h == 768))
 		{
-			  document.write("<img src='images/hippo_title.gif' width='260px'/>");
+			  document.write("<a href='\index.php'><img src='images/hippo_title.gif' height='70px' border=0/></a>");
 		}			
 		else
 		{
-			 document.write("<img src='images/hippo_title.gif' width='350px'/>");
+			 document.write("<a href='\index.php'><img src='images/hippo_title1.gif' height='70px' border=0/></a>");
 		}
 		</script>
 	</div>

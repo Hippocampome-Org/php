@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 include ("access_db.php");
@@ -163,7 +165,8 @@ if ($_REQUEST['clear_all'])
 $n_property = 4;
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript">
@@ -226,21 +229,16 @@ function operator(link, i0)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 
-	<div id="menu_main_button_new">
-	<form action="index.php" method="post" style='display:inline'>
-		<input type="submit" name='index' value='Home' class="main_button"/> 
-	</form>
-	<form action="morphology.php" method="post" style='display:inline' target="_blank">	
-		<input type="submit" name='browsing' value='Browse' class="main_button"/> 
-	</form>
-	<form action="help.php" method="post" style='display:inline' target="_blank">
-		<input type="submit" name='help' value='Help' class="main_button"/>
-	</form>
-	</div>
+<div class='title_area'>
+	<font class="font1">Search by neuron type</font>
+</div>
 		
-
+<!-- submenu no tabs 
 <div class='sub_menu'>
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -248,28 +246,21 @@ function operator(link, i0)
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 		
 			<font class="font7_B">Neuron</font> <font class="font7_A">|</font> 
-			<a href="find_author.php?searching=1"><font class="font7">Author</font></a> <font class="font7_A">|</font> 
-			<a href="find_pmid.php?searching=1"><font class="font7">PMID/ISBN</font></a>
+			<a href="find_author.php?searching=1"><font class="font7"> Author</font> </a> <font class="font7_A">|</font> 
+			<a href="find_pmid.php?searching=1"><font class="font7"> PMID/ISBN</font> </a><font class="font7_A">|</font> 
+			</font>	
 		</td>
 	</tr>
 	</table>
 </div>
+-->
 <!-- ------------------------ -->
 
 <div class="table_position_search_page">
 <table width="95%" border="0" cellspacing="5" cellpadding="0" class='body_table'>
   <tr>
     <td width="80%">
-		<!-- ****************  BODY **************** -->
-		<font class='font1'>Find neuron</font>
-		
-		<!-- clear all tab -->
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-			<form action="search.php" method="post" style='display:inline'>	
-			<input type='submit' name='clear_all' value='CLEAR ALL' />
-			</form>
-		<!-- ---- -->
-
+		<!-- ****************  BODY **************** -->	
 		<br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>
@@ -343,7 +334,7 @@ function operator(link, i0)
 		
 			if ($property1 == 'Morphology')
 				$n_part = 3;
-			if ($property1 == 'Markers')
+			if ($property1 == 'Molecular markers')
 				$n_part = 33;
 			if ($property1 == 'Electrophysiology')
 				$n_part = 10;		
@@ -375,7 +366,7 @@ function operator(link, i0)
 			// Relation **************************************************************************************************
 			if ($property1 == 'Morphology')
 				$n_relation = 2;
-			if ($property1 == 'Markers')
+			if ($property1 == 'Molecular markers')
 				$n_relation = 3;
 			if ($property1 == 'Electrophysiology')
 				$n_relation = 5;	
@@ -477,7 +468,7 @@ function operator(link, i0)
 							
 			if ($property1 == 'Morphology')
 				$n_value = 32;
-			if ($property1 == 'Markers')
+			if ($property1 == 'Molecular markers')
 				$n_value = 0;
 			if ($property1 == 'Electrophysiology')
 				$n_value = 11;	
@@ -593,10 +584,18 @@ function operator(link, i0)
 
 		<br /><br />		
 		<div align="center">
-		<form action='search_engine.php' method="post" target="_blank">
-			<input type="submit" name='go_search' value=' Search ' />
+		<table width='400px'>
+		<tr>
+		<td width='40%'><form action="search.php" method="post" style='display:inline'>	
+			<input type='submit' name='clear_all' value='CLEAR ALL' />
+		</form></td>
+		<td width='20%'></td>
+		<td width='40%'><form action='search_engine.php' method="post">
+			<input type="submit" name='go_search' value='  SEARCH  ' />
 			<input type="hidden" name='name_table' value='<?php print $name_temporary_table ?>' />
-		</form>
+		</form></td>
+		</tr>
+		</table>
 		</div>	
 		</td>
 		<td width="20%">

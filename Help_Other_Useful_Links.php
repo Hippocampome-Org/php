@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 
@@ -7,7 +9,6 @@ if ($perm == NULL)
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -92,26 +93,12 @@ ul
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
-
-	<div id="menu_main_button_new">
-
-  	<form action="index.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='index' value='Home' class="main_button"/> 
-  	</form>
-  	<form action="morphology.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='browsing' value='Browse' class="main_button"/>
-  	</form>
-  	<form action="search.php" method="post" style='display:inline' target="_blank">
-  		<input type="submit" name='searching' value='Search' class="main_button" />
-  	</form>
-  	<form action="help.php" method="post" style='display:inline'>
-  		<input type="submit" name='help' value='Help' class="main_button"/>
-  	</form>
-
-	</div>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
 		
-			  <BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR>
 	
 <div class=WordSection1>
 		
@@ -121,32 +108,32 @@ font-family:"Arial","sans-serif"'>Other Useful Links</span></u></b></p>
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.temporal-lobe.com">Temporal-lobe.com</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.temporal-lobe.com" target='_blank'>Temporal-lobe.com</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://cmbn-approd01.uio.no/zoomgen/hippocampus/home.do">The Rat Hippocampus Atlas</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://cmbn-approd01.uio.no/zoomgen/hippocampus/home.do" target='_blank'>The Rat Hippocampus Atlas</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.neuromorpho.org">NeuroMorpho.Org</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.neuromorpho.org" target='_blank'>NeuroMorpho.Org</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.neuroelectro.org">NeuroElectro</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.neuroelectro.org" target='_blank'>NeuroElectro</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.incf.org/programs/pons/neuron-registry">Neuron Registry</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://www.incf.org/programs/pons/neuron-registry" target='_blank'>Neuron Registry</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://krasnow1.gmu.edu/cn3/hippocampus3d/">Hippocampus 3D Model</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://krasnow1.gmu.edu/cn3/hippocampus3d/" target='_blank'>Hippocampus 3D Model</a></span></p>
 
 </div>
 <!-- ------------------------ -->

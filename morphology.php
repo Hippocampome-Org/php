@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 include ("access_db.php");
@@ -131,7 +133,8 @@ $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_ty
 $hippo_select = $_SESSION['hippo_select'];
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script language="javascript">
@@ -159,63 +162,35 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>		
 
-	<div id="menu_main_button_new">
-	<?php
-		if ($research);	
-		else
-		{
-	?>	
-			<form action="index.php" method="post" style='display:inline'>
-				<input type="submit" name='index' value='Home' class="main_button"/> 
-			</form>
-			<form action="search.php" method="post" style='display:inline' target="_blank">	
-				<input type="submit" name='searching' value='Search' class="main_button"/> 
-			</form>				
-			<form action="help.php" method="post" style='display:inline' target="_blank">
-				<input type="submit" name='help' value='Help' class="main_button"/>
-			</form>
-	<?php
-		}
-	?>		
-	</div>
-		
+<div class='title_area'>
+	<font class="font1">Browse morphology matrix</font>
+</div>
+
+<!-- Submenu tabs
 <div class='sub_menu'>
-
-	<?php
-		if ($research);
-		else
-		{
-	?>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="left">
-			<font class="font7_B">Morphology</font> <font class="font7_A">|</font> 
-			<a href='markers.php'><font class="font7">Molecular Markers</font></a> <font class="font7_A">|</font> 
-			<a href='ephys.php'><font class="font7">Electrophysiology</font></a><font class="font7_A">|</font> 
-			<a href='connectivity.php'><font class="font7"> Connectivity</font></a>						
-		</td>
-	</tr>
-	</table>
-	<br />
-
-	<?php
-		}
-	?>
-</div>	
+	<div class="clr-page-tabs clr-subnav-tabs">		
+		<ul class="ui-tabs">
+			<li class="title">Browse:</li>
+			<li class="active"><a href="morphology.php">Morphology</a></li>
+			<li><a href="markers.php">Molecular markers</a></li>
+			<li><a href="ephys.php">Electrophysiology</a></li>
+			<li><a href="connectivity.php">Connectivity</a></li>
+		</ul>
+	</div>
+</div>
+ -->
 <!-- ------------------------ -->
 
 <div class='table_position'>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr height="20">
-    <td></td>
-  </tr>
   <tr>
     <td>
 		<!-- ****************  BODY **************** -->
-
-		<font class='font1'>Morphology matrix</font> &nbsp; &nbsp;&nbsp; &nbsp;
 		<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];
@@ -746,7 +721,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 
 				print ("<td width='20%' align='right'>");
 			
-					print ("<a href='neuron_page.php?id=$id' target='_blank' class='font_cell'>");
+					print ("<a href='neuron_page.php?id=$id' class='font_cell'>");
 					
 					if (strpos($nickname, '(+)') == TRUE)
 						print ("<font color='#339900'>$nickname</font>");
@@ -769,7 +744,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SMo&color=$color[1]&page=1' target='_blank'>");
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SMo&color=$color[1]&page=1'>");
 						print ($color[0]);	
 						print ("</a>");
 					}
@@ -785,7 +760,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SMi&color=$color[1]&page=1' target='_blank'>");
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SMi&color=$color[1]&page=1'>");
 						print ($color[0]);	
 						print ("</a>");
 					}		
@@ -801,7 +776,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SG&color=$color[1]&page=1' target='_blank'>");
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_SG&color=$color[1]&page=1'>");
 						print ($color[0]);	
 						print ("</a>");
 					}			
@@ -816,7 +791,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_H&color=$color[1]&page=1' target='_blank'>");
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=DG_H&color=$color[1]&page=1'>");
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -833,7 +808,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SLM&color=$color[1]&page=1' target='_blank'>");	
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SLM&color=$color[1]&page=1'>");	
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -848,7 +823,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SR&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SR&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -863,7 +838,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SL&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SL&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}		
@@ -878,7 +853,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SP&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SP&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -893,7 +868,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SO&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA3_SO&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -910,7 +885,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SLM&color=$color[1]&page=1' target='_blank'>");	
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SLM&color=$color[1]&page=1'>");	
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -924,7 +899,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SR&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SR&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}		
@@ -939,7 +914,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SP&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SP&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -954,7 +929,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SO&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA2_SO&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}							
@@ -971,7 +946,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SLM&color=$color[1]&page=1' target='_blank'>");		
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SLM&color=$color[1]&page=1'>");		
 						print ($color[0]);	
 						print ("</a>");
 					}		
@@ -986,7 +961,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SR&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SR&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1001,7 +976,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SP&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SP&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1016,7 +991,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SO&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=CA1_SO&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1033,7 +1008,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_SM&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_SM&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}			
@@ -1048,7 +1023,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_SP&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_SP&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1063,7 +1038,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_PL&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=SUB_PL&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1080,7 +1055,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_I&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_I&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}			
@@ -1095,7 +1070,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_II&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_II&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1110,7 +1085,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_III&color=$color[1]&page=1' target='_blank'>");					
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_III&color=$color[1]&page=1'>");					
 						print ($color[0]);	
 						print ("</a>");
 					}			
@@ -1125,7 +1100,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_IV&color=$color[1]&page=1' target='_blank'>");				
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_IV&color=$color[1]&page=1'>");				
 						print ($color[0]);	
 						print ("</a>");
 					}		
@@ -1140,7 +1115,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_V&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_V&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}	
@@ -1155,7 +1130,7 @@ function ctr(select_nick_name2, color, select_nick_name_check)
 						print ($color[0]);	
 					else	
 					{
-						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_VI&color=$color[1]&page=1' target='_blank'>");			
+						print ("<a href='property_page_morphology.php?id_neuron=$id&val_property=EC_VI&color=$color[1]&page=1'>");			
 						print ($color[0]);	
 						print ("</a>");
 					}			

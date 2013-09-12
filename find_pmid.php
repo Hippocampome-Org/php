@@ -1,3 +1,5 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <?php
 session_start();
 include ("access_db.php");
@@ -33,7 +35,7 @@ if ($_REQUEST['search_pmid'])
 			$error_pmid = 1;
 		else
 		{
-			if (eregi('[a-z]', $pmid)) 
+			if (preg_match('[a-z]', $pmid)) 
 				$error_pmid = 1;
 			else
 				$error_pmid = 0;
@@ -41,7 +43,7 @@ if ($_REQUEST['search_pmid'])
 	}
 	if ($type_search == 'ISBN')
 	{
-		if (eregi('[a-z]', $pmid)) 
+		if (preg_match('[a-z]', $pmid)) 
 			$error_pmid = 1;
 		else
 			$error_pmid = 0;	
@@ -85,7 +87,6 @@ else
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -98,33 +99,30 @@ else
 <body>
 
 <!-- COPY IN ALL PAGES -->
-<?php include ("function/title.php"); ?>
+<?php 
+	include ("function/title.php");
+	include ("function/menu_main.php");
+?>	
+	
+<div class='title_area'>
+	<font class="font1">Search by PMID/ISBN</font>
+</div>	
 
-	<div id="menu_main_button_new">
-	<form action="index.php" method="post" style='display:inline'>
-		<input type="submit" name='index' value='Home' class="main_button"/> 
-	</form>
-	<form action="morphology.php" method="post" style='display:inline' target="_blank">	
-		<input type="submit" name='browsing' value='Browse' class="main_button"/> 
-	</form>
-	<form action="help.php" method="post" style='display:inline' target="_blank">
-		<input type="submit" name='help' value='Help' class="main_button"/>
-	</form>
-	</div>
-		
-
+<!-- submenu no tabs
 <div class='sub_menu'>
 	<table width="90%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="100%" align="left">
 			<font class='font1'><em>Find:</em></font> &nbsp; &nbsp; 
 			<a href="search.php?searching=1"><font class="font7">Neuron</font></a> <font class="font7_A">|</font> 
-			<a href="find_author.php?searching=1"><font class="font7">Author</font></a> <font class="font7_A">|</font> 
-			<font class="font7_B">PMID/ISBN</font>
+			<a href="find_author.php?searching=1"><font class="font7">  Author</font></a><font class="font7_A">|</font> 
+			<font class="font7_B"> PMID/ISBN</font><font class="font7_A">|</font> 
+			</font>	
 		</td>
 	</tr>
 	</table>
 </div>
+-->
 <!-- ------------------------ -->
 
 <div class="table_position_search_page">
@@ -132,9 +130,7 @@ else
   <tr>
     <td width="80%">
 		<!-- ****************  BODY **************** -->
-		
-		<font class='font1'>Find PMID / ISBN</font>
-		<br /><br />
+		<br /><br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>		
 			<td width="100%" align="left">
@@ -291,7 +287,7 @@ else
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		if ( ($n_id_article == 0) && ($error_pmid == 0) )
 		{
-			print ("<form action='send_email.php' method='post' style='display:inline' target='_blank'>	");
+			print ("<form action='send_email.php' method='post' style='display:inline'>	");
 										
 			if ($pmid != NULL)
 			{
