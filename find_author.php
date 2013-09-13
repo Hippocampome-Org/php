@@ -1,14 +1,16 @@
 <?php
 session_start();
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
 include ("access_db.php");
+
+$perm = $_SESSION['perm'];
+if ($perm == NULL)
+	header("Location:error1.html");
+	
 require_once('class/class.temporary_author.php');
 require_once('class/class.author.php');	
 require_once('class/class.articleauthorrel.php');	
@@ -58,9 +60,8 @@ if ($_REQUEST['searching'])
 	
 	$temporary_search=0;
 	
-	//$and_or = 'AND';
-	//$_SESSION['and_or'] = $and_or;
-		
+	$and_or = 'AND';
+	$_SESSION['and_or'] = $and_or;		
 }
 
 
@@ -344,31 +345,8 @@ $(document).ready(function(){
   <tr>
     <td width="80%">
 		<!-- ****************  BODY **************** -->
-		<br /><br /><br />
-		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
-		<tr>		
-			<td width="100%" align="left">
-			<?php
-
-			
-				if ($and_or == 'AND')
-				{
-					print ("<input type='radio' name='and_or' value='AND' checked='checked'/> 
-						<font class='font12'>AND</font> ");
-					print ("<input type='radio' name='and_or' value='OR' onClick=\"javascript:location.href='find_author.php?and_or=OR'\"/>  
-						<font class='font12'>OR</font>");
-				}
-				if ($and_or == 'OR')
-				{
-					print ("<input type='radio' name='and_or' value='AND' onClick=\"javascript:location.href='find_author.php?and_or=AND'\" />  
-						<font class='font12'>AND </font>");
-					print ("<input type='radio' name='and_or' value='OR' checked='checked'/> 
-						<font class='font12'>OR</font>");
-				}			
-			?>
-				<br /><br /> 	
-			</td>
-		</tr>
+		
+		<br /><br />
 		
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>
@@ -382,7 +360,7 @@ $(document).ready(function(){
 			<?php
 				if ($temporary_search == 1)
 				{
-					if ($n_tot_id_results < 2)
+					if ($n_tot_id_results == 1)
 						print ("<font class='font12'> $n_tot_id_results article has been found</font>");
 					else
 						print ("<font class='font12'> $n_tot_id_results articles have been found</font>");
@@ -531,7 +509,35 @@ $(document).ready(function(){
 		?>
 		</tr>
 	</table>
-	<br /><br /><br />
+	
+	<br />
+
+	<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
+	<tr>		
+		<td width="100%" align="center">
+		<?php
+
+		
+			if (($and_or == 'AND') && ($n_search > 1))
+			{
+				print ("<input type='radio' name='and_or' value='AND' checked='checked'/> 
+					<font class='font12'>AND</font> ");
+				print ("<input type='radio' name='and_or' value='OR' onClick=\"javascript:location.href='find_author.php?and_or=OR'\"/>  
+					<font class='font12'>OR</font>");
+			}
+			if (($and_or == 'OR') && ($n_search > 1))
+			{
+				print ("<input type='radio' name='and_or' value='AND' onClick=\"javascript:location.href='find_author.php?and_or=AND'\" />  
+					<font class='font12'>AND </font>");
+				print ("<input type='radio' name='and_or' value='OR' checked='checked'/> 
+					<font class='font12'>OR</font>");
+			}			
+		?>				
+		</td>
+	</tr>
+	</table>
+			
+	<br /><br /><br /> 
 
 	<div align="center" >
 	<table width='400px'>
