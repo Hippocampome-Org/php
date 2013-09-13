@@ -1,7 +1,13 @@
+<?php
+session_start();
+$perm = $_SESSION['perm'];
+if ($perm == NULL)
+	header("Location:error1.html");
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-session_start();
 include ("access_db.php");
 
 include ("function/property.php");
@@ -26,10 +32,6 @@ $epdataevidencerel =  new epdataevidencerel($class_epdataevidencerel);
 $temporary_search = new temporary_search();
 
 $full_search_string="";
-
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
 
 
 // Comes from INDEX:PHP and in this case the program creates the temporary table:
