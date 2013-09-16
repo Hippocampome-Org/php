@@ -665,6 +665,27 @@ width:1060px;
 }
 
 
+.vText {	
+   -moz-transform: rotate(-90deg) translate(0, 100%);
+   -moz-transform-origin: bottom left;
+   -o-transform: rotate(-90deg) translate(0, 100%);
+   -o-transform-origin: 0% 100%;
+   -webkit-transform: rotate(-90deg) translate(0, 100%);
+   -webkit-transform-origin: 0% 100%;
+   transform: rotate(-90deg) translate(0, 100%);
+   transform-origin: 0% 100%;
+    	 
+   display: inline-block;
+   max-height: 500px;
+   height: 200px;
+   width: 30px;
+   padding: 0;
+   border-spacing: 0;
+   border: 0;
+   font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+
 .clr-page-tabs{
 	float:left;
 	clear:both;
