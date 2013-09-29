@@ -894,16 +894,16 @@ if ($text_file_creation)
 				$marker_neg_disp_counter = count($neg_array['part_key']);
 				
 				// sort all arrays alphabetically
-				array_multisort($pos_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$pos_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$pos_array['weak_key'], SORT_NATURAL | SORT_FLAG_CASE, 
-								$pos_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
-				array_multisort($neg_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$neg_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$neg_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
-				array_multisort($mixed_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$mixed_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
-								$mixed_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+				array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
+								$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
+								$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
+				array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
+								$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
+				array_multisort($mixed_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$mixed_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
+								$mixed_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			}
 			else
 				$mixed_array = NULL;
@@ -915,17 +915,17 @@ if ($text_file_creation)
 		
 		// if only neg results, sort them alphabetically
 		elseif ($marker_pos_disp_counter == 0) {
-			array_multisort($neg_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
-							$neg_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE, 
-							$neg_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+			array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
+							$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			$mixed_array = NULL;		
 		}
 		
 		// if only pos results, sort them alphabetically		
 		elseif ($marker_neg_disp_counter == 0) {
-			array_multisort($pos_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
-							$pos_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE, 
-							$pos_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+			array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
+							$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			$mixed_array = NULL;
 		} // end if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0))
 				
