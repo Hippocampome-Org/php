@@ -109,7 +109,7 @@ remove_table_by_tyme();
     </td>
 
     <td width="45%" style='vertical-align:top; padding-top:100px; padding-left:50px'>
-      <img src='images/brain4.gif' width='450px'/>
+      <img src='images/brain6.png' width='450px'/>
     </td>
   </tr>
 

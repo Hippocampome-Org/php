@@ -819,93 +819,134 @@ if ($text_file_creation)
 							
 		
 		<!-- TABLE Molecular markers: -->
+		<?php
+
+		$marker_pos_disp_counter = 0;
+		$marker_neg_disp_counter = 0;
+		
+		// loop through all evidence to look for marker evidence
+		for ($i=0; $i<$n; $i++) {
+			$property -> retrive_by_id($property_id[$i]);
+			$val = $property -> getVal();
+			$part = $property -> getPart();
+			
+			$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
+			$unvetted = $evidencepropertyyperel -> getUnvetted();
+			$evidencepropertyyperel -> retrieve_conflict_note($property_id[$i], $id);
+			$conflict_note = $evidencepropertyyperel -> getConflict_note();
+			
+			// maintain separate arrays for positive (+ wk pos) and negative evidence
+			if (($val == 'positive') || ($val == 'weak_positive')) {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
+				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
+				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
+				
+				if ($val == 'weak_positive')
+					$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
+				else
+					$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+				
+				$marker_pos_disp_counter++;
+			}
+			elseif ($val == 'negative') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
+				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
+				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
+				
+				$marker_neg_disp_counter++;
+			}
+		}	
+		
+		// if both positive and negative evidence exist, set up mixed array for possible overlaps
+		if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0)) {
+
+			// mixed_array keeps the overlap between pos+neg and keys from the pos array
+			$mixed_array['part_key'] = array_intersect($pos_array['part_key'], $neg_array['part_key']);
+			// mixed_array keeps the overlap between pos+neg and keys from the neg array
+			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);
+			
+			$mixed_exp_disp_counter = count($mixed_array['part_key']);
+			
+			// if there are mixed expression results
+			if ($mixed_exp_disp_counter > 0) {
+			
+				// copy the unvetted status and conflict notes from pos array 
+				foreach(array_keys($mixed_array['part_key']) as $key) {
+					$mixed_array['unvetted_key'][$key] = $pos_array['unvetted_key'][$key];
+					$mixed_array['conflict_key'][$key] = $pos_array['conflict_key'][$key];
+				}					
+				
+				// remove mixed results from pos array
+				foreach(array_keys($mixed_array['part_key']) as $key) {
+					unset($pos_array['part_key'][$key]);
+					unset($pos_array['unvetted_key'][$key]);
+					unset($pos_array['weak_key'][$key]);
+					unset($pos_array['conflict_key'][$key]);
+				}
+				$marker_pos_disp_counter = count($pos_array['part_key']);
+
+				// remove mixed results from neg array
+				foreach(array_keys($dummy_array['part_key']) as $key) {
+					unset($neg_array['part_key'][$key]);
+					unset($neg_array['unvetted_key'][$key]);
+					unset($neg_array['conflict_key'][$key]);
+				}
+				$marker_neg_disp_counter = count($neg_array['part_key']);
+				
+				// sort all arrays alphabetically
+				array_multisort($pos_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$pos_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$pos_array['weak_key'], SORT_NATURAL | SORT_FLAG_CASE, 
+								$pos_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+				array_multisort($neg_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$neg_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$neg_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+				array_multisort($mixed_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$mixed_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE,
+								$mixed_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+			}
+			else
+				$mixed_array = NULL;
+		} 
+		
+		// if no pos and no neg results, there are no mixed results
+		elseif (($marker_pos_disp_counter == 0) && ($marker_neg_disp_counter == 0))
+			$mixed_array = NULL;
+		
+		// if only neg results, sort them alphabetically
+		elseif ($marker_pos_disp_counter == 0) {
+			array_multisort($neg_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
+							$neg_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE, 
+							$neg_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+			$mixed_array = NULL;		
+		}
+		
+		// if only pos results, sort them alphabetically		
+		elseif ($marker_neg_disp_counter == 0) {
+			array_multisort($pos_array['part_key'], SORT_NATURAL | SORT_FLAG_CASE,
+							$pos_array['unvetted_key'], SORT_NATURAL | SORT_FLAG_CASE, 
+							$pos_array['conflict_key'], SORT_NATURAL | SORT_FLAG_CASE);
+			$mixed_array = NULL;
+		} // end if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0))
+				
+		
+		?>
+		
 		<table width="80%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td width="20%" align="center" class="table_neuron_page3">
-					Molecular markers
-				</td>			
-			</tr>			
-		</table>	
-	
-			<!-- Positive sub-table -->
-			<table width="80%" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td width="20%" align="right" class="table_neuron_page1">
-						Positive
-					</td>
-					<td align="left" width="80%" class="table_neuron_page1">
-					</td>				
-				</tr>	
-				<?php
-				// retrive information for POSITIVE AND WEAK-POSITIVE in property table.
-				$marker_pos_disp_counter = 0;
-				for ($i=0; $i<$n; $i++)
-				{
-					$property -> retrive_by_id($property_id[$i]);
-					$val = $property -> getVal();
-					if ($val == 'positive')
-					{
-						$part = $property -> getPart();
+				<td width="20%" align="center" class="table_neuron_page3">Molecular markers</td>
+			</tr>
+		</table>
+		
+		<!-- Positive sub-table -->
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td width="20%" align="right" class="table_neuron_page1">Positive</td>
+				<td align="left" width="80%" class="table_neuron_page1"></td>
+			</tr>
+			
+			<?php
 
-						// retrieve UNVETTED:
-						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
-						$unvetted = $evidencepropertyyperel -> getUnvetted();
-						
-						if ($unvetted == 1)
-							$font_col = 'font4_unvetted';
-						else
-							$font_col = 'font4';
-						
-						print ("
-							<tr>
-								<td width='20%' align='right'>
-								</td>
-								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=positive' class='$font_col'>
-								$part 
-								</a>	
-								</td>					
-							</tr>							
-						");
-	
-						$marker_pos_disp_counter++;									
-					}
-
-					else;
-				}	
-				for ($i=0; $i<$n; $i++)
-				{
-					$property -> retrive_by_id($property_id[$i]);
-					$val = $property -> getVal();
-					
-					// retrieve UNVETTED:
-					$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
-					$unvetted = $evidencepropertyyperel -> getUnvetted();
-					
-					if ($unvetted == 1)
-						$font_col = 'font4_unvetted';
-					else
-						$font_col = 'font4';
-												
-					if ($val == 'weak_positive')
-					{
-						$part = $property -> getPart();
-						print ("
-							<tr>
-								<td width='20%' align='right'>
-								</td>
-								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=weak_positive' class='$font_col'>
-								$part (Weak Positive)
-								</a>
-								</td>					
-							</tr>							
-						");
-
-						$marker_pos_disp_counter++;									
-					}
-					else;
-				}
 				if ($marker_pos_disp_counter == 0) {
 					print ("
 							<tr>
@@ -914,55 +955,45 @@ if ($text_file_creation)
 							</tr>
 							");
 				}
-				?>
-			</table>	
-	
-			<!-- Negative sub-table -->
-			<table width="80%" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td width="20%" align="right" class="table_neuron_page1">
-						Negative
-					</td>
-					<td align="left" width="80%" class="table_neuron_page1">
-					</td>				
-				</tr>	
-				<?php
-				// retrive information for NEGATIVE in property table.
-				$marker_neg_disp_counter = 0;
-				for ($i=0; $i<$n; $i++)
-				{
-					$property -> retrive_by_id($property_id[$i]);
-					$val = $property -> getVal();
-					if ($val == 'negative')
-					{
-						$part = $property -> getPart();
-						
-						// retrieve UNVETTED:
-						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
-						$unvetted = $evidencepropertyyperel -> getUnvetted();
-						
-						if ($unvetted == 1)
+				else {
+					for ($j=0; $j<$marker_pos_disp_counter; $j++) {
+						$markerForLink = $pos_array['part_key'][$j];
+
+						if ($pos_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
-													
+						
+						if ($pos_array['weak_key'][$j] == 1)
+							$disp_marker_name = $pos_array['part_key'][$j] . ' (weak positive)';
+						else					
+							$disp_marker_name = $pos_array['part_key'][$j];
+						
 						print ("
 							<tr>
-								<td width='20%' align='right'>
-								</td>
-								<td align='left' width='80%' class='table_neuron_page2'>
-								<a href='property_page_markers.php?id_neuron=$id&val_property=$part&page=markers&color=negative' class='$font_col'>
-								$part
-								</a>
-								</td>					
-							</tr>							
-						");		
+							<td width='20%' align='right'>
+							</td>
+							<td align='left' width='80%' class='table_neuron_page2'>
+							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive' class='$font_col'>
+							$disp_marker_name
+							</a>
+							</td>
+							</tr>
+							");
+					} // end for $j
+				} // end if ($marker_pos_disp_counter == 0) {
+			?>
+		</table>	
+	
+		<!-- Negative sub-table -->
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td width="20%" align="right" class="table_neuron_page1">Negative</td>
+				<td align="left" width="80%" class="table_neuron_page1"></td>				
+			</tr>	
+			
+			<?php
 
-						$marker_neg_disp_counter++;								
-					}
-					else;
-				}	
-					
 				if ($marker_neg_disp_counter == 0) {
 					print ("
 							<tr>
@@ -970,9 +1001,79 @@ if ($text_file_creation)
 							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
 							</tr>
 							");
-				}	
-				?>
-				</table>	
+				}
+				else {
+					for ($j=0; $j<$marker_neg_disp_counter; $j++) {
+						$markerForLink = $neg_array['part_key'][$j];
+
+						if ($neg_array['unvetted_key'][$j] == 1)
+							$font_col = 'font4_unvetted';
+						else
+							$font_col = 'font4';
+							
+						$disp_marker_name = $neg_array['part_key'][$j];
+						
+						print ("
+							<tr>
+							<td width='20%' align='right'>
+							</td>
+							<td align='left' width='80%' class='table_neuron_page2'>
+							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=negative' class='$font_col'>
+							$disp_marker_name
+							</a>
+							</td>
+							</tr>
+							");						
+					} // end for $j
+				} // end if ($marker_neg_disp_counter == 0) {
+			?>
+		</table>	
+	
+		<!-- Mixed expression sub-table -->
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td width="20%" align="right" class="table_neuron_page1">Mixed expression</td>
+				<td align="left" width="80%" class="table_neuron_page1"></td>
+			</tr>
+			
+			<?php								
+				if ($mixed_exp_disp_counter == 0) {
+					print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
+							</tr>
+							");
+				}
+				else {
+					for ($j=0; $j<$mixed_exp_disp_counter; $j++) {
+						$markerForLink = $mixed_array['part_key'][$j];
+						if ($mixed_array['unvetted_key'][$j] == 1)
+							$font_col = 'font4_unvetted';
+						else
+							$font_col = 'font4';
+									
+						$disp_marker_name = $mixed_array['part_key'][$j];
+						
+						$mixed_conflict = $mixed_array['conflict_key'][$j];
+						if (!$mixed_conflict)
+							$mixed_conflict = 'not yet determined';
+						
+						print ("
+							<tr>
+							<td width='20%' align='right'>
+							</td>
+							<td align='left' width='80%' class='table_neuron_page2'>
+							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
+							$disp_marker_name ($mixed_conflict)
+							</a>
+							</td>
+							</tr>
+							");			
+					} // end for $j
+				} // end if ($marker_pos_disp_counter == 0) {
+			?>
+		</table>		
 	
 		<br />
 		
@@ -1002,43 +1103,52 @@ if ($text_file_creation)
 					// Keep only property_id related by id_type;
 					// and retrieve id_evidence by these id:
 					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id);
+					
+					// get number of sources for this EP property
 					$nn = $evidencepropertyyperel ->getN_evidence_id();	
-						
+					
 					if ($nn == 0);
-					else {
+					else {												
 						$complete_name = real_name_ephys_evidence($subject);
 						$res=show_ephys($subject);
 
+						// for each source of this particular EP property
+						$num_sources_counter = 0;
 						for ($t1=0; $t1<$nn; $t1++) {
 							$evidence_id = $evidencepropertyyperel -> getEvidence_id_array($t1);
 							$epdataevidencerel -> retrive_Epdata($evidence_id);								
-							$epdata_id = $epdataevidencerel -> getEpdata_id();								
-							$epdata -> retrive_all_information($epdata_id);
+							$epdata_id = $epdataevidencerel -> getEpdata_id();
+							$epdataevidencerel -> setEpdata_id(NULL);							
 							
-							$value1 = $epdata -> getValue1();
-							$value2 = $epdata -> getValue2();
-							if($value2)
-								$final_value_array[$t1] = ($value1 + $value2) / 2;
-							else
-								$final_value_array[$t1] = $value1;
-									
-							$n_measurement = $epdata -> getN();
-							if (!$n_measurement)
-								$n_measurement = 1;
-							$n_array[$t1] = $n_measurement;
+							if ($epdata_id == NULL);
+							else {	
+								$num_sources_counter = $num_sources_counter + 1;
+								  					
+								$epdata -> retrive_all_information($epdata_id);
+								
+								$value1 = $epdata -> getValue1();
+								$value2 = $epdata -> getValue2();
+								if($value2)
+									$final_value_array[$num_sources_counter - 1] = ($value1 + $value2) / 2;
+								else
+									$final_value_array[$num_sources_counter - 1] = $value1;
+										
+								$n_measurement = $epdata -> getN();
+								if (!$n_measurement)
+									$n_measurement = 1;
+								$n_array[$num_sources_counter - 1] = $n_measurement;
+							}
 						} // end for $t1
 							
 						$tot_value = 0;
 						$tot_n = 0;
 						$tot_n_squared = 0;
 						$weighted_sum = 0;
-						for ($y1=0; $y1<$nn; $y1++) {
+						for ($y1=0; $y1<$num_sources_counter; $y1++) {
 							$tot_value = $tot_value + $final_value_array[$y1];
 							$tot_n = $tot_n + $n_array[$y1];
 							$weighted_sum = $weighted_sum + ($final_value_array[$y1] * $n_array[$y1]);
 						} // end for $y1
-							
-						//$mean_value1 = $tot_value1 / $nn;
 						
 						// calculate weighted mean
 						if ($tot_n != 0) {
@@ -1046,10 +1156,10 @@ if ($text_file_creation)
 							$mean_value = number_format($mean_value, $res[3], ".", "");
 						}
 						else
-							$mean_value = -999999; // print a value to indicate an error; div by 0
+							$mean_value = NULL;
 
 						// calculated weighted variance
-						if ($nn == 1)
+						if ($num_sources_counter <= 1)
 							$weighted_var = 0;
 						else {
 							$weighted_var_sum = 0;
@@ -1160,10 +1270,11 @@ if ($text_file_creation)
 							$font_col = 'font4';
 	
 						if ($mean_value) {
+							$ephys_disp_counter++;
 							print ("<tr><td width='20%' align='right'></td>");
 							print ("<td align='left' width='80%' class='table_neuron_page2'>");
 						    
-						    if ($nn == 1) {
+						    if ($num_sources_counter == 1) {
 						    // 	$print_str = $mean_value . " " . $res[2] . " (" . $nn . " source, ";
 						    	$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " source, ";
 					    	}
@@ -1181,11 +1292,10 @@ if ($text_file_creation)
 						    	print ("<strong>$complete_name ($res[0]):</strong> ");
 						    
 							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject' class='$font_col'>$print_str</a>");
-							print ("</td></tr>");
-											
-							$mean_value = NULL;				
-	            			$ephys_disp_counter++;
+							print ("</td></tr>");											
 						} // end if ($mean_value)
+							
+						$mean_value = NULL;						
 					} // end else (if ($nn == 0))
 				} // end if ($predicate == 'is between');
 			} // end for $i

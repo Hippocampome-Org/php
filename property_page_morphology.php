@@ -19,6 +19,7 @@ require_once('class/class.author.php');
 require_once('class/class.evidencefragmentrel.php');
 require_once('class/class.articleevidencerel.php');
 require_once('class/class.articleauthorrel.php');
+require_once('function/quote_manipulation.php');
 
 
 function create_temp_table ($name_temporary_table)
@@ -702,6 +703,7 @@ function show_only_morphology(link, start1, stop1)
 					// Retrieve Quote and page_location and original_id from Fragment bu using fragment_id:
 					$fragment -> retrive_by_id($fragment_id[$i]);
 					$quote = $fragment -> getQuote();
+					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
 					$page_location = $fragment -> getPage_location();
 				
