@@ -10,7 +10,6 @@ function quote_replaceIDwithName($theQuote)
 		$idArray[] = intval($match);
 		
 		$fetch_query="SELECT subregion, nickname FROM type WHERE id=$match";
-		print_r($fetch_query);
 		$query_result = mysql_query($fetch_query);
 
 		while($subs_and_nicks = mysql_fetch_array($query_result, MYSQL_ASSOC)) {
