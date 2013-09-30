@@ -9,14 +9,14 @@ function quote_replaceIDwithName($theQuote)
 	foreach ($matches[1] as $match) {
 		$idArray[] = $match;
 		
-		$fetch_query="SELECT DISTINCT subregion, nickname FROM hippocampome.type WHERE id=$match";
-		$query_result = mysql_query($fetch_query);
+		$fetch_query="SELECT c.subregion, c.nickname FROM hippocampome.type c WHERE id=$match";
+		$query_result = mysql_query($fetch_query);		
 
-		$subs_and_nicks = mysql_fetch_array($query_result, MYSQL_ASSOC);
-		//$subs[$u] = $subs_and_nicks['subregion'];
-		//$nicks[$u] = $subs_and_nicks['nickname'];
-		$printable_subs_and_nicks[$u] = '{' . $subs_and_nicks['subregion'] . ' ' . $subs_and_nicks['nickname'] . '}';
-
+		while($subs_and_nicks = mysql_fetch_array($query_result, MYSQL_ASSOC)) {
+			//$subs[$u] = $subs_and_nicks['subregion'];
+			//$nicks[$u] = $subs_and_nicks['nickname'];
+			$printable_subs_and_nicks[$u] = '{' . $subs_and_nicks['subregion'] . ' ' . $subs_and_nicks['nickname'] . '}';
+		}
 		$u++;
 	}
 	
