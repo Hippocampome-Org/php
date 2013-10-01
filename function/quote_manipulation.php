@@ -7,9 +7,9 @@ function quote_replaceIDwithName($theQuote)
 		
 	$u = 0;	
 	foreach ($matches[1] as $match) {
-		$idArray[] = intval($match);
+		$idArray[] = $match;
 		
-		$fetch_query="SELECT subregion, nickname FROM type WHERE id=$match";
+		$fetch_query="SELECT subregion, nickname FROM Type WHERE id=$match";
 		$query_result = mysql_query($fetch_query);
 
 		while($subs_and_nicks = mysql_fetch_array($query_result, MYSQL_ASSOC)) {
@@ -20,10 +20,16 @@ function quote_replaceIDwithName($theQuote)
 		}		
 	}
 	
-	// replace <% cell ID %> with {cell type name} by using regular expression search
-	$newQuote = preg_replace_callback('/\<% [^<>]+ %\>/', function($matches) use (&$printable_subs_and_nicks) {
-		return array_shift($printable_subs_and_nicks);
-	}, $theQuote);
+	if (!empty($printable_subs_and_nicks)) {
+		// replace <% cell ID %> with {cell type name} by using regular expression search
+		$newQuote = preg_replace_callback('/\<% [^<>]+ %\>/', function($matches) use (&$printable_subs_and_nicks) {
+			return array_shift($printable_subs_and_nicks);
+		}, $theQuote);
+	}
+	else {
+		preg_match('/\<% ([^<>]+) %\>/', $theQuote, $matches);
+		$newQuote = preg_replace('/\<% [^<>]+ %\>/', '{ <B>!! cell ID ' . $matches[1] . ' not found !!</B> }', $theQuote);
+	}
 	
 	return ($newQuote);
 }
