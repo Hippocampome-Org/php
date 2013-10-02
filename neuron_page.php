@@ -14,6 +14,7 @@ include ("function/name_ephys_for_evidence.php");
 include ("function/show_ephys.php");
 include ("function/get_abbreviation_definition_box.php");
 include ("function/stm_lib.php");
+include ("function/quote_manipulation.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -667,6 +668,7 @@ if ($text_file_creation)
 			// Citation figure: ***************************************************************
 			$fragment -> retrive_by_id($id_fragment);
 			$citation = $fragment -> getQuote();
+			$citation = quote_replaceIDwithName($citation);
 
 			//$original_id = $fragment -> getOriginal_id();
 

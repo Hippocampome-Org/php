@@ -9,6 +9,7 @@ if ($perm == NULL)
 
 <?php
 include ("access_db.php");
+include ("function/quote_manipulation.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -763,6 +764,7 @@ function show_only_authors(link, color)
 
 					$fragment -> retrive_by_id($fragment_id_1);
 					$quote = $fragment -> getQuote();
+					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
 					$type = $fragment -> getType();
 					$page_location = $fragment -> getPage_location();				

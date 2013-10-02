@@ -9,6 +9,7 @@ if ($perm == NULL)
 
 <?php
 include ("access_db.php");
+include ("function/quote_manipulation.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -19,7 +20,6 @@ require_once('class/class.author.php');
 require_once('class/class.evidencefragmentrel.php');
 require_once('class/class.articleevidencerel.php');
 require_once('class/class.articleauthorrel.php');
-require_once('function/quote_manipulation.php');
 
 
 function create_temp_table ($name_temporary_table)
