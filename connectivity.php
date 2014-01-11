@@ -66,7 +66,624 @@
 	<link href="fixed_header_table/clrcss/CLR_theme.css" rel="stylesheet" media="screen" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
 	<script src="fixed_header_table/jquery.fixedheadertable.js"></script>
-	<script src="fixed_header_table/table_defns.js"></script>        
+	<script src="fixed_header_table/table_defns.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+<style>
+
+.ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
+text-align:center !important;
+margin-bottom:0px !important;
+}
+.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
+.ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:235px; 
+text-align:left;
+margin-bottom:5px;}
+#frmCntr
+{	top:200px; 
+	left:80px;
+	position:absolute;
+}
+#toCntr
+{
+	top:10px; 
+	left:290px;
+	position:absolute;
+}
+#jqgh_nGrid_Neuron_type{ 
+text-align:centre !important;
+margin-bottom:0px !important;}
+
+#nGrid_dg_non_ivy_ngf_0331,#nGrid_ca3_oriens_oriens_00003,#nGrid_ca2_sp_sr_0302,#nGrid_ca2_sp_sr_0302,#nGrid_ca1_oriens_oriens_0003,#nGrid_sub_pyramidal_ca1_331p
+{
+	width:auto !important;
+	border-right:solid medium red !important;
+}
+
+.ui-jqgrid tr.jqgrow td 
+{
+	height:20px !important;
+	padding:0px !important;
+} 
+.highlighted{
+	/*height:22px !important;*/
+	border: solid 1px Chartreuse !important;
+}
+.rotate
+{
+	-webkit-transform: rotate(-90deg);    /* Safari 3.1+, Chrome */
+    -moz-transform: rotate(-90deg);       /* Firefox 3.5+ */
+    -o-transform: rotate(-90deg);         /* Opera starting with 10.50+ */
+    -ms-transform: rotate(-90deg);        /* IE9 */
+     transform: rotate(-90deg);        /* CSS3 */
+}
+.rotateOldIE
+{
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);       /* IE6, IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"; /* IE8 */
+    zoom: 1;
+}
+
+</style>
+<script language="javascript">
+function OpenInNewTab(aEle)
+{
+	//alert(aEle.href);
+	var win = window.open(aEle.href,'_blank');
+	win.focus();
+}
+function getIEVersion() {
+    var rv = -1; // Return value assumes failure.
+    if (navigator.appName == 'Microsoft Internet Explorer') {
+        var ua = navigator.userAgent;
+        var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.test(ua) != null)
+            rv = parseFloat( RegExp.$1 );
+    }
+    return rv;
+}
+
+
+function checkVersion() {
+    var ver = getIEVersion();
+	//alert("Version : "+ver);
+    /*if ( ver != -1 ) {
+        if (ver <= 9.0) {
+            // do something
+        }
+    }*/
+    return ver;
+}
+checkVersion();
+
+</script>
+<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	 var rotateFunction = function (grid, headerHeight) {
+	 // we use grid as context (if one have more as one table on the page)
+	 var trHead = $("thead:first tr", grid.hdiv),
+        cm = grid.getGridParam("colModel"),
+        ieVer = $.browser.version.substr(0, 3),
+        iCol, cmi, headDiv,
+        isSafariAndNotChrome = (($.browser.webkit || $.browser.safari) &&
+                               !(/(chrome)[ \/]([\w.]+)/i.test(navigator.userAgent)));
+
+    $("thead:first tr th").height(headerHeight);
+    headerHeight = $("thead:first tr th").height();
+   for (iCol = 0; iCol < cm.length; iCol++) 
+    {
+        cmi = cm[iCol];
+        // prevent text cutting based on the current column width
+        headDiv = $("th:eq(" + iCol + ") div", trHead);
+        if (!$.browser.msie || ieVer === "9.0" || document.documentMode >= 9) {
+            headDiv.width(headerHeight)
+                   .addClass("rotate")
+                   .css("left",3);
+                   /* .css("bottom", isSafariAndNotChrome? 0: 7)
+                   .css("left", ($.browser.webkit || $.browser.safari)?
+                                (cmi.width - headerHeight)/2:
+                                (cmi.width - headerHeight)/2 + 2); */
+        }
+        else {
+            // Internet Explorer 6.0-8.0 or Internet Explorer 9.0 in compatibility mode
+            headDiv.width(headerHeight).addClass("rotateOldIE");
+            if (ieVer === "8.0" || document.documentMode === 8) { // documentMode is important to test for IE compatibility mode
+            	headDiv.width(headerHeight)
+                .addClass("rotate")
+                .css("left",3);
+            } else {
+                headDiv.css("left", 3);
+            }
+            headDiv.parent().css("zoom",1);
+        } 
+    }
+ }  
+	
+	function Merger(gridName,cellName){
+		var mya = $("#" + gridName + "").getDataIDs();	
+		var rowCount = mya.length;
+		var rowSpanCount = 1;
+		var countRows = 0;
+		var lastRowDelete =0;
+		var firstElement = 0;
+
+		for(var i=0;i<=rowCount;i=i+countRows)
+		{ 
+			var before = $("#" + gridName + "").jqGrid('getRowData', mya[i]); // Fetch me the data for the first row
+			for (j = i+1; j <=rowCount; j++) 
+			{
+				var end = $("#" + gridName + "").jqGrid('getRowData', mya[j]); // Fetch me the data for the next row
+				if (before[cellName] == end[cellName]) // If the previous row and the next row data are the same
+				{
+					$("#" + gridName + "").setCell(mya[j], cellName,'&nbsp;');
+					$("tr#"+j+" td#type"+j).css("border-bottom","none");
+					if(rowSpanCount > 1) // For the first row Don't delete the cell and its contents
+					{ 
+						$("tr#"+j+" td#type"+j).css("border-bottom","none");
+					}
+					else
+					{
+						firstElement = j;
+					}
+					rowSpanCount++;	
+                } 
+                else 
+                {
+					$("tr#"+j).css("border-bottom", "2px red");
+					countRows = rowSpanCount;
+                	rowSpanCount = 1;
+                	break;
+                }
+			}
+		} 
+	}
+	var research = "<?php echo $research?>";
+	var table = "<?php echo $_REQUEST['table_result']?>";
+
+	$grid = $("#nGrid"),
+    resizeColumnHeader = function () {
+        var rowHight, resizeSpanHeight,
+            // get the header row which contains
+            headerRow = $(this).closest("div.ui-jqgrid-view")
+                .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+
+        // reset column height
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.height = '';
+        });
+
+        // increase the height of the resizing span
+        resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.cssText = resizeSpanHeight;
+        });
+
+        // set position of the dive with the column header text to the middle
+        rowHight = headerRow.height();
+        headerRow.find("div.ui-jqgrid-sortable").each(function () {
+            var ts = $(this);
+            ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
+        });
+    },
+    fixPositionsOfFrozenDivs = function () {
+        var $rows;
+        if (typeof this.grid.fbDiv !== "undefined") {
+            $rows = $('>div>table.ui-jqgrid-btable>tbody>tr', this.grid.bDiv);
+            $('>table.ui-jqgrid-btable>tbody>tr', this.grid.fbDiv).each(function (i) {
+                var rowHight = $($rows[i]).height(), rowHightFrozen = $(this).height();
+                if ($(this).hasClass("jqgrow")) {
+                    $(this).height(rowHight);
+                    rowHightFrozen = $(this).height();
+                    if (rowHight !== rowHightFrozen) {
+                        $(this).height(rowHight + (rowHight - rowHightFrozen));
+                    }
+                }
+            });
+            $(this.grid.fbDiv).height(this.grid.bDiv.clientHeight);
+            $(this.grid.fbDiv).css($(this.grid.bDiv).position());
+        }
+        if (typeof this.grid.fhDiv !== "undefined") {
+            $rows = $('>div>table.ui-jqgrid-htable>thead>tr', this.grid.hDiv);
+            $('>table.ui-jqgrid-htable>thead>tr', this.grid.fhDiv).each(function (i) {
+                var rowHight = $($rows[i]).height(), rowHightFrozen = $(this).height();
+                $(this).height(rowHight);
+                rowHightFrozen = $(this).height();
+                if (rowHight !== rowHightFrozen) {
+                    $(this).height(rowHight + (rowHight - rowHightFrozen));
+                }
+            });
+            $(this.grid.fhDiv).height(this.grid.hDiv.clientHeight);
+            $(this.grid.fhDiv).css($(this.grid.hDiv).position());
+        }
+        $( "#frmCntr" ).remove();
+        $( "#toCntr" ).remove();
+    },
+    fixGboxHeight = function () {
+        var gviewHeight = $("#gview_" + $.jgrid.jqID(this.id)).outerHeight(),
+            pagerHeight = $(this.p.pager).outerHeight();
+
+        $("#gbox_" + $.jgrid.jqID(this.id)).height(gviewHeight + pagerHeight);
+        gviewHeight = $("#gview_" + $.jgrid.jqID(this.id)).outerHeight();
+        pagerHeight = $(this.p.pager).outerHeight();
+        $("#gbox_" + $.jgrid.jqID(this.id)).height(gviewHeight + pagerHeight);
+    };
+
+    $grid.jqGrid({
+    url:'getConnectivity.php',
+    datatype: 'json',
+    mtype: 'GET',
+    ajaxGridOptions :{
+		contentType : "application/json"
+        },
+    postData: {
+        researchVar: research,
+        table_result : table
+    },
+    colNames:['&nbsp;','<div id="frmCntr">FROM</div><div id="toCntr" class="rotate">TO</div>',
+              '<a href="neuron_page.php?id=1000" onClick="OpenInNewTab(this);" target="_blank">DG:Granule (+)2201p</a>',
+              '<a href="neuron_page.php?id=1001" onClick="OpenInNewTab(this);" target="_blank">DG:Semilunar Granule (+)2311p&nbsp;&nbsp;&nbsp;</a>',
+              '<a href="neuron_page.php?id=1043" onClick="OpenInNewTab(this);" target="_blank">DG:Quad MC (+)2323</a>',
+              '<a href="neuron_page.php?id=1041" onClick="OpenInNewTab(this);" target="_blank">DG:Hilar Granule (+)2203p</a>',
+              '<a href="neuron_page.php?id=1002" onClick="OpenInNewTab(this);" target="_blank">DG:Mossy (+)0103</a>',
+              '<a href="neuron_page.php?id=1004" onClick="OpenInNewTab(this);" target="_blank">DG:Total Molecular (-)3303</a>',
+              '<a href="neuron_page.php?id=1005" onClick="OpenInNewTab(this);" target="_blank">DG:MOLAX (-)3302</a>',
+              '<a href="neuron_page.php?id=1006" onClick="OpenInNewTab(this);" target="_blank">DG:Outer Molecular (-)3222</a>',
+              '<a href="neuron_page.php?id=1007" onClick="OpenInNewTab(this);" target="_blank">DG:Neurogliaform (-)3000p</a>',
+              '<a href="neuron_page.php?id=1008" onClick="OpenInNewTab(this);" target="_blank">DG:MOPP (-)3000p</a>',
+              '<a href="neuron_page.php?id=1027" onClick="OpenInNewTab(this);" target="_blank">DG:Aspiny Hilar (-)2333</a>',
+              '<a href="neuron_page.php?id=1009" onClick="OpenInNewTab(this);" target="_blank">DG:HICAP (-)2322</a>',
+              '<a href="neuron_page.php?id=1010" onClick="OpenInNewTab(this);" target="_blank">DG:Axo-Axonic (-)2233</a>',
+              '<a href="neuron_page.php?id=1035" onClick="OpenInNewTab(this);" target="_blank">DG:Basket-PV (-)2232</a>',
+              '<a href="neuron_page.php?id=1036" onClick="OpenInNewTab(this);" target="_blank">DG:Basket-CCK (-)2232</a>',
+              '<a href="neuron_page.php?id=1026" onClick="OpenInNewTab(this);" target="_blank">DG:Hilar proj (-)1333p</a>',
+              '<a href="neuron_page.php?id=1013" onClick="OpenInNewTab(this);" target="_blank">DG:HIPP (-)1002</a>',
+              '<a href="neuron_page.php?id=1040" onClick="OpenInNewTab(this);" target="_blank">DG:Non-Ivy / NGF (-)0331</a>',
+              '<a href="neuron_page.php?id=2000" onClick="OpenInNewTab(this);" target="_blank">CA3:Pyramidal a/b (+)23223p</a>',
+              '<a href="neuron_page.php?id=2004" onClick="OpenInNewTab(this);" target="_blank">CA3:Pyramidal c (+)03223p</a>',
+              '<a href="neuron_page.php?id=2001" onClick="OpenInNewTab(this);" target="_blank">CA3:CA3 Granule (+)22100</a>',
+              '<a href="neuron_page.php?id=2003" onClick="OpenInNewTab(this);" target="_blank">CA3:Radiatum Giant (+)22010</a>',
+              '<a href="neuron_page.php?id=2005" onClick="OpenInNewTab(this);" target="_blank">CA3:LM-R (-)33200</a>',
+              '<a href="neuron_page.php?id=2043" onClick="OpenInNewTab(this);" target="_blank">CA3:Basket-PV (-)22232</a>',
+              '<a href="neuron_page.php?id=2044" onClick="OpenInNewTab(this);" target="_blank">CA3:Basket-CCK (-)22232</a>',
+              '<a href="neuron_page.php?id=2028" onClick="OpenInNewTab(this);" target="_blank">CA3:Axo-Axonic (-)22232</a>',
+              '<a href="neuron_page.php?id=2049" onClick="OpenInNewTab(this);" target="_blank">CA3:Quad O-LM (-)12222</a>',
+              '<a href="neuron_page.php?id=2008" onClick="OpenInNewTab(this);" target="_blank">CA3:R-LM (-)12000</a>',
+              '<a href="neuron_page.php?id=2009" onClick="OpenInNewTab(this);" target="_blank">CA3:O-LM (-)11003</a>',
+              '<a href="neuron_page.php?id=2042" onClick="OpenInNewTab(this);" target="_blank">CA3:Interneuron Spec (-)03333p</a>',
+              '<a href="neuron_page.php?id=2045" onClick="OpenInNewTab(this);" target="_blank">CA3:Bistratified (-)03333</a>',
+              '<a href="neuron_page.php?id=2046" onClick="OpenInNewTab(this);" target="_blank">CA3:Ivy (-)03333</a>',
+              '<a href="neuron_page.php?id=2036" onClick="OpenInNewTab(this);" target="_blank">CA3:Mossy Fiber-Assoc (-)03330p</a>',
+              '<a href="neuron_page.php?id=2013" onClick="OpenInNewTab(this);" target="_blank">CA3:Lucidum-Oriens (-)03311</a>',
+              '<a href="neuron_page.php?id=2014" onClick="OpenInNewTab(this);" target="_blank">CA3:Lucidum (-)03300</a>',
+              '<a href="neuron_page.php?id=2023" onClick="OpenInNewTab(this);" target="_blank">CA3:Radiatum (-)03000</a>',
+              '<a href="neuron_page.php?id=2035" onClick="OpenInNewTab(this);" target="_blank">CA3:Mossy Fiber-Oriens (-)02332p</a>',
+              '<a href="neuron_page.php?id=2017" onClick="OpenInNewTab(this);" target="_blank">CA3:Lucidum-Pyramidale (-)02310</a>',
+              '<a href="neuron_page.php?id=2019" onClick="OpenInNewTab(this);" target="_blank">CA3:Spiny Lucidum (-)01320p</a>',
+              '<a href="neuron_page.php?id=2020" onClick="OpenInNewTab(this);" target="_blank">CA3:Trilaminar (-)01113p</a>',
+              '<a href="neuron_page.php?id=2021" onClick="OpenInNewTab(this);" target="_blank">CA3:Interneuron Spec-2 (-)01113</a>',
+              '<a href="neuron_page.php?id=2047" onClick="OpenInNewTab(this);" target="_blank">CA3:Axo-Axonic (-)00012</a>',
+              '<a href="neuron_page.php?id=2022" onClick="OpenInNewTab(this);" target="_blank">CA3:Oriens-Oriens (-)00003</a>',
+              '<a href="neuron_page.php?id=3000" onClick="OpenInNewTab(this);" target="_blank">CA2:Pyramidal (+)2333p</a>',
+              '<a href="neuron_page.php?id=3007" onClick="OpenInNewTab(this);" target="_blank">CA2:Basket-Wide (-)2232p</a>',
+              '<a href="neuron_page.php?id=3006" onClick="OpenInNewTab(this);" target="_blank">CA2:Basket (-)2232</a>',
+              '<a href="neuron_page.php?id=3003" onClick="OpenInNewTab(this);" target="_blank">CA2:Bistratified (-)0313p</a>',
+              '<a href="neuron_page.php?id=3008" onClick="OpenInNewTab(this);" target="_blank">CA2:SP-SR (-)0302</a>',
+              '<a href="neuron_page.php?id=4000" onClick="OpenInNewTab(this);" target="_blank">CA1:Pyramidal (+)2223p</a>',
+              '<a href="neuron_page.php?id=4054" onClick="OpenInNewTab(this);" target="_blank">CA1:Radiatum Giant (+)2201</a>',
+              '<a href="neuron_page.php?id=4003" onClick="OpenInNewTab(this);" target="_blank">CA1:Quadrilaminar (-)3333</a>',
+              '<a href="neuron_page.php?id=4004" onClick="OpenInNewTab(this);" target="_blank">CA1:RLM Proj (-)3300</a>',
+              '<a href="neuron_page.php?id=4005" onClick="OpenInNewTab(this);" target="_blank">CA1:RLM (-)3300</a>',
+              '<a href="neuron_page.php?id=4076" onClick="OpenInNewTab(this);" target="_blank">CA1:Perforant Path (-)3222</a>',
+              '<a href="neuron_page.php?id=4006" onClick="OpenInNewTab(this);" target="_blank">CA1:Perforant Path Proj (-)3200p</a>',
+              '<a href="neuron_page.php?id=4011" onClick="OpenInNewTab(this);" target="_blank">CA1:Neurogliaform Proj (-)3000p</a>',
+              '<a href="neuron_page.php?id=4012" onClick="OpenInNewTab(this);" target="_blank">CA1:Neurogliaform (-)3000</a>',
+              '<a href="neuron_page.php?id=4013" onClick="OpenInNewTab(this);" target="_blank">CA1:RPO (-)2333</a>',
+              '<a href="neuron_page.php?id=4015" onClick="OpenInNewTab(this);" target="_blank">CA1:Schaffer Collateral (-)2311</a>',
+              '<a href="neuron_page.php?id=4056" onClick="OpenInNewTab(this);" target="_blank">CA1:Interneuron Spec-5 (-)2300</a>',
+              '<a href="neuron_page.php?id=4055" onClick="OpenInNewTab(this);" target="_blank">CA1:Oriens-Alveus (-)2233</a>',
+              '<a href="neuron_page.php?id=4078" onClick="OpenInNewTab(this);" target="_blank">CA1:Basket-PV (-)2232</a>',
+              '<a href="neuron_page.php?id=4079" onClick="OpenInNewTab(this);" target="_blank">CA1:Basket-CCK (-)2232</a>',
+              '<a href="neuron_page.php?id=4036" onClick="OpenInNewTab(this);" target="_blank">CA1:Axo-Axonic (-)2232</a>',
+              '<a href="neuron_page.php?id=4020" onClick="OpenInNewTab(this);" target="_blank">CA1:Interneuron Spec-4 (-)2223</a>',
+              '<a href="neuron_page.php?id=4021" onClick="OpenInNewTab(this);" target="_blank">CA1:Interneuron Spec-2 (-)2100</a>',
+              '<a href="neuron_page.php?id=4022" onClick="OpenInNewTab(this);" target="_blank">CA1:Interneuron Spec-3 (-)2003</a>',
+              '<a href="neuron_page.php?id=4061" onClick="OpenInNewTab(this);" target="_blank">CA1:LM-R (-)1300</a>',
+              '<a href="neuron_page.php?id=4066" onClick="OpenInNewTab(this);" target="_blank">CA1:P-LM (-)1202</a>',
+              '<a href="neuron_page.php?id=4023" onClick="OpenInNewTab(this);" target="_blank">CA1:Back Proj (-)1133p</a>',
+              '<a href="neuron_page.php?id=4068" onClick="OpenInNewTab(this);" target="_blank">CA1:Oriens-Bistratified (-)0103</a>',
+              '<a href="neuron_page.php?id=4087" onClick="OpenInNewTab(this);" target="_blank">CA1:SR O-LM (-)1102</a>',
+              '<a href="neuron_page.php?id=4089" onClick="OpenInNewTab(this);" target="_blank">CA1:SO O-LM (-)1003</a>',
+              '<a href="neuron_page.php?id=4069" onClick="OpenInNewTab(this);" target="_blank">CA1:O-LM (-)1002</a>',
+              '<a href="neuron_page.php?id=4080" onClick="OpenInNewTab(this);" target="_blank">CA1:Bistratified (-)0333</a>',
+              '<a href="neuron_page.php?id=4081" onClick="OpenInNewTab(this);" target="_blank">CA1:Ivy (-)0333</a>',
+              '<a href="neuron_page.php?id=4084" onClick="OpenInNewTab(this);" target="_blank">CA1:Schaffer Coll-Assoc (-)0322</a>',
+              '<a href="neuron_page.php?id=4041" onClick="OpenInNewTab(this);" target="_blank">CA1:OR Proj (-)0313p</a>',
+              '<a href="neuron_page.php?id=4095" onClick="OpenInNewTab(this);" target="_blank">CA1:Ivy (-)0302</a>',
+              '<a href="neuron_page.php?id=4028" onClick="OpenInNewTab(this);" target="_blank">CA1:Radiatum (-)0300</a>',
+              '<a href="neuron_page.php?id=4091" onClick="OpenInNewTab(this);" target="_blank">CA1:IS (-)0221</a>',
+              '<a href="neuron_page.php?id=4093" onClick="OpenInNewTab(this);" target="_blank">CA1:IS-1c (-)0203</a>',
+              '<a href="neuron_page.php?id=4035" onClick="OpenInNewTab(this);" target="_blank">CA1:Trilaminar (-)0113p</a>',
+              '<a href="neuron_page.php?id=4083" onClick="OpenInNewTab(this);" target="_blank">CA1:Oriens-Bistratified (-)1113p</a>',
+              '<a href="neuron_page.php?id=4031" onClick="OpenInNewTab(this);" target="_blank">CA1:Interneuron Spec-6 (-)0102</a>',
+              '<a href="neuron_page.php?id=4039" onClick="OpenInNewTab(this);" target="_blank">CA1:Basket horiz (-)0012</a>',
+              '<a href="neuron_page.php?id=4038" onClick="OpenInNewTab(this);" target="_blank">CA1:Axo-Axonic Horiz (-)0012</a>',
+              '<a href="neuron_page.php?id=4033" onClick="OpenInNewTab(this);" target="_blank">CA1:Oriens-Oriens (-)0003</a>',
+              '<a href="neuron_page.php?id=5001" onClick="OpenInNewTab(this);" target="_blank">SUB:Pyramidal-EC (+)331p</a>',
+              '<a href="neuron_page.php?id=5002" onClick="OpenInNewTab(this);" target="_blank">SUB:Axo-Axonic (-)210</a>',
+              '<a href="neuron_page.php?id=5005" onClick="OpenInNewTab(this);" target="_blank">SUB:Pyramidal-CA1 (+)331p</a>',
+              '<a href="neuron_page.php?id=6082" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal II (+)333000p</a>',
+              '<a href="neuron_page.php?id=6002" onClick="OpenInNewTab(this);" target="_blank">EC:Bipolar V (+)331131p</a>',
+              '<a href="neuron_page.php?id=6003" onClick="OpenInNewTab(this);" target="_blank">EC:Stellate II (+)331111p</a>',
+              '<a href="neuron_page.php?id=6005" onClick="OpenInNewTab(this);" target="_blank">EC:Fan II (+)331000p</a>',
+              '<a href="neuron_page.php?id=6006" onClick="OpenInNewTab(this);" target="_blank">EC:Medial Pyramidal III (+)313300</a>',
+              '<a href="neuron_page.php?id=6007" onClick="OpenInNewTab(this);" target="_blank">EC:Lateral Pyramidal III (+)233310</a>',
+              '<a href="neuron_page.php?id=6008" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal II (+)233111</a>',
+              '<a href="neuron_page.php?id=6094" onClick="OpenInNewTab(this);" target="_blank">EC:Multiform II (+)231000</a>',
+              '<a href="neuron_page.php?id=6095" onClick="OpenInNewTab(this);" target="_blank">EC:Multiform III-IV-V (+)223331</a>',
+              '<a href="neuron_page.php?id=6092" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal III (+)223200p</a>',
+              '<a href="neuron_page.php?id=6017" onClick="OpenInNewTab(this);" target="_blank">EC:Small Pyramidal III (+)223111p</a>',
+              '<a href="neuron_page.php?id=6018" onClick="OpenInNewTab(this);" target="_blank">EC:Stellate III (+)223000</a>',
+              '<a href="neuron_page.php?id=6019" onClick="OpenInNewTab(this);" target="_blank">EC:Oblique Pyramidal II (+)221100</a>',
+              '<a href="neuron_page.php?id=6085" onClick="OpenInNewTab(this);" target="_blank">EC:Horizontal V (+)220233p</a>',
+              '<a href="neuron_page.php?id=6021" onClick="OpenInNewTab(this);" target="_blank">EC:Small Pyramidal V (+)220033</a>',
+              '<a href="neuron_page.php?id=6023" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal V (+)213330</a>',
+              '<a href="neuron_page.php?id=6024" onClick="OpenInNewTab(this);" target="_blank">EC:Bipolar III (+)133100</a>',
+              '<a href="neuron_page.php?id=6025" onClick="OpenInNewTab(this);" target="_blank">EC:Lateral Multipolar III (+)113330</a>',
+              '<a href="neuron_page.php?id=6031" onClick="OpenInNewTab(this);" target="_blank">EC:Multipolar III (+)003310</a>',
+              '<a href="neuron_page.php?id=6033" onClick="OpenInNewTab(this);" target="_blank">EC:Multipolar V (+)001331</a>',
+              '<a href="neuron_page.php?id=6078" onClick="OpenInNewTab(this);" target="_blank">EC:Multipolar VI (+)001331</a>',
+              '<a href="neuron_page.php?id=6086" onClick="OpenInNewTab(this);" target="_blank">EC:Multipolar V (+)000333p</a>',
+              '<a href="neuron_page.php?id=6052" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal VI (+)000023</a>',
+              '<a href="neuron_page.php?id=6038" onClick="OpenInNewTab(this);" target="_blank">EC:Superficial Inhib III (-)333000</a>',
+              '<a href="neuron_page.php?id=6040" onClick="OpenInNewTab(this);" target="_blank">EC:Multipolar Inhib III (-)233000</a>',
+              '<a href="neuron_page.php?id=6053" onClick="OpenInNewTab(this);" target="_blank">EC:Basket II (-)230000</a>',
+              '<a href="neuron_page.php?id=6047" onClick="OpenInNewTab(this);" target="_blank">EC:Polymorphic III (-)113220</a>',
+              '<a href="neuron_page.php?id=6096" onClick="OpenInNewTab(this);" target="_blank">EC:Basket II (-)031000</a>',
+              '<a href="neuron_page.php?id=6048" onClick="OpenInNewTab(this);" target="_blank">EC:Axo-Axonic II (-)030000</a>',
+              '<a href="neuron_page.php?id=6087" onClick="OpenInNewTab(this);" target="_blank">EC:Pyramidal-Like III (-)023300</a>',
+              '<a href="neuron_page.php?id=6049" onClick="OpenInNewTab(this);" target="_blank">EC:Multiform III (-)023000</a>'], 
+	colModel :[
+	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
+          return 'id=\'type' + rowId + "\'";   
+      },frozen:true},
+      {name:'Neuron_type', index:'nickname', width:200,sortable:false,frozen:true},
+          //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
+      {name:'dg_granule_2201p', index:'dg_granule_2201p', width:20,height:130,search:false,sortable:false},
+      {name:'dg_semilunar_granule_2311p', index:'dg_semilunar_granule_2311p', width:20,height:130,search:false,sortable:false},
+      {name:'dg_quad_mc_2323', index:'dg_quad_mc_2323', width:20,height:150,search:false,sortable:false},
+      {name:'dg_hillar_granule_2203', index:'dg_hillar_granule_2203', width:20,height:150,search:false,sortable:false},
+      {name:'dg_mossy_0103', index:'dg_mossy_0103', width:20,height:150,search:false,sortable:false},
+      {name:'dg_total_molecular_3303', index:'dg_total_molecular_3303', width:20,height:150,search:false,sortable:false},
+      {name:'dg_molax_3302', index:'dg_molax_3302', width:20,height:150,search:false,sortable:false},
+      {name:'dg_outer_molecular_3222', index:'dg_outer_molecular_3222', width:20,height:150,search:false,sortable:false},
+      {name:'dg_neurogliaform_3000p', index:'dg_neurogliaform_3000p', width:20,height:150,search:false,sortable:false},
+      {name:'dg_mopp_3000p', index:'dg_mopp_3000p', width:20,height:150,search:false,sortable:false},
+      {name:'dg_aspiny_hillar_2333', index:'dg_aspiny_hillar_2333', width:20,height:150,search:false,sortable:false},
+      {name:'dg_hicap_2322', index:'dg_hicap_2322', width:20,height:150,search:false,sortable:false},
+      {name:'dg_axo_axonic_2233', index:'dg_axo_axonic_2233', width:20,height:150,search:false,sortable:false},
+      {name:'dg_basket_pv_2232', index:'dg_basket_pv_2232', width:20,height:150,search:false,sortable:false},
+      {name:'dg_basket_cck_2332', index:'dg_basket_cck_2332', width:20,height:150,search:false,sortable:false},
+      {name:'dg_hillar_proj_1333', index:'dg_hillar_proj_1333', width:20,height:150,search:false,sortable:false},
+      {name:'dg_hipp_1002', index:'dg_hipp_1002', width:20,height:150,search:false,sortable:false},
+      {name:'dg_non_ivy_ngf_0331', index:'dg_non_ivy_ngf_0331', width:20,height:150,search:false,sortable:false,
+    	  cellattr: function(rowId, tv, rawObject, cm, rdata) 
+          {
+             return 'style="border-right:medium solid red;"';
+          }},
+      {name:'ca3_pyramidal_a_b_23223p', index:'ca3_pyramidal_a_b_23223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca3_pyramidal_c_03223p', index:'ca3_pyramidal_c_03223p', width:20,height:130,search:false,sortable:false},
+      {name:'ca3_ca3_granule_22100', index:'ca3_ca3_granule_22100', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_radiatum_giant_22010', index:'ca3_radiatum_giant_22010', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_lm_r_33200', index:'ca3_lm_r_33200', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_basket_pv_22232', index:'ca3_Basket_pv_22232', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_basket_cck_22232', index:'ca3_basket_cck_22232', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_axo_axonic_22232', index:'ca3_axo_axonic_22232', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_quad_o_lm_12222', index:'ca3_quad_o_lm_12222', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_r_lm_12000', index:'ca3_r_lm_12000', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_o_lm_11003', index:'ca3_o_lm_11003', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_interneuron_spec_03333p', index:'ca3_interneuron_spec_03333p', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_bistratified_03333', index:'ca3_bistratified_03333', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_ivy_03333', index:'ca3_ivy_03333', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_mossy_fiber_assoc_03330p', index:'ca3_mossy_fiber_assoc_03330p', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_lucidum_oriens_03311', index:'ca3_lucidum_oriens_03311', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_lucidum_03300', index:'ca3_lucidum_03300', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_radiatum_03000', index:'ca3_radiatum_03000', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_mossy_fiber_oriens_02332p', index:'ca3_mossy_fiber_oriens_02332p', width:20,height:130,search:false,sortable:false},
+      {name:'ca3_lucidum_pyramidale_02310', index:'ca3_lucidum_pyramidale_02310', width:20,height:130,search:false,sortable:false},
+      {name:'ca3_spiny_lucidum_01320p', index:'ca3_spiny_lucidum_01320p', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_trilaminar_01113p', index:'ca3_trilaminar_01113p', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_interneuron_spec_2_01113', index:'ca3_interneuron_spec_2_01113', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_axo_axonic_00012', index:'ca3_axo_axonic_00012', width:20,height:150,search:false,sortable:false},
+      {name:'ca3_oriens_oriens_00003', index:'ca3_oriens_oriens_00003', width:20,height:150,search:false,sortable:false,
+       cellattr: function(rowId, tv, rawObject, cm, rdata) 
+       {
+             return 'style="border-right:medium solid red;"';
+       }},
+      {name:'ca2_pyramidal_2333p', index:'ca2_pyramidal_2333p', width:20,height:150,search:false,sortable:false},
+      {name:'ca2_basket_wide_2232p', index:'ca2_basket_wide_2232p', width:20,height:150,search:false,sortable:false},
+      {name:'ca2_basket_2232', index:'ca2_basket_2232', width:20,height:150,search:false,sortable:false},
+      {name:'ca2_bistratified_0313p', index:'ca2_bistratified_0313p', width:20,height:150,search:false,sortable:false},
+      {name:'ca2_sp_sr_0302', index:'ca2_sp_sr_0302', width:20,height:150,search:false,sortable:false,
+       cellattr: function(rowId, tv, rawObject, cm, rdata) 
+       {
+          return 'style="border-right:medium solid red;"';
+       }
+      },
+      {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_radiatum_giant_2201', index:'ca1_radiatum_giant_2201', width:20,height:130,search:false,sortable:false},
+      {name:'ca1_quadrilaminar_3333', index:'ca1_quadrilaminar_3333', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_rlm_proj_3300', index:'ca1_rlm_proj_3300', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_rlm_3300', index:'ca1_rlm_3300', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_perforant_path_3222', index:'ca1_perforant_path_3222', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_perforant_path_proj_3200p', index:'ca1_perforant_path_proj_3200p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_neurogliaform_proj_3000p', index:'ca1_neurogliaform_proj_3000p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_neurogliaform_3000', index:'ca1_neurogliaform_3000', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_rpo_2333', index:'ca1_rpo_2333', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_schaffer_collateral_2311', index:'ca1_schaffer_collateral_2311', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_interneuron_spec_5_2300', index:'ca1_interneuron_spec_5_2300', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_oriens_alveus_2233', index:'ca1_oriens_alveus_2233', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_basket_pv_2232', index:'ca1_basket_pv_2232', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_basket_cck_2232', index:'ca1_basket_cck_2232', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_axo_axonic_2232', index:'ca1_axo_axonic_2232', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_interneuron_spec_4_2223', index:'ca1_interneuron_spec_4_2223', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_interneuron_spec_2_2100', index:'ca1_interneuron_spec_2_2100', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_interneuron_spec_3_2003', index:'ca1_interneuron_spec_3_2003', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_lm_r_1300', index:'ca1_lm_r_1300', width:20,height:130,search:false,sortable:false},
+      {name:'ca1_p_lm_1202', index:'ca1_p_lm_1202', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_back_proj_1133p', index:'ca1_back_proj_1133p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_oriens_bistratified_0103', index:'ca1_oriens_bistratified_0103', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_sr_o_lm_1102', index:'ca1_sr_o_lm_1102', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_so_o_lm_1003', index:'ca1_so_o_lm_1003', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_o_lm_1002', index:'ca1_o_lm_1002', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_bistratified_0333', index:'ca1_bistratified_0333', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_ivy_0333', index:'ca1_ivy_0333', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_schaffer_coll_assoc_0322', index:'ca1_schaffer_coll_assoc_0322', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_or_proj_031_p', index:'ca1_or_proj_031_p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_ivy_0302', index:'ca1_ivy_0302', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_radiatum_0300', index:'ca1_radiatum_0300', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_is_0221', index:'ca1_is_0221', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_is_1c_0203', index:'ca1_is_1c_0203', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_trilaminar_0113p', index:'ca1_trilaminar_0113p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_oriens_bistratified_1113p', index:'ca1_oriens_bistratified_1113p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_interneuron_spec_6_0102', index:'ca1_interneuron_spec_6_0102', width:20,height:130,search:false,sortable:false},
+      {name:'ca1_basket_horiz_0012', index:'ca1_basket_horiz_0012', width:20,height:130,search:false,sortable:false},
+      {name:'ca1_axo_axonic_horiz_0012', index:'ca1_axo_axonic_horiz_0012', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_oriens_oriens_0003', index:'ca1_oriens_oriens_0003', width:20,height:150,search:false,sortable:false,
+       cellattr: function(rowId, tv, rawObject, cm, rdata) 
+       {
+         return 'style="border-right:medium solid red;"';
+       }
+       },
+      {name:'sub_pyramidal_EC_331p', index:'sub_pyramidal_EC_331p', width:20,height:130,search:false,sortable:false},
+      {name:'sub_axo_axonic_210', index:'sub_axo_axonic_210', width:20,height:150,search:false,sortable:false},
+      {name:'sub_pyramidal_ca1_331p', index:'sub_pyramidal_ca1_331p', width:20,height:150,search:false,sortable:false,
+       cellattr: function(rowId, tv, rawObject, cm, rdata) 
+       {
+         return 'style="border-right:medium solid red;"';
+       }
+      },
+	  {name:'ec_pyramidal_II_333000p', index:'ec_pyramidal_II_333000p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ec_bipolar_V_331131p', index:'ec_bipolar_V_331131p', width:20,height:130,search:false,sortable:false},
+      {name:'ec_stellate_II_331111p', index:'ec_stellate_II_331111p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_fan_II_331000p', index:'ec_fan_II_331000p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_medial_pyramidal_III_313300', index:'ec_medial_pyramidal_III_313300', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ec_lateral_pyramidal_III_233310', index:'ec_lateral_pyramidal_III_233310', width:20,height:130,search:false,sortable:false},
+      {name:'ec_pyramidal_II_233111', index:'ec_pyramidal_II_233111', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multiform_II_231000', index:'ec_multiform_II_231000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multiform_III_IV_V_223331', index:'ec_multiform_III_IV_V_223331', width:20,height:150,search:false,sortable:false},
+      {name:'ec_pyramidal_III_223200p', index:'ec_pyramidal_III_223200p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_small_pyramidal_III_223111p', index:'ec_small_pyramidal_III_223111p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_stellate_III_223000', index:'ec_stellate_III_223000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_oblique_pyramidal_II_221100', index:'ec_oblique_pyramidal_II_221100', width:20,height:150,search:false,sortable:false},
+      {name:'ec_horizontal_V_220233p', index:'ec_horizontal_V_220233p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_small_pyramidal_V_220033', index:'ec_small_pyramidal_V_220033', width:20,height:150,search:false,sortable:false},
+      {name:'ec_pyramidal_V_213330', index:'ec_pyramidal_V_213330', width:20,height:150,search:false,sortable:false},
+      {name:'ec_bipolar_III_133100', index:'ec_bipolar_III_133100', width:20,height:150,search:false,sortable:false},
+      {name:'ec_lateral_multipolar_III_113330', index:'ec_lateral_multipolar_III_113330', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multipolar_III_003310', index:'ec_multipolar_III_003310', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multipolar_V_001331', index:'ec_multipolar_V_001331', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multipolar_VI_001331', index:'ec_multipolar_VI_001331', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multipolar_V_000333p', index:'ec_multipolar_V_000333p', width:20,height:150,search:false,sortable:false},
+      {name:'ec_pyramidal_VI_000023', index:'ec_pyramidal_VI_000023', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ec_superficial_inhib_III_333000', index:'ec_superficial_inhib_III_333000', width:20,height:130,search:false,sortable:false},
+      {name:'ec_multipolar_inhib_III_233000', index:'ec_multipolar_inhib_III_233000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_basket_II_230000', index:'ec_basket_II_230000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_polymorphic_III_113220', index:'ec_polymorphic_III_113220', width:20,height:150,search:false,sortable:false},
+      {name:'ec_basket_II_031000', index:'ec_basket_II_031000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_axo_axonic_II_030000', index:'ec_axo_axonic_II_030000', width:20,height:150,search:false,sortable:false},
+      {name:'ec_pyramidal_like_III_023300', index:'ec_pyramidal_like_III_023300', width:20,height:150,search:false,sortable:false},
+      {name:'ec_multiform_III_023000', index:'ec_multiform_III_023000', width:20,height:150,search:false,sortable:false} 
+     ], 
+    //multiselect: true,
+   /* pager: '#pager',*/
+    rowNum:122,
+    rowList:[122],
+   /*  sortname: 'invid',
+    sortorder: 'desc',*/
+    viewrecords: true, 
+    gridview: true,
+    jsonReader : {
+      /* page: "page",
+      total: "total",
+      records: "records",
+      root:"rows", */
+      repeatitems: true,
+      onSelectRow: function() {
+    	     return false;
+    	},
+      cell:"cell",
+      id: "invid"
+   },
+    //caption: 'Morphology Matrix',
+    scrollerbar:true,
+    shrinkToFit:false,
+    height:'250',
+    width:"1050",
+    /*loadComplete : function()
+    {
+    	fixPositionsOfFrozenDivs(this);
+    },*/
+    gridComplete: function () {
+    	 var gridName = "nGrid"; // Access the grid Name
+    	// $('#nGrid').fixedHeaderTable({ altClass: 'odd', footer: false, fixedColumns: 1 });
+    	 Merger(gridName,"type");
+    	//rotateFunction();
+    	 //RotateCheckboxColumnHeaders("#nGrid",235);
+    	 //$('#nGrid').fixedHeaderTable({ altClass: 'odd', footer: false, fixedColumns: 3 });
+    	} 
+    });
+	
+	$grid.jqGrid('setFrozenColumns');
+	rotateFunction($grid,235);
+	fixPositionsOfFrozenDivs.call($grid[0]);
+	
+	//$("#nGrid").triggerHandler("jqGridAfterGridComplete");
+	
+	//RotateCheckboxColumnHeaders("#nGrid",235);
+	//rotateFunction("#nGrid");
+	
+	var cm = $grid.jqGrid('getGridParam', 'colModel');
+	
+	
+	$grid.mouseover(function(e) {
+
+		var count = $("#nGrid").jqGrid('getGridParam', 'records');
+	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
+	        rowId = $tr.attr('id');
+        
+       	if (rowId) {
+	        var ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
+			$row = "#"+rowId+" td"; 
+			$($row).addClass('highlighted');
+
+			for(var i=0;i<count;i++)
+			{
+				$colSelected = "tr#"+i+" td:eq("+ci+")";
+			    $($colSelected).addClass('highlighted');
+			} 
+		}
+	});
+	$grid.mouseout(function(e) {
+		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
+	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
+	        rowId = $tr.attr('id'), ci;
+       	if (rowId) {
+	        ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
+	        $row = "#"+rowId+" td";  
+			$($row).removeClass('highlighted');
+			for(var i=0;i<count;i++)
+			{
+				$colSelected = "tr#"+i+" td:eq("+ci+")";
+				$($colSelected).removeClass('highlighted');
+			}  
+		}
+	});
+});
+
+</script>        
 </head>
 
 <body>
@@ -102,313 +719,14 @@
 <table border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td width="950">
-		<div class='clr_container divider'>
-		<div class='clr_grid height600'>
-		
-		<?php 				
-			if ($research) {
-				$n_DG = 0;
-				$n_CA3 = 0;
-				$n_CA2 = 0;
-				$n_CA1 = 0;
-				$n_SUB = 0;
-				$n_EC = 0;
-				$n_All = 0;
-				
-				for($W1=0; $W1<$number_type; $W1++) {
-					if ($id_search[$W1] < 1999) {
-						//$type -> retrive_by_id($id_search[$W1]);
-						//$DG_position[$n_DG] = $type->getPosition();
-						// $DG_position[$n_DG]=$id_search[$W1];
-						$DG_position[$n_DG] = $id_search[$W1];
-						$n_DG = $n_DG + 1;
-						$n_All += 1; 
-					}
-					if ( ($id_search[$W1] >= 2000) && ($id_search[$W1] < 2999) ) {
-						$CA3_position[$n_CA3]=$id_search[$W1];
-						$n_CA3 = $n_CA3 + 1;
-						$n_All += 1;
-					}
-					if ( ($id_search[$W1] >= 3000) && ($id_search[$W1] < 3999) ) {
-						$CA2_position[$n_CA2]=$id_search[$W1];
-						$n_CA2 = $n_CA2 + 1;
-						$n_All += 1;
-					}
-					if ( ($id_search[$W1] >= 4000) && ($id_search[$W1] < 4999) ) {
-						$CA1_position[$n_CA1]=$id_search[$W1];
-						$n_CA1 = $n_CA1 + 1;
-						$n_All += 1;
-					}
-					if ( ($id_search[$W1] >= 5000) && ($id_search[$W1] < 5999) ) {
-						$SUB_position[$n_SUB]=$id_search[$W1];
-						$n_SUB = $n_SUB + 1;
-						$n_All += 1;
-					}
-					if ( ($id_search[$W1] >= 6000) && ($id_search[$W1] < 6999) ) {
-						$EC_position[$n_EC]=$id_search[$W1];
-						$n_EC = $n_EC + 1;
-						$n_All += 1;
-					}
-				} // end for W1
-						
-				if ($n_DG != 0) {
-					sort($DG_position);
-					$first_DG = $DG_position[0];
-				}
-				if ($n_CA3 != 0) {
-					sort($CA3_position);
-					$first_CA3 = $CA3_position[0];
-				}
-				if ($n_CA2 != 0) {
-					sort($CA2_position);
-					$first_CA2 = $CA2_position[0];
-				}
-				if ($n_CA1 != 0) {
-					sort($CA1_position);
-					$first_CA1 = $CA1_position[0];
-				}
-				if ($n_SUB != 0) {
-					sort($SUB_position);
-					$first_SUB = $SUB_position[0];
-				}
-				if ($n_EC != 0) {
-					sort($EC_position);
-					$first_EC = $EC_position[0];
-				}
-			} // end if ($research)		
-						
-				
-			// if table is big enough, use a fixed first column
-			if ( ($research) And ($n_All < 26) )
-				print("<table id='connectivity_table_small' class='fancyTable' cellpadding='0' cellspacing='0'>");
-			else
-				print("<table id='connectivity_table' class='fancyTable' cellpadding='0' cellspacing='0'>");
-		
-			
-			/* Connectivity matrix header */
-			
-			print("<thead><tr>");
-				print("<th bgcolor='#FFFFFF' style='height:175px; width:175px;'><img src='images/connectivity/spacer_first_cell_2.png' width='175' height='175' border='0'/></th>");				
-				
-				// read in potential connectivity csv file
-				$pot_conn_csv = file_get_contents('connectivity_data_files/potential_connectivity_matrix_v1.0alpha.csv', FILE_USE_INCLUDE_PATH);
-
-				$pot_rows = explode("\n", $pot_conn_csv);
-				$num_pot_rows = count($pot_rows);
-				unset($pot_rows[$num_pot_rows-1]);
-				$pot_header = str_getcsv(array_shift($pot_rows));	// pulls out header row from array				
-				
-				$pot_conn_matrix = array();
-				foreach ($pot_rows as $this_pot_row) {
-					$pot_conn_matrix[] = array_combine($pot_header, str_getcsv($this_pot_row));
-				}					
-
-				// read in known connectivity csv file
-				$known_conn_csv = file_get_contents('connectivity_data_files/known_connectivity_matrix_v1.0alpha.csv', FILE_USE_INCLUDE_PATH);
-				
-				$known_rows = explode("\n", $known_conn_csv);
-				$num_known_rows = count($known_rows);
-				unset($known_rows[$num_known_rows-1]);
-				$known_header = str_getcsv(array_shift($known_rows));	// pulls out header row from array
-					
-				$known_conn_matrix = array();
-				foreach ($known_rows as $this_known_row) {
-					$known_conn_matrix[] = array_combine($known_header, str_getcsv($this_known_row));
-				}			
-					
-				$num_columns = 0;
-				for ($i1=0; $i1<$number_type; $i1++) {
-					$num_columns = $num_columns + 1;
-					 
-					// retrieve the id_type from Type
-					if ($research)
-						$id = $id_search[$i1];
-					else
-						$id = $type->getID_array($i1);
-					
-					$type -> retrive_by_id($id);
-					$nickname_type = $type->getNickname();
-					$subregion_type = $type->getSubregion();
-					
-					$nickname_type = str_replace('_', ' ', $nickname_type);
-					$subregion_nickname_type = $subregion_type . ":" . $nickname_type;
-					$position = $type->getPosition();
-					
-					if (!$research) {
-						if ( ($position == 201) || ($position == 301) || ($position == 401) || ($position == 501) || ($position == 601)) {
-							$num_columns = $num_columns + 1;
-							print ("<th style='width:4px' bgcolor='#FF0000'></th>");
-						}
-					}
-					else {
-						if ($i1 !=0 And ( ($id == $first_CA3) || ($id == $first_CA2) || ($id == $first_CA1) || ($id == $first_SUB) || ($id == $first_EC)) )
-						{								
-							$num_columns = $num_columns + 1;
-							print ("<th style='width:4px' bgcolor='#FF0000'></th>");
-						}
-					}
-				
-					print ("<th bgcolor='#E0FFFF' style='vertical-align:bottom; width:20px; max-height:175px;'>");
-					
-					print ("<a href='neuron_page.php?id=$id' class='font_cell_3'>");	
-
-					/* needed for .png images of text */
-					$type_name_image_path = str_replace(':', '_', $subregion_nickname_type);
-					$type_name_image_path = str_replace('/', '_', $type_name_image_path);
-					$type_name_image_path = '\'images/name_neuron_type/rotated/' . $type_name_image_path . '.png\'';
-					print ("<img src=$type_name_image_path alt=$type_name_image_path style='max-height:175px' border='0'/>");
-
-					/* needed for vText */
-					//print ("<div style='display: inline-block; width: 30px; height: 200px; position: relative; background-color: #ffffff; '>");
-					//print ("<div style='position:absolute; left:0; bottom:0;' class='vText'>");						
-					//$subregion_nickname_type = $string = str_replace(' ', '', $subregion_nickname_type);
-					
-					/* needed for either normal, horizontal text OR for vText */
-					//if (strpos($subregion_nickname_type, '(+)') == TRUE)
-					//	print ("<font style='font-size:12px' color='#339900'>$subregion_nickname_type</font>");
-					//if (strpos($subregion_nickname_type, '(-)') == TRUE)
-					//	print ("<font style='font-size:12px' color='#CC0000'>$subregion_nickname_type</font>");												
-					
-					/* needed for vText */
-					//print ("</div></div></div>");
-					
-					print ("</a>");						
-					print ("</th>");
-				}					
-				
-				$num_columns = $num_columns + 1;
-				
-				print ("</tr></thead>");
-				
-				
-				/* Connectivity matrix body */
-									
-				print ("<tbody>");
-			
-				for ($row=0; $row<$number_type; $row++) { //$number_type					
-					// retrieve the id_type from Type
-					if ($research)
-						$id_type_row = $id_search[$row];
-					else
-						$id_type_row = $type->getID_array($row);
-					
-					$type -> retrive_by_id($id_type_row);
-					$nickname_type_row = $type->getNickname();
-					$subregion_type_row = $type->getSubregion();
-				
-					$nickname_type_row = str_replace('_', ' ', $nickname_type_row);
-					$subregion_nickname_type_row = $subregion_type_row . ":" . $nickname_type_row;
-					$position_row = $type->getPosition();
-					
-					$num_merged_cols = $num_columns-1;
-					
-					if (!$research) {
-						$rowIdx = $row;
-						if ( ($position_row == 201) || ($position_row == 301) || ($position_row == 401) || ($position_row == 501) || ($position_row == 601))					
-							print ("<tr style='height:4px'><td bgcolor=#FF0000 style='width:175px'></td><td colspan='" . $num_merged_cols . "' bgcolor='#FF0000'></td></tr>");
-					}
-					else {
-						$rowIdx = array_search($id_type_row, $known_header) - 1;
-						if ($row !=0 And ( ($id_type_row == $first_CA3) || ($id_type_row == $first_CA2) || ($id_type_row == $first_CA1) || ($id_type_row == $first_SUB) || ($id_type_row == $first_EC)) )
-							print ("<tr style='height:4px'><td bgcolor=#FF0000 style='width:175px'></td><td colspan='" . $num_merged_cols . "' bgcolor='#FF0000'></td></tr>");
-
-					}
-						
-					print ("<tr><td bgcolor='#E0FFFF' style='text-align:right; vertical-align:middle; max-width:175px; height:20px;'>");
-														
-					print ("<a href='neuron_page.php?id=$id_type_row' class='font_cell_3'>");
-
-					/* needed for .png images of text */
-					$type_name_image_path = str_replace(':', '_', $subregion_nickname_type_row);
-					$type_name_image_path = str_replace('/', '_', $type_name_image_path);
-					$type_name_image_path = '\'images/name_neuron_type/unrotated/' . $type_name_image_path . '.png\'';
-					print ("<img src=$type_name_image_path alt=$type_name_image_path border='0' style='max-width:175px'/>");
-					
-					/* needed for normal, horizontal text */
-					//if (strpos($subregion_nickname_type_row, '(+)') == TRUE)
-					//	print ("<font style='font-size:12px' color='#339900'>$subregion_nickname_type_row</font>");
-					//if (strpos($subregion_nickname_type_row, '(-)') == TRUE)
-					//	print ("<font style='font-size:12px' color='#CC0000'>$subregion_nickname_type_row</font>");							
-					
-					print ("</a>");								
-					print ("</td>");
-	
-					for ($col=0; $col<$number_type; $col++) {
-						// retrieve the id_type from Type
-						if ($research)
-							$id_type_col = $id_search[$col];
-						else
-							$id_type_col = $type->getID_array($col);
-						
-						$type -> retrive_by_id($id_type_col);
-						$nickname_type_col = $type->getNickname();
-						$subregion_type_col = $type->getSubregion();
-					
-						$nickname_type_col = str_replace('_', ' ', $nickname_type_col);
-						$subregion_nickname_type = $subregion_type_col . " " . $nickname_type_col;
-						$position_col = $type->getPosition();
-						
-						if (!$research) {
-							$colIdx = $col;
-							if ( ($position_col == 201) || ($position_col == 301) || ($position_col == 401) || ($position_col == 501) || ($position_col == 601))
-								print ("<td style='width:4px' bgcolor='#FF0000'></td>");
-						}
-						else {		
-							$colIdx = array_search($id_type_col, $known_header) - 1;
-							if ($col !=0 And ( ($id_type_col == $first_CA3) || ($id_type_col == $first_CA2) || ($id_type_col == $first_CA1) || ($id_type_col == $first_SUB) || ($id_type_col == $first_EC)))
-								print ("<td style='width:4px' bgcolor='#FF0000'></td>");
-						}
-						
-						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
-							$presynaptic_bg_color = '#FFFFFF';
-						else {
-							switch ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]]) {
-								case -1:
-									$presynaptic_bg_color = '#AAAAAA';
-									break;
-								case 1:
-									$presynaptic_bg_color = '#000000';
-									break;
-								case 4:
-									$presynaptic_bg_color = '#FF8C00';
-									break;
-								default:
-									$presynaptic_bg_color = '#FFFFFF';
-									break;
-							}
-						}
-						
-						print ("<td bgcolor=$presynaptic_bg_color style='text-align:center; vertical-align:middle'>");
-						
-						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
-							print ("<img src='images/connectivity/known_nonconnection.png' width='20px' border='0'/>");
-						elseif ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 1)
-							print ("<img src='images/connectivity/known_connection.png' width='20px' border='0'/>");
-						
-						// space rows & columns using images on the main diagonal
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 0) )
-							print ("<img src='images/connectivity/spacer_white.png' height='20px' 'width='20px' border='0'/>");
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == -1) )
-							print ("<img src='images/connectivity/spacer_gray.png' height='20px' 'width='20px' border='0'/>");
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 1) )
-							print ("<img src='images/connectivity/spacer_black.png' height='20px' 'width='20px' border='0'/>");
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 4) )
-							print ("<img src='images/connectivity/spacer_orange.png' height='20px' 'width='20px' border='0'/>");
-						
-						print ("</td>");
-					}			
-					
-					print ("</tr>");
-				}
-				
-				
-				
-				print("</tbody>");
-				print("</table>");			
-			?>
-			
-		</div>
-		</div>	
+		<!--  div class='clr_container divider'-->
+		<!--  div class='clr_grid height600' -->
+		 
+				<table id="nGrid"></table>
+				<div id="pager"></div>
+			 
+		<!--  div -->
+		<!--  div-->	
 	</td>
 	
 	
