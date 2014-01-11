@@ -197,8 +197,8 @@ $n_CA1 = 0;
 $n_SUB = 0;
 $n_EC = 0;
 
-header("Content-type: application/json;charset=utf-8");
-
+//header("Content-type: application/json;charset=utf-8");
+$responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "");
 $responce->page = $page;
 $responce->total = $total_pages;
 $responce->records = $count;
