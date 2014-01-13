@@ -31,32 +31,32 @@ function create_temp_table ($name_temporary_table)
 	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
-				   id_fragment int(10),
-				   id_original int(10),
+				   id_fragment varchar(10),
+				   id_original varchar(10),
 				   quote text(2000),
 				   authors varchar(600),
 				   title varchar(300),
 				   publication varchar(100),
 				   year varchar(15),
-				   PMID BIGint(25),
+				   PMID varchar(25),
 				   pages varchar(20),
 				   page_location varchar(20),
-				   id_markerdata int(50),
-				   id_evidence1 int(20),
-				   id_evidence2 int(20),
-				   show1 int(5),
+				   id_markerdata varchar(10),
+				   id_evidence1 varchar(20),
+				   id_evidence2 varchar(20),
+				   show1 varchar(5),
 				   type varchar(20),
 				   type_marker varchar (70),
 				   color varchar (100),		
 				   pmcid varchar (50),	
 				   NIHMSID varchar (50),
 				   doi varchar (100),
-				   citation int (7), 
-				   show2 int (4),  
-				   show_button int (4),
+				   citation varchar(7), 
+				   show2 varchar(4),  
+				   show_button varchar(4),
 				   volume varchar (20),
 				   issue varchar (20),
-           secondary_pmid BIGint(25),
+           		   secondary_pmid varchar(50),
 				   PRIMARY KEY (id));";
 	$query = mysql_query($creatable);	
 }
@@ -121,7 +121,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$issue',
      '$secondary_pmid'
 	   )";	
-	$rs2 = mysql_query($query_i);					
+	$rs2 = mysql_query($query_i);
 }
 
 
@@ -139,7 +139,6 @@ function header_row($title, $value) {
               }
 
 $page = $_REQUEST['page'];
-
 if ($page)
 {
 	$id_neuron = $_REQUEST['id_neuron'];
@@ -179,6 +178,7 @@ if ($page)
 	
 	
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$val_property_temp.$color_temporary_table.'__'.$time_t;
+	echo "Name Temporary Table ".$name_temporary_table;
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
 	create_temp_table ($name_temporary_table);
 
@@ -719,6 +719,7 @@ function show_only_authors(link, color)
 			$color_1[0] = $color;
 		}	
 		// for on number of marker (number of $color) ++++
+		
 		for ($m2=0; $m2<$number_marker; $m2++)
 		{
 			// Retrieve Id_property from Property By using Val_property (object) AND Color (predicate)
@@ -728,7 +729,7 @@ function show_only_authors(link, color)
 			// Retrieve the ID EVIDENCE from EvidencePropertyTypeRel by using ID TYPE and ID PROPERTY:
 			$evidencepropertyyperel -> retrive_evidence_id($id_property, $id_neuron);
 			$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
-	
+			
 			$n_tot_marker = 0;
 			$old_id_marker = 0;
 			for ($i=0; $i<$n_id_evidence; $i++)

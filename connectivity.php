@@ -106,7 +106,11 @@ margin-bottom:0px !important;}
 	padding:0px !important;
 } 
 .highlighted{
-	/*height:22px !important;*/
+	border-right: solid 1px Chartreuse !important;
+	border-left: solid 1px Chartreuse !important;
+	border-bottom:solid 1px Chartreuse !important; 
+}
+.highlighted_top{
 	border: solid 1px Chartreuse !important;
 }
 .rotate
@@ -650,37 +654,39 @@ $(function(){
 	
 	$grid.mouseover(function(e) {
 
-		var count = $("#nGrid").jqGrid('getGridParam', 'records');
+		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
 	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
 	        rowId = $tr.attr('id');
-        
-       	if (rowId) {
+	    
+	   	if (rowId) {
 	        var ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
 			$row = "#"+rowId+" td"; 
-			$($row).addClass('highlighted');
+			$($row).addClass('highlighted_top');
 
 			for(var i=0;i<count;i++)
 			{
 				$colSelected = "tr#"+i+" td:eq("+ci+")";
-			    $($colSelected).addClass('highlighted');
+				$($colSelected).addClass('highlighted');
+				
 			} 
 		}
-	});
-	$grid.mouseout(function(e) {
-		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
-	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
-	        rowId = $tr.attr('id'), ci;
-       	if (rowId) {
+		});
+		
+		$grid.mouseout(function(e) {
+			var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
+	    	var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
+	        	rowId = $tr.attr('id'), ci;
+	   		if (rowId) {
 	        ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
-	        $row = "#"+rowId+" td";  
-			$($row).removeClass('highlighted');
-			for(var i=0;i<count;i++)
-			{
-				$colSelected = "tr#"+i+" td:eq("+ci+")";
-				$($colSelected).removeClass('highlighted');
-			}  
-		}
-	});
+	        	$row = "#"+rowId+" td";  
+				$($row).removeClass('highlighted_top');
+				for(var i=0;i<count;i++)
+				{
+					$colSelected = "tr#"+i+" td:eq("+ci+")";
+					$($colSelected).removeClass('highlighted');
+				} 
+			}
+		});
 });
 
 </script>        

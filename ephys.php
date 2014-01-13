@@ -54,6 +54,11 @@ $epdata = new epdata($class_epdata);
 	text-align:left;
 }
 .highlighted{
+	border-right: solid 1px Chartreuse !important;
+	border-left: solid 1px Chartreuse !important;
+	border-bottom:solid 1px Chartreuse !important; 
+}
+.highlighted_top{
 	border: solid 1px Chartreuse !important;
 }
 #jqgh_nGrid_Vrest,#jqgh_nGrid_Rin,#jqgh_nGrid_Tm,#jqgh_nGrid_Vthresh,#jqgh_nGrid_FastAhp,#jqgh_nGrid_Apampl,#jqgh_nGrid_Apwidth,#jqgh_nGrid_MaxFr,#jqgh_nGrid_SlowAhp,#jqgh_nGrid_Sagratio
@@ -263,42 +268,42 @@ $(function(){
 	});
 	
 	var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
-	
-	
 
 	$("#nGrid").mouseover(function(e) {
 
-		var count = $("#nGrid").jqGrid('getGridParam', 'records');
+		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
 	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
 	        rowId = $tr.attr('id');
-        
-       	if (rowId) {
+	    
+	   	if (rowId) {
 	        var ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
 			$row = "#"+rowId+" td"; 
-			$($row).addClass('highlighted');
+			$($row).addClass('highlighted_top');
 
 			for(var i=0;i<count;i++)
 			{
 				$colSelected = "tr#"+i+" td:eq("+ci+")";
-			    $($colSelected).addClass('highlighted');
+				$($colSelected).addClass('highlighted');
+				
 			} 
 		}
-	});
-	$("#nGrid").mouseout(function(e) {
-		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
-	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
-	        rowId = $tr.attr('id'), ci;
-       	if (rowId) {
+		});
+		
+		$("#nGrid").mouseout(function(e) {
+			var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
+	    	var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
+	        	rowId = $tr.attr('id'), ci;
+	   		if (rowId) {
 	        ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
-	        $row = "#"+rowId+" td";  
-			$($row).removeClass('highlighted');
-			for(var i=0;i<count;i++)
-			{
-				$colSelected = "tr#"+i+" td:eq("+ci+")";
-				$($colSelected).removeClass('highlighted');
-			}  
-		}
-	}); 
+	        	$row = "#"+rowId+" td";  
+				$($row).removeClass('highlighted_top');
+				for(var i=0;i<count;i++)
+				{
+					$colSelected = "tr#"+i+" td:eq("+ci+")";
+					$($colSelected).removeClass('highlighted');
+				} 
+			}
+		}); 
 });
 </script>
 </head>
