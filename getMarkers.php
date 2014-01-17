@@ -58,10 +58,11 @@ $name_markers = array(
 
 function getUrlForLink($id,$img,$key,$color1)
 {
-	$url = '';
+	$url = $img;
 	if($img!='')
 	{
-		$url ='<a href="property_page_markers.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=markers" target="_blank">'.$img.'</a>';
+		if($color1!=NULL)
+		  $url ='<a href="property_page_markers.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=markers" target="_blank">'.$img.'</a>';
 	}
 	return ($url);
 }
