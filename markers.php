@@ -17,8 +17,13 @@ require_once('class/class.temporary_result_neurons.php');
 $width1='25%';
 $width2='2%';
 
-$research = $_REQUEST['research'];
-$table_result = $_REQUEST['table_result'];
+$research = "";
+if(isset($_REQUEST['research']))
+	$research = $_REQUEST['research'];
+
+$table_result ="";
+if(isset($_REQUEST['table_result']))
+	$table_result = $_REQUEST['table_result'];
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -159,7 +164,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $_REQUEST['table_result']?>";
+	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
 	
 	$("#nGrid").jqGrid({
     url:'getMarkers.php',

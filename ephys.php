@@ -21,7 +21,14 @@ require_once('class/class.temporary_result_neurons.php');
 
 $type = new type($class_type);
 
-$research = $_REQUEST['research'];
+$research = "";
+if(isset($_REQUEST['research']))
+	$research = $_REQUEST['research'];
+
+$table_result ="";
+if(isset($_REQUEST['table_result']))
+	$table_result = $_REQUEST['table_result'];
+	
 
 $property = new property($class_property);
 
@@ -114,7 +121,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $_REQUEST['table_result']?>";
+	var table = "<?php echo $table_result?>";
 	
 	$("#nGrid").jqGrid({
     url:'getEphys.php',

@@ -8,7 +8,7 @@ $perm = $_SESSION['perm'];
 if ($perm == '')
 	header("Location:error1.html");
 
-$research = $_REQUEST['research'];
+//$research = $_REQUEST['research'];
 
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');
@@ -224,12 +224,12 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	 		$id = $type->getID_array($i);
 	 
 		$ephys2 = array("Vrest"=>NULL, "Rin"=>NULL,"tm"=>NULL, "Vthresh"=>NULL, "fast_AHP"=>NULL,
-				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "solw_AHP" =>NULL, "sag_ratio" =>NULL);
+				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "slow_AHP" =>NULL, "sag_ratio" =>NULL);
 		$id_ephys2 = array("Vrest"=>NULL, "Rin"=>NULL,"tm"=>NULL, "Vthresh"=>NULL, "fast_AHP"=>NULL,
-				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "solw_AHP" =>NULL, "sag_ratio" =>NULL);
+				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "slow_AHP" =>NULL, "sag_ratio" =>NULL);
 		
 		$unvetted_ephys2 = array("Vrest"=>NULL, "Rin"=>NULL,"tm"=>NULL, "Vthresh"=>NULL, "fast_AHP"=>NULL,
-				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "solw_AHP" =>NULL, "sag_ratio" =>NULL);
+				"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "slow_AHP" =>NULL, "sag_ratio" =>NULL);
 		
 	 	$type -> retrive_by_id($id); // Retrieve id
 	 	$nickname = $type->getNickname(); // Retrieve nick name
@@ -324,7 +324,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			}
 		
 				// Check the UNVETTED color: ***************************************************************************
-				$evidencepropertyyperel -> retrive_unvetted($id_type, $property_id); // For a particular type and property id check if vetted or unvetted
+				$evidencepropertyyperel -> retrive_unvetted($id, $property_id); // For a particular type and property id check if vetted or unvetted
 				$unvetted = $evidencepropertyyperel -> getUnvetted();
 				$unvetted_ephys2[$name_epys]=$unvetted;
 		
@@ -347,7 +347,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	  		print_ephys_value_and_hover('AP_width', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
 	  		print_ephys_value_and_hover('max_fr', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
 	  		print_ephys_value_and_hover('slow_AHP', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-	  		print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2)
+	  		print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2) 
 	  		); 
 }
 echo json_encode($responce);

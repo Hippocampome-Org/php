@@ -6,7 +6,7 @@ $perm = $_SESSION['perm'];
 if ($perm == '')
 	header("Location:error1.html");
 
-$research = $_REQUEST['research'];
+//$research = $_REQUEST['research'];
 
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');

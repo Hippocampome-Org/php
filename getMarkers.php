@@ -6,7 +6,7 @@ $perm = $_SESSION['perm'];
 if ($perm == '')
 	header("Location:error1.html");
 
-$research = $_REQUEST['research'];
+//$research = $_REQUEST['research'];
 
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');
@@ -319,7 +319,9 @@ else $sord = $_GET['sord'];
 if(!$sidx) $sidx =1;
 
 $type = new type($class_type);
-$research = $_GET['researchVar'];
+$research = 0;
+if(isset($_GET['researchVar']))
+	$research = $_GET['researchVar'];
 if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
@@ -433,7 +435,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
 	
@@ -444,7 +446,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
 	
@@ -456,7 +458,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
 	
@@ -467,7 +469,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);
 							
@@ -479,7 +481,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);						
 			
@@ -491,7 +493,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);			
 							
@@ -503,7 +505,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);
 
@@ -514,7 +516,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 									"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 									"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 									"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
-									"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
+									"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,"vGluT3" =>NULL,
 									"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL);
 	
 	

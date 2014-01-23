@@ -16,8 +16,14 @@
 	require_once('class/class.temporary_result_neurons.php');	
 	
 	$type = new type($class_type);
-	
+
+$research = "";
+if(isset($_REQUEST['research']))
 	$research = $_REQUEST['research'];
+
+$table_result ="";
+if(isset($_REQUEST['table_result']))
+	$table_result = $_REQUEST['table_result'];
 	
 	if ($research) { // From page of search; retrieve the id from search_table (temporary) -----------------------	
 		$table_result = $_REQUEST['table_result'];
@@ -245,7 +251,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $_REQUEST['table_result']?>";
+	var table = "<?php echo $table_result?>";
 
 	$grid = $("#nGrid"),
     resizeColumnHeader = function () {

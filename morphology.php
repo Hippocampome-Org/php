@@ -166,6 +166,9 @@ $hippo_select = $_SESSION['hippo_select'];
 	border-left:medium solid #770000;
 	width:auto !important;
 }
+.ui-jqgrid {
+    font-size: 11px !important;
+}
 </style>
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
@@ -263,7 +266,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $_REQUEST['table_result']?>";
+	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
 	//alert(table);
 	$("#nGrid").jqGrid({
     url:'getMorphology.php',

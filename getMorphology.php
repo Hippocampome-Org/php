@@ -6,7 +6,7 @@ $perm = $_SESSION['perm'];
 if ($perm == '')
 	header("Location:error1.html");
 
-$research = $_REQUEST['research'];
+//$research = $_REQUEST['research'];
 
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');
@@ -102,7 +102,9 @@ else $sord = $_GET['sord'];
 if(!$sidx) $sidx =1;
 
 $type = new type($class_type);
-$research = $_GET['researchVar'];
+$research = 0;
+if(isset($_GET['researchVar']))
+	$research = $_GET['researchVar'];
 if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
@@ -264,7 +266,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		// DG +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		if(count($val_array) > 1) // To check if the explode has returned both the postfix value and the prefix value
 		{
-			$unvetted = check_unvetted1($id, $id_p, $evidencepropertyyperel); // Checks if a particular property is vetted or unvetted
+			$unvetted = check_unvetted1($id, $id_p[$ii], $evidencepropertyyperel); // Checks if a particular property is vetted or unvetted
 			$neuronType = ''; // Whether neuron present is Axon,Dendrite or Both
 			if($hippo[$val[$ii]]!='') // Check if for a particular property , the associated value 
 			{
