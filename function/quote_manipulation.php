@@ -4,11 +4,10 @@ function quote_replaceIDwithName($theQuote)
 {
 	// find all <% cell ID %>
 	preg_match_all('/\<% ([^<>]+) %\>/', $theQuote, $matches, PREG_PATTERN_ORDER);	
-		
 	$u = 0;	
+	$newQuote = "";
 	foreach ($matches[1] as $match) {
 		$idArray[] = $match;
-		
 		$fetch_query="SELECT subregion, nickname FROM Type WHERE id=$match";
 		$query_result = mysql_query($fetch_query);
 
@@ -28,7 +27,8 @@ function quote_replaceIDwithName($theQuote)
 	}
 	else {
 		preg_match('/\<% ([^<>]+) %\>/', $theQuote, $matches);
-		$newQuote = preg_replace('/\<% [^<>]+ %\>/', '{ <B>!! cell ID ' . $matches[1] . ' not found !!</B> }', $theQuote);
+		if(count($matches) > 0)
+			$newQuote = preg_replace('/\<% [^<>]+ %\>/', '{ <B>!! cell ID ' . $matches[1] . ' not found !!</B> }', $theQuote);
 	}
 	
 	return ($newQuote);

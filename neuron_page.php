@@ -825,6 +825,7 @@ if ($text_file_creation)
 
 		$marker_pos_disp_counter = 0;
 		$marker_neg_disp_counter = 0;
+		$mixed_exp_disp_counter = 0;
 		
 		// loop through all evidence to look for marker evidence
 		for ($i=0; $i<$n; $i++) {
@@ -866,6 +867,7 @@ if ($text_file_creation)
 			$mixed_array['part_key'] = array_intersect($pos_array['part_key'], $neg_array['part_key']);
 			// mixed_array keeps the overlap between pos+neg and keys from the neg array
 			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);
+			
 			
 			$mixed_exp_disp_counter = count($mixed_array['part_key']);
 			
@@ -1073,7 +1075,7 @@ if ($text_file_creation)
 							</tr>
 							");			
 					} // end for $j
-				} // end if ($marker_pos_disp_counter == 0) {
+				}  // end if ($marker_pos_disp_counter == 0) {
 			?>
 		</table>		
 	
@@ -1464,6 +1466,11 @@ if ($text_file_creation)
       //print "<br><br>POSSIBLE TARGETS:<br>"; print_r($possible_targets);
 
       $result = mysql_query($explicit_target_query);
+      $explicit_targets = null;
+      $list_explicit_sources = null;
+      $list_explicit_nonsources = null;
+      $list_explicit_nontargets = null;
+      $list_explicit_targets = null;
       $explicit_targets = result_set_to_array($result, "t2_id");
       //print "<br><br>EXPLICIT TARGETS:<br>"; print_r($explicit_targets);
 
