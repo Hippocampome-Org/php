@@ -17,11 +17,10 @@ require_once('class/class.temporary_result_neurons.php');
 $width1='25%';
 $width2='2%';
 
-$research = "";
+$research ="";
+$table_result ="";
 if(isset($_REQUEST['research']))
 	$research = $_REQUEST['research'];
-
-$table_result ="";
 if(isset($_REQUEST['table_result']))
 	$table_result = $_REQUEST['table_result'];
 
@@ -164,7 +163,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
+	var table = "<?php echo $table_result?>";
 	
 	$("#nGrid").jqGrid({
     url:'getMarkers.php',
@@ -244,7 +243,7 @@ $(function(){
    },
     //caption: 'Morphology Matrix',
     scrollerbar:true,
-    height:"250",
+    height:"2340",
     width:"80%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
