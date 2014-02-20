@@ -21,14 +21,7 @@ require_once('class/class.temporary_result_neurons.php');
 
 $type = new type($class_type);
 
-$research = "";
-if(isset($_REQUEST['research']))
-	$research = $_REQUEST['research'];
-
-$table_result ="";
-if(isset($_REQUEST['table_result']))
-	$table_result = $_REQUEST['table_result'];
-	
+$research = $_REQUEST['research'];
 
 $property = new property($class_property);
 
@@ -121,7 +114,7 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $table_result?>";
+	var table = "<?php echo $_REQUEST['table_result']?>";
 	
 	$("#nGrid").jqGrid({
     url:'getEphys.php',
@@ -189,7 +182,7 @@ $(function(){
       id: "invid"
    },
     scrollerbar:true,
-    height:"250",
+    height:"2325",
     width:"85%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
