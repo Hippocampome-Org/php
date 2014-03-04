@@ -167,32 +167,32 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 	}
 
 	$n_tot = 0;
-	for ($i=1; $i<=$nn; $i++)
+	for ($i=1; $i<=$nn; $i++) // For Each Predicate  type i.e. for is expressed consider positive,unknown
 	{ 
 		$new_type_id = NULL;
 		
-		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]);
+		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]); // Retrieve  property IDs for subject and respective predicates
 		
-		$n_property_id = $property_1 -> getNumber_type();
+		$n_property_id = $property_1 -> getNumber_type(); // Count the number of Property IDs for a given subject and predicate
 		
 		
-		for ($i0=0; $i0<$n_property_id; $i0++)
+		for ($i0=0; $i0<$n_property_id; $i0++) // For Each Property Id
 		{
-			$property_id = $property_1 -> getProperty_id($i0);
+			$property_id = $property_1 -> getProperty_id($i0); // retrieve the  property Id
 		
 			// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
+			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id); // retrieve the neuron types from evidencepropertytype rel
 		
-			$n_type_id = $evidencepropertyyperel -> getN_Type_id();
+			$n_type_id = $evidencepropertyyperel -> getN_Type_id(); // Get a count of the number of neuron type Ids
 		
-			for ($i1=0; $i1<$n_type_id; $i1++)
+			for ($i1=0; $i1<$n_type_id; $i1++) // For each Type Id
 			{
 				if ($i == 1)
-					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);		
+					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);	// Get the total type ids for positive
 				if ($i == 2)
 				{
-					$type_r = $evidencepropertyyperel -> getType_id_array($i1);
-					$type_id[$n_tot] = "10_".$type_r;
+					$type_r = $evidencepropertyyperel -> getType_id_array($i1); // get the type Id for unknown
+					$type_id[$n_tot] = "10_".$type_r; // Append 10_
 				}					
 				$n_tot = $n_tot + 1;
 			} // END $i1
@@ -200,7 +200,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		
 		// Now, the program must remove the doubble or more type_id:	
 		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id);
+			$new_type_id=array_unique($type_id); // Get unique Type Ids
 
 			
 	} // END $i

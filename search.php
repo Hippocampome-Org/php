@@ -42,6 +42,7 @@ if ($_REQUEST['searching'])
 	$time_t = time();
 	
 	$name_temporary_table ='search1_'.$ip_address."__".$time_t;
+	echo " Temporary Table Name : ".$name_temporary_table;
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
 
 	// Creates the temporary table:
@@ -53,10 +54,7 @@ if ($_REQUEST['searching'])
 
 
 $N = $_REQUEST['N'];
-
 {
-	
-	
 	// ************ INSERT THE DATA IN THE TEMPORARY TABLE ********************************************************************************			
 	// Insert the property in the temporary table: --------------------------------------------------------------
 	$property = $_REQUEST['property'];
@@ -271,7 +269,7 @@ function operator(link, i0)
 			<td align="center" width="18%" class='table_neuron_page3'> Part </td>
 			<td align="center" width="22%" class='table_neuron_page3'> Relation </td>
 			<td align="center" width="29%" class='table_neuron_page3'> Value </td>
-			<td align="center" width="8%" class='table_neuron_page3'> Operator </td>
+			<td align="center" width="8%" class='table_neuron_page3'>  Operator </td>
 		</tr>
 		</table>
 		
