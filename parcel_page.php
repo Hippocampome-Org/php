@@ -215,7 +215,7 @@ if ($text_file_creation)
         </td>
         <td align='left' width='80%' class='table_neuron_page2'>
         <a href='neuron_page.php?id=".$parcel->getTypeId()."'>
-        <font class='font4'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
+        <font class='".get_excit_inhib_font_class($parcel->getNickName())."'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
 	        </a>
 	        </td>
 	        </tr>";
@@ -376,7 +376,7 @@ if ($text_file_creation)
 	  /* INPUT LIST  */
 	  // Known Sources of Input
 
-	  $dendrite_parcels[]  = $subregionForSelection.":".$array_for_use[$ivar]; // Change in Later implementation
+	  /* $dendrite_parcels[]  = $subregionForSelection.":".$array_for_use[$ivar]; // Change in Later implementation
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       
       $parcel->retrive_neuron_list_by_input_output("positive","Type2_id",$subregionForSelection.":".$array_for_use[$ivar]); // Generate a list of all neurons for the parcel --> To be changed in Later Implementation
@@ -411,7 +411,7 @@ if ($text_file_creation)
       $list_potential_sources = array_unique($list_potential_sources);
       $list_potential_sources = get_sorted_records($list_potential_sources);
       
-      /* OUTPUT LIST  */
+      /* OUTPUT LIST  
       // Known Sources of Output
       $axon_parcels[] = $subregionForSelection.":".$array_for_use[$ivar]; // Change in Later implementation
       $possible_targets = filter_types_by_morph_property('dendrites',$axon_parcels);
@@ -471,8 +471,8 @@ if ($text_file_creation)
 	  {
 	  	print name_row($list_potential_sources,$list_potential_targets);
 	  }
-	  print connection_table_foot();
- }
+	  print connection_table_foot();*/
+ } 
 	  ?>
 		</table>	
 			<br />	<br />		
