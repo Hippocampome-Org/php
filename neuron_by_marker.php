@@ -10,6 +10,15 @@ if ($perm == NULL)
 <?php
 
 $parameter=$_GET['marker'];
+//&prop;-act2 ; GABAa &prop
+if($parameter=="alpha-actinin-2")
+	$title = "&prop;-act2";
+else if($parameter=="Gaba-a-alpha")
+	$title= "GABAa &prop;";
+else
+	$title = $parameter;
+
+$predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','unknown'=>'Types with unknown expression');
 
 include ("access_db.php");
 require_once('class/class.type.php');
@@ -33,31 +42,13 @@ $epdataevidencerel = new epdataevidencerel($class_epdataevidencerel);
 $epdata = new epdata($class_epdata);
 $typetyperel = new typetyperel();
 
+$objArr = $property_1->retrievePropertyIdByName($parameter);
+
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$parameter)
 {
 	
 	$new_type_id_nan = array();
-
-	// retrieve id_property from Property table using SUBJECT and PREDICATE:
-	/* if ($predicate == 'is expressed')
-	{ */
-		/* $predicate3[1] = 'positive';
-		$predicate3[2] = 'unknown';
-		$nn = 2; */
-	/* } */
-	/* if ($predicate == 'is not expressed')
-	{
-		$predicate3[1] = 'negative';
-		$predicate3[2] = 'unknown';
-		$nn = 2;
-	}
-	if ($predicate == 'unknown')
-	{
-		$predicate3[1] = 'unknown';
-		$nn = 1;		
-	} */
-
 	$n_tot = 0;
 	
 	$new_type_id = NULL;
@@ -73,7 +64,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$
 		$n_type_id = $evidencepropertyyperel -> getN_Type_id(); // Get a count of the number of neuron type Ids
 		for ($i1=0; $i1<$n_type_id; $i1++) // For each Type Id
 		{
-			if ($predicate == 'positive')
+			if ($predicate == 'positive' || $predicate =='negative')
 				$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);	// Get the total type ids for positive
 			else
 			{
@@ -99,70 +90,69 @@ function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 <!-- COPY IN ALL PAGES -->
+<div class='title_area'>
+	<font class="font1"><?php echo $title?></font>
+</div>
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
-
-	/* if (strpos($id, '0_') == 1)
-	{
-		$id = str_replace('10_', '', $id);
 	
-		$type -> retrive_by_id($id);
-		$status = $type -> getStatus();
-	
-		if ($status == 'active')
-		{
-			$id_t_unknown[$n_result_tot_unknown] = $id;
-			$name_type_unknown[$n_result_tot_unknown] = $type -> getNickname();
-			$subregion_type_unknown[$n_result_tot_unknown] = $type -> getSubregion();
-			$position_type_unknown[$n_result_tot_unknown] = $type -> getPosition();
-			$n_result_tot_unknown = $n_result_tot_unknown +1;
-		}
-	}
-	else
-	{
-		$type -> retrive_by_id($id);
-		$status = $type -> getStatus();
-			
-		if ($status == 'active')
-		{
-			$id_t[$n_result_tot] = $id;
-			$name_type[$n_result_tot] = $type -> getNickname();
-			$subregion_type[$n_result_tot] = $type -> getSubregion();
-			$position_type[$n_result_tot] = $type -> getPosition();
-			$n_result_tot = $n_result_tot +1;
-		}
-	} */	
-	$positive_marker_id = markers_search($evidencepropertyyperel, $property_1, $type,'positive',$parameter);
 	?>
 <body>
 	<div class="table_position_search_page">
+<?php 
+$n_result_tot = 0;
+$id_t = Array();
+$pos_Array = Array();
+$pos_intr_Array = Array();
+$neg_Array = Array();
+$name_type = "";
+$subregion_type ="";
+$position_type = "";
+foreach ($predicateArr as $k => $v)
+{
+	$marker_id = Array();
+	$n_result_tot = 0;
+	$marker_id = markers_search($evidencepropertyyperel, $property_1, $type,$k,$parameter);
+	if(count($marker_id) > 0)
+	{
+?>
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 			<tr>
 				<td align="center" width="5%">&nbsp;</td>
 				<td align="center" width="10%">&nbsp;</td>
-				<td align="center" width='30%' class="table_neuron_page3">Neurons</td>
+				<td align="center" width='30%' class="table_neuron_page3"><?php echo $predicateArr[$k] ?></td>
 				<td align="right" width="55%">&nbsp;</td>
 			</tr>
-<?php 
-$n_result_tot = 0;
-$id_t = Array();
-$name_type = "";
-$subregion_type ="";
-$position_type = "";
-
-for ($i=0; $i<count($positive_marker_id); $i++)
-{
-	$type -> retrive_by_id($positive_marker_id[$i]);
-	$status = $type -> getStatus();
+<?php
+	
+		for ($i=0; $i<count($marker_id); $i++)
+		{
+			$id = $marker_id[$i];
+			
+			if (strpos($id, '0_') == 1)
+				$id = str_replace('10_', '',$id);
+		 
+			$type -> retrive_by_id($id);
+			$status = $type -> getStatus();
 		
-	if ($status == 'active')
-	{
-		$id_t = $positive_marker_id[$i];
-		$name_type = $type -> getNickname();
-		$subregion_type = $type -> getSubregion();
-		$position_type = $type -> getPosition();
-		$n_result_tot = $n_result_tot + 1;
+			if ($status == 'active')
+			{
+				if($k=='positive')
+				{
+					$pos_Array[$id] = $id;
+					$pos_intr_Array[] = $id;
+				}
+				else if($k=='negative')
+				{
+					$neg_Array[] = $id;			
+				}
+			
+				$id_t = $id;
+				$name_type = $type -> getNickname();
+				$subregion_type = $type -> getSubregion();
+				$position_type = $type -> getPosition();
+				$n_result_tot = $n_result_tot + 1;
 		
 ?>			<tr>
 				<td align='center' width='5%'>&nbsp;</td>
@@ -170,49 +160,66 @@ for ($i=0; $i<count($positive_marker_id); $i++)
 				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t ?>'><font class='font13'><?php echo $subregion_type." ".$name_type  ?></font></a></td>
 				<td align='right' width='55%'>&nbsp;</td>
 			</tr>
-<?php } 
-} 
-$unknown_marker_id = markers_search($evidencepropertyyperel, $property_1, $type,'unknown',$parameter);
-?>				
-		</table>
-		<table border='0' cellspacing='3' cellpadding='0' class='table_result'>
+<?php 		} 
+		}
+?>
+		</table><br /> 
+<?php }
+	  else 
+	  {
+?>
+	  	<div><font class="font3"><?php echo "No ".$k." Type found " ?></font></div><br/>
+<?php }
+	}
+	if((count($pos_intr_Array)>0)&&(count($neg_Array)>0))
+	{
+?>
+		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 			<tr>
-				<td align='center' width='5%'>&nbsp;</td>
-				<td align='center' width='10%'>&nbsp;</td>
-				<td align='center' width='30%' class='table_neuron_page3'> Neurons with unknown expression </td>
-				<td align='right' width='55%'>&nbsp;</td>
+				<td align="center" width="5%">&nbsp;</td>
+				<td align="center" width="10%">&nbsp;</td>
+				<td align="center" width='30%' class="table_neuron_page3">Type with mixed expression</td>
+				<td align="right" width="55%">&nbsp;</td>
 			</tr>
 <?php 
-$n_result_tot_unknown = 0;
-for ($i=0; $i<count($unknown_marker_id); $i++)
-{
-	
-	$id = $unknown_marker_id[$i];
-	
-	if (strpos($id, '0_') == 1)
-		$id = str_replace('10_', '',$id);
-	
-		$type -> retrive_by_id($id);
-		$status = $type -> getStatus();
-	
+	$n_result_tot = 0;
+	asort($pos_intr_Array);
+	asort($neg_Array);
 		
+	$mixed_array = array_intersect($neg_Array,$pos_intr_Array);
 	
-	if ($status == 'active')
+	foreach ($mixed_array as $value)
 	{
-		$id_t_unknown= $id;
-		$name_type_unknown= $type -> getNickname();
-		$subregion_type_unknown= $type -> getSubregion();
-		$position_type_unknown= $type -> getPosition();
-		$n_result_tot_unknown = $n_result_tot_unknown +1;
+		$type -> retrive_by_id($value);
+		$name_type = $type -> getNickname();
 		
-?>			<tr>
-				<td align='center' width='5%'>&nbsp;</td>
-				<td align='center' width='10%' class='table_neuron_page4'><?php print $n_result_tot_unknown?></td>
-				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t_unknown ?>'><font class='font13'><?php echo $subregion_type_unknown." ".$name_type_unknown ?></font></a></td>
-				<td align='right' width='55%'>&nbsp;</td>
-			</tr>
-<?php } 
-} ?>
+		$subregion_type = $type -> getSubregion();
+		$position_type = $type -> getPosition();
+		$n_result_tot = $n_result_tot + 1; 
+		
+		$evidencepropertyyperel -> retrive_unvetted($value,$objArr['positive']);
+		$unvetted = $evidencepropertyyperel -> getUnvetted();
+		$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $value);
+		$conflict_note = $evidencepropertyyperel -> getConflict_note();
+
+		if ($unvetted == 1)
+			$font_col = 'font4_unvetted';
+		else
+			$font_col = 'font4';
+			
+		$mixed_conflict = $conflict_note;
+		if (!$mixed_conflict)
+			$mixed_conflict = 'not yet determined';
+		?>
+				<tr>
+					<td align='center' width='5%'>&nbsp;</td>
+					<td align='center' width='10%' class='table_neuron_page4'><?php print $n_result_tot?></td>
+					<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $value ?>'><font class='<?php echo $font_col?>'><?php echo $subregion_type." ".$name_type." (".$mixed_conflict.")" ?></font></a></td>
+					<td align='right' width='55%'>&nbsp;</td>
+				</tr>
+<?php }
+	} 
+?>
 		</table>
 	</div>
 </body>

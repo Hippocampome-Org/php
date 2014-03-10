@@ -9,6 +9,7 @@ class property
 	private $_val;
 	private $_Property_id;	
 	private $_number_type;
+	private $_property_Arr;
 
 	function __construct ($name)
 	{
@@ -43,7 +44,7 @@ class property
 		}
 		if ($flag ==2 )
 		{
-			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND object = '$val'";	
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND object = '$val'";
 		}	
 		if ($flag ==3 )
 		{
@@ -61,7 +62,6 @@ class property
 			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
       $query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
 		}	
-		
 		$rs = mysql_query($query);
 		$n6=0;
 		while(list($id) = mysql_fetch_row($rs))
@@ -72,7 +72,18 @@ class property
 		$this->setNumber_type($n6);
 	}	
 	
-			
+	public function	retrievePropertyIdByName($markername)
+	{
+		$table=$this->getName_table();
+		$this->_property_Arr = Array();
+		$query = "SELECT id,object FROM $table WHERE subject = '$markername' and object in ('positive','negative')";
+		$rs = mysql_query($query);
+		while(list($id,$object) = mysql_fetch_row($rs))
+		{
+			$_property_Arr[$object] = $id;
+		}
+		return $_property_Arr;
+	}	
 		
 	// SET -------------------------------------
  	public function setID($val1)
