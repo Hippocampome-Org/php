@@ -14,6 +14,11 @@ require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.temporary_result_neurons.php');
 
+$research = $_REQUEST['research'];
+$table = $_REQUEST['table_result'];
+/* if(isset($research))
+	echo "Research variable Set !";
+ */
 // Check the UNVETTED color: ***************************************************************************
 function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = type_id,$id_property = propert_idy,
 {
@@ -37,7 +42,6 @@ function check_color($type, $unvetted) //$type --> whether axons/dendrites or bo
 			$link[0] = "<img src='images/morphology/axons_present.png' border='0'/>";
 
 		 $link[1] = 'red';
-
 	}
 	if ($type == 'dendrites')
 	{
@@ -58,12 +62,6 @@ function check_color($type, $unvetted) //$type --> whether axons/dendrites or bo
 		
 		$link[1] = 'violet';
 	}
-	/* if ($variable == NULL)
-	{
-		$link[0] = "<img src='images/blank_morphology.png' border='0'/>";
-		$link[1] = $variable;
-	} */
-	//echo $link;
 	return ($link);
 }
 // check for link
@@ -102,10 +100,10 @@ else $sord = $_GET['sord'];
 if(!$sidx) $sidx =1;
 
 $type = new type($class_type);
-$research = 0;
-if(isset($_GET['researchVar']))
-	$research = $_GET['researchVar'];
-if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
+//$research = 0;
+/* if(isset($research)
+	$research = $_GET['researchVar']; */
+if (isset($research)) // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
 	$temporary_result_neurons = new temporary_result_neurons();
@@ -192,10 +190,10 @@ $n_SUB = 0;
 $n_EC = 0;
 
 //header("Content-type: application/json;charset=utf-8");
-$responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "");
+$responce = (object) array('page' => 1, 'total' => $total_pages, 'records' =>$count, 'rows' => "");
 
-$responce->page = $page;
-$responce->total = $total_pages;
+//$responce->page = $page;
+//$responce->total = $total_pages;
 $responce->records = $count; 
 
 if($research!="1")
@@ -226,13 +224,11 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"EC:I" =>'', "EC:II" =>'', "EC:III" =>'', "EC:IV" =>'', "EC:V" =>'', "EC:VI" =>'' );
 	
 		if(isset($id_search))
-		{
 			$id = $id_search[$i];	
-		}
 		else
 	 		$id = $type->getID_array($i);
 	 
-		$type -> retrive_by_id($id); // Retrieve id
+	 $type -> retrive_by_id($id); // Retrieve id
 	 $nickname = $type->getNickname(); // Retrieve nick name
 	 $position = $type->getPosition(); // Retrieve the position
 	 $subregion = $type -> getSubregion(); // Retrieve the sub region
@@ -245,9 +241,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	for ($i5=0; $i5<$n_property_id; $i5++) // For Each Property id he derieves by using an Index
 	{
 		$Property_id = $evidencepropertyyperel -> getProperty_id_array($i5); // Retrieve the property to the corresponding index passed
-	
 		$property -> retrive_by_id($Property_id); // For a property id derieved as above,retrieve its corresponding properties
-	
 		$rel = $property->getRel(); // Retrieve Predicate (from the property table)
 		$part1 = $property->getPart(); // Retrieve Subject (from the property table)
 	
@@ -258,7 +252,6 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			$part[$q] = $property->getPart();  // Get the Subject
 			$q = $q+1;
 		}
-		
 	}
 	for ($ii=0; $ii<$q; $ii++) // For all the preperties derieved check the required conditions
 	{
@@ -321,5 +314,4 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['EC:VI'],'EC_VI',$hippo_color['EC:VI']),
 			);
 }
-echo json_encode($responce);
 ?>
