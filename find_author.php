@@ -223,13 +223,35 @@ if ($temporary_search == 1)
 		//print_r($article_id);	
 		$n_tot_id_results = count($article_id);
 		
-	
+	print("Innnnnnnnnnnnnnnnnn");
+	//starts
+
+	$j3=0;
+		for ($i3=0; $i3<$n_tot_id_results; $i3++)
+		{
+			//remove duplicate articles
+			
+			$article_1 -> retrive_by_id($article_id[$i3]);
+			if(!in_array($article_1 -> getPmid_isbn(), $pmid1))
+			{
+				$pmid1[$j3] = $article_1 -> getPmid_isbn();
+				$j3++;
+			}
+		} // END $i3
 		
+		//remove duplicate articles
+		//UNIQUE pmid
+		$unique_n_tot_id_results = $j3;
+	print("unique".$n_tot_id_results);
+	//ends
+	
 		
 	}
 	else
+	{
 		$n_tot_id_results = 0;	
-	
+		$unique_n_tot_id_results = $j3;
+	}
 	// show the results *********************
 	if ($_REQUEST['see_result'])
 	{
