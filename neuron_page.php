@@ -171,7 +171,22 @@ if ($text_file_creation)
 ?>	
 
 <div class='title_area'>
-	<font class="font1"><?php print $type->getSubregion(); print " "; print $type->getNickname(); ?></font>
+	<font class="font1">
+		<?php
+	 	//	print $type->getSubregion(); print " ";
+	  	//	print $type->getNickname();
+
+	  		if (strpos($type->getNickname(),$type->getSubregion()) !== false) {
+    			print $type->getNickname();
+			}
+			
+			else{
+				print $type->getSubregion(); print " ";
+	  		print $type->getNickname();
+			}
+	  		
+	  ?>
+	  </font>
 </div>
 
 <!-- 

@@ -6,7 +6,7 @@ session_start();
 
 <?php
 include ("access_db.php");
-
+//print_r($_SESSION);
 $perm = $_SESSION['perm'];
 if ($perm == NULL)
 	header("Location:error1.html");
@@ -220,23 +220,62 @@ if ($temporary_search == 1)
 	{	
 		// remove the dubble id:
 		$article_id=array_unique($article_id);
+		//print_r($article_id);	
 		$n_tot_id_results = count($article_id);
+		
+	print("Innnnnnnnnnnnnnnnnn");
+	//starts
+
+	$j3=0;
+		for ($i3=0; $i3<$n_tot_id_results; $i3++)
+		{
+			//remove duplicate articles
+			
+			$article_1 -> retrive_by_id($article_id[$i3]);
+			if(!in_array($article_1 -> getPmid_isbn(), $pmid1))
+			{
+				$pmid1[$j3] = $article_1 -> getPmid_isbn();
+				$j3++;
+			}
+		} // END $i3
+		
+		//remove duplicate articles
+		//UNIQUE pmid
+		$unique_n_tot_id_results = $j3;
+	print("unique".$n_tot_id_results);
+	//ends
+	
+		
 	}
 	else
+	{
 		$n_tot_id_results = 0;	
-	
+		$unique_n_tot_id_results = $j3;
+	}
 	// show the results *********************
 	if ($_REQUEST['see_result'])
 	{
+		$j3=0;
 		for ($i3=0; $i3<$n_tot_id_results; $i3++)
 		{
-			$article_1 -> retrive_by_id($article_id[$i3]);		
-			$title[$i3] = $article_1 -> getTitle();
-			$journal[$i3] = $article_1 -> getPublication();
-			$year[$i3] = $article_1 -> getYear();
-			$pmid[$i3] = $article_1 -> getPmid_isbn();
-			$doi[$i3] = $article_1 -> getDoi();
+			//remove duplicate articles
+			
+			$article_1 -> retrive_by_id($article_id[$i3]);
+			if(!in_array($article_1 -> getPmid_isbn(), $pmid))
+			{
+				$pmid[$j3] = $article_1 -> getPmid_isbn();
+				$title[$j3] = $article_1 -> getTitle();
+				$journal[$j3] = $article_1 -> getPublication();
+				$year[$j3] = $article_1 -> getYear();
+				$doi[$j3] = $article_1 -> getDoi();
+				$j3++;
+			}
 		} // END $i3
+		
+		//remove duplicate articles
+		//UNIQUE pmid
+		$unique_n_tot_id_results = $j3;
+		
 	}	
 }
 // --------------------------------------------------------------------------------------------------------	
@@ -360,10 +399,17 @@ $(document).ready(function(){
 			<?php
 				if ($temporary_search == 1)
 				{
-					if ($n_tot_id_results == 1)
-						print ("<font class='font12'> $n_tot_id_results article has been found</font>");
+				//	if ($n_tot_id_results == 1)
+				//		print ("<font class='font12'> $n_tot_id_results article has been found</font>");
+				//	else
+				//		print ("<font class='font12'> $n_tot_id_results articles have been found</font>");
+						
+						if ($unique_n_tot_id_results == 1)
+						print ("<font class='font12'> $unique_n_tot_id_results article has been found</font>");
 					else
-						print ("<font class='font12'> $n_tot_id_results articles have been found</font>");
+						print ("<font class='font12'> $unique_n_tot_id_results articles have been found</font>");
+						
+						
 				}
 				else
 					//print ("<font class='font12'> Searching...</font>");
@@ -548,7 +594,7 @@ $(document).ready(function(){
 		<td width='20%'></td>
 		<td width='40%'><form action='find_author.php' method='post' style='display:inline'> 
 			<input type="submit" name='see_result' value='SEE RESULTS' />
-			<input type="hidden" name='id_results' value='<?php print $article_id ?>' />			
+			<input type="hidden" name='id_results' value='<?php $article_id?>' />			
 		</form></td>
 		</tr>
 	</table>
@@ -573,8 +619,8 @@ $(document).ready(function(){
 			// If the name of authors is egual at search name --> use the BOLD text:
 			$temporary -> retrieve_id();			
 			$mm = $temporary -> getN_id();		
-			
-			for ($i=0; $i<$n_tot_id_results; $i++)
+			//print("total pid=$n_tot_id_results");
+			for ($i=0; $i<$unique_n_tot_id_results; $i++)
 			{
 				$fl=0;
 				for ($ii4=0; $ii4<$mm; $ii4++)
@@ -641,6 +687,7 @@ $(document).ready(function(){
 						<td align='left' width='5%' class='table_neuron_page4'>$yea </td>
 						<td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'>$pmid[$i]</font> </a></td>");		
 				print("<td align='left' width='20%' class='table_neuron_page4'>");
+			//	print("...$pmid[$i]......$unique_pmid[$i]....");
 				
 $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i]')";
 				$Type_name = mysql_query($a);
@@ -677,7 +724,8 @@ $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` 
 				
 					if($ty_nick!=null)
 					{
-						print("$o)$ty_nick <br/>");
+					//	print("$o)$ty_nick <br/>");
+						print("$o)$ty_name <br/>");
 					}
 					else
 					{

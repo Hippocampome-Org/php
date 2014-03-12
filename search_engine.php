@@ -153,6 +153,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		$predicate3[1] = 'positive';
 		$predicate3[2] = 'unknown';
 		$nn = 2;
+		//i'm here
 	}
 	if ($predicate == 'is not expressed')
 	{
@@ -167,32 +168,61 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 	}
 
 	$n_tot = 0;
-	for ($i=1; $i<=$nn; $i++) // For Each Predicate  type i.e. for is expressed consider positive,unknown
+	for ($i=1; $i<=$nn; $i++)
 	{ 
 		$new_type_id = NULL;
 		
-		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]); // Retrieve  property IDs for subject and respective predicates
 		
-		$n_property_id = $property_1 -> getNumber_type(); // Count the number of Property IDs for a given subject and predicate
+		//MY DELETE
+		//print("...predicate3:-".$predicate3[$i]);
+		 
+		//MyDelete ends
 		
+		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]);
 		
-		for ($i0=0; $i0<$n_property_id; $i0++) // For Each Property Id
+		//MY DELETE
+		//print("...property_1:-");
+		//print_r($property_1->retrive_ID(2, $subject, NULL, $predicate3[$i]));
+		//MyDelete ends
+		
+		$n_property_id = $property_1 -> getNumber_type();
+		//MY DELETE
+		//print("...n_property_id:-".$n_property_id);
+		//MyDelete ends
+		
+		for ($i0=0; $i0<$n_property_id; $i0++)
 		{
-			$property_id = $property_1 -> getProperty_id($i0); // retrieve the  property Id
+			$property_id = $property_1 -> getProperty_id($i0);
 		
 			// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id); // retrieve the neuron types from evidencepropertytype rel
+			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
+			//MY DELETE
+			//print("....evidencepropertyyperel:-");
+		//print_r($evidencepropertyyperel);
+		//MyDelete ends
 		
-			$n_type_id = $evidencepropertyyperel -> getN_Type_id(); // Get a count of the number of neuron type Ids
+			$n_type_id = $evidencepropertyyperel -> getN_Type_id();
+			//MY DELETE
+		//print("...n_type_id:-".$n_type_id);
+		//MyDelete ends
 		
-			for ($i1=0; $i1<$n_type_id; $i1++) // For each Type Id
+		
+			for ($i1=0; $i1<$n_type_id; $i1++)
 			{
+				
+		
 				if ($i == 1)
-					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);	// Get the total type ids for positive
+					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
+					//MY DELETE
+		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
+		//MyDelete ends		
 				if ($i == 2)
 				{
-					$type_r = $evidencepropertyyperel -> getType_id_array($i1); // get the type Id for unknown
-					$type_id[$n_tot] = "10_".$type_r; // Append 10_
+					$type_r = $evidencepropertyyperel -> getType_id_array($i1);
+					$type_id[$n_tot] = "10_".$type_r;
+					//MY DELETE
+		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
+		//MyDelete ends	
 				}					
 				$n_tot = $n_tot + 1;
 			} // END $i1
@@ -200,7 +230,11 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		
 		// Now, the program must remove the doubble or more type_id:	
 		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id); // Get unique Type Ids
+			$new_type_id=array_unique($type_id);
+			//MY DELETE
+			//print("....new_type_id:-");
+		//print_r($new_type_id);
+		//MyDelete ends	
 
 			
 	} // END $i
@@ -438,12 +472,16 @@ function connectivity_search ($evidencepropertyyperel, $property_1, $type, $part
 
 $time1 = microtime_float();
 
+
 // Search engine for FIND NEURON *****************************************************************************************
 // ***********************************************************************************************************************
 // ***********************************************************************************************************************
 
 // 1) Retrive the number of search line from temporary table:
 $name_temporary_table_search = $_REQUEST['name_table'];
+//MY DELETE
+//print("...name_temporary_table_search:-".$name_temporary_table_search);
+//MyDelete ends
 
 $query = "SELECT id FROM $name_temporary_table_search";
 $rs = mysql_query($query);
@@ -489,6 +527,12 @@ $ip_address = str_replace('.', '_', $ip_address);
 $time_t = time();
 
 $name_temporary_table_result = "search_result_table_".$ip_address."__".$time_t;
+//MY DELETE
+//print("...name_temporary_table_result:-".$name_temporary_table_result);
+//MyDelete ends
+
+
+
 create_result_table_result($name_temporary_table_result);
 
 $n_res1 = 0;
@@ -498,6 +542,11 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 	$id_type_res = array(); // Arrays where will be inseted the results of ID TYPE
 
 	$n_b = count($id_res[$i]);
+	//MY DELETE
+//print("...n_b:-".$n_b);
+//MyDelete ends
+	
+	
 	
 	// Association for AND results
 	for ($i1=0; $i1<$n_b; $i1++) 
@@ -559,6 +608,11 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		
 			if ($res_marker != NULL)
 				$id_type_res = array_merge($id_type_res, $res_marker);
+				
+				//MY DELETE
+			//	print("...id_type_res:-");
+		//print_r($id_type_res);
+		//MyDelete ends	
 		}
 		// END Script for MARKERS +++++++++++++++++++++++++++++++++++++++		
 		
@@ -700,7 +754,21 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 						$name_type_unknown[$n_result_tot_unknown] = $type -> getNickname();
 						$subregion_type_unknown[$n_result_tot_unknown] = $type -> getSubregion();
 						$position_type_unknown[$n_result_tot_unknown] = $type -> getPosition();
-						$n_result_tot_unknown = $n_result_tot_unknown +1;					
+						
+						//print("/nickname:".$name_type_unknown[$n_result_tot_unknown]);
+						//print("/subregion:".$subregion_type_unknown[$n_result_tot_unknown]);
+						$pos=0;
+						$pos= strpos($name_type_unknown[$n_result_tot_unknown],$subregion_type_unknown[$n_result_tot_unknown]);
+						
+						if($pos!==false)
+						{
+							
+							$name_type_unknown[$n_result_tot_unknown]=str_replace($subregion_type_unknown[$n_result_tot_unknown],"", $name_type_unknown[$n_result_tot_unknown]);
+							//substr_replace($subregion_type_unknown[$n_result_tot_unknown],"",$pos);
+							
+						}	
+						
+						$n_result_tot_unknown = $n_result_tot_unknown +1;
 					}						
 				}
 				else
@@ -714,7 +782,23 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 						$name_type[$n_result_tot] = $type -> getNickname();
 						$subregion_type[$n_result_tot] = $type -> getSubregion();
 						$position_type[$n_result_tot] = $type -> getPosition();
-						$n_result_tot = $n_result_tot +1;					
+						
+						
+						//print("/nickname:".$name_type[$n_result_tot]);
+						//print("/subregion:".$subregion_type[$n_result_tot]);
+						$pos=0;
+						$pos= strpos($name_type[$n_result_tot],$subregion_type[$n_result_tot]);
+						
+						if($pos!== false)
+						{
+							
+							
+							$name_type[$n_result_tot]= str_replace($subregion_type[$n_result_tot],"", $name_type[$n_result_tot]);
+							//print(substr_replace($subregion_type[$n_result_tot_unknown],"",$pos));
+							
+						}	
+
+						$n_result_tot = $n_result_tot +1;
 					}
 				}
 			} // END While
@@ -729,7 +813,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
 			else
 				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
-
+		
 		?>
 		<br /><br />
 
@@ -766,7 +850,8 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 		<?php		
 			if ($n_result_tot)
 			{
-				array_multisort($position_type, $id_t, $name_type);
+				//array_multisort($position_type, $id_t, $name_type);
+				
 				for ($i=0; $i<$n_result_tot; $i++)
 				{
 					$i9=$i+1;
@@ -804,7 +889,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 				");
 		
 				print ("<table border='0' cellspacing='3' cellpadding='0' class='table_result'>");
-					array_multisort($position_type_unknown, $id_t_unknown, $name_type_unknown);
+				//	array_multisort($position_type_unknown, $id_t_unknown, $name_type_unknown);
 					for ($i=0; $i<$n_result_tot_unknown; $i++)
 					{
 						$i9=$i+1;
