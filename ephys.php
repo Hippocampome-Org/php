@@ -9,6 +9,7 @@ if ($perm == NULL)
 
 <?php
 include ("access_db.php");
+include ("getEphys.php");
 include ("function/ephys_unit_table.php");
 include ("function/ephys_num_decimals_table.php");
 require_once('class/class.type.php');
@@ -75,6 +76,7 @@ $epdata = new epdata($class_epdata);
 <script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
+	var dataStr = <?php echo json_encode($responce)?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -117,16 +119,18 @@ $(function(){
 	var table = "<?php echo $_REQUEST['table_result']?>";
 	
 	$("#nGrid").jqGrid({
-    url:'getEphys.php',
-    datatype: 'json', 
-    mtype: 'GET',
-    ajaxGridOptions :{
-		contentType : "application/json"
-        },
-    postData: {
-        researchVar: research,
-        table_result : table
-    },
+		datatype: "jsonstring",
+		datastr: dataStr,
+		/* url:'getEphys.php',
+	    datatype: 'json', 
+	    mtype: 'GET',
+	    ajaxGridOptions :{
+			contentType : "application/json"
+	        },
+	    postData: {
+	        researchVar: research,
+	        table_result : table
+	    }, */
     colNames:['','Neuron Type','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {

@@ -10,6 +10,9 @@ if ($perm == '')
 
 //$research = $_REQUEST['research'];
 
+$research = $_REQUEST['research'];
+$table = $_REQUEST['table_result'];
+
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');
 require_once('class/class.property.php');
@@ -106,8 +109,8 @@ else $sord = $_GET['sord'];
 if(!$sidx) $sidx =1;
 
 $type = new type($class_type);
-$research = $_GET['researchVar'];
-if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
+//$research = $_GET['researchVar'];
+if (isset($research)) // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
 	$temporary_result_neurons = new temporary_result_neurons();
@@ -350,5 +353,5 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	  		print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2) 
 	  		); 
 }
-echo json_encode($responce);
+//echo json_encode($responce);
 ?>
