@@ -859,10 +859,11 @@ if ($text_file_creation)
 				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
 				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
 				
-				if ($val == 'weak_positive')
-					$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
-				else
-					$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+			//  the following is commented out to remove differences between positive and weakly positive
+			//	if ($val == 'weak_positive')
+			//		$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
+			//	else
+			//		$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
 				
 				$marker_pos_disp_counter++;
 			}
@@ -899,7 +900,9 @@ if ($text_file_creation)
 				foreach(array_keys($mixed_array['part_key']) as $key) {
 					unset($pos_array['part_key'][$key]);
 					unset($pos_array['unvetted_key'][$key]);
-					unset($pos_array['weak_key'][$key]);
+
+				//Commented out to make weakly positive identical to positive
+					//unset($pos_array['weak_key'][$key]);
 					unset($pos_array['conflict_key'][$key]);
 				}
 				$marker_pos_disp_counter = count($pos_array['part_key']);
@@ -984,7 +987,9 @@ if ($text_file_creation)
 							$font_col = 'font4';
 						
 						if ($pos_array['weak_key'][$j] == 1)
-							$disp_marker_name = $pos_array['part_key'][$j] . ' (weak positive)';
+							$disp_marker_name = $pos_array['part_key'][$j];
+					//This was edited out of the above line to make positive/weakly positive equal
+					//. ' (weak positive)';
 						else					
 							$disp_marker_name = $pos_array['part_key'][$j];
 						
