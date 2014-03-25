@@ -18,7 +18,7 @@ else if($parameter=="Gaba-a-alpha")
 else
 	$title = $parameter;
 
-$predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','unknown'=>'Types with unknown expression');
+$predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Type with mixed expression','unknown'=>'Types with unknown expression');
 
 include ("access_db.php");
 require_once('class/class.type.php');
@@ -106,6 +106,7 @@ $id_t = Array();
 $pos_Array = Array();
 $pos_intr_Array = Array();
 $neg_Array = Array();
+$mixed_type = Array();
 $name_type = "";
 $subregion_type ="";
 $position_type = "";
@@ -113,7 +114,17 @@ foreach ($predicateArr as $k => $v)
 {
 	$marker_id = Array();
 	$n_result_tot = 0;
-	$marker_id = markers_search($evidencepropertyyperel, $property_1, $type,$k,$parameter);
+	
+	if($k=='mixed')
+	{
+		asort($pos_intr_Array);
+		asort($neg_Array);
+		$marker_id = array_intersect($neg_Array,$pos_intr_Array);
+	}
+	else
+		$marker_id = markers_search($evidencepropertyyperel, $property_1, $type,$k,$parameter);
+	
+	
 	if(count($marker_id) > 0)
 	{
 ?>
@@ -126,9 +137,9 @@ foreach ($predicateArr as $k => $v)
 			</tr>
 <?php
 	
-		for ($i=0; $i<count($marker_id); $i++)
+		foreach ($marker_id as $idToConsider)
 		{
-			$id = $marker_id[$i];
+			$id = $idToConsider;
 			
 			if (strpos($id, '0_') == 1)
 				$id = str_replace('10_', '',$id);
@@ -153,11 +164,29 @@ foreach ($predicateArr as $k => $v)
 				$subregion_type = $type -> getSubregion();
 				$position_type = $type -> getPosition();
 				$n_result_tot = $n_result_tot + 1;
+				
+				if($k=='mixed')
+				{
+					$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive']);
+					$unvetted = $evidencepropertyyperel -> getUnvetted();
+					$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $id);
+					$conflict_note = $evidencepropertyyperel -> getConflict_note();
+				
+					if ($unvetted == 1)
+						$font_col = 'font4_unvetted';
+					else
+						$font_col = 'font4';
+					
+					$mixed_conflict = $conflict_note;
+					
+					if (!$mixed_conflict)
+						$mixed_conflict = 'not yet determined';;
+				}
 		
 ?>			<tr>
 				<td align='center' width='5%'>&nbsp;</td>
 				<td align='center' width='10%' class='table_neuron_page4'><?php print $n_result_tot?></td>
-				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t ?>'><font class='font13'><?php echo $subregion_type." ".$name_type  ?></font></a></td>
+				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t ?>'><?php if($k!='mixed') {?><font class='font13'><?php } else {?><font class='<?php echo $font_col?>'><?php } echo $subregion_type." ".$name_type; if($k=='mixed'){ echo " (".$mixed_conflict.")"; } ?></font></a></td>
 				<td align='right' width='55%'>&nbsp;</td>
 			</tr>
 <?php 		} 
@@ -170,56 +199,7 @@ foreach ($predicateArr as $k => $v)
 ?>
 	  	<div><font class="font3"><?php echo "No ".$k." Type found " ?></font></div><br/>
 <?php }
-	}
-	if((count($pos_intr_Array)>0)&&(count($neg_Array)>0))
-	{
-?>
-		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
-			<tr>
-				<td align="center" width="5%">&nbsp;</td>
-				<td align="center" width="10%">&nbsp;</td>
-				<td align="center" width='30%' class="table_neuron_page3">Type with mixed expression</td>
-				<td align="right" width="55%">&nbsp;</td>
-			</tr>
-<?php 
-	$n_result_tot = 0;
-	asort($pos_intr_Array);
-	asort($neg_Array);
-		
-	$mixed_array = array_intersect($neg_Array,$pos_intr_Array);
-	
-	foreach ($mixed_array as $value)
-	{
-		$type -> retrive_by_id($value);
-		$name_type = $type -> getNickname();
-		
-		$subregion_type = $type -> getSubregion();
-		$position_type = $type -> getPosition();
-		$n_result_tot = $n_result_tot + 1; 
-		
-		$evidencepropertyyperel -> retrive_unvetted($value,$objArr['positive']);
-		$unvetted = $evidencepropertyyperel -> getUnvetted();
-		$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $value);
-		$conflict_note = $evidencepropertyyperel -> getConflict_note();
-
-		if ($unvetted == 1)
-			$font_col = 'font4_unvetted';
-		else
-			$font_col = 'font4';
-			
-		$mixed_conflict = $conflict_note;
-		if (!$mixed_conflict)
-			$mixed_conflict = 'not yet determined';
-		?>
-				<tr>
-					<td align='center' width='5%'>&nbsp;</td>
-					<td align='center' width='10%' class='table_neuron_page4'><?php print $n_result_tot?></td>
-					<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $value ?>'><font class='<?php echo $font_col?>'><?php echo $subregion_type." ".$name_type." (".$mixed_conflict.")" ?></font></a></td>
-					<td align='right' width='55%'>&nbsp;</td>
-				</tr>
-<?php }
-	} 
-?>
-		</table>
+	}?>
+	</table>
 	</div>
 </body>
