@@ -38,7 +38,7 @@ function create_temp_table ($name_temporary_table)
 				   year varchar(15),
 				   PMID BIGint(25),
 				   pages varchar(20),
-				   page_location varchar(20),
+				   page_location varchar(100),
 				   id_evidence int(20),
 				   show1 int(5),
 				   pmcid varchar(400),
@@ -192,6 +192,7 @@ if ($page) // Come from another page
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
 
 	create_temp_table($name_temporary_table);	
+
 	
 	$val_property = str_replace('_', ':', $val_property);
 
@@ -760,6 +761,7 @@ function show_only_morphology(link, start1, stop1)
 
 					if ($page)
 					{
+						
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++				
 						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
 						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
