@@ -1,4 +1,4 @@
-<%@LANGUAGE="JAVASCRIPT" CODEPAGE="1252"%>
+<!-- <%@LANGUAGE="JAVASCRIPT" CODEPAGE="1252"%> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
@@ -30,6 +30,7 @@
 			<li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
 			<li><a href="find_author.php?searching=1">Author</a></li>
 			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
+			<li><a href="neuron_search.php?searching=1">Neuron name</a></li>
 	
 		</ul></li>
 	
