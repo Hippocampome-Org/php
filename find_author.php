@@ -223,7 +223,7 @@ if ($temporary_search == 1)
 		//print_r($article_id);	
 		$n_tot_id_results = count($article_id);
 		
-	print("Innnnnnnnnnnnnnnnnn");
+	//cprint("Innnnnnnnnnnnnnnnnn");
 	//starts
 
 	$j3=0;
@@ -242,7 +242,7 @@ if ($temporary_search == 1)
 		//remove duplicate articles
 		//UNIQUE pmid
 		$unique_n_tot_id_results = $j3;
-	print("unique".$n_tot_id_results);
+	//print("unique".$n_tot_id_results);
 	//ends
 	
 		

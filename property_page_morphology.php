@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 $perm = $_SESSION['perm'];
@@ -14,6 +15,7 @@ require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
 require_once('class/class.fragment.php');
+require_once('class/class.attachment.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.article.php');
 require_once('class/class.author.php');
@@ -280,6 +282,7 @@ if ($name_show_only_var)
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
+	//$name_temporary_attachment=
 
 	// Option: All:
 	if ($name_show_only == 'all')
@@ -483,6 +486,8 @@ $type -> retrive_by_id($id_neuron);
 $property = new property($class_property);
 
 $fragment = new fragment($class_fragment);
+
+$attachment_obj = new attachment($class_attachment);
 
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 
@@ -708,6 +713,10 @@ function show_only_morphology(link, start1, stop1)
 					$original_id = $fragment -> getOriginal_id();
 					$page_location = $fragment -> getPage_location();
 				
+					//Retreive information from attachment table
+				//	$attachment_obj->retrive_by_id($fragment_id[$i],$id_neuron);
+					
+					
 					// retrieve article_id from ArticleEvidenceRel by using Evidence_id
 					//$articleevidencerel -> retrive_article_id($fragment_id[$i]);
 					$articleevidencerel -> retrive_article_id($evidence_id[$i]);
@@ -1194,9 +1203,16 @@ function show_only_morphology(link, start1, stop1)
 									print ("<td width='15%' align='left'> </td></tr>");
 																	
 									// retrieve the attachament from "fragment" with original_id *****************************
-									$fragment -> retrive_attachment_by_original_id($id_original);
-									$attachment = $fragment -> getAttachment();
-									$attachment_type = $fragment -> getAttachment_type();
+								//	$fragment -> retrive_attachment_by_original_id($id_original);
+								//	$attachment = $fragment -> getAttachment();
+								//	$attachment_type = $fragment -> getAttachment_type();
+									
+									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
+									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+									$attachment = $attachment_obj -> getName();
+									$attachment_type = $attachment_obj -> getType();
+									
+									
 									
 									// change PFD in JPG:
 									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
