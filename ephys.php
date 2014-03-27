@@ -186,7 +186,8 @@ $(function(){
       id: "invid"
    },
     scrollerbar:true,
-    height:"2325",
+    //height:"2325", //full height
+    height:"440", //page height
     width:"85%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name

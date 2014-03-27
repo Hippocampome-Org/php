@@ -392,7 +392,8 @@ $(function(){
    },
     //caption: 'Morphology Matrix',
     scrollerbar:true,
-    height:"2807",
+    //height:"2807", //full height
+    height:"440", //page height
     width:"60%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name

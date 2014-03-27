@@ -21,7 +21,7 @@ class attachment
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, cell_id, original_id, name, type FROM attachment WHERE id = '$id' and cell_id = '$id_neuron'";
+		$query = "SELECT id, cell_id, original_id, name, type FROM Attachment WHERE id = '$id' and cell_id = '$id_neuron'";
 		$rs = mysql_query($query);
 		while(list($id,$cell_id, $original_id, $name, $type) = mysql_fetch_row($rs))
 		{	
@@ -41,7 +41,7 @@ class attachment
 		$table=$this->getName_table();
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
-		$query = "SELECT name, type FROM attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
 		$rs = mysql_query($query);
 		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
 		{

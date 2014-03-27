@@ -250,9 +250,10 @@ $(function(){
       cell:"cell",
       id: "invid"
    },
-    //caption: 'Morphology Matrix',
+    //caption: 'Marker Matrix',
     scrollerbar:true,
-    height:"2340",
+    //height:"2340", //full height
+    height:"440", //page height
     width:"80%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
