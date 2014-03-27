@@ -40,7 +40,7 @@ function create_temp_table ($name_temporary_table)
 				   year varchar(15),
 				   PMID varchar(25),
 				   pages varchar(20),
-				   page_location varchar(20),
+				   page_location varchar(100),
 				   id_markerdata varchar(10),
 				   id_evidence1 varchar(20),
 				   id_evidence2 varchar(20),
@@ -120,7 +120,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$volume',
 	   '$issue',
      '$secondary_pmid'
-	   )";	
+	   )";
 	$rs2 = mysql_query($query_i);
 }
 
@@ -178,7 +178,6 @@ if ($page)
 	
 	
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$val_property_temp.$color_temporary_table.'__'.$time_t;
-	echo "Name Temporary Table ".$name_temporary_table;
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
 	create_temp_table ($name_temporary_table);
 
@@ -273,7 +272,6 @@ if ($_REQUEST['show_0']) //  ==> OFF
 
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
-	
 	$query = "UPDATE $name_temporary_table SET show_button =  '0' WHERE title = '$title_paper'";
 	$rs2 = mysql_query($query);	
 }
@@ -732,101 +730,100 @@ function show_only_authors(link, color)
 			
 			$n_tot_marker = 0;
 			$old_id_marker = 0;
+			
 			for ($i=0; $i<$n_id_evidence; $i++)
 			{
 				$id_evidence[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
 
-        // STM getting the linking PMID
-        $id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
-        if ($id_secondary_article) {
-          $article -> retrive_by_id($id_secondary_article);
-          $secondary_pmid = $article -> getPmid_isbn(); 
-        } else {
-          $secondary_pmid = NULL;
-        }
+        	// STM getting the linking PMID
+        	$id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
+        	if ($id_secondary_article) {
+          	$article -> retrive_by_id($id_secondary_article);
+          	$secondary_pmid = $article -> getPmid_isbn(); 
+        	} else {
+          	$secondary_pmid = NULL;
+        	}
 
-
-				// Retrieve EVIDENCE2_ID from EvidenceEvidenceRel by using EVIDENCE1_ID:
-				$evidenceevidencerel -> retrive_evidence2_id($id_evidence[$i]);
-		
-
-				$n_evidence2 = $evidenceevidencerel -> getN_evidence2();			
 				
-				for ($i1=0; $i1<$n_evidence2; $i1++)
-				{	
-					$id_evidence2[$i1] = $evidenceevidencerel -> getEvidence2_id_array($i1);
-						
-					// Retrieve Fragment_id from Fragment by using Evidence_id =  $id_evidence2[$i1]
-					$evidencefragmentrel -> retrive_fragment_id($id_evidence2[$i1]);
-					$n_fragment_id = $evidencefragmentrel -> getN_Fragment_id();
-	
-					$evidencefragmentrel -> retrive_fragment_id_1($id_evidence2[$i1]);
-					$fragment_id_1 = $evidencefragmentrel -> getFragment_id();
-
-					$fragment -> retrive_by_id($fragment_id_1);
-					$quote = $fragment -> getQuote();
-					$quote = quote_replaceIDwithName($quote);
-					$original_id = $fragment -> getOriginal_id();
-					$type = $fragment -> getType();
-					$page_location = $fragment -> getPage_location();				
-																
-					// retrive information in Article table:
-					$articleevidencerel -> retrive_article_id($id_evidence2[$i1]);				
-					$id_article = $articleevidencerel -> getarticle_id_array(0);		
+			// Retrieve EVIDENCE2_ID from EvidenceEvidenceRel by using EVIDENCE1_ID:
+			$evidenceevidencerel -> retrive_evidence2_id($id_evidence[$i]);
 		
-					$article -> retrive_by_id($id_article);
-					$title = $article -> getTitle();			
-					$publication = $article -> getPublication();
-					$year = $article -> getYear();
-					$pmid_isbn = $article -> getPmid_isbn(); 
-					$first_page = $article -> getFirst_page(); 
-					$last_page = $article -> getLast_page(); 
-					$pmcid = $article -> getPmcid(); 
-					$nihmsid = $article -> getNihmsid(); 
-					$doi = $article -> getDoi(); 
-					$open_access = $article -> getOpen_access(); 
-					$citation = $article -> getLast_page(); 
-					$volume = $article -> getVolume(); 
-					$issue = $article -> getIssue(); 
+			$n_evidence2 = $evidenceevidencerel -> getN_evidence2();			
+				
+			for ($i1=0; $i1<$n_evidence2; $i1++)
+			{	
+				$id_evidence2[$i1] = $evidenceevidencerel -> getEvidence2_id_array($i1);
+						
+				// Retrieve Fragment_id from Fragment by using Evidence_id =  $id_evidence2[$i1]
+				$evidencefragmentrel -> retrive_fragment_id($id_evidence2[$i1]);
+				$n_fragment_id = $evidencefragmentrel -> getN_Fragment_id();
 	
-					$pages = $first_page." - ".$last_page;								
+				$evidencefragmentrel -> retrive_fragment_id_1($id_evidence2[$i1]);
+				$fragment_id_1 = $evidencefragmentrel -> getFragment_id();
+
+				$fragment -> retrive_by_id($fragment_id_1);
+				$quote = $fragment -> getQuote();
+				$quote = preg_replace("/\'/","\'",quote_replaceIDwithName($quote));
+				$original_id = $fragment -> getOriginal_id();
+				$type = $fragment -> getType();
+				$page_location = $fragment -> getPage_location();				
+																
+				// retrive information in Article table:
+				$articleevidencerel -> retrive_article_id($id_evidence2[$i1]);				
+				$id_article = $articleevidencerel -> getarticle_id_array(0);		
+		
+				$article -> retrive_by_id($id_article);
+				$title = preg_replace("/\'/","\'",$article -> getTitle());			
+				$publication = preg_replace("/\'/","\'",$article -> getPublication());
+				$year = preg_replace("/\'/","\'",$article -> getYear());
+				$pmid_isbn = preg_replace("/\'/","\'",$article -> getPmid_isbn()); 
+				$first_page = preg_replace("/\'/","\'",$article -> getFirst_page()); 
+				$last_page = preg_replace("/\'/","\'",$article -> getLast_page()); 
+				$pmcid = preg_replace("/\'/","\'",$article -> getPmcid()); 
+				$nihmsid = preg_replace("/\'/","\'",$article -> getNihmsid()); 
+				$doi = $article -> getDoi(); 
+				$open_access = preg_replace("/\'/","\'",$article -> getOpen_access()); 
+				$citation = preg_replace("/\'/","\'",$article -> getLast_page()); 
+				$volume = preg_replace("/\'/","\'",$article -> getVolume()); 
+				$issue = preg_replace("/\'/","\'",$article -> getIssue()); 
+	
+				$pages = $first_page." - ".$last_page;								
 								
-					// retrive the Author Position from ArticleAuthorRel ++++++++++++++++++++++++++++++++++++++++++
-					$articleauthorrel -> retrive_author_position($id_article);
-					$n_author = $articleauthorrel -> getN_author_id();
-					for ($ii3=0; $ii3<$n_author; $ii3++)
-						$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
+				// retrive the Author Position from ArticleAuthorRel ++++++++++++++++++++++++++++++++++++++++++
+				$articleauthorrel -> retrive_author_position($id_article);
+				$n_author = $articleauthorrel -> getN_author_id();
+				for ($ii3=0; $ii3<$n_author; $ii3++)
+					$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
 						
-					sort ($auth_pos);
+				sort ($auth_pos);
 					
-					$name_authors = NULL;
-					for ($ii3=0; $ii3<$n_author; $ii3++)
-					{
-						$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
-						$id_author = $articleauthorrel -> getAuthor_id_array(0);
+				$name_authors = NULL;
+				for ($ii3=0; $ii3<$n_author; $ii3++)
+				{
+					$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
+					$id_author = $articleauthorrel -> getAuthor_id_array(0);
 						
-						$author -> retrive_by_id($id_author);
-						$name_a = $author -> getName_author_array(0);
+					$author -> retrive_by_id($id_author);
+					$name_a = $author -> getName_author_array(0);
 						
-						$name_authors = $name_authors.', '.$name_a;
-					}
+					$name_authors = $name_authors.', '.$name_a;
+				}
 					
-					$name_authors[0] = ' ';
-					$name_authors[1] = ' ';	
+				$name_authors[0] = ' ';
+				$name_authors[1] = ' ';	
 					
-					$name_authors = ltrim($name_authors);
-
-					// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-					if ($page)
-					{
-						// Insert the data in the temporary table ********************************************************************************
-						insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
-					}							
+				$name_authors = ltrim($name_authors);
+				$name_authors = preg_replace("/\'/","\'",$name_authors);
+				// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				if ($page)
+				{
+				// Insert the data in the temporary table ********************************************************************************
+					insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
+				}							
 								
 					// SHOW ONLY TYPE = DATA:			
-					$query = "UPDATE $name_temporary_table SET show1 = '1' WHERE type = 'data' ";							
-					$rs = mysql_query($query);								
+				$query = "UPDATE $name_temporary_table SET show1 = '1' WHERE type = 'data' ";							
+				$rs = mysql_query($query);								
 				}
 			}
 		

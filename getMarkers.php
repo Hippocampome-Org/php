@@ -61,8 +61,25 @@ function getUrlForLink($id,$img,$key,$color1)
 	$url = $img;
 	if($img!='')
 	{
+		if($key=="GABAa_alfa")
+			$keyProperty = "Gaba-a-alpha";
+		else if($key=="CoupTF_2")
+			$keyProperty = "CoupTF II";
+		else if($key=="Sub_P")
+			$keyProperty = "Sub P";
+		else if($key=="5HT_3")
+			$keyProperty = "5HT-3";
+		else if($key=="a-act2")
+			$keyProperty = "alpha-actinin-2";
+		else if($key=="GAT_1")
+			$keyProperty = "GAT-1";
+		else if($key=="mGluR2_3")
+			$keyProperty = "mGluR2/3";
+		else
+			$keyProperty = $key;
+		
 		if($color1!=NULL)
-		  $url ='<a href="property_page_markers.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=markers" target="_blank">'.$img.'</a>';
+		  $url ='<a href="property_page_markers.php?id_neuron='.$id.'&val_property='.$keyProperty.'&color='.$color1.'&page=markers" target="_blank">'.$img.'</a>';
 	}
 	return ($url);
 }
@@ -332,8 +349,10 @@ else $sord = $_GET['sord'];
 if(!$sidx) $sidx =1;
 
 $type = new type($class_type);
-$research = $_GET['researchVar'];
-if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
+
+$research = $_REQUEST['research'];
+$table = $_REQUEST['table_result'];
+if (isset($research)) // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
 	$temporary_result_neurons = new temporary_result_neurons();
