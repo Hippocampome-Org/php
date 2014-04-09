@@ -1,10 +1,10 @@
 <?php
 include ("access_db.php");
-?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<?php
+
+echo ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
+
 include ("simphp-2.0.php");
 $_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
@@ -19,11 +19,11 @@ if (array_key_exists('password', $_REQUEST))
     {	
       $permission1 = $permission;
       $_SESSION['perm'] = $permission1;
+      
     }	
     else;
   }
 }
-
 // delete temporary table for the research: -----------------
 include ("function/remove_table_research.php");
 remove_table_by_tyme();
@@ -36,22 +36,185 @@ remove_table_by_tyme();
 
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
+
+
+<script type="text/javascript" src="jqGrid/js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+
+<style>
+#dvLoading{
+background:#000 url(images/ajax-loader.gif) no-repeat center center;
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+   top: 50%;
+  margin: -25px 0 0 -25px;
+}
+
+</style>
+
+<script>
+
+$(window).load(function(){
+
+	  $('#dvLoading').fadeOut(0);
+
+	});
+
+
+
+jQuery(document).ready(function(){
+//$( "#image_brain" ).load(function() {
+//$( "#submit_load" ).click(function() {	
+$( "#form_load" ).mouseover(function() {	
+	  // Handler for .load() called.
+//alert("in");
+
+	$.ajax({
+	    crossDomain: true,
+	  type: "POST",
+	 async: false,
+	 // data:input,
+	 contentType:"application/json; charset=utf-8",
+	  url:"http://localhost/php_new/load_matrix_sessions.php",
+	//  dataType: 'jsonp',
+	  success: function(output_string) {
+ 	//	alert(output_string);
+	     
+	   },
+	   error: function(xhr, status, error) {
+		   var err = eval("(" + xhr.responseText + ")");
+		   alert(err.Message);
+		 }
+	   
+	}); 
+
+	$(this).unbind("mouseover");
+	
+	
+});
+
+
+//$( "#image_news").load(function() {
+//	$( "#submit_load").click(function() {
+	$( ".topfirst").mouseover(function() {
+	  // Handler for .load() called.
+//alert("in");
+
+	$.ajax({
+	    crossDomain: true,
+	  type: "POST",
+	 async: false,
+	 // data:input,
+	 contentType:"application/json; charset=utf-8",
+	  url:"http://localhost/php_new/load_matrices_session3.php",
+	//  dataType: 'jsonp',
+	  success: function(output_string) {
+	//alert(output_string);
+	     
+	   },
+	   error: function(xhr, status, error) {
+		   var err = eval("(" + xhr.responseText + ")");
+		   alert(err.Message);
+		 }
+	   
+	}); 
+
+	$(this).unbind("mouseover");
+	
+});
+
+
+$( "#image_find").load(function() {
+	  // Handler for .load() called.
+//alert("in");
+
+	$.ajax({
+	    crossDomain: true,
+	  type: "POST",
+	 async: false,
+	 // data:input,
+	 contentType:"application/json; charset=utf-8",
+	  url:"http://localhost/php_new/load_matrices_session2.php",
+	//  dataType: 'jsonp',
+	  success: function(output_string) {
+	//alert(output_string);
+	     
+	   },
+	   error: function(xhr, status, error) {
+		   var err = eval("(" + xhr.responseText + ")");
+		   alert(err.Message);
+		 }
+	   
+	}); 
+
+
+	
+});
+
+
+
+
+
+});
+
+/*
+
+			function load_matrices() {
+		  // Handler for .load() called.
+	//alert("in");
+
+		$.ajax({
+		    crossDomain: true,
+		  type: "POST",
+		 async: false,
+		 // data:input,
+		 contentType:"application/json; charset=utf-8",
+		  url:"http://localhost/php_new/load_matrix_sessions.php",
+		//  dataType: 'jsonp',
+		  success: function(output_string) {
+//		alert(output_string);
+		     
+		   },
+		   error: function(xhr, status, error) {
+			   var err = eval("(" + xhr.responseText + ")");
+			   alert(err.Message);
+			 }
+		   
+		}); 
+}
+
+*/		
+	
+
+
+
+</script>
+
+
+
 <?php include ("function/icon.html"); ?>
-<title>Hippocampome</title>
+<title id="title_id">Hippocampome</title>
 
 </head>
 
-<body>
+<body onload="AjaxFunction()">
 
 <?php 
 	include ("function/title.php");
 	if ($permission1 != 0)
+	{
 		include ("function/menu_main.php");
+		
+	}
 ?>	
 
 <br /><br /><br /><br /><br /><br /><br />
 
-<table width=1100 class='index_table'>
+<table width=1100 class='index_table' id="table_load">
   <tr>		
     <td width="55%">
     <!-- ****************  BODY **************** -->
@@ -94,10 +257,10 @@ remove_table_by_tyme();
       	if ($permission1 == 0) {
       ?>
 
-      <form action="index.php" method="post">
+      <form action="index.php" method="post" id="form_load">
       	<font class='font2'> Please insert password: </font><br />
-      	<input type="password" size="50" name='password' class='select1'/>
-      	<input type="submit" name='ok' value=' OK ' />
+      	<input type="password" size="50" name='password' class='select1' id="password_load"/>
+      	<input type="submit" name='ok' value=' OK ' id="submit_load"/>
       </form>
 
       <?php
@@ -109,7 +272,7 @@ remove_table_by_tyme();
     </td>
 
     <td width="45%" style='vertical-align:top; padding-top:100px; padding-left:50px'>
-      <img src='images/brain6.png' width='450px'/>
+      <img src='images/brain6.png' width='450px' id="image_brain"/>
     </td>
   </tr>
 
@@ -131,5 +294,25 @@ remove_table_by_tyme();
   </tr>
 </table>
 
+
+<!-- 
+<div id="dvLoading"></div>
+-->
+
+
+
 </body>
+<?php
+/*
+if($_SESSION['perm']!=0)
+{
+	include 'getMorphology.php';
+	$_SESSION['morphology'] = json_encode($responce);
+	include 'getMarkers.php';
+	$_SESSION['markers'] = json_encode($responce);
+	include 'getEphys.php';
+	$_SESSION['ephys'] = json_encode($responce);
+}
+*/
+?>
 </html>

@@ -4,12 +4,11 @@ $perm = $_SESSION['perm'];
 if ($perm == NULL)
 	header("Location:error1.html");
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
 include ("access_db.php");
-include ("getEphys.php");
+$jsonStr = $_SESSION['ephys'];
+//include ("getEphys.php");
 include ("function/ephys_unit_table.php");
 include ("function/ephys_num_decimals_table.php");
 require_once('class/class.type.php');
@@ -22,7 +21,14 @@ require_once('class/class.temporary_result_neurons.php');
 
 $type = new type($class_type);
 
-$research = $_REQUEST['research'];
+$research = "";
+if(isset($_REQUEST['research']))
+	$research = $_REQUEST['research'];
+
+$table_result ="";
+if(isset($_REQUEST['table_result']))
+	$table_result = $_REQUEST['table_result'];
+	
 
 $property = new property($class_property);
 
@@ -76,7 +82,7 @@ $epdata = new epdata($class_epdata);
 <script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-	var dataStr = <?php echo json_encode($responce)?>;
+	var dataStr = <?php echo $jsonStr?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -116,21 +122,21 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $_REQUEST['table_result']?>";
+	var table = "<?php echo $table_result?>";
 	
 	$("#nGrid").jqGrid({
-		datatype: "jsonstring",
-		datastr: dataStr,
-		/* url:'getEphys.php',
-	    datatype: 'json', 
-	    mtype: 'GET',
-	    ajaxGridOptions :{
-			contentType : "application/json"
-	        },
-	    postData: {
-	        researchVar: research,
-	        table_result : table
-	    }, */
+	datatype: "jsonstring",
+	datastr: dataStr,
+	/* url:'getEphys.php',
+    datatype: 'json', 
+    mtype: 'GET',
+    ajaxGridOptions :{
+		contentType : "application/json"
+        },
+    postData: {
+        researchVar: research,
+        table_result : table
+    }, */
     colNames:['','Neuron Type','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
@@ -186,8 +192,7 @@ $(function(){
       id: "invid"
    },
     scrollerbar:true,
-    //height:"2325", //full height
-    height:"440", //page height
+    height:"250",
     width:"85%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name

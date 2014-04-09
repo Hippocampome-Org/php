@@ -12,7 +12,7 @@
 	<div id="menu_main_button_new_clr">
 
 	<ul id="css3menu0" class="topmenu">
-		<li class="topfirst"><a href="morphology.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/news.png" alt=""/>Browse</span></a>
+		<li class="topfirst"><a href="morphology.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
 	
 		<ul>
 	
@@ -23,7 +23,7 @@
 	
 		</ul></li>
 	
-		<li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt=""/>Search</span></a>
+		<li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
 	
 		<ul>
 	
