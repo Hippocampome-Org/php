@@ -5,7 +5,8 @@ if ($perm == NULL)
 	header("Location:error1.html");
 
 include ("access_db.php");
-include ("getMorphology.php");
+$jsonStr = $_SESSION['morphology'];
+//include ("getMorphology.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
@@ -169,24 +170,10 @@ $hippo_select = $_SESSION['hippo_select'];
 .ui-jqgrid {
     font-size: 11px !important;
 }
-#dg_subregion,#ca3_subregion,#ec_subregion
-{
-	color: white;
-}
-#ca2_subregion,#ca1_subregion
-{
-	color:#000099;
-}
 </style>
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <script language="javascript">
-function OpenInNewTab(aEle)
-{
-	//alert(aEle.href);
-	var win = window.open(aEle.href,'_self');
-	win.focus();
-}
 
 /* function ctr(select_nick_name2, color, select_nick_name_check)
 {
@@ -229,7 +216,7 @@ checkVersion();
 <script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-	var dataStr = <?php echo json_encode($responce)?>;
+	var dataStr = <?php echo $jsonStr?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -280,6 +267,7 @@ $(function(){
 			//$("tr#"+firstElement).css("border-bottom", "2px red");
 		} 
 	}
+	
 	var research = "<?php echo $research?>";
 	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
 	//alert(table);
@@ -295,7 +283,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','<a href="parcel_page.php?parcel=SMo&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMo</a>','<a href="parcel_page.php?parcel=SMi&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMi</a>','<a href="parcel_page.php?parcel=SG&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SG</a>','<a href="parcel_page.php?parcel=H&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">H</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SL&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SL</a>','<a href="parcel_page.php?parcel=SP&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SM&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SM</a>','<a href="parcel_page.php?parcel=SP&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=PL&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">PL</a>','<a href="parcel_page.php?parcel=I&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">I</a>','<a href="parcel_page.php?parcel=II&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">II</a>','<a href="parcel_page.php?parcel=III&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">III</a>','<a href="parcel_page.php?parcel=IV&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">IV</a>','<a href="parcel_page.php?parcel=V&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">V</a>','<a href="parcel_page.php?parcel=VI&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">VI</a>'],
+    colNames:['','Neuron Type','SMo','SMi','SG','H','SLM','SR','SL','SP','SO','SLM','SR','SP','SO','SLM','SR','SP','SO','SM','SP','PL','I','II','III','IV','V','VI'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
@@ -392,8 +380,7 @@ $(function(){
    },
     //caption: 'Morphology Matrix',
     scrollerbar:true,
-    //height:"2807", //full height
-    height:"440", //page height
+    height:"2807",
     width:"60%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
@@ -402,14 +389,14 @@ $(function(){
     });
 	jQuery("#nGrid").jqGrid('setGroupHeaders', { useColSpanStyle: true, 
 		groupHeaders:[ 
-		      		/* {startColumnName: 'Type', numberOfColumns: 2, titleText: '<b>Neuron Type<b>'}, */
-		      		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);" >DG(18)</a><b>'},
-		      		{startColumnName: 'SLM', numberOfColumns: 5, titleText: '<b><a id="ca3_subregion" href="parcel_page.php?subregion=CA3&type=subregion" onClick="OpenInNewTab(this);">CA3(25)</a></b>'},
-		      		{startColumnName: '2_SLM', numberOfColumns: 4, titleText: '<b><a id="ca2_subregion" href="parcel_page.php?subregion=CA2&type=subregion" onClick="OpenInNewTab(this);">CA2(5)</a></b>'},
-		      		{startColumnName: '1_SLM', numberOfColumns: 4, titleText: '<b><a id="ca1_subregion" href="parcel_page.php?subregion=CA1&type=subregion" onClick="OpenInNewTab(this);">CA1(40)</a></b>'},
-		      		{startColumnName: 'SUB_SM', numberOfColumns: 3, titleText: '<b><a id="sub_subregion" href="parcel_page.php?subregion=SUB&type=subregion" onClick="OpenInNewTab(this);">SUB(3)</a></b>'},
-		      		{startColumnName: 'I', numberOfColumns: 6, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC(31)</a></b>'}
-		      		] 
+		/* {startColumnName: 'Type', numberOfColumns: 2, titleText: '<b>Neuron Type<b>'}, */
+		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b>DG(18)<b>'},
+		{startColumnName: 'SLM', numberOfColumns: 5, titleText: '<b>CA3(25)</b>'},
+		{startColumnName: '2_SLM', numberOfColumns: 4, titleText: '<b>CA2(5)</b>'},
+		{startColumnName: '1_SLM', numberOfColumns: 4, titleText: '<b>CA1(40)</b>'},
+		{startColumnName: 'SUB_SM', numberOfColumns: 3, titleText: '<b>SUB(3)</b>'},
+		{startColumnName: 'I', numberOfColumns: 6, titleText: '<b>EC(31)</b>'}
+		] 
 	});
 	//jQuery("#nGrid").jqGrid('navGrid','#pager',{search:true,edit:false,add:false,del:false});
 	if(checkVersion()=="9")

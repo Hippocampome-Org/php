@@ -9,7 +9,8 @@ if ($perm == NULL)
 
 <?php
 include ("access_db.php");
-include ("getMarkers.php");
+$jsonStr = $_SESSION['markers'];
+//include ("getMarkers.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
@@ -18,10 +19,11 @@ require_once('class/class.temporary_result_neurons.php');
 $width1='25%';
 $width2='2%';
 
-$research ="";
-$table_result ="";
+$research = "";
 if(isset($_REQUEST['research']))
 	$research = $_REQUEST['research'];
+
+$table_result ="";
 if(isset($_REQUEST['table_result']))
 	$table_result = $_REQUEST['table_result'];
 
@@ -82,11 +84,6 @@ if(isset($_REQUEST['table_result']))
 }
 </style>
 <script language="javascript">
-function OpenInNewTab(aEle)
-{
-	var win = window.open(aEle.href,'_self');
-	win.focus();
-}
 function ctr(select_nick_name2, color, select_nick_name_check)
 {
 
@@ -129,7 +126,7 @@ checkVersion();
 <script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-	var dataStr = <?php echo json_encode($responce)?>;
+	var dataStr = <?php echo $jsonStr?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -170,22 +167,22 @@ $(function(){
 		} 
 	}
 	var research = "<?php echo $research?>";
-	var table = "<?php echo $table_result?>";
+	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
 	
 	$("#nGrid").jqGrid({
-		datatype: "jsonstring",
-		datastr: dataStr,
-	    /* url:'getMarkers.php',
-	    datatype: 'json', */
-	    mtype: 'GET',
-	    /* ajaxGridOptions :{
-			contentType : "application/json"
-	        }, */
-	    postData: {
-	        researchVar: research,
-	        table_result : table
-	    },
-    colNames:['','Neuron Type','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=Gly T2" onClick="OpenInNewTab(this);">Gly T2</a>','<a href="neuron_by_marker.php?marker=mGLuR1a" onClick="OpenInNewTab(this);">mGLuR1a</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGLuR7a" onClick="OpenInNewTab(this);">mGLuR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=nNos" onClick="OpenInNewTab(this);">nNos</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=Sub P" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGlu T3<a/>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>'],
+	datatype: "jsonstring",
+	datastr: dataStr,
+    /* url:'getMarkers.php',
+    datatype: 'json', */
+    mtype: 'GET',
+    /* ajaxGridOptions :{
+		contentType : "application/json"
+        }, */
+    postData: {
+        researchVar: research,
+        table_result : table
+    },
+    colNames:['','Neuron Type','5HT-3','&prop;-act2','AChE','CB','CB1','CCK','CGRP','ChAT','CoupTF II','CR','DYN','EAAT3','ENK','GABAa &prop;','GAT-1','Gly T2','mGLuR1a','mGluR2/3','mGLuR7a','mGluR8a','MOR','Mus2R','NKB','nNos','NPY','PPTA','PPTB','PV','RLN','SOM','Sub P Rec','vAChT','vGluT2','vGlu T3','VIAAT','VIP'],
               /* ,'SMi','SG','H','SLM','SR','SL','SP','SO','SLM','SR','SP','SO','SLM','SR','SP','SO','SM','SP','PL','I','II','III','IV','V','VI']*/
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
@@ -250,10 +247,9 @@ $(function(){
       cell:"cell",
       id: "invid"
    },
-    //caption: 'Marker Matrix',
+    //caption: 'Morphology Matrix',
     scrollerbar:true,
-    //height:"2340", //full height
-    height:"440", //page height
+    height:"350",
     width:"80%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name

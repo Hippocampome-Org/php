@@ -851,7 +851,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 			if ($n_result_tot)
 			{
 				//array_multisort($position_type, $id_t, $name_type);
-				
+				array_multisort($position_type,$id_t,$subregion_type,$name_type);
 				for ($i=0; $i<$n_result_tot; $i++)
 				{
 					$i9=$i+1;
@@ -890,6 +890,7 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 		
 				print ("<table border='0' cellspacing='3' cellpadding='0' class='table_result'>");
 				//	array_multisort($position_type_unknown, $id_t_unknown, $name_type_unknown);
+				array_multisort($position_type_unknown, $id_t_unknown, $subregion_type_unknown, $name_type_unknown);
 					for ($i=0; $i<$n_result_tot_unknown; $i++)
 					{
 						$i9=$i+1;
