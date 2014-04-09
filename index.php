@@ -82,7 +82,7 @@ $( "#form_load" ).mouseover(function() {
 	 async: false,
 	 // data:input,
 	 contentType:"application/json; charset=utf-8",
-	  url:"http://localhost/php_new/load_matrix_session_morphology.php",
+	  url:"load_matrix_session_morphology.php",
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
  	//	alert(output_string);
@@ -113,7 +113,7 @@ $( "#form_load" ).mouseover(function() {
 	 async: false,
 	 // data:input,
 	 contentType:"application/json; charset=utf-8",
-	  url:"http://localhost/php_new/load_matrix_session_ephys.php",
+	  url:"load_matrix_session_ephys.php",
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
 	//alert(output_string);
@@ -141,7 +141,7 @@ $( "#image_find").load(function() {
 	 async: false,
 	 // data:input,
 	 contentType:"application/json; charset=utf-8",
-	  url:"http://localhost/php_new/load_matrix_session_markers.php",
+	  url:"load_matrix_session_markers.php",
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
 	//alert(output_string);

@@ -192,7 +192,7 @@ $(function(){
       id: "invid"
    },
     scrollerbar:true,
-    height:"250",
+    height:"440",
     width:"85%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name

@@ -380,7 +380,7 @@ $(function(){
    },
     //caption: 'Morphology Matrix',
     scrollerbar:true,
-    height:"2807",
+    height:"440",
     width:"60%",
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
