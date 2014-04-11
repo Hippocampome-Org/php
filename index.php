@@ -1,10 +1,9 @@
 <?php
 include ("access_db.php");
 
-
-
-echo ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
-
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<?php
 include ("simphp-2.0.php");
 $_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
@@ -36,7 +35,7 @@ remove_table_by_tyme();
 
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
-
+<link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
 <!--  
 <script type="text/javascript" src="jqGrid/js/jquery-1.8.3.js"></script>-->
 <script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
@@ -47,7 +46,7 @@ remove_table_by_tyme();
 
 <style>
 #dvLoading{
-background:#000 url(images/ajax-loader.gif) no-repeat center center;
+background: url(images/ajax-loader.gif) no-repeat center center;
   height: 100px;
   width: 100px;
   position: fixed;
@@ -55,27 +54,46 @@ background:#000 url(images/ajax-loader.gif) no-repeat center center;
   left: 50%;
    top: 50%;
   margin: -25px 0 0 -25px;
+  
 }
 
 </style>
 
 <script>
 
-$(window).load(function(){
 
-	  $('#dvLoading').fadeOut(0);
-
-	});
 
 
 
 jQuery(document).ready(function(){
-//$( "#image_brain" ).load(function() {
-//$( "#submit_load" ).click(function() {	
-$( "#form_load" ).mouseover(function() {	
-	  // Handler for .load() called.
-//alert("in");
 
+
+
+	
+//	$('#image_find').load(function(){
+	//	  $('#dvLoading').fadeOut(1000);
+	//	  $('#dvLoading').css("display","block");
+//		});	
+
+$( "#image_find" ).load(function() {
+//$( "#submit_load" ).click(function() {	
+//$( "#form_load" ).mouseover(function() {	
+	  // Handler for .load() called.
+
+	  //...............CSS for spinning in crome
+$('#dvLoading').css("background"," url(images/ajax-loader.gif) no-repeat center center");
+$('#dvLoading').css("height","100px");
+$('#dvLoading').css("width","100px");
+$('#dvLoading').css("position","fixed");
+$('#dvLoading').css("z-index","1000");
+$('#dvLoading').css("left","50%");
+$('#dvLoading').css("top","50%");
+$('#dvLoading').css("margin","-25px 0 0 -25px");
+	  
+	  
+	  
+	  
+//ajax for morphology--------------------
 	$.ajax({
 	    crossDomain: true,
 	  type: "POST",
@@ -86,38 +104,100 @@ $( "#form_load" ).mouseover(function() {
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
  	//	alert(output_string);
-	     
+		
+
+		//ajax for ephys--------------
+		  $.ajax({
+			    crossDomain: true,
+			  type: "POST",
+			 async: false,
+			 // data:input,
+			 contentType:"application/json; charset=utf-8",
+			  url:"load_matrix_session_ephys.php",
+			//  dataType: 'jsonp',
+			  success: function(output_string) {
+			//alert(output_string);
+				  
+
+					//ajax for markers--------------------
+				  
+					$.ajax({
+					    crossDomain: true,
+					  type: "POST",
+					 async: false,
+					 // data:input,
+					 contentType:"application/json; charset=utf-8",
+					  url:"load_matrix_session_markers.php",
+					//  dataType: 'jsonp',
+					  success: function(output_string) {
+					//alert(output_string);
+						  $('#dvLoading').css("display","none");
+						  $("div#menu_main_button_new_clr").css("display","block");
+						 
+					     
+					   },
+					   error: function(xhr, status, error) {
+						   var err = eval("(" + xhr.responseText + ")");
+						   alert(err.Message);
+						 }
+					   
+					}); 
+				  
+
+			   },
+			   error: function(xhr, status, error) {
+				   var err = eval("(" + xhr.responseText + ")");
+				   alert(err.Message);
+				 }
+			   
+			}); 
+
+		  
 	   },
 	   error: function(xhr, status, error) {
 		   var err = eval("(" + xhr.responseText + ")");
 		   alert(err.Message);
+		   $('#dvLoading').css("display","none");
+			  $("#menu_main_button_new_clr").css("display","block");
 		 }
 	   
 	}); 
 
-	$(this).unbind("mouseover");
+	
 	
 	
 });
 
-
-//$( "#image_news").load(function() {
+/*
+$( "#image_news").load(function() {
 //	$( "#submit_load").click(function() {
-	$( ".topfirst").mouseover(function() {
+	//$( ".topfirst").mouseover(function() {
 	  // Handler for .load() called.
 //alert("in");
 
+	  
+	  $('#dvLoading').css("background","#000 url(images/ajax-loader.gif) no-repeat center center");
+$('#dvLoading').css("height","100px");
+$('#dvLoading').css("width","100px");
+$('#dvLoading').css("position","fixed");
+$('#dvLoading').css("z-index","1000");
+$('#dvLoading').css("left","50%");
+$('#dvLoading').css("top","50%");
+$('#dvLoading').css("margin","-25px 0 0 -25px");
+	  
+	  
 	$.ajax({
 	    crossDomain: true,
 	  type: "POST",
 	 async: false,
 	 // data:input,
 	 contentType:"application/json; charset=utf-8",
-	  url:"load_matrix_session_ephys.php",
+	  url:"http://localhost/php_new/load_matrix_session_ephys.php",
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
 	//alert(output_string);
-	     
+		  $('#dvLoading').css("display","none");
+		  $("#menu_main_button_new_clr").css("diplay","block");
 	   },
 	   error: function(xhr, status, error) {
 		   var err = eval("(" + xhr.responseText + ")");
@@ -133,18 +213,30 @@ $( "#form_load" ).mouseover(function() {
 
 $( "#image_find").load(function() {
 	  // Handler for .load() called.
-//alert("in");
+$('#dvLoading').css("background","#000 url(images/ajax-loader.gif) no-repeat center center");
+$('#dvLoading').css("height","100px");
+$('#dvLoading').css("width","100px");
+$('#dvLoading').css("position","fixed");
+$('#dvLoading').css("z-index","1000");
+$('#dvLoading').css("left","50%");
+$('#dvLoading').css("top","50%");
+$('#dvLoading').css("margin","-25px 0 0 -25px");
 
+
+
+	  
 	$.ajax({
 	    crossDomain: true,
 	  type: "POST",
 	 async: false,
 	 // data:input,
 	 contentType:"application/json; charset=utf-8",
-	  url:"load_matrix_session_markers.php",
+	  url:"http://localhost/php_new/load_matrix_session_markers.php",
 	//  dataType: 'jsonp',
 	  success: function(output_string) {
 	//alert(output_string);
+		 
+		 
 	     
 	   },
 	   error: function(xhr, status, error) {
@@ -159,7 +251,7 @@ $( "#image_find").load(function() {
 });
 
 
-
+*/
 
 
 
@@ -206,16 +298,56 @@ $( "#image_find").load(function() {
 
 </head>
 
-<body onload="AjaxFunction()">
+<body>
 
 <?php 
 	include ("function/title.php");
 	if ($permission1 != 0)
 	{
-		include ("function/menu_main.php");
-		
+//		include ("function/menu_main.php");
+	?>
+	<div id="menu_main_button_new_clr" style="display:none;">
+
+	<ul id="css3menu0" class="topmenu">
+		<li class="topfirst"><a href="morphology.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
+	
+		<ul>
+	
+			<li class="subfirst"><a href="morphology.php">Morphology</a></li>
+			<li><a href="markers.php">Molecular markers</a></li>
+			<li><a href="ephys.php">Electrophysiology</a></li>
+			<li><a href="connectivity.php">Connectivity</a></li>
+	
+		</ul></li>
+	
+		<li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
+	
+		<ul>
+	
+			<li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
+			<li><a href="find_author.php?searching=1">Author</a></li>
+			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
+			<li><a href="neuron_search.php?searching=1">Neuron name</a></li>
+	
+		</ul></li>
+	
+		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
+	
+	</ul>
+	
+	</div>  
+	<?php 	
 	}
+	
 ?>	
+<script>
+jQuery(document).ready(function(){
+
+	$("#menu_main_button_new_clr").css("diplay","none");
+
+	
+});
+</script>
 
 <br /><br /><br /><br /><br /><br /><br />
 
@@ -298,15 +430,19 @@ $( "#image_find").load(function() {
     </td>		
   </tr>
 </table>
+<?php if($permission1!=0)
 
+		echo"<div id='dvLoading'></div>"
 
-<!-- 
-<div id="dvLoading"></div>
--->
+		
+		?>
 
 
 
 </body>
+
+
+
 <?php
 /*
 if($_SESSION['perm']!=0)

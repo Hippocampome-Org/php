@@ -933,21 +933,21 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 				<tr>
 					<td align='center' width='20%'>  </td>
 					<td align='center' width='18%'>
-					<form action='morphology.php' method='post' style='display:inline' target='_blank'>
+					<form action='morphology_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='morpology_matrix' value='MORPHOLOGY' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1' />
 					</form>	
 					</td>			
 					<td align='center' width='18%'> 
-					<form action='markers.php' method='post' style='display:inline' target='_blank'>
+					<form action='markers_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='markers_matrix' value='MARKERS' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1' />
 					</form>				
 					</td>
 					<td align='center' width='18%'> 
-					<form action='ephys.php' method='post' style='display:inline' target='_blank'>
+					<form action='ephys_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='ephys_matrix' value='EPHYS' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1'  />
