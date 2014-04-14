@@ -1,299 +1,115 @@
 <?php
-include ("access_db.php");
-
+  include ("access_db.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
 <?php
-include ("simphp-2.0.php");
+include("simphp-2.0.php");
+
 $_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
 
-if (array_key_exists('password', $_REQUEST))
-{
+if (array_key_exists('password', $_REQUEST)) {
   $query = "SELECT permission FROM user WHERE password = '{$_REQUEST['password']}'";
   $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs))
-  {
-    if ($permission == 1)
-    {	
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 1) {	
       $permission1 = $permission;
       $_SESSION['perm'] = $permission1;
-      
-    }	
+    }
     else;
   }
 }
+
 // delete temporary table for the research: -----------------
-include ("function/remove_table_research.php");
+include("function/remove_table_research.php");
 remove_table_by_tyme();
 // ------------------------------------------------------------
 ?>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
-<!--  
-<script type="text/javascript" src="jqGrid/js/jquery-1.8.3.js"></script>-->
 <script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
-<!-- 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">-->
 
-</script>
-
-<style>
-#dvLoading{
-background: url(images/ajax-loader.gif) no-repeat center center;
+<style type="text/css">
+#dvLoading {
+  background-image: url(images/ajax-loader.gif);
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100px;
   width: 100px;
   position: fixed;
   z-index: 1000;
-  left: 50%;
-   top: 50%;
+  left: 70%;
+  top: 15%;
   margin: -25px 0 0 -25px;
-  
 }
-
 </style>
 
 <script>
-
-
-
-
-
-jQuery(document).ready(function(){
-
-
-
-	
-//	$('#image_find').load(function(){
-	//	  $('#dvLoading').fadeOut(1000);
-	//	  $('#dvLoading').css("display","block");
-//		});	
-
-$( "#image_find" ).load(function() {
-//$( "#submit_load" ).click(function() {	
-//$( "#form_load" ).mouseover(function() {	
-	  // Handler for .load() called.
-
-	  //...............CSS for spinning in crome
-$('#dvLoading').css("background"," url(images/ajax-loader.gif) no-repeat center center");
-$('#dvLoading').css("height","100px");
-$('#dvLoading').css("width","100px");
-$('#dvLoading').css("position","fixed");
-$('#dvLoading').css("z-index","1000");
-$('#dvLoading').css("left","50%");
-$('#dvLoading').css("top","50%");
-$('#dvLoading').css("margin","-25px 0 0 -25px");
-	  
-	  
-	  
-	  
-//ajax for morphology--------------------
-	$.ajax({
-	    crossDomain: true,
-	  type: "POST",
-	 async: false,
-	 // data:input,
-	 contentType:"application/json; charset=utf-8",
-	  url:"load_matrix_session_morphology.php",
-	//  dataType: 'jsonp',
-	  success: function(output_string) {
- 	//	alert(output_string);
-		
-
-		//ajax for ephys--------------
-		  $.ajax({
-			    crossDomain: true,
-			  type: "POST",
-			 async: false,
-			 // data:input,
-			 contentType:"application/json; charset=utf-8",
-			  url:"load_matrix_session_ephys.php",
-			//  dataType: 'jsonp',
-			  success: function(output_string) {
-			//alert(output_string);
-				  
-
-					//ajax for markers--------------------
-				  
-					$.ajax({
-					    crossDomain: true,
-					  type: "POST",
-					 async: false,
-					 // data:input,
-					 contentType:"application/json; charset=utf-8",
-					  url:"load_matrix_session_markers.php",
-					//  dataType: 'jsonp',
-					  success: function(output_string) {
-					//alert(output_string);
-						  $('#dvLoading').css("display","none");
-						  $("div#menu_main_button_new_clr").css("display","block");
-						 
-					     
-					   },
-					   error: function(xhr, status, error) {
-						   var err = eval("(" + xhr.responseText + ")");
-						   alert(err.Message);
-						 }
-					   
-					}); 
-				  
-
-			   },
-			   error: function(xhr, status, error) {
-				   var err = eval("(" + xhr.responseText + ")");
-				   alert(err.Message);
-				 }
-			   
-			}); 
-
-		  
-	   },
-	   error: function(xhr, status, error) {
-		   var err = eval("(" + xhr.responseText + ")");
-		   alert(err.Message);
-		   $('#dvLoading').css("display","none");
-			  $("#menu_main_button_new_clr").css("display","block");
-		 }
-	   
-	}); 
-
-	
-	
-	
+jQuery(document).ready(function() {
+  $( "#image_find" ).load(function() {
+    //ajax for morphology--------------------
+    $('#dvLoading').show();
+    $.ajax( {
+      crossDomain: true,
+      type: 'POST',
+      cache: false,
+      contentType: 'application/json; charset=utf-8',
+      url: 'load_matrix_session_morphology.php',
+      success: function(output_string) {
+        //ajax for ephys--------------
+        $.ajax( {
+          crossDomain: true,
+          type: 'POST',
+          cache: false,
+          contentType: 'application/json; charset=utf-8',
+          url: 'load_matrix_session_ephys.php',
+          success: function(output_string) {
+            //ajax for markers--------------------
+            $.ajax( {
+              crossDomain: true,
+              type: 'POST',
+              cache: false,
+              contentType: 'application/json; charset=utf-8',
+              url: 'load_matrix_session_markers.php',
+              success: function(output_string) {
+                $('#dvLoading').hide();
+                $('div#menu_main_button_new_clr').css('display','block');
+              },
+              error: function(xhr, status, error) {
+                $('#dvLoading').hide();
+                var err = eval("(" + xhr.responseText + ")");
+                alert(err.Message);
+              }
+            }); 
+          },
+          error: function(xhr, status, error) {
+            $('#dvLoading').hide();
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+          }
+        }); 
+      },
+      error: function(xhr, status, error) {
+        $('#dvLoading').hide();
+        $('#menu_main_button_new_clr').css('display','block');
+        var err = eval("(" + xhr.responseText + ")");
+        alert(err.Message);
+      }
+    }); 
+  });
 });
-
-/*
-$( "#image_news").load(function() {
-//	$( "#submit_load").click(function() {
-	//$( ".topfirst").mouseover(function() {
-	  // Handler for .load() called.
-//alert("in");
-
-	  
-	  $('#dvLoading').css("background","#000 url(images/ajax-loader.gif) no-repeat center center");
-$('#dvLoading').css("height","100px");
-$('#dvLoading').css("width","100px");
-$('#dvLoading').css("position","fixed");
-$('#dvLoading').css("z-index","1000");
-$('#dvLoading').css("left","50%");
-$('#dvLoading').css("top","50%");
-$('#dvLoading').css("margin","-25px 0 0 -25px");
-	  
-	  
-	$.ajax({
-	    crossDomain: true,
-	  type: "POST",
-	 async: false,
-	 // data:input,
-	 contentType:"application/json; charset=utf-8",
-	  url:"http://localhost/php_new/load_matrix_session_ephys.php",
-	//  dataType: 'jsonp',
-	  success: function(output_string) {
-	//alert(output_string);
-		  $('#dvLoading').css("display","none");
-		  $("#menu_main_button_new_clr").css("diplay","block");
-	   },
-	   error: function(xhr, status, error) {
-		   var err = eval("(" + xhr.responseText + ")");
-		   alert(err.Message);
-		 }
-	   
-	}); 
-
-	$(this).unbind("mouseover");
-	
-});
-
-
-$( "#image_find").load(function() {
-	  // Handler for .load() called.
-$('#dvLoading').css("background","#000 url(images/ajax-loader.gif) no-repeat center center");
-$('#dvLoading').css("height","100px");
-$('#dvLoading').css("width","100px");
-$('#dvLoading').css("position","fixed");
-$('#dvLoading').css("z-index","1000");
-$('#dvLoading').css("left","50%");
-$('#dvLoading').css("top","50%");
-$('#dvLoading').css("margin","-25px 0 0 -25px");
-
-
-
-	  
-	$.ajax({
-	    crossDomain: true,
-	  type: "POST",
-	 async: false,
-	 // data:input,
-	 contentType:"application/json; charset=utf-8",
-	  url:"http://localhost/php_new/load_matrix_session_markers.php",
-	//  dataType: 'jsonp',
-	  success: function(output_string) {
-	//alert(output_string);
-		 
-		 
-	     
-	   },
-	   error: function(xhr, status, error) {
-		   var err = eval("(" + xhr.responseText + ")");
-		   alert(err.Message);
-		 }
-	   
-	}); 
-
-
-	
-});
-
-
-*/
-
-
-
-
-});
-
-/*
-
-			function load_matrices() {
-		  // Handler for .load() called.
-	//alert("in");
-
-		$.ajax({
-		    crossDomain: true,
-		  type: "POST",
-		 async: false,
-		 // data:input,
-		 contentType:"application/json; charset=utf-8",
-		  url:"http://localhost/php_new/load_matrix_sessions.php",
-		//  dataType: 'jsonp',
-		  success: function(output_string) {
-//		alert(output_string);
-		     
-		   },
-		   error: function(xhr, status, error) {
-			   var err = eval("(" + xhr.responseText + ")");
-			   alert(err.Message);
-			 }
-		   
-		}); 
-}
-
-*/		
-	
-
-
-
 </script>
 
+<?php
+include("function/icon.html");
+?>
 
-
-<?php include ("function/icon.html"); ?>
 <title id="title_id">Hippocampome</title>
 
 </head>
@@ -301,51 +117,36 @@ $('#dvLoading').css("margin","-25px 0 0 -25px");
 <body>
 
 <?php 
-	include ("function/title.php");
-	if ($permission1 != 0)
-	{
-//		include ("function/menu_main.php");
-	?>
-	<div id="menu_main_button_new_clr" style="display:none;">
-
-	<ul id="css3menu0" class="topmenu">
-		<li class="topfirst"><a href="morphology.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
-	
-		<ul>
-	
-			<li class="subfirst"><a href="morphology.php">Morphology</a></li>
-			<li><a href="markers.php">Molecular markers</a></li>
-			<li><a href="ephys.php">Electrophysiology</a></li>
-			<li><a href="connectivity.php">Connectivity</a></li>
-	
-		</ul></li>
-	
-		<li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
-	
-		<ul>
-	
-			<li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
-			<li><a href="find_author.php?searching=1">Author</a></li>
-			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
-			<li><a href="neuron_search.php?searching=1">Neuron name</a></li>
-	
-		</ul></li>
-	
-		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
-	
-	</ul>
-	
-	</div>  
-	<?php 	
-	}
-	
+include("function/title.php");
+if ($permission1 != 0) {
+?>
+<div id="menu_main_button_new_clr" style="display:none;">
+  <ul id="css3menu0" class="topmenu">
+    <li class="topfirst"><a href="morphology.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
+      <ul>
+        <li class="subfirst"><a href="morphology.php">Morphology</a></li>
+        <li><a href="markers.php">Molecular markers</a></li>
+        <li><a href="ephys.php">Electrophysiology</a></li>
+        <li><a href="connectivity.php">Connectivity</a></li>
+      </ul>
+    </li>
+    <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
+      <ul>
+        <li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
+        <li><a href="find_author.php?searching=1">Author</a></li>
+        <li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
+        <li><a href="neuron_search.php?searching=1">Neuron name</a></li>
+      </ul>
+    </li>
+    <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
+  </ul>
+</div>  
+<?php 	
+}
 ?>	
 <script>
-jQuery(document).ready(function(){
-
-	$("#menu_main_button_new_clr").css("diplay","none");
-
-	
+jQuery(document).ready(function() {
+  $("#menu_main_button_new_clr").css("diplay","none");
 });
 </script>
 
@@ -385,7 +186,6 @@ jQuery(document).ready(function(){
       If you have feedback on either functionality or content, or if you
       would like to be informed when the first official version is released,
       please email us at <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
-
       </font>
 
       <br><br>
@@ -430,30 +230,10 @@ jQuery(document).ready(function(){
     </td>		
   </tr>
 </table>
-<?php if($permission1!=0)
-
-		echo"<div id='dvLoading'></div>"
-
-		
-		?>
-
-
+<?php
+if ($permission1!=0) echo "<div id='dvLoading'></div>"
+?>
 
 </body>
 
-
-
-<?php
-/*
-if($_SESSION['perm']!=0)
-{
-	include 'getMorphology.php';
-	$_SESSION['morphology'] = json_encode($responce);
-	include 'getMarkers.php';
-	$_SESSION['markers'] = json_encode($responce);
-	include 'getEphys.php';
-	$_SESSION['ephys'] = json_encode($responce);
-}
-*/
-?>
 </html>
