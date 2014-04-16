@@ -119,6 +119,14 @@ $hippo_select = $_SESSION['hippo_select'];
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <style>
+#ca3_subregion,#dg_subregion,#ec_subregion
+{
+	color:white !important;
+}
+#ca2_subregion,#ca1_subregion,#sub_subregion
+{
+	color:#000099 !important;
+}
 .highlighted{
 	border-right: solid 1px Chartreuse !important;
 	border-left: solid 1px Chartreuse !important;
@@ -396,12 +404,12 @@ $(function(){
 	jQuery("#nGrid").jqGrid('setGroupHeaders', { useColSpanStyle: true, 
 		groupHeaders:[ 
 		/* {startColumnName: 'Type', numberOfColumns: 2, titleText: '<b>Neuron Type<b>'}, */
-		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b>DG(18)<b>'},
-		{startColumnName: 'SLM', numberOfColumns: 5, titleText: '<b>CA3(25)</b>'},
-		{startColumnName: '2_SLM', numberOfColumns: 4, titleText: '<b>CA2(5)</b>'},
-		{startColumnName: '1_SLM', numberOfColumns: 4, titleText: '<b>CA1(40)</b>'},
-		{startColumnName: 'SUB_SM', numberOfColumns: 3, titleText: '<b>SUB(3)</b>'},
-		{startColumnName: 'I', numberOfColumns: 6, titleText: '<b>EC(31)</b>'}
+		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);" >DG(18)</a><b>'},
+		{startColumnName: 'SLM', numberOfColumns: 5, titleText: '<b><a id="ca3_subregion" href="parcel_page.php?subregion=CA3&type=subregion" onClick="OpenInNewTab(this);">CA3(25)</a></b>'},
+		{startColumnName: '2_SLM', numberOfColumns: 4, titleText: '<b><a id="ca2_subregion" href="parcel_page.php?subregion=CA2&type=subregion" onClick="OpenInNewTab(this);">CA2(5)</a></b>'},
+		{startColumnName: '1_SLM', numberOfColumns: 4, titleText: '<b><a id="ca1_subregion" href="parcel_page.php?subregion=CA1&type=subregion" onClick="OpenInNewTab(this);">CA1(40)</a></b>'},
+		{startColumnName: 'SUB_SM', numberOfColumns: 3, titleText: '<b><a id="sub_subregion" href="parcel_page.php?subregion=SUB&type=subregion" onClick="OpenInNewTab(this);">SUB(3)</a></b>'},
+		{startColumnName: 'I', numberOfColumns: 6, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC(31)</a></b>'}
 		] 
 	});
 	//jQuery("#nGrid").jqGrid('navGrid','#pager',{search:true,edit:false,add:false,del:false});
