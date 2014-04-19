@@ -3,6 +3,7 @@ access_db.php
 .buildpath
 .project
 .settings/
+attachment
 error_log
 hits.txt
 figure
