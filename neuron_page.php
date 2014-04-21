@@ -26,7 +26,7 @@ require_once('class/class.fragmenttyperel.php');
 require_once('class/class.fragment.php');
 require_once('class/class.evidencefragmentrel.php');
 require_once('class/class.typetyperel.php');
-
+require_once('class/class.attachment.php');
 require_once('class/class.article.php');
 require_once('class/class.author.php');
 require_once('class/class.articleevidencerel.php');
@@ -66,6 +66,7 @@ $articleauthorrel = new articleauthorrel($class_articleauthorrel);
 
 $author = new author($class_author);
 
+$attachment_obj = new attachment($class_attachment);
 
 if ($text_file_creation)
 {
@@ -672,12 +673,42 @@ if ($text_file_creation)
 			
 			$fragment ->  retrive_by_id($id_fragment);
 			
-			$attachment = $fragment -> getAttachment();
-			$attachment_type = $fragment -> getAttachment_type();
+			//$attachment = $fragment -> getAttachment();
+			//$attachment_type = $fragment -> getAttachment_type();
 	
+			
+			
+			//figures from attachment table.................
+			$id_original=$fragment -> getOriginal_id();
+			$attachment_obj -> retrive_attachment_by_original_id($id_original, $id);
+			$attachment = $attachment_obj -> getName();
+			$attachment_type = $attachment_obj -> getType();
+			
+			$link_figure="";
+			$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+			//echo "$attachment_jpg";
+			if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
+				$link_figure = "attachment/marker/".$attachment_jpg;
+			//	echo "marker:-".$link_figure;
+			}
+			
+			if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
+				$link_figure = "attachment/morph/".$attachment_jpg;
+			//	echo "morph:-".$link_figure;
+			}
+			
+			if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
+				$link_figure = "attachment/ephys/".$attachment_jpg;
+				//echo "ephys:-".$link_figure;
+			}
+
+
+			
+			
 			// change PFD in JPG:
 			$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-			$link_figure = "figure/".$attachment_jpg;	
+			//$link_figure = "figure/".$attachment_jpg;	
+		//	$link_figure = "attachment/morph/".$attachment_jpg;
 			// -------------------------------------------------------------------------------		
 		
 			// Citation figure: ***************************************************************
@@ -811,8 +842,9 @@ if ($text_file_creation)
 							<br />
 		
 							<?php								
-								if ($attachment_type == 'figure')
-								{
+							//	if ($attachment_type == 'figure')
+							if ($attachment_type=="morph_figure"||$attachment_type=="morph_table"||$attachment_type=="marker_figure"||$attachment_type=="marker_table"||$attachment_type=="ephys_figure"||$attachment_type=="ephys_table")	
+							{
 									print ("<a href='$link_figure' rel='lightbox' title='$citation'>");
 									print ("<img src='$link_figure' border='2' width='30%'>");
 									print ("</a>");

@@ -1215,23 +1215,22 @@ function show_only_morphology(link, start1, stop1)
 									
 									
 									// change PFD in JPG:
-									
 									$link_figure="";
 									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
 									//echo "$attachment_jpg";
-									if($attachment_type=="marker_figure"||$attachment_type=="marker_figure"){
+									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
 										$link_figure = "attachment/marker/".$attachment_jpg;
-										//echo "marker:-".$link_figure;
+								//		echo "marker:-".$link_figure;
 									}
 									
-									if($attachment_type=="morph_figure"||$attachment_type=="morph_figure"){
+									if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
 										$link_figure = "attachment/morph/".$attachment_jpg;
-										//echo "morph:-".$link_figure;
+								//		echo "morph:-".$link_figure;
 									}
 									
-									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_figure"){
+									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
 										$link_figure = "attachment/ephys/".$attachment_jpg;
-										//echo "ephys:-".$link_figure;
+								//		echo "ephys:-".$link_figure;
 									}
 									//$link_figure = "figure/".$attachment_jpg;
 									
@@ -1253,13 +1252,13 @@ function show_only_morphology(link, start1, stop1)
 										</td>
 										<td width='15%' class='table_neuron_page2' align='center'>");
 										
-								//		if ($attachment_type == 'figure')
-								//		{
+										if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+										{
 											print ("<a href='$link_figure' target='_blank'>");
 											print ("<img src='$link_figure' border='0' width='80%'>");
 											print ("</a>");
-								//		}	
-								//		else;
+										}	
+										else;
 										print("</td></tr>");
 	
 									print ("</table>");

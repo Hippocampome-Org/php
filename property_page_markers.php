@@ -1206,34 +1206,35 @@ function show_only_authors(link, color)
 						{		
 
 							// retrieve the attachament from "fragment" with original_id *****************************
-						//	$fragment -> retrive_attachment_by_original_id($id_original);
-						//	$attachment = $fragment -> getAttachment();
-						//	$attachment_type = $fragment -> getAttachment_type();
-							
+					//		$fragment -> retrive_attachment_by_original_id($id_original);
+					//		$attachment = $fragment -> getAttachment();
+					//		$attachment_type = $fragment -> getAttachment_type();
+
 							// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
 							$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
 							$attachment = $attachment_obj -> getName();
 							$attachment_type = $attachment_obj -> getType();
-							
+									
 							
 							// change PFD in JPG:
 							$link_figure="";
 							$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-							//echo "$attachment_jpg";
-							if($attachment_type=="marker_figure"||$attachment_type=="marker_figure"){
+					//	echo "$attachment_jpg";
+							if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
 								$link_figure = "attachment/marker/".$attachment_jpg;
-								//echo "marker:-".$link_figure;
+					//			echo "marker:-".$link_figure;
 							}
 							
-							if($attachment_type=="morph_figure"||$attachment_type=="morph_figure"){
+							if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
 								$link_figure = "attachment/morph/".$attachment_jpg;
-								//echo "morph:-".$link_figure;
+						//		echo "morph:-".$link_figure;
 							}
 							
-							if($attachment_type=="ephys_figure"||$attachment_type=="ephys_figure"){
+							if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
 								$link_figure = "attachment/ephys/".$attachment_jpg;
 								//echo "ephys:-".$link_figure;
-							}		
+							}			
+							
 							
 							//$link_figure = "figure/".$attachment_jpg;
 							
@@ -1275,13 +1276,13 @@ function show_only_authors(link, color)
 								</td>	
 								<td width='15%' class='table_neuron_page2' align='center'>");
 										
-							//	if ($attachment_type == 'figure')
-							//	{
+								if ($attachment_type=="marker_figure"||$attachment_type=="marker_table")
+								{
 									print ("<a href='$link_figure' target='_blank'>");
 									print ("<img src='$link_figure' border='0' width='80%'>");
 									print ("</a>");
-							//	}	
-							//	else;								
+								}	
+								else;								
 	
 							print ("</td></tr>");					
 
