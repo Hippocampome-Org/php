@@ -766,7 +766,7 @@ function show_only_authors(link, color)
 
 				$fragment -> retrive_by_id($fragment_id_1);
 				$quote = $fragment -> getQuote();
-				$quote = preg_replace("/\'/","\'",quote_replaceIDwithName($quote));
+				//$quote = preg_replace("/\'/","\'",quote_replaceIDwithName($quote));
 				$original_id = $fragment -> getOriginal_id();
 				$type = $fragment -> getType();
 				$page_location = $fragment -> getPage_location();				
