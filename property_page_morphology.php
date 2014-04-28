@@ -1195,9 +1195,9 @@ function show_only_morphology(link, start1, stop1)
 										print ("<td width='15%' rowspan='3' align='right' valign='top'></td>");	
 										
 		
-									print ("<td width='70%' class='table_neuron_page2' align='left'>");
+									/* print ("<td width='70%' class='table_neuron_page2' align='left'>");
 									print ("$id_fragment (original: $id_original) - $type_show");
-									print ("</td>");
+									print ("</td>"); */
 									
 									
 									print ("<td width='15%' align='left'> </td></tr>");
@@ -1241,7 +1241,7 @@ function show_only_morphology(link, start1, stop1)
 									print ("
 									<tr>	
 										<td width='70%' class='table_neuron_page2' align='left'>
-											Page location: $page_location
+											$id_neuron - $id_fragment (original: $id_original) - $type_show - Page location: $page_location
 										</td>
 										<td width='15%' align='center'>");																											
 										
