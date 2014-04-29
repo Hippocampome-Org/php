@@ -135,7 +135,6 @@ if ($permission1 != 0) {
         <li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
         <li><a href="find_author.php?searching=1">Author</a></li>
         <li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
-        <li><a href="neuron_search.php?searching=1">Neuron name</a></li>
       </ul>
     </li>
     <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>

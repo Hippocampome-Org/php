@@ -30,7 +30,6 @@
 			<li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
 			<li><a href="find_author.php?searching=1">Author</a></li>
 			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
-			<li><a href="neuron_search.php?searching=1">Neuron name</a></li>
 	
 		</ul></li>
 	
