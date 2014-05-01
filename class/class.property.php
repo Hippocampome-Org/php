@@ -53,8 +53,8 @@ class property
 		if ($flag ==4 )
 		{
       // STM added after changing DB structure to have explicit hippocampal formation properties
-      //$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
-      $query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+      $query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
+      //$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
 		}	
 		if ($flag ==5 )
 		{
