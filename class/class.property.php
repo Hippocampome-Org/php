@@ -52,15 +52,22 @@ class property
 		}	
 		if ($flag ==4 )
 		{
-      // STM added after changing DB structure to have explicit hippocampal formation properties
-      $query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
-      //$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			// STM added after changing DB structure to have explicit hippocampal formation properties
+			if ($rel == "in")
+			{
+				$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
+			}
+			else
+			// if "not in" - added else to yield the inverse of "in"
+			{
+				$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			}
 		}	
 		if ($flag ==5 )
 		{
-      // STM added after changing DB structure to have explicit subregion properties
+			// STM added after changing DB structure to have explicit subregion properties
 			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
-      $query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
 		}	
 		$rs = mysql_query($query);
 		$n6=0;
