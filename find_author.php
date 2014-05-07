@@ -404,10 +404,18 @@ $(document).ready(function(){
 				//	else
 				//		print ("<font class='font12'> $n_tot_id_results articles have been found</font>");
 						
-						if ($unique_n_tot_id_results == 1)
+					if ($unique_n_tot_id_results == 1)
+					{
 						print ("<font class='font12'> $unique_n_tot_id_results article has been found</font>");
-					else
+					}
+					else if ($unique_n_tot_id_results > 1)
+					{
 						print ("<font class='font12'> $unique_n_tot_id_results articles have been found</font>");
+					}
+					else
+					{
+						print ("<font class='font12'> 0 articles have been found</font>");
+					}
 						
 						
 				}
