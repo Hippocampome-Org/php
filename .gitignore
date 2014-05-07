@@ -5,6 +5,7 @@ access_db.php
 .project
 .settings/
 attachment
+cache
 error_log
 hits.txt
 figure

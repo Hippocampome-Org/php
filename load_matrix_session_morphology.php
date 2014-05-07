@@ -1,22 +1,30 @@
 <?php
-//function load_session_matrix(){
-	
 
-//	if($_SESSION['perm']!=0)
-//	{
-		
-			include 'getMorphology.php';
-			$_SESSION['morphology'] = json_encode($responce);
-			$_SESSION['morphology_set']=1;
-			echo "done";
-		
-//		include 'getMarkers.php';
-//		$_SESSION['markers'] = json_encode($responce);
-//		include 'getEphys.php';
-//		$_SESSION['ephys'] = json_encode($responce);
-			
-	
-//	}
-//	echo "failed";
-//}
+//include 'getMorphology.php';
+//$_SESSION['morphology'] = json_encode($responce);
+
+$session_matrix_cache_file = "cache/session_matrix_morph.json";
+$get_matrix = "getMorphology.php";
+$matrix_type = "morphology";
+
+if (file_exists($session_matrix_cache_file))
+{
+  session_start();
+  include ("access_db.php");
+  $perm = $_SESSION['perm'];
+  if ($perm == '') header("Location:error1.html");
+  $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+}
+else
+{
+  include $get_matrix;
+  $_SESSION[$matrix_type] = json_encode($responce);
+  $fp = fopen($session_matrix_cache_file, 'w');
+  fwrite($fp, $_SESSION[$matrix_type]);
+  fclose($fp); 
+}
+
+$_SESSION['morphology_set'] = 1;
+echo "done";
+
 ?>
