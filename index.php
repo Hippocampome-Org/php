@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
     $('#dvLoading').show();
     $.ajax( {
       crossDomain: true,
-      type: 'POST',
+      type: 'GET',
       cache: false,
       contentType: 'application/json; charset=utf-8',
       url: 'load_matrix_session_morphology.php',
@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
         //ajax for ephys--------------
         $.ajax( {
           crossDomain: true,
-          type: 'POST',
+          type: 'GET',
           cache: false,
           contentType: 'application/json; charset=utf-8',
           url: 'load_matrix_session_ephys.php',
@@ -73,7 +73,7 @@ jQuery(document).ready(function() {
             //ajax for markers--------------------
             $.ajax( {
               crossDomain: true,
-              type: 'POST',
+              type: 'GET',
               cache: false,
               contentType: 'application/json; charset=utf-8',
               url: 'load_matrix_session_markers.php',
