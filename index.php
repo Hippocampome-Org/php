@@ -61,13 +61,13 @@ jQuery(document).ready(function() {
       url: 'load_matrix_session_markers.php',
       success: function() {
         $.ajax({
-          type: 'GET',
+          type: 'PUT',
           cache: false,
           contentType: 'application/json; charset=utf-8',
           url: 'load_matrix_session_ephys.php',
           success: function() {
             $.ajax({
-              type: 'GET',
+              type: 'POST',
               cache: false,
               contentType: 'application/json; charset=utf-8',
               url: 'load_matrix_session_morphology.php',
