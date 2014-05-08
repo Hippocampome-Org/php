@@ -52,12 +52,6 @@ remove_table_by_tyme();
 
 <script>
 jQuery(document).ready(function() {
-  <!--
-  $("#image_find").load(function() {
-    $('#dvLoading').show();
-    $('#dvLoading').hide();
-  });
-  -->
   $.ajax({
     type: 'GET',
     cache: false,
