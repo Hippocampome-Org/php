@@ -200,9 +200,6 @@ jQuery(document).ready(function() {
     </td>		
   </tr>
 </table>
-<?php
-if ($permission1!=0) echo "<div id='dvLoading'></div>"
-?>
 
 </body>
 
