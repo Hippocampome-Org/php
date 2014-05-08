@@ -60,7 +60,7 @@ jQuery(document).ready(function() {
       type: 'GET',
       cache: false,
       contentType: 'application/json; charset=utf-8',
-      url: 'load_matrix_session_morphology.php',
+      url: 'load_matrix_session_markers.php',
       success: function(output_string) {
         //ajax for ephys--------------
         $.ajax( {
@@ -76,7 +76,7 @@ jQuery(document).ready(function() {
               type: 'GET',
               cache: false,
               contentType: 'application/json; charset=utf-8',
-              url: 'load_matrix_session_markers.php',
+              url: 'load_matrix_session_morphology.php',
               success: function(output_string) {
                 $('#dvLoading').hide();
                 $('div#menu_main_button_new_clr').css('display','block');
