@@ -24,7 +24,7 @@ else
   fclose($fp); 
 }
 
-$_SESSION['morphology_set'] = 1;
-echo "done";
+//$_SESSION['morphology_set'] = 1;
+//echo "done";
 
 ?>
