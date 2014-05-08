@@ -33,8 +33,7 @@ remove_table_by_tyme();
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
-<!-- <script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script> -->
-<script type="text/javascript" src="jqGrid/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
 
 <style type="text/css">
 #dvLoading {
@@ -53,34 +52,31 @@ remove_table_by_tyme();
 
 <script>
 jQuery(document).ready(function() {
-  $( "#image_find" ).load(function() {
+  $("#image_find").load(function() {
     $('#dvLoading').show();
     $.ajax({
       type: 'GET',
       cache: false,
       contentType: 'application/json; charset=utf-8',
       url: 'load_matrix_session_markers.php',
-      success: function() {
-        $.ajax({
-          type: 'GET',
-          cache: false,
-          contentType: 'application/json; charset=utf-8',
-          url: 'load_matrix_session_ephys.php',
-          success: function() {
-            $.ajax({
-              type: 'GET',
-              cache: false,
-              contentType: 'application/json; charset=utf-8',
-              url: 'load_matrix_session_morphology.php',
-              success: function() {
-                $('#dvLoading').hide();
-                $('div#menu_main_button_new_clr').css('display','block');
-              }
-            }); 
-          }
-        }); 
-      }
+      success: function() {}
     }); 
+    $.ajax({
+      type: 'GET',
+      cache: false,
+      contentType: 'application/json; charset=utf-8',
+      url: 'load_matrix_session_ephys.php',
+      success: function() {}
+    }); 
+    $.ajax({
+      type: 'GET',
+      cache: false,
+      contentType: 'application/json; charset=utf-8',
+      url: 'load_matrix_session_morphology.php',
+      success: function() {}
+    }); 
+    $('#dvLoading').hide();
+    $('div#menu_main_button_new_clr').css('display','block');
   });
 });
 </script>
