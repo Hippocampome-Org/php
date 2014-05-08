@@ -53,53 +53,31 @@ remove_table_by_tyme();
 <script>
 jQuery(document).ready(function() {
   $( "#image_find" ).load(function() {
-    //ajax for morphology--------------------
     $('#dvLoading').show();
-    $.ajax( {
-      crossDomain: true,
+    $.ajax({
       type: 'GET',
       cache: false,
       contentType: 'application/json; charset=utf-8',
       url: 'load_matrix_session_markers.php',
-      success: function(output_string) {
-        //ajax for ephys--------------
-        $.ajax( {
-          crossDomain: true,
+      success: function() {
+        $.ajax({
           type: 'GET',
           cache: false,
           contentType: 'application/json; charset=utf-8',
           url: 'load_matrix_session_ephys.php',
-          success: function(output_string) {
-            //ajax for markers--------------------
-            $.ajax( {
-              crossDomain: true,
+          success: function() {
+            $.ajax({
               type: 'GET',
               cache: false,
               contentType: 'application/json; charset=utf-8',
               url: 'load_matrix_session_morphology.php',
-              success: function(output_string) {
+              success: function() {
                 $('#dvLoading').hide();
                 $('div#menu_main_button_new_clr').css('display','block');
-              },
-              error: function(xhr, status, error) {
-                $('#dvLoading').hide();
-                var err = eval("(" + xhr.responseText + ")");
-                alert(err.Message);
               }
             }); 
-          },
-          error: function(xhr, status, error) {
-            $('#dvLoading').hide();
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message);
           }
         }); 
-      },
-      error: function(xhr, status, error) {
-        $('#dvLoading').hide();
-        $('#menu_main_button_new_clr').css('display','block');
-        var err = eval("(" + xhr.responseText + ")");
-        alert(err.Message);
       }
     }); 
   });
