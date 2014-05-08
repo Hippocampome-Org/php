@@ -52,32 +52,34 @@ remove_table_by_tyme();
 
 <script>
 jQuery(document).ready(function() {
+  <!--
   $("#image_find").load(function() {
     $('#dvLoading').show();
-    $.ajax({
-      type: 'GET',
-      cache: false,
-      contentType: 'application/json; charset=utf-8',
-      url: 'load_matrix_session_markers.php',
-      success: function() {}
-    }); 
-    $.ajax({
-      type: 'GET',
-      cache: false,
-      contentType: 'application/json; charset=utf-8',
-      url: 'load_matrix_session_ephys.php',
-      success: function() {}
-    }); 
-    $.ajax({
-      type: 'GET',
-      cache: false,
-      contentType: 'application/json; charset=utf-8',
-      url: 'load_matrix_session_morphology.php',
-      success: function() {}
-    }); 
     $('#dvLoading').hide();
-    $('div#menu_main_button_new_clr').css('display','block');
   });
+  -->
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_markers.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_ephys.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_morphology.php',
+    success: function() {}
+  }); 
+  $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
 
