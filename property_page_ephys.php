@@ -206,7 +206,7 @@ $res=show_ephys($ep);
 
 <!-- ---------------------- -->
 <table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr height="150">
+  <tr height="40">
     <td></td>
   </tr>
   <tr>
