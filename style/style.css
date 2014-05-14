@@ -136,7 +136,7 @@ border:none;
 }
 
 .index_table {
-	position:absolute; top: 120px; left: 88px;
+	position:absolute; top: 90px; left: 88px;
 	border:none;
 	margin:auto;
 }
@@ -517,7 +517,7 @@ width:1026px;
 }
 
 .title_area {
-	position:absolute; top: 120px; left: 50px;
+	position:absolute; top: 80px; left: 50px;
 	width: 700px;
 	border:none;
 }
@@ -531,14 +531,14 @@ width:1026px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position {
-	position:absolute; top: 150px; left: 50px;
+	position:absolute; top: 110px; left: 50px;
 	width:auto;	
 	border:none;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position_search_page {
-	position:absolute; top: 150px; left: 30px;
+	position:absolute; top: 110px; left: 30px;
 	width:auto;	
 	border:none;	
 }

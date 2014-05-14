@@ -445,7 +445,7 @@ width:1450px;
 }
 
 .title_area {
-	position:absolute; top: 120px; left: 50px;
+	position:absolute; top: 80px; left: 50px;
 	width: 700px;
 	border:none;
 }
@@ -459,14 +459,14 @@ width:1450px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position {
-	position:absolute; top: 150px; left: 50px;
+	position:absolute; top: 110px; left: 50px;
 	width:auto;	
 	border:none;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
 .table_position_search_page {
-	position:absolute; top: 200px; left: 30px;
+	position:absolute; top: 160px; left: 30px;
 	width:auto;	
 	border:none;	
 }
