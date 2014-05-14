@@ -340,7 +340,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		if (strpos($nickname, '(-)') == TRUE)
 			$fontColor='#CC0000';
 		
-	   $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
+	   $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 			print_ephys_value_and_hover('Vrest', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
 	  		print_ephys_value_and_hover('Rin', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
 	  		print_ephys_value_and_hover('tm', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),

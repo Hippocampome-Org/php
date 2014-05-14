@@ -674,7 +674,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			$hippo_color[$name_markers[$f1]] = $img[1];
 	}
 	
-	  $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
+	  $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 			getUrlForLink($id,$hippo['5HT_3'],$name_markers['0'],$hippo_color['5HT_3']),
 			getUrlForLink($id,$hippo['a-act2'],$name_markers['1'],$hippo_color['a-act2']),
 			getUrlForLink($id,$hippo['AChE'],$name_markers['2'],$hippo_color['AChE']),
