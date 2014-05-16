@@ -101,9 +101,14 @@ else $sord = $_GET['sord'];
 // if we not pass at first time index use the first column for the index or what you want
 if(!$sidx) $sidx =1;
 
+$research = $_REQUEST['research'];
+
 $type = new type($class_type);
-$research = $_GET['researchVar'];
-if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
+$type ->retrive_id();
+
+$number_type = $type ->getNumber_type();
+$research = $_REQUEST['research'];
+if (isset($research)) // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
 	$table_result = $_REQUEST['table_result'];
 	$temporary_result_neurons = new temporary_result_neurons();
@@ -115,7 +120,7 @@ if ($research=="1") // From page of search; retrieve the id from search_table (t
 	for ($i2=0; $i2<$n_id_res; $i2++)
 	{
 		$id2 = 	$temporary_result_neurons -> getID_array($i2); // Retrieve  each ID corresponding to the id Array
-
+		echo "id2 : ".$id2;
 		if (strpos($id2, '0_') == 1);
 		else
 		{
@@ -134,24 +139,6 @@ if ($research=="1") // From page of search; retrieve the id from search_table (t
 	array_multisort($position_search, $id_search);
 	// sort($id_search);
 }
-else // not from search page --------------
-{
-		if($_GET['_search']=='false') // Condition to check ifthe 
-		{
-			$type -> retrive_id();
-			$number_type = $type->getNumber_type();
-		}
-		else{
-			//Retrieve types by Search conditions
-
-			//echo "Search ".$_GET['_search'];
-			/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
-			echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
-			echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
-				
-		}
-}
-
 $property = new property($class_property);
 
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
@@ -192,60 +179,11 @@ $n_EC = 0;
 //header("Content-type: application/json;charset=utf-8");
 $responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "");
 
-$responce->page = $page;
-$responce->total = $total_pages;
+//$responce->page = $page;
+//$responce->total = $total_pages;
 $responce->records = $count;
 
-$type = new type($class_type);
-$research = $_GET['researchVar'];
-if ($research=="1") // From page of search; retrieve the id from search_table (temporary) -----------------------
-{
-	$table_result = $_REQUEST['table_result'];
-	$temporary_result_neurons = new temporary_result_neurons();
-	$temporary_result_neurons -> setName_table($table_result);
-	
-	$temporary_result_neurons -> retrieve_id_array();
-	$n_id_res = $temporary_result_neurons -> getN_id();
-	$number_type = 0;
-	for ($i2=0; $i2<$n_id_res; $i2++)
-	{
-		$id2 = 	$temporary_result_neurons -> getID_array($i2); // Retrieve  each ID corresponding to the id Array
 
-		if (strpos($id2, '0_') == 1);
-		else
-		{
-			$type -> retrive_by_id($id2); // For each Id  retrieve the type characteristics
-			$status = $type -> getStatus(); // Retrieve the status for each id
-				
-			if ($status == 'active')
-			{
-				$id_search[$number_type] = $id2;
-				$position_search[$number_type] = $type -> getPosition();
-				$number_type = $number_type + 1;
-			}
-		}
-	} // END $i2
-
-	array_multisort($position_search, $id_search);
-	// sort($id_search);
-}
-else // not from search page --------------
-{
-		if($_GET['_search']=='false') // Condition to check ifthe 
-		{
-			$type -> retrive_id();
-			$number_type = $type->getNumber_type();
-		}
-		else{
-			//Retrieve types by Search conditions
-
-			//echo "Search ".$_GET['_search'];
-			/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
-			echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
-			echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
-				
-		}
-}
 $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 
@@ -280,9 +218,8 @@ $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#
 				}			
 					
 				$num_columns = 0; 
-				
 for ($row=0; $row<$number_type; $row++) {
-
+	
 	$hippo_nickname = array("0"=>NULL,"1"=>NULL,"2"=>NULL,"3"=>NULL,"4"=>NULL,"5"=>NULL,"6"=>NULL,
 			"7"=>NULL,"8"=>NULL,"9"=>NULL,"10"=>NULL,"11"=>NULL,"12"=>NULL,"13"=>NULL,"14"=>NULL,"15"=>NULL,"16"=>NULL,"17"=>NULL,
 			"18"=>NULL,"19"=>NULL,"20"=>NULL,"21"=>NULL,"22"=>NULL,"23"=>NULL,"24"=>NULL,"25"=>NULL,"26"=>NULL,"27"=>NULL,"28"=>NULL,
@@ -297,22 +234,24 @@ for ($row=0; $row<$number_type; $row++) {
 			"117"=>NULL,"118"=>NULL,"119"=>NULL,"120"=>NULL,"121"=>NULL);
 				
 					// retrieve the id_type from Type
-					if ($research)
+					if (isset($research))
 						$id_type_row = $id_search[$row];
 					else
 						$id_type_row = $type->getID_array($row);
-						
+					
 					$type -> retrive_by_id($id_type_row);
 					$nickname_type_row = $type->getNickname();
+					$name = $type->getName();
+					
 					$subregion_type_row = $type->getSubregion();
-					 $position = $type->getPosition(); // Retrieve the position
+					$position = $type->getPosition(); // Retrieve the position
 					$subregion = $type -> getSubregion(); // Retrieve the sub region 
 					
 					$nickname_type_row = str_replace('_', ' ', $nickname_type_row);
 					$subregion_nickname_type_row = $subregion_type_row . ":" . $nickname_type_row;
 					$position_row = $type->getPosition();
 					
-					if (!$research) {
+					if (!isset($research)) {
 						$rowIdx = $row;
 					}
 					else {
@@ -423,29 +362,27 @@ for ($row=0; $row<$number_type; $row++) {
 						$hippo_nickname[$col] = $image;
 						//echo " Col ".$col." Image is ".$image."\n\n";
 					}
-						$responce->rows[$row]['cell']=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>',
-						$hippo_nickname['0'],$hippo_nickname['1'],$hippo_nickname['2'],$hippo_nickname['3'],$hippo_nickname['4'],$hippo_nickname['5'],
-						$hippo_nickname['6'],$hippo_nickname['7'],$hippo_nickname['8'],$hippo_nickname['9'],$hippo_nickname['10'],$hippo_nickname['11'],
-						$hippo_nickname['12'],$hippo_nickname['13'],$hippo_nickname['14'],$hippo_nickname['15'],$hippo_nickname['16'],$hippo_nickname['17'],
-						$hippo_nickname['18'],$hippo_nickname['19'],$hippo_nickname['20'],$hippo_nickname['21'],$hippo_nickname['22'],$hippo_nickname['23'],
-						$hippo_nickname['24'],$hippo_nickname['25'],$hippo_nickname['26'],$hippo_nickname['27'],$hippo_nickname['28'],$hippo_nickname['29'],
-						$hippo_nickname['30'],$hippo_nickname['31'],$hippo_nickname['32'],$hippo_nickname['33'],$hippo_nickname['34'],$hippo_nickname['35'],
-						$hippo_nickname['36'],$hippo_nickname['37'],$hippo_nickname['38'],$hippo_nickname['39'],$hippo_nickname['40'],$hippo_nickname['41'],
-						$hippo_nickname['42'],$hippo_nickname['43'],$hippo_nickname['44'],$hippo_nickname['45'],$hippo_nickname['46'],
-						$hippo_nickname['47'],$hippo_nickname['48'],$hippo_nickname['49'],$hippo_nickname['50'],$hippo_nickname['51'],$hippo_nickname['52'],
-						$hippo_nickname['53'],$hippo_nickname['54'],$hippo_nickname['55'],$hippo_nickname['56'],$hippo_nickname['57'],$hippo_nickname['58'],
-						$hippo_nickname['59'],$hippo_nickname['60'],$hippo_nickname['61'],$hippo_nickname['62'],$hippo_nickname['63'],$hippo_nickname['64'],
-						$hippo_nickname['65'],$hippo_nickname['66'],$hippo_nickname['67'],$hippo_nickname['68'],$hippo_nickname['69'],$hippo_nickname['70'],
-						$hippo_nickname['71'],$hippo_nickname['72'],$hippo_nickname['73'],$hippo_nickname['74'],$hippo_nickname['75'],$hippo_nickname['76'],
-						$hippo_nickname['77'],$hippo_nickname['78'],$hippo_nickname['79'],$hippo_nickname['80'],$hippo_nickname['81'],$hippo_nickname['82'],
-						$hippo_nickname['83'],$hippo_nickname['84'],$hippo_nickname['85'],$hippo_nickname['86'],$hippo_nickname['87'],$hippo_nickname['88'],
-						$hippo_nickname['89'],$hippo_nickname['90'],$hippo_nickname['91'],$hippo_nickname['92'],$hippo_nickname['93'],$hippo_nickname['94'],
-						$hippo_nickname['95'],$hippo_nickname['96'],$hippo_nickname['97'],$hippo_nickname['98'],$hippo_nickname['99'],$hippo_nickname['100'],
-						$hippo_nickname['101'],$hippo_nickname['102'],$hippo_nickname['103'],$hippo_nickname['104'],$hippo_nickname['105'],$hippo_nickname['106'],
-						$hippo_nickname['107'],$hippo_nickname['108'],$hippo_nickname['109'],$hippo_nickname['110'],$hippo_nickname['111'],$hippo_nickname['112'],
-						$hippo_nickname['113'],$hippo_nickname['114'],$hippo_nickname['115'],$hippo_nickname['116'],$hippo_nickname['117'],$hippo_nickname['118'],
-						$hippo_nickname['119'],$hippo_nickname['120'],$hippo_nickname['121'] );
-						
+					$responce->rows[$row]['cell']=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>',
+					$hippo_nickname['0'],$hippo_nickname['1'],$hippo_nickname['2'],$hippo_nickname['3'],$hippo_nickname['4'],$hippo_nickname['5'],
+					$hippo_nickname['6'],$hippo_nickname['7'],$hippo_nickname['8'],$hippo_nickname['9'],$hippo_nickname['10'],$hippo_nickname['11'],
+					$hippo_nickname['12'],$hippo_nickname['13'],$hippo_nickname['14'],$hippo_nickname['15'],$hippo_nickname['16'],$hippo_nickname['17'],
+					$hippo_nickname['18'],$hippo_nickname['19'],$hippo_nickname['20'],$hippo_nickname['21'],$hippo_nickname['22'],$hippo_nickname['23'],
+					$hippo_nickname['24'],$hippo_nickname['25'],$hippo_nickname['26'],$hippo_nickname['27'],$hippo_nickname['28'],$hippo_nickname['29'],
+					$hippo_nickname['30'],$hippo_nickname['31'],$hippo_nickname['32'],$hippo_nickname['33'],$hippo_nickname['34'],$hippo_nickname['35'],
+					$hippo_nickname['36'],$hippo_nickname['37'],$hippo_nickname['38'],$hippo_nickname['39'],$hippo_nickname['40'],$hippo_nickname['41'],
+					$hippo_nickname['42'],$hippo_nickname['43'],$hippo_nickname['44'],$hippo_nickname['45'],$hippo_nickname['46'],
+					$hippo_nickname['47'],$hippo_nickname['48'],$hippo_nickname['49'],$hippo_nickname['50'],$hippo_nickname['51'],$hippo_nickname['52'],
+					$hippo_nickname['53'],$hippo_nickname['54'],$hippo_nickname['55'],$hippo_nickname['56'],$hippo_nickname['57'],$hippo_nickname['58'],
+					$hippo_nickname['59'],$hippo_nickname['60'],$hippo_nickname['61'],$hippo_nickname['62'],$hippo_nickname['63'],$hippo_nickname['64'],
+					$hippo_nickname['65'],$hippo_nickname['66'],$hippo_nickname['67'],$hippo_nickname['68'],$hippo_nickname['69'],$hippo_nickname['70'],
+					$hippo_nickname['71'],$hippo_nickname['72'],$hippo_nickname['73'],$hippo_nickname['74'],$hippo_nickname['75'],$hippo_nickname['76'],
+					$hippo_nickname['77'],$hippo_nickname['78'],$hippo_nickname['79'],$hippo_nickname['80'],$hippo_nickname['81'],$hippo_nickname['82'],
+					$hippo_nickname['83'],$hippo_nickname['84'],$hippo_nickname['85'],$hippo_nickname['86'],$hippo_nickname['87'],$hippo_nickname['88'],
+					$hippo_nickname['89'],$hippo_nickname['90'],$hippo_nickname['91'],$hippo_nickname['92'],$hippo_nickname['93'],$hippo_nickname['94'],
+					$hippo_nickname['95'],$hippo_nickname['96'],$hippo_nickname['97'],$hippo_nickname['98'],$hippo_nickname['99'],$hippo_nickname['100'],
+					$hippo_nickname['101'],$hippo_nickname['102'],$hippo_nickname['103'],$hippo_nickname['104'],$hippo_nickname['105'],$hippo_nickname['106'],
+					$hippo_nickname['107'],$hippo_nickname['108'],$hippo_nickname['109'],$hippo_nickname['110'],$hippo_nickname['111'],$hippo_nickname['112'],
+					$hippo_nickname['113'],$hippo_nickname['114'],$hippo_nickname['115'],$hippo_nickname['116'],$hippo_nickname['117'],$hippo_nickname['118'],
+					$hippo_nickname['119'],$hippo_nickname['120'],$hippo_nickname['121'] );
 }
-echo json_encode($responce);
 ?>

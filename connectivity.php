@@ -3,23 +3,40 @@
 	$perm = $_SESSION['perm'];
 	if ($perm == NULL)
 		header("Location:error1.html");
+	
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<?php	
+<?php
+	
+
 	include ("access_db.php");
 	include ("function/stm_lib.php");
 	require_once('class/class.type.php');
 	require_once('class/class.property.php');
 	require_once('class/class.evidencepropertyyperel.php');
 	require_once('class/class.temporary_result_neurons.php');	
+	require_once('class/class.utils.php');
+	
+	$connectivityHeader = new utils();
+	$connectivityHeader->setHeader("type");
+	$connheaderStr = $connectivityHeader->getHeaderStr();
+	
 	
 	$type = new type($class_type);
 	
 	$research = $_REQUEST['research'];
 	
-	if ($research) { // From page of search; retrieve the id from search_table (temporary) -----------------------	
+	if(isset($research))
+	{
+		include ('getConnectivity.php');
+		$jsonStr = json_encode($responce);
+	}
+	else
+		$jsonStr = $_SESSION['connectivity'];
+	
+	/* if ($research) { // From page of search; retrieve the id from search_table (temporary) -----------------------	
 		$table_result = $_REQUEST['table_result'];
 	
 		$temporary_result_neurons = new temporary_result_neurons();
@@ -51,7 +68,9 @@
 	else {// not from search page --------------	
 		$type -> retrive_id();
 		$number_type = $type->getNumber_type();
-	}	
+	}
+	
+	 */
 ?>
 
 
@@ -166,6 +185,7 @@ checkVersion();
 <script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
+	var dataStr = <?php echo $jsonStr?>;;
 	 var rotateFunction = function (grid, headerHeight) {
 	 // we use grid as context (if one have more as one table on the page)
 	 var trHead = $("thead:first tr", grid.hdiv),
@@ -316,139 +336,9 @@ $(function(){
     };
 
     $grid.jqGrid({
-    url:'getConnectivity.php',
-    datatype: 'json',
-    mtype: 'GET',
-    ajaxGridOptions :{
-		contentType : "application/json"
-        },
-    postData: {
-        researchVar: research,
-        table_result : table
-    },
-    colNames:['&nbsp;','<div id="frmCntr">FROM</div><div id="toCntr" class="rotate">TO</div>',
-              '<a href="neuron_page.php?id=1000" onClick="OpenInNewTab(this);" target="_blank">DG:granule</a>',
-              '<a href="neuron_page.php?id=1041" onClick="OpenInNewTab(this);" target="_blank">DG:granule ectopic</a>',
-              '<a href="neuron_page.php?id=1001" onClick="OpenInNewTab(this);" target="_blank">DG:granule semilunar</a>',
-              '<a href="neuron_page.php?id=1002" onClick="OpenInNewTab(this);" target="_blank">DG:mossy</a>',
-              '<a href="neuron_page.php?id=1043" onClick="OpenInNewTab(this);" target="_blank">DG:mossy MOLDEN</a>',
-              '<a href="neuron_page.php?id=1010" onClick="OpenInNewTab(this);" target="_blank">DG:axo-axonic</a>',
-              '<a href="neuron_page.php?id=1035" onClick="OpenInNewTab(this);" target="_blank">DG:basket</a>',
-              '<a href="neuron_page.php?id=1036" onClick="OpenInNewTab(this);" target="_blank">DG:basket CCK+</a>',
-              '<a href="neuron_page.php?id=1026" onClick="OpenInNewTab(this);" target="_blank">DG:HICAL</a>',
-              '<a href="neuron_page.php?id=1009" onClick="OpenInNewTab(this);" target="_blank">DG:HICAP</a>',
-              '<a href="neuron_page.php?id=1027" onClick="OpenInNewTab(this);" target="_blank">DG:HIDAL</a>',
-              '<a href="neuron_page.php?id=1013" onClick="OpenInNewTab(this);" target="_blank">DG:HIPP</a>',
-              '<a href="neuron_page.php?id=1040" onClick="OpenInNewTab(this);" target="_blank">DG:MOCAP</a>',
-              '<a href="neuron_page.php?id=1005" onClick="OpenInNewTab(this);" target="_blank">DG:MOLAX</a>',
-              '<a href="neuron_page.php?id=1008" onClick="OpenInNewTab(this);" target="_blank">DG:MOPP</a>',
-              '<a href="neuron_page.php?id=1007" onClick="OpenInNewTab(this);" target="_blank">DG:neurogliaform</a>',
-              '<a href="neuron_page.php?id=1006" onClick="OpenInNewTab(this);" target="_blank">DG:outer molecular layer</a>',
-              '<a href="neuron_page.php?id=1004" onClick="OpenInNewTab(this);" target="_blank">DG:total molecular layer</a>',
-              '<a href="neuron_page.php?id=2000" onClick="OpenInNewTab(this);" target="_blank">CA3:pyramidal</a>',
-              '<a href="neuron_page.php?id=2004" onClick="OpenInNewTab(this);" target="_blank">CA3:pyramidal c</a>',
-              '<a href="neuron_page.php?id=2003" onClick="OpenInNewTab(this);" target="_blank">CA3:giant</a>',
-              '<a href="neuron_page.php?id=2001" onClick="OpenInNewTab(this);" target="_blank">CA3:granule</a>',
-              '<a href="neuron_page.php?id=2028" onClick="OpenInNewTab(this);" target="_blank">CA3:axo-axonic</a>',
-              '<a href="neuron_page.php?id=2047" onClick="OpenInNewTab(this);" target="_blank">CA3:axo-axonic horizontal</a>',
-              '<a href="neuron_page.php?id=2043" onClick="OpenInNewTab(this);" target="_blank">CA3:basket</a>',
-              '<a href="neuron_page.php?id=2044" onClick="OpenInNewTab(this);" target="_blank">CA3:basket CCK+</a>',
-              '<a href="neuron_page.php?id=2045" onClick="OpenInNewTab(this);" target="_blank">CA3:bistratified</a>',
-              '<a href="neuron_page.php?id=2021" onClick="OpenInNewTab(this);" target="_blank">CA3:interneuron specific oriens</a>',
-              '<a href="neuron_page.php?id=2042" onClick="OpenInNewTab(this);" target="_blank">CA3:interneuron specific Quad</a>',
-              '<a href="neuron_page.php?id=2046" onClick="OpenInNewTab(this);" target="_blank">CA3:ivy</a>',
-              '<a href="neuron_page.php?id=2005" onClick="OpenInNewTab(this);" target="_blank">CA3:LMR-targeting</a>',
-              '<a href="neuron_page.php?id=2036" onClick="OpenInNewTab(this);" target="_blank">CA3:mossy fiber-associated</a>',
-              '<a href="neuron_page.php?id=2035" onClick="OpenInNewTab(this);" target="_blank">CA3:mossy fiber-associated ORDEN</a>',
-              '<a href="neuron_page.php?id=2009" onClick="OpenInNewTab(this);" target="_blank">CA3:O-LM</a>',
-              '<a href="neuron_page.php?id=2049" onClick="OpenInNewTab(this);" target="_blank">CA3:QuadD-LM</a>',
-              '<a href="neuron_page.php?id=2023" onClick="OpenInNewTab(this);" target="_blank">CA3:radiatum</a>',
-              '<a href="neuron_page.php?id=2014" onClick="OpenInNewTab(this);" target="_blank">CA3:radiatum-lucidum</a>',
-              '<a href="neuron_page.php?id=2008" onClick="OpenInNewTab(this);" target="_blank">CA3:R-LM</a>',
-              '<a href="neuron_page.php?id=2022" onClick="OpenInNewTab(this);" target="_blank">CA3:SO-SO</a>',
-              '<a href="neuron_page.php?id=2019" onClick="OpenInNewTab(this);" target="_blank">CA3:spiny lucidum dentate-projecting</a>',
-              '<a href="neuron_page.php?id=2017" onClick="OpenInNewTab(this);" target="_blank">CA3:stratum lucidum</a>',
-              '<a href="neuron_page.php?id=2013" onClick="OpenInNewTab(this);" target="_blank">CA3:stratum lucidum ORAXO</a>',
-              '<a href="neuron_page.php?id=2020" onClick="OpenInNewTab(this);" target="_blank">CA3:trilaminar projection</a>',
-              '<a href="neuron_page.php?id=3000" onClick="OpenInNewTab(this);" target="_blank">CA2:pyramidal</a>',
-              '<a href="neuron_page.php?id=3006" onClick="OpenInNewTab(this);" target="_blank">CA2:basket</a>',
-              '<a href="neuron_page.php?id=3007" onClick="OpenInNewTab(this);" target="_blank">CA2:basket wide-arbor</a>',
-              '<a href="neuron_page.php?id=3003" onClick="OpenInNewTab(this);" target="_blank">CA2:bistratified</a>',
-              '<a href="neuron_page.php?id=3008" onClick="OpenInNewTab(this);" target="_blank">CA2:SP-SR</a>',
-              '<a href="neuron_page.php?id=4000" onClick="OpenInNewTab(this);" target="_blank">CA1:pyramidal</a>',
-              '<a href="neuron_page.php?id=4054" onClick="OpenInNewTab(this);" target="_blank">CA1:radiatum giant</a>',
-              '<a href="neuron_page.php?id=4036" onClick="OpenInNewTab(this);" target="_blank">CA1:axo-axonic</a>',
-              '<a href="neuron_page.php?id=4038" onClick="OpenInNewTab(this);" target="_blank">CA1:axo-axonic horizontal</a>',
-              '<a href="neuron_page.php?id=4023" onClick="OpenInNewTab(this);" target="_blank">CA1:back-projection</a>',
-              '<a href="neuron_page.php?id=4078" onClick="OpenInNewTab(this);" target="_blank">CA1:basket</a>',
-              '<a href="neuron_page.php?id=4079" onClick="OpenInNewTab(this);" target="_blank">CA1:basket CCK+</a>',
-              '<a href="neuron_page.php?id=4039" onClick="OpenInNewTab(this);" target="_blank">CA1:basket horizontal</a>',
-              '<a href="neuron_page.php?id=4080" onClick="OpenInNewTab(this);" target="_blank">CA1:bistratified</a>',
-              '<a href="neuron_page.php?id=4041" onClick="OpenInNewTab(this);" target="_blank">CA1:hippocampo-subicular projecting</a>',
-              '<a href="neuron_page.php?id=4022" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific LMO-O</a>',
-              '<a href="neuron_page.php?id=4021" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific LM-R</a>',
-              '<a href="neuron_page.php?id=4056" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific LMR-R</a>',
-              '<a href="neuron_page.php?id=4031" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific O-R</a>',
-              '<a href="neuron_page.php?id=4020" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific ORT QuadD</a>',
-              '<a href="neuron_page.php?id=4093" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific RO-O</a>',
-              '<a href="neuron_page.php?id=4091" onClick="OpenInNewTab(this);" target="_blank">CA1:interneuron specific RP-O</a>',
-              '<a href="neuron_page.php?id=4081" onClick="OpenInNewTab(this);" target="_blank">CA1:ivy</a>',
-              '<a href="neuron_page.php?id=4095" onClick="OpenInNewTab(this);" target="_blank">CA1:ivy-radiatum</a>',
-              '<a href="neuron_page.php?id=4005" onClick="OpenInNewTab(this);" target="_blank">CA1:moleculare-radiatum</a>',
-              '<a href="neuron_page.php?id=4004" onClick="OpenInNewTab(this);" target="_blank">CA1:moleculare-radiatum projection</a>',
-              '<a href="neuron_page.php?id=4012" onClick="OpenInNewTab(this);" target="_blank">CA1:neurogliaform</a>',
-              '<a href="neuron_page.php?id=4011" onClick="OpenInNewTab(this);" target="_blank">CA1:neurogliaform projection</a>',
-              '<a href="neuron_page.php?id=4069" onClick="OpenInNewTab(this);" target="_blank">CA1:O-LM</a>',
-              '<a href="neuron_page.php?id=4089" onClick="OpenInNewTab(this);" target="_blank">CA1:O-LM recurrent</a>',
-              '<a href="neuron_page.php?id=4087" onClick="OpenInNewTab(this);" target="_blank">CA1:O-LMR</a>',
-              '<a href="neuron_page.php?id=4055" onClick="OpenInNewTab(this);" target="_blank">CA1:oriens/alveus</a>',
-              '<a href="neuron_page.php?id=4083" onClick="OpenInNewTab(this);" target="_blank">CA1:oriens-bistratified</a>',
-              '<a href="neuron_page.php?id=4068" onClick="OpenInNewTab(this);" target="_blank">CA1:oriens-bistratified projecting</a>',
-              '<a href="neuron_page.php?id=4066" onClick="OpenInNewTab(this);" target="_blank">CA1:OR-LM</a>',
-              '<a href="neuron_page.php?id=4006" onClick="OpenInNewTab(this);" target="_blank">CA1:perforant path-associated</a>',
-              '<a href="neuron_page.php?id=4076" onClick="OpenInNewTab(this);" target="_blank">CA1:perforant path-associated QuadD</a>',
-              '<a href="neuron_page.php?id=4003" onClick="OpenInNewTab(this);" target="_blank">CA1:quadrilaminar</a>',
-              '<a href="neuron_page.php?id=4013" onClick="OpenInNewTab(this);" target="_blank">CA1:radial trilaminar</a>',
-              '<a href="neuron_page.php?id=4028" onClick="OpenInNewTab(this);" target="_blank">CA1:radiatum</a>',
-              '<a href="neuron_page.php?id=4061" onClick="OpenInNewTab(this);" target="_blank">CA1:RARE apical-targeting</a>',
-              '<a href="neuron_page.php?id=4084" onClick="OpenInNewTab(this);" target="_blank">CA1:RAT Schaffer-receiving</a>',
-              '<a href="neuron_page.php?id=4015" onClick="OpenInNewTab(this);" target="_blank">CA1:Schaffer collateral-associated</a>',
-              '<a href="neuron_page.php?id=4033" onClick="OpenInNewTab(this);" target="_blank">CA1:SO-SO</a>',
-              '<a href="neuron_page.php?id=4035" onClick="OpenInNewTab(this);" target="_blank">CA1:trilaminar</a>',
-              '<a href="neuron_page.php?id=5001" onClick="OpenInNewTab(this);" target="_blank">SUB:pyramidal EC-projecting</a>',
-              '<a href="neuron_page.php?id=5005" onClick="OpenInNewTab(this);" target="_blank">SUB:pyramidal CA1-projecting</a>',
-              '<a href="neuron_page.php?id=5002" onClick="OpenInNewTab(this);" target="_blank">SUB:axo-axonic</a>',
-              '<a href="neuron_page.php?id=6094" onClick="OpenInNewTab(this);" target="_blank">EC:LI-II multipolar-pyramidal</a>',
-              '<a href="neuron_page.php?id=6005" onClick="OpenInNewTab(this);" target="_blank">EC:LI-II pyramidal-fan</a>',
-              '<a href="neuron_page.php?id=6008" onClick="OpenInNewTab(this);" target="_blank">EC:LII pyramidal-multiform medial</a>',
-              '<a href="neuron_page.php?id=6019" onClick="OpenInNewTab(this);" target="_blank">EC:LII pyramidal-stellate medial</a>',
-              '<a href="neuron_page.php?id=6003" onClick="OpenInNewTab(this);" target="_blank">EC:LII stellate medial</a>',
-              '<a href="neuron_page.php?id=6082" onClick="OpenInNewTab(this);" target="_blank">EC:LII-III pyramidal-stellate</a>',
-              '<a href="neuron_page.php?id=6025" onClick="OpenInNewTab(this);" target="_blank">EC:LIII principal multipolar lateral</a>',
-              '<a href="neuron_page.php?id=6031" onClick="OpenInNewTab(this);" target="_blank">EC:LIII principal multipolar medial</a>',
-              '<a href="neuron_page.php?id=6017" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal</a>',
-              '<a href="neuron_page.php?id=6024" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal bipolar complex medial</a>',
-              '<a href="neuron_page.php?id=6007" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal complex lateral</a>',
-              '<a href="neuron_page.php?id=6006" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal complex medial</a>',
-              '<a href="neuron_page.php?id=6092" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal-stellate</a>',
-              '<a href="neuron_page.php?id=6018" onClick="OpenInNewTab(this);" target="_blank">EC:LIII stellate</a>',
-              '<a href="neuron_page.php?id=6095" onClick="OpenInNewTab(this);" target="_blank">EC:LIII-V pyramidal</a>',
-              '<a href="neuron_page.php?id=6085" onClick="OpenInNewTab(this);" target="_blank">EC:LIV-V pyramidal-horizontal</a>',
-              '<a href="neuron_page.php?id=6086" onClick="OpenInNewTab(this);" target="_blank">EC:LIV-VI multipolar-pyramidal</a>',
-              '<a href="neuron_page.php?id=6033" onClick="OpenInNewTab(this);" target="_blank">EC:LV multipolar-pyramidal medial</a>',
-              '<a href="neuron_page.php?id=6021" onClick="OpenInNewTab(this);" target="_blank">EC:LV pyramidal</a>',
-              '<a href="neuron_page.php?id=6002" onClick="OpenInNewTab(this);" target="_blank">EC:LV pyramidal medial</a>',
-              '<a href="neuron_page.php?id=6023" onClick="OpenInNewTab(this);" target="_blank">EC:LV pyramidal superficial medial</a>',
-              '<a href="neuron_page.php?id=6052" onClick="OpenInNewTab(this);" target="_blank">EC:LV-VI pyramidal-polymorphic medial</a>',
-              '<a href="neuron_page.php?id=6078" onClick="OpenInNewTab(this);" target="_blank">EC:LVI multipolar-pyramidal lateral</a>',
-              '<a href="neuron_page.php?id=6048" onClick="OpenInNewTab(this);" target="_blank">EC:LII axo-axonic</a>',
-              '<a href="neuron_page.php?id=6096" onClick="OpenInNewTab(this);" target="_blank">EC:LII basket medial</a>',
-              '<a href="neuron_page.php?id=6053" onClick="OpenInNewTab(this);" target="_blank">EC:LII basket-multipolar</a>',
-              '<a href="neuron_page.php?id=6049" onClick="OpenInNewTab(this);" target="_blank">EC:LIII multipolar lateral</a>', 
-              '<a href="neuron_page.php?id=6047" onClick="OpenInNewTab(this);" target="_blank">EC:LIII multipolar medial</a>',
-              '<a href="neuron_page.php?id=6040" onClick="OpenInNewTab(this);" target="_blank">EC:LIII multipolar superficial medial</a>',
-              '<a href="neuron_page.php?id=6087" onClick="OpenInNewTab(this);" target="_blank">EC:LIII pyramidal-looking</a>',
-              '<a href="neuron_page.php?id=6038" onClick="OpenInNewTab(this);" target="_blank">EC:LIII trilayered superficial medial</a>'],
+    datatype: "jsonstring",
+    datastr: dataStr,
+    colNames:[<?php echo $connheaderStr?>], 
 	colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
@@ -601,12 +491,8 @@ $(function(){
       {name:'ec_pyramidal_like_III_023300', index:'ec_pyramidal_like_III_023300', width:20,height:150,search:false,sortable:false},
       {name:'ec_multiform_III_023000', index:'ec_multiform_III_023000', width:20,height:150,search:false,sortable:false} 
      ], 
-    //multiselect: true,
-   /* pager: '#pager',*/
     rowNum:122,
     rowList:[122],
-   /*  sortname: 'invid',
-    sortorder: 'desc',*/
     viewrecords: true, 
     gridview: true,
     jsonReader : {
@@ -621,28 +507,22 @@ $(function(){
       cell:"cell",
       id: "invid"
    },
-    //caption: 'Morphology Matrix',
-    scrollerbar:true,
+	scrollerbar:true,
     shrinkToFit:false,
     height:'250',
     width:"1050",
-    /*loadComplete : function()
-    {
-    	fixPositionsOfFrozenDivs(this);
-    },*/
-    gridComplete: function () {
+   gridComplete: function () {
     	 var gridName = "nGrid"; // Access the grid Name
-    	// $('#nGrid').fixedHeaderTable({ altClass: 'odd', footer: false, fixedColumns: 1 });
     	 Merger(gridName,"type");
-    	//rotateFunction();
-    	 //RotateCheckboxColumnHeaders("#nGrid",235);
-    	 //$('#nGrid').fixedHeaderTable({ altClass: 'odd', footer: false, fixedColumns: 3 });
+    	 $grid.jqGrid('setFrozenColumns');
+    	 rotateFunction($grid,235);
+    	 fixPositionsOfFrozenDivs.call($grid[0]);
     	} 
     });
+
+    
 	
-	$grid.jqGrid('setFrozenColumns');
-	rotateFunction($grid,235);
-	fixPositionsOfFrozenDivs.call($grid[0]);
+	
 	
 	//$("#nGrid").triggerHandler("jqGridAfterGridComplete");
 	
