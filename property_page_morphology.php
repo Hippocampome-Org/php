@@ -616,6 +616,10 @@ function show_only_morphology(link, start1, stop1)
 				</td>				
 			</tr>
 			<tr>
+				<td width="20%" align="right">&nbsp;</td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
+			</tr>
+			<tr>
 				<td width="20%" align="right">
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
@@ -629,9 +633,9 @@ function show_only_morphology(link, start1, stop1)
 					if ($color == 'somata')
 						$name1 = "Somata";				
 					
-					print ("&nbsp <strong>$name1</strong> in <strong>$val_property</strong>");
+					print ("&nbsp; <strong>$name1</strong> in <strong>$val_property</strong>");
 				?>
-				</td>				
+				</td>
 			</tr>								
 		</table>
 		
@@ -1240,7 +1244,7 @@ function show_only_morphology(link, start1, stop1)
 									print ("
 									<tr>	
 										<td width='70%' class='table_neuron_page2' align='left'>
-											$id_neuron - $id_fragment (original: $id_original) - $type_show - Page location: $page_location
+											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
 										</td>
 										<td width='15%' align='center'>");																											
 										
