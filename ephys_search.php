@@ -44,6 +44,10 @@ $epdata = new epdata($class_epdata);
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
+.ui-jqgrid-bdiv
+{
+	height:auto !important;
+}
 .ui-jqgrid tr.jqgrow td 
 {
 	height:auto !important;
@@ -322,51 +326,29 @@ $(function(){
 ?>	
 		
 <div class='title_area'>
-	<font class="font1">Browse electrophysiology matrix</font>
-</div>
-
-<!--  submenu no tabs
-<div class='sub_menu'>
-	<?php
-		if ($research);
-		else
-		{
-	?>
-			<table width="90%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td width="100%" align="left">
-					<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp; 
-					<a href='morphology.php'><font class="font7">Morphology</font> <font class="font7_A">|</font> 
-					<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
-					<font class="font7_B">Electrophysiology</font> <font class="font7_A">|</font> 
-					<a href='connectivity.php'><font class="font7"> Connectivity</font></a>
-					</font>	
-				</td>
-			</tr>
-			</table>
-	<?php
-		}
-	?>		
-</div>
--->
-<!-- ------------------------ -->
-
-<div class="table_position">
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr>
-    <td>
-		<!-- ****************  BODY **************** -->
-		<?php 
+	<font class="font1">Browse electrophysiology matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];
 				if ($number_type == 1)
 					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
 				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");			
+					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
 			}
-		?>
-			
-		<br />
+	?>
+</div>
+<div class="table_position">
+<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
+	<tr>
+ 		<td>
+		  	<table id="nGrid"></table>
+			<div id="pager"></div>	
+		</td>
+	</tr>
+</table>		
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
+  <tr>
+    <td>
 		<font class='font5'><strong>Legend:</strong> </font>&nbsp;
 		<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
 		&nbsp; &nbsp; 
@@ -377,24 +359,6 @@ $(function(){
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
-		<br /><br />
-			
-				
-<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
- 		<td>
-		  	<table id="nGrid"></table>
-			<div id="pager"></div>	
-		</td>
-	</tr>
-
-	<tr>
-		<td><!-- div "divinterno" removed -->
-		
-		</td>
-	</tr>
-</table>		
-				
 	</td>
   </tr>
 </table>

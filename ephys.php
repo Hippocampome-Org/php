@@ -357,6 +357,14 @@ $(function(){
 <!-- ------------------------ -->
 
 <div class="table_position">
+<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
+	<tr>
+ 		<td>
+		  	<table id="nGrid"></table>
+			<div id="pager"></div>	
+		</td>
+	</tr>
+</table>		
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td>
@@ -370,8 +378,6 @@ $(function(){
 					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");			
 			}
 		?>
-			
-		<br />
 		<font class='font5'><strong>Legend:</strong> </font>&nbsp;
 		<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
 		&nbsp; &nbsp; 
@@ -382,24 +388,6 @@ $(function(){
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
-		<br /><br />
-			
-				
-<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
- 		<td>
-		  	<table id="nGrid"></table>
-			<div id="pager"></div>	
-		</td>
-	</tr>
-
-	<tr>
-		<td><!-- div "divinterno" removed -->
-		
-		</td>
-	</tr>
-</table>		
-				
 	</td>
   </tr>
 </table>

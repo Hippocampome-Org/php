@@ -118,6 +118,10 @@ $hippo_select = $_SESSION['hippo_select'];
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <style>
+.ui-jqgrid-bdiv
+{
+	height:auto !important;
+}
 .highlighted{
 	border-right: solid 1px Chartreuse !important;
 	border-left: solid 1px Chartreuse !important;
@@ -609,7 +613,16 @@ $("#nGrid").mouseout(function(e) {
 ?>		
 
 <div class='title_area'>
-	<font class="font1">Browse morphology matrix</font>
+	<font class="font1">Browse morphology matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<?php 
+			if ($research){
+				$full_search_string = $_SESSION['full_search_string'];
+				if ($number_type == 1)
+					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
+				else
+					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
+			}
+		?>
 </div>
 
 <!-- Submenu tabs
@@ -628,20 +641,16 @@ $("#nGrid").mouseout(function(e) {
 <!-- ------------------------ -->
 
 <div class='table_position'>
+<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
+	<tr>
+		<td>
+			<table id="nGrid"></table>
+		</td>
+	</tr>
+</table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td>
-		<!-- ****************  BODY **************** -->
-		<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
-			}
-		?>
-		<br />
 		<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
 		<img src="images/morphology/axons_present.png" width="10px" border="0"/> <font class='font5'>Axon present </font> &nbsp; &nbsp; 
 		<img src="images/morphology/dendrites_present.png" width="10px" border="0"/> <font class='font5'>Dendrite present </font>&nbsp; &nbsp; 
@@ -654,15 +663,6 @@ $("#nGrid").mouseout(function(e) {
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
-		<br />
-		
-<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
-		<td>
-			<table id="nGrid"></table>
-		</td>
-	</tr>
-</table>		
 	</td>
   </tr>
 </table>

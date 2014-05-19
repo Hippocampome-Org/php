@@ -629,6 +629,13 @@ $("#nGrid").mouseout(function(e) {
 <!-- ------------------------ -->
 
 <div class='table_position'>
+<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
+	<tr>
+		<td>
+			<table id="nGrid"></table>
+		</td>
+	</tr>
+</table>		
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td>
@@ -642,7 +649,6 @@ $("#nGrid").mouseout(function(e) {
 					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
 			}
 		?>
-		<br />
 		<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
 		<img src="images/morphology/axons_present.png" width="10px" border="0"/> <font class='font5'>Axon present </font> &nbsp; &nbsp; 
 		<img src="images/morphology/dendrites_present.png" width="10px" border="0"/> <font class='font5'>Dendrite present </font>&nbsp; &nbsp; 
@@ -656,16 +662,8 @@ $("#nGrid").mouseout(function(e) {
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
 		<br />
-		
-<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
-		<td>
-			<table id="nGrid"></table>
-		</td>
-	</tr>
-</table>		
 	</td>
-  </tr>
+	</tr>
 </table>
 </div>
 </body>

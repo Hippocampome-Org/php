@@ -35,6 +35,10 @@ if(isset($_REQUEST['table_result']))
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <style>
+.ui-jqgrid-bdiv
+{
+	height:auto !important;
+}
 .ui-jqgrid tr.jqgrow td
 {
 	height:18px !important;
@@ -395,7 +399,16 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 ?>	
 
 <div class='title_area'>
-	<font class="font1">Browse molecular markers matrix</font>
+	<font class="font1">Browse molecular markers matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<?php 
+			if ($research){
+				$full_search_string = $_SESSION['full_search_string'];
+				if ($number_type == 1)
+					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
+				else
+					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
+			}
+	?>
 </div>
 
 <!-- Submenu no tabs
@@ -425,20 +438,24 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 <!-- ------------------------ -->
 
 <div class="table_position">
+<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
+	<tr>
+ 		<td>
+			<table id="nGrid"></table>
+			<div id="pager"></div>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+		
+		</td>
+	</tr>
+
+</table>			
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td>
-		<!-- ****************  BODY **************** -->
-		<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");			
-			}
-		?>		
-		<br />
 		<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
 		<img src='images/positive.png' width="13px" border="0"/> <font class='font5'>Positive </font> &nbsp; &nbsp; 
 		<img src='images/negative.png' width="13px" border="0"/> <font class='font5'>Negative </font>&nbsp; &nbsp; 
@@ -455,26 +472,6 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
-		<br />
-
-
-<table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
- 		<td>
-			<table id="nGrid"></table>
-			<div id="pager"></div>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-		
-		</td>
-	</tr>
-
-</table>			
-		
-		<br /><br />		
 	</td>
   </tr>
 </table>

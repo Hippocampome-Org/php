@@ -5,12 +5,8 @@
 		header("Location:error1.html");
 	
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
-	
-
 	include ("access_db.php");
 	include ("function/stm_lib.php");
 	require_once('class/class.type.php');
@@ -89,7 +85,12 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <style>
-
+<?php if(isset($research)){?>
+.ui-jqgrid-bdiv
+{
+	height:auto !important;
+}
+<?php }?>
 .ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
 text-align:center !important;
 margin-bottom:0px !important;
@@ -509,7 +510,7 @@ $(function(){
    },
 	scrollerbar:true,
     shrinkToFit:false,
-    height:'250',
+    height:'440',
     width:"1050",
    gridComplete: function () {
     	 var gridName = "nGrid"; // Access the grid Name
@@ -581,46 +582,27 @@ $(function(){
 ?>	
 
 <div class='title_area'>
-	<font class="font1">Browse connectivity matrix</font>
+	<font class="font1">Browse connectivity matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<?php 
+			if ($research){
+				$full_search_string = $_SESSION['full_search_string'];
+				if ($number_type == 1)
+					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
+				else
+					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
+			}
+		?>
 </div>
-	
-<!-- submenu no tabs 	
-<div class='sub_menu'>
-	<table width="90%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="100%" align="left">
-			<font class='font1'><em>Matrix:</em></font> &nbsp; &nbsp;
-			<a href='morphology.php'><font class="font7">Morphology</font> </a> <font class="font7_A">|</font> 
-			<a href='markers.php'><font class="font7"> Markers</font> </a> <font class="font7_A">|</font> 
-			<a href='ephys.php'><font class="font7"> Electrophysiology</font> </a><font class="font7_A">|</font> 
-			<font class="font7_B"> Connectivity</font>
-		</td>
-	</tr>
-	</table>
-</div>
- -->
-<!-- ------------------------ -->
-
-<div class="clr_table_position">
+<div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td width="950">
-		<!--  div class='clr_container divider'-->
-		<!--  div class='clr_grid height600' -->
-		 
-				<table id="nGrid"></table>
-				<div id="pager"></div>
-			 
-		<!--  div -->
-		<!--  div-->	
+		<table id="nGrid"></table>
+		<div id="pager"></div>
 	</td>
-	
-	
 	<!-- LEGEND -->
 	<td width="200" style="vertical-align:top">
 	
-		<br><br>
-		  
 		<table border="0" cellspacing="5">
 			<tr height="75" style='vertical-align:top'>
 				<td colspan="2" style="text-align:center"><font class='font5'>You can also view the entire<br>matrix as a <a href='images/connectivity/Connectivity_Matrix.jpg' target='_blank'>.jpg image</a></font></td>				
