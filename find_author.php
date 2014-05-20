@@ -698,7 +698,7 @@ $(document).ready(function(){
 			//	print("...$pmid[$i]......$unique_pmid[$i]....");
 				
 $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i]')";
-				$Type_name = mysql_query($a);
+$Type_name = mysql_query($a);
 				if (!$Type_name) {
 					die("<p>Error in listing tables:" . mysql_error() . "</p>");
 				}
@@ -709,7 +709,8 @@ $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` 
 		{
 			$ty_name=$rows['name'];
 			$ty_nick=$rows['nickname'];
-			
+			$ty_status =$rows['status'];
+			$ty_id = $rows['id'];
 			$x=0;
 			for($v=0;$v<sizeof($t_n);$v++)
 			{
@@ -729,21 +730,13 @@ $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` 
 				{
 					continue;
 				}
-				
-					if($ty_nick!=null)
+					if($ty_status!='frozen')
 					{
-					//	print("$o)$ty_nick <br/>");
-						print("$o)$ty_name <br/>");
+						print("$o)&nbsp;<a href='neuron_page.php?id=$ty_id' target='_blank' title='".$ty_name."'>$ty_nick</a><br/>");
+						$o=$o+1;
 					}
-					else
-					{
-						print("$o)$ty_name <br/>");
-					}
-			
-			
-			
 			$t_n[$f]=$ty_name;
-			$o=$o+1;
+			
 			$f=$f+1;
 		}			
 			if($o==1)
