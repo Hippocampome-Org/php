@@ -16,7 +16,7 @@
 	require_once('class/class.utils.php');
 	
 	$connectivityHeader = new utils();
-	$connectivityHeader->setHeader("type");
+	$connectivityHeader->setHeader("Type");
 	$connheaderStr = $connectivityHeader->getHeaderStr();
 	
 	
