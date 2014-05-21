@@ -120,7 +120,6 @@ if (isset($research)) // From page of search; retrieve the id from search_table 
 	for ($i2=0; $i2<$n_id_res; $i2++)
 	{
 		$id2 = 	$temporary_result_neurons -> getID_array($i2); // Retrieve  each ID corresponding to the id Array
-		echo "id2 : ".$id2;
 		if (strpos($id2, '0_') == 1);
 		else
 		{
