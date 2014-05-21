@@ -726,6 +726,7 @@ function show_only_authors(link, color)
 			// Retrieve Id_property from Property By using Val_property (object) AND Color (predicate)
 			$property -> retrive_ID(2, $val_property, NULL, $color_1[$m2]);
 			$id_property = $property -> getProperty_id(0);
+			
 
 			// Retrieve the ID EVIDENCE from EvidencePropertyTypeRel by using ID TYPE and ID PROPERTY:
 			$evidencepropertyyperel -> retrive_evidence_id($id_property, $id_neuron);
@@ -741,18 +742,17 @@ function show_only_authors(link, color)
         	// STM getting the linking PMID
         	$id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
         	if ($id_secondary_article) {
-          	$article -> retrive_by_id($id_secondary_article);
-          	$secondary_pmid = $article -> getPmid_isbn(); 
-        	} else {
+			$article -> retrive_by_id($id_secondary_article);
+          	$secondary_pmid = $article -> getPmid_isbn();
+          	} else {
           	$secondary_pmid = NULL;
         	}
-
-				
+			
 			// Retrieve EVIDENCE2_ID from EvidenceEvidenceRel by using EVIDENCE1_ID:
 			$evidenceevidencerel -> retrive_evidence2_id($id_evidence[$i]);
 		
-			$n_evidence2 = $evidenceevidencerel -> getN_evidence2();			
-				
+			$n_evidence2 = $evidenceevidencerel -> getN_evidence2();
+					
 			for ($i1=0; $i1<$n_evidence2; $i1++)
 			{	
 				$id_evidence2[$i1] = $evidenceevidencerel -> getEvidence2_id_array($i1);
@@ -821,7 +821,7 @@ function show_only_authors(link, color)
 				if ($page)
 				{
 				// Insert the data in the temporary table ********************************************************************************
-					insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
+				insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
 				}							
 								
 					// SHOW ONLY TYPE = DATA:			
@@ -1096,7 +1096,7 @@ function show_only_authors(link, color)
 
 	<?php		
 		// Select only DOI, to have the exact number of articles and to show only one time the name of article.
-		$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue, secondary_pmid FROM $name_temporary_table ORDER BY $order_by $type_order ";				
+		$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue FROM $name_temporary_table ORDER BY $order_by $type_order ";				
 		$rs = mysql_query($query);	
 		$number_of_article = 0;		
 		while(list($authors, $title, $publication, $year, $PMID, $pages, $pmcid, $NIHMSID, $doi, $citation, $show2, $show_button, $volume, $issue, $secondary_pmid) = mysql_fetch_row($rs))		
