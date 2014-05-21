@@ -1,7 +1,7 @@
 <?php
 function quote_replaceIDwithName($theQuote) {
 	// find all <% cell ID %>
-	if (preg_match_all ( '/\<% ([^<>]+) %\>/', $theQuote, &$matches )) {
+	if (preg_match_all ( '/\<% ([^<>]+) %\>/', $theQuote, $matches, PREG_PATTERN_ORDER )) {
 		$u = 0;
 		$newQuote = "";
 		foreach ( $matches [1] as $match ) {
