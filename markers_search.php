@@ -35,10 +35,6 @@ if(isset($_REQUEST['table_result']))
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <style>
-.ui-jqgrid-bdiv
-{
-	height:auto !important;
-}
 .ui-jqgrid tr.jqgrow td
 {
 	height:18px !important;

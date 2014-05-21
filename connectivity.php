@@ -86,10 +86,6 @@
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <style>
 <?php if(isset($research)){?>
-.ui-jqgrid-bdiv
-{
-	height:auto !important;
-}
 <?php }?>
 .ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
 text-align:center !important;

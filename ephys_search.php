@@ -44,10 +44,6 @@ $epdata = new epdata($class_epdata);
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
-.ui-jqgrid-bdiv
-{
-	height:auto !important;
-}
 .ui-jqgrid tr.jqgrow td 
 {
 	height:auto !important;

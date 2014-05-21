@@ -118,10 +118,6 @@ $hippo_select = $_SESSION['hippo_select'];
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <style>
-.ui-jqgrid-bdiv
-{
-	height:auto !important;
-}
 .highlighted{
 	border-right: solid 1px Chartreuse !important;
 	border-left: solid 1px Chartreuse !important;
