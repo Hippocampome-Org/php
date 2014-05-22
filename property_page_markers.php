@@ -1175,7 +1175,7 @@ function show_only_authors(link, color)
 					<td align='left' width='85%' class='table_neuron_page2'>				
 						<font color='#000000'><strong>$title1[$t3] </strong></font> <br>
 						$authors1[$t3] <br>
-						$publication1[$t3], $year1[$t3], $volume1[$t3] $issue_tot pages: $pages1[$t3] <br>
+						$publication1[$t3], $year1[$t3], $volume1[$t3] $issue_tot pages: $pages1[$t3]<br>
 						$string_pmid<font class='font13'>  $PMID1[$t3]</font></a>; $doi_tot <br>
 					</td>	
 				</tr>	
@@ -1255,7 +1255,7 @@ function show_only_authors(link, color)
                 <tr>
                 <td width='15%'></td>	
                 <td align='left' width='70%' class='table_neuron_page2'>				
-                Hippocampome ID: $id_fragment (original: $id_original)
+                Hippocampome ID: $id_fragment 
                 </td>	
                 <td width='15%'></td>
                 </tr>");							
@@ -1263,7 +1263,7 @@ function show_only_authors(link, color)
                 <tr>
                 <td width='15%'></td>	
                 <td align='left' width='70%' class='table_neuron_page2'>				
-                Page location: $page_location
+                Page location: <span title='(original: ".$id_original.")'>$page_location</span>
                 </td>	
                 <td width='15%'>");
 																		
