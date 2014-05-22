@@ -594,6 +594,10 @@ function show_only_authors(link, color)
 					print("<a href='neuron_page.php?id=$id'>$name</a>");
 					 ?>
 				</td>				
+			</tr>
+			<tr>
+				<td width="20%" align="right">&nbsp;</td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
 			</tr>	
 			<tr>
 				<td width="20%" align="right">
@@ -1255,15 +1259,7 @@ function show_only_authors(link, color)
                 <tr>
                 <td width='15%'></td>	
                 <td align='left' width='70%' class='table_neuron_page2'>				
-                Hippocampome ID: $id_fragment 
-                </td>	
-                <td width='15%'></td>
-                </tr>");							
-              print ("
-                <tr>
-                <td width='15%'></td>	
-                <td align='left' width='70%' class='table_neuron_page2'>				
-                Page location: <span title='(original: ".$id_original.")'>$page_location</span>
+                Page location: <span title='$id_fragment (original: ".$id_original.")'>$page_location</span>
                 </td>	
                 <td width='15%'>");
 																		
