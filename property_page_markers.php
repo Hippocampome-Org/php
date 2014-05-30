@@ -65,6 +65,7 @@ function create_temp_table ($name_temporary_table)
 
 function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_markerdata, $id_evidence1, $id_evidence2, $type, $type_marker, $ccolor, $pmcid, $NIHMSID, $doi, $citation, $volume, $issue, $secondary_pmid)
 {
+		$quote = mysql_real_escape_string($quote);
 	$query_i = "INSERT INTO $table
 	  (id,
 	   id_fragment,

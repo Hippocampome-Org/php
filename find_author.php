@@ -92,9 +92,42 @@ if ($letter)
 {
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$id_update = $_REQUEST['id'];
+	/*----------------------------------new-------------------------------*/
+					// retrieve ALL authors from table AUTHOR:
+					$author_1 -> retrive_name();
+					$n_author_total = $author_1 -> getN_author();
+					
+					// keep only the authors that have the first letter = $letter_t:
+					$n_author = 0;
+					$name_author = NULL;
+					for ($i1=0; $i1<$n_author_total; $i1++)
+					{
+						$name_author1 = $author_1 -> getName_author_array($i1);
+						
+						//if ($letter == '--')
+						if ($letter == 'all')
+						{
+							$name_author[$n_author] = $name_author1;
+							$n_author = $n_author + 1;						
+						}
+						else
+						{
+						
+							if ($name_author1[0] == $letter)
+							{
+								$name_author[$n_author] = $name_author1;
+								$n_author = $n_author + 1;
+							}
+						}
+										
+						if ($name_author)
+							sort($name_author);						
+					}
 	
+/*-----------------------------------------------------------------------*/
 	$temporary ->setName_table($name_temporary_table);
-	$temporary -> update_temporary($letter, NULL, 1, $id_update);
+	$temporary -> update_temporary($letter, $name_author[0], 1, $id_update);
+//	$temporary -> update_temporary($letter, NULL, 1, $id_update);
 	
 	$temporary_search=0;
 	
@@ -524,8 +557,10 @@ $(document).ready(function(){
 			
 					if ($name_author_right)
 					{
-						print ("<OPTION VALUE='$name_author_right'>$name_author_right</OPTION>");	
-						print ("<OPTION VALUE=''></OPTION>");
+						$temp_author= htmlspecialchars($name_author_right,ENT_QUOTES);
+					//	print ("<OPTION VALUE='$name_author_right'>$name_author_right</OPTION>");	
+						echo "<option value='".$temp_author."'>".stripslashes($name_author_right)."</option>";
+						print ("<OPTION VALUE='' disabled></OPTION>");
 					}	
 					
 					
@@ -537,7 +572,10 @@ $(document).ready(function(){
 					{
 						for ($i1=0; $i1<$n_author; $i1++)
 						{
-							print ("<OPTION VALUE='$name_author[$i1]'>$name_author[$i1]</OPTION>");		
+							$temp_author= htmlspecialchars($name_author[$i1],ENT_QUOTES);
+					//		print ("<OPTION VALUE='$temp_author'>$name_author[$i1]</OPTION>");		
+							echo "<option value='".$temp_author."'>".$name_author[$i1]."</option>";
+							//		echo "<option value='".htmlspecialchars($row['player'])."|".$row['plID']."'>".$row['player']."</option>/r/n";	
 						}
 					}
 					

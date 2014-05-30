@@ -28,6 +28,11 @@ class temporary_author
 
 	public function insert_temporary($letter, $author)
 	{
+	set_magic_quotes_runtime(0);
+		if (get_magic_quotes_gpc()) {
+        	$author = stripslashes($author);    
+    	}
+		$author= mysql_real_escape_string($author);
 		$table=$this->getName_table();
 			
 		$query_i = "INSERT INTO $table (id, letter, author) VALUES (NULL, '$letter', '$author')";
@@ -36,6 +41,13 @@ class temporary_author
 
 	public function update_temporary($letter, $author, $flag, $id)
 	{
+	set_magic_quotes_runtime(0);
+	
+    	if (get_magic_quotes_gpc()) {
+        	$author = stripslashes($author);    
+    	}
+    
+		$author= mysql_real_escape_string($author);	
 		$table=$this->getName_table();
 	
 		if ($flag == 1) // Update letter:

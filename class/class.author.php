@@ -46,6 +46,7 @@ class author
 	public function retrive_id_by_name($name) 
     {
 		$table=$this->getName_table();
+	$name= mysql_real_escape_string($name);
 		
 		$query = "SELECT DISTINCT id FROM $table WHERE name='$name'";
 		$rs = mysql_query($query);
