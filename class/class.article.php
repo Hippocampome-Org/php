@@ -52,6 +52,32 @@ class article
 		}
 	}	
 	
+	
+	public function retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page)
+	{
+		$table=$this->getName_table();
+	
+		$query = "SELECT id, pmid_isbn, pmcid, nihmsid, doi, open_access, title, publication, volume, issue, first_page, last_page, year, citation_count FROM $table WHERE pmid_isbn='$pmid_isbn' AND first_page='$pmid_isbn_page'";
+		$rs = mysql_query($query);
+		while(list($id, $pmid_isbn, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysql_fetch_row($rs))
+		{
+			$this->setID($id);
+			$this->setPmid_isbn($pmid_isbn);
+			$this->setPmcid($pmicid);
+			$this->setNihmsid($nihmsid);
+			$this->setDoi($doi);
+			$this->setOpen_access($open_access);
+			$this->setTitle($title);
+			$this->setPublication($publication);
+			$this->setVolume($volume);
+			$this->setIssue($issue);
+			$this->setFirst_page($first_page);
+			$this->setLast_page($last_page);
+			$this->setYear($year);
+			$this->setCitation_count($citation_count);
+		}
+	}
+	
 	public function retrive_by_pmid($pmid) 
     {
 		$table=$this->getName_table();

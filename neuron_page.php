@@ -715,9 +715,18 @@ if ($text_file_creation)
 			$fragment -> retrive_by_id($id_fragment);
 			$citation = $fragment -> getQuote();
 			$citation = quote_replaceIDwithName($citation);
+			$pmid_isbn = $fragment -> getPmid_isbn();
+			$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 
 			//$original_id = $fragment -> getOriginal_id();
+			if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
+			{
+				$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
+				$id_article= $article -> getID();
 
+			}
+			else 
+			{
 			// retrieve Evidence_id from EvidenceFragmentRel by using Fragment_id
 			$evidencefragmentrel -> retrieve_evidence_id($id_fragment);
 			$id_evidence = $evidencefragmentrel -> getEvidence_id_array(0);
@@ -725,9 +734,11 @@ if ($text_file_creation)
 			// retrieve Article_id from ArticleEvidenceRel by using Evidence_id
 			$articleevidencerel -> retrive_article_id($id_evidence);
 			$id_article = $articleevidencerel -> getArticle_id_array(0);
+			$article -> retrive_by_id($id_article) ;
+			}
 
 			// retrieve all information from article table by using article_id
-			$article -> retrive_by_id($id_article) ; 
+			
 			$title = $article -> getTitle();
 			$pmid_isbn = $article -> getPmid_isbn(); 
 			$issue = $article -> getIssue();

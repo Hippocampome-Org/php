@@ -720,19 +720,29 @@ function show_only_morphology(link, start1, stop1)
 					$quote = $fragment -> getQuote();
 					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
+					$pmid_isbn= $fragment -> getPmid_isbn();
+					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					$page_location = $fragment -> getPage_location();
 				
 					//Retreive information from attachment table
 				//	$attachment_obj->retrive_by_id($fragment_id[$i],$id_neuron);
 					
+					if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
+					{
+						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
+						$id_article= $article -> getID();
+					}
 					
-					// retrieve article_id from ArticleEvidenceRel by using Evidence_id
 					//$articleevidencerel -> retrive_article_id($fragment_id[$i]);
-					$articleevidencerel -> retrive_article_id($evidence_id[$i]);
-					$id_article = $articleevidencerel -> getArticle_id_array(0);
-		
-					// retrieve all information from article table by using article_id
-					$article -> retrive_by_id($id_article) ; 
+					else 
+					{
+						// retrieve article_id from ArticleEvidenceRel by using Evidence_id
+						$articleevidencerel -> retrive_article_id($evidence_id[$i]);
+						$id_article = $articleevidencerel -> getArticle_id_array(0);
+						// retrieve all information from article table by using article_id
+						$article -> retrive_by_id($id_article) ;
+					}
+					
 					$title = $article -> getTitle();
 					$publication = $article -> getPublication();
 					$year = $article -> getYear();

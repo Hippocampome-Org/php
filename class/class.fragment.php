@@ -5,7 +5,9 @@ class fragment
 	private $_id;
 	private $_quote;
 	private $_original_id;
-	private $_page_location;	
+	private $_page_location;
+	private $_pmid_isbn;
+	private $_pmid_isbn_page;	
 	private $_type;	
 	private $_attachment;
 	private $_attachment_type;
@@ -22,14 +24,16 @@ class fragment
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, original_id, quote, page_location, type, attachment, attachment_type  FROM $table WHERE id = '$id'";
+		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type  FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
-		while(list($id, $original_id, $quote, $page_location, $type, $attachment, $attachment_type) = mysql_fetch_row($rs))
+		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type) = mysql_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setOriginal_id($original_id);			
 			$this->setQuote($quote);
-			$this->setPage_location($page_location);		
+			$this->setPage_location($page_location);
+			$this->setPmid_isbn($pmid_isbn);
+			$this->setPmid_isbn_page($pmid_isbn_page);
 			$this->setType($type);	
 			$this->setAttachment($attachment);	
 			$this->setAttachment_type($attachment_type);	
@@ -100,6 +104,16 @@ class fragment
 		  $this->_original_id = $val;
     }
 
+    public function setPmid_isbn($val)
+    {
+    	$this->_pmid_isbn = $val;
+    }
+
+    public function setPmid_isbn_page($val)
+    {
+    	$this->_pmid_isbn_page = $val;
+    }
+    
  	public function setType($val)
     {
 		  $this->_type = $val;
@@ -152,6 +166,16 @@ class fragment
     	return $this->_original_id;
     }
 
+    public function getPmid_isbn()
+    {
+    	return $this->_pmid_isbn;
+    }
+    
+    public function getPmid_isbn_page()
+    {
+    	return $this->_pmid_isbn_page;
+    }
+    
     public function getType()
     {
     	return $this->_type;
