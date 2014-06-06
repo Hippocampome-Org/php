@@ -48,7 +48,7 @@ $name_markers = array(
 		"27" =>"PV",
 		"28" =>"RLN",
 		"29" =>"SOM",
-		"30" =>"Sub_P",
+		"30" =>"Sub_P_Rec",
 		"31" =>"vAChT",
 		"32" =>"vGluT2",
 		"33" =>"vGluT3",
@@ -65,8 +65,8 @@ function getUrlForLink($id,$img,$key,$color1)
 			$keyProperty = "Gaba-a-alpha";
 		else if($key=="CoupTF_2")
 			$keyProperty = "CoupTF II";
-		else if($key=="Sub_P")
-			$keyProperty = "Sub P";
+		else if($key=="Sub_P_Rec")
+			$keyProperty = "Sub P Rec";
 		else if($key=="5HT_3")
 			$keyProperty = "5HT-3";
 		else if($key=="a-act2")
@@ -459,7 +459,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	// ARRAY Creation for hippocampome properties: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$hippo_property_id = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 			"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
-			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,
+			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
 			"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -471,7 +471,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	
 	$hippo_property = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 			"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
-			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,
+			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
 			"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, 
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -482,7 +482,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	
 	$hippo = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 			"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
-			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,
+			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
 			"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -494,7 +494,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	
 	$hippo_negative = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 							"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,		
-							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,	
+							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,	
 							"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, 
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -505,7 +505,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							
 			$hippo_positive = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 							"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,		
-							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,	
+							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,	
 							"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -517,7 +517,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			
 			$hippo_weak_positive = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 							"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,		
-							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,	
+							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,	
 							"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -529,7 +529,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							
 			$hippo_unknown = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 							"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,		
-							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,	
+							"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,	
 							"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -541,7 +541,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 
 			$hippo_color = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 									"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
-									"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P" =>NULL,
+									"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
 									"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 									"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 									"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
@@ -588,8 +588,8 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		else if (strpos($part[$ii], 'CoupTF') == 'TRUE')
 			$part[$ii] = 'CoupTF_2';
 		else;
-		if ($part[$ii] == 'Sub P')
-			$part[$ii] = 'Sub_P';
+		if ($part[$ii] == 'Sub P Rec')
+			$part[$ii] = 'Sub_P_Rec';
 		if ($part[$ii] == '5HT-3')						// CLR modified this line
 			$part[$ii] = '5HT_3';								// CLR modified this line
 		if ($part[$ii] == 'alpha-actinin-2')
@@ -623,7 +623,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$hippo_property['ENK'] = check_positive_negative('ENK', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['GABAa_alfa'] = check_positive_negative('GABAa_alfa', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['Mus2R'] = check_positive_negative('Mus2R', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-	$hippo_property['Sub_P'] = check_positive_negative('Sub_P', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
+	$hippo_property['Sub_P_Rec'] = check_positive_negative('Sub_P_Rec', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['vGluT3'] = check_positive_negative('vGluT3', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['CoupTF_2'] = check_positive_negative('CoupTF_2', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['5HT_3'] = check_positive_negative('5HT_3', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown); 
@@ -705,7 +705,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['PV'],$name_markers['27'],$hippo_color['PV']),
 			getUrlForLink($id,$hippo['RLN'],$name_markers['28'],$hippo_color['RLN']),
 			getUrlForLink($id,$hippo['SOM'],$name_markers['29'],$hippo_color['SOM']),
-			getUrlForLink($id,$hippo['Sub_P'],$name_markers['30'],$hippo_color['Sub_P']),
+			getUrlForLink($id,$hippo['Sub_P_Rec'],$name_markers['30'],$hippo_color['Sub_P_Rec']),
 			getUrlForLink($id,$hippo['vAChT'],$name_markers['31'],$hippo_color['vAChT']),
 			getUrlForLink($id,$hippo['vGluT2'],$name_markers['32'],$hippo_color['vGluT2']),
 			getUrlForLink($id,$hippo['vGluT3'],$name_markers['33'],$hippo_color['vGluT3']),

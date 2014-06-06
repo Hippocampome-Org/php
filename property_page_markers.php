@@ -148,8 +148,8 @@ if ($page)
 	$color = $_REQUEST['color'];
 
 
-	if ($val_property == 'sub_P')
-		$val_property = 'Sub P';
+	if ($val_property == 'Sub_P_Rec')
+		$val_property = 'Sub P Rec';
 	if ($val_property == 'GABAa_alfa')
 		$val_property = 'Gaba-a-alpha';	
 	if ($val_property == 'a-act2')
