@@ -561,6 +561,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	 $nickname = $type->getNickname(); // Retrieve nick name
 	 $position = $type->getPosition(); // Retrieve the position
 	 $subregion = $type -> getSubregion(); // Retrieve the sub region
+	$excit_inhib =$type-> getExcit_Inhib();
 	
 	$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id); // Retrieve distinct Property ids for each type id
 	$n_property = $evidencepropertyyperel -> getN_Property_id(); // Count of the number of properties for a given type id
@@ -648,9 +649,11 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$hippo_property['mGluR2_3'] = check_positive_negative('mGluR2_3', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['CGRP'] = check_positive_negative('CGRP', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	
-	if (strpos($nickname, '(+)') == TRUE)
+//	if (strpos($nickname, '(+)') == TRUE)
+	if ($excit_inhib == 'e')
 		$fontColor='#339900';
-	if (strpos($nickname, '(-)') == TRUE)
+//	if (strpos($nickname, '(-)') == TRUE)
+	if ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 	
 	for ($f1=0; $f1<$n_markers; $f1++)  //$n_markers set to 36

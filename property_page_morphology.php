@@ -513,6 +513,85 @@ $author = new author($class_author);
 
 <script type="text/javascript">
 // Javascript function *****************************************************************************************************
+//================changes===========================
+function evidencetoggle(){	
+
+	
+	var element_axondendrite= document.getElementsByClassName('axondendrite');
+	var element_axon= document.getElementsByClassName('axon');
+	var element_dendrite= document.getElementsByClassName('dendrite');
+
+	if (document.getElementById('axoncheck').checked==false) {
+		 document.getElementById("axoncheck").disabled = false;
+		 document.getElementById("dendritecheck").disabled = false;
+		for(var i=0;i<element_dendrite.length;i++){
+			
+			element_dendrite[i].style.display = 'table';
+			
+		}  
+    	for(var i=0;i<element_axon.length;i++){
+    		
+			element_axon[i].style.display = 'none';
+			
+			
+		}  
+    	for(var i=0;i<element_axondendrite.length;i++){
+    		
+			element_axondendrite[i].style.display = 'table';
+			
+			
+		}  
+    	
+		 document.getElementById("dendritecheck").disabled = true;
+    } 
+	 if (document.getElementById('dendritecheck').checked==false) {
+		 document.getElementById("axoncheck").disabled = false;
+		 document.getElementById("dendritecheck").disabled = false;
+		for(var i=0;i<element_dendrite.length;i++){
+			
+			element_dendrite[i].style.display = 'none';
+			
+		}  
+    	for(var i=0;i<element_axon.length;i++){
+    		
+			element_axon[i].style.display = 'table';
+			
+			
+		}  
+    	for(var i=0;i<element_axondendrite.length;i++){
+    		
+			element_axondendrite[i].style.display = 'table';
+			
+			
+		}  
+    	document.getElementById("axoncheck").disabled = true;
+	 }
+     if (document.getElementById('dendritecheck').checked==true && document.getElementById('axoncheck').checked==true) {
+    	 document.getElementById("axoncheck").disabled = false;
+		 document.getElementById("dendritecheck").disabled = false;
+     	for(var i=0;i<element_dendrite.length;i++){
+    		
+			element_dendrite[i].style.display = 'table';
+			
+		}  
+    	for(var i=0;i<element_axon.length;i++){
+    		
+			element_axon[i].style.display = 'table';
+			
+			
+		}  
+    	for(var i=0;i<element_axondendrite.length;i++){
+    		
+			element_axondendrite[i].style.display = 'table';
+			
+			
+		}  
+    }
+		
+
+}
+
+//====================================================
 function show_only(link, start1, stop1)
 {
 	var name=link[link.selectedIndex].value;
@@ -870,9 +949,15 @@ function show_only_morphology(link, start1, stop1)
 							}
 						?>
 
-						<td width="10%">
+						<td width="20%">
+							<?php if($color == 'violet'){?>	
+							<form>
+								<span style='color:rgb(254,1,2)'  ><input type="checkbox" name="violet" value="axon" id="axoncheck" checked onclick="evidencetoggle()"> axon</input></span>
+								<span style='color:rgb(1,1,153)' ><input type="checkbox" name="violet" value="dendrite" id="dendritecheck" checked onclick="evidencetoggle()" >dendrite</input></span>
+							</form>
+							<?php }?>
 						</td>
-						<td width="50%" align="center">
+						<td width="40%" align="center">
 						<form action="property_page_morphology.php" method="post" style="display:inline">
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
@@ -1199,9 +1284,20 @@ function show_only_morphology(link, start1, stop1)
 									}
 									else
 										$type_show = '';								
-	
+								if($color == 'violet'){
+										print("<br>");
+										if ($type_show == 'Axons')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
+										if ($type_show == 'Dendrites')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
+										if ($type_show == 'Axon and Dendrite')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");								
+									}else{
+										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
+									
+									}
 								
-									print ("<br><table width='80%' border='0' cellspacing='2' cellpadding='5'>");								
+								//	print ("<br><table width='80%' border='0' cellspacing='2' cellpadding='5'>");								
 									print ("<tr>");
 											
 									if ($type_show == 'Axons')		

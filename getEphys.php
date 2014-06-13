@@ -238,6 +238,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	 	$nickname = $type->getNickname(); // Retrieve nick name
 	 	$position = $type->getPosition(); // Retrieve the position
 	 	$subregion = $type -> getSubregion(); // Retrieve the sub region
+		$excit_inhib =$type-> getExcit_Inhib();
 	
 		$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id); // Retrieve distinct Property ids for each type id
 		$n_property = $evidencepropertyyperel -> getN_Property_id(); // Count of the number of properties for a given type id
@@ -335,9 +336,11 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			}
 		}
 		
-		if (strpos($nickname, '(+)') == TRUE)
+	//	if (strpos($nickname, '(+)') == TRUE)
+		if ($excit_inhib == 'e')
 			$fontColor='#339900';
-		if (strpos($nickname, '(-)') == TRUE)
+	//	if (strpos($nickname, '(-)') == TRUE)
+		if ($excit_inhib == 'i')
 			$fontColor='#CC0000';
 		
 	   $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',

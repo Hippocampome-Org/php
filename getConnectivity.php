@@ -245,6 +245,7 @@ for ($row=0; $row<$number_type; $row++) {
 					$subregion_type_row = $type->getSubregion();
 					$position = $type->getPosition(); // Retrieve the position
 					$subregion = $type -> getSubregion(); // Retrieve the sub region 
+					$excit_inhib =$type-> getExcit_Inhib();
 					
 					$nickname_type_row = str_replace('_', ' ', $nickname_type_row);
 					$subregion_nickname_type_row = $subregion_type_row . ":" . $nickname_type_row;
@@ -257,9 +258,10 @@ for ($row=0; $row<$number_type; $row++) {
 						$rowIdx = array_search($id_type_row, $known_header) - 1;
 						}
 						
-						if (strpos($nickname_type_row, '(+)') == TRUE)
+		//				if (strpos($nickname_type_row, '(+)') == TRUE)
+						if ($excit_inhib == 'e')
 							$fontColor='#339900';
-						if (strpos($nickname_type_row, '(-)') == TRUE)
+						if ($excit_inhib == 'i')
 							$fontColor='#CC0000';
 						
 				for ($col=0; $col<$number_type; $col++) {

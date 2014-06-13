@@ -6,6 +6,7 @@ class type
 	private $_dt;
 	private $_name;
 	private $_nickname;
+	private $_excit_inhib;
 	private $_status;
 	private $_number_type;
 	private $_id_array;	
@@ -50,9 +51,9 @@ class type
     {
 		$table=$this->getName_table();	
 		
-		$query = "SELECT id, position, dt, name, nickname, status, subregion FROM $table WHERE id = '$id'";
+		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
-		while(list($id, $position, $dt, $name, $nickname, $status, $subregion) = mysql_fetch_row($rs))
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -61,6 +62,7 @@ class type
 			$this->setStatus($status);
 			$this->setPosition($position);
 			$this->setSubregion($subregion);
+			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}	
 
@@ -68,14 +70,15 @@ class type
     {
 		$table=$this->getName_table();	
 		
-		$query = "SELECT id, position, dt, name, nickname, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
+		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
 		$rs = mysql_query($query);
-		while(list($id, $position, $dt, $name, $nickname, $status, $subregion) = mysql_fetch_row($rs))
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
 			$this->setName($name);
 			$this->setNickname($nickname);
+			$this->setExcit_Inhib($excit_inhib);
 			$this->setStatus($status);
 			$this->setPosition($position);
 			$this->setSubregion($subregion);
@@ -108,6 +111,10 @@ class type
 	public function setNickname($var)
     {
 		  $this->_nickname = $var;
+	}	
+	public function setExcit_Inhib($var)
+    {
+		  $this->_excit_inhib = $var;
     }	
 		
  	public function setId($var)
@@ -161,6 +168,10 @@ class type
     	return $this->_nickname;
     }		
 
+		public function getExcit_Inhib()
+   	 {
+		  return $this->_excit_inhib;
+    	}
     public function getId()
     {
     	return $this->_id;

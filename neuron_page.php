@@ -1459,7 +1459,7 @@ if ($text_file_creation)
       }
 
       function get_excit_inhib_font_class($name) {
-        if (strpos($name, '(+)')) {
+        if ($name == 'e') {
           $font_class = 'font10a';
         } else { // is (-)
           $font_class = 'font11';
@@ -1469,8 +1469,10 @@ if ($text_file_creation)
 
       function name_row($record) {
         $name = to_name($record);
+	 $ex_in= $record["excit_inhib"];
         $id = $record["id"];
-        $font_class = get_excit_inhib_font_class($name);
+    //    $font_class = get_excit_inhib_font_class($name);
+	$font_class = get_excit_inhib_font_class($ex_in);
         $html =
           "<tr>
             <td width='20%' align='right'/>
