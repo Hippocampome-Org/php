@@ -183,8 +183,8 @@ $responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =
 $responce->records = $count;
 
 
-$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
-$neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
+$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(39)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
+$neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 
 // read in potential connectivity csv file
 				$pot_conn_csv = file_get_contents('connectivity_data_files/potential_connectivity_matrix_v1.0alpha.csv', FILE_USE_INCLUDE_PATH);
