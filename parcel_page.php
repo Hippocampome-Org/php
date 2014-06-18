@@ -215,7 +215,7 @@ if ($text_file_creation)
         </td>
         <td align='left' width='80%' class='table_neuron_page2'>
         <a href='neuron_page.php?id=".$parcel->getTypeId()."'>
-        <font class='".get_excit_inhib_font_class($parcel->getNickName())."'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
+        <font class='".get_excit_inhib_font_class($parcel->getExcitInhib())."'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
 	        </a>
 	        </td>
 	        </tr>";
@@ -251,9 +251,10 @@ if ($text_file_creation)
       }
 	
       function get_excit_inhib_font_class($name) {
-	      if (strpos($name, '(+)')) {
+	 //     if (strpos($name, '(+)')) {
+			 if ($name == 'e') {
 	      $font_class = 'font10a';
-	} else { // is (-)
+	} else { // is (i)
 	$font_class = 'font11';
 	}
 		return $font_class;
@@ -267,12 +268,12 @@ if ($text_file_creation)
 		{
 			$html = $html."<tr><td width='20%' align='center'>&nbsp;</td>";
 			if(isset($inputList[$var]))
-				$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;<a href='neuron_page.php?id=".$inputList[$var]["id"]."' class='".get_excit_inhib_font_class($inputList[$var]["nickname"])."'>".$inputList[$var]["subregion"]." ".$inputList[$var]["nickname"]."</a></td>";
+				$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;<a href='neuron_page.php?id=".$inputList[$var]["id"]."' class='".get_excit_inhib_font_class($inputList[$var]["excit_inhib"])."'>".$inputList[$var]["subregion"]." ".$inputList[$var]["nickname"]."</a></td>";
 						else
 						$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;</td>";
 	
 		    if(isset($outputList[$var]))
-			    		$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;<a href='neuron_page.php?id=".$outputList[$var]["id"]."' class='".get_excit_inhib_font_class($outputList[$var]["nickname"])."'>".$outputList[$var]["subregion"]." ".$outputList[$var]["nickname"]."</a></td>";
+			    		$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;<a href='neuron_page.php?id=".$outputList[$var]["id"]."' class='".get_excit_inhib_font_class($outputList[$var]["excit_inhib"])."'>".$outputList[$var]["subregion"]." ".$outputList[$var]["nickname"]."</a></td>";
 			    				else
 				$html = $html."<td width='40%' align='left' class='table_neuron_page2'>&nbsp;</td>";
 			    				 

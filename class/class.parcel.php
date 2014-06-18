@@ -5,6 +5,7 @@ class parcel {
 	private $propertyId;
 	private $name;
 	private $nickname;
+	private $excit_inhib;
 	private $subregion;
 	private $subject;
 	private $predicate;
@@ -41,6 +42,10 @@ class parcel {
 	public function getNickname()
 	{
 		return $this->nickname;
+	}
+	public function getExcitInhib()
+	{
+		return $this->excit_inhib;
 	}
 	
 	public function getSubRegion()
@@ -128,6 +133,11 @@ class parcel {
 	{
 		$this->nickname = $val;
 	}
+
+	public function setExcitInhib($val)
+	{
+		$this->excit_inhib = $val;
+	}
 	
 	public function setSubRegion($val)
 	{
@@ -197,17 +207,18 @@ class parcel {
 	public function retrieve_neuron_list_by_property($objectType,$subject)
 	{
 		$parcelList = Array();
-		$query = "SELECT DISTINCT t.name, t.subregion, t.nickname, p.subject, p.predicate, p.object, eptr.Type_id, eptr.Property_id "
+		$query = "SELECT DISTINCT t.name, t.subregion, t.nickname,t.excit_inhib, p.subject, p.predicate, p.object, eptr.Type_id, eptr.Property_id "
 				." FROM EvidencePropertyTypeRel eptr JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id) "
 				." WHERE predicate = 'in' AND object REGEXP '".$objectType."' and t.status ='active' AND subject = '".$subject."'";
 		
 		$rs = mysql_query($query);
-		while(list($name,$subregion,$nickname,$subject,$predicate,$object,$typeId,$propertyId) = mysql_fetch_row($rs))
+		while(list($name,$subregion,$nickname,$excit_inhib,$subject,$predicate,$object,$typeId,$propertyId) = mysql_fetch_row($rs))
 		{
 			$parcel = new parcel();
 			$parcel->setName($name);
 			$parcel->setSubRegion($subregion);
 			$parcel->setNickname($nickname);
+		$parcel->setExcitInhib($excit_inhib);
 			$parcel->setSubject($subject);
 			$parcel->setPredicate($predicate);
 			$parcel->setObject($object);
