@@ -208,22 +208,25 @@ if ($temporary_search == 1)
 	for ($i1=0; $i1<$n_id; $i1++)
 	{
 		$aut = $temporary -> getAuthor_array($i1);	
+		$auth = $temporary -> getCanonical_author($aut);
 	
-		// With name of authors, I retrieve the id of the authors from Author table.
-		$author_1 -> retrive_id_by_name($aut);
-		$id_author = $author_1 -> getID_array(0);
+		for($j=0;$j<sizeof($auth);$j++){
+			// With name of authors, I retrieve the id of the authors from Author table.
+			$author_1 -> retrive_id_by_name($auth[$j]);
+			$id_author = $author_1 -> getID_array(0);
 		
-		// With Id_author retrieve the ID_article form table ArticleAuthorRel:
-		$articleauthorrel -> retrive_article_id($id_author);
+			// With Id_author retrieve the ID_article form table ArticleAuthorRel:
+			$articleauthorrel -> retrive_article_id($id_author);
 		
-		$n_article_id = $articleauthorrel -> getN_author_id();
+			$n_article_id = $articleauthorrel -> getN_author_id();
 		
 		
-		for ($i2=0; $i2<$n_article_id; $i2++)
-		{
-			$article_id_temp[$n_total_id_article] = $articleauthorrel -> getArticle_id_array($i2);
-			$n_total_id_article = $n_total_id_article + 1;
-		} // end $i2			
+			for ($i2=0; $i2<$n_article_id; $i2++)
+			{
+				$article_id_temp[$n_total_id_article] = $articleauthorrel -> getArticle_id_array($i2);
+				$n_total_id_article = $n_total_id_article + 1;
+			} // end $i2			
+		}//end of $j
 	} // end $i1
 
 
@@ -688,16 +691,24 @@ $(document).ready(function(){
 						$author_1 -> retrive_by_id($id_author);
 						$name_a = $author_1 -> getName_author_array(0);
 
+						$flag=0;
 						for ($ii4=0; $ii4<$mm; $ii4++)
 						{
-							if ($name_a == $name_temp[$ii4])
+							$auth = $temporary->getCanonical_author($name_temp[$ii4]);
+							for($j=0;$j<sizeof($auth);$j++){
+							if ($name_a == $auth[$j])
 							{
 								$name_b = "<strong>$name_a</strong>";
+								$flag=1;
 								break;
 							}
 							else
 								$name_b = $name_a;
+							
 						}
+						if($flag==1)
+						break;
+					}
 						
 						$name_authors[$ii3] = $name_b;	
 					}

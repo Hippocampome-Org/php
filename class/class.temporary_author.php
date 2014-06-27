@@ -177,6 +177,21 @@ class temporary_author
     {
     	return $this->_author_array[$i];
     }	
+	public function getCanonical_author($author)
+    {
+    	$author = substr($author, 0,(strpos($author, ' ')+2)); //1st parameter string,2nd parameter starting index ,3rd parameter total length after the space
+		$author= mysql_real_escape_string($author);
+		$query_canonical="SELECT name FROM author WHERE name LIKE '$author%'"; //Bring all the authors with first name and first initial of the last name same.
+		$rs = mysql_query($query_canonical);	
+		$i=0;				
+		while(list($author_name) = mysql_fetch_row($rs))	
+		{	
+			$canonical[$i]=$author_name;
+			$i++;
+		}
+		return $canonical;
+    }
+    
 	
 }
 ?>
