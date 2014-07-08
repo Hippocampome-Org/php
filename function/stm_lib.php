@@ -13,7 +13,11 @@ function result_set_to_array($result_set, $field="all") {
 }
 
 function to_name($record) {
-  $name = $record["subregion"] . ' ' . $record["nickname"];
+  if (strpos($record["nickname"], $record["subregion"]) !== false) {
+    $name = $record["nickname"];
+  } else {
+    $name = $record["subregion"] . ' ' . $record["nickname"];
+  }
   return $name;
 }
 
