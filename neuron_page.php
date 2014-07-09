@@ -240,7 +240,7 @@ if ($text_file_creation)
 				<td width="20%" align="right">
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; <?php print $type->getName(); ?> 
+					<?php print $type->getName(); ?> 
 				</td>				
 			</tr>			
 		</table>
