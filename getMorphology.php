@@ -29,37 +29,121 @@ function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = ty
 }
 // *****************************************************************************************************
 
+//*******************************Changes to handle somata evidence**************************************
+function check_color_somata($id,$type, $unvetted,$val,$part){
+	$soma_location_check_somata="SELECT DISTINCT p.subject, p.object
+      FROM hippocampome.EvidencePropertyTypeRel eptr
+      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'somata';";
+	
+	$soma_location_check_axons="SELECT DISTINCT p.subject, p.object
+      FROM hippocampome.EvidencePropertyTypeRel eptr
+      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'axons';";
+	
+	$soma_location_check_dendrites="SELECT DISTINCT p.subject, p.object
+      FROM hippocampome.EvidencePropertyTypeRel eptr
+      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'dendrites';";
+	
+	$result_somata = mysql_query($soma_location_check_somata);
+	$result_axons = mysql_query($soma_location_check_axons);
+	$result_dendrites = mysql_query($soma_location_check_dendrites);
+	$axons_dendrites_check=0;
+	
+	while(list($subject,$object) = mysql_fetch_row($result_axons)){
+		if($subject=='axons' && $object==$val){
+			$axons_dendrites_check=1;
+			break;
+		}
+	}
+	
+	while(list($subject,$object) = mysql_fetch_row($result_dendrites)){
+		if($subject=='dendrites' && $object==$val){
+			$axons_dendrites_check=1;
+			break;
+		}
+	}
+	
+	$flag=0;
+	if($axons_dendrites_check!=1){
+		while(list($subject,$object) = mysql_fetch_row($result_somata)){
+			if($subject=='somata' && $object==$val){
+				
+				$flag=1;
+				break;
+			}
+		}
+	}
+	
+	 if ($type == 'somata'){
+			if($flag==1)
+				$link[0] = "<img src='images/morphology/neuron_soma.png' border='0'/>";
+		}
+	
+	return ($link);
+}
 
 
-function check_color($type, $unvetted) //$type --> whether axons/dendrites or both
+function check_color($id,$type, $unvetted,$val,$part) //$type --> whether axons/dendrites or both
 {
-	//echo "Neuron Type : ".$type." for id ".$id."\n";
+	$soma_location_check="SELECT DISTINCT p.subject, p.object
+      FROM hippocampome.EvidencePropertyTypeRel eptr
+      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'somata';";
+	
+	$result = mysql_query($soma_location_check);
+	$flag=0;
+	while(list($subject,$object) = mysql_fetch_row($result)){
+		if($subject=='somata' && $object==$val){
+			$flag=1;
+			break;
+		}
+	}
 	if ($type == 'axons')
 	{
-		if ($unvetted == 1)
+		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/axons_present_unvetted.png' border='0'/>";
-		else
-			$link[0] = "<img src='images/morphology/axons_present.png' border='0'/>";
-
+		}
+		else{
+			if($flag==1){
+				$link[0] = "<img src='images/morphology/axons_present_soma.png' border='0'/>";
+				
+			}
+			else{
+				$link[0] = "<img src='images/morphology/axons_present.png' border='0'/>";
+			}
+		}
 		 $link[1] = 'red';
 	}
-	if ($type == 'dendrites')
+	else if ($type == 'dendrites')
 	{
-		if ($unvetted == 1)
+		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/dendrites_present_unvetted.png' border='0'/>";
-		else
-			$link[0] = "<img src='images/morphology/dendrites_present.png' border='0'/>";
-
+		}
+		else{
+			if($flag==1){
+				$link[0] = "<img src='images/morphology/dendrites_present_soma.png' border='0'/>";
+			}
+			else{
+				$link[0] = "<img src='images/morphology/dendrites_present.png' border='0'/>";
+			}
+		}
 		$link[1] = 'blue';
 	}
-	if ($type == 'both')
+	else if ($type == 'both')
 	{
 		//echo "Should come here";
-		if ($unvetted == 1)
+		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/somata_present_unvetted.png' border='0'/>";
+		}
+		else{
+			if($flag==1)
+				$link[0] = "<img src='images/morphology/somata_present_soma.png' border='0'/>";
+				
 		else
 			$link[0] = "<img src='images/morphology/somata_present.png' border='0'/>";
-		
+		}
 		$link[1] = 'violet';
 	}
 	return ($link);
@@ -74,9 +158,17 @@ function check_color($type, $unvetted) //$type --> whether axons/dendrites or bo
 function getUrlForLink($id,$img,$key,$color1) 
 {
 	$url = '';
+	if($color1!=''){
+		if($img!='')
+		{
+			$url ='<a href="property_page_morphology.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';	
+		}
+	}
+	else{
 	if($img!='')
-	{
-		$url ='<a href="property_page_morphology.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';	
+		{
+			$url =$img;	
+		}
 	}
 	return ($url);	
 }
@@ -232,7 +324,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	 $nickname = $type->getNickname(); // Retrieve nick name
 	 $position = $type->getPosition(); // Retrieve the position
 	 $subregion = $type -> getSubregion(); // Retrieve the sub region
-	 $excit_inhib =$type-> getExcit_Inhib();
+	 $excit_inhib =$type-> getExcit_Inhib();//Retrieve the Excit or Inhib
 	
 	$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id); // Retrieve properties for each Type id
 	
@@ -246,7 +338,8 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		$rel = $property->getRel(); // Retrieve Predicate (from the property table)
 		$part1 = $property->getPart(); // Retrieve Subject (from the property table)
 	
-		if (($rel == 'in') && ($part1 != 'somata')) // Why are we eliminating Somata in ?
+		if (($rel == 'in'))
+	//	if (($rel == 'in') && ($part1 != 'somata')) // Why are we eliminating Somata in ?
 		{
 			$id_p[$q] = $property->getID();
 			$val[$q] = $property->getVal();  // Get the Object
@@ -256,30 +349,47 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	}
 	for ($ii=0; $ii<$q; $ii++) // For all the preperties derieved check the required conditions
 	{
-		$val_array=explode(':', $val[$ii]); // Check the object from the property index
-		// DG +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		if(count($val_array) > 1) // To check if the explode has returned both the postfix value and the prefix value
-		{
-			$unvetted = check_unvetted1($id, $id_p[$ii], $evidencepropertyyperel); // Checks if a particular property is vetted or unvetted
-			$neuronType = ''; // Whether neuron present is Axon,Dendrite or Both
-			if($hippo[$val[$ii]]!='') // Check if for a particular property , the associated value 
+		if($part[$ii]!='somata')
+		{		
+			$val_array=explode(':', $val[$ii]); // Check the object from the property index
+			// DG +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			if(count($val_array) > 1) // To check if the explode has returned both the postfix value and the prefix value
 			{
-				$neuronType ='both';
-				/* $img = check_color('both', $unvetted);
-				$hippo[$val[$ii]] = $img[0]; */
+				$unvetted = check_unvetted1($id, $id_p[$ii], $evidencepropertyyperel); // Checks if a particular property is vetted or unvetted
+				$neuronType = ''; // Whether neuron present is Axon,Dendrite or Both
+		//		if($hippo[$val[$ii]]!='') // Check if for a particular property , the associated value 
+				if($hippo_color[$val[$ii]]!='')
+				{
+					$neuronType ='both';
+					/* $img = check_color('both', $unvetted);
+					$hippo[$val[$ii]] = $img[0]; */
+				}
+				else{
+					if ($part[$ii] == 'axons')
+						$neuronType ='axons';
+						//$hippo[$val[$ii]] ='<img src=images/morphology/axons_present.png>';
+					else
+						$neuronType ='dendrites';
+						//$hippo[$val[$ii]] ='<img src=images/morphology/dendrites_present.png>';
+				}
+				 $img = check_color($id,$neuronType, $unvetted,$val[$ii],$part[$ii]);
+				 $hippo[$val[$ii]] = $img[0];
+				 $hippo_color[$val[$ii]] = $img[1]; 
+			} 
+		}
+		if($part[$ii]=='somata'){	
+			$val_array=explode(':', $val[$ii]);
+			if(count($val_array) > 1) // To check if the explode has returned both the postfix value and the prefix value
+			{
+				$unvetted = check_unvetted1($id, $id_p[$ii], $evidencepropertyyperel); // Checks if a particular property is vetted or unvetted
+				$neuronType ='somata';
+				$img_somata = check_color_somata($id,$neuronType, $unvetted,$val[$ii],$part[$ii]);
+				if($img_somata!=''){
+				 	$hippo[$val[$ii]] = $img_somata[0];
+				
+				} 
 			}
-			else{
-				if ($part[$ii] == 'axons')
-					$neuronType ='axons';
-					//$hippo[$val[$ii]] ='<img src=images/morphology/axons_present.png>';
-				else
-					$neuronType ='dendrites';
-					//$hippo[$val[$ii]] ='<img src=images/morphology/dendrites_present.png>';
-			}
-			 $img = check_color($neuronType, $unvetted);
-			 $hippo[$val[$ii]] = $img[0];
-			 $hippo_color[$val[$ii]] = $img[1]; 
-		} 
+		}
 	}
 //	if (strpos($nickname, '(+)') == TRUE)
 	if ($excit_inhib == 'e')
