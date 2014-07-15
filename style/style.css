@@ -558,16 +558,26 @@ width:1026px;
 
 /* Change with resolution ------------------------------------------------------------- */	
 .show1 {
-	width:20px;
+/*	width:20px;
 	height:20px;
-	background:#FF6633;
+	background:#FF6633;*/
+	width:34px;
+	height:34px;
+	border-style: solid;
+	border-color: #E4E4E4;
+	background: url(../images/triangle_close1.png) no-repeat;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
 .show0 {
-	width:20px;
+/*	width:20px;
 	height:20px;
-	background:#009966;
+	background:#009966;*/
+	width:34px;
+	height:34px;
+	border-style: solid;
+	border-color: #E4E4E4;
+	background: url(../images/triangle_open1.png) no-repeat;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
