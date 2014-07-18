@@ -67,7 +67,7 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 	$outputStr ='';
 	if($formatted_value!='')
 	{
-		$outputStr = '<span class="'.$span_class_str.'"><a href="property_page_ephys.php?id_ephys='.$id_ephys2[$param_str].'&id_neuron='.$id_type.'&ep='.$param_str.'" target="_blank" class="'.$color_unvetted.'">'.$formatted_value;
+		$outputStr = '<span class="'.$span_class_str.'"><a href="property_page_ephys.php?id_ephys='.$id_ephys2[$param_str].'&id_neuron='.$id_type.'&ep='.$param_str.'&page=1" target="_blank" class="'.$color_unvetted.'">'.$formatted_value;
 	
 	//$print_str = $formatted_value . ' &plusmn; ' . $weighted_std_ephys2[$param_str] . ' ' . $units;
 		$print_str = ' &plusmn; ' . $weighted_std_ephys2[$param_str] . ' ' . $units;
