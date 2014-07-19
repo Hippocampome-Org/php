@@ -653,6 +653,7 @@ $("#nGrid").mouseout(function(e) {
 		<img src="images/morphology/axons_present.png" width="10px" border="0"/> <font class='font5'>Axon present </font> &nbsp; &nbsp; 
 		<img src="images/morphology/dendrites_present.png" width="10px" border="0"/> <font class='font5'>Dendrite present </font>&nbsp; &nbsp; 
 		<img src="images/morphology/somata_present.png" width="10px" border="0"/> <font class='font5'>Axon & Dendrite present </font> &nbsp; &nbsp; 
+		<img src="images/morphology/neuron_soma.png" width="10px" border="0"/> <font class='font5'>Soma present </font>  &nbsp; &nbsp;
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>

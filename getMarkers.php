@@ -14,7 +14,8 @@ require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.temporary_result_neurons.php');
 
-$n_markers = 36;
+//$n_markers = 36;
+$n_markers = 37;
 
 // Name in alphabetic order for MARKERS: ************************************
 $name_markers = array(
@@ -40,20 +41,21 @@ $name_markers = array(
 		"19" =>"mGluR8a",
 		"20" =>"MOR",
 		"21" =>"Mus2R",
-		"22" =>"NKB",
-		"23"=>"nNOS",
-		"24" =>"NPY",
-		"25" =>"PPTA",
-		"26" =>"PPTB",
-		"27" =>"PV",
-		"28" =>"RLN",
-		"29" =>"SOM",
-		"30" =>"Sub_P_Rec",
-		"31" =>"vAChT",
-		"32" =>"vGluT2",
-		"33" =>"vGluT3",
-		"34" =>"VIAAT",
-		"35" =>"VIP"
+		"22" =>"NG",
+		"23" =>"NKB",
+		"24"=>"nNOS",
+		"25" =>"NPY",
+		"26" =>"PPTA",
+		"27" =>"PPTB",
+		"28" =>"PV",
+		"29" =>"RLN",
+		"30" =>"SOM",
+		"31" =>"Sub_P_Rec",
+		"32" =>"vAChT",
+		"33" =>"vGluT2",
+		"34" =>"vGluT3",
+		"35" =>"VIAAT",
+		"36" =>"VIP"
 );
 
 function getUrlForLink($id,$img,$key,$color1)
@@ -451,12 +453,14 @@ if($research!="1")
 	$type -> retrive_id();
 	$number_type = $type->getNumber_type();
 }
+//$number_type=$number_type+6;
 $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(39)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
+//$prev_subregion="NONE";
 for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the number of active neuron types to print each row in the data table
 {
-
 	// ARRAY Creation for hippocampome properties: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
 	$hippo_property_id = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 			"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
 			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
@@ -464,7 +468,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
-			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+			"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
@@ -475,19 +479,19 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, 
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
-			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+			"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
 	
-	$hippo = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
+	$hippo = array("CB"=>NULL,"CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
 			"NPY" =>NULL, "PV" =>NULL, "SOM" =>NULL, "VIP" =>NULL, "CB1" =>NULL,
 			"ENK" =>NULL, "GABAa_alfa" =>NULL, "Mus2R" =>NULL, "Sub_P_Rec" =>NULL,
 			"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, // CLR modified this line
 			"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL,
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
-			"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+			"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 	);
@@ -498,7 +502,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"VgluT3" =>NULL, "CoupTF_2" =>NULL, "5HT_3" =>NULL, "RLN" =>NULL, 
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
-							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+							"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);
@@ -510,7 +514,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
-							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+							"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);						
@@ -534,7 +538,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"a-act2" =>NULL, "ChAT" =>NULL, "DYN" =>NULL, "EAAT3" =>NULL, 
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
-							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
+							"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
 							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
 							);
@@ -555,24 +559,28 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			$id = $id_search[$i];	
 		}
 		else
-	 		$id = $type->getID_array($i);
+			$id = $type->getID_array($i);
 	 
+
+			
 	 $type -> retrive_by_id($id); // Retrieve id
 	 $nickname = $type->getNickname(); // Retrieve nick name
 	 $position = $type->getPosition(); // Retrieve the position
 	 $subregion = $type -> getSubregion(); // Retrieve the sub region
-	$excit_inhib =$type-> getExcit_Inhib();
+	 $excit_inhib =$type-> getExcit_Inhib();
 	
 	$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id); // Retrieve distinct Property ids for each type id
 	$n_property = $evidencepropertyyperel -> getN_Property_id(); // Count of the number of properties for a given type id
 	
 	$q=0;
+
 	for ($i5=0; $i5<$n_property; $i5++) // For Each Property id he derieves by using an Index
 	{
 		$Property_id = $evidencepropertyyperel -> getProperty_id_array($i5); // retrive the respective property id at a particular id index
 		
 		$property -> retrive_by_id($Property_id); // For each property id retrieve the respective properties
 		$rel1 = $property->getRel(); // Retrieve a predicate for a particular property id
+		$part1 = $property->getPart(); // Retrieve Subject (from the property table)
 		if ($rel1 == 'has expression')
 		{
 			$id_p[$q] = $property->getID(); // Retrieve the id
@@ -581,7 +589,9 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			$rel[$q] = $property->getRel(); // Retrieve the Predicate
 			$q = $q+1;
 		}
+	
 	}
+	
 	for ($ii=0; $ii<$q; $ii++) // For all the properties derieved check the required conditions
 	{
 		if (strpos($part[$ii], 'Gaba-a') == 'TRUE')
@@ -638,6 +648,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$hippo_property['mGluR7a'] = check_positive_negative('mGluR7a', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['mGluR8a'] = check_positive_negative('mGluR8a', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['MOR'] = check_positive_negative('MOR', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
+	$hippo_property['NG'] = check_positive_negative('NG', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['NKB'] = check_positive_negative('NKB', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['PPTA'] = check_positive_negative('PPTA', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['PPTB'] = check_positive_negative('PPTB', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
@@ -655,7 +666,10 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 //	if (strpos($nickname, '(-)') == TRUE)
 	if ($excit_inhib == 'i')
 		$fontColor='#CC0000';
-	
+/*	for ($f1=0; $f1<6; $f1++){
+		$hippo[$f1]="";
+		$hippo_color[$f1]="";
+	}*/
 	for ($f1=0; $f1<$n_markers; $f1++)  //$n_markers set to 36
 	{
 		
@@ -676,9 +690,10 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		else	  
 			$hippo_color[$name_markers[$f1]] = $img[1];
 	}
-	
+
 	  $responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
-			getUrlForLink($id,$hippo['5HT_3'],$name_markers['0'],$hippo_color['5HT_3']),
+	
+	  		getUrlForLink($id,$hippo['5HT_3'],$name_markers['0'],$hippo_color['5HT_3']),
 			getUrlForLink($id,$hippo['a-act2'],$name_markers['1'],$hippo_color['a-act2']),
 			getUrlForLink($id,$hippo['AChE'],$name_markers['2'],$hippo_color['AChE']),
 			getUrlForLink($id,$hippo['CB'],$name_markers['3'],$hippo_color['CB']),
@@ -700,20 +715,22 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['mGluR8a'],$name_markers['19'],$hippo_color['mGluR8a']),
 			getUrlForLink($id,$hippo['MOR'],$name_markers['20'],$hippo_color['MOR']),
 			getUrlForLink($id,$hippo['Mus2R'],$name_markers['21'],$hippo_color['Mus2R']),
-			getUrlForLink($id,$hippo['NKB'],$name_markers['22'],$hippo_color['NKB']),
-			getUrlForLink($id,$hippo['nNOS'],$name_markers['23'],$hippo_color['nNOS']),
-			getUrlForLink($id,$hippo['NPY'],$name_markers['24'],$hippo_color['NPY']),
-			getUrlForLink($id,$hippo['PPTA'],$name_markers['25'],$hippo_color['PPTA']),
-			getUrlForLink($id,$hippo['PPTB'],$name_markers['26'],$hippo_color['PPTB']),
-			getUrlForLink($id,$hippo['PV'],$name_markers['27'],$hippo_color['PV']),
-			getUrlForLink($id,$hippo['RLN'],$name_markers['28'],$hippo_color['RLN']),
-			getUrlForLink($id,$hippo['SOM'],$name_markers['29'],$hippo_color['SOM']),
-			getUrlForLink($id,$hippo['Sub_P_Rec'],$name_markers['30'],$hippo_color['Sub_P_Rec']),
-			getUrlForLink($id,$hippo['vAChT'],$name_markers['31'],$hippo_color['vAChT']),
-			getUrlForLink($id,$hippo['vGluT2'],$name_markers['32'],$hippo_color['vGluT2']),
-			getUrlForLink($id,$hippo['vGluT3'],$name_markers['33'],$hippo_color['vGluT3']),
-			getUrlForLink($id,$hippo['VIAAT'],$name_markers['34'],$hippo_color['VIAAT']),
-			getUrlForLink($id,$hippo['VIP'],$name_markers['35'],$hippo_color['VIP']));  
+			getUrlForLink($id,$hippo['NG'],$name_markers['22'],$hippo_color['NG']),
+			getUrlForLink($id,$hippo['NKB'],$name_markers['23'],$hippo_color['NKB']),
+			getUrlForLink($id,$hippo['nNOS'],$name_markers['24'],$hippo_color['nNOS']),
+			getUrlForLink($id,$hippo['NPY'],$name_markers['25'],$hippo_color['NPY']),
+			getUrlForLink($id,$hippo['PPTA'],$name_markers['26'],$hippo_color['PPTA']),
+			getUrlForLink($id,$hippo['PPTB'],$name_markers['27'],$hippo_color['PPTB']),
+			getUrlForLink($id,$hippo['PV'],$name_markers['28'],$hippo_color['PV']),
+			getUrlForLink($id,$hippo['RLN'],$name_markers['29'],$hippo_color['RLN']),
+			getUrlForLink($id,$hippo['SOM'],$name_markers['30'],$hippo_color['SOM']),
+			getUrlForLink($id,$hippo['Sub_P_Rec'],$name_markers['31'],$hippo_color['Sub_P_Rec']),
+			getUrlForLink($id,$hippo['vAChT'],$name_markers['32'],$hippo_color['vAChT']),
+			getUrlForLink($id,$hippo['vGluT2'],$name_markers['33'],$hippo_color['vGluT2']),
+			getUrlForLink($id,$hippo['vGluT3'],$name_markers['34'],$hippo_color['vGluT3']),
+			getUrlForLink($id,$hippo['VIAAT'],$name_markers['35'],$hippo_color['VIAAT']),
+			getUrlForLink($id,$hippo['VIP'],$name_markers['36'],$hippo_color['VIP']));  
+
 }
 //echo json_encode($responce);
 ?>
