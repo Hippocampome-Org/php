@@ -48,6 +48,7 @@ function create_temp_table ($name_temporary_table)
 	PMID BIGint(25),
 	pages varchar(20),
 	page_location varchar(100),
+	protocol varchar(80),
 	id_evidence int(20),
 	show1 int(5),
 	pmcid varchar(400),
@@ -74,7 +75,7 @@ function create_temp_table ($name_temporary_table)
 
 }
 
-function insert_temporary($table, $id_fragment, $id_original, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time, $volume, $issue)
+function insert_temporary($table, $id_fragment, $id_original, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time, $volume, $issue)
 {		
 	if ($open_access == NULL)
 		$open_access = -1;
@@ -95,6 +96,7 @@ $publication= mysql_real_escape_string($publication);
 		PMID,
 		pages,
 		page_location,
+		protocol,
 		id_evidence,
 		show1,
 		pmcid,
@@ -122,6 +124,7 @@ $publication= mysql_real_escape_string($publication);
 	   '$PMID',
 	   '$pages',
 	   '$page_location',
+	   '$protocol',
 	   '$id_evidence',
 	   '$show1',
 	   '$pmcid',
@@ -686,7 +689,13 @@ function show_only_ephys(link, start1, stop1)
 					$evidencefragmentrel -> retrive_fragment_id_1($id_evidence_2[$i1]);
 					$id_fragment = $evidencefragmentrel -> getFragment_id();
 					$fragment -> retrive_by_id($id_fragment);
-					$page_location = $fragment -> getPage_location();
+					$page_loc = $fragment -> getPage_location();
+						
+					// Extract page_location and protocol
+					$protoc = explode(",", $page_loc);
+					$page_location=$protoc[0];
+					$protocol=$protoc[1];
+					
 					$original_id = $fragment -> getOriginal_id();
 		
 					// retrieve the article_id ffrom evidencearticleRel:
@@ -740,7 +749,7 @@ function show_only_ephys(link, start1, stop1)
 					{
 		
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-						insert_temporary($name_temporary_table, $id_fragment, $original_id, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
+						insert_temporary($name_temporary_table, $id_fragment, $original_id, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
 						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					}
 		 		}
@@ -1119,18 +1128,18 @@ function show_only_ephys(link, start1, stop1)
 						// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
 						if ($show1 == 1)
 						{
-							$query = "SELECT id_fragment, id_original, page_location, complete_name, res0, res2, res3, value1, value2, error, n_measurement, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
+							$query = "SELECT id_fragment, id_original, page_location, protocol, complete_name, res0, res2, res3, value1, value2, error, n_measurement, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
 							$rs = mysql_query($query);
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;
-							while(list($id_fragment, $id_original, $page_location, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time) = mysql_fetch_row($rs))
+							while(list($id_fragment, $id_original, $page_location, $protocol, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time) = mysql_fetch_row($rs))
 							{
 
 								if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
 								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
 								print ("<tr>");
-								print ("<td width='15%' rowspan='3' align='right' valign='top'></td>");
+								print ("<td width='15%' rowspan='4' align='right' valign='top'></td>");
 								print ("<td width='15%' align='left'> </td></tr>");
 							
 								// retrieve the attachament from "fragment" with original_id *****************************
@@ -1165,6 +1174,16 @@ function show_only_ephys(link, start1, stop1)
 								Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
 								</td>
 								<td width='15%' align='center'>");
+
+								// Display protocol, if any.
+								if ($protocol) {
+								print ("</td></tr>
+								<tr>
+								<td width='70%' class='table_neuron_page2' align='left'>
+								Protocol: <span>$protocol</span>
+								</td><td width='15%' align='center'>");
+								}
+
 						
 								print ("</td></tr>
 								<tr>
