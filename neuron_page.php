@@ -1353,7 +1353,7 @@ if ($text_file_creation)
 						    else
 						    	print ("<strong>$complete_name ($res[0]):</strong> ");
 						    
-							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject' class='$font_col'>$print_str</a>");
+							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject&page=1' class='$font_col'>$print_str</a>");
 							print ("</td></tr>");											
 						} // end if ($mean_value)
 							
