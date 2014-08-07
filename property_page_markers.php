@@ -538,6 +538,1222 @@ function show_only_authors(link, color)
 	location.href = destination_page+"?name_show_only_authors="+name+"&name_show_only_authors_var=1&color="+color;
 }
 
+//Javascript function *****************************************************************************************************
+//================changes===========================
+function evidencetoggle(){	
+
+	//alert(document.getElementById('animal_select').value);
+	
+	var element_mouse_mRNA= document.getElementsByClassName('mouse_mRNA');
+	var element_mouse_unknown= document.getElementsByClassName('mouse_unknown');
+	var element_mouse_immunohistochemistry= document.getElementsByClassName('mouse_immunohistochemistry');
+	var element_mouse_immunohistochemistry_mRNA= document.getElementsByClassName('mouse_immunohistochemistry_mRNA');
+
+	var element_unspecified_rodent_mRNA= document.getElementsByClassName('unspecified_rodent_mRNA');
+	var element_unspecified_rodent_unknown= document.getElementsByClassName('unspecified_rodent_unknown');
+	var element_unspecified_rodent_immunohistochemistry= document.getElementsByClassName('unspecified_rodent_immunohistochemistry');
+	var element_unspecified_rodent_immunohistochemistry_mRNA= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_mRNA');
+
+	var element_rat_mRNA= document.getElementsByClassName('rat_mRNA');
+	var element_rat_unknown= document.getElementsByClassName('rat_unknown');
+	var element_rat_immunohistochemistry= document.getElementsByClassName('rat_immunohistochemistry');
+	var element_rat_immunohistochemistry_mRNA= document.getElementsByClassName('rat_immunohistochemistry_mRNA');
+	
+//..................... All aminals and All protocols...........................................
+//....................1
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all'))||
+			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry'))||
+			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA'))||
+			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry_mRNA'))||
+			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown'))||
+			((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all'))||
+			((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all'))||
+			((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+				}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}  
+			
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+				} 
+		}
+
+//-------------------------------------------------------------------------------------------
+	//.....................  rats and  immunohistochemistry ...........................................
+//.........................2
+	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+	//..................... rats and mRNA ...........................................
+
+	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+	//.....................rats and immunohistochemistry and mRna ...........................................
+
+	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+	//.....................rats and unknown ...........................................
+
+	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+		}
+//--------------------------------------------------------------------------------------------------
+
+	//..................... mouse and  immunohistochemistry ...........................................
+//...........................3
+	 if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+	//..................... mouse and mRNA ...........................................
+
+	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+	//.....................mouse and immunohistochemistry and mRna ...........................................
+
+	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+	//.....................mouse and unknown ...........................................
+
+	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+//	alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+		}
+	//--------------------------------------------------------------------------------------------------
+
+	//..................... unspecified rodent and  immunohistochemistry ...........................................
+//..................4
+	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+	//..................... unspecified rodent and mRNA ...........................................
+
+	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'table';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+	//.....................unspecified rodent and immunohistochemistry and mRna ...........................................
+
+	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'table';
+					
+					
+			} 
+		}
+
+	//.....................unspecified rodent and unknown ...........................................
+
+	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA.length;i++){
+				
+				element_mouse_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		
+	  			element_mouse_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA.length;i++){
+				
+				element_rat_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		
+	  			element_rat_unknown[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		
+	  		element_rat_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+				
+				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown[i].style.display = 'table';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
+				
+				
+			}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+					
+					
+			} 
+		}
+	
+	
+}
+
+//====================================================
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -631,11 +1847,11 @@ function show_only_authors(link, color)
 			</tr>								
 		</table>
     <table width="80%" border="0" cellspacing="2" cellpadding="5" padding-top="5"> 
-      <tr>
+<!--      <tr>
         <td class="table_neuron_page2" padding="5">
           All experiments were conducted on rats with an immunohistochemical staining protocol, unless otherwise specified. 
         </td>
-     </tr>
+     </tr>-->
 <tr>
 <td class="table_neuron_page2" padding="5">
       All of the evidence provided on Hippocampome.org are quotes from scientific texts.  
@@ -921,7 +2137,202 @@ function show_only_authors(link, color)
 
 		<br />	
 	<?php		
-	if ($n_show1 < 2);
+	if ($n_show1 < 2){
+	?>
+	<!-- TABLE SHOW ONLY *******************************************************************************************************************
+		************************************************************************************************************************************* -->				
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+		<tr>
+			<td width="25%" align="left" style='visibility: hidden;'>
+				<font class="font2">Show Only:</font> 
+			</td>
+			<td width="35%" align="left" style="visibility: hidden;">
+			<?php 
+				print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, '$color')\">");
+					
+				if ($name_show_only)
+				{
+					if ($name_show_only == 'all')
+						$name_show_only1 = 'All';
+					if ($name_show_only == 'article_book')
+						$name_show_only1 = 'Articles / Books';								
+					if ($name_show_only == 'name_journal')
+						$name_show_only1 = 'Name of Publication';
+					if ($name_show_only == 'authors')
+						$name_show_only1 = 'Authors';
+					if ($name_show_only == 'morphology')
+						$name_show_only1 = 'Morphology';
+																												
+					print ("<OPTION VALUE='$name_show_only1'>$name_show_only1</OPTION>");
+					print ("<OPTION VALUE='all'>----</OPTION>");
+				}
+			?>	
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='article_book'>Articles / Books</OPTION>
+				<OPTION VALUE='name_journal'>Name of Publication</OPTION>
+				<OPTION VALUE='authors'>Authors</OPTION>
+				</select>					
+			</td>
+			<td width="15%" align="left">
+				<font class="font2">Animal:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='animal_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all' >All</OPTION>
+				<OPTION VALUE='rat'>Rat</OPTION>
+				<OPTION VALUE='mouse'>Mouse</OPTION>
+				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
+				</select>					
+			</td>
+				<td width="15%" align="left">
+				<font class="font2">Protocol:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='protocol_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
+				<OPTION VALUE='mRNA'>mRNA</OPTION>
+				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
+				<OPTION VALUE='unknown'>unknown</OPTION>
+				</select>					
+			</td>
+		
+			<td width="40%" align="left">
+			<?php 
+				// ARTICLE - BOOK: ++++++++++++++++++++++++
+
+				if ($sub_show_only == 'article')
+				{
+					// retrieve the number of article or number of book:
+					$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table WHERE show1 = '1'";	
+					$rs = mysql_query($query);
+					$number_of_articles_1 = 0;
+					$number_of_books_1 = 0;
+					while(list($title, $pmid) = mysql_fetch_row($rs))		
+					{	
+						if (strlen($pmid) > 10)
+							$number_of_books_1 = $number_of_books_1 + 1;
+						if (strlen($pmid) < 10)
+							$number_of_articles_1 = $number_of_articles_1 + 1;							
+					}
+					
+				
+					if ($name_show_only_article == 'article')
+					{
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
+						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
+						print ("<OPTION VALUE='all'>All</OPTION>");
+						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
+						print ("</select>");							
+					}
+					else if ($name_show_only_article == 'book')
+					{
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
+						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
+						print ("<OPTION VALUE='all'>All</OPTION>");
+						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
+						print ("</select>");
+					}
+					else
+					{
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
+						print ("<OPTION VALUE='all'>All</OPTION>");
+						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
+						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
+						print ("</select>");
+					}							
+				}						
+			
+				// PUBLICATION: ++++++++++++++++++++++++
+				if ($sub_show_only == 'name_journal')
+				{						
+					print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, '$color')\">");
+					
+					if ( ($name_show_only_journal != 'all') &&  ($name_show_only_journal != NULL) )
+						print ("<OPTION VALUE='$name_show_only_journal'>$name_show_only_journal</OPTION>");
+					
+					print ("<OPTION VALUE='all'>All</OPTION>");
+					
+					// retrieve the name of journal from temporary table:
+					$query ="SELECT DISTINCT publication FROM $name_temporary_table WHERE show1 = '1'";
+					$rs = mysql_query($query);					
+					while(list($pub) = mysql_fetch_row($rs))	
+					{	
+						// retrieve the number of articles for this publication:
+						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE publication = '$pub'";
+						$rs1 = mysql_query($query1);
+						$n_pub1=0;					
+						while(list($id) = mysql_fetch_row($rs1))							
+							$n_pub1 = $n_pub1 + 1;
+					
+						if ($pub == $name_show_only_journal);
+						else
+							print ("<OPTION VALUE='$pub'>$pub ($n_pub1)</OPTION>");		
+					}
+					print ("</select>");				
+				}
+				
+				// AUTHORS: ++++++++++++++++++++++++
+				$aut1 = NULL;
+				if ($sub_show_only == 'authors')
+				{
+					// retrieve the name of authors from temporary table:
+					$query ="SELECT DISTINCT authors FROM $name_temporary_table WHERE show1 = '1'";
+					$rs = mysql_query($query);				
+					
+					while(list($aut) = mysql_fetch_row($rs))
+					{
+						$aut1=$aut1.", ".$aut;
+					}					
+					$aut1=str_replace(', ', '*', $aut1);
+					$single_aut=explode('*', $aut1);
+
+					sort($single_aut);
+					$single_aut2=array_unique($single_aut);
+
+					// Remove the blank from array:
+					$ni=0;
+					for ($i1=0; $i1<count($single_aut2); $i1++)
+					{		 
+						if ($single_aut2[$i1] == NULL);
+						else
+						{
+							$single_aut3[$ni] = $single_aut2[$i1];
+							$ni = $ni + 1;
+						}
+					}							
+
+					print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_authors(this, '$color')\">");
+					
+					if ( ($name_show_only_authors != 'all') &&  ($name_show_only_authors != NULL) )
+					{
+						print ("<OPTION VALUE='$name_show_only_authors'>$name_show_only_authors</OPTION>");
+						print ("<OPTION VALUE='all'>---</OPTION>");
+					}
+					print ("<OPTION VALUE='all'> ALL </OPTION>");
+					
+					for ($i1=0; $i1<count($single_aut3); $i1++)
+					{
+					
+						// retrieve the number of articles for this publication:
+						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE authors LIKE '%$single_aut3[$i1]%'";
+						$rs1 = mysql_query($query1);
+						$n_auth1=0;					
+						while(list($id) = mysql_fetch_row($rs1))	
+							$n_auth1 = $n_auth1 + 1;	
+
+						print ("<OPTION VALUE='$single_aut3[$i1]'>$single_aut3[$i1] ($n_auth1)</OPTION>");
+					}
+					print ("</select>");				
+				}						
+			?>	
+			</td>							
+		</tr>
+		</table>
+		<!-- END TABLE SHOW ONLY ***************************************************************************************************************
+		************************************************************************************************************************************* -->	
+	<?php 
+	}
 	else
 	{
 	?>
@@ -929,10 +2340,10 @@ function show_only_authors(link, color)
 		************************************************************************************************************************************* -->				
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<tr>
-			<td width="15%" align="left">
+			<td width="25%" align="left">
 				<font class="font2">Show Only:</font> 
 			</td>
-			<td width="45%" align="left">
+			<td width="35%" align="left">
 			<?php 
 				print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, '$color')\">");
 					
@@ -959,6 +2370,29 @@ function show_only_authors(link, color)
 				<OPTION VALUE='authors'>Authors</OPTION>
 				</select>					
 			</td>	
+			<td width="15%" align="left">
+				<font class="font2">Animal:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='animal_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all' >All</OPTION>
+				<OPTION VALUE='rat'>Rat</OPTION>
+				<OPTION VALUE='mouse'>Mouse</OPTION>
+				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
+				</select>					
+			</td>
+				<td width="15%" align="left">
+				<font class="font2">Protocol:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='protocol_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
+				<OPTION VALUE='mRNA'>mRNA</OPTION>
+				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
+				<OPTION VALUE='unknown'>unknown</OPTION>
+				</select>					
+			</td>
 			<td width="40%" align="left">
 			<?php 
 				// ARTICLE - BOOK: ++++++++++++++++++++++++
@@ -1185,7 +2619,7 @@ function show_only_authors(link, color)
 					</td>	
 				</tr>	
 				</table>");																																	
-				print ("<br>");
+			//	print ("<br>");
 		
 				
 				$query = "SELECT DISTINCT id, id_fragment, id_original, quote, page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
@@ -1251,10 +2685,42 @@ function show_only_authors(link, color)
               $header_html = header_row("EXPRESSION", $expression);
               if ($animal != 'rat')
                 $header_html = $header_html . header_row("ANIMAL", $animal);
+		 else 
+                $header_html = $header_html . header_row("ANIMAL", 'rat');
               if ($protocol != 'immunohistochemistry')
                 $header_html = $header_html . header_row("PROTOCOL", $protocol);
-
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
+		 else 
+                $header_html = $header_html . header_row("PROTOCOL", 'immunohistochemistry');
+	//mouse and protocols
+            if($animal=="mouse" && $protocol=="mRNA")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="unknown")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="immunohistochemistry")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA' style='display:table'>");  
+     //unspecified_rodent and protocols
+            
+             else if($animal=="unspecified_rodent" && $protocol=="mRNA")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_mRNA' style='display:table'>");
+			 else if($animal=="unspecified_rodent" && $protocol=="unknown")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_unknown' style='display:table'>");
+			 else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry' style='display:table'>");
+			else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry_mRNA")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_mRNA' style='display:table'>");
+           //rat and protocols		
+            	
+            else if($animal=="rat" && $protocol=="mRNA")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_mRNA' style='display:table'>");
+		else if($animal=="rat" && $protocol=="unknown")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_unknown' style='display:table'>");
+            else if($animal=="rat" && $protocol=="immunohistochemistry")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry' style='display:table'>");
+            else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA' style='display:table'>");
+            
               print $header_html;
               print ("
                 <tr>
@@ -1294,7 +2760,7 @@ function show_only_authors(link, color)
                   <td width='15%'>");
               }
 							print ("</table>");
-							print ("<br>");	
+							//print ("<br>");	
 
 							$id_fragment_compare = $id_fragment;
 						} // END IF	($id_fragment_compare == $id_fragment)
@@ -1303,7 +2769,7 @@ function show_only_authors(link, color)
 					
 				} // end WHILE
 				
-				print ("<br>");	
+			//	print ("<br>");	
 
 			} // end show2		
 		} // end FOR $t3
