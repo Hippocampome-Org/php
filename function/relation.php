@@ -54,6 +54,14 @@ function relation($n, $property, $part)
 
 	}
 	
+	if ($property == 'Major Neurontransmitter')
+	{
+		if ($n == 0)
+			$relation = 'is expressed';
+		if ($n == 1)
+			$relation = 'is not expressed';
+	}
+	
 	return $relation;
 }
 ?>

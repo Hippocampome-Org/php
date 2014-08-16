@@ -64,7 +64,22 @@ class type
 			$this->setSubregion($subregion);
 			$this->setExcit_Inhib($excit_inhib);
 		}	
-	}	
+	}
+
+	public function retrive_by_excit_inhib($pred)   // Retrive all data by excit_inhib
+	{
+		$table=$this->getName_table();
+	
+		$query = "SELECT id FROM $table WHERE excit_inhib ='$pred'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setID_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setNumber_type($n);
+	}
 
 	public function retrive_by_id_active($id)   // Retrive all data by ID
     {
@@ -168,10 +183,10 @@ class type
     	return $this->_nickname;
     }		
 
-		public function getExcit_Inhib()
-   	 {
-		  return $this->_excit_inhib;
-    	}
+	public function getExcit_Inhib()
+   	{
+		return $this->_excit_inhib;
+    }
     public function getId()
     {
     	return $this->_id;

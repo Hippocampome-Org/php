@@ -1625,64 +1625,109 @@ if ($text_file_creation)
 	  
       $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       $list_potential_sources = array_unique($list_potential_sources);
-      $list_potential_sources = get_sorted_records($list_potential_sources);
-/*
-      $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
+      $list_potential_sources = get_sorted_records($list_potential_sources); ?>
+
+       <!--  $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
 
       $net_sources = array_unique($net_sources);
-      $net_sources = get_sorted_records($net_sources);
-*/
+      $net_sources = get_sorted_records($net_sources);  --> 
+
       
-// Start R 2C connectivity changes
-      // print it out
-      print connection_table_head("Known targets of output");
-	  if (count($list_explicit_targets) < 1) // the list of targets or sources is empty
-			print name_row_none("none known");
-	  else
-			foreach($list_explicit_targets as $target) { print name_row($target); }
-	  print connection_table_foot();
 
-      print connection_table_head("Potential targets of output");
-	  if (count($list_potential_targets) < 1) // the list of targets or sources is empty
-			print name_row_none("none known");
-	  else
-			foreach($list_potential_targets as $target) { print name_row($target); }
-	  //foreach($net_targets as $target) { print name_row($target); }
-	  print connection_table_foot();
-
-      print connection_table_head("Potential targets of output known to be avoided");
-	  if (count($list_explicit_nontargets) < 1) // the list of targets or sources is empty
-			print name_row_none("none known");
-	  else
-			foreach($list_explicit_nontargets as $target) { print name_row($target); }
-	  print connection_table_foot();
-
-      print connection_table_head("Known sources of input");
+      <table width='80%' border='0' cellspacing='4' cellpadding='0' >
+      <tr>
+      <td width="20%" align="center" class="table_neuron_page3"> Sources of Input </td>
+      </tr>
+      </table>
+      <table width='80%' border='0' cellspacing='4' cellpadding='0' colspan='3'>
+      <tr valign="top">
+	  <td width='33%' align='center'>
+	  <?php
+      print connection_table_head("Known sources");
 	  if (count($list_explicit_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
 			foreach($list_explicit_sources as $source) { print name_row($source); }
 	  print connection_table_foot();
+	  ?>
+	  </td>
 
-      print connection_table_head("Potential sources of input");
+	  <td width='33%' align='center'>
+	  <?php
+      print connection_table_head("Potential sources");
 	  if (count($list_potential_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
 			foreach($list_potential_sources as $source) { print name_row($source); }
 	  //foreach($net_sources as $source) { print name_row($source); }
 	  print connection_table_foot();
+	  ?>
+	  </td>
 	
-      print connection_table_head("Potential sources of input known to be avoided");
+      <td width='33%' align='center'>
+	  <?php
+      print connection_table_head("Potential sources known to be avoided");
 	  if (count($list_explicit_nonsources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
 			foreach($list_explicit_nonsources as $source) { print name_row($source); }
 	  print connection_table_foot();
+	  ?>
+	  </td>
+	  </tr>
+	  </table>
+	  
+	 
+      
+      
+      <table width='80%' border='0' cellspacing='4' cellpadding='0'>
+      <tr>
+      <td width="20%" align="center" class="table_neuron_page3"> Targets of Output </td>
+      </tr>
+      </table>
+      
+      <table width='80%' border='0' cellspacing='4' cellpadding='0' colspan='3'>
+      <tr valign="top">
+      <td width='33%' align='center'>
+      <?php 
+      print connection_table_head("Known targets");
+	  if (count($list_explicit_targets) < 1) // the list of targets or sources is empty
+			print name_row_none("none known");
+	  else
+			foreach($list_explicit_targets as $target) { print name_row($target); }
+	  print connection_table_foot();
+	  ?>
+	  </td>
+	  
+	  <td width='33%' align='center'>
+	  <?php
+      print connection_table_head("Potential targets");
+	  if (count($list_potential_targets) < 1) // the list of targets or sources is empty
+			print name_row_none("none known");
+	  else
+			foreach($list_potential_targets as $target) { print name_row($target); }
+	  //foreach($net_targets as $target) { print name_row($target); }
+	  print connection_table_foot();
+	  ?>
+	  </td>
+	  
+	  <td width='33%' align='center'>
+	  <?php
+      print connection_table_head("Potential targets known to be avoided");
+	  if (count($list_explicit_nontargets) < 1) // the list of targets or sources is empty
+			print name_row_none("none known");
+	  else
+			foreach($list_explicit_nontargets as $target) { print name_row($target); }
+	  print connection_table_foot();
+	  ?>
+	  </td>
+	  </tr>
+	  
+	  
+	  
 
-// End R 2C connectivity changes
-	
-		?>
+		</table>
 		</table>	
 
 			<br />	<br /> <br />	<br />		

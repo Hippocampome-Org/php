@@ -9,6 +9,9 @@ function property($n)
 		$property = 'Electrophysiology';
 	if ($n == 3)
 		$property = 'Connectivity';
+	if ($n == 4)
+		$property = 'Major Neurontransmitter';
+	
 
 	return $property;
 }

@@ -114,7 +114,7 @@ $N = $_REQUEST['N'];
 		$relation3 = $temporary_search -> getRelation();
 		$value3 = $temporary_search -> getValue();	
 					
-		if ($property3 == 'Molecular markers')
+		if (($property3 == 'Molecular markers') || ($property3 == 'Major Neurontransmitter'))
 		{
 			if ( ($property3 != NULL) && ($part3 != NULL) && ($relation3 != NULL )
 			&& ($property3 != '-') && ($part3 != '-') && ($relation3 != '-' ) )
@@ -162,7 +162,7 @@ if ($_REQUEST['clear_all'])
 
 
 
-$n_property = 4;
+$n_property = 5;
 
 ?>
 
@@ -259,16 +259,16 @@ function operator(link, i0)
 <div class="table_position_search_page">
 <table width="95%" border="0" cellspacing="5" cellpadding="0" class='body_table'>
   <tr>
-    <td width="80%">
+    <td >
 		<!-- ****************  BODY **************** -->	
 		<br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>
 			<td align="center" width="4%" class='table_neuron_page3'>  </td>
-			<td align="center" width="17%" class='table_neuron_page3'> Property </td>
+			<td align="center" width="22%" class='table_neuron_page3'> Property </td>
 			<td align="center" width="18%" class='table_neuron_page3'> Part </td>
 			<td align="center" width="22%" class='table_neuron_page3'> Relation </td>
-			<td align="center" width="29%" class='table_neuron_page3'> Value </td>
+			<td align="center" width="31%" class='table_neuron_page3'> Value </td>
 			<td align="center" width="8%" class='table_neuron_page3'>  Operator </td>
 		</tr>
 		</table>
@@ -339,7 +339,9 @@ function operator(link, i0)
 			if ($property1 == 'Electrophysiology')
 				$n_part = 10;		
 			if ($property1 == 'Connectivity')
-				$n_part = 2;									
+				$n_part = 2;
+			if ($property1 == 'Major Neurontransmitter')	
+				$n_part = 2;								
 			
 			for ($i=0; $i<$n_part; $i++)
 				$value_part[$i] = part($i, $property1); 
@@ -372,6 +374,8 @@ function operator(link, i0)
 				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
 				$n_relation = 3;
+			if ($property1 == 'Major Neurontransmitter')
+				$n_relation = 2;
 			
 			print ("<td width='22%' align='center' class='table_neuron_page1'>");									
 
@@ -471,13 +475,16 @@ function operator(link, i0)
 			if ($property1 == 'Molecular markers')
 				$n_value = 0;
 			if ($property1 == 'Electrophysiology')
-				$n_value = 11;	
+				$n_value = 11;
+			if ($property1 == 'Major Neurontransmitter')
+				$n_value = 0;
 			if ($property1 == 'Connectivity') {
 				$type -> retrive_id();
 				$n_value = $type->getNumber_type();
 			}
+			
 																
-			print ("<td width='29%' align='center' class='table_neuron_page1'>");
+			print ("<td width='31%' align='center' class='table_neuron_page1'>");
 			
 			if ($n_value == 0) ;
 			else

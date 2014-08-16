@@ -1373,7 +1373,7 @@ function show_only_morphology(link, start1, stop1)
 									else
 										$type_show = '';								
 								if($color == 'violet'){
-										print("<br>");
+		//								print("<br>");
 								//		if ($type_show == 'Axons')
 								//			print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
 								//		if ($type_show == 'Dendrites')
@@ -1406,7 +1406,7 @@ function show_only_morphology(link, start1, stop1)
 									print ("</td>"); */
 									
 									
-									print ("<td width='15%' align='left'> </td></tr>");
+									//print ("<td width='15%' align='left'> </td></tr>");
 																	
 									// retrieve the attachament from "fragment" with original_id *****************************
 								//	$fragment -> retrive_attachment_by_original_id($id_original);
@@ -1486,7 +1486,7 @@ function show_only_morphology(link, start1, stop1)
 									else
 										$type_show = '';								
 									if($color == 'violet'){
-										print("<br>");
+		//								print("<br>");
 										if ($type_show == 'Axons')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
 										if ($type_show == 'Dendrites')
@@ -1516,7 +1516,8 @@ function show_only_morphology(link, start1, stop1)
 									print ("</td>"); */
 									
 									
-									print ("<td width='15%' align='left'> </td></tr>");
+								//	print ("<td width='15%' align='left'> </td></tr>");
+									print ("</tr>");
 																	
 									// retrieve the attachament from "fragment" with original_id *****************************
 								//	$fragment -> retrive_attachment_by_original_id($id_original);
@@ -1587,7 +1588,7 @@ function show_only_morphology(link, start1, stop1)
 						
 							}							
 						}
-						print("<br>");	
+		//				print("<br>");	
 
 				} // end FOR $i
 		?>

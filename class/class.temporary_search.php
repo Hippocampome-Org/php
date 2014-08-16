@@ -45,7 +45,7 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 		
 		if ($flag == 1)  // Update Property
-			$query = "UPDATE $name_temporary_table SET property = '$property', part = '$part', relation = '$ralation', value = '$value', min=NULL, max=NULL, mean=NULL WHERE  id = '$N' ";	
+			$query = "UPDATE $name_temporary_table SET property = '$property', part = '$part', relation = '$relation', value = '$value', min=NULL, max=NULL, mean=NULL WHERE  id = '$N' ";	
 		if ($flag == 2)  // Update Part
 			$query = "UPDATE $name_temporary_table SET part = '$part', relation = NULL, value = NULL WHERE  id = '$N' ";
 		if ($flag == 3)  // Update Relation
@@ -84,7 +84,7 @@ class temporary_search
 		$rs = mysql_query($query);
 		$n = 0;
 		while(list($N) = mysql_fetch_row($rs))
-			 $n = $n_ + 1;	
+			 $n = $n + 1;	
 			 
 		$this->setN_search($n);	 	
 	}

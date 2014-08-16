@@ -542,937 +542,503 @@ function show_only_authors(link, color)
 //================changes===========================
 function evidencetoggle(){	
 
-	//alert(document.getElementById('animal_select').value);
+	////alert(document.getElementById('animal_select').value);
 	
-	var element_mouse_mRNA= document.getElementsByClassName('mouse_mRNA');
-	var element_mouse_unknown= document.getElementsByClassName('mouse_unknown');
-	var element_mouse_immunohistochemistry= document.getElementsByClassName('mouse_immunohistochemistry');
-	var element_mouse_immunohistochemistry_mRNA= document.getElementsByClassName('mouse_immunohistochemistry_mRNA');
+	var element_mouse_mRNA_positive= document.getElementsByClassName('mouse_mRNA_positive');
+	var element_mouse_mRNA_negative= document.getElementsByClassName('mouse_mRNA_negative');
+	var element_mouse_mRNA_positive_negative= document.getElementsByClassName('mouse_mRNA_positive_negative');
 
-	var element_unspecified_rodent_mRNA= document.getElementsByClassName('unspecified_rodent_mRNA');
-	var element_unspecified_rodent_unknown= document.getElementsByClassName('unspecified_rodent_unknown');
-	var element_unspecified_rodent_immunohistochemistry= document.getElementsByClassName('unspecified_rodent_immunohistochemistry');
-	var element_unspecified_rodent_immunohistochemistry_mRNA= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_mRNA');
-
-	var element_rat_mRNA= document.getElementsByClassName('rat_mRNA');
-	var element_rat_unknown= document.getElementsByClassName('rat_unknown');
-	var element_rat_immunohistochemistry= document.getElementsByClassName('rat_immunohistochemistry');
-	var element_rat_immunohistochemistry_mRNA= document.getElementsByClassName('rat_immunohistochemistry_mRNA');
+	var element_mouse_unknown_positive= document.getElementsByClassName('mouse_unknown_positive');
+	var element_mouse_unknown_negative= document.getElementsByClassName('mouse_unknown_negative');
+	var element_mouse_unknown_positive_negative= document.getElementsByClassName('mouse_unknown_positive_negative');
 	
+	var element_mouse_immunohistochemistry_positive= document.getElementsByClassName('mouse_immunohistochemistry_positive');
+	var element_mouse_immunohistochemistry_negative= document.getElementsByClassName('mouse_immunohistochemistry_negative');
+	var element_mouse_immunohistochemistry_positive_negative= document.getElementsByClassName('mouse_immunohistochemistry_positive_negative');
+	
+	var element_mouse_immunohistochemistry_mRNA_positive= document.getElementsByClassName('mouse_immunohistochemistry_mRNA_positive');
+	var element_mouse_immunohistochemistry_mRNA_negative= document.getElementsByClassName('mouse_immunohistochemistry_mRNA_negative');
+	var element_mouse_immunohistochemistry_mRNA_positive_negative= document.getElementsByClassName('mouse_immunohistochemistry_mRNA_negative');
+	
+	var element_unspecified_rodent_mRNA_positive= document.getElementsByClassName('unspecified_rodent_mRNA_positive');
+	var element_unspecified_rodent_mRNA_negative= document.getElementsByClassName('unspecified_rodent_mRNA_negative');
+	var element_unspecified_rodent_mRNA_positive_negative= document.getElementsByClassName('unspecified_rodent_mRNA_positive_negative');
+	
+	var element_unspecified_rodent_unknown_positive= document.getElementsByClassName('unspecified_rodent_unknown_positive');
+	var element_unspecified_rodent_unknown_negative= document.getElementsByClassName('unspecified_rodent_unknown_negative');
+	var element_unspecified_rodent_unknown_positive_negative= document.getElementsByClassName('unspecified_rodent_unknown_positive_negative');
+	
+	var element_unspecified_rodent_immunohistochemistry_positive= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_positive');
+	var element_unspecified_rodent_immunohistochemistry_negative= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_negative');
+	var element_unspecified_rodent_immunohistochemistry_positive_negative= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_positive_negative');
+	
+	var element_unspecified_rodent_immunohistochemistry_mRNA_positive= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_mRNA_positive');
+	var element_unspecified_rodent_immunohistochemistry_mRNA_negative= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_mRNA_negative');
+	var element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative= document.getElementsByClassName('unspecified_rodent_immunohistochemistry_mRNA_positive_negative');
+
+	var element_rat_mRNA_positive= document.getElementsByClassName('rat_mRNA_positive');
+	var element_rat_mRNA_negative= document.getElementsByClassName('rat_mRNA_negative');
+	var element_rat_mRNA_positive_negative= document.getElementsByClassName('rat_mRNA_positive_negative');
+	
+	var element_rat_unknown_positive= document.getElementsByClassName('rat_unknown_positive');
+	var element_rat_unknown_negative= document.getElementsByClassName('rat_unknown_negative');
+	var element_rat_unknown_positive_negative= document.getElementsByClassName('rat_unknown_positive_negative');
+	
+	var element_rat_immunohistochemistry_positive= document.getElementsByClassName('rat_immunohistochemistry_positive');
+	var element_rat_immunohistochemistry_negative= document.getElementsByClassName('rat_immunohistochemistry_negative');
+	var element_rat_immunohistochemistry_positive_negative = document.getElementsByClassName('rat_immunohistochemistry_positive_negative');
+
+	var element_rat_immunohistochemistry_mRNA_positive= document.getElementsByClassName('rat_immunohistochemistry_mRNA_positive');
+	var element_rat_immunohistochemistry_mRNA_negative= document.getElementsByClassName('rat_immunohistochemistry_mRNA_negative');
+	var element_rat_immunohistochemistry_mRNA_positive_negative= document.getElementsByClassName('rat_immunohistochemistry_mRNA_positive_negative');
+
 //..................... All aminals and All protocols...........................................
 //....................1
-	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all'))||
-			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry'))||
-			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA'))||
-			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry_mRNA'))||
-			((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown'))||
-			((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all'))||
-			((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all'))||
-			((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all'))) {
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='all'))
+			//((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry'))||
+			//((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA'))||
+			//((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry_mRNA'))||
+			//((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown'))||
+			//((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all'))||
+			//((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all'))||
+			//((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all'))
+			) {
 		//	 document.getElementById("axoncheck").disabled = false;
 		//	 document.getElementById("dendritecheck").disabled = false;
 	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
+//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
 				
-				element_mouse_mRNA[i].style.display = 'table';
+				element_mouse_mRNA_positive[i].style.display = 'table';
 				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'table';
+			}
+
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
 				
+				element_mouse_mRNA_negative[i].style.display = 'table';
 				
 			}  
 
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'table';
+				
+			}  
+			
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
 	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'table';
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}   
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
 				
 				
 			}
 
-	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'table';
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
 					
 					
-				} 
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+					
+					
+			}
+			
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+		
+			} 
 	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
 				
-				element_rat_mRNA[i].style.display = 'table';
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'table';
+							
+						}
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'table';
 				
 			}  
 			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
 	  		
-	  			element_rat_unknown[i].style.display = 'table';
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
 				
 				
 			}  
 
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
 	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'table';
+	  			element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+	  			element_rat_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+	  			element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
 				
 				
 			}
 
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
 		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'table';
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+				}  
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+								
+								
+							}  
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
 					
 					
 				}  
 	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
 				
-				element_unspecified_rodent_mRNA[i].style.display = 'table';
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
 				
 			}  
 			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
 	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'table';
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
 				
 				
 			}  
 
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
 	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'table';
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
 				
 				
 			}  
 			
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
 		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'table';
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
 					
 					
 				} 
 		}
 
 //-------------------------------------------------------------------------------------------
-	//.....................  rats and  immunohistochemistry ...........................................
+	//.....................  rats and  immunohistochemistry and positive...........................................
 //.........................2
-	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'table';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-			
-			
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				}  
-				
-			 
-		}
-
-	//..................... rats and mRNA ...........................................
-
-	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'table';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-			
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				}
-			 
-		}
-
-	//.....................rats and immunohistochemistry and mRna ...........................................
-
-	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'table';
-					
-					
-			}  
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-		}
-
-	//.....................rats and unknown ...........................................
-
-	if ((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'table';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-		}
-//--------------------------------------------------------------------------------------------------
-
-	//..................... mouse and  immunohistochemistry ...........................................
-//...........................3
-	 if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-		//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'table';
-				
-				
-			}
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-			
-			
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				}  
-				
-			 
-		}
-
-	//..................... mouse and mRNA ...........................................
-
-	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'table';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-			
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-				}
-			 
-		}
-
-	//.....................mouse and immunohistochemistry and mRna ...........................................
-
-	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'table';
-					
-					
-			}
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-		}
-
-	//.....................mouse and unknown ...........................................
-
-	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive'))) {
 		//	 document.getElementById("axoncheck").disabled = false;
 		//	 document.getElementById("dendritecheck").disabled = false;
 	//mouse and protocols	
 //	alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
 				
-				element_mouse_mRNA[i].style.display = 'none';
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
 	  		
-	  			element_mouse_unknown[i].style.display = 'table';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+	  			element_mouse_unknown_positive[i].style.display = 'none';
 				
 				
 			}
-
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			}  
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
-		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
-			} 
-		}
-	//--------------------------------------------------------------------------------------------------
-
-	//..................... unspecified rodent and  immunohistochemistry ...........................................
-//..................4
-	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+	  			element_mouse_unknown_negative[i].style.display = 'none';
 				
 				
 			}
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 				} 
 	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
 				
-				element_rat_mRNA[i].style.display = 'none';
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
 	  		
-	  			element_rat_unknown[i].style.display = 'none';
+	  			element_rat_unknown_positive[i].style.display = 'none';
 				
 				
 			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
 		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
 					
 					
-			}  
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}   
 			
 			
 	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
 				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
 	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
 				
 				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'table';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
 		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+	  		
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 				}  
@@ -1480,280 +1046,18254 @@ function evidencetoggle(){
 			 
 		}
 
-	//..................... unspecified rodent and mRNA ...........................................
 
-	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')) {
+
+	//.....................  rats and  immunohistochemistry and negative...........................................
+	//.........................3
+		if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+//		alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}   
+				
+				
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+		  		
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+					
+				 
+			}
+
+
+		//.....................  rats and  immunohistochemistry and positive_negative...........................................
+		//.........................4
+			if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+	//		alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+				
+				
+				
+
+		//.....................  rats and  immunohistochemistry and all...........................................
+		//.........................5
+			if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			
+	//		alert(document.getElementById('animal_select').value);
+	//		alert(document.getElementById('protocol_select').value);
+	//		alert(document.getElementById('expression_select').value);
+			
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+
+
+//===========================================================================================
+	//..................... rats and mRNA and  positive...........................................
+		//...6
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
 		//	 document.getElementById("axoncheck").disabled = false;
 		//	 document.getElementById("dendritecheck").disabled = false;
 	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
+//	alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
 				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
+				element_mouse_mRNA_positive[i].style.display = 'none';
 				
 			}  
-
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
-	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
 				
 			}
 
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
 					
 					
 			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
 	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
 				
-				element_rat_mRNA[i].style.display = 'none';
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
 	  		
-	  			element_rat_unknown[i].style.display = 'none';
+	  			element_rat_unknown_positive[i].style.display = 'none';
 				
 				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
 		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
-					
-					
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
 			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}  
 			
 	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
 				
-				element_unspecified_rodent_mRNA[i].style.display = 'table';
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
 	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
 				
 				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
 		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 				}
 			 
 		}
 
-	//.....................unspecified rodent and immunohistochemistry and mRna ...........................................
 
-	if ((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
-		//	 document.getElementById("axoncheck").disabled = false;
-		//	 document.getElementById("dendritecheck").disabled = false;
-	//mouse and protocols	
-	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
-				
-				element_mouse_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
-				
-				
-			}  
+	//..................... rats and mRNA and  negative...........................................
+	//...7
+if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+//mouse and protocols	
+//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
 
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+  		
+  			element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
 	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+  			element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+  		
+  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
 				
 				
 			}
 
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'table';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+  		
+  			element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+  			element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+  			element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+  		
+  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+
+  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+						
+						
+				} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+			
+			element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+			
+			
+	}  
+		
+//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+  		
+  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+  		
+  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... rats and mRNA and  positive_negative...........................................
+//........8
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... rats and mRNA and  all...........................................
+//........9
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+//	alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'table';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'table';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+	
+//================================================================================
+	//.....................rats and immunohistochemistry and mRna  and positive ...........................................
+//.......10
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	////alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}  
+
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}  
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			  
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 			}
 	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
 				
-				element_rat_mRNA[i].style.display = 'none';
+				element_rat_mRNA_positive[i].style.display = 'none';
 				
 			}  
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
 			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
 	  		
-	  			element_rat_unknown[i].style.display = 'none';
+	  			element_rat_unknown_positive[i].style.display = 'none';
 				
 				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
 		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 			}  
 	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
 				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
 				
 			}  
 			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
 	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'none';
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
 				
 				
 			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
 		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'table';
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 			} 
 		}
 
-	//.....................unspecified rodent and unknown ...........................................
 
-	if ((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')) {
+
+
+	//.....................rats and immunohistochemistry and mRna  and  negative...........................................
+	//.......11
+		if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}  
+
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}  
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				  
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				}  
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}  
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+				
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				} 
+			}
+
+
+
+		
+		//.....................rats and immunohistochemistry and mRna  and positive_negative ...........................................
+		//.......12
+			if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					} 
+				}
+
+
+
+
+
+
+		
+		//.....................rats and immunohistochemistry and mRna  and all ...........................................
+		//.......13
+			if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('animal_select').value);
+			//alert(document.getElementById('protocol_select').value);
+			//alert(document.getElementById('expression_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					} 
+				}
+
+
+		
+//================================================================================================
+//...................13
+	//.....................rats and unknown and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive'))) {
 		//	 document.getElementById("axoncheck").disabled = false;
 		//	 document.getElementById("dendritecheck").disabled = false;
 	//mouse and protocols	
 	//alert(document.getElementById('protocol_select').value);
-			for(var i=0;i<element_mouse_mRNA.length;i++){
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
 				
-				element_mouse_mRNA[i].style.display = 'none';
+				element_mouse_mRNA_positive[i].style.display = 'none';
 				
-			}  
-			 
-	  		for(var i=0;i<element_mouse_unknown.length;i++){
-	  		
-	  			element_mouse_unknown[i].style.display = 'none';
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
 				
+				element_mouse_mRNA_negative[i].style.display = 'none';
 				
 			}  
 
-	  		for(var i=0;i<element_mouse_immunohistochemistry.length;i++){
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
 	  		
-	  		element_mouse_immunohistochemistry[i].style.display = 'none';
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
 				
 				
 			}
 
-			for(var i=0;i<element_mouse_immunohistochemistry_mRNA.length;i++){
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
 		  		
-		  		element_mouse_immunohistochemistry_mRNA[i].style.display = 'none';
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
 					
 					
 			} 
-	// rats and protocols
-			for(var i=0;i<element_rat_mRNA.length;i++){
-				
-				element_rat_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_rat_unknown.length;i++){
-	  		
-	  			element_rat_unknown[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry.length;i++){
-	  		
-	  		element_rat_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA.length;i++){
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
 		  		
-		  		element_rat_immunohistochemistry_mRNA[i].style.display = 'none';
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
 					
 					
-			}  
-	//unknown rodents and protocols		
-			for(var i=0;i<element_unspecified_rodent_mRNA.length;i++){
-				
-				element_unspecified_rodent_mRNA[i].style.display = 'none';
-				
-			}  
-			 
-	  		for(var i=0;i<element_unspecified_rodent_unknown.length;i++){
-	  		
-	  			element_unspecified_rodent_unknown[i].style.display = 'table';
-				
-				
-			}  
-
-	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry.length;i++){
-	  		
-	  		element_unspecified_rodent_immunohistochemistry[i].style.display = 'none';
-				
-				
-			}  
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
 			
-			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA.length;i++){
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
 		  		
-		  		element_unspecified_rodent_immunohistochemistry_mRNA[i].style.display = 'none';
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
 					
 					
 			} 
 		}
+		
+		
+		
+
+//...................14
+	//.....................rats and unknown and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................15
+	//.....................rats and unknown and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................16
+	//.....................rats and unknown and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+				
+		
+		
+
+		
+//================================================================================================
+//...................17
+	//.....................rats and all and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................18
+	//.....................rats and all and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................19
+	//.....................rats and all and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'table';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................20
+	//.....................rats and all and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='rat')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+	//alert(document.getElementById('expression_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'table';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+				
+		
+		
+		
+		
+		
+//==============================================================================================================================		
+//**************************************************************************************************************************		
+//==============================================================================================================================		
+//--------------------------------------------------------------------------------------------------
+
+		
+		
+		
+//==============================================================================================================================		
+//**************************************************************************************************************************		
+//==============================================================================================================================		
+//--------------------------------------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------------------------------
+	//.....................  mouse and  immunohistochemistry and positive...........................................
+//.........................21
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}   
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+	  		
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+
+
+	//.....................  mouse and  immunohistochemistry and negative...........................................
+	//.........................22
+		if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}   
+				
+				
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+		  		
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+					
+				 
+			}
+
+
+		//.....................  mouse and  immunohistochemistry and positive_negative...........................................
+		//.........................23
+			if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+		//.....................  mouse and  immunohistochemistry and all...........................................
+		//.........................24
+			if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+
+//===========================================================================================
+	//..................... mouse and mRNA and  positive...........................................
+		//...25
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'table';
+				
+			}  
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+
+	//..................... mouse and mRNA and  negative...........................................
+	//...26
+if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+//mouse and protocols	
+//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+
+  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+  		
+  			element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+  			element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+  		
+  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+  		
+  			element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+  			element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+  			element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+  		
+  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+
+  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+						
+						
+				} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+			
+			element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+			
+			
+	}  
+		
+//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+  		
+  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+  		
+  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... mouse and mRNA and  positive_negative...........................................
+//........27
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'table';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
 	
 	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+	
+	
+	
+	
+	
+
+//..................... mouse and mRNA and  all...........................................
+//........28
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'table';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'table';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+	
+//================================================================================
+	//.....................mouse and immunohistochemistry and mRna  and positive ...........................................
+//.......29
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}  
+
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}  
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			  
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			}  
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+	//.....................mouse and immunohistochemistry and mRna  and  negative...........................................
+	//.......30
+		if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}  
+
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}  
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				  
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+					element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				}  
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}  
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+				
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				} 
+			}
+
+
+
+		
+		//.....................mouse and immunohistochemistry and mRna  and positive_negative ...........................................
+		//.......31
+			if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					} 
+				}
+
+
+
+		//.....................mouse and immunohistochemistry and mRna  and all ...........................................
+		//.......32
+			if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					} 
+				}
+
+
+
+
+
+		
+//================================================================================================
+//...................33
+	//.....................mouse and unknown and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................34
+	//.....................mouse and unknown and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................35
+	//.....................mouse and unknown and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+//...................36
+	//.....................mouse and unknown and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+//...................37
+	//.....................mouse and all and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'table';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................38
+	//.....................mouse and all and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'table';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................39
+	//.....................mouse and all and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'table';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+//...................40
+	//.....................mouse and all and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='mouse')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'table';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'table';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'table';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+		
+//=================================================================================================================================================
+//*********************************************************************************************************************************************
+//=================================================================================================================================================		
+
+
+
+
+
+//-------------------------------------------------------------------------------------------
+	//.....................  unspecified rodent and  immunohistochemistry and positive...........................................
+//.........................41
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}   
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+					
+					
+				}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+	  		
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+
+
+	//.....................  unspecified rodent and  immunohistochemistry and negative...........................................
+	//.........................42
+		if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}   
+				
+				
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+					
+					
+				}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+		  		
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+					
+				 
+			}
+
+
+		//.....................  unspecified rodent and  immunohistochemistry and positive_negative...........................................
+		//.........................43
+			if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+		//.....................  unspecified rodent and  immunohistochemistry and all...........................................
+		//.........................44
+			if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+//===========================================================================================
+	//..................... unspecified rodent and mRNA and  positive...........................................
+		//...45
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}  
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+
+	//..................... unspecified rodent and mRNA and  negative...........................................
+	//...46
+if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+//mouse and protocols	
+//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+
+  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+  		
+  			element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+  			element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+  		
+  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+  		
+  			element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+  			element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+  			element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+  		
+  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+
+  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+						
+						
+				} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+			
+			element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+			
+			
+	}  
+		
+//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+  		
+  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+  		
+  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... unspecified rodent and mRNA and  positive_negative...........................................
+//........47
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... unspecified rodent and mRNA and  all...........................................
+//........48
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+
+//================================================================================
+	//.....................unspecified rodent and immunohistochemistry and mRna  and positive ...........................................
+//.......49
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}  
+
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}  
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			  
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			}  
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+	//.....................unspecified rodent and immunohistochemistry and mRna  and  negative...........................................
+	//.......50
+		if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}  
+
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}  
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				  
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+					element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				}  
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}  
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+				
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+							} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				} 
+			}
+
+
+
+		
+		//.....................unspecified rodent and immunohistochemistry and mRna  and positive_negative ...........................................
+		//.......51
+			if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					} 
+				}
+
+
+		
+		//.....................unspecified rodent and immunohistochemistry and mRna  and all ...........................................
+		//.......52
+			if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					} 
+				}
+
+
+
+
+
+
+
+		
+//================================================================================================
+//...................53
+	//.....................unspecified rodent and unknown and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................54
+	//.....................unspecified rodent and unknown and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................55
+	//.....................unspecified rodent and unknown and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+
+		
+		
+		
+
+//...................56
+	//.....................unspecified rodent and unknown and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+
+//...................57
+	//.....................unspecified rodent and all and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................58
+	//.....................unspecified rodent and all and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................59
+	//.....................unspecified rodent and all and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+		}
+		
+
+		
+		
+		
+
+//...................60
+	//.....................unspecified rodent and all and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='unspecified rodent')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+		}
+
+		
+//=================================================================================================================================================
+//*********************************************************************************************************************************************
+//=================================================================================================================================================		
+
+	
+	
+
+//-------------------------------------------------------------------------------------------
+	//.....................  all and  immunohistochemistry and positive...........................................
+//.........................61
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}   
+			
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+					
+					
+				}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+	  		
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+				
+			 
+		}
+
+
+
+	//.....................  all and  immunohistochemistry and negative...........................................
+	//.........................62
+		if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}   
+				
+				
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+					
+					
+				}
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+		  		
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+					} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+									
+									
+								} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+					
+				 
+			}
+
+
+		//.....................  all and  immunohistochemistry and positive_negative...........................................
+		//.........................53
+			if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+		//.....................  all and  immunohistochemistry and all...........................................
+		//.........................54
+			if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						} 
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}  
+
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+					}   
+					
+					
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+							
+							
+						}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+						
+						
+					}
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+							
+							
+						}
+			  		
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+						} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+									} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+						
+					 
+				}
+
+
+
+//===========================================================================================
+	//..................... all and mRNA and  positive...........................................
+		//...55
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'table';
+				
+			}  
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					} 
+		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}  
+			
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+				}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+							}
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+				}
+			 
+		}
+
+
+	//..................... all and mRNA and  negative...........................................
+	//...66
+if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+//mouse and protocols	
+//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'none';
+			
+		}
+
+  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+  		
+  			element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+  			element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+  		
+  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'table';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+  		
+  			element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+  			element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+  			element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+  		
+  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+
+  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+						
+						
+				} 
+	for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+			
+			element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+			
+			
+	}  
+		
+//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+			
+		}  
+		 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+  		
+  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+  		
+  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... all and mRNA and  positive_negative...........................................
+//........57
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'none';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'table';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'none';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'none';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+//..................... all and mRNA and  all...........................................
+//........68
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+	//	 document.getElementById("axoncheck").disabled = false;
+	//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+		for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+			
+			element_mouse_mRNA_positive[i].style.display = 'table';
+			
+		}  
+		for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+						
+						element_mouse_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+			
+			element_mouse_mRNA_positive_negative[i].style.display = 'table';
+			
+		}
+	
+			for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			
+				element_mouse_unknown_positive[i].style.display = 'none';
+			
+			
+		}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+				element_mouse_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+				element_mouse_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			
+			element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+	
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+					}
+		for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+		}
+	// rats and protocols
+		for(var i=0;i<element_rat_mRNA_positive.length;i++){
+			
+			element_rat_mRNA_positive[i].style.display = 'table';
+			
+		} 
+		for(var i=0;i<element_rat_mRNA_negative.length;i++){
+						
+						element_rat_mRNA_negative[i].style.display = 'table';
+						
+					} 
+		for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+			
+			element_rat_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_rat_unknown_positive.length;i++){
+			
+				element_rat_unknown_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+				element_rat_unknown_negative[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+				element_rat_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			
+			element_rat_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+	
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+		} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+		
+	//unknown rodents and protocols		
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+			
+		}
+		for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+						
+					}
+		for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+			
+			element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+			
+		}  
+		 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			
+				element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+			
+			
+		}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			
+			element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+			
+			
+		} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+	
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+				
+				
+			}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+							
+							
+						}
+		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+				
+				
+			}
+		 
+	}
+
+
+
+//================================================================================
+	//.....................all and immunohistochemistry and mRna  and positive ...........................................
+//.......59
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}  
+
+			for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+							
+							element_mouse_mRNA_negative[i].style.display = 'none';
+							
+						}  
+			for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+				
+				element_mouse_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			  
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+		  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+		  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						}
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			}  
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+							
+							element_rat_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+		  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+		  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+	  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				}
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}  
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+							
+							element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+							
+						} 
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}  
+			 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+	  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+		  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+					
+					
+				} 
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+					  		
+					  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+								
+								
+						} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+	//.....................all and immunohistochemistry and mRna  and  negative...........................................
+	//.......70
+		if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='negative'))) {
+			//	 document.getElementById("axoncheck").disabled = false;
+			//	 document.getElementById("dendritecheck").disabled = false;
+		//mouse and protocols	
+		//alert(document.getElementById('protocol_select').value);
+				for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+					
+					element_mouse_mRNA_positive[i].style.display = 'none';
+					
+				}  
+
+				for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+								
+								element_mouse_mRNA_negative[i].style.display = 'none';
+								
+							}  
+				for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+					
+					element_mouse_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				  
+		  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+		  		
+		  			element_mouse_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+			  		
+		  			element_mouse_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+			  		
+		  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}
+
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+					element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+				}
+				for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}
+		// rats and protocols
+				for(var i=0;i<element_rat_mRNA_positive.length;i++){
+					
+					element_rat_mRNA_positive[i].style.display = 'none';
+					
+				}  
+				for(var i=0;i<element_rat_mRNA_negative.length;i++){
+								
+								element_rat_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+					
+					element_rat_mRNA_positive_negative[i].style.display = 'none';
+					
+				} 
+				 
+		  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+		  		
+		  			element_rat_unknown_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+			  		
+		  			element_rat_unknown_negative[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+			  		
+		  			element_rat_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				}
+		  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					}
+		  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+		  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+							} 
+				for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				}  
+		//unknown rodents and protocols		
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+					
+				} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+								
+								element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+								
+							} 
+				for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+					
+					element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+					
+				}  
+				 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+		  		
+		  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+					
+					
+				}  
+		  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+			  		
+		  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+					
+					
+				} 
+
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+					
+					
+				} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+						
+						
+					} 
+		  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+				
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+						
+						
+				} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+						  		
+						  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+									
+									
+							} 
+				for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+						
+						
+				} 
+			}
+
+
+
+		
+		//.....................all and immunohistochemistry and mRna  and positive_negative ...........................................
+		//.......71
+			if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					} 
+				}
+
+
+		
+		//.....................all and immunohistochemistry and mRna  and all ...........................................
+		//.......72
+			if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='immunohistochemistry and mRNA')&&(document.getElementById('expression_select').value=='all'))) {
+				//	 document.getElementById("axoncheck").disabled = false;
+				//	 document.getElementById("dendritecheck").disabled = false;
+			//mouse and protocols	
+			//alert(document.getElementById('protocol_select').value);
+					for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+						
+						element_mouse_mRNA_positive[i].style.display = 'none';
+						
+					}  
+
+					for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+									
+									element_mouse_mRNA_negative[i].style.display = 'none';
+									
+								}  
+					for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+						
+						element_mouse_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					  
+			  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+			  		
+			  			element_mouse_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_negative.length;i++){
+				  		
+			  			element_mouse_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+				  		
+			  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}
+
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								}
+					for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}
+			// rats and protocols
+					for(var i=0;i<element_rat_mRNA_positive.length;i++){
+						
+						element_rat_mRNA_positive[i].style.display = 'none';
+						
+					}  
+					for(var i=0;i<element_rat_mRNA_negative.length;i++){
+									
+									element_rat_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+						
+						element_rat_mRNA_positive_negative[i].style.display = 'none';
+						
+					} 
+					 
+			  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+			  		
+			  			element_rat_unknown_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_negative.length;i++){
+				  		
+			  			element_rat_unknown_negative[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+				  		
+			  			element_rat_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					}
+			  		for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						}
+			  		for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+
+			  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								} 
+					for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					}  
+			//unknown rodents and protocols		
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+						
+					} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+									
+									element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+									
+								} 
+					for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+						
+						element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+						
+					}  
+					 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+			  		
+			  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+						
+						
+					}  
+			  		for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+				  		
+			  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+						
+						
+					} 
+
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+			  		
+			  		element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+						
+						
+					} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+							
+							
+						} 
+			  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+							
+							
+						}  
+					
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+				  		
+				  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+							
+							
+					} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+							  		
+							  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+										
+										
+								} 
+					for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+							
+							element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+							
+							
+					} 
+				}
+
+
+
+
+
+
+
+		
+//================================================================================================
+//...................73
+	//.....................all and unknown and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................74
+	//.....................all and unknown and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................75
+	//.....................all and unknown and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+
+		
+		
+		
+
+//...................76
+	//.....................all and unknown and  all...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='unknown')&&(document.getElementById('expression_select').value=='all'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+
+
+
+
+
+//...................77
+	//.....................all and all and  positive...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'table';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'table';
+				
+				
+				}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'table';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+		
+
+//...................78
+	//.....................all and all and  negative...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'table';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'none';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'table';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'none';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'table';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'none';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'table';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'none';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'none';
+					
+					
+			} 
+		}
+		
+		
+
+		
+
+//...................79
+	//.....................all and all and  positive_negative...........................................
+
+	if (((document.getElementById('animal_select').value=='all')&&(document.getElementById('protocol_select').value=='all')&&(document.getElementById('expression_select').value=='positive and negative'))) {
+		//	 document.getElementById("axoncheck").disabled = false;
+		//	 document.getElementById("dendritecheck").disabled = false;
+	//mouse and protocols	
+	//alert(document.getElementById('protocol_select').value);
+			for(var i=0;i<element_mouse_mRNA_positive.length;i++){
+				
+				element_mouse_mRNA_positive[i].style.display = 'none';
+				
+			}
+for(var i=0;i<element_mouse_mRNA_negative.length;i++){
+				
+				element_mouse_mRNA_negative[i].style.display = 'none';
+				
+			}  
+
+for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
+	
+	element_mouse_mRNA_positive_negative[i].style.display = 'table';
+	
+}
+	  		for(var i=0;i<element_mouse_unknown_positive.length;i++){
+	  		
+	  			element_mouse_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_mouse_unknown_negative.length;i++){
+	  		
+	  			element_mouse_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_mouse_unknown_positive_negative.length;i++){
+	  		
+	  			element_mouse_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_mouse_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_mouse_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_mouse_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_mouse_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_mouse_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+			
+	// rats and protocols
+			for(var i=0;i<element_rat_mRNA_positive.length;i++){
+				
+				element_rat_mRNA_positive[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_negative.length;i++){
+				
+				element_rat_mRNA_negative[i].style.display = 'none';
+				
+			} 
+			for(var i=0;i<element_rat_mRNA_positive_negative.length;i++){
+				
+				element_rat_mRNA_positive_negative[i].style.display = 'table';
+				
+			} 
+			 
+	  		for(var i=0;i<element_rat_unknown_positive.length;i++){
+	  		
+	  			element_rat_unknown_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_rat_unknown_negative.length;i++){
+	  		
+	  			element_rat_unknown_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_unknown_positive_negative.length;i++){
+	  		
+	  			element_rat_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_positive.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_positive_negative.length;i++){
+	  		
+	  		element_rat_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			}
+
+	  		for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			}
+			for(var i=0;i<element_rat_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_rat_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			}
+	//unknown rodents and protocols		
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_negative[i].style.display = 'none';
+				
+			}
+			for(var i=0;i<element_unspecified_rodent_mRNA_positive_negative.length;i++){
+				
+				element_unspecified_rodent_mRNA_positive_negative[i].style.display = 'table';
+				
+			}
+			 
+	  		 for(var i=0;i<element_unspecified_rodent_unknown_positive.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_unknown_positive_negative.length;i++){
+	  		
+	  			element_unspecified_rodent_unknown_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+
+	  		for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive[i].style.display = 'none';
+				
+				
+			}  
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_negative[i].style.display = 'none';
+				
+				
+			} 
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_positive_negative.length;i++){
+	  		
+				element_unspecified_rodent_immunohistochemistry_positive_negative[i].style.display = 'table';
+				
+				
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_negative[i].style.display = 'none';
+					
+					
+			} 
+			
+			for(var i=0;i<element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative.length;i++){
+		  		
+		  		element_unspecified_rodent_immunohistochemistry_mRNA_positive_negative[i].style.display = 'table';
+					
+					
+			} 
+		}
+		
+
+		
+		
+		
 }
 
 //====================================================
+
+
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -1847,11 +19387,11 @@ function evidencetoggle(){
 			</tr>								
 		</table>
     <table width="80%" border="0" cellspacing="2" cellpadding="5" padding-top="5"> 
-<!--      <tr>
+ <!--  <tr>
         <td class="table_neuron_page2" padding="5">
           All experiments were conducted on rats with an immunohistochemical staining protocol, unless otherwise specified. 
         </td>
-     </tr>-->
+     </tr> -->
 <tr>
 <td class="table_neuron_page2" padding="5">
       All of the evidence provided on Hippocampome.org are quotes from scientific texts.  
@@ -2137,202 +19677,7 @@ function evidencetoggle(){
 
 		<br />	
 	<?php		
-	if ($n_show1 < 2){
-	?>
-	<!-- TABLE SHOW ONLY *******************************************************************************************************************
-		************************************************************************************************************************************* -->				
-		<table width="80%" border="0" cellspacing="2" cellpadding="0">
-		<tr>
-			<td width="25%" align="left" style='visibility: hidden;'>
-				<font class="font2">Show Only:</font> 
-			</td>
-			<td width="35%" align="left" style="visibility: hidden;">
-			<?php 
-				print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, '$color')\">");
-					
-				if ($name_show_only)
-				{
-					if ($name_show_only == 'all')
-						$name_show_only1 = 'All';
-					if ($name_show_only == 'article_book')
-						$name_show_only1 = 'Articles / Books';								
-					if ($name_show_only == 'name_journal')
-						$name_show_only1 = 'Name of Publication';
-					if ($name_show_only == 'authors')
-						$name_show_only1 = 'Authors';
-					if ($name_show_only == 'morphology')
-						$name_show_only1 = 'Morphology';
-																												
-					print ("<OPTION VALUE='$name_show_only1'>$name_show_only1</OPTION>");
-					print ("<OPTION VALUE='all'>----</OPTION>");
-				}
-			?>	
-				<OPTION VALUE='all'>All</OPTION>
-				<OPTION VALUE='article_book'>Articles / Books</OPTION>
-				<OPTION VALUE='name_journal'>Name of Publication</OPTION>
-				<OPTION VALUE='authors'>Authors</OPTION>
-				</select>					
-			</td>
-			<td width="15%" align="left">
-				<font class="font2">Animal:</font> 
-			</td>
-			<td width="40%" align="left">
-				<select id='animal_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all' >All</OPTION>
-				<OPTION VALUE='rat'>Rat</OPTION>
-				<OPTION VALUE='mouse'>Mouse</OPTION>
-				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
-				</select>					
-			</td>
-				<td width="15%" align="left">
-				<font class="font2">Protocol:</font> 
-			</td>
-			<td width="40%" align="left">
-				<select id='protocol_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all'>All</OPTION>
-				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
-				<OPTION VALUE='mRNA'>mRNA</OPTION>
-				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
-				<OPTION VALUE='unknown'>unknown</OPTION>
-				</select>					
-			</td>
-		
-			<td width="40%" align="left">
-			<?php 
-				// ARTICLE - BOOK: ++++++++++++++++++++++++
-
-				if ($sub_show_only == 'article')
-				{
-					// retrieve the number of article or number of book:
-					$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table WHERE show1 = '1'";	
-					$rs = mysql_query($query);
-					$number_of_articles_1 = 0;
-					$number_of_books_1 = 0;
-					while(list($title, $pmid) = mysql_fetch_row($rs))		
-					{	
-						if (strlen($pmid) > 10)
-							$number_of_books_1 = $number_of_books_1 + 1;
-						if (strlen($pmid) < 10)
-							$number_of_articles_1 = $number_of_articles_1 + 1;							
-					}
-					
-				
-					if ($name_show_only_article == 'article')
-					{
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
-						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
-						print ("<OPTION VALUE='all'>All</OPTION>");
-						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
-						print ("</select>");							
-					}
-					else if ($name_show_only_article == 'book')
-					{
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
-						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
-						print ("<OPTION VALUE='all'>All</OPTION>");
-						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
-						print ("</select>");
-					}
-					else
-					{
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_article(this, '$color')\">");
-						print ("<OPTION VALUE='all'>All</OPTION>");
-						print ("<OPTION VALUE='book'>Book(s) ($number_of_books_1)</OPTION>");
-						print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
-						print ("</select>");
-					}							
-				}						
-			
-				// PUBLICATION: ++++++++++++++++++++++++
-				if ($sub_show_only == 'name_journal')
-				{						
-					print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, '$color')\">");
-					
-					if ( ($name_show_only_journal != 'all') &&  ($name_show_only_journal != NULL) )
-						print ("<OPTION VALUE='$name_show_only_journal'>$name_show_only_journal</OPTION>");
-					
-					print ("<OPTION VALUE='all'>All</OPTION>");
-					
-					// retrieve the name of journal from temporary table:
-					$query ="SELECT DISTINCT publication FROM $name_temporary_table WHERE show1 = '1'";
-					$rs = mysql_query($query);					
-					while(list($pub) = mysql_fetch_row($rs))	
-					{	
-						// retrieve the number of articles for this publication:
-						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE publication = '$pub'";
-						$rs1 = mysql_query($query1);
-						$n_pub1=0;					
-						while(list($id) = mysql_fetch_row($rs1))							
-							$n_pub1 = $n_pub1 + 1;
-					
-						if ($pub == $name_show_only_journal);
-						else
-							print ("<OPTION VALUE='$pub'>$pub ($n_pub1)</OPTION>");		
-					}
-					print ("</select>");				
-				}
-				
-				// AUTHORS: ++++++++++++++++++++++++
-				$aut1 = NULL;
-				if ($sub_show_only == 'authors')
-				{
-					// retrieve the name of authors from temporary table:
-					$query ="SELECT DISTINCT authors FROM $name_temporary_table WHERE show1 = '1'";
-					$rs = mysql_query($query);				
-					
-					while(list($aut) = mysql_fetch_row($rs))
-					{
-						$aut1=$aut1.", ".$aut;
-					}					
-					$aut1=str_replace(', ', '*', $aut1);
-					$single_aut=explode('*', $aut1);
-
-					sort($single_aut);
-					$single_aut2=array_unique($single_aut);
-
-					// Remove the blank from array:
-					$ni=0;
-					for ($i1=0; $i1<count($single_aut2); $i1++)
-					{		 
-						if ($single_aut2[$i1] == NULL);
-						else
-						{
-							$single_aut3[$ni] = $single_aut2[$i1];
-							$ni = $ni + 1;
-						}
-					}							
-
-					print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_authors(this, '$color')\">");
-					
-					if ( ($name_show_only_authors != 'all') &&  ($name_show_only_authors != NULL) )
-					{
-						print ("<OPTION VALUE='$name_show_only_authors'>$name_show_only_authors</OPTION>");
-						print ("<OPTION VALUE='all'>---</OPTION>");
-					}
-					print ("<OPTION VALUE='all'> ALL </OPTION>");
-					
-					for ($i1=0; $i1<count($single_aut3); $i1++)
-					{
-					
-						// retrieve the number of articles for this publication:
-						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE authors LIKE '%$single_aut3[$i1]%'";
-						$rs1 = mysql_query($query1);
-						$n_auth1=0;					
-						while(list($id) = mysql_fetch_row($rs1))	
-							$n_auth1 = $n_auth1 + 1;	
-
-						print ("<OPTION VALUE='$single_aut3[$i1]'>$single_aut3[$i1] ($n_auth1)</OPTION>");
-					}
-					print ("</select>");				
-				}						
-			?>	
-			</td>							
-		</tr>
-		</table>
-		<!-- END TABLE SHOW ONLY ***************************************************************************************************************
-		************************************************************************************************************************************* -->	
-	<?php 
-	}
+	if ($n_show1 < 2);
 	else
 	{
 	?>
@@ -2369,30 +19714,8 @@ function evidencetoggle(){
 				<OPTION VALUE='name_journal'>Name of Publication</OPTION>
 				<OPTION VALUE='authors'>Authors</OPTION>
 				</select>					
-			</td>	
-			<td width="15%" align="left">
-				<font class="font2">Animal:</font> 
 			</td>
-			<td width="40%" align="left">
-				<select id='animal_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all' >All</OPTION>
-				<OPTION VALUE='rat'>Rat</OPTION>
-				<OPTION VALUE='mouse'>Mouse</OPTION>
-				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
-				</select>					
-			</td>
-				<td width="15%" align="left">
-				<font class="font2">Protocol:</font> 
-			</td>
-			<td width="40%" align="left">
-				<select id='protocol_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all'>All</OPTION>
-				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
-				<OPTION VALUE='mRNA'>mRNA</OPTION>
-				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
-				<OPTION VALUE='unknown'>unknown</OPTION>
-				</select>					
-			</td>
+		
 			<td width="40%" align="left">
 			<?php 
 				// ARTICLE - BOOK: ++++++++++++++++++++++++
@@ -2532,6 +19855,52 @@ function evidencetoggle(){
 	?>
 
 		<br />
+
+		<!-- TABLE SHOW ONLY *******************************************************************************************************************
+		************************************************************************************************************************************* -->				
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+		<tr>
+			<td width="15%" align="left">
+				<font class="font2">Animal:</font> 
+			</td>
+			
+			<td width="30%" align="left">
+				<select id='animal_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all' >All</OPTION>
+				<OPTION VALUE='rat'>Rat</OPTION>
+				<OPTION VALUE='mouse'>Mouse</OPTION>
+				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
+				</select>					
+			</td>
+				<td width="15%" align="left">
+				<font class="font2">Protocol:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='protocol_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
+				<OPTION VALUE='mRNA'>mRNA</OPTION>
+				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
+				<OPTION VALUE='unknown'>unknown</OPTION>
+				</select>					
+			</td>
+	 				
+			<td width="15%" align="left">
+				<font class="font2">Expression:</font> 
+			</td>
+			<td width="40%" align="left">
+				<select id='expression_select' onchange='evidencetoggle()'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='positive'>positive</OPTION>
+				<OPTION VALUE='negative'>negative</OPTION>
+				<OPTION VALUE='positive and negative'>positive and negative</OPTION>
+				</select>					
+			</td>
+			
+		</tr>
+	</table>
+	<!--   END TABLE SHOW ONLY ***************************************************************************************************************-->
+	<br/>
 
 	<?php		
 		// Select only DOI, to have the exact number of articles and to show only one time the name of article.
@@ -2685,43 +20054,101 @@ function evidencetoggle(){
               $header_html = header_row("EXPRESSION", $expression);
               if ($animal != 'rat')
                 $header_html = $header_html . header_row("ANIMAL", $animal);
-		 else 
+               else 
                 $header_html = $header_html . header_row("ANIMAL", 'rat');
               if ($protocol != 'immunohistochemistry')
                 $header_html = $header_html . header_row("PROTOCOL", $protocol);
-		 else 
+               else 
                 $header_html = $header_html . header_row("PROTOCOL", 'immunohistochemistry');
-	//mouse and protocols
-            if($animal=="mouse" && $protocol=="mRNA")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA' style='display:table'>");
-            else if($animal=="mouse" && $protocol=="unknown")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown' style='display:table'>");
-            else if($animal=="mouse" && $protocol=="immunohistochemistry")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry' style='display:table'>");
-            else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA' style='display:table'>");  
-     //unspecified_rodent and protocols
+	//mouse and mRNA and expression
+            if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_positive' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="mRNA" && $expression=="negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_negative' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive, negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_positive_negative' style='display:table'>");
+    //mouse and unknown and expression           
+            else if($animal=="mouse" && $protocol=="unknown" && $expression=="positive")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown_positive' style='display:table'>");
+			else if($animal=="mouse" && $protocol=="unknown" && $expression=="negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown_negative' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="unknown" && $expression=="positive, negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown_positive_negative' style='display:table'>");
+    //mouse and immunohistochemistry and expression          
+        	else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="positive")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_positive' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_negative' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="positive, negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_positive_negative' style='display:table'>");
+     //mouse and immunohistochemistry_mRNA and expression       
+            else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive' style='display:table'>"); 
+            else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_negative' style='display:table'>");
+             else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive, negative")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive_negative' style='display:table'>");   
+     //unspecified_rodent and mRNA and expression
             
-             else if($animal=="unspecified_rodent" && $protocol=="mRNA")  
-            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_mRNA' style='display:table'>");
-			 else if($animal=="unspecified_rodent" && $protocol=="unknown")  
-            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_unknown' style='display:table'>");
-			 else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry")  
-            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry' style='display:table'>");
-			else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry_mRNA")  
-            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_mRNA' style='display:table'>");
-           //rat and protocols		
+             else if($animal=="unspecified_rodent" && $protocol=="mRNA" && $expression=="positive")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_mRNA_positive' style='display:table'>");
+			else if($animal=="unspecified_rodent" && $protocol=="mRNA" && $expression=="negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_mRNA_negative' style='display:table'>");
+			else if($animal=="unspecified_rodent" && $protocol=="mRNA" && $expression=="positive, negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_mRNA_positive_negative' style='display:table'>");
+			 
+      //unspecified_rodent and unknown and expression      	
+            else if($animal=="unspecified_rodent" && $protocol=="unknown" && $expression=="positive")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_unknown_positive' style='display:table'>");
+			else if($animal=="unspecified_rodent" && $protocol=="unknown" && $expression=="negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_unknown_negative' style='display:table'>");
+            else if($animal=="unspecified_rodent" && $protocol=="unknown" && $expression=="positive, negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_unknown_positive_negative' style='display:table'>");
+      //unspecified_rodent and immunohistochemistry and expression      	
+           else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry" && $expression=="positive")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_positive' style='display:table'>");
+			else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry" && $expression=="negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_negative' style='display:table'>");
+            else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry" && $expression=="positive, negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_positive_negative' style='display:table'>");
+        //unspecified_rodent and immunohistochemistry_mRNA and expression     	
+            else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_mRNA_positive' style='display:table'>");
+     		 else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry_mRNA" && $expression=="negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_mRNA_positive' style='display:table'>");
+			 else if($animal=="unspecified_rodent" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive, negative")  
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='unspecified_rodent_immunohistochemistry_mRNA_positive_negative' style='display:table'>");            	
             	
-            else if($animal=="rat" && $protocol=="mRNA")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_mRNA' style='display:table'>");
-		else if($animal=="rat" && $protocol=="unknown")
-				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_unknown' style='display:table'>");
-            else if($animal=="rat" && $protocol=="immunohistochemistry")
-				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry' style='display:table'>");
-            else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA")
-				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA' style='display:table'>");
-            
-              print $header_html;
+         //rat and mRNA and expression		
+            	
+            else if($animal=="rat" && $protocol=="mRNA" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_mRNA_positive' style='display:table'>");
+            else if($animal=="rat" && $protocol=="mRNA" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_mRNA_negative' style='display:table'>");
+			else if($animal=="rat" && $protocol=="mRNA" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_mRNA_positive_negative' style='display:table'>");
+		 //rat and unknown and expression		
+			else if($animal=="rat" && $protocol=="unknown" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_unknown_positive' style='display:table'>");
+            else if($animal=="rat" && $protocol=="unknown" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_unknown_negative' style='display:table'>");
+            else if($animal=="rat" && $protocol=="unknown" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_unknown_positive_negative' style='display:table'>");
+          //rat and immunohistochemistry and expression  
+			else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_positive' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_negative' style='display:table'>");
+            else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_positive_negative' style='display:table'>");
+          //rat and immunohistochemistry_mRNA and expression              
+			else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_positive' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_negative' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_positive_negative' style='display:table'>");            
+			print $header_html;
               print ("
                 <tr>
                 <td width='15%'></td>	
@@ -2760,7 +20187,7 @@ function evidencetoggle(){
                   <td width='15%'>");
               }
 							print ("</table>");
-							//print ("<br>");	
+						//	print ("<br>");	
 
 							$id_fragment_compare = $id_fragment;
 						} // END IF	($id_fragment_compare == $id_fragment)

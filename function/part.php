@@ -113,6 +113,14 @@ function part($n, $property)
 			$part = 'Post-synaptic output';
 	}
 	
+	if ($property == 'Major Neurontransmitter')
+	{
+		if($n == 0)
+			$part = 'GABA';
+		if($n == 1)
+			$part = 'Glutamate';
+	}
+	
 	return $part;
 }
 ?>

@@ -14,7 +14,7 @@ $parameter=$_GET['marker'];
 if($parameter=="alpha-actinin-2")
 	$title = "&prop;-act2";
 else if($parameter=="Gaba-a-alpha")
-	$title= "GABAa &prop;";
+	$title= "GABAa &prop;1";
 else
 	$title = $parameter;
 

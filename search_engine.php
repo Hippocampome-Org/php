@@ -244,6 +244,27 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
+// SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function major_neurontransmitter_search($property_1, $type, $subject, $predicate)
+{
+	$new_type_id_nan = array();
+
+	$type -> retrive_by_excit_inhib($predicate);
+	$n_type= $type -> getNumber_type();
+	
+	for ($i=0; $i<$n_type; $i++){
+		
+		$type_id[$i]= $type -> getID_array($i);
+	}
+		
+	if ($type_id != NULL)
+		$new_type_id=array_unique($type_id);
+
+	return $new_type_id;
+}
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 // SEARCH Function for EPHYS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // STM Alternative Ephys search
 //function ephys_search($conditions) {
@@ -258,6 +279,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
   //$records = result_set_to_array($result, "Type_id");
   //return $records;
 //}
+
 
 function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $predicate, $class_evidence_property_type_rel, $epdataevidencerel, $value, $epdata)
 {
@@ -539,7 +561,7 @@ $n_res1 = 0;
 
 for ($i=0; $i<=$a; $i++)   // Count for each OR
 {
-	$id_type_res = array(); // Arrays where will be inseted the results of ID TYPE
+	$id_type_res = array(); // Arrays where will be inserted the results of ID TYPE
 
 	$n_b = count($id_res[$i]);
 	//MY DELETE
@@ -596,7 +618,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		// Script for MARKERS +++++++++++++++++++++++++++++++++++++++++++		
 		if ($property == 'Molecular markers')
 		{
-			// ********** devo inserire ciclo IF per legare i nomi dei Markers ai reali nomi presenti nel database ***********
+			
 			$subject = $part;	
 			
 			if (strpos($subject, 'GABAa') == 'TRUE')
@@ -616,7 +638,35 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		}
 		// END Script for MARKERS +++++++++++++++++++++++++++++++++++++++		
 		
-		// Script for ELETROPHISIOLOGY +++++++++++++++++++++++++++++++++++++++++++		
+		
+		// Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++++++
+		if ($property == 'Major Neurontransmitter')
+		{
+			
+			$subject = $part;
+			//check for GABA
+			if (($subject == 'GABA' & $relation == 'is expressed')||($subject == 'Glutamate' & $relation == 'is not expressed')) {
+				
+				$predicate='i';
+			}
+			
+			//check for Glutamate
+			if (($subject == 'Glutamate' & $relation == 'is expressed')||($subject == 'GABA' & $relation == 'is not expressed')) {
+			
+				$predicate='e';
+			}
+			
+			
+			$res_marker = major_neurontransmitter_search($property_1, $type, $subject, $predicate) ;
+		
+			if ($res_marker != NULL)
+				$id_type_res = array_merge($id_type_res, $res_marker);
+		
+		}
+		// END Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++
+		
+		
+		// Script for ELECTROPHYSIOLOGY +++++++++++++++++++++++++++++++++++++++++++		
 		if ($property == 'Electrophysiology')
 		{
 			$predicate = $relation;	
@@ -735,6 +785,8 @@ $delta_time_format = number_format($delta_time,2,'.',',');
     <td width="80%">
 		<!-- ****************  BODY **************** -->
 		<?php
+		
+		
 			$query = "SELECT DISTINCT id_type FROM $name_temporary_table_result";
 			$rs = mysql_query($query);
 			$n_result_tot=0;
