@@ -104,6 +104,83 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.0&alpha; R 4I (17 Aug 2014):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 008: Add code to the portal to handle weakly positive expression as simple positive expression.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 010: Add "Major Neurotransmitter" to the list of Neuron type searches.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 023: Change the style of the open/close buttons on the Evidence Pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 043: Reformat connectivity sections of the Neuron pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 119: GABAa \alpha1 column in marker matrix is blank.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 121: New markers in spreadsheet not being read into database.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 124: Animal and protocol should always be listed on marker evidence page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 128: The "flag" for axonal evidence should be red, not blue.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 132: A user should be able to select whether they want to see info about positive expression or negative expression (or even both).
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 134: Species/protocol toggles for marker evidence.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue    : Minimized the evidence row gaps on the marker evidence pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue    : Minimized the evidence row gaps on the morphology evidence pages.
+</span></p>
+
+</BR></BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4H (26 Jul 2014):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span

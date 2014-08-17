@@ -19376,7 +19376,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
               //print("CONFLICT NOTE:" . $conflict_note);
 
 					 if ($val_property == 'Gaba-a-alpha')
-             print ("&nbsp <strong>GABAa &alpha; ($color) $conflict_note</strong>"); 
+             print ("&nbsp <strong>GABAa &alpha;1 ($color) $conflict_note</strong>"); 
 					 else if ($val_property == 'alpha-actinin-2')
              print ("&nbsp <strong>&alpha;-act2 ($color) $conflict_note</strong>"); 						
 					 else				
