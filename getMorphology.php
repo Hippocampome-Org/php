@@ -66,7 +66,7 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 	}
 	
 	$flag=0;
-	if($axons_dendrites_check!=1){
+//	if($axons_dendrites_check!=1){
 		while(list($subject,$object) = mysql_fetch_row($result_somata)){
 			if($subject=='somata' && $object==$val){
 				
@@ -74,7 +74,7 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 				break;
 			}
 		}
-	}
+//	}
 	
 	 if ($type == 'somata'){
 			if($flag==1)
