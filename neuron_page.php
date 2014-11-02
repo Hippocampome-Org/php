@@ -414,6 +414,7 @@ if ($text_file_creation)
 						while($arows = mysql_fetch_array($ress, MYSQL_ASSOC))
 						{
 							$auth_name[$g]=$arows['name_auth'];
+							$auth_name[$g]=preg_replace("/'/", "&#39;", $auth_name[$g]);
 							$u++;
 						}	
 						$g++;
@@ -772,6 +773,7 @@ if ($text_file_creation)
 				
 				$author -> retrive_by_id($id_author);
 				$name_a = $author -> getName_author_array(0);
+				$name_a = preg_replace("/'/", "&#39;", $name_a);
 				//$name_b=trim($name_a);
 				$f_auth1=substr($name_a,0,1);
 				$name_b="<a href='find_author.php?name_author=$name_a&first_author=$f_auth1&new=1&see_result=1'>$name_a</a>";
