@@ -934,6 +934,7 @@ function show_only_morphology(link, start1, stop1)
 					}
 					$name_authors[0] = '';
 					$name_authors = trim($name_authors);						
+					$name_authors = preg_replace("/'/", "\'", $name_authors);
 
 					$pages= $first_page." - ".$last_page;
 
@@ -1253,6 +1254,7 @@ function show_only_morphology(link, start1, stop1)
 						{
 							$f_auth=substr(trim($auth[$x]),0,1);
 							$auth_final=trim($auth[$x]);
+							$auth_final=preg_replace("/'/", "&#39;", $auth_final);
 							if($x!=sizeof($auth)-1)
 								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>,";	
 							else 
