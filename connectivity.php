@@ -76,14 +76,13 @@
 	<?php include ("function/icon.html"); ?>
 	<title>Connectivity Matrix</title>
 	<script type="text/javascript" src="style/resolution.js"></script>
-	
-	<link href="fixed_header_table/clrcss/fixedHeaderTable_defaultTheme.css" rel="stylesheet" media="screen" />
-	<link href="fixed_header_table/clrcss/CLR_theme.css" rel="stylesheet" media="screen" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-	<script src="fixed_header_table/jquery.fixedheadertable.js"></script>
-	<script src="fixed_header_table/table_defns.js"></script>
-	<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+	<link href="Fixed-Header-Table-master/css/fixedHeaderTable_defaultTheme.css" rel="stylesheet" media="screen" />
+	<link href="Fixed-Header-Table-master/css/CLR_theme.css" rel="stylesheet" media="screen" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="Fixed-Header-Table-master/jquery.fixedheadertable.js"></script>
+	<script src="Fixed-Header-Table-master/table_defns.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
 <style>
 <?php if(isset($research)){?>
 <?php }?>
@@ -177,22 +176,23 @@ function checkVersion() {
 checkVersion();
 
 </script>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;;
 	 var rotateFunction = function (grid, headerHeight) {
 	 // we use grid as context (if one have more as one table on the page)
-	 var trHead = $("thead:first tr", grid.hdiv),
-        cm = grid.getGridParam("colModel"),
+	 	var trHead = $("thead:first tr", grid.hdiv),
+        cm = grid.getGridParam("colModel") ,
         ieVer = $.browser.version.substr(0, 3),
         iCol, cmi, headDiv,
         isSafariAndNotChrome = (($.browser.webkit || $.browser.safari) &&
-                               !(/(chrome)[ \/]([\w.]+)/i.test(navigator.userAgent)));
+                               !(/(chrome)[ \/]([\w.]+)/i.test(navigator.userAgent))); 
 
-    $("thead:first tr th").height(headerHeight);
+    
     headerHeight = $("thead:first tr th").height();
    for (iCol = 0; iCol < cm.length; iCol++) 
     {
@@ -286,7 +286,7 @@ $(function(){
         rowHight = headerRow.height();
         headerRow.find("div.ui-jqgrid-sortable").each(function () {
             var ts = $(this);
-            ts.css('top', (rowHight - ts.outerHeight()) / 2 + 'px');
+            ts.css('top', (rowHight - ts.outerHeight()) + 'px');
         });
     },
     fixPositionsOfFrozenDivs = function () {
@@ -504,21 +504,18 @@ $(function(){
       id: "invid"
    },
 	scrollerbar:true,
-    shrinkToFit:false,
+   	shrinkToFit:false,
     height:'440',
-    width:"1050",
-   gridComplete: function () {
+    width:'1050',
+   	gridComplete: function () {
     	 var gridName = "nGrid"; // Access the grid Name
     	 Merger(gridName,"type");
     	 $grid.jqGrid('setFrozenColumns');
-    	 rotateFunction($grid,235);
+    	 rotateFunction($grid,235); 
     	 fixPositionsOfFrozenDivs.call($grid[0]);
     	} 
     });
 
-    
-	
-	
 	
 	//$("#nGrid").triggerHandler("jqGridAfterGridComplete");
 	
@@ -528,7 +525,7 @@ $(function(){
 	var cm = $grid.jqGrid('getGridParam', 'colModel');
 	
 	
-	$grid.mouseover(function(e) {
+	 $grid.mouseover(function(e) {
 
 		var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
 	    var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
@@ -539,12 +536,12 @@ $(function(){
 			$row = "#"+rowId+" td"; 
 			$($row).addClass('highlighted_top');
 
-			for(var i=0;i<count;i++)
+			/* for(var i=0;i<count;i++)
 			{
 				$colSelected = "tr#"+i+" td:eq("+ci+")";
 				$($colSelected).addClass('highlighted');
 				
-			} 
+			}  */
 		}
 		});
 		
@@ -556,13 +553,13 @@ $(function(){
 	        ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
 	        	$row = "#"+rowId+" td";  
 				$($row).removeClass('highlighted_top');
-				for(var i=0;i<count;i++)
+				/* for(var i=0;i<count;i++)
 				{
 					$colSelected = "tr#"+i+" td:eq("+ci+")";
 					$($colSelected).removeClass('highlighted');
-				} 
+				}  */
 			}
-		});
+		}); 
 });
 
 </script>        

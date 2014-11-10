@@ -83,14 +83,14 @@ if ($text_file_creation)
 <?php include ("function/icon.html"); ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Neuron page</title>
-<script src="lightbox/js/jquery-1.7.2.min.js"></script>
+<script src="lightbox/js/jquery-1.11.0.min.js"></script>
 <script src="lightbox/js/lightbox.js"></script>
 <link href="lightbox/css/lightbox.css" rel="stylesheet"/>
 
-<script src="jquery-ui-1.10.2.custom/js/jquery-1.9.1.js"></script>
-<link rel="stylesheet" href="jquery-ui-1.10.2.custom/css/smoothness/jquery-ui-1.10.2.custom.min.css" />
+<script src="jqGrid-4/js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 <script src="jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
- <link rel="stylesheet" href="/resources/demos/style.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
   
   <script>
   $(function(){
@@ -1552,6 +1552,7 @@ if ($text_file_creation)
 	  
       $list_potential_targets = array_diff(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
       $list_potential_targets = array_unique($list_potential_targets);
+      if (!empty ($list_potential_targets))
       $list_potential_targets = get_sorted_records($list_potential_targets);
 /*
       $net_targets = array_merge(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);

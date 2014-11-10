@@ -32,8 +32,8 @@ if(isset($_REQUEST['table_result']))
 <?php include ("function/icon.html"); ?>
 <title>Molecular Markers Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
 <style>
 .ui-jqgrid tr.jqgrow td
 {
@@ -124,9 +124,9 @@ function checkVersion() {
 checkVersion();
 
 </script>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo json_encode($responce)?>;
@@ -346,7 +346,7 @@ $(function(){
 
 var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 	
-	
+/* 	
 	$("#nGrid").mouseover(function(e) {
 
 	var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
@@ -381,7 +381,7 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 				$($colSelected).removeClass('highlighted');
 			} 
 		}
-	}); 
+	});  */
 });
 </script>
 </head>

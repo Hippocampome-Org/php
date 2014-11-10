@@ -179,8 +179,8 @@ $hippo_select = $_SESSION['hippo_select'];
     font-size: 11px !important;
 }
 </style>
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
 <script language="javascript">
 function OpenInNewTab(aEle)
 {
@@ -225,9 +225,10 @@ function checkVersion() {
 checkVersion();
 
 </script>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;
@@ -559,7 +560,7 @@ $(function(){
 
 var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 	
-$("#nGrid").mouseover(function(e) {
+ $("#nGrid").mouseover(function(e) {
 
 	var count = $("#nGrid").jqGrid('getGridParam', 'records') + 1;
     var $td = $(e.target).closest('td'), $tr = $td.closest('tr.jqgrow'),
@@ -570,12 +571,12 @@ $("#nGrid").mouseover(function(e) {
 		$row = "#"+rowId+" td"; 
 		$($row).addClass('highlighted_top');
 
-		for(var i=0;i<count;i++)
+		/* for(var i=0;i<count;i++)
 		{
 			$colSelected = "tr#"+i+" td:eq("+ci+")";
 			$($colSelected).addClass('highlighted');
 			
-		} 
+		}  */
 	}
 });
 $("#nGrid").mouseout(function(e) {
@@ -586,13 +587,13 @@ $("#nGrid").mouseout(function(e) {
         ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
         $row = "#"+rowId+" td";  
 		$($row).removeClass('highlighted_top');
-		for(var i=0;i<count;i++)
+		/* for(var i=0;i<count;i++)
 		{
 			$colSelected = "tr#"+i+" td:eq("+ci+")";
 			$($colSelected).removeClass('highlighted');
-		} 
+		}  */
 	}
-});
+}); 
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />

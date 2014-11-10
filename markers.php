@@ -34,8 +34,8 @@ if(isset($_REQUEST['table_result']))
 <?php include ("function/icon.html"); ?>
 <title>Molecular Markers Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
 <style>
 .ui-jqgrid tr.jqgrow td
 {
@@ -126,9 +126,9 @@ function checkVersion() {
 checkVersion();
 
 </script>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;
@@ -362,12 +362,12 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 		$row = "#"+rowId+" td"; 
 		$($row).addClass('highlighted_top');
 
-		for(var i=0;i<count;i++)
+		/* for(var i=0;i<count;i++)
 		{
 			$colSelected = "tr#"+i+" td:eq("+ci+")";
 			$($colSelected).addClass('highlighted');
 			
-		} 
+		}  */
 	}
 	});
 	
@@ -379,11 +379,11 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
         ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
         	$row = "#"+rowId+" td";  
 			$($row).removeClass('highlighted_top');
-			for(var i=0;i<count;i++)
+			/* for(var i=0;i<count;i++)
 			{
 				$colSelected = "tr#"+i+" td:eq("+ci+")";
 				$($colSelected).removeClass('highlighted');
-			} 
+			} */ 
 		}
 	}); 
 });

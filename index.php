@@ -33,7 +33,7 @@ remove_table_by_tyme();
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
-<script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 
 <style type="text/css">
 #dvLoading {

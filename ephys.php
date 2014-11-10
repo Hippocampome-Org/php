@@ -46,8 +46,8 @@ $epdata = new epdata($class_epdata);
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
 <title>Ephys Matrix</title>
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="jqGrid/css/ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 .ui-jqgrid tr.jqgrow td 
@@ -77,9 +77,9 @@ $epdata = new epdata($class_epdata);
 	color:#66FFFF;
 }
 </style>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;
@@ -290,12 +290,12 @@ $(function(){
 			$row = "#"+rowId+" td"; 
 			$($row).addClass('highlighted_top');
 
-			for(var i=0;i<count;i++)
+			/* for(var i=0;i<count;i++)
 			{
 				$colSelected = "tr#"+i+" td:eq("+ci+")";
 				$($colSelected).addClass('highlighted');
 				
-			} 
+			}  */
 		}
 		});
 		
@@ -307,11 +307,11 @@ $(function(){
 	        ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
 	        	$row = "#"+rowId+" td";  
 				$($row).removeClass('highlighted_top');
-				for(var i=0;i<count;i++)
+				/* for(var i=0;i<count;i++)
 				{
 					$colSelected = "tr#"+i+" td:eq("+ci+")";
 					$($colSelected).removeClass('highlighted');
-				} 
+				}  */
 			}
 		}); 
 });
