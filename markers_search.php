@@ -1,14 +1,14 @@
 <?php
-session_start();
+/*session_start();
 $perm = $_SESSION['perm'];
 if ($perm == NULL)
 	header("Location:error1.html");
-?>
+*/?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
+//include ("access_db.php");
 include ("getMarkers.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
@@ -215,6 +215,7 @@ $(function(){
       {name:'mGluR8a', index:'mGluR8a', width:15,height:150,search:false,sortable:false},
       {name:'MOR', index:'MOR', width:15,height:150,search:false,sortable:false},
       {name:'Mus2R', index:'Mus2R', width:15,height:150,search:false,sortable:false},
+{name:'NG', index:'NG', width:15,height:150,search:false,sortable:false},	
       {name:'NKB', index:'NKB', width:15,height:150,search:false,sortable:false},
       {name:'nNos', index:'nNos', width:15,height:150,search:false,sortable:false},
       {name:'NPY', index:'NPY', width:15,height:150,search:false,sortable:false},
@@ -284,6 +285,7 @@ $(function(){
 		$("#jqgh_nGrid_mGluR8a").addClass("rotateIE9");
 		$("#jqgh_nGrid_MOR").addClass("rotateIE9");
 		$("#jqgh_nGrid_Mus2R").addClass("rotateIE9");
+	$("#jqgh_nGrid_NG").addClass("rotateIE9");
 		$("#jqgh_nGrid_NKB").addClass("rotateIE9");
 		$("#jqgh_nGrid_nNos").addClass("rotateIE9");
 		$("#jqgh_nGrid_NPY").addClass("rotateIE9");
@@ -323,6 +325,7 @@ $(function(){
 		$("#jqgh_nGrid_mGluR8a").addClass("rotate");
 		$("#jqgh_nGrid_MOR").addClass("rotate");
 		$("#jqgh_nGrid_Mus2R").addClass("rotate");
+	$("#jqgh_nGrid_NG").addClass("rotate");
 		$("#jqgh_nGrid_NKB").addClass("rotate");
 		$("#jqgh_nGrid_nNos").addClass("rotate");
 		$("#jqgh_nGrid_NPY").addClass("rotate");

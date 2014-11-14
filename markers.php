@@ -1,15 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" />
+<script type="text/javascript" src="style/resolution.js"></script>
+<link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
+<script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
+<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<?php
+ include ("access_db.php");
+?>
 <?php
 session_start();
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 0;
+    }
+    else{
+		$_SESSION['perm'] = 1;
+	}
+    
+  }
 $perm = $_SESSION['perm'];
-if ($perm == NULL)
+//if ($perm == NULL)
+if ($perm == 1 && $_SESSION['flag']== NULL){
 	header("Location:error1.html");
+}
+else{?>
+<script>
+jQuery(document).ready(function() {
+	
+	$.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_markers.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_ephys.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_morphology.php',
+    success: function() {}
+  });
+  $.ajax({
+	    type: 'GET',
+	    cache: false,
+	    contentType: 'application/json; charset=utf-8',
+	    url: 'load_matrix_session_connectivity.php',
+	    success: function() {}
+	  });
+  $('div#menu_main_button_new_clr').css('display','block');
+});
+</script>
+<?php 
+}
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <?php
-include ("access_db.php");
+//include ("access_db.php");
 $jsonStr = $_SESSION['markers'];
+if($_SESSION['check']=="no_reload")
+	$_SESSION['check']='reload';
 //include ("getMarkers.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
@@ -28,9 +94,7 @@ if(isset($_REQUEST['table_result']))
 	$table_result = $_REQUEST['table_result'];
 
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
 <?php include ("function/icon.html"); ?>
 <title>Molecular Markers Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -129,6 +193,18 @@ checkVersion();
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script>
+ 
+	window.onload = function() 
+	{ 
+	if (!window.location.search) 
+	{ 
+	setTimeout("window.location+='?refreshed';", .1000); 
+	} 
+	} 
+ 
+
+</script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;
@@ -187,7 +263,8 @@ $(function(){
         researchVar: research,
         table_result : table
     },
-    colNames:['','Neuron Type','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=Gly T2" onClick="OpenInNewTab(this);">Gly T2</a>','<a href="neuron_by_marker.php?marker=mGLuR1a" onClick="OpenInNewTab(this);">mGLuR1a</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGLuR7a" onClick="OpenInNewTab(this);">mGLuR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=nNos" onClick="OpenInNewTab(this);">nNos</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=Sub P Rec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGlu T3<a/>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>'],
+     // colNames:['','Neuron Type','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=Gly T2" onClick="OpenInNewTab(this);">Gly T2</a>','<a href="neuron_by_marker.php?marker=mGLuR1a" onClick="OpenInNewTab(this);">mGLuR1a</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGLuR7a" onClick="OpenInNewTab(this);">mGLuR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=nNos" onClick="OpenInNewTab(this);">nNos</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=Sub P Rec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGlu T3<a/>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>'],	
+       colNames:['','Neuron Type','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=mGLuR1a" onClick="OpenInNewTab(this);">mGLuR1a</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=Sub P Rec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGluT3<a/>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=nNos" onClick="OpenInNewTab(this);">nNos</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=Gly T2" onClick="OpenInNewTab(this);">Gly T2</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGLuR7a" onClick="OpenInNewTab(this);">mGLuR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>'],
               /* ,'SMi','SG','H','SLM','SR','SL','SP','SO','SLM','SR','SP','SO','SLM','SR','SP','SO','SM','SP','PL','I','II','III','IV','V','VI']*/
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
@@ -195,7 +272,7 @@ $(function(){
       } },
       {name:'Neuron type', index:'nickname', width:175,sortable:false},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
-      {name:'5HT-3', index:'5HT-3', width:15,height:130,search:false,sortable:false},
+/*      {name:'5HT-3', index:'5HT-3', width:15,height:130,search:false,sortable:false},
       {name:'act2', index:'act2', width:15,height:130,search:false,sortable:false},
       {name:'ache', index:'ache', width:15,height:150,search:false,sortable:false},
       {name:'CB', index:'CB', width:15,height:150,search:false,sortable:false},
@@ -231,7 +308,53 @@ $(function(){
       {name:'vGluT2', index:'vGluT2', width:15,height:150,search:false,sortable:false},
       {name:'vGluT3', index:'vGluT3', width:15,height:150,search:false,sortable:false},
       {name:'VIAAT', index:'VIAAT', width:15,height:150,search:false,sortable:false},
-      {name:'VIP', index:'VIP', width:28,height:150,search:false,sortable:false}
+      {name:'VIP', index:'VIP', width:28,height:150,search:false,sortable:false}*/
+	      {name:'CB', index:'CB', width:15,height:150,search:false,sortable:false},
+      {name:'CR', index:'CR', width:15,height:150,search:false,sortable:false},
+      {name:'PV', index:'PV', width:15,height:150,search:false,sortable:false},
+      
+      {name:'5HT-3', index:'5HT-3', width:15,height:130,search:false,sortable:false},
+      {name:'CB1', index:'CB1', width:15,height:150,search:false,sortable:false},
+      {name:'GABAa', index:'GABAa', width:15,height:150,search:false,sortable:false},
+      {name:'mGLuR1a', index:'mGLuR1a', width:15,height:150,search:false,sortable:false},
+      {name:'Mus2R', index:'Mus2R', width:15,height:150,search:false,sortable:false},
+      {name:'SubPRec', index:'SubPRec', width:15,height:150,search:false,sortable:false},
+      {name:'vGluT3', index:'vGluT3', width:15,height:150,search:false,sortable:false},
+
+      {name:'CCK', index:'CCK', width:15,height:150,search:false,sortable:false},
+      {name:'ENK', index:'ENK', width:15,height:150,search:false,sortable:false},
+      {name:'NG', index:'NG', width:15,height:150,search:false,sortable:false},
+      {name:'NPY', index:'NPY', width:15,height:150,search:false,sortable:false},
+      {name:'SOM', index:'SOM', width:15,height:150,search:false,sortable:false},
+      {name:'VIP', index:'VIP', width:15,height:150,search:false,sortable:false},
+
+      
+       
+      {name:'act2', index:'act2', width:15,height:130,search:false,sortable:false},
+      {name:'CoupTFII', index:'CoupTFII', width:15,height:150,search:false,sortable:false},
+      {name:'nNos', index:'nNos', width:15,height:150,search:false,sortable:false},
+      {name:'RLN', index:'RLN', width:15,height:150,search:false,sortable:false},
+
+      
+      
+      {name:'ache', index:'ache', width:15,height:150,search:false,sortable:false},
+       {name:'CGRP', index:'CGRP', width:15,height:150,search:false,sortable:false},
+      {name:'ChAT', index:'ChAT', width:15,height:150,search:false,sortable:false},
+      {name:'DYN', index:'DYN', width:15,height:150,search:false,sortable:false},
+      {name:'EAAT3', index:'EAAT3', width:15,height:150,search:false,sortable:false},
+      {name:'GAT-1', index:'GAT-1', width:15,height:150,search:false,sortable:false},
+      {name:'GlyT2', index:'GlyT2', width:15,height:150,search:false,sortable:false},
+      {name:'mGluR23', index:'mGluR23', width:15,height:150,search:false,sortable:false},
+      {name:'mGLuR7a', index:'mGLuR7a', width:15,height:150,search:false,sortable:false},
+      {name:'mGluR8a', index:'mGluR8a', width:15,height:150,search:false,sortable:false},
+      {name:'MOR', index:'MOR', width:15,height:150,search:false,sortable:false},
+      {name:'NKB', index:'NKB', width:15,height:150,search:false,sortable:false}, 
+      {name:'PPTA', index:'PPTA', width:15,height:150,search:false,sortable:false},
+      {name:'PPTB', index:'PPTB', width:15,height:150,search:false,sortable:false},
+     {name:'vAChT', index:'vAChT', width:15,height:150,search:false,sortable:false},
+      {name:'vGluT2', index:'vGluT2', width:15,height:150,search:false,sortable:false},
+      {name:'VIAAT', index:'VIAAT', width:15,height:150,search:false,sortable:false}
+
     ], 
     //multiselect: true,
    /* pager: '#pager',*/
@@ -264,7 +387,7 @@ $(function(){
     });
 	if(checkVersion()=="9")
 	{
-		$("#jqgh_nGrid_5HT-3").addClass("rotateIE9");
+/*		$("#jqgh_nGrid_5HT-3").addClass("rotateIE9");
 		$("#jqgh_nGrid_act2").addClass("rotateIE9");
 		$("#jqgh_nGrid_ache").addClass("rotateIE9");
 		$("#jqgh_nGrid_CB").addClass("rotateIE9");
@@ -300,10 +423,92 @@ $(function(){
 		$("#jqgh_nGrid_vGluT2").addClass("rotateIE9");
 		$("#jqgh_nGrid_vGluT3").addClass("rotateIE9");
 		$("#jqgh_nGrid_VIAAT").addClass("rotateIE9");
+		$("#jqgh_nGrid_VIP").addClass("rotateIE9");  */
+		$("#jqgh_nGrid_CB").addClass("rotateIE9");
+		$("#jqgh_nGrid_CR").addClass("rotateIE9");
+		$("#jqgh_nGrid_PV").addClass("rotateIE9");
+		
+		$("#jqgh_nGrid_5HT-3").addClass("rotateIE9");
+		$("#jqgh_nGrid_CB1").addClass("rotateIE9");
+		$("#jqgh_nGrid_GABAa").addClass("rotateIE9");
+		$("#jqgh_nGrid_mGLuR1a").addClass("rotateIE9");
+		$("#jqgh_nGrid_Mus2R").addClass("rotateIE9");
+		$("#jqgh_nGrid_SubPRec").addClass("rotateIE9");
+		$("#jqgh_nGrid_vGluT3").addClass("rotateIE9");
+
+		$("#jqgh_nGrid_CCK").addClass("rotateIE9");
+		$("#jqgh_nGrid_ENK").addClass("rotateIE9");
+		$("#jqgh_nGrid_NG").addClass("rotateIE9");
+		$("#jqgh_nGrid_NPY").addClass("rotateIE9");
+		$("#jqgh_nGrid_SOM").addClass("rotateIE9");
 		$("#jqgh_nGrid_VIP").addClass("rotateIE9");
+		$("#jqgh_nGrid_act2").addClass("rotateIE9");
+		$("#jqgh_nGrid_CoupTFII").addClass("rotateIE9");
+		$("#jqgh_nGrid_nNos").addClass("rotateIE9");
+		$("#jqgh_nGrid_RLN").addClass("rotateIE9");
+	$("#jqgh_nGrid_ache").addClass("rotateIE9");
+		$("#jqgh_nGrid_CGRP").addClass("rotateIE9");
+		$("#jqgh_nGrid_ChAT").addClass("rotateIE9");
+		$("#jqgh_nGrid_DYN").addClass("rotateIE9");
+		$("#jqgh_nGrid_EAAT3").addClass("rotateIE9");
+		$("#jqgh_nGrid_GAT-1").addClass("rotateIE9");
+		$("#jqgh_nGrid_GlyT2").addClass("rotateIE9");
+		$("#jqgh_nGrid_mGluR23").addClass("rotateIE9");
+		$("#jqgh_nGrid_mGLuR7a").addClass("rotateIE9");
+		$("#jqgh_nGrid_mGluR8a").addClass("rotateIE9");
+		$("#jqgh_nGrid_MOR").addClass("rotateIE9");
+		$("#jqgh_nGrid_NKB").addClass("rotateIE9");
+		$("#jqgh_nGrid_PPTA").addClass("rotateIE9");
+		$("#jqgh_nGrid_PPTB").addClass("rotateIE9");
+		$("#jqgh_nGrid_vAChT").addClass("rotateIE9");
+		$("#jqgh_nGrid_vGluT2").addClass("rotateIE9");
+		$("#jqgh_nGrid_VIAAT").addClass("rotateIE9");
 	}
 	else
 	{
+		$("#jqgh_nGrid_CB").addClass("rotate");
+		
+		$("#jqgh_nGrid_CR").addClass("rotate");
+		$("#jqgh_nGrid_PV").addClass("rotate");
+		
+		$("#jqgh_nGrid_5HT-3").addClass("rotate");
+		$("#jqgh_nGrid_CB1").addClass("rotate");
+		$("#jqgh_nGrid_GABAa").addClass("rotate");
+		$("#jqgh_nGrid_mGLuR1a").addClass("rotate");
+		$("#jqgh_nGrid_Mus2R").addClass("rotate");
+		$("#jqgh_nGrid_SubPRec").addClass("rotate");
+		$("#jqgh_nGrid_vGluT3").addClass("rotate");
+
+		$("#jqgh_nGrid_CCK").addClass("rotate");
+		$("#jqgh_nGrid_ENK").addClass("rotate");
+		$("#jqgh_nGrid_NG").addClass("rotate");
+		$("#jqgh_nGrid_NPY").addClass("rotate");
+		$("#jqgh_nGrid_SOM").addClass("rotate");
+		$("#jqgh_nGrid_VIP").addClass("rotate");
+		
+		$("#jqgh_nGrid_act2").addClass("rotate");
+		$("#jqgh_nGrid_CoupTFII").addClass("rotate");
+		$("#jqgh_nGrid_nNos").addClass("rotate");
+		$("#jqgh_nGrid_RLN").addClass("rotate");
+		$("#jqgh_nGrid_ache").addClass("rotate");
+		$("#jqgh_nGrid_CGRP").addClass("rotate");
+		$("#jqgh_nGrid_ChAT").addClass("rotate");
+		$("#jqgh_nGrid_DYN").addClass("rotate");
+		$("#jqgh_nGrid_EAAT3").addClass("rotate");
+		$("#jqgh_nGrid_GAT-1").addClass("rotate");
+		$("#jqgh_nGrid_GlyT2").addClass("rotate");
+		$("#jqgh_nGrid_mGluR23").addClass("rotate");
+		$("#jqgh_nGrid_mGLuR7a").addClass("rotate");
+		$("#jqgh_nGrid_mGluR8a").addClass("rotate");
+		$("#jqgh_nGrid_MOR").addClass("rotate");
+		$("#jqgh_nGrid_NKB").addClass("rotate");
+		$("#jqgh_nGrid_PPTA").addClass("rotate");
+		$("#jqgh_nGrid_PPTB").addClass("rotate");
+		$("#jqgh_nGrid_vAChT").addClass("rotate");
+		$("#jqgh_nGrid_vGluT2").addClass("rotate");
+		$("#jqgh_nGrid_VIAAT").addClass("rotate");
+	
+		/*
 		$("#jqgh_nGrid_5HT-3").addClass("rotate");
 		$("#jqgh_nGrid_act2").addClass("rotate");
 		$("#jqgh_nGrid_ache").addClass("rotate");
@@ -341,7 +546,7 @@ $(function(){
 		$("#jqgh_nGrid_vGluT3").addClass("rotate");
 		$("#jqgh_nGrid_VIAAT").addClass("rotate");
 		$("#jqgh_nGrid_VIP").addClass("rotate");
-
+*/
     }
 
 	$("#nGrid_5HT-3").css("height","80");
@@ -387,6 +592,48 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 		}
 	}); 
 });
+	function  HideColumn () {
+	 
+    // Position of the name column
+//var colPos = 20;
+    var myGrid = $('#nGrid');
+    for(var i=22;i<39;i++){
+    	myGrid.jqGrid('hideCol', myGrid.getGridParam("colModel")[i].name);
+    }
+
+    var a = $("#nGrid").jqGrid('getGridParam','colModel');
+    for(var i=0;i<21;i++){
+   		(a[i].width)="15";
+    }
+    
+   /* alert(a[0].name);
+    alert(a[0].width);
+    alert(a[1].name);
+    alert(a[1].width);*/
+  //  myGrid.jqGrid('setColProp','amount',{width:80%});
+   // myGrid.jqGrid('setGridWidth',"80%");
+    
+    $(".ui-th-column").width(15);
+    $("#nGrid_type").width(49);
+    $("th#nGrid_Neuron").width(133);
+    
+    // myGrid.jqGrid('showCol', myGrid.getGridParam("colModel")[colPos + 1].name);
+}
+
+function  ShowColumn () {
+	 
+    // Position of the name column
+//	var colPos = 20;
+    var myGrid = $('#nGrid');
+    for(var i=22;i<39;i++)
+    	myGrid.jqGrid('showCol', myGrid.getGridParam("colModel")[i].name);
+   // myGrid.jqGrid('showCol', myGrid.getGridParam("colModel")[colPos + 1].name);
+    $("ui-jqgrid .ui-jqgrid-hdiv ").width(988);
+    $(".ui-th-column").width(15);
+    $("#nGrid_type").width(49);
+    $("th#nGrid_Neuron").width(171);
+  
+}
 </script>
 </head>
 
@@ -400,6 +647,8 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 
 <div class='title_area'>
 	<font class="font1">Browse molecular markers matrix</font>
+		<input type="button" id="btnHide" disabled value="Hide Column" onclick="HideColumn();" />
+	<input type="button" id="btnShow" disabled value="Show Column" onclick="ShowColumn();" />
 </div>
 
 <!-- Submenu no tabs

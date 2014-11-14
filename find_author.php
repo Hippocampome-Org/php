@@ -1,16 +1,41 @@
 <?php
-session_start();
+/*session_start();*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
+  include ("access_db.php");
+?>
+<?php
+session_start();
+
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 0;
+    }
+    else{
+		$_SESSION['perm'] = 1;
+	}
+    
+  }
+
+
+$perm = $_SESSION['perm'];
+//if ($perm == NULL)
+if ($perm == 1 && $_SESSION['flag']== NULL)
+	header("Location:error1.html");
+?>
+<?php
+/*
 include ("access_db.php");
 //print_r($_SESSION);
 $perm = $_SESSION['perm'];
 if ($perm == NULL)
 	header("Location:error1.html");
-	
+*/	
 require_once('class/class.temporary_author.php');
 require_once('class/class.author.php');	
 require_once('class/class.articleauthorrel.php');	

@@ -5,7 +5,23 @@
 <?php
 include("simphp-2.0.php");
 
+//-------user login required check----------
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 1;
+ $_SESSION['flag'] = 1;
+    }
+    else{
 $_SESSION['perm'] = 0;
+$_SESSION['flag'] = 1;
+	}
+    
+  }
+//-------------------------------------------
+//$_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
 
 if (array_key_exists('password', $_REQUEST)) {

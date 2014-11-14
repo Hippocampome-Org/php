@@ -1,14 +1,36 @@
 <?php
+  include ("access_db.php");
+?>
+<?php
 session_start();
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 0;
+    }
+    else{
+		$_SESSION['perm'] = 1;
+	}
+    
+  }
+$perm = $_SESSION['perm'];
+//if ($perm == NULL)
+if ($perm == 1 && $_SESSION['flag']== NULL)
+	header("Location:error1.html");
+?>
+<?php
+/*session_start();
 $perm = $_SESSION['perm'];
 if ($perm == NULL)
-	header("Location:error1.html");
+	header("Location:error1.html");*/
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
+//include ("access_db.php");
 include ("function/quote_manipulation.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
@@ -67,9 +89,11 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 		if (get_magic_quotes_gpc()) {
         	$publication = stripslashes($publication);  
         	$quotes = stripslashes($quotes);   
+	$authors = stripslashes($authors);  
 	}
 		$publication= mysql_real_escape_string($publication);
 	$quote = mysql_real_escape_string($quote);
+	$authors = mysql_real_escape_string($authors);
 	$query_i = "INSERT INTO $table
 	  (id,
 	   id_fragment,

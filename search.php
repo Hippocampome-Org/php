@@ -1,14 +1,38 @@
 <?php
-session_start();
+/*session_start();
 $perm = $_SESSION['perm'];
 if ($perm == NULL)
 	header("Location:error1.html");
+*/?>
+<?php
+  include ("access_db.php");
 ?>
+<?php
+session_start();
 
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 0;
+    }
+    else{
+		$_SESSION['perm'] = 1;
+	}
+    
+  }
+
+
+$perm = $_SESSION['perm'];
+//if ($perm == NULL)
+if ($perm == 1 && $_SESSION['flag']== NULL)
+	header("Location:error1.html");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
+//include ("access_db.php");
 
 include ("function/property.php");
 include ("function/part.php");
@@ -353,9 +377,27 @@ function operator(link, i0)
 				print ("<OPTION VALUE='$part1'>$part1</OPTION>");
 								
 			print ("<OPTION VALUE='-'>-</OPTION>");
+	for ($c = 0; $c < count($value_part); $c++) {
+    		$value_part_temp[$c] = $value_part[$c];
+	}
 
+	for ($c = 0; $c < count($value_part); $c++) {
+    		$lowercase = strtolower($value_part[$c]);
+    		$value_part[$c] = $lowercase;
+	}
 			sort($value_part);
+		for ($c = 0; $c < count($value_part); $c++) {
+				for($cc=0;$cc<count($value_part_temp);$cc++){
+				//	$value_part[$c]=strcasecmp($value_part[$c],$value_part_temp[$cc]);
+					if(strcasecmp($value_part[$c],$value_part_temp[$cc])==0){
+					
+						$value_part[$c]=$value_part_temp[$cc];
+					
+					}
+					
+				}
 			
+		}
 			for ($i=0; $i<$n_part; $i++)
 			{
 				if ($value_part[$i] != $part1)

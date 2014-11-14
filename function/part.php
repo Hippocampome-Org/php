@@ -68,7 +68,8 @@ function part($n, $property)
 		if ($n == 26)
 			$part = 'NKB';	
 		if ($n == 27)
-			$part = 'NK1';
+		//	$part = 'NK1';
+		$part='Sub P Rec';
 		if ($n == 28)
 			$part = 'PPTA';			
 		if ($n == 29)

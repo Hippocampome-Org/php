@@ -1,10 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" />
+<script type="text/javascript" src="style/resolution.js"></script>
+<link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
+<script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
+<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<?php
+ include ("access_db.php");
+?>
 <?php
 session_start();
+$query = "SELECT permission FROM user WHERE id = '1'";
+  $rs = mysql_query($query);
+  while(list($permission) = mysql_fetch_row($rs)) {
+    if ($permission == 0) {	
+      $permission1 = $permission;
+      $_SESSION['perm'] = 0;
+    }
+    else{
+		$_SESSION['perm'] = 1;
+	}
+    
+  }
 $perm = $_SESSION['perm'];
-if ($perm == NULL)
+//if ($perm == NULL)
+if ($perm == 1 && $_SESSION['flag']== NULL){
 	header("Location:error1.html");
+}
+else{?>
+<script>
+jQuery(document).ready(function() {
+	
+	$.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_markers.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_ephys.php',
+    success: function() {}
+  }); 
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_morphology.php',
+    success: function() {}
+  });
+  $.ajax({
+	    type: 'GET',
+	    cache: false,
+	    contentType: 'application/json; charset=utf-8',
+	    url: 'load_matrix_session_connectivity.php',
+	    success: function() {}
+	  });
+  $('div#menu_main_button_new_clr').css('display','block');
+});
+</script>
+<?php 
+}
+?>
 
-include ("access_db.php");
+<?php
+//session_start();
+//$perm = $_SESSION['perm'];
+//if ($perm == NULL)
+//	header("Location:error1.html");
+//include ("access_db.php");
 $jsonStr = $_SESSION['morphology'];
 //include ("getMorphology.php");
 require_once('class/class.type.php');
@@ -115,9 +185,6 @@ $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_ty
 $hippo_select = $_SESSION['hippo_select'];
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
 <style>
 #ca3_subregion,#dg_subregion,#ec_subregion
 {
@@ -229,6 +296,18 @@ checkVersion();
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script>
+ 
+	window.onload = function() 
+	{ 
+	if (!window.location.search) 
+	{ 
+	setTimeout("window.location+='?refreshed';", .1000); 
+	} 
+	} 
+ 
+
+</script>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;

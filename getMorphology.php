@@ -66,7 +66,7 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 	}
 	
 	$flag=0;
-//	if($axons_dendrites_check!=1){
+	if($axons_dendrites_check!=1){
 		while(list($subject,$object) = mysql_fetch_row($result_somata)){
 			if($subject=='somata' && $object==$val){
 				
@@ -74,11 +74,12 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 				break;
 			}
 		}
-//	}
+	}
 	
 	 if ($type == 'somata'){
 			if($flag==1)
 				$link[0] = "<img src='images/morphology/neuron_soma.png' border='0'/>";
+	$link[1]='somata';
 		}
 	
 	return ($link);
@@ -386,7 +387,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 				$img_somata = check_color_somata($id,$neuronType, $unvetted,$val[$ii],$part[$ii]);
 				if($img_somata!=''){
 				 	$hippo[$val[$ii]] = $img_somata[0];
-				
+		 $hippo_color[$val[$ii]] = $img_somata[1];		
 				} 
 			}
 		}
