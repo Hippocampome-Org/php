@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
-<script type="text/javascript" src="jqGrid/js/jquery-1.7.2.min.js"></script>
-<script src="jqGrid/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-<script src="jqGrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
-<script src="jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <?php
 include ("access_db.php");
 ?>
@@ -247,6 +248,8 @@ checkVersion();
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+
+<?php if($_SESSION['flag']!='1'){?>
 <script>
  
 	window.onload = function() 
@@ -260,6 +263,7 @@ checkVersion();
  
 
 </script>
+<?php }?>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;;
