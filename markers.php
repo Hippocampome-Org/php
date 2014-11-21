@@ -271,7 +271,7 @@ $(function(){
       } },
       {name:'Neuron type', index:'nickname', width:175,sortable:false},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
-/*      {name:'5HT-3', index:'5HT-3', width:15,height:130,search:false,sortable:false},
+      {name:'5HT-3', index:'5HT-3', width:15,height:130,search:false,sortable:false},
       {name:'act2', index:'act2', width:15,height:130,search:false,sortable:false},
       {name:'ache', index:'ache', width:15,height:150,search:false,sortable:false},
       {name:'CB', index:'CB', width:15,height:150,search:false,sortable:false},
@@ -307,8 +307,8 @@ $(function(){
       {name:'vGluT2', index:'vGluT2', width:15,height:150,search:false,sortable:false},
       {name:'vGluT3', index:'vGluT3', width:15,height:150,search:false,sortable:false},
       {name:'VIAAT', index:'VIAAT', width:15,height:150,search:false,sortable:false},
-      {name:'VIP', index:'VIP', width:28,height:150,search:false,sortable:false}*/
-	      {name:'CB', index:'CB', width:15,height:150,search:false,sortable:false},
+      {name:'VIP', index:'VIP', width:28,height:150,search:false,sortable:false}
+/*	      {name:'CB', index:'CB', width:15,height:150,search:false,sortable:false},
       {name:'CR', index:'CR', width:15,height:150,search:false,sortable:false},
       {name:'PV', index:'PV', width:15,height:150,search:false,sortable:false},
       
@@ -352,7 +352,7 @@ $(function(){
       {name:'PPTB', index:'PPTB', width:15,height:150,search:false,sortable:false},
      {name:'vAChT', index:'vAChT', width:15,height:150,search:false,sortable:false},
       {name:'vGluT2', index:'vGluT2', width:15,height:150,search:false,sortable:false},
-      {name:'VIAAT', index:'VIAAT', width:15,height:150,search:false,sortable:false}
+      {name:'VIAAT', index:'VIAAT', width:15,height:150,search:false,sortable:false}*/
 
     ], 
     //multiselect: true,
@@ -386,7 +386,7 @@ $(function(){
     });
 	if(checkVersion()=="9")
 	{
-/*		$("#jqgh_nGrid_5HT-3").addClass("rotateIE9");
+		$("#jqgh_nGrid_5HT-3").addClass("rotateIE9");
 		$("#jqgh_nGrid_act2").addClass("rotateIE9");
 		$("#jqgh_nGrid_ache").addClass("rotateIE9");
 		$("#jqgh_nGrid_CB").addClass("rotateIE9");
@@ -422,8 +422,8 @@ $(function(){
 		$("#jqgh_nGrid_vGluT2").addClass("rotateIE9");
 		$("#jqgh_nGrid_vGluT3").addClass("rotateIE9");
 		$("#jqgh_nGrid_VIAAT").addClass("rotateIE9");
-		$("#jqgh_nGrid_VIP").addClass("rotateIE9");  */
-		$("#jqgh_nGrid_CB").addClass("rotateIE9");
+		$("#jqgh_nGrid_VIP").addClass("rotateIE9");  
+/*		$("#jqgh_nGrid_CB").addClass("rotateIE9");
 		$("#jqgh_nGrid_CR").addClass("rotateIE9");
 		$("#jqgh_nGrid_PV").addClass("rotateIE9");
 		
@@ -461,11 +461,11 @@ $(function(){
 		$("#jqgh_nGrid_PPTB").addClass("rotateIE9");
 		$("#jqgh_nGrid_vAChT").addClass("rotateIE9");
 		$("#jqgh_nGrid_vGluT2").addClass("rotateIE9");
-		$("#jqgh_nGrid_VIAAT").addClass("rotateIE9");
+		$("#jqgh_nGrid_VIAAT").addClass("rotateIE9");*/
 	}
 	else
 	{
-		$("#jqgh_nGrid_CB").addClass("rotate");
+	/*	$("#jqgh_nGrid_CB").addClass("rotate");
 		
 		$("#jqgh_nGrid_CR").addClass("rotate");
 		$("#jqgh_nGrid_PV").addClass("rotate");
@@ -505,9 +505,9 @@ $(function(){
 		$("#jqgh_nGrid_PPTB").addClass("rotate");
 		$("#jqgh_nGrid_vAChT").addClass("rotate");
 		$("#jqgh_nGrid_vGluT2").addClass("rotate");
-		$("#jqgh_nGrid_VIAAT").addClass("rotate");
+		$("#jqgh_nGrid_VIAAT").addClass("rotate");*/
 	
-		/*
+		
 		$("#jqgh_nGrid_5HT-3").addClass("rotate");
 		$("#jqgh_nGrid_act2").addClass("rotate");
 		$("#jqgh_nGrid_ache").addClass("rotate");
@@ -545,7 +545,7 @@ $(function(){
 		$("#jqgh_nGrid_vGluT3").addClass("rotate");
 		$("#jqgh_nGrid_VIAAT").addClass("rotate");
 		$("#jqgh_nGrid_VIP").addClass("rotate");
-*/
+
     }
 
 	$("#nGrid_5HT-3").css("height","80");

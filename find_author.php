@@ -317,6 +317,7 @@ if ($temporary_search == 1)
 	if ($_REQUEST['see_result'])
 	{
 		$j3=0;
+$pmid=array();
 		for ($i3=0; $i3<$n_tot_id_results; $i3++)
 		{
 			//remove duplicate articles

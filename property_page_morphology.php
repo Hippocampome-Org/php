@@ -957,8 +957,8 @@ function show_only_morphology(link, start1, stop1)
 						$name_authors = $name_authors.', '.$name_a;
 					}
 					$name_authors[0] = '';
-					$name_authors = trim($name_authors);						
-					$name_authors = preg_replace("/'/", "\'", $name_authors);
+			//		$name_authors = trim($name_authors);						
+			//		$name_authors = preg_replace("/'/", "\'", $name_authors);
 
 					$pages= $first_page." - ".$last_page;
 
