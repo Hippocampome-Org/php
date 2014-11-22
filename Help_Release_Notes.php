@@ -161,7 +161,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 139: No evidence appears for CA1 (i)0333 Ivy: ¿-act2 (negative) clicking from the Neuron page.
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 139: No evidence appears for CA1 (i)0333 Ivy: a-act2 (negative) clicking from the Neuron page.
 </span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
