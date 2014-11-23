@@ -1,40 +1,36 @@
+<?php
+session_start();
+include ("access_db.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
-
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <?php
- include ("access_db.php");
-?>
-<?php
-session_start();
 $query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 0;
-    }
-    else{
-		$_SESSION['perm'] = 1;
-	}
-    
+$rs = mysql_query($query);
+while(list($permission) = mysql_fetch_row($rs)) {
+  if ($permission == 0) {	
+    $permission1 = $permission;
+    $_SESSION['perm'] = 0;
   }
+  else{
+    $_SESSION['perm'] = 1;
+  }
+}
 $perm = $_SESSION['perm'];
-//if ($perm == NULL)
 if ($perm == 1 && $_SESSION['flag']== NULL){
-	header("Location:error1.html");
+  header("Location:error1.html");
 }
 else{?>
 <script>
 jQuery(document).ready(function() {
-	
-	$.ajax({
+  $.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
@@ -56,18 +52,19 @@ jQuery(document).ready(function() {
     success: function() {}
   });
   $.ajax({
-	    type: 'GET',
-	    cache: false,
-	    contentType: 'application/json; charset=utf-8',
-	    url: 'load_matrix_session_connectivity.php',
-	    success: function() {}
-	  });
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_connectivity.php',
+    success: function() {}
+  });
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
 <?php 
 }
 ?>
+
 $perm = $_SESSION['perm'];
 //if ($perm == NULL)
 if ($perm == 1 && $_SESSION['flag']== NULL)

@@ -6,36 +6,33 @@
 include("simphp-2.0.php");
 
 //-------user login required check----------
-$query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 1;
- $_SESSION['flag'] = 1;
-    }
-    else{
 $_SESSION['perm'] = 0;
 $_SESSION['flag'] = 1;
-	}
-    
-  }
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysql_query($query);
+list($permission) = mysql_fetch_row($rs);
+if ($permission == 1) {	
+  $_SESSION['perm'] = 1;
+}
+else{
+  $_SESSION['perm'] = 0;
+}
 //-------------------------------------------
 //$_SESSION['perm'] = 0;
 $permission1 = $_SESSION['perm'];
-
-if (array_key_exists('password', $_REQUEST)) {
-  $query = "SELECT permission FROM user WHERE password = '{$_REQUEST['password']}'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 1) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = $permission1;
+if ($_SESSION['perm'] == 0) {
+  if (array_key_exists('password', $_REQUEST)) {
+    $query = "SELECT permission FROM user WHERE password = '{$_REQUEST['password']}'";
+    $rs = mysql_query($query);
+    while(list($permission) = mysql_fetch_row($rs)) {
+      if ($permission == 1) {	
+        $permission1 = $permission;
+        $_SESSION['perm'] = $permission1;
+      }
+      else;
     }
-    else;
   }
 }
-
 // delete temporary table for the research: -----------------
 include("function/remove_table_research.php");
 remove_table_by_tyme();
