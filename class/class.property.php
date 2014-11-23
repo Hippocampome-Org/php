@@ -66,8 +66,8 @@ class property
 		if ($flag ==5 )
 		{
 			// STM added after changing DB structure to have explicit subregion properties
-			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
-			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
+			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
 		}	
 		$rs = mysql_query($query);
 		$n6=0;
