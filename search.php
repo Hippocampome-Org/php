@@ -1,10 +1,4 @@
 <?php
-/*session_start();
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
-*/?>
-<?php
   include ("access_db.php");
 ?>
 <?php
@@ -513,7 +507,7 @@ function operator(link, i0)
 			}	
 							
 			if ($property1 == 'Morphology')
-				$n_value = 32;
+				$n_value = 33;
 			if ($property1 == 'Molecular markers')
 				$n_value = 0;
 			if ($property1 == 'Electrophysiology')

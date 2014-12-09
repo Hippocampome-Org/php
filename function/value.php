@@ -42,33 +42,33 @@ function value($n, $property, $min, $max)
 			$value = 'CA1'; 			
 		if ($n == 18)	
 			$value = 'CA1:SLM'; 
-		if ($n == 16)		
+		if ($n == 19)		
 			$value = 'CA1:SR';
-		if ($n == 19)	
-			$value = 'CA1:SP'; 
 		if ($n == 20)	
-			$value = 'CA1:SO';
+			$value = 'CA1:SP'; 
 		if ($n == 21)	
-			$value = 'SUB'; 			
+			$value = 'CA1:SO';
 		if ($n == 22)	
+			$value = 'SUB'; 			
+		if ($n == 23)	
 			$value = 'SUB:SM'; 
-		if ($n == 23)	  	
+		if ($n == 24)	  	
 			$value = 'SUB:SP';
-		if ($n == 24)	
-			$value = 'SUB:PL';
 		if ($n == 25)	
-			$value = 'EC';			
+			$value = 'SUB:PL';
 		if ($n == 26)	
-			$value = 'EC:I';
+			$value = 'EC';			
 		if ($n == 27)	
-			$value = 'EC:II';
+			$value = 'EC:I';
 		if ($n == 28)	
-			$value = 'EC:III';
+			$value = 'EC:II';
 		if ($n == 29)	
-			$value = 'EC:IV';
+			$value = 'EC:III';
 		if ($n == 30)	
-			$value = 'EC:V';
+			$value = 'EC:IV';
 		if ($n == 31)	
+			$value = 'EC:V';
+		if ($n == 32)	
 			$value = 'EC:VI';
 	}
 

@@ -139,7 +139,7 @@ function check_color($variable, $unvetted, $conflict_note)
 			else
 				$link[0] = "<img src='images/marker/positive-negative-subtypes.png' border='0' width='15px' />";		
 		}
-		elseif ($conflict_note == "species differences")
+		elseif ($conflict_note == "species/protocol differences")
 		{
 			/* echo "Variable ".$variable;
 			echo " Conflict Note :".$conflict_note; */
@@ -154,6 +154,20 @@ function check_color($variable, $unvetted, $conflict_note)
 				$link[0] = "<img src='images/marker/positive-negative-conflicting_unvetted.png' border='0' width='15px' />";
 			else
 				$link[0] = "<img src='images/marker/positive-negative-conflicting.png' border='0' width='15px' />";		
+		}		
+		elseif ($conflict_note == "positive")
+		{
+			if ($unvetted == 1)
+				$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";		
+		}		
+		elseif ($conflict_note == "negative")
+		{
+			if ($unvetted == 1)
+				$link[0] = "<img src='images/marker/negative_unvetted.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/negative.png' border='0' width='15px' />";		
 		}		
 		else
 		{

@@ -123,6 +123,12 @@ $epdata = new epdata($class_epdata);
 	height:18px !important;
 	text-align:left;
 }
+.ui-jqgrid .ui-jqgrid-htable th div 
+{
+ position:relative;
+ height: auto
+ }
+
 .highlighted{
 	border-right: solid 1px Chartreuse !important;
 	border-left: solid 1px Chartreuse !important;
