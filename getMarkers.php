@@ -129,8 +129,8 @@ function check_color($variable, $unvetted, $conflict_note)
 
 		$link[1] = $variable;
 	}
-	if ($variable == 'positive-negative')
-	{
+//	if ($variable == 'positive-negative')
+//	{
 		// Check the conflict_note:
 		if ($conflict_note == "subtypes")
 		{
@@ -175,7 +175,7 @@ function check_color($variable, $unvetted, $conflict_note)
 		}
 	
 		$link[1] = $variable;
-	}	
+//	}	
 //	if ($variable == 'positive-negative-weak_positive')
 //	{
 //		if ($unvetted == 1)
