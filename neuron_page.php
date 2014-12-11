@@ -899,7 +899,21 @@ if ($text_file_creation)
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();
 			
 			// maintain separate arrays for positive (+ wk pos) and negative evidence
-			if (($val == 'positive') || ($val == 'weak_positive')) {
+			if ($conflict_note == 'positive') {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
+				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
+				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
+				
+				$marker_pos_disp_counter++;
+			}
+			elseif ($conflict_note == 'negative') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
+				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
+				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
+				
+				$marker_neg_disp_counter++;
+			}
+			elseif (($val == 'positive') || ($val == 'weak_positive')) {
 				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
 				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
 				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
@@ -960,7 +974,7 @@ if ($text_file_creation)
 				// sort all arrays alphabetically
 				array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
 								$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
-								$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
+								//$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
 								$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 				array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
 								$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
@@ -1020,6 +1034,7 @@ if ($text_file_creation)
 							");
 				}
 				else {
+					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_pos_disp_counter; $j++) {
 						$markerForLink = $pos_array['part_key'][$j];
 
@@ -1032,8 +1047,9 @@ if ($text_file_creation)
 							$disp_marker_name = $pos_array['part_key'][$j] . ' (weak positive)';
 						else					
 							$disp_marker_name = $pos_array['part_key'][$j];
-						
-						print ("
+
+						if (!($disp_marker_name_prior == $disp_marker_name)) {
+							print ("
 							<tr>
 							<td width='20%' align='right'>
 							</td>
@@ -1044,6 +1060,8 @@ if ($text_file_creation)
 							</td>
 							</tr>
 							");
+						}
+						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
 				} // end if ($marker_pos_disp_counter == 0) {
 			?>
@@ -1067,6 +1085,7 @@ if ($text_file_creation)
 							");
 				}
 				else {
+					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_neg_disp_counter; $j++) {
 						$markerForLink = $neg_array['part_key'][$j];
 
@@ -1076,8 +1095,9 @@ if ($text_file_creation)
 							$font_col = 'font4';
 							
 						$disp_marker_name = $neg_array['part_key'][$j];
-						
-						print ("
+
+						if (!($disp_marker_name_prior == $disp_marker_name)) {
+							print ("
 							<tr>
 							<td width='20%' align='right'>
 							</td>
@@ -1088,6 +1108,8 @@ if ($text_file_creation)
 							</td>
 							</tr>
 							");						
+						}
+						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
 				} // end if ($marker_neg_disp_counter == 0) {
 			?>
