@@ -4,6 +4,8 @@
 
 $today= time();
 
+$name_send = $_REQUEST['name_send'];
+$institute_send = $_REQUEST['institute_send'];
 $email_send = $_REQUEST['email_send'];
 $pmid_send = $_REQUEST['pmid_send'];
 $title_send = $_REQUEST['title_send'];
@@ -18,32 +20,34 @@ if ($pos == NULL)
 else
 {
 	$from_user = $email_send; 
-	$to = "hippocampome@gmail.com"; 
-	$subject = "New Article from PMID";
+	$to = "hippocampome.org@gmail.com"; 
+	$subject = "Hippocampome.org - PMID/ISBN not found";
 	
 	$mess_text="
 				$today ------------ \n
 				Insert this new aricle:\n\n
-				PMID: $pmid_send \n
+				PMID/ISBN: $pmid_send \n
 				Title: $title_send \n
 				Author: $author_send \n
 				Publication: $publication_send \n
-				Email user: $from_user
-				\n\n
+				Name: $name_send \n
+				Institute: $institute_send \n
+				Email user: $from_user \n
+				\n
 				Thanks \n
 	";
 	
-	require_once('class/class.phpgmailer.php');
-	$mail = new PHPGMailer();
-	$mail->Username = 'hippocampome@gmail.com';
-	$mail->Password = 'ascoli08';
+	require 'class/class.phpmailer.php';
+	$mail = new PHPMailer;
+	$mail->Username = 'hippocampome.org@gmail.com';
+	$mail->Password = 'NeuroHipp2010';
 	
-	$mail->From = 'Hippocampome';
-	$mail->FromName = 'Hippocampome';
+	$mail->From = 'Hippocampome.org';
+	$mail->FromName = 'Hippocampome.org';
 	$mail->Subject = $subject;
 	$mail->AddAddress($to);//to:email address
 	$mail->Body = $mess_text;
-	$mail->Send();
+	$mail->send();
 }
 ?>
 

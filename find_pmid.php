@@ -1,14 +1,6 @@
 <?php
-/*session_start();
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
-*/?>
-<?php
-  include ("access_db.php");
-?>
-<?php
 session_start();
+include ("access_db.php");
 
 $query = "SELECT permission FROM user WHERE id = '1'";
   $rs = mysql_query($query);
@@ -50,7 +42,7 @@ if ($_REQUEST['search_pmid'])
 	$type_search = $_SESSION['type_search'];
 
 	$n_pmid = $_SESSION['n_pmid'];
-	$pmid = $_REQUEST['pubmed_id'];
+	$pmid = trim($_REQUEST['pubmed_id']);
 
 
 	// Check if the pmid is OK or not: ************
@@ -308,7 +300,7 @@ else
 		
 		
 		
-/*		// Send an email ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// Send an email ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		if ( ($n_id_article == 0) && ($error_pmid == 0) )
 		{
@@ -320,15 +312,17 @@ else
 					$res=scraper_pubmed($pmid);
 				if ($type_search == 'ISBN');
 				
-				
-				if ($res[0] == '1')
-				{
-					$res[0] = "Insert the title";
-					$author_3  = "Insert the authors";					
-					$res[2] = "Insert the publication";
-				}
-				else
-					$author_3 = $res[1].". et al.";
+				//if ($res[0] == '1')
+				//{
+				//	$res[0] = "Insert the title";
+				//	$author_3  = "Insert the authors";					
+				//	$res[2] = "Insert the publication";
+				//}
+				//else
+				//	$author_3 = $res[1].". et al.";
+				$res[0]   = "";
+				$author_3 = "";					
+				$res[2]   = "";
 			
 				print ("<table border='0' cellspacing='2' cellpadding='0' class='table_result'>");
 				print ("<tr>");
@@ -398,6 +392,32 @@ else
 				print ("<tr>");
 					print ("
 						<td width='10%'></td>
+						<td width='20%' align='right' class='table_neuron_page4'> YOUR NAME </td>
+						<td width='60%' align='left' class='table_neuron_page4'>
+							<input type='text' name='name_send' value='' size='50'>
+						</td>
+						<td width='10%'></td>
+					");
+				print ("</tr>");				
+				print ("</table>");			
+		
+				print ("<table border='0' cellspacing='2' cellpadding='0' class='table_result'>");
+				print ("<tr>");
+					print ("
+						<td width='10%'></td>
+						<td width='20%' align='right' class='table_neuron_page4'> YOUR INSTITUTE </td>
+						<td width='60%' align='left' class='table_neuron_page4'>
+							<input type='text' name='institute_send' value='' size='50'>
+						</td>
+						<td width='10%'></td>
+					");
+				print ("</tr>");				
+				print ("</table>");			
+		
+				print ("<table border='0' cellspacing='2' cellpadding='0' class='table_result'>");
+				print ("<tr>");
+					print ("
+						<td width='10%'></td>
 						<td width='20%' align='right' class='table_neuron_page4'> YOUR EMAIL* </td>
 						<td width='60%' align='left' class='table_neuron_page4'>
 							<input type='text' name='email_send' value='' size='50'>
@@ -420,7 +440,7 @@ else
 						");
 			}
 			
-		} // END ELSE (send an email) */
+		} // END ELSE (send an email)
 	?>
 		</td>
 	</tr>
