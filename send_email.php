@@ -2,7 +2,8 @@
 
 <?php
 
-$today= time();
+$gmdatetimenice = gmdate('Y-m-d H:i');
+$gmdatetimestamp = gmdate('YmdHi');
 
 $name_send = $_REQUEST['name_send'];
 $institute_send = $_REQUEST['institute_send'];
@@ -21,20 +22,18 @@ else
 {
 	$from_user = $email_send; 
 	$to = "hippocampome.org@gmail.com"; 
-	$subject = "Hippocampome.org - PMID/ISBN not found";
+	$subject = "Hippocampome.org - New PMID/ISBN request " . $gmdatetimestamp;
 	
 	$mess_text="
-				$today ------------ \n
-				Insert this new aricle:\n\n
+				New PMID/ISBN request $gmdatetimestamp \n
 				PMID/ISBN: $pmid_send \n
+				Date/Time(UTC): $gmdatetimenice \n
 				Title: $title_send \n
 				Author: $author_send \n
 				Publication: $publication_send \n
 				Name: $name_send \n
 				Institute: $institute_send \n
 				Email user: $from_user \n
-				\n
-				Thanks \n
 	";
 	
 	require 'class/class.phpmailer.php';
@@ -42,8 +41,8 @@ else
 	$mail->Username = 'hippocampome.org@gmail.com';
 	$mail->Password = 'NeuroHipp2010';
 	
-	$mail->From = 'Hippocampome.org';
-	$mail->FromName = 'Hippocampome.org';
+	$mail->From = 'hippocampome.org';
+	$mail->FromName = 'Portal User ' . $email_send;
 	$mail->Subject = $subject;
 	$mail->AddAddress($to);//to:email address
 	$mail->Body = $mess_text;
