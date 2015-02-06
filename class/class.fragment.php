@@ -13,6 +13,13 @@ class fragment
 	private $_attachment_type;
 	private $_attachment_array;
 	private $_attachment_type_array;
+	private $_interpretation;
+	private $_interpretation_notes;
+	private $_linking_cell_id;
+	private $_linking_pmid_isbn;
+	private $_linking_pmid_isbn_page;
+	private $_linking_quote;
+	private $_linking_page_location;
 	private $_number_attachment;
 	
 	function __construct ($name)
@@ -24,9 +31,9 @@ class fragment
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type  FROM $table WHERE id = '$id'";
+		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
-		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type) = mysql_fetch_row($rs))
+		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_cell_id, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysql_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setOriginal_id($original_id);			
@@ -36,7 +43,16 @@ class fragment
 			$this->setPmid_isbn_page($pmid_isbn_page);
 			$this->setType($type);	
 			$this->setAttachment($attachment);	
-			$this->setAttachment_type($attachment_type);	
+			$this->setAttachment_type($attachment_type);
+			$this->setInterpretation($interpretation);
+			$this->setInterpretation_notes($interpretation_notes);
+			$this->setLinking_cell_id($linking_cell_id);
+			$this->setLinking_page_location($linking_page_location);
+			$this->setLinking_pmid_isbn($linking_pmid_isbn);
+			$this->setLinking_pmid_isbn_page($linking_pmid_isbn_page);
+			$this->setLinking_quote($linking_quote);
+			$this->setLinking_page_location($linking_page_location);
+			
 		}
 	}
 
@@ -138,7 +154,42 @@ class fragment
     {
 		  $this->_attachment_type_array = $val;
     }
-		
+
+	public function setInterpretation($val)
+	{
+		$this->_interpretation = $val;
+	}
+	
+	public function setInterpretation_notes($val)
+	{
+		$this->_interpretation_notes = $val;
+	}
+	
+	public function setLinking_cell_id($val)
+	{
+		$this->_linking_cell_id = $val;
+	}
+	
+	public function setLinking_pmid_isbn($val)
+	{
+		$this->_linking_pmid_isbn = $val;
+	}
+	
+	public function setLinking_pmid_isbn_page($val)
+	{
+		$this->_linking_pmid_isbn_page = $val;
+	}
+	
+	public function setLinking_quote($val)
+	{
+		$this->_linking_quote = $val;
+	}
+	
+	public function setLinking_page_location($val)
+	{
+		$this->_linking_page_location = $val;
+	}
+	
  	public function setNumber_attachment($n)
     {
 		  $this->_number_attachment = $n;
@@ -205,7 +256,42 @@ class fragment
     {
     	return $this->_attachment_type_array;
     }
-		
+
+    public function getInterpretation()
+    {
+    	return $this->_interpretation;
+    }
+    
+    public function getInterpretation_notes()
+    {
+    	return $this->_interpretation_notes;
+    }
+    
+    public function getLinking_cell_id()
+    {
+    	return $this->_linking_cell_id;
+    }
+    
+    public function getLinking_pmid_isbn()
+    {
+    	return $this->_linking_pmid_isbn;
+    }
+    
+    public function getLinking_pmid_isbn_page()
+    {
+    	return $this->_linking_pmid_isbn_page;
+    }
+    
+    public function getLinking_quote()
+    {
+    	return $this->_linking_quote;
+    }
+    
+    public function getLinking_page_location()
+    {
+    	return $this->_linking_page_location;
+    }
+    
     public function getNumber_attachment()
     {
     	return $this->_number_attachment;

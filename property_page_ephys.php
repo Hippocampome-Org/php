@@ -33,6 +33,7 @@ if ($perm == NULL)
 //include ("access_db.php");
 include ("function/name_ephys.php");
 include ("function/name_ephys_for_evidence.php");
+include ("function/name_parameter_ephys.php");
 include ("function/show_ephys.php");
 include ("function/quote_manipulation.php");
 include ("function/get_abbreviation_definition_box.php");
@@ -79,6 +80,14 @@ function create_temp_table ($name_temporary_table)
 	open_access int(6),
 	show_only int(30),
 	complete_name varchar(200),
+	parameter varchar(80),
+	interpretation varchar(80),
+	interpretation_notes varchar(400),
+	linking_cell_id varchar(80),
+	linking_pmid_isbn varchar(80),
+	linking_pmid_isbn_page varchar(80),
+	linking_quote varchar(400),
+	linking_page_location varchar(40),
 	res0 varchar(80),
 	res2 varchar(80),
 	res3 varchar(80),
@@ -97,7 +106,7 @@ function create_temp_table ($name_temporary_table)
 
 }
 
-function insert_temporary($table, $id_fragment, $id_original, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time, $volume, $issue)
+function insert_temporary($table, $id_fragment, $id_original, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_cell_id, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time, $volume, $issue)
 {		
 	if ($open_access == NULL)
 		$open_access = -1;
@@ -106,7 +115,7 @@ function insert_temporary($table, $id_fragment, $id_original, $authors, $title, 
 			$publication = stripslashes($publication);
 			$res = stripslashes($res);
 		}
-
+		
 $publication= mysql_real_escape_string($publication);
 	$query_i = "INSERT INTO $table
 	(id,
@@ -127,6 +136,14 @@ $publication= mysql_real_escape_string($publication);
 		open_access,
 		show_only,
 		complete_name,
+		parameter,
+		interpretation,
+		interpretation_notes,
+		linking_cell_id,
+		linking_pmid_isbn,
+		linking_pmid_isbn_page,
+		linking_quote,
+		linking_page_location,
 		res0,
 		res2,
 		res3,
@@ -155,6 +172,14 @@ $publication= mysql_real_escape_string($publication);
 	   '$open_access',
 	   '1',
 	   '$complete_name',
+	   '$parameter',
+	   '$interpretation',
+	   '$interpretation_notes',
+	   '$linking_cell_id',
+	   '$linking_pmid_isbn',
+	   '$linking_pmid_isbn_page',
+	   '$linking_quote',
+	   '$linking_page_location',
 	   '$res0',
 	   '$res2',
 	   '$res3',
@@ -269,6 +294,7 @@ if ($page) // Come from another page
 	$ep1 = $_REQUEST['ep'];
 	
 	$ep= real_name_ephys($ep1);
+	$parameter= parameter_ephys($ep);
 	$complete_name = real_name_ephys_evidence($ep1);
 	$res=show_ephys($ep);
 	
@@ -719,8 +745,15 @@ function show_only_ephys(link, start1, stop1)
 					$protocol=$protoc[1];
 					
 					$original_id = $fragment -> getOriginal_id();
+					$interpretation= $fragment -> getInterpretation();
+					$interpretation_notes= $fragment ->getInterpretation_notes();
+					$linking_cell_id= $fragment ->getLinking_cell_id();
+					$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
+					$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
+					$linking_quote= $fragment ->getLinking_quote();
+					$linking_page_location= $fragment ->getLinking_page_location();
 		
-					// retrieve the article_id ffrom evidencearticleRel:
+					// retrieve the article_id from evidencearticleRel:
 					$articleevidencerel -> retrive_article_id($id_evidence_2[$i1]);
 					$id_article = $articleevidencerel -> getarticle_id_array(0);;
 		
@@ -771,7 +804,7 @@ function show_only_ephys(link, start1, stop1)
 					{
 		
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-						insert_temporary($name_temporary_table, $id_fragment, $original_id, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
+						insert_temporary($name_temporary_table, $id_fragment, $original_id, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_cell_id, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
 						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					}
 		 		}
@@ -1150,18 +1183,18 @@ function show_only_ephys(link, start1, stop1)
 						// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
 						if ($show1 == 1)
 						{
-							$query = "SELECT id_fragment, id_original, page_location, protocol, complete_name, res0, res2, res3, value1, value2, error, n_measurement, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
+							$query = "SELECT id_fragment, id_original, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
 							$rs = mysql_query($query);
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;
-							while(list($id_fragment, $id_original, $page_location, $protocol, $complete_name, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time) = mysql_fetch_row($rs))
+							while(list($id_fragment, $id_original, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_cell_id, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time) = mysql_fetch_row($rs))
 							{
 
 								if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
 								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
 								print ("<tr>");
-								print ("<td width='15%' rowspan='4' align='right' valign='top'></td>");
+								print ("<td width='15%' rowspan='6' align='right' valign='top'></td>");
 								print ("<td width='15%' align='left'> </td></tr>");
 							
 								// retrieve the attachament from "fragment" with original_id *****************************
@@ -1170,7 +1203,7 @@ function show_only_ephys(link, start1, stop1)
 								//	$attachment_type = $fragment -> getAttachment_type();
 							
 								// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-								$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+								$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron, $parameter);
 								$attachment = $attachment_obj -> getName();
 								$attachment_type = $attachment_obj -> getType();
 							
@@ -1205,8 +1238,39 @@ function show_only_ephys(link, start1, stop1)
 								Protocol: <span>$protocol</span>
 								</td><td width='15%' align='center'>");
 								}
-
-						
+								
+								// Display Interpretation quotes, if any.
+								if ($interpretation||$interpretation_notes) {
+									print ("</td></tr>
+											<tr>
+											<td width='70%' class='table_neuron_page2' align='left'>");
+											if($interpretation)
+											print ("Interpretation: <span>$interpretation</span>");
+											if($interpretation_notes)
+											print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+											
+											print ("</td><td width='15%' align='center'>");
+								}
+								
+								// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
+								if ($linking_cell_id||$linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
+									print ("</td></tr>
+											<tr>
+											<td width='70%' class='table_neuron_page2' align='left'>");
+									if($linking_cell_id)
+										print ("Linking cell ID: <span>$linking_cell_id</span>");
+									if($linking_pmid_isbn)
+										print ("<br>Linking PMID: <span>$linking_pmid_isbn</span>");
+									if($linking_pmid_isbn_page)
+										print ("<br>Linking PMID ISBN page: <span>$linking_pmid_isbn_page</span>");
+									if($linking_quote)
+										print ("<br>Linking Quote: <span>$linking_quote</span>");
+									if($linking_page_location)
+										print ("<br>Linking Page Location: <span>$linking_page_location</span>");
+									
+									print ("</td><td width='15%' align='center'>");
+								}
+								
 								print ("</td></tr>
 								<tr>
 								<td width='70%' class='table_neuron_page2' align='left'>

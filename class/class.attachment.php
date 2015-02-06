@@ -36,12 +36,12 @@ class attachment
 	
 	
 	
-	public function retrive_attachment_by_original_id($id,$id_neuron)
+	public function retrive_attachment_by_original_id($id,$id_neuron,$parameter)
 	{
 		$table=$this->getName_table();
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
-		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter'";
 		$rs = mysql_query($query);
 		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
 		{
