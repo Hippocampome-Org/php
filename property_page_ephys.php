@@ -1203,7 +1203,7 @@ function show_only_ephys(link, start1, stop1)
 								//	$attachment_type = $fragment -> getAttachment_type();
 							
 								// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-								$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron, $parameter);
+								$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
 								$attachment = $attachment_obj -> getName();
 								$attachment_type = $attachment_obj -> getType();
 							

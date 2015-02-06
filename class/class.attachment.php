@@ -36,12 +36,12 @@ class attachment
 	
 	
 	
-	public function retrive_attachment_by_original_id($id,$id_neuron,$parameter)
+	public function retrive_attachment_by_original_id($id,$id_neuron)
 	{
 		$table=$this->getName_table();
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
-		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter'";
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
 		$rs = mysql_query($query);
 		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
 		{
@@ -58,6 +58,31 @@ class attachment
 			$this->setName($attachment);	
 				$this->setType($attachment_type);	
 		}		
+		//print("figure:".$this->getName());
+	}
+	
+	public function retrieve_attachment_by_original_id($id,$id_neuron,$parameter)
+	{
+		$table=$this->getName_table();
+		//print("original id:".$id);
+		//print("cell id".$id_neuron);
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter'";
+		$rs = mysql_query($query);
+		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		{
+			//	while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+			//	{
+			//		print("attachment:".$attachment);
+			$this->setName($attachment);
+			$this->setType($attachment_type);
+			//	}
+		}
+		else{
+			$attachment="";
+			$attachment_type="";
+			$this->setName($attachment);
+			$this->setType($attachment_type);
+		}
 		//print("figure:".$this->getName());
 	}
 
