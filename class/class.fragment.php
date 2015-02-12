@@ -15,7 +15,7 @@ class fragment
 	private $_attachment_type_array;
 	private $_interpretation;
 	private $_interpretation_notes;
-	private $_linking_cell_id;
+	//private $_linking_cell_id;
 	private $_linking_pmid_isbn;
 	private $_linking_pmid_isbn_page;
 	private $_linking_quote;
@@ -31,9 +31,9 @@ class fragment
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
+		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
-		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_cell_id, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysql_fetch_row($rs))
+		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysql_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setOriginal_id($original_id);			
@@ -46,7 +46,7 @@ class fragment
 			$this->setAttachment_type($attachment_type);
 			$this->setInterpretation($interpretation);
 			$this->setInterpretation_notes($interpretation_notes);
-			$this->setLinking_cell_id($linking_cell_id);
+			//$this->setLinking_cell_id($linking_cell_id);
 			$this->setLinking_page_location($linking_page_location);
 			$this->setLinking_pmid_isbn($linking_pmid_isbn);
 			$this->setLinking_pmid_isbn_page($linking_pmid_isbn_page);
@@ -165,10 +165,10 @@ class fragment
 		$this->_interpretation_notes = $val;
 	}
 	
-	public function setLinking_cell_id($val)
+/* 	public function setLinking_cell_id($val)
 	{
 		$this->_linking_cell_id = $val;
-	}
+	} */
 	
 	public function setLinking_pmid_isbn($val)
 	{
@@ -267,10 +267,10 @@ class fragment
     	return $this->_interpretation_notes;
     }
     
-    public function getLinking_cell_id()
+   /*  public function getLinking_cell_id()
     {
     	return $this->_linking_cell_id;
-    }
+    } */
     
     public function getLinking_pmid_isbn()
     {
