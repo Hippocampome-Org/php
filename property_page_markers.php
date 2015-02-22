@@ -59,6 +59,12 @@ function create_temp_table ($name_temporary_table)
 				   id_fragment varchar(10),
 				   id_original varchar(10),
 				   quote text(2000),
+				   interpretation varchar(80),
+				   interpretation_notes varchar(400),
+				   linking_pmid_isbn varchar(80),
+				   linking_pmid_isbn_page varchar(80),
+				   linking_quote varchar(400),
+				   linking_page_location varchar(40),
 				   authors varchar(600),
 				   title varchar(300),
 				   publication varchar(100),
@@ -87,7 +93,7 @@ function create_temp_table ($name_temporary_table)
 }
 
 
-function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_markerdata, $id_evidence1, $id_evidence2, $type, $type_marker, $ccolor, $pmcid, $NIHMSID, $doi, $citation, $volume, $issue, $secondary_pmid)
+function insert_temporary($table, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_markerdata, $id_evidence1, $id_evidence2, $type, $type_marker, $ccolor, $pmcid, $NIHMSID, $doi, $citation, $volume, $issue, $secondary_pmid)
 {
 		$quote = mysql_real_escape_string($quote);
 	$query_i = "INSERT INTO $table
@@ -95,6 +101,12 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   id_fragment,
 	   id_original,
 	   quote,
+	   interpretation,
+	   interpretation_notes,
+	   linking_pmid_isbn,
+	   linking_pmid_isbn_page,
+	   linking_quote,
+	   linking_page_location,
 	   authors,
 	   title,
 	   publication,
@@ -123,6 +135,12 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$id_fragment',
 	   '$id_original',
 	   '$quote',
+	   '$interpretation',
+	   '$interpretation_notes',
+	   '$linking_pmid_isbn',
+	   '$linking_pmid_isbn_page',
+	   '$linking_quote',
+	   '$linking_page_location',
 	   '$authors',
 	   '$title',
 	   '$publication',
@@ -19552,6 +19570,14 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				$fragment -> retrive_by_id($fragment_id_1);
 				$quote = $fragment -> getQuote();
 				$quote = quote_replaceIDwithName($quote);
+				$interpretation= $fragment -> getInterpretation();
+				$interpretation = quote_replace_IDwithName($interpretation);
+				$interpretation_notes= $fragment ->getInterpretation_notes();
+				//$linking_cell_id= $fragment ->getLinking_cell_id();
+				$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
+				$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
+				$linking_quote= $fragment ->getLinking_quote();
+				$linking_page_location= $fragment ->getLinking_page_location();
 				$original_id = $fragment -> getOriginal_id();
 				$type = $fragment -> getType();
 				$page_location = $fragment -> getPage_location();				
@@ -19606,7 +19632,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				if ($page)
 				{
 				// Insert the data in the temporary table ********************************************************************************
-				insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
+				insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
 				}							
 								
 					// SHOW ONLY TYPE = DATA:			
@@ -20015,23 +20041,23 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 			//	print ("<br>");
 		
 				
-				$query = "SELECT DISTINCT id, id_fragment, id_original, quote, page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
+				$query = "SELECT DISTINCT id, id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
 				$rs = mysql_query($query);											
-				while(list($aa, $id_fragment, $id_original, $quote,  $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
+				while(list($aa, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
 				{
 					if (($show1 == 1) && ($show_button1[$t3] == 1))
 					{
             // STM markerdata was not being loaded
-          $evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence1);
-          $id_markerdata = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+			          $evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence1);
+			          $id_markerdata = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
 						$markerdata -> retrive_info($id_markerdata);
 
 						$expression = $markerdata -> getExpression();	
-            $expression = preg_replace('/[\[\]"]/', '', $expression);
+            			$expression = preg_replace('/[\[\]"]/', '', $expression);
 						$animal = $markerdata -> getAnimal();	
-            $animal = preg_replace('/[\[\]"]/', '', $animal);
+            			$animal = preg_replace('/[\[\]"]/', '', $animal);
 						$protocol = $markerdata -> getProtocol();	
-            $protocol = preg_replace('/[\[\]"]/', '', $protocol);
+           				$protocol = preg_replace('/[\[\]"]/', '', $protocol);
 							
 						if ($id_fragment_compare == $id_fragment);
 						else	
@@ -20084,6 +20110,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
                 $header_html = $header_html . header_row("PROTOCOL", $protocol);
                else 
                 $header_html = $header_html . header_row("PROTOCOL", 'immunohistochemistry');
+               
 	//mouse and mRNA and expression
             if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_positive' style='display:table'>");
@@ -20091,7 +20118,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_negative' style='display:table'>");
             else if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive, negative")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_positive_negative' style='display:table'>");
-    //mouse and unknown and expression           
+    //mouse and unknown and expression
             else if($animal=="mouse" && $protocol=="unknown" && $expression=="positive")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_unknown_positive' style='display:table'>");
 			else if($animal=="mouse" && $protocol=="unknown" && $expression=="negative")
@@ -20101,10 +20128,14 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
     //mouse and immunohistochemistry and expression          
         	else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="positive")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_positive' style='display:table'>");
+        	else if($animal=="mouse, rat" && $protocol=="immunohistochemistry" && $expression=="positive")
+        		print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_rat_immunohistochemistry_positive' style='display:table'>");
             else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="negative")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_negative' style='display:table'>");
             else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="positive, negative")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_positive_negative' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="immunohistochemistry" && $expression=="weak_positive")
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_weak_positive' style='display:table'>");
      //mouse and immunohistochemistry_mRNA and expression       
             else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive' style='display:table'>"); 
@@ -20179,9 +20210,56 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
                 <td align='left' width='70%' class='table_neuron_page2'>				
                 Page location: <span title='$id_fragment (original: ".$id_original.")'>$page_location</span>
                 </td>	
-                <td width='15%'>");
-																		
-							print ("</td></tr>");					
+                ");
+
+				// Display Interpretation quotes, if any.
+				if ($interpretation||$interpretation_notes) {
+					print ("</tr>
+					<tr>
+					<td width='15%'>
+					<td width='70%' class='table_neuron_page2' align='left'>");
+					if($interpretation)
+						print ("Interpretation: <span>$interpretation</span>");
+					if($interpretation_notes)
+						print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+						
+					//print ("</td><td width='15%' align='center'>");
+				}
+				
+				// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
+				if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
+					print ("</td></tr>
+					<tr>
+					<td width='15%'>
+					<td width='70%' class='table_neuron_page2' align='left'>");
+					//if($linking_cell_id)
+					//print ("Linking cell ID: <span>$linking_cell_id</span>");
+					if($linking_pmid_isbn){
+							
+						if (strlen($linking_pmid_isbn) > 10 )
+						{
+							$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
+							$string_pmid = "Linking ISBN:".$link2;
+						}
+						else
+						{
+							$value_link ='PMID: '.$linking_pmid_isbn;
+							$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";
+							$string_pmid = "Linking PMID: ".$link2;
+						}
+						print ("$string_pmid<font class='font13'>$linking_pmid_isbn</font></a>");
+					}
+				
+						
+					if($linking_quote)
+						print ("<br>Linking Quote: <span>$linking_quote</span>");
+					if($linking_page_location)
+						print ("<br>Linking Page Location: <span>$linking_page_location</span>");
+						
+					print ("</td><td width='15%' align='center'>");
+				}
+
+						print ("</td></tr>");
 							print ("
 							<tr>
 								<td width='15%'></td>	
