@@ -20142,7 +20142,14 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
             else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="negative")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_negative' style='display:table'>");
              else if($animal=="mouse" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive, negative")
-              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive_negative' style='display:table'>");   
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive_negative' style='display:table'>"); 
+             else if($animal=="mouse" && $protocol=="immunohistochemistry, mRNA" && $expression=="positive")
+             	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive' style='display:table'>");
+             else if($animal=="mouse" && $protocol=="immunohistochemistry, mRNA" && $expression=="negative")
+             	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_negative' style='display:table'>");
+             else if($animal=="mouse" && $protocol=="immunohistochemistry, mRNA" && $expression=="positive, negative")
+             	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_immunohistochemistry_mRNA_positive_negative' style='display:table'>");
+             
      //unspecified_rodent and mRNA and expression
             
              else if($animal=="unspecified_rodent" && $protocol=="mRNA" && $expression=="positive")  
@@ -20203,6 +20210,19 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_negative' style='display:table'>");
 			else if($animal=="rat" && $protocol=="immunohistochemistry_mRNA" && $expression=="positive, negative")
 				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_positive_negative' style='display:table'>");            
+			else if($animal=="rat" && $protocol=="immunohistochemistry, mRNA" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_positive' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry, mRNA" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_negative' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry, mRNA" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_mRNA_positive_negative' style='display:table'>");
+			else if($animal=="mouse, rat" && $protocol=="immunohistochemistry" && $expression=="positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_rat_immunohistochemistry_positive' style='display:table'>");
+			else if($animal=="mouse, rat" && $protocol=="immunohistochemistry" && $expression=="negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_rat_immunohistochemistry_negative' style='display:table'>");
+			else if($animal=="mouse, rat" && $protocol=="immunohistochemistry" && $expression=="positive, negative")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_rat_immunohistochemistry_positive_negative' style='display:table'>");
+			
 			print $header_html;
               print ("
                 <tr>
