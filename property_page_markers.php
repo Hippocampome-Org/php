@@ -20114,6 +20114,10 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 	//mouse and mRNA and expression
             if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_positive' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="mRNA" && $expression=="weak_positive")
+            	print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_weak_positive' style='display:table'>");
+            else if($animal=="mouse" && $protocol=="promoter_expression_construct" && $expression=="positive")
+              print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_promoter_expression_construct _positive' style='display:table'>");
             else if($animal=="mouse" && $protocol=="mRNA" && $expression=="negative")
               print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='mouse_mRNA_negative' style='display:table'>");
             else if($animal=="mouse" && $protocol=="mRNA" && $expression=="positive, negative")
@@ -20199,6 +20203,8 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
           //rat and immunohistochemistry and expression  
 			else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="positive")
 				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_positive' style='display:table'>");
+			else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="weak_positive")
+				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_weak_positive' style='display:table'>");
 			else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="negative")
 				print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' class='rat_immunohistochemistry_negative' style='display:table'>");
             else if($animal=="rat" && $protocol=="immunohistochemistry" && $expression=="positive, negative")
