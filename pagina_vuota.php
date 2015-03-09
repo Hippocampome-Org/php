@@ -3,8 +3,7 @@ session_start();
 include ("delete_temporary_table.php");
 include ("access_db.php");
 $perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
+  include ("permission_check.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

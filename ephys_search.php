@@ -1,25 +1,8 @@
 <?php
   include ("access_db.php");
 ?>
-<?php
-session_start();
-$query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 0;
-    }
-    else{
-		$_SESSION['perm'] = 1;
-	}
-    
-  }
-$perm = $_SESSION['perm'];
-//if ($perm == NULL)
-if ($perm == 1 && $_SESSION['flag']== NULL)
-	header("Location:error1.html");
-?>
+
+ 
 <?php
 /*session_start();
 $perm = $_SESSION['perm'];
@@ -31,6 +14,7 @@ if ($perm == NULL)
 
 <?php
 include ("access_db.php");
+include ("permission_check.php");
 include ("getEphys.php");
 include ("function/ephys_unit_table.php");
 include ("function/ephys_num_decimals_table.php");

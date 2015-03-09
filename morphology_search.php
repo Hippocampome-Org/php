@@ -1,8 +1,7 @@
 <?php
 session_start();
 $perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
+ include ("permission_check.php");
 
 include ("access_db.php");
 include ("getMorphology.php");

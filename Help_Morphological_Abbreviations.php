@@ -1,31 +1,6 @@
 <?php
   include ("access_db.php");
 ?>
-<?php
-session_start();
-$query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 0;
-    }
-    else{
-		$_SESSION['perm'] = 1;
-	}
-    
-  }
-$perm = $_SESSION['perm'];
-//if ($perm == NULL)
-if ($perm == 1 && $_SESSION['flag']== NULL)
-	header("Location:error1.html");
-?>
-<?php
-/*session_start();
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
-*/?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -33,7 +8,11 @@ if ($perm == NULL)
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php include ("function/icon.html"); ?>
+<?php 
+session_start();
+include ("permission_check.php");
+ include ("function/icon.html"); 
+ ?>
 <title>Help</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>

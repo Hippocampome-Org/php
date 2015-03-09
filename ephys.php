@@ -11,23 +11,7 @@ include ("access_db.php");
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
-<?php
-$query = "SELECT permission FROM user WHERE id = '1'";
-$rs = mysql_query($query);
-while(list($permission) = mysql_fetch_row($rs)) {
-  if ($permission == 0) {	
-    $permission1 = $permission;
-    $_SESSION['perm'] = 0;
-  }
-  else{
-    $_SESSION['perm'] = 1;
-  }
-}
-$perm = $_SESSION['perm'];
-if ($perm == 1 && $_SESSION['flag']== NULL){
-  header("Location:error1.html");
-}
-else{?>
+
 <script>
 jQuery(document).ready(function() {
   $.ajax({
@@ -61,17 +45,12 @@ jQuery(document).ready(function() {
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
-<?php 
-}
-?>
 
-$perm = $_SESSION['perm'];
-//if ($perm == NULL)
-if ($perm == 1 && $_SESSION['flag']== NULL)
-	header("Location:error1.html");
-?>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
+include ("permission_check.php");
 //include ("access_db.php");
 $jsonStr = $_SESSION['ephys'];
 //include ("getEphys.php");

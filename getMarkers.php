@@ -2,9 +2,7 @@
 session_start();
 include ("access_db.php"); // data base access
 
-$perm = $_SESSION['perm'];
-if ($perm == '')
-	header("Location:error1.html");
+include ("permission_check.php");
 
 $research = $_REQUEST['research'];
 

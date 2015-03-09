@@ -3,22 +3,7 @@
 ?>
 <?php
 session_start();
-$query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 0;
-    }
-    else{
-		$_SESSION['perm'] = 1;
-	}
-    
-  }
-$perm = $_SESSION['perm'];
-//if ($perm == NULL)
-if ($perm == 1 && $_SESSION['flag']== NULL)
-	header("Location:error1.html");
+
 ?>
 <?php
 /*session_start();
@@ -768,7 +753,10 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php include ("function/icon.html"); ?>
+<?php 
+include ("function/icon.html"); 
+include ("permission_check.php");
+?>
 
 <title>Find Neurons</title>
 

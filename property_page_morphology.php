@@ -3,22 +3,8 @@
 ?>
 <?php
 session_start();
-$query = "SELECT permission FROM user WHERE id = '1'";
-  $rs = mysql_query($query);
-  while(list($permission) = mysql_fetch_row($rs)) {
-    if ($permission == 0) {	
-      $permission1 = $permission;
-      $_SESSION['perm'] = 0;
-    }
-    else{
-		$_SESSION['perm'] = 1;
-	}
-    
-  }
-$perm = $_SESSION['perm'];
-//if ($perm == NULL)
-if ($perm == 1 && $_SESSION['flag']== NULL)
-	header("Location:error1.html");
+
+
 ?>
 <?php
 /*session_start();
@@ -751,6 +737,7 @@ function show_only_morphology(link, start1, stop1)
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
+	include ("permission_check.php");
 ?>
 
 <div class='title_area'>

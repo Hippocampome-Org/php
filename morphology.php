@@ -12,23 +12,7 @@ include ("access_db.php");
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
-<?php
-$query = "SELECT permission FROM user WHERE id = '1'";
-$rs = mysql_query($query);
-while(list($permission) = mysql_fetch_row($rs)) {
-  if ($permission == 0) {	
-    $permission1 = $permission;
-    $_SESSION['perm'] = 0;
-  }
-  else{
-    $_SESSION['perm'] = 1;
-  }
-}
-$perm = $_SESSION['perm'];
-if ($perm == 1 && $_SESSION['flag']== NULL){
-  header("Location:error1.html");
-}
-else{?>
+
 <script>
 jQuery(document).ready(function() {
   $.ajax({
@@ -62,11 +46,10 @@ jQuery(document).ready(function() {
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
-<?php 
-}
-?>
+
 
 <?php
+include ("permission_check.php");
 //session_start();
 //$perm = $_SESSION['perm'];
 //if ($perm == NULL)
