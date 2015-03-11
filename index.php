@@ -7,7 +7,6 @@ include("simphp-2.0.php");
 
 //-------user login required check----------
 $_SESSION['perm'] = 0;
-$_SESSION['flag'] = 1;
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
 $rs = mysql_query($query);
 list($permission) = mysql_fetch_row($rs);
