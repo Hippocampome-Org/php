@@ -1,11 +1,7 @@
 <?php
-session_start();
 include ("access_db.php"); // data base access
-
 include ("permission_check.php");
-
 $research = $_REQUEST['research'];
-
 // Define all the necessary classes needed for the application
 require_once('class/class.type.php');
 require_once('class/class.property.php');

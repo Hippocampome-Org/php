@@ -1,11 +1,8 @@
 <?php
-
-include ("access_db.php");
+ include ("access_db.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
-
-session_start();
 include ("permission_check.php");	
 require_once('class/class.temporary_author.php');
 require_once('class/class.author.php');	

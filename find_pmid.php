@@ -1,4 +1,3 @@
-
 <?php
   include ("access_db.php");
 ?>

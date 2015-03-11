@@ -13,7 +13,6 @@ if ($perm == NULL)
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
 include ("permission_check.php");
 include ("getEphys.php");
 include ("function/ephys_unit_table.php");

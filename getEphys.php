@@ -1,11 +1,10 @@
 <?php
-session_start();
-include ("access_db.php"); // data base access
-include ("function/ephys_unit_table.php"); // Include unit table
-include ("function/ephys_num_decimals_table.php"); // Include num decimals table
-include ("permission_check.php");
-$perm = $_SESSION['perm'];
-if ($perm == '')
+ include ("access_db.php"); // data base access
+ include ("function/ephys_unit_table.php"); // Include unit table
+ include ("function/ephys_num_decimals_table.php"); // Include num decimals table
+ include ("permission_check.php");
+ $perm = $_SESSION['perm'];
+ if ($perm == '')
 	header("Location:error1.html");
 
 //$research = $_REQUEST['research'];

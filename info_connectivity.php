@@ -1,16 +1,14 @@
-
+<?php
+ include ("access_db.php");
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
 include ("permission_check.php");
-
 $type_post = $_REQUEST['type_post'];
 $main = $_REQUEST['main'];
 $connection = $_REQUEST['connection'];
-
-
 // type_post=E&main=$nickname_type&connection=$nickname_type1
 
 if ($type_post == 'E')

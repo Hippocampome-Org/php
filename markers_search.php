@@ -1,18 +1,17 @@
 <?php
-session_start();
-$perm = $_SESSION['perm'];
-include ("permission_check.php");
+ include ("access_db.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <?php
-include ("access_db.php");
-include ("getMarkers.php");
-require_once('class/class.type.php');
-require_once('class/class.property.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('class/class.temporary_result_neurons.php');
+ $perm = $_SESSION['perm'];
+ include ("permission_check.php");
+ include ("getMarkers.php");
+ require_once('class/class.type.php');
+ require_once('class/class.property.php');
+ require_once('class/class.evidencepropertyyperel.php');
+ require_once('class/class.temporary_result_neurons.php');
 	
 $width1='25%';
 $width2='2%';

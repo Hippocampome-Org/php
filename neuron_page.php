@@ -1,15 +1,9 @@
 <?php
-session_start();
-include ("access_db.php");
-$perm = $_SESSION['perm'];
- 
+ include ("access_db.php");
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
-
-
+$perm = $_SESSION['perm'];
 include ("function/neuron_page_text_file.php");
 include ("function/name_ephys_for_evidence.php");
 include ("function/show_ephys.php");

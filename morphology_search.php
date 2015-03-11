@@ -1,9 +1,7 @@
 <?php
-session_start();
-$perm = $_SESSION['perm'];
- include ("permission_check.php");
-
 include ("access_db.php");
+$perm = $_SESSION['perm'];
+include ("permission_check.php");
 include ("getMorphology.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');

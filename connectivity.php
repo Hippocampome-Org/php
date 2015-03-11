@@ -1,6 +1,5 @@
 <?php
-session_start();
-include ("access_db.php");
+ include ("access_db.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,7 +56,7 @@ jQuery(document).ready(function() {
 ?>
 <?php
 //	include ("access_db.php");
-include ("permission_check.php");
+    include ("permission_check.php");
 	include ("function/stm_lib.php");
 	require_once('class/class.type.php');
 	require_once('class/class.property.php');

@@ -1,21 +1,13 @@
 <?php
   include ("access_db.php");
 ?>
-<?php
-session_start();
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
-//include ("access_db.php");
-
 include ("function/property.php");
 include ("function/part.php");
 include ("function/relation.php");
 include ("function/value.php");
 include ("function/ephys_unit_table.php");
-
 require_once('class/class.type.php');
 require_once('class/class.epdata.php');
 require_once('class/class.property.php');

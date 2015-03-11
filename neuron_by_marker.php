@@ -1,13 +1,8 @@
 <?php
   include ("access_db.php");
 ?>
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
-
 $parameter=$_GET['marker'];
 //&prop;-act2 ; GABAa &prop
 if($parameter=="alpha-actinin-2")
@@ -20,7 +15,6 @@ else
 $predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Type with mixed expression','unknown'=>'Types with unknown expression');
 
 //include ("access_db.php");
-session_start();
 include ("permission_check.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
