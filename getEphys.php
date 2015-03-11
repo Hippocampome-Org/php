@@ -1,11 +1,7 @@
 <?php
- include ("access_db.php"); // data base access
- include ("function/ephys_unit_table.php"); // Include unit table
- include ("function/ephys_num_decimals_table.php"); // Include num decimals table
- include ("permission_check.php");
- $perm = $_SESSION['perm'];
- if ($perm == '')
-	header("Location:error1.html");
+  include ("permission_check.php");
+  include ("function/ephys_unit_table.php"); // Include unit table
+  include ("function/ephys_num_decimals_table.php"); // Include num decimals table
 
 //$research = $_REQUEST['research'];
 

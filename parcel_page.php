@@ -1,11 +1,8 @@
 <?php
- include ("access_db.php");
+  include ("permission_check.php");
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
-$perm = $_SESSION['perm'];
 include ("function/neuron_page_text_file.php");
 include ("function/name_ephys_for_evidence.php");
 include ("function/show_ephys.php");
@@ -104,7 +101,6 @@ if ($text_file_creation)
 <head>
 <?php 
 include ("function/icon.html"); 
- include ("permission_check.php");
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Parcel page</title>

@@ -1,17 +1,11 @@
 <?php
-include ("access_db.php"); // data base access
-include ("permission_check.php");
-$perm = $_SESSION['perm'];
-if ($perm == '')
-	header("Location:error1.html");
-
-//$research = $_REQUEST['research'];
-
-// Define all the necessary classes needed for the application
-require_once('class/class.type.php');
-require_once('class/class.property.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('class/class.temporary_result_neurons.php');
+  include ("permission_check.php");
+  //$research = $_REQUEST['research'];
+  // Define all the necessary classes needed for the application
+  require_once('class/class.type.php');
+  require_once('class/class.property.php');
+  require_once('class/class.evidencepropertyyperel.php');
+  require_once('class/class.temporary_result_neurons.php');
 
 $research = $_REQUEST['research'];
 $table = $_REQUEST['table_result'];

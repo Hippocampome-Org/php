@@ -1,5 +1,5 @@
 <?php
-  include ("access_db.php");
+  include ("permission_check.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
@@ -743,7 +743,6 @@ $delta_time_format = number_format($delta_time,2,'.',',');
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php 
 include ("function/icon.html"); 
-include ("permission_check.php");
 ?>
 
 <title>Find Neurons</title>

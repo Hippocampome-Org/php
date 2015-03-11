@@ -1,17 +1,7 @@
 <?php
- include ("access_db.php");
+  include ("permission_check.php");
 ?>
 <?php
-
-    
-include ("permission_check.php");
-
-/*session_start();
-$perm = $_SESSION['perm'];
-if ($perm == NULL)
-	header("Location:error1.html");
-	
-include ("access_db.php");*/
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');

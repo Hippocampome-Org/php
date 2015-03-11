@@ -1,17 +1,9 @@
 <?php
- include ("access_db.php"); // data base access
- include ("permission_check.php");
- $perm = $_SESSION['perm'];
- if ($perm == '')
-	header("Location:error1.html");
-
-//$research = $_REQUEST['research'];
-
-// Define all the necessary classes needed for the application
-require_once('class/class.type.php');
-require_once('class/class.property.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('class/class.temporary_result_neurons.php');
+  include ("permission_check.php");
+  require_once('class/class.type.php');
+  require_once('class/class.property.php');
+  require_once('class/class.evidencepropertyyperel.php');
+  require_once('class/class.temporary_result_neurons.php');
 
 // Check the UNVETTED color: ***************************************************************************
 function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = type_id,$id_property = propert_idy,

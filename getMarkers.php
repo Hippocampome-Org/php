@@ -1,12 +1,11 @@
 <?php
-include ("access_db.php"); // data base access
-include ("permission_check.php");
-$research = $_REQUEST['research'];
-// Define all the necessary classes needed for the application
-require_once('class/class.type.php');
-require_once('class/class.property.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('class/class.temporary_result_neurons.php');
+  include ("permission_check.php");
+  $research = $_REQUEST['research'];
+  // Define all the necessary classes needed for the application
+  require_once('class/class.type.php');
+  require_once('class/class.property.php');
+  require_once('class/class.evidencepropertyyperel.php');
+  require_once('class/class.temporary_result_neurons.php');
 
 //$n_markers = 36;
 $n_markers = 37;

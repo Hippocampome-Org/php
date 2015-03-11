@@ -1,12 +1,10 @@
 <?php
-include ("access_db.php");
-$perm = $_SESSION['perm'];
-include ("permission_check.php");
-include ("getMorphology.php");
-require_once('class/class.type.php');
-require_once('class/class.property.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('class/class.temporary_result_neurons.php');
+  include ("permission_check.php");
+  include ("getMorphology.php");
+  require_once('class/class.type.php');
+  require_once('class/class.property.php');
+  require_once('class/class.evidencepropertyyperel.php');
+  require_once('class/class.temporary_result_neurons.php');
 // FUNCTIONS -------------------------------------------------------------------------------
 // Check the UNVETTED color: ***************************************************************************
 /* function check_unvetted1($id, $id_property, $evidencepropertyyperel)

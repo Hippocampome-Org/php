@@ -1,28 +1,20 @@
 <?php
-  include ("access_db.php");
+  include ("permission_check.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
-<?php
-include ("permission_check.php");
-?>
 <title>Help</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
-
 <body>
-
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>	
-
 <div class='title_area'>
 	<font class="font1">Help topics</font>
 </div>
-		
-
 <div>	
 	<table width="40%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:180px; left:80px;">
 	<tr>

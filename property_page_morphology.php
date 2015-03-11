@@ -1,5 +1,5 @@
 <?php
-  include ("access_db.php");
+  include ("permission_check.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -725,7 +725,6 @@ function show_only_morphology(link, start1, stop1)
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
-	include ("permission_check.php");
 ?>
 
 <div class='title_area'>
