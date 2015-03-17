@@ -25,18 +25,18 @@ function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = ty
 //*******************************Changes to handle somata evidence**************************************
 function check_color_somata($id,$type, $unvetted,$val,$part){
 	$soma_location_check_somata="SELECT DISTINCT p.subject, p.object
-      FROM hippocampome.EvidencePropertyTypeRel eptr
-      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      FROM EvidencePropertyTypeRel eptr
+      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'somata';";
 	
 	$soma_location_check_axons="SELECT DISTINCT p.subject, p.object
-      FROM hippocampome.EvidencePropertyTypeRel eptr
-      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      FROM EvidencePropertyTypeRel eptr
+      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'axons';";
 	
 	$soma_location_check_dendrites="SELECT DISTINCT p.subject, p.object
-      FROM hippocampome.EvidencePropertyTypeRel eptr
-      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      FROM EvidencePropertyTypeRel eptr
+      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'dendrites';";
 	
 	$result_somata = mysql_query($soma_location_check_somata);
@@ -82,8 +82,8 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 function check_color($id,$type, $unvetted,$val,$part) //$type --> whether axons/dendrites or both
 {
 	$soma_location_check="SELECT DISTINCT p.subject, p.object
-      FROM hippocampome.EvidencePropertyTypeRel eptr
-      JOIN (hippocampome.Property p, hippocampome.Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+      FROM EvidencePropertyTypeRel eptr
+      JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'somata';";
 	
 	$result = mysql_query($soma_location_check);
