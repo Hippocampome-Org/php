@@ -28,20 +28,20 @@ function create_temp_table ($name_temporary_table)
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
 				   id_fragment varchar(10),
-				   id_original varchar(10),
-				   quote text(2000),
+				   id_original varchar(20),
+				   quote MEDIUMTEXT,
 				   interpretation varchar(80),
 				   interpretation_notes varchar(400),
 				   linking_pmid_isbn varchar(80),
 				   linking_pmid_isbn_page varchar(80),
-				   linking_quote varchar(400),
+				   linking_quote MEDIUMTEXT,
 				   linking_page_location varchar(40),
 				   authors varchar(600),
-				   title varchar(300),
+				   title MEDIUMTEXT,
 				   publication varchar(100),
-				   year varchar(15),
+				   year varchar(30),
 				   PMID varchar(25),
-				   pages varchar(20),
+				   pages varchar(30),
 				   page_location varchar(100),
 				   id_markerdata varchar(10),
 				   id_evidence1 varchar(20),
@@ -52,7 +52,7 @@ function create_temp_table ($name_temporary_table)
 				   color varchar (100),		
 				   pmcid varchar (50),	
 				   NIHMSID varchar (50),
-				   doi varchar (100),
+				   doi varchar (150),
 				   citation varchar(7), 
 				   show2 varchar(4),  
 				   show_button varchar(4),
@@ -19547,7 +19547,8 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				//$linking_cell_id= $fragment ->getLinking_cell_id();
 				$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
 				$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
-				$linking_quote= $fragment ->getLinking_quote();
+				$linking_quote = preg_replace("/\'/","\'",$fragment ->getLinking_quote());
+				//$linking_quote= $fragment ->getLinking_quote();
 				$linking_page_location= $fragment ->getLinking_page_location();
 				$original_id = $fragment -> getOriginal_id();
 				$type = $fragment -> getType();
@@ -19558,7 +19559,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				$id_article = $articleevidencerel -> getarticle_id_array(0);		
 		
 				$article -> retrive_by_id($id_article);
-				$title = preg_replace("/\'/","\'",$article -> getTitle());			
+				$title = preg_replace("/\'/","\'",$article -> getTitle());
 				$publication = preg_replace("/\'/","\'",$article -> getPublication());
 				$year = preg_replace("/\'/","\'",$article -> getYear());
 				$pmid_isbn = preg_replace("/\'/","\'",$article -> getPmid_isbn()); 
@@ -19573,7 +19574,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				$issue = preg_replace("/\'/","\'",$article -> getIssue()); 
 	
 				$pages = $first_page." - ".$last_page;								
-								
+				//echo "frag".$fragment_id_1." "."orig id:". " ". $original_id." "."evidence id:". $id_evidence2[$i1]." "."quote:". $quote." "."inter:". $interpretation." "." int notes:". $interpretation_notes." "."lpmid:". $linking_pmid_isbn." "."lpmisb:". $linking_pmid_isbn_page." "." lquote:". $linking_quote." ". $linking_page_location." authors:". $name_authors." "."title: ". $title." "."pub:". $publication." "."year:". $year." "."pmidisb: ". $pmid_isbn." "."pages: ". $pages." "."page_loc:". $page_location." "."id_marker: ". $id_markerdata." "."id_evidence: ". $id_evidence[$i]." "."id2: ". $id_evidence2[$i1]." "."type:". $type." ". "color:". $color_1[$m2]." "."pmcid:". $pmcid." "."nihmsid:". $nihmsid." "." doi:". $doi." "."citation:". $citation." "."vol:". $volume." "."issue:". $issue." "."sec_pmid:". $secondary_pmid." ";
 				// retrive the Author Position from ArticleAuthorRel ++++++++++++++++++++++++++++++++++++++++++
 				$articleauthorrel -> retrive_author_position($id_article);
 				$n_author = $articleauthorrel -> getN_author_id();
