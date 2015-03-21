@@ -19501,7 +19501,6 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 			$property -> retrive_ID(2, $val_property, NULL, $color_1[$m2]);
 			$id_property = $property -> getProperty_id(0);
 			
-
 			// Retrieve the ID EVIDENCE from EvidencePropertyTypeRel by using ID TYPE and ID PROPERTY:
 			$evidencepropertyyperel -> retrive_evidence_id($id_property, $id_neuron);
 			$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
@@ -19512,6 +19511,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 			for ($i=0; $i<$n_id_evidence; $i++)
 			{
 				$id_evidence[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
+				$linking_quote_evidence[$i]= $evidencepropertyyperel-> getLinking_quote_array($i);
 
         	// STM getting the linking PMID
         	$id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
@@ -19547,7 +19547,11 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				//$linking_cell_id= $fragment ->getLinking_cell_id();
 				$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
 				$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
+				if($linking_quote_evidence[$i]){
+				$linking_quote = preg_replace("/\'/","\'",$fragment ->getLinking_quote())." ".$linking_quote_evidence[$i].".";
+				}else{
 				$linking_quote = preg_replace("/\'/","\'",$fragment ->getLinking_quote());
+				}
 				//$linking_quote= $fragment ->getLinking_quote();
 				$linking_page_location= $fragment ->getLinking_page_location();
 				$original_id = $fragment -> getOriginal_id();

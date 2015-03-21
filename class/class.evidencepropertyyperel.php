@@ -14,6 +14,7 @@ class evidencepropertyyperel
 	private $_unvetted;
 	private $_article_id;
 	private $_conflict_note;
+	private $_n_linking_quote_array;
 
 	function __construct ($name)
 	{
@@ -54,12 +55,13 @@ class evidencepropertyyperel
     {
 		$table=$this->getName_table();
 	
-		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
+		$query = "SELECT DISTINCT Evidence_id,linking_quote FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
 		$rs = mysql_query($query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id,$linking_quote) = mysql_fetch_row($rs))
 		{			
-			$this->setEvidence_id_array($id, $n);		
+			$this->setEvidence_id_array($id, $n);
+			$this->setLinking_quote_array($linking_quote, $n);
 			$n = $n +1;
 		}
 		$this->setN_evidence_id($n);	
@@ -191,6 +193,12 @@ class evidencepropertyyperel
     {
 		  $this->_conflict_note = $val1;
     }
+    
+    public function setLinking_quote_array($val1, $n)
+    {
+    	$this->_n_linking_quote_array[$n] = $val1;
+    }
+    
 
 	
 		 	
@@ -240,7 +248,10 @@ class evidencepropertyyperel
     	return $this->_conflict_note;
     }		
 	
-		
+    public function getLinking_quote_array($i)
+    {
+    	return $this->_n_linking_quote_array[$i];
+    }	
 			
 }
 ?>	
