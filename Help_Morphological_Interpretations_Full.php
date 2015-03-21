@@ -710,21 +710,21 @@ collaterals” refers specifically to CA3 pyramidal neuron axons.</span></p>
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “mossy
-fibers” refers specifically to dentate gyrus granule cell axons</span></p>
+fibers” refers specifically to dentate gyrus granule cell axons.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats under 200 g
 and/or less than 3 weeks old are considered to be juveniles (Dumas TC, personal
-communication)</span></p>
+communication).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats at least 200 g
 and/or more than 3 weeks old are considered to be adults (Dumas TC, personal
-communication)</span></p>
+communication).</span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;line-height:150%'><span
 style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>&nbsp;</span></p>

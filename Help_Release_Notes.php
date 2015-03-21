@@ -147,6 +147,12 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 179: Rule addition to Help_Morphological_Interpretations_Full.php.
 </span></p>
 
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Added new neuron type: CA1 (e)3000 (S000) Cajal-Retzius.
+</span></p>
+
 </BR></BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
