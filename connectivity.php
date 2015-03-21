@@ -230,14 +230,14 @@ checkVersion();
 <?php if($_SESSION['flag']!='1'){?>
 <script>
  
-	window.onload = function() 
-	{ 
-	if (!window.location.search) 
-	{ 
-	setTimeout("window.location+='?refreshed';", .1000);
+	//window.onload = function() 
+	//{ 
+	//if (!window.location.search) 
+	//{ 
+	//setTimeout("window.location+='?refreshed';", .1000);
 //	setTimeout("window.location;", .1000); 
-	} 
-	} 
+	//} 
+	//} 
  
 
 </script>
@@ -466,6 +466,7 @@ $(function(){
        }
       },
       {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_cajal_retzius_3000', index:'ca1_cajal_retzius_3000', width:20,height:130,search:false,sortable:false},
       {name:'ca1_radiatum_giant_2201', index:'ca1_radiatum_giant_2201', width:20,height:130,search:false,sortable:false},
       {name:'ca1_quadrilaminar_3333', index:'ca1_quadrilaminar_3333', width:20,height:150,search:false,sortable:false},
       {name:'ca1_rlm_proj_3300', index:'ca1_rlm_proj_3300', width:20,height:150,search:false,sortable:false},

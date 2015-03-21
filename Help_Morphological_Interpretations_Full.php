@@ -717,14 +717,14 @@ margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats under 200 g
 and/or less than 3 weeks old are considered to be juveniles (Dumas TC, personal
-communication) and are not reported</span></p>
+communication)</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats at least 200 g
 and/or more than 3 weeks old are considered to be adults (Dumas TC, personal
-communication) and are reported</span></p>
+communication)</span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;line-height:150%'><span
 style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>&nbsp;</span></p>
@@ -773,6 +773,14 @@ href="http://www.ncbi.nlm.nih.gov/pubmed/17920013"><span style='font-size:14.0pt
 font-family:"Arial","sans-serif"'>17920013</span></a><span style='font-size:
 14.0pt;font-family:"Arial","sans-serif"'>).</span><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'> </span></p>
+
+<p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
+"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>
+CA2 stratum lucidum (SL) is interpreted as the incursion of mossy fibers,
+i.e. Granule cell axons, into CA2 stratum pyramidale (SP).
+</span></p>
 
 <p class=MsoNormalCxSpMiddle style='line-height:150%'><span style='font-size:
 14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>&nbsp;</span></p>

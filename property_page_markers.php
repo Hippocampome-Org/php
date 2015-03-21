@@ -20220,10 +20220,15 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 					<tr>
 					<td width='15%'>
 					<td width='70%' class='table_neuron_page2' align='left'>");
-					if($interpretation)
+					if($interpretation) {
 						print ("Interpretation: <span>$interpretation</span>");
-					if($interpretation_notes)
-						print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+						if($interpretation_notes) {
+							print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+						}
+					} else if($interpretation_notes) {
+						print ("Interpretation notes: <span>$interpretation_notes</span>");
+					}
+
 						
 					//print ("</td><td width='15%' align='center'>");
 				}

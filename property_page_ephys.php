@@ -36,7 +36,7 @@ function create_temp_table ($name_temporary_table)
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 	id int(4) NOT NULL AUTO_INCREMENT,
 	id_fragment int(10),
-	id_original int(10) DEFAULT NULL,
+	id_original BIGint(20) DEFAULT NULL,
 	quote text(2000),
 	authors varchar(600),
 	title varchar(300),

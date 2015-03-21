@@ -168,13 +168,13 @@ checkVersion();
 <?php if($_SESSION['flag']!='1'){?>
 <script>
  
-	window.onload = function() 
-	{ 
-	if (!window.location.search) 
-	{ 
-	setTimeout("window.location+='?refreshed';", .1000); 
-	} 
-	} 
+	//window.onload = function() 
+	//{ 
+	//if (!window.location.search) 
+	//{ 
+	//setTimeout("window.location+='?refreshed';", .1000); 
+	//} 
+	//} 
  
 </script>
 <?php }?>
