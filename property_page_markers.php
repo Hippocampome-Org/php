@@ -19379,21 +19379,187 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 
               $subject = $val_property;
               $predicate = 'has expression';
-              $expression_values = explode('-', $_REQUEST['color']);
+              //$expression_values = explode('-', $_REQUEST['color']);
+              $expression_values = explode('-', $color);
               $object = $expression_values[0];
               $property -> retrive_ID(1, $subject, $predicate, $object);
               $property_id = $property -> getProperty_id(0);
-              $conflict_note = $evidencepropertyyperel -> retrieve_conflict_note($property_id, $type_id);
-              if ($conflict_note)
-                $conflict_note = "-- $conflict_note";
-              //print("CONFLICT NOTE:" . $conflict_note);
 
-					 if ($val_property == 'Gaba-a-alpha')
-             print ("&nbsp <strong>GABAa &alpha;1 ($color) $conflict_note</strong>"); 
-					 else if ($val_property == 'alpha-actinin-2')
-             print ("&nbsp <strong>&alpha;-act2 ($color) $conflict_note</strong>"); 						
-					 else				
-             print ("&nbsp <strong>$val_property ($color) $conflict_note</strong>");
+              $conflict_note = $evidencepropertyyperel -> retrieve_conflict_note($property_id, $type_id);
+                            
+              list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
+              if ($permission == 0) { // only enabled for curation, where anonymous user is disabled
+              ///////////// CLR added this block /////////////
+              $conflict_note = $evidencepropertyyperel -> getConflict_note();
+              
+              if ($conflict_note == "positive" || $conflict_note == "negative") {
+              	$conflict_note = "";
+              	$mixed_data = false;
+              }
+              else {
+              	//if ($conflict_note == "species/protocol differences") {
+              		$mixed_data = true;
+              
+              		// positive +
+              		$property -> retrive_ID(1, $subject, 'has expression', 'positive');
+              		$property_id_pos = $property -> getProperty_id(0);
+              
+              		$query = "SELECT Evidence_id FROM EvidencePropertyTypeRel WHERE Type_id=$type_id and Property_id=$property_id_pos";
+              		$rs = mysql_query($query);
+              		$pos_array = Array();
+              		$pos_summary = Array( Array(0, 0), Array (0, 0));
+              		$pos_summary[0][0] = 0;
+              		$pos_summary[0][1] = 0;
+              		$pos_summary[1][0] = 0;
+              		$pos_summary[1][1] = 0;
+              		while(list($id_evidence_pos) = mysql_fetch_row($rs))
+              		{
+              			$evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence_pos);
+              			$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+              			$markerdata -> retrive_info($id_markerdata1);
+              
+              			//$expression = $markerdata -> getExpression();
+              			//$expression = preg_replace('/[\[\]"]/', '', $expression);
+              			$animal = $markerdata -> getAnimal();
+              			$animal = preg_replace('/[\[\]"]/', '', $animal);
+              			$protocol = $markerdata -> getProtocol();
+              			$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+              			if ($protocol != "unknown") {
+              				$ani_prot_values = Array();
+              				array_push($ani_prot_values, $animal);
+              				array_push($ani_prot_values, $protocol);
+              				array_push($pos_array, $ani_prot_values);
+              
+              				if ($animal=="rat" && $protocol=="immunohistochemistry") $pos_summary[0][0]++;
+              				elseif ($animal=="rat" && $protocol=="mRNA") $pos_summary[0][1]++;
+              				elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $pos_summary[1][0]++;
+              				elseif ($animal=="mouse" && $protocol=="mRNA") $pos_summary[1][1]++;
+              			}
+              		}
+              		$pos_array = array_map("unserialize", array_unique(array_map("serialize", $pos_array)));
+              
+              
+              		// negative -
+              		$property -> retrive_ID(1, $subject, 'has expression', 'negative');
+              		$property_id_neg = $property -> getProperty_id(0);
+              
+              		$query = "SELECT Evidence_id FROM EvidencePropertyTypeRel WHERE Type_id=$type_id and Property_id=$property_id_neg";
+              		$rs = mysql_query($query);
+              		$neg_array = Array();
+              		$neg_summary = Array( Array(0, 0), Array (0, 0));
+              		$neg_summary[0][0] = 0;
+              		$neg_summary[0][1] = 0;
+              		$neg_summary[1][0] = 0;
+              		$neg_summary[1][1] = 0;
+              		while(list($id_evidence_neg) = mysql_fetch_row($rs))
+              		{
+              			$evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence_neg);
+              			$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+              			$markerdata -> retrive_info($id_markerdata1);
+              
+              			//$expression = $markerdata -> getExpression();
+              			//$expression = preg_replace('/[\[\]"]/', '', $expression);
+              			$animal = $markerdata -> getAnimal();
+              			$animal = preg_replace('/[\[\]"]/', '', $animal);
+              			$protocol = $markerdata -> getProtocol();
+              			$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+              			if ($protocol != "unknown") {
+              				$ani_prot_values = Array();
+              				array_push($ani_prot_values, $animal);
+              				array_push($ani_prot_values, $protocol);
+              				array_push($neg_array, $ani_prot_values);
+              
+              				if ($animal=="rat" && $protocol=="immunohistochemistry") $neg_summary[0][0]++;
+              				elseif ($animal=="rat" && $protocol=="mRNA") $neg_summary[0][1]++;
+              				elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $neg_summary[1][0]++;
+              				elseif ($animal=="mouse" && $protocol=="mRNA") $neg_summary[1][1]++;
+              			}
+              		}
+              		$neg_array = array_map("unserialize", array_unique(array_map("serialize", $neg_array)));
+              	//}
+              
+              	$conflict_note = ": " . $conflict_note; // CLR added
+              }
+              
+              if ($val_property == 'Gaba-a-alpha')
+              	print ("&nbsp <strong>GABAa &alpha;1 ($color$conflict_note)</strong>");
+              else if ($val_property == 'alpha-actinin-2')
+              	print ("&nbsp <strong>&alpha;-act2 ($color$conflict_note)</strong>");
+              else
+              	print ("&nbsp <strong>$val_property ($color$conflict_note)</strong>");
+              
+              if ($mixed_data) {
+              	echo "<TABLE> <TR> <TD width='15%'></TD> <TD width='40%'>";
+              
+              	// first table option
+              	echo "<HR><TABLE class='table_neuron_page2' padding='10'> <TR> <TD valign='top'><strong>Positive</strong></TD> <TD valign='top'><TABLE><TR>";
+              	if ($pos_summary[0][0] > 0) {echo "<TD>Rat</TD> <TD>Immunohistochemistry</TD> <TD>[" . $pos_summary[0][0] . "]</TD></TR>";}
+              	if ($pos_summary[0][1] > 0) {echo "<TD>Rat</TD> <TD>mRNA</TD> <TD>[" . $pos_summary[0][1] . "]</TD></TR>";}
+              	if ($pos_summary[1][0] > 0) {echo "<TD>Mouse</TD> <TD>Immunohistochemistry</TD> <TD>[" . $pos_summary[1][0] . "]</TD></TR>";}
+              	if ($pos_summary[1][1] > 0) {echo "<TD>Mouse</TD> <TD>mRNA</TD> <TD>[" . $pos_summary[1][1] . "]</TD></TR>";}
+              	
+              	echo "</TABLE> </TD></TR> <TR> <TD valign='top'><strong>Negative</strong></TD> <TD valign='top'><TABLE><TR>";              	
+              	if ($neg_summary[0][0] > 0) {echo "<TD>Rat</TD> <TD>Immunohistochemistry</TD> <TD>[" . $neg_summary[0][0] . "]</TD></TR>";}
+              	if ($neg_summary[0][1] > 0) {echo "<TD>Rat</TD> <TD>mRNA</TD> <TD>[" . $neg_summary[0][1] . "]</TD></TR>";}
+              	if ($neg_summary[1][0] > 0) {echo "<TD>Mouse</TD> <TD>Immunohistochemistry</TD> <TD>[" . $neg_summary[1][0] . "]</TD></TR>";}
+              	if ($neg_summary[1][1] > 0) {echo "<TD>Mouse</TD> <TD>mRNA</TD> <TD>[" . $neg_summary[1][1] . "]</TD></TR>";}
+              	/*foreach ($pos_array as $i => $row) {
+              		if ($i == 0) {echo        "<TD>" . $row[0] . "</TD> <TD>" . $row[1] . "</TD></TR>";}
+              		else {echo "<TR> <TD></TD> <TD>" . $row[0] . "</TD> <TD>" . $row[1] . "</TD></TR>";}
+              	}
+              	 
+              	echo "<TR> <TD><strong>Negative</strong></TD>";
+              	foreach ($neg_array as $i => $row) {
+              		if ($i == 0) {echo        "<TD>" . $row[0] . "</TD> <TD>" . $row[1] . "</TD></TR>";}
+              		else {echo "<TR> <TD></TD> <TD>" . $row[0] . "</TD> <TD>" . $row[1] . "</TD></TR>";}
+              	}*/
+              	echo "</TABLE> </TD></TR></TABLE> <HR>";
+              
+              	//Second table option
+              	echo "</TD> <TD width='5%'></TD> <TD width='40%'>";
+              	 
+              	echo "<HR><TABLE class='table_neuron_page2' padding='10'> <TR> <TD></TD> <TD><strong>Immunohistochemistry</strong></TD> <TD><strong>mRNA</strong></TD> </TR>";
+              	echo "<TR> <TD><strong>Rat</strong></TD> <TD><center>";
+              	 
+              	//if rat & immuno
+              	if ($pos_summary[0][0] > 0 && $neg_summary[0][0] > 0)
+              		echo "Pos. [" . $pos_summary[0][0] . "]; Neg. [" . $neg_summary[0][0] . "]";
+              	elseif ($pos_summary[0][0] > 0) echo "Pos. [" . $pos_summary[0][0] . "]";
+              	elseif ($neg_summary[0][0] > 0) echo "Neg. [" . $neg_summary[0][0] . "]";
+              	else echo "unknown";
+              	echo "</center></TD> <TD><center>";
+              	 
+              	//if rat & mRna
+              	if ($pos_summary[0][1] > 0 && $neg_summary[0][1] > 0)
+              		echo "Pos. [" . $pos_summary[0][1] . "]; Neg. [" . $neg_summary[0][1] . "]";
+              	elseif ($pos_summary[0][1] > 0) echo "Pos. [" . $pos_summary[0][1] . "]";
+              	elseif ($neg_summary[0][1] > 0) echo "Neg. [" . $neg_summary[0][1] . "]";
+              	else echo "unknown";
+              	echo "</center></TD> </TR>";
+              	echo "<TR> <TD><strong>Mouse</strong</TD> <TD><center>";
+              	 
+              	// mouse & immuno
+              	if ($pos_summary[1][0] > 0 && $neg_summary[1][0] > 0)
+              		echo "Pos. [" . $pos_summary[1][0] . "]; Neg. [" . $neg_summary[1][0] . "]";
+              	elseif ($pos_summary[1][0] > 0) echo "Pos. [" . $pos_summary[1][0] . "]";
+              	elseif ($neg_summary[1][0] > 0) echo "Neg. [" . $neg_summary[1][0] . "]";
+              	else echo "unknown";
+              	echo "</center></TD> <TD><center>";
+              	 
+              	// mouse & mRNA
+				if ($pos_summary[1][1] > 0 && $neg_summary[1][1] > 0)
+              		echo "Pos. [" . $pos_summary[1][1] . "]; Neg. [" . $neg_summary[1][1] . "]";
+              	elseif ($pos_summary[1][1] > 0) echo "Pos. [" . $pos_summary[1][1] . "]";
+              	elseif ($neg_summary[1][1] > 0) echo "Neg. [" . $neg_summary[1][1] . "]";
+              	else echo "unknown";
+              	echo "</center></TD> </TR>";
+              	echo "</TABLE><HR>";
+              	echo "</TD> </TR></TABLE>";
+              }
+              
+              ///////////// end of CLR changes /////////////
+              } //END only enabled for curation, where anonymous user is disabled
+              
 				?>
 
 				</td>				
