@@ -27,7 +27,6 @@ require_once('class/class.evidenceevidencerel.php');
 require_once('class/class.epdata.php');
 require_once('class/class.epdataevidencerel.php');
 
-
 function create_temp_table ($name_temporary_table)
 {
 	$drop_table ="DROP TABLE $name_temporary_table";
@@ -37,14 +36,14 @@ function create_temp_table ($name_temporary_table)
 	id int(4) NOT NULL AUTO_INCREMENT,
 	id_fragment int(10),
 	id_original BIGint(20) DEFAULT NULL,
-	quote text(2000),
+	quote text(4000),
 	authors varchar(600),
-	title varchar(300),
-	publication varchar(100),
+	title varchar(600),
+	publication varchar(200),
 	year varchar(15),
 	PMID BIGint(25),
 	pages varchar(20),
-	page_location varchar(100),
+	page_location varchar(600),
 	protocol varchar(80),
 	id_evidence int(20),
 	show1 int(5),
@@ -53,14 +52,14 @@ function create_temp_table ($name_temporary_table)
 	doi varchar(400),
 	open_access int(6),
 	show_only int(30),
-	complete_name varchar(200),
-	parameter varchar(80),
-	interpretation varchar(80),
-	interpretation_notes varchar(400),
+	complete_name varchar(400),
+	parameter varchar(200),
+	interpretation varchar(200),
+	interpretation_notes varchar(800),
 	linking_pmid_isbn varchar(80),
 	linking_pmid_isbn_page varchar(80),
-	linking_quote varchar(400),
-	linking_page_location varchar(40),
+	linking_quote text(4000),
+	linking_page_location varchar(80),
 	res0 varchar(80),
 	res2 varchar(80),
 	res3 varchar(80),
@@ -270,8 +269,6 @@ if ($page) // Come from another page
 	$parameter= parameter_ephys($ep);
 	$complete_name = real_name_ephys_evidence($ep1);
 	$res=show_ephys($ep);
-	
-	
 	
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
@@ -617,44 +614,74 @@ function show_only_ephys(link, start1, stop1)
 </div>
 -->
 
-	<br><br />
-	<br><br /> <!-- ---------------------- -->
-			<table width="85%" border="0" cellspacing="0" cellpadding="0"
-				class='body_table'>
-				<tr height="40">
-					<td></td>
+<br><br />
+<br><br /> <!-- ---------------------- -->
+<table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
+	<tr height="40">
+		<td></td>
+	</tr>
+	<tr>
+		<td align="center">
+			<!-- ****************  BODY **************** --> <!-- TABLE NAME AND PROPERTY-->
+			<table width="80%" border="0" cellspacing="2" cellpadding="2">
+				<tr>
+					<td width="20%" align="right" class="table_neuron_page1">Neuron Type</td>
+					<td align="left" width="80%" class="table_neuron_page2">
+						&nbsp;
+						<?php
+							$id = $type->getId();
+							$name = $type->getName();
+							print("<a href='neuron_page.php?id=$id'>&nbsp;$name</a>");
+						?>
+					</td>
 				</tr>
 				<tr>
-					<td align="center">
-						<!-- ****************  BODY **************** --> <!-- TABLE NAME AND PROPERTY-->
-						<table width="80%" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td width="20%" align="right" class="table_neuron_page1">Neuron
-									Type</td>
-								<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; <?php $id=$type->getId();
-								 $name=$type->getName();
-					print("<a href='neuron_page.php?id=$id'>$name</a>"); ?>
-				</td>
-							</tr>
-							<tr>
-								<td width="20%" align="right">&nbsp;</td>
-								<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
-							</tr>
-						</table>
-
-						<table width="80%" border="0" cellspacing="2" cellpadding="5"
-							padding-top="5">
-							<tr>
-								<td class="table_neuron_page2" padding="5">All of the evidence
-									provided on Hippocampome.org are quotes from scientific texts.
-									However, because quoted passages may be difficult to understand
-									in isolation, contextual information and expanded abbreviations
-									set in square brackets have been added for clarity.</td>
-							</tr>
-						</table> <br />
+					<td width="20%" align="right">&nbsp;</td>
+					<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;
+						<strong>
+							Hippocampome Neuron ID: <?php echo $id?>
+						</strong>
+					</td>
+				</tr>
+				<tr>
+					<td width="20%" align="right">&nbsp;</td>
+					<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;
+						<strong>
+							<?php
+								if ($complete_name == "") {
+									$ep_msq = mysql_query("SELECT DISTINCT complete_name, res0 FROM $name_temporary_table");
+									while(list($ep_complete_name, $ep_res0) = mysql_fetch_row($ep_msq)) {	
+										if ($ep_res0 == 'Sag ratio') {
+											print ("$ep_complete_name");
+										} else {
+											print ("$ep_complete_name ($ep_res0)");
+										}
+									}
+								} else {
+									if ($res[0] == 'Sag ratio') {
+										print ("$complete_name");
+									} else {
+										print ("$complete_name ($res[0])");
+									}
+								}
+							?>
+						</strong>
+					</td>
+				</tr>
+			</table>
+			<table width="80%" border="0" cellspacing="2" cellpadding="5" padding-top="5">
+				<tr>
+					<td class="table_neuron_page2" padding="5">All of the evidence
+						provided on Hippocampome.org are quotes from scientific texts.
+						However, because quoted passages may be difficult to understand
+						in isolation, contextual information and expanded abbreviations
+						set in square brackets have been added for clarity.
+					</td>
+				</tr>
+			</table>
+			<br />
 		
-		<?php 
+			<?php 
 			
 			{
 			
@@ -691,7 +718,7 @@ function show_only_ephys(link, start1, stop1)
 				
 		
 		
-			// ARTICLE -----------------------------------------------------------------------
+				// ARTICLE -----------------------------------------------------------------------
 				for ($i1=0; $i1<$n_epdata; $i1++)
 			 	{
 			 		
@@ -727,6 +754,7 @@ function show_only_ephys(link, start1, stop1)
 					$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
 					$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
 					$linking_quote= $fragment ->getLinking_quote();
+					$linking_quote = quote_replaceIDwithName($linking_quote);
 					$linking_page_location= $fragment ->getLinking_page_location();
 		
 					// retrieve the article_id from evidencearticleRel:
@@ -786,23 +814,23 @@ function show_only_ephys(link, start1, stop1)
 		 		}
 			}
 		 
-					// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
-					$rs = mysql_query($query);
-					$n_id_tot = 0;	 // Total number of articles:
-					while(list($id) = mysql_fetch_row($rs))
-						$n_id_tot = $n_id_tot + 1;
-					// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		
-					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
-					$rs = mysql_query($query);
-					$n_id = 0;
-			
-					while(list($title) = mysql_fetch_row($rs))
-					{
-						$title_temp[$n_id] = $title;
-						$n_id = $n_id + 1;
-					}
+			// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
+			$rs = mysql_query($query);
+			$n_id_tot = 0;	 // Total number of articles:
+			while(list($id) = mysql_fetch_row($rs))
+				$n_id_tot = $n_id_tot + 1;
+			// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+			$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
+			$rs = mysql_query($query);
+			$n_id = 0;
+	
+			while(list($title) = mysql_fetch_row($rs))
+			{
+				$title_temp[$n_id] = $title;
+				$n_id = $n_id + 1;
+			}
 		
 			?>
 		
@@ -1048,7 +1076,7 @@ function show_only_ephys(link, start1, stop1)
 				{	
 				
 					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, id_original, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only,  volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
+					$query = "SELECT id, id_original, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
 					$rs = mysql_query($query);	
 					$auth=array();	
 							
@@ -1215,15 +1243,15 @@ function show_only_ephys(link, start1, stop1)
 								</td><td width='15%' align='center'>");
 								}
 								
-								
 								print ("</td></tr>
 								<tr>
 								<td width='70%' class='table_neuron_page2' align='left'>
 								");
-								if ($res[0]=='Sag ratio')
+								if ($res0=='Sag ratio') {
 									print ("<strong>$complete_name:</strong>");
-								else
+								} else {
 									print ("<strong>$complete_name ($res0):</strong>");
+								}
 								
 								// *************************************************************************************************
 								// *************************************************************************************************
@@ -1302,14 +1330,19 @@ function show_only_ephys(link, start1, stop1)
 								// Display Interpretation quotes, if any.
 								if ($interpretation||$interpretation_notes) {
 									print ("</td></tr>
-											<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>");
-											if($interpretation)
+										<tr>
+										<td width='70%' class='table_neuron_page2' align='left'>");
+										if($interpretation) {
 											print ("Interpretation: <span>$interpretation</span>");
-											if($interpretation_notes)
-											print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
-											
-											print ("</td><td width='15%' align='center'>");
+											if($interpretation_notes) {
+												print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+											}
+										} else {
+											if($interpretation_notes) {
+												print ("Interpretation notes: <span>$interpretation_notes</span>");
+											}
+										}
+									print ("</td><td width='15%' align='center'>");
 								}
 								
 								// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
