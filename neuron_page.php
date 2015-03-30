@@ -1023,12 +1023,21 @@ if ($text_file_creation)
 			<?php
 
 				if ($marker_pos_disp_counter == 0) {
-					print ("
+					if ($id == '4094') { // Cajal-Retzius
+						print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>Currently annotating</td>
+							</tr>
+							");
+					} else {
+						print ("
 							<tr>
 							<td width='20%' align='right'></td>
 							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
 							</tr>
 							");
+					}
 				}
 				else {
 					$disp_marker_name_prior = NULL;
@@ -1074,12 +1083,21 @@ if ($text_file_creation)
 			<?php
 
 				if ($marker_neg_disp_counter == 0) {
-					print ("
+					if ($id == '4094') { // Cajal-Retzius
+						print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>Currently annotating</td>
+							</tr>
+							");
+					} else {
+						print ("
 							<tr>
 							<td width='20%' align='right'></td>
 							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
 							</tr>
 							");
+					}
 				}
 				else {
 					$disp_marker_name_prior = NULL;
@@ -1121,12 +1139,21 @@ if ($text_file_creation)
 			
 			<?php								
 				if ($mixed_exp_disp_counter == 0) {
-					print ("
+					if ($id == '4094') { // Cajal-Retzius
+						print ("
+							<tr>
+							<td width='20%' align='right'></td>
+							<td align='left' width='80%' class='table_neuron_page2'>Currently annotating</td>
+							</tr>
+							");
+					} else {
+						print ("
 							<tr>
 							<td width='20%' align='right'></td>
 							<td align='left' width='80%' class='table_neuron_page2'>None known</td>
 							</tr>
 							");
+					}
 				}
 				else {
 					for ($j=0; $j<$mixed_exp_disp_counter; $j++) {
@@ -1384,12 +1411,21 @@ if ($text_file_creation)
 			} // end for $i
 			
 			if ($ephys_disp_counter == 0) {
-				print ("
-					<tr>
-					<td width='20%' align='right'></td>
-					<td align='left' width='80%' class='table_neuron_page2'>None known</td>
-					</tr>
-				");
+				if ($id == '4094') { // Cajal-Retzius
+					print ("
+						<tr>
+						<td width='20%' align='right'></td>
+						<td align='left' width='80%' class='table_neuron_page2'>Currently annotating</td>
+						</tr>
+						");
+				} else {
+					print ("
+						<tr>
+						<td width='20%' align='right'></td>
+						<td align='left' width='80%' class='table_neuron_page2'>None known</td>
+						</tr>
+					");
+				}
 			}			
 
 
