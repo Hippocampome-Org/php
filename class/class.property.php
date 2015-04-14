@@ -36,11 +36,20 @@ class property
 	public function retrive_ID($flag, $part, $rel, $val)
     {
 		$table=$this->getName_table();
-		
+	
 		// flag = 1 use by part and val:
 		if ($flag ==1 )
 		{
-			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			if ($rel == "in")
+			{
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";
+			}
+			else
+			{
+				
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part'  AND  id not in  
+					(SELECT DISTINCT id  FROM $table WHERE subject = '$part' AND  predicate = 'in' AND object = '$val')";				
+			}            			
 		}
 		if ($flag ==2 )
 		{
@@ -55,19 +64,32 @@ class property
 			// STM added after changing DB structure to have explicit hippocampal formation properties
 			if ($rel == "in")
 			{
-				$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
+				//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel'";	
+				$query = "SELECT DISTINCT id FROM $table WHERE  predicate = '$rel'";
 			}
 			else
 			// if "not in" - added else to yield the inverse of "in"
 			{
-				$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+				//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+				$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part'  AND  id not in  
+						(SELECT DISTINCT id  FROM $table WHERE subject = '$part' AND  predicate = 'in' AND object = '$val')";	
 			}
 		}	
 		if ($flag ==5 )
 		{
 			// STM added after changing DB structure to have explicit subregion properties
-			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
-			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object = '$val'";	
+			//$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";				
+
+            if ($rel == "in")
+			{
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";
+			}
+			else
+			{
+				
+			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part'  AND  id not in  
+					(SELECT DISTINCT id  FROM $table WHERE subject = '$part' AND  predicate = 'in' AND object LIKE '%$val%')";				
+			}   			
 		}	
 		$rs = mysql_query($query);
 		$n6=0;

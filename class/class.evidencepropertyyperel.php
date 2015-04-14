@@ -50,6 +50,40 @@ class evidencepropertyyperel
 		}
 		$this->setN_Type_id($n);	
 	}		
+	/// added for "not in" type search. Issue 151
+	public function retrive_for_Not_In($flag,$Property_id,$val,$rel,$part)
+    {
+		$table=$this->getName_table();
+		$table1 = "Property";
+		$table2 = "Type";
+	    if ($flag ==1 )
+		$query = "SELECT DISTINCT eptr.Type_id  FROM $table eptr
+                  JOIN ($table1 p, $table2 t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+	              WHERE p.subject = '$part'  and Property_id = '$Property_id'
+				  and Type_id not in 
+	             (SELECT DISTINCT eptr.Type_id
+                 FROM EvidencePropertyTypeRel eptr
+                 JOIN ($table1 p, $table2 t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+	             WHERE subject = '$part'  and predicate  = 'in' AND object = '$val')";
+		else
+		$query = "SELECT DISTINCT eptr.Type_id  FROM $table eptr
+                  JOIN ($table1 p, $table2 t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+	              WHERE p.subject = '$part'  and Property_id = '$Property_id'
+				  and Type_id not in 
+	             (SELECT DISTINCT eptr.Type_id
+                 FROM EvidencePropertyTypeRel eptr
+                 JOIN ($table1 p, $table2 t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
+	             WHERE subject = '$part'  and predicate  = 'in' AND object like '%$val%')";
+					 
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setType_id_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setN_Type_id($n);	
+	}		
 
 	public function retrive_evidence_id($Property_id, $type_id)
     {
