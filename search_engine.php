@@ -109,10 +109,29 @@ function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $
 	$n_tot = 0;
 	for ($i1=0; $i1<$n_property_id; $i1++)
 	{
-		$property_id = $property_1 -> getProperty_id($i1);
-
-	
-		$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
+		$property_id = $property_1 -> getProperty_id($i1);    
+	     ///changes for ""Not IN" typse search. Issue 151
+		 if ($rel == "in")			
+		     $evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);			
+		else
+			{	
+			    if ($val == 'Hippocampal formation')
+				$evidencepropertyyperel -> retrive_for_Not_In(1,$property_id, NULL, $rel, $part); 
+				else if ($val == 'DG')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 
+				else if ($val == 'CA3')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 
+				else if ($val == 'CA2')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 
+				else if ($val == 'CA1')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 	
+				else if ($val == 'SUB')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 
+				else if ($val == 'EC')
+				$evidencepropertyyperel -> retrive_for_Not_In(2,$property_id, $val, $rel, $part); 
+				else				
+				$evidencepropertyyperel -> retrive_for_Not_In(1,$property_id, $val, $rel, $part); 
+			}
 		$n_type_id = $evidencepropertyyperel -> getN_Type_id();
 	
 		for ($i2=0; $i2<$n_type_id; $i2++)
@@ -121,7 +140,7 @@ function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $
 			$n_tot = $n_tot + 1;	
 		}
 	}	
-	// Now, the program must remove the doubble or more type_id:	
+	// Now, the program must remove the double or more type_id:	
 	if ($type_id != NULL)
 		$new_type_id=array_unique($type_id);
 	
