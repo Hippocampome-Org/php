@@ -1199,95 +1199,147 @@ if ($text_file_creation)
 
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<?php		
-      		//$abbreviations = array();
-      		
-      		$ephys_disp_counter = 0;
+      			//$abbreviations = array();
+      			$ephys_disp_counter = 0;
 			for ($i=0; $i<$n; $i++)
 			{
 				$property -> retrive_by_id($property_id[$i]);
 				$predicate = $property -> getRel();
-		
 				if ($predicate == 'is between') {
 					$subject = $property -> getPart(); // ephys parameter
-
-					// Keep only property_id related by id_type;
-					// and retrieve id_evidence by these id:
-					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id);
-					
-					// get number of sources for this EP property
-					$nn = $evidencepropertyyperel ->getN_evidence_id();	
-					
-					if ($nn == 0);
-					else {												
+					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id); // retrieve id_evidence by related property_id and id_type
+					$nn = $evidencepropertyyperel -> getN_evidence_id(); // get number of sources for this EP property
+					if ($nn != 0)
+					{												
+						$val_min = 0;
+						$val_max = 0;
+						$error_sum = 0;
+						$nn_rep_values = 0;
+						$n_vals = 0;
 						$complete_name = real_name_ephys_evidence($subject);
-						$res=show_ephys($subject);
-
-						// for each source of this particular EP property
+						$res = show_ephys($subject);
 						$num_sources_counter = 0;
-						for ($t1=0; $t1<$nn; $t1++) {
+						for ($t1=0; $t1<$nn; $t1++) // for each source of this particular EP property
+						{
 							$evidence_id = $evidencepropertyyperel -> getEvidence_id_array($t1);
 							$epdataevidencerel -> retrive_Epdata($evidence_id);								
 							$epdata_id = $epdataevidencerel -> getEpdata_id();
 							$epdataevidencerel -> setEpdata_id(NULL);							
-							
-							if ($epdata_id == NULL);
-							else {	
+							if ($epdata_id != NULL)
+							{	
 								$num_sources_counter = $num_sources_counter + 1;
-								  					
 								$epdata -> retrive_all_information($epdata_id);
-								
+
+								// record min and max values
 								$value1 = $epdata -> getValue1();
-								$value2 = $epdata -> getValue2();
-								if($value2)
-									$final_value_array[$num_sources_counter - 1] = ($value1 + $value2) / 2;
+								if ($val_min == 0 && $val_max == 0)
+								{
+									$val_min = $value1;
+									$val_max = $value1;
+								}
 								else
-									$final_value_array[$num_sources_counter - 1] = $value1;
-										
+								{
+									if ($val_min > $value1)
+									{
+										$val_min = $value1;
+									}
+									if ($val_max < $value1)
+									{
+										$val_max = $value1;
+									}
+								}
+
+								// record N values
 								$n_measurement = $epdata -> getN();
 								if (!$n_measurement)
+								{
 									$n_measurement = 1;
-								$n_array[$num_sources_counter - 1] = $n_measurement;
+								}
+								$n_vals += $n_measurement;
+
+								// handle rep_values
+								$rep_value = $epdata -> getRep_value();
+								if ($rep_value != NULL)
+								{
+									$nn_rep_values += 1;
+									$value1 = $epdata -> getValue1();
+									$value2 = $epdata -> getValue2();
+									$error  = $epdata -> getError();
+									if($value2)
+									{
+										$final_value_array[$num_sources_counter - 1] = ($value1 + $value2) / 2;
+									}
+									else
+									{
+										$final_value_array[$num_sources_counter - 1] = $value1;
+									}
+									$n_measurement = $epdata -> getN();
+									if (!$n_measurement)
+									{
+										$n_measurement = 1;
+									}
+									$n_array[$num_sources_counter - 1] = $n_measurement;
+									$error_sum += $error;
+								}
+								else
+                                       				{
+									$final_value_array[$num_sources_counter - 1] = 0;
+									$n_array[$num_sources_counter - 1] = 0;
+								}
 							}
 						} // end for $t1
-							
 						$tot_value = 0;
 						$tot_n = 0;
 						$tot_n_squared = 0;
 						$weighted_sum = 0;
-						for ($y1=0; $y1<$num_sources_counter; $y1++) {
+						for ($y1=0; $y1<$num_sources_counter; $y1++)
+						{
 							$tot_value = $tot_value + $final_value_array[$y1];
 							$tot_n = $tot_n + $n_array[$y1];
 							$weighted_sum = $weighted_sum + ($final_value_array[$y1] * $n_array[$y1]);
 						} // end for $y1
-						
+
 						// calculate weighted mean
-						if ($tot_n != 0) {
+						if ($tot_n != 0)
+						{
 							$mean_value = $weighted_sum / $tot_n;
 							$mean_value = number_format($mean_value, $res[3], ".", "");
 						}
 						else
+						{
 							$mean_value = NULL;
+						}
 
-						// calculated weighted variance
+						// calculate weighted variance
 						if ($num_sources_counter <= 1)
+						{
 							$weighted_var = 0;
-						else {
+						}
+						else
+						{
 							$weighted_var_sum = 0;
 							for ($y2=0; $y2<$nn; $y2++)
+							{
 								$weighted_var_sum = $weighted_var_sum + ($n_array[$y2] * pow($final_value_array[$y2] - $mean_value, 2));
-						
-								$weighted_var = $weighted_var_sum / $tot_n;
+							}
+							$weighted_var = $weighted_var_sum / $tot_n;
 						}
-						
 						$weighted_std = sqrt($weighted_var);
-				
-						if ($weighted_std == 0);
-						else
+						if ($weighted_std != 0)
+						{
 							$weighted_std = number_format($weighted_std, $res[3], ".", "");
-									
-											
+						}
+
+						// calculate rep_value based weighted_std
+						if ($nn_rep_values > 0)
+						{
+							$weighted_std = $error_sum / $nn_rep_values;
+						}
+						else
+						{
+							$weighted_std = 0;
+						}
 						// -------------------------------------------------------------------------------------
-						
 /*
 						$epdata -> retrive_all_information($epdata_id);
 						$value1 = $epdata -> getValue1();
@@ -1301,10 +1353,8 @@ if ($text_file_creation)
 						$istim =  $epdata -> getIstim();	
 						$time =  $epdata -> getTime();	
 						$std_sem =  $epdata -> getStd_sem();
-              			array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations 
-
+						array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations 
 						// BEGIN DWW Istimul-Tstimul modifications
-								
 						if ($value2)
 						{
 							$mean_value = ($value1 + $value2) / 2;
@@ -1315,11 +1365,9 @@ if ($text_file_creation)
 							$mean_value = "$value1";	
 							$range = "";
 						}
-									
 						if ($error)
 						{
 							$error_value = "&plusmn; $error";
-							
 							if ($std_sem == 'std')
 							{
 								$std_sem_value = ", Mean &plusmn; SD";
@@ -1332,79 +1380,92 @@ if ($text_file_creation)
 							}
 							else
 								$std_sem_value ='';
-								
 							$n_error = 1;	
 						}
 						else
 						{
 						  	$error_value = "";
-						  	
 							$std_sem_value = "";
 						}
-							
 						if ($n_measurement)
 							$N = " (n=$n_measurement)";
 						else
 							$N = " (n=1)";	
-					
 						if ($istim && ($istim != "unknown"))
 						{
 							$istim_show =", Istimul=$istim pA"; 			
 							array_push($abbreviations, 'istim');
 						}
 						else
-						    $istim_show ="";
-								
+							$istim_show ="";
 						if ($time && ($time != "unknown"))
 						{
 							$time_val = ", Tstimul=$time ms";
 							array_push($abbreviations, 'time');
 						}
 						else 
-						  $time_val = "";
-
-    					$meas="$mean_value $range $error_value $res[2]$N$std_sem_value$istim_show$time_val";
-																
+							$time_val = "";
+						$meas="$mean_value $range $error_value $res[2]$N$std_sem_value$istim_show$time_val";
 						// END DWW Istimul-Tstimul modifications
 */							
-              			// -------------------------------------------------------------------------------------
+						// -------------------------------------------------------------------------------------
 											
-
 						// retrieve UNVETTED:
 						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
 						$unvetted = $evidencepropertyyperel -> getUnvetted();
 	
 						if ($unvetted == 1)
+						{
 							$font_col = 'font4_unvetted';
+						}
 						else
+						{
 							$font_col = 'font4';
+						}
 	
-						if ($mean_value) {
+						if ($mean_value)
+						{
 							$ephys_disp_counter++;
 							print ("<tr><td width='20%' align='right'></td>");
 							print ("<td align='left' width='80%' class='table_neuron_page2'>");
 						    
-						    if ($num_sources_counter == 1) {
-						    // 	$print_str = $mean_value . " " . $res[2] . " (" . $nn . " source, ";
-						    	$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " source, ";
-					    	}
-						    else
-						    	$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " sources, ";
+							if ($num_sources_counter == 1)
+							{
+								//$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " source, ";
+								$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn_rep_values . " source, ";
+							}
+							else
+							{
+								//$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " sources, ";
+								$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn_rep_values . " sources, ";
+							}
 						    
-						    if ($tot_n == 1)
-						    	$print_str = $print_str . $tot_n . " total cell)";
-						    else
-						    	$print_str = $print_str . $tot_n . " total cells)";
-						    
-						    if ($res[0]=='Sag ratio')
-						    	print ("<strong>$complete_name:</strong> ");
-						    else
-						    	print ("<strong>$complete_name ($res[0]):</strong> ");
-						    
+							if ($tot_n == 1)
+							{
+								$print_str = $print_str . $tot_n . " total cell)";
+							}
+							else
+							{
+								$print_str = $print_str . $tot_n . " total cells)";
+							}
+
+							if ($nn > 0)
+							{
+								$print_str = $print_str . " [" . $val_min . "," . $val_max . "; N=" . $n_vals . "]";
+							}
+ 
+							if ($res[0]=='Sag ratio')
+							{
+								print ("<strong>$complete_name:</strong> ");
+							}
+							else
+							{
+								print ("<strong>$complete_name ($res[0]):</strong> ");
+							}
+
 							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject&page=1' class='$font_col'>$print_str</a>");
 							print ("</td></tr>");											
 						} // end if ($mean_value)
-							
 						$mean_value = NULL;						
 					} // end else (if ($nn == 0))
 				} // end if ($predicate == 'is between');
