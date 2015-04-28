@@ -19382,7 +19382,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
               //$expression_values = explode('-', $_REQUEST['color']);
               $expression_values = explode('-', $color);
               $object = $expression_values[0];
-              $property -> retrive_ID(1, $subject, $predicate, $object);
+              $property -> retrive_ID(2, $subject, $predicate, $object);
               $property_id = $property -> getProperty_id(0);
 
               $conflict_note = $evidencepropertyyperel -> retrieve_conflict_note($property_id, $type_id);
