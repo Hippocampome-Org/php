@@ -90,7 +90,7 @@ ul
 
 <div class=WordSection1>
 
-<p class=MsoNormal>The following issues will be addressed in v1.1:</p>
+<p class=MsoNormal><span style='font-size:18.0pt;line-height:115%'>The following issues will be addressed in v1.1:</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in;mso-list:l0 level1 lfo1'><![if !supportLists]><span
 style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
@@ -124,7 +124,7 @@ Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"
 of known connections and known non-connections between mossy fibers and CA2
 Pyramidal cells<o:p></o:p></span></p>
 
-<p class=MsoNormal>The following cell types will be added under v1.1:</p>
+<p class=MsoNormal><span style='font-size:18.0pt;line-height:115%'>The following cell types will be added under v1.1:</span></p>
 
 <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=1511
  style='width:1133.0pt;margin-left:4.65pt;border-collapse:collapse;mso-yfti-tbllook:
