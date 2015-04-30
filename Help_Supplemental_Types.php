@@ -74,14 +74,19 @@ ul
 </style>
 </head>
 
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>
-
-
-<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+		
+<BR><BR><BR><BR><BR><BR><BR>
+		
+<div class='title_area'>
+	<font class="font1">Supplemental Cell Types</font>
+</div>
 
 <div class=WordSection1>
 
@@ -143,46 +148,7 @@ ul
   normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Figure / Table<o:p></o:p></span></b></p>
   </td>
-  <td width=359 valign=bottom style='width:269.0pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Authors<o:p></o:p></span></b></p>
-  </td>
-  <td width=359 valign=bottom style='width:269.0pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Title<o:p></o:p></span></b></p>
-  </td>
-  <td width=48 nowrap valign=bottom style='width:.5in;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Year<o:p></o:p></span></b></p>
-  </td>
-  <td width=64 nowrap valign=bottom style='width:48.0pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>PMID<o:p></o:p></span></b></p>
-  </td>
-  <td width=221 nowrap valign=bottom style='width:166.0pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Journal/Book<o:p></o:p></span></b></p>
-  </td>
+  <td width=359 valign=bottom style='width:269.0pt;border:solid windowtext 1.0pt;  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:  0in 5.4pt 0in 5.4pt;height:15.0pt'>  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";  mso-fareast-font-family:"Times New Roman"'>Authors<o:p></o:p></span></b></p>  </td>  <td width=359 valign=bottom style='width:269.0pt;border:solid windowtext 1.0pt;  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:  0in 5.4pt 0in 5.4pt;height:15.0pt'>  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";  mso-fareast-font-family:"Times New Roman"'>Title<o:p></o:p></span></b></p>  </td>  <td width=48 nowrap valign=bottom style='width:.5in;border:solid windowtext 1.0pt;  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:  0in 5.4pt 0in 5.4pt;height:15.0pt'>  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";  mso-fareast-font-family:"Times New Roman"'>Year<o:p></o:p></span></b></p>  </td>  <td width=64 nowrap valign=bottom style='width:48.0pt;border:solid windowtext 1.0pt;  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:  0in 5.4pt 0in 5.4pt;height:15.0pt'>  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";  mso-fareast-font-family:"Times New Roman"'>PMID<o:p></o:p></span></b></p>  </td>  <td width=221 nowrap valign=bottom style='width:166.0pt;border:solid windowtext 1.0pt;  border-left:none;mso-border-top-alt:solid windowtext .5pt;mso-border-bottom-alt:  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:  0in 5.4pt 0in 5.4pt;height:15.0pt'>  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:  normal'><b><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";  mso-fareast-font-family:"Times New Roman"'>Journal/Book<o:p></o:p></span></b></p>  </td>
  </tr>
  <tr style='mso-yfti-irow:1;height:30.0pt'>
   <td width=73 nowrap valign=bottom style='width:55.0pt;border:solid windowtext 1.0pt;

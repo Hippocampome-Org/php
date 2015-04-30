@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Known Bugs</title>
+<title>Known Bugs and Issues</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -81,15 +81,31 @@ ul
 </style>
 </head>
 
+<body lang=EN-US style='tab-interval:.5in'>
+
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>
 		
-<body lang=EN-US style='tab-interval:.5in'>
+<BR><BR><BR><BR><BR><BR><BR>
+		
+<div class='title_area'>
+	<font class="font1">Known Bugs and Issues</font>
+</div>
 
 <div class=WordSection1>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>A Neuron page
+summarizes all of the known properties of a given neuronal type, including its
+morphology, molecular biomarkers, electrophysiological properties, and known
+and potential connectivity with other neuronal types.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>An Evidence
+page summarizes all of the known bibliographic citations that support a given
+piece of knowledge, by presenting original quotations or figures that support
+that knowledge.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
 "Arial","sans-serif"'>Issue #151 - Empty search results are returned when
@@ -133,16 +149,6 @@ molecular biomarkers.<o:p></o:p></span></p>
 are not properly left- and right-justified for all supported browsers.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial","sans-serif"'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>A Neuron page
-summarizes all of the known properties of a given neuronal type, including its
-morphology, molecular biomarkers, electrophysiological properties, and known
-and potential connectivity with other neuronal types.<o:p></o:p></span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>An Evidence
-page summarizes all of the known bibliographic citations that support a given
-piece of knowledge, by presenting original quotations or figures that support
-that knowledge.<o:p></o:p></span></p>
 
 </div>
 

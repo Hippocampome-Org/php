@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title></title>
+<title>Suspended Types</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -81,13 +81,20 @@ ul
 </style>
 </head>
 
+<body lang=EN-US link=blue vlink=purple>
+
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>
 
-<body lang=EN-US link=blue vlink=purple>
+		
+<BR><BR><BR><BR><BR><BR><BR>
+		
+<div class='title_area'>
+	<font class="font1">Suspended Cell Types</font>
+</div>
 
 <div class=WordSection1>
 

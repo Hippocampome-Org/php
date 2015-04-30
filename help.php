@@ -44,9 +44,9 @@
 			
 			<font class='font1a'>Miscellaneous:</font> &nbsp; &nbsp;			
 			<ul>
-  			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bug List</font></a></li>
+  			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bugs and Issues</font></a></li>
   			<li><a href='Help_Suspended_Types.php'><font class="font7"> Suspended Types</font></a></li>
-  			<li><a href='Help_Supplemental_Types.php'><font class="font7"> Suupplemental Types</font></a></li>
+  			<li><a href='Help_Supplemental_Types.php'><font class="font7"> Supplemental Types</font></a></li>
   			<li><a href='Help_In_Progress.php'><font class="font7"> In Progress ...</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
