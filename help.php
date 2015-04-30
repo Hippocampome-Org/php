@@ -50,6 +50,7 @@
   			<li><a href='Help_In_Progress.php'><font class="font7"> In Progress ...</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
+  			<li><a href='Help_Bibliography.php'><font class="font7"> Bibliography</font></a></li>
   			<li><a href='Help_Other_Useful_Links.php'><font class="font7"> Other Useful Links</font></a></li>
   			<li><a href='Help_Acknowledgements.php'><font class="font7"> Acknowledgements</font></a></li>
 			</ul>
