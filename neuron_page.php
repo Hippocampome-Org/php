@@ -1192,7 +1192,7 @@ if ($text_file_creation)
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">
-					Electrophysiological properties (weighted mean &plusmn; SD)
+					Electrophysiological properties
 				</td>			
 			</tr>			
 		</table>		
@@ -1258,6 +1258,8 @@ if ($text_file_creation)
 								$n_vals += $n_measurement;
 
 								// handle rep_values
+								$max_n_measurement = 0;
+								
 								$rep_value = $epdata -> getRep_value();
 								if ($rep_value != NULL)
 								{
@@ -1267,28 +1269,52 @@ if ($text_file_creation)
 									$error  = $epdata -> getError();
 									if($value2)
 									{
-										$final_value_array[$num_sources_counter - 1] = ($value1 + $value2) / 2;
+										$final_value = ($value1 + $value2) / 2;
+										//$final_value_array[$num_sources_counter - 1] = ($value1 + $value2) / 2;
 									}
 									else
 									{
-										$final_value_array[$num_sources_counter - 1] = $value1;
+										$final_value = $value1;
+										//$final_value_array[$num_sources_counter - 1] = $value1;
 									}
 									$n_measurement = $epdata -> getN();
-									if (!$n_measurement)
-									{
-										$n_measurement = 1;
+									if (!$n_measurement) {
+										if ($value2) {
+											$n_measurement = 2; // n default for a range is 2
+										}
+										else {
+											$n_measurement = 1; // n_measurement is 1
+										}
 									}
-									$n_array[$num_sources_counter - 1] = $n_measurement;
-									$error_sum += $error;
+									//$n_array[$num_sources_counter - 1] = $n_measurement;
+									//$error_sum += $error;
+									
+									if ($n_measurement > $max_n_measurement) {
+										$max_value = $max_n_measurement;
+										$representative_value = $final_value;
+										$representative_n_measurement = $n_measurement;
+										$std_sem = $epdata->getStd_sem();
+										if ($std_sem == 'sem') {
+											$representative_error = $error*sqrt($n_measurement);
+											$representative_error = number_format($representative_error, 1, ".", "");
+										}
+										else {
+											$representative_error = $error;
+										}
+									}
+									
+									
 								}
-								else
-                                       				{
-									$final_value_array[$num_sources_counter - 1] = 0;
-									$n_array[$num_sources_counter - 1] = 0;
-								}
+								//else
+                                //{
+								//	$final_value_array[$num_sources_counter - 1] = 0;
+								//	$n_array[$num_sources_counter - 1] = 0;
+								//}
 							}
 						} // end for $t1
-						$tot_value = 0;
+						
+						
+						/*$tot_value = 0;
 						$tot_n = 0;
 						$tot_n_squared = 0;
 						$weighted_sum = 0;
@@ -1339,76 +1365,7 @@ if ($text_file_creation)
 						{
 							$weighted_std = 0;
 						}
-						// -------------------------------------------------------------------------------------
-/*
-						$epdata -> retrive_all_information($epdata_id);
-						$value1 = $epdata -> getValue1();
-						if($value1)
-							$value1 = number_format($value1,$res[3]);
-						$value2 = $epdata -> getValue2();
-						if($value2)
-							$value2 = number_format($value2,$res[3]);
-						$error = $epdata -> getError();
-						$n_measurement = $epdata -> getN();
-						$istim =  $epdata -> getIstim();	
-						$time =  $epdata -> getTime();	
-						$std_sem =  $epdata -> getStd_sem();
-						array_push($abbreviations, $std_sem);  // will read these out at end to print abbreviations 
-						// BEGIN DWW Istimul-Tstimul modifications
-						if ($value2)
-						{
-							$mean_value = ($value1 + $value2) / 2;
-							$range = "[$value1 - $value2]";
-						}
-						else
-						{
-							$mean_value = "$value1";	
-							$range = "";
-						}
-						if ($error)
-						{
-							$error_value = "&plusmn; $error";
-							if ($std_sem == 'std')
-							{
-								$std_sem_value = ", Mean &plusmn; SD";
-								array_push($abbreviations, $std_sem);
-							}
-							elseif ($std_sem == 'sem')	
-							{
-								$std_sem_value = ", Mean &plusmn; SEM";
-								array_push($abbreviations, $std_sem);
-							}
-							else
-								$std_sem_value ='';
-							$n_error = 1;	
-						}
-						else
-						{
-						  	$error_value = "";
-							$std_sem_value = "";
-						}
-						if ($n_measurement)
-							$N = " (n=$n_measurement)";
-						else
-							$N = " (n=1)";	
-						if ($istim && ($istim != "unknown"))
-						{
-							$istim_show =", Istimul=$istim pA"; 			
-							array_push($abbreviations, 'istim');
-						}
-						else
-							$istim_show ="";
-						if ($time && ($time != "unknown"))
-						{
-							$time_val = ", Tstimul=$time ms";
-							array_push($abbreviations, 'time');
-						}
-						else 
-							$time_val = "";
-						$meas="$mean_value $range $error_value $res[2]$N$std_sem_value$istim_show$time_val";
-						// END DWW Istimul-Tstimul modifications
-*/							
-						// -------------------------------------------------------------------------------------
+						*/
 											
 						// retrieve UNVETTED:
 						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
@@ -1423,36 +1380,41 @@ if ($text_file_creation)
 							$font_col = 'font4';
 						}
 	
-						if ($mean_value)
+						//if ($mean_value)
+						if ($representative_value)
 						{
 							$ephys_disp_counter++;
+							
+							if ($ephys_disp_counter==1) {
+								print ("<tr><td width='20%' align='right'></td>");
+								print ("<td align='left' width='80%' class='table_neuron_page2'>");
+								print ("<strong>Key:</strong> representative value&plusmn;SD (measurements); Number of sources (total measurements) [min , max]");
+								print ("</td></tr>");
+								
+								print ("<tr><td width='20%' align='right'></td>");
+								print ("<td align='left' width='80%' bgcolor='#FFFFFF'>");
+								print ("<BR>");
+								print ("</td></tr>");
+							}
+							
 							print ("<tr><td width='20%' align='right'></td>");
 							print ("<td align='left' width='80%' class='table_neuron_page2'>");
+							
+							$print_str = $representative_value;
+							if ($representative_error != 0) {
+								$print_str = $print_str . "&plusmn;" . $representative_error;
+							}
+							
+							$print_str = $print_str . " " . $res[2] . " (" . $representative_n_measurement . "); ";
 						    
-							if ($num_sources_counter == 1)
-							{
-								//$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " source, ";
-								$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn_rep_values . " source, ";
+							if ($num_sources_counter == 1) {
+								$print_str = $print_str . " " . $nn . " source";
 							}
-							else
-							{
-								//$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn . " sources, ";
-								$print_str = $mean_value . " &plusmn; " . $weighted_std . " " . $res[2] . " (" . $nn_rep_values . " sources, ";
+							else {
+								$print_str = $print_str . " " . $nn . " sources (" . $n_vals . "): ";
+								$print_str = $print_str . " [" . $val_min . " , " . $val_max . "]";
 							}
-						    
-							if ($tot_n == 1)
-							{
-								$print_str = $print_str . $tot_n . " total cell)";
-							}
-							else
-							{
-								$print_str = $print_str . $tot_n . " total cells)";
-							}
-
-							if ($nn > 0)
-							{
-								$print_str = $print_str . " [" . $val_min . "," . $val_max . "; N=" . $n_vals . "]";
-							}
+							
  
 							if ($res[0]=='Sag ratio')
 							{
@@ -1464,7 +1426,8 @@ if ($text_file_creation)
 							}
 
 							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject&page=1' class='$font_col'>$print_str</a>");
-							print ("</td></tr>");											
+							print ("</td></tr>");		
+								
 						} // end if ($mean_value)
 						$mean_value = NULL;						
 					} // end else (if ($nn == 0))

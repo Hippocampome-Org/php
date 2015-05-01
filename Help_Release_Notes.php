@@ -89,7 +89,7 @@ ul
 	include ("function/menu_main.php");
 ?>
 		
-<BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR>
 	
 <div class=WordSection1>
 		
@@ -97,7 +97,7 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
-font-family:"Arial","sans-serif"'>v1.0&alpha; R 4Q (29 Apr 2015):</span></p>
+font-family:"Arial","sans-serif"'>v1.0&alpha; R 4Q (1 May 2015):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
@@ -159,7 +159,13 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 198: Post a user-friendly list of known bugs and issues in the Help section.
 </span></p>
 
-</BR></BR>
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 199: Post a list of changes forthcoming in the next major updates.
+</span></p>
+
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4P (21 Mar 2015):</span></p>
@@ -230,7 +236,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Added new neuron type: CA1 (e)3000 (S000) Cajal-Retzius.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4N (12 Mar 2015):</span></p>
@@ -241,7 +247,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 126: Enable direct access to any page within the site without first having to go through the home page.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4M (24 Feb 2015):</span></p>
@@ -264,7 +270,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 150: Property page markers rendering format error under certain conditions.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4L (19 Feb 2015):</span></p>
@@ -299,7 +305,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 161: Amend the import scripts and database to handle linking information for marker evidence.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4K (12 Dec 2014):</span></p>
@@ -340,7 +346,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 149: CA2 SO is not an option in the value drop-down.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4J (21 Nov 2014):</span></p>
@@ -417,7 +423,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue: Compressed PNG files for browser rendering performance improvement.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4I (17 Aug 2014):</span></p>
@@ -494,7 +500,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue    : Minimized the evidence row gaps on the morphology evidence pages.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4H (26 Jul 2014):</span></p>
@@ -505,7 +511,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 136: When clicking on an ephys value from the neuron page, an error is encountered.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4G (22 Jul 2014):</span></p>
@@ -546,7 +552,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Partially Fixed Issue 072: Add figures to electrophysiology evidence pages. Figure functionality along with other functionality and layout similar to morphology page added to the Ephys page. Once the spreadsheet linking figure captions to figure files and ephys interpretations has been created, the csv2db ingest code must be enhanced to read it.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4F (8 Jul 2014):</span></p>
@@ -557,7 +563,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 125: The HC region is repeated twice in the I/O source/target section.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4E (28 Jun 2014):</span></p>
@@ -580,7 +586,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 073: Morphology purple squares - toggle axonal/dendritic info on Evidence Pages.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4D (18 Jun 2014):</span></p>
@@ -597,7 +603,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 109: Update the php code that reads the (+)/(-) tags for the matrices.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4C (6 Jun 2014):</span></p>
@@ -632,7 +638,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 106: Missing association in the database between fragments and cell types.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4B (31 May 2014):</span></p>
@@ -649,7 +655,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 107: Author search does not work when Author's name has apostrophe.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4A (27 May 2014):</span></p>
@@ -684,7 +690,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 101: Missing Lingenhohl IV soma evidence for EC (+) 223331 multiform III-IV-V cells.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 4 (14 May 2014):</span></p>
@@ -695,7 +701,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Major update of web interface and content.
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 3B:</span></p>
@@ -735,7 +741,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 (29 May 2013)
 </span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 3A:</span></p>
@@ -848,7 +854,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Citations from Tricoire et al., 2011, are now correctly attributed to CA1 (-)1003 SO O-LM cells rather than to CA1 (-)1002 O-LM cells.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 2D (16 May 2013):</span></p>
@@ -858,7 +864,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Progress made in vetting entorhinal cortex marker information.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 2C (25 April 2013):</span></p>
@@ -873,7 +879,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Progress made in vetting Subiculum marker information.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 2B (23 April 2013):</span></p>
@@ -883,7 +889,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Progress made in vetting CA3 marker information.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 2A (16 April 2013):</span></p>
@@ -953,7 +959,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Corrected missing electrophysiological values for some neuronal types.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 1B (09 April 2013):</span></p>
@@ -973,7 +979,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Progress was made in vetting electrophysiological information.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; R 1A (04 April 2013):</span></p>
@@ -998,7 +1004,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Added note to the Home Page about the known lack of uniformity across all combinations of browsers and screen resolutions.</span></p>
 
-</BR></BR>
+</BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.0&alpha; (26 March 2013):</span></p>
@@ -1008,6 +1014,7 @@ style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Released v1.0&alpha;.</span></p>
 
+</BR>
 
 </div>
 <!-- ------------------------ -->

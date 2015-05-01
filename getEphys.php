@@ -25,7 +25,7 @@ function getUrlForLink($id,$img,$key,$color1)
 	return ($url);
 }
 
-function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2)
+function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2)
 {
 	include("function/ephys_unit_table.php");
 	include("function/ephys_num_decimals_table.php");
@@ -72,9 +72,23 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 	{
 		$outputStr = '<span class="'.$span_class_str.'"><a href="property_page_ephys.php?id_ephys='.$id_ephys2[$param_str].'&id_neuron='.$id_type.'&ep='.$param_str.'&page=1" target="_blank" class="'.$color_unvetted.'">'.$formatted_value;
 		//$print_str = $formatted_value . ' &plusmn; ' . $weighted_std_ephys2[$param_str] . ' ' . $units;
-		$print_str = ' &plusmn; ' . $weighted_std_ephys2[$param_str] . ' ' . $units;
-		$outputStr.='<span> '.$print_str.'&#013;Sources : '.$nn_ephys2[$param_str].' &#013;';
-		$outputStr.='Total cells : '.$tot_n1_ephys2[$param_str].'&#013;';
+		if ($weighted_std_ephys2[$param_str] != 0) {
+			$print_str = '&plusmn;' . $weighted_std_ephys2[$param_str] . ' ' . $units;
+		}
+		$print_str = $print_str . ' ' . $protocol_ephys2[$param_str];
+		
+		$outputStr.='<span>' . $print_str . '&#013;';
+		$outputStr.='Measurements: ' . $tot_n1_ephys2[$param_str] . ' &#013;';
+		$outputStr.='Representative value selected from ' . $nn_ephys2[$param_str] . ' source';
+		if ($nn_ephys2[$param_str] > 1) {
+			$outputStr.='s';
+		}
+		//if ($protocol_ephys2[$param_str] != '') {
+		//	$outputStr.='&#013;' . $protocol_ephys2[$param_str];
+		//}
+		//else {
+		//	$outputStr.='default conditions';
+		//}
 		$outputStr.='</span></a></span>';
 	}
 	return $outputStr;
@@ -171,9 +185,9 @@ else // not from search page --------------
 	{
 		//Retrieve types by Search conditions
 		//echo "Search ".$_GET['_search'];
-		/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
-		echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
-		echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
+		/* echo "Search Field : ".$_GET['searchField']; // ï¿½ the name of the field defined in colModel
+		echo "Search String : ".$_GET['searchString']; // ï¿½ the string typed in the search field
+		echo "Search Operator : ".$_GET['searchOper']; //ï¿½ the operator choosen in the search field (ex. equal, greater than, ï¿½) */
 	}
 }
 $property = new property($class_property);
@@ -289,33 +303,74 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 					$epdata_id = $epdataevidencerel->getEpdata_id();
 					$epdata->retrive_all_information($epdata_id); // Retrieve all information for a given epdata
 					$rep_value = $epdata->getRep_value();
+					$std_sem = $epdata->getStd_sem();
+					
+					$max_n_measurement = 0;
+					$non_default_conditions_str = "";
 					if ($rep_value != NULL)
 					{
 						$nn_rep_value += 1;
+						
+						if (strpos($rep_value,'mice') !== false) {
+							$non_default_conditions_str = "(mice, ";
+						}
+						else {
+							$non_default_conditions_str = "(rats, ";
+						}
+						if (strpos($rep_value,'microelectrodes') !== false) {
+							$non_default_conditions_str = $non_default_conditions_str . "microelectrodes, ";
+						}
+						else {
+							$non_default_conditions_str = $non_default_conditions_str . "patch clamp, ";
+						}
+						if (strpos($rep_value,'room') !== false) {
+							$non_default_conditions_str = $non_default_conditions_str . "room temp)";
+						}
+						else {
+							$non_default_conditions_str = $non_default_conditions_str . "body temp)";
+						}
+
 						$value1 = $epdata->getValue1(); // Retrieve value 1 for a give epdata id
 						$value2 = $epdata->getValue2(); // Retrieve value 2 for a give epdata id
 						$error = $epdata->getError(); // Retrieve error value for a given epdata id
 						if ($value2) // if value 2 is set
 						{
 							$final_value = ($value1 + $value2) / 2; // final value for that particular evidence id is the mean
-							$final_value_array[$t1] = $final_value;
+							//$final_value_array[$t1] = $final_value;
 						}
 						else
 						{
 							$final_value = $value1; // else final value for that evidence is value 1
-							$final_value_array[$t1] = $value1;
+							//$final_value_array[$t1] = $value1;
 						}
 						$n_measurement = $epdata->getN();
 						if (!$n_measurement) // if n_measurement is not set
 						{
-							$n_measurement = 1; // n_measurement is 1
+							if ($value2) {
+								$n_measurement = 2; // n default for a range is 2
+							}
+							else {
+								$n_measurement = 1; // n_measurement is 1
+							}
 						}
-						$n_array[$t1] = $n_measurement;
-						$tot_value = $tot_value + $final_value; // Total value is calculated as the sum of all evidences
-						$tot_n = $tot_n + $n_measurement; // Total of all n values for evidences for a given property
-						$tot_n_squared = $tot_n_squared + pow($n_measurement,2); // Total of all (n*n) values for evidences for a given property
-						$weighted_sum = $weighted_sum + ($final_value * $n_measurement); // Product of final_value and n of all evidences for property
-						$error_sum += $error;
+						//$n_array[$t1] = $n_measurement;
+						//$tot_value = $tot_value + $final_value; // Total value is calculated as the sum of all evidences
+						//$tot_n = $tot_n + $n_measurement; // Total of all n values for evidences for a given property
+						//$tot_n_squared = $tot_n_squared + pow($n_measurement,2); // Total of all (n*n) values for evidences for a given property
+						//$weighted_sum = $weighted_sum + ($final_value * $n_measurement); // Product of final_value and n of all evidences for property
+						//$error_sum += $error;
+						
+						if ($n_measurement > $max_n_measurement) {
+							$max_value = $max_n_measurement;
+							$final_value_array[$t1] = $final_value;
+							$n_array[$t1] = $n_measurement;
+							if ($std_sem == 'sem') {
+								$representative_error = $error*sqrt($n_measurement);
+							}
+							else {
+								$representative_error = $error;
+							}
+						}
 					}
 					else
 					{
@@ -323,36 +378,35 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 						$n_array[$t1] = 0;
 					}
 				}
+				
+				/*
 				// calculate weighted mean
-				if ($tot_n != 0)
-				{
+				if ($tot_n != 0) {
 					$mean_value = $weighted_sum / $tot_n; // Calculate the mean for each property
 				}
-				else
-				{
+				else {
 					$mean_value = -999999; // print a value to indicate an error; div by 0 
 				}
-				// calculated weighted variance
-				if ($nn == 1)
-				{
-					$weighted_var = 0;
+				
+				
+				// calculated weighted variance				
+				$weighted_var_sum = 0;
+				for ($y2=0; $y2<$nn_rep_value; $y2++) {
+					$weighted_var_sum = $weighted_var_sum + ($n_array[$y2] * pow($final_value_array[$y2] - $mean_value, 2));//calculate weighted variable sum
 				}
-				else
-				{
-					$weighted_var_sum = 0;
-					for ($y2=0; $y2<$nn; $y2++)
-					{
-						$weighted_var_sum = $weighted_var_sum + ($n_array[$y2] * pow($final_value_array[$y2] - $mean_value, 2));//calculate weighted variable sum
-					}
-					$weighted_var = $weighted_var_sum / $tot_n;
-				}
+				$weighted_var = $weighted_var_sum / $tot_n;
 				$weighted_std = sqrt($weighted_var);
-				$ephys2[$name_epys] = $mean_value; // Store the mean value for each header name
+				*/
+				
+				//$ephys2[$name_epys] = $mean_value; // Store the mean value for each header name
+				$ephys2[$name_epys] = $final_value;
 				$id_ephys2[$name_epys] = $epdata_id; // Store the epdata id for each epdata
-				//$nn_ephys2[$name_epys] = $nn; // Store the n measurement for each header name
-				$nn_ephys2[$name_epys] = $nn_rep_value; // Store the n measurement for each header name
-				$tot_n1_ephys2[$name_epys] = $tot_n; // Store the total for each header name
-				//$weighted_std_ephys2[$name_epys] = $weighted_std; // Store the weighted standard deviation 
+				$protocol_ephys2[$name_epys] = $non_default_conditions_str;
+				$nn_ephys2[$name_epys] = $nn; // Store the n measurement for each header name
+				//$nn_ephys2[$name_epys] = $nn_rep_value; // Store the n measurement for each header name
+				//$tot_n1_ephys2[$name_epys] = $tot_n; // Store the total for each header name
+				$tot_n1_ephys2[$name_epys] = $n_measurement;
+				/*$weighted_std_ephys2[$name_epys] = $weighted_std; // Store the weighted standard deviation 
 				if ($nn_rep_value > 0)
 				{
 					$weighted_std_ephys2[$name_epys] = $error_sum / $nn_rep_value;
@@ -361,6 +415,9 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 				{
 					$weighted_std_ephys2[$name_epys] = 0;
 				}
+				*/
+				$weighted_std_ephys2[$name_epys] = $representative_error;
+
 			}
 			// Check the UNVETTED color: ***************************************************************************
 			$evidencepropertyyperel->retrive_unvetted($id, $property_id); // For a particular type and property id check if vetted or unvetted
@@ -382,16 +439,16 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$responce->rows[$i]['cell'] =
 		array(	'<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
 			'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
-			print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2),
-  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2) 
+			print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2),
+  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $weighted_std_ephys2, $protocol_ephys2) 
   		); 
 }
 //echo json_encode($responce);

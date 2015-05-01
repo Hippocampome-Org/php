@@ -16,7 +16,7 @@
 	<font class="font1">Help topics</font>
 </div>
 <div>	
-	<table width="40%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:180px; left:80px;">
+	<table width="40%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:125px; left:80px;">
 	<tr>
 		<td width="100%" align="left">
 			<font class='font1a'>Morphology:</font> &nbsp; &nbsp;

@@ -83,14 +83,14 @@ ul
 	include ("function/menu_main.php");
 ?>
 		
-<BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR>
 	
 <div class=WordSection1>
 
 <p class=MsoNormal style='line-height:normal'><b><u><span style='font-size:
 16.0pt;font-family:"Arial","sans-serif"'>Bibliography</span></u></b></p>
 
-	<table width="70%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:180px; left:80px;">
+	<table width="70%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:125px; left:80px;">
 	<tr>
 		<td width="100%" align="left">
 		<?php 
