@@ -19374,6 +19374,16 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
 				<?php
+				list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
+				if ($permission != 0) // where anonymous user is enabled
+				{
+					if ($val_property == 'Gaba-a-alpha')
+						print ("&nbsp <strong>GABAa &alpha;1 ($color$conflict_note)</strong>");
+					else if ($val_property == 'alpha-actinin-2')
+						print ("&nbsp <strong>&alpha;-act2 ($color$conflict_note)</strong>");
+					else
+						print ("&nbsp <strong>$val_property ($color$conflict_note)</strong>");
+				}
 // STM added
               $type_id = $type -> getId();
 
