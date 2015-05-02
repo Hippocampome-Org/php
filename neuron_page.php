@@ -1388,7 +1388,7 @@ if ($text_file_creation)
 							if ($ephys_disp_counter==1) {
 								print ("<tr><td width='20%' align='right'></td>");
 								print ("<td align='left' width='80%' class='table_neuron_page2'>");
-								print ("<strong>Key:</strong> representative value&plusmn;SD (measurements); Number of sources (total measurements) [min , max]");
+								print ("<strong>Key:</strong> representative value&plusmn;SD (measurements); Number of sources (total measurements): [min , max]");
 								print ("</td></tr>");
 								
 								print ("<tr><td width='20%' align='right'></td>");
