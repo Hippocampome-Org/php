@@ -20287,7 +20287,10 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 					//		$attachment_type = $fragment -> getAttachment_type();
 
 							// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-							$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+							//$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+
+							// retrieve the attachament from the "Attachment" table with original_id and cell_id and parameter *******
+							$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $val_property);
 							$attachment = $attachment_obj -> getName();
 							$attachment_type = $attachment_obj -> getType();
 									
