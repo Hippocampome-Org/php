@@ -20277,7 +20277,8 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 						$protocol = $markerdata -> getProtocol();	
            				$protocol = preg_replace('/[\[\]"]/', '', $protocol);
 							
-						if ($id_fragment_compare == $id_fragment);
+						//if ($id_fragment_compare == $id_fragment);
+						if (($id_fragment_compare == $id_fragment) && ($id_evidence1_compare == $id_evidence1));
 						else	
 						{		
 
@@ -20551,6 +20552,7 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 						//	print ("<br>");	
 
 							$id_fragment_compare = $id_fragment;
+							$id_evidence1_compare = $id_evidence1;
 						} // END IF	($id_fragment_compare == $id_fragment)
 					
 					}// end IF show1
