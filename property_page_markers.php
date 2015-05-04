@@ -20259,9 +20259,11 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 			//	print ("<br>");
 		
 				
-				$query = "SELECT DISTINCT id, id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
+				//$query = "SELECT DISTINCT id, id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
+				$query = "SELECT DISTINCT id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
 				$rs = mysql_query($query);											
-				while(list($aa, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
+				//while(list($aa, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
+				while(list($id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
 				{
 					if (($show1 == 1) && ($show_button1[$t3] == 1))
 					{
