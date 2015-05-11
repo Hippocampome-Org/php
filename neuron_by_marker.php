@@ -12,7 +12,7 @@ else if($parameter=="Gaba-a-alpha")
 else
 	$title = $parameter;
 
-$predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Type with mixed expression','unknown'=>'Types with unknown expression');
+$predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Types with mixed expression','unknown'=>'Types with unknown expression');
 
 //include ("access_db.php");
 require_once('class/class.type.php');
@@ -138,7 +138,7 @@ foreach ($predicateArr as $k => $v)
 			if (strpos($id, '0_') == 1)
 				$id = str_replace('10_', '',$id);
 		 
-			$type -> retrive_by_id($id);
+			$type -> retrieve_by_id($id);
 			$status = $type -> getStatus();
 		
 			if ($status == 'active')
@@ -155,7 +155,7 @@ foreach ($predicateArr as $k => $v)
 			
 				$id_t = $id;
 				$name_type = $type -> getNickname();
-				$subregion_type = $type -> getSubregion();
+				//$subregion_type = $type -> getSubregion();
 				$position_type = $type -> getPosition();
 				$n_result_tot = $n_result_tot + 1;
 				
@@ -183,7 +183,7 @@ foreach ($predicateArr as $k => $v)
 				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t ?>'><?php if($k!='mixed') {?><font class='font13'><?php } else {?><font class='<?php echo $font_col?>'><?php } echo $subregion_type." ".$name_type; if($k=='mixed'){ echo " (".$mixed_conflict.")"; } ?></font></a></td>
 				<td align='right' width='55%'>&nbsp;</td>
 			</tr>
-<?php 		} 
+<?php			}
 		}
 ?>
 		</table><br /> 

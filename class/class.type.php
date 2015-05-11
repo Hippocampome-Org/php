@@ -48,11 +48,31 @@ class type
 	}	
 	
 	public function retrive_by_id($id)   // Retrive all data by ID
-    {
+	{
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		{	
+			$this->setId($id);
+			$this->setDt($dt);
+			$this->setName($name);
+			$this->setNickname($nickname);
+			$this->setStatus($status);
+			$this->setPosition($position);
+			$this->setSubregion($subregion);
+			$this->setExcit_Inhib($excit_inhib);
+		}	
+	}
+	
+	public function retrieve_by_id($id)   // Retrieve all data by ID
+	{
+		$table=$this->getName_table();	
+		
+		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id'";
+		$rs = mysql_query($query);
+		$this->setStatus('');
 		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
 		{	
 			$this->setId($id);
@@ -82,11 +102,31 @@ class type
 	}
 
 	public function retrive_by_id_active($id)   // Retrive all data by ID
-    {
+	{
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
 		$rs = mysql_query($query);
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		{	
+			$this->setId($id);
+			$this->setDt($dt);
+			$this->setName($name);
+			$this->setNickname($nickname);
+			$this->setExcit_Inhib($excit_inhib);
+			$this->setStatus($status);
+			$this->setPosition($position);
+			$this->setSubregion($subregion);
+		}	
+	}
+
+	public function retrieve_by_id_active($id)   // Retrieve all data by ID
+	{
+		$table=$this->getName_table();	
+		
+		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
+		$rs = mysql_query($query);
+		$this->setStatus('');
 		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
 		{	
 			$this->setId($id);
