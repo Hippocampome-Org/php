@@ -705,7 +705,8 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 			
 			while ( !(($aSubregion == $theSubregion) And ($aNickname == $theNickname)) And ($aType < $number_type)) {
 				$id_type_row = $type->getID_array($aType);
-				$type -> retrive_by_id($id_type_row);
+				//$type -> retrive_by_id($id_type_row);
+				$type -> retrieve_by_id($id_type_row);
 				$aSubregion = $type->getSubregion();
 				$aNickname = $type->getNickname();
 				$aType = $aType + 1;
@@ -813,7 +814,8 @@ include ("function/icon.html");
 				{
 					$id = str_replace('10_', '', $id);
 				
-					$type -> retrive_by_id($id);
+					//$type -> retrive_by_id($id);
+					$type -> retrieve_by_id($id);
 					$status = $type -> getStatus();	
 								
 					if ($status == 'active')
@@ -841,7 +843,8 @@ include ("function/icon.html");
 				}
 				else
 				{
-					$type -> retrive_by_id($id);
+					//$type -> retrive_by_id($id);
+					$type -> retrieve_by_id($id);
 					$status = $type -> getStatus();		
 									
 					if ($status == 'active')
