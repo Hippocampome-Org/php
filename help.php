@@ -48,7 +48,8 @@
   			<li><a href='Help_Future_Updates.php'><font class="font7"> Future Updates</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
   			<li><a href='Help_Suspended_Types.php'><font class="font7"> Suspended Types</font></a></li>
-  			<li><a href='Help_Supplemental_Types.php'><font class="font7"> Supplemental Types</font></a></li>
+  			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
+  			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Use Case Scenario</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
   			<li><a href='Help_Bibliography.php'><font class="font7"> Bibliography</font></a></li>
   			<li><a href='Help_Other_Useful_Links.php'><font class="font7"> Other Useful Links</font></a></li>

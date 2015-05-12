@@ -1,4 +1,4 @@
-<title>Supplemental Types</title>
+<title>Supplemental Evidence</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -85,7 +85,7 @@ ul
 <BR><BR><BR><BR><BR><BR><BR>
 		
 <div class='title_area'>
-	<font class="font1">Supplemental Cell Types</font>
+	<font class="font1">Supplemental Evidence</font>
 </div>
 
 <div class=WordSection1>
