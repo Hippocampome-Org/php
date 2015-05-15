@@ -90,7 +90,7 @@ ul
 	include ("function/menu_main.php");
 ?>
 		
-<BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR>
 	
 <div class=WordSection1>
 		

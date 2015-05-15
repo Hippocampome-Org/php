@@ -94,7 +94,23 @@ ul
 	<tr>
 		<td width="100%" align="left">
 		<?php 
-			$t="SELECT distinct a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi,a.title AS ttl FROM Article AS a where publication is not NULL ORDER BY a.title";
+			$t="	SELECT DISTINCT
+					a.id,
+					a.publication AS pub,
+					a.volume AS vol,
+					a.pmid_isbn AS pmid,
+					a.issue AS iss,
+					a.first_page AS first,
+					a.last_page AS last,
+					a.year AS yea,
+					a.doi AS doi,
+					a.title AS ttl 
+				FROM	Article AS a
+				JOIN	(ArticleAuthorRel AS aar, Author AS au)
+				ON	a.id = aar.Article_id AND au.id = aar.Author_id
+				WHERE	a.publication is not NULL AND aar.author_pos = 0 
+				ORDER BY au.name ASC, a.year DESC, a.pmid_isbn DESC
+			";
 			$r=mysql_query($t);
 			$l=0;
 			while($row = mysql_fetch_array($r, MYSQL_ASSOC))
@@ -105,7 +121,7 @@ ul
 				$is[$l]=$row['iss'];
 				$fir[$l]=$row['first'];
 				$las[$l]=$row['last'];
-				$ye[$l]=$row['yea'];
+				$ye[$l]=substr($row['yea'],0,4);
 				$volu[$l]=$row['vol'];
 				$article_id[$l]=$row['id'];
 				$doi_list[$l]=$row['doi'];
@@ -117,8 +133,6 @@ ul
 				$results=mysql_query($article_author_rel);
 				if($publi[$ll]!="")
 				{
-					print("<br/>");
-					print("<b>".$ttls[$ll]."</b>");
 					print("<br/>");
 					$g=0;
 					while($rows = mysql_fetch_array($results, MYSQL_ASSOC))
@@ -132,7 +146,7 @@ ul
 							$auth_name=preg_replace("/'/", "&#39;", $auth_name);
 							if ($g == 0)
 							{
-								print($auth_name);
+								print("<b>".$auth_name."</b>");
 							}
 							else
 							{
@@ -141,13 +155,17 @@ ul
 						}	
 						$g++;
 					}
-					print(".<br/>");
+					print(" (<b>".$ye[$ll]."</b>)");
+					print(". ");
+					$article_title=$ttls[$ll];
+					$article_title=preg_replace("/\[/", "", $article_title);
+					$article_title=preg_replace("/\]/", "", $article_title);
+					print("<i>".$article_title."</i> ");
 					print($publi[$ll].", ");
-					print($ye[$ll].", ");
-					print($volu[$ll]." (");
-					print($is[$ll]."), pages: ");
-					print($fir[$ll]." - ".$las[$ll]);
-					print(".<br/>");
+					print($volu[$ll]."(");
+					print($is[$ll]."):");
+					print($fir[$ll]."-".$las[$ll]);
+					print(". ");
 					print("PMID/ISBN: ");
 					print($pm[$ll]);
 					print("<br/>");
