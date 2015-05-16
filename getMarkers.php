@@ -29,26 +29,26 @@ $name_markers = array(
 		"14" =>"GAT_1",
 		"15" =>"GlyT2",
 		"16" =>"mGluR1a",
-		"17" =>"mGluR2_3",
-		"18" =>"mGluR7a",
-		"19" =>"mGluR8a",
-		"20" =>"MOR",
-		"21" =>"Mus2R",
-		"22" =>"NG",
-		"23" =>"NKB",
-		"24"=>"nNOS",
-		"25" =>"NPY",
-		"26" =>"PPTA",
-		"27" =>"PPTB",
-		"28" =>"PV",
-		"29" =>"RLN",
-		"30" =>"SOM",
-		"31" =>"Sub_P_Rec",
-		"32" =>"vAChT",
-		"33" =>"vGluT2",
-		"34" =>"vGluT3",
-		"35" =>"VIAAT",
-		"36" =>"VIP"
+	//	"17" =>"mGluR2_3",
+		"17" =>"mGluR7a",
+		"18" =>"mGluR8a",
+		"19" =>"MOR",
+		"20" =>"Mus2R",
+		"21" =>"NG",
+		"22" =>"NKB",
+		"23"=>"nNOS",
+		"24" =>"NPY",
+		"25" =>"PPTA",
+		"26" =>"PPTB",
+		"27" =>"PV",
+		"28" =>"RLN",
+		"29" =>"SOM",
+		"30" =>"Sub_P_Rec",
+		"31" =>"vAChT",
+		"32" =>"vGluT2",
+		"33" =>"vGluT3",
+		"34" =>"VIAAT",
+		"35" =>"VIP"
 );
 
 function getUrlForLink($id,$img,$key,$color1)
@@ -477,7 +477,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 			"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+			"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 	);
 	
 	$hippo_property = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -488,7 +488,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 			"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+			"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 	);
 	
 	$hippo = array("CB"=>NULL,"CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -500,7 +500,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			//							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 			"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 			"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-			"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+			"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 	);
 	
 	$hippo_negative = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -511,7 +511,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 							"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+							"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 							);
 							
 			$hippo_positive = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -523,7 +523,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL,"NG" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+							"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 							);						
 			
 			$hippo_weak_positive = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -535,7 +535,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+							"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 							);			
 							
 			$hippo_unknown = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -547,7 +547,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 //							"MOR" =>NULL, "NKB" =>NULL, "NK1" =>NULL, "PPTA" =>NULL,
 							"MOR" =>NULL, "NG" =>NULL,"NKB" =>NULL, "PPTA" =>NULL,
 							"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-							"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL
+							"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL
 							);
 
 			$hippo_color = array("CB"=>NULL, "CR"=>NULL,"CCK"=>NULL,"nNOS"=>NULL,
@@ -558,7 +558,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 									"GlyT2" =>NULL, "mGluR1a" =>NULL, "mGluR7a" =>NULL, "mGluR8a" =>NULL,
 									"MOR" =>NULL, "NKB" =>NULL, "PPTA" =>NULL,
 									"PPTB" =>NULL, "vAChT" =>NULL, "VIAAT" =>NULL, "vGluT2" =>NULL,
-									"AChE" =>NULL, "GAT_1" =>NULL, "mGluR2_3" =>NULL, "CGRP" =>NULL);
+									"AChE" =>NULL, "GAT_1" =>NULL,  "CGRP" =>NULL);
 	
 	
 		if(isset($id_search))
@@ -664,7 +664,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$hippo_property['vGluT2'] = check_positive_negative('vGluT2', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['AChE'] = check_positive_negative('AChE', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['GAT_1'] = check_positive_negative('GAT_1', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-	$hippo_property['mGluR2_3'] = check_positive_negative('mGluR2_3', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
+//	$hippo_property['mGluR2_3'] = check_positive_negative('mGluR2_3', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	$hippo_property['CGRP'] = check_positive_negative('CGRP', $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
 	
 //	if (strpos($nickname, '(+)') == TRUE)
@@ -717,7 +717,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['GAT_1'],$name_markers['14'],$hippo_color['GAT_1']),
 			getUrlForLink($id,$hippo['GlyT2'],$name_markers['15'],$hippo_color['GlyT2']),
 			getUrlForLink($id,$hippo['mGluR1a'],$name_markers['16'],$hippo_color['mGluR1a']),
-			getUrlForLink($id,$hippo['mGluR2_3'],$name_markers['17'],$hippo_color['mGluR2_3']),
+//			getUrlForLink($id,$hippo['mGluR2_3'],$name_markers['17'],$hippo_color['mGluR2_3']),
 			getUrlForLink($id,$hippo['mGluR7a'],$name_markers['18'],$hippo_color['mGluR7a']),
 			getUrlForLink($id,$hippo['mGluR8a'],$name_markers['19'],$hippo_color['mGluR8a']),
 			getUrlForLink($id,$hippo['MOR'],$name_markers['20'],$hippo_color['MOR']),
