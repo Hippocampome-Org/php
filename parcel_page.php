@@ -204,19 +204,19 @@ include ("function/icon.html");
 	}
 	
 	function parcel_row($parcel, $part) {
-	$color_table = array("axons" => "red", "dendrites" => "blue", "somata" => "somata");
-      $color = $color_table[$part];
-	      		$html = "<tr>
-	        <td width='20%' align='right'>
-        </td>
-        <td align='left' width='80%' class='table_neuron_page2'>
-        <a href='neuron_page.php?id=".$parcel->getTypeId()."'>
-        <font class='".get_excit_inhib_font_class($parcel->getExcitInhib())."'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
-	        </a>
-	        </td>
-	        </tr>";
-        return $html;
-    }
+		$color_table = array("axons" => "red", "dendrites" => "blue", "somata" => "somata");
+		$color = $color_table[$part];
+		$html = "<tr>
+				<td width='20%' align='right'> </td>
+				<td align='left' width='80%' class='table_neuron_page2'>
+					<a href='neuron_page.php?id=".$parcel->getTypeId()."'>
+						<font class='".get_excit_inhib_font_class($parcel->getExcitInhib())."'>".$parcel->getNickName()."</font>
+					</a>
+				</td>
+			</tr>";
+		return $html;
+						//<font class='".get_excit_inhib_font_class($parcel->getExcitInhib())."'>".$parcel->getSubRegion().":".$parcel->getNickName()."</font>
+	}
 	
     function morphology_sub_table_foot()
 	{
