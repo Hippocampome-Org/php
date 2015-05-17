@@ -451,22 +451,22 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td>
-		<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
-		<img src='images/positive.png' width="13px" border="0"/> <font class='font5'>Positive </font> &nbsp; &nbsp; 
-		<img src='images/negative.png' width="13px" border="0"/> <font class='font5'>Negative </font>&nbsp; &nbsp; 
-		<img src="images/positive-negative-subtypes.png" width="13px" border="0"/> <font class='font5'>Positive-Negative (subtypes) </font> &nbsp; &nbsp; 
-		<img src="images/positive-negative-species.png" width="13px" border="0"/> <font class='font5'>Positive-Negative (species/protocol differences) </font> &nbsp; &nbsp; 
-		<img src="images/positive-negative-conflicting.png" width="13px" border="0"/> <font class='font5'>Positive-Negative (conflicting data) </font> &nbsp; &nbsp; 
-		<img src="images/unknown.png" width="13px" border="0"/> <font class='font5'>No Information Available </font> &nbsp; &nbsp; 
-		<img src="images/searching.png" width="13px" border="0"/> <font class='font5'>Search ongoing </font> &nbsp; &nbsp;
-		<br />
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
-		&nbsp; &nbsp; 
-		<font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font>
-		<br />
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
+                <font class='font5'><strong>Legend:</strong></font>&nbsp;
+                <img src='images/positive.png' width="13px" border="0"/><font class='font5'>Positive</font>&nbsp;
+                <img src='images/negative.png' width="13px" border="0"/>&nbsp;<font class='font5'>Negative</font>&nbsp;
+                <img src="images/positive-negative-subtypes.png" width="13px" border="0"/>&nbsp;<font class='font5'>Positive-Negative (subtypes)</font>&nbsp;
+                <img src="images/positive-negative-species.png" width="13px" border="0"/>&nbsp;<font class='font5'>Positive-Negative (species/protocol/subcellular expression differences)</font>&nbsp;
+                <img src="images/positive-negative-conflicting.png" width="13px" border="0"/>&nbsp;<font class='font5'>Positive-Negative (unresolved mixed)</font>&nbsp;
+                <img src="images/unknown.png" width="13px" border="0"/>&nbsp;<font class='font5'>No information available</font>&nbsp;
+                <img src="images/searching.png" width="13px" border="0"/>&nbsp;<font class='font5'>Search ongoing</font>
+                <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2">+/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
+                &nbsp;&nbsp; 
+                <font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font>
+                <br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
 	</td>
   </tr>
 </table>

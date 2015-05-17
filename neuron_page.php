@@ -189,7 +189,7 @@ if ($text_file_creation)
 
 <!-- 
 <div align="center" class="title_3">
-	<table width="90%" border="0" cellspacing="0" cellpadding="0">
+	<table width="90%" border="0" cellspacing="2" cellpadding="0">
 	<tr>
 		<td width="100%">
 			<font size='4' color="#990000" face="Verdana, Arial, Helvetica, sans-serif"><?php print $type->getSubregion(); print " "; print $type->getNickname(); ?> </font>
@@ -202,7 +202,7 @@ if ($text_file_creation)
 <!-- ---------------------- -->
 
 <div align="center">
-<table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
+<table width="85%" border="0" cellspacing="2" cellpadding="0" class='body_table'>
   <tr height="95">
     <td></td>
   </tr>
@@ -280,7 +280,7 @@ if ($text_file_creation)
 		<br />	
 
 		<!-- LIST of articles -->
-			<table width="80%" border="0" cellspacing="0" cellpadding="0">
+			<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">
 					List of articles
@@ -563,7 +563,7 @@ if ($text_file_creation)
 		<br />
 
 		<!-- TABLE Morphology -->
-		<table width="80%" border="0" cellspacing="0" cellpadding="0">
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">
 					Morphology
@@ -798,14 +798,14 @@ if ($text_file_creation)
 			if ($attachment_jpg != NULL)
 			{
 			?>
-				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>
 						<td width="20%" align="center" class="table_neuron_page3">
 							Representative figure
 						</td>			
 					</tr>	
 				</table>
-				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<?php
 						// TABLE OF THE ARTICLES: ************************************************************************************************
 						
@@ -1007,7 +1007,7 @@ if ($text_file_creation)
 		
 		?>
 		
-		<table width="80%" border="0" cellspacing="0" cellpadding="0">
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">Molecular markers</td>
 			</tr>
@@ -1717,12 +1717,12 @@ if ($text_file_creation)
 
       
 
-      <table width='80%' border='0' cellspacing='4' cellpadding='0' >
+      <table width='80%' border='0' cellspacing='2' cellpadding='0' >
       <tr>
       <td width="20%" align="center" class="table_neuron_page3"> Sources of Input </td>
       </tr>
       </table>
-      <table width='80%' border='0' cellspacing='4' cellpadding='0' colspan='3'>
+      <table width='80%' border='0' cellspacing='2' cellpadding='0' colspan='3'>
       <tr valign="top">
 	  <td width='33%' align='center'>
 	  <?php
@@ -1763,13 +1763,13 @@ if ($text_file_creation)
 	 
       
       
-      <table width='80%' border='0' cellspacing='4' cellpadding='0'>
+      <table width='80%' border='0' cellspacing='2' cellpadding='0'>
       <tr>
       <td width="20%" align="center" class="table_neuron_page3"> Targets of Output </td>
       </tr>
       </table>
       
-      <table width='80%' border='0' cellspacing='4' cellpadding='0' colspan='3'>
+      <table width='80%' border='0' cellspacing='2' cellpadding='0' colspan='3'>
       <tr valign="top">
       <td width='33%' align='center'>
       <?php 
