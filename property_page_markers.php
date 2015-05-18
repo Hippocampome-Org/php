@@ -20484,15 +20484,16 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 				*/
 				
 				// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
-				if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
+				if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location)
+				{
 					print ("</td></tr>
 					<tr>
 					<td width='15%'>
 					<td width='70%' class='table_neuron_page2' align='left'>");
 					//if($linking_cell_id)
 					//print ("Linking cell ID: <span>$linking_cell_id</span>");
-					if($linking_pmid_isbn){
-							
+					if ($linking_pmid_isbn)
+					{
 						if (strlen($linking_pmid_isbn) > 10 )
 						{
 							$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
@@ -20506,39 +20507,50 @@ for(var i=0;i<element_mouse_mRNA_positive_negative.length;i++){
 						}
 						print ("$string_pmid<font class='font13'>$linking_pmid_isbn</font></a>");
 					}
-				
 						
 					if($linking_quote)
-						print ("<br>Linking Quote: <span>$linking_quote</span>");
+					{
+						$evidencepropertyyperel -> retrieve_morphology_evidence_id_by_type_and_pmid_isbn($id_neuron, $linking_pmid_isbn);
+						$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
+						$linking_quote_url_to_property_page_morphology_linking_pmid_isbn =
+							"<a href='property_page_morphology_linking_pmid_isbn.php?id_neuron=$id_neuron&linking_pmid_isbn=$linking_pmid_isbn&val_property=DG_H&color=somata&page=1'>$linking_quote</a>";
+						if ($n_evidence_id > 0)
+						{
+							print ("<br>Linking Quote: <span>$linking_quote_url_to_property_page_morphology_linking_pmid_isbn</span>");
+						}
+						else
+						{
+							print ("<br>Linking Quote: <span>$linking_quote</span>");
+						}
+					}
+
 					if($linking_page_location)
+					{
 						print ("<br>Linking Page Location: <span>$linking_page_location</span>");
+					}
 						
 					print ("</td><td width='15%' align='center'>");
 				}
 
-						print ("</td></tr>");
+				print ("</td></tr>");
 						
-						// concatenate interpretation notes after quote, then print quote
-						if ($interpretation_notes)
-							$quote = $quote . "<BR><BR>Interpretation notes: <span>$interpretation_notes</span>";
+				// concatenate interpretation notes after quote, then print quote
+				if ($interpretation_notes)
+					$quote = $quote . "<BR><BR>Interpretation notes: <span>$interpretation_notes</span>";
 						
-						print ("
-						<tr>
-							<td width='15%'></td>	
-							<td align='left' width='70%' class='table_neuron_page2'>				
-							$quote
-							</td>	
-							<td width='15%' class='table_neuron_page2' align='center'>");
-									
-							if ($attachment_type=="marker_figure"||$attachment_type=="marker_table")
-							{
-								print ("<a href='$link_figure' target='_blank'>");
-								print ("<img src='$link_figure' border='0' width='80%'>");
-								print ("</a>");
-							}	
-							else;								
+				print ("<tr>
+					<td width='15%'></td>	
+					<td align='left' width='70%' class='table_neuron_page2'>$quote</td>	
+					<td width='15%' class='table_neuron_page2' align='center'>");
 
-						print ("</td></tr>");					
+					if ($attachment_type=="marker_figure"||$attachment_type=="marker_table")
+					{
+						print ("<a href='$link_figure' target='_blank'>");
+						print ("<img src='$link_figure' border='0' width='80%'>");
+						print ("</a>");
+					}	
+
+				print ("</td></tr>");					
 
                 // STM added for linking PMID
                 if ($secondary_pmid and $secondary_pmid != $PMID) {

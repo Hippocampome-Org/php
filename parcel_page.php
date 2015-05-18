@@ -307,7 +307,7 @@ include ("function/icon.html");
 	<font class="font1"><?php echo $title?></font>
 </div>
 <div align="center">
-<table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
+<table width="85%" border="0" cellspacing="2" cellpadding="0" class='body_table'>
   <tr height="50">
     <td></td>
   </tr>
@@ -316,7 +316,7 @@ include ("function/icon.html");
 		<!-- ****************  BODY **************** -->		
 				
 		
-		<br /><br /> <br /><br />
+		<br/><br/><br/>
 		
 		
 		
@@ -324,7 +324,7 @@ include ("function/icon.html");
  for($ivar=0;$ivar < count($array_for_use);$ivar++)
  {
 ?>
-<table width="80%" border="0" cellspacing="0" cellpadding="0">
+<table width="80%" border="0" cellspacing="2" cellpadding="0">
 <?php if($selectionType=="subregion"){?> 	
 	<tr>
 		<td width="100%" align="left"><font class="font1"><?php echo $subregionForSelection.":".$array_for_use[$ivar]?></font></td>

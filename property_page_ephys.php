@@ -1370,9 +1370,27 @@ function show_only_ephys(link, start1, stop1)
 										
 									
 									if($linking_quote)
-										print ("<br>Linking Quote: <span>$linking_quote</span>");
+									{
+										//print ("<br>Linking Quote: <span>$linking_quote</span>");
+										$evidencepropertyyperel -> retrieve_morphology_evidence_id_by_type_and_pmid_isbn($id_neuron, $linking_pmid_isbn);
+										$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
+										$linking_quote_url_to_property_page_morphology_linking_pmid_isbn =
+											"<a href='property_page_morphology_linking_pmid_isbn.php?id_neuron=$id_neuron&linking_pmid_isbn=$linking_pmid_isbn&val_property=DG_H&color=somata&page=1'>$linking_quote</a>";
+										if ($n_evidence_id > 0)
+										{
+											print ("<br>Linking Quote: <span>$linking_quote_url_to_property_page_morphology_linking_pmid_isbn</span>");
+										}
+										else
+										{
+											print ("<br>Linking Quote: <span>$linking_quote</span>");
+										}
+
+									}
+
 									if($linking_page_location)
+									{
 										print ("<br>Linking Page Location: <span>$linking_page_location</span>");
+									}
 									
 									print ("</td><td width='15%' align='center'>");
 								}
