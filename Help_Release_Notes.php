@@ -97,7 +97,7 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
-font-family:"Arial","sans-serif"'>v1.0&alpha; R 4R (18 May 2015):</span></p>
+font-family:"Arial","sans-serif"'>v1.0&alpha; R 4R (19 May 2015):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
@@ -121,12 +121,6 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 195: Cell types are sometimes duplicated on parcel pages.
-</span></p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 197: In marker matrix, hide the mGluR2/3 column, which is empty.
 </span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
