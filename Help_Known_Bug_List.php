@@ -107,8 +107,62 @@ page summarizes all of the known bibliographic citations that support a given
 piece of knowledge, by presenting original quotations or figures that support
 that knowledge.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #5 - Add the ability to search for cell types byname/synonym.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #32 - Add <span class=SpellE>php</span> code todisplay quotes related to connectivity between cell types.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #33 - Include quotes about known connectivity betweencell types to the database.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #86 - Add an interpretation notes column to themorphology figure files spreadsheet for import into the database.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #87 - Add an interpretation notes column to themorphology quotations spreadsheet for import into the database.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #88 - Amend the import scripts and database tohandle the interpretation notes for the morphological evidence.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #89 - Modify the <span class=SpellE>php</span> codeon the morphology Evidence pages to display any interpretation notes.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #129 - Clicking on a square with a gray dot in the summarymorphology matrix should take the user to an Evidence page that also presentsthe somatic evidence.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #152 - On the Neuron pages, the values for someelectrophysiological properties have associated with them a zero standard <spanclass=GramE>deviation</span>, even though non-zero values are shown on theassociated Evidence pages.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #153 - There is a duplicate quote that appears onthe Evidence pages for CA1 Bistratified CCK expression, under the PMID 11807843evidence.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #157 - On the Neuron pages, the Sources of Inputand Targets of Output <span class=SpellE>subtables</span> are sometimesincomplete and/or incorrect.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #160 - Each entry in the bibliography section of aNeuron page should be tagged with a morphology, marker, and/orelectrophysiology label indicating its contribution to the page.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #167 - On the Evidence pages for molecularbiomarkers, when the Open/Close All function is performed, theAnimal/Protocol/Expression selectors are all automatically reset and must bere-selected.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #184 - In the Author search results, the neurontypes are supposed to be listed for each citation returned; however, theresponse ‚Äú(to be determined)‚Äù still appears fairly frequently.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #186 - Highlight the &quot;mostrepresentative&quot; source on an electrophysiological Evidence page.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #187 - Highlight the representative sources on a markersEvidence page, when there are conflicting expression reports.<o:p></o:p></span></p><p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue #189 - The gray outline boxes on the Neuron pagesare not properly <span class=GramE>left</span>- and right-justified for allsupported browsers.<o:p></o:p></span></p>
-<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'><o:p>&nbsp;</o:p></span></p>
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #5 - Add the ability to search for cell types by
+name/synonym.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #32 - Add <span class=SpellE>php</span> code to
+display quotes related to connectivity between cell types.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #33 - Include quotes about known connectivity between
+cell types to the database.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #86 - Add an interpretation notes column to the
+morphology figure files spreadsheet for import into the database.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #87 - Add an interpretation notes column to the
+morphology quotations spreadsheet for import into the database.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #88 - Amend the import scripts and database to
+handle the interpretation notes for the morphological evidence.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #89 - Modify the <span class=SpellE>php</span> code
+on the morphology Evidence pages to display any interpretation notes.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #129 - Clicking on a square with a gray dot in the summary
+morphology matrix should take the user to an Evidence page that also presents
+the somatic evidence.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #160 - Each entry in the bibliography section of a
+Neuron page should be tagged with a morphology, marker, and/or
+electrophysiology label indicating its contribution to the page.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #167 - On the Evidence pages for molecular
+biomarkers, when the Open/Close All function is performed, the
+Animal/Protocol/Expression selectors are all automatically reset and must be
+re-selected.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #184 - In the Author search results, the neuron
+types are supposed to be listed for each citation returned; however, the
+response ì(to be determined)î still appears fairly frequently.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #186 - Highlight the &quot;most
+representative&quot; source on an electrophysiological Evidence page.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #187 - Highlight the representative sources on a
+markers Evidence page, when there are conflicting expression reports.<o:p></o:p></span></p>
 
 </div>
 
