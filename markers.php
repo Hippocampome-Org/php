@@ -155,7 +155,7 @@ window.onload = function()
 { 
 	if (!window.location.search) 
 	{ 
-		setTimeout("window.location+='?refreshed';", .1000); 
+		setTimeout("window.location+='?refreshed';", 0); 
 	} 
 } 
 </script>
