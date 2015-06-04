@@ -227,9 +227,12 @@ checkVersion();
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 
-<?php if($_SESSION['flag']!='1'){?>
-<script>
- 
+<?php
+if ($_SESSION['perm'] == NULL)
+{
+	$_SESSION['perm'] = 1;
+?>
+	<script>
 	window.onload = function() 
 	{ 
 		if (!window.location.search) 
@@ -237,10 +240,10 @@ checkVersion();
 			setTimeout("window.location+='?refreshed';", 0);
 		} 
 	} 
- 
-
-</script>
-<?php }?>
+	</script>
+<?php
+}
+?>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;;

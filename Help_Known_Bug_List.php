@@ -153,8 +153,8 @@ re-selected.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
 "Arial","sans-serif"'>Issue #184 - In the Author search results, the neuron
-types are supposed to be listed for each citation returned; however, the
-response “(to be determined)” still appears fairly frequently.<o:p></o:p></span></p>
+types are supposed to be listed for each citation returned; however, the response
+“(to be determined)” still appears fairly frequently.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
 "Arial","sans-serif"'>Issue #186 - Highlight the &quot;most
@@ -163,6 +163,24 @@ representative&quot; source on an electrophysiological Evidence page.<o:p></o:p>
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
 "Arial","sans-serif"'>Issue #187 - Highlight the representative sources on a
 markers Evidence page, when there are conflicting expression reports.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span class=GramE><span style='font-size:14.0pt;line-height:
+115%;font-family:"Arial","sans-serif"'>Issue #190 - Correct matrix flashing during
+refresh without adversely affecting URL direct access.</span></span><span
+style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #210 - Modify the database ingest to accommodate the
+new lower-limit maximum firing rate (<span class=SpellE>maxFR</span>) values.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #211 - Modify the <span class=SpellE>php</span>
+code to display the new lower-limit maximum firing rate (<span class=SpellE>maxFR</span>)
+values.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>Issue #212 - Modify the search routine to accommodate the
+new lower-limit maximum firing rate (<span class=SpellE>maxFR</span>) values.<o:p></o:p></span></p>
 
 </div>
 

@@ -149,17 +149,23 @@ function checkVersion() {
 }
 checkVersion();
 </script>
-<?php if($_SESSION['flag']!='1') {?>
-<script>
-window.onload = function() 
-{ 
-	if (!window.location.search) 
+<?php
+if ($_SESSION['perm'] == NULL)
+{
+	$_SESSION['perm'] = 1;
+?>
+	<script>
+	window.onload = function() 
 	{ 
-		setTimeout("window.location+='?refreshed';", 0); 
+		if (!window.location.search) 
+		{ 
+			setTimeout("window.location+='?refreshed';", 0); 
+		} 
 	} 
-} 
-</script>
-<?php }?>
+	</script>
+<?php
+}
+?>
 <script type="text/javascript">
 $(function()
 {

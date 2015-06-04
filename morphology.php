@@ -271,9 +271,12 @@ checkVersion();
 
 </script>
 
-<?php if($_SESSION['flag']!='1'){?>
-<script>
- 
+<?php
+if ($_SESSION['perm'] == NULL)
+{
+	$_SESSION['perm'] = 1;
+?>
+	<script>
 	window.onload = function() 
 	{ 
 		if (!window.location.search) 
@@ -281,9 +284,10 @@ checkVersion();
 			setTimeout("window.location+='?refreshed';", 0); 
 		} 
 	} 
-
-</script>
-<?php }?>
+	</script>
+<?php
+}
+?>
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;
