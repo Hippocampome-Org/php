@@ -1219,6 +1219,9 @@ if ($text_file_creation)
 						$complete_name = real_name_ephys_evidence($subject);
 						$res = show_ephys($subject);
 						$num_sources_counter = 0;
+						
+						$max_n_measurement = 0;
+						
 						for ($t1=0; $t1<$nn; $t1++) // for each source of this particular EP property
 						{
 							$evidence_id = $evidencepropertyyperel -> getEvidence_id_array($t1);
@@ -1256,10 +1259,9 @@ if ($text_file_creation)
 									$n_measurement = 1;
 								}
 								$n_vals += $n_measurement;
-
-								// handle rep_values
-								$max_n_measurement = 0;
 								
+								$gt_value = $epdata->getGt_value();
+
 								$rep_value = $epdata -> getRep_value();
 								if ($rep_value != NULL)
 								{
@@ -1290,7 +1292,8 @@ if ($text_file_creation)
 									//$error_sum += $error;
 									
 									if ($n_measurement > $max_n_measurement) {
-										$max_value = $max_n_measurement;
+										$max_n_measurement = $n_measurement;
+										
 										$representative_value = $final_value;
 										$representative_n_measurement = $n_measurement;
 										$std_sem = $epdata->getStd_sem();
@@ -1301,10 +1304,17 @@ if ($text_file_creation)
 										else {
 											$representative_error = $error;
 										}
+										$max_n_statistics_strng = $representative_error;
+										
+										if ($gt_value != NULL) {
+											$max_gt_flag = 1;
+										}
+										else {
+											$max_gt_flag = 0;
+										}
 									}
-									
-									
 								}
+								
 								//else
                                 //{
 								//	$final_value_array[$num_sources_counter - 1] = 0;
@@ -1388,7 +1398,7 @@ if ($text_file_creation)
 							if ($ephys_disp_counter==1) {
 								print ("<tr><td width='20%' align='right'></td>");
 								print ("<td align='left' width='80%' class='table_neuron_page2'>");
-								print ("<strong>Key:</strong> representative value&plusmn;SD (measurements); Number of sources (total measurements): [min , max]");
+								print ("<strong>Key:</strong> [range] OR representative value&plusmn;SD (measurements); Number of sources (total measurements): [min , max]");
 								print ("</td></tr>");
 								
 								print ("<tr><td width='20%' align='right'></td>");
@@ -1400,9 +1410,15 @@ if ($text_file_creation)
 							print ("<tr><td width='20%' align='right'></td>");
 							print ("<td align='left' width='80%' class='table_neuron_page2'>");
 							
-							$print_str = $representative_value;
+							if (!$max_gt_flag) {
+								$print_str = $representative_value;
+							}
+							else {
+								$print_str = ">" . $representative_value;
+							}
+							
 							if ($representative_error != 0) {
-								$print_str = $print_str . "&plusmn;" . $representative_error;
+								$print_str = $print_str . "&plusmn;" . $max_n_statistics_strng;
 							}
 							
 							$print_str = $print_str . " " . $res[2] . " (" . $representative_n_measurement . "); ";

@@ -33,6 +33,7 @@ function create_temp_table ($name_temporary_table)
 	$query = mysql_query($drop_table);
 
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
+	i1_counter int(6),
 	id int(4) NOT NULL AUTO_INCREMENT,
 	id_fragment int(10),
 	id_original BIGint(20) DEFAULT NULL,
@@ -67,6 +68,8 @@ function create_temp_table ($name_temporary_table)
 	value2 float DEFAULT NULL,
 	error float DEFAULT NULL,
 	n_measurement float DEFAULT NULL,
+	rep_value varchar(128),
+	gt_value tinyint(1),
 	istim varchar(32),
 	std_sem varchar(32),
 	time varchar(32),
@@ -77,20 +80,20 @@ function create_temp_table ($name_temporary_table)
 
 
 }
-
-function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time, $volume, $issue)
-{		
+function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time, $volume, $issue)
+{
 	if ($open_access == NULL)
 		$open_access = -1;
-		set_magic_quotes_runtime(0);
-		if (get_magic_quotes_gpc()) {
-			$publication = stripslashes($publication);
-			$res = stripslashes($res);
-		}
+	set_magic_quotes_runtime(0);
+	if (get_magic_quotes_gpc()) {
+		$publication = stripslashes($publication);
+		$res = stripslashes($res);
+	}
 		
-$publication= mysql_real_escape_string($publication);
+	$publication= mysql_real_escape_string($publication);
 	$query_i = "INSERT INTO $table
 	(id,
+		i1_counter,
 		id_fragment,
 		quote,
 		authors,
@@ -120,6 +123,8 @@ $publication= mysql_real_escape_string($publication);
 		res2,
 		res3,
 		value1,
+		rep_value,
+		gt_value,
 		istim,
 		std_sem,
 		time,
@@ -127,6 +132,7 @@ $publication= mysql_real_escape_string($publication);
 		issue)
 	VALUES
 	(NULL,
+	   '$i1_counter',
 	   '$id_fragment',
 	   '$quote',
 	   '$authors',
@@ -156,6 +162,8 @@ $publication= mysql_real_escape_string($publication);
 	   '$res2',
 	   '$res3',
 	   '$value1',
+	   '$rep_value',
+	   '$gt_value',
 	   '$istim',
 	   '$std_sem',
 	   '$time',
@@ -163,37 +171,73 @@ $publication= mysql_real_escape_string($publication);
 	   '$issue'   
 	   )";
 	$rs2 = mysql_query($query_i);
-	
+		
 	//if id_original is NULL
 	if ($id_original) {
-		$query1="UPDATE $table set id_original = '$id_original' where id_fragment='$id_fragment'";
-	}
-	$rs2 = mysql_query($query1);
-	
+		$query1="UPDATE $table set id_original = '$id_original' where id_fragment='$id_fragment' AND i1_counter='$i1_counter'";
+		$rs2 = mysql_query($query1);
+	}	
 	
 	//if error is NULL
 	if ($error) {
-		$query2="UPDATE $table set error = '$error' where id_fragment='$id_fragment'";
-	}
-	$rs3 = mysql_query($query2);
-		
+		$query2="UPDATE $table set error = '$error' where id_fragment='$id_fragment' AND i1_counter='$i1_counter'";
+		$rs3 = mysql_query($query2);
+	}		
 	
 	//if value2 is NULL
 	if ($value2) {
-		$query3="UPDATE $table set value2 = '$value2' where id_fragment='$id_fragment'";
-	}
-	$rs4 = mysql_query($query3);
-	
+		$query3="UPDATE $table set value2 = '$value2' where id_fragment='$id_fragment' AND i1_counter='$i1_counter'";
+		$rs4 = mysql_query($query3);
+	}	
 	
 	//if n_measurement is NULL
 	if ($n_measurement) {
-		$query4="UPDATE $table set n_measurement = '$n_measurement' where id_fragment='$id_fragment'";
-	}
-	$rs4 = mysql_query($query4);
-	
+		$query4="UPDATE $table set n_measurement = '$n_measurement' where id_fragment='$id_fragment' AND i1_counter='$i1_counter'";
+		$rs4 = mysql_query($query4);
+	}	
 	
 }
 
+
+function expand_protocol_text($protocol)
+{
+	$protocol = str_replace(' ', '', $protocol);
+	$prot_pieces = explode("|", $protocol);
+	
+	if ($prot_pieces[0] == "r")
+		$prot_pieces[0] = "rats";
+	else if ($prot_pieces[0] == "m")
+		$prot_pieces[0] = "mice";
+	else if ($prot_pieces[0] == "r;m" || $prot_pieces[1] == "m;r")
+		$prot_pieces[0] = "rats; mice";
+	else if ($prot_pieces[0] == "g")
+		$prot_pieces[0] = "guinea pigs";
+	else
+		$prot_pieces[0] = "species unknown";
+	
+	if ($prot_pieces[1] == "p")
+		$prot_pieces[1] = "patch clamp";
+	else if ($prot_pieces[1] == "e")
+		$prot_pieces[1] = "microelectrodes";
+	else if ($prot_pieces[1] == "e;p" || $prot_pieces[2] == "p;e")
+		$prot_pieces[1] = "microelectrodes; patch clamp";
+	else
+		$prot_pieces[1] = "protocol unknown";
+	
+	if ($prot_pieces[2] != "")
+		$prot_pieces[2] = "temperature=" . $prot_pieces[2] . "&deg;";
+	
+	if ($prot_pieces[3] == "r")
+		$prot_pieces[3] = "(room)";
+	else if ($prot_pieces[3] == "b")
+		$prot_pieces[3] = "(body)";
+	else
+		$prot_pieces[3] = "temperature unknown";
+	
+	$protocol = $prot_pieces[0] . " | " . $prot_pieces[1] . " | " . $prot_pieces[2] . " " . $prot_pieces[3];
+	
+	return $protocol;
+}
 
 // *********************************************************************************************************************************
 
@@ -715,9 +759,6 @@ function show_only_ephys(link, start1, stop1)
 				// Retrieve all information from table: EPDATA:
 				$value1_tot = 0;
 		
-				
-		
-		
 				// ARTICLE -----------------------------------------------------------------------
 				for ($i1=0; $i1<$n_epdata; $i1++)
 			 	{
@@ -728,6 +769,10 @@ function show_only_ephys(link, start1, stop1)
 			 		$value2[$i1] = $epdata -> getValue2();
 			 		$error[$i1] =  $epdata -> getError();
 			 		$n_measurement[$i1] =  $epdata -> getN();
+			 		$rep_value[$i1] = $epdata -> getRep_value();
+			 		$gt_value[$i1] = $epdata -> getGt_value();
+			 		if ($gt_value[$i1] == NULL)
+			 			$gt_value[$i1] = 0;
 			 		$istim[$i1] =  $epdata -> getIstim();
 			 		$time[$i1] =  $epdata -> getTime();
 			 		$std_sem[$i1] =  $epdata -> getStd_sem();
@@ -743,6 +788,7 @@ function show_only_ephys(link, start1, stop1)
 					$protoc = explode(",", $page_loc);
 					$page_location=$protoc[0];
 					$protocol=$protoc[1];
+					$protocol = expand_protocol_text($protocol);
 					
 					$original_id = $fragment -> getOriginal_id();
 					$quote = $fragment -> getQuote();
@@ -806,9 +852,8 @@ function show_only_ephys(link, start1, stop1)
 						
 			 		if ($page)
 					{
-		
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-						insert_temporary($name_temporary_table, $id_fragment, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
+						insert_temporary($name_temporary_table, $i1, $id_fragment, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $rep_value[$i1], $gt_value[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
 						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					}
 		 		}
@@ -1187,14 +1232,13 @@ function show_only_ephys(link, start1, stop1)
 						// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
 						if ($show1 == 1)
 						{
-							$query = "SELECT id_fragment, id_original, quote, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
+							$query = "SELECT id_fragment, id_original, quote, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, rep_value, gt_value, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
 							$rs = mysql_query($query);
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;
-							while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $istim, $std_sem, $time) = mysql_fetch_row($rs))
+							while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time) = mysql_fetch_row($rs))
 							{
-
 								if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
 								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
 								print ("<tr>");
@@ -1236,17 +1280,28 @@ function show_only_ephys(link, start1, stop1)
 
 								// Display protocol, if any.
 								if ($protocol) {
-								print ("</td></tr>
-								<tr>
-								<td width='70%' class='table_neuron_page2' align='left'>
-								Protocol: <span>$protocol</span>
-								</td><td width='15%' align='center'>");
+									if ($rep_value != NULL) {
+										print ("</td></tr>
+											<tr>
+											<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
+											Protocol: <span>$protocol *preferred conditions*</span>
+											</td><td width='15%' align='center'>");
+									}
+									else {
+										print ("</td></tr>
+											<tr>
+											<td width='70%' class='table_neuron_page2' align='left'>
+											Protocol: <span>$protocol</span>
+											</td><td width='15%' align='center'>");
+									}									
 								}
 								
 								print ("</td></tr>
 								<tr>
 								<td width='70%' class='table_neuron_page2' align='left'>
 								");
+								
+								
 								if ($res0=='Sag ratio') {
 									print ("<strong>$complete_name:</strong>");
 								} else {
@@ -1322,7 +1377,12 @@ function show_only_ephys(link, start1, stop1)
 								else
 									$time_val = "";
 								
-								$meas = " $mean_value $range $error_value $res2$N$std_sem_value$istim_show$time_val";
+								if ($gt_value)
+									$gt_str = ">";
+								else
+									$gt_str = "";
+								
+								$meas = " $gt_str$mean_value $range $error_value $res2$N$std_sem_value$istim_show$time_val";
 								
 								print ("$meas");
 								

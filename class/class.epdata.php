@@ -12,6 +12,7 @@ class epdata
     private $_value1_array;
     private $_n_value1;
     private $_rep_value;
+    private $_gt_value;
     
     function __construct ($name)
     {
@@ -21,9 +22,9 @@ class epdata
     public function retrive_all_information($id)
     {
         $table=$this->getName_table();
-        $query = "SELECT raw, value1, value2, error, std_sem, n, istim, time, rep_value FROM $table WHERE id = '$id'";
+        $query = "SELECT raw, value1, value2, error, std_sem, n, istim, time, rep_value, gt_value FROM $table WHERE id = '$id'";
         $rs = mysql_query($query);
-        while (list($raw, $value1, $value2, $error, $std_sem, $n, $istim, $time, $rep_value) = mysql_fetch_row($rs))
+        while (list($raw, $value1, $value2, $error, $std_sem, $n, $istim, $time, $rep_value, $gt_value) = mysql_fetch_row($rs))
         {    
             $this->setRaw($raw);    
             $this->setValue1($value1);
@@ -33,7 +34,8 @@ class epdata
             $this->setIstim($istim);        
             $this->setTime($time);    
             $this->setStd_sem($std_sem);                            
-            $this->setRep_value($rep_value);                            
+            $this->setRep_value($rep_value);   
+            $this->setGt_value($gt_value);
         }    
     }    
 
@@ -108,6 +110,11 @@ class epdata
     {
         $this->_rep_value = $val1;
     }
+    
+    public function setGt_value($val1)
+    {
+    	$this->_gt_value = $val1;
+    }
 
 
     // GET ++++++++++++++++++++++++++++++++++++++    
@@ -171,5 +178,10 @@ class epdata
     {
         return $this->_rep_value;
     }    
+    
+    public function getGt_value()
+    {
+    	return $this->_gt_value;
+    }
 }
 ?>
