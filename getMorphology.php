@@ -72,7 +72,7 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 	 if ($type == 'somata'){
 			if($flag==1)
 				$link[0] = "<img src='images/morphology/neuron_soma.png' border='0'/>";
-//	$link[1]='somata';
+                $link[1]='somata';
 		}
 	
 	return ($link);
@@ -98,47 +98,61 @@ function check_color($id,$type, $unvetted,$val,$part) //$type --> whether axons/
 	{
 		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/axons_present_unvetted.png' border='0'/>";
+			$link[1] = 'red';
 		}
 		else{
 			if($flag==1){
 				$link[0] = "<img src='images/morphology/axons_present_soma.png' border='0'/>";
+				$link[1] = 'redSoma';
 				
 			}
 			else{
 				$link[0] = "<img src='images/morphology/axons_present.png' border='0'/>";
+				$link[1] = 'red';
 			}
 		}
-		 $link[1] = 'red';
+		// $link[1] = 'red';
 	}
 	else if ($type == 'dendrites')
 	{
 		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/dendrites_present_unvetted.png' border='0'/>";
+			$link[1] = 'blue';
 		}
 		else{
 			if($flag==1){
 				$link[0] = "<img src='images/morphology/dendrites_present_soma.png' border='0'/>";
+				$link[1] = 'blueSoma';
 			}
 			else{
 				$link[0] = "<img src='images/morphology/dendrites_present.png' border='0'/>";
+				$link[1] = 'blue';
+				
 			}
 		}
-		$link[1] = 'blue';
+		
 	}
 	else if ($type == 'both')
 	{
 		//echo "Should come here";
 		if ($unvetted == 1){
 			$link[0] = "<img src='images/morphology/somata_present_unvetted.png' border='0'/>";
+			$link[1] = 'violet';
 		}
 		else{
 			if($flag==1)
+			{
 				$link[0] = "<img src='images/morphology/somata_present_soma.png' border='0'/>";
+			    $link[1] = 'violetSoma';
+			}
+		
 				
-		else
+		else {
 			$link[0] = "<img src='images/morphology/somata_present.png' border='0'/>";
+		    $link[1] = 'violet';
 		}
-		$link[1] = 'violet';
+
+	}
 	}
 	return ($link);
 }
@@ -151,6 +165,7 @@ function check_color($id,$type, $unvetted,$val,$part) //$type --> whether axons/
  * */
 function getUrlForLink($id,$img,$key,$color1) 
 {
+	
 	$url = '';
 	if($color1!=''){
 		if($img!='')
@@ -161,7 +176,8 @@ function getUrlForLink($id,$img,$key,$color1)
 	else{
 	if($img!='')
 		{
-			$url =$img;	
+			//$url =$img;
+             $url ='<a href="property_page_morphology.php?id_neuron='.$id.'&val_property='.$key.'&color=somata&page=1" target="_blank">'.$img.'</a>';			
 		}
 	}
 	return ($url);	
@@ -325,10 +341,10 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$n_property_id = $evidencepropertyyperel -> getN_Property_id(); // retrieve a count of the total number of property ids
 	
 	$q=0;
-	for ($i5=0; $i5<$n_property_id; $i5++) // For Each Property id he derieves by using an Index
+	for ($i5=0; $i5<$n_property_id; $i5++) // For Each Property id he derives by using an Index
 	{
 		$Property_id = $evidencepropertyyperel -> getProperty_id_array($i5); // Retrieve the property to the corresponding index passed
-		$property -> retrive_by_id($Property_id); // For a property id derieved as above,retrieve its corresponding properties
+		$property -> retrive_by_id($Property_id); // For a property id derived as above,retrieve its corresponding properties
 		$rel = $property->getRel(); // Retrieve Predicate (from the property table)
 		$part1 = $property->getPart(); // Retrieve Subject (from the property table)
 	
@@ -380,7 +396,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 				$img_somata = check_color_somata($id,$neuronType, $unvetted,$val[$ii],$part[$ii]);
 				if($img_somata!=''){
 				 	$hippo[$val[$ii]] = $img_somata[0];
-//		 $hippo_color[$val[$ii]] = $img_somata[1];		
+                    //$hippo_color[$val[$ii]] = $img_somata[1];		
 				} 
 			}
 		}
