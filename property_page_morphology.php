@@ -188,6 +188,7 @@ if ($page) // Come from another page
 	$val_property = $_REQUEST['val_property'];
 	$color = $_REQUEST['color'];
 	
+	
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
 	
@@ -474,10 +475,16 @@ if ($name_show_only_morphology_var)
 
 if ($color == 'red')
 	$part = "axons";
+if ($color == 'redSoma')
+	$part = "axons_somata";
 if ($color == 'blue')
-	$part = "dendrites";				
+	$part = "dendrites";
+if ($color == 'blueSoma')
+	$part = "dendrites_somata";
 if ($color == 'violet')
-	$part = "axons_dendrites";	
+	$part = "axons_dendrites";
+if ($color == 'violetSoma')
+	$part = "axons_dendrites_somata";
 if ($color == 'somata')
 	$part = "somata";	
 
@@ -513,55 +520,37 @@ $author = new author($class_author);
 // Javascript function *****************************************************************************************************
 //================changes===========================
 function evidencetoggle(){	
-
 	
 	var element_axondendrite= document.getElementsByClassName('axondendrite');
 	var element_axon= document.getElementsByClassName('axon');
 	var element_dendrite= document.getElementsByClassName('dendrite');
 
-		var element_combo_dendrite= document.getElementsByClassName('comboflag-dendrite');
-	var 	element_combo_axon= document.getElementsByClassName('comboflag-axon');
-	var 	element_combo_axondendrite= document.getElementsByClassName('comboflag-axondendrite');
+	var element_combo_dendrite= document.getElementsByClassName('comboflag-dendrite-ad');
+	var element_combo_axon= document.getElementsByClassName('comboflag-axon-ad');
+	var element_combo_axondendrite= document.getElementsByClassName('comboflag-axondendrite');
 	if (document.getElementById('axoncheck').checked==false) {
 		 document.getElementById("axoncheck").disabled = false;
 		 document.getElementById("dendritecheck").disabled = false;
 		for(var i=0;i<element_dendrite.length;i++){
-			
-			element_dendrite[i].style.display = 'table';
-			
+			element_dendrite[i].style.display = 'table';			
 		}  
     	for(var i=0;i<element_axon.length;i++){
-    		
-			element_axon[i].style.display = 'none';
-			
-			
+    		  element_axon[i].style.display = 'none';			
 		}  
-    	for(var i=0;i<element_axondendrite.length;i++){
-    		
-			element_axondendrite[i].style.display = 'table';
-			
-			
+		for(var i=0;i<element_axondendrite.length;i++){
+				element_axondendrite[i].style.display = 'table';			
 		}  
-    	
-		 document.getElementById("dendritecheck").disabled = true;
-	//A-D hybrid flag change js code change begins
-	     for(var i=0;i<element_combo_dendrite.length;i++){
-				
-	    	 element_combo_dendrite[i].style.display = 'table-cell';
-				
-			}  
-	    	for(var i=0;i<element_combo_axon.length;i++){
-	    		
+    	document.getElementById("dendritecheck").disabled = true;
+	
+		for(var i=0;i<element_combo_dendrite.length;i++){
+				element_combo_dendrite[i].style.display = 'table-cell';				
+		}  
+		for(var i=0;i<element_combo_axon.length;i++){
 	    		element_combo_axon[i].style.display = 'none';
-				
-				
-			}  
-	    	for(var i=0;i<element_combo_axondendrite.length;i++){
-	    		
-	    		element_combo_axondendrite[i].style.display = 'none';
-				
-				
-			}   
+		}  
+	    for(var i=0;i<element_combo_axondendrite.length;i++){
+	    		element_combo_axondendrite[i].style.display = 'none';		
+		}   
 
 	    	document.getElementById('axon-quote').style.display='none';
 	    	document.getElementById('dendrite-quote').style.display='block';
@@ -572,85 +561,52 @@ function evidencetoggle(){
 	 if (document.getElementById('dendritecheck').checked==false) {
 		 document.getElementById("axoncheck").disabled = false;
 		 document.getElementById("dendritecheck").disabled = false;
-		for(var i=0;i<element_dendrite.length;i++){
-			
+		for(var i=0;i<element_dendrite.length;i++){			
 			element_dendrite[i].style.display = 'none';
-			
 		}  
-    	for(var i=0;i<element_axon.length;i++){
-    		
-			element_axon[i].style.display = 'table';
-			
-			
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';	
 		}  
-    	for(var i=0;i<element_axondendrite.length;i++){
-    		
-			element_axondendrite[i].style.display = 'table';
-			
-			
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';	
 		}  
     	document.getElementById("axoncheck").disabled = true;
-	 //A-D hybrid flag change js code change begins
-	     for(var i=0;i<element_combo_dendrite.length;i++){
-				
+	 
+	    for(var i=0;i<element_combo_dendrite.length;i++){				
 	    	 element_combo_dendrite[i].style.display = 'none';
-				
-			}  
-	    	for(var i=0;i<element_combo_axon.length;i++){
-	    		
+		}  
+	    for(var i=0;i<element_combo_axon.length;i++){	    		
 	    		element_combo_axon[i].style.display = 'table-cell';
-				
-				
-			}  
-	    	for(var i=0;i<element_combo_axondendrite.length;i++){
-	    		
+		}  
+	    for(var i=0;i<element_combo_axondendrite.length;i++){	    		
 	    		element_combo_axondendrite[i].style.display = 'none';
-				
-				
-			}   
+		}   
 	    	document.getElementById('axon-quote').style.display='block';
 	    	document.getElementById('dendrite-quote').style.display='none';
 	    	document.getElementById('combo-quote').style.display='none';
-			//A-D hybrid flag change js code ends
+			
 	 }
      if (document.getElementById('dendritecheck').checked==true && document.getElementById('axoncheck').checked==true) {
     	 document.getElementById("axoncheck").disabled = false;
 		 document.getElementById("dendritecheck").disabled = false;
-     	for(var i=0;i<element_dendrite.length;i++){
-    		
-			element_dendrite[i].style.display = 'table';
-			
+     	for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'table';			
 		}  
-    	for(var i=0;i<element_axon.length;i++){
-    		
-			element_axon[i].style.display = 'table';
-			
-			
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';		
 		}  
-    	for(var i=0;i<element_axondendrite.length;i++){
-    		
+    	for(var i=0;i<element_axondendrite.length;i++){    		
 			element_axondendrite[i].style.display = 'table';
-			
-			
 		}  
-		 //A-D hybrid flag change js code change begins
-	     	for(var i=0;i<element_combo_dendrite.length;i++){
-				
+		for(var i=0;i<element_combo_dendrite.length;i++){				
 	    	 element_combo_dendrite[i].style.display = 'none';
-				
-			}  
-	    	for(var i=0;i<element_combo_axon.length;i++){
-	    		
-	    		element_combo_axon[i].style.display = 'none';
-				
-				
-			}  
-	    	for(var i=0;i<element_combo_axondendrite.length;i++){
-	    		
-	    		element_combo_axondendrite[i].style.display = 'table-cell';
-				
-				
-			}   
+		}  
+	    for(var i=0;i<element_combo_axon.length;i++){	    		
+	    	element_combo_axon[i].style.display = 'none';	
+		}  
+	    for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'table-cell';	
+		}   
 	    	document.getElementById('axon-quote').style.display='none';
 	    	document.getElementById('dendrite-quote').style.display='none';
 	    	document.getElementById('combo-quote').style.display='block';
@@ -658,6 +614,907 @@ function evidencetoggle(){
     }
 		
 
+}
+function triplevidencetoggle(){	
+	
+	var element_axon= document.getElementsByClassName('axon');
+	var element_dendrite= document.getElementsByClassName('dendrite');
+	var element_somata= document.getElementsByClassName('somata');
+	var element_axondendrite= document.getElementsByClassName('axondendrite');
+	var element_axonsomata= document.getElementsByClassName('axonsomata');
+	var element_dendritesomata= document.getElementsByClassName('dendritesomata');
+	var element_axondendritesomata= document.getElementsByClassName('axondendritesomata');
+
+	var element_combo_dendrite_ad= document.getElementsByClassName('comboflag-dendrite-ad');
+	var element_combo_axon_ad= document.getElementsByClassName('comboflag-axon-ad');	
+	var element_combo_axon_as= document.getElementsByClassName('comboflag-axon-as');
+	var element_combo_somata_as= document.getElementsByClassName('comboflag-somata-as');
+	var element_combo_dendrite_ds= document.getElementsByClassName('comboflag-dendrite-ds');
+	var element_combo_somata_ds= document.getElementsByClassName('comboflag-somata-ds');
+	var element_combo_dendrite_all= document.getElementsByClassName('comboflag-dendrite-all');
+	var element_combo_axon_all= document.getElementsByClassName('comboflag-axon-all');
+	var element_combo_somata_all= document.getElementsByClassName('comboflag-somata-all');
+	var element_combo_dendritesomata= document.getElementsByClassName('comboflag-dendritesomata');
+	var element_combo_axondendrite= document.getElementsByClassName('comboflag-axondendrite');
+	var element_combo_axonsomata= document.getElementsByClassName('comboflag-axonsomata');
+	var element_combo_dendritesomata_all= document.getElementsByClassName('comboflag-dendritesomata-all');
+	var element_combo_axondendrite_all= document.getElementsByClassName('comboflag-axondendrite-all');
+	var element_combo_axonsomata_all= document.getElementsByClassName('comboflag-axonsomata-all');
+	var element_combo_axondendritesomata= document.getElementsByClassName('comboflag-axondendritesomata');
+	
+	/// axon and somata evidences
+	if ((document.getElementById('dendritecheck').checked==false)&& (document.getElementById('axoncheck').checked==true)&&(document.getElementById('somatacheck').checked==true)){
+		    
+		    document.getElementById("axoncheck").disabled = false;
+		    document.getElementById("somatacheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'none';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'none';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'table-cell';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'none';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'none';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 	
+		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'none';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+		
+			
+		    //display the quote according to the condition
+	    	document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='block';
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			
+		
+		
+    }
+	//somata and dendrites evidences
+	if ((document.getElementById('axoncheck').checked==false)&& (document.getElementById('somatacheck').checked==true)&&(document.getElementById('dendritecheck').checked==true)){
+		
+			document.getElementById("somatacheck").disabled = false;
+			document.getElementById("dendritecheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'none';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'table-cell';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'none';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'none';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'none';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'table-cell';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'table-cell';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+		 
+	       //display the quote according to the condition
+	    	document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='block';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='none';	
+    }
+	// axon and dendrite evidences
+	if ((document.getElementById('somatacheck').checked==false) && (document.getElementById('axoncheck').checked==true)&&(document.getElementById('dendritecheck').checked==true))
+	{
+		 
+			document.getElementById("axoncheck").disabled = false;
+			document.getElementById("dendritecheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'none';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'none';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'none';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'table-cell';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'table-cell';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'none';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+			
+	        //display the quote according to the condition
+	    	document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='block';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='none';
+
+    }
+	//dendrites
+	if ((document.getElementById('axoncheck').checked==false) && (document.getElementById('somatacheck').checked==false)){
+		
+			document.getElementById("axoncheck").disabled = false;
+			document.getElementById("somatacheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'none';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'none';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'table-cell';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'none';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'none';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'table-cell';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'table-cell';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'none';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+			
+		    //display the quote according to the condition
+	    	document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='block';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='none';			
+			
+			document.getElementById('dendritecheck').disabled = true;
+
+    } 
+	// axons
+	 if ((document.getElementById('dendritecheck').checked==false) && (document.getElementById('somatacheck').checked==false)){
+		
+			document.getElementById("somatacheck").disabled = false;
+			document.getElementById("dendritecheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'none';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'none';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'none';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'table-cell';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'table-cell';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'none';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 			 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'none';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+			
+			//display the quote according to the condition
+			document.getElementById('axon-quote').style.display='block';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('axoncheck').disabled = true;
+			//A-D hybrid flag change js code ends
+    }
+	
+	// somata evidences
+	 if ((document.getElementById('dendritecheck').checked==false) && (document.getElementById('axoncheck').checked==false)){
+		   
+			document.getElementById("axoncheck").disabled = false;
+			document.getElementById("dendritecheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'none';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'none';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'none';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'none';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'none';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'none';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'none';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'table-cell';	
+		} 		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'none';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'none';	
+		}		
+			//display the quote according to the condition
+			document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='block';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('somatacheck').disabled = true;
+			//A-D hybrid flag change js code ends
+    }
+	
+	//all
+	
+	if ((document.getElementById('dendritecheck').checked==true) && (document.getElementById('axoncheck').checked==true) && (document.getElementById('somatacheck').checked==true)){
+		
+			document.getElementById("axoncheck").disabled = false;
+			document.getElementById("dendritecheck").disabled = false;
+			document.getElementById("somatacheck").disabled = false;
+			
+		for(var i=0;i<element_dendrite.length;i++){    		
+			element_dendrite[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_axon.length;i++){    		
+			element_axon[i].style.display = 'table';		
+		}  
+		for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		} 
+    	for(var i=0;i<element_axondendrite.length;i++){    		
+			element_axondendrite[i].style.display = 'table';
+		} 
+		for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';
+		} 
+        for(var i=0;i<element_axondendritesomata.length;i++){    		
+			element_axondendritesomata[i].style.display = 'table';
+		} 		
+		for(var i=0;i<element_combo_dendrite_ad.length;i++){				
+	    	 element_combo_dendrite_ad[i].style.display = 'none';
+		}  
+	    for(var i=0;i<element_combo_axon_ad.length;i++){	    		
+	    	element_combo_axon_ad[i].style.display = 'none';	
+		}        
+		for(var i=0;i<element_combo_axon_as.length;i++){	    		
+	    	element_combo_axon_as[i].style.display = 'none';	
+		}  	    
+		for(var i=0;i<element_combo_somata_as.length;i++){	    		
+	    	element_combo_somata_as[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_ds.length;i++){				
+	    	 element_combo_dendrite_ds[i].style.display = 'none';
+		} 		
+		for(var i=0;i<element_combo_somata_ds.length;i++){	    		
+	    	element_combo_somata_ds[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axon_all.length;i++){	    		
+	    	element_combo_axon_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendrite_all.length;i++){				
+	    	 element_combo_dendrite_all[i].style.display = 'none';
+		} 
+        for(var i=0;i<element_combo_somata_all.length;i++){	    		
+	    	element_combo_somata_all[i].style.display = 'none';	
+		} 	
+		 		
+	    for(var i=0;i<element_combo_axonsomata.length;i++){
+	    	element_combo_axonsomata[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_axondendrite.length;i++){
+	    	element_combo_axondendrite[i].style.display = 'table-cell';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    	element_combo_dendritesomata[i].style.display = 'table-cell';	
+		}
+		 for(var i=0;i<element_combo_axonsomata_all.length;i++){
+	    	element_combo_axonsomata_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_axondendrite_all.length;i++){
+	    	element_combo_axondendrite_all[i].style.display = 'none';	
+		} 
+		for(var i=0;i<element_combo_dendritesomata_all.length;i++){
+	    	element_combo_dendritesomata_all[i].style.display = 'none';
+		}
+        for(var i=0;i<element_combo_axondendritesomata.length;i++){
+	    	element_combo_axondendritesomata[i].style.display = 'table-cell';	
+		}		
+			//display the quote according to the condition
+			document.getElementById('axon-quote').style.display='none';
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';
+			document.getElementById('axon-dendrite-quote').style.display='none';	
+			document.getElementById('dendrite-somata-quote').style.display='none';
+			document.getElementById('axon-somata-quote').style.display='none';
+	    	document.getElementById('combo-quote').style.display='block';
+			
+			
+			
+			
+    }
+		
+
+}
+function dendritesomataevidencetoggle() {
+	
+	var element_dendritesomata= document.getElementsByClassName('dendritesomata');
+	var element_somata= document.getElementsByClassName('somata');
+	var element_dendrite= document.getElementsByClassName('dendrite');
+
+	var element_combo_dendrite= document.getElementsByClassName('comboflag-dendrite-ds');
+	var element_combo_somata= document.getElementsByClassName('comboflag-somata-ds');
+	var element_combo_dendritesomata= document.getElementsByClassName('comboflag-dendritesomata');
+	if (document.getElementById('dendritecheck').checked==false){
+		
+			
+			document.getElementById("somatacheck").disabled = false;
+			
+			for(var i=0;i<element_dendrite.length;i++){
+			
+			element_dendrite[i].style.display = 'none';
+			}  
+			for(var i=0;i<element_somata.length;i++){
+    		
+			element_somata[i].style.display = 'table';
+		    }  
+			for(var i=0;i<element_dendritesomata.length;i++){
+    		
+			element_dendritesomata[i].style.display = 'table';
+			}  
+    	
+        
+	     for(var i=0;i<element_combo_dendrite.length;i++){
+				
+	    	 element_combo_dendrite[i].style.display = 'none';
+				
+			}  
+	    	for(var i=0;i<element_combo_somata.length;i++){
+	    		
+	    		element_combo_somata[i].style.display = 'table-cell';
+				
+				
+			}  
+	    	for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    		
+	    		element_combo_dendritesomata[i].style.display = 'none';
+				
+				
+			}   
+			
+			
+		    //display the quote according to the condition
+	    	
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='block';		
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('somatacheck').disabled = true;
+	}
+	if (document.getElementById('somatacheck').checked==false){
+		
+			
+			document.getElementById("dendritecheck").disabled = false;
+			
+			for(var i=0;i<element_dendrite.length;i++){
+			
+			element_dendrite[i].style.display = 'table';
+			}  
+			for(var i=0;i<element_somata.length;i++){
+    		
+			element_somata[i].style.display = 'none';
+		    }  
+			for(var i=0;i<element_dendritesomata.length;i++){
+    		
+			element_dendritesomata[i].style.display = 'table';
+			}  
+    	
+        
+			for(var i=0;i<element_combo_dendrite.length;i++){
+				
+	    	 element_combo_dendrite[i].style.display = 'table-cell';
+				
+			}  
+	    	for(var i=0;i<element_combo_somata.length;i++){
+	    		
+	    		element_combo_somata[i].style.display = 'none';
+				
+				
+			}  
+	    	for(var i=0;i<element_combo_dendritesomata.length;i++){
+	    		
+	    		element_combo_dendritesomata[i].style.display = 'none';
+				
+				
+			}   
+			
+		    //display the quote according to the condition
+	    	
+	    	document.getElementById('dendrite-quote').style.display='block';
+			document.getElementById('somata-quote').style.display='none';				
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('dendritecheck').disabled = true;
+	}
+	if ((document.getElementById('dendritecheck').checked==true) && (document.getElementById('somatacheck').checked==true)){
+		 document.getElementById("dendritecheck").disabled = false;
+		 document.getElementById("somatacheck").disabled = false;
+		 for(var i=0;i<element_dendrite.length;i++){
+    		element_dendrite[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_dendritesomata.length;i++){    		
+			element_dendritesomata[i].style.display = 'table';				
+		}  
+	    for(var i=0;i<element_combo_dendrite.length;i++){				
+	    	 element_combo_dendrite[i].style.display = 'none';				
+		}  
+	    for(var i=0;i<element_combo_somata.length;i++){	    		
+	    	 element_combo_somata[i].style.display = 'none';		
+		}  
+	    for(var i=0;i<element_combo_dendritesomata.length;i++){	    		
+	    	element_combo_dendritesomata[i].style.display = 'table-cell';			
+		}  
+
+		    //display the quote according to the condition
+	    	document.getElementById('dendrite-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';					
+	    	document.getElementById('combo-quote').style.display='block';
+			
+			
+		
+	}
+	
+}
+function axonsomataevidencetoggle() {
+    var element_axonsomata= document.getElementsByClassName('axonsomata');
+	var element_somata= document.getElementsByClassName('somata');
+	var element_axon= document.getElementsByClassName('axon');
+
+	var element_combo_axon= document.getElementsByClassName('comboflag-axon-as');
+	var element_combo_somata= document.getElementsByClassName('comboflag-somata-as');
+	var element_combo_axonsomata= document.getElementsByClassName('comboflag-axonsomata');
+	
+	if (document.getElementById('axoncheck').checked==false){
+		
+			
+			document.getElementById("somatacheck").disabled = false;
+			
+			for(var i=0;i<element_axon.length;i++){
+			
+			element_axon[i].style.display = 'none';
+			}  
+			for(var i=0;i<element_somata.length;i++){
+    		
+			element_somata[i].style.display = 'table';
+		    }  
+			for(var i=0;i<element_axonsomata.length;i++){
+    		
+			element_axonsomata[i].style.display = 'table';
+			}     	        
+	        for(var i=0;i<element_combo_axon.length;i++){
+				
+	    	 element_combo_axon[i].style.display = 'none';				
+			}  
+	    	for(var i=0;i<element_combo_somata.length;i++){
+	    	element_combo_somata[i].style.display = 'table-cell';
+		    }  
+	    	for(var i=0;i<element_combo_axonsomata.length;i++){	    		
+	    	element_combo_axonsomata[i].style.display = 'none';		
+		    }   
+			
+			//display the quote according to the condition
+	    	
+	    	document.getElementById('axon-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='block';		
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('somatacheck').disabled = true;
+	}
+	if (document.getElementById('somatacheck').checked==false){
+
+			document.getElementById("axoncheck").disabled = false;
+			for(var i=0;i<element_axon.length;i++){
+			
+			element_axon[i].style.display = 'table';
+			}  
+			for(var i=0;i<element_somata.length;i++){
+    		
+			element_somata[i].style.display = 'none';
+		    }  
+			for(var i=0;i<element_axonsomata.length;i++){
+    		
+			element_axonsomata[i].style.display = 'table';
+			}     	        
+	         for(var i=0;i<element_combo_axon.length;i++){
+				
+	    	 element_combo_axon[i].style.display = 'table-cell';				
+			}  
+	    	for(var i=0;i<element_combo_somata.length;i++){
+	    	element_combo_somata[i].style.display = 'none';
+		    }  
+	    	for(var i=0;i<element_combo_axonsomata.length;i++){	    		
+	    	element_combo_axonsomata[i].style.display = 'none';		
+		    }   
+			
+			
+			
+		    //display the quote according to the condition
+	    	
+	    	document.getElementById('axon-quote').style.display='block';
+			document.getElementById('somata-quote').style.display='none';				
+	    	document.getElementById('combo-quote').style.display='none';
+			
+			
+			document.getElementById('axoncheck').disabled = true;
+	}
+	if ((document.getElementById('axoncheck').checked==true) && (document.getElementById('somatacheck').checked==true)){
+		
+			document.getElementById("axoncheck").disabled = false;
+			document.getElementById("somatacheck").disabled = false;
+		for(var i=0;i<element_axon.length;i++){
+    		element_axon[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_somata.length;i++){    		
+			element_somata[i].style.display = 'table';			
+		}  
+    	for(var i=0;i<element_axonsomata.length;i++){    		
+			element_axonsomata[i].style.display = 'table';				
+		}  
+	    for(var i=0;i<element_combo_axon.length;i++){				
+	    	 element_combo_axon[i].style.display = 'none';				
+		}  
+	    for(var i=0;i<element_combo_somata.length;i++){	    		
+	    	 element_combo_somata[i].style.display = 'none';		
+		}  
+	    for(var i=0;i<element_combo_axonsomata.length;i++){	    		
+	    	element_combo_axonsomata[i].style.display = 'table-cell';			
+		}  
+			
+		    //display the quote according to the condition
+	    	document.getElementById('axon-quote').style.display='none';
+			document.getElementById('somata-quote').style.display='none';					
+	    	document.getElementById('combo-quote').style.display='block';	
+			
+		
+	}
+	
 }
 
 //====================================================
@@ -780,13 +1637,18 @@ function show_only_morphology(link, start1, stop1)
 				<?php
 					if ($color == 'red')
 						$name1 = "Axons";
+					if ($color == 'redSoma')
+						$name1 = "Axons and Somata";
 					if ($color == 'blue')
-						$name1 = "Dendrites";				
+						$name1 = "Dendrites";
+					if ($color == 'blueSoma')
+						$name1 = "Dendrites and Somata";					
 					if ($color == 'violet')
-						$name1 = "Axons and Dendrites";			
+						$name1 = "Axons and Dendrites";	
+					if ($color == 'violetSoma')
+						$name1 = "Axons, Dendrites and Somata";						
 					if ($color == 'somata')
-						$name1 = "Somata";				
-					
+						$name1 = "Somata";						
 					print ("&nbsp; <strong>$name1</strong> in <strong>$val_property</strong>");
 				?>
 				</td>
@@ -804,10 +1666,12 @@ function show_only_morphology(link, start1, stop1)
 		<br />			
 				
 		<?php
-			if ($part != 'axons_dendrites')
-				$n_interraction = 1;
-			else
+			if ($part == 'axons_dendrites_somata')
+				$n_interraction = 3;
+			else if ($part == 'axons_dendrites' || $part == 'axons_somata' || $part == 'dendrites_somata')
 				$n_interraction = 2;
+			else 
+				$n_interraction = 1;
 						
 			for ($tt=0; $tt<$n_interraction; $tt++)
 			{
@@ -818,21 +1682,78 @@ function show_only_morphology(link, start1, stop1)
 					$property  -> retrive_ID(1, $part, 'in', $val_property);
 					$n_property_id = $property -> getNumber_type();				
 				}
-				else
+				else if ($n_interraction == 2)
 				{
 					// Axons and Dendrites
-					if ($tt == 0)
+					if($part == 'axons_dendrites')
 					{
+					 if ($tt == 0)
+					 {
 						$part1[$tt] = 'Axons';
 						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
-					}
-					if ($tt == 1)
-					{
+					 }
+					 if ($tt == 1)
+					 {
 						$part1[$tt] = 'Dendrites';
 						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
-					}			
+					
+					 }
+					}
+					else if($part == 'axons_somata')
+					{
+					 if ($tt == 0)
+					 {
+						$part1[$tt] = 'Axons';
+						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();										
+					 }
+					 if ($tt == 1)
+					 {
+						$part1[$tt] = 'Somata';
+						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();
+					 }
+					}
+                     else
+					 { 
+				     if ($tt == 0)
+					 {
+						$part1[$tt] = 'Dendrites';
+						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();										
+					 }
+					 if ($tt == 1)
+					 {
+						$part1[$tt] = 'Somata';
+						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();
+					 }
+						 
+					 }						 
+				}
+				else
+				{
+					if ($tt == 0)
+					 {
+						$part1[$tt] = 'Dendrites';
+						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();										
+					 }
+					 if ($tt == 1)
+					 {
+						$part1[$tt] = 'Axons';
+						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();	
+					 }
+					  if ($tt == 2)
+					 {
+						$part1[$tt] = 'Somata';
+						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();
+					 }
+					
 				}
 						
 				for ($i=0; $i<$n_property_id; $i++)
@@ -974,6 +1895,37 @@ function show_only_morphology(link, start1, stop1)
 						$number_of_quotes_dendrite = 0;  // total number of dendrite quotes
 						while(list($id) = mysql_fetch_row($rs))			
 							$number_of_quotes_dendrite = $number_of_quotes_dendrite + 1;
+						
+						// find the total number of quotes of type somata: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and type='Somata'";	
+						$rs = mysql_query($query);
+						$number_of_quotes_somata = 0;  // total number of somata quotes
+						while(list($id) = mysql_fetch_row($rs))							
+						$number_of_quotes_somata = $number_of_quotes_somata + 1;
+					
+					// get number of quotes pairwise
+					
+					// find the total number of quotes of type axon and dendrite: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and (type='Axons' or type='Dendrites')";	
+						$rs = mysql_query($query);
+						$number_of_axons_dendrites_quotes = 0;  // total number of somata quotes
+						while(list($id) = mysql_fetch_row($rs))							
+						$number_of_axons_dendrites_quotes = $number_of_axons_dendrites_quotes + 1;
+					
+					// find the total number of quotes of type axon and somata: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and (type='Axons' or type='Somata')";	
+						$rs = mysql_query($query);
+						$number_of_axons_somata_quotes = 0;  // total number of somata quotes
+						while(list($id) = mysql_fetch_row($rs))							
+						$number_of_axons_somata_quotes = $number_of_axons_somata_quotes + 1;
+					
+					// find the total number of quotes of type somata and dendrite: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and (type='Somata' or type='Dendrites')";	
+						$rs = mysql_query($query);
+						$number_of_dendrite_somata_quotes = 0;  // total number of somata quotes
+						while(list($id) = mysql_fetch_row($rs))							
+						$number_of_dendrite_somata_quotes = $number_of_dendrite_somata_quotes + 1;				
+					 			
 					// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++					
 					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
 					$rs = mysql_query($query);					
@@ -997,7 +1949,7 @@ function show_only_morphology(link, start1, stop1)
 							<td width="10%">
 								<font class="font2">Order by:</font>
 							</td>
-							<td width="20%">				
+							<td width="15%">				
 							<form action="property_page_morphology.php" method="post" style="display:inline">
 								<select name='order' size='1' cols='10' class='select1'>
 								
@@ -1032,13 +1984,34 @@ function show_only_morphology(link, start1, stop1)
 							}
 						?>
 
-						<td width="20%">
+						<td width="25%">
 							<?php if($color == 'violet'){?>	
 							<form>
 								<span style='color:rgb(254,1,2)'  ><input type="checkbox" name="violet" value="axon" id="axoncheck" checked onclick="evidencetoggle()"> axon</input></span>
 								<span style='color:rgb(1,1,153)' ><input type="checkbox" name="violet" value="dendrite" id="dendritecheck" checked onclick="evidencetoggle()" >dendrite</input></span>
 							</form>
 							<?php }?>
+							<?php if($color == 'violetSoma'){?>	
+							<form>
+								<span style='color:rgb(254,1,2)'  ><input type="checkbox" name="violetSoma" value="axon" id="axoncheck" checked onclick="triplevidencetoggle()"> axon</input></span>
+								<span style='color:rgb(1,1,153)' ><input type="checkbox" name="violetSoma" value="dendrite" id="dendritecheck" checked onclick="triplevidencetoggle()" >dendrite</input></span>
+								<span style='color:rgb(84,84,84)' ><input type="checkbox" name="violetSoma" value="somata" id="somatacheck" checked onclick="triplevidencetoggle()" >somata</input></span>
+							</form>
+							<?php }?>
+							
+							<?php if($color == 'redSoma'){?>	
+							<form>
+								<span style='color:rgb(254,1,2)'  ><input type="checkbox" name="redSoma" value="axon" id="axoncheck" checked onclick="axonsomataevidencetoggle()"> axon</input></span>								
+								<span style='color:rgb(84,84,84)' ><input type="checkbox" name="redSoma" value="somata" id="somatacheck" checked onclick="axonsomataevidencetoggle()" >somata</input></span>
+							</form>
+							<?php }?>
+							<?php if($color == 'blueSoma'){?>	
+							<form>								
+								<span style='color:rgb(1,1,153)' ><input type="checkbox" name="blueSoma" value="dendrite" id="dendritecheck" checked onclick="dendritesomataevidencetoggle()" >dendrite</input></span>
+								<span style='color:rgb(84,84,84)' ><input type="checkbox" name="blueSoma" value="somata" id="somatacheck" checked onclick="dendritesomataevidencetoggle()" >somata</input></span>
+							</form>
+							<?php }?>
+							
 						</td>
 						<td width="40%" align="center">
 						<form action="property_page_morphology.php" method="post" style="display:inline">
@@ -1348,247 +2321,158 @@ function show_only_morphology(link, start1, stop1)
 						// TABLE for Quotes: ------------------------------------------------------------------------------------------------------------------------------------------
 						if ($show1 == 1)
 						{					
-							$query = "SELECT id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	
+							$query = "SELECT distinct id_fragment, id_original, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	
 							$rs = mysql_query($query);	
-							$rs_combo=mysql_query($query); // to check for combo-neuron type
-							$id_fragment_old = NULL;
-							$type_old = NULL;
-							$n5=0;				
-							list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysql_fetch_row($rs_combo);
+							//$rs_combo=mysql_query($query); // to check for combo-neuron type						
+							//$id_fragment_old = NULL;
+							//$type_old = NULL;
+							 
+							//$n5=0;				
+							//list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysql_fetch_row($rs_combo);
 							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysql_fetch_row($rs))
 							{	
-									list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysql_fetch_row($rs_combo);
-								
-								
-									if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
-									else if(($id_fragment == $id_fragment_next)&&($type!=$type_next)){ //axon-dendrite neuron type
-									
-									if ($type)
-									{
-								//		if ($n5 == 0)
-								//			$type_show = $type;
-								//		else
-											$type_show = "Axon and Dendrite";
-									}
-									else
-										$type_show = '';								
-								if($color == 'violet'){
-		//								print("<br>");
-								//		if ($type_show == 'Axons')
-								//			print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-								//		if ($type_show == 'Dendrites')
-								//			print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-										if ($type_show == 'Axon and Dendrite')
-											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");								
-									}else{
-										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
-									
-									}
-								
-								//	print ("<br><table width='80%' border='0' cellspacing='2' cellpadding='5'>");								
-									print ("<tr>");
-											
-									if ($type_show == 'Axons')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
-									if ($type_show == 'Dendrites')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");											
-									if ($type_show == 'Axon and Dendrite'){		
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-axon'><img src='images/axon.png'></td>");
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-dendrite'><img src='images/dendrite.png'></td>");	
-									}
-									if ($type_show == '')											
-										print ("<td width='15%' rowspan='3' align='right' valign='top'></td>");	
-										
-		
-									/* print ("<td width='70%' class='table_neuron_page2' align='left'>");
-									print ("$id_fragment (original: $id_original) - $type_show");
-									print ("</td>"); */
-									
-									
-									//print ("<td width='15%' align='left'> </td></tr>");
-																	
-									// retrieve the attachament from "fragment" with original_id *****************************
-								//	$fragment -> retrive_attachment_by_original_id($id_original);
-								//	$attachment = $fragment -> getAttachment();
-								//	$attachment_type = $fragment -> getAttachment_type();
-									
-									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
-									$attachment = $attachment_obj -> getName();
-									$attachment_type = $attachment_obj -> getType();
-									
-									
-									
-									// change PFD in JPG:
-									$link_figure="";
-									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-									//echo "$attachment_jpg";
-									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
-										$link_figure = "attachment/marker/".$attachment_jpg;
-								//		echo "marker:-".$link_figure;
-									}
-									
-									if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
-										$link_figure = "attachment/morph/".$attachment_jpg;
-								//		echo "morph:-".$link_figure;
-									}
-									
-									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
-										$link_figure = "attachment/ephys/".$attachment_jpg;
-								//		echo "ephys:-".$link_figure;
-									}
-									//$link_figure = "figure/".$attachment_jpg;
-									
-									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
-									// **************************************************************************************									
-									
-									print ("
-									<tr>	
-										<td width='70%' class='table_neuron_page2' align='left'>
-											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
-										</td>
-										<td width='15%' align='center'>");																											
-										
-									print ("</td></tr>	
-									<tr>		
-										<td width='70%' class='table_neuron_page2' align='left'>
-											<em>$quote</em>
-										</td>
-										<td width='15%' class='table_neuron_page2' align='center'>");
-										
-										if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-										{
-											print ("<a href='$link_figure' target='_blank'>");
-											print ("<img src='$link_figure' border='0' width='80%'>");
-											print ("</a>");
-										}	
-										else;
-										print("</td></tr>");
-	
-									print ("</table>");
-								
-									$id_fragment_old = $id_fragment;
-									$type_old=$type;
-								
-					}//================================prasad changes=======================
-								else
-								{
-									
-									if ($type)
-									{
-								//		if ($n5 == 0)
-											$type_show = $type;
-								//		else
-								//			$type_show = "Axon and Dendrite";
-									}
-									else
-										$type_show = '';								
-									if($color == 'violet'){
-		//								print("<br>");
-										if ($type_show == 'Axons')
-											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-										if ($type_show == 'Dendrites')
-											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-					//					if ($type_show == 'Axon and Dendrite')
-					//						print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");								
-									}else{
-										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
-									
-									}
-								
-								//	print ("<br><table width='80%' border='0' cellspacing='2' cellpadding='5'>");								
-									print ("<tr>");
-											
-									if ($type_show == 'Axons')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
-									if ($type_show == 'Dendrites')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");											
-					//				if ($type_show == 'Axon and Dendrite')		
-					//					print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon-dendrite.png'></td>");	
-									if ($type_show == '')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'></td>");	
-										
-		
-									/* print ("<td width='70%' class='table_neuron_page2' align='left'>");
-									print ("$id_fragment (original: $id_original) - $type_show");
-									print ("</td>"); */
-									
-									
-								//	print ("<td width='15%' align='left'> </td></tr>");
-									print ("</tr>");
-																	
-									// retrieve the attachament from "fragment" with original_id *****************************
-								//	$fragment -> retrive_attachment_by_original_id($id_original);
-								//	$attachment = $fragment -> getAttachment();
-								//	$attachment_type = $fragment -> getAttachment_type();
-									
-									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
-									$attachment = $attachment_obj -> getName();
-									$attachment_type = $attachment_obj -> getType();
-									
-									
-									
-									// change PFD in JPG:
-									$link_figure="";
-									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-									//echo "$attachment_jpg";
-									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
-										$link_figure = "attachment/marker/".$attachment_jpg;
-								//		echo "marker:-".$link_figure;
-									}
-									
-									if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
-										$link_figure = "attachment/morph/".$attachment_jpg;
-								//		echo "morph:-".$link_figure;
-									}
-									
-									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
-										$link_figure = "attachment/ephys/".$attachment_jpg;
-								//		echo "ephys:-".$link_figure;
-									}
-									//$link_figure = "figure/".$attachment_jpg;
-									
-									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
-									// **************************************************************************************									
-									
-									print ("
-									<tr>	
-										<td width='70%' class='table_neuron_page2' align='left'>
-											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
-										</td>
-										<td width='15%' align='center'>");																											
-										
-									print ("</td></tr>	
-									<tr>		
-										<td width='70%' class='table_neuron_page2' align='left'>
-											<em>$quote</em>
-										</td>
-										<td width='15%' class='table_neuron_page2' align='center'>");
-										
-										if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-										{
-											print ("<a href='$link_figure' target='_blank'>");
-											print ("<img src='$link_figure' border='0' width='80%'>");
-											print ("</a>");
-										}	
-										else;
-										print("</td></tr>");
-	
-									print ("</table>");
-								
-									$id_fragment_old = $id_fragment;
-									$type_old=$type;
-								}
 						
-								$n5 = $n5 + 1;
+						         //================================prasad & bhawna changes=======================
+                                     
+
+							$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment ORDER BY type ASC";
+							$rs_type = mysql_query($query_type);	
+							$type_show = "";
+							while(list($type) = mysql_fetch_row($rs_type))
+							{
+								$type_show  = $type_show . $type;
+							}				
+							   
+								
+								if($color != ''){
+								
+							    
+								if ($type_show == 'Axons')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
+								if ($type_show == 'Dendrites')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
+							    if ($type_show == 'Somata')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
+								if ($type_show == 'AxonsSomata')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
+								if ($type_show == 'AxonsDendrites')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
+								if ($type_show == 'DendritesSomata')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
+								if ($type_show == 'AxonsDendritesSomata')
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
+								}
+								if ($type_show == ''){								
+								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'>");
+								  }
+								print ("<tr>");
+											
+									if ($type_show == 'Axons')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
+									if ($type_show == 'Dendrites')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");	
+									if ($type_show == 'Somata')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+                                    if ($type_show == 'AxonsSomata')	
+									{
+                                       print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-somata-as'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");		
+									   print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none'  class='comboflag-axon-as'><img src='images/axon.png'></td>");
+                                       print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+									}									   
+                                    if ($type_show == 'AxonsDendrites')	
+									{										
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-axon-ad'><img src='images/axon.png'></td>");
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-dendrite-ad'><img src='images/dendrite.png'></td>");	
+									}
+                                    if ($type_show == 'DendritesSomata')
+									{										
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-somata-ds'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");		
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-dendrite-ds'><img src='images/dendrite.png'></td>");	
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+									}										
+									if ($type_show == 'AxonsDendritesSomata'){	
+                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-somata-all'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");	
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-axon-all'><img src='images/axon.png'></td>");
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-dendrite-all'><img src='images/dendrite.png'></td>");	
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-axonsomata-all'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-axondendrite-all'><img src='images/axon-dendrite.png'></td>");
+                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:none' class='comboflag-dendritesomata-all'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");											
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+										
+									}
+									if ($type_show == '')													
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'></td>");								
+								
+		
+									
+									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
+									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+									$attachment = $attachment_obj -> getName();
+									$attachment_type = $attachment_obj -> getType();
+									
+									
+									
+									// change PFD in JPG:
+									$link_figure="";
+									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+									//echo "$attachment_jpg";
+									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
+										$link_figure = "attachment/marker/".$attachment_jpg;
+								//		echo "marker:-".$link_figure;
+									}
+									
+									if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
+										$link_figure = "attachment/morph/".$attachment_jpg;
+								//		echo "morph:-".$link_figure;
+									}
+									
+									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
+										$link_figure = "attachment/ephys/".$attachment_jpg;
+								//		echo "ephys:-".$link_figure;
+									}
+									//$link_figure = "figure/".$attachment_jpg;
+									
+									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
+									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
+									// **************************************************************************************									
+									
+									print ("
+									<tr>	
+										<td width='70%' class='table_neuron_page2' align='left'>
+											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
+										</td>
+										<td width='15%' align='center'>");																											
+										
+									print ("</td></tr>	
+									<tr>		
+										<td width='70%' class='table_neuron_page2' align='left'>
+											<em>$quote</em>
+										</td>
+										<td width='15%' class='table_neuron_page2' align='center'>");
+										
+										if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+										{
+											print ("<a href='$link_figure' target='_blank'>");
+											print ("<img src='$link_figure' border='0' width='80%'>");
+											print ("</a>");
+										}	
+										else;
+										print("</td></tr>");
+	
+									print ("</table>");
+								
+									//$id_fragment_old = $id_fragment;
+									//$type_old=$type;
+								
+					}
+								
+						
+								
 						
 							}							
-						}
-		//				print("<br>");	
+						
+	
 
 				} // end FOR $i
 		?>
@@ -1689,6 +2573,126 @@ function show_only_morphology(link, start1, stop1)
 							?>
 							</font>
 						<!--  -->
+							<!-- Somata QUOTES -->
+							
+							<font class="font3" id="somata-quote" style='display:none'>
+							<?php
+								$page_in1 = $page_in + 1;
+								
+								
+
+								if ($page_end >= $n_id_tot) 
+								{
+									$page_end1 = $n_id_tot;
+									$no_button_up = 1;
+								}
+								else
+									$page_end1 = $page_end;
+								
+								if ($page_in == 0) 
+									$no_button_down = 1;
+								
+								if ($n_id_tot != 0){
+									print ("$page_in1 - $page_end1 of $n_id_tot articles ($number_of_quotes_somata Somata Quotes)");	
+										
+								}
+								 // Last page:
+								 $last_page1 = $n_id_tot / 10;
+								 $last_array =  explode('.', $last_page1);	
+							
+								 if ($last_array[1] == NULL)
+								 	$last_page2 = ($last_array[0] - 1) * 10;	
+								else	
+								 	$last_page2 = $last_array[0] * 10;								 		 
+							?>
+							</font>
+								<font class="font3" id="axon-dendrite-quote" style='display:none'>
+							<?php
+								$page_in1 = $page_in + 1;
+
+								if ($page_end >= $n_id_tot) 
+								{
+									$page_end1 = $n_id_tot;
+									$no_button_up = 1;
+								}
+								else
+									$page_end1 = $page_end;
+								
+								if ($page_in == 0) 
+									$no_button_down = 1;
+								
+								if ($n_id_tot != 0){
+									print ("$page_in1 - $page_end1 of $n_id_tot articles ( $number_of_axons_dendrites_quotes Quotes)");	
+										
+								}
+								 // Last page:
+								 $last_page1 = $n_id_tot / 10;
+								 $last_array =  explode('.', $last_page1);	
+							
+								 if ($last_array[1] == NULL)
+								 	$last_page2 = ($last_array[0] - 1) * 10;	
+								else	
+								 	$last_page2 = $last_array[0] * 10;								 		 
+							?>
+							</font>
+								<font class="font3" id="axon-somata-quote" style='display:none'>
+							<?php
+								$page_in1 = $page_in + 1;
+
+								if ($page_end >= $n_id_tot) 
+								{
+									$page_end1 = $n_id_tot;
+									$no_button_up = 1;
+								}
+								else
+									$page_end1 = $page_end;
+								
+								if ($page_in == 0) 
+									$no_button_down = 1;
+								
+								if ($n_id_tot != 0){
+									print ("$page_in1 - $page_end1 of $n_id_tot articles ( $number_of_axons_somata_quotes Quotes)");	
+										
+								}
+								 // Last page:
+								 $last_page1 = $n_id_tot / 10;
+								 $last_array =  explode('.', $last_page1);	
+							
+								 if ($last_array[1] == NULL)
+								 	$last_page2 = ($last_array[0] - 1) * 10;	
+								else	
+								 	$last_page2 = $last_array[0] * 10;								 		 
+							?>
+							</font>
+								<font class="font3" id="dendrite-somata-quote" style='display:none'>
+							<?php
+								$page_in1 = $page_in + 1;
+
+								if ($page_end >= $n_id_tot) 
+								{
+									$page_end1 = $n_id_tot;
+									$no_button_up = 1;
+								}
+								else
+									$page_end1 = $page_end;
+								
+								if ($page_in == 0) 
+									$no_button_down = 1;
+								
+								if ($n_id_tot != 0){
+									print ("$page_in1 - $page_end1 of $n_id_tot articles ($number_of_dendrite_somata_quotes Quotes)");	
+										
+								}
+								 // Last page:
+								 $last_page1 = $n_id_tot / 10;
+								 $last_array =  explode('.', $last_page1);	
+							
+								 if ($last_array[1] == NULL)
+								 	$last_page2 = ($last_array[0] - 1) * 10;	
+								else	
+								 	$last_page2 = $last_array[0] * 10;								 		 
+							?>
+							</font>
 						&nbsp; &nbsp;
 						
 						<form action="property_page_morphology.php" method="post" style="display:inline">
