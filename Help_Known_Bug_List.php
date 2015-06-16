@@ -125,10 +125,6 @@ Issue 089: Modify the <span class=SpellE>php</span> code on the morphology Evide
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 129: Clicking on a square with a gray dot in the summary morphology matrix should take the user to an Evidence page that also presents the somatic evidence.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 160: Each entry in the bibliography section of a Neuron page should be tagged with a morphology, marker, and/or electrophysiology label indicating its contribution to the page.
 </span></p>
 
