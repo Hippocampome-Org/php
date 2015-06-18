@@ -141,10 +141,6 @@ Issue 187: Highlight the representative sources on a markers Evidence page, when
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 214: Some ephys page locations and protocols are missing.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
 </span></p>
 
