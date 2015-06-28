@@ -395,10 +395,11 @@ if ($text_file_creation)
 						$article_id=$row['id'];
 						$doi_list=$row['doi'];
 						$l++;
-					}
-					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
-					$results=mysql_query($article_author_rel);		
+					}					
 					
+					
+					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
+					$results=mysql_query($article_author_rel);	
 					$g=0;
 					$auths=array();
 					$auth_name=array();
@@ -416,6 +417,42 @@ if ($text_file_creation)
 						}	
 						$g++;
 					}
+					// bhawna changes for adding tags with the articles				
+					$tag = "";
+					$tag_query_marker = "select * from evidencepropertytyperel where type_id = '$id' and evidence_id in (
+										select evidence_id from evidencemarkerdatarel where evidence_id in (select evidence1_id from evidenceevidencerel where evidence2_id in
+									   (select evidence_id from articleevidencerel where article_id = '$article_id')))";
+										 
+	                $results_marker =  mysql_query($tag_query_marker);
+					$num_rows_marker = mysql_num_rows($results_marker);
+					if($num_rows_marker > 0)
+					{
+						$tag  = $tag . "marker";						
+					}
+					$tag_query_ephys = "select * from evidencepropertytyperel where type_id = '$id' and evidence_id in (
+										select evidence_id from epdataevidencerel where evidence_id in (select evidence1_id from evidenceevidencerel where evidence2_id in
+									   (select evidence_id from articleevidencerel where article_id = '$article_id')))";
+				    $results_ephys = mysql_query($tag_query_ephys);
+					$num_rows_ephys = mysql_num_rows($results_ephys);
+				    if($num_rows_ephys > 0)
+					{
+						if ($tag == '')						
+						$tag  = $tag . "electrophysiology";						
+					    else
+						$tag  = $tag . ", electrophysiology";
+					}
+					$tag_query_morpho = "select * from evidencepropertytyperel where type_id ='$id' and evidence_id in(select evidence_id from articleevidencerel where article_id = '$article_id')";
+				    $results_morpho =  mysql_query($tag_query_morpho);
+					$num_rows_morpho = mysql_num_rows($results_morpho);
+					if($num_rows_morpho > 0)
+					{ 
+				        if($tag == '')
+						$tag  = $tag . "morphology";	
+                        else	
+						$tag  = $tag . ", morphology";							 
+					}
+					 
+					$tag_string = "<strong>Tags:</strong>" ;
 					$years=substr($ye, 0, 4);
 					print("<em class='for_accordion'><font size='0.5' color='#000066'>$auth_name[0] &nbsp;($years) <b>$publi</b></font></em>");
 					
@@ -470,6 +507,7 @@ if ($text_file_creation)
 					
 						Pages: $fir - $las <br/>
 						$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
+						$tag_string $tag <br/>
 						</div>");
 					}
 					else 
@@ -480,6 +518,7 @@ if ($text_file_creation)
 									
 								Pages: $fir - $las <br/>
 								$pmid_string <font class='font13'>$pm</font></a><br/>
+								$tag_string  $tag <br/>
 								</div>");
 					}
 					}
@@ -492,6 +531,7 @@ if ($text_file_creation)
 			
 							Pages: $fir - $las <br/>
 							$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
+							$tag_string  $tag <br/>
 							</div>");
 						}
 						else 
@@ -502,6 +542,7 @@ if ($text_file_creation)
 										
 									Pages: $fir - $las <br/>
 									$pmid_string <font class='font13'>$pm</font></a><br/>
+									$tag_string  $tag <br/>
 									</div>");
 						}
 						
@@ -517,6 +558,7 @@ if ($text_file_creation)
 										
 									Pages: $fir - $las <br/>
 									$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
+									$tag_string  $tag <br/>
 									</div>");
 							}
 							else
@@ -527,6 +569,7 @@ if ($text_file_creation)
 								
 										Pages: $fir - $las <br/>
 										$pmid_string <font class='font13'>$pm</font></a><br/>
+										$tag_string  $tag <br/>
 										</div>");
 							}
 						}
@@ -539,6 +582,7 @@ if ($text_file_creation)
 									$ye,
 									Pages: $fir - $las <br/>
 									$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
+									$tag_string  $tag <br/>
 									</div>");
 							}
 							else
@@ -549,6 +593,7 @@ if ($text_file_creation)
 											
 										Pages: $fir - $las <br/>
 										$pmid_string <font class='font13'>$pm</font></a><br/>
+										$tag_string  $tag <br/>
 										</div>");
 							}
 						}
