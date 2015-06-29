@@ -329,8 +329,7 @@ if ($text_file_creation)
 						$n_article_real = $n_article_real + 1;
 					}
 				}
-				
-				
+
 				$art_id=array();
 				$auth_first_name_final=array();
 				$h=0;
@@ -361,9 +360,7 @@ if ($text_file_creation)
 				}
 				
 				array_multisort($auth_first_name_final,$art_id);
-				
-				
-				
+
 				for ($i1=0; $i1<$n_article_real; $i1++)
 				{
 					$article -> retrive_by_id($art_id[$i1]);
@@ -376,9 +373,7 @@ if ($text_file_creation)
 				{
 					$title_article_correct = NULL;
 					$art=$article_title[$i1];
-				
-				
-					
+
 					$t="SELECT a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi FROM Article AS a WHERE a.title='$article_title[$i1]'";
 					$r=mysql_query($t);
 					$l=0;
@@ -396,8 +391,7 @@ if ($text_file_creation)
 						$doi_list=$row['doi'];
 						$l++;
 					}					
-					
-					
+
 					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
 					$results=mysql_query($article_author_rel);	
 					$g=0;
@@ -419,37 +413,39 @@ if ($text_file_creation)
 					}
 					// bhawna changes for adding tags with the articles				
 					$tag = "";
-					$tag_query_marker = "select * from evidencepropertytyperel where type_id = '$id' and evidence_id in (
-										select evidence_id from evidencemarkerdatarel where evidence_id in (select evidence1_id from evidenceevidencerel where evidence2_id in
-									   (select evidence_id from articleevidencerel where article_id = '$article_id')))";
-										 
-	                $results_marker =  mysql_query($tag_query_marker);
+					$tag_query_marker = "select * from EvidencePropertyTypeRel where type_id = '$id' and evidence_id in
+								(select evidence_id from EvidenceMarkerdataRel where evidence_id in
+									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
+									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
+			                $results_marker =  mysql_query($tag_query_marker);
 					$num_rows_marker = mysql_num_rows($results_marker);
 					if($num_rows_marker > 0)
 					{
 						$tag  = $tag . "marker";						
 					}
-					$tag_query_ephys = "select * from evidencepropertytyperel where type_id = '$id' and evidence_id in (
-										select evidence_id from epdataevidencerel where evidence_id in (select evidence1_id from evidenceevidencerel where evidence2_id in
-									   (select evidence_id from articleevidencerel where article_id = '$article_id')))";
-				    $results_ephys = mysql_query($tag_query_ephys);
+					$tag_query_ephys = "select * from EvidencePropertyTypeRel where type_id = '$id' and evidence_id in
+								(select evidence_id from EpdataEvidenceRel where evidence_id in
+									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
+									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
+					$results_ephys = mysql_query($tag_query_ephys);
 					$num_rows_ephys = mysql_num_rows($results_ephys);
-				    if($num_rows_ephys > 0)
+					if($num_rows_ephys > 0)
 					{
 						if ($tag == '')						
-						$tag  = $tag . "electrophysiology";						
-					    else
-						$tag  = $tag . ", electrophysiology";
+							$tag  = $tag . "electrophysiology";						
+						else
+							$tag  = $tag . ", electrophysiology";
 					}
-					$tag_query_morpho = "select * from evidencepropertytyperel where type_id ='$id' and evidence_id in(select evidence_id from articleevidencerel where article_id = '$article_id')";
-				    $results_morpho =  mysql_query($tag_query_morpho);
+					$tag_query_morpho = "select * from EvidencePropertyTypeRel where type_id ='$id' and evidence_id in
+								(select evidence_id from ArticleEvidenceRel where article_id = '$article_id')";
+					$results_morpho =  mysql_query($tag_query_morpho);
 					$num_rows_morpho = mysql_num_rows($results_morpho);
 					if($num_rows_morpho > 0)
 					{ 
-				        if($tag == '')
-						$tag  = $tag . "morphology";	
-                        else	
-						$tag  = $tag . ", morphology";							 
+						if($tag == '')
+							$tag  = $tag . "morphology";	
+						else	
+							$tag  = $tag . ", morphology";							 
 					}
 					 
 					$tag_string = "<strong>Tags:</strong>" ;
