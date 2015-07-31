@@ -544,7 +544,7 @@ function  singleevidencetoggle(btn,class_name){
 function evidencetoggleclose(){
 var arr_animal = ["mouse", "rat", "unspecified_rodent"];
 var arr_protocol = ["immunohistochemistry", "mRNA", "immunohistochemistry_mRna","unknown"];
-var arr_expression = ["positive", "negative", "positive_negative"];
+var arr_expression = ["positive", "negative", "positive_negative","weak_positive"];
 var class_name_hide;
 
 			for(var i=0;i<arr_animal.length;i++){							
@@ -576,7 +576,7 @@ var protocol_select_value   = document.getElementById('protocol_select').value;
 var expression_select_value =  document.getElementById('expression_select').value;
 var arr_animal = ["mouse", "rat", "unspecified_rodent"];
 var arr_protocol = ["immunohistochemistry", "mRNA", "immunohistochemistry_mRna","unknown"];
-var arr_expression = ["positive", "negative", "positive_negative"];
+var arr_expression = ["positive", "negative", "positive_negative","weak_positive"];
 var class_name_hide,class_name_show,element_to_hide,button_to_hide,button_to_show;
 
 			for(var i=0;i<arr_animal.length;i++){							
@@ -617,12 +617,13 @@ if(protocol_select_value == "all")
  }
 	
 if(expression_select_value =="all")
-	 arr_expression_to_show = ["positive", "negative", "positive_negative"];
+	 arr_expression_to_show = ["positive", "negative", "positive_negative", "weak_positive"];
 else if (expression_select_value == "positive and negative")
-	arr_expression_to_show = ["positive_negative"];
+	arr_expression_to_show = ["positive_negative","weak_positive"];
 else {
-	arr_expression_to_show = new Array(1);
+	arr_expression_to_show = new Array(2);
 	arr_expression_to_show[0] = expression_select_value;
+	arr_expression_to_show[2] = "weak_positive";
 }
 
 			for(var i=0;i<arr_animal_to_show.length;i++){							

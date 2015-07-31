@@ -125,10 +125,6 @@ Issue 089: Modify the <span class=SpellE>php</span> code on the morphology Evide
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 167: On the Evidence pages for molecular biomarkers, when the Open/Close All function is performed, the Animal/Protocol/Expression selectors are all automatically reset and must be re-selected.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 184: In the Author search results, the neuron types are supposed to be listed for each citation returned; however, the response “(to be determined)” still appears fairly frequently.
 </span></p>
 
