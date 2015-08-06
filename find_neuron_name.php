@@ -289,15 +289,14 @@ $(document).ready(function(){
 		
 		<br /><br />
 		
-		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
+	<!--	<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 	<tr>
 			<td align="center" width="10%">  </td>
-			<td align="center" width="20%" class='table_neuron_page3'>Neuron Initial</td>
-			<td align="center" width="20%" class='table_neuron_page3'>Name/Synonym</td>
+			
 			<td align="center" width="5%" class'table_neuron_page3'> </td>
 			<td align="center" width="5%" class'table_neuron_page3'> </td>
 			
-			<td align="right" width="40%"> 
+			<td align="right" width="40%"> -->
 			
 			<?php
 			if ($temporary_search == 1)
@@ -311,17 +310,17 @@ $(document).ready(function(){
 					}
 					?>
 			
-			</td>
-		</tr>
-		</table>
+			
+	
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
+		<th align="center" width="50%" class='table_neuron_page3'>Neuron Initial</th>
+			<th align="center" width="20%" class='table_neuron_page3'>Name/Synonym</th>
 			<?php
 				$temporary -> retrieve_id();
 				$n_search = $temporary -> getN_id();
 				for ($i=0; $i<$n_search; $i++)
 				{
 					print ("<tr>
-							<td align='center' width='10%'>  </td>
 							<td align='center' width='20%' class='table_neuron_page1'>");
 						
 						$id = $temporary -> getID_array($i);
