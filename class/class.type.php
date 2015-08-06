@@ -3,6 +3,7 @@ class type
 {	
 	private $_name_table;
 	private $_id;
+	private $_n_id;
 	private $_dt;
 	private $_name;
 	private $_nickname;
@@ -13,12 +14,16 @@ class type
 	private $_position;
 	private $_notes;
 	private $_subregion;
-	
+	private $_n_name_nickname;
+	private $_id_namearray;
+	private $_name_neuron_array;
+	private $_nickname_neuron_array;
+	private $_name_neuron;
+	private $_nickname_neuron;
 	function __construct ($name)
 	{
 		$this->_name_table = $name;
 	}
-
 
 	public function retrive_id()   // Retrive the data from table: 'TYPE' by ID (only with STATUS = active):
     {
@@ -33,8 +38,9 @@ class type
 			$n = $n + 1;
 		}
 		$this->setNumber_type($n);
-	}	
-
+	}
+	
+	
 	public function retrive_name_by_nickname()   // Retrive the data from table: 'TYPE' by ID (only with STATUS = active):
     {
 		$table=$this->getName_table();	
@@ -45,13 +51,14 @@ class type
 		{	
 			$this->setName($var);
 		}
-	}	
+	}
 	
-	public function retrive_by_id($id)   // Retrive all data by ID
+	
+	public function retrive_by_id($id)   // Retrieve all data by ID
 	{
 		$table=$this->getName_table();	
 		
-		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id'";
+		$query = "SELECT id, position, dt, name, nickname, excit_inhib, status, subregion FROM $table WHERE id = '$id'";
 		$rs = mysql_query($query);
 		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
 		{	
@@ -65,7 +72,6 @@ class type
 			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}
-	
 	public function retrieve_by_id($id)   // Retrieve all data by ID
 	{
 		$table=$this->getName_table();	
@@ -85,6 +91,7 @@ class type
 			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}
+	
 
 	public function retrive_by_excit_inhib($pred)   // Retrive all data by excit_inhib
 	{
@@ -152,6 +159,146 @@ class type
 		}
 	}	
 	
+//------------------------------------------------------------------------------new methods-----------------------------------
+	public function retrive_name() //Retrieve all the names in the table TYPE
+    {
+		$table=$this->getName_table();
+		
+		$query = "SELECT DISTINCT name FROM $table";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setName_neuron_array($id, $n);						
+			$n = $n +1;
+		}
+		$this->setName_neuron($n);			
+	}
+
+
+public function retrive_nickname()   // Retrieve all the nicknames in the table TYPE
+    {
+		$table=$this->getName_table();	
+	
+		$query = "SELECT DISTINCT nickname FROM $table ";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setNickname_neuron_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setNickame_neuron($n);			
+	}
+	
+
+	public function retrive_id_by_name($name) //Retrieve id, nickname based on the name in the table TYPE
+    {
+		$table=$this->getName_table();
+	$name= mysql_real_escape_string($name);
+		
+		$query = "SELECT DISTINCT id FROM $table WHERE name='$name'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setID_namearray($id, $n);					
+			$n = $n +1;
+		}
+		$this->setN_id($n);			
+	}
+	
+	
+
+	public function retrive_nickname_by_name($name)  //Retrieve nickname by the name in table TYPE
+    {
+		$table=$this->getName_table();
+	$name= mysql_real_escape_string($name);
+		
+		$query = "SELECT DISTINCT nickname FROM $table WHERE name='$name'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setNickname_neuron_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setNickame_neuron($n);	
+		}
+		
+		
+	
+		
+		public function retrive_name_by_nickname1($nickname) //Retrieve name by the nickname in table TYPE
+    {
+		$table=$this->getName_table();
+	$name= mysql_real_escape_string($name);
+		
+		$query = "SELECT DISTINCT name FROM $table WHERE nickname='$nickname'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setName_neuron_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setName_neuron($n);	
+		}
+		
+
+	public function retrive_id_by_nickname($nickname) //Retrive id by nickname
+    {
+		$table=$this->getName_table();
+	$name= mysql_real_escape_string($name);
+		
+		$query = "SELECT DISTINCT id FROM $table WHERE nickname='$nickname'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setID_namearray($id, $n);			
+			$n = $n +1;
+		}
+		$this->setN_id($n);			
+	}
+	
+	
+		public function retrive_id1()   // Retrieve the data from table: 'TYPE' by ID (only with STATUS = active):
+    {
+		$table=$this->getName_table();	
+	
+		$query = "SELECT id FROM $table ";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setID_array($id, $n);
+			$n = $n + 1;
+		}
+		$this->setN_id($n);
+	}	
+	
+	
+	
+		public function retrieve_by_name($name)   // Retrieve all data by ID
+	{
+		$table=$this->getName_table();	
+		
+		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE name = '$name'";
+		$rs = mysql_query($query);
+		$this->setStatus('');
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		{	
+			$this->setId($id);
+			$this->setDt($dt);
+			$this->setName($name);
+			$this->setNickname($nickname);
+			$this->setStatus($status);
+			$this->setPosition($position);
+			$this->setSubregion($subregion);
+			$this->setExcit_Inhib($excit_inhib);
+		}	
+	}
 	// SET -------------------------------------
  	public function setNumber_type($n)
     {
@@ -171,11 +318,10 @@ class type
     {
 		  $this->_excit_inhib = $var;
     }	
-		
- 	public function setId($var)
+		public function setId($var)
     {
 		  $this->_id = $var;
-    }		
+    }	
 	
  	public function setDt($var)
     {
@@ -185,9 +331,9 @@ class type
  	public function setName($var)
     {
 		  $this->_name = $var;
-    }		
-
- 	public function setStatus($var)
+    }	
+	
+		public function setStatus($var)
     {
 		  $this->_status = $var;
     }	
@@ -205,7 +351,40 @@ class type
  	public function setSubregion($var)
     {
 		  $this->_subregion = $var;
+    }
+//----------------new setmethods------------------
+	
+	public function setN_id($var)
+    {
+		  $this->_n_id = $var;
     }	
+	
+	public function setName_neuron_array($val, $n)
+    {
+		  $this->_name_neuron_array[$n] = $val;
+    }
+
+	public function setID_namearray($var, $n)
+    {
+		  $this->_id_namearray[$n] = $var;
+    }
+	
+	public function setName_neuron($val)
+    {
+		  $this->_name_neuron = $val;
+    }
+	
+	public function setNickname_neuron_array($val, $n)
+    {
+		  $this->_nickname_neuron_array[$n] = $val;
+    }
+
+	public function setNickame_neuron($val)
+    {
+		  $this->_nickname_neuron = $val;
+    }
+	
+ 	
 	
 	// GET ++++++++++++++++++++++++++++++++++++++	  
     public function getID_array($i)
@@ -227,11 +406,11 @@ class type
    	{
 		return $this->_excit_inhib;
     }
-    public function getId()
+    
+	 public function getId()
     {
     	return $this->_id;
     }
-	
     public function getDt()
     {
     	return $this->_dt;
@@ -242,7 +421,7 @@ class type
     	return $this->_name;
     }		
 
-    public function getStatus()
+		   public function getStatus()
     {
     	return $this->_status;
     }		
@@ -267,5 +446,36 @@ class type
     	return $this->_subregion;
     }	
 
+//---------------------new get methods------------------------------------------------------------
+	 
+	 public function getN_id()
+    {
+    	return $this->_n_id;
+    }
+	 public function getName_neuron_array($i)
+    {
+    	return $this->_name_neuron_array[$i];
+    }	
+
+	public function getID_namearray($i)
+    {
+    	return $this->_id_namearray[$i];
+    }	
+
+public function getName_neuron()
+    {
+    	return $this->_name_neuron;
+    }	
+	
+	 public function getNickname_neuron_array($i)
+    {
+    	return $this->_nickname_neuron_array[$i];
+    }
+   public function getNickname_neuron()
+    {
+    	return $this->_nickname_neuron;
+    }	
+	
+ 
 }
 ?>

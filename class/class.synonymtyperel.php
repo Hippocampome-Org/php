@@ -5,7 +5,8 @@ class synonymtyperel
 	private $_synonym_id;
 	private $_type_id;	
 	private $_n_synonym;
-	
+	private $_n_id;
+    private $_id_type_array;
 	
 	function __construct ($name)
 	{
@@ -28,6 +29,22 @@ class synonymtyperel
 		$this->setN_synonym($n);
 	}	
 	
+	//new methdod 
+	public function retrive_type_id_by_syn_id($synonym_id)  
+    {
+		$table=$this->getName_table();
+	   $synonym_id= mysql_real_escape_string($synonym_id);
+		
+		$query = "SELECT DISTINCT Type_id FROM $table WHERE Synonym_id = '$synonym_id'";
+		$rs = mysql_query($query);
+		$n=0;
+		while(list($id) = mysql_fetch_row($rs))
+		{	
+			$this->setID_type_array($id, $n);				
+			$n = $n +1;
+		}
+		$this->setN_id($n);			
+	}
 	
 	// SET -------------------------------------
  	public function setID($val)
@@ -48,6 +65,15 @@ class synonymtyperel
  	public function setN_synonym($val)
     {
 		  $this->_n_synonym = $val;
+    }	
+public function setID_type_array($var, $n)
+    {
+		  $this->_id_type_array[$n] = $var;
+    }
+	
+	public function setN_id($var)
+    {
+		  $this->_n_id = $var;
     }		
 	
 	
@@ -75,7 +101,16 @@ class synonymtyperel
     public function getName_table()
     {
     	return $this->_name_table;
-    }			
+    }	
+	public function getID_type_array($i)
+    {
+    	return $this->_id_type_array[$i];
+    }
+	
+	public function getN_id()
+    {
+    	return $this->_n_id;
+    }	
 }
 
 ?>
