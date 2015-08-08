@@ -277,27 +277,10 @@ $(document).ready(function(){
 ?>	
 	
 <div class='title_area'>
-	<font class="font1">Search by Neuron Name/Synonym</font>
+<font class="font1">Search by Neuron Name/Synonym</font>
 </div>	
-
-
-<div class="table_position_search_page">
-<table width="95%" border="0" cellspacing="5" cellpadding="0" class='body_table'>
-  <tr>
-    <td width="80%">
+<div class="table_position_search_page" >
 		<!-- ****************  BODY **************** -->
-		
-		<br /><br />
-		
-	<!--	<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
-	<tr>
-			<td align="center" width="10%">  </td>
-			
-			<td align="center" width="5%" class'table_neuron_page3'> </td>
-			<td align="center" width="5%" class'table_neuron_page3'> </td>
-			
-			<td align="right" width="40%"> -->
-			
 			<?php
 			if ($temporary_search == 1)
 				{
@@ -310,18 +293,20 @@ $(document).ready(function(){
 					}
 					?>
 			
-			
-	
-		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
-		<th align="center" width="50%" class='table_neuron_page3'>Neuron Initial</th>
-			<th align="center" width="20%" class='table_neuron_page3'>Name/Synonym</th>
-			<?php
+				<table border="0" cellspacing="3" cellpadding="0" class='table_search' style ="width:auto">
+					<tr >
+		              <td align="center" width="10%" class='table_neuron_page3'>Neuron Initial</td>
+			          <td align="center" width="20%" class='table_neuron_page3'>Name/Synonym</td>
+							</tr>
+				
+				<?php
 				$temporary -> retrieve_id();
 				$n_search = $temporary -> getN_id();
 				for ($i=0; $i<$n_search; $i++)
 				{
-					print ("<tr>
-							<td align='center' width='20%' class='table_neuron_page1'>");
+					
+				     print ("<tr>
+							<td align='center' class='table_neuron_page1' style ='width: 20px'>");
 						
 						$id = $temporary -> getID_array($i);
 					
@@ -513,21 +498,16 @@ $(document).ready(function(){
 ?>
 		</tr>
 	</table>
-	
 	<br />
-			
-	<br /><br /><br /> 
 
-	<div align="center" >
-	<table width='400px'>
+	<div align="left" >
+	<table width='250px'>
 		<tr>
 		<td><form action="find_neuron_name.php" method="post" style='display:inline'>	
 			<input type='submit' name='clear_all' value='CLEAR ALL' />
 		</form></td>
-		<td width='20%'></td>
 		<td width='40%'><form action='find_neuron_name.php' method='post' style='display:inline'> 
 			<input type="submit" name='see_result' value='SEE RESULTS' />
-				
 		</form></td>
 		</tr>
 	</table>
