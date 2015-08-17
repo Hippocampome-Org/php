@@ -38,12 +38,9 @@ if ($_REQUEST['searching'])
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
 	$time_t = time();
-	
 	$name_temporary_table ='search1_'.$ip_address."__".$time_t;
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
-	
 	$temporary ->setName_table($name_temporary_table);
-	
 	$temporary -> create_temp_table ($name_temporary_table);
 	$temporary -> insert_temporary('C', 'CA1 (e)2201 Radiatum Giant');
 	
@@ -55,7 +52,6 @@ if($_REQUEST['new'])
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
 	$time_t = time();
-		
 	$name_temporary_table ='search1_'.$ip_address."__".$time_t;
 	$_SESSION['name_temporary_table'] = $name_temporary_table;
 	$temporary ->setName_table($name_temporary_table);
@@ -83,100 +79,96 @@ if ($letter)
 			    // keep only those names that have the first letter = $letter:
 					
 					$n_neuron = 0;
-					$name_neuron = NULL;
+					$name_neuron = array();
 						
 					for ($i1=0; $i1<$n_neuron_total_name; $i1++)
 					{
 						$name_neuron1 = $type_1 -> getName_neuron_array($i1);		
 						if ($letter == 'all')
 						{
-							$name_neuron[$n_neuron] = $name_neuron1;
-							
-							$n_neuron = $n_neuron + 1;	
-							
+						$name_neuron[$n_neuron] = $name_neuron1;
+						$n_neuron = $n_neuron + 1;		
 						}
 						else if ($name_neuron1[0] == $letter)
-							{
-								$name_neuron[$n_neuron] = $name_neuron1;
-					
-								$n_neuron = $n_neuron + 1;
-							}
+						{
+						$name_neuron[$n_neuron] = $name_neuron1;					
+						$n_neuron = $n_neuron + 1;
+						}
                             						
 					}
-					if($name_neuron)
-			        sort($name_neuron);
-			
+			if(n_neuron!== 0)
+			{
 			$temporary ->setName_table($name_temporary_table);
 	        $temporary -> update_temporary($letter, $name_neuron[0], 1, $id_update);
-	        $temporary_search=0;
-	        $name_count=$n_neuron;
-					
+	        }
+			$temporary_search=0;
+			$name_count=$n_neuron;	
+			
 			// keep only those names that have the first letter = $letter:
-		    $nick_neuron= NULL;
-	       for ($i1=0; $i1<$n_neuron_total_nickname; $i1++)
+			$nick_neuron= array();
+			$n_neuron1 = 0;		
+	        for ($i1=0; $i1<$n_neuron_total_nickname; $i1++)
 				{
-					$name_nick_neuron = $type_1 -> getNickname_neuron_array($i1);
-			
-						if ($letter == 'all')
-						{
-							$nick_neuron[$n_neuron] = $name_nick_neuron;
-							$n_neuron = $n_neuron + 1;						
-						}
-						else if ($name_nick_neuron[0] == $letter)
-							{
-			
-							    $nick_neuron[$n_neuron] = $name_nick_neuron;
-								$n_neuron = $n_neuron + 1;
-							}					
-				}
-             if($nick_neuron)
-			 sort($nick_neuron);					
-			
-	$temporary ->setName_table($name_temporary_table);
-	$temporary -> update_temporary($letter, $nick_neuron[0], 1, $id_update);
-	$temporary_search=0;
-	$nickname_count=$n_neuron;
-	
-	// keep only those synonym names that have the first letter = $letter:
-					
-					$syn_neuron = NULL;
-					for ($i1=0; $i1<$n_neuron_total_synonym; $i1++)
+				$name_nick_neuron = $type_1 -> getNickname_neuron_array($i1);			
+				if ($letter == 'all')
 					{
-						$name_syn_neuron = $synonym_1 -> getName_neuron_array($i1);		
-						if ($letter == 'all')
-						{
-							$syn_neuron[$n_neuron] = $name_syn_neuron;
-							$n_neuron = $n_neuron + 1;	
-							
-						}
-						else if ($name_syn_neuron[0] == $letter)
-							{
-								$syn_neuron[$n_neuron] = $name_syn_neuron;
-								$n_neuron = $n_neuron + 1;
-							}
-                            						
+					$nick_neuron[$n_neuron] = $name_nick_neuron;
+					$n_neuron = $n_neuron + 1;						
 					}
-		    if($syn_neuron)
-			sort($syn_neuron);	
-			
+				else if ($name_nick_neuron[0] == $letter)
+						{
+					    $nick_neuron[$n_neuron1] = $name_nick_neuron;
+						$n_neuron1 = $n_neuron1 + 1;
+						}					
+				}				
+			if($n_neuron1 !== 0)
+			{
 			$temporary ->setName_table($name_temporary_table);
-	        $temporary -> update_temporary($letter, $syn_neuron[0], 1, $id_update);
-	        $temporary_search=0;
+			$temporary -> update_temporary($letter, $nick_neuron[0], 1, $id_update);
+			}
+			
+			$temporary_search=0;
+			$nickname_count=$n_neuron;
+	
+			// keep only those synonym names that have the first letter = $letter:
+							
+			$syn_neuron = array();
+			$n_neuron2 = 0;
+			for ($i1=0; $i1<$n_neuron_total_synonym; $i1++)
+				{
+				$name_syn_neuron = $synonym_1 -> getName_neuron_array($i1);		
+				if ($letter == 'all')
+					{
+					$syn_neuron[$n_neuron] = $name_syn_neuron;
+					$n_neuron = $n_neuron + 1;			
+					}
+					else if ($name_syn_neuron[0] == $letter)
+						{
+						$syn_neuron[$n_neuron2] = $name_syn_neuron;
+						$n_neuron2 = $n_neuron2 + 1;
+						}    						
+					}
+			
+				if($n_neuron2 !==0)
+				{
+				$temporary ->setName_table($name_temporary_table);
+				$temporary -> update_temporary($letter, $syn_neuron[0], 1, $id_update);
+				}
+				$temporary_search=0;
+				}
 
-	}
+	
+			$neuron5 = $_REQUEST['neuron'];
+			if ($neuron5)
+				{
+				$name_temporary_table = $_SESSION['name_temporary_table'];
+				$id_update = $_REQUEST['id'];
+				$temporary ->setName_table($name_temporary_table);
+				$temporary -> update_temporary(NULL, $neuron5, 2, $id_update);
+				$temporary_search=1;
+				}
 
-
-$neuron5 = $_REQUEST['neuron'];
-if ($neuron5)
-{
-	$name_temporary_table = $_SESSION['name_temporary_table'];
-	$id_update = $_REQUEST['id'];
-	$temporary ->setName_table($name_temporary_table);
-	$temporary -> update_temporary(NULL, $neuron5, 2, $id_update);
-	$temporary_search=1;
-}
-
-// ADD a new line for a new Author: --------------------------------------------------------------------
+	// ADD a new line for a new Author: --------------------------------------------------------------------
 if ($_REQUEST['plus'])
 {
 	$name_temporary_table = $_SESSION['name_temporary_table'];
@@ -202,11 +194,11 @@ if ($_REQUEST['see_result'])
 	$temporary ->setName_table($name_temporary_table);
 	$temporary_search=1;
 }
-	if ($temporary_search == 1)
+if ($temporary_search == 1)
 {
-		 $temporary -> retrieve_id();
-	     $n_id = $temporary -> getN_id();
-		}
+	$temporary -> retrieve_id();
+	$n_id = $temporary -> getN_id();
+}
 
 // Clear all ---------------------------------------------
 if ($_REQUEST['clear_all'])
@@ -285,19 +277,19 @@ $(document).ready(function(){
 			if ($temporary_search == 1)
 				{
 				if ($n_id == 1)
-						print ("<font class='font12'>$n_id Neuron Name has been selected</font>");
+					print ("<font class='font12'>$n_id Neuron Name has been selected</font>");
 					else if ($n_id > 1)
-						print ("<font class='font12'> $n_id Neuron Names have been selected</font>");
+							print ("<font class='font12'> $n_id Neuron Names have been selected</font>");
 					else
-						print ("<font class='font12'> 0 Neuron Names have been selected</font>");
-					}
-					?>
+							print ("<font class='font12'> 0 Neuron Names have been selected</font>");
+				}
+			?>
 			
 				<table border="0" cellspacing="3" cellpadding="0" class='table_search' style ="width:auto">
 					<tr >
 		              <td align="center" width="10%" class='table_neuron_page3'>Neuron Initial</td>
 			          <td align="center" width="20%" class='table_neuron_page3'>Name/Synonym</td>
-							</tr>
+					</tr>
 				
 				<?php
 				$temporary -> retrieve_id();
@@ -309,7 +301,6 @@ $(document).ready(function(){
 							<td align='center' class='table_neuron_page1' style ='width: 20px'>");
 						
 						$id = $temporary -> getID_array($i);
-					
 						print ("<select name='letter1' size='1' cols='10' class='select1' onChange=\"letter(this, $id)\">");
 						
 						$temporary -> retrieve_letter_from_id($id);
@@ -361,12 +352,10 @@ $(document).ready(function(){
 					
 					// keep only the names from table 'Type' that have the first letter = $letter_t:
 					$n_neuron = 0;
-					$name_neuron = NULL;
+					$name_neuron = array();
 					for ($i1=0; $i1<$n_neuron_total_name; $i1++)
 					{
 						$name_neuron1 = $type_1 -> getName_neuron_array($i1);
-					
-			
 						if ($letter_t == 'all')
 						{
 							$name_neuron[$n_neuron] = $name_neuron1;
@@ -374,7 +363,6 @@ $(document).ready(function(){
 						}
 						else
 						{
-						
 							if ($name_neuron1[0] == $letter_t)
 							{
 								$name_neuron[$n_neuron] = $name_neuron1;
@@ -388,10 +376,11 @@ $(document).ready(function(){
 				    $name_count=$n_neuron;
 					
 	              // keep only the nicknames from table 'Type' that have the first letter = $letter_t:
-		             $nick_neuron = NULL;
+		             $nick_neuron = array();
+					 $n_neuron1 = 0;
 	                 for ($i1=0; $i1<$n_neuron_total_nickname; $i1++)
 					{
-						//$name_neuron1 = $type_1 -> getName_neuron_array($i1);
+				//$name_neuron1 = $type_1 -> getName_neuron_array($i1);
 					$name_nick_neuron = $type_1 -> getNickname_neuron_array($i1);
 			
 						if ($letter_t == 'all')
@@ -404,42 +393,47 @@ $(document).ready(function(){
 						
 							if ($name_nick_neuron[0] == $letter_t)
 							{
-							    $nick_neuron[$n_neuron] = $name_nick_neuron;
-								$n_neuron = $n_neuron + 1;
+							    $nick_neuron[$n_neuron1] = $name_nick_neuron;
+								$n_neuron1 = $n_neuron1 + 1;
 							}
 						} 		    							
 					}	
 					$nickname_count=$n_neuron;		
 					
-					     // keep only the synonym names from table 'Synonym' that have the first letter = $letter_t:
-					$syn_neuron = NULL;
-					
+				 // keep only the synonym names from table 'Synonym' that have the first letter = $letter_t:
+					$syn_neuron =array();
+					$n_neuron2 = 0;
 					for ($i1=0; $i1<$n_neuron_total_synonym; $i1++)
 					{
 						$name_syn_neuron = $synonym_1 -> getName_neuron_array($i1);		
 						if ($letter_t == 'all')
 						{
 							$syn_neuron[$n_neuron] = $name_syn_neuron;
-							
 							$n_neuron = $n_neuron + 1;		
 						}
 						else
                        {						
 					   if ($name_syn_neuron[0] == $letter_t)
 							{
-								$syn_neuron[$n_neuron] = $name_syn_neuron;
-					
-								$n_neuron = $n_neuron + 1;
+								$syn_neuron[$n_neuron2] = $name_syn_neuron;
+								$n_neuron2 = $n_neuron2 + 1;
 							}
                       }
 					}
 					
+			 			
 					print ("<td align='center' width='20%' class='table_neuron_page1'>");				
 					print ("<select name='neuron1' size='1' cols='10' class='select1' onChange=\"neuron(this, $id)\">");
-		
+					
 					$temporary -> retrieve_neuron_from_id($id);
-					$name_neuron_right = $temporary -> getNeuron();		
-				
+					$name_neuron_right = $temporary -> getNeuron();	
+					
+					//get all the names, nicknames and synonyms that coresspond to a particluar letter
+				    $result = array_merge($name_neuron,$nick_neuron,$syn_neuron);  
+					$total =0;
+					$total = $n_neuron + $n_neuron1 + $n_neuron2;
+					sort($result);
+					
 					if ($name_neuron_right)
 					{
 						$temp_neuron= htmlspecialchars($name_neuron_right,ENT_QUOTES);	
@@ -447,35 +441,18 @@ $(document).ready(function(){
 						print ("<OPTION VALUE='' disabled></OPTION>");
 					}	
 					
-						if ($n_neuron == 0)
-					{
-						print ("<OPTION VALUE=''>-</OPTION>");	
-					}
+					
+					if ($total === 0)
+						print ("<OPTION VALUE=''>-</OPTION>");
 					else
 					{
-						for ($i1=0; $i1<$name_count; $i1++)
+						for ($k1=0; $k1<$total; $k1++)
 						{
-							$temp_neuron= htmlspecialchars($name_neuron[$i1],ENT_QUOTES);	
-							echo "<option value='".$temp_neuron."'>".$name_neuron[$i1]. "</option>";
-			   
+							$temp_neuron= htmlspecialchars($result[$k1],ENT_QUOTES);	
+			                echo "<option value='".$temp_neuron."'>".$result[$k1]. "</option>";
 						}
-		
-						for ($i1=$name_count; $i1<$nickname_count; $i1++)
-						{
-							$temp_neuron= htmlspecialchars($nick_neuron[$i1],ENT_QUOTES);	
-			                echo "<option value='".$temp_neuron."'>".$nick_neuron[$i1]. "</option>";
-						}
-						
-						
-						for ($i1=$nickname_count; $i1<$n_neuron; $i1++)
-						{
-							$temp_neuron= htmlspecialchars($syn_neuron[$i1],ENT_QUOTES);	
-			                echo "<option value='".$temp_neuron."'>".$syn_neuron[$i1]. "</option>";
-						}
-						
 						
 					}
-					
 					print ("</select>");
 					print ("</td><td align='center' width='5%'>
 								<form action='find_neuron_name.php' method='post' style='display:inline'> 
@@ -485,14 +462,14 @@ $(document).ready(function(){
 										
 					if ($i > 0)		 
 						print ("</td><td align='center' width='5%'>
-									<form action='find_neuron_name.php' method='post' style='display:inline'> 
-									<input type='submit' name='remove' value=' - ' class='more_button'>
-									<input type='hidden' name='id' value='$id'>
-									</form>
-								 </td>");
+								<form action='find_neuron_name.php' method='post' style='display:inline'> 
+								<input type='submit' name='remove' value=' - ' class='more_button'>
+								<input type='hidden' name='id' value='$id'>
+								</form>
+								</td>");
 					else
 						print ("</td><td align='center' width='5%'> </td>");
-					print ("</td><td align='center' width='40%'>  </td>");
+						print ("</td><td align='center' width='40%'>  </td>");
 					
 }
 ?>
@@ -525,21 +502,20 @@ $(document).ready(function(){
 						  <th align='center' width='10%' class='table_neuron_page1'> <strong>Journal/Book </strong></th></font>
 						  <th align='center' width='5%' class='table_neuron_page1'> <strong>Year </strong></th></font>
 						  <th align='center' width='5%' class='table_neuron_page1'> <strong>PMID/ISBN </strong></th></font>
-						<th align='center' width='20%' class='table_neuron_page1'> <strong>Types</strong></th></font>
-              					</tr></thead><tbody>");		  
+						  <th align='center' width='20%' class='table_neuron_page1'> <strong>Types</strong></th></font>
+					</tr></thead><tbody>");		  
 				
 		 $temporary -> retrieve_id();
 	     $n_id = $temporary -> getN_id();
-   
    for ($j1=0; $j1<$n_id; $j1++)
    {
 		$name_aut_neur[$j1] = $temporary -> getNeuron_array($j1);
 		$name_neuron=$name_aut_neur[$j1];
+		
 		$type_1 -> retrive_name();
 		$type_1 -> retrive_nickname();
 		$n_total_name = $type_1 -> getName_neuron();	
 		$value_from_type = 0;
-		
     for($i2=0; $i2<$n_total_name; $i2++) //If the neuron selected is from field name of table Type
 		{
 		    if($name_neuron == $type_1 -> getName_neuron_array($i2))
@@ -548,13 +524,14 @@ $(document).ready(function(){
 			$id_neuron = $type_1 -> getID_namearray(0);
 			$value_from_type = $value_from_type + 1;
 		    }
-		    else if($name_neuron == $type_1 -> getNickname_neuron_array($i2))//If the neuron selected is from field nickname of table Type
+		    
+			else if($name_neuron == $type_1 -> getNickname_neuron_array($i2))//If the neuron selected is from field nickname of table Type
 		    {
-		  $type_1 ->  retrive_name_by_nickname1($name_neuron);
-		  $nickname_id = $type_1 ->getName_neuron_array(0);
-		  $type_1 -> retrive_id_by_name($nickname_id);
-		  $id_neuron = $type_1 -> getID_namearray(0);
-		  $value_from_type= $value_from_type + 1;		
+			$type_1 ->  retrive_name_by_nickname1($name_neuron);
+			$nickname_id = $type_1 ->getName_neuron_array(0);
+			$type_1 -> retrive_id_by_name($nickname_id);
+			$id_neuron = $type_1 -> getID_namearray(0);
+			$value_from_type= $value_from_type + 1;		
 	       }
 	   }  
 	   
@@ -562,7 +539,7 @@ $(document).ready(function(){
 	{
 	    $synonym_1 -> retrive_name() ;
 	    $n_total_syn =$synonym_1 ->getName_neuron();
-	
+		
 	    for($i3=0; $i3<$n_total_syn; $i3++)     
 		{
 
@@ -576,17 +553,18 @@ $(document).ready(function(){
 	    }
 	}
 
-                    $articleevidencerel ->setarticle_id_array(NULL,0);
-		            $evidencepropertyyperel -> retrive_evidence_id2($id_neuron);
-					$n_evidence_id_3 =0;
-					$n_evidence_id_3 = $evidencepropertyyperel -> getN_evidence_id();
-					$n_article_3=0;
+            $articleevidencerel ->setarticle_id_array(NULL,0);
+		    $evidencepropertyyperel -> retrive_evidence_id2($id_neuron);
+			$n_evidence_id_3 =0;
 					
-				for ($i1=0; $i1<$n_evidence_id_3; $i1++)
+			$n_evidence_id_3 = $evidencepropertyyperel -> getN_evidence_id();
+			$n_article_3=0;
+					
+			for ($i1=0; $i1<$n_evidence_id_3; $i1++)
 				{
-					$evidence_id_for_articles = $evidencepropertyyperel -> getEvidence_id_array($i1);
-					
-					// retrieve id_article from ArticleEvidenceRel by using $evidence_id_for_articles
+				$evidence_id_for_articles = $evidencepropertyyperel -> getEvidence_id_array($i1);
+				
+				// retrieve id_article from ArticleEvidenceRel by using $evidence_id_for_articles
 					$articleevidencerel -> retrive_article_id($evidence_id_for_articles);
 					$id_article_3 = $articleevidencerel -> getarticle_id_array(0);
 					if ($id_article_3 === NULL);
@@ -606,10 +584,8 @@ $(document).ready(function(){
 					else
 					{
 						$id_article_4_unique[$n_article_real] = $id_article_4[$i11];
-						
 						$id_proof = $id_article_4[$i11];
 						$n_article_real = $n_article_real + 1;
-	
 					}
 				}
 	
@@ -641,36 +617,35 @@ $(document).ready(function(){
 			        $title_article_correct = NULL;
 			        $art=$article_title[$i1];
 			        $article -> retrive_by_id($art_id[$i1]);
-					
-					if(!in_array($article -> getPmid_isbn(), $pmid))
-			        {
 				    $pmid[$i1] = $article -> getPmid_isbn();
 					$article_title[$i1] = $article -> getTitle();	
                     $vol[$i1] = $article -> getPublication();	
                     $yea[$i1] = $article -> getYear();	
-                   		}
-			 $years=substr($yea[$i1], 0, 4);
+					$years=substr($yea[$i1], 0, 4);
 					
-						if (strlen($pmid[$i]) > 10 )
-				{	
+					if (strlen($pmid[$i]) > 10 )
+					{	
 					$link2 = "<a href='$link_isbn$pmid[$i]' target='_blank'>";	
-				}
-				else
-				{
+					}
+					else
+					{
 					$value_link ='PMID: '.$pmid[$i];
 					$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";										
-				}					
+					}					
 				
 				
-				   print ("<tr>
-						<td align='left' width='20%' class='table_neuron_page4'>$name_authors2[$i1]</td>
-					    <td align='left' width='40%' class='table_neuron_page4'>$article_title[$i1]</td>
-						<td align='left' width='10%' class='table_neuron_page4'>$vol[$i1] </td>
-						<td align='left' width='5%' class='table_neuron_page4'>$years </td>
-				        <td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'>$pmid[$i1]</font> </a></td>");
-				print("<td align='left' width='20%' class='table_neuron_page4'>");
+					print ("<tr>
+							<td align='left' width='20%' class='table_neuron_page4'>$name_authors2[$i1]</td>
+							<td align='left' width='40%' class='table_neuron_page4'>$article_title[$i1]</td>
+							<td align='left' width='10%' class='table_neuron_page4'>$vol[$i1] </td>
+							<td align='left' width='5%' class='table_neuron_page4'>$years </td>
+							<td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'>$pmid[$i1]</font> </a></td>");
+					print("<td align='left' width='20%' class='table_neuron_page4'>");
 			
-$a= "SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i1]')";
+$a= "SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i1]')
+UNION 
+SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleEvidenceRel` ON (`ArticleEvidenceRel`.`Article_id` = `Article`.`id`) INNER JOIN `EvidenceFragmentRel` ON (`ArticleEvidenceRel`.`Evidence_id` = `EvidenceFragmentRel`.`Evidence_id`) INNER JOIN `FragmentTypeRel` ON (`EvidenceFragmentRel`.`Fragment_id` = `FragmentTypeRel`.`Fragment_id`) INNER JOIN `TYPE` ON `Type`.`id` = `FragmentTypeRel`.`Type_id` WHERE(`pmid_isbn` = '$pmid[$i1]')";
+
 $Type_name = mysql_query($a);
 				if (!$Type_name) {
 					die("<p>Error in listing tables:" . mysql_error() . "</p>");
@@ -725,7 +700,6 @@ $Type_name = mysql_query($a);
 	print("</tbody></table>");
 		}
 	?>
-	
 	<br /><br />
 	</div>
 </div>
