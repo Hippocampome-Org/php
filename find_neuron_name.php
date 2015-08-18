@@ -642,10 +642,7 @@ $(document).ready(function(){
 							<td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'>$pmid[$i1]</font> </a></td>");
 					print("<td align='left' width='20%' class='table_neuron_page4'>");
 			
-$a= "SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i1]')
-UNION 
-SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleEvidenceRel` ON (`ArticleEvidenceRel`.`Article_id` = `Article`.`id`) INNER JOIN `EvidenceFragmentRel` ON (`ArticleEvidenceRel`.`Evidence_id` = `EvidenceFragmentRel`.`Evidence_id`) INNER JOIN `FragmentTypeRel` ON (`EvidenceFragmentRel`.`Fragment_id` = `FragmentTypeRel`.`Fragment_id`) INNER JOIN `TYPE` ON `Type`.`id` = `FragmentTypeRel`.`Type_id` WHERE(`pmid_isbn` = '$pmid[$i1]')";
-
+$a= "SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleEvidenceRel` ON (`ArticleEvidenceRel`.`Article_id` = `Article`.`id`) INNER JOIN `EvidenceFragmentRel` ON (`ArticleEvidenceRel`.`Evidence_id` = `EvidenceFragmentRel`.`Evidence_id`) INNER JOIN `FragmentTypeRel` ON (`EvidenceFragmentRel`.`Fragment_id` = `FragmentTypeRel`.`Fragment_id`) INNER JOIN `Type` ON `Type`.`id` = `FragmentTypeRel`.`Type_id` WHERE(`pmid_isbn` = '$pmid[$i1]')";
 $Type_name = mysql_query($a);
 				if (!$Type_name) {
 					die("<p>Error in listing tables:" . mysql_error() . "</p>");
