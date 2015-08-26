@@ -42,6 +42,15 @@
 			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>  			
 			</ul>
 			
+			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			
+			<ul>
+			<li><a href='images/morphology/Morphology_Matrix.jpg'><font class="font7"> Morphology Matrix</font></a></li>  			
+			<li><a href='images/marker/Marker_Matrix.jpg'><font class="font7"> Marker Matrix</font></a></li>  			
+			<li><a href='images/electrophysiology/Electrophysiology_Table.jpg'><font class="font7"> Electrophysiology Table</font></a></li>  			
+			<li><a href='images/connectivity/Connectivity_Matrix.jpg'><font class="font7"> Connectivity Matrix</font></a></li>
+			<li><a href='images/connectivity/DG_Circuit_Diagram.jpg'><font class="font7"> Dentate Gyrus Circuit Diagram</font></a></li>
+			</ul>			
+			
 			<font class='font1a'>Miscellaneous:</font> &nbsp; &nbsp;			
 			<ul>
   			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bugs and Issues</font></a></li>
