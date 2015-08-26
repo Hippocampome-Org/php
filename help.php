@@ -49,6 +49,7 @@
 			<li><a href='images/electrophysiology/Electrophysiology_Table.jpg'><font class="font7"> Electrophysiology Table</font></a></li>  			
 			<li><a href='images/connectivity/Connectivity_Matrix.jpg'><font class="font7"> Connectivity Matrix</font></a></li>
 			<li><a href='images/connectivity/DG_Circuit_Diagram.jpg'><font class="font7"> Dentate Gyrus Circuit Diagram</font></a></li>
+			<li><a href='images/connectivity/DG_Circuit_Diagram.graffle.zip'><font class="font7"> Dentate Gyrus Circuit Diagram (source)</font></a></li>
 			</ul>			
 			
 			<font class='font1a'>Miscellaneous:</font> &nbsp; &nbsp;			
