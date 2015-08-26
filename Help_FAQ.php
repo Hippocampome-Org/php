@@ -117,29 +117,28 @@ plan to include these data as well?</span></a><span class=MsoHyperlink><span
 style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span><a
-href="#how_link">How are data from different articles linked?</a><span
-style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
+href="#how_link"><span style='font-size:16.0pt;line-height:115%'>How are data
+from different articles linked?</span></a><span style='font-size:16.0pt;
+line-height:115%'><span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
-href="#link_to_both"><span style='font-size:16.0pt;line-height:115%'>If a new
-paper publishes data on cells with axonal/dendritic branching in <span
-class=SpellE>SMo</span> that lumps together cells that have no projections to
-Sub with those that do (i.e., DG Neurogliaform and MOPP), will the data be
-linked with both, or only one of the two cell types defined in the knowledge
-base?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
-line-height:115%'><o:p></o:p></span></span></p>
+href="#link_to_both"><span style='font-size:16.0pt;line-height:115%'>If a new paper
+publishes data on cells with axonal/dendritic branching in <span class=SpellE>SMo</span>
+that lumps together cells that have no projections to Sub with those that do
+(i.e., DG Neurogliaform and MOPP), will the data be linked with both, or only
+one of the two cell types defined in the knowledge base?</span></a><span
+class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%;color:windowtext;
-text-decoration:none;text-underline:none'>Q:<span style='mso-tab-count:1'>     </span></span></span><span
-class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%'><a
-href="#MEC_LEC">Reference is made to MEC LII stellate cells but EC LIII
-pyramidal cells [without the M], and EC LII basket-multipolar [without the M]
-but MEC LIII superficial <span class=SpellE>trilayered</span> interneurons. Is
-this intentional?</a></span></span><span style='font-size:16.0pt;line-height:
-115%'><o:p></o:p></span></p>
+text-decoration:none;text-underline:none'>Q:<span style='mso-tab-count:1'>     </span></span></span><a
+href="#MEC_LEC"><span style='font-size:16.0pt;line-height:115%'>Reference is
+made to MEC LII stellate cells but EC LIII pyramidal cells [without the M], and
+EC LII basket-multipolar [without the M] but MEC LIII superficial <span
+class=SpellE>trilayered</span> interneurons. Is this intentional?</span></a><span
+style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal><a href="#curation"><span style='font-size:16.0pt;
 line-height:115%'>Curation</span></a><span style='font-size:16.0pt;line-height:
@@ -174,16 +173,19 @@ electrophysiology data, why are rats preferred over mice and other rodent
 species?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
 line-height:115%'><o:p></o:p></span></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><a
-href="#collaborations">Collaborations</a> <o:p></o:p></span></p>
+<p class=MsoNormal><a href="#collaborations"><span style='font-size:16.0pt;
+line-height:115%'>Collaborations</span></a><span style='font-size:16.0pt;
+line-height:115%'> <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span><a
-href="#does_collaborate">Does Hippocampome.org collaborate with any other web
-sites?</a><o:p></o:p></span></p>
+style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
+href="#does_collaborate"><span style='font-size:16.0pt;line-height:115%'>Does
+Hippocampome.org collaborate with any other web sites?</span></a><span
+style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><a
-href="#future_directions">Future Directions</a><o:p></o:p></span></p>
+<p class=MsoNormal><a href="#future_directions"><span style='font-size:16.0pt;
+line-height:115%'>Future Directions</span></a><span style='font-size:16.0pt;
+line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
@@ -192,7 +194,11 @@ no mention of gap junctions - will these data be added later?</span></a><span
 style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+style='font-size:16.0pt;line-height:115%'><a href="#general">General</a><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span><a
+href="#browsers">Which browsers are formally supported by Hippocampome.org?</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.75in'><span style='font-size:16.0pt;
 line-height:115%'><o:p>&nbsp;</o:p></span></p>
@@ -235,9 +241,9 @@ the main categorization property is <span class=SpellE>axo</span>-dendritic
 pattern, the secondary properties listed below are sufficient to uniquely
 separate neuron types.<span style='mso-spacerun:yes'>  </span>Such significance
 is placed on these secondary properties because they can dramatically affect
-the behavior of the type in a neuronal network. In the case of CA1 Axo-axonic
-cells, they specifically target the axon initial segments of CA1 Pyramidal
-cells and ignore any other targets. <o:p></o:p></span></p>
+the behavior of the type in a neuronal network. In the case of CA1 Axo-axonic cells,
+they specifically target the axon initial segments of CA1 Pyramidal cells and
+ignore any other targets. <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><span style='mso-tab-count:1'>          </span>-Primary
@@ -363,11 +369,14 @@ doing the annotating and review of the knowledge base?<o:p></o:p></span></b></a>
 <span style='mso-bookmark:annotation'></span>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Currently
-and for the near term, the annotation and review of Hippocampome.org will be
-performed by the authors of the main Hippocampome.org manuscript.<span
-style='mso-spacerun:yes'>  </span>In the future, we will endeavor to include
-mechanisms for more direct input from the user community.<o:p></o:p></span></p>
+style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Currently,
+the annotation and review of<span style='mso-spacerun:yes'>  </span>the
+knowledge base will be performed by<span style='mso-spacerun:yes'>  </span>the
+authors of the publication (D. W. Wheeler, C. M. White, C. L. Rees, A. O.
+Komendantov, D. J. Hamilton, G. A. Ascoli &quot;Hippocampome.org: A knowledge
+base of neuron types in the rodent hippocampus&quot;, under review).<span
+style='mso-spacerun:yes'>  </span>In the future, we will endeavor to include mechanisms
+for direct input from the user community.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="survey_frequency"><b style='mso-bidi-font-weight:normal'><span
@@ -411,8 +420,7 @@ normal'><span style='font-size:16.0pt;line-height:115%'>Electrophysiology<o:p></
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="Ephys_rats_over_mice"><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>For
-electrophysiology data, why are rats preferred over mice and other rodent
-species?<o:p></o:p></span></b></a></p>
+electrophysiology data, why are rats preferred over mice and other rodent species?<o:p></o:p></span></b></a></p>
 
 <span style='mso-bookmark:Ephys_rats_over_mice'></span>
 
@@ -488,7 +496,22 @@ we are in the early stages of annotation information concerning gap junctions
 and other synaptic information, which will be added to Hippocampome.org in a
 future update.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.5in'><a name=general><b
+style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
+115%'>General<o:p></o:p></span></b></a></p>
+
+<span style='mso-bookmark:general'></span>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
+name=browsers><b style='mso-bidi-font-weight:normal'><span style='font-size:
+16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>Which
+browsers are formally supported by Hippocampome.org?<o:p></o:p></span></b></a></p>
+
+<span style='mso-bookmark:browsers'></span>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Hippocampome.org
+formally supports current versions of Firefox, Chrome, Safari, and Explorer.<o:p></o:p></span></p>
 
 </div>
 
