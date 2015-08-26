@@ -101,10 +101,6 @@ piece of knowledge, by presenting original quotations or figures that support
 that knowledge.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 005: Add the ability to search for cell types by name/synonym.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 032: Add <span class=SpellE>php</span> code to display quotes related to connectivity between cell types.
 </span></p>
 
