@@ -42,14 +42,26 @@
 			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>  			
 			</ul>
 			
+			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			
+			<ul>
+			<li><a href='images/morphology/Morphology_Matrix.jpg'><font class="font7"> Morphology Matrix</font></a></li>  			
+			<li><a href='images/marker/Marker_Matrix.jpg'><font class="font7"> Marker Matrix</font></a></li>  			
+			<li><a href='images/electrophysiology/Electrophysiology_Table.jpg'><font class="font7"> Electrophysiology Table</font></a></li>  			
+			<li><a href='images/connectivity/Connectivity_Matrix.jpg'><font class="font7"> Connectivity Matrix</font></a></li>
+			<li><a href='images/connectivity/DG_Circuit_Diagram.jpg'><font class="font7"> Dentate Gyrus Circuit Diagram</font></a></li>
+			<li><a href='images/connectivity/DG_Circuit_Diagram.graffle.zip'><font class="font7"> Dentate Gyrus Circuit Diagram (source)</font></a></li>
+			</ul>			
+			
 			<font class='font1a'>Miscellaneous:</font> &nbsp; &nbsp;			
 			<ul>
   			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bugs and Issues</font></a></li>
   			<li><a href='Help_Future_Updates.php'><font class="font7"> Future Updates</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
-  			<li><a href='Help_Suspended_Types.php'><font class="font7"> Suspended Types</font></a></li>
+  			<li><a href='Help_FAQ.php'><font class="font7"> FAQs</font></a></li>
+  			<li><a href='Help_On-hold_Types.php'><font class="font7"> On-hold Types</font></a></li>
   			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
   			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Usage Scenario</font></a></li>
+  			<li><a href='Help_Formal_Name_Encoding.php'><font class="font7"> Formal Name Encoding</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
   			<li><a href='Help_Bibliography.php'><font class="font7"> Bibliography</font></a></li>
   			<li><a href='Help_Other_Useful_Links.php'><font class="font7"> Other Useful Links</font></a></li>
