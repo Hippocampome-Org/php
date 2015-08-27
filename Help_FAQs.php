@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>FAQ</title>
+<title>FAQs</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -93,7 +93,7 @@ ul
 <BR><BR><BR><BR><BR><BR><BR>
 		
 <div class='title_area'>
-	<font class="font1">FAQ</font>
+	<font class="font1">Frequently Asked Questions</font>
 </div>
 
 <div class=WordSection1>
