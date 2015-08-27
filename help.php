@@ -57,7 +57,7 @@
   			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bugs and Issues</font></a></li>
   			<li><a href='Help_Future_Updates.php'><font class="font7"> Future Updates</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
-  			<li><a href='Help_FAQs.php'><font class="font7"> FAQs</font></a></li>
+  			<li><a href='Help_FAQ.php'><font class="font7"> FAQs</font></a></li>
   			<li><a href='Help_On-hold_Types.php'><font class="font7"> On-hold Types</font></a></li>
   			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
   			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Usage Scenario</font></a></li>
