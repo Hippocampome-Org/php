@@ -132,6 +132,22 @@ Issue 187: Highlight the representative sources on a markers Evidence page, when
 Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
 </span></p>
 
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
+</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Issue 216: Add a new "Feedback" button to the banner.
+</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Issue 217: Add a basic feedback form.
+</span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Issue 218: Add a new help page that tracks the feedback submissions.
+</span></p>
+
 </div>
 </body>
 </html>
