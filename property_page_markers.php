@@ -695,28 +695,35 @@ else {
 		<table width="80%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">
-					Neuron Type
+					Neuron Type &nbsp;
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; 
 					<?php			
-						 $id=$type->getId();
-								 $name=$type->getName();
-					print("<a href='neuron_page.php?id=$id'>$name</a>");
+					    $id=$type->getId();
+						$name=$type->getName();
+						print("<a href='neuron_page.php?id=$id'>$name</a>");
 					 ?>
 				</td>				
 			</tr>
 			<tr>
 				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
+				<td align="left" width="80%" class="table_neuron_page2"><strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
 			</tr>	
 			<tr>
-				<td width="20%" align="right">
+				<td width="20%" align="right" valign="top" class="table_neuron_page1">
+					<?php
+						if ($val_property == 'Gaba-a-alpha')
+							print ("GABAa &alpha;1 Expression &nbsp;");
+						else if ($val_property == 'alpha-actinin-2')
+							print ("&alpha;-act2 Expression &nbsp;");
+						else
+							print ("$val_property Expression &nbsp;");
+					?>
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
 				
 				
-				<?php
+				<?php				
 				  // handle mixed flag (conflict) notes
 	              $type_id = $type -> getId();
 	
@@ -734,26 +741,38 @@ else {
 	              $conflict_explanation_statement = $evidencepropertyyperel -> getProperty_type_explanation();
 	              
 	              if ($conflict_note == "positive" || $conflict_note == "negative") {
+	              	if ($conflict_note=="positive") {
+	              		$print_color = "positive";
+	              		$image_link = "<img src='images/marker/positive_clear.png' border='0' width='8px' />";
+	              	}
+	              	else if ($conflict_note=="negative") {
+	              		$print_color = "negative";
+	              		$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
+	              	}
+	              	
 	              	$mixed_data = false;
 	              	$conflict_note = "";
 	              	$conflict_explanation_statement = "";
 	              }
 	              else {
+	              	if ($conflict_note == "species/protocol differences") {
+	              		$conflict_note = "species/protocol/subcellular expression differences";
+	              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
+	              	}
+	              	else if ($conflict_note == "subtypes")
+	              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
+	              	else if ($conflict_note == "conflicting data")
+	              		$image_link = "<img src='images/marker/positive-negative-conflicting_clear.png' border='0' width='15px' />";
+	              	
 	              	$mixed_data = true;
-	              	if ($conflict_note == "species/protocol differences")
-	              		$conflict_note = "species/protocol/sub-cellular expression differences";
-	              	$conflict_note = ": " . $conflict_note; // CLR added	
+	              	$print_color = "positive-negative";
+	              	$conflict_note = ": " . $conflict_note;
 	              }
 	              
-	              if ($val_property == 'Gaba-a-alpha')
-	              	print ("&nbsp; <strong>GABAa &alpha;1 ($color$conflict_note)</strong>");
-	              else if ($val_property == 'alpha-actinin-2')
-	              	print ("&nbsp; <strong>&alpha;-act2 ($color$conflict_note)</strong>");
-	              else
-	              	print ("&nbsp; <strong>$val_property ($color$conflict_note)</strong>");
+	              print ("$image_link <strong>&nbsp;$print_color$conflict_note</strong>");
 	              
 	              if ($conflict_explanation_statement)
-	              	print ("<BR><BR>&nbsp; $conflict_explanation_statement");
+	              	print ("<BR>Conflict explanation: $conflict_explanation_statement");
 	                            
 	              list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
 	              if ($permission == 0) { // only enabled for curation, where anonymous user is disabled
