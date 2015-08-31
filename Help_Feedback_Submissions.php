@@ -98,10 +98,10 @@ ul
 
 <div class=WordSection1>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'>On 4/11/2013
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%'>On 4/11/2013
 11:38 <span class=GramE>AM</span>, J.E. wrote:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'>The one
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%'>The one
 thing we in my lab think would be great is if you tried to separate out cells
 based on layers as best as possible. For example, I know some interneuron types
 can be located in several layers, but in general many are expressed mainly in
@@ -109,29 +109,29 @@ specific layers. So when you list all the cells in CA3 or CA1 you could
 organize the list based on layer. The list would include oriens, pyramidale,
 radiatum, etc. <span class=GramE>Thoughts?</span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><span
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%'><span
 style='mso-tab-count:1'>          </span>On 04/11/2013 5:14 PM,
 Hippocampome.org wrote:<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:.5in'><span style='font-size:16.0pt;
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
 line-height:115%'>The other bit of functionality that we are planning on
 implementing is parcel summary pages.<span style='mso-spacerun:yes'> 
 </span>For instance, all in one page you could view everything we have
 accumulated about CA1 SR, such as cell types, etc.<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:.5in'><span style='font-size:16.0pt;
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
 line-height:115%'><span style='mso-tab-count:1'>          </span>On 4/12/2013
 10:45 <span class=GramE>AM</span>, J.E. wrote:<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
+<p class=MsoNormal style='margin-left:1.0in'><span style='font-size:14.0pt;
 line-height:115%'>Yes, that would actually be great to have a function like
 that plus it eliminates the issues with how I described organizing it. I like
 that idea. I think many others would as well.<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:1.5in'><span style='font-size:16.0pt;
+<p class=MsoNormal style='margin-left:1.5in'><span style='font-size:14.0pt;
 line-height:115%'>On 05/14/2014 2:46 PM, Hippocampome.org wrote:<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:.5in'><span style='font-size:16.0pt;
+<p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
 line-height:115%'><span style='mso-tab-count:1'>          </span><span
 style='mso-tab-count:1'>          </span>Parcel summary pages have been
 implemented.<o:p></o:p></span></p>
