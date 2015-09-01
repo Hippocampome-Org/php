@@ -145,7 +145,7 @@ Issue 217: Add a basic feedback form.
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 218: Add a new help page that tracks the feedback submissions.
+Issue 222: For conflicting data add a plain text descriptor to the marker evidence pages.
 </span></p>
 
 </div>
