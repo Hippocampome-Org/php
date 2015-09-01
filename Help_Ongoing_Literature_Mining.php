@@ -1327,6 +1327,57 @@ ul
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Hooper A, Maguire J</p>
+  </td>
+  <td width=336 valign=bottom style='width:3.5in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Characterization of a novel subtype of hippocampal interneurons that
+  express <span class=SpellE>corticotropin</span>-releasing hormone</p>
+  </td>
+  <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Hippocampus</p>
+  </td>
+  <td width=48 valign=bottom style='width:36.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>2015</p>
+  </td>
+  <td width=84 valign=bottom style='width:63.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>26135556</p>
+  </td>
+  <td width=96 valign=bottom style='width:1.0in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>09/01/2015</p>
+  </td>
+  <td width=144 valign=bottom style='width:1.5in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>For future mining</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'>Jones RS, Heinemann U</p>
   </td>
   <td width=336 valign=bottom style='width:3.5in;border-top:none;border-left:
@@ -1373,7 +1424,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:24'>
+ <tr style='mso-yfti-irow:25'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1431,7 +1482,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:25'>
+ <tr style='mso-yfti-irow:26'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1487,7 +1538,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:26'>
+ <tr style='mso-yfti-irow:27'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1545,7 +1596,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:27'>
+ <tr style='mso-yfti-irow:28'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1599,7 +1650,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:28'>
+ <tr style='mso-yfti-irow:29'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1654,7 +1705,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:29'>
+ <tr style='mso-yfti-irow:30'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1705,7 +1756,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:30'>
+ <tr style='mso-yfti-irow:31'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1758,7 +1809,7 @@ ul
   normal'>Under follow-up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:31'>
+ <tr style='mso-yfti-irow:32'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1813,7 +1864,7 @@ ul
   normal'>Under follow-up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:32'>
+ <tr style='mso-yfti-irow:33'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1827,9 +1878,9 @@ ul
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Regional
-  variability and postsynaptic targets of chandelier cells in the hippocampal
-  formation of the rat<o:p></o:p></span></p>
+  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Regional variability
+  and postsynaptic targets of chandelier cells in the hippocampal formation of
+  the rat<o:p></o:p></span></p>
   </td>
   <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1868,7 +1919,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:33'>
+ <tr style='mso-yfti-irow:34'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1918,7 +1969,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:34'>
+ <tr style='mso-yfti-irow:35'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -1972,7 +2023,7 @@ ul
   normal'>Under follow-up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:35'>
+ <tr style='mso-yfti-irow:36'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2023,7 +2074,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:36'>
+ <tr style='mso-yfti-irow:37'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2078,7 +2129,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:37'>
+ <tr style='mso-yfti-irow:38'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2128,7 +2179,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:38'>
+ <tr style='mso-yfti-irow:39'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2181,7 +2232,7 @@ ul
   normal'>up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:39'>
+ <tr style='mso-yfti-irow:40'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2234,7 +2285,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:40'>
+ <tr style='mso-yfti-irow:41'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2290,7 +2341,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:41'>
+ <tr style='mso-yfti-irow:42'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2343,7 +2394,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:42'>
+ <tr style='mso-yfti-irow:43'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2396,7 +2447,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:43'>
+ <tr style='mso-yfti-irow:44'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2446,7 +2497,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:44'>
+ <tr style='mso-yfti-irow:45'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2500,7 +2551,7 @@ ul
   normal'>up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:45'>
+ <tr style='mso-yfti-irow:46'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2550,7 +2601,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:46'>
+ <tr style='mso-yfti-irow:47'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2604,7 +2655,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:47'>
+ <tr style='mso-yfti-irow:48'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2660,7 +2711,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:48'>
+ <tr style='mso-yfti-irow:49'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2715,7 +2766,7 @@ ul
   normal'>up mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:49'>
+ <tr style='mso-yfti-irow:50'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2769,7 +2820,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:50'>
+ <tr style='mso-yfti-irow:51'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2820,7 +2871,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:51'>
+ <tr style='mso-yfti-irow:52'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2876,7 +2927,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:52'>
+ <tr style='mso-yfti-irow:53'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2928,7 +2979,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:53'>
+ <tr style='mso-yfti-irow:54'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -2979,7 +3030,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:54'>
+ <tr style='mso-yfti-irow:55'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3034,7 +3085,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:55'>
+ <tr style='mso-yfti-irow:56'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3084,7 +3135,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:56'>
+ <tr style='mso-yfti-irow:57'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3135,7 +3186,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:57'>
+ <tr style='mso-yfti-irow:58'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3185,56 +3236,6 @@ ul
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'>Under active mining</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:58'>
-  <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=336 valign=bottom style='width:3.5in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=48 valign=bottom style='width:36.15pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=84 valign=bottom style='width:63.0pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=96 valign=bottom style='width:1.0in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=144 valign=bottom style='width:1.5in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:59'>
