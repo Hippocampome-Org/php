@@ -125,27 +125,7 @@ Issue 184: In the Author search results, the neuron types are supposed to be lis
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 187: Highlight the representative sources on a markers Evidence page, when there are conflicting expression reports.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 216: Add a new "Feedback" button to the banner.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 217: Add a basic feedback form.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 222: For conflicting data add a plain text descriptor to the marker evidence pages.
 </span></p>
 
 </div>

@@ -152,6 +152,18 @@ function header_row($title, $value) {
                 </tr>";
                 return $html;
               }
+              
+function header_row_special($title, $value) {
+              	$html = "
+              	<tr>
+              	<td width='15%'></td>
+              	<td align='left' width='70%' class='table_neuron_page2_special'>
+              	$title: $value
+              	</td>
+              	<td width='15%'></td>
+              	</tr>";
+              	return $html;
+              }              
 
 $page = $_REQUEST['page'];
 if ($page)
@@ -721,156 +733,185 @@ else {
 					?>
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-				
-				
-				<?php				
-				  // handle mixed flag (conflict) notes
-	              $type_id = $type -> getId();
-	
-	              $subject = $val_property;
-	              $predicate = 'has expression';
-	              //$expression_values = explode('-', $_REQUEST['color']);
-	              $expression_values = explode('-', $color);
-	              $object = $expression_values[0];
-	              $property -> retrive_ID(2, $subject, $predicate, $object);
-	              $property_id = $property -> getProperty_id(0);
-	
-	              $conflict_note = $evidencepropertyyperel -> retrieve_conflict_note($property_id, $type_id);
-	              $conflict_note = $evidencepropertyyperel -> getConflict_note();
-	              $conflict_explanation_statement = $evidencepropertyyperel -> retrieve_property_type_explanation($property_id, $type_id);
-	              $conflict_explanation_statement = $evidencepropertyyperel -> getProperty_type_explanation();
-	              
-	              if ($conflict_note == "positive" || $conflict_note == "negative") {
-	              	if ($conflict_note=="positive") {
-	              		$print_color = "positive";
-	              		$image_link = "<img src='images/marker/positive_clear.png' border='0' width='8px' />";
-	              	}
-	              	else if ($conflict_note=="negative") {
-	              		$print_color = "negative";
-	              		$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
-	              	}
-	              	
-	              	$mixed_data = false;
-	              	$conflict_note = "";
-	              	$conflict_explanation_statement = "";
-	              }
-	              else {
-	              	if ($conflict_note == "species/protocol differences") {
-	              		$conflict_note = "species/protocol/subcellular expression differences";
-	              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
-	              	}
-	              	else if ($conflict_note == "subtypes")
-	              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
-	              	else if ($conflict_note == "conflicting data")
-	              		$image_link = "<img src='images/marker/positive-negative-conflicting_clear.png' border='0' width='15px' />";
-	              	
-	              	$mixed_data = true;
-	              	$print_color = "positive-negative";
-	              	$conflict_note = ": " . $conflict_note;
-	              }
-	              
-	              print ("$image_link <strong>&nbsp;$print_color$conflict_note</strong>");
-	              
-	              if ($conflict_explanation_statement)
-	              	print ("<BR>Conflict explanation: $conflict_explanation_statement");
-	                            
-	              list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
-	              if ($permission == 0) { // only enabled for curation, where anonymous user is disabled
-	
-		              //if ($mixed_data) {	// comment out to always display (assuming correct permissions)
-			              	$pos_summary = Array( Array(0, 0), Array (0, 0));
-			              	$pos_summary[0][0] = 0;
-			              	$pos_summary[0][1] = 0;
-			              	$pos_summary[1][0] = 0;
-			              	$pos_summary[1][1] = 0;
-			              	$neg_summary = Array( Array(0, 0), Array (0, 0));
-			              	$neg_summary[0][0] = 0;
-			              	$neg_summary[0][1] = 0;
-			              	$neg_summary[1][0] = 0;
-			              	$neg_summary[1][1] = 0;
-			              	$mixed_summary = Array( Array(0, 0), Array (0, 0));
-			              	$mixed_summary[0][0] = 0;
-			              	$mixed_summary[0][1] = 0;
-			              	$mixed_summary[1][0] = 0;
-			              	$mixed_summary[1][1] = 0;
-			              
-			              	// positive +              		
-							$property -> retrive_ID(2, $subject, 'has expression', 'positive');
-			              	$property_id_pos = $property -> getProperty_id(0);
-			
-			              	//$query = "SELECT Evidence_id FROM EvidencePropertyTypeRel WHERE Type_id=$type_id and Property_id=$property_id_pos";
-			              	//$rs = mysql_query($query);
-			              	//while(list($id_evidence_pos) = mysql_fetch_row($rs)) {
-			              	
-			              	$evidencepropertyyperel -> retrive_evidence_id($property_id_pos, $type_id);
-			              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
-			              		
-			              	for ($i=0; $i<$n_id_evidence; $i++) {
-			              		$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);              		
-			              		$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
-			              		$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);              			
-			              		$markerdata -> retrive_info($id_markerdata1);
-			              
-			              		$expression = $markerdata -> getExpression();
-			              		$expression = preg_replace('/[\[\]"]/', '', $expression);
-			              		$animal = $markerdata -> getAnimal();
-			              		$animal = preg_replace('/[\[\]"]/', '', $animal);
-			              		$protocol = $markerdata -> getProtocol();
-			              		$protocol = preg_replace('/[\[\]"]/', '', $protocol);
-			              			
-			              		if ($expression != "positive, negative") {
-				              		if ($protocol != "unknown") {	              
-				              			if ($animal=="rat" && $protocol=="immunohistochemistry") $pos_summary[0][0]++;
-				              			elseif ($animal=="rat" && $protocol=="mRNA") $pos_summary[0][1]++;
-				              			elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $pos_summary[1][0]++;
-				              			elseif ($animal=="mouse" && $protocol=="mRNA") $pos_summary[1][1]++;
-				              		}
-			              		}
-			              		else {
-									if ($protocol != "unknown") {
-										if ($animal=="rat" && $protocol=="immunohistochemistry") $mixed_summary[0][0]++;
-										elseif ($animal=="rat" && $protocol=="mRNA") $mixed_summary[0][1]++;
-										elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $mixed_summary[1][0]++;
-										elseif ($animal=="mouse" && $protocol=="mRNA") $mixed_summary[1][1]++;
-									}
-								}
-			            	}
-			              
-			              
-			              	// negative -
-			              	$property -> retrive_ID(2, $subject, 'has expression', 'negative');
-			              	$property_id_neg = $property -> getProperty_id(0);
-			              
-			              	//$query = "SELECT Evidence_id FROM EvidencePropertyTypeRel WHERE Type_id=$type_id and Property_id=$property_id_neg";
-			              	//$rs = mysql_query($query);              		
-			              	//while(list($id_evidence_neg) = mysql_fetch_row($rs)) {
-			              	
-			              	$evidencepropertyyperel -> retrive_evidence_id($property_id_neg, $type_id);
-			              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
-			              	
-			              	for ($i=0; $i<$n_id_evidence; $i++) {
-			              		$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
-			              		$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
-			              		$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
-			              		$markerdata -> retrive_info($id_markerdata1);
-			              
-			              		$expression = $markerdata -> getExpression();
-			              		$expression = preg_replace('/[\[\]"]/', '', $expression);
-			              		$animal = $markerdata -> getAnimal();
-			              		$animal = preg_replace('/[\[\]"]/', '', $animal);
-			              		$protocol = $markerdata -> getProtocol();
-			              		$protocol = preg_replace('/[\[\]"]/', '', $protocol);
-			              			
-			              		if ($expression != "positive, negative") {
-				              		if ($protocol != "unknown") {	              
-				              			if ($animal=="rat" && $protocol=="immunohistochemistry") $neg_summary[0][0]++;
-				              			elseif ($animal=="rat" && $protocol=="mRNA") $neg_summary[0][1]++;
-				              			elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $neg_summary[1][0]++;
-				              			elseif ($animal=="mouse" && $protocol=="mRNA") $neg_summary[1][1]++;
-				              		}
-				              	}
-			              	}   
-	              	
+					<?php			  
+
+		              $type_id = $type -> getId();
+		              $subject = $val_property;
+		              $predicate = 'has expression';
+		                            
+		              
+		              // look at calls for evidence and build summary arrays
+		              	
+		              $pos_summary = Array( Array(0, 0), Array (0, 0));
+		              $pos_summary[0][0] = 0;
+		              $pos_summary[0][1] = 0;
+		              $pos_summary[1][0] = 0;
+		              $pos_summary[1][1] = 0;
+		              $neg_summary = Array( Array(0, 0), Array (0, 0));
+		              $neg_summary[0][0] = 0;
+		              $neg_summary[0][1] = 0;
+		              $neg_summary[1][0] = 0;
+		              $neg_summary[1][1] = 0;
+		              $mixed_summary = Array( Array(0, 0), Array (0, 0));
+		              $mixed_summary[0][0] = 0;
+		              $mixed_summary[0][1] = 0;
+		              $mixed_summary[1][0] = 0;
+		              $mixed_summary[1][1] = 0;
+		              
+		              // positive +
+		              $property -> retrive_ID(2, $subject, 'has expression', 'positive');
+		              $property_id_pos = $property -> getProperty_id(0);
+		              $num_ids_pos = $property -> getNumber_type();	// should be 1, or 0 if id for this marker (positive) is not in DB
+		              	
+		              if ($num_ids_pos > 0) {
+		              	$evidencepropertyyperel -> retrive_evidence_id($property_id_pos, $type_id);
+		              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
+		              }
+		              else
+		              	$n_id_evidence = 0;
+		              
+		              for ($i=0; $i<$n_id_evidence; $i++) {
+		              	$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
+		              	$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
+		              	$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+		              	$markerdata -> retrive_info($id_markerdata1);
+		              
+		              	$expression = $markerdata -> getExpression();
+		              	$expression = preg_replace('/[\[\]"]/', '', $expression);
+		              	$animal = $markerdata -> getAnimal();
+		              	$animal = preg_replace('/[\[\]"]/', '', $animal);
+		              	$protocol = $markerdata -> getProtocol();
+		              	$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+		              
+		              	if ($expression != "positive, negative") {
+		              		if ($protocol != "unknown") {
+		              			if ($animal=="rat" && $protocol=="immunohistochemistry") $pos_summary[0][0]++;
+		              			elseif ($animal=="rat" && $protocol=="mRNA") $pos_summary[0][1]++;
+		              			elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $pos_summary[1][0]++;
+		              			elseif ($animal=="mouse" && $protocol=="mRNA") $pos_summary[1][1]++;
+		              		}
+		              	}
+		              	else {
+		              		if ($protocol != "unknown") {
+		              			if ($animal=="rat" && $protocol=="immunohistochemistry") $mixed_summary[0][0]++;
+		              			elseif ($animal=="rat" && $protocol=="mRNA") $mixed_summary[0][1]++;
+		              			elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $mixed_summary[1][0]++;
+		              			elseif ($animal=="mouse" && $protocol=="mRNA") $mixed_summary[1][1]++;
+		              		}
+		              	}
+		              }
+		              
+		              
+		              // negative -
+		              $property -> retrive_ID(2, $subject, 'has expression', 'negative');
+		              $property_id_neg = $property -> getProperty_id(0);
+		              $num_ids_neg = $property -> getNumber_type();	// should be 1, or 0 if id for this marker (positive) is not in DB
+		              	
+		              if ($num_ids_neg > 0) {
+		              	$evidencepropertyyperel -> retrive_evidence_id($property_id_neg, $type_id);
+		              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
+		              }
+		              else
+		              	$n_id_evidence = 0;
+		              	
+		              for ($i=0; $i<$n_id_evidence; $i++) {
+		              	$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
+		              	$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
+		              	$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+		              	$markerdata -> retrive_info($id_markerdata1);
+		              
+		              	$expression = $markerdata -> getExpression();
+		              	$expression = preg_replace('/[\[\]"]/', '', $expression);
+		              	$animal = $markerdata -> getAnimal();
+		              	$animal = preg_replace('/[\[\]"]/', '', $animal);
+		              	$protocol = $markerdata -> getProtocol();
+		              	$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+		              
+		              	if ($expression != "positive, negative") {
+		              		if ($protocol != "unknown") {
+		              			if ($animal=="rat" && $protocol=="immunohistochemistry") $neg_summary[0][0]++;
+		              			elseif ($animal=="rat" && $protocol=="mRNA") $neg_summary[0][1]++;
+		              			elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $neg_summary[1][0]++;
+		              			elseif ($animal=="mouse" && $protocol=="mRNA") $neg_summary[1][1]++;
+		              		}
+		              	}
+		              }
+		              
+		              $total_pos_evid = $pos_summary[0][0] + $pos_summary[0][1] + $pos_summary[1][0] + $pos_summary[1][1];
+		              $total_neg_evid = $neg_summary[0][0] + $neg_summary[0][1] + $neg_summary[1][0] + $neg_summary[1][1];
+		              $total_mixed_evid = $mixed_summary[0][0] + $mixed_summary[0][1] + $mixed_summary[1][0] + $mixed_summary[1][1];
+		              
+		              	if ( ($total_pos_evid > 0 && ($total_neg_evid > 0 || $total_mixed_evid > 0)) ||
+	              		($total_neg_evid > 0 && ($total_pos_evid > 0 || $total_mixed_evid > 0)) ||
+		              	($total_mixed_evid > 0 && ($total_pos_evid > 0 || $total_neg_evid > 0)) )
+	              			$individual_calls_conflict = 1;
+	              		else
+	              			$individual_calls_conflict = 0;
+
+		              
+		              // handle mixed flag explanation notes
+		              
+		              //$expression_values = explode('-', $_REQUEST['color']);
+		              $expression_values = explode('-', $color);
+		              $object = $expression_values[0];
+		              $property -> retrive_ID(2, $subject, $predicate, $object);
+		              $property_id = $property -> getProperty_id(0);
+		              
+		              $conflict_note = $evidencepropertyyperel -> retrieve_conflict_note($property_id, $type_id);
+		              $conflict_note = $evidencepropertyyperel -> getConflict_note();
+		              $conflict_explanation_statement = $evidencepropertyyperel -> retrieve_property_type_explanation($property_id, $type_id);
+		              $conflict_explanation_statement = $evidencepropertyyperel -> getProperty_type_explanation();
+		              
+		              if ($conflict_note == "positive" || $conflict_note == "negative") {
+		              	if ($conflict_note=="positive") {
+		              		$print_color = "positive";
+		              		$image_link = "<img src='images/marker/positive_clear.png' border='0' width='8px' />";
+		              	}
+		              	else if ($conflict_note=="negative") {
+		              		$print_color = "negative";
+		              		$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
+		              	}
+		              	 
+		              	$mixed_data = false;
+		              	$conflict_note = "";
+		              	$conflict_explanation_statement = "";
+		              	
+		              	if ($individual_calls_conflict)
+		              		$dissent_note = "* Minority-opinion exists (open all evidence to view)";
+		              	else
+		              		$dissent_note = NULL;
+		              }
+		              else {
+		              	if ($conflict_note == "species/protocol differences") {
+		              		$conflict_note = "species/protocol/subcellular expression differences";
+		              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
+		              	}
+		              	else if ($conflict_note == "subtypes")
+		              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
+		              	else if ($conflict_note == "conflicting data") {
+		              		$image_link = "<img src='images/marker/positive-negative-conflicting_clear.png' border='0' width='15px' />";
+		              		$conflict_explanation_statement = "Data come from multiple sources that use the same species and technique; however, non-identical experimental details (e.g., the antibodies used) prevent conclusive interpretation.";
+		              	}
+		              	 
+		              	$mixed_data = true;
+		              	$print_color = "positive-negative";
+		              	$conflict_note = ": " . $conflict_note;
+		              	$dissent_note = NULL;
+		              }
+		              
+		              print ("$image_link&nbsp;<strong>$print_color$conflict_note</strong>");
+		              
+		              if ($dissent_note)
+		              	print ("<BR>$dissent_note");
+		              if ($conflict_explanation_statement)
+		              	print ("<BR>Explanation: $conflict_explanation_statement");
+		              
+		              
+		              
+		              // print summary arrays for debugging and vetting
+		              
+		              list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
+		              if ($permission == 0) { // only enabled for curation, where anonymous user is disabled
 
 						// table containing both table options
 		              	echo "<TABLE> <TR> <TD width='7%'></TD> <TD width='44%'>";
@@ -880,7 +921,7 @@ else {
 		              	
 		              	echo "<TR> <TD valign='top'> <TABLE><TR><TD><strong>Positive</strong></TD></TR></TABLE> </TD>";
 		              	echo "<TD valign='top'><TABLE><TR>";
-		              	if ($pos_summary[0][0] + $pos_summary[0][1] + $pos_summary[1][0] + $pos_summary[1][1] > 0) {	              						
+		              	if ($total_pos_evid > 0) {	              						
 			              	if ($pos_summary[0][0] > 0) {echo "<TD>Rat;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $pos_summary[0][0] . "]</TD></TR>";}
 			              	if ($pos_summary[0][1] > 0) {echo "<TD>Rat;</TD> <TD>mRNA</TD> <TD>[" . $pos_summary[0][1] . "]</TD></TR>";}
 			              	if ($pos_summary[1][0] > 0) {echo "<TD>Mouse;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $pos_summary[1][0] . "]</TD></TR>";}
@@ -892,7 +933,7 @@ else {
 		              	
 		              	echo "<TR> <TD valign='top'> <TABLE><TR><TD><strong>Negative</strong></TD></TR></TABLE> </TD>";
 		              	echo "<TD valign='top'><TABLE><TR>";
-		              	if ($neg_summary[0][0] + $neg_summary[0][1] + $neg_summary[1][0] + $neg_summary[1][1] > 0) {              	
+		              	if ($total_neg_evid > 0) {              	
 			              	if ($neg_summary[0][0] > 0) {echo "<TD>Rat;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $neg_summary[0][0] . "]</TD></TR>";}
 			              	if ($neg_summary[0][1] > 0) {echo "<TD>Rat;</TD> <TD>mRNA</TD> <TD>[" . $neg_summary[0][1] . "]</TD></TR>";}
 			              	if ($neg_summary[1][0] > 0) {echo "<TD>Mouse;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $neg_summary[1][0] . "]</TD></TR>";}
@@ -904,7 +945,7 @@ else {
 			              		
 			            echo "<TR> <TD valign='top'> <TABLE><TR><TD><strong>Mixed</strong></TD></TR></TABLE> </TD>";
 			            echo "<TD valign='top'><TABLE><TR>";
-		              	if ($mixed_summary[0][0] + $mixed_summary[0][1] + $mixed_summary[1][0] + $mixed_summary[1][1] > 0) {
+		              	if ($total_mixed_evid > 0) {
 			              	if ($mixed_summary[0][0] > 0) {echo "<TD>Rat;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $mixed_summary[0][0] . "]</TD></TR>";}
 			              	if ($mixed_summary[0][1] > 0) {echo "<TD>Rat;</TD> <TD>mRNA</TD> <TD>[" . $mixed_summary[0][1] . "]</TD></TR>";}
 			              	if ($mixed_summary[1][0] > 0) {echo "<TD>Mouse;</TD> <TD>Immunohistochemistry</TD> <TD>[" . $mixed_summary[1][0] . "]</TD></TR>";}
@@ -986,10 +1027,7 @@ else {
 		              	echo "</center></TD> </TR>";
 		              	echo "</TABLE><HR>";
 		              	echo "</TD> </TR></TABLE>";
-		              	
-	              	//}  // END if $mixed_data
 
-	              ///////////// end of CLR changes /////////////
 	              } //END only enabled for curation, where anonymous user is disabled
               
 				?>
@@ -1687,7 +1725,11 @@ else {
 							// **************************************************************************************							
               // STM Formatting header
 
-              $header_html = header_row("EXPRESSION", $expression);
+			  if (($expression == $print_color) || ($print_color == "positive-negative"))
+              	$header_html = header_row("EXPRESSION", $expression);
+			  else 
+			  	$header_html = header_row_special("EXPRESSION (* minority opinion)", $expression);
+              
               if ($animal != 'rat')
                 $header_html = $header_html . header_row("ANIMAL", $animal);
                else 

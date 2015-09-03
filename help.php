@@ -19,6 +19,11 @@
 	<table width="40%" border="0" cellspacing="0" cellpadding="0" style="position:absolute; top:125px; left:80px;">
 	<tr>
 		<td width="100%" align="left">
+			<font class='font1a'>Feedback:</font> &nbsp; &nbsp;
+			<ul> 
+			<li><a href='user_feedback_form_entry.php'><font class="font7"> User Feedback Form</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Morphology:</font> &nbsp; &nbsp;
 			<ul> 
 			<li><a href='Help_Morphological_Abbreviations.php'><font class="font7"> Abbreviations</font></a></li>

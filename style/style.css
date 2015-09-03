@@ -221,6 +221,14 @@ border:none;
 }
 
 /* Change with resolution ------------------------------------------------------------- */	
+.table_neuron_page2_special {
+	color:#000066;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	background:#CCCCAA;
+}
+
+/* Change with resolution ------------------------------------------------------------- */	
 .table_neuron_page3 {
 	color:#FFFFFF;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
