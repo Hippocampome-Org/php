@@ -22,6 +22,7 @@
 			<font class='font1a'>Feedback:</font> &nbsp; &nbsp;
 			<ul> 
 			<li><a href='user_feedback_form_entry.php'><font class="font7"> User Feedback Form</font></a></li>
+  			<li><a href='Help_Feedback_Submissions.php'><font class="font7"> Feedback Submissions</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Morphology:</font> &nbsp; &nbsp;
@@ -65,7 +66,6 @@
   			<li><a href='Help_Ongoing_Literature_Mining.php'><font class="font7"> Ongoing Literature Mining</font></a></li>
   			<li><a href='Help_Release_Notes.php'><font class="font7"> Release Notes</font></a></li>
   			<li><a href='Help_FAQ.php'><font class="font7"> FAQs</font></a></li>
-  			<li><a href='Help_Feedback_Submissions.php'><font class="font7"> Feedback Submissions</font></a></li>
   			<li><a href='Help_On-hold_Types.php'><font class="font7"> On-hold Types</font></a></li>
   			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
   			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Usage Scenario</font></a></li>
