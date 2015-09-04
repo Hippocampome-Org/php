@@ -93,9 +93,8 @@ ul
 <BR><BR><BR><BR><BR><BR><BR>
 		
 <div class='title_area'>
-	<font class="font1">On-hold Cell Types</font>
+	<font class="font1">On-hold Types</font>
 </div>
-
 
 <div class=WordSection1>
 
@@ -1758,9 +1757,8 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Target selectivity and
-  neurochemical characteristics of VIP-immunoreactive interneurons in the rat
-  dentate gyrus<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Target selectivity and neurochemical
+  characteristics of VIP-immunoreactive interneurons in the rat dentate gyrus<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2194,109 +2192,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:21;height:75.0pt'>
-  <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
-  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
-  0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>DG<o:p></o:p></span></p>
-  </td>
-  <td width=41 nowrap valign=bottom style='width:30.65pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>(<span class=SpellE>i</span>)<o:p></o:p></span></p>
-  </td>
-  <td width=76 valign=bottom style='width:57.1pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>2322<o:p></o:p></span></p>
-  </td>
-  <td width=120 valign=bottom style='width:89.8pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>CCK+ interneuron<o:p></o:p></span></p>
-  </td>
-  <td width=51 valign=bottom style='width:38.2pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>N = 1<o:p></o:p></span></p>
-  </td>
-  <td width=102 valign=bottom style='width:76.4pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>&nbsp;N = 1<o:p></o:p></span></p>
-  </td>
-  <td width=113 nowrap valign=bottom style='width:84.95pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Fig 1a<o:p></o:p></span></p>
-  </td>
-  <td width=137 valign=bottom style='width:102.9pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Hefft</span></span><span
-  style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> S1, Jonas P<o:p></o:p></span></p>
-  </td>
-  <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Asynchronous GABA release
-  generates long-lasting inhibition at a hippocampal interneuron-principal
-  neuron synapse<o:p></o:p></span></p>
-  </td>
-  <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>2005<o:p></o:p></span></p>
-  </td>
-  <td width=89 valign=bottom style='width:66.6pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>16158066<o:p></o:p></span></p>
-  </td>
-  <td width=134 valign=bottom style='width:100.7pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Nature Neuroscience<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:22;height:60.0pt'>
+ <tr style='mso-yfti-irow:21;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2395,7 +2291,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:23;height:75.0pt'>
+ <tr style='mso-yfti-irow:22;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2499,7 +2395,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Nature Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:24;height:60.0pt'>
+ <tr style='mso-yfti-irow:23;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2600,7 +2496,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Comparative Neurology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:25;height:75.0pt'>
+ <tr style='mso-yfti-irow:24;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2702,7 +2598,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:26;height:75.0pt'>
+ <tr style='mso-yfti-irow:25;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2804,7 +2700,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:27;height:75.0pt'>
+ <tr style='mso-yfti-irow:26;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2877,8 +2773,7 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Interneurons of the dentate-hilus
-  border of the rat dentate gyrus: morphological and electrophysiological
-  heterogeneity<o:p></o:p></span></p>
+  border of the rat dentate gyrus: morphological and electrophysiological heterogeneity<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2905,7 +2800,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:28;height:75.0pt'>
+ <tr style='mso-yfti-irow:27;height:75.0pt'>
   <td width=76 valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3008,7 +2903,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Nature Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:29;height:45.0pt'>
+ <tr style='mso-yfti-irow:28;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3111,7 +3006,7 @@ ul
   "Times New Roman"'> brain Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:30;height:60.0pt'>
+ <tr style='mso-yfti-irow:29;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3213,7 +3108,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:31;height:45.0pt'>
+ <tr style='mso-yfti-irow:30;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3315,7 +3210,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:32;height:45.0pt'>
+ <tr style='mso-yfti-irow:31;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3416,7 +3311,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:33;height:75.0pt'>
+ <tr style='mso-yfti-irow:32;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3518,7 +3413,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:34;height:75.0pt'>
+ <tr style='mso-yfti-irow:33;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3621,7 +3516,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:35;height:30.0pt'>
+ <tr style='mso-yfti-irow:34;height:30.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3722,7 +3617,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Frontiers in Neural Circuits<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:36;height:75.0pt'>
+ <tr style='mso-yfti-irow:35;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3825,7 +3720,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:37;height:1.25in'>
+ <tr style='mso-yfti-irow:36;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -3917,7 +3812,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Structure and Function<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:38;height:1.25in'>
+ <tr style='mso-yfti-irow:37;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4017,7 +3912,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:39;height:60.0pt'>
+ <tr style='mso-yfti-irow:38;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4120,7 +4015,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurophysiol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:40;height:30.0pt'>
+ <tr style='mso-yfti-irow:39;height:30.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4219,7 +4114,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Frontiers in Neural Circuits<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:41;height:75.0pt'>
+ <tr style='mso-yfti-irow:40;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4291,8 +4186,8 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Dentate hilar cells with dendrites
-  in the molecular layer have lower thresholds for synaptic activation by perforant
-  path than granule cells<o:p></o:p></span></p>
+  in the molecular layer have lower thresholds for synaptic activation by
+  perforant path than granule cells<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -4319,7 +4214,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:42;height:105.0pt'>
+ <tr style='mso-yfti-irow:41;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4423,7 +4318,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:43;height:75.0pt'>
+ <tr style='mso-yfti-irow:42;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4527,7 +4422,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:44;height:105.0pt'>
+ <tr style='mso-yfti-irow:43;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4631,7 +4526,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:45;height:105.0pt'>
+ <tr style='mso-yfti-irow:44;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4735,7 +4630,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:46;height:1.25in'>
+ <tr style='mso-yfti-irow:45;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4838,7 +4733,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:47;height:75.0pt'>
+ <tr style='mso-yfti-irow:46;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -4931,7 +4826,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:48;height:45.0pt'>
+ <tr style='mso-yfti-irow:47;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5032,7 +4927,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:49;height:1.25in'>
+ <tr style='mso-yfti-irow:48;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5137,7 +5032,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:50;height:1.25in'>
+ <tr style='mso-yfti-irow:49;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5240,7 +5135,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:51;height:75.0pt'>
+ <tr style='mso-yfti-irow:50;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5344,7 +5239,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:52;height:60.0pt'>
+ <tr style='mso-yfti-irow:51;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5447,7 +5342,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:53;height:1.25in'>
+ <tr style='mso-yfti-irow:52;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5551,7 +5446,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:54;height:1.25in'>
+ <tr style='mso-yfti-irow:53;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5656,7 +5551,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:55;height:75.0pt'>
+ <tr style='mso-yfti-irow:54;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5759,7 +5654,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:56;height:1.25in'>
+ <tr style='mso-yfti-irow:55;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5864,7 +5759,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:57;height:105.0pt'>
+ <tr style='mso-yfti-irow:56;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5967,7 +5862,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:58;height:1.25in'>
+ <tr style='mso-yfti-irow:57;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6044,8 +5939,8 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Dynamic changes in interneuron <span
-  class=SpellE>morphophysiological</span> properties mark the maturation of hippocampal
-  network activity<o:p></o:p></span></p>
+  class=SpellE>morphophysiological</span> properties mark the maturation of
+  hippocampal network activity<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6072,7 +5967,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:59;height:105.0pt'>
+ <tr style='mso-yfti-irow:58;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6175,7 +6070,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:60;height:105.0pt'>
+ <tr style='mso-yfti-irow:59;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6279,7 +6174,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:61;height:1.25in'>
+ <tr style='mso-yfti-irow:60;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6384,7 +6279,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:62;height:105.0pt'>
+ <tr style='mso-yfti-irow:61;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6487,7 +6382,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:63;height:150.0pt'>
+ <tr style='mso-yfti-irow:62;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6591,7 +6486,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:64;height:45.0pt'>
+ <tr style='mso-yfti-irow:63;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6692,7 +6587,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:65;height:105.0pt'>
+ <tr style='mso-yfti-irow:64;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6795,7 +6690,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:66;height:60.0pt'>
+ <tr style='mso-yfti-irow:65;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -6898,7 +6793,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:67;height:1.25in'>
+ <tr style='mso-yfti-irow:66;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7003,7 +6898,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:68;height:30.0pt'>
+ <tr style='mso-yfti-irow:67;height:30.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7101,7 +6996,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:69;height:105.0pt'>
+ <tr style='mso-yfti-irow:68;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7204,7 +7099,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:70;height:60.0pt'>
+ <tr style='mso-yfti-irow:69;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7276,8 +7171,8 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Neurogliaform and Ivy cells: A
-  major family of nNOS expressing GABAergic neurons<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Neurogliaform and Ivy cells: A major
+  family of nNOS expressing GABAergic neurons<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7304,7 +7199,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Front Neuro Cir<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:71;height:105.0pt'>
+ <tr style='mso-yfti-irow:70;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7408,7 +7303,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:72;height:75.0pt'>
+ <tr style='mso-yfti-irow:71;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7481,9 +7376,8 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Target selectivity and
-  neurochemical characteristics of VIP-immunoreactive interneurons in the rat
-  dentate gyrus<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Target selectivity and neurochemical
+  characteristics of VIP-immunoreactive interneurons in the rat dentate gyrus<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7510,7 +7404,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:73;height:105.0pt'>
+ <tr style='mso-yfti-irow:72;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7613,7 +7507,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:74;height:1.25in'>
+ <tr style='mso-yfti-irow:73;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7717,7 +7611,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:75;height:105.0pt'>
+ <tr style='mso-yfti-irow:74;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7820,7 +7714,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:76;height:1.25in'>
+ <tr style='mso-yfti-irow:75;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7923,7 +7817,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:77;height:105.0pt'>
+ <tr style='mso-yfti-irow:76;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8026,7 +7920,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:78;height:45.0pt'>
+ <tr style='mso-yfti-irow:77;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8127,7 +8021,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:79;height:45.0pt'>
+ <tr style='mso-yfti-irow:78;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8228,7 +8122,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:80;height:1.25in'>
+ <tr style='mso-yfti-irow:79;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8333,7 +8227,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:81;height:1.25in'>
+ <tr style='mso-yfti-irow:80;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8438,7 +8332,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:82;height:1.25in'>
+ <tr style='mso-yfti-irow:81;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8543,7 +8437,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:83;height:75.0pt'>
+ <tr style='mso-yfti-irow:82;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8645,7 +8539,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:84;height:75.0pt'>
+ <tr style='mso-yfti-irow:83;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8746,7 +8640,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:85;height:1.25in'>
+ <tr style='mso-yfti-irow:84;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8851,7 +8745,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:86;height:1.25in'>
+ <tr style='mso-yfti-irow:85;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8955,7 +8849,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:87;height:105.0pt'>
+ <tr style='mso-yfti-irow:86;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9058,7 +8952,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Comparative Neurology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:88;height:45.0pt'>
+ <tr style='mso-yfti-irow:87;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9159,7 +9053,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:89;height:105.0pt'>
+ <tr style='mso-yfti-irow:88;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9262,7 +9156,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Comparative Neurology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:90;height:135.0pt'>
+ <tr style='mso-yfti-irow:89;height:135.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9368,7 +9262,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:91;height:105.0pt'>
+ <tr style='mso-yfti-irow:90;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9471,7 +9365,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Comparative Neurology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:92;height:105.0pt'>
+ <tr style='mso-yfti-irow:91;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9574,7 +9468,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Comparative Neurology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:93;height:75.0pt'>
+ <tr style='mso-yfti-irow:92;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9675,7 +9569,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:94;height:1.25in'>
+ <tr style='mso-yfti-irow:93;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9779,7 +9673,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:95;height:1.25in'>
+ <tr style='mso-yfti-irow:94;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9884,7 +9778,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:96;height:1.25in'>
+ <tr style='mso-yfti-irow:95;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -9989,7 +9883,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:97;height:1.25in'>
+ <tr style='mso-yfti-irow:96;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10094,7 +9988,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:98;height:105.0pt'>
+ <tr style='mso-yfti-irow:97;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10197,7 +10091,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:99;height:60.0pt'>
+ <tr style='mso-yfti-irow:98;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10271,8 +10165,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Precision and variability in postsynaptic
-  target selection of inhibitory cells in the hippocampal CA3 region<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Precision and variability in
+  postsynaptic target selection of inhibitory cells in the hippocampal CA3
+  region<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -10299,7 +10194,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:100;height:1.25in'>
+ <tr style='mso-yfti-irow:99;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10404,7 +10299,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:101;height:75.0pt'>
+ <tr style='mso-yfti-irow:100;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10505,7 +10400,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neurophysiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:102;height:1.25in'>
+ <tr style='mso-yfti-irow:101;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -10597,7 +10492,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Structure and Function<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:103;height:1.25in'>
+ <tr style='mso-yfti-irow:102;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10697,7 +10592,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:104;height:75.0pt'>
+ <tr style='mso-yfti-irow:103;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10797,7 +10692,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:105;height:75.0pt'>
+ <tr style='mso-yfti-irow:104;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10897,7 +10792,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:106;height:75.0pt'>
+ <tr style='mso-yfti-irow:105;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -10997,7 +10892,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:107;height:75.0pt'>
+ <tr style='mso-yfti-irow:106;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11097,7 +10992,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:108;height:75.0pt'>
+ <tr style='mso-yfti-irow:107;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11197,7 +11092,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:109;height:45.0pt'>
+ <tr style='mso-yfti-irow:108;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11300,7 +11195,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Science<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:110;height:75.0pt'>
+ <tr style='mso-yfti-irow:109;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11403,7 +11298,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Physiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:111;height:75.0pt'>
+ <tr style='mso-yfti-irow:110;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11505,7 +11400,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurophysiol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:112;height:60.0pt'>
+ <tr style='mso-yfti-irow:111;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11607,7 +11502,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Frontiers in Neuroanatomy<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:113;height:60.0pt'>
+ <tr style='mso-yfti-irow:112;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11710,7 +11605,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:114;height:150.0pt'>
+ <tr style='mso-yfti-irow:113;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11814,7 +11709,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:115;height:150.0pt'>
+ <tr style='mso-yfti-irow:114;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11918,7 +11813,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:116;height:1.25in'>
+ <tr style='mso-yfti-irow:115;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12009,7 +11904,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:117;height:1.25in'>
+ <tr style='mso-yfti-irow:116;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12101,7 +11996,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:118;height:1.25in'>
+ <tr style='mso-yfti-irow:117;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12193,7 +12088,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>j Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:119;height:75.0pt'>
+ <tr style='mso-yfti-irow:118;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12286,7 +12181,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Cell Tissue Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:120;height:1.25in'>
+ <tr style='mso-yfti-irow:119;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12378,7 +12273,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:121;height:45.0pt'>
+ <tr style='mso-yfti-irow:120;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12469,7 +12364,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:122;height:60.0pt'>
+ <tr style='mso-yfti-irow:121;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12563,7 +12458,7 @@ ul
   "Times New Roman"'> <span class=SpellE>Int</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:123;height:30.0pt'>
+ <tr style='mso-yfti-irow:122;height:30.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12651,7 +12546,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:124;height:45.0pt'>
+ <tr style='mso-yfti-irow:123;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12740,7 +12635,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Science<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:125;height:45.0pt'>
+ <tr style='mso-yfti-irow:124;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -12840,7 +12735,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Handbook of Brain Microcircuits<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:126;height:150.0pt'>
+ <tr style='mso-yfti-irow:125;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -12945,7 +12840,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:127;height:75.0pt'>
+ <tr style='mso-yfti-irow:126;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -12987,8 +12882,7 @@ ul
   0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>weak to non-existent axonal
-  evidence<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>weak to non-existent axonal evidence<o:p></o:p></span></p>
   </td>
   <td width=113 nowrap valign=bottom style='width:84.95pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -13038,7 +12932,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:128;height:135.0pt'>
+ <tr style='mso-yfti-irow:127;height:135.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -13131,7 +13025,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:129;height:45.0pt'>
+ <tr style='mso-yfti-irow:128;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -13222,7 +13116,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:130;height:75.0pt'>
+ <tr style='mso-yfti-irow:129;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -13314,7 +13208,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:131;height:105.0pt'>
+ <tr style='mso-yfti-irow:130;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13387,9 +13281,9 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Physiological and morphological
-  diversity of <span class=SpellE>immunocytochemically</span> defined parvalbumin-
-  and cholecystokinin-positive interneurones in CA1 of the adult rat
-  hippocampus<o:p></o:p></span></p>
+  diversity of <span class=SpellE>immunocytochemically</span> defined
+  parvalbumin- and cholecystokinin-positive interneurones in CA1 of the adult
+  rat hippocampus<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -13416,7 +13310,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J Comp <span class=SpellE>Neurol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:132;height:120.0pt'>
+ <tr style='mso-yfti-irow:131;height:120.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13521,7 +13415,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:133;height:45.0pt'>
+ <tr style='mso-yfti-irow:132;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13620,7 +13514,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Science<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:134;height:135.0pt'>
+ <tr style='mso-yfti-irow:133;height:135.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13724,7 +13618,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Nat <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:135;height:45.0pt'>
+ <tr style='mso-yfti-irow:134;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13827,7 +13721,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Physiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:136;height:1.25in'>
+ <tr style='mso-yfti-irow:135;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13929,7 +13823,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:137;height:60.0pt'>
+ <tr style='mso-yfti-irow:136;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14031,7 +13925,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Front Cell <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:138;height:150.0pt'>
+ <tr style='mso-yfti-irow:137;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14136,7 +14030,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:139;height:75.0pt'>
+ <tr style='mso-yfti-irow:138;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14211,7 +14105,8 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Neurogliaform cells and other
-  interneurons of stratum lacunosum-moleculare gate entorhinal-hippocampal dialogue<o:p></o:p></span></p>
+  interneurons of stratum lacunosum-moleculare gate entorhinal-hippocampal
+  dialogue<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -14238,7 +14133,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Physiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:140;height:1.25in'>
+ <tr style='mso-yfti-irow:139;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14340,7 +14235,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:141;height:75.0pt'>
+ <tr style='mso-yfti-irow:140;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14440,7 +14335,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurophysiol</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:142;height:60.0pt'>
+ <tr style='mso-yfti-irow:141;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14542,7 +14437,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Front Cell <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:143;height:30.0pt'>
+ <tr style='mso-yfti-irow:142;height:30.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14615,8 +14510,8 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Inhibitory control of hippocampal
-  inhibitory neurons<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Inhibitory control of hippocampal inhibitory
+  neurons<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -14643,7 +14538,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Front <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:144;height:60.0pt'>
+ <tr style='mso-yfti-irow:143;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14747,7 +14642,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:145;height:150.0pt'>
+ <tr style='mso-yfti-irow:144;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14851,7 +14746,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:146;height:75.0pt'>
+ <tr style='mso-yfti-irow:145;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -14954,7 +14849,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:147;height:60.0pt'>
+ <tr style='mso-yfti-irow:146;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15054,7 +14949,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:148;height:2.5in'>
+ <tr style='mso-yfti-irow:147;height:2.5in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15158,7 +15053,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Nat <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:149;height:60.0pt'>
+ <tr style='mso-yfti-irow:148;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15258,7 +15153,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:150;height:75.0pt'>
+ <tr style='mso-yfti-irow:149;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15331,9 +15226,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Synaptic communication among hippocampal
-  interneurons: properties of spontaneous IPSCs in morphologically identified
-  cells<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Synaptic communication among
+  hippocampal interneurons: properties of spontaneous IPSCs in morphologically
+  identified cells<o:p></o:p></span></p>
   </td>
   <td width=44 nowrap valign=bottom style='width:33.15pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -15360,7 +15255,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:151;height:75.0pt'>
+ <tr style='mso-yfti-irow:150;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15462,7 +15357,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Frontiers in Neural Circuits<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:152;height:120.0pt'>
+ <tr style='mso-yfti-irow:151;height:120.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15567,7 +15462,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:153;height:1.25in'>
+ <tr style='mso-yfti-irow:152;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -15658,7 +15553,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:154;height:105.0pt'>
+ <tr style='mso-yfti-irow:153;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15760,7 +15655,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:155;height:1.25in'>
+ <tr style='mso-yfti-irow:154;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border-top:none;
   border-left:solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
   mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
@@ -15852,7 +15747,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:156;height:60.0pt'>
+ <tr style='mso-yfti-irow:155;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -15954,7 +15849,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:157;height:1.25in'>
+ <tr style='mso-yfti-irow:156;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16056,7 +15951,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:158;height:1.25in'>
+ <tr style='mso-yfti-irow:157;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16157,7 +16052,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuropharmacology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:159;height:1.25in'>
+ <tr style='mso-yfti-irow:158;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16260,7 +16155,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>J <span class=SpellE>Neurosci</span><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:160;height:75.0pt'>
+ <tr style='mso-yfti-irow:159;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16362,7 +16257,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:161;height:150.0pt'>
+ <tr style='mso-yfti-irow:160;height:150.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16466,7 +16361,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:162;height:1.25in'>
+ <tr style='mso-yfti-irow:161;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16572,7 +16467,7 @@ ul
   "Times New Roman"'><o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:163;height:75.0pt'>
+ <tr style='mso-yfti-irow:162;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16673,7 +16568,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Neurophysiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:164;height:1.25in'>
+ <tr style='mso-yfti-irow:163;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16776,7 +16671,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Brain Structure and Function<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:165;height:60.0pt'>
+ <tr style='mso-yfti-irow:164;height:60.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16879,7 +16774,7 @@ ul
   "Times New Roman"'> Brain Res<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:166;height:1.25in'>
+ <tr style='mso-yfti-irow:165;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -16983,7 +16878,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:167;height:75.0pt'>
+ <tr style='mso-yfti-irow:166;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17086,7 +16981,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Journal of Physiology<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:168;height:45.0pt'>
+ <tr style='mso-yfti-irow:167;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17186,7 +17081,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neural Plasticity<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:169;height:75.0pt'>
+ <tr style='mso-yfti-irow:168;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17288,7 +17183,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Hippocampus<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:170;height:75.0pt'>
+ <tr style='mso-yfti-irow:169;height:75.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17389,7 +17284,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>European Journal of Neuroscience<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:171;height:105.0pt'>
+ <tr style='mso-yfti-irow:170;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17492,7 +17387,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuron<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:172;height:105.0pt'>
+ <tr style='mso-yfti-irow:171;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17595,7 +17490,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuron<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:173;height:45.0pt'>
+ <tr style='mso-yfti-irow:172;height:45.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17695,7 +17590,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neural Plasticity<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:174;height:105.0pt'>
+ <tr style='mso-yfti-irow:173;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17799,7 +17694,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuron<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:175;height:105.0pt'>
+ <tr style='mso-yfti-irow:174;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -17903,7 +17798,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuron<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:176;height:105.0pt'>
+ <tr style='mso-yfti-irow:175;height:105.0pt'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -18006,7 +17901,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Neuron<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:177;mso-yfti-lastrow:yes;height:1.25in'>
+ <tr style='mso-yfti-irow:176;mso-yfti-lastrow:yes;height:1.25in'>
   <td width=76 nowrap valign=bottom style='width:57.0pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
   solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:

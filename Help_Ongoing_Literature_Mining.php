@@ -1440,8 +1440,8 @@ ul
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Cell
-  type-specific genetic and optogenetic tools reveal hippocampal CA2 circuits.<o:p></o:p></span></p>
+  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Cell type-specific
+  genetic and optogenetic tools reveal hippocampal CA2 circuits.<o:p></o:p></span></p>
   </td>
   <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1878,9 +1878,9 @@ ul
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Regional variability
-  and postsynaptic targets of chandelier cells in the hippocampal formation of
-  the rat<o:p></o:p></span></p>
+  normal'><span style='mso-fareast-font-family:"Times New Roman"'>Regional
+  variability and postsynaptic targets of chandelier cells in the hippocampal
+  formation of the rat<o:p></o:p></span></p>
   </td>
   <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3035,6 +3035,58 @@ ul
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Yu J, <span class=SpellE>Swietek</span> B, <span class=SpellE>Proddutur</span>
+  A, <span class=SpellE>Santhakumar</span> V</p>
+  </td>
+  <td width=336 valign=bottom style='width:3.5in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Dentate total molecular layer interneurons mediate
+  cannabinoid-sensitive inhibition</p>
+  </td>
+  <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>Hippocampus</p>
+  </td>
+  <td width=48 valign=bottom style='width:36.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>2015</p>
+  </td>
+  <td width=84 valign=bottom style='width:63.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>25603947</p>
+  </td>
+  <td width=96 valign=bottom style='width:1.0in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>09/02/2015</p>
+  </td>
+  <td width=144 valign=bottom style='width:1.5in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'>For future mining</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:56'>
+  <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='mso-fareast-font-family:"Times New Roman"'>Zemankovics</span></span><span
   style='mso-fareast-font-family:"Times New Roman"'> R1, <span class=SpellE>Veres</span>
   JM, Oren I, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
@@ -3085,7 +3137,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:56'>
+ <tr style='mso-yfti-irow:57'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3135,7 +3187,7 @@ ul
   normal'>Under active mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:57'>
+ <tr style='mso-yfti-irow:58'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3186,7 +3238,7 @@ ul
   normal'>For future mining</p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:58'>
+ <tr style='mso-yfti-irow:59'>
   <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
   border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
   padding:0in 5.4pt 0in 5.4pt'>
@@ -3236,56 +3288,6 @@ ul
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'>Under active mining</p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:59'>
-  <td width=265 valign=bottom style='width:198.9pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=336 valign=bottom style='width:3.5in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=192 valign=bottom style='width:143.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=48 valign=bottom style='width:36.15pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=84 valign=bottom style='width:63.0pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=96 valign=bottom style='width:1.0in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
-  </td>
-  <td width=144 valign=bottom style='width:1.5in;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><o:p>&nbsp;</o:p></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:60'>

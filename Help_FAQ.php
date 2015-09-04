@@ -98,6 +98,9 @@ ul
 
 <div class=WordSection1>
 
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:16.0pt;line-height:115%'>Hippocampome FAQ<o:p></o:p></span></p>
+
 <p class=MsoNormal><a href="#design_criteria"><span style='font-size:16.0pt;
 line-height:115%'>Project Design</span></a><span style='font-size:16.0pt;
 line-height:115%'><o:p></o:p></span></p>
@@ -124,12 +127,13 @@ line-height:115%'><span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
-href="#link_to_both"><span style='font-size:16.0pt;line-height:115%'>If a new paper
-publishes data on cells with axonal/dendritic branching in <span class=SpellE>SMo</span>
-that lumps together cells that have no projections to Sub with those that do
-(i.e., DG Neurogliaform and MOPP), will the data be linked with both, or only
-one of the two cell types defined in the knowledge base?</span></a><span
-class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></span></p>
+href="#link_to_both"><span style='font-size:16.0pt;line-height:115%'>If a new
+paper publishes data on cells with axonal/dendritic branching in <span
+class=SpellE>SMo</span> that lumps together cells that have no projections to
+Sub with those that do (i.e., DG Neurogliaform and MOPP), will the data be
+linked with both, or only one of the two cell types defined in the knowledge
+base?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
+line-height:115%'><o:p></o:p></span></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%;color:windowtext;
@@ -193,12 +197,15 @@ href="#gap_junctions"><span style='font-size:16.0pt;line-height:115%'>There is
 no mention of gap junctions - will these data be added later?</span></a><span
 style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-left:.5in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'><a href="#general">General</a><o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:.5in;text-indent:-.5in'><a href="#general"><span
+style='font-size:16.0pt;line-height:115%'>General</span></a><span
+style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
-style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span><a
-href="#browsers">Which browsers are formally supported by Hippocampome.org?</a><o:p></o:p></span></p>
+style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
+href="#browsers"><span style='font-size:16.0pt;line-height:115%'>Which browsers
+are formally supported by Hippocampome.org?</span></a><span style='font-size:
+16.0pt;line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.75in'><span style='font-size:16.0pt;
 line-height:115%'><o:p>&nbsp;</o:p></span></p>
@@ -241,9 +248,9 @@ the main categorization property is <span class=SpellE>axo</span>-dendritic
 pattern, the secondary properties listed below are sufficient to uniquely
 separate neuron types.<span style='mso-spacerun:yes'>  </span>Such significance
 is placed on these secondary properties because they can dramatically affect
-the behavior of the type in a neuronal network. In the case of CA1 Axo-axonic cells,
-they specifically target the axon initial segments of CA1 Pyramidal cells and
-ignore any other targets. <o:p></o:p></span></p>
+the behavior of the type in a neuronal network. In the case of CA1 Axo-axonic
+cells, they specifically target the axon initial segments of CA1 Pyramidal
+cells and ignore any other targets. <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><span style='mso-tab-count:1'>          </span>-Primary
@@ -253,11 +260,8 @@ neurotransmitter: e.g., CA1 Cajal-Retzius and CA1 Neurogliaform<o:p></o:p></span
 line-height:115%'>-Targeting specificity: e.g., CA1 Axo-axonic and CA1 Basket<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>-Differentiating pattern of biomarkers and/or
+line-height:115%'>-Consistently differentiating patterns of biomarkers and/or
 electrophysiological properties: e.g., CA1 Basket and CA1 Basket CCK+<o:p></o:p></span></p>
-
-<p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="guinea_pigs"><b style='mso-bidi-font-weight:normal'><span
@@ -270,8 +274,7 @@ style='mso-bookmark:guinea_pigs'><span style='font-size:16.0pt;line-height:
 115%'>A:<span style='mso-tab-count:1'>     </span>We curate information on
 rodent species; consequently, information from guinea pigs is included.<span
 style='mso-spacerun:yes'>  </span>Because this information has been
-infrequently encountered, it is sparse in the knowledge base; and currently,
-there is no plan to target it in literature searches.<o:p></o:p></span></span></p>
+infrequently encountered, it is sparse in the knowledge base.<o:p></o:p></span></span></p>
 
 <span style='mso-bookmark:guinea_pigs'></span>
 
@@ -284,7 +287,7 @@ style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>All
-data in Hippocampome.org is linked to a neuron type.<span
+data in Hippocampome.org are linked to a neuron type.<span
 style='mso-spacerun:yes'>  </span>This can be accomplished directly by
 presentation of a reconstruction, schematic, or text description of the neuron;
 or indirectly by a citation that provides such a description.<span
@@ -296,17 +299,10 @@ pattern. <o:p></o:p></span></p>
 style='font-size:16.0pt;line-height:115%'><span style='mso-tab-count:1'>          </span>The
 special cases rely on identification by other prominent characteristics of the
 neuron type: 1. soma location in the principal cell layer for DG Granule and
-CA1, CA2, CA3, and Sub Pyramidal neuron types, where they make up 90% or
-greater of the cell bodies and 2.<span style='mso-spacerun:yes'>  </span><span
-class=GramE>axonal</span> tracts for DG Granule (mossy fibers) and EC
-hippocampal projecting types (perforant path). <o:p></o:p></span></p>
-
-<p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>If authors research neurons with Hippocampome.org-definable
-but different <span class=SpellE>axo</span>-dendritic patterns and do not parse
-the data relevant to other Hippocampome.org domains (biomarker,
-electrophysiology, etc.), the data will be used for all the defined neuron
-types.<o:p></o:p></span></p>
+CA1, CA2, and CA3 Pyramidal neuron types, where they make up 90% or greater of
+the cell bodies; and 2.<span style='mso-spacerun:yes'>  </span>axonal tracts
+for DG Granule (mossy fibers) and EC hippocampal projecting types (perforant
+path). <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="link_to_both"><b style='mso-bidi-font-weight:normal'><span
@@ -371,12 +367,12 @@ doing the annotating and review of the knowledge base?<o:p></o:p></span></b></a>
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Currently,
 the annotation and review of<span style='mso-spacerun:yes'>  </span>the
-knowledge base will be performed by<span style='mso-spacerun:yes'>  </span>the
-authors of the publication (D. W. Wheeler, C. M. White, C. L. Rees, A. O.
-Komendantov, D. J. Hamilton, G. A. Ascoli &quot;Hippocampome.org: A knowledge
-base of neuron types in the rodent hippocampus&quot;, under review).<span
-style='mso-spacerun:yes'>  </span>In the future, we will endeavor to include mechanisms
-for direct input from the user community.<o:p></o:p></span></p>
+knowledge base is performed by the authors of the publication (D. W. Wheeler,
+C. M. White, C. L. Rees, A. O. Komendantov, D. J. Hamilton, G. A. Ascoli
+&quot;Hippocampome.org: A knowledge base of neuron types in the rodent
+hippocampus&quot;, under review).<span style='mso-spacerun:yes'>  </span>In the
+future, we will endeavor to include mechanisms for direct input from the user
+community.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="survey_frequency"><b style='mso-bidi-font-weight:normal'><span
@@ -420,7 +416,8 @@ normal'><span style='font-size:16.0pt;line-height:115%'>Electrophysiology<o:p></
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="Ephys_rats_over_mice"><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>For
-electrophysiology data, why are rats preferred over mice and other rodent species?<o:p></o:p></span></b></a></p>
+electrophysiology data, why are rats preferred over mice and other rodent
+species?<o:p></o:p></span></b></a></p>
 
 <span style='mso-bookmark:Ephys_rats_over_mice'></span>
 
@@ -432,12 +429,11 @@ and 3% from guinea pigs), Hippocampome.org curates both and has a substantial
 amount of mouse information.<span style='mso-spacerun:yes'>  </span>In the
 electrophysiological table for legibility reasons, it is only possible to
 display one value.<span style='mso-spacerun:yes'>  </span>To determine the
-display value, we use a prioritization algorithm that has rat, patch-clamp, <span
-class=GramE>body</span> temperature data at the top.<span
-style='mso-spacerun:yes'>  </span>Clicking on any value will display all of the
-information, including any from mouse.<span style='mso-spacerun:yes'> 
-</span>Moreover, we have plans to make the species displayed a selectable user
-option.<o:p></o:p></span></p>
+display value, we prioritize rat, patch-clamp, and body temperature data.<span
+style='mso-spacerun:yes'>  </span>However, clicking on any value will display
+all of the information, including any from mouse (and from sharp electrodes,
+room temperature, etc.).<span style='mso-spacerun:yes'>  </span>Moreover, we
+have plans to make the species displayed a selectable user option.<o:p></o:p></span></p>
 
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></b></p>
@@ -457,23 +453,21 @@ style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>We
 fervently think that scientific progress is significantly expedited by
-information sharing.<span style='mso-spacerun:yes'>  </span>Two of our
-established collaborations are with <span class=SpellE>NeuroElectro</span> and
+information sharing.<span style='mso-spacerun:yes'>  </span>Two examples of
+collaborative relations are with <span class=SpellE>NeuroElectro</span> and
 NIF.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>Hippocapome.org did share mined data with <span class=SpellE>NeuroElectro</span>.
-The <span class=SpellE>NeuroElectro</span> curator visited our lab in May 2014
-and we provided the Hippocampome.org electrophysiological data as a ‘gold
-standard’ testbed to help validate the <span class=SpellE>NeuroElectro</span>
-automated literature mining protocol. We have checked <span class=SpellE>NeuroElectro</span>
-content related to hippocampus neurons and found no additional information to
-date, but we will continue to monitor future updates. <span
-style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+line-height:115%'>Hippocapome.org shared mined electrophysiological data with <span
+class=SpellE>NeuroElectro</span> in May 2014 as a ‘gold standard’ testbed to
+help validate the <span class=SpellE>NeuroElectro</span> automated literature
+mining protocol. We will continue to monitor future updates of <span
+class=SpellE>NeuroElectro</span> content for new additional information related
+to hippocampus neurons.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>We will allow NIF to scrape our website for future inclusion of
-Hippocampome.org content in their search portal.<o:p></o:p></span></p>
+line-height:115%'>We have given NIF scraping access to our website for inclusion
+of Hippocampome.org content in their search portal.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
@@ -493,8 +487,11 @@ is no mention of gap junctions - will these data be added later?<o:p></o:p></spa
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Yes,
 we are in the early stages of annotation information concerning gap junctions
-and other synaptic information, which will be added to Hippocampome.org in a
-future update.<o:p></o:p></span></p>
+and other synaptic information, which will be added to Hippocampome.org in future
+updates.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in;text-indent:-.5in'><a name=general><b
 style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
