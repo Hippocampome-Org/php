@@ -47,7 +47,7 @@
 					print ("<td width='10%'></td>
 						<td width='10%' align='right' class='table_neuron_page4'> SUBJECT </td>
 						<td width='70%' align='left' class='table_neuron_page4'>
-							<input type='text' name='subject_send' value='' size='92' style='font-family:monospace'>
+							<input type='text' name='subject_send' value='' size='92'>
 						</td>
 						<td width='10%'></td>
 					");
@@ -59,7 +59,7 @@
 					print ("<td width='10%'></td>
 						<td width='10%' align='right' class='table_neuron_page4'> NAME </td>
 						<td width='70%' align='left' class='table_neuron_page4'>
-							<input type='text' name='name_send' value='' size='60' style='font-family:monospace'>
+							<input type='text' name='name_send' value='' size='60'>
 						</td>
 						<td width='10%'></td>
 					");
@@ -71,7 +71,7 @@
 					print ("<td width='10%'></td>
 						<td width='10%' align='right' class='table_neuron_page4'> INSTITUTE </td>
 						<td width='70%' align='left' class='table_neuron_page4'>
-							<input type='text' name='institute_send' value='' size='60' style='font-family:monospace'>
+							<input type='text' name='institute_send' value='' size='60'>
 						</td>
 						<td width='10%'></td>
 					");
@@ -83,7 +83,7 @@
 					print ("<td width='10%'></td>
 						<td width='10%' align='right' class='table_neuron_page4'> EMAIL </td>
 						<td width='70%' align='left' class='table_neuron_page4'>
-							<input type='text' name='email_send' value='' size='60' style='font-family:monospace'>
+							<input type='text' name='email_send' value='' size='60'>
 						</td>
 						<td width='10%'></td>
 					");
@@ -95,7 +95,7 @@
 					print ("<td width='10%'></td>
 						<td width='10%' align='right' class='table_neuron_page4'> MESSAGE </td>
 						<td width='70%' align='left' class='table_neuron_page4'>
-							<textarea rows='10' cols='90' name='message_send' style='font-family:monospace;font-size:110%'></textarea>
+							<textarea rows='10' cols='70' name='message_send'></textarea>
 						</td>
 						<td width='10%'></td>
 					");
