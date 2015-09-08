@@ -79,7 +79,10 @@ if ($text_file_creation)
  include ("function/icon.html"); 
  ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Neuron page</title>
+<?php include ("function/icon.html"); 
+	$name=$type->getNickname();
+	print("<title>Neuron type - $name</title>");
+?>
 <script src="lightbox/js/jquery-1.11.0.min.js"></script>
 <script src="lightbox/js/lightbox.js"></script>
 <link href="lightbox/css/lightbox.css" rel="stylesheet"/>

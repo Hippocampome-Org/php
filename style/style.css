@@ -828,16 +828,15 @@ span.link_left a span {
 }
 				
 span.link_left a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
+	
 }
-				
+
 span.link_left a:hover span {
-	display: block;
+/*	display: block;
 	position: absolute;
 	margin-top: 10px;
 	margin-left: -5px;
-	width: 90px; 
+	/*width: 90px;*/
 	padding: 5px;
 	z-index: 100;
 	color: #000000;
@@ -845,7 +844,7 @@ span.link_left a:hover span {
 	font: 12px "Arial", sans-serif;
 	text-align: left;
 	text-decoration: none;
-}
+*/}
 
 span.link_left_bottom {
 	position: relative;
@@ -856,12 +855,11 @@ span.link_left_bottom a span {
 }
 				
 span.link_left_bottom a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
+
 }
 				
 span.link_left_bottom a:hover span {
-	display: block;
+/*	display: block;
 	position: absolute;
 	margin-top: -75px;
 	margin-left: -5px;
@@ -873,65 +871,7 @@ span.link_left_bottom a:hover span {
 	font: 12px "Arial", sans-serif;
 	text-align: left;
 	text-decoration: none;
-}
-
-
-span.link_middle {
-	position: relative;
-}
-				
-span.link_middle a span {
-	display: none;
-}
-				
-span.link_middle a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
-}
-				
-span.link_middle a:hover span {
-	display: block;
-	position: absolute;
-	margin-top: 10px;
-	margin-left: -25px;
-	width: 90px; 
-	padding: 5px;
-	z-index: 100;
-	color: #000000;
-	background: #FFFFAA;
-	font: 12px "Arial", sans-serif;
-	text-align: left;
-	text-decoration: none;
-}
-
-
-span.link_middle_bottom {
-	position: relative;
-}
-				
-span.link_middle_bottom a span {
-	display: none;
-}
-				
-span.link_middle_bottom a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
-}
-				
-span.link_middle_bottom a:hover span {
-	display: block;
-	position: absolute;
-	margin-top: -75px;
-	margin-left: -25px;
-	width: 90px; 
-	padding: 5px;
-	z-index: 100;
-	color: #000000;
-	background: #FFFFAA;
-	font: 12px "Arial", sans-serif;
-	text-align: left;
-	text-decoration: none;
-}
+*/}
 
 
 span.link_right {
@@ -943,12 +883,11 @@ span.link_right a span {
 }
 				
 span.link_right a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
+
 }
 				
 span.link_right a:hover span {
-	display: block;
+/*	display: block;
 	position: absolute;
 	margin-top: 10px;
 	margin-left: -40px;
@@ -960,7 +899,7 @@ span.link_right a:hover span {
 	font: 12px "Arial", sans-serif;
 	text-align: left;
 	text-decoration: none;
-}
+*/}
 
 
 span.link_right_bottom {
@@ -972,12 +911,11 @@ span.link_right_bottom a span {
 }
 				
 span.link_right_bottom a:hover {
-	/*font-size: 99%;*/
-	/*font-color: #FF00FF;*/
+
 }
 				
 span.link_right_bottom a:hover span {
-	display: block;
+/*	display: block;
 	position: absolute;
 	margin-top: -75px;
 	margin-left: -40px;
@@ -989,4 +927,4 @@ span.link_right_bottom a:hover span {
 	font: 12px "Arial", sans-serif;
 	text-align: left;
 	text-decoration: none;
-}
+*/}

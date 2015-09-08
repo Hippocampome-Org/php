@@ -663,8 +663,11 @@ else {
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php include ("function/icon.html"); ?>
-<title>Evidence Page</title>
+<?php include ("function/icon.html"); 
+	$name=$type->getNickname();
+	print("<title>Evidence - $name ($val_property)</title>");
+?>
+
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -877,20 +880,20 @@ else {
 		              	$conflict_explanation_statement = "";
 		              	
 		              	if ($individual_calls_conflict)
-		              		$dissent_note = "* Minority-opinion exists (open all evidence to view)";
+		              		$dissent_note = "* Contradictory evidence exists (open all evidence to view)";
 		              	else
 		              		$dissent_note = NULL;
 		              }
 		              else {
-		              	if ($conflict_note == "species/protocol differences") {
+		              	if (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences")) {
 		              		$conflict_note = "species/protocol/subcellular expression differences";
 		              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
 		              	}
 		              	else if ($conflict_note == "subtypes")
 		              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
-		              	else if ($conflict_note == "conflicting data") {
+		              	else if (($conflict_note == "conflicting data") || ($conflict_note == "unresolved")) {
 		              		$image_link = "<img src='images/marker/positive-negative-conflicting_clear.png' border='0' width='15px' />";
-		              		$conflict_explanation_statement = "Data come from multiple sources that use the same species and technique; however, non-identical experimental details (e.g., the antibodies used) prevent conclusive interpretation.";
+		              		$conflict_explanation_statement = "Data come from multiple sources that use the same species and technique; however, non-identical experimental details (e.g., the antibodies used) prevent interpretation.";
 		              	}
 		              	 
 		              	$mixed_data = true;
@@ -1728,7 +1731,7 @@ else {
 			  if (($expression == $print_color) || ($print_color == "positive-negative"))
               	$header_html = header_row("EXPRESSION", $expression);
 			  else 
-			  	$header_html = header_row_special("EXPRESSION (* minority opinion)", $expression);
+			  	$header_html = header_row_special("EXPRESSION (* contradictory evidence)", $expression);
               
               if ($animal != 'rat')
                 $header_html = $header_html . header_row("ANIMAL", $animal);

@@ -132,7 +132,7 @@ function check_color($variable, $unvetted, $conflict_note)
 			else
 				$link[0] = "<img src='images/marker/positive-negative-subtypes.png' border='0' width='15px' />";		
 		}
-		elseif ($conflict_note == "species/protocol differences")
+		elseif (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences"))
 		{
 			/* echo "Variable ".$variable;
 			echo " Conflict Note :".$conflict_note; */
@@ -141,7 +141,7 @@ function check_color($variable, $unvetted, $conflict_note)
 			else
 				$link[0] = "<img src='images/marker/positive-negative-species.png' border='0' width='15px' />";		
 		}	
-		elseif ($conflict_note == "conflicting data")
+		elseif (($conflict_note == "conflicting data") || ($conflict_note == "unresolved"))
 		{
 			if ($unvetted == 1)
 				$link[0] = "<img src='images/marker/positive-negative-conflicting_unvetted.png' border='0' width='15px' />";
@@ -403,9 +403,9 @@ else // not from search page --------------
 			//Retrieve types by Search conditions
 
 			//echo "Search ".$_GET['_search'];
-			/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
-			echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
-			echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
+			/* echo "Search Field : ".$_GET['searchField']; // ï¿½ the name of the field defined in colModel
+			echo "Search String : ".$_GET['searchString']; // ï¿½ the string typed in the search field
+			echo "Search Operator : ".$_GET['searchOper']; //ï¿½ the operator choosen in the search field (ex. equal, greater than, ï¿½) */
 				
 		}
 }

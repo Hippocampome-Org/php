@@ -1571,8 +1571,10 @@ function show_only_morphology(link, start1, stop1)
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php include ("function/icon.html"); ?>
-<title>Evidence Page</title>
+<?php include ("function/icon.html"); 
+	$name=$type->getNickname();
+	print("<title>Evidence - $name ($val_property)</title>");
+?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 

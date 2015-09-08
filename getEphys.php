@@ -76,7 +76,7 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 		}
 		$print_str = $print_str . ' ' . $protocol_ephys2[$param_str];
 		
-		$outputStr.='<span>' . $print_str . '&#013;';
+		$outputStr.='<span class="' . $span_class_str . '">' . $print_str . '&#013;';
 		$outputStr.='Measurements: ' . $tot_n1_ephys2[$param_str] . ' &#013;';
 		$outputStr.='Representative value selected from ' . $nn_ephys2[$param_str] . ' source';
 		if ($nn_ephys2[$param_str] > 1) {
