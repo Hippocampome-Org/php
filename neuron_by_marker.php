@@ -111,13 +111,22 @@ foreach ($predicateArr as $k => $v)
 	
 	if($k=='mixed')
 	{
+		$pos_intr_Array = markers_search($evidencepropertyyperel, $property_1, $type,'positive',$parameter);
+		$neg_Array = markers_search($evidencepropertyyperel, $property_1, $type,'negative',$parameter);
 		asort($pos_intr_Array);
 		asort($neg_Array);
 		$marker_id = array_intersect($neg_Array,$pos_intr_Array);
 	}
-	else
+	elseif($k == 'positive' || $k == 'negative') {
+		$pos_intr_Array = markers_search($evidencepropertyyperel, $property_1, $type,'positive',$parameter);
+		$neg_Array = markers_search($evidencepropertyyperel, $property_1, $type,'negative',$parameter);
+		$mixed_type = array_intersect($pos_intr_Array,$neg_Array);
+		if($k == 'positive') $marker_id = array_diff($pos_intr_Array, $mixed_type);
+		if($k == 'negative') $marker_id = array_diff($neg_Array, $mixed_type);
+    }
+	else {
 		$marker_id = markers_search($evidencepropertyyperel, $property_1, $type,$k,$parameter);
-	
+	}
 	
 	if(count($marker_id) > 0)
 	{
@@ -152,7 +161,7 @@ foreach ($predicateArr as $k => $v)
 				{
 					$neg_Array[] = $id;			
 				}
-			
+				
 				$id_t = $id;
 				$name_type = $type -> getNickname();
 				//$subregion_type = $type -> getSubregion();
@@ -174,7 +183,7 @@ foreach ($predicateArr as $k => $v)
 					$mixed_conflict = $conflict_note;
 					
 					if (!$mixed_conflict)
-						$mixed_conflict = 'not yet determined';;
+						$mixed_conflict = 'not yet determined';
 				}
 		
 ?>			<tr>
