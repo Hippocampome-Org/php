@@ -181,8 +181,8 @@ jQuery(document).ready(function() {
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
       Reference: <b>Wheeler et al., 2015</b>.
-      <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i>.
-      <a href="http://elifesciences.org">eLife Sciences Publications Ltd.</a>
+      <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i>
+      (in press, <a href="http://elifesciences.org">eLife</a>).
       </font>
 
       <br><br>
