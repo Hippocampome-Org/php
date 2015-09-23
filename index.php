@@ -173,19 +173,16 @@ jQuery(document).ready(function() {
       as a scholarly resource.  The content does not yet appear uniformly
       across all combinations of browsers and screen resolutions.
       <br><br>
-      If you have
-      <a href="user_feedback_form_entry.php">feedback</a>
-      on either functionality or content, or if you
+      If you have feedback on either functionality or content, or if you
       would like to be informed when the first official version is released,
       please fill out the
-      <a href="user_feedback_form_entry.php">feedback</a>
-      form or email us at
+      <a href="user_feedback_form_entry.php">feedback form</a>
+      or email us at
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
       Reference: <b>Wheeler et al., 2015</b>.
       <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i>.
-      (Article currently in review with
-      <a href="http://elifesciences.org">eLife Sciences Publications Ltd.</a>)
+      <a href="http://elifesciences.org">eLife Sciences Publications Ltd.</a>
       </font>
 
       <br><br>
@@ -224,7 +221,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, § 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><? echo $info; ?>
-          <br />Last Update: 18 Sep 2015 (<a href="Help_Release_Notes.php">v1.0&beta; R 0I</a>)</font>
+          <br />Last Update: 23 Sep 2015 (<a href="Help_Release_Notes.php">v1.0&beta; R 1</a>)</font>
           <br />
         </div>
     </td>		
