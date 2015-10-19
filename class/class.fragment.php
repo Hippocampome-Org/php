@@ -32,8 +32,8 @@ class fragment
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setOriginal_id($original_id);			
@@ -61,9 +61,9 @@ class fragment
 		$table=$this->getName_table();
 		
 		$query = "SELECT attachment FROM $table WHERE fragment_id = '$id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($attachment) = mysql_fetch_row($rs))
+		while(list($attachment) = mysqli_fetch_row($rs))
 		{	
 			$this->setAttachment_array($attachment, $n);	
 			$n = $n + 1;
@@ -76,9 +76,9 @@ class fragment
 		$table=$this->getName_table();
 		
 		$query = "SELECT attachment_type FROM $table WHERE original_id = '$id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($attachment_type) = mysql_fetch_row($rs))
+		while(list($attachment_type) = mysqli_fetch_row($rs))
 		{	
 			$this->setAttachment_type_array($attachment_type, $n);
 			$n = $n + 1;
@@ -91,8 +91,8 @@ class fragment
 		$table=$this->getName_table();
 		
 		$query = "SELECT attachment, attachment_type FROM $table WHERE original_id = '$id'";
-		$rs = mysql_query($query);
-		while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{	
 			$this->setAttachment($attachment);	
 			$this->setAttachment_type($attachment_type);	

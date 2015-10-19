@@ -22,7 +22,7 @@ require_once('class/class.articleauthorrel.php');
 function create_temp_table ($name_temporary_table)
 {	
 	$drop_table ="DROP TABLE $name_temporary_table";
-	$query = mysql_query($drop_table);
+	$query = mysqli_query($GLOBALS['conn'],$drop_table);
 	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
@@ -48,7 +48,7 @@ function create_temp_table ($name_temporary_table)
 				   volume varchar(20),
 				   issue varchar(20),
 				   PRIMARY KEY (id));";
-	$query = mysql_query($creatable);
+	$query = mysqli_query($GLOBALS['conn'],$creatable);
 	
 
 }
@@ -65,9 +65,9 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
         	$quotes = stripslashes($quotes);   
 	$authors = stripslashes($authors);  
 	}
-		$publication= mysql_real_escape_string($publication);
-	$quote = mysql_real_escape_string($quote);
-	$authors = mysql_real_escape_string($authors);
+		$publication= mysqli_real_escape_string($GLOBALS['conn'],$publication);
+	$quote = mysqli_real_escape_string($GLOBALS['conn'],$quote);
+	$authors = mysqli_real_escape_string($GLOBALS['conn'],$authors);
 	$query_i = "INSERT INTO $table
 	  (id,
 	   id_fragment,
@@ -116,7 +116,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$volume' ,
 	   '$issue'   
 	   )";
-	$rs2 = mysql_query($query_i);					
+	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
 
 // *********************************************************************************************************************************
@@ -134,7 +134,7 @@ if ($see_all == 'Open All Evidence')
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '1'";
-	$rs2 = mysql_query($query);		
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
 
 if ($see_all == 'Close All Evidence')
@@ -143,7 +143,7 @@ if ($see_all == 'Close All Evidence')
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '0'";
-	$rs2 = mysql_query($query);		
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
 
 // Change the show coloums in the temporary table: ------------------------------------------------
@@ -156,7 +156,7 @@ if ($_REQUEST['show_1']) //  ==> ON
 	$page_end = $_REQUEST['stop'];
 				
 	$query = "UPDATE $name_temporary_table SET show1 =  '1' WHERE title = '$title_paper'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
 if ($_REQUEST['show_0']) //  ==> OFF
@@ -168,7 +168,7 @@ if ($_REQUEST['show_0']) //  ==> OFF
 	$page_end = $_REQUEST['stop'];
 	
 	$query = "UPDATE $name_temporary_table SET show1 =  '0' WHERE title = '$title_paper'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
 // --------------------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'all';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 	
 	// Option: Articles / books:
@@ -305,7 +305,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'article';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Publication:
@@ -315,7 +315,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'name_journal';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Authors:
@@ -325,7 +325,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'authors';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Morphology:
@@ -335,7 +335,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'morphology';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 } // end if $name_show_only_var
 
@@ -355,11 +355,11 @@ if ($name_show_only_article_var)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	
 	$query ="SELECT id, PMID FROM $name_temporary_table";
-	$rs = mysql_query($query);					
-	while(list($id, $pmid) = mysql_fetch_row($rs))	
+	$rs = mysqli_query($GLOBALS['conn'],$query);					
+	while(list($id, $pmid) = mysqli_fetch_row($rs))	
 	{	
 		if ($name_show_only_article == 'article')
 		{
@@ -374,7 +374,7 @@ if ($name_show_only_article_var)
 		else
 			$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE id = '$id'";
 				
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 } // end if $name_show_only_article
 
@@ -392,14 +392,14 @@ if ($name_show_only_journal_var)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 		
 	if ($name_show_only_journal == 'all')
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	else
 		$query = "UPDATE $name_temporary_table SET show_only =  '0' WHERE publication != '$name_show_only_journal'";
 	
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 
 } // end if $name_show_only_journal
 	
@@ -419,19 +419,19 @@ if ($name_show_only_authors_var)
 	if ($name_show_only_authors == 'all')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);		
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 	}
 	else
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '0'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 				
 		$query ="SELECT id FROM $name_temporary_table WHERE authors LIKE '%$name_show_only_authors%'";
-		$rs = mysql_query($query);					
-		while(list($id) = mysql_fetch_row($rs))		
+		$rs = mysqli_query($GLOBALS['conn'],$query);					
+		while(list($id) = mysqli_fetch_row($rs))		
 		{
 			$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE id = '$id'";
-			$rs2 = mysql_query($query);
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}	
 	}
 
@@ -450,22 +450,22 @@ if ($name_show_only_morphology_var)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '0'";
-	$rs2 = mysql_query($query);		
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 	
 	if ($name_show_only_morphology == 'Axons')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE type = 'axons'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 	if ($name_show_only_morphology == 'Dendrites')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE type = 'dendrites'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 	if ($name_show_only_morphology == 'both')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 
 
@@ -956,38 +956,38 @@ function show_only_morphology(link, start1, stop1)
 								
 	// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 	$n_id_tot = 0;	 // Total number of articles:
-	while(list($id) = mysql_fetch_row($rs))			
+	while(list($id) = mysqli_fetch_row($rs))			
 		$n_id_tot = $n_id_tot + 1;
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++				
 				
 	// find the total number of quotes: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1";	
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 	$number_of_quotes = 0;  // total number of quotes
-	while(list($id) = mysql_fetch_row($rs))			
+	while(list($id) = mysqli_fetch_row($rs))			
 		$number_of_quotes = $number_of_quotes + 1;
 						
 	// find the total number of quotes of type axon: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and type='Axons'";	
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 	$number_of_quotes_axon = 0;  // total number of axon quotes
-	while(list($id) = mysql_fetch_row($rs))			
+	while(list($id) = mysqli_fetch_row($rs))			
 		$number_of_quotes_axon = $number_of_quotes_axon + 1;	
 					
 	// find the total number of quotes of type dendrite: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE show_only = 1 and type='Dendrites'";	
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 	$number_of_quotes_dendrite = 0;  // total number of dendrite quotes
-	while(list($id) = mysql_fetch_row($rs))			
+	while(list($id) = mysqli_fetch_row($rs))			
 		$number_of_quotes_dendrite = $number_of_quotes_dendrite + 1;
 
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++					
 	$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
-	$rs = mysql_query($query);					
+	$rs = mysqli_query($GLOBALS['conn'],$query);					
 	$n_id = 0;
-	while(list($title) = mysql_fetch_row($rs))
+	while(list($title) = mysqli_fetch_row($rs))
 	{
 		$title_temp[$n_id] = $title;											
 		$n_id = $n_id + 1;
@@ -1080,10 +1080,10 @@ function show_only_morphology(link, start1, stop1)
 				
 					// retrieve information about the authors, journals and otehr by using name of article:
 					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
-					$rs = mysql_query($query);	
+					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
 							
-					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysql_fetch_row($rs))
+					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
 					{			
 						$auth=array();
 						$authors2="";
@@ -1192,15 +1192,15 @@ function show_only_morphology(link, start1, stop1)
 						if ($show1 == 1)
 						{					
 							$query = "SELECT id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	
-							$rs = mysql_query($query);	
-							$rs_combo=mysql_query($query); // to check for combo-neuron type
+							$rs = mysqli_query($GLOBALS['conn'],$query);	
+							$rs_combo=mysqli_query($GLOBALS['conn'],$query); // to check for combo-neuron type
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;				
-							list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysql_fetch_row($rs_combo);
-							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysql_fetch_row($rs))
+							list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysqli_fetch_row($rs_combo);
+							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
-									list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysql_fetch_row($rs_combo);
+									list($id_fragment_next, $id_original_next, $quote_next, $page_location_next, $type_next) = mysqli_fetch_row($rs_combo);
 								
 								
 									if (($id_fragment == $id_fragment_old));//duplicate  neuron copies

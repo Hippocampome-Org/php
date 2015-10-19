@@ -21,9 +21,9 @@ class type
 		$table=$this->getName_table();	
 	
 		$query = "SELECT id FROM $table WHERE status = 'active' ORDER BY position ASC";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);
 			$n = $n + 1;
@@ -36,8 +36,8 @@ class type
 		$table=$this->getName_table();	
 	
 		$query = "SELECT name FROM $table WHERE nickname = '$nickname'";
-		$rs = mysql_query($query);
-		while(list($id) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName($var);
 		}
@@ -48,8 +48,8 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, dt, name, nickname, status FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $dt, $name, $nickname, $status) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $dt, $name, $nickname, $status) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -64,8 +64,8 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, dt, name, nickname, status FROM $table WHERE id = '$id' AND status = 'active'";
-		$rs = mysql_query($query);
-		while(list($id, $dt, $name, $nickname, $status) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $dt, $name, $nickname, $status) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);

@@ -32,8 +32,8 @@ class article
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, pmid_isbn, pmcid, nihmsid, doi, open_access, title, publication, volume, issue, first_page, last_page, year, citation_count FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $pmid_isbn, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $pmid_isbn, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setPmid_isbn($pmid_isbn);
@@ -58,8 +58,8 @@ class article
 		$table=$this->getName_table();
 	
 		$query = "SELECT id, pmid_isbn, pmcid, nihmsid, doi, open_access, title, publication, volume, issue, first_page, last_page, year, citation_count FROM $table WHERE pmid_isbn='$pmid_isbn' AND first_page='$pmid_isbn_page'";
-		$rs = mysql_query($query);
-		while(list($id, $pmid_isbn, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $pmid_isbn, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysqli_fetch_row($rs))
 		{
 			$this->setID($id);
 			$this->setPmid_isbn($pmid_isbn);
@@ -83,8 +83,8 @@ class article
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, pmcid, nihmsid, doi, open_access, title, publication, volume, issue, first_page, last_page, year, citation_count FROM $table WHERE Pmid_isbn = '$pmid'";
-		$rs = mysql_query($query);
-		while(list($id, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $pmcid, $nihmsid, $doi, $open_access, $title, $publication, $volume, $issue, $first_page, $last_page, $year, $citation_count) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setPmcid($pmicid);
@@ -107,9 +107,9 @@ class article
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT pmid_isbn FROM $table";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($pmcid) = mysql_fetch_row($rs))
+		while(list($pmcid) = mysqli_fetch_row($rs))
 		{
 			if ($flag == 1)
 			{
@@ -131,9 +131,9 @@ class article
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, Pmid_isbn FROM $table WHERE Pmid_isbn LIKE '%$pmid%'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($id, $Pmid_isbn) = mysql_fetch_row($rs))
+		while(list($id, $Pmid_isbn) = mysqli_fetch_row($rs))
 		{	
 			if ($flag == 1)
 			{	

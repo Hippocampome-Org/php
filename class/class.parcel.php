@@ -214,8 +214,8 @@ class parcel {
 				." FROM EvidencePropertyTypeRel eptr JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id) "
 				." WHERE predicate = 'in' AND object = '".$objectType."' and t.status ='active' AND subject = '".$subject."' ORDER BY t.position";
 		
-		$rs = mysql_query($query);
-		while(list($name,$subregion,$nickname,$excit_inhib,$subject,$predicate,$object,$typeId,$propertyId) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($name,$subregion,$nickname,$excit_inhib,$subject,$predicate,$object,$typeId,$propertyId) = mysqli_fetch_row($rs))
 		{
 			$parcel = new parcel();
 			$parcel->setName($name);
@@ -245,9 +245,9 @@ class parcel {
 				 " and connection_status = '".$connectionType."' and connection_location REGEXP '".$parcel_type."' ";
 		/* if($connectionType =="negative")
 			echo " Query : ".$query; */
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$count = 0;
-		while(list($type1_id,$type1_subregion,$type1_nickname,$type2_id,$type2_subregion,$type2_nickname) = mysql_fetch_row($rs))
+		while(list($type1_id,$type1_subregion,$type1_nickname,$type2_id,$type2_subregion,$type2_nickname) = mysqli_fetch_row($rs))
 		{
 			$parcel = new parcel();
 			$parcel->setType1Id($type1_id);

@@ -20,9 +20,9 @@ class articleauthorrel
 		$table=$this->getName_table();
 	
 		$query = "SELECT DISTINCT author_id FROM $table WHERE Article_id = '$article_id' AND author_pos = '$position'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setAuthor_id_array($id, $n);		
 			$n = $n +1;
@@ -35,9 +35,9 @@ class articleauthorrel
 		$table=$this->getName_table();
 	
 		$query = "SELECT DISTINCT article_id FROM $table WHERE Author_id = '$author_id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setArticle_id_array($id, $n);		
 			$n = $n +1;
@@ -51,9 +51,9 @@ class articleauthorrel
 		$table=$this->getName_table();
 	
 		$query = "SELECT author_pos FROM $table WHERE Article_id = '$article_id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($pos) = mysql_fetch_row($rs))
+		while(list($pos) = mysqli_fetch_row($rs))
 		{	
 			$this->setAuthor_position_array($pos, $n);		
 			$n = $n +1;

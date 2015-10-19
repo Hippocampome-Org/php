@@ -30,9 +30,9 @@ class type
 		$table=$this->getName_table();	
 	
 		$query = "SELECT id FROM $table WHERE status = 'active' ORDER BY position ASC";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);
 			$n = $n + 1;
@@ -46,8 +46,8 @@ class type
 		$table=$this->getName_table();	
 	
 		$query = "SELECT name FROM $table WHERE nickname = '$nickname'";
-		$rs = mysql_query($query);
-		while(list($id) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName($var);
 		}
@@ -59,8 +59,8 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname, excit_inhib, status, subregion FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -77,9 +77,9 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$this->setStatus('');
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -98,9 +98,9 @@ class type
 		$table=$this->getName_table();
 	
 		$query = "SELECT id FROM $table WHERE excit_inhib ='$pred'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);		
 			$n = $n +1;
@@ -113,8 +113,8 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
-		$rs = mysql_query($query);
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -132,9 +132,9 @@ class type
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$this->setStatus('');
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -152,8 +152,8 @@ class type
 		$table=$this->getName_table();	
 	
 		$query = "SELECT notes FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($var) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($var) = mysqli_fetch_row($rs))
 		{	
 			$this->setNotes($var);
 		}
@@ -165,9 +165,9 @@ class type
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT name FROM $table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName_neuron_array($id, $n);						
 			$n = $n +1;
@@ -181,9 +181,9 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		$table=$this->getName_table();	
 	
 		$query = "SELECT DISTINCT nickname FROM $table ";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setNickname_neuron_array($id, $n);		
 			$n = $n +1;
@@ -195,12 +195,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 	public function retrive_id_by_name($name) //Retrieve id, nickname based on the name in the table TYPE
     {
 		$table=$this->getName_table();
-	$name= mysql_real_escape_string($name);
+	$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
 		
 		$query = "SELECT DISTINCT id FROM $table WHERE name='$name'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_namearray($id, $n);					
 			$n = $n +1;
@@ -213,12 +213,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 	public function retrive_nickname_by_name($name)  //Retrieve nickname by the name in table TYPE
     {
 		$table=$this->getName_table();
-	$name= mysql_real_escape_string($name);
+	$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
 		
 		$query = "SELECT DISTINCT nickname FROM $table WHERE name='$name'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setNickname_neuron_array($id, $n);		
 			$n = $n +1;
@@ -232,12 +232,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		public function retrive_name_by_nickname1($nickname) //Retrieve name by the nickname in table TYPE
     {
 		$table=$this->getName_table();
-	$name= mysql_real_escape_string($name);
+	$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
 		
 		$query = "SELECT DISTINCT name FROM $table WHERE nickname='$nickname'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName_neuron_array($id, $n);		
 			$n = $n +1;
@@ -249,12 +249,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 	public function retrive_id_by_nickname($nickname) //Retrive id by nickname
     {
 		$table=$this->getName_table();
-	$name= mysql_real_escape_string($name);
+	$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
 		
 		$query = "SELECT DISTINCT id FROM $table WHERE nickname='$nickname'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_namearray($id, $n);			
 			$n = $n +1;
@@ -268,9 +268,9 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		$table=$this->getName_table();	
 	
 		$query = "SELECT id FROM $table ";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);
 			$n = $n + 1;
@@ -285,9 +285,9 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		$table=$this->getName_table();	
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE name = '$name'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$this->setStatus('');
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysql_fetch_row($rs))
+		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);

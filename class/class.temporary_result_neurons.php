@@ -12,9 +12,9 @@ class temporary_result_neurons
 		$name_temporary_table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT id_type FROM $name_temporary_table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($id)	= mysql_fetch_row($rs))		
+		while(list($id)	= mysqli_fetch_row($rs))		
 		{
 			$this->setID_array($id, $n);
 			$n = $n + 1;

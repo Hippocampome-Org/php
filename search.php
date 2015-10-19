@@ -144,7 +144,7 @@ if ($_REQUEST['clear_all'])
 {
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$query = "TRUNCATE $name_temporary_table";
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 
 	// Creates the temporary table:
 	$temporary_search -> setName_table($name_temporary_table);	
@@ -477,7 +477,7 @@ include ("function/icon.html");
 	            $mean_value1 = ($min_value1 + $max_value1) / 2;
 							
 				$query = "UPDATE $name_temporary_table SET max = '$max_value1', min = '$min_value1', mean = '$mean_value1' WHERE id = '$id1' ";	
-				$rs2 = mysql_query($query);	
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 				// ---------------------------------------------------------------------------------------------------------
 						
 			}	
@@ -528,9 +528,9 @@ include ("function/icon.html");
 			$i_new = $id_2[$tt1];
 			
 			$query = "SELECT operator FROM $name_temporary_table WHERE id = '$i_new'";
-			$rs = mysql_query($query);
+			$rs = mysqli_query($GLOBALS['conn'],$query);
 			
-			while(list($operator) = mysql_fetch_row($rs))						
+			while(list($operator) = mysqli_fetch_row($rs))						
 				$operator1 = $operator;
 			
 			print ("<td width='8%' align='center' class='table_neuron_page1'>");
@@ -562,9 +562,9 @@ include ("function/icon.html");
 		<?php
 			// Search is assembled in a non-editable box for the user's benefit:
 			$query = "SELECT N, operator, property, part, relation, value FROM $name_temporary_table";
-			$rs = mysql_query($query);
+			$rs = mysqli_query($GLOBALS['conn'],$query);
 			$n9=0;
-			while(list($N, $operator, $property, $part, $relation, $value) = mysql_fetch_row($rs))
+			while(list($N, $operator, $property, $part, $relation, $value) = mysqli_fetch_row($rs))
 			{	
 				if (($part == '-') || ($part == NULL));
 				else
@@ -623,9 +623,9 @@ include ("function/icon.html");
 		<div align="left">
 		<?php
 		$query = "SELECT DISTINCT part, max, min, mean FROM $name_temporary_table WHERE property = 'Electrophysiology'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$m1 = 0;
-		while(list($part, $max, $min, $mean) = mysql_fetch_row($rs))
+		while(list($part, $max, $min, $mean) = mysqli_fetch_row($rs))
 		{
 			$part_3[$m1] = $part;
 			$max_3[$m1] = $max;

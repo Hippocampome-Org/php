@@ -339,17 +339,17 @@ if ($text_file_creation)
 				for($i4=0;$i4<$n_article_real;$i4++)
 				{
 				$auth_query="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$id_article_4_unique[$i4]' ORDER BY b.author_pos";
-				$query_results=mysql_query($auth_query);
+				$query_results=mysqli_query($GLOBALS['conn'],$auth_query);
 				$g=0;
 				$u=0;
 				$auth=array();
 				$auth_first_name=array();
-				while($erows = mysql_fetch_array($query_results, MYSQL_ASSOC))
+				while($erows = mysqli_fetch_array($query_results, MYSQL_ASSOC))
 				{
 				$auth[$g]=$erows['auth_id'];
 				$fetch_auth_name="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auth[$g]'";
-				$resss=mysql_query($fetch_auth_name);
-				while($drows = mysql_fetch_array($resss, MYSQL_ASSOC))
+				$resss=mysqli_query($GLOBALS['conn'],$fetch_auth_name);
+				while($drows = mysqli_fetch_array($resss, MYSQL_ASSOC))
 				{
 				$auth_first_name[$u]=$drows['name_auth'];
 				//asort($auth_first_name);
@@ -378,9 +378,9 @@ if ($text_file_creation)
 					$art=$article_title[$i1];
 
 					$t="SELECT a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi FROM Article AS a WHERE a.title='$article_title[$i1]'";
-					$r=mysql_query($t);
+					$r=mysqli_query($GLOBALS['conn'],$t);
 					$l=0;
-					while($row = mysql_fetch_array($r, MYSQL_ASSOC))
+					while($row = mysqli_fetch_array($r, MYSQL_ASSOC))
 					{
 				
 						$publi=$row['pub'];
@@ -396,17 +396,17 @@ if ($text_file_creation)
 					}					
 
 					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
-					$results=mysql_query($article_author_rel);	
+					$results=mysqli_query($GLOBALS['conn'],$article_author_rel);	
 					$g=0;
 					$auths=array();
 					$auth_name=array();
-					while($rows = mysql_fetch_array($results, MYSQL_ASSOC))
+					while($rows = mysqli_fetch_array($results, MYSQL_ASSOC))
 					{
 						$auths[$g]=$rows['auth_id'];
 						$fetch_auth="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auths[$g]'";
-						$ress=mysql_query($fetch_auth);
+						$ress=mysqli_query($GLOBALS['conn'],$fetch_auth);
 						$u=0;
-						while($arows = mysql_fetch_array($ress, MYSQL_ASSOC))
+						while($arows = mysqli_fetch_array($ress, MYSQL_ASSOC))
 						{
 							$auth_name[$g]=$arows['name_auth'];
 							$auth_name[$g]=preg_replace("/'/", "&#39;", $auth_name[$g]);
@@ -420,8 +420,8 @@ if ($text_file_creation)
 								(select evidence_id from EvidenceMarkerdataRel where evidence_id in
 									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
 									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
-			                $results_marker =  mysql_query($tag_query_marker);
-					$num_rows_marker = mysql_num_rows($results_marker);
+			                $results_marker =  mysqli_query($GLOBALS['conn'],$tag_query_marker);
+					$num_rows_marker = mysqli_num_rows($results_marker);
 					if($num_rows_marker > 0)
 					{
 						$tag  = $tag . "marker";						
@@ -430,8 +430,8 @@ if ($text_file_creation)
 								(select evidence_id from EpdataEvidenceRel where evidence_id in
 									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
 									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
-					$results_ephys = mysql_query($tag_query_ephys);
-					$num_rows_ephys = mysql_num_rows($results_ephys);
+					$results_ephys = mysqli_query($GLOBALS['conn'],$tag_query_ephys);
+					$num_rows_ephys = mysqli_num_rows($results_ephys);
 					if($num_rows_ephys > 0)
 					{
 						if ($tag == '')						
@@ -441,8 +441,8 @@ if ($text_file_creation)
 					}
 					$tag_query_morpho = "select * from EvidencePropertyTypeRel where type_id ='$id' and evidence_id in
 								(select evidence_id from ArticleEvidenceRel where article_id = '$article_id')";
-					$results_morpho =  mysql_query($tag_query_morpho);
-					$num_rows_morpho = mysql_num_rows($results_morpho);
+					$results_morpho =  mysqli_query($GLOBALS['conn'],$tag_query_morpho);
+					$num_rows_morpho = mysqli_num_rows($results_morpho);
 					if($num_rows_morpho > 0)
 					{ 
 						if($tag == '')
@@ -680,13 +680,13 @@ if ($text_file_creation)
     $soma_query = $one_type_query . " AND subject = 'somata'";
 
     // get the lists
-    $result = mysql_query($soma_query);
+    $result = mysqli_query($GLOBALS['conn'],$soma_query);
     $soma_parcels = result_set_to_array($result, 'object');
 
-    $result = mysql_query($axon_query);
+    $result = mysqli_query($GLOBALS['conn'],$axon_query);
     $axon_parcels = result_set_to_array($result, 'object');
 
-    $result = mysql_query($dendrite_query);
+    $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
     $dendrite_parcels = result_set_to_array($result, 'object');
 
     // print it out
@@ -1659,14 +1659,14 @@ if ($text_file_creation)
       $explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
 
       // potential targets of output
-      $result = mysql_query($axon_query);
+      $result = mysqli_query($GLOBALS['conn'],$axon_query);
       $axon_parcels = result_set_to_array($result, 'object');
       //print "<br><br>AXON PARCELS<br>"; print_r($axon_parcels);
 
       $possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
       //print "<br><br>POSSIBLE TARGETS:<br>"; print_r($possible_targets);
 
-      $result = mysql_query($explicit_target_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
       $explicit_targets = null;
       $list_explicit_sources = null;
       $list_explicit_nonsources = null;
@@ -1680,7 +1680,7 @@ if ($text_file_creation)
 			$list_explicit_targets = get_sorted_records($list_explicit_targets);
 	  }
 	  
-      $result = mysql_query($explicit_nontarget_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
       $explicit_nontargets = result_set_to_array($result, "t2_id");
       //print "<br><br>EXPLICIT NONTARGETS:<br>"; print_r($explicit_nontargets);	  
 	  
@@ -1703,14 +1703,14 @@ if ($text_file_creation)
 */
 
       // potential sources of input
-      $result = mysql_query($dendrite_query);
+      $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
       
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
       
-      $result = mysql_query($explicit_source_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
       
@@ -1719,7 +1719,7 @@ if ($text_file_creation)
       	$list_explicit_sources = get_sorted_records($list_explicit_sources);
       }
        
-      $result = mysql_query($explicit_nonsource_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
       
@@ -1740,14 +1740,14 @@ if ($text_file_creation)
       */
       
       // potential sources of input
-      $result = mysql_query($dendrite_query);
+      $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
 
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
 
-      $result = mysql_query($explicit_source_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
 
@@ -1756,7 +1756,7 @@ if ($text_file_creation)
 			$list_explicit_sources = get_sorted_records($list_explicit_sources);
 	  }
 	  
-      $result = mysql_query($explicit_nonsource_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
 

@@ -23,7 +23,7 @@ require_once('class/class.attachment.php');
 function create_temp_table ($name_temporary_table)
 {	
 	$drop_table ="DROP TABLE $name_temporary_table";
-	$query = mysql_query($drop_table);
+	$query = mysqli_query($GLOBALS['conn'],$drop_table);
 	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
@@ -60,13 +60,13 @@ function create_temp_table ($name_temporary_table)
 				   issue varchar (20),
            		   secondary_pmid varchar(50),
 				   PRIMARY KEY (id));";
-	$query = mysql_query($creatable);	
+	$query = mysqli_query($GLOBALS['conn'],$creatable);	
 }
 
 
 function insert_temporary($table, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_markerdata, $id_evidence1, $id_evidence2, $type, $type_marker, $ccolor, $pmcid, $NIHMSID, $doi, $citation, $volume, $issue, $secondary_pmid)
 {
-		$quote = mysql_real_escape_string($quote);
+		$quote = mysqli_real_escape_string($GLOBALS['conn'],$quote);
 	$query_i = "INSERT INTO $table
 	  (id,
 	   id_fragment,
@@ -136,7 +136,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $interpret
 	   '$issue',
      '$secondary_pmid'
 	   )";
-	$rs2 = mysql_query($query_i);
+	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);
 }
 
 
@@ -254,7 +254,7 @@ else
 	else
 		$query = "UPDATE $name_temporary_table SET show1 = '0' WHERE id = '$id_change' ";
 	
-	$rs2 = mysql_query($query);			
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 }
 
 
@@ -318,7 +318,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'all';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 	
 	// Option: Articles / books:
@@ -328,7 +328,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'article';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Publication:
@@ -338,7 +338,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'name_journal';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Authors:
@@ -348,7 +348,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'authors';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 
 	// Option: Morphology:
@@ -358,7 +358,7 @@ if ($name_show_only_var)
 		$sub_show_only = 'morphology';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);			
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
 } // end if $name_show_only_var
 
@@ -384,11 +384,11 @@ if ($name_show_only_article_var)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	
 	$query ="SELECT id, PMID FROM $name_temporary_table";
-	$rs = mysql_query($query);					
-	while(list($id, $pmid) = mysql_fetch_row($rs))	
+	$rs = mysqli_query($GLOBALS['conn'],$query);					
+	while(list($id, $pmid) = mysqli_fetch_row($rs))	
 	{	
 		if ($name_show_only_article == 'article')
 		{
@@ -403,7 +403,7 @@ if ($name_show_only_article_var)
 		else
 			$query = "UPDATE $name_temporary_table SET show2 =  '1' WHERE id = '$id'";
 				
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 } // end if $name_show_only_article
 
@@ -427,14 +427,14 @@ if ($name_show_only_journal_var)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 		
 	if ($name_show_only_journal == 'all')
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 	else
 		$query = "UPDATE $name_temporary_table SET show2 =  '0' WHERE publication != '$name_show_only_journal'";
 	
-	$rs2 = mysql_query($query);	
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 
 } // end if $name_show_only_journal
 	
@@ -460,19 +460,19 @@ if ($name_show_only_authors_var)
 	if ($name_show_only_authors == 'all')
 	{
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
-		$rs2 = mysql_query($query);		
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 	}
 	else
 	{
 		$query = "UPDATE $name_temporary_table SET show2 =  '0'";
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 				
 		$query ="SELECT id FROM $name_temporary_table WHERE authors LIKE '%$name_show_only_authors%'";
-		$rs = mysql_query($query);					
-		while(list($id) = mysql_fetch_row($rs))		
+		$rs = mysqli_query($GLOBALS['conn'],$query);					
+		while(list($id) = mysqli_fetch_row($rs))		
 		{
 			$query = "UPDATE $name_temporary_table SET show2 =  '1' WHERE id = '$id'";
-			$rs2 = mysql_query($query);
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}	
 	}
 
@@ -913,7 +913,7 @@ else {
 		              
 		              // print summary arrays for debugging and vetting
 		              
-		              list($permission) = mysql_fetch_row(mysql_query("SELECT permission FROM user WHERE id = '2'"));
+		              list($permission) = mysqli_fetch_row(mysqli_query($GLOBALS['conn'],"SELECT permission FROM user WHERE id = '2'"));
 		              if ($permission == 0) { // only enabled for curation, where anonymous user is disabled
 
 						// table containing both table options
@@ -1255,28 +1255,28 @@ else {
 								
 					// SHOW ONLY TYPE = DATA:			
 				$query = "UPDATE $name_temporary_table SET show1 = '1' WHERE type = 'data' ";							
-				$rs = mysql_query($query);								
+				$rs = mysqli_query($GLOBALS['conn'],$query);								
 				}
 			}
 		
 			// Retrieve MARKERDATA ID from EvidenceMarkerdataRel by using ID EVIDENCE: *****************************
 			$query = "SELECT id_evidence1 FROM $name_temporary_table";
-			$rs = mysql_query($query);
-			while(list($id_evidence1) = mysql_fetch_row($rs))
+			$rs = mysqli_query($GLOBALS['conn'],$query);
+			while(list($id_evidence1) = mysqli_fetch_row($rs))
 			{
 				$evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence1);
 				$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
 	
 				$query1 = "UPDATE $name_temporary_table SET id_markerdata = '$id_markerdata1' WHERE $id_evidence1 = '$id_evidence1' ";							
-				$rs1 = mysql_query($query1);					
+				$rs1 = mysqli_query($GLOBALS['conn'],$query1);					
 			}	
 			// ****************************************************************************************************
 		}
 
 		$query = "SELECT show1 FROM $name_temporary_table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n_show1=0;
-		while(list($show1) = mysql_fetch_row($rs))
+		while(list($show1) = mysqli_fetch_row($rs))
 		{
 			if ($show1 == 1)
 				$n_show1 = $n_show1 + 1;
@@ -1391,10 +1391,10 @@ else {
 				{
 					// retrieve the number of article or number of book:
 					$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table WHERE show1 = '1'";	
-					$rs = mysql_query($query);
+					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$number_of_articles_1 = 0;
 					$number_of_books_1 = 0;
-					while(list($title, $pmid) = mysql_fetch_row($rs))		
+					while(list($title, $pmid) = mysqli_fetch_row($rs))		
 					{	
 						if (strlen($pmid) > 10)
 							$number_of_books_1 = $number_of_books_1 + 1;
@@ -1441,14 +1441,14 @@ else {
 					
 					// retrieve the name of journal from temporary table:
 					$query ="SELECT DISTINCT publication FROM $name_temporary_table WHERE show1 = '1'";
-					$rs = mysql_query($query);					
-					while(list($pub) = mysql_fetch_row($rs))	
+					$rs = mysqli_query($GLOBALS['conn'],$query);					
+					while(list($pub) = mysqli_fetch_row($rs))	
 					{	
 						// retrieve the number of articles for this publication:
 						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE publication = '$pub'";
-						$rs1 = mysql_query($query1);
+						$rs1 = mysqli_query($GLOBALS['conn'],$query1);
 						$n_pub1=0;					
-						while(list($id) = mysql_fetch_row($rs1))							
+						while(list($id) = mysqli_fetch_row($rs1))							
 							$n_pub1 = $n_pub1 + 1;
 					
 						if ($pub == $name_show_only_journal);
@@ -1464,9 +1464,9 @@ else {
 				{
 					// retrieve the name of authors from temporary table:
 					$query ="SELECT DISTINCT authors FROM $name_temporary_table WHERE show1 = '1'";
-					$rs = mysql_query($query);				
+					$rs = mysqli_query($GLOBALS['conn'],$query);				
 					
-					while(list($aut) = mysql_fetch_row($rs))
+					while(list($aut) = mysqli_fetch_row($rs))
 					{
 						$aut1=$aut1.", ".$aut;
 					}					
@@ -1502,9 +1502,9 @@ else {
 					
 						// retrieve the number of articles for this publication:
 						$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE authors LIKE '%$single_aut3[$i1]%'";
-						$rs1 = mysql_query($query1);
+						$rs1 = mysqli_query($GLOBALS['conn'],$query1);
 						$n_auth1=0;					
-						while(list($id) = mysql_fetch_row($rs1))	
+						while(list($id) = mysqli_fetch_row($rs1))	
 							$n_auth1 = $n_auth1 + 1;	
 
 						print ("<OPTION VALUE='$single_aut3[$i1]'>$single_aut3[$i1] ($n_auth1)</OPTION>");
@@ -1573,9 +1573,9 @@ else {
 		// Select only DOI, to have the exact number of articles and to show only one time the name of article.
 		$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue, secondary_pmid FROM $name_temporary_table ORDER BY $order_by $type_order ";	
 		//$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue, secondary_pmid FROM $name_temporary_table";
-		$rs = mysql_query($query);	
+		$rs = mysqli_query($GLOBALS['conn'],$query);	
 		$number_of_article = 0;		
-		while(list($authors, $title, $publication, $year, $PMID, $pages, $pmcid, $NIHMSID, $doi, $citation, $show2, $show_button, $volume, $issue, $secondary_pmid) = mysql_fetch_row($rs))		
+		while(list($authors, $title, $publication, $year, $PMID, $pages, $pmcid, $NIHMSID, $doi, $citation, $show2, $show_button, $volume, $issue, $secondary_pmid) = mysqli_fetch_row($rs))		
 		{
 			$DOI[$number_of_article]=$doi;
 			
@@ -1663,9 +1663,9 @@ else {
 				
 				//$query = "SELECT DISTINCT id, id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, color, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
 				$query = "SELECT DISTINCT id_fragment, id_original, quote, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location,page_location, id_markerdata, show1, type, type_marker, id_evidence1, id_evidence2, secondary_pmid, PMID FROM $name_temporary_table WHERE title = '$title1[$t3]' ";				
-				$rs = mysql_query($query);											
-				//while(list($aa, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
-				while(list($id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysql_fetch_row($rs))		
+				$rs = mysqli_query($GLOBALS['conn'],$query);											
+				//while(list($aa, $id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $color_see, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysqli_fetch_row($rs))		
+				while(list($id_fragment, $id_original, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $page_location, $id_markerdata, $show1, $type, $type_marker, $id_evidence1, $id_evidence2, $secondary_pmid, $PMID) = mysqli_fetch_row($rs))		
 				{
 					//bhawna
 					//if ($show1 == 1)

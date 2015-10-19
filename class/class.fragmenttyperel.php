@@ -8,8 +8,8 @@ class fragmenttyperel
 	public function retrive_fragment_id($type_id)
     {
 		$query = "SELECT DISTINCT Fragment_id FROM FragmentTypeRel WHERE type_id = '$type_id'";
-		$rs = mysql_query($query);
-		while(list($id) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setFragment_id($id);		
 		}		
@@ -18,8 +18,8 @@ class fragmenttyperel
 	public function retrive_fragment_id_priority_uno($type_id)
     {
 		$query = "SELECT DISTINCT Fragment_id FROM FragmentTypeRel WHERE type_id = '$type_id' AND priority = '1'";
-		$rs = mysql_query($query);
-		while(list($id) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setFragment_id($id);		
 		}		

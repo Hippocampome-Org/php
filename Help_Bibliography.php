@@ -111,9 +111,9 @@ ul
 				WHERE	a.publication is not NULL AND aar.author_pos = 0 
 				ORDER BY au.name ASC, a.year DESC, a.pmid_isbn DESC
 			";
-			$r=mysql_query($t);
+			$r=mysqli_query($GLOBALS['conn'],$t);
 			$l=0;
-			while($row = mysql_fetch_array($r, MYSQL_ASSOC))
+			while($row = mysqli_fetch_array($r, MYSQL_ASSOC))
 			{
 				$ttls[$l]=$row['ttl'];
 				$publi[$l]=$row['pub'];
@@ -130,17 +130,17 @@ ul
 			for($ll=0;$ll<$l;$ll++)
 			{
 				$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id[$ll]' ORDER BY b.author_pos";
-				$results=mysql_query($article_author_rel);
+				$results=mysqli_query($GLOBALS['conn'],$article_author_rel);
 				if($publi[$ll]!="")
 				{
 					print("<br/>");
 					$g=0;
-					while($rows = mysql_fetch_array($results, MYSQL_ASSOC))
+					while($rows = mysqli_fetch_array($results, MYSQL_ASSOC))
 					{
 						$auth_id=$rows['auth_id'];
 						$fetch_auth="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auth_id'";
-						$ress=mysql_query($fetch_auth);
-						while($arows = mysql_fetch_array($ress, MYSQL_ASSOC))
+						$ress=mysqli_query($GLOBALS['conn'],$fetch_auth);
+						while($arows = mysqli_fetch_array($ress, MYSQL_ASSOC))
 						{
 							$auth_name=$arows['name_auth'];
 							$auth_name=preg_replace("/'/", "&#39;", $auth_name);

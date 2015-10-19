@@ -3,8 +3,8 @@ include ("access_db.php");
 $perm = $_SESSION['perm'];
 if ($perm == NULL) {
 	$query = "SELECT permission FROM user WHERE id = '2'";
-	$rs = mysql_query($query);
-	while (list($permission) = mysql_fetch_row($rs)) {
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	while (list($permission) = mysqli_fetch_row($rs)) {
 		if ($permission == 1) {
 			$anonymous = 1;
 		}

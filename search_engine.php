@@ -36,13 +36,13 @@ $morphology_properties_query =
 function create_result_table_result ($name_temporary_table)
 {	
 	$drop_table ="DROP TABLE $name_temporary_table";
-	$query = mysql_query($drop_table);
+	$query = mysqli_query($GLOBALS['conn'],$drop_table);
 	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
 				   id_type varchar(200),
 				   PRIMARY KEY (id));";
-	$query = mysql_query($creatable);
+	$query = mysqli_query($GLOBALS['conn'],$creatable);
 }	
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -60,7 +60,7 @@ function insert_result_table_result($table, $id_type, $n_type_id)
 		  (NULL,
 			'$id_type[$i]'
 		   )";
-		$rs2 = mysql_query($query_i);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);	
 	}
 }
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -70,8 +70,8 @@ function insert_result_table_result($table, $id_type, $n_type_id)
 function information_by_id ($name_temporary_table, $id)
 {
 	$query = "SELECT property, part, relation, value FROM $name_temporary_table WHERE id='$id'";
-	$rs = mysql_query($query);
-	while(list($property, $part, $relation, $value) = mysql_fetch_row($rs))
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	while(list($property, $part, $relation, $value) = mysqli_fetch_row($rs))
 	{
 		$varr[0] = $property;
 		$varr[1] = $part;
@@ -289,7 +289,7 @@ function major_neurontransmitter_search($property_1, $type, $subject, $predicate
   //$where_clause = ' ' . create_where_clause_from_conditions($conditions);  // see stm_lib
   //$order_clause = " ORDER BY t.position";
   //$query = $base_query . $where_clause . $order_clause;
-  //$result = mysql_query($query);
+  //$result = mysqli_query($GLOBALS['conn'],$query);
   //$records = result_set_to_array($result, "Type_id");
   //return $records;
 //}
@@ -431,55 +431,55 @@ function connectivity_search ($evidencepropertyyperel, $property_1, $type, $part
 	
 	if (strpos($rel,'known to come from') === 0) {
 		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_target_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
 		$explicit_targets = result_set_to_array($result, "t2_id");
 		$conn_search_result_array = $explicit_targets;
 	}
 	elseif (strpos($rel,'known not to come from') === 0) {
 		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nontarget_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
 		$explicit_nontargets = result_set_to_array($result, "t2_id");
 		$conn_search_result_array = $explicit_nontargets;
 	}
 	elseif (strpos($rel,'known to target') === 0) {
 		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_source_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
 		$explicit_sources = result_set_to_array($result, "t1_id");
 		$conn_search_result_array = $explicit_sources;
 	}
 	elseif (strpos($rel,'known not to target') === 0) {
 		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nonsource_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
 		$explicit_nonsources = result_set_to_array($result, "t1_id");
 		$conn_search_result_array = $explicit_nonsources;
 	}
 	elseif (strpos($rel,'potentially from') === 0) {
 		$axon_query = $one_type_query . " AND subject = 'axons'";
-		$result = mysql_query($axon_query);
+		$result = mysqli_query($GLOBALS['conn'],$axon_query);
 		$axon_parcels = result_set_to_array($result, 'object');
 		$possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
 		
 		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_target_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
 		$explicit_targets = result_set_to_array($result, "t2_id");
 		
 		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nontarget_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
 		$explicit_nontargets = result_set_to_array($result, "t2_id");		
 		$conn_search_result_array = array_merge(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
 	}
 	elseif (strpos($rel,'potentially targeting') === 0) {	
 		$dendrite_query = $one_type_query . " AND subject = 'dendrites'";
-		$result = mysql_query($dendrite_query);
+		$result = mysqli_query($GLOBALS['conn'],$dendrite_query);
 		$dendrite_parcels = result_set_to_array($result, 'object');
 		$possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
 				
 		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_source_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
 		$explicit_sources = result_set_to_array($result, "t1_id");
 		
 		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nonsource_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
 		$explicit_nonsources = result_set_to_array($result, "t1_id");		
 		$conn_search_result_array = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
 	}
@@ -520,9 +520,9 @@ $name_temporary_table_search = $_REQUEST['name_table'];
 //MyDelete ends
 
 $query = "SELECT id FROM $name_temporary_table_search";
-$rs = mysql_query($query);
+$rs = mysqli_query($GLOBALS['conn'],$query);
 $n_line = 0;
-while(list($id) = mysql_fetch_row($rs))
+while(list($id) = mysqli_fetch_row($rs))
 {
 	$id_line[$n_line]=$id;
 	$n_line = $n_line + 1;
@@ -534,8 +534,8 @@ $b = 0; // stores the number of AND lines + 1 (for the first line)
 for ($i=0; $i<$n_line; $i++)
 {
 	$query = "SELECT id, operator FROM $name_temporary_table_search WHERE id = '$id_line[$i]'";
-	$rs = mysql_query($query);
-	while(list($id, $operator) = mysql_fetch_row($rs))
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	while(list($id, $operator) = mysqli_fetch_row($rs))
 	{	
 		if ( ($operator == '') || ($operator == 'AND') )
 		{
@@ -805,10 +805,10 @@ include ("function/icon.html");
 		
 		
 			$query = "SELECT DISTINCT id_type FROM $name_temporary_table_result";
-			$rs = mysql_query($query);
+			$rs = mysqli_query($GLOBALS['conn'],$query);
 			$n_result_tot=0;
 			$n_result_tot_unknown=0;
-			while(list($id) = mysql_fetch_row($rs))
+			while(list($id) = mysqli_fetch_row($rs))
 			{			
 				if (strpos($id, '0_') == 1)
 				{

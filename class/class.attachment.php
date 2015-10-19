@@ -22,8 +22,8 @@ class attachment
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, cell_id, original_id, name, type FROM Attachment WHERE id = '$id' and cell_id = '$id_neuron'";
-		$rs = mysql_query($query);
-		while(list($id,$cell_id, $original_id, $name, $type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setCell_id($cell_id);
@@ -42,10 +42,10 @@ class attachment
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
 		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
-		$rs = mysql_query($query);
-		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{
-		//	while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		//	while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		//	{	
 		//		print("attachment:".$attachment);
 				$this->setName($attachment);	
@@ -67,10 +67,10 @@ class attachment
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
 		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter'";
-		$rs = mysql_query($query);
-		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{
-			//	while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+			//	while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 			//	{
 			//		print("attachment:".$attachment);
 			$this->setName($attachment);

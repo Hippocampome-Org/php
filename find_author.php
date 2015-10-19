@@ -183,10 +183,8 @@ if ($_REQUEST['see_result'])
 if ($temporary_search == 1)
 {
 	$and_or = $_SESSION['and_or'];
-
 	$temporary -> retrieve_id();
 	$n_id = $temporary -> getN_id();
-
 	
 	// Name of Authors
 	$n_author = 0;
@@ -201,17 +199,15 @@ if ($temporary_search == 1)
 	{
 		$aut = $temporary -> getAuthor_array($i1);	
 		$auth = $temporary -> getCanonical_author($aut);
-	
 		for($j=0;$j<sizeof($auth);$j++){
 			// With name of authors, I retrieve the id of the authors from Author table.
 			$author_1 -> retrive_id_by_name($auth[$j]);
 			$id_author = $author_1 -> getID_array(0);
-		
 			// With Id_author retrieve the ID_article form table ArticleAuthorRel:
 			$articleauthorrel -> retrive_article_id($id_author);
 		
 			$n_article_id = $articleauthorrel -> getN_author_id();
-		
+			//print("n_article_id:".$n_article_id);
 		
 			for ($i2=0; $i2<$n_article_id; $i2++)
 			{
@@ -317,7 +313,7 @@ if ($_REQUEST['clear_all'])
 {
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$query = "TRUNCATE $name_temporary_table";
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 
 	// Creates the temporary table:
 	$temporary -> setName_table($name_temporary_table);	
@@ -741,14 +737,14 @@ $(document).ready(function(){
 			//	print("...$pmid[$i]......$unique_pmid[$i]....");
 				
 $a="SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleSynonymRel` ON (`ArticleSynonymRel`.`Article_id` = `Article`.`id`) INNER JOIN `Synonym` ON (`Synonym`.`id` = `ArticleSynonymRel`.`Synonym_id`) INNER JOIN `SynonymTypeRel` ON (`SynonymTypeRel`.`Synonym_id` = `Synonym`.`id`) INNER JOIN `Type` ON (`Type`.`id` = `SynonymTypeRel`.`Type_id`) WHERE (`pmid_isbn` = '$pmid[$i]')";
-$Type_name = mysql_query($a);
+$Type_name = mysqli_query($GLOBALS['conn'],$a);
 				if (!$Type_name) {
-					die("<p>Error in listing tables:" . mysql_error() . "</p>");
+					die("<p>Error in listing tables:" . mysqli_error($GLOBALS['conn']) . "</p>");
 				}
 				$f=0;
 				$o=1;
 				$t_n=array();
-		while($rows=mysql_fetch_array($Type_name, MYSQL_ASSOC))
+		while($rows=mysqli_fetch_array($Type_name, MYSQL_ASSOC))
 		{
 			$ty_name=$rows['name'];
 			$ty_nick=$rows['nickname'];

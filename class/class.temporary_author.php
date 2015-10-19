@@ -16,14 +16,14 @@ class temporary_author
 		$table=$this->getName_table();
 	
 		$drop_table ="DROP TABLE $table";
-		$query = mysql_query($drop_table);
+		$query = mysqli_query($GLOBALS['conn'],$drop_table);
 		
 		$creatable=	"CREATE TABLE IF NOT EXISTS $table (
 					   id int(4) NOT NULL AUTO_INCREMENT,
 					   letter varchar(3),
 					   author varchar(200),
 					   PRIMARY KEY (id));";
-		$query = mysql_query($creatable);
+		$query = mysqli_query($GLOBALS['conn'],$creatable);
 	}
 
 	public function insert_temporary($letter, $author)
@@ -32,11 +32,11 @@ class temporary_author
 		if (get_magic_quotes_gpc()) {
         	$author = stripslashes($author);    
     	}
-		$author= mysql_real_escape_string($author);
+		$author= mysqli_real_escape_string($GLOBALS['conn'],$author);
 		$table=$this->getName_table();
 			
 		$query_i = "INSERT INTO $table (id, letter, author) VALUES (NULL, '$letter', '$author')";
-		$rs2 = mysql_query($query_i);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);	
 	}
 
 	public function update_temporary($letter, $author, $flag, $id)
@@ -47,7 +47,7 @@ class temporary_author
         	$author = stripslashes($author);    
     	}
     
-		$author= mysql_real_escape_string($author);	
+		$author= mysqli_real_escape_string($GLOBALS['conn'],$author);	
 		$table=$this->getName_table();
 	
 		if ($flag == 1) // Update letter:
@@ -58,7 +58,7 @@ class temporary_author
 		{
 			$query_i = "UPDATE $table SET author = '$author' WHERE id='$id'";	
 		}
-		$rs2 = mysql_query($query_i);
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);
 	}
 
 
@@ -67,9 +67,9 @@ class temporary_author
 		$table=$this->getName_table();
 	
 		$query = "SELECT id, author FROM $table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($id, $author) = mysql_fetch_row($rs))
+		while(list($id, $author) = mysqli_fetch_row($rs))
 		{
 			$this->setID_array($id, $n);
 			$this->setAuthor_array($author, $n);
@@ -83,8 +83,8 @@ class temporary_author
 		$table=$this->getName_table();
 	
 		$query = "SELECT letter FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
-		while(list($var) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($var) = mysqli_fetch_row($rs))
 		{
 			$this->setLetter($var);
 		}
@@ -95,8 +95,8 @@ class temporary_author
 		$table=$this->getName_table();
 	
 		$query = "SELECT author FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
-		while(list($var) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($var) = mysqli_fetch_row($rs))
 		{
 			$this->setAuthor($var);
 		}
@@ -107,7 +107,7 @@ class temporary_author
 		$table=$this->getName_table();
 	
 		$query = "DELETE FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 	}
 	
 		
@@ -180,11 +180,11 @@ class temporary_author
 	public function getCanonical_author($author)
     {
     	$author = substr($author, 0,(strpos($author, ' ')+2)); //1st parameter string,2nd parameter starting index ,3rd parameter total length after the space
-		$author= mysql_real_escape_string($author);
+		$author= mysqli_real_escape_string($GLOBALS['conn'],$author);
 		$query_canonical="SELECT name FROM Author WHERE name LIKE '$author%'"; //Bring all the authors with first name and first initial of the last name same.
-		$rs = mysql_query($query_canonical);	
+		$rs = mysqli_query($GLOBALS['conn'],$query_canonical);	
 		$i=0;				
-		while(list($author_name) = mysql_fetch_row($rs))	
+		while(list($author_name) = mysqli_fetch_row($rs))	
 		{	
 			$canonical[$i]=$author_name;
 			$i++;

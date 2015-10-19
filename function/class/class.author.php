@@ -18,9 +18,9 @@ class author
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT name FROM $table WHERE id = '$id' ";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName_author_array($id, $n);		
 			$n = $n +1;
@@ -33,9 +33,9 @@ class author
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT name FROM $table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName_author_array($id, $n);		
 			$n = $n +1;
@@ -48,9 +48,9 @@ class author
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT id FROM $table WHERE name='$name'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);		
 			$n = $n +1;

@@ -205,7 +205,7 @@ if ($_REQUEST['clear_all'])
 {
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$query = "TRUNCATE $name_temporary_table";
-	$rs = mysql_query($query);
+	$rs = mysqli_query($GLOBALS['conn'],$query);
 	// Creates the temporary table:
 	$temporary -> setName_table($name_temporary_table);	
 	$temporary -> insert_temporary('C', 'CA1 (e)2201 Radiatum Giant');
@@ -643,14 +643,14 @@ $(document).ready(function(){
 					print("<td align='left' width='20%' class='table_neuron_page4'>");
 			
 $a= "SELECT `Article`.`id` AS `Article_id`, `pmid_isbn`, `Type`.* FROM `Article` INNER JOIN `ArticleEvidenceRel` ON (`ArticleEvidenceRel`.`Article_id` = `Article`.`id`) INNER JOIN `EvidenceFragmentRel` ON (`ArticleEvidenceRel`.`Evidence_id` = `EvidenceFragmentRel`.`Evidence_id`) INNER JOIN `FragmentTypeRel` ON (`EvidenceFragmentRel`.`Fragment_id` = `FragmentTypeRel`.`Fragment_id`) INNER JOIN `Type` ON `Type`.`id` = `FragmentTypeRel`.`Type_id` WHERE(`pmid_isbn` = '$pmid[$i1]')";
-$Type_name = mysql_query($a);
+$Type_name = mysqli_query($GLOBALS['conn'],$a);
 				if (!$Type_name) {
-					die("<p>Error in listing tables:" . mysql_error() . "</p>");
+					die("<p>Error in listing tables:" . mysqli_error($GLOBALS['conn']) . "</p>");
 				}
 				$f=0;
 				$o=1;
 				$t_n=array();
-		while($rows=mysql_fetch_array($Type_name, MYSQL_ASSOC))
+		while($rows=mysqli_fetch_array($Type_name, MYSQL_ASSOC))
 		{
 			$ty_name=$rows['name'];
 			$ty_nick=$rows['nickname'];
