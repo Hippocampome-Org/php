@@ -24,6 +24,7 @@
   			<li><a href='Help_FAQ.php'><font class="font7"> FAQs</font></a></li>
 			<li><a href='images/Interpretation_Flowchart.jpeg'><font class="font7"> Interpretation Protocols Flowchart</font></a></li>
   			<li><a href='Help_Formal_Name_Encoding.php'><font class="font7"> Formal Name Encoding</font></a></li>
+  			<li><a href='help/Formal_Neuron_Type_Definitions.html'><font class="font7"> Formal Neuron Type Definitions</font></a></li>
 			</ul>
 
 			<font class='font1a'>Feedback:</font> &nbsp; &nbsp;

@@ -1,9 +1,11 @@
 <?php
 	// name table:
+	$class_term = 'Term';
 	$class_type = 'Type';
 	$class_property = 'Property';
 	$class_evidence_property_type_rel = 'EvidencePropertyTypeRel';
 	$class_synonym = 'Synonym';
+	$class_synonymtyperel = 'SynonymTypeRel';
 	$class_evidencefragmentrel='EvidenceFragmentRel';
 	$class_articleevidencerel='ArticleEvidenceRel';
 	$class_fragment='Fragment';
