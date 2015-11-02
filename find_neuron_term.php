@@ -402,15 +402,13 @@ $(document).ready(function(){
 		{
 			print("<table border='0'  class='table_result' id='tab_res' width='100%'>");
 			print("<thead><tr>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Parent</strong> </th>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term</strong></th></font>
+				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term Source</strong> </th>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Portal</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Repository</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Unique ID</strong></th></font>
-				<th align='center' width='20%' class='table_neuron_page1'> <strong>Definition Link</strong></th></font>
-				<th align='center' width='20%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
-				<th align='center' width='05%' class='table_neuron_page1'> <strong>Protein/Gene</strong></th></font>
-				<th align='center' width='05%' class='table_neuron_page1'> <strong>Human/Rat</strong></th></font>
+				<th align='center' width='25%' class='table_neuron_page1'> <strong>External Link</strong></th></font>
+				<th align='center' width='25%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
 				</tr></thead><tbody>"
 			);
 			$temporary->retrieve_id();
@@ -441,15 +439,13 @@ $(document).ready(function(){
 							$term_protein_gene = $term->getProteinGene();
 							$term_human_rat = $term->getHumanRat();
 							print("	<tr>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_parent</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_term</td>
+								<td align='left' width='10%' class='table_neuron_page4'>$term_parent</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_portal</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_repository</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_unique_id</td>
-								<td align='left' width='20%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
-								<td align='left' width='20%' class='table_neuron_page4'>$term_definition</td>
-								<td align='left' width='05%' class='table_neuron_page4'>$term_protein_gene</td>
-								<td align='left' width='05%' class='table_neuron_page4'>$term_human_rat</td>
+								<td align='left' width='25%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
+								<td align='left' width='25%' class='table_neuron_page4'>$term_definition</td>
 								</tr>"
 							);
 						}
