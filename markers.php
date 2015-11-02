@@ -382,10 +382,10 @@ $(function()
 			cell: "cell",
 			id: "invid"
 		},
-		scrollerbar: true,
+		scrollerbar: false,
 		height: "440",
 		width: "700",
-		shrinkToFit: false,
+		shrinkToFit: true,
 		gridComplete: function ()
 		{
 			var gridName = "nGrid"; // Access the grid Name
@@ -456,6 +456,8 @@ function HideShowColumns ()
 	$("#myform :checkbox").click(function() {
 		var $this = $(this);
 		if ($this.is(':checked')) {
+			myGrid.jqGrid('setGridParam', {scrollerbar: true});
+			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT3","VIAAT","VILIP","Y1"]);
 		}
 		else {
