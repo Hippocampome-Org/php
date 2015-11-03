@@ -176,9 +176,9 @@ jQuery(document).ready(function() {
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
       Reference: <b>Wheeler et al., 2015</b>.
-      <a href="http://elifesciences.org/content/early/2015/09/24/eLife.09960">
+      <a href="http://elifesciences.org/content/4/e09960">
       <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i></a>.
-      eLife 2015;10.7554/eLife.09960.
+      eLife 2015;4:e09960.
       </font>
 
       <br><br>
@@ -217,7 +217,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, § 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
-          <br />Last Update: 2 Nov 2015 (<a href="Help_Release_Notes.php">v1.0 R 1B</a>)</font>
+          <br />Last Update: 3 Nov 2015 (<a href="Help_Release_Notes.php">v1.0 R 1B</a>)</font>
           <br />
         </div>
     </td>   
