@@ -686,19 +686,19 @@ $(function(){
 				<!-- <td width="10"><img src='images/connectivity/excitatory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#000000></td>
 				<td><font class='font5'>Potential Excitatory Non-PCL Connection </font></td>
-				<td><font class='font5'><p id="cle3"></p></font></td>
+				<td align="right"><font class='font5'><p id="cle3"></p></font></td>
 			</tr>
 			<tr>
 				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#AAAAAA></td>
 				<td><font class='font5'>Potential Inhibitory Non-PCL Connection </font></td>
-				<td><font class='font5'><p id="cle5"></p></font></td> 
+				<td align="right"><font class='font5'><p id="cle5"></p></font></td> 
 			</tr>
 			<tr>
 				<!-- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#FF8C00></td>
 				<td><font class='font5'>Potential Inhibitory PCL-Only Connection</font></td>
-				<td><font class='font5'><p id="cle4"></p></font></td>
+				<td align="right"><font class='font5'><p id="cle4"></p>0</font></td>
 			</tr>
 			<tr height="20"></tr>
 			<!--
@@ -714,12 +714,12 @@ $(function(){
 			<tr>					
 				<td style="text-align:center"><img src='images/connectivity/known_connection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Connection</font></td>
-				<td><font class='font5'><p id="cle"></p></font></td>
+				<td align="right"><font class='font5'><p id="cle"></p></font></td>
 			</tr>
 			<tr>
 				<td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Non-Connection </font></td>
-				<td><font class='font5'><p id="cle2"></p></font></td> 
+				<td align="right"><font class='font5'><p id="cle2"></p></font></td> 
 			</tr>
 			<tr height="20"></tr>
 			<tr>			
