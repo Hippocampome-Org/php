@@ -402,7 +402,7 @@ $(function()
 			id: "invid"
 		},
 		scrollerbar: false,
-		height: "440",
+		height: "402",
 		width: "708",
 		shrinkToFit: true,
 		gridComplete: function ()
