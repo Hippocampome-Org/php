@@ -84,7 +84,10 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 {
 	if ($open_access == NULL)
 		$open_access = -1;
-	set_magic_quotes_runtime(0);
+	if(get_magic_quotes_runtime())
+	{
+		set_magic_quotes_runtime(false);
+	}
 	if (get_magic_quotes_gpc()) {
 		$publication = stripslashes($publication);
 		$res = stripslashes($res);
@@ -247,6 +250,9 @@ $page = $_REQUEST['page'];
 $sub_show_only = $_SESSION['sub_show_only']; 
 $name_show_only_article = $_SESSION['name_show_only_article'];
 
+$name_show_animal = $_SESSION['name_show_animal'];
+$name_show_protocol = $_SESSION['name_show_protocol'];
+
 
 $see_all = $_REQUEST['see_all']; 
 if ($see_all == 'Open All Evidence')
@@ -254,8 +260,11 @@ if ($see_all == 'Open All Evidence')
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
-	$query = "UPDATE $name_temporary_table SET show1 =  '1'";
-	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
+	$name_show_animal_t = strtolower($name_show_animal);
+	$name_show_protocol_t = strtolower($name_show_protocol);
+	$name_show_protocol_t1 = substr($name_show_protocol_t , 0, 5);
+	$query = "UPDATE $name_temporary_table SET show1 =  '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_protocol_t1%'";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
 if ($see_all == 'Close All Evidence')
@@ -300,7 +309,13 @@ if ($page) // Come from another page
 	$_SESSION['name_show_only'] = $name_show_only;
 		
 	$sub_show_only = NULL;
-	$_SESSION['sub_show_only'] = $sub_show_only;	
+	$_SESSION['sub_show_only'] = $sub_show_only;
+
+	$name_show_animal = NULL;
+	$_SESSION['name_show_animal'] = $name_show_animal;
+	
+	$name_show_protocol = NULL;
+	$_SESSION['name_show_protocol'] = $name_show_protocol;
 	
 	$name_show_only_article = 'all';
 	$name_show_only_journal = 'all';	
@@ -405,7 +420,6 @@ if ($name_show_only_var)
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
-	//$name_temporary_attachment=
 
 	// Option: All:
 	if ($name_show_only == 'all')
@@ -548,6 +562,156 @@ if ($name_show_only_authors_var)
 } // end if $name_show_only_authors
 
 
+//Animal
+$name_show_animal_var = $_REQUEST['name_show_animal_var'];
+
+if ($name_show_animal_var)
+{
+	$query = "UPDATE $name_temporary_table SET show1 = '0'";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	$name_show_animal = $_REQUEST['name_show_animal'];
+	$_SESSION['name_show_animal'] = $name_show_animal;
+	
+	$page_in = $_REQUEST['start'];
+	$page_end = $_REQUEST['stop'];
+	$name_temporary_table = $_SESSION['name_temporary_table'];
+
+	// Option: Mice:
+	if ($name_show_animal == 'Mice')
+	{
+		if($name_show_protocol == 'Patch_Clamp')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_protocol == 'Microelectrodes')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		else
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}			
+	}
+	//Option: Rats
+	if ($name_show_animal == 'Rats')
+	{
+		if($name_show_protocol == 'Patch_Clamp')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_protocol == 'Microelectrodes')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		else
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}			
+	}
+	//Option:All
+	if ($name_show_animal == 'All')
+	{
+		if($name_show_protocol == 'Patch_Clamp')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' protocol like '%patch clamp%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_protocol == 'Microelectrodes')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_protocol == 'All')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+		}			
+	}
+	
+}
+
+//Protocol
+$name_show_protocol_var = $_REQUEST['name_show_protocol_var'];
+
+if ($name_show_protocol_var)
+{
+	$query = "UPDATE $name_temporary_table SET show1 = '0'";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	$name_show_protocol = $_REQUEST['name_show_protocol'];
+	$_SESSION['name_show_protocol'] = $name_show_protocol;
+	
+	$page_in = $_REQUEST['start'];
+	$page_end = $_REQUEST['stop'];
+	$name_temporary_table = $_SESSION['name_temporary_table'];
+
+	// Option: Patch Clamp:
+	if ($name_show_protocol == 'Patch_Clamp')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		else
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+		}
+				
+	}
+	//Option: Microelectrodes
+	if ($name_show_protocol == 'Microelectrodes')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		else
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}			
+	}
+	//Option:All
+	if ($name_show_protocol == 'All')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+		}
+		elseif($name_show_animal == 'All')
+		{
+			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
+			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+		}
+	}
+	
+}
+
+
 $type = new type($class_type);
 $type -> retrive_by_id($id_neuron);
 
@@ -585,6 +749,30 @@ function show_only(link, start1, stop1)
 	var destination_page = "property_page_ephys.php";
 
 	location.href = destination_page+"?name_show_only="+name+"&start="+start2+"&stop="+stop2+"&name_show_only_var=1";
+}
+
+//Animal
+function show_animal(link, start1, stop1)
+{
+	var name=link[link.selectedIndex].value;
+	var start2 = start1;
+	var stop2 = stop1;
+
+	var destination_page = "property_page_ephys.php";
+
+	location.href = destination_page+"?name_show_animal="+name+"&start="+start2+"&stop="+stop2+"&name_show_animal_var=1";
+}
+
+//Protocol
+function show_protocol(link, start1, stop1)
+{
+	var name=link[link.selectedIndex].value;
+	var start2 = start1;
+	var stop2 = stop1;
+
+	var destination_page = "property_page_ephys.php";
+
+	location.href = destination_page+"?name_show_protocol="+name+"&start="+start2+"&stop="+stop2+"&name_show_protocol_var=1";
 }
 
 function show_only_article(link, start1, stop1)
@@ -966,7 +1154,7 @@ function show_only_ephys(link, start1, stop1)
 							if ($name_show_only == 'authors')
 								$name_show_only1 = 'Authors';
 							
-																														
+																												
 							print ("<OPTION VALUE='$name_show_only1'>$name_show_only1</OPTION>");
 							print ("<OPTION VALUE='all'>----</OPTION>");
 						}
@@ -1113,6 +1301,62 @@ function show_only_ephys(link, start1, stop1)
 				************************************************************************************************************************************* -->
 
 				<br />
+				
+				<!-- Animal and protocol -->
+						<table width='80%' border='0' cellspacing='2' cellpadding='5'>
+						<tr>
+								<td width='10%' align='left'>
+								<font class='font2'>Animal:</font>
+								</td>
+								<td width='30%' align='left'>
+						
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_animal(this, $page_in, '10')\">");
+						if ($name_show_animal)
+						{
+							if ($name_show_animal == 'all')
+								$name_show_animal1 = 'All';
+							if ($name_show_animal == 'Rats')
+								$name_show_animal1 = 'Rats';								
+							if ($name_show_animal== 'Mice')
+								$name_show_animal1 = 'Mice';
+							
+							print ("<OPTION VALUE='$name_show_animal1'>$name_show_animal1</OPTION>");
+							
+							
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Rats'>Rats</OPTION>
+						<OPTION value='Mice'>Mice</OPTION>
+						</td>
+						
+						<td width='10%' align='left'>
+						<font class='font2'>Protocol:</font>
+						</td>
+						<td width='30%' align='left'>
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_protocol(this, $page_in, '10')\">");
+						if ($name_show_protocol)
+						{
+							if ($name_show_protocol == 'All')
+								$name_show_protocol1 = 'All';
+							if ($name_show_protocol == 'Patch_Clamp')
+								$name_show_protocol1 = 'Patch_Clamp';
+							if ($name_show_protocol == 'Microelectrodes')
+								$name_show_protocol1 = 'Microelectrodes';								
+							
+							print ("<OPTION VALUE='$name_show_protocol1'>$name_show_protocol1</OPTION>");
+							
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Patch_Clamp'>Patch_Clamp</OPTION>
+						<OPTION value='Microelectrodes'>Microelectrodes</OPTION>
+						</select>
+						</td>
+						</tr>
+						</table>
 		
 			<?php
 				// There are no results available:
@@ -1155,6 +1399,7 @@ function show_only_ephys(link, start1, stop1)
 						$volume1 = $volume;
 						$issue1 = $issue;
 					}				
+		
 		
 					// TABLE OF THE ARTICLES: ************************************************************************************************
 						$first_author = NULL;
@@ -1281,18 +1526,19 @@ function show_only_ephys(link, start1, stop1)
 								<td width='15%' align='center'>");
 
 								// Display protocol, if any.
+								
 								if ($protocol) {
 									if ($rep_value != NULL) {
-										print ("</td></tr>
+										print("</td></tr>
 											<tr>
 											<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
-											Protocol: <span>$protocol *preferred conditions*</span>
+											Protocol: <span>$protocol *preferred conditions* </span>
 											</td><td width='15%' align='center'>");
 									}
 									else {
-										print ("</td></tr>
+										print("</td></tr>
 											<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>
+											<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
 											Protocol: <span>$protocol</span>
 											</td><td width='15%' align='center'>");
 									}									
