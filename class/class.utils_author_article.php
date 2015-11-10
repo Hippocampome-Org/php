@@ -203,7 +203,7 @@ class utils_author_article
 								where Art.id=$article_id
 								UNION
 								SELECT DISTINCT Art.id as article_id,Art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
-								from Article art
+								from Article Art
 								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Article_id = Art.id)
 								INNER  JOIN EvidenceEvidenceRel EvdEvdRel ON (EvdEvdRel.Evidence2_id=ArtEvdRel.Evidence_id)
 								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdEvdRel.Evidence1_id=EvdPrptTypRel.Evidence_id)
