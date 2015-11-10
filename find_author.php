@@ -50,7 +50,7 @@ if($_REQUEST['new'])
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
 	$time_t = time();
-	$name_temporary_table ='search_'.$ip_address."__".$time_t;
+	$name_temporary_table ='search1_'.$ip_address."__".$time_t;
 	$_SESSION[$search_temporary_table] = $name_temporary_table;
 	$temporary ->setName_table($name_temporary_table);
 	$temporary -> create_temp_table ($name_temporary_table);

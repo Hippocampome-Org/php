@@ -73,16 +73,16 @@ class utils_author_article
 			// For particular article we need to retrive all authors in order of author position(in ArticleAuthorRel table) to form authors string.
 			// Record must be sorted according to author position.
 			// Group_concat forms the authors string, which consist of all authors related to article as per position seperated by comma.
-			$query_to_get_article=" SELECT Auth1.name,Auth1.id AS author_id,ArtAuthRel1.author_pos AS search_auth_pos,ArtAuthRel2.author_pos,ArtAuthRel1.article_id,
-									art.title,art.publication,art.year,art.pmid_isbn,
-									GROUP_CONCAT(distinct Auth2.name ORDER BY ArtAuthRel1.article_id,ArtAuthRel2.author_pos SEPARATOR ', ')  AS authors
+			$query_to_get_article=" SELECT Auth1.name,Auth1.id AS author_id,ArtAuthRel1.author_pos AS search_auth_pos,ArtAuthRel2.author_pos,ArtAuthRel1.Article_id,
+									Art.title,Art.publication,Art.year,Art.pmid_isbn,
+									GROUP_CONCAT(distinct Auth2.name ORDER BY ArtAuthRel1.Article_id,ArtAuthRel2.author_pos SEPARATOR ', ')  AS authors
 									FROM Author Auth1 
-									INNER JOIN ArticleAuthorRel ArtAuthRel1 ON (Auth1.id=ArtAuthRel1.author_id)
-									INNER JOIN ArticleAuthorRel ArtAuthRel2 ON (ArtAuthRel1.article_id=ArtAuthRel2.article_id)
-									INNER JOIN Author Auth2 ON (ArtAuthRel2.author_id=Auth2.id)
-									INNER JOIN Article Art ON (Art.id=ArtAuthRel1.article_id)
+									INNER JOIN ArticleAuthorRel ArtAuthRel1 ON (Auth1.id=ArtAuthRel1.Author_id)
+									INNER JOIN ArticleAuthorRel ArtAuthRel2 ON (ArtAuthRel1.Article_id=ArtAuthRel2.Article_id)
+									INNER JOIN Author Auth2 ON (ArtAuthRel2.Author_id=Auth2.id)
+									INNER JOIN Article Art ON (Art.id=ArtAuthRel1.Article_id)
 									WHERE Auth1.name LIKE $authors_condition
-									GROUP BY ArtAuthRel1.article_id
+									GROUP BY ArtAuthRel1.Article_id
 									ORDER BY ArtAuthRel1.author_pos";
 			$result_set = mysqli_query($GLOBALS['conn'],$query_to_get_article);
 			if (!$result_set) {
@@ -91,7 +91,7 @@ class utils_author_article
 			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
 			{
 				$author_name=$rows['name'];
-				$article_id=$rows['article_id'];
+				$article_id=$rows['Article_id'];
 				$author_id=$rows['author_id'];
 				$authors=$rows['authors'];
 				$article_title=$rows['title'];
@@ -150,17 +150,17 @@ class utils_author_article
     	$author_article_array=array();
 		$index=0;
 		// Get the Evidence associated with type_id and using evidence retrive article and then authors.
-		$query_to_get_article=" SELECT ArtAuthRel1.article_id,art.title,art.publication,art.year,art.pmid_isbn,
-								GROUP_CONCAT(distinct Auth2.name ORDER BY ArtAuthRel1.article_id,ArtAuthRel2.author_pos SEPARATOR ', ')  AS authors
+		$query_to_get_article=" SELECT ArtAuthRel1.Article_id,Art.title,Art.publication,Art.year,Art.pmid_isbn,
+								GROUP_CONCAT(distinct Auth2.name ORDER BY ArtAuthRel1.Article_id,ArtAuthRel2.author_pos SEPARATOR ', ')  AS authors
 								FROM $temp_table_name TempSearch
-								INNER JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdPrptTypRel.type_id=TempSearch.type_id)
-								INNER JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.evidence_id = EvdPrptTypRel.evidence_id)
-								INNER JOIN Article Art ON (Art.id=ArtEvdRel.article_id)
-								INNER JOIN ArticleAuthorRel ArtAuthRel1 ON (ArtAuthRel1.article_id=Art.id)
-								INNER JOIN Author Auth1 ON (Auth1.id=ArtAuthRel1.author_id)
-								INNER JOIN ArticleAuthorRel ArtAuthRel2 ON (ArtAuthRel2.article_id=ArtAuthRel1.article_id)
-								INNER JOIN Author Auth2 ON (ArtAuthRel2.author_id=Auth2.id)
-								GROUP BY ArtAuthRel1.article_id
+								INNER JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdPrptTypRel.Type_id=TempSearch.type_id)
+								INNER JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Evidence_id = EvdPrptTypRel.Evidence_id)
+								INNER JOIN Article Art ON (Art.id=ArtEvdRel.Article_id)
+								INNER JOIN ArticleAuthorRel ArtAuthRel1 ON (ArtAuthRel1.Article_id=Art.id)
+								INNER JOIN Author Auth1 ON (Auth1.id=ArtAuthRel1.Author_id)
+								INNER JOIN ArticleAuthorRel ArtAuthRel2 ON (ArtAuthRel2.Article_id=ArtAuthRel1.Article_id)
+								INNER JOIN Author Auth2 ON (ArtAuthRel2.Author_id=Auth2.id)
+								GROUP BY ArtAuthRel1.Article_id
 								ORDER BY ArtAuthRel1.author_pos";
 			$result_set = mysqli_query($GLOBALS['conn'],$query_to_get_article);
 			if (!$result_set) {
@@ -168,7 +168,7 @@ class utils_author_article
         	}
 			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
 			{
-				$article_id=$rows['article_id'];
+				$article_id=$rows['Article_id'];
 				$authors=$rows['authors'];
 				$article_title=$rows['title'];
 				$article_publication =$rows['publication'];
@@ -195,20 +195,20 @@ class utils_author_article
 		// retrive the neuron type associated with article using evidence id.
 		// article to evidence link is found in ArticleEvidenceRel table. All these evidence are further mapped to one or more evidence
 		// in table EvidenceEvidenceRel(source=evidence2_id and it is evidence_id in ArticleEvidenceRel table)
-    	$query_to_get_type= " SELECT DISTINCT art.id as article_id,art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
-								FROM Article art
-								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.article_id = art.id)
-								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (ArtEvdRel.evidence_id=EvdPrptTypRel.evidence_id)
-								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.type_id)
-								where art.id=$article_id
+    	$query_to_get_type= " SELECT DISTINCT Art.id as article_id,Art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
+								FROM Article Art
+								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Article_id = Art.id)
+								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (ArtEvdRel.Evidence_id=EvdPrptTypRel.Evidence_id)
+								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.Type_id)
+								where Art.id=$article_id
 								UNION
-								SELECT DISTINCT art.id as article_id,art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
+								SELECT DISTINCT Art.id as article_id,Art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
 								from Article art
-								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.article_id = art.id)
-								INNER  JOIN EvidenceEvidenceRel EvdEvdRel ON (EvdEvdRel.evidence2_id=ArtEvdRel.evidence_id)
-								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdEvdRel.evidence1_id=EvdPrptTypRel.evidence_id)
-								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.type_id)
-								WHERE art.id=$article_id 
+								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Article_id = Art.id)
+								INNER  JOIN EvidenceEvidenceRel EvdEvdRel ON (EvdEvdRel.Evidence2_id=ArtEvdRel.Evidence_id)
+								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdEvdRel.Evidence1_id=EvdPrptTypRel.Evidence_id)
+								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.Type_id)
+								WHERE Art.id=$article_id 
 								ORDER BY type_id ";
 		$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
 		if (!$article_type) {
