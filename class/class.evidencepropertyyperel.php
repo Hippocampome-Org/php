@@ -51,7 +51,49 @@ class evidencepropertyyperel
 			$n = $n +1;
 		}
 		$this->setN_Type_id($n);	
-	}		
+	}	
+
+	public function retrive_Type_id_by_Subject_override($Subject, $Conflict_note)
+	{
+		$table 	= $this->getName_table();
+		$table1 = "Property";
+		
+		$query = "SELECT DISTINCT ev.Type_id
+			FROM $table ev
+			JOIN $table1 pr
+			ON (ev.Property_id = pr.id)
+			WHERE conflict_note = '$Conflict_note' and pr.subject = '$Subject'";
+			
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+			$this->setType_id_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setN_Type_id($n);
+	}
+	
+	public function retrive_Type_id_by_Subject_Object($Subject, $Object)
+	{
+		$table 	= $this->getName_table();
+		$table1 = "Property";
+		
+		$query = "SELECT DISTINCT ev.Type_id
+			FROM $table ev
+			JOIN $table1 pr
+			ON (ev.Property_id = pr.id)
+			WHERE pr.object = '$Object' and pr.subject = '$Subject'";
+			
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+			$this->setType_id_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setN_Type_id($n);
+	}
 
 	/// added for "not in" type search. Issue 151
 	public function retrive_for_Not_In($flag,$Property_id,$val,$rel,$part)

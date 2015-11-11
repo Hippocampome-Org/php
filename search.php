@@ -381,7 +381,7 @@ include ("function/icon.html");
 			if ($property1 == 'Morphology')
 				$n_relation = 2;
 			if ($property1 == 'Molecular markers')
-				$n_relation = 3;
+				$n_relation = 6;
 			if ($property1 == 'Electrophysiology')
 				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
