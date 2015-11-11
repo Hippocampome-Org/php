@@ -255,7 +255,6 @@ include ("function/icon.html");
   <tr>
     <td >
 		<!-- ****************  BODY **************** -->	
-		<br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>
 			<td align="center" width="4%" class='table_neuron_page3'>  </td>
@@ -554,7 +553,6 @@ include ("function/icon.html");
 		?>
 		</table>
 
-	<br /><br />
 	<div align="center">
 	<table width="600px" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -569,23 +567,25 @@ include ("function/icon.html");
 				if (($part == '-') || ($part == NULL));
 				else
 				{
+					// Commenting the print statements that is used to display the search string
+					// It will be implemented for advanced search
 					if ($n9 == 0){
 						if ($value == NULL) { // for markers, no value, so no space after relation 
-							print ("$part: ($relation) ");
+						//	print ("$part: ($relation) ");
 							$full_search_string = $part . ": (" . $relation . ")";
 						}
 						else {
-							print ("$part: ($relation $value) ");
+						//	print ("$part: ($relation $value) ");
 							$full_search_string = $part . ": (" . $relation . " " . $value . ")";
 						}
 					}
 					else{
 						if ($value == NULL) { // for markers, no value, so no space after relation
-							print ("<br>$operator $part: ($relation) ");
+						//	print ("<br>$operator $part: ($relation) ");
 							$full_search_string = $full_search_string . " " . $operator . " " . $part . ": (" . $relation . ")";
 						}
 						else {
-							print ("<br>$operator $part: ($relation $value) ");
+						//	print ("<br>$operator $part: ($relation $value) ");
 							$full_search_string = $full_search_string . " " . $operator . " " . $part . ": (" . $relation . " " . $value . ")";
 						}
 					}					
@@ -599,18 +599,16 @@ include ("function/icon.html");
 	<?php
 		$_SESSION['full_search_string'] = $full_search_string;
 	?>
-	</div>
-
-		<br /><br />		
-		<div align="center">
-		<table width='400px'>
+	</div>	
+		<div align="left">
+		<table width='100px'>
 		<tr>
 		<td width='40%'><form action="search.php" method="post" style='display:inline'>	
-			<input type='submit' name='clear_all' value='CLEAR ALL' />
+			<input type='submit' name='clear_all' value='RESET' />
 		</form></td>
 		<td width='20%'></td>
 		<td width='40%'><form action='search_engine.php' method="post">
-			<input type="submit" name='go_search' value='  SEARCH  ' />
+			<input type="submit" name='go_search' value='  SEE RESULTS  ' />
 			<input type="hidden" name='name_table' value='<?php print $name_temporary_table ?>' />
 		</form></td>
 		</tr>

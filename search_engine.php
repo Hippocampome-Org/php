@@ -864,7 +864,7 @@ include ("function/icon.html");
 			$full_search_string_to_print = str_replace('OR', '<br>OR', $full_search_string);
 			$full_search_string_to_print = str_replace('AND', '<br>AND', $full_search_string_to_print);
 			
-			print ("<br><br>" . $full_search_string_to_print . "<br><br>");
+			print ("" . $full_search_string_to_print . "<br>");
 			
 			if ($n_result_tot == 1)
 				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
@@ -872,7 +872,6 @@ include ("function/icon.html");
 				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
 		
 		?>
-		<br /><br />
 
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 		<tr>
@@ -929,7 +928,6 @@ include ("function/icon.html");
 		?>
 		</table>
 
-		<br />
 		
 		<?php
 			if ($n_result_tot_unknown)
@@ -968,7 +966,6 @@ include ("function/icon.html");
 			}
 		?>
 
-		<br /><br /><br />
 
 		<?php
 		if ($n_result_tot == 0);
