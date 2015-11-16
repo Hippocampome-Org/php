@@ -260,11 +260,21 @@ if ($see_all == 'Open All Evidence')
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
+	if($name_show_animal != 'All' && $name_show_protocol != 'All')
+	{
 	$name_show_animal_t = strtolower($name_show_animal);
 	$name_show_protocol_t = strtolower($name_show_protocol);
 	$name_show_protocol_t1 = substr($name_show_protocol_t , 0, 5);
 	$query = "UPDATE $name_temporary_table SET show1 =  '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_protocol_t1%'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+	}
+	
+	elseif($name_show_animal == 'All' && $name_show_protocol == 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	
 }
 
 if ($see_all == 'Close All Evidence')
@@ -619,7 +629,7 @@ if ($name_show_animal_var)
 	{
 		if($name_show_protocol == 'Patch_Clamp')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' protocol like '%patch clamp%'" ;
+			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}
 		elseif($name_show_protocol == 'Microelectrodes')
@@ -627,7 +637,7 @@ if ($name_show_animal_var)
 			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}
-		elseif($name_show_protocol == 'All')
+		else
 		{
 			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -702,7 +712,7 @@ if ($name_show_protocol_var)
 			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}
-		elseif($name_show_animal == 'All')
+		else
 		{
 			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -1314,7 +1324,7 @@ function show_only_ephys(link, start1, stop1)
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_animal(this, $page_in, '10')\">");
 						if ($name_show_animal)
 						{
-							if ($name_show_animal == 'all')
+							if ($name_show_animal == 'All')
 								$name_show_animal1 = 'All';
 							if ($name_show_animal == 'Rats')
 								$name_show_animal1 = 'Rats';								
@@ -1342,7 +1352,7 @@ function show_only_ephys(link, start1, stop1)
 							if ($name_show_protocol == 'All')
 								$name_show_protocol1 = 'All';
 							if ($name_show_protocol == 'Patch_Clamp')
-								$name_show_protocol1 = 'Patch_Clamp';
+								$name_show_protocol1 = 'Patch Clamp';
 							if ($name_show_protocol == 'Microelectrodes')
 								$name_show_protocol1 = 'Microelectrodes';								
 							
@@ -1351,7 +1361,7 @@ function show_only_ephys(link, start1, stop1)
 						}
 						?>
 						<OPTION value='All'>All</OPTION>
-						<OPTION value='Patch_Clamp'>Patch_Clamp</OPTION>
+						<OPTION value='Patch_Clamp'>Patch Clamp</OPTION>
 						<OPTION value='Microelectrodes'>Microelectrodes</OPTION>
 						</select>
 						</td>
