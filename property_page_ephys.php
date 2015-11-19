@@ -252,7 +252,7 @@ $name_show_only_article = $_SESSION['name_show_only_article'];
 
 $name_show_animal = $_SESSION['name_show_animal'];
 $name_show_protocol = $_SESSION['name_show_protocol'];
-
+$name_show_temperature = $_SESSION['name_show_temperature'];
 
 $see_all = $_REQUEST['see_all']; 
 if ($see_all == 'Open All Evidence')
@@ -260,21 +260,50 @@ if ($see_all == 'Open All Evidence')
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
 	$name_temporary_table = $_SESSION['name_temporary_table'];
-	if($name_show_animal != 'All' && $name_show_protocol != 'All')
-	{
 	$name_show_animal_t = strtolower($name_show_animal);
 	$name_show_protocol_t = strtolower($name_show_protocol);
 	$name_show_protocol_t1 = substr($name_show_protocol_t , 0, 5);
-	$query = "UPDATE $name_temporary_table SET show1 =  '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_protocol_t1%'";
-	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+	$name_show_temperature_t = strtolower($name_show_temperature);
+	if($name_show_animal != 'All' && $name_show_protocol != 'All' && $name_show_temperature != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 =  '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_protocol_t1%' and protocol like '%$name_show_temperature_t%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
-	
-	elseif($name_show_animal == 'All' && $name_show_protocol == 'All')
+	elseif($name_show_animal != 'All' && $name_show_protocol != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_protocol_t1%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	elseif($name_show_animal != 'All' && $name_show_temperature != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '$name_show_animal_t%' and protocol like '%$name_show_temperature_t%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	elseif($name_show_protocol != 'All' && $name_show_temperature != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%$name_show_protocol_t1%' and protocol like '%$name_show_temperature_t%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	elseif($name_show_animal != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '$name_show_animal_t%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	elseif($name_show_protocol != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%$name_show_protocol_t1%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	elseif($name_show_temperature != 'All')
+	{
+		$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%$name_show_temperature_t%'";
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	}
+	else
 	{
 		$query = "UPDATE $name_temporary_table SET show1 = '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);
 	}
-	
 }
 
 if ($see_all == 'Close All Evidence')
@@ -326,6 +355,9 @@ if ($page) // Come from another page
 	
 	$name_show_protocol = NULL;
 	$_SESSION['name_show_protocol'] = $name_show_protocol;
+	
+	$name_show_temperature = NULL;
+	$_SESSION['name_show_temperature'] = $name_show_temperature;
 	
 	$name_show_only_article = 'all';
 	$name_show_only_journal = 'all';	
@@ -591,18 +623,73 @@ if ($name_show_animal_var)
 	{
 		if($name_show_protocol == 'Patch_Clamp')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			
 		}
 		elseif($name_show_protocol == 'Microelectrodes')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}			
 	}
 	//Option: Rats
@@ -610,18 +697,72 @@ if ($name_show_animal_var)
 	{
 		if($name_show_protocol == 'Patch_Clamp')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		elseif($name_show_protocol == 'Microelectrodes')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}			
 	}
 	//Option:All
@@ -629,18 +770,72 @@ if ($name_show_animal_var)
 	{
 		if($name_show_protocol == 'Patch_Clamp')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		elseif($name_show_protocol == 'Microelectrodes')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
 		}			
 	}
 	
@@ -665,38 +860,145 @@ if ($name_show_protocol_var)
 	{
 		if($name_show_animal == 'Rats')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		elseif($name_show_animal == 'Mice')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-		}
-				
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+		}		
 	}
 	//Option: Microelectrodes
 	if ($name_show_protocol == 'Microelectrodes')
 	{
 		if($name_show_animal == 'Rats')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		elseif($name_show_animal == 'Mice')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}			
 	}
 	//Option:All
@@ -704,20 +1006,326 @@ if ($name_show_protocol_var)
 	{
 		if($name_show_animal == 'Rats')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		elseif($name_show_animal == 'Mice')
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
 		}
 		else
 		{
-			$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
-			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			if($name_show_temperature == 'Body')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			elseif($name_show_temperature == 'Room')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			elseif($name_show_temperature == 'Unknown')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
 		}
 	}
+}
+	
+
+//Temperature
+$name_show_temperature_var = $_REQUEST['name_show_temperature_var'];
+
+if ($name_show_temperature_var)
+{
+	$query = "UPDATE $name_temporary_table SET show1 = '0'";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);
+	$name_show_temperature = $_REQUEST['name_show_temperature'];
+	$_SESSION['name_show_temperature'] = $name_show_temperature;
+	
+	$page_in = $_REQUEST['start'];
+	$page_end = $_REQUEST['stop'];
+	$name_temporary_table = $_SESSION['name_temporary_table'];
+
+	// Option: Body:
+	if ($name_show_temperature == 'Body')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'rats%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'mice%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		else
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%body%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}		
+	}
+	//Option: Room
+	if ($name_show_temperature == 'Room')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'rats%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'mice%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		else
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%room%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}		
+	}
+	
+	//Option:Unknown
+	if ($name_show_temperature == 'Unknown')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'rats%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'mice%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		else
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%unknown%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}		
+	}
+	
+	//Option:All
+	if ($name_show_temperature == 'All')
+	{
+		if($name_show_animal == 'Rats')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'rats%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		elseif($name_show_animal == 'Mice')
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%' and protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like 'mice%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+		else
+		{
+			if ($name_show_protocol == 'Patch_Clamp')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%patch clamp%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			elseif ($name_show_protocol == 'Microelectrodes')
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1' where protocol like '%microelectrodes%'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+			else
+			{
+				$query = "UPDATE $name_temporary_table SET show1 = '1'" ;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);
+			}
+		}
+	}	
+	
 	
 }
 
@@ -783,6 +1391,18 @@ function show_protocol(link, start1, stop1)
 	var destination_page = "property_page_ephys.php";
 
 	location.href = destination_page+"?name_show_protocol="+name+"&start="+start2+"&stop="+stop2+"&name_show_protocol_var=1";
+}
+
+//Temperature
+function show_temperature(link, start1, stop1)
+{
+	var name=link[link.selectedIndex].value;
+	var start2 = start1;
+	var stop2 = stop1;
+
+	var destination_page = "property_page_ephys.php";
+
+	location.href = destination_page+"?name_show_temperature="+name+"&start="+start2+"&stop="+stop2+"&name_show_temperature_var=1";
 }
 
 function show_only_article(link, start1, stop1)
@@ -1312,13 +1932,13 @@ function show_only_ephys(link, start1, stop1)
 
 				<br />
 				
-				<!-- Animal and protocol -->
+				<!-- Animal and protocol and temperature-->
 						<table width='80%' border='0' cellspacing='2' cellpadding='5'>
 						<tr>
 								<td width='10%' align='left'>
 								<font class='font2'>Animal:</font>
 								</td>
-								<td width='30%' align='left'>
+								<td width='20%' align='left'>
 						
 						<?php 
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_animal(this, $page_in, '10')\">");
@@ -1332,8 +1952,7 @@ function show_only_ephys(link, start1, stop1)
 								$name_show_animal1 = 'Mice';
 							
 							print ("<OPTION VALUE='$name_show_animal1'>$name_show_animal1</OPTION>");
-							
-							
+							print ("<OPTION VALUE='All'>----</OPTION>");
 						}
 						?>
 						<OPTION value='All'>All</OPTION>
@@ -1344,7 +1963,7 @@ function show_only_ephys(link, start1, stop1)
 						<td width='10%' align='left'>
 						<font class='font2'>Protocol:</font>
 						</td>
-						<td width='30%' align='left'>
+						<td width='20%' align='left'>
 						<?php 
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_protocol(this, $page_in, '10')\">");
 						if ($name_show_protocol)
@@ -1357,12 +1976,41 @@ function show_only_ephys(link, start1, stop1)
 								$name_show_protocol1 = 'Microelectrodes';								
 							
 							print ("<OPTION VALUE='$name_show_protocol1'>$name_show_protocol1</OPTION>");
-							
+							print ("<OPTION VALUE='All'>----</OPTION>");
 						}
 						?>
 						<OPTION value='All'>All</OPTION>
 						<OPTION value='Patch_Clamp'>Patch Clamp</OPTION>
 						<OPTION value='Microelectrodes'>Microelectrodes</OPTION>
+						</td>
+						
+						
+						<td width='10%' align='left'>
+						<font class='font2'>Temperature:</font>
+						</td>
+						<td width='20%' align='left'>
+						
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_temperature(this, $page_in, '10')\">");
+						if ($name_show_temperature)
+						{
+							if ($name_show_temperature == 'All')
+								$name_show_temperature1 = 'All';
+							if ($name_show_temperature == 'Body')
+								$name_show_temperature1 = 'Body';								
+							if ($name_show_temperature== 'Room')
+								$name_show_temperature1 = 'Room';
+							if ($name_show_temperature== 'Unknown')
+								$name_show_temperature1 = 'Unknown';
+							
+							print ("<OPTION VALUE='$name_show_temperature1'>$name_show_temperature1</OPTION>");
+							print ("<OPTION VALUE='All'>----</OPTION>");
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Body'>Body</OPTION>
+						<OPTION value='Room'>Room</OPTION>
+						<OPTION value='Unknown'>Unknown</OPTION>
 						</select>
 						</td>
 						</tr>
