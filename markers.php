@@ -109,7 +109,7 @@ include ("function/icon.html");
 	left:3px;
 	font-size:12px;
 	font-weight:bold;
-	padding:0px;
+	padding:0 0 0 5.5px;
 	font:Verdana;
 }
 .rotateIE9 
@@ -123,20 +123,24 @@ include ("function/icon.html");
 	left:3px; 
 	font-size:12px;
 	font-weight:bold;
-	padding:0px;
+	padding:0 0 0 4px;
 	font:Verdana;
 }
-#jqgh_nGrid_Encoding {
+#jqgh_nGrid_NeuritePattern {
 	text-align: right;
 	padding-left: 4px;
 }
+
+.patternHeight {
+	top: 48.5px !important;
+}  
 .title_area_marker {
 	position:absolute; top: 80px; left: 50px;
 	width: 530px;
 	border:none;
 }
-.expandChrome {
-	top: 95px !important;
+ .expandChrome {
+	top: 93px !important;
 	}
 .expandOther {
 	top: 105px !important;
@@ -263,12 +267,12 @@ $(function()
 			researchVar: research,
 			table_result : table
 		},
-		colNames:['','Neuron Type','Neurite<br>Pattern','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=SubPRec" onClick="OpenInNewTab(this);">SubPRec</a>','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=mGluR1a" onClick="OpenInNewTab(this);">mGluR1a</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGluT3</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=nNOS" onClick="OpenInNewTab(this);">nNOS</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=AMIGO2" onClick="OpenInNewTab(this);">AMIGO2</a>','<a href="neuron_by_marker.php?marker=AMPAR2/3" onClick="OpenInNewTab(this);">AMPAR2/3</a>','<a href="neuron_by_marker.php?marker=BDNF" onClick="OpenInNewTab(this);">BDNF</a>','<a href="neuron_by_marker.php?marker=Bok" onClick="OpenInNewTab(this);">Bok</a>','<a href="neuron_by_marker.php?marker=Caln" onClick="OpenInNewTab(this);">Caln</a>','<a href="neuron_by_marker.php?marker=CaM" onClick="OpenInNewTab(this);">CaM</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=Chrna2" onClick="OpenInNewTab(this);">Chrna2</a>','<a href="neuron_by_marker.php?marker=CRF" onClick="OpenInNewTab(this);">CRF</a>','<a href="neuron_by_marker.php?marker=Ctip2" onClick="OpenInNewTab(this);">Ctip2</a>','<a href="neuron_by_marker.php?marker=Cx36" onClick="OpenInNewTab(this);">Cx36</a>','<a href="neuron_by_marker.php?marker=CXCR4" onClick="OpenInNewTab(this);">CXCR4</a>','<a href="neuron_by_marker.php?marker=Disc1" onClick="OpenInNewTab(this);">Disc1</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=EAAT3" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ErbB4" onClick="OpenInNewTab(this);">ErbB4</a>','<a href="neuron_by_marker.php?marker=GABA-B1" onClick="OpenInNewTab(this);">GABA-B1</a>','<a href="neuron_by_marker.php?marker=GABAa\delta" onClick="OpenInNewTab(this);">GABAa\delta</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha2" onClick="OpenInNewTab(this);">GABAa\alpha2</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha3" onClick="OpenInNewTab(this);">GABAa\alpha3</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha4" onClick="OpenInNewTab(this);">GABAa\alpha4</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha5" onClick="OpenInNewTab(this);">GABAa\alpha5</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha6" onClick="OpenInNewTab(this);">GABAa\alpha6</a>','<a href="neuron_by_marker.php?marker=GABAa\beta1" onClick="OpenInNewTab(this);">GABAa\beta1</a>','<a href="neuron_by_marker.php?marker=GABAa\beta2" onClick="OpenInNewTab(this);">GABAa\beta2</a>','<a href="neuron_by_marker.php?marker=GABAa\beta3" onClick="OpenInNewTab(this);">GABAa\beta3</a>','<a href="neuron_by_marker.php?marker=GABAa\gamma1" onClick="OpenInNewTab(this);">GABAa\gamma1</a>','<a href="neuron_by_marker.php?marker=GABAa\gamma2" onClick="OpenInNewTab(this);">GABAa\gamma2</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=GAT-3" onClick="OpenInNewTab(this);">GAT-3</a>','<a href="neuron_by_marker.php?marker=GluA1" onClick="OpenInNewTab(this);">GluA1</a>','<a href="neuron_by_marker.php?marker=GluA2" onClick="OpenInNewTab(this);">GluA2</a>','<a href="neuron_by_marker.php?marker=GluA3" onClick="OpenInNewTab(this);">GluA3</a>','<a href="neuron_by_marker.php?marker=GluA4" onClick="OpenInNewTab(this);">GluA4</a>','<a href="neuron_by_marker.php?marker=GluR2/3" onClick="OpenInNewTab(this);">GluR2/3</a>','<a href="neuron_by_marker.php?marker=GlyT2" onClick="OpenInNewTab(this);">GlyT2</a>','<a href="neuron_by_marker.php?marker=Id-2" onClick="OpenInNewTab(this);">Id-2</a>','<a href="neuron_by_marker.php?marker=Kv3.1" onClick="OpenInNewTab(this);">Kv3.1</a>','<a href="neuron_by_marker.php?marker=Man1a" onClick="OpenInNewTab(this);">Man1a</a>','<a href="neuron_by_marker.php?marker=Math-2" onClick="OpenInNewTab(this);">Math-2</a>','<a href="neuron_by_marker.php?marker=mGluR1" onClick="OpenInNewTab(this);">mGluR1</a>','<a href="neuron_by_marker.php?marker=mGluR2" onClick="OpenInNewTab(this);">mGluR2</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGluR3" onClick="OpenInNewTab(this);">mGluR3</a>','<a href="neuron_by_marker.php?marker=mGluR4" onClick="OpenInNewTab(this);">mGluR4</a>','<a href="neuron_by_marker.php?marker=mGluR5" onClick="OpenInNewTab(this);">mGluR5</a>','<a href="neuron_by_marker.php?marker=mGluR5a" onClick="OpenInNewTab(this);">mGluR5a</a>','<a href="neuron_by_marker.php?marker=mGluR7a" onClick="OpenInNewTab(this);">mGluR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus1R" onClick="OpenInNewTab(this);">Mus1R</a>','<a href="neuron_by_marker.php?marker=Mus3R" onClick="OpenInNewTab(this);">Mus3R</a>','<a href="neuron_by_marker.php?marker=Mus4R" onClick="OpenInNewTab(this);">Mus4R</a>','<a href="neuron_by_marker.php?marker=NECAB1" onClick="OpenInNewTab(this);">NECAB1</a>','<a href="neuron_by_marker.php?marker=Neuropilin2" onClick="OpenInNewTab(this);">Neuropilin2</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=p-CREB" onClick="OpenInNewTab(this);">p-CREB</a>','<a href="neuron_by_marker.php?marker=PCP4" onClick="OpenInNewTab(this);">PCP4</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=Prox1" onClick="OpenInNewTab(this);">Prox1</a>','<a href="neuron_by_marker.php?marker=PSA-NCAM" onClick="OpenInNewTab(this);">PSA-NCAM</a>','<a href="neuron_by_marker.php?marker=SATB1" onClick="OpenInNewTab(this);">SATB1</a>','<a href="neuron_by_marker.php?marker=SATB2" onClick="OpenInNewTab(this);">SATB2</a>','<a href="neuron_by_marker.php?marker=SCIP" onClick="OpenInNewTab(this);">SCIP</a>','<a href="neuron_by_marker.php?marker=SPO" onClick="OpenInNewTab(this);">SPO</a>','<a href="neuron_by_marker.php?marker=SubP" onClick="OpenInNewTab(this);">SubP</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGAT" onClick="OpenInNewTab(this);">vGAT</a>','<a href="neuron_by_marker.php?marker=vGlut1" onClick="OpenInNewTab(this);">vGlut1</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VILIP" onClick="OpenInNewTab(this);">VILIP</a>','<a href="neuron_by_marker.php?marker=Y1" onClick="OpenInNewTab(this);">Y1</a>'],	
+		colNames:['','Neuron Type','Neurite<br>Pattern','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=SubPRec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=mGluR1a" onClick="OpenInNewTab(this);">mGluR1a</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGluT3</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=nNOS" onClick="OpenInNewTab(this);">nNOS</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=AMIGO2" onClick="OpenInNewTab(this);">AMIGO2</a>','<a href="neuron_by_marker.php?marker=AMPAR2/3" onClick="OpenInNewTab(this);">AMPAR2/3</a>','<a href="neuron_by_marker.php?marker=BDNF" onClick="OpenInNewTab(this);">BDNF</a>','<a href="neuron_by_marker.php?marker=Bok" onClick="OpenInNewTab(this);">Bok</a>','<a href="neuron_by_marker.php?marker=Caln" onClick="OpenInNewTab(this);">Caln</a>','<a href="neuron_by_marker.php?marker=CaM" onClick="OpenInNewTab(this);">CaM</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=Chrna2" onClick="OpenInNewTab(this);">Chrna2</a>','<a href="neuron_by_marker.php?marker=CRF" onClick="OpenInNewTab(this);">CRF</a>','<a href="neuron_by_marker.php?marker=Ctip2" onClick="OpenInNewTab(this);">Ctip2</a>','<a href="neuron_by_marker.php?marker=Cx36" onClick="OpenInNewTab(this);">Cx36</a>','<a href="neuron_by_marker.php?marker=CXCR4" onClick="OpenInNewTab(this);">CXCR4</a>','<a href="neuron_by_marker.php?marker=Disc1" onClick="OpenInNewTab(this);">Disc1</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=EAAT3" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ErbB4" onClick="OpenInNewTab(this);">ErbB4</a>','<a href="neuron_by_marker.php?marker=GABA-B1" onClick="OpenInNewTab(this);">GABA-B1</a>','<a href="neuron_by_marker.php?marker=GABAa\delta" onClick="OpenInNewTab(this);">GABAa\delta</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha2" onClick="OpenInNewTab(this);">GABAa\alpha2</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha3" onClick="OpenInNewTab(this);">GABAa\alpha3</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha4" onClick="OpenInNewTab(this);">GABAa\alpha4</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha5" onClick="OpenInNewTab(this);">GABAa\alpha5</a>','<a href="neuron_by_marker.php?marker=GABAa\alpha6" onClick="OpenInNewTab(this);">GABAa\alpha6</a>','<a href="neuron_by_marker.php?marker=GABAa\beta1" onClick="OpenInNewTab(this);">GABAa\beta1</a>','<a href="neuron_by_marker.php?marker=GABAa\beta2" onClick="OpenInNewTab(this);">GABAa\beta2</a>','<a href="neuron_by_marker.php?marker=GABAa\beta3" onClick="OpenInNewTab(this);">GABAa\beta3</a>','<a href="neuron_by_marker.php?marker=GABAa\gamma1" onClick="OpenInNewTab(this);">GABAa\gamma1</a>','<a href="neuron_by_marker.php?marker=GABAa\gamma2" onClick="OpenInNewTab(this);">GABAa\gamma2</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=GAT-3" onClick="OpenInNewTab(this);">GAT-3</a>','<a href="neuron_by_marker.php?marker=GluA1" onClick="OpenInNewTab(this);">GluA1</a>','<a href="neuron_by_marker.php?marker=GluA2" onClick="OpenInNewTab(this);">GluA2</a>','<a href="neuron_by_marker.php?marker=GluA3" onClick="OpenInNewTab(this);">GluA3</a>','<a href="neuron_by_marker.php?marker=GluA4" onClick="OpenInNewTab(this);">GluA4</a>','<a href="neuron_by_marker.php?marker=GluR2/3" onClick="OpenInNewTab(this);">GluR2/3</a>','<a href="neuron_by_marker.php?marker=GlyT2" onClick="OpenInNewTab(this);">GlyT2</a>','<a href="neuron_by_marker.php?marker=Id-2" onClick="OpenInNewTab(this);">Id-2</a>','<a href="neuron_by_marker.php?marker=Kv3.1" onClick="OpenInNewTab(this);">Kv3.1</a>','<a href="neuron_by_marker.php?marker=Man1a" onClick="OpenInNewTab(this);">Man1a</a>','<a href="neuron_by_marker.php?marker=Math-2" onClick="OpenInNewTab(this);">Math-2</a>','<a href="neuron_by_marker.php?marker=mGluR1" onClick="OpenInNewTab(this);">mGluR1</a>','<a href="neuron_by_marker.php?marker=mGluR2" onClick="OpenInNewTab(this);">mGluR2</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGluR3" onClick="OpenInNewTab(this);">mGluR3</a>','<a href="neuron_by_marker.php?marker=mGluR4" onClick="OpenInNewTab(this);">mGluR4</a>','<a href="neuron_by_marker.php?marker=mGluR5" onClick="OpenInNewTab(this);">mGluR5</a>','<a href="neuron_by_marker.php?marker=mGluR5a" onClick="OpenInNewTab(this);">mGluR5a</a>','<a href="neuron_by_marker.php?marker=mGluR7a" onClick="OpenInNewTab(this);">mGluR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus1R" onClick="OpenInNewTab(this);">Mus1R</a>','<a href="neuron_by_marker.php?marker=Mus3R" onClick="OpenInNewTab(this);">Mus3R</a>','<a href="neuron_by_marker.php?marker=Mus4R" onClick="OpenInNewTab(this);">Mus4R</a>','<a href="neuron_by_marker.php?marker=NECAB1" onClick="OpenInNewTab(this);">NECAB1</a>','<a href="neuron_by_marker.php?marker=Neuropilin2" onClick="OpenInNewTab(this);">Neuropilin2</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=p-CREB" onClick="OpenInNewTab(this);">p-CREB</a>','<a href="neuron_by_marker.php?marker=PCP4" onClick="OpenInNewTab(this);">PCP4</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=Prox1" onClick="OpenInNewTab(this);">Prox1</a>','<a href="neuron_by_marker.php?marker=PSA-NCAM" onClick="OpenInNewTab(this);">PSA-NCAM</a>','<a href="neuron_by_marker.php?marker=SATB1" onClick="OpenInNewTab(this);">SATB1</a>','<a href="neuron_by_marker.php?marker=SATB2" onClick="OpenInNewTab(this);">SATB2</a>','<a href="neuron_by_marker.php?marker=SCIP" onClick="OpenInNewTab(this);">SCIP</a>','<a href="neuron_by_marker.php?marker=SPO" onClick="OpenInNewTab(this);">SPO</a>','<a href="neuron_by_marker.php?marker=SubP" onClick="OpenInNewTab(this);">SubP</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGAT" onClick="OpenInNewTab(this);">vGAT</a>','<a href="neuron_by_marker.php?marker=vGlut1" onClick="OpenInNewTab(this);">vGlut1</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VILIP" onClick="OpenInNewTab(this);">VILIP</a>','<a href="neuron_by_marker.php?marker=Y1" onClick="OpenInNewTab(this);">Y1</a>'],	
 		colModel :
 		[
-			{name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {return 'id=\'type' + rowId + "\'";}},
-			{name:'Neuron type', index:'nickname', width:175,sortable:false,frozen:true},
-			{name:'Encoding', index:'Encoding', width:50,sortable:false,frozen:true},
+			{name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {return 'id=\'type' + rowId + "\'";}},
+			{name:'NeuronType', index:'nickname', width:175,sortable:false},
+			{name:'NeuritePattern', index:'NeuritePattern', width:50,hidden:true},
 			{name:'CB',index:'CB',width:15,height:150,search:false,sortable:false},
 			{name:'CR',index:'CR',width:15,height:150,search:false,sortable:false},
 			{name:'PV',index:'PV',width:15,height:150,search:false,sortable:false,
@@ -403,7 +407,7 @@ $(function()
 		},
 		scrollerbar: false,
 		height: "402",
-		width: "708",
+		width: "722",
 		shrinkToFit: true,
 		gridComplete: function ()
 		{
@@ -416,7 +420,7 @@ $(function()
 		groupHeaders:[ 
 		{startColumnName: 'CB', numberOfColumns: 3, titleText: '<b>Ca2+ binding proteins<b>'},
 		{startColumnName: 'CB1', numberOfColumns: 7, titleText: '<b>Receptors/Transporters</b>'},
-		{startColumnName: 'CCK', numberOfColumns: 6, titleText: '<b>Neuro peptides</b>'},
+		{startColumnName: 'CCK', numberOfColumns: 6, titleText: '<b>Neuropeptides</b>'},
 		{startColumnName: 'a-act2', numberOfColumns: 4, titleText: '<b>Misc</b>'},
 		] 
 	});
@@ -506,21 +510,40 @@ $(function()
 function HideShowColumns ()
 {
 	var myGrid = $('#nGrid');
-	myGrid.jqGrid('setFrozenColumns');
 	var customWidth = screen.availWidth-100;
 	$(".ui-jqgrid-bdiv").addClass("hideHorizontalScroll");
-	$("#myform :checkbox").click(function() {
-		var $this = $(this);
-		if ($this.is(':checked')) {
+	$("#checkbox1").click(function() {
+		if ($("#checkbox1").is(':checked')) {
+			var myGrid = $("#nGrid");
+			myGrid.jqGrid('showCol', ["NeuritePattern"]);
+			myGrid.jqGrid('setColProp', "NeuritePattern", {frozen: true });
+			myGrid.jqGrid('setFrozenColumns');
+		}
+ 		else {
+			var myGrid = $("#nGrid");
+			myGrid.jqGrid('setColProp', "NeuritePattern", {frozen: false });
+			myGrid.jqGrid('setFrozenColumns');
+			myGrid.jqGrid('hideCol', ["NeuritePattern"]);
+			$(".frozen-div .jqg-first-row-header").eq(1).remove();
+		}  
+	});
+	$("#checkbox2").click(function() {
+		if ($("#checkbox2").is(':checked')) {
+			$("#jqgh_nGrid_NeuronType").addClass("patternHeight");
+			$("#jqgh_nGrid_NeuritePattern").addClass("patternHeight");
+			myGrid.jqGrid('setColProp', 'type', {frozen: true });
+			myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
+			myGrid.jqGrid('setFrozenColumns');
 			$(".ui-jqgrid-bdiv").removeClass("hideHorizontalScroll");
 			myGrid.setGridWidth(customWidth,false);
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
+
 		}
 		else {
-			myGrid.setGridWidth("708");
+			myGrid.setGridWidth("722");
 			$(".ui-jqgrid-bdiv").addClass("hideHorizontalScroll");
 			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
 		} 
@@ -567,11 +590,15 @@ include ("function/menu_main.php");
 ?>	
 <div class='title_area_marker'>
 	<font class="font1">Browse molecular markers matrix</font>
-	<div align="right" style="margin-top:-20px;color:#000099">
+<div align="right" style="color:#000099;margin-top:-20px">
 		<form id="myform">
-			<input type="checkbox" name="check1" value="check1" style="background-color: #000099;margin-right:-48px">
+			<input type="checkbox" id="checkbox1" name="check1" value="check1" style="background-color: #000099;margin-right:60px;padding-left:0px">
 		</form>
-		<div align="right" style="margin-top:-20px;margin-right:-170px;color:#000099">Show All Markers</div>
+		<div style="margin-top:-20px;margin-right:-50px;color:#000099">Neurite Patterns</div>
+   <form id="myform1">
+   <input type="checkbox" id="checkbox2" name="check2" value="check2" style="background-color: rgb(0, 0, 153); margin-right: -85px; margin-top: -16px;">
+    </form>
+		<div align="right" style="margin-top: -20px; color: rgb(0, 0, 153); margin-right: -170px;">All Markers</div>
 	</div>
 </div>
 <div class="table_position">

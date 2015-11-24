@@ -4735,26 +4735,14 @@ $.jgrid.extend({
 						top = top + $($t.grid.uDiv).outerHeight();
 					}
 				}
-				var is_ieedge = navigator.userAgent.toLowerCase().indexOf('edge') > -1;
-				var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-				var is_ie = navigator.userAgent.toLowerCase().indexOf('msie') > -1;
-				var is_ietrident = navigator.userAgent.toLowerCase().indexOf('trident') > -1;
-				if(is_chrome && is_ieedge) {
-					is_ieedge = 1;
-					is_chrome = 0;
+				if (typeof $t.grid.fbDiv !== "undefined") {
+					$($t.grid.fbDiv).css($($t.grid.bDiv).position());
 				}
-				if(is_chrome){
-					$t.grid.fhDiv = $('<div style="position:absolute;overflow-y:hidden;left:0px;top:'+top+'px;height:126px!important;" class="frozen-div ui-state-default ui-jqgrid-hdiv"></div>');
-					$t.grid.fbDiv = $('<div style="position:absolute;left:0px;top:'+(parseInt(top,10)+parseInt(hth,10) + 83)+'px;overflow-y:hidden" class="frozen-bdiv ui-jqgrid-bdiv"></div>');
+				if (typeof $t.grid.fhDiv !== "undefined") {
+					$($t.grid.fhDiv).css($($t.grid.hDiv).position());
 				}
-				else if(is_ie || is_ietrident || is_ieedge){
-					$t.grid.fhDiv = $('<div style="position:absolute;overflow-y:hidden;left:0px;top:'+top+'px;height:126px!important;" class="frozen-div ui-state-default ui-jqgrid-hdiv"></div>');
-					$t.grid.fbDiv = $('<div style="position:absolute;left:0px;top:'+(parseInt(top,10)+parseInt(hth,10) + 86)+'px;overflow-y:hidden" class="frozen-bdiv ui-jqgrid-bdiv"></div>');
-				}
-				else {
-					$t.grid.fhDiv = $('<div style="position:absolute;overflow-y:hidden;left:0px;top:'+top+'px;height:128px!important;" class="frozen-div ui-state-default ui-jqgrid-hdiv"></div>');
-					$t.grid.fbDiv = $('<div style="position:absolute;left:0px;top:'+(parseInt(top,10)+parseInt(hth,10) + 94)+'px;overflow-y:hidden" class="frozen-bdiv ui-jqgrid-bdiv"></div>');
-				}
+				$t.grid.fhDiv = $('<div style="position:absolute;left:0px;top:'+top+'px;height:'+hth+'px;" class="frozen-div ui-state-default ui-jqgrid-hdiv"></div>');
+				$t.grid.fbDiv = $('<div style="position:absolute;left:0px;top:'+(parseInt(top,10)+parseInt(hth,10) + 1)+'px;overflow-y:hidden" class="frozen-bdiv ui-jqgrid-bdiv"></div>');
 				$("#gview_"+$.jgrid.jqID($t.p.id)).append($t.grid.fhDiv);
 				var htbl = $(".ui-jqgrid-htable","#gview_"+$.jgrid.jqID($t.p.id)).clone(true);
 				// groupheader support - only if useColSpanstyle is false
@@ -4848,6 +4836,9 @@ $.jgrid.extend({
 						);
 					}
 					btbl=null;
+					$("tr.jqgrow", btbl).each(function () {
+						$(this).height($("#"+$.jgrid.jqID(this.id)).height() );
+					});
 				});
 				if(!$t.grid.hDiv.loading) {
 					$($t).triggerHandler("jqGridAfterGridComplete");
