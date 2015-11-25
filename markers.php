@@ -154,10 +154,6 @@ include ("function/icon.html");
 .ui-jqgrid-hdiv {
 	overflow-y: hidden !important;
 }
-.hideHorizontalScroll {
-	overflow-x: hidden !important;
-	/* width: 715px !important; */
-}
 </style>
 <script language="javascript">
 function OpenInNewTab(aEle)
@@ -511,15 +507,39 @@ function HideShowColumns ()
 {
 	var myGrid = $('#nGrid');
 	var customWidth = screen.availWidth-100;
-	$(".ui-jqgrid-bdiv").addClass("hideHorizontalScroll");
 	$("#checkbox1").click(function() {
 		if ($("#checkbox1").is(':checked')) {
 			var myGrid = $("#nGrid");
+			myGrid.setGridWidth("722");
+			myGrid.jqGrid('setGridParam', {autowidth: true});
+			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+			myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["NeuritePattern"]);
+			$("#checkbox2").click(function() {
+				if ($("#checkbox2").is(':checked')) {
+					myGrid.setGridWidth(customWidth,false);
+					myGrid.jqGrid('setGridParam', {autowidth: true});
+					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					myGrid.jqGrid('setGridParam', {scrollerbar: true});
+				} else {
+					myGrid.setGridWidth("722");
+				}
+			});
 		}
  		else {
 			var myGrid = $("#nGrid");
 			myGrid.jqGrid('hideCol', ["NeuritePattern"]);
+			myGrid.setGridWidth("722");
+			$("#checkbox2").click(function() {
+				if ($("#checkbox2").is(':checked')) {
+					myGrid.setGridWidth(customWidth,false);
+					myGrid.jqGrid('setGridParam', {autowidth: true});
+					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					myGrid.jqGrid('setGridParam', {scrollerbar: true});
+				} else {
+					myGrid.setGridWidth("722");
+				}
+			});
 		}  
 	});
 	$("#checkbox2").click(function() {
@@ -529,17 +549,38 @@ function HideShowColumns ()
 			myGrid.jqGrid('setColProp', 'type', {frozen: true });
 			myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
 			myGrid.jqGrid('setFrozenColumns');
-			$(".ui-jqgrid-bdiv").removeClass("hideHorizontalScroll");
 			myGrid.setGridWidth(customWidth,false);
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
-
+			$("#checkbox1").click(function() {
+				if ($("#checkbox1").is(':checked')) {
+					myGrid.setGridWidth(customWidth,false);
+					myGrid.jqGrid('setGridParam', {autowidth: true});
+					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					myGrid.jqGrid('setGridParam', {scrollerbar: true});
+				} else {
+					myGrid.setGridWidth(customWidth,false);
+				}
+			});
 		}
 		else {
 			myGrid.setGridWidth("722");
 			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
+			$("#checkbox1").click(function() {
+				if ($("#checkbox1").is(':checked')) {
+					myGrid.setGridWidth("722");
+					myGrid.jqGrid('setGridParam', {autowidth: true});
+					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					myGrid.jqGrid('setGridParam', {scrollerbar: true});
+				} else {
+					myGrid.setGridWidth("722");
+					myGrid.jqGrid('setGridParam', {autowidth: true});
+					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					myGrid.jqGrid('setGridParam', {scrollerbar: true});
+				}
+			});
 		} 
 	});
 }
