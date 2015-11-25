@@ -136,7 +136,7 @@ include ("function/icon.html");
 }  
 .title_area_marker {
 	position:absolute; top: 80px; left: 50px;
-	width: 530px;
+	width: 700px;
 	border:none;
 }
  .expandChrome {
@@ -516,15 +516,10 @@ function HideShowColumns ()
 		if ($("#checkbox1").is(':checked')) {
 			var myGrid = $("#nGrid");
 			myGrid.jqGrid('showCol', ["NeuritePattern"]);
-			myGrid.jqGrid('setColProp', "NeuritePattern", {frozen: true });
-			myGrid.jqGrid('setFrozenColumns');
 		}
  		else {
 			var myGrid = $("#nGrid");
-			myGrid.jqGrid('setColProp', "NeuritePattern", {frozen: false });
-			myGrid.jqGrid('setFrozenColumns');
 			myGrid.jqGrid('hideCol', ["NeuritePattern"]);
-			$(".frozen-div .jqg-first-row-header").eq(1).remove();
 		}  
 	});
 	$("#checkbox2").click(function() {
@@ -544,7 +539,6 @@ function HideShowColumns ()
 		}
 		else {
 			myGrid.setGridWidth("722");
-			$(".ui-jqgrid-bdiv").addClass("hideHorizontalScroll");
 			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AMPAR2_3","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
 		} 
 	});
@@ -588,18 +582,12 @@ function ShowColumn ()
 include ("function/title.php");
 include ("function/menu_main.php");
 ?>	
-<div class='title_area_marker'>
-	<font class="font1">Browse molecular markers matrix</font>
-<div align="right" style="color:#000099;margin-top:-20px">
+<div class="title_area_marker">   
 		<form id="myform">
-			<input type="checkbox" id="checkbox1" name="check1" value="check1" style="background-color: #000099;margin-right:60px;padding-left:0px">
+      <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
+			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
+        <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2"/><span style="color: rgb(0, 0, 153);">All Markers</span></input>
 		</form>
-		<div style="margin-top:-20px;margin-right:-50px;color:#000099">Neurite Patterns</div>
-   <form id="myform1">
-   <input type="checkbox" id="checkbox2" name="check2" value="check2" style="background-color: rgb(0, 0, 153); margin-right: -85px; margin-top: -16px;">
-    </form>
-		<div align="right" style="margin-top: -20px; color: rgb(0, 0, 153); margin-right: -170px;">All Markers</div>
-	</div>
 </div>
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
