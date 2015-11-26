@@ -76,9 +76,12 @@ jQuery(document).ready(function() {
 	{
 		include ('getConnectivity.php');
 		$jsonStr = json_encode($responce);
+
 	}
 	else
 		$jsonStr = $_SESSION['connectivity'];
+
+
 	
 	/* if ($research) { // From page of search; retrieve the id from search_table (temporary) -----------------------	
 		$table_result = $_REQUEST['table_result'];
@@ -247,6 +250,18 @@ if ($_SESSION['perm'] == NULL)
 <script type="text/javascript">
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;;
+	//alert(dataStr.Unknowncount);
+	var tep1 = dataStr.knowncount;
+	var tep2 = dataStr.Unknowncount;
+	var tep3 = dataStr.black;
+	var tep4 = dataStr.orange;
+	var tep5 = dataStr.gray;
+	document.getElementById("cle").innerHTML=tep1;
+	document.getElementById("cle2").innerHTML=tep2;
+	document.getElementById("cle3").innerHTML=tep3;
+	document.getElementById("cle4").innerHTML=tep4;
+	document.getElementById("cle5").innerHTML=tep5;
+
 	 var rotateFunction = function (grid, headerHeight) {
 	 // we use grid as context (if one have more as one table on the page)
 	 	var trHead = $("thead:first tr", grid.hdiv),
@@ -670,17 +685,20 @@ $(function(){
 			<tr>
 				<!-- <td width="10"><img src='images/connectivity/excitatory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#000000></td>
-				<td><font class='font5'>Potential Excitatory Non-PCL Connection</font></td>
+				<td><font class='font5'>Potential Excitatory Non-PCL Connection </font></td>
+				<td align="right"><font class='font5'><p id="cle3"></p></font></td>
 			</tr>
 			<tr>
 				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#AAAAAA></td>
-				<td><font class='font5'>Potential Inhibitory Non-PCL Connection<br></font></td> 
+				<td><font class='font5'>Potential Inhibitory Non-PCL Connection </font></td>
+				<td align="right"><font class='font5'><p id="cle5"></p></font></td> 
 			</tr>
 			<tr>
 				<!-- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#FF8C00></td>
 				<td><font class='font5'>Potential Inhibitory PCL-Only Connection</font></td>
+				<td align="right"><font class='font5'><p id="cle4"></p>0</font></td>
 			</tr>
 			<tr height="20"></tr>
 			<!--
@@ -696,10 +714,12 @@ $(function(){
 			<tr>					
 				<td style="text-align:center"><img src='images/connectivity/known_connection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Connection</font></td>
+				<td align="right"><font class='font5'><p id="cle"></p></font></td>
 			</tr>
 			<tr>
 				<td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
-				<td><font class='font5'>Known Non-Connection</font></td> 
+				<td><font class='font5'>Known Non-Connection </font></td>
+				<td align="right"><font class='font5'><p id="cle2"></p></font></td> 
 			</tr>
 			<tr height="20"></tr>
 			<tr>			
