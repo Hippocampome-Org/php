@@ -9,6 +9,8 @@ include ("function/scraper_pubmed.php");
 require_once('class/class.article.php');
 require_once('class/class.author.php');	
 require_once('class/class.articleauthorrel.php');
+require_once('class/class.utils_type.php');	
+require_once('class/class.utils_author_article.php');
 
 $author_1 = new author($class_author);
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
@@ -126,7 +128,6 @@ else
   <tr>
     <td width="80%">
 		<!-- ****************  BODY **************** -->
-		<br /><br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>		
 			<td width="100%" align="left">
@@ -146,7 +147,6 @@ else
 						<font class='font12'>ISBN</font>");
 				}			
 			?>
-				<br /><br /> 	
 			</td>
 		</tr>	
 		<tr>		
@@ -170,7 +170,6 @@ else
 			</td>
 		</tr>
 		</table>
-		<br /><br />
 		<form action="find_pmid.php" method="post" style="display:inline">
 			<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 			<tr>		
@@ -186,7 +185,7 @@ else
 					<input type="text" name='pubmed_id' size='40' />
 				</td>			
 				<td width="10%" align="center">
-					<input type="submit" name='search_pmid' value='Search' />
+					<input type="submit" name='search_pmid' value='SEE RESULTS' />
 				</td>			
 				<td width="40%" align="center">				
 				<?php
@@ -203,21 +202,20 @@ else
 			</table>		
 		</form>
 		
-	<br /><br /><br />
 	<?php
 		if ( ($n_id_article != 0) && ($error_pmid == 0) )
 		{
-			print ("<table border='0' cellspacing='2' cellpadding='0' class='table_result'>");
-			print ("<tr>
+			print ("<table border='0'  class='table_result' id='tab_res' width='100%'>");
+			print ("<thead><tr>
 						<td align='center' width='20%' class='table_neuron_page1'> <strong>Authors</strong> </td>
-						<td align='center' width='30%' class='table_neuron_page1'> <strong>Title </strong></td>
-						<td align='center' width='20%' class='table_neuron_page1'> <strong>Journal/Book</strong> </td>
-						<td align='center' width='10%' class='table_neuron_page1'> <strong>Year </strong></td>
-						<td align='center' width='20%' class='table_neuron_page1'> <strong>PMID</strong></td>
-					</tr>");
-			print ("</table>");		
-		
-			print ("<table border='0' cellspacing='2' cellpadding='3' class='table_result'>");
+						<td align='center' width='40%' class='table_neuron_page1'> <strong>Title </strong></td>
+						<td align='center' width='10%' class='table_neuron_page1'> <strong>Journal/Book</strong> </td>
+						<td align='center' width='5%' class='table_neuron_page1'> <strong>Year </strong></td>
+						<td align='center' width='5%' class='table_neuron_page1'> <strong>PMID</strong></td>
+						<td align='center' width='20%' class='table_neuron_page1'> <strong>Types</strong></td>
+					</tr></thead><tbody>");
+			
+			$aut_art_typ_utils = new utils_author_article();
 			for ($i1=0; $i1<$n_id_article; $i1++)
 			{	
 				$id_article = $article -> getID_array($i1);
@@ -267,14 +265,39 @@ else
 					
 				print ("<tr>
 						<td align='left' width='20%' class='table_neuron_page4'>$name_authors1.</td>
-						<td align='left' width='30%' class='table_neuron_page4'>$title </td>
-						<td align='left' width='20%' class='table_neuron_page4'>$journal.</td>
-						<td align='left' width='10%' class='table_neuron_page4'>$year </td>
-						<td align='left' width='20%' class='table_neuron_page4'>$link2 <font class='font13'><strong>$PMID1</strong></font> </a> </td>
-					</tr>");		
+						<td align='left' width='40%' class='table_neuron_page4'>$title </td>
+						<td align='left' width='10%' class='table_neuron_page4'>$journal.</td>
+						<td align='left' width='5%' class='table_neuron_page4'>$year </td>
+						<td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'><strong>$PMID1</strong></font> </a> </td>
+						<td align='left' width='20%' class='table_neuron_page4'>");
+				
+				// Get the Types using Article ID
+				$type_id_array = $aut_art_typ_utils -> getArticleTypesArray($id_article);	
+		
+				$count=0;
+				for ($j=0; $j < sizeof($type_id_array) ; $j++)
+				{
+					$type_name=$type_id_array[$j]->getName();
+					$type_nickname=$type_id_array[$j]->getNickname();
+					$type_status =$type_id_array[$j]->getStatus();
+					$type_id = $type_id_array[$j]->getId();
+				
+					if($type_status!=NULL&&$type_status!='frozen')
+					{
+						$count++;
+						print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname</a><br/>");
+					}
+				}
+				
+				if ($count==0) 
+				{
+					print("(to be determined)");
+				}
+				
+				print("</td></tr>");		
 
 			} // end $i1
-			print ("</table>");			
+			print ("</tbody></table>");			
 		}
 		
 		

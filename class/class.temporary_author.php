@@ -8,7 +8,7 @@ class temporary_author
 	private $_name_table;
 	private $_n_id;
 	private $_id_array;
-	private $_author_array;
+	private $_author_array=array();
 
 
 	public function create_temp_table ()
@@ -25,10 +25,51 @@ class temporary_author
 					   PRIMARY KEY (id));";
 		$query = mysqli_query($GLOBALS['conn'],$creatable);
 	}
+	public function retriveAuthorsWithLetter($letter){
+        $authors_array=array();
+        $index=0;
+        // set letter as blank so that all name associated with author will be fetched in case of all.
+        if($letter=='all'){
+            $letter='';
+        }
+        $query_to_get_authors_name=" SELECT name FROM Author where name LIKE '".$letter."%' ORDER BY name";
+        $author_records = mysqli_query($GLOBALS['conn'],$query_to_get_authors_name);
+        if (!$author_records) {
+            die("<p>Error in Listing Author Records.:" . mysql_error() . "</p>");
+        }
+        while($rows=mysqli_fetch_array($author_records, MYSQL_ASSOC))
+        {
+            $authors_array[$index]=$rows['name'];
+            $index++;   
+        }        
+        return $authors_array;
+    }
+    public function retriveSearchedAuthors(){
+        $authors_array=array();
+        $index=0;
+        $table=$this->getName_table();
+        $query_to_get_authors_name=" SELECT id,letter,author FROM $table";
+        $author_records = mysqli_query($GLOBALS['conn'],$query_to_get_authors_name);
+        if (!$author_records) {
+            die("<p>Error in Listing Author Records.:" . mysql_error() . "</p>");
+        }
+        while($rows=mysqli_fetch_array($author_records, MYSQL_ASSOC))
+        {
+            $id=$rows['id'];
+            $letter=$rows['letter'];
+            $author_name=$rows['author'];
+            $authors_array[$index]=new temporary_author();
+            $authors_array[$index]->setId($id);
+            $authors_array[$index]->setAuthor($author_name);
+            $authors_array[$index]->setLetter($letter);
+            $index++;   
+        }        
+        return $authors_array;
+    }
 
 	public function insert_temporary($letter, $author)
 	{
-	set_magic_quotes_runtime(0);
+		set_magic_quotes_runtime(0);
 		if (get_magic_quotes_gpc()) {
         	$author = stripslashes($author);    
     	}
@@ -109,6 +150,13 @@ class temporary_author
 		$query = "DELETE FROM $table WHERE id='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 	}
+	public function removeAll()
+	{
+		$table=$this->getName_table();
+	
+		$query = "DELETE FROM $table";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+	}
 	
 		
 	// SET -------------------------------------	
@@ -141,6 +189,11 @@ class temporary_author
     {
 		  $this->_author = $var;
     }	
+    public function setId($var)
+    {
+		  $this->_id = $var;
+    }
+  
 	
 	// GET ++++++++++++++++++++++++++++++++++++++	
     public function getName_table()
