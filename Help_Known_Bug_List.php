@@ -109,19 +109,11 @@ Issue 033: Include quotes about known connectivity between cell types to the dat
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 086: Add an interpretation notes column to the morphology figure files spreadsheet for import into the database.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 088: Amend the import scripts and database to handle the interpretation notes for the morphological evidence.
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 089: Modify the <span class=SpellE>php</span> code on the morphology Evidence pages to display any interpretation notes.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 184: In the Author search results, the neuron types are supposed to be listed for each citation returned; however, the response “(to be determined)” still appears fairly frequently.
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
