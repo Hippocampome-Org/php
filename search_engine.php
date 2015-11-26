@@ -159,15 +159,11 @@ function microtime_float()
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $predicate)
 {
-	$new_type_id_nan = array();
-
-	// retrieve id_property from Property table using SUBJECT and PREDICATE:
 	if ($predicate == 'is expressed')
 	{
 		$predicate3[1] = 'positive';
 		$predicate3[2] = 'unknown';
 		$nn = 2;
-		//i'm here
 	}
 	if ($predicate == 'is not expressed')
 	{
@@ -175,84 +171,68 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
+	if ($predicate == 'expression differences')
+	{
+		$predicate3[1] = 'species/protocol/subcellular expression differences';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
+	if ($predicate == 'subtypes')
+	{
+		$predicate3[1] = 'subtypes';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
+	if ($predicate == 'unresolved mixed')
+	{
+		$predicate3[1] = 'unresolved';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
 	if ($predicate == 'unknown')
 	{
 		$predicate3[1] = 'unknown';
-		$nn = 1;		
+		$nn = 1;
 	}
 
-	$n_tot = 0;
+	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
+	$new_type_id = NULL;	// Variable to store and return the complete list of Matched and Unmatched IDs
 	for ($i=1; $i<=$nn; $i++)
-	{ 
-		$new_type_id = NULL;
-		
-		
-		//MY DELETE
-		//print("...predicate3:-".$predicate3[$i]);
-		 
-		//MyDelete ends
-		
-		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]);
-		
-		//MY DELETE
-		//print("...property_1:-");
-		//print_r($property_1->retrive_ID(2, $subject, NULL, $predicate3[$i]));
-		//MyDelete ends
-		
-		$n_property_id = $property_1 -> getNumber_type();
-		//MY DELETE
-		//print("...n_property_id:-".$n_property_id);
-		//MyDelete ends
-		
-		for ($i0=0; $i0<$n_property_id; $i0++)
+	{
+		if(($i == 1) && ($predicate3[$i] != 'unknown'))
 		{
-			$property_id = $property_1 -> getProperty_id($i0);
+			// Call the function to search for the appropriate Type Ids
+			$evidencepropertyyperel -> retrive_Type_id_by_Subject_override($subject, $predicate3[$i]);
+		}
+		else // if it unknown
+		{
+			$evidencepropertyyperel -> retrive_Type_id_by_Subject_Object($subject, $predicate3[$i]);
+		}
+		$n_type_id = $evidencepropertyyperel -> getN_Type_id();		// Get the total number of the search result Type IDs
 		
-			// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
-			//MY DELETE
-			//print("....evidencepropertyyperel:-");
-		//print_r($evidencepropertyyperel);
-		//MyDelete ends
+		// Get the total number of Type Ids in Type table
+		$number_type= $type -> getNumber_type();
 		
-			$n_type_id = $evidencepropertyyperel -> getN_Type_id();
-			//MY DELETE
-		//print("...n_type_id:-".$n_type_id);
-		//MyDelete ends
-		
-		
-			for ($i1=0; $i1<$n_type_id; $i1++)
+		// Iterate through the result of the conflict override searched Type Ids
+		for ($i1=0; $i1<$n_type_id; $i1++)
+		{
+			if($i == 1)
+			{				
+				$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
+			}
+			else if($i == 2)
 			{
-				
-		
-				if ($i == 1)
-					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
-					//MY DELETE
-		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
-		//MyDelete ends		
-				if ($i == 2)
-				{
-					$type_r = $evidencepropertyyperel -> getType_id_array($i1);
-					$type_id[$n_tot] = "10_".$type_r;
-					//MY DELETE
-		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
-		//MyDelete ends	
-				}					
-				$n_tot = $n_tot + 1;
-			} // END $i1
-		} // END $i0
-		
-		// Now, the program must remove the doubble or more type_id:	
-		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id);
-			//MY DELETE
-			//print("....new_type_id:-");
-		//print_r($new_type_id);
-		//MyDelete ends	
-
+				$type_r = $evidencepropertyyperel -> getType_id_array($i1);
+				$type_id[$n_tot] = "10_".$type_r;
+			}
 			
-	} // END $i
-	
+			$n_tot = $n_tot + 1;
+		}
+		
+		// Check if Type_id arrary is not null
+		if ($type_id != NULL)
+				$new_type_id=array_unique($type_id);
+	}	
 	return $new_type_id;
 }
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -606,8 +586,14 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 			$predicate = $relation;
 		if ($relation == 'is not expressed')
 			$predicate = $relation;
-		if ($relation == 'unknown')
-			$predicate = $relation;			 
+		if ($relation == 'expression differences')
+			$predicate = $relation;		
+		if	($relation == 'subtypes')
+			$predicate = $relation;
+		if	($relation == 'unresolved mixed')
+			$predicate = $relation;
+		if	($relation == 'unknown')
+			$predicate = $relation;
 			
 			
 		if ($part == 'Soma')
@@ -878,7 +864,7 @@ include ("function/icon.html");
 			$full_search_string_to_print = str_replace('OR', '<br>OR', $full_search_string);
 			$full_search_string_to_print = str_replace('AND', '<br>AND', $full_search_string_to_print);
 			
-			print ("<br><br>" . $full_search_string_to_print . "<br><br>");
+			print ("" . $full_search_string_to_print . "<br>");
 			
 			if ($n_result_tot == 1)
 				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
@@ -886,7 +872,6 @@ include ("function/icon.html");
 				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
 		
 		?>
-		<br /><br />
 
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 		<tr>
@@ -943,7 +928,6 @@ include ("function/icon.html");
 		?>
 		</table>
 
-		<br />
 		
 		<?php
 			if ($n_result_tot_unknown)
@@ -982,7 +966,6 @@ include ("function/icon.html");
 			}
 		?>
 
-		<br /><br /><br />
 
 		<?php
 		if ($n_result_tot == 0);

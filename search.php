@@ -255,7 +255,6 @@ include ("function/icon.html");
   <tr>
     <td >
 		<!-- ****************  BODY **************** -->	
-		<br /><br />
 		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
 		<tr>
 			<td align="center" width="4%" class='table_neuron_page3'>  </td>
@@ -329,7 +328,10 @@ include ("function/icon.html");
 			if ($property1 == 'Morphology')
 				$n_part = 3;
 			if ($property1 == 'Molecular markers')
-				$n_part = 33;
+			{
+				getSubject_untracked();	// Function to store all the untracked Subjects from the property table (function/part.php)
+				$n_part = 96;
+			}
 			if ($property1 == 'Electrophysiology')
 				$n_part = 10;		
 			if ($property1 == 'Connectivity')
@@ -345,33 +347,93 @@ include ("function/icon.html");
 			
 			if ($part1)
 				print ("<OPTION VALUE='$part1'>$part1</OPTION>");
-								
-			print ("<OPTION VALUE='-'>-</OPTION>");
-	for ($c = 0; $c < count($value_part); $c++) {
-    		$value_part_temp[$c] = $value_part[$c];
-	}
-
-	for ($c = 0; $c < count($value_part); $c++) {
-    		$lowercase = strtolower($value_part[$c]);
-    		$value_part[$c] = $lowercase;
-	}
-			sort($value_part);
-		for ($c = 0; $c < count($value_part); $c++) {
-				for($cc=0;$cc<count($value_part_temp);$cc++){
-				//	$value_part[$c]=strcasecmp($value_part[$c],$value_part_temp[$cc]);
-					if(strcasecmp($value_part[$c],$value_part_temp[$cc])==0){
-					
-						$value_part[$c]=$value_part_temp[$cc];
-					
-					}
-					
-				}
 			
-		}
-			for ($i=0; $i<$n_part; $i++)
+			print ("<OPTION VALUE='-'>-</OPTION>");
+			
+			// Store the first 20 Tracked markers(part) in a separate array
+			// and conver into lower case
+			for($iter = 0; $iter < 20; $iter++)
 			{
-				if ($value_part[$i] != $part1)
-					print ("<OPTION VALUE='$value_part[$i]'>$value_part[$i]</OPTION>");
+				$value_part_tracked[$iter] = $value_part[$iter];
+				$lowercase = strtolower($value_part_tracked[$iter]);
+				$value_part_tracked[$iter] = $lowercase;
+			}	
+			
+			// Store the Untracked markers(part) - untracked markers start from 20th index
+			// and conver into lower case
+			for($j_iter = 20; $j_iter < count($value_part); $j_iter++)
+			{
+				$value_part_untracked[$j_iter] = $value_part[$j_iter];
+				$lowercase = strtolower($value_part_untracked[$iter]);
+				$value_part_untracked[$iter] = $lowercase;
+			}
+			
+			// Copy all the Part to a temporary arrary
+			for ($c = 0; $c < count($value_part); $c++) {
+					$value_part_temp[$c] = $value_part[$c];
+			}
+			
+			// Sort the Tracker Markers (Part)
+			sort($value_part_tracked);
+			
+			// --------------------------------------------------------
+			// --------------------------------------------------------
+			// Since "value_part_untracked" array starts from 20th index
+			// and sort() function doesn't correctly sort this array
+			// Hence a temp array has been used to store the untracked marker starting from 0th index
+			// After sorting the temp array is used to store back to "value_part_untracked" array that 
+			// begins from 20th index for further processing
+			$counter = 20;
+			for($k_iter = 0; $k_iter < count($value_part_untracked); $k_iter++)
+			{
+				$value_part_untracked_temp[$k_iter] = $value_part_untracked[$counter];
+				$counter++;
+			}
+
+			sort($value_part_untracked_temp);
+			
+			$counter = 20;
+			for($k_iter = 0; $k_iter < count($value_part_untracked_temp); $k_iter++)
+			{
+				$value_part_untracked[$counter] = $value_part_untracked_temp[$k_iter];
+				$counter++;
+			}
+			// --------------------------------------------------------
+			// --------------------------------------------------------
+			
+			for ($c = 0; $c < count($value_part); $c++) 
+			{
+				// Add a Delimeter after all the tracked markers
+				if($c == 20)
+					print ("<OPTION VALUE='--'>-------------------</OPTION>");
+					
+				for($cc=0;$cc<count($value_part_temp);$cc++)
+				{
+					if($c < 20)
+					{
+						// Check all the Tracked Markers have correct names
+						if(strcasecmp($value_part_tracked[$c],$value_part_temp[$cc])==0)
+						{
+							$value_part_tracked[$c] = $value_part_temp[$cc];
+							
+							// Check if Part is already used by the user; if not print
+							if ($value_part_tracked[$c] != $part1)
+								print ("<OPTION VALUE='$value_part_tracked[$c]'>$value_part_tracked[$c]</OPTION>");
+						}
+					}
+					else	
+					{
+						// Check all the Untracked Markers have correct names
+						if(strcasecmp($value_part_untracked[$c],$value_part_temp[$cc])==0)
+						{
+							$value_part_untracked[$c] = $value_part_temp[$cc];
+							
+							// Check if Part is already used by the user; if not print
+							if ($value_part_untracked[$c] != $part1)
+								print ("<OPTION VALUE='$value_part_untracked[$c]'>$value_part_untracked[$c]</OPTION>");
+						}
+					}
+				}
 			}
 			print ("</select>");
 			print ("</td>");				
@@ -381,7 +443,7 @@ include ("function/icon.html");
 			if ($property1 == 'Morphology')
 				$n_relation = 2;
 			if ($property1 == 'Molecular markers')
-				$n_relation = 3;
+				$n_relation = 6;
 			if ($property1 == 'Electrophysiology')
 				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
@@ -554,7 +616,6 @@ include ("function/icon.html");
 		?>
 		</table>
 
-	<br /><br />
 	<div align="center">
 	<table width="600px" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -569,23 +630,25 @@ include ("function/icon.html");
 				if (($part == '-') || ($part == NULL));
 				else
 				{
+					// Commenting the print statements that is used to display the search string
+					// It will be implemented for advanced search
 					if ($n9 == 0){
 						if ($value == NULL) { // for markers, no value, so no space after relation 
-							print ("$part: ($relation) ");
+						//	print ("$part: ($relation) ");
 							$full_search_string = $part . ": (" . $relation . ")";
 						}
 						else {
-							print ("$part: ($relation $value) ");
+						//	print ("$part: ($relation $value) ");
 							$full_search_string = $part . ": (" . $relation . " " . $value . ")";
 						}
 					}
 					else{
 						if ($value == NULL) { // for markers, no value, so no space after relation
-							print ("<br>$operator $part: ($relation) ");
+						//	print ("<br>$operator $part: ($relation) ");
 							$full_search_string = $full_search_string . " " . $operator . " " . $part . ": (" . $relation . ")";
 						}
 						else {
-							print ("<br>$operator $part: ($relation $value) ");
+						//	print ("<br>$operator $part: ($relation $value) ");
 							$full_search_string = $full_search_string . " " . $operator . " " . $part . ": (" . $relation . " " . $value . ")";
 						}
 					}					
@@ -599,18 +662,16 @@ include ("function/icon.html");
 	<?php
 		$_SESSION['full_search_string'] = $full_search_string;
 	?>
-	</div>
-
-		<br /><br />		
-		<div align="center">
-		<table width='400px'>
+	</div>	
+		<div align="left">
+		<table width='100px'>
 		<tr>
 		<td width='40%'><form action="search.php" method="post" style='display:inline'>	
-			<input type='submit' name='clear_all' value='CLEAR ALL' />
+			<input type='submit' name='clear_all' value='RESET' />
 		</form></td>
 		<td width='20%'></td>
 		<td width='40%'><form action='search_engine.php' method="post">
-			<input type="submit" name='go_search' value='  SEARCH  ' />
+			<input type="submit" name='go_search' value='  SEE RESULTS  ' />
 			<input type="hidden" name='name_table' value='<?php print $name_temporary_table ?>' />
 		</form></td>
 		</tr>

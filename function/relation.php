@@ -16,6 +16,12 @@ function relation($n, $property, $part)
 		if ($n == 1)
 			$relation = 'is not expressed';		
 		if ($n == 2)
+			$relation = 'expression differences';
+		if ($n == 3)
+			$relation = 'subtypes';
+		if ($n == 4)
+			$relation = 'unresolved mixed';
+		if ($n == 5)
 			$relation = 'unknown';									
 	}
 
