@@ -322,12 +322,12 @@ for ($row=0; $row<$number_type; $row++) {
 						
 						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
 						{
-							$responce->knowncount++;
+							$responce->Unknowncount++;
 							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_nonconnection.png' height='20px' width='20px' border='0'/></div>";
 						}
 						elseif ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 1)
 						{
-							$responce->Unknowncount++;
+							$responce->knowncount++;
 							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_connection.png' height='20px' width='20px' border='0'/></div>";
 						}
 						else if ( ($rowIdx != $colIdx) And ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == -1))

@@ -97,12 +97,12 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
-font-family:"Arial","sans-serif"'>v1.0 R 1C (26 Nov 2015):</span></p>
+font-family:"Arial","sans-serif"'>v1.0 R 1C (27 Nov 2015):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 018: Potential connectivity summary page.
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 018: Potential connectivity summary [info in legend on connectivity matrix] page.
 </span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
