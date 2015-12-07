@@ -83,7 +83,7 @@ class evidencepropertyyperel
 			FROM $table ev
 			JOIN $table1 pr
 			ON (ev.Property_id = pr.id)
-			WHERE pr.object = '$Object' and pr.subject = '$Subject'";
+			WHERE pr.object = '$Object' and (conflict_note is null or conflict_note ='') and pr.subject = '$Subject'";
 			
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
