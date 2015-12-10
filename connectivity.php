@@ -259,7 +259,7 @@ $(function(){
 	document.getElementById("cle").innerHTML=tep1;
 	document.getElementById("cle2").innerHTML=tep2;
 	document.getElementById("cle3").innerHTML=tep3;
-	document.getElementById("cle4").innerHTML=tep4;
+	//document.getElementById("cle4").innerHTML=tep4;
 	document.getElementById("cle5").innerHTML=tep5;
 
 	 var rotateFunction = function (grid, headerHeight) {
@@ -694,12 +694,14 @@ $(function(){
 				<td><font class='font5'>Potential Inhibitory Non-PCL Connection </font></td>
 				<td align="right"><font class='font5'><p id="cle5"></p></font></td> 
 			</tr>
+			<!--
 			<tr>
-				<!-- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -->
+				< ! -- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -- >
 				<td bgcolor=#FF8C00></td>
 				<td><font class='font5'>Potential Inhibitory PCL-Only Connection</font></td>
 				<td align="right"><font class='font5'><p id="cle4"></p>0</font></td>
 			</tr>
+			-->
 			<tr height="20"></tr>
 			<!--
 				<tr>

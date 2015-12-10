@@ -223,7 +223,7 @@ else
 				$article -> retrive_by_id($id_article);
 				$title = $article -> getTitle();
 				$journal = $article -> getPublication();
-				$year = $article -> getYear();
+				$year = $article -> getYearSansMonth();
 				$PMID1 = $article -> getPmid_isbn();
 
 				// retrieve tha list of authors: -----------------------------------------------			

@@ -282,6 +282,11 @@ class article
     {
     	return $this->_year;
     }	
+	
+	public function getYearSansMonth()
+    {
+    	return substr($this->_year,0,4);
+    }	
 
 	public function getPmcid()
     {

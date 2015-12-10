@@ -1560,7 +1560,7 @@ else {
 				<OPTION VALUE='all'>All</OPTION>
 				<OPTION VALUE='positive'>positive</OPTION>
 				<OPTION VALUE='negative'>negative</OPTION>
-				<OPTION VALUE='positive and negative'>positive and negative</OPTION>
+				<!--OPTION VALUE='positive and negative'>positive and negative</OPTION-->
 				</select>					
 			</td>
 			
@@ -1731,7 +1731,8 @@ else {
 			  if (($expression == $print_color) || ($print_color == "positive-negative"))
               	$header_html = header_row("EXPRESSION", $expression);
 			  else 
-			  	$header_html = header_row_special("EXPRESSION (* contradictory evidence)", $expression);
+			  	$header_html = header_row("EXPRESSION (* contradictory evidence)", $expression);
+			  	//$header_html = header_row_special("EXPRESSION (* contradictory evidence)", $expression);
               
               if ($animal != 'rat')
                 $header_html = $header_html . header_row("ANIMAL", $animal);
