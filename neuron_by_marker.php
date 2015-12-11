@@ -119,7 +119,9 @@ foreach ($predicateArr as $k => $v)
 	{
         if(!empty($evidencepropertyyperel)){
 			$pos_neg_array = markers_search($evidencepropertyyperel, $property_1, $type,'subtypes',$parameter);
-			$marker_id = array_intersect($pos_neg_array, $pos_neg_array);
+			if(!empty($pos_neg_array)){
+				$marker_id = array_intersect($pos_neg_array, $pos_neg_array);
+			}
 		}
 	}
 	elseif($k == 'positive' || $k == 'negative') {
@@ -184,10 +186,10 @@ foreach ($predicateArr as $k => $v)
 					$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $id);
 					$conflict_note = $evidencepropertyyperel -> getConflict_note();
 				
-					if ($unvetted == 1)
-						$font_col = 'font4_unvetted';
-					else
-						$font_col = 'font4';
+					//if ($unvetted == 1)
+					//	$font_col = 'font4_unvetted';
+					//else
+					//	$font_col = 'font4';
 					
 					$mixed_conflict = $conflict_note;
 					
@@ -209,7 +211,7 @@ foreach ($predicateArr as $k => $v)
 	  else 
 	  {
 ?>
-	  	<div><font class="font3"><?php echo "No ".$k." Type found " ?></font></div><br/>
+	  	<div><font class="font3"><?php echo "No ".$k." type found " ?></font></div><br/>
 <?php }
 	}?>
 	</table>
