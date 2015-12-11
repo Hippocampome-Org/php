@@ -40,37 +40,43 @@ $objArr = $property_1->retrievePropertyIdByName($parameter);
 
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$parameter)
-{
+{	
+	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
+	$new_type_id = NULL;	// Variable to store and return the complete list of Matched and Unmatched IDs
 	
-	$new_type_id_nan = array();
-	$n_tot = 0;
-	
-	$new_type_id = NULL;
-	$type_id = NULL;
-	$property_1 -> retrive_ID(2, $parameter, NULL, $predicate); // Retrieve  property IDs for subject and respective predicates
-	$n_property_id = $property_1 -> getNumber_type(); // Count the number of Property IDs for a given subject and predicate
-	
-	for ($i0=0; $i0<$n_property_id; $i0++) // For Each Property Id
+	if(($predicate != 'unknown'))
 	{
-		$property_id = $property_1 -> getProperty_id($i0); // retrieve the  property Id
-		// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-		$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id); // retrieve the neuron types from evidencepropertytype rel
-		$n_type_id = $evidencepropertyyperel -> getN_Type_id(); // Get a count of the number of neuron type Ids
-		for ($i1=0; $i1<$n_type_id; $i1++) // For each Type Id
+		// Call the function to search for the appropriate Type Ids
+		$evidencepropertyyperel -> retrive_Type_id_by_Subject_override($parameter, $predicate);
+	}
+	else // if it unknown
+	{
+		$evidencepropertyyperel -> retrive_Type_id_by_Subject_Object($parameter, $predicate);
+	}
+	$n_type_id = $evidencepropertyyperel -> getN_Type_id();		// Get the total number of the search result Type IDs
+	
+	// Get the total number of Type Ids in Type table
+	$number_type= $type -> getNumber_type();
+	
+	// Iterate through the result of the conflict override searched Type Ids
+	for ($i1=0; $i1<$n_type_id; $i1++)
+	{
+		if(($predicate != 'unknown'))
+		{				
+			$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
+		}
+		else 
 		{
-			if ($predicate == 'positive' || $predicate =='negative')
-				$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);	// Get the total type ids for positive
-			else
-			{
-				$type_r = $evidencepropertyyperel -> getType_id_array($i1); // get the type Id for unknown
-				$type_id[$n_tot] = "10_".$type_r; // Append 10_
-			}					
-		  $n_tot = $n_tot + 1;
-		} // END $i1
-	} // END $i0
-		// Now, the program must remove the doubble or more type_id:	
-		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id); // Get unique Type Ids
+			$type_r = $evidencepropertyyperel -> getType_id_array($i1);
+			$type_id[$n_tot] = "10_".$type_r;
+		}
+		
+		$n_tot = $n_tot + 1;
+	}
+	
+	// Check if Type_id arrary is not null
+	if ($type_id != NULL)
+			$new_type_id=array_unique($type_id);
 	
 	return $new_type_id;
 }
@@ -112,13 +118,8 @@ foreach ($predicateArr as $k => $v)
 	if($k=='mixed')
 	{
         if(!empty($evidencepropertyyperel)){
-			$pos_intr_Array = markers_search($evidencepropertyyperel, $property_1, $type,'positive',$parameter);
-			$neg_Array = markers_search($evidencepropertyyperel, $property_1, $type,'negative',$parameter);
-			if(!empty($pos_intr_Array)) asort($pos_intr_Array);
-			if(!empty($neg_Array)) asort($neg_Array);
-			if((!empty($pos_intr_Array)) && (!empty($neg_Array))) {
-				$marker_id = array_intersect($neg_Array,$pos_intr_Array);
-			}
+			$pos_neg_array = markers_search($evidencepropertyyperel, $property_1, $type,'subtypes',$parameter);
+			$marker_id = array_intersect($pos_neg_array, $pos_neg_array);
 		}
 	}
 	elseif($k == 'positive' || $k == 'negative') {
