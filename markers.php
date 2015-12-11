@@ -158,7 +158,8 @@ include ("function/icon.html");
 <script language="javascript">
 function OpenInNewTab(aEle)
 {
-	var win = window.open(aEle.href,'_self');
+	//var win = window.open(aEle.href,'_self'); // stay in same tab
+	var win = window.open(aEle.href,'_blank'); // open in new tab
 	win.focus();
 }
 function ctr(select_nick_name2, color, select_nick_name_check)
