@@ -350,89 +350,120 @@ include ("function/icon.html");
 			
 			print ("<OPTION VALUE='-'>-</OPTION>");
 			
-			// Store the first 20 Tracked markers(part) in a separate array
-			// and conver into lower case
-			for($iter = 0; $iter < 20; $iter++)
+			if ($property1 == 'Molecular markers')
 			{
-				$value_part_tracked[$iter] = $value_part[$iter];
-				$lowercase = strtolower($value_part_tracked[$iter]);
-				$value_part_tracked[$iter] = $lowercase;
-			}	
-			
-			// Store the Untracked markers(part) - untracked markers start from 20th index
-			// and conver into lower case
-			for($j_iter = 20; $j_iter < count($value_part); $j_iter++)
-			{
-				$value_part_untracked[$j_iter] = $value_part[$j_iter];
-				$lowercase = strtolower($value_part_untracked[$iter]);
-				$value_part_untracked[$iter] = $lowercase;
-			}
-			
-			// Copy all the Part to a temporary arrary
-			for ($c = 0; $c < count($value_part); $c++) {
-					$value_part_temp[$c] = $value_part[$c];
-			}
-			
-			// Sort the Tracker Markers (Part)
-			sort($value_part_tracked);
-			
-			// --------------------------------------------------------
-			// --------------------------------------------------------
-			// Since "value_part_untracked" array starts from 20th index
-			// and sort() function doesn't correctly sort this array
-			// Hence a temp array has been used to store the untracked marker starting from 0th index
-			// After sorting the temp array is used to store back to "value_part_untracked" array that 
-			// begins from 20th index for further processing
-			$counter = 20;
-			for($k_iter = 0; $k_iter < count($value_part_untracked); $k_iter++)
-			{
-				$value_part_untracked_temp[$k_iter] = $value_part_untracked[$counter];
-				$counter++;
-			}
-
-			sort($value_part_untracked_temp);
-			
-			$counter = 20;
-			for($k_iter = 0; $k_iter < count($value_part_untracked_temp); $k_iter++)
-			{
-				$value_part_untracked[$counter] = $value_part_untracked_temp[$k_iter];
-				$counter++;
-			}
-			// --------------------------------------------------------
-			// --------------------------------------------------------
-			
-			for ($c = 0; $c < count($value_part); $c++) 
-			{
-				// Add a Delimeter after all the tracked markers
-				if($c == 20)
-					print ("<OPTION VALUE='--'>-------------------</OPTION>");
-					
-				for($cc=0;$cc<count($value_part_temp);$cc++)
+				// Store the first 20 Tracked markers(part) in a separate array
+				// and conver into lower case
+				for($iter = 0; $iter < 20; $iter++)
 				{
-					if($c < 20)
+					$value_part_tracked[$iter] = $value_part[$iter];
+					$lowercase = strtolower($value_part_tracked[$iter]);
+					$value_part_tracked[$iter] = $lowercase;
+				}	
+				
+				// Store the Untracked markers(part) - untracked markers start from 20th index
+				// and conver into lower case
+				for($j_iter = 20; $j_iter < count($value_part); $j_iter++)
+				{
+					$value_part_untracked[$j_iter] = $value_part[$j_iter];
+					$lowercase = strtolower($value_part_untracked[$iter]);
+					$value_part_untracked[$iter] = $lowercase;
+				}
+				
+				// Copy all the Part to a temporary arrary
+				for ($c = 0; $c < count($value_part); $c++) {
+						$value_part_temp[$c] = $value_part[$c];
+				}
+				
+				// Sort the Tracker Markers (Part)
+				sort($value_part_tracked);
+				
+				// --------------------------------------------------------
+				// --------------------------------------------------------
+				// Since "value_part_untracked" array starts from 20th index
+				// and sort() function doesn't correctly sort this array
+				// Hence a temp array has been used to store the untracked marker starting from 0th index
+				// After sorting the temp array is used to store back to "value_part_untracked" array that 
+				// begins from 20th index for further processing
+				$counter = 20;
+				for($k_iter = 0; $k_iter < count($value_part_untracked); $k_iter++)
+				{
+					$value_part_untracked_temp[$k_iter] = $value_part_untracked[$counter];
+					$counter++;
+				}
+	
+				sort($value_part_untracked_temp);
+				
+				$counter = 20;
+				for($k_iter = 0; $k_iter < count($value_part_untracked_temp); $k_iter++)
+				{
+					$value_part_untracked[$counter] = $value_part_untracked_temp[$k_iter];
+					$counter++;
+				}
+				// --------------------------------------------------------
+				// --------------------------------------------------------
+				
+				for ($c = 0; $c < count($value_part); $c++) 
+				{
+					// Add a Delimeter after all the tracked markers
+					if($c == 20)
+						print ("<OPTION VALUE='--'>-------------------</OPTION>");
+						
+					for($cc=0;$cc<count($value_part_temp);$cc++)
 					{
-						// Check all the Tracked Markers have correct names
-						if(strcasecmp($value_part_tracked[$c],$value_part_temp[$cc])==0)
+						if($c < 20)
 						{
-							$value_part_tracked[$c] = $value_part_temp[$cc];
-							
-							// Check if Part is already used by the user; if not print
-							if ($value_part_tracked[$c] != $part1)
-								print ("<OPTION VALUE='$value_part_tracked[$c]'>$value_part_tracked[$c]</OPTION>");
+							// Check all the Tracked Markers have correct names
+							if(strcasecmp($value_part_tracked[$c],$value_part_temp[$cc])==0)
+							{
+								$value_part_tracked[$c] = $value_part_temp[$cc];
+								
+								// Check if Part is already used by the user; if not print
+								if ($value_part_tracked[$c] != $part1)
+									print ("<OPTION VALUE='$value_part_tracked[$c]'>$value_part_tracked[$c]</OPTION>");
+							}
+						}
+						else	
+						{
+							// Check all the Untracked Markers have correct names
+							if(strcasecmp($value_part_untracked[$c],$value_part_temp[$cc])==0)
+							{
+								$value_part_untracked[$c] = $value_part_temp[$cc];
+								
+								// Check if Part is already used by the user; if not print
+								if ($value_part_untracked[$c] != $part1)
+									print ("<OPTION VALUE='$value_part_untracked[$c]'>$value_part_untracked[$c]</OPTION>");
+							}
 						}
 					}
-					else	
+				}
+			}
+			else // if ($property1 != 'Molecular markers')
+			{
+				for ($c = 0; $c < count($value_part); $c++)
+				{
+					$value_part_temp[$c] = $value_part[$c];
+				}
+				for ($c = 0; $c < count($value_part); $c++)
+				{
+					$lowercase = strtolower($value_part[$c]);
+					$value_part[$c] = $lowercase;
+				}
+				sort($value_part);
+				for ($c = 0; $c < count($value_part); $c++)
+				{
+					for($cc=0;$cc<count($value_part_temp);$cc++)
 					{
-						// Check all the Untracked Markers have correct names
-						if(strcasecmp($value_part_untracked[$c],$value_part_temp[$cc])==0)
+						if(strcasecmp($value_part[$c],$value_part_temp[$cc])==0)
 						{
-							$value_part_untracked[$c] = $value_part_temp[$cc];
-							
-							// Check if Part is already used by the user; if not print
-							if ($value_part_untracked[$c] != $part1)
-								print ("<OPTION VALUE='$value_part_untracked[$c]'>$value_part_untracked[$c]</OPTION>");
+							$value_part[$c]=$value_part_temp[$cc];
 						}
 					}
+				}
+				for ($i=0; $i<$n_part; $i++)
+				{
+					if ($value_part[$i] != $part1)
+						print ("<OPTION VALUE='$value_part[$i]'>$value_part[$i]</OPTION>");
 				}
 			}
 			print ("</select>");
