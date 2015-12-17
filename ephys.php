@@ -197,12 +197,13 @@ $(function(){
         researchVar: research,
         table_result : table
     }, */
-    colNames:['','Neuron Type','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
+    colNames:['','Neuron Type','Neurite<br/>Pattern','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
       } },
       {name:'Neuron type', index:'nickname', width:175,sortable:false},
+	  {name:'Neurite Pattern', index:'nickname', width:80,sortable:false},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
       {name:'Vrest', index:'Vrest', width:75,height:130,search:false,sortable:false},
       {name:'Rin', index:'Rin', width:75,height:130,search:false,sortable:false},
