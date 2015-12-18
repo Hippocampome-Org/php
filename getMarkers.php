@@ -555,7 +555,12 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 
 	$hippo_color = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
 
-	
+	$soma_location = array("DG:SMo"=>0, "DG:SMi"=>1, "DG:SG"=>2, "DG:H"=>3, 
+	                       "CA3:SLM"=>0, "CA3:SR"=>1, "CA3:SL"=>2, "CA3:SP"=>3, "CA3:SO"=>4, 
+						   "CA2:SLM"=>0, "CA2:SR"=>1, "CA2:SP"=>2, "CA2:SO"=>3,
+						   "CA1:SLM"=>0, "CA1:SR"=>1, "CA1:SP"=>2, "CA1:SO"=>3,
+						   "SUB:SM"=>0, "SUB:SP"=>1, "SUB:PL"=>2, 
+						   "EC:I"=>0, "EC:II"=>1, "EC:III"=>2, "EC:IV"=>3, "EC:V"=>4, "EC:VI"=>5);
 	
 		if(isset($id_search))
 		{
@@ -574,6 +579,20 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	
 	$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id); // Retrieve distinct Property ids for each type id
 	$n_property = $evidencepropertyyperel -> getN_Property_id(); // Count of the number of properties for a given type id
+	
+	for($j=0 ; $j<$n_property ; $j++)  //To obtain soma location
+	{
+		$prop_id = $evidencepropertyyperel -> getProperty_id_array($j);
+		$property->retrive_by_id($prop_id);
+		$part1 = $property->getPart();
+		$rel1 = $property->getRel();
+		if(($property->getPart() == 'somata') && ($property->getRel() == 'in'))
+		{
+			$object_value = $property->getVal();
+			$soma_position = $soma_location["$object_value"];
+		}	
+	}
+	
 	
 	$q=0;
 
@@ -762,8 +781,15 @@ $hippo_property['Y1'] = check_positive_negative('Y1',$hippo_positive, $hippo_neg
 		else	
 			$hippo_color[$name_markers[$f1]] = $img[1];
 	}
+	
+		
 	preg_match('!\d+!',substr($type->getName(),strpos($type->getName(), ')')),$matches);
-	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>','<span style="color:#2e6e9e;padding-right:5px;float:right"><strong>'.$matches[0].'</strong></span>',
+	$neurite_pattern=str_split($matches[0]);
+	$neurite_pattern_temp = str_replace($neurite_pattern[$soma_position], "<strong>".$neurite_pattern[$soma_position]."</strong>", $neurite_pattern);
+	$neurite_pattern_soma_location = implode('',$neurite_pattern_temp);
+	
+	
+	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>','<span style="color:black;float:right">'.$neurite_pattern_soma_location.'</span>',
 	
 			getUrlForLink($id,$hippo['CB'],$name_markers['0'],$hippo_color['CB']),
 			getUrlForLink($id,$hippo['CR'],$name_markers['1'],$hippo_color['CR']),
