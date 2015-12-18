@@ -508,14 +508,20 @@ function HideShowColumns ()
 {
 	var myGrid = $('#nGrid');
 	var customWidth = screen.availWidth-100;
+	//myGrid.jqGrid('setFrozenColumns');
 	$("#checkbox1").click(function() {
 		if ($("#checkbox1").is(':checked')) {
 			var myGrid = $("#nGrid");
 			myGrid.setGridWidth("722");
+			myGrid.jqGrid('setColProp', 'type', {frozen: true });
+			myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["NeuritePattern"]);
+			$("#jqgh_nGrid_NeuronType").addClass("patternHeight");
+			$("#jqgh_nGrid_NeuritePattern").addClass("patternHeight");
+			myGrid.jqGrid('setFrozenColumns');
 			$("#checkbox2").click(function() {
 				if ($("#checkbox2").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
