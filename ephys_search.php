@@ -334,15 +334,6 @@ function HideShowColumns ()
 <div class='title_area'>
 	<font class="font1">Browse electrophysiology matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 		<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span>
-	<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
-			}
-	?>
 </div>
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
