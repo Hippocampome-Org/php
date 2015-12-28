@@ -97,7 +97,7 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
-font-family:"Arial","sans-serif"'>v1.0 R 1D (22 Dec 2015):</span></p>
+font-family:"Arial","sans-serif"'>v1.0 R 1D (28 Dec 2015):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
@@ -115,6 +115,12 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 256: Matrix generated from neuron type search result should reflect style of browse matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 258: [search] view results in a matrix neurons do not match search by neuron type results.
 </span></p>
 
 </BR>

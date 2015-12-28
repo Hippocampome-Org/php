@@ -84,7 +84,7 @@ function information_by_id ($name_temporary_table, $id)
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // SEARCH Function for MORPHOLOGY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $part, $rel, $val)
+function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $part, $rel, $val, $type)
 {	
 	
 	if ($val == 'Hippocampal formation')
@@ -137,7 +137,17 @@ function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $
 		for ($i2=0; $i2<$n_type_id; $i2++)
 		{	
 			$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i2);
-			$n_tot = $n_tot + 1;	
+
+			// Use the id only if the id is present in Type table
+			// Retrieve the Type id from type table
+			$type -> retrieve_by_id(intval($type_id[$n_tot]));
+			$id_type = $type->getId();	// Get the id
+			
+			// Increment only if the id is present in both the tables
+			if($id_type == $type_id[$n_tot])
+				$n_tot = $n_tot + 1;
+			else
+				$n_tot = $n_tot;	
 		}
 	}	
 	// Now, the program must remove the double or more type_id:	
@@ -606,7 +616,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		// Script for MORPHOLOGY +++++++++++++++++++++++++++++++++++++++++++		
 		if ($property == 'Morphology')
 		{
-			$res = morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $subject, $predicate, $value);	
+			$res = morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $subject, $predicate, $value, $type);	
 			
 			if ($res != NULL)
 				$id_type_res = array_merge($id_type_res, $res); 	
