@@ -108,34 +108,56 @@ $name_markers = array(
 
 function remap_marker_names($old_name) {
 	$new_name = $old_name;
-	
+
 	if (strpos($old_name, 'Gaba-a') == 'TRUE')
 		$new_name = 'GABAa_alfa';
-	else if (strpos($old_name, 'CoupTF') == 'TRUE')
+	elseif (strpos($old_name, 'CoupTF') == 'TRUE')
 		$new_name = 'CoupTF_2';
-	else;
-				
+	else;	
+
 	if ($old_name == 'Sub P Rec')
 		$new_name = 'Sub_P_Rec';
-	if ($old_name == '5HT-3')
+	elseif ($old_name == '5HT-3')
 		$new_name = '5HT_3';
-	if ($old_name == 'alpha-actinin-2')
+	elseif ($old_name == 'alpha-actinin-2')
 		$new_name = 'a-act2';
-	if ($old_name == 'GAT-1')
+	elseif ($old_name == 'GAT-1')
 		$new_name = 'GAT_1';
-	if ($old_name == 'mGluR2/3')
+	elseif ($old_name == 'mGluR2/3')
 		$new_name = 'mGluR2_3';
-	if($old_name=="AMPAR2_3")
-		$new_name = "AMPAR2/3";
-	if($old_name=="Kv3_1")
-		$new_name = "Kv3.1";
-	if ($old_name == 'GluR2/3')
+	elseif ($old_name == 'AMPAR2_3')
+		$new_name = 'AMPAR 2/3';
+	elseif ($old_name == 'Kv3_1')
+		$new_name = 'Kv3.1';
+	elseif ($old_name == 'GluR2/3')
 		$new_name = 'GluR2_3';
-	if($old_name=="Id_2")
-		$new_name = "Id-2";
-	if(strpos($old_name,"'_'") !== false)
-		$new_name = str_replace("'_'", "_", $key);
-	
+	elseif ($old_name == 'Id_2')
+		$new_name = 'Id-2';
+	/*elseif ($old_name == 'GABAa \delta')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\alpha 2')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\alpha 3')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\alpha 4')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\alpha 5')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\alpha 6')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\beta 1')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\beta 2')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\beta 3')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\gamma 1')
+		$new_name = '?';
+	elseif ($old_name == 'GABAa\gamma 2')
+		$new_name = '?';*/
+	elseif (strpos($old_name,"'_'") !== false)
+		$new_name = str_replace("'_'", "_", $old_name);
+
 	return $new_name;
 }
 
@@ -248,16 +270,18 @@ function check_color($variable, $unvetted, $conflict_note)
 
 
 function determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown) {
-	foreach ($name_markers as $mName) {
-		$hippo_property[$mName] = check_positive_negative($mName, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
-	}	
-	
+	for ($m1=0; $m1<count($name_markers); $m1++) {
+		$remapped_part = remap_marker_names($name_markers[$m1]);
+		$hippo_property[$name_markers[$m1]] = check_positive_negative($remapped_part, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
+	}
 	return $hippo_property;
 }
 
 
 function check_positive_negative($variable, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown)
 {
+	$variable = remap_marker_names($variable);
+	
 	if (($hippo_unknown[$variable]==1) && ($hippo_positive[$variable]!=1) && ($hippo_negative[$variable]!=1) && ($hippo_weak_positive[$variable]!=1) && ($hippo_positive_inference[$variable]!=1) && ($hippo_negative_inference[$variable]!=1))
 		$result = 'unknown';
 	else
@@ -338,29 +362,29 @@ function getUrlForLink($id,$img,$key,$color1)
 	if($img!='') {
 		if($key=="GABAa_alfa")
 			$keyProperty = "Gaba-a-alpha";
-		else if($key=="CoupTF_2")
+		elseif($key=="CoupTF_2")
 			$keyProperty = "CoupTF II";
-		else if($key=="Sub_P_Rec")
+		elseif($key=="Sub_P_Rec")
 			$keyProperty = "Sub P Rec";
-		else if($key=="5HT_3")
+		elseif($key=="5HT_3")
 			$keyProperty = "5HT-3";
-		else if($key=="a-act2")
+		elseif($key=="a-act2")
 			$keyProperty = "alpha-actinin-2";
-		else if($key=="GAT_1")
+		elseif($key=="GAT_1")
 			$keyProperty = "GAT-1";
-		else if($key=="mGluR2_3")
+		elseif($key=="mGluR2_3")
 			$keyProperty = "mGluR2/3";
-		else if($key=="GluR2_3")
+		elseif($key=="GluR2_3")
 			$keyProperty = "GluR2/3";
-		else if($key=="AMPAR2_3")
-			$keyProperty = "AMPAR2/3";
-		else if($key=="Kv3_1")
+		elseif($key=="AMPAR2_3")
+			$keyProperty = "AMPAR 2/3";
+		elseif($key=="Kv3_1")
 			$keyProperty = "Kv3.1";
-		else if($key=="Id_2")
+		elseif($key=="Id_2")
 			$keyProperty = "Id-2";
-		else if($key=="GABAa_delta")
+		elseif($key=="GABAa_delta")
 			$keyProperty = "GABAa\delta";
-		else if(strpos($key,"'\'") !== false)
+		elseif(strpos($key,"'\'") !== false)
 			$keyProperty = str_replace("'\'", "_", $key);
 		else
 			$keyProperty = $key;
@@ -376,29 +400,29 @@ function getUrlText($id,$key,$color1)
 {
 	if($key=="GABAa_alfa")
 		$keyProperty = "Gaba-a-alpha";
-	else if($key=="CoupTF_2")
+	elseif($key=="CoupTF_2")
 		$keyProperty = "CoupTF II";
-	else if($key=="Sub_P_Rec")
+	elseif($key=="Sub_P_Rec")
 		$keyProperty = "Sub P Rec";
-	else if($key=="5HT_3")
+	elseif($key=="5HT_3")
 		$keyProperty = "5HT-3";
-	else if($key=="a-act2")
+	elseif($key=="a-act2")
 		$keyProperty = "alpha-actinin-2";
-	else if($key=="GAT_1")
+	elseif($key=="GAT_1")
 		$keyProperty = "GAT-1";
-	else if($key=="mGluR2_3")
+	elseif($key=="mGluR2_3")
 		$keyProperty = "mGluR2/3";
-	else if($key=="GluR2_3")
+	elseif($key=="GluR2_3")
 		$keyProperty = "GluR2/3";
-	else if($key=="AMPAR2_3")
-		$keyProperty = "AMPAR2/3";
-	else if($key=="Kv3_1")
+	elseif($key=="AMPAR2/3")
+		$keyProperty = "AMPAR 2/3";
+	elseif($key=="Kv3_1")
 		$keyProperty = "Kv3.1";
-	else if($key=="Id_2")
+	elseif($key=="Id_2")
 		$keyProperty = "Id-2";
-	else if($key=="GABAa_delta")
+	elseif($key=="GABAa_delta")
 		$keyProperty = "GABAa\delta";
-	else if(strpos($key,"'\'") !== false)
+	elseif(strpos($key,"'\'") !== false)
 		$keyProperty = str_replace("'\'", "_", $key);
 	else
 		$keyProperty = $key;

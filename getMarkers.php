@@ -232,26 +232,22 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			$q = $q+1;
 		}	
 	}
-		
+	
 	$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);	
 
-	for ($f1=0; $f1<$n_markers; $f1++)
-	{
+	for ($f1=0; $f1<$n_markers; $f1++) {
+		$this_remapped_name = remap_marker_names($name_markers[$f1]);
 		
-		$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$name_markers[$f1]], $id);
-	    $conflict_note = $evidencepropertyyperel -> getConflict_note();
+		$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$this_remapped_name], $id);
+	    $conflict_note = $evidencepropertyyperel -> getConflict_note();	    
+	    $nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);
 	    
-	    $nam_unv1 = check_unvetted1($id, $hippo_property_id[$name_markers[$f1]], $evidencepropertyyperel);
 		$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
-		$hippo[$name_markers[$f1]] =$img[0];
+		
+		$hippo[$name_markers[$f1]] = $img[0];
 		
 		if ($img[1] == NULL)
-		{
-			/* if ($name_markers[$f1] == 'a-act2') // if name_markers is a-act2
-				$hippo[$name_markers[$f1]] =$img[0]." ".$unvetted_act2;
-			else */
-				$hippo[$name_markers[$f1]] =$img[0];
-		}
+			$hippo[$name_markers[$f1]] = $img[0];
 		else	
 			$hippo_color[$name_markers[$f1]] = $img[1];
 	}

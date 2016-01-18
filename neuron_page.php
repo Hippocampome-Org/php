@@ -1080,26 +1080,26 @@ if ($text_file_creation)
 							$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			$mixed_array = NULL;
 		} // end if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0))
-			
-		
-		
-		
+
 		$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
 		
-		for ($f1=0; $f1<$n_markers; $f1++) {			
-			$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$name_markers[$f1]], $id);
-			$conflict_note = $evidencepropertyyperel -> getConflict_note();
-			 
-			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$name_markers[$f1]], $evidencepropertyyperel);
+		for ($f1=0; $f1<$n_markers; $f1++) {
+			$this_remapped_name = remap_marker_names($name_markers[$f1]);
+			
+			$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$this_remapped_name], $id);
+			$conflict_note = $evidencepropertyyperel -> getConflict_note();			
+			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);			
+			
 			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
-			$hippo[$name_markers[$f1]] = $img[0];
+			
+			$hippo[$this_remapped_name] = $img[0];
 		
 			if ($img[1] == NULL)
-				$hippo[$name_markers[$f1]] = $img[0];
+				$hippo[$this_remapped_name] = $img[0];
 			else
-				$hippo_color[$name_markers[$f1]] = $img[1];
+				$hippo_color[$this_remapped_name] = $img[1];
 			
-			$marker_URLs[$name_markers[$f1]] = getUrlText($id, $name_markers[$f1], $hippo_color[$name_markers[$f1]]);
+			$marker_URLs[$this_remapped_name] = getUrlText($id, $this_remapped_name, $hippo_color[$this_remapped_name]);
 		}
 		
 		?>
@@ -1156,18 +1156,32 @@ if ($text_file_creation)
 						if ($pos_conflict == "positive inference")
 							$disp_marker_name = $disp_marker_name . ' (inference)';
 						
-						if (!($disp_marker_name_prior == $disp_marker_name)) {
+						// if NULL, marker needs to be remapped; just print name (w/o URL)
+						if ($this_marker_URL_start == NULL) {
 							print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							$this_marker_URL_start class='$font_col'>
-							$disp_marker_name
-							</a>
-							</td>
-							</tr>
-							");
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>									
+									$disp_marker_name
+									</td>
+									</tr>
+									");
+						}
+						else {
+							if (!($disp_marker_name_prior == $disp_marker_name)) {
+								print ("
+								<tr>
+								<td width='20%' align='right'>
+								</td>
+								<td align='left' width='80%' class='table_neuron_page2'>
+								$this_marker_URL_start class='$font_col'>
+								$disp_marker_name
+								</a>
+								</td>
+								</tr>
+								");
+							}
 						}
 						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
@@ -1218,19 +1232,33 @@ if ($text_file_creation)
 						if ($neg_conflict == "negative inference")
 							$disp_marker_name = $disp_marker_name . ' (inference)';
 
-						if (!($disp_marker_name_prior == $disp_marker_name)) {
-							print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							$this_marker_URL_start class='$font_col'>
-							$disp_marker_name
-							</a>
-							</td>
-							</tr>
-							");						
-						}
+							// if NULL, marker needs to be remapped; just print name (w/o URL)
+							if ($this_marker_URL_start == NULL) {
+								print ("
+										<tr>
+										<td width='20%' align='right'>
+										</td>
+										<td align='left' width='80%' class='table_neuron_page2'>
+										$disp_marker_name
+										</td>
+										</tr>
+										");
+							}
+							else {
+								if (!($disp_marker_name_prior == $disp_marker_name)) {
+									print ("
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>
+									$this_marker_URL_start class='$font_col'>
+									$disp_marker_name
+									</a>
+									</td>
+									</tr>
+									");						
+								}
+							}
 						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
 				} // end if ($marker_neg_disp_counter == 0) {
@@ -1278,18 +1306,32 @@ if ($text_file_creation)
 						if (!$mixed_conflict)
 							$mixed_conflict = 'not yet determined';
 						
-						print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
-							$this_marker_URL_start class='$font_col'>
-							$disp_marker_name ($mixed_conflict)
-							</a>
-							</td>
-							</tr>
-							");			
+						// if NULL, marker needs to be remapped; just print name (w/o URL)
+						if ($this_marker_URL_start == NULL) {
+							print ("
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>
+									$disp_marker_name
+									</td>
+									</tr>
+									");
+						}
+						else {
+							print ("
+								<tr>
+								<td width='20%' align='right'>
+								</td>
+								<td align='left' width='80%' class='table_neuron_page2'>
+								<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
+								$this_marker_URL_start class='$font_col'>
+								$disp_marker_name ($mixed_conflict)
+								</a>
+								</td>
+								</tr>
+								");
+						}
 					} // end for $j
 				}  // end if ($marker_pos_disp_counter == 0) {
 			?>
