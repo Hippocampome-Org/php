@@ -105,7 +105,7 @@ class property
 	{
 		$table=$this->getName_table();
 		$this->_property_Arr = Array();
-		$query = "SELECT id,object FROM $table WHERE subject = '$markername' and object in ('positive','negative')";
+		$query = "SELECT id,object FROM $table WHERE subject = '$markername' and object in ('positive','negative','positive_inference','negative_inference')";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id,$object) = mysqli_fetch_row($rs))
 		{

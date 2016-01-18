@@ -10,6 +10,7 @@ include ("function/show_ephys.php");
 include ("function/get_abbreviation_definition_box.php");
 include ("function/stm_lib.php");
 include ("function/quote_manipulation.php");
+include ("function/markers/marker_helper.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -276,7 +277,7 @@ if ($text_file_creation)
 						</td>					
 					</tr>			
 					");								
-				} 
+				}
 			?>
 		</table>		
 		
@@ -931,66 +932,91 @@ if ($text_file_creation)
 		// loop through all evidence to look for marker evidence
 		for ($i=0; $i<$n; $i++) {
 			$property -> retrive_by_id($property_id[$i]);
+			$this_id = $property -> getId();
 			$val = $property -> getVal();
 			$part = $property -> getPart();
+			$remapped_part = remap_marker_names($part);
 			
 			$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
 			$unvetted = $evidencepropertyyperel -> getUnvetted();
 			$evidencepropertyyperel -> retrieve_conflict_note($property_id[$i], $id);
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();
 			
+			
 			// maintain separate arrays for positive (+ wk pos) and negative evidence
-			if ($conflict_note == 'positive') {
-				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
+			if ($val == 'positive') {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
+				$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
 				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
 				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
 				
-				$marker_pos_disp_counter++;
-			}
-			elseif ($conflict_note == 'negative') {
-				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
-				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
-				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
-				
-				$marker_neg_disp_counter++;
-			}
-			elseif (($val == 'positive') || ($val == 'weak_positive')) {
-				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
-				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
-				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
-				
-				if ($val == 'weak_positive')
+				if ($val == 'weak_positive') {
 					$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
-				else
+					$hippo_weak_positive[$remapped_part] = 1;
+				}
+				else {
 					$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+					$hippo_positive[$remapped_part] = 1;
+				}
 				
 				$marker_pos_disp_counter++;
 			}
-			elseif ($val == 'negative') {
-				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
+			if ($val == 'negative') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
+				$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
 				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
 				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
 				
+				$hippo_negative[$remapped_part] = 1;
+				
 				$marker_neg_disp_counter++;
 			}
+			elseif ($val == 'positive_inference') {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
+				$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
+				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
+				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
+				$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+				
+				$hippo_positive_inference[$remapped_part] = 1;
+				
+				$marker_pos_disp_counter++;
+			}
+			elseif ($val == 'negative_inference') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
+				$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
+				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
+				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
+				
+				$hippo_negative_inference[$remapped_part] = 1;
+				
+				$marker_neg_disp_counter++;
+			}
+			
+			elseif ($val == 'unknown')
+				$hippo_unknown[$remapped_part] = 1;
+			
+				
+			$hippo_property_id[$part] = $this_id;
 		}	
+
 		
 		// if both positive and negative evidence exist, set up mixed array for possible overlaps
 		if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0)) {
 
 			// mixed_array keeps the overlap between pos+neg and keys from the pos array
 			$mixed_array['part_key'] = array_intersect($pos_array['part_key'], $neg_array['part_key']);
-			// mixed_array keeps the overlap between pos+neg and keys from the neg array
-			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);
+			// dummy_array keeps the overlap between pos+neg and keys from the neg array
+			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);			
 			
-			
-			$mixed_exp_disp_counter = count($mixed_array['part_key']);
+			$mixed_exp_disp_counter = count($mixed_array['part_key']);			
 			
 			// if there are mixed expression results
 			if ($mixed_exp_disp_counter > 0) {
 			
 				// copy the unvetted status and conflict notes from pos array 
 				foreach(array_keys($mixed_array['part_key']) as $key) {
+					$mixed_array['disp_name_key'][$key] = $pos_array['disp_name_key'][$key];
 					$mixed_array['unvetted_key'][$key] = $pos_array['unvetted_key'][$key];
 					$mixed_array['conflict_key'][$key] = $pos_array['conflict_key'][$key];
 				}					
@@ -998,6 +1024,7 @@ if ($text_file_creation)
 				// remove mixed results from pos array
 				foreach(array_keys($mixed_array['part_key']) as $key) {
 					unset($pos_array['part_key'][$key]);
+					unset($pos_array['disp_name_key'][$key]);
 					unset($pos_array['unvetted_key'][$key]);
 					unset($pos_array['weak_key'][$key]);
 					unset($pos_array['conflict_key'][$key]);
@@ -1007,6 +1034,7 @@ if ($text_file_creation)
 				// remove mixed results from neg array
 				foreach(array_keys($dummy_array['part_key']) as $key) {
 					unset($neg_array['part_key'][$key]);
+					unset($neg_array['disp_name_key'][$key]);
 					unset($neg_array['unvetted_key'][$key]);
 					unset($neg_array['conflict_key'][$key]);
 				}
@@ -1014,13 +1042,16 @@ if ($text_file_creation)
 				
 				// sort all arrays alphabetically
 				array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$pos_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
-								//$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
+								$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
 								$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 				array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$neg_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 								$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 				array_multisort($mixed_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$mixed_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$mixed_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 								$mixed_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			}
@@ -1035,19 +1066,41 @@ if ($text_file_creation)
 		// if only neg results, sort them alphabetically
 		elseif ($marker_pos_disp_counter == 0) {
 			array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$neg_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 							$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
-							$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
-			$mixed_array = NULL;		
+							$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);			
+			$mixed_array = NULL;
 		}
 		
 		// if only pos results, sort them alphabetically		
 		elseif ($marker_neg_disp_counter == 0) {
 			array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$pos_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 							$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
 							$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			$mixed_array = NULL;
 		} // end if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0))
-				
+			
+		
+		
+		
+		$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
+		
+		for ($f1=0; $f1<$n_markers; $f1++) {			
+			$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$name_markers[$f1]], $id);
+			$conflict_note = $evidencepropertyyperel -> getConflict_note();
+			 
+			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$name_markers[$f1]], $evidencepropertyyperel);
+			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
+			$hippo[$name_markers[$f1]] = $img[0];
+		
+			if ($img[1] == NULL)
+				$hippo[$name_markers[$f1]] = $img[0];
+			else
+				$hippo_color[$name_markers[$f1]] = $img[1];
+			
+			$marker_URLs[$name_markers[$f1]] = getUrlText($id, $name_markers[$f1], $hippo_color[$name_markers[$f1]]);
+		}
 		
 		?>
 		
@@ -1087,6 +1140,7 @@ if ($text_file_creation)
 					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_pos_disp_counter; $j++) {
 						$markerForLink = $pos_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
 
 						if ($pos_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
@@ -1094,17 +1148,21 @@ if ($text_file_creation)
 							$font_col = 'font4';
 						
 						if ($pos_array['weak_key'][$j] == 1)
-							$disp_marker_name = $pos_array['part_key'][$j] . ' (weak positive)';
+							$disp_marker_name = $pos_array['disp_name_key'][$j] . ' (weak positive)';
 						else					
-							$disp_marker_name = $pos_array['part_key'][$j];
-
+							$disp_marker_name = $pos_array['disp_name_key'][$j];
+						
+						$pos_conflict = $pos_array['conflict_key'][$j];
+						if ($pos_conflict == "positive inference")
+							$disp_marker_name = $disp_marker_name . ' (inference)';
+						
 						if (!($disp_marker_name_prior == $disp_marker_name)) {
 							print ("
 							<tr>
 							<td width='20%' align='right'>
 							</td>
 							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive' class='$font_col'>
+							$this_marker_URL_start class='$font_col'>
 							$disp_marker_name
 							</a>
 							</td>
@@ -1147,13 +1205,18 @@ if ($text_file_creation)
 					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_neg_disp_counter; $j++) {
 						$markerForLink = $neg_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
 
 						if ($neg_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
 							
-						$disp_marker_name = $neg_array['part_key'][$j];
+						$disp_marker_name = $neg_array['disp_name_key'][$j];
+						
+						$neg_conflict = $neg_array['conflict_key'][$j];
+						if ($neg_conflict == "negative inference")
+							$disp_marker_name = $disp_marker_name . ' (inference)';
 
 						if (!($disp_marker_name_prior == $disp_marker_name)) {
 							print ("
@@ -1161,7 +1224,7 @@ if ($text_file_creation)
 							<td width='20%' align='right'>
 							</td>
 							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=negative' class='$font_col'>
+							$this_marker_URL_start class='$font_col'>
 							$disp_marker_name
 							</a>
 							</td>
@@ -1202,12 +1265,14 @@ if ($text_file_creation)
 				else {
 					for ($j=0; $j<$mixed_exp_disp_counter; $j++) {
 						$markerForLink = $mixed_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
+						
 						if ($mixed_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
 									
-						$disp_marker_name = $mixed_array['part_key'][$j];
+						$disp_marker_name = $mixed_array['disp_name_key'][$j];
 						
 						$mixed_conflict = $mixed_array['conflict_key'][$j];
 						if (!$mixed_conflict)
@@ -1219,6 +1284,7 @@ if ($text_file_creation)
 							</td>
 							<td align='left' width='80%' class='table_neuron_page2'>
 							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
+							$this_marker_URL_start class='$font_col'>
 							$disp_marker_name ($mixed_conflict)
 							</a>
 							</td>

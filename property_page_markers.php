@@ -5,6 +5,7 @@
 <?php
 //include ("access_db.php");
 include ("function/quote_manipulation.php");
+include ("function/markers/marker_helper.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -188,10 +189,7 @@ if ($page)
 	$_SESSION['val_property'] = $val_property;	
 	$_SESSION['colore'] = $color;
 	
-	if ($color == 'positive-negative-weak_positive')
-		$color_table = 'pos_neg_weak';
-	else
-		$color_table = $color;	
+	$color_table = remap_temp_table_names($color);
 	
 	
 	$ip_address = $_SERVER['REMOTE_ADDR'];
@@ -815,7 +813,7 @@ else {
 		              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
 		              }
 		              else
-		              	$n_id_evidence = 0;
+		              	$n_id_evidence = 0;		              
 		              	
 		              for ($i=0; $i<$n_id_evidence; $i++) {
 		              	$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
@@ -840,6 +838,87 @@ else {
 		              	}
 		              }
 		              
+		              
+		              // property has expression positive_inference
+		              $property -> retrive_ID(2, $subject, 'has expression', 'positive_inference');
+		              $property_id_pos = $property -> getProperty_id(0);
+		              $num_ids_pos = $property -> getNumber_type();	// should be 1, or 0 if id for this marker (positive) is not in DB
+		               
+		              if ($num_ids_pos > 0) {
+		              	$evidencepropertyyperel -> retrive_evidence_id($property_id_pos, $type_id);
+		              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
+		              }
+		              else
+		              	$n_id_evidence = 0;
+		              
+		              	for ($i=0; $i<$n_id_evidence; $i++) {
+		              		$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
+		              		$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
+		              		$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+		              		$markerdata -> retrive_info($id_markerdata1);
+		              
+		              		$expression = $markerdata -> getExpression();
+		              		$expression = preg_replace('/[\[\]"]/', '', $expression);
+		              		$animal = $markerdata -> getAnimal();
+		              		$animal = preg_replace('/[\[\]"]/', '', $animal);
+		              		$protocol = $markerdata -> getProtocol();
+		              		$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+		              
+		              		if ($expression != "positive, negative") {
+		              			if ($protocol != "unknown") {
+		              				if ($animal=="rat" && $protocol=="immunohistochemistry") $pos_summary[0][0]++;
+		              				elseif ($animal=="rat" && $protocol=="mRNA") $pos_summary[0][1]++;
+		              				elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $pos_summary[1][0]++;
+		              				elseif ($animal=="mouse" && $protocol=="mRNA") $pos_summary[1][1]++;
+		              			}
+		              		}
+		              		else {
+		              			if ($protocol != "unknown") {
+		              				if ($animal=="rat" && $protocol=="immunohistochemistry") $mixed_summary[0][0]++;
+		              				elseif ($animal=="rat" && $protocol=="mRNA") $mixed_summary[0][1]++;
+		              				elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $mixed_summary[1][0]++;
+		              				elseif ($animal=="mouse" && $protocol=="mRNA") $mixed_summary[1][1]++;
+		              			}
+		              		}
+		              	}
+		              	
+		              	
+		              // property has expression negative_inference
+		              $property -> retrive_ID(2, $subject, 'has expression', 'negative_inference');
+		              $property_id_neg = $property -> getProperty_id(0);
+		              $num_ids_neg = $property -> getNumber_type();	// should be 1, or 0 if id for this marker (positive) is not in DB
+		               
+		              if ($num_ids_neg > 0) {
+		              	$evidencepropertyyperel -> retrive_evidence_id($property_id_neg, $type_id);
+		              	$n_id_evidence = $evidencepropertyyperel -> getN_evidence_id();
+		              }
+		              else
+		              	$n_id_evidence = 0;
+		              	 
+		              	for ($i=0; $i<$n_id_evidence; $i++) {
+		              		$id_this_evidence = $evidencepropertyyperel -> getEvidence_id_array($i);
+		              		$evidencemarkerdatarel -> retrive_Markerdata_id($id_this_evidence);
+		              		$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
+		              		$markerdata -> retrive_info($id_markerdata1);
+		              
+		              		$expression = $markerdata -> getExpression();
+		              		$expression = preg_replace('/[\[\]"]/', '', $expression);
+		              		$animal = $markerdata -> getAnimal();
+		              		$animal = preg_replace('/[\[\]"]/', '', $animal);
+		              		$protocol = $markerdata -> getProtocol();
+		              		$protocol = preg_replace('/[\[\]"]/', '', $protocol);
+		              
+		              		if ($expression != "positive, negative") {
+		              			if ($protocol != "unknown") {
+		              				if ($animal=="rat" && $protocol=="immunohistochemistry") $neg_summary[0][0]++;
+		              				elseif ($animal=="rat" && $protocol=="mRNA") $neg_summary[0][1]++;
+		              				elseif ($animal=="mouse" && $protocol=="immunohistochemistry") $neg_summary[1][0]++;
+		              				elseif ($animal=="mouse" && $protocol=="mRNA") $neg_summary[1][1]++;
+		              			}
+		              		}
+		              	}
+		              	
+		              	
 		              $total_pos_evid = $pos_summary[0][0] + $pos_summary[0][1] + $pos_summary[1][0] + $pos_summary[1][1];
 		              $total_neg_evid = $neg_summary[0][0] + $neg_summary[0][1] + $neg_summary[1][0] + $neg_summary[1][1];
 		              $total_mixed_evid = $mixed_summary[0][0] + $mixed_summary[0][1] + $mixed_summary[1][0] + $mixed_summary[1][1];
@@ -865,36 +944,56 @@ else {
 		              $conflict_explanation_statement = $evidencepropertyyperel -> retrieve_property_type_explanation($property_id, $type_id);
 		              $conflict_explanation_statement = $evidencepropertyyperel -> getProperty_type_explanation();
 		              
-		              if ($conflict_note == "positive" || $conflict_note == "negative") {
-		              	if ($conflict_note=="positive") {
-		              		$print_color = "positive";
+		              if (($conflict_note == "positive") || ($conflict_note == "negative")) {
+		              	$print_color = $conflict_note;
+		              	
+		              	if ($conflict_note=="positive")
 		              		$image_link = "<img src='images/marker/positive_clear.png' border='0' width='8px' />";
-		              	}
-		              	else if ($conflict_note=="negative") {
-		              		$print_color = "negative";
-		              		$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
-		              	}
-		              	 
-		              	$mixed_data = false;
-		              	$conflict_note = "";
-		              	$conflict_explanation_statement = "";
+	              		elseif ($conflict_note=="negative")
+	              			$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
+	              		
+
+              			$mixed_data = false;
+              			$conflict_note = "";
+              			$conflict_explanation_statement = "";
 		              	
 		              	if ($individual_calls_conflict)
 		              		$dissent_note = "* Contradictory evidence exists (open all evidence to view)";
 		              	else
 		              		$dissent_note = NULL;
 		              }
+		              elseif (($conflict_note == "positive inference") || ($conflict_note == "negative inference")) {
+		              	$print_color = $conflict_note;
+		              	 
+		              	if ($conflict_note=="positive inference")
+		              		$image_link = "<img src='images/marker/positive_inference_clear.png' border='0' width='8px' />";
+	              		elseif ($conflict_note=="negative inference")
+	              			$image_link = "<img src='images/marker/negative_inference_clear.png' border='0' width='8px' />";
+	              		
+              			$mixed_data = false;
+              			$conflict_note = "";
+              			$conflict_explanation_statement = "";
+		              }
+
+		              // mixed data
 		              else {
 		              	if (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences")) {
 		              		$conflict_note = "species/protocol/subcellular expression differences";
 		              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
 		              	}
-		              	else if ($conflict_note == "subtypes")
+		              	elseif ($conflict_note == "subtypes")
 		              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
-		              	else if (($conflict_note == "conflicting data") || ($conflict_note == "unresolved")) {
+		              	elseif (($conflict_note == "conflicting data") || ($conflict_note == "unresolved")) {
 		              		$image_link = "<img src='images/marker/positive-negative-conflicting_clear.png' border='0' width='15px' />";
 		              		$conflict_explanation_statement = "Data come from multiple sources that use the same species and technique; however, non-identical experimental details (e.g., the antibodies used) prevent interpretation.";
 		              	}
+		              	elseif ($conflict_note == "positive; negative inference")
+		              		$image_link = "<img src='images/marker/positive-negative_inference_clear.png' border='0' width='15px' />";
+	              		elseif ($conflict_note == "positive inference; negative")
+		              		$image_link = "<img src='images/marker/positive_inference-negative_clear.png' border='0' width='15px' />";
+	              		elseif ($conflict_note == "positive inference; negative inference")
+		              		$image_link = "<img src='images/marker/positive_inference-negative_inference_clear.png' border='0' width='15px' />";
+
 		              	 
 		              	$mixed_data = true;
 		              	$print_color = "positive-negative";
@@ -1054,88 +1153,11 @@ else {
 		<br />		
 
 		<?php
-		// There are two different or more 	
-		if ($color == 'positive-negative')
-		{
-			$number_marker = 2;
-			$color_1[0] = "positive";
-			$color_1[1] = "negative";
-		}
-		else if ($color == 'positive-weak_positive')
-		{
-			$number_marker = 2;
-			$color_1[0] = "positive";
-			$color_1[1] = "weak_positive";
-		}		
-		else if ($color == 'negative-weak_positive')
-		{
-			$number_marker = 2;
-			$color_1[0] = "negative";
-			$color_1[1] = "weak_positive";
-		}			
-		else if ($color == 'negative-unknown')
-		{
-			$number_marker = 2;
-			$color_1[0] = "negative";
-			$color_1[1] = "unknown";
-		}		
-		else if ($color == 'positive-unknown')
-		{
-			$number_marker = 2;
-			$color_1[0] = "positive";
-			$color_1[1] = "unknown";
-		}	
-		else if ($color == 'weak_positive-unknown')
-		{
-			$number_marker = 2;
-			$color_1[0] = "weak_positive";
-			$color_1[1] = "unknown";
-		}		
-		else if ($color == 'positive-negative-weak_positive')
-		{
-			$number_marker = 3;
-			$color_1[0] = "positive";
-			$color_1[1] = "negative";
-			$color_1[2] = "weak_positive";			
-		}	
-		else if ($color == 'positive-negative-unknown')
-		{
-			$number_marker = 3;
-			$color_1[0] = "positive";
-			$color_1[1] = "negative";
-			$color_1[2] = "unknown";
-		}		
-		else if ($color == 'positive-negative-weak_positive-unknown')
-		{
-			$number_marker = 4;
-			$color_1[0] = "positive";
-			$color_1[1] = "negative";
-			$color_1[2] = "weak_positive";	
-			$color_1[3] = "unknown";		
-		}			
-		else if ($color == 'positive-weak_positive-unknown')
-		{
-			$number_marker = 3;
-			$color_1[0] = "positive";
-			$color_1[1] = "weak_positive";	
-			$color_1[2] = "unknown";		
-		}		
-		else if ($color == 'negative-weak_positive-unknown')
-		{
-			$number_marker = 3;
-			$color_1[0] = "negative";
-			$color_1[1] = "weak_positive";	
-			$color_1[2] = "unknown";		
-		}			
-		else
-		{
-			$number_marker = 1;
-			$color_1[0] = $color;
-		}	
-		// for on number of marker (number of $color) ++++
+		$color_1 = explode("-", $color);
+		$number_marker = count($color_1);
 		
-		for ($m2=0; $m2<$number_marker; $m2++)
-		{
+		// for on number of marker (number of $color) ++++		
+		for ($m2=0; $m2<$number_marker; $m2++) {			
 			// Retrieve Id_property from Property By using Val_property (object) AND Color (predicate)
 			$property -> retrive_ID(2, $val_property, NULL, $color_1[$m2]);
 			$id_property = $property -> getProperty_id(0);
@@ -1147,123 +1169,121 @@ else {
 			$n_tot_marker = 0;
 			$old_id_marker = 0;
 			
-			for ($i=0; $i<$n_id_evidence; $i++)
-			{
+			for ($i=0; $i<$n_id_evidence; $i++) {
 				$id_evidence[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
 				$linking_quote_evidence[$i]= $evidencepropertyyperel-> getLinking_quote_array($i);
 				$interpretation_notes_evidence[$i]= $evidencepropertyyperel-> getInterpretation_notes_array($i);
 
-        	// STM getting the linking PMID
-        	$id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
-        	if ($id_secondary_article) {
-			$article -> retrive_by_id($id_secondary_article);
-          	$secondary_pmid = $article -> getPmid_isbn();
-          	} else {
-          	$secondary_pmid = NULL;
-        	}
+	        	// STM getting the linking PMID
+	        	$id_secondary_article = $evidencepropertyyperel -> retrive_article_id($id_property, $id_neuron, $id_evidence[$i]);
+	        	if ($id_secondary_article) {
+					$article -> retrive_by_id($id_secondary_article);
+		          	$secondary_pmid = $article -> getPmid_isbn();
+	          	}
+	          	else
+	          		$secondary_pmid = NULL;
+	        	
+				
+				// Retrieve EVIDENCE2_ID from EvidenceEvidenceRel by using EVIDENCE1_ID:
+				$evidenceevidencerel -> retrive_evidence2_id($id_evidence[$i]);
 			
-			// Retrieve EVIDENCE2_ID from EvidenceEvidenceRel by using EVIDENCE1_ID:
-			$evidenceevidencerel -> retrive_evidence2_id($id_evidence[$i]);
-		
-			$n_evidence2 = $evidenceevidencerel -> getN_evidence2();
-					
-			for ($i1=0; $i1<$n_evidence2; $i1++)
-			{	
-				$id_evidence2[$i1] = $evidenceevidencerel -> getEvidence2_id_array($i1);
+				$n_evidence2 = $evidenceevidencerel -> getN_evidence2();
 						
-				// Retrieve Fragment_id from Fragment by using Evidence_id =  $id_evidence2[$i1]
-				$evidencefragmentrel -> retrive_fragment_id($id_evidence2[$i1]);
-				$n_fragment_id = $evidencefragmentrel -> getN_Fragment_id();
+				for ($i1=0; $i1<$n_evidence2; $i1++) {	
+					$id_evidence2[$i1] = $evidenceevidencerel -> getEvidence2_id_array($i1);
+							
+					// Retrieve Fragment_id from Fragment by using Evidence_id =  $id_evidence2[$i1]
+					$evidencefragmentrel -> retrive_fragment_id($id_evidence2[$i1]);
+					$n_fragment_id = $evidencefragmentrel -> getN_Fragment_id();
+		
+					$evidencefragmentrel -> retrive_fragment_id_1($id_evidence2[$i1]);
+					$fragment_id_1 = $evidencefragmentrel -> getFragment_id();
 	
-				$evidencefragmentrel -> retrive_fragment_id_1($id_evidence2[$i1]);
-				$fragment_id_1 = $evidencefragmentrel -> getFragment_id();
+					$fragment -> retrive_by_id($fragment_id_1);
+					$quote = $fragment -> getQuote();
+					$quote = quote_replaceIDwithName($quote);
+					$interpretation= $fragment -> getInterpretation();
+					$interpretation = quote_replace_IDwithName($interpretation);
+					$interpretation_notes= $fragment ->getInterpretation_notes();
+					if($interpretation_notes_evidence[$i])
+						$interpretation_notes = $interpretation_notes_evidence[$i]; 
+					
+					//$linking_cell_id= $fragment ->getLinking_cell_id();
+					$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
+					$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
+					$linking_quote = preg_replace("/\'/","\'",$fragment ->getLinking_quote());
+					if($linking_quote_evidence[$i])
+						$linking_quote = $linking_quote . "<BR>Linking notes: " . $linking_quote_evidence[$i];
+					//$linking_quote= $fragment ->getLinking_quote();
+					$linking_page_location= $fragment ->getLinking_page_location();
+					
+					$original_id = $fragment -> getOriginal_id();
+					$type = $fragment -> getType();
+					$page_location = $fragment -> getPage_location();				
+																	
+					// retrive information in Article table:
+					$articleevidencerel -> retrive_article_id($id_evidence2[$i1]);				
+					$id_article = $articleevidencerel -> getarticle_id_array(0);		
+			
+					$article -> retrive_by_id($id_article);
+					$title = preg_replace("/\'/","\'",$article -> getTitle());
+					$publication = preg_replace("/\'/","\'",$article -> getPublication());
+					$year = preg_replace("/\'/","\'",$article -> getYear());
+					$pmid_isbn = preg_replace("/\'/","\'",$article -> getPmid_isbn()); 
+					$first_page = preg_replace("/\'/","\'",$article -> getFirst_page()); 
+					$last_page = preg_replace("/\'/","\'",$article -> getLast_page()); 
+					$pmcid = preg_replace("/\'/","\'",$article -> getPmcid()); 
+					$nihmsid = preg_replace("/\'/","\'",$article -> getNihmsid()); 
+					$doi = $article -> getDoi(); 
+					$open_access = preg_replace("/\'/","\'",$article -> getOpen_access()); 
+					$citation = preg_replace("/\'/","\'",$article -> getLast_page()); 
+					$volume = preg_replace("/\'/","\'",$article -> getVolume()); 
+					$issue = preg_replace("/\'/","\'",$article -> getIssue()); 
+		
+					$pages = $first_page." - ".$last_page;								
+					//echo "frag".$fragment_id_1." "."orig id:". " ". $original_id." "."evidence id:". $id_evidence2[$i1]." "."quote:". $quote." "."inter:". $interpretation." "." int notes:". $interpretation_notes." "."lpmid:". $linking_pmid_isbn." "."lpmisb:". $linking_pmid_isbn_page." "." lquote:". $linking_quote." ". $linking_page_location." authors:". $name_authors." "."title: ". $title." "."pub:". $publication." "."year:". $year." "."pmidisb: ". $pmid_isbn." "."pages: ". $pages." "."page_loc:". $page_location." "."id_marker: ". $id_markerdata." "."id_evidence: ". $id_evidence[$i]." "."id2: ". $id_evidence2[$i1]." "."type:". $type." ". "color:". $color_1[$m2]." "."pmcid:". $pmcid." "."nihmsid:". $nihmsid." "." doi:". $doi." "."citation:". $citation." "."vol:". $volume." "."issue:". $issue." "."sec_pmid:". $secondary_pmid." ";
+					// retrive the Author Position from ArticleAuthorRel ++++++++++++++++++++++++++++++++++++++++++
+					$articleauthorrel -> retrive_author_position($id_article);
+					$n_author = $articleauthorrel -> getN_author_id();
+					for ($ii3=0; $ii3<$n_author; $ii3++)
+						$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
+							
+					sort ($auth_pos);
+						
+					$name_authors = NULL;
+					for ($ii3=0; $ii3<$n_author; $ii3++) {
+						$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
+						$id_author = $articleauthorrel -> getAuthor_id_array(0);
+							
+						$author -> retrive_by_id($id_author);
+						$name_a = $author -> getName_author_array(0);
+							
+						$name_authors = $name_authors.', '.$name_a;
+					}
+						
+					$name_authors[0] = ' ';
+					$name_authors[1] = ' ';	
+						
+					$name_authors = ltrim($name_authors);
+					$name_authors = preg_replace("/\'/","\'",$name_authors);
 
-				$fragment -> retrive_by_id($fragment_id_1);
-				$quote = $fragment -> getQuote();
-				$quote = quote_replaceIDwithName($quote);
-				$interpretation= $fragment -> getInterpretation();
-				$interpretation = quote_replace_IDwithName($interpretation);
-				$interpretation_notes= $fragment ->getInterpretation_notes();
-				if($interpretation_notes_evidence[$i])
-					$interpretation_notes = $interpretation_notes_evidence[$i]; 
-				
-				//$linking_cell_id= $fragment ->getLinking_cell_id();
-				$linking_pmid_isbn= $fragment ->getLinking_pmid_isbn();
-				$linking_pmid_isbn_page= $fragment ->getLinking_pmid_isbn_page();
-				$linking_quote = preg_replace("/\'/","\'",$fragment ->getLinking_quote());
-				if($linking_quote_evidence[$i])
-					$linking_quote = $linking_quote . "<BR>Linking notes: " . $linking_quote_evidence[$i];
-				//$linking_quote= $fragment ->getLinking_quote();
-				$linking_page_location= $fragment ->getLinking_page_location();
-				
-				$original_id = $fragment -> getOriginal_id();
-				$type = $fragment -> getType();
-				$page_location = $fragment -> getPage_location();				
-																
-				// retrive information in Article table:
-				$articleevidencerel -> retrive_article_id($id_evidence2[$i1]);				
-				$id_article = $articleevidencerel -> getarticle_id_array(0);		
-		
-				$article -> retrive_by_id($id_article);
-				$title = preg_replace("/\'/","\'",$article -> getTitle());
-				$publication = preg_replace("/\'/","\'",$article -> getPublication());
-				$year = preg_replace("/\'/","\'",$article -> getYear());
-				$pmid_isbn = preg_replace("/\'/","\'",$article -> getPmid_isbn()); 
-				$first_page = preg_replace("/\'/","\'",$article -> getFirst_page()); 
-				$last_page = preg_replace("/\'/","\'",$article -> getLast_page()); 
-				$pmcid = preg_replace("/\'/","\'",$article -> getPmcid()); 
-				$nihmsid = preg_replace("/\'/","\'",$article -> getNihmsid()); 
-				$doi = $article -> getDoi(); 
-				$open_access = preg_replace("/\'/","\'",$article -> getOpen_access()); 
-				$citation = preg_replace("/\'/","\'",$article -> getLast_page()); 
-				$volume = preg_replace("/\'/","\'",$article -> getVolume()); 
-				$issue = preg_replace("/\'/","\'",$article -> getIssue()); 
-	
-				$pages = $first_page." - ".$last_page;								
-				//echo "frag".$fragment_id_1." "."orig id:". " ". $original_id." "."evidence id:". $id_evidence2[$i1]." "."quote:". $quote." "."inter:". $interpretation." "." int notes:". $interpretation_notes." "."lpmid:". $linking_pmid_isbn." "."lpmisb:". $linking_pmid_isbn_page." "." lquote:". $linking_quote." ". $linking_page_location." authors:". $name_authors." "."title: ". $title." "."pub:". $publication." "."year:". $year." "."pmidisb: ". $pmid_isbn." "."pages: ". $pages." "."page_loc:". $page_location." "."id_marker: ". $id_markerdata." "."id_evidence: ". $id_evidence[$i]." "."id2: ". $id_evidence2[$i1]." "."type:". $type." ". "color:". $color_1[$m2]." "."pmcid:". $pmcid." "."nihmsid:". $nihmsid." "." doi:". $doi." "."citation:". $citation." "."vol:". $volume." "."issue:". $issue." "."sec_pmid:". $secondary_pmid." ";
-				// retrive the Author Position from ArticleAuthorRel ++++++++++++++++++++++++++++++++++++++++++
-				$articleauthorrel -> retrive_author_position($id_article);
-				$n_author = $articleauthorrel -> getN_author_id();
-				for ($ii3=0; $ii3<$n_author; $ii3++)
-					$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
-						
-				sort ($auth_pos);
-					
-				$name_authors = NULL;
-				for ($ii3=0; $ii3<$n_author; $ii3++)
-				{
-					$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
-					$id_author = $articleauthorrel -> getAuthor_id_array(0);
-						
-					$author -> retrive_by_id($id_author);
-					$name_a = $author -> getName_author_array(0);
-						
-					$name_authors = $name_authors.', '.$name_a;
-				}
-					
-				$name_authors[0] = ' ';
-				$name_authors[1] = ' ';	
-					
-				$name_authors = ltrim($name_authors);
-				$name_authors = preg_replace("/\'/","\'",$name_authors);
-				// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-				if ($page)
-				{
-				// Insert the data in the temporary table ********************************************************************************
-				insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);	
-				}							
-								
+					// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+					if ($page) {
+						// Insert the data in the temporary table ********************************************************************************
+						insert_temporary($name_temporary_table, $fragment_id_1, $original_id, $quote, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $id_markerdata, $id_evidence[$i], $id_evidence2[$i1], $type, '0', $color_1[$m2], $pmcid, $nihmsid, $doi, $citation, $volume, $issue, $secondary_pmid);
+					}							
+									
 					// SHOW ONLY TYPE = DATA:			
-				$query = "UPDATE $name_temporary_table SET show1 = '1' WHERE type = 'data' ";							
-				$rs = mysqli_query($GLOBALS['conn'],$query);								
-				}
-			}
+					$query = "UPDATE $name_temporary_table SET show1 = '1' WHERE type = 'data' ";							
+					$rs = mysqli_query($GLOBALS['conn'],$query);
+					
+				} // end for n_evidence2
+			} // end for n_id_evidence
 		
 			// Retrieve MARKERDATA ID from EvidenceMarkerdataRel by using ID EVIDENCE: *****************************
 			$query = "SELECT id_evidence1 FROM $name_temporary_table";
 			$rs = mysqli_query($GLOBALS['conn'],$query);
-			while(list($id_evidence1) = mysqli_fetch_row($rs))
-			{
+			while(list($id_evidence1) = mysqli_fetch_row($rs)) {
 				$evidencemarkerdatarel -> retrive_Markerdata_id($id_evidence1);
 				$id_markerdata1 = $evidencemarkerdatarel -> getMarkerdata_id_array(0);
 	
@@ -1276,8 +1296,7 @@ else {
 		$query = "SELECT show1 FROM $name_temporary_table";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n_show1=0;
-		while(list($show1) = mysqli_fetch_row($rs))
-		{
+		while(list($show1) = mysqli_fetch_row($rs)) {
 			if ($show1 == 1)
 				$n_show1 = $n_show1 + 1;
 		}			
@@ -1677,6 +1696,8 @@ else {
 
 						$expression = $markerdata -> getExpression();	
             			$expression = preg_replace('/[\[\]"]/', '', $expression);
+            			$expression = str_replace("_", " ", $expression);
+            			$expression = str_replace("inference", "(inference)", $expression);
 						$animal = $markerdata -> getAnimal();	
             			$animal = preg_replace('/[\[\]"]/', '', $animal);
 						$protocol = $markerdata -> getProtocol();	
@@ -1728,7 +1749,9 @@ else {
 							// **************************************************************************************							
               // STM Formatting header
 
-			  if (($expression == $print_color) || ($print_color == "positive-negative"))
+			  if (($expression == $print_color) || ($print_color == "positive-negative") || 
+	  		  ($expression == "positive (inference)" && $print_color == "positive") || ($expression == "negative (inference)" && $print_color == "negative") ||
+	  		  ($expression == "positive (inference)" && $print_color == "positive inference") || ($expression == "negative (inference)" && $print_color == "negative inference"))
               	$header_html = header_row("EXPRESSION", $expression);
 			  else 
 			  	$header_html = header_row("EXPRESSION (* contradictory evidence)", $expression);

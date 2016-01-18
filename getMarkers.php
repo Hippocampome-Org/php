@@ -6,409 +6,9 @@
   require_once('class/class.property.php');
   require_once('class/class.evidencepropertyyperel.php');
   require_once('class/class.temporary_result_neurons.php');
+  include("function/markers/marker_helper.php");
+  
 
-//$n_markers = 36;
-$n_markers = 96;
-
-// Name in alphabetic order for MARKERS: ************************************
-$name_markers = array(
-		"0"=>"CB",
-		"1"=>"CR",
-		"2"=>"PV",
-		"3"=>"CB1",
-		"4"=>"Mus2R",
-		"5"=>"Sub_P_Rec",
-		"6"=>"5HT_3",
-		"7"=>"GABAa_alfa",
-		"8"=>"mGluR1a",
-		"9"=>"vGluT3",
-		"10"=>"CCK",
-		"11"=>"ENK",
-		"12"=>"NPY",
-		"13"=>"SOM",
-		"14"=>"VIP",
-		"15"=>"NG",
-		"16"=>"a-act2",
-		"17"=>"CoupTF_2",
-		"18"=>"nNOS",
-		"19"=>"RLN",
-		"20"=>"AChE",
-		"21"=>"AMIGO2",
-		"22"=>"AMPAR2_3",
-		"23"=>"BDNF",
-		"24"=>"Bok",
-		"25"=>"Caln",
-		"26"=>"CaM",
-		"27"=>"CGRP",
-		"28"=>"ChAT",
-		"29"=>"Chrna2",
-		"30"=>"CRF",
-		"31"=>"Ctip2",
-		"32"=>"Cx36",
-		"33"=>"CXCR4",
-		"34"=>"Disc1",
-		"35"=>"DYN",
-		"36"=>"EAAT3",
-		"37"=>"ErbB4",
-		"38"=>"GABA-B1",
-		"39"=>"GABAa_delta",
-		"40"=>"GABAa_alpha2",
-		"41"=>"GABAa_alpha3",
-		"42"=>"GABAa_alpha4",
-		"43"=>"GABAa_alpha5",
-		"44"=>"GABAa_alpha6",
-		"45"=>"GABAa_beta1",
-		"46"=>"GABAa_beta2",
-		"47"=>"GABAa_beta3",
-		"48"=>"GABAa_gamma1",
-		"49"=>"GABAa_gamma2",
-		"50"=>"GAT_1",
-		"51"=>"GAT-3",
-		"52"=>"GluA1",
-		"53"=>"GluA2",
-		"54"=>"GluA3",
-		"55"=>"GluA4",
-		"56"=>"GluR2_3",
-		"57"=>"GlyT2",
-		"58"=>"Id_2",
-		"59"=>"Kv3_1",
-		"60"=>"Man1a",
-		"61"=>"Math-2",
-		"62"=>"mGluR1",
-		"63"=>"mGluR2",
-		"64"=>"mGluR2_3",
-		"65"=>"mGluR3",
-		"66"=>"mGluR4",
-		"67"=>"mGluR5",
-		"68"=>"mGluR5a",
-		"69"=>"mGluR7a",
-		"70"=>"mGluR8a",
-		"71"=>"MOR",
-		"72"=>"Mus1R",
-		"73"=>"Mus3R",
-		"74"=>"Mus4R",
-		"75"=>"NECAB1",
-		"76"=>"Neuropilin2",
-		"77"=>"NKB",
-		"78"=>"p-CREB",
-		"79"=>"PCP4",
-		"80"=>"PPTA",
-		"81"=>"PPTB",
-		"82"=>"Prox1",
-		"83"=>"PSA-NCAM",
-		"84"=>"SATB1",
-		"85"=>"SATB2",
-		"86"=>"SCIP",
-		"87"=>"SPO",
-		"88"=>"SubP",
-		"89"=>"vAChT",
-		"90"=>"vGAT",
-		"91"=>"vGlut1",
-		"92"=>"vGluT2",
-		"93"=>"VIAAT",
-		"94"=>"VILIP",
-		"95"=>"Y1"
-);
-
-function getUrlForLink($id,$img,$key,$color1)
-{
-	$url = $img;
-	if($img!='')
-	{
-		if($key=="GABAa_alfa")
-			$keyProperty = "Gaba-a-alpha";
-		else if($key=="CoupTF_2")
-			$keyProperty = "CoupTF II";
-		else if($key=="Sub_P_Rec")
-			$keyProperty = "Sub P Rec";
-		else if($key=="5HT_3")
-			$keyProperty = "5HT-3";
-		else if($key=="a-act2")
-			$keyProperty = "alpha-actinin-2";
-		else if($key=="GAT_1")
-			$keyProperty = "GAT-1";
-		else if($key=="mGluR2_3")
-			$keyProperty = "mGluR2/3";
-		else if($key=="GluR2_3")
-			$keyProperty = "GluR2/3";
-		else if($key=="AMPAR2_3")
-			$keyProperty = "AMPAR2/3";
-		else if($key=="Kv3_1")
-			$keyProperty = "Kv3.1";		
-		else if($key=="Id_2")
-			$keyProperty = "Id-2";
-		else if($key=="GABAa_delta")
-			$keyProperty = "GABAa\delta";
-		else if(strpos($key,"'\'") !== false)
-			$keyProperty = str_replace("'\'", "_", $key);
-		else
-			$keyProperty = $key;
-		
-		if($color1!=NULL)
-		  $url ='<a href="property_page_markers.php?id_neuron='.$id.'&val_property='.$keyProperty.'&color='.$color1.'&page=markers" target="_blank">'.$img.'</a>';
-	}
-	return ($url);
-}
-
-// Check the UNVETTED color: ***************************************************************************
-function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = type_id,$id_property = propert_id,
-{
-	//echo " Type id: ".$id." Property Id : ".$id_property;
-	$evidencepropertyyperel -> retrive_unvetted($id, $id_property);
-	$unvetted1 = $evidencepropertyyperel -> getUnvetted();
-	return ($unvetted1);
-}
-// *****************************************************************************************************
-
-function check_color($variable, $unvetted, $conflict_note)
-{
-/*	if ($variable == 'weak_positive')
-
-// CHANGED to be the same as the positive example, to make positive and weakly positive the same
-	{
-		if ($unvetted == 1)
-			$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
-		else
-			$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";
-		
-		$link[1] = $variable;
-	}*/
-
-
-
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";	
-//		
-//		$link[1] = $variable;
-//	}
-
-	if ($variable == 'negative')
-	{
-		if ($unvetted == 1)
-			$link[0] = "<img src='images/marker/negative_unvetted.png' border='0' width='15px' />";
-		else
-			$link[0] = "<img src='images/marker/negative.png' border='0' width='15px' />";			
-
-		$link[1] = $variable;
-	}
-//	if ($variable == 'positive-negative')
-//	{
-		// Check the conflict_note:
-		if ($conflict_note == "subtypes")
-		{
-			if ($unvetted == 1)
-				$link[0] = "<img src='images/marker/positive-negative-subtypes_unvetted.png' border='0' width='15px' />";
-			else
-				$link[0] = "<img src='images/marker/positive-negative-subtypes.png' border='0' width='15px' />";		
-		}
-		elseif (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences"))
-		{
-			/* echo "Variable ".$variable;
-			echo " Conflict Note :".$conflict_note; */
-			if ($unvetted == 1)
-				$link[0] = "<img src='images/marker/positive-negative-species_unvetted.png' border='0' width='15px' />";
-			else
-				$link[0] = "<img src='images/marker/positive-negative-species.png' border='0' width='15px' />";		
-		}	
-		elseif (($conflict_note == "conflicting data") || ($conflict_note == "unresolved"))
-		{
-			if ($unvetted == 1)
-				$link[0] = "<img src='images/marker/positive-negative-conflicting_unvetted.png' border='0' width='15px' />";
-			else
-				$link[0] = "<img src='images/marker/positive-negative-conflicting.png' border='0' width='15px' />";		
-		}		
-		elseif ($conflict_note == "positive")
-		{
-			if ($unvetted == 1)
-				$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
-			else
-				$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";		
-		}		
-		elseif ($conflict_note == "negative")
-		{
-			if ($unvetted == 1)
-				$link[0] = "<img src='images/marker/negative_unvetted.png' border='0' width='15px' />";
-			else
-				$link[0] = "<img src='images/marker/negative.png' border='0' width='15px' />";		
-		}		
-		else
-		{
-			$link[0] = "<img src='images/marker/negative_positive_unvetted.png' border='0' width='15px' />";
-		}
-	
-		$link[1] = $variable;
-//	}	
-//	if ($variable == 'positive-negative-weak_positive')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-negative-weak_positive_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-negative-weak_positive.png' border='0' width='15px' />";		
-//	
-//		$link[1] = $variable;
-//	}	
-//	if ($variable == 'positive-weak_positive')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-weak_positive_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-weak_positive.png' border='0' width='15px' />";		
-//
-//		$link[1] = $variable;
-//	}		
-//	if ($variable == 'negative-weak_positive')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/negative-weak_positive_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/negative-weak_positive.png' border='0' width='15px' />";	
-//
-//		$link[1] = $variable;
-//	}	
-	if ($variable == 'positive'|| $variable == 'weak_positive')
-	{
-		if ($unvetted == 1)
-			$link[0] = "<img src='images/marker/positive_unvetted.png' border='0' width='15px' />";
-		else
-			$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";
-		
-		$link[1] = $variable;
-	}
-//	if ($variable == 'negative-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/negative-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/negative-unknown.png' border='0' width='15px' />";	
-//	
-//		$link[1] = $variable;
-//	}	
-
-//	if ($variable == 'positive-negative-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-negative-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-negative-unknown.png' border='0' width='15px' />";		
-//
-//		$link[1] = $variable;
-//	}
-//	if ($variable == 'positive-negative-weak_positive-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-negative-weak_positive-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-negative-weak_positive-unknown.png' border='0' width='15px' />";			
-//
-//		$link[1] = $variable;
-//	}	
-//	if ($variable == 'positive-weak_positive-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-weak_positive-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-weak_positive-unknown.png' border='0' width='15px' />";		
-//
-//		$link[1] = $variable;
-//	}	
-//	if ($variable == 'weak_positive-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/weak_positive-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/weak_positive-unknown.png' border='0' width='15px' />";	
-//	
-//		$link[1] = $variable;
-//	}	
-//	if ($variable == 'negative-weak_positive-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/negative-weak_positive-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/negative-weak_positive-unknown.png' border='0' width='15px' />";		
-//
-//		$link[1] = $variable;
-//	}	
-	
-//	if ($variable == 'positive-unknown')
-//	{
-//		if ($unvetted == 1)
-//			$link[0] = "<img src='images/marker/positive-unknown_unvetted.png' border='0' width='15px' />";
-//		else
-//			$link[0] = "<img src='images/marker/positive-unknown.png' border='0' width='15px' />";		
-//
-//		$link[1] = $variable;
-//	}		
-	if ($variable == 'unknown')
-	{
-		$link[0] = "<img src='images/unknown.png' border='0' width='15px' />";
-		//$link[1] = $variable;
-		$link[1] = NULL;
-	}	
-	
-	if ($variable == 'nothing')
-	{
-		$link[0] = "<img src='images/nothing.png' border='0' width='15px'/>";
-		$link[1] = NULL;
-	}
-	
-	return ($link);
-}
-
-function check_positive_negative($variable, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown) 
-{	
-	/* if($variable=='5HT_3')
-	{
-		echo " Hippo Positive ".$hippo_positive[$variable];
-		echo " Hippo Negative ".$hippo_negative[$variable];
-		echo " Weak Positive ".$hippo_weak_positive[$variable];
-		echo " Hippo Unknown ".$hippo_unknown[$variable];
-	} */
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 0))
-		$result = 'negative';
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 1))
-		$result = 'negative-unknown';		
-				
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 0))
-		$result = 'positive-negative';
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 1))
-		$result = 'positive-negative-unknown';		
-		
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 0))
-		$result = 'positive-negative-weak_positive';
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 1))
-		$result = 'positive-negative-weak_positive-unknown';		
-		
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 0))
-		$result = 'positive-weak_positive';		
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 1))
-		$result = 'positive-weak_positive-unknown';				
-		
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 0))
-		$result = 'weak_positive';	
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 1))
-		$result = 'weak_positive-unknown';			
-		
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 0))
-		$result = 'negative-weak_positive';		
-	if (($hippo_negative[$variable] == 1) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 1) && ($hippo_unknown[$variable] == 1))
-		$result = 'negative-weak_positive-unknown';				
-		
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 0))
-		$result = 'positive';			
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 1) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 1))
-		$result = 'positive-unknown';		
-	
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 1))
-		$result = 'unknown';							
-							
-	if (($hippo_negative[$variable] == 0) && ($hippo_positive[$variable] == 0) && ($hippo_weak_positive[$variable] == 0) && ($hippo_unknown[$variable] == 0))
-		$result = 'nothing';			
-	
-	return ($result);
-}
 if(!isset($_GET['page'])) $page=1;
 else $page = $_GET['page'];
 //page=1&rows=5&sidx=1&sord=asc
@@ -551,6 +151,10 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 
 	$hippo_weak_positive = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
 
+	$hippo_negative_inference = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
+	
+	$hippo_positive_inference = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
+	
 	$hippo_unknown = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
 
 	$hippo_color = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"CB1"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"5HT_3"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"NG"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AMPAR2_3"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABA-B1"=>NULL,"GABAa_delta"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GluR2_3"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPTA"=>NULL,"PPTB"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VIAAT"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
@@ -607,161 +211,31 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		{
 			$id_p[$q] = $property->getID(); // Retrieve the id
 			$val[$q] = $property->getVal(); // retrieve object
-			$part[$q] = $property->getPart(); // Retrieve the subject
+			$part[$q] = remap_marker_names($property->getPart()); // Retrieve the subject
 			$rel[$q] = $property->getRel(); // Retrieve the Predicate
+			
+			if ($val[$q] == 'positive')
+				$hippo_positive[$part[$q]]=1;
+			if ($val[$q] == 'negative')
+				$hippo_negative[$part[$q]]=1;
+			if ($val[$q] == 'weak_positive')
+				$hippo_weak_positive[$part[$q]]=1;
+			if ($val[$q] == 'positive_inference')
+				$hippo_positive_inference[$part[$q]]=1;
+			if ($val[$q] == 'negative_inference')
+				$hippo_negative_inference[$part[$q]]=1;
+			if ($val[$q] == 'unknown')
+				$hippo_unknown[$part[$q]]=1;
+			
+			$hippo_property_id[$part[$q]] = $id_p[$q];
+			
 			$q = $q+1;
-		}
-	
+		}	
 	}
-	
-	for ($ii=0; $ii<$q; $ii++) // For all the properties derieved check the required conditions
-	{
-		if (strpos($part[$ii], 'Gaba-a') == 'TRUE')
-			$part[$ii] = 'GABAa_alfa';
-		else if (strpos($part[$ii], 'CoupTF') == 'TRUE')
-			$part[$ii] = 'CoupTF_2';
-		else;
-		if ($part[$ii] == 'Sub P Rec')
-			$part[$ii] = 'Sub_P_Rec';
-		if ($part[$ii] == '5HT-3')						// CLR modified this line
-			$part[$ii] = '5HT_3';								// CLR modified this line
-		if ($part[$ii] == 'alpha-actinin-2')
-			$part[$ii] = 'a-act2';
-		if ($part[$ii] == 'GAT-1')
-			$part[$ii] = 'GAT_1';
-		if ($part[$ii] == 'mGluR2/3')
-			$part[$ii] = 'mGluR2_3';
-		if($part[$ii]=="AMPAR2_3")
-			$part[$ii] = "AMPAR2/3";
-		if($part[$ii]=="Kv3_1")
-			$part[$ii] = "Kv3.1";
-		if ($part[$ii] == 'GluR2/3')
-			$part[$ii] = 'GluR2_3';
-		if($part[$ii]=="Id_2")
-			$part[$ii] = "Id-2";
-		if(strpos($part[$ii],"'_'") !== false)
-			$part[$ii] = str_replace("'_'", "_", $key);
-
-		if ($val[$ii] == 'positive')
-			$hippo_positive[$part[$ii]]=1;
-		if ($val[$ii] == 'negative')
-		$hippo_negative[$part[$ii]]=1;
-		if ($val[$ii] == 'weak_positive')
-			$hippo_weak_positive[$part[$ii]]=1;
-		if ($val[$ii] == 'unknown')
-			$hippo_unknown[$part[$ii]]=1;
 		
-		$hippo_property_id[$part[$ii]] = $id_p[$ii];
-	}
-	
-$hippo_property['CB'] = check_positive_negative('CB',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CR'] = check_positive_negative('CR',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['PV'] = check_positive_negative('PV',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CB1'] = check_positive_negative('CB1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Mus2R'] = check_positive_negative('Mus2R',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Sub_P_Rec'] = check_positive_negative('Sub_P_Rec',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['5HT_3'] = check_positive_negative('5HT_3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alfa'] = check_positive_negative('GABAa_alfa',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR1a'] = check_positive_negative('mGluR1a',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['vGluT3'] = check_positive_negative('vGluT3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CCK'] = check_positive_negative('CCK',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['ENK'] = check_positive_negative('ENK',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['NPY'] = check_positive_negative('NPY',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SOM'] = check_positive_negative('SOM',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['VIP'] = check_positive_negative('VIP',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['NG'] = check_positive_negative('NG',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['a-act2'] = check_positive_negative('a-act2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CoupTF_2'] = check_positive_negative('CoupTF_2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['nNOS'] = check_positive_negative('nNOS',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['RLN'] = check_positive_negative('RLN',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['AChE'] = check_positive_negative('AChE',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['AMIGO2'] = check_positive_negative('AMIGO2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['AMPAR2_3'] = check_positive_negative('AMPAR2_3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['BDNF'] = check_positive_negative('BDNF',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Bok'] = check_positive_negative('Bok',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Caln'] = check_positive_negative('Caln',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CaM'] = check_positive_negative('CaM',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CGRP'] = check_positive_negative('CGRP',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['ChAT'] = check_positive_negative('ChAT',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Chrna2'] = check_positive_negative('Chrna2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CRF'] = check_positive_negative('CRF',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Ctip2'] = check_positive_negative('Ctip2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Cx36'] = check_positive_negative('Cx36',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['CXCR4'] = check_positive_negative('CXCR4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Disc1'] = check_positive_negative('Disc1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['DYN'] = check_positive_negative('DYN',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['EAAT3'] = check_positive_negative('EAAT3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['ErbB4'] = check_positive_negative('ErbB4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABA-B1'] = check_positive_negative('GABA-B1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_delta'] = check_positive_negative('GABAa_delta',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alpha2'] = check_positive_negative('GABAa_alpha2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alpha3'] = check_positive_negative('GABAa_alpha3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alpha4'] = check_positive_negative('GABAa_alpha4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alpha5'] = check_positive_negative('GABAa_alpha5',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_alpha6'] = check_positive_negative('GABAa_alpha6',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_beta1'] = check_positive_negative('GABAa_beta1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_beta2'] = check_positive_negative('GABAa_beta2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_beta3'] = check_positive_negative('GABAa_beta3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_gamma1'] = check_positive_negative('GABAa_gamma1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GABAa_gamma2'] = check_positive_negative('GABAa_gamma2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GAT_1'] = check_positive_negative('GAT_1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GAT-3'] = check_positive_negative('GAT-3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GluA1'] = check_positive_negative('GluA1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GluA2'] = check_positive_negative('GluA2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GluA3'] = check_positive_negative('GluA3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GluA4'] = check_positive_negative('GluA4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GluR2_3'] = check_positive_negative('GluR2_3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['GlyT2'] = check_positive_negative('GlyT2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Id_2'] = check_positive_negative('Id_2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Kv3_1'] = check_positive_negative('Kv3_1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Man1a'] = check_positive_negative('Man1a',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Math-2'] = check_positive_negative('Math-2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR1'] = check_positive_negative('mGluR1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR2'] = check_positive_negative('mGluR2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR2_3'] = check_positive_negative('mGluR2_3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR3'] = check_positive_negative('mGluR3',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR4'] = check_positive_negative('mGluR4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR5'] = check_positive_negative('mGluR5',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR5a'] = check_positive_negative('mGluR5a',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR7a'] = check_positive_negative('mGluR7a',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['mGluR8a'] = check_positive_negative('mGluR8a',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['MOR'] = check_positive_negative('MOR',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Mus1R'] = check_positive_negative('Mus1R',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Mus3R'] = check_positive_negative('Mus3R',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Mus4R'] = check_positive_negative('Mus4R',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['NECAB1'] = check_positive_negative('NECAB1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Neuropilin2'] = check_positive_negative('Neuropilin2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['NKB'] = check_positive_negative('NKB',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['p-CREB'] = check_positive_negative('p-CREB',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['PCP4'] = check_positive_negative('PCP4',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['PPTA'] = check_positive_negative('PPTA',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['PPTB'] = check_positive_negative('PPTB',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Prox1'] = check_positive_negative('Prox1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['PSA-NCAM'] = check_positive_negative('PSA-NCAM',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SATB1'] = check_positive_negative('SATB1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SATB2'] = check_positive_negative('SATB2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SCIP'] = check_positive_negative('SCIP',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SPO'] = check_positive_negative('SPO',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['SubP'] = check_positive_negative('SubP',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['vAChT'] = check_positive_negative('vAChT',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['vGAT'] = check_positive_negative('vGAT',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['vGlut1'] = check_positive_negative('vGlut1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['vGluT2'] = check_positive_negative('vGluT2',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['VIAAT'] = check_positive_negative('VIAAT',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['VILIP'] = check_positive_negative('VILIP',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-$hippo_property['Y1'] = check_positive_negative('Y1',$hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_unknown);
-	
-//	if (strpos($nickname, '(+)') == TRUE)
-	if ($excit_inhib == 'e')
-		$fontColor='#339900';
-//	if (strpos($nickname, '(-)') == TRUE)
-	if ($excit_inhib == 'i')
-		$fontColor='#CC0000';
-/*	for ($f1=0; $f1<6; $f1++){
-		$hippo[$f1]="";
-		$hippo_color[$f1]="";
-	}*/
-	for ($f1=0; $f1<$n_markers; $f1++)  //$n_markers set to 36
+	$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);	
+
+	for ($f1=0; $f1<$n_markers; $f1++)
 	{
 		
 		$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$name_markers[$f1]], $id);
@@ -788,6 +262,10 @@ $hippo_property['Y1'] = check_positive_negative('Y1',$hippo_positive, $hippo_neg
 	$neurite_pattern_temp = str_replace($neurite_pattern[$soma_position], "<strong>".$neurite_pattern[$soma_position]."</strong>", $neurite_pattern);
 	$neurite_pattern_soma_location = implode('',$neurite_pattern_temp);
 	
+	if ($excit_inhib == 'e')
+		$fontColor='#339900';
+	elseif ($excit_inhib == 'i')
+		$fontColor='#CC0000';
 	
 	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>','<span style="color:black;float:right">'.$neurite_pattern_soma_location.'</span>',
 	
