@@ -92,7 +92,6 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 		$publication = stripslashes($publication);
 		$res = stripslashes($res);
 	}
-		
 	$publication= mysqli_real_escape_string($GLOBALS['conn'],$publication);
 	$query_i = "INSERT INTO $table
 	(id,
@@ -1596,19 +1595,32 @@ function show_only_ephys(link, start1, stop1)
 			 		$istim[$i1] =  $epdata -> getIstim();
 			 		$time[$i1] =  $epdata -> getTime();
 			 		$std_sem[$i1] =  $epdata -> getStd_sem();
+					$location[$i1] = $epdata -> getLocation();
 			 		
-			 		
-					// retriveve information about fragment: --------------
+					// retrieve information about fragment: --------------
 					$evidencefragmentrel -> retrive_fragment_id_1($id_evidence_2[$i1]);
 					$id_fragment = $evidencefragmentrel -> getFragment_id();
 					$fragment -> retrive_by_id($id_fragment);
 					$page_loc = $fragment -> getPage_location();
-						
+					
 					// Extract page_location and protocol
 					$protoc = explode(",", $page_loc);
 					$page_location=$protoc[0];
-					$protocol=$protoc[1];
+					
+					$location[$i1] = str_replace(' ', '', $location[$i1]);
+					$location_protoc = explode(",", $location[$i1]);
+					$location_protocol = $location_protoc[1];
+					
+					$protoc[1] = str_replace(' ', '', $protoc[1]);
+					$protoc_pieces = explode("|", $protoc[1]);
+					
+					if($location_protocol == 'patchelectrode' && $protoc_pieces[1] != 'p')
+					{
+						$protoc_pieces[1] = 'p';
+					}
+					$protocol = $protoc_pieces[0] . " | " . $protoc_pieces[1] . " | " . $protoc_pieces[2] . " | " . $protoc_pieces[3];
 					$protocol = expand_protocol_text($protocol);
+					
 					
 					$original_id = $fragment -> getOriginal_id();
 					$quote = $fragment -> getQuote();
@@ -1623,9 +1635,10 @@ function show_only_ephys(link, start1, stop1)
 					$linking_quote = quote_replaceIDwithName($linking_quote);
 					$linking_page_location= $fragment ->getLinking_page_location();
 		
+		
 					// retrieve the article_id from evidencearticleRel:
 					$articleevidencerel -> retrive_article_id($id_evidence_2[$i1]);
-					$id_article = $articleevidencerel -> getarticle_id_array(0);;
+					$id_article = $articleevidencerel -> getarticle_id_array(0);
 		
 					$id_article_1[$i1] = $id_article;
 		
@@ -1669,7 +1682,7 @@ function show_only_ephys(link, start1, stop1)
 					$name_authors[0] = '';
 		
 					$name_authors = trim($name_authors);
-						
+					
 			 		if ($page)
 					{
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2142,6 +2155,10 @@ function show_only_ephys(link, start1, stop1)
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;
+							$position_originalID = 0;
+							$i1 = 0;
+							$duplicate=0;
+							
 							while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time) = mysqli_fetch_row($rs))
 							{
 								if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
@@ -2156,11 +2173,64 @@ function show_only_ephys(link, start1, stop1)
 								//	$attachment_type = $fragment -> getAttachment_type();
 							
 								// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-								$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
+								
+								$list_originalID[$position_originalID] = $id_original;
+			
+								$attachment_obj->retrieve_by_originalId($id_original, $id_neuron);
+								$tag = $attachment_obj->getProtocol_tag();
+								
+								$i1 = $position_originalID;
+								
+								while($i1 > 0)
+								{
+									$i1--;
+									if($list_originalID[$i1] == $id_original)
+									{
+										$duplicate = 1;
+									}
+								}
+								if($duplicate == 1)
+								{
+									$temp_protocol = $protocol;
+									$new_temp_protocol = str_replace(' ','', $temp_protocol);
+									$new_temp_protocol_pieces = explode("|", $new_temp_protocol);
+									
+									$temp_tag = substr($tag, 5 , -1);
+									
+									if($new_temp_protocol_pieces[1] == 'patchclamp')
+									{
+										$protocolTag = 'p';
+										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+									}
+									elseif($new_temp_protocol_pieces[1] == 'microelectrodes')
+									{
+										$protocolTag = 'e';
+										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+									}
+									
+									if($temp_tag == '26.5')
+									{
+										$protocolTag = 'CA3b[26.5]';
+										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+									}
+									elseif($temp_tag == '23.2')
+									{
+										$protocolTag = 'CA3a[23.2]';
+										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+									}
+								}
+								else
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
+								}
+								$position_originalID++;
+								$position_value1++;
+								
+								
+								//$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
 								$attachment = $attachment_obj -> getName();
 								$attachment_type = $attachment_obj -> getType();
-							
-							
+								
 							
 								// change PFD in JPG:
 								$link_figure="";
@@ -2389,10 +2459,10 @@ function show_only_ephys(link, start1, stop1)
 								
 								
 								
-								}print("<br>");
+							}print("<br>");
 								
-							}
 						}
+				}
 						
 			
 							
