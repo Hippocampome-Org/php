@@ -5,6 +5,7 @@ class term
 	private $_id;
 	private $_dt;
 	private $_parent;
+	private $_concept;
 	private $_term;
 	private $_portal;
 	private $_repository;
@@ -30,13 +31,14 @@ class term
 	{
 		$table = $this->getName_table();
 		
-		$query = "SELECT id, dt, parent, term, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
+		$query = "SELECT id, dt, parent, concept, term, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while (list($id, $dt, $parent, $term, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
+		while (list($id, $dt, $parent, $concept, $term, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
 			$this->setParent($parent);
+			$this->setConcept($concept);
 			$this->setTerm($term);
 			$this->setPortal($portal);
 			$this->setRepository($repository);
@@ -53,7 +55,7 @@ class term
 	{
 		$table=$this->getName_table();
 		
-		$query = "SELECT DISTINCT term FROM $table";
+		$query = "SELECT DISTINCT term FROM $table ORDER BY term";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
@@ -101,6 +103,10 @@ class term
 	public function setParent($var)
 	{
 		$this->_parent = $var;
+	}
+	public function setConcept($var)
+	{
+		$this->_concept = $var;
 	}
 	public function setTerm($var)
 	{
@@ -171,6 +177,10 @@ class term
 	public function getParent()
 	{
 		return $this->_parent;
+	}
+	public function getConcept()
+	{
+		return $this->_concept;
 	}
 	public function getTerm()
 	{

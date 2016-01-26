@@ -74,7 +74,7 @@ if ($letter)
 	$name_temporary_table = $_SESSION['name_temporary_table'];
 	$id_update = $_REQUEST['id'];
 
-	// retrieve all Names, Nicknames from table 'Type' and Names from table 'Synonym' and Terms from table 'Term':
+	// retrieve all neuron terms
 	$term->retrive_name();
 	$n_neuron_total_term = $term->getName_neuron();
 
@@ -104,7 +104,7 @@ if ($letter)
 	{
 		$temporary->update_temporary($letter, '', 1, $id_update);
 	}
-	sort($trm_neuron);
+	//sort($trm_neuron);
 	$temporary_search = 0;
 }
 
@@ -229,15 +229,15 @@ $(document).ready(function(){
 <div class="table_position_search_page" >
 	<!-- ****************  BODY **************** -->
 	<?php
-		if ($temporary_search == 1)
-		{
-			if ($n_id == 1)
-				print ("<font class='font12'>$n_id Neuron Term has been selected</font>");
-			else if ($n_id > 1)
-				print ("<font class='font12'> $n_id Neuron Terms have been selected</font>");
-			else
-				print ("<font class='font12'> 0 Neuron Terms have been selected</font>");
-		}
+		//if ($temporary_search == 1)
+		//{
+		//	if ($n_id == 1)
+		//		print ("<font class='font12'>$n_id Neuron Term has been selected</font>");
+		//	else if ($n_id > 1)
+		//		print ("<font class='font12'> $n_id Neuron Terms have been selected</font>");
+		//	else
+		//		print ("<font class='font12'> 0 Neuron Terms have been selected</font>");
+		//}
 	?>
 	<table border='0' cellspacing='3' cellpadding='0' class='table_search' width='100%'>
 		<tr>
@@ -315,7 +315,7 @@ $(document).ready(function(){
 						$n_neuron3 = $n_neuron3 + 1;
 					}
 				}
-				sort($trm_neuron);
+				//sort($trm_neuron);
 
 				$temporary->retrieve_neuron_from_id($id);
 				$name_neuron_right = $temporary->getNeuron();
@@ -403,12 +403,13 @@ $(document).ready(function(){
 			print("<table border='0'  class='table_result' id='tab_res' width='100%'>");
 			print("<thead><tr>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term</strong></th></font>
+				<th align='center' width='10%' class='table_neuron_page1'> <strong>Concept</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term Source</strong> </th>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Portal</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Repository</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Unique ID</strong></th></font>
-				<th align='center' width='25%' class='table_neuron_page1'> <strong>External Link</strong></th></font>
-				<th align='center' width='25%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
+				<th align='center' width='20%' class='table_neuron_page1'> <strong>External Link</strong></th></font>
+				<th align='center' width='20%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
 				</tr></thead><tbody>"
 			);
 			$temporary->retrieve_id();
@@ -430,6 +431,7 @@ $(document).ready(function(){
 							$id_term = $term->getID_array($k3);
 							$term->retrive_by_id($id_term);
 							$term_parent = $term->getParent();
+							$term_concept = $term->getConcept();
 							$term_term = $term->getTerm();
 							$term_portal = $term->getPortal();
 							$term_repository = $term->getRepository();
@@ -440,12 +442,13 @@ $(document).ready(function(){
 							$term_human_rat = $term->getHumanRat();
 							print("	<tr>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_term</td>
+								<td align='left' width='10%' class='table_neuron_page4'>$term_concept</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_parent</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_portal</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_repository</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_unique_id</td>
-								<td align='left' width='25%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
-								<td align='left' width='25%' class='table_neuron_page4'>$term_definition</td>
+								<td align='left' width='20%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
+								<td align='left' width='20%' class='table_neuron_page4'>$term_definition</td>
 								</tr>"
 							);
 						}
