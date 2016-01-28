@@ -10,6 +10,7 @@ include ("function/name_parameter_ephys.php");
 include ("function/show_ephys.php");
 include ("function/quote_manipulation.php");
 include ("function/get_abbreviation_definition_box.php");
+include ("function/stm_lib.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -2150,14 +2151,21 @@ function show_only_ephys(link, start1, stop1)
 						// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
 						if ($show1 == 1)
 						{
+							//List of all original ID
+							$query = "select id_original FROM $name_temporary_table";
+							$rs = mysqli_query($GLOBALS['conn'],$query);
+							$list_original_id = result_set_to_array($rs,'id_original');
+							$number_of_original_id = count($list_original_id);
+							
+							
 							$query = "SELECT id_fragment, id_original, quote, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, rep_value, gt_value, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
 							$rs = mysqli_query($GLOBALS['conn'],$query);
 							$id_fragment_old = NULL;
 							$type_old = NULL;
 							$n5=0;
-							$position_originalID = 0;
+							//$position_originalID = 0;
 							$i1 = 0;
-							$duplicate=0;
+							$duplicate_count = 0;
 							
 							while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time) = mysqli_fetch_row($rs))
 							{
@@ -2173,33 +2181,39 @@ function show_only_ephys(link, start1, stop1)
 								//	$attachment_type = $fragment -> getAttachment_type();
 							
 								// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-								
-								$list_originalID[$position_originalID] = $id_original;
-			
-								$attachment_obj->retrieve_by_originalId($id_original, $id_neuron);
-								$tag = $attachment_obj->getProtocol_tag();
-								
-								$i1 = $position_originalID;
-								
-								while($i1 > 0)
+				
+								//To find duplicate original_id
+								$i1 = $number_of_original_id;
+								$duplicate_count = 0;
+								while($i1 >= 0)
 								{
 									$i1--;
-									if($list_originalID[$i1] == $id_original)
+									if($list_original_id[$i1] == $id_original)
 									{
-										$duplicate = 1;
+										$duplicate_count++;
 									}
+									
 								}
-								if($duplicate == 1)
+								
+								if($duplicate_count >= 2)
 								{
+									$attachment_obj->retrieve_by_originalId($id_original, $id_neuron);
+									$tag = $attachment_obj->getProtocol_tag();
+									
 									$temp_protocol = $protocol;
 									$new_temp_protocol = str_replace(' ','', $temp_protocol);
 									$new_temp_protocol_pieces = explode("|", $new_temp_protocol);
 									
-									$temp_tag = substr($tag, 5 , -1);
+									$temp_tag = 0;
+									if(strlen($tag) > 2)
+										$temp_tag = substr($tag, 5 , -1);
+									else
+										$temp_tag = $tag;
 									
-									if($new_temp_protocol_pieces[1] == 'patchclamp')
+									$temp_value1 = abs($value1);
+									if($temp_tag != 'm' && $temp_tag != 'p')
 									{
-										$protocolTag = 'p';
+										$protocolTag = '%'.$temp_value1.'%';
 										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
 									}
 									elseif($new_temp_protocol_pieces[1] == 'microelectrodes')
@@ -2207,24 +2221,17 @@ function show_only_ephys(link, start1, stop1)
 										$protocolTag = 'e';
 										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
 									}
+									elseif($new_temp_protocol_pieces[1] == 'patchclamp')
+									{
+										$protocolTag = 'p';
+										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+									}
 									
-									if($temp_tag == '26.5')
-									{
-										$protocolTag = 'CA3b[26.5]';
-										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
-									}
-									elseif($temp_tag == '23.2')
-									{
-										$protocolTag = 'CA3a[23.2]';
-										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
-									}
 								}
 								else
 								{
 									$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
 								}
-								$position_originalID++;
-								$position_value1++;
 								
 								
 								//$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);

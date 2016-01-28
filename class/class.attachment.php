@@ -49,8 +49,7 @@ class attachment
 			$this->setOriginal_id($original_id);	
 			$this->setName($name);	
 			$this->setProtocol_tag($protocol_tag);
-			$this->setType($type);	
-				
+			$this->setType($type);		
 		}
 	}
 	
@@ -109,7 +108,7 @@ class attachment
 		$table=$this->getName_table();
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
-		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter' and protocol_tag = '$protocolTag'";
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter' and protocol_tag LIKE '$protocolTag'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{
