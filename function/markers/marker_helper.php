@@ -133,6 +133,31 @@ function remap_marker_names($old_name) {
 		$new_name = 'GluR2_3';
 	elseif ($old_name == 'Id_2')
 		$new_name = 'Id-2';
+	elseif ($old_name == 'GABAa_delta')
+		$new_name = 'GABAa \delta';
+	elseif($old_name == "GABAa_alpha2")
+		$new_name = "GABAa\alpha 2";
+	elseif($old_name == "GABAa_alpha3")
+		$new_name = "GABAa\alpha 3";
+	elseif($old_name == "GABAa_alpha4")
+		$new_name = "GABAa\alpha 4";
+	elseif($old_name == "GABAa_alpha5")
+		$new_name = "GABAa\alpha 5";
+	elseif($old_name == "GABAa_alpha6")
+		$new_name = "GABAa\alpha 6";
+	elseif($old_name == "GABAa_beta1")
+		$new_name = "GABAa\beta 1";
+	elseif($old_name == "GABAa_beta2")
+		$new_name = "GABAa\beta 2";
+	elseif($old_name == "GABAa_beta3")
+		$new_name = "GABAa\beta 3";
+	elseif($old_name == "GABAa_gamma1")
+		$new_name = "GABAa\gamma 1";
+	elseif($old_name == "GABAa_gamma2")
+		$new_name = "GABAa\gamma 2";
+	elseif($old_name == "SubP")
+		$new_name = "Sub P";
+
 	/*elseif ($old_name == 'GABAa \delta')
 		$new_name = '?';
 	elseif ($old_name == 'GABAa\alpha 2')
@@ -358,7 +383,6 @@ function check_positive_negative($variable, $hippo_positive, $hippo_negative, $h
 function getUrlForLink($id,$img,$key,$color1)
 {
 	$url = $img;
-	
 	if($img!='') {
 		if($key=="GABAa_alfa")
 			$keyProperty = "Gaba-a-alpha";
@@ -383,9 +407,29 @@ function getUrlForLink($id,$img,$key,$color1)
 		elseif($key=="Id_2")
 			$keyProperty = "Id-2";
 		elseif($key=="GABAa_delta")
-			$keyProperty = "GABAa\delta";
-		elseif(strpos($key,"'\'") !== false)
-			$keyProperty = str_replace("'\'", "_", $key);
+			$keyProperty = "GABAa \delta";
+		elseif($key=="GABAa_alpha2")
+			$keyProperty = "GABAa\alpha 2";
+		elseif($key=="GABAa_alpha3")
+			$keyProperty = "GABAa\alpha 3";
+		elseif($key=="GABAa_alpha4")
+			$keyProperty = "GABAa\alpha 4";
+		elseif($key=="GABAa_alpha5")
+			$keyProperty = "GABAa\alpha 5";
+		elseif($key=="GABAa_alpha6")
+			$keyProperty = "GABAa\alpha 6";
+		elseif($key=="GABAa_beta1")
+			$keyProperty = "GABAa\beta 1";
+		elseif($key=="GABAa_beta2")
+			$keyProperty = "GABAa\beta 2";
+		elseif($key=="GABAa_beta3")
+			$keyProperty = "GABAa\beta 3";
+		elseif($key=="GABAa_gamma1")
+			$keyProperty = "GABAa\gamma 1";
+		elseif($key=="GABAa_gamma2")
+			$keyProperty = "GABAa\gamma 2";
+		elseif($key=="SubP")
+			$keyProperty = "Sub P";
 		else
 			$keyProperty = $key;
 
