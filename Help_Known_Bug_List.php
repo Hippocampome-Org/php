@@ -116,10 +116,6 @@ Issue 088: Amend the import scripts and database to handle the interpretation no
 Issue 089: Modify the <span class=SpellE>php</span> code on the morphology Evidence pages to display any interpretation notes.
 </span></p>
 
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 215: Ephys fragments need to be able to handle multiple sets of protocol conditions.
-</span></p>
-
 </div>
 </body>
 </html>
