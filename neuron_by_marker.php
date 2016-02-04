@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 $parameter=$_GET['marker'];
+
 //&prop;-act2 ; GABAa &prop
 if ($parameter=="alpha-actinin-2")
 	$title = "&prop;-act2";
@@ -11,6 +12,9 @@ elseif ($parameter=="Gaba-a-alpha")
 	$title = "GABAa &prop;1";
 else
 	$title = $parameter;
+if (strpos($parameter,'\\') != false) {
+	$parameter = str_replace('\\', '\\\\', $parameter);
+}
 
 $predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Types with mixed expression','unknown'=>'Types with unknown expression');
 
@@ -37,7 +41,6 @@ $epdata = new epdata($class_epdata);
 $typetyperel = new typetyperel();
 
 $objArr = $property_1->retrievePropertyIdByName($parameter);
-
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type, $predicate, $parameter) {	
 	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
@@ -89,7 +92,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php
 	include ("function/icon.html"); 
-	print("<title>" . $parameter . " expression</title>");
+	print("<title>" . $title . " expression</title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
@@ -150,7 +153,7 @@ foreach ($predicateArr as $k => $v)
 			list($pos_inf_intr_Array, $conf_notes_pi) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference', $parameter);
 			list($neg_Array, $conf_notes_neg) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative', $parameter);
 			list($neg_inf_Array, $conf_notes_ni) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative inference', $parameter);
-			
+
 			if (!empty($pos_intr_Array) && !empty($pos_inf_intr_Array))
 				$pos_combined_array = array_merge($pos_intr_Array, $pos_inf_intr_Array);
 			elseif (!empty($pos_intr_Array))

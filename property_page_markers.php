@@ -184,6 +184,9 @@ if ($page)
 		$val_property = 'GAT-1';	
  	if ($val_property == 'mGluR2_3')
 		$val_property = 'mGluR2/3';	  		
+	if (strpos($val_property,'\\') != false) {
+		$val_property = str_replace('\\', '\\\\', $val_property);
+	}
 
 	$_SESSION['id_neuron'] = $id_neuron;
 	$_SESSION['val_property'] = $val_property;	
