@@ -172,7 +172,7 @@ if ($page)
 	$id_neuron = $_REQUEST['id_neuron'];
 	$val_property = $_REQUEST['val_property'];
 	$color = $_REQUEST['color'];
-
+	$title = '';
 
 	if ($val_property == 'Sub_P_Rec')
 		$val_property = 'Sub P Rec';
@@ -185,6 +185,7 @@ if ($page)
  	if ($val_property == 'mGluR2_3')
 		$val_property = 'mGluR2/3';	  		
 	if (strpos($val_property,'\\') != false) {
+		$title = $val_property;
 		$val_property = str_replace('\\', '\\\\', $val_property);
 	}
 
@@ -728,12 +729,16 @@ else {
 			<tr>
 				<td width="20%" align="right" valign="top" class="table_neuron_page1">
 					<?php
+						if (strpos($val_property,'\\') != false) {
+							print ("$title Expression &nbsp;");
+						} else {
 						if ($val_property == 'Gaba-a-alpha')
 							print ("GABAa &alpha;1 Expression &nbsp;");
 						else if ($val_property == 'alpha-actinin-2')
 							print ("&alpha;-act2 Expression &nbsp;");
 						else
 							print ("$val_property Expression &nbsp;");
+						}
 					?>
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
