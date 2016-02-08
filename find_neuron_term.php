@@ -405,11 +405,9 @@ $(document).ready(function(){
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Concept</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term Source</strong> </th>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Portal</strong></th></font>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Repository</strong></th></font>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Unique ID</strong></th></font>
+				<th align='center' width='10%' class='table_neuron_page1'> <strong>Resource</strong></th></font>
 				<th align='center' width='20%' class='table_neuron_page1'> <strong>External Link</strong></th></font>
-				<th align='center' width='20%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
+				<th align='center' width='40%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
 				</tr></thead><tbody>"
 			);
 			$temporary->retrieve_id();
@@ -433,6 +431,7 @@ $(document).ready(function(){
 							$term_parent = $term->getParent();
 							$term_concept = $term->getConcept();
 							$term_term = $term->getTerm();
+							$term_resource = $term->getResource();
 							$term_portal = $term->getPortal();
 							$term_repository = $term->getRepository();
 							$term_unique_id = $term->getUniqueID();
@@ -444,11 +443,9 @@ $(document).ready(function(){
 								<td align='left' width='10%' class='table_neuron_page4'>$term_term</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_concept</td>
 								<td align='left' width='10%' class='table_neuron_page4'>$term_parent</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_portal</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_repository</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_unique_id</td>
+								<td align='left' width='10%' class='table_neuron_page4'>$term_resource</td>
 								<td align='left' width='20%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
-								<td align='left' width='20%' class='table_neuron_page4'>$term_definition</td>
+								<td align='left' width='40%' class='table_neuron_page4'>$term_definition</td>
 								</tr>"
 							);
 						}

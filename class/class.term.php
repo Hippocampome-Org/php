@@ -7,6 +7,7 @@ class term
 	private $_parent;
 	private $_concept;
 	private $_term;
+	private $_resource;
 	private $_portal;
 	private $_repository;
 	private $_unique_id;
@@ -31,15 +32,16 @@ class term
 	{
 		$table = $this->getName_table();
 		
-		$query = "SELECT id, dt, parent, concept, term, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
+		$query = "SELECT id, dt, parent, concept, term, resource, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while (list($id, $dt, $parent, $concept, $term, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
+		while (list($id, $dt, $parent, $concept, $term, $resource, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
 			$this->setParent($parent);
 			$this->setConcept($concept);
 			$this->setTerm($term);
+			$this->setResource($resource);
 			$this->setPortal($portal);
 			$this->setRepository($repository);
 			$this->setUniqueID($unique_id);
@@ -111,6 +113,10 @@ class term
 	public function setTerm($var)
 	{
 		$this->_term = $var;
+	}
+	public function setResource($var)
+	{
+		$this->_resource = $var;
 	}
 	public function setPortal($var)
 	{
@@ -185,6 +191,10 @@ class term
 	public function getTerm()
 	{
 		return $this->_term;
+	}
+	public function getResource()
+	{
+		return $this->_resource;
 	}
 	public function getPortal()
 	{

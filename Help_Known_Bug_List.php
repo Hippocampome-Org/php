@@ -105,10 +105,6 @@ Issue 032: Add <span class=SpellE>php</span> code to display quotes related to c
 </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 033: Include quotes about known connectivity between cell types to the database.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
 Issue 088: Amend the import scripts and database to handle the interpretation notes for the morphological evidence.
 </span></p>
 
