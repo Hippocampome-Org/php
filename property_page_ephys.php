@@ -28,6 +28,7 @@ require_once('class/class.evidenceevidencerel.php');
 require_once('class/class.epdata.php');
 require_once('class/class.epdataevidencerel.php');
 
+
 function create_temp_table ($name_temporary_table)
 {
 	$drop_table ="DROP TABLE $name_temporary_table";
@@ -76,12 +77,13 @@ function create_temp_table ($name_temporary_table)
 	time varchar(32),
 	volume varchar(20),
 	issue varchar(20),
+	locationValue varchar(30),
 	PRIMARY KEY (id))DEFAULT CHARSET=utf8;";
 	$query = mysqli_query($GLOBALS['conn'],$creatable);
 
 
 }
-function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time, $volume, $issue)
+function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $protocol, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time, $volume, $issue, $locationValue)
 {
 	if ($open_access == NULL)
 		$open_access = -1;
@@ -132,7 +134,8 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 		std_sem,
 		time,
 		volume,
-		issue)
+		issue,
+		locationValue)
 	VALUES
 	(NULL,
 	   '$i1_counter',
@@ -171,7 +174,8 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 	   '$std_sem',
 	   '$time',
 	   '$volume',
-	   '$issue'   
+	   '$issue',
+	   '$locationValue'	   
 	   )";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);
 		
@@ -1580,6 +1584,8 @@ function show_only_ephys(link, start1, stop1)
 				$value1_tot = 0;
 		
 				// ARTICLE -----------------------------------------------------------------------
+				
+				
 				for ($i1=0; $i1<$n_epdata; $i1++)
 			 	{
 			 		
@@ -1596,8 +1602,9 @@ function show_only_ephys(link, start1, stop1)
 			 		$istim[$i1] =  $epdata -> getIstim();
 			 		$time[$i1] =  $epdata -> getTime();
 			 		$std_sem[$i1] =  $epdata -> getStd_sem();
-					$location[$i1] = $epdata -> getLocation();
-			 		
+					$locationValue[$i1] = $epdata -> getLocation();
+					
+					
 					// retrieve information about fragment: --------------
 					$evidencefragmentrel -> retrive_fragment_id_1($id_evidence_2[$i1]);
 					$id_fragment = $evidencefragmentrel -> getFragment_id();
@@ -1608,9 +1615,10 @@ function show_only_ephys(link, start1, stop1)
 					$protoc = explode(",", $page_loc);
 					$page_location=$protoc[0];
 					
-					$location[$i1] = str_replace(' ', '', $location[$i1]);
-					$location_protoc = explode(",", $location[$i1]);
+					$locationValue1[$i1] = str_replace(' ', '', $locationValue[$i1]);
+					$location_protoc = explode(",", $locationValue1[$i1]);
 					$location_protocol = $location_protoc[1];
+					$location_animal = strpos($locationValue1[$i1],'mouse');					
 					
 					$protoc[1] = str_replace(' ', '', $protoc[1]);
 					$protoc_pieces = explode("|", $protoc[1]);
@@ -1618,6 +1626,10 @@ function show_only_ephys(link, start1, stop1)
 					if($location_protocol == 'patchelectrode' && $protoc_pieces[1] != 'p')
 					{
 						$protoc_pieces[1] = 'p';
+					}
+					if($location_animal != null && $protoc_pieces[0] != 'm')
+					{
+						$protoc_pieces[0] = 'm';
 					}
 					$protocol = $protoc_pieces[0] . " | " . $protoc_pieces[1] . " | " . $protoc_pieces[2] . " | " . $protoc_pieces[3];
 					$protocol = expand_protocol_text($protocol);
@@ -1685,14 +1697,16 @@ function show_only_ephys(link, start1, stop1)
 					$name_authors = trim($name_authors);
 					
 			 		if ($page)
-					{
+					{ 
 						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-						insert_temporary($name_temporary_table, $i1, $id_fragment, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $rep_value[$i1], $gt_value[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue);
+						insert_temporary($name_temporary_table, $i1, $id_fragment, $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, $protocol, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res[0], $res[2], $res[3], $value1[$i1], $value2[$i1], $error[$i1], $n_measurement[$i1], $rep_value[$i1], $gt_value[$i1], $istim[$i1], $std_sem[$i1], $time[$i1], $volume, $issue, $locationValue[$i1]);
 						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					}
 		 		}
+				
+				$_GLOBALS['temp_location'] = $locationValue;
 			}
-		 
+		
 			// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 			$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -1712,6 +1726,7 @@ function show_only_ephys(link, start1, stop1)
 			}
 		
 			?>
+		
 		
 		
 				<!-- ORDER BY: _______________________________________________________________________________________________________ -->
@@ -2031,445 +2046,486 @@ function show_only_ephys(link, start1, stop1)
 						</table>
 		
 			<?php
-				// There are no results available:
-				if ($n_id == 0)
-					print ("<br><font class='font12'>There are no results available.</font><br><br>");
-				$abbreviations = array();
-				for ($i=0; $i<$n_id; $i++)
-				{	
-				
-					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, id_original, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
-					$rs = mysqli_query($GLOBALS['conn'],$query);	
-					$auth=array();	
-							
-					while(list($id, $id_original, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
-					{			
-						$auth=array();
-						$authors2="";
-						$f_auth="";
-						$authors1 = $authors;
-						$temp=explode(",", $authors);
-						$auth=array_merge($auth,$temp);
-						for($x=0;$x<sizeof($auth);$x++)
-						{
-							$f_auth=substr(trim($auth[$x]),0,1);
-							$auth_final=trim($auth[$x]);
-							if($x!=sizeof($auth)-1)
-								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>,";	
-							else 
-								$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>";
-						}
-						
-						$year1 = $year;
-						$publication1 = $publication;
-						$PMID1 = $PMID;
-						$pages1 = $pages;	
-						$doi1 = $doi;
-						$show1 = $show;
-						$show_only1 = $show_only;
-						$volume1 = $volume;
-						$issue1 = $issue;
-					}				
-		
-		
-					// TABLE OF THE ARTICLES: ************************************************************************************************
-						$first_author = NULL;
-						for ($yy=0; $yy<strlen($authors1); $yy++)
-						{
-							if ($authors1[$yy] != ',')
-								$first_author = $first_author.$authors1[$yy];
-							else
-								break;
-						}
-					
-						print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
-					
-						print ("
-							<tr>
-							<td width='10%' align='center'>
-							</td>
-							<td width='5%' align='center' class='table_neuron_page2' valign='center'>
-						");
-
-						if ($show1 == 0)
-						{
-							print ("<form action='property_page_ephys.php' method='post' style='display:inline'>");
-							print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
-							print ("<input type='hidden' name='start' value='$page_in' />");
-							print ("<input type='hidden' name='stop' value='$page_end' />");
-							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
-							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
-							print ("</form>");
-						}
-						if ($show1 == 1)
-						{
-							print ("<form action='property_page_ephys.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
-							print ("<input type='submit' name='show_0' value=' ' class='show0'>");
-							print ("<input type='hidden' name='start' value='$page_in' />");
-							print ("<input type='hidden' name='stop' value='$page_end' />");
-							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
-							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
-							print ("</form>");
-						}
-						
-												
-						if (strlen($PMID1) > 10 )
-						{									
-							$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
-							$string_pmid = "<strong>ISBN: </strong>".$link2;	
-						}
-						else
-						{
-							$value_link ='PMID: '.$PMID1;
-							$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";								
-							$string_pmid = "<strong>PMID: </strong>".$link2;			
-						}
 			
-						if ($issue1 != NULL)
-							$issue_tot = "($issue1),";
+			// There are no results available:
+			if ($n_id == 0)
+				print ("<br><font class='font12'>There are no results available.</font><br><br>");
+			$abbreviations = array();
+			for ($i=0; $i<$n_id; $i++)
+			{	
+				// retrieve information about the authors, journals and otehr by using name of article:
+				$query = "SELECT id, id_original, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
+				$rs = mysqli_query($GLOBALS['conn'],$query);	
+				$auth=array();	
+						
+				while(list($id, $id_original, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
+				{			
+					$auth=array();
+					$authors2="";
+					$f_auth="";
+					$authors1 = $authors;
+					$temp=explode(",", $authors);
+					$auth=array_merge($auth,$temp);
+					for($x=0;$x<sizeof($auth);$x++)
+					{
+						$f_auth=substr(trim($auth[$x]),0,1);
+						$auth_final=trim($auth[$x]);
+						if($x!=sizeof($auth)-1)
+							$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>,";	
+						else 
+							$authors2.=" <a href='find_author.php?name_author=$auth_final&first_author=$f_auth&new=1&see_result=1'>$auth[$x]</a>";
+					}
+					
+					$year1 = $year;
+					$publication1 = $publication;
+					$PMID1 = $PMID;
+					$pages1 = $pages;	
+					$doi1 = $doi;
+					$show1 = $show;
+					$show_only1 = $show_only;
+					$volume1 = $volume;
+					$issue1 = $issue;
+				}				
+	
+	
+				// TABLE OF THE ARTICLES: ************************************************************************************************
+					$first_author = NULL;
+					for ($yy=0; $yy<strlen($authors1); $yy++)
+					{
+						if ($authors1[$yy] != ',')
+							$first_author = $first_author.$authors1[$yy];
 						else
-							$issue_tot = "";			
-
-						if ($doi1 != NULL)
-							$doi_tot = "DOI: $doi1";
-						else
-							$doi_tot = "";
-								
-						print ("
-							</td>							
-							<td align='left' width='85%' class='table_neuron_page2'>
+							break;
+					}
 				
-							<font color='#000000'><strong>$title_temp[$i]</strong></font> <br>
-							$authors2 <br>
-							$publication1, $year1, $volume1 $issue_tot pages: $pages1 <br>
-							$string_pmid <font class='font13'>$PMID1</font></a>; $doi_tot
-							</td>	
-							</tr>																																		
-						</table>");
+					print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
+				
+					print ("
+						<tr>
+						<td width='10%' align='center'>
+						</td>
+						<td width='5%' align='center' class='table_neuron_page2' valign='center'>
+					");
 
-						// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
-						if ($show1 == 1)
+					if ($show1 == 0)
+					{
+						print ("<form action='property_page_ephys.php' method='post' style='display:inline'>");
+						print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
+						print ("<input type='hidden' name='start' value='$page_in' />");
+						print ("<input type='hidden' name='stop' value='$page_end' />");
+						print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+						print ("</form>");
+					}
+					if ($show1 == 1)
+					{
+						print ("<form action='property_page_ephys.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
+						print ("<input type='submit' name='show_0' value=' ' class='show0'>");
+						print ("<input type='hidden' name='start' value='$page_in' />");
+						print ("<input type='hidden' name='stop' value='$page_end' />");
+						print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+						print ("</form>");
+					}
+											
+					if (strlen($PMID1) > 10 )
+					{									
+						$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
+						$string_pmid = "<strong>ISBN: </strong>".$link2;	
+					}
+					else
+					{
+						$value_link ='PMID: '.$PMID1;
+						$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";								
+						$string_pmid = "<strong>PMID: </strong>".$link2;			
+					}
+		
+					if ($issue1 != NULL)
+						$issue_tot = "($issue1),";
+					else
+						$issue_tot = "";			
+
+					if ($doi1 != NULL)
+						$doi_tot = "DOI: $doi1";
+					else
+						$doi_tot = "";
+							
+					print ("
+						</td>							
+						<td align='left' width='85%' class='table_neuron_page2'>
+			
+						<font color='#000000'><strong>$title_temp[$i]</strong></font> <br>
+						$authors2 <br>
+						$publication1, $year1, $volume1 $issue_tot pages: $pages1 <br>
+						$string_pmid <font class='font13'>$PMID1</font></a>; $doi_tot
+						</td>	
+						</tr>																																		
+					</table>");
+
+					// TABLE for Attachment & Page Location: ------------------------------------------------------------------------------------------------------------------------------------------
+					if ($show1 == 1)
+					{ 
+						//List of all original ID
+						$query = "select id_original FROM $name_temporary_table";
+						$rs = mysqli_query($GLOBALS['conn'],$query);
+						$list_original_id = result_set_to_array($rs,'id_original');
+						$number_of_original_id = count($list_original_id);
+						
+						
+						$query = "SELECT id_fragment, id_original, quote, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, rep_value, gt_value, istim, std_sem, time, locationValue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
+						$rs = mysqli_query($GLOBALS['conn'],$query);
+						$id_fragment_old = NULL;
+						$type_old = NULL;
+						$n5=0;
+						//$position_originalID = 0;
+						$i1 = 0;
+						$duplicate_count = 0;
+						$ii=0;
+						$location_Value = null;
+						
+						
+						while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time, $locationValue) = mysqli_fetch_row($rs))
 						{
-							//List of all original ID
-							$query = "select id_original FROM $name_temporary_table";
-							$rs = mysqli_query($GLOBALS['conn'],$query);
-							$list_original_id = result_set_to_array($rs,'id_original');
-							$number_of_original_id = count($list_original_id);
-							
-							
-							$query = "SELECT id_fragment, id_original, quote, page_location, protocol, complete_name, parameter, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location, res0, res2, res3, value1, value2, error, n_measurement, rep_value, gt_value, istim, std_sem, time FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";
-							$rs = mysqli_query($GLOBALS['conn'],$query);
-							$id_fragment_old = NULL;
-							$type_old = NULL;
-							$n5=0;
-							//$position_originalID = 0;
-							$i1 = 0;
+							if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
+							print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
+							print ("<tr>");
+							print ("<td width='15%' rowspan='7' align='right' valign='top'></td>");
+							print ("<td width='15%' align='left'> </td></tr>");
+						
+							// retrieve the attachament from "fragment" with original_id *****************************
+							//	$fragment -> retrive_attachment_by_original_id($id_original);
+							//	$attachment = $fragment -> getAttachment();
+							//	$attachment_type = $fragment -> getAttachment_type();
+						
+							// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
+			
+							//To find duplicate original_id
+							$i1 = $number_of_original_id;
 							$duplicate_count = 0;
-							
-							while(list($id_fragment, $id_original, $quote, $page_location, $protocol, $complete_name, $parameter, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location, $res0, $res2, $res3, $value1, $value2, $error, $n_measurement, $rep_value, $gt_value, $istim, $std_sem, $time) = mysqli_fetch_row($rs))
+							while($i1 >= 0)
 							{
-								if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
-								print ("<tr>");
-								print ("<td width='15%' rowspan='7' align='right' valign='top'></td>");
-								print ("<td width='15%' align='left'> </td></tr>");
-							
-								// retrieve the attachament from "fragment" with original_id *****************************
-								//	$fragment -> retrive_attachment_by_original_id($id_original);
-								//	$attachment = $fragment -> getAttachment();
-								//	$attachment_type = $fragment -> getAttachment_type();
-							
-								// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-				
-								//To find duplicate original_id
-								$i1 = $number_of_original_id;
-								$duplicate_count = 0;
-								while($i1 >= 0)
+								$i1--;
+								if($list_original_id[$i1] == $id_original)
 								{
-									$i1--;
-									if($list_original_id[$i1] == $id_original)
-									{
-										$duplicate_count++;
-									}
-									
+									$duplicate_count++;
 								}
+							}
+							
+							
+							if($duplicate_count >= 2)
+							{
+								//retrieve protocol_tag from attachment table
+								$query1 = "SELECT protocol_tag FROM attachment where original_id='$id_original'";
+								$rs1 = mysqli_query($GLOBALS['conn'],$query1);
+								$result_array = result_set_to_array($rs1,'protocol_tag');
+								$result_array1 = array_reverse($result_array);
 								
-								if($duplicate_count >= 2)
-								{
-									$attachment_obj->retrieve_by_originalId($id_original, $id_neuron);
-									$tag = $attachment_obj->getProtocol_tag();
-									
-									$temp_protocol = $protocol;
-									$new_temp_protocol = str_replace(' ','', $temp_protocol);
-									$new_temp_protocol_pieces = explode("|", $new_temp_protocol);
-									
-									$temp_tag = 0;
-									if(strlen($tag) > 2)
-										$temp_tag = substr($tag, 5 , -1);
-									else
-										$temp_tag = $tag;
-									
-									$temp_value1 = abs($value1);
-									if($temp_tag != 'm' && $temp_tag != 'p')
-									{
-										$protocolTag = '%'.$temp_value1.'%';
-										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
-									}
-									elseif($new_temp_protocol_pieces[1] == 'microelectrodes')
-									{
-										$protocolTag = 'e';
-										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
-									}
-									elseif($new_temp_protocol_pieces[1] == 'patchclamp')
-									{
-										$protocolTag = 'p';
-										$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
-									}
-									
-								}
+								$attachment_obj->retrieve_by_originalId($id_original, $id_neuron);
+								$tag = $attachment_obj->getProtocol_tag();
+								
+								$temp_protocol = $protocol;
+								$new_temp_protocol = str_replace(' ','', $temp_protocol);
+								$new_temp_protocol_pieces = explode("|", $new_temp_protocol);
+								
+								$temp_tag = 0;
+								if(strlen($tag) > 2)
+									$temp_tag = substr($tag, 5 , -1);
 								else
+									$temp_tag = $tag;
+								
+								$temp_value1 = abs($value1);
+								if($temp_value1 > 1)
+									$temp_value1 = round($temp_value1,1);
+								
+								if($temp_tag != 'm' && $temp_tag != 'p')
 								{
-									$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
+									$protocolTag = '%'.$temp_value1.'%';
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+								}
+								elseif($new_temp_protocol_pieces[1] == 'microelectrodes')
+								{
+									$protocolTag = 'e';
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
+								}
+								elseif($new_temp_protocol_pieces[1] == 'patchclamp')
+								{
+									$protocolTag = 'p';
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $protocolTag);
 								}
 								
 								
-								//$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
-								$attachment = $attachment_obj -> getName();
-								$attachment_type = $attachment_obj -> getType();
-								
-							
-								// change PFD in JPG:
-								$link_figure="";
-								$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-								//echo "$attachment_jpg";
-													
-								if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
-									$link_figure = "attachment/ephys/".$attachment_jpg;
+								if($result_array1[$ii] == 'm1' && $new_temp_protocol_pieces[0] == 'mice')
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $result_array1[$ii]);		
 								}
-								//$link_figure = "figure/".$attachment_jpg;
+								elseif($result_array1[$ii] == 'mC' && $new_temp_protocol_pieces[0] == 'mice')
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $result_array1[$ii]);		
+								}
+								elseif($result_array1[$ii] == 'r' && $new_temp_protocol_pieces[0] == 'rats')
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $result_array1[$ii]);
+								}	
+								
+								
+								$location_Value = strpos($locationValue,'spiny');
+								if($result_array1[$ii] == 's' && $location_Value != null)
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $result_array1[$ii]);
+								}
+								
+								$location_Value = strpos($locationValue,'aspiny');	
+								if($result_array1[$ii] == 'a' && $location_Value != null)
+								{
+									$attachment_obj -> retrieve_attachment_by_original_id_protocolTag($id_original, $id_neuron, $parameter, $result_array1[$ii]);
+								}
+								$ii++;
+							}
+							else
+							{
+								$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
+							}
 							
-								$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-								$link_figure_pdf = "figure_pdf/".$attachment_pdf;
-								// **************************************************************************************
 							
-								print ("
-								<tr>
-								<td width='70%' class='table_neuron_page2' align='left'>
-								Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
-								</td>
-								<td width='15%' align='center'>");
+							//$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $parameter);
+							$attachment = $attachment_obj -> getName();
+							$attachment_type = $attachment_obj -> getType();
+							
+						
+							// change PFD in JPG:
+							$link_figure="";
+							$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+							//echo "$attachment_jpg";
+												
+							if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
+								$link_figure = "attachment/ephys/".$attachment_jpg;
+							}
+							//$link_figure = "figure/".$attachment_jpg;
+						
+							$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
+							$link_figure_pdf = "figure_pdf/".$attachment_pdf;
+							// **************************************************************************************
+						
+							print ("
+							<tr>
+							<td width='70%' class='table_neuron_page2' align='left'>
+							Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
+							</td>
+							<td width='15%' align='center'>");
 
-								// Display protocol, if any.
-								
-								if ($protocol) {
-									if ($rep_value != NULL) {
-										print("</td></tr>
-											<tr>
-											<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
-											Protocol: <span>$protocol *preferred conditions* </span>
-											</td><td width='15%' align='center'>");
-									}
-									else {
-										print("</td></tr>
-											<tr>
-											<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
-											Protocol: <span>$protocol</span>
-											</td><td width='15%' align='center'>");
-									}									
+							// Display protocol, if any.
+							
+							if ($protocol) {
+								if ($rep_value != NULL) {
+									print("</td></tr>
+										<tr>
+										<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
+										Protocol: <span>$protocol *preferred conditions* </span>
+										</td><td width='15%' align='center'>");
 								}
-								
-								print ("</td></tr>
-								<tr>
-								<td width='70%' class='table_neuron_page2' align='left'>
-								");
-								
-								
-								if ($res0=='Sag ratio') {
-									print ("<strong>$complete_name:</strong>");
-								} else {
-									print ("<strong>$complete_name ($res0):</strong>");
-								}
-								
-								// *************************************************************************************************
-								// *************************************************************************************************
-								
-								// BEGIN DWW Istimul-Tstimul modifications
-								
-								// BEGIN CLR modifications...
-								if ($value1)
-									$value1 = number_format($value1,$res3);
-								if ($value2)
-									$value2 = number_format($value2,$res3);
-								
-								if ($value2)
+								else {
+									print("</td></tr>
+										<tr>
+										<td width='70%' class='table_neuron_page2' style='background-color:#AAAAAA' align='left'>
+										Protocol: <span>$protocol</span>
+										</td><td width='15%' align='center'>");
+								}									
+							}
+							
+							print ("</td></tr>
+							<tr>
+							<td width='70%' class='table_neuron_page2' align='left'>
+							");
+							
+							
+							if ($res0=='Sag ratio') {
+								print ("<strong>$complete_name:</strong>");
+							} else {
+								print ("<strong>$complete_name ($res0):</strong>");
+							}
+							
+							// *************************************************************************************************
+							// *************************************************************************************************
+							
+							// BEGIN DWW Istimul-Tstimul modifications
+							
+							// BEGIN CLR modifications...
+							if ($value1)
+								$value1 = number_format($value1,$res3);
+							if ($value2)
+								$value2 = number_format($value2,$res3);
+							
+							if ($value2)
+							{
+								$mean_value = ($value1 + $value2) / 2;
+								$range = "[$value1 - $value2]";
+							}
+							else
+							{
+								$mean_value = "$value1";
+								$range = "";
+							}
+							
+							if ($error)
+							{
+								$error_value = "&plusmn; $error";
+							
+								if ($std_sem == 'std')
 								{
-									$mean_value = ($value1 + $value2) / 2;
-									$range = "[$value1 - $value2]";
+									$std_sem_value = ", Mean &plusmn; SD";
+									array_push($abbreviations, $std_sem);
+								}
+								elseif ($std_sem == 'sem')
+								{
+									$std_sem_value = ", Mean &plusmn; SEM";
+									array_push($abbreviations, $std_sem);
 								}
 								else
-								{
-									$mean_value = "$value1";
-									$range = "";
-								}
-								
-								if ($error)
-								{
-									$error_value = "&plusmn; $error";
-								
-									if ($std_sem == 'std')
-									{
-										$std_sem_value = ", Mean &plusmn; SD";
-										array_push($abbreviations, $std_sem);
-									}
-									elseif ($std_sem == 'sem')
-									{
-										$std_sem_value = ", Mean &plusmn; SEM";
-										array_push($abbreviations, $std_sem);
-									}
-									else
-										$std_sem_value = "";
-								
-									$n_error=1;
-								}
-								else
-								{
-									$error_value = "";
-								
 									$std_sem_value = "";
-								}
-								
-								if ($n_measurement)
-									$N = " (n=$n_measurement)";
-								else
-									$N = " (n=1)";
-								
-								if ($istim && ($istim != "unknown"))
-								{
-									$istim_show =", Istimul=$istim pA";
-									array_push($abbreviations, 'istim');
-								}
-								else
-									$istim_show ="";
-								
-								if ($time && ($time != "unknown"))
-								{
-									$time_val = ", Tstimul=$time ms";
-									array_push($abbreviations, 'time');
-								}
-								else
-									$time_val = "";
-								
-								if ($gt_value)
-									$gt_str = ">";
-								else
-									$gt_str = "";
-								
-								$meas = " $gt_str$mean_value $range $error_value $res2$N$std_sem_value$istim_show$time_val";
-								
-								print ("$meas");
-								
-								
-								// Display Interpretation quotes, if any.
-								if ($interpretation||$interpretation_notes) {
-									print ("</td></tr>
+							
+								$n_error=1;
+							}
+							else
+							{
+								$error_value = "";
+							
+								$std_sem_value = "";
+							}
+							
+							if ($n_measurement)
+								$N = " (n=$n_measurement)";
+							else
+								$N = " (n=1)";
+							
+							if ($istim && ($istim != "unknown"))
+							{
+								$istim_show =", Istimul=$istim pA";
+								array_push($abbreviations, 'istim');
+							}
+							else
+								$istim_show ="";
+							
+							if ($time && ($time != "unknown"))
+							{
+								$time_val = ", Tstimul=$time ms";
+								array_push($abbreviations, 'time');
+							}
+							else
+								$time_val = "";
+							
+							if ($gt_value)
+								$gt_str = ">";
+							else
+								$gt_str = "";
+							
+							$meas = " $gt_str$mean_value $range $error_value $res2$N$std_sem_value$istim_show$time_val";
+							
+							print ("$meas");
+							
+							
+							// Display Interpretation quotes, if any.
+							if ($interpretation||$interpretation_notes) {
+								print ("</td></tr>
+									<tr>
+									<td width='70%' class='table_neuron_page2' align='left'>");
+									if($interpretation) {
+										print ("Interpretation: <span>$interpretation</span>");
+										if($interpretation_notes) {
+											print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
+										}
+									} else {
+										if($interpretation_notes) {
+											print ("Interpretation notes: <span>$interpretation_notes</span>");
+										}
+									}
+								print ("</td><td width='15%' align='center'>");
+							}
+							
+							// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
+							if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
+								print ("</td></tr>
 										<tr>
 										<td width='70%' class='table_neuron_page2' align='left'>");
-										if($interpretation) {
-											print ("Interpretation: <span>$interpretation</span>");
-											if($interpretation_notes) {
-												print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
-											}
-										} else {
-											if($interpretation_notes) {
-												print ("Interpretation notes: <span>$interpretation_notes</span>");
-											}
-										}
-									print ("</td><td width='15%' align='center'>");
-								}
+								//if($linking_cell_id)
+									//print ("Linking cell ID: <span>$linking_cell_id</span>");
+								if($linking_pmid_isbn){
 								
-								// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
-								if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
-									print ("</td></tr>
-											<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>");
-									//if($linking_cell_id)
-										//print ("Linking cell ID: <span>$linking_cell_id</span>");
-									if($linking_pmid_isbn){
-									
-										if (strlen($linking_pmid_isbn) > 10 )
-											{
-												$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
-												$string_pmid = "Linking ISBN:".$link2;
-											}
-											else
-											{
-												$value_link ='PMID: '.$linking_pmid_isbn;
-												$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";
-												$string_pmid = "Linking PMID: ".$link2;
-											}
-										print ("$string_pmid<font class='font13'>$linking_pmid_isbn</font></a>");
-									}
-										
-									
-									if($linking_quote)
-									{
-										//print ("<br>Linking Quote: <span>$linking_quote</span>");
-										$evidencepropertyyperel -> retrieve_morphology_evidence_id_by_type_and_pmid_isbn($id_neuron, $linking_pmid_isbn);
-										$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
-										$linking_quote_url_to_property_page_morphology_linking_pmid_isbn =
-											"<a href='property_page_morphology_linking_pmid_isbn.php?id_neuron=$id_neuron&linking_pmid_isbn=$linking_pmid_isbn&val_property=DG_H&color=somata&page=1'>$linking_quote</a>";
-										if ($n_evidence_id > 0)
+									if (strlen($linking_pmid_isbn) > 10 )
 										{
-											print ("<br>Linking Quote: <span>$linking_quote_url_to_property_page_morphology_linking_pmid_isbn</span>");
+											$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
+											$string_pmid = "Linking ISBN:".$link2;
 										}
 										else
 										{
-											print ("<br>Linking Quote: <span>$linking_quote</span>");
+											$value_link ='PMID: '.$linking_pmid_isbn;
+											$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";
+											$string_pmid = "Linking PMID: ".$link2;
 										}
-
-									}
-
-									if($linking_page_location)
-									{
-										print ("<br>Linking Page Location: <span>$linking_page_location</span>");
-									}
+									print ("$string_pmid<font class='font13'>$linking_pmid_isbn</font></a>");
+								}
 									
-									print ("</td><td width='15%' align='center'>");
-								}
 								
-								
-								
-								// END DWW Istimul-Tstimul modifications
-								
-								
-								print ("</td></tr>	
-									<tr>		
-										<td width='70%' class='table_neuron_page2' align='left'>
-											<em>$quote</em>
-										</td>
-										<td width='15%' class='table_neuron_page2' align='center'>");
-								
-											
-								if ($attachment_type=="ephys_figure"||$attachment_type=="ephys_table")
+								if($linking_quote)
 								{
-									print ("<a href='$link_figure' target='_blank'>");
-									print ("<img src='$link_figure' border='0' width='80%'>");
-									print ("</a>");
+									//print ("<br>Linking Quote: <span>$linking_quote</span>");
+									$evidencepropertyyperel -> retrieve_morphology_evidence_id_by_type_and_pmid_isbn($id_neuron, $linking_pmid_isbn);
+									$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
+									$linking_quote_url_to_property_page_morphology_linking_pmid_isbn =
+										"<a href='property_page_morphology_linking_pmid_isbn.php?id_neuron=$id_neuron&linking_pmid_isbn=$linking_pmid_isbn&val_property=DG_H&color=somata&page=1'>$linking_quote</a>";
+									if ($n_evidence_id > 0)
+									{
+										print ("<br>Linking Quote: <span>$linking_quote_url_to_property_page_morphology_linking_pmid_isbn</span>");
+									}
+									else
+									{
+										print ("<br>Linking Quote: <span>$linking_quote</span>");
+									}
+
 								}
-								else;
-								print("</td></tr>");
-						
-								print ("</table>");
-								$id_fragment_old = $id_fragment;
-								$n5 = $n5 + 1;
+
+								if($linking_page_location)
+								{
+									print ("<br>Linking Page Location: <span>$linking_page_location</span>");
+								}
 								
-								
-								
-							}print("<br>");
-								
+								print ("</td><td width='15%' align='center'>");
+							}
+							
+							
+							
+							// END DWW Istimul-Tstimul modifications
+							
+							
+							print ("</td></tr>	
+								<tr>		
+									<td width='70%' class='table_neuron_page2' align='left'>
+										<em>$quote</em>
+									</td>
+									<td width='15%' class='table_neuron_page2' align='center'>");
+							
+										
+							if ($attachment_type=="ephys_figure"||$attachment_type=="ephys_table")
+							{
+								print ("<a href='$link_figure' target='_blank'>");
+								print ("<img src='$link_figure' border='0' width='80%'>");
+								print ("</a>");
+							}
+							else;
+							print("</td></tr>");
+					
+							print ("</table>");
+							$id_fragment_old = $id_fragment;
+							$n5 = $n5 + 1;
+							
+							
+							
 						}
+						print("<br>");
+							
+					}
 				}
+				
+			
 						
 			
 							
@@ -2480,7 +2536,7 @@ function show_only_ephys(link, start1, stop1)
 	$abbreviations = array_unique($abbreviations);
 	
 	/* BEGIN DWW commented out section
-    if (array_unique($std_sem)) {  // checks for non-null vals
+    if (array_unique($std_sem))   // checks for non-null vals
       $definitions = get_abbreviation_definitions($std_sem);
     END DWW commented out section */
 	
