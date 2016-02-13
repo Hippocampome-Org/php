@@ -7,6 +7,7 @@ class term
 	private $_parent;
 	private $_concept;
 	private $_term;
+	private $_resource_rank;
 	private $_resource;
 	private $_portal;
 	private $_repository;
@@ -32,15 +33,16 @@ class term
 	{
 		$table = $this->getName_table();
 		
-		$query = "SELECT id, dt, parent, concept, term, resource, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
+		$query = "SELECT id, dt, parent, concept, term, resource_rank, resource, portal, repository, unique_id, definition_link, definition, protein_gene, human_rat, control FROM $table WHERE id = '$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while (list($id, $dt, $parent, $concept, $term, $resource, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
+		while (list($id, $dt, $parent, $concept, $term, $resource_rank, $resource, $portal, $repository, $unique_id, $definition_link, $definition, $protein_gene, $human_rat, $control) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
 			$this->setParent($parent);
 			$this->setConcept($concept);
 			$this->setTerm($term);
+			$this->setResourceRank($resource_rank);
 			$this->setResource($resource);
 			$this->setPortal($portal);
 			$this->setRepository($repository);
@@ -71,18 +73,29 @@ class term
 	//new method 
 	public function retrive_id_by_name($name) //Retrieve id by the name from table 'Term'
 	{
-		$table=$this->getName_table();
-		$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
-		
-		$query = "SELECT id FROM $table WHERE term = '$name'";
+		$table = $this->getName_table();
+		$name = mysqli_real_escape_string($GLOBALS['conn'],$name);
+
+		// get concept for term
+		$termconcept = $name;
+		$query = "SELECT id, concept FROM $table WHERE term = '$name'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $concept) = mysqli_fetch_row($rs))
+		{	
+			$termconcept = $concept;
+			break;
+		}
+
+		// use concept instead of term in query
+		$query = "SELECT id FROM $table WHERE concept = '$termconcept' GROUP BY definition ORDER BY resource_rank";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
-		{	
-			$this->setID_array($id, $n);				
-			$n = $n +1;
+		{
+			$this->setID_array($id, $n);
+			$n = $n + 1;
 		}
-		$this->setN_id($n);			
+		$this->setN_id($n);
 	}
 	
 	// SET -------------------------------------	
@@ -113,6 +126,10 @@ class term
 	public function setTerm($var)
 	{
 		$this->_term = $var;
+	}
+	public function setResourceRank($var)
+	{
+		$this->_resource_rank = $var;
 	}
 	public function setResource($var)
 	{
@@ -191,6 +208,10 @@ class term
 	public function getTerm()
 	{
 		return $this->_term;
+	}
+	public function getResourceRank()
+	{
+		return $this->_resource_rank;
 	}
 	public function getResource()
 	{

@@ -294,7 +294,7 @@ $(document).ready(function(){
 					</select></td>"
 				);
 
-				// retrieve all Names, Nicknames from table 'Type' and Names from table 'Synonym':
+				// retrieve all terms from table 'Term'
 				$term->retrive_name();
 				$n_neuron_total_term = $term->getName_neuron();
 
@@ -402,12 +402,11 @@ $(document).ready(function(){
 		{
 			print("<table border='0'  class='table_result' id='tab_res' width='100%'>");
 			print("<thead><tr>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term</strong></th></font>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Concept</strong></th></font>
-				<th align='center' width='10%' class='table_neuron_page1'> <strong>Term Source</strong> </th>
+				<th align='center' width=' 5%' class='table_neuron_page1'> <strong>Rank</strong></th></font>
+				<th align='center' width='15%' class='table_neuron_page1'> <strong>Term</strong></th></font>
+				<th align='center' width='15%' class='table_neuron_page1'> <strong>Concept</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Resource</strong></th></font>
-				<th align='center' width='20%' class='table_neuron_page1'> <strong>External Link</strong></th></font>
-				<th align='center' width='40%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
+				<th align='center' width='55%' class='table_neuron_page1'> <strong>Definition</strong></th></font>
 				</tr></thead><tbody>"
 			);
 			$temporary->retrieve_id();
@@ -430,7 +429,9 @@ $(document).ready(function(){
 							$term->retrive_by_id($id_term);
 							$term_parent = $term->getParent();
 							$term_concept = $term->getConcept();
-							$term_term = $term->getTerm();
+							//$term_term = $term->getTerm();
+							$term_term = $name_neuron; // overide database term with selector term
+							$term_resource_rank = $term->getResourceRank();
 							$term_resource = $term->getResource();
 							$term_portal = $term->getPortal();
 							$term_repository = $term->getRepository();
@@ -439,13 +440,20 @@ $(document).ready(function(){
 							$term_definition = $term->getDefinition();
 							$term_protein_gene = $term->getProteinGene();
 							$term_human_rat = $term->getHumanRat();
+							$term_term_display = '';
+							$term_concept_display = '';
+							//$term_term_display = $term_term;
+							//$term_concept_display = $term_concept;
+							if ($k3 == 0) {
+								$term_term_display = $term_term;
+								$term_concept_display = $term_concept;
+							}
 							print("	<tr>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_term</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_concept</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_parent</td>
-								<td align='left' width='10%' class='table_neuron_page4'>$term_resource</td>
-								<td align='left' width='20%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_definition_link</font></a></td>
-								<td align='left' width='40%' class='table_neuron_page4'>$term_definition</td>
+								<td align='center' width=' 5%' class='table_neuron_page4'>$term_resource_rank</td>
+								<td align='center' width='15%' class='table_neuron_page4'>$term_term_display</td>
+								<td align='center' width='15%' class='table_neuron_page4'>$term_concept_display</td>
+								<td align='center' width='10%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_resource</font></a></td>
+								<td align='left' width='55%' class='table_neuron_page4'>$term_definition</td>
 								</tr>"
 							);
 						}
