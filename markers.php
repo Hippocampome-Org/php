@@ -684,6 +684,9 @@ include ("function/menu_main.php");
 			<br/>
 			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
+			</br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<font class='font5'>Twenty matrix markers displayed by default are from our publication.</font>
 		</td>
 	</tr>
 </table>
