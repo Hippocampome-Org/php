@@ -402,7 +402,7 @@ $(document).ready(function(){
 		{
 			print("<table border='0'  class='table_result' id='tab_res' width='100%'>");
 			print("<thead><tr>
-				<th align='center' width=' 5%' class='table_neuron_page1'> <strong>Rank</strong></th></font>
+				<th style='display:none;' align='center' width=' 5%' class='table_neuron_page1'> <strong>Rank</strong></th></font>
 				<th align='center' width='15%' class='table_neuron_page1'> <strong>Term</strong></th></font>
 				<th align='center' width='15%' class='table_neuron_page1'> <strong>Concept</strong></th></font>
 				<th align='center' width='10%' class='table_neuron_page1'> <strong>Resource</strong></th></font>
@@ -449,7 +449,7 @@ $(document).ready(function(){
 								$term_concept_display = $term_concept;
 							}
 							print("	<tr>
-								<td align='center' width=' 5%' class='table_neuron_page4'>$term_resource_rank</td>
+								<td style='display:none;' align='center' width=' 5%' class='table_neuron_page4'>$term_resource_rank</td>
 								<td align='center' width='15%' class='table_neuron_page4'>$term_term_display</td>
 								<td align='center' width='15%' class='table_neuron_page4'>$term_concept_display</td>
 								<td align='center' width='10%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_resource</font></a></td>
