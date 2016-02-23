@@ -423,6 +423,9 @@ $(document).ready(function(){
 					{
 						$term->retrive_id_by_name($name_neuron);
 						$n_term_id = $term->getN_id();
+						$concept_title='';
+						$terms_concept = '';
+						$parents_concept = '';
 						for ($k3=0; $k3<$n_term_id; $k3++)
 						{
 							$id_term = $term->getID_array($k3);
@@ -442,8 +445,6 @@ $(document).ready(function(){
 							$term_human_rat = $term->getHumanRat();
 							$term_term_display = '';
 							$term_concept_display = '';
-							//$term_term_display = $term_term;
-							//$term_concept_display = $term_concept;
 							if ($k3 == 0) {
 								$term_term_display = $term_term;
 								$term_concept_display = $term_concept;
@@ -451,12 +452,38 @@ $(document).ready(function(){
 							print("	<tr>
 								<td style='display:none;' align='center' width=' 5%' class='table_neuron_page4'>$term_resource_rank</td>
 								<td align='center' width='15%' class='table_neuron_page4'>$term_term_display</td>
-								<td align='center' width='15%' class='table_neuron_page4'>$term_concept_display</td>
+								<td id='concept' align='center' width='15%' class='table_neuron_page4' title=''>$term_concept_display</td>
 								<td align='center' width='10%' class='table_neuron_page4'><a href='$term_definition_link' target='_blank'><font class='font13'>$term_resource</font></a></td>
 								<td align='left' width='55%' class='table_neuron_page4'>$term_definition</td>
 								</tr>"
 							);
 						}
+						$terms_concept = $term->retrive_term_concept($term_concept);
+						$value = '';
+						$allTerms = '';
+						if (!empty($terms_concept)) {
+							foreach ($terms_concept as $value) {
+								$allTerms .= $value.",".$allTerms;
+							}
+						}
+						$allTerms = trim(implode(',',array_unique(explode(',', $allTerms))), ",");
+						$allTerms = 'Synonym(s):\r\n    '.str_replace(",",'\r\n    ',$allTerms);
+						$parents_concept = $term->retrive_parent_concept($term_concept);
+						$value = '';
+						$allParents = '';
+						if (!empty($parents_concept)) {
+							foreach ($parents_concept as $value) {
+								$allParents .= $value.",".$allParents;
+							}
+						}
+						$allParents = trim(implode(',',array_unique(explode(',', $allParents))), ",");
+						$allParents = 'Term Source(s):\r\n    '.str_replace(",",'\r\n    ',$allParents);
+						$concept_title = $allParents.'\r\n'.$allTerms;
+						?>
+						<script language="javascript">
+							$('#concept').attr('title', '<?php echo $concept_title;?>');
+						</script>
+						<?php
 					}
 				} //END for ($i2=0; $i2<$n_total_name; $i2++)
 			} //END for ($j1=0; $j1<$n_id; $j1++)

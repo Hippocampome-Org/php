@@ -23,6 +23,8 @@ class term
 	private $_name_neuron;
 	private $_n_id;
 	private $_id_array;
+	private $_term_concept;
+	private $_parent_concept;
 
 	function __construct ($name)
 	{
@@ -68,6 +70,36 @@ class term
 			$n = $n + 1;
 		}
 		$this->setName_neuron($n);			
+	}
+
+	public function retrive_term_concept($concept) 
+	{
+		$table=$this->getName_table();
+		$this->_term_concept = Array();
+		$query = "SELECT DISTINCT term FROM $table WHERE concept='$concept'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+             $_term_concept[] = $id;		
+		}
+		return $_term_concept;
+					
+	}	
+	
+	public function retrive_parent_concept($concept) 
+	{
+		$table=$this->getName_table();
+		$this->_parent_concept = Array();
+		$query = "SELECT DISTINCT parent FROM $table WHERE concept='$concept'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+             $_parent_concept[] = $id;		
+		}
+		return $_parent_concept;
+					
 	}	
 
 	//new method 
