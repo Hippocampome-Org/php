@@ -18,9 +18,9 @@ class synonymtyperel
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT Synonym_id FROM $table WHERE Type_id = '$id_type'";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{
 			$this->setSynonym_id($id, $n);
 			$n = $n + 1;		
@@ -33,12 +33,12 @@ class synonymtyperel
 	public function retrive_type_id_by_syn_id($synonym_id)  
     {
 		$table=$this->getName_table();
-	   $synonym_id= mysql_real_escape_string($synonym_id);
+	   $synonym_id= mysqli_real_escape_string($GLOBALS['conn'],$synonym_id);
 		
 		$query = "SELECT DISTINCT Type_id FROM $table WHERE Synonym_id = '$synonym_id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_type_array($id, $n);				
 			$n = $n +1;

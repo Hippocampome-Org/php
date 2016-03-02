@@ -167,11 +167,17 @@ $n_SUB = 0;
 $n_EC = 0;
 
 //header("Content-type: application/json;charset=utf-8");
-$responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "");
+$responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "", 'Unknowncount' => $unknowncount, 'black'=>$bl, 'orange' =>$or, 'gray' =>$gr);
+
 
 //$responce->page = $page;
 //$responce->total = $total_pages;
 $responce->records = $count;
+$bl=$or=$gr=0;
+$knowncount =0;
+$unknowncount =0;
+
+//$count123 = (object) array('knowncount' => $knowncount, 'hello' => $unknowncount);
 
 
 $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
@@ -287,7 +293,8 @@ for ($row=0; $row<$number_type; $row++) {
 						}
 						//echo " Known Conn Matrix ".$known_conn_matrix[$rowIdx][$known_header[$colIdx+1]]."\n";
 						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
-						{	
+						{
+								
 							$presynaptic_bg_color = '#FFFFFF';
 						}
 						else {
@@ -315,20 +322,31 @@ for ($row=0; $row<$number_type; $row++) {
 						
 						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
 						{
+							$responce->Unknowncount++;
 							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_nonconnection.png' height='20px' width='20px' border='0'/></div>";
 						}
 						elseif ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 1)
 						{
+							$responce->knowncount++;
 							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_connection.png' height='20px' width='20px' border='0'/></div>";
 						}
 						else if ( ($rowIdx != $colIdx) And ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == -1))
 						{
 							if($presynaptic_bg_color=="#000000")
+							{
+								$responce->black++;
 								$image = "<div style='background-color:".$presynaptic_bg_color.";width:100%; padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
+							}
 							else if($presynaptic_bg_color=="#FF8C00")
+							{
+								$responce->orange++;
 								$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_orange.png' height='20px' width='20px' border='0'/></div>";
+							}
 							if($presynaptic_bg_color == "#AAAAAA")
+							{	
+								$responce->gray++;	
 								$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
+							}
 						} 
 						// space rows & columns using images on the main diagonal
 						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 0) )

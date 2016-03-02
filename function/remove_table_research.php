@@ -2,15 +2,14 @@
 // Remove temporary table for the research:
 function remove_table_by_tyme()  // after 2 hours:
 {
-	
+	//global $conn,$DB_NAME;
 	$time_rem = 7200;   // 7200 -> 2 ore
 
 	$time_1 = time();
-
-	$query = "SHOW TABLES from {$GLOBALS['DB_NAME']} ";
-	$rs2 = mysql_query($query);			
+	$query = "SHOW TABLES";// from {$GLOBALS['DB_NAME']} ";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 	$n_table = 0;
-	while ($row = mysql_fetch_row($rs2))
+	while ($row = mysqli_fetch_assoc($rs2))
 	{
 		if  ((strpos($row[0], 'search') == 'TRUE') || (strpos($row[0], 'temp') == 'TRUE') )
 		{
@@ -32,7 +31,7 @@ function remove_table_by_tyme()  // after 2 hours:
 			if ($delta_t > $time_rem)  // 36000
 			{
 				$drop_table ="DROP TABLE $table[$i]";
-				$query = mysql_query($drop_table);	
+				$query = mysqli_query($GLOBALS['conn'],$drop_table);	
 			}
 		}
 
@@ -47,7 +46,7 @@ function remove_table_by_tyme()  // after 2 hours:
 			if ($delta_t > $time_rem)  // 36000
 			{
 				$drop_table ="DROP TABLE $table[$i]";
-				$query = mysql_query($drop_table);	
+				$query = mysqli_query($GLOBALS['conn'],$drop_table);	
 			}
 		}
 
@@ -62,7 +61,7 @@ function remove_table_by_tyme()  // after 2 hours:
 			if ($delta_t > $time_rem)  // 36000
 			{
 				$drop_table ="DROP TABLE $table[$i]";
-				$query = mysql_query($drop_table);	
+				$query = mysqli_query($GLOBALS['conn'],$drop_table);	
 			}
 		}
 		

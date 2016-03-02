@@ -13,6 +13,7 @@ class epdata
     private $_n_value1;
     private $_rep_value;
     private $_gt_value;
+	private $_location;
     
     function __construct ($name)
     {
@@ -22,9 +23,9 @@ class epdata
     public function retrive_all_information($id)
     {
         $table=$this->getName_table();
-        $query = "SELECT raw, value1, value2, error, std_sem, n, istim, time, rep_value, gt_value FROM $table WHERE id = '$id'";
-        $rs = mysql_query($query);
-        while (list($raw, $value1, $value2, $error, $std_sem, $n, $istim, $time, $rep_value, $gt_value) = mysql_fetch_row($rs))
+        $query = "SELECT raw, value1, value2, error, std_sem, n, istim, time, location, rep_value, gt_value FROM $table WHERE id = '$id'";
+        $rs = mysqli_query($GLOBALS['conn'],$query);
+        while (list($raw, $value1, $value2, $error, $std_sem, $n, $istim, $time, $location, $rep_value, $gt_value) = mysqli_fetch_row($rs))
         {    
             $this->setRaw($raw);    
             $this->setValue1($value1);
@@ -32,7 +33,8 @@ class epdata
             $this->setError($error);    
             $this->setN($n);
             $this->setIstim($istim);        
-            $this->setTime($time);    
+            $this->setTime($time); 
+			$this->setLocation($location);
             $this->setStd_sem($std_sem);                            
             $this->setRep_value($rep_value);   
             $this->setGt_value($gt_value);
@@ -43,9 +45,9 @@ class epdata
     {
         $table = $this->getName_table();
         $query = "SELECT value1 FROM $table WHERE id='$id'";
-        $rs = mysql_query($query);
+        $rs = mysqli_query($GLOBALS['conn'],$query);
         $n = 0;
-        while (list($value1) = mysql_fetch_row($rs))
+        while (list($value1) = mysqli_fetch_row($rs))
         {    
             $this->setValue1_array($n, $value1);
             $n = $n + 1;
@@ -99,6 +101,11 @@ class epdata
     public function setTime($val1)
     {
         $this->_time = $val1;
+    }
+	
+	public function setLocation($val1)
+    {
+        $this->_location = $val1;
     }
 
     public function setStd_sem($val1)
@@ -169,6 +176,11 @@ class epdata
         return $this->_time;
     }
     
+	public function getLocation()
+    {
+        return $this->_location;
+    }
+	
     public function getStd_sem()
     {
         return $this->_std_sem;

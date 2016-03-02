@@ -125,12 +125,13 @@ $(function(){
 	        researchVar: research,
 	        table_result : table
 	    }, */
-    colNames:['','Neuron Type','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
+    colNames:['','Neuron Type','Neurite<br/>Pattern','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
       } },
       {name:'Neuron type', index:'nickname', width:175,sortable:false},
+      {name:'NeuritePattern', index:'NeuritePattern', width:80,sortable:false, hidden: true},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
       {name:'Vrest', index:'Vrest', width:75,height:130,search:false,sortable:false},
       {name:'Rin', index:'Rin', width:75,height:130,search:false,sortable:false},
@@ -186,6 +187,7 @@ $(function(){
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
     	Merger(gridName,"type");
+		HideShowColumns();
 		}  
     });
 	
@@ -304,6 +306,20 @@ $(function(){
 			}
 		}); 
 });
+function HideShowColumns ()
+{
+	var myGrid = $("#nGrid");
+	$("#checkbox1").click(function() {
+		if ($("#checkbox1").is(':checked')) {
+			myGrid.jqGrid('showCol', ["NeuritePattern"]);
+		}
+		else {
+			myGrid.jqGrid('setGridParam', {shrinkToFit: true});
+			myGrid.jqGrid('setGridParam', {scrollerbar: false});
+			myGrid.jqGrid('hideCol', ["NeuritePattern"]);
+		}
+	});
+}
 </script>
 </head>
 
@@ -316,16 +332,8 @@ $(function(){
 ?>	
 		
 <div class='title_area'>
-	<font class="font1">Browse electrophysiology matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
-			}
-	?>
+	<font class="font1">Browse electrophysiology matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
+		<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span>
 </div>
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
@@ -345,7 +353,10 @@ $(function(){
 		<font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font>
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-		<font class='font5'>Values presented are means across relevant sources weighted by the source population size.  Hovering over a value shows weighted mean &plusmn; SD.</font>
+		<font class='font5'>Values are selected from the source with the greatest number of measurements taken at preferred experimental conditions (rats, patch clamp, & body temperature, when available).</font>
+		<br />
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<font class='font5'>Hover over a value for standard deviation, experimental conditions, number of measurements, and number of sources.</font>
 		<br />
 		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 		<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>

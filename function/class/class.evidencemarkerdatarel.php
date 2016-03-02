@@ -18,9 +18,9 @@ class evidencemarkerdatarel
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT Markerdata_id FROM $table WHERE Evidence_id = '$evidence_id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setMarkerdata_id_array($id, $n);		
 			$n = $n +1;

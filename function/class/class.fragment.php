@@ -18,8 +18,8 @@ class fragment
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, original_id, quote, page_location, type FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $original_id, $quote, $page_location, $type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $original_id, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setOriginal_id($original_id);			

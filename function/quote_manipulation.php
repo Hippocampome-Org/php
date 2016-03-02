@@ -7,9 +7,9 @@ function quote_replaceIDwithName($theQuote) {
 		foreach ( $matches [1] as $match ) {
 			$idArray [] = $match;
 			$fetch_query = "SELECT subregion, nickname FROM Type WHERE id=$match";
-			$query_result = mysql_query ( $fetch_query );
+			$query_result = mysqli_query($GLOBALS['conn'], $fetch_query );
 			
-			while ( $subs_and_nicks = mysql_fetch_array ( $query_result, MYSQL_ASSOC ) ) {
+			while ( $subs_and_nicks = mysqli_fetch_array ( $query_result, MYSQL_ASSOC ) ) {
 				// $subs[$u] = $subs_and_nicks['subregion'];
 				// $nicks[$u] = $subs_and_nicks['nickname'];
 				//$printable_subs_and_nicks [$u] = '{' . $subs_and_nicks ['subregion'] . ' ' . $subs_and_nicks ['nickname'] . '}';
@@ -44,9 +44,9 @@ function quote_replace_IDwithName($theQuote) {
 		foreach ( $matches [1] as $match ) {
 			$idArray [] = $match;
 			$fetch_query = "SELECT subregion, nickname FROM Type WHERE id=$match";
-			$query_result = mysql_query ( $fetch_query );
+			$query_result = mysqli_query($GLOBALS['conn'], $fetch_query );
 				
-			while ( $subs_and_nicks = mysql_fetch_array ( $query_result, MYSQL_ASSOC ) ) {
+			while ( $subs_and_nicks = mysqli_fetch_array ( $query_result, MYSQL_ASSOC ) ) {
 				// $subs[$u] = $subs_and_nicks['subregion'];
 				// $nicks[$u] = $subs_and_nicks['nickname'];
 				//$printable_subs_and_nicks [$u] = '{' . $subs_and_nicks ['subregion'] . ' ' . $subs_and_nicks ['nickname'] . '}';

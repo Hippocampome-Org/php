@@ -22,7 +22,7 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 	
 		$drop_table ="DROP TABLE $name_temporary_table";
-		$query = mysql_query($drop_table);
+		$query = mysqli_query($GLOBALS['conn'],$drop_table);
 		
 		$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 					   id int(4) NOT NULL AUTO_INCREMENT,
@@ -36,7 +36,7 @@ class temporary_search
 					   max varchar(100),
 					   mean varchar(100),
 					   PRIMARY KEY (id));";
-		$query = mysql_query($creatable);
+		$query = mysqli_query($GLOBALS['conn'],$creatable);
 	}	
 	
 	
@@ -55,7 +55,7 @@ class temporary_search
 			$query = "UPDATE $name_temporary_table SET value = '$value' WHERE id = '$N' ";
 		}			
 		
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}		
 
 	public function retrieve_by_id($id)
@@ -63,8 +63,8 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 
 		$query = "SELECT id, N, operator, property, part, relation, value FROM $name_temporary_table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $N, $operator, $property, $part, $relation, $value) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $N, $operator, $property, $part, $relation, $value) = mysqli_fetch_row($rs))
 		{
 			$this->setID($id);
 			$this->setN($N);
@@ -81,9 +81,9 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 		
 		$query = "SELECT N FROM $name_temporary_table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($N) = mysql_fetch_row($rs))
+		while(list($N) = mysqli_fetch_row($rs))
 			 $n = $n + 1;	
 			 
 		$this->setN_search($n);	 	
@@ -94,9 +94,9 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 		
 		$query = "SELECT id FROM $name_temporary_table";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($id)	= mysql_fetch_row($rs))		
+		while(list($id)	= mysqli_fetch_row($rs))		
 		{
 			$this->setID_array($id, $n);
 			$n = $n + 1;
@@ -109,7 +109,7 @@ class temporary_search
 		$name_temporary_table=$this->getName_table();
 		
 		$query = "DELETE FROM $name_temporary_table WHERE id = '$line'";			
-		$rs2 = mysql_query($query);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
 	
 	public function insert_temporary($N, $property, $part, $relation, $value, $operator)
@@ -140,7 +140,7 @@ class temporary_search
 			NULL,
 			NULL
 		   )";
-		$rs2 = mysql_query($query_i);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);	
 	}
 
 

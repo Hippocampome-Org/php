@@ -21,8 +21,8 @@ class property
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, subject, predicate, object FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $part, $rel, $val) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $part, $rel, $val) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setPart($part);
@@ -57,9 +57,9 @@ class property
 		{
 			$query = "SELECT DISTINCT id FROM $table WHERE subject = '$part' AND predicate = '$rel' AND object LIKE '%$val%'";	
 		}	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n6=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{		
 			$this->setProperty_id($id, $n6);
 			$n6 = $n6 + 1;

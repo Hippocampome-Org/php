@@ -197,12 +197,13 @@ $(function(){
         researchVar: research,
         table_result : table
     }, */
-    colNames:['','Neuron Type','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
+    colNames:['','Neuron Type','Neurite<br/>Pattern','V<sub>rest</sub><br/><small>(mV)</small>','R<sub>in</sub><br/><small>(M&Omega;)</small>','&tau;<sub>m</sub><br/><small>(ms)</small>','V<sub>thresh</sub><br/><small>(mV)</small>','Fast AHP<br/><small>(mV)</small>','AP<sub>ampl</sub><br/><small>(mV)</small>','AP<sub>width</sub><br/><small>(ms)</small>','Max F.R.<br/><small>(Hz)</small>','Slow AHP<br/><small>(mV)</small>','Sag ratio'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
       } },
       {name:'Neuron type', index:'nickname', width:175,sortable:false},
+	  {name:'NeuritePattern', index:'NeuritePattern', width:80,sortable:false, hidden: true},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
       {name:'Vrest', index:'Vrest', width:75,height:130,search:false,sortable:false},
       {name:'Rin', index:'Rin', width:75,height:130,search:false,sortable:false},
@@ -257,6 +258,7 @@ $(function(){
     gridComplete: function () {
     	var gridName = "nGrid"; // Access the grid Name
     	Merger(gridName,"type");
+		HideShowColumns();
 		}  
     });
 	
@@ -375,6 +377,20 @@ $(function(){
 			}
 		}); 
 });
+function HideShowColumns ()
+{
+	var myGrid = $("#nGrid");
+	$("#checkbox1").click(function() {
+		if ($("#checkbox1").is(':checked')) {
+			myGrid.jqGrid('showCol', ["NeuritePattern"]);
+		}
+		else {
+			myGrid.jqGrid('setGridParam', {shrinkToFit: true});
+			myGrid.jqGrid('setGridParam', {scrollerbar: false});
+			myGrid.jqGrid('hideCol', ["NeuritePattern"]);
+		}
+	});
+}
 </script>
 </head>
 
@@ -387,7 +403,10 @@ $(function(){
 ?>	
 		
 <div class='title_area'>
-	<font class="font1">Browse electrophysiology matrix</font>
+	<form id="myform">
+		<font class="font1">Browse electrophysiology matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
+		<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
+	</form>
 </div>
 
 <!--  submenu no tabs

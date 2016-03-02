@@ -36,13 +36,13 @@ $morphology_properties_query =
 function create_result_table_result ($name_temporary_table)
 {	
 	$drop_table ="DROP TABLE $name_temporary_table";
-	$query = mysql_query($drop_table);
+	$query = mysqli_query($GLOBALS['conn'],$drop_table);
 	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
 				   id_type varchar(200),
 				   PRIMARY KEY (id));";
-	$query = mysql_query($creatable);
+	$query = mysqli_query($GLOBALS['conn'],$creatable);
 }	
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -60,7 +60,7 @@ function insert_result_table_result($table, $id_type, $n_type_id)
 		  (NULL,
 			'$id_type[$i]'
 		   )";
-		$rs2 = mysql_query($query_i);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);	
 	}
 }
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -70,8 +70,8 @@ function insert_result_table_result($table, $id_type, $n_type_id)
 function information_by_id ($name_temporary_table, $id)
 {
 	$query = "SELECT property, part, relation, value FROM $name_temporary_table WHERE id='$id'";
-	$rs = mysql_query($query);
-	while(list($property, $part, $relation, $value) = mysql_fetch_row($rs))
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	while(list($property, $part, $relation, $value) = mysqli_fetch_row($rs))
 	{
 		$varr[0] = $property;
 		$varr[1] = $part;
@@ -84,7 +84,7 @@ function information_by_id ($name_temporary_table, $id)
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // SEARCH Function for MORPHOLOGY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $part, $rel, $val)
+function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $part, $rel, $val, $type)
 {	
 	
 	if ($val == 'Hippocampal formation')
@@ -137,7 +137,17 @@ function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $
 		for ($i2=0; $i2<$n_type_id; $i2++)
 		{	
 			$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i2);
-			$n_tot = $n_tot + 1;	
+
+			// Use the id only if the id is present in Type table
+			// Retrieve the Type id from type table
+			$type -> retrieve_by_id(intval($type_id[$n_tot]));
+			$id_type = $type->getId();	// Get the id
+			
+			// Increment only if the id is present in both the tables
+			if($id_type == $type_id[$n_tot])
+				$n_tot = $n_tot + 1;
+			else
+				$n_tot = $n_tot;	
 		}
 	}	
 	// Now, the program must remove the double or more type_id:	
@@ -159,15 +169,11 @@ function microtime_float()
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $predicate)
 {
-	$new_type_id_nan = array();
-
-	// retrieve id_property from Property table using SUBJECT and PREDICATE:
 	if ($predicate == 'is expressed')
 	{
 		$predicate3[1] = 'positive';
 		$predicate3[2] = 'unknown';
 		$nn = 2;
-		//i'm here
 	}
 	if ($predicate == 'is not expressed')
 	{
@@ -175,84 +181,68 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
+	if ($predicate == 'expression differences')
+	{
+		$predicate3[1] = 'species/protocol/subcellular expression differences';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
+	if ($predicate == 'subtypes')
+	{
+		$predicate3[1] = 'subtypes';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
+	if ($predicate == 'unresolved mixed')
+	{
+		$predicate3[1] = 'unresolved';
+		$predicate3[2] = 'unknown';
+		$nn = 2;
+	}
 	if ($predicate == 'unknown')
 	{
 		$predicate3[1] = 'unknown';
-		$nn = 1;		
+		$nn = 1;
 	}
 
-	$n_tot = 0;
+	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
+	$new_type_id = NULL;	// Variable to store and return the complete list of Matched and Unmatched IDs
 	for ($i=1; $i<=$nn; $i++)
-	{ 
-		$new_type_id = NULL;
-		
-		
-		//MY DELETE
-		//print("...predicate3:-".$predicate3[$i]);
-		 
-		//MyDelete ends
-		
-		$property_1 -> retrive_ID(2, $subject, NULL, $predicate3[$i]);
-		
-		//MY DELETE
-		//print("...property_1:-");
-		//print_r($property_1->retrive_ID(2, $subject, NULL, $predicate3[$i]));
-		//MyDelete ends
-		
-		$n_property_id = $property_1 -> getNumber_type();
-		//MY DELETE
-		//print("...n_property_id:-".$n_property_id);
-		//MyDelete ends
-		
-		for ($i0=0; $i0<$n_property_id; $i0++)
+	{
+		if(($i == 1) && ($predicate3[$i] != 'unknown'))
 		{
-			$property_id = $property_1 -> getProperty_id($i0);
+			// Call the function to search for the appropriate Type Ids
+			$evidencepropertyyperel -> retrive_Type_id_by_Subject_override($subject, $predicate3[$i]);
+		}
+		else // if it unknown
+		{
+			$evidencepropertyyperel -> retrive_Type_id_by_Subject_Object($subject, $predicate3[$i]);
+		}
+		$n_type_id = $evidencepropertyyperel -> getN_Type_id();		// Get the total number of the search result Type IDs
 		
-			// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-			$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id);
-			//MY DELETE
-			//print("....evidencepropertyyperel:-");
-		//print_r($evidencepropertyyperel);
-		//MyDelete ends
+		// Get the total number of Type Ids in Type table
+		$number_type= $type -> getNumber_type();
 		
-			$n_type_id = $evidencepropertyyperel -> getN_Type_id();
-			//MY DELETE
-		//print("...n_type_id:-".$n_type_id);
-		//MyDelete ends
-		
-		
-			for ($i1=0; $i1<$n_type_id; $i1++)
+		// Iterate through the result of the conflict override searched Type Ids
+		for ($i1=0; $i1<$n_type_id; $i1++)
+		{
+			if($i == 1)
+			{				
+				$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
+			}
+			else if($i == 2)
 			{
-				
-		
-				if ($i == 1)
-					$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
-					//MY DELETE
-		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
-		//MyDelete ends		
-				if ($i == 2)
-				{
-					$type_r = $evidencepropertyyperel -> getType_id_array($i1);
-					$type_id[$n_tot] = "10_".$type_r;
-					//MY DELETE
-		//print("...type_id[n_tot]:-".$type_id[$n_tot]);
-		//MyDelete ends	
-				}					
-				$n_tot = $n_tot + 1;
-			} // END $i1
-		} // END $i0
-		
-		// Now, the program must remove the doubble or more type_id:	
-		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id);
-			//MY DELETE
-			//print("....new_type_id:-");
-		//print_r($new_type_id);
-		//MyDelete ends	
-
+				$type_r = $evidencepropertyyperel -> getType_id_array($i1);
+				$type_id[$n_tot] = "10_".$type_r;
+			}
 			
-	} // END $i
-	
+			$n_tot = $n_tot + 1;
+		}
+		
+		// Check if Type_id arrary is not null
+		if ($type_id != NULL)
+				$new_type_id=array_unique($type_id);
+	}	
 	return $new_type_id;
 }
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -289,7 +279,7 @@ function major_neurontransmitter_search($property_1, $type, $subject, $predicate
   //$where_clause = ' ' . create_where_clause_from_conditions($conditions);  // see stm_lib
   //$order_clause = " ORDER BY t.position";
   //$query = $base_query . $where_clause . $order_clause;
-  //$result = mysql_query($query);
+  //$result = mysqli_query($GLOBALS['conn'],$query);
   //$records = result_set_to_array($result, "Type_id");
   //return $records;
 //}
@@ -431,55 +421,55 @@ function connectivity_search ($evidencepropertyyperel, $property_1, $type, $part
 	
 	if (strpos($rel,'known to come from') === 0) {
 		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_target_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
 		$explicit_targets = result_set_to_array($result, "t2_id");
 		$conn_search_result_array = $explicit_targets;
 	}
 	elseif (strpos($rel,'known not to come from') === 0) {
 		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nontarget_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
 		$explicit_nontargets = result_set_to_array($result, "t2_id");
 		$conn_search_result_array = $explicit_nontargets;
 	}
 	elseif (strpos($rel,'known to target') === 0) {
 		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_source_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
 		$explicit_sources = result_set_to_array($result, "t1_id");
 		$conn_search_result_array = $explicit_sources;
 	}
 	elseif (strpos($rel,'known not to target') === 0) {
 		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nonsource_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
 		$explicit_nonsources = result_set_to_array($result, "t1_id");
 		$conn_search_result_array = $explicit_nonsources;
 	}
 	elseif (strpos($rel,'potentially from') === 0) {
 		$axon_query = $one_type_query . " AND subject = 'axons'";
-		$result = mysql_query($axon_query);
+		$result = mysqli_query($GLOBALS['conn'],$axon_query);
 		$axon_parcels = result_set_to_array($result, 'object');
 		$possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
 		
 		$explicit_target_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_target_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
 		$explicit_targets = result_set_to_array($result, "t2_id");
 		
 		$explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nontarget_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
 		$explicit_nontargets = result_set_to_array($result, "t2_id");		
 		$conn_search_result_array = array_merge(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
 	}
 	elseif (strpos($rel,'potentially targeting') === 0) {	
 		$dendrite_query = $one_type_query . " AND subject = 'dendrites'";
-		$result = mysql_query($dendrite_query);
+		$result = mysqli_query($GLOBALS['conn'],$dendrite_query);
 		$dendrite_parcels = result_set_to_array($result, 'object');
 		$possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
 				
 		$explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
-		$result = mysql_query($explicit_source_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
 		$explicit_sources = result_set_to_array($result, "t1_id");
 		
 		$explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
-		$result = mysql_query($explicit_nonsource_query);
+		$result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
 		$explicit_nonsources = result_set_to_array($result, "t1_id");		
 		$conn_search_result_array = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
 	}
@@ -520,9 +510,9 @@ $name_temporary_table_search = $_REQUEST['name_table'];
 //MyDelete ends
 
 $query = "SELECT id FROM $name_temporary_table_search";
-$rs = mysql_query($query);
+$rs = mysqli_query($GLOBALS['conn'],$query);
 $n_line = 0;
-while(list($id) = mysql_fetch_row($rs))
+while(list($id) = mysqli_fetch_row($rs))
 {
 	$id_line[$n_line]=$id;
 	$n_line = $n_line + 1;
@@ -534,8 +524,8 @@ $b = 0; // stores the number of AND lines + 1 (for the first line)
 for ($i=0; $i<$n_line; $i++)
 {
 	$query = "SELECT id, operator FROM $name_temporary_table_search WHERE id = '$id_line[$i]'";
-	$rs = mysql_query($query);
-	while(list($id, $operator) = mysql_fetch_row($rs))
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	while(list($id, $operator) = mysqli_fetch_row($rs))
 	{	
 		if ( ($operator == '') || ($operator == 'AND') )
 		{
@@ -606,8 +596,14 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 			$predicate = $relation;
 		if ($relation == 'is not expressed')
 			$predicate = $relation;
-		if ($relation == 'unknown')
-			$predicate = $relation;			 
+		if ($relation == 'expression differences')
+			$predicate = $relation;		
+		if	($relation == 'subtypes')
+			$predicate = $relation;
+		if	($relation == 'unresolved mixed')
+			$predicate = $relation;
+		if	($relation == 'unknown')
+			$predicate = $relation;
 			
 			
 		if ($part == 'Soma')
@@ -620,7 +616,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		// Script for MORPHOLOGY +++++++++++++++++++++++++++++++++++++++++++		
 		if ($property == 'Morphology')
 		{
-			$res = morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $subject, $predicate, $value);	
+			$res = morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $subject, $predicate, $value, $type);	
 			
 			if ($res != NULL)
 				$id_type_res = array_merge($id_type_res, $res); 	
@@ -805,10 +801,10 @@ include ("function/icon.html");
 		
 		
 			$query = "SELECT DISTINCT id_type FROM $name_temporary_table_result";
-			$rs = mysql_query($query);
+			$rs = mysqli_query($GLOBALS['conn'],$query);
 			$n_result_tot=0;
 			$n_result_tot_unknown=0;
-			while(list($id) = mysql_fetch_row($rs))
+			while(list($id) = mysqli_fetch_row($rs))
 			{			
 				if (strpos($id, '0_') == 1)
 				{
@@ -878,7 +874,7 @@ include ("function/icon.html");
 			$full_search_string_to_print = str_replace('OR', '<br>OR', $full_search_string);
 			$full_search_string_to_print = str_replace('AND', '<br>AND', $full_search_string_to_print);
 			
-			print ("<br><br>" . $full_search_string_to_print . "<br><br>");
+			print ("" . $full_search_string_to_print . "<br>");
 			
 			if ($n_result_tot == 1)
 				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
@@ -886,7 +882,6 @@ include ("function/icon.html");
 				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
 		
 		?>
-		<br /><br />
 
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 		<tr>
@@ -943,7 +938,6 @@ include ("function/icon.html");
 		?>
 		</table>
 
-		<br />
 		
 		<?php
 			if ($n_result_tot_unknown)
@@ -982,7 +976,6 @@ include ("function/icon.html");
 			}
 		?>
 
-		<br /><br /><br />
 
 		<?php
 		if ($n_result_tot == 0);

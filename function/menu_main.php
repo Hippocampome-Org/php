@@ -27,11 +27,11 @@
 	
 		<ul>
 	
-			<li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
-			<li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
 			<li><a href="find_author.php?searching=1">Author</a></li>
+			<li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
+			<li><a href="find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
+			<li class="subfirst"><a href="search.php?searching=1">Neuron Type</a></li>
 			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
-			
 	
 		</ul></li>
 	

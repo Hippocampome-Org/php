@@ -265,13 +265,34 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 					"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "slow_AHP" =>NULL, "sag_ratio" =>NULL);
 	$unvetted_ephys2 = array("Vrest"=>NULL, "Rin"=>NULL,"tm"=>NULL, "Vthresh"=>NULL, "fast_AHP"=>NULL,
 					"AP_ampl" =>NULL, "AP_width" =>NULL, "max_fr" =>NULL, "slow_AHP" =>NULL, "sag_ratio" =>NULL);
+	$soma_location = array("DG:SMo"=>0, "DG:SMi"=>1, "DG:SG"=>2, "DG:H"=>3, 
+	                       "CA3:SLM"=>0, "CA3:SR"=>1, "CA3:SL"=>2, "CA3:SP"=>3, "CA3:SO"=>4, 
+						   "CA2:SLM"=>0, "CA2:SR"=>1, "CA2:SP"=>2, "CA2:SO"=>3,
+						   "CA1:SLM"=>0, "CA1:SR"=>1, "CA1:SP"=>2, "CA1:SO"=>3,
+						   "SUB:SM"=>0, "SUB:SP"=>1, "SUB:PL"=>2, 
+						   "EC:I"=>0, "EC:II"=>1, "EC:III"=>2, "EC:IV"=>3, "EC:V"=>4, "EC:VI"=>5);
  	$type->retrive_by_id($id); // Retrieve id
  	$nickname = $type->getNickname(); // Retrieve nick name
  	$position = $type->getPosition(); // Retrieve the position
  	$subregion = $type->getSubregion(); // Retrieve the sub region
+	//$neurite_pattern_value = substr($name,6,4);
+	
 	$excit_inhib =$type-> getExcit_Inhib();
 	$evidencepropertyyperel->retrive_Property_id_by_Type_id($id); // Retrieve distinct Property ids for each type id
 	$n_property = $evidencepropertyyperel->getN_Property_id(); // Count of the number of properties for a given type id
+	
+	for($j=0 ; $j<$n_property ; $j++)  //To obtain soma location
+	{
+		$prop_id = $evidencepropertyyperel -> getProperty_id_array($j);
+		$property->retrive_by_id($prop_id);
+		$part1 = $property->getPart();
+		$rel1 = $property->getRel();
+		if(($property->getPart() == 'somata') && ($property->getRel() == 'in'))
+		{
+			$object_value = $property->getVal();
+			$soma_position = $soma_location["$object_value"];
+		}	
+	}
 	$q = 0;
 	for ($i1=0; $i1<count($ephys); $i1++) // check for each name Eg. Vrest,Rin,tm etc..
 	{
@@ -456,9 +477,16 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		$fontColor='#CC0000';
 	}
 	
+	preg_match('!\d+!',substr($type->getName(),strpos($type->getName(), ')')),$matches);
+	$neurite_pattern=str_split($matches[0]);
+	$new_neurite_pattern = str_replace($neurite_pattern[$soma_position], "<strong>".$neurite_pattern[$soma_position]."</strong>", $neurite_pattern);
+	$neurite_pattern_new = implode('',$new_neurite_pattern);
+	//print_r($neurite_pattern_new);
+	
 	$responce->rows[$i]['cell'] =
 		array(	'<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
 			'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
+			'<span style="color:black">'.$neurite_pattern_new.'</span>',
 			print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
   			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
   			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),

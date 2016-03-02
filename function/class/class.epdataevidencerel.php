@@ -16,8 +16,8 @@ class epdataevidencerel
 	
 		$query = "SELECT Epdata_id FROM $table WHERE Evidence_id = '$evidence_id'";
 
-		$rs = mysql_query($query);
-		while(list($id) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setEpdata_id($id);		
 		}	

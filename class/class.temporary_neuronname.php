@@ -16,14 +16,14 @@ class temporary_neuronname
 		$table=$this->getName_table();
 	
 		$drop_table ="DROP TABLE $table";
-		$query = mysql_query($drop_table);
+		$query = mysqli_query($GLOBALS['conn'],$drop_table);
 		
 		$creatable=	"CREATE TABLE IF NOT EXISTS $table (					
                       id int(4) NOT NULL AUTO_INCREMENT,
 					   letter varchar(3),
 					   neuron varchar(200),
 					   PRIMARY KEY (id));";
-		$query = mysql_query($creatable);
+		$query = mysqli_query($GLOBALS['conn'],$creatable);
 	}
 
 	public function insert_temporary($letter, $neuron)
@@ -32,11 +32,11 @@ class temporary_neuronname
 		if (get_magic_quotes_gpc()) {
         	$neuron = stripslashes($neuron);    
     	}
-		$neuron= mysql_real_escape_string($neuron);
+		$neuron= mysqli_real_escape_string($GLOBALS['conn'],$neuron);
 		$table=$this->getName_table();
 			
 		$query_i = "INSERT INTO $table (id, letter, neuron) VALUES (NULL, '$letter', '$neuron')";
-		$rs2 = mysql_query($query_i);	
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);	
 	}
 
 	public function update_temporary($letter, $neuron, $flag, $id)
@@ -47,7 +47,7 @@ class temporary_neuronname
         	$neuron = stripslashes($neuron);    
     	}
     
-		$neuron= mysql_real_escape_string($neuron);	
+		$neuron= mysqli_real_escape_string($GLOBALS['conn'],$neuron);	
 		$table=$this->getName_table();
 	
 		if ($flag == 1) // Update letter:
@@ -58,7 +58,7 @@ class temporary_neuronname
 		{
 			$query_i = "UPDATE $table SET neuron = '$neuron' WHERE id='$id'";	
 		}
-		$rs2 = mysql_query($query_i);
+		$rs2 = mysqli_query($GLOBALS['conn'],$query_i);
 	}
 
 
@@ -67,9 +67,9 @@ class temporary_neuronname
 		$table=$this->getName_table();
 	
 		$query = "SELECT id, neuron FROM $table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n = 0;
-		while(list($id, $neuron) = mysql_fetch_row($rs))
+		while(list($id, $neuron) = mysqli_fetch_row($rs))
 		{
 			$this->setID_array($id, $n);
 			$this->setNeuron_array($neuron, $n);
@@ -83,8 +83,8 @@ class temporary_neuronname
 		$table=$this->getName_table();
 	
 		$query = "SELECT letter FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
-		while(list($var) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($var) = mysqli_fetch_row($rs))
 		{
 			$this->setLetter($var);
 		}
@@ -95,8 +95,8 @@ class temporary_neuronname
 		$table=$this->getName_table();
 	
 		$query = "SELECT neuron FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
-		while(list($var) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($var) = mysqli_fetch_row($rs))
 		{
 			$this->setNeuron($var);
 		}
@@ -107,7 +107,7 @@ class temporary_neuronname
 		$table=$this->getName_table();
 	
 		$query = "DELETE FROM $table WHERE id='$id'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 	}
 	
 		

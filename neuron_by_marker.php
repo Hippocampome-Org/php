@@ -4,13 +4,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 $parameter=$_GET['marker'];
+
 //&prop;-act2 ; GABAa &prop
-if($parameter=="alpha-actinin-2")
+if ($parameter=="alpha-actinin-2")
 	$title = "&prop;-act2";
-else if($parameter=="Gaba-a-alpha")
-	$title= "GABAa &prop;1";
+elseif ($parameter=="Gaba-a-alpha")
+	$title = "GABAa &prop;1";
 else
 	$title = $parameter;
+if (strpos($parameter,'\\') != false) {
+	$parameter = str_replace('\\', '\\\\', $parameter);
+}
 
 $predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Types with mixed expression','unknown'=>'Types with unknown expression');
 
@@ -37,50 +41,59 @@ $epdata = new epdata($class_epdata);
 $typetyperel = new typetyperel();
 
 $objArr = $property_1->retrievePropertyIdByName($parameter);
-
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$parameter)
-{
+function markers_search($evidencepropertyyperel, $property_1, $type, $predicate, $parameter) {	
+	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
+	$new_type_id = NULL;	// Variable to store and return the complete list of Matched and Unmatched IDs
 	
-	$new_type_id_nan = array();
-	$n_tot = 0;
+	if(($predicate != 'unknown')) {
+		// Call the function to search for the appropriate Type Ids
+		$evidencepropertyyperel -> retrive_Type_id_by_Subject_override($parameter, $predicate);
+	}
+	else {// if it unknown
+		$evidencepropertyyperel -> retrive_Type_id_by_Subject_Object($parameter, $predicate);
+	}
 	
-	$new_type_id = NULL;
-	$type_id = NULL;
-	$property_1 -> retrive_ID(2, $parameter, NULL, $predicate); // Retrieve  property IDs for subject and respective predicates
-	$n_property_id = $property_1 -> getNumber_type(); // Count the number of Property IDs for a given subject and predicate
+	$n_type_id = $evidencepropertyyperel -> getN_Type_id();		// Get the total number of the search result Type IDs
 	
-	for ($i0=0; $i0<$n_property_id; $i0++) // For Each Property Id
-	{
-		$property_id = $property_1 -> getProperty_id($i0); // retrieve the  property Id
-		// retrieve the Type_id from EvidencePropertyTypeRel by using property_id:
-		$evidencepropertyyperel -> retrive_Type_id_by_Property_id($property_id); // retrieve the neuron types from evidencepropertytype rel
-		$n_type_id = $evidencepropertyyperel -> getN_Type_id(); // Get a count of the number of neuron type Ids
-		for ($i1=0; $i1<$n_type_id; $i1++) // For each Type Id
-		{
-			if ($predicate == 'positive' || $predicate =='negative')
-				$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);	// Get the total type ids for positive
-			else
-			{
-				$type_r = $evidencepropertyyperel -> getType_id_array($i1); // get the type Id for unknown
-				$type_id[$n_tot] = "10_".$type_r; // Append 10_
-			}					
-		  $n_tot = $n_tot + 1;
-		} // END $i1
-	} // END $i0
-		// Now, the program must remove the doubble or more type_id:	
-		if ($type_id != NULL)
-			$new_type_id=array_unique($type_id); // Get unique Type Ids
+	// Get the total number of Type Ids in Type table
+	$number_type= $type -> getNumber_type();
 	
-	return $new_type_id;
+	// Iterate through the result of the conflict override searched Type Ids
+	for ($i1=0; $i1<$n_type_id; $i1++) {
+		if(($predicate != 'unknown')) {
+			$type_id[$n_tot] = $evidencepropertyyperel -> getType_id_array($i1);
+		}
+		else {
+			$type_r = $evidencepropertyyperel -> getType_id_array($i1);
+			$type_id[$n_tot] = "10_".$type_r;
+		}
+		
+		$n_tot = $n_tot + 1;
+	}
+	
+	// Check if Type_id arrary is not null
+	if ($type_id != NULL)
+		$new_type_id = array_unique($type_id);
+	
+	if (!empty($new_type_id)) {
+		foreach ($new_type_id as $an_id) {
+			//$new_type_id['note_key'][$an_id] = $predicate;
+			$new_type_conflict_note[$an_id] = $predicate;
+		}
+	}
+	
+	return array($new_type_id, $new_type_conflict_note);
 }
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<?php include ("function/icon.html"); ?>
-<title>Neurons</title>
+<?php
+	include ("function/icon.html"); 
+	print("<title>" . $title . " expression</title>");
+?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 <!-- COPY IN ALL PAGES -->
@@ -95,11 +108,14 @@ function markers_search($evidencepropertyyperel, $property_1, $type,$predicate,$
 <body>
 	<div class="table_position_search_page">
 <?php 
+
 $n_result_tot = 0;
 $id_t = Array();
 $pos_Array = Array();
 $pos_intr_Array = Array();
+$pos_inf_intr_Array = Array();
 $neg_Array = Array();
+$neg_inf_Array = Array();
 $mixed_type = Array();
 $name_type = "";
 $subregion_type ="";
@@ -111,13 +127,57 @@ foreach ($predicateArr as $k => $v)
 	
 	if($k=='mixed')
 	{
-		asort($pos_intr_Array);
-		asort($neg_Array);
-		$marker_id = array_intersect($neg_Array,$pos_intr_Array);
+        if(!empty($evidencepropertyyperel)){
+        	$pos_neg_all = array();
+        	
+			list($pos_neg_all[], $conf_notes_subtypes) = markers_search($evidencepropertyyperel, $property_1, $type, 'subtypes', $parameter);
+			list($pos_neg_all[], $conf_notes_spse) = markers_search($evidencepropertyyperel, $property_1, $type, 'species/protocol/subcellular expression differences', $parameter);
+			list($pos_neg_all[], $conf_notes_unresolved) = markers_search($evidencepropertyyperel, $property_1, $type, 'unresolved', $parameter);
+			list($pos_neg_all[], $conf_notes_pni) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive; negative inference', $parameter);
+			list($pos_neg_all[], $conf_notes_pin) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference; negative', $parameter);
+			list($pos_neg_all[], $conf_notes_pini) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference; negative inference', $parameter);
+			
+			
+        	$marker_id = array();
+
+			foreach($pos_neg_all as $arr) {
+			    if(is_array($arr)) {
+			        $marker_id = array_merge($marker_id, $arr);
+			    }
+			}
+		}
 	}
-	else
-		$marker_id = markers_search($evidencepropertyyperel, $property_1, $type,$k,$parameter);
-	
+	elseif($k == 'positive' || $k == 'negative') {
+		if(!empty($evidencepropertyyperel)){
+			list($pos_intr_Array, $conf_notes_pos) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive', $parameter);
+			list($pos_inf_intr_Array, $conf_notes_pi) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference', $parameter);
+			list($neg_Array, $conf_notes_neg) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative', $parameter);
+			list($neg_inf_Array, $conf_notes_ni) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative inference', $parameter);
+
+			if (!empty($pos_intr_Array) && !empty($pos_inf_intr_Array))
+				$pos_combined_array = array_merge($pos_intr_Array, $pos_inf_intr_Array);
+			elseif (!empty($pos_intr_Array))
+				$pos_combined_array = $pos_intr_Array;
+			elseif (!empty($pos_inf_intr_Array))
+				$pos_combined_array = $pos_inf_intr_Array;
+			
+			if (!empty($neg_Array) && !empty($neg_inf_Array))
+				$neg_combined_array = array_merge($neg_Array, $neg_inf_Array);
+			elseif (!empty($neg_Array))
+				$neg_combined_array = $neg_Array;
+			elseif (!empty($neg_inf_Array))
+				$neg_combined_array = $neg_inf_Array; 
+			
+			if((!empty($pos_combined_array)) && (!empty($neg_combined_array))) {
+				$mixed_type = array_intersect($pos_combined_array, $neg_combined_array);
+			}
+			if($k == 'positive' && !empty($pos_combined_array)) $marker_id = array_diff($pos_combined_array, $mixed_type);
+			if($k == 'negative' && !empty($neg_combined_array)) $marker_id = array_diff($neg_combined_array, $mixed_type);			
+		}
+	}
+	else {
+		list($marker_id, $conf_notes_unknown) = markers_search($evidencepropertyyperel, $property_1, $type, $k, $parameter);
+	}
 	
 	if(count($marker_id) > 0)
 	{
@@ -130,9 +190,7 @@ foreach ($predicateArr as $k => $v)
 				<td align="right" width="55%">&nbsp;</td>
 			</tr>
 <?php
-	
-		foreach ($marker_id as $idToConsider)
-		{
+		foreach ($marker_id as $idToConsider) {
 			$id = $idToConsider;
 			
 			if (strpos($id, '0_') == 1)
@@ -141,40 +199,58 @@ foreach ($predicateArr as $k => $v)
 			$type -> retrieve_by_id($id);
 			$status = $type -> getStatus();
 		
-			if ($status == 'active')
-			{
-				if($k=='positive')
-				{
+			if ($status == 'active') {
+				if($k=='positive') {
 					$pos_Array[$id] = $id;
 					$pos_intr_Array[] = $id;
 				}
-				else if($k=='negative')
-				{
+				elseif($k=='negative') {
 					$neg_Array[] = $id;			
 				}
-			
+				
 				$id_t = $id;
 				$name_type = $type -> getNickname();
+				
+				if ((!empty($conf_notes_pi) && array_key_exists($id_t, $conf_notes_pi)) ||
+						(!empty($conf_notes_ni) && array_key_exists($id_t, $conf_notes_ni)))
+					$name_type = $name_type . " (inference)";					
+				
 				//$subregion_type = $type -> getSubregion();
 				$position_type = $type -> getPosition();
 				$n_result_tot = $n_result_tot + 1;
 				
-				if($k=='mixed')
-				{
-					$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive']);
-					$unvetted = $evidencepropertyyperel -> getUnvetted();
-					$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $id);
-					$conflict_note = $evidencepropertyyperel -> getConflict_note();
+				if($k=='mixed') {
+					if ((!empty($conf_notes_subtypes) && array_key_exists($id_t, $conf_notes_subtypes)) ||
+							(!empty($conf_notes_spse) && array_key_exists($id_t, $conf_notes_spse)) ||
+							(!empty($conf_notes_unresolved) && array_key_exists($id_t, $conf_notes_unresolved))) {
+						$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive']);
+						$unvetted = $evidencepropertyyperel -> getUnvetted();
+						$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive'], $id);
+						$conflict_note = $evidencepropertyyperel -> getConflict_note();
+					}
+					elseif ((!empty($conf_notes_pin) && array_key_exists($id_t, $conf_notes_pin)) ||							
+							(!empty($conf_notes_pini) && array_key_exists($id_t, $conf_notes_pini))) {
+						$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive_inference']);
+						$unvetted = $evidencepropertyyperel -> getUnvetted();
+						$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive_inference'], $id);
+						$conflict_note = $evidencepropertyyperel -> getConflict_note();
+					}
+					elseif (!empty($conf_notes_pni) && array_key_exists($id_t, $conf_notes_pni)) {
+						$evidencepropertyyperel -> retrive_unvetted($id,$objArr['negative_inference']);
+						$unvetted = $evidencepropertyyperel -> getUnvetted();
+						$evidencepropertyyperel -> retrieve_conflict_note($objArr['negative_inference'], $id);
+						$conflict_note = $evidencepropertyyperel -> getConflict_note();
+					}
 				
-					if ($unvetted == 1)
-						$font_col = 'font4_unvetted';
-					else
-						$font_col = 'font4';
+					//if ($unvetted == 1)
+					//	$font_col = 'font4_unvetted';
+					//else
+					//	$font_col = 'font4';
 					
 					$mixed_conflict = $conflict_note;
 					
 					if (!$mixed_conflict)
-						$mixed_conflict = 'not yet determined';;
+						$mixed_conflict = 'not yet determined';
 				}
 		
 ?>			<tr>
@@ -188,10 +264,9 @@ foreach ($predicateArr as $k => $v)
 ?>
 		</table><br /> 
 <?php }
-	  else 
-	  {
+	  else {
 ?>
-	  	<div><font class="font3"><?php echo "No ".$k." Type found " ?></font></div><br/>
+	  	<div><font class="font3"><?php echo "No ".$k." type found " ?></font></div><br/>
 <?php }
 	}?>
 	</table>

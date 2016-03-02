@@ -10,6 +10,7 @@ include ("function/show_ephys.php");
 include ("function/get_abbreviation_definition_box.php");
 include ("function/stm_lib.php");
 include ("function/quote_manipulation.php");
+include ("function/markers/marker_helper.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
@@ -276,7 +277,7 @@ if ($text_file_creation)
 						</td>					
 					</tr>			
 					");								
-				} 
+				}
 			?>
 		</table>		
 		
@@ -339,17 +340,17 @@ if ($text_file_creation)
 				for($i4=0;$i4<$n_article_real;$i4++)
 				{
 				$auth_query="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$id_article_4_unique[$i4]' ORDER BY b.author_pos";
-				$query_results=mysql_query($auth_query);
+				$query_results=mysqli_query($GLOBALS['conn'],$auth_query);
 				$g=0;
 				$u=0;
 				$auth=array();
 				$auth_first_name=array();
-				while($erows = mysql_fetch_array($query_results, MYSQL_ASSOC))
+				while($erows = mysqli_fetch_array($query_results, MYSQL_ASSOC))
 				{
 				$auth[$g]=$erows['auth_id'];
 				$fetch_auth_name="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auth[$g]'";
-				$resss=mysql_query($fetch_auth_name);
-				while($drows = mysql_fetch_array($resss, MYSQL_ASSOC))
+				$resss=mysqli_query($GLOBALS['conn'],$fetch_auth_name);
+				while($drows = mysqli_fetch_array($resss, MYSQL_ASSOC))
 				{
 				$auth_first_name[$u]=$drows['name_auth'];
 				//asort($auth_first_name);
@@ -378,9 +379,9 @@ if ($text_file_creation)
 					$art=$article_title[$i1];
 
 					$t="SELECT a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi FROM Article AS a WHERE a.title='$article_title[$i1]'";
-					$r=mysql_query($t);
+					$r=mysqli_query($GLOBALS['conn'],$t);
 					$l=0;
-					while($row = mysql_fetch_array($r, MYSQL_ASSOC))
+					while($row = mysqli_fetch_array($r, MYSQL_ASSOC))
 					{
 				
 						$publi=$row['pub'];
@@ -396,17 +397,17 @@ if ($text_file_creation)
 					}					
 
 					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
-					$results=mysql_query($article_author_rel);	
+					$results=mysqli_query($GLOBALS['conn'],$article_author_rel);	
 					$g=0;
 					$auths=array();
 					$auth_name=array();
-					while($rows = mysql_fetch_array($results, MYSQL_ASSOC))
+					while($rows = mysqli_fetch_array($results, MYSQL_ASSOC))
 					{
 						$auths[$g]=$rows['auth_id'];
 						$fetch_auth="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auths[$g]'";
-						$ress=mysql_query($fetch_auth);
+						$ress=mysqli_query($GLOBALS['conn'],$fetch_auth);
 						$u=0;
-						while($arows = mysql_fetch_array($ress, MYSQL_ASSOC))
+						while($arows = mysqli_fetch_array($ress, MYSQL_ASSOC))
 						{
 							$auth_name[$g]=$arows['name_auth'];
 							$auth_name[$g]=preg_replace("/'/", "&#39;", $auth_name[$g]);
@@ -420,8 +421,8 @@ if ($text_file_creation)
 								(select evidence_id from EvidenceMarkerdataRel where evidence_id in
 									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
 									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
-			                $results_marker =  mysql_query($tag_query_marker);
-					$num_rows_marker = mysql_num_rows($results_marker);
+			                $results_marker =  mysqli_query($GLOBALS['conn'],$tag_query_marker);
+					$num_rows_marker = mysqli_num_rows($results_marker);
 					if($num_rows_marker > 0)
 					{
 						$tag  = $tag . "marker";						
@@ -430,8 +431,8 @@ if ($text_file_creation)
 								(select evidence_id from EpdataEvidenceRel where evidence_id in
 									(select evidence1_id from EvidenceEvidenceRel where evidence2_id in
 									   (select evidence_id from ArticleEvidenceRel where article_id = '$article_id')))";
-					$results_ephys = mysql_query($tag_query_ephys);
-					$num_rows_ephys = mysql_num_rows($results_ephys);
+					$results_ephys = mysqli_query($GLOBALS['conn'],$tag_query_ephys);
+					$num_rows_ephys = mysqli_num_rows($results_ephys);
 					if($num_rows_ephys > 0)
 					{
 						if ($tag == '')						
@@ -441,8 +442,8 @@ if ($text_file_creation)
 					}
 					$tag_query_morpho = "select * from EvidencePropertyTypeRel where type_id ='$id' and evidence_id in
 								(select evidence_id from ArticleEvidenceRel where article_id = '$article_id')";
-					$results_morpho =  mysql_query($tag_query_morpho);
-					$num_rows_morpho = mysql_num_rows($results_morpho);
+					$results_morpho =  mysqli_query($GLOBALS['conn'],$tag_query_morpho);
+					$num_rows_morpho = mysqli_num_rows($results_morpho);
 					if($num_rows_morpho > 0)
 					{ 
 						if($tag == '')
@@ -680,13 +681,13 @@ if ($text_file_creation)
     $soma_query = $one_type_query . " AND subject = 'somata'";
 
     // get the lists
-    $result = mysql_query($soma_query);
+    $result = mysqli_query($GLOBALS['conn'],$soma_query);
     $soma_parcels = result_set_to_array($result, 'object');
 
-    $result = mysql_query($axon_query);
+    $result = mysqli_query($GLOBALS['conn'],$axon_query);
     $axon_parcels = result_set_to_array($result, 'object');
 
-    $result = mysql_query($dendrite_query);
+    $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
     $dendrite_parcels = result_set_to_array($result, 'object');
 
     // print it out
@@ -931,66 +932,91 @@ if ($text_file_creation)
 		// loop through all evidence to look for marker evidence
 		for ($i=0; $i<$n; $i++) {
 			$property -> retrive_by_id($property_id[$i]);
+			$this_id = $property -> getId();
 			$val = $property -> getVal();
 			$part = $property -> getPart();
+			$remapped_part = remap_marker_names($part);
 			
 			$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
 			$unvetted = $evidencepropertyyperel -> getUnvetted();
 			$evidencepropertyyperel -> retrieve_conflict_note($property_id[$i], $id);
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();
 			
+			
 			// maintain separate arrays for positive (+ wk pos) and negative evidence
-			if ($conflict_note == 'positive') {
-				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
+			if ($val == 'positive') {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
+				$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
 				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
 				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
 				
-				$marker_pos_disp_counter++;
-			}
-			elseif ($conflict_note == 'negative') {
-				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
-				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
-				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
-				
-				$marker_neg_disp_counter++;
-			}
-			elseif (($val == 'positive') || ($val == 'weak_positive')) {
-				$pos_array['part_key'][$marker_pos_disp_counter] = $part;
-				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
-				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
-				
-				if ($val == 'weak_positive')
+				if ($val == 'weak_positive') {
 					$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
-				else
+					$hippo_weak_positive[$remapped_part] = 1;
+				}
+				else {
 					$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+					$hippo_positive[$remapped_part] = 1;
+				}
 				
 				$marker_pos_disp_counter++;
 			}
-			elseif ($val == 'negative') {
-				$neg_array['part_key'][$marker_neg_disp_counter] = $part;
+			if ($val == 'negative') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
+				$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
 				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
 				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
 				
+				$hippo_negative[$remapped_part] = 1;
+				
 				$marker_neg_disp_counter++;
 			}
+			elseif ($val == 'positive_inference') {
+				$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
+				$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
+				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
+				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
+				$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+				
+				$hippo_positive_inference[$remapped_part] = 1;
+				
+				$marker_pos_disp_counter++;
+			}
+			elseif ($val == 'negative_inference') {
+				$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
+				$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
+				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
+				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;
+				
+				$hippo_negative_inference[$remapped_part] = 1;
+				
+				$marker_neg_disp_counter++;
+			}
+			
+			elseif ($val == 'unknown')
+				$hippo_unknown[$remapped_part] = 1;
+			
+				
+			$hippo_property_id[$part] = $this_id;
 		}	
+
 		
 		// if both positive and negative evidence exist, set up mixed array for possible overlaps
 		if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0)) {
 
 			// mixed_array keeps the overlap between pos+neg and keys from the pos array
 			$mixed_array['part_key'] = array_intersect($pos_array['part_key'], $neg_array['part_key']);
-			// mixed_array keeps the overlap between pos+neg and keys from the neg array
-			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);
+			// dummy_array keeps the overlap between pos+neg and keys from the neg array
+			$dummy_array['part_key'] = array_intersect($neg_array['part_key'], $pos_array['part_key']);			
 			
-			
-			$mixed_exp_disp_counter = count($mixed_array['part_key']);
+			$mixed_exp_disp_counter = count($mixed_array['part_key']);			
 			
 			// if there are mixed expression results
 			if ($mixed_exp_disp_counter > 0) {
 			
 				// copy the unvetted status and conflict notes from pos array 
 				foreach(array_keys($mixed_array['part_key']) as $key) {
+					$mixed_array['disp_name_key'][$key] = $pos_array['disp_name_key'][$key];
 					$mixed_array['unvetted_key'][$key] = $pos_array['unvetted_key'][$key];
 					$mixed_array['conflict_key'][$key] = $pos_array['conflict_key'][$key];
 				}					
@@ -998,6 +1024,7 @@ if ($text_file_creation)
 				// remove mixed results from pos array
 				foreach(array_keys($mixed_array['part_key']) as $key) {
 					unset($pos_array['part_key'][$key]);
+					unset($pos_array['disp_name_key'][$key]);
 					unset($pos_array['unvetted_key'][$key]);
 					unset($pos_array['weak_key'][$key]);
 					unset($pos_array['conflict_key'][$key]);
@@ -1007,6 +1034,7 @@ if ($text_file_creation)
 				// remove mixed results from neg array
 				foreach(array_keys($dummy_array['part_key']) as $key) {
 					unset($neg_array['part_key'][$key]);
+					unset($neg_array['disp_name_key'][$key]);
 					unset($neg_array['unvetted_key'][$key]);
 					unset($neg_array['conflict_key'][$key]);
 				}
@@ -1014,13 +1042,16 @@ if ($text_file_creation)
 				
 				// sort all arrays alphabetically
 				array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$pos_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
-								//$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
+								$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE, 
 								$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 				array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$neg_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 								$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 				array_multisort($mixed_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+								$mixed_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 								$mixed_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 								$mixed_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			}
@@ -1035,19 +1066,41 @@ if ($text_file_creation)
 		// if only neg results, sort them alphabetically
 		elseif ($marker_pos_disp_counter == 0) {
 			array_multisort($neg_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$neg_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 							$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
-							$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
-			$mixed_array = NULL;		
+							$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);			
+			$mixed_array = NULL;
 		}
 		
 		// if only pos results, sort them alphabetically		
 		elseif ($marker_neg_disp_counter == 0) {
 			array_multisort($pos_array['part_key'], SORT_STRING | SORT_FLAG_CASE,
+							$pos_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 							$pos_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE, 
 							$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 			$mixed_array = NULL;
 		} // end if (($marker_pos_disp_counter > 0) && ($marker_neg_disp_counter > 0))
-				
+
+		$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
+		
+		for ($f1=0; $f1<$n_markers; $f1++) {
+			$this_remapped_name = remap_marker_names($name_markers[$f1]);
+			
+			$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$this_remapped_name], $id);
+			$conflict_note = $evidencepropertyyperel -> getConflict_note();			
+			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);			
+			
+			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
+			
+			$hippo[$this_remapped_name] = $img[0];
+		
+			if ($img[1] == NULL)
+				$hippo[$this_remapped_name] = $img[0];
+			else
+				$hippo_color[$this_remapped_name] = $img[1];
+			
+			$marker_URLs[$this_remapped_name] = getUrlText($id, $this_remapped_name, $hippo_color[$this_remapped_name]);
+		}
 		
 		?>
 		
@@ -1087,6 +1140,7 @@ if ($text_file_creation)
 					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_pos_disp_counter; $j++) {
 						$markerForLink = $pos_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
 
 						if ($pos_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
@@ -1094,22 +1148,40 @@ if ($text_file_creation)
 							$font_col = 'font4';
 						
 						if ($pos_array['weak_key'][$j] == 1)
-							$disp_marker_name = $pos_array['part_key'][$j] . ' (weak positive)';
+							$disp_marker_name = $pos_array['disp_name_key'][$j] . ' (weak positive)';
 						else					
-							$disp_marker_name = $pos_array['part_key'][$j];
-
-						if (!($disp_marker_name_prior == $disp_marker_name)) {
+							$disp_marker_name = $pos_array['disp_name_key'][$j];
+						
+						$pos_conflict = $pos_array['conflict_key'][$j];
+						if ($pos_conflict == "positive inference")
+							$disp_marker_name = $disp_marker_name . ' (inference)';
+						
+						// if NULL, marker needs to be remapped; just print name (w/o URL)
+						if ($this_marker_URL_start == NULL) {
 							print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive' class='$font_col'>
-							$disp_marker_name
-							</a>
-							</td>
-							</tr>
-							");
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>									
+									$disp_marker_name
+									</td>
+									</tr>
+									");
+						}
+						else {
+							if (!($disp_marker_name_prior == $disp_marker_name)) {
+								print ("
+								<tr>
+								<td width='20%' align='right'>
+								</td>
+								<td align='left' width='80%' class='table_neuron_page2'>
+								$this_marker_URL_start class='$font_col'>
+								$disp_marker_name
+								</a>
+								</td>
+								</tr>
+								");
+							}
 						}
 						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
@@ -1147,27 +1219,46 @@ if ($text_file_creation)
 					$disp_marker_name_prior = NULL;
 					for ($j=0; $j<$marker_neg_disp_counter; $j++) {
 						$markerForLink = $neg_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
 
 						if ($neg_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
 							
-						$disp_marker_name = $neg_array['part_key'][$j];
+						$disp_marker_name = $neg_array['disp_name_key'][$j];
+						
+						$neg_conflict = $neg_array['conflict_key'][$j];
+						if ($neg_conflict == "negative inference")
+							$disp_marker_name = $disp_marker_name . ' (inference)';
 
-						if (!($disp_marker_name_prior == $disp_marker_name)) {
-							print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=negative' class='$font_col'>
-							$disp_marker_name
-							</a>
-							</td>
-							</tr>
-							");						
-						}
+							// if NULL, marker needs to be remapped; just print name (w/o URL)
+							if ($this_marker_URL_start == NULL) {
+								print ("
+										<tr>
+										<td width='20%' align='right'>
+										</td>
+										<td align='left' width='80%' class='table_neuron_page2'>
+										$disp_marker_name
+										</td>
+										</tr>
+										");
+							}
+							else {
+								if (!($disp_marker_name_prior == $disp_marker_name)) {
+									print ("
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>
+									$this_marker_URL_start class='$font_col'>
+									$disp_marker_name
+									</a>
+									</td>
+									</tr>
+									");						
+								}
+							}
 						$disp_marker_name_prior = $disp_marker_name;
 					} // end for $j
 				} // end if ($marker_neg_disp_counter == 0) {
@@ -1202,28 +1293,45 @@ if ($text_file_creation)
 				else {
 					for ($j=0; $j<$mixed_exp_disp_counter; $j++) {
 						$markerForLink = $mixed_array['part_key'][$j];
+						$this_marker_URL_start = $marker_URLs[$markerForLink];
+						
 						if ($mixed_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
 									
-						$disp_marker_name = $mixed_array['part_key'][$j];
+						$disp_marker_name = $mixed_array['disp_name_key'][$j];
 						
 						$mixed_conflict = $mixed_array['conflict_key'][$j];
 						if (!$mixed_conflict)
 							$mixed_conflict = 'not yet determined';
 						
-						print ("
-							<tr>
-							<td width='20%' align='right'>
-							</td>
-							<td align='left' width='80%' class='table_neuron_page2'>
-							<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
-							$disp_marker_name ($mixed_conflict)
-							</a>
-							</td>
-							</tr>
-							");			
+						// if NULL, marker needs to be remapped; just print name (w/o URL)
+						if ($this_marker_URL_start == NULL) {
+							print ("
+									<tr>
+									<td width='20%' align='right'>
+									</td>
+									<td align='left' width='80%' class='table_neuron_page2'>
+									$disp_marker_name
+									</td>
+									</tr>
+									");
+						}
+						else {
+							print ("
+								<tr>
+								<td width='20%' align='right'>
+								</td>
+								<td align='left' width='80%' class='table_neuron_page2'>
+								<a href='property_page_markers.php?id_neuron=$id&val_property=$markerForLink&page=markers&color=positive-negative' class='$font_col'>
+								$this_marker_URL_start class='$font_col'>
+								$disp_marker_name ($mixed_conflict)
+								</a>
+								</td>
+								</tr>
+								");
+						}
 					} // end for $j
 				}  // end if ($marker_pos_disp_counter == 0) {
 			?>
@@ -1659,14 +1767,14 @@ if ($text_file_creation)
       $explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
 
       // potential targets of output
-      $result = mysql_query($axon_query);
+      $result = mysqli_query($GLOBALS['conn'],$axon_query);
       $axon_parcels = result_set_to_array($result, 'object');
       //print "<br><br>AXON PARCELS<br>"; print_r($axon_parcels);
 
       $possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
       //print "<br><br>POSSIBLE TARGETS:<br>"; print_r($possible_targets);
 
-      $result = mysql_query($explicit_target_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
       $explicit_targets = null;
       $list_explicit_sources = null;
       $list_explicit_nonsources = null;
@@ -1680,7 +1788,7 @@ if ($text_file_creation)
 			$list_explicit_targets = get_sorted_records($list_explicit_targets);
 	  }
 	  
-      $result = mysql_query($explicit_nontarget_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
       $explicit_nontargets = result_set_to_array($result, "t2_id");
       //print "<br><br>EXPLICIT NONTARGETS:<br>"; print_r($explicit_nontargets);	  
 	  
@@ -1703,14 +1811,14 @@ if ($text_file_creation)
 */
 
       // potential sources of input
-      $result = mysql_query($dendrite_query);
+      $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
       
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
       
-      $result = mysql_query($explicit_source_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
       
@@ -1719,7 +1827,7 @@ if ($text_file_creation)
       	$list_explicit_sources = get_sorted_records($list_explicit_sources);
       }
        
-      $result = mysql_query($explicit_nonsource_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
       
@@ -1740,14 +1848,14 @@ if ($text_file_creation)
       */
       
       // potential sources of input
-      $result = mysql_query($dendrite_query);
+      $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
 
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
 
-      $result = mysql_query($explicit_source_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
 
@@ -1756,7 +1864,7 @@ if ($text_file_creation)
 			$list_explicit_sources = get_sorted_records($list_explicit_sources);
 	  }
 	  
-      $result = mysql_query($explicit_nonsource_query);
+      $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
 

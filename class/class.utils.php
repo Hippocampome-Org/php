@@ -16,9 +16,9 @@ class utils {
 	public function setHeader($tableName)
 	{
 		$query = "select id,subregion,nickname from ".$tableName." where status ='active' order by position";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$str = "'&nbsp;','<div id=\"frmCntr\">FROM</div><div id=\"toCntr\" class=\"rotate\">TO</div>'";
-		while(list($id,$subregion,$nickname) = mysql_fetch_row($rs))
+		while(list($id,$subregion,$nickname) = mysqli_fetch_row($rs))
 		{
 			$str=$str.","."'<a href=\"neuron_page.php?id=".$id."\" onClick=\"OpenInNewTab(this);\" target=\"_blank\">".$subregion.":".$nickname."</a>'";
 		}

@@ -23,9 +23,9 @@ class typetyperel
 		
 		// with type_1:
 		$query = "SELECT Connection_status FROM $table WHERE Type1_id = '$type1_id' AND connection_location = '$connection_location' ";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($Connection_status) = mysql_fetch_row($rs))
+		while(list($Connection_status) = mysqli_fetch_row($rs))
 		{
 //			$this->setConnection_status_array($Connection_status, $n);
 			$this->setConnection_status($Connection_status, $n);
@@ -42,9 +42,9 @@ class typetyperel
 		
 //		$query = "SELECT Type2_id FROM $table WHERE Type1_id = '$type1_id' AND connection_location = '$connection_location' AND connection_status = 'positive' ";	
 		$query = "SELECT Type2_id FROM $table WHERE Type1_id = '$type1_id' AND connection_location = '$connection_location' ";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($Type2_id) = mysql_fetch_row($rs))
+		while(list($Type2_id) = mysqli_fetch_row($rs))
 		{
 //			$this->setType2_id_array($Type2_id, $n);
 			$this->setType2_id($Type2_id, $n);
@@ -61,9 +61,9 @@ class typetyperel
 		
 //		$query = "SELECT Type2_id FROM $table WHERE Type2_id = '$type2_id' AND connection_location = '$connection_location' AND connection_status = 'positive' ";	
 		$query = "SELECT Type1_id FROM $table WHERE Type2_id = '$type2_id' AND connection_location = '$connection_location'  ";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($Type1_id) = mysql_fetch_row($rs))
+		while(list($Type1_id) = mysqli_fetch_row($rs))
 		{
 			$this->setType1_id_array($Type1_id, $n);
 			$n = $n + 1;		
@@ -79,9 +79,9 @@ class typetyperel
 		
 		// with type_1:
 		$query = "SELECT DISTINCT connection_location FROM $table WHERE Type1_id = '$id_type'";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($connection_location) = mysql_fetch_row($rs))
+		while(list($connection_location) = mysqli_fetch_row($rs))
 		{
 			$this->setConnection_location($connection_location, $n);
 			$n = $n + 1;		
@@ -97,9 +97,9 @@ class typetyperel
 		
 		// with type_2:
 		$query = "SELECT DISTINCT connection_location FROM $table WHERE Type2_id = '$id_type'";	
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($connection_location) = mysql_fetch_row($rs))
+		while(list($connection_location) = mysqli_fetch_row($rs))
 		{
 			$this->setConnection_location($connection_location, $n);
 			$n = $n + 1;		

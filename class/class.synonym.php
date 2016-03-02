@@ -20,8 +20,8 @@ class synonym
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, dt, name FROM $table WHERE id = '$id'";
-		$rs = mysql_query($query);
-		while(list($id, $dt, $name) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id, $dt, $name) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
 			$this->setDt($dt);
@@ -35,9 +35,9 @@ public function retrive_name()
 		$table=$this->getName_table();
 		
 		$query = "SELECT DISTINCT name FROM $table";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setName_neuron_array($id, $n);						
 			$n = $n +1;
@@ -51,12 +51,12 @@ public function retrive_name()
 public function retrive_id_by_name($name) //Retrieve id by the name from table 'Synonym'
     {
 		$table=$this->getName_table();
-	$name= mysql_real_escape_string($name);
+	$name= mysqli_real_escape_string($GLOBALS['conn'],$name);
 		
 		$query = "SELECT id FROM $table WHERE name = '$name'";
-		$rs = mysql_query($query);
+		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysql_fetch_row($rs))
+		while(list($id) = mysqli_fetch_row($rs))
 		{	
 			$this->setID_array($id, $n);				
 			$n = $n +1;

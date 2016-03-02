@@ -39,19 +39,19 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
       JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'dendrites';";
 	
-	$result_somata = mysql_query($soma_location_check_somata);
-	$result_axons = mysql_query($soma_location_check_axons);
-	$result_dendrites = mysql_query($soma_location_check_dendrites);
+	$result_somata = mysqli_query($GLOBALS['conn'],$soma_location_check_somata);
+	$result_axons = mysqli_query($GLOBALS['conn'],$soma_location_check_axons);
+	$result_dendrites = mysqli_query($GLOBALS['conn'],$soma_location_check_dendrites);
 	$axons_dendrites_check=0;
 	
-	while(list($subject,$object) = mysql_fetch_row($result_axons)){
+	while(list($subject,$object) = mysqli_fetch_row($result_axons)){
 		if($subject=='axons' && $object==$val){
 			$axons_dendrites_check=1;
 			break;
 		}
 	}
 	
-	while(list($subject,$object) = mysql_fetch_row($result_dendrites)){
+	while(list($subject,$object) = mysqli_fetch_row($result_dendrites)){
 		if($subject=='dendrites' && $object==$val){
 			$axons_dendrites_check=1;
 			break;
@@ -60,7 +60,7 @@ function check_color_somata($id,$type, $unvetted,$val,$part){
 	
 	$flag=0;
 //	if($axons_dendrites_check!=1){
-		while(list($subject,$object) = mysql_fetch_row($result_somata)){
+		while(list($subject,$object) = mysqli_fetch_row($result_somata)){
 			if($subject=='somata' && $object==$val){
 				
 				$flag=1;
@@ -86,9 +86,9 @@ function check_color($id,$type, $unvetted,$val,$part) //$type --> whether axons/
       JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'AND eptr.Type_id = '$id' AND subject = 'somata';";
 	
-	$result = mysql_query($soma_location_check);
+	$result = mysqli_query($GLOBALS['conn'],$soma_location_check);
 	$flag=0;
-	while(list($subject,$object) = mysql_fetch_row($result)){
+	while(list($subject,$object) = mysqli_fetch_row($result)){
 		if($subject=='somata' && $object==$val){
 			$flag=1;
 			break;

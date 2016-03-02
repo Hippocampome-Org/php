@@ -8,9 +8,9 @@ include("simphp-2.0.php");
 //-------user login required check----------
 $_SESSION['perm'] = 0;
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
-$rs = mysql_query($query);
-list($permission) = mysql_fetch_row($rs);
-if ($permission == 1) {	
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
+if ($permission == 1) { 
   $_SESSION['perm'] = 1;
 }
 else{
@@ -22,9 +22,9 @@ $permission1 = $_SESSION['perm'];
 if ($_SESSION['perm'] == 0) {
   if (array_key_exists('password', $_REQUEST)) {
     $query = "SELECT permission FROM user WHERE password = '{$_REQUEST['password']}'";
-    $rs = mysql_query($query);
-    while(list($permission) = mysql_fetch_row($rs)) {
-      if ($permission == 1) {	
+    $rs = mysqli_query($conn,$query);
+    while(list($permission) = mysqli_fetch_row($rs)) {
+      if ($permission == 1) { 
         $permission1 = $permission;
         $_SESSION['perm'] = $permission1;
       }
@@ -86,12 +86,12 @@ jQuery(document).ready(function() {
     success: function() {}
   });
   $.ajax({
-	    type: 'GET',
-	    cache: false,
-	    contentType: 'application/json; charset=utf-8',
-	    url: 'load_matrix_session_connectivity.php',
-	    success: function() {}
-	  });
+      type: 'GET',
+      cache: false,
+      contentType: 'application/json; charset=utf-8',
+      url: 'load_matrix_session_connectivity.php',
+      success: function() {}
+    });
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
@@ -122,18 +122,19 @@ if ($permission1 != 0) {
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
       <ul>
-        <li class="subfirst"><a href="search.php?searching=1">Neuron type</a></li>
-		<li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
         <li><a href="find_author.php?searching=1">Author</a></li>
+        <li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
+        <li><a href="find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
+        <li class="subfirst"><a href="search.php?searching=1">Neuron Type</a></li>
         <li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
       </ul>
     </li>
     <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
   </ul>
 </div>  
-<?php 	
+<?php   
 }
-?>	
+?>  
 <script>
 jQuery(document).ready(function() {
   $("#menu_main_button_new_clr").css("diplay","none");
@@ -143,7 +144,7 @@ jQuery(document).ready(function() {
 <br /><br /><br /><br /><br /><br /><br />
 
 <table width=1100 class='index_table' id="table_load">
-  <tr>		
+  <tr>    
     <td width="55%">
     <!-- ****************  BODY **************** -->
       <font class='font1' color='#000000'>
@@ -167,42 +168,34 @@ jQuery(document).ready(function() {
       is presented for user-friendly browsing and searching and for
       machine-readable downloading.
       <br><br>
-      *** Please note: This is a beta-testing site.  The content is
-      still being vetted for accuracy and has not yet undergone peer-review.
-      As such, it may contain inaccuracies and should not (yet) be trusted
-      as a scholarly resource.  The content does not yet appear uniformly
-      across all combinations of browsers and screen resolutions.
-      <br><br>
-      If you have
-      <a href="user_feedback_form_entry.php">feedback</a>
-      on either functionality or content, or if you
+      If you have feedback on either functionality or content, or if you
       would like to be informed when the first official version is released,
       please fill out the
-      <a href="user_feedback_form_entry.php">feedback</a>
-      form or email us at
+      <a href="user_feedback_form_entry.php">feedback form</a>
+      or email us at
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
       Reference: <b>Wheeler et al., 2015</b>.
-      <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i>.
-      (Article currently in review with
-      <a href="http://elifesciences.org">eLife Sciences Publications Ltd.</a>)
+      <a href="http://elifesciences.org/content/4/e09960">
+      <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i></a>.
+      eLife 2015;4:e09960.
       </font>
 
       <br><br>
 
       <?php
-      	if ($permission1 == 0) {
+        if ($permission1 == 0) {
       ?>
 
       <form action="index.php" method="post" id="form_load">
-      	<font class='font2'> Please insert password: </font><br />
-      	<input type="password" size="50" name='password' class='select1' id="password_load"/>
-      	<input type="submit" name='ok' value=' OK ' id="submit_load"/>
+        <font class='font2'> Please insert password: </font><br />
+        <input type="password" size="50" name='password' class='select1' id="password_load"/>
+        <input type="submit" name='ok' value=' OK ' id="submit_load"/>
       </form>
 
       <?php
-      	}
-      	else;
+        }
+        else;
       ?>
 
       <br>
@@ -215,19 +208,19 @@ jQuery(document).ready(function() {
 
   <tr>
     <td colspan="2">
-        <!--			<div class='version'> -->
+        <!--      <div class='version'> -->
         <div class='version2'>
-          <!--	<a href='http://peg.gd/2yN' target="_blank">http://peg.gd/2yN</a> -->
+          <!--  <a href='http://peg.gd/2yN' target="_blank">http://peg.gd/2yN</a> -->
           <br><br>
           <hr class='hr2'/>
           <font class='font3' color='#000000'>
-            NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, § 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
+            NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, ï¿½ 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2016 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
-          <br /><p><? echo $info; ?>
-          <br />Last Update: 18 Sep 2015 (<a href="Help_Release_Notes.php">v1.0&beta; R 0I</a>)</font>
+          <br /><p><?php echo $info; ?>
+          <br />Last Update: 23 Feb 2016 (<a href="Help_Release_Notes.php">v1.0 R 1F</a>)</font>
           <br />
         </div>
-    </td>		
+    </td>   
   </tr>
 </table>
 

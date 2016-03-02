@@ -7,6 +7,7 @@ class attachment
 	private $_a_original_id;
 	private $_name;	
 	private $_a_type;	
+	private $_protocol_tag;
 	//unused
 	
 	
@@ -21,20 +22,36 @@ class attachment
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, cell_id, original_id, name, type FROM Attachment WHERE id = '$id' and cell_id = '$id_neuron'";
-		$rs = mysql_query($query);
-		while(list($id,$cell_id, $original_id, $name, $type) = mysql_fetch_row($rs))
+		$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM Attachment WHERE id = '$id' and cell_id = '$id_neuron'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
 			$this->setCell_id($cell_id);
 			$this->setOriginal_id($original_id);	
-			$this->setName($name);		
+			$this->setName($name);	
+			$this->setProtocol_tag($protocol_tag);
 			$this->setType($type);	
 				
 		}
 	}
 	
-	
+	public function retrieve_by_originalId($original_id ,$id_neuron) 
+    {
+		$table=$this->getName_table();
+		
+		$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM Attachment WHERE original_id = '$original_id' and cell_id = '$id_neuron'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
+		{	
+			$this->setID($id);
+			$this->setCell_id($cell_id);
+			$this->setOriginal_id($original_id);	
+			$this->setName($name);	
+			$this->setProtocol_tag($protocol_tag);
+			$this->setType($type);		
+		}
+	}
 	
 	public function retrive_attachment_by_original_id($id,$id_neuron)
 	{
@@ -42,10 +59,10 @@ class attachment
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
 		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
-		$rs = mysql_query($query);
-		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{
-		//	while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		//	while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		//	{	
 		//		print("attachment:".$attachment);
 				$this->setName($attachment);	
@@ -67,10 +84,10 @@ class attachment
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
 		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter'";
-		$rs = mysql_query($query);
-		if(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{
-			//	while(list($attachment, $attachment_type) = mysql_fetch_row($rs))
+			//	while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 			//	{
 			//		print("attachment:".$attachment);
 			$this->setName($attachment);
@@ -86,6 +103,30 @@ class attachment
 		//print("figure:".$this->getName());
 	}
 
+	public function retrieve_attachment_by_original_id_protocolTag($id,$id_neuron,$parameter,$protocolTag)
+	{
+		$table=$this->getName_table();
+		//print("original id:".$id);
+		//print("cell id".$id_neuron);
+		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron' and parameter= '$parameter' and protocol_tag LIKE '$protocolTag'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
+		{
+			//	while(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
+			//	{
+			//		print("attachment:".$attachment);
+			$this->setName($attachment);
+			$this->setType($attachment_type);
+			//	}
+		}
+		else{
+			$attachment="";
+			$attachment_type="";
+			$this->setName($attachment);
+			$this->setType($attachment_type);
+		}
+		//print("figure:".$this->getName());
+	}
 	// SET -------------------------------------
  	public function setID($val)
     {
@@ -107,6 +148,11 @@ class attachment
     {
 		  $this->_name = $val;
     }
+	
+	public function setProtocol_tag($protocol_tag)
+	{
+		$this->_protocol_tag = $protocol_tag;
+	}
     //new ends
 	
  	
@@ -141,6 +187,10 @@ class attachment
     	return $this->_name_table;
     }	
 	
+	public function getProtocol_tag()
+	{
+		return $this->_protocol_tag;
+	}
 		
     
     
