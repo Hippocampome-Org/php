@@ -118,6 +118,7 @@ if ($permission1 != 0) {
         <li><a href="markers.php">Molecular markers</a></li>
         <li><a href="ephys.php">Electrophysiology</a></li>
         <li><a href="connectivity.php">Connectivity</a></li>
+        <li><a href="FP.php">Firing patterns</a></li>
       </ul>
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
@@ -217,7 +218,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, � 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2016 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
-          <br />Last Update: 23 Feb 2016 (<a href="Help_Release_Notes.php">v1.0 R 1F</a>)</font>
+          <br />Last Update: 3 Mar 2016 (<a href="Help_Release_Notes.php">v1.0 R 1F</a>)</font>
           <br />
         </div>
     </td>   
