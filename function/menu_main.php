@@ -20,6 +20,7 @@
 			<li><a href="markers.php">Molecular markers</a></li>
 			<li><a href="ephys.php">Electrophysiology</a></li>
 			<li><a href="connectivity.php">Connectivity</a></li>
+			<li><a href="FP.php">Firing patterns</a></li>
 	
 		</ul></li>
 	
