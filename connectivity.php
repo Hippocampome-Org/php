@@ -686,14 +686,14 @@ $(function(){
 				<!-- <td width="10"><img src='images/connectivity/excitatory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#000000></td>
 				<td><font class='font5'>Potential Excitatory Connections</font></td>
-				<td align="right"><font class='font5'>1139</font></td>
+				<td align="right"><font class='font5'>1216</font></td>
 				<!--td align="right"><font class='font5'><p id="cle3"></p></font></td-->
 			</tr>
 			<tr height="20">
 				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#AAAAAA></td>
 				<td><font class='font5'>Potential Inhibitory Connections</font></td>
-				<td align="right"><font class='font5'>1903</font></td> 
+				<td align="right"><font class='font5'>2001</font></td> 
 				<!--td align="right"><font class='font5'><p id="cle5"></p></font></td-->
 			</tr>
 			<!--
@@ -718,7 +718,7 @@ $(function(){
 			<tr height="20">
 				<td style="text-align:center"><img src='images/connectivity/known_connection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Connections</font></td>
-				<td align="right"><font class='font5'>175</font></td>
+				<td align="right"><font class='font5'>167</font></td>
 				<!--td align="right"><font class='font5'><p id="cle"></p></font></td-->
 			</tr>
 			<tr height="20">
