@@ -97,7 +97,7 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
-font-family:"Arial","sans-serif"'>v1.0 R 1F (9 Mar 2016):</span></p>
+font-family:"Arial","sans-serif"'>v1.0 R 1F (11 Mar 2016):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
@@ -156,7 +156,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Updated known connectivity matrix data and connectivity matrix legend counts.
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Updated known/potential connectivity matrix data and connectivity matrix legend counts.
 </span></p>
 
 </BR>
