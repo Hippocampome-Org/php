@@ -693,7 +693,7 @@ $(function(){
 				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#AAAAAA></td>
 				<td><font class='font5'>Potential Inhibitory Connections</font></td>
-				<td align="right"><font class='font5'>1993</font></td> 
+				<td align="right"><font class='font5'>2020</font></td> 
 				<!--td align="right"><font class='font5'><p id="cle5"></p></font></td-->
 			</tr>
 			<!--
