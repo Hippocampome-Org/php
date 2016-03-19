@@ -1,9 +1,36 @@
 <?php
   include ("permission_check.php");
+  include("function/stm_lib.php");
   require_once('class/class.type.php');
   require_once('class/class.property.php');
   require_once('class/class.evidencepropertyyperel.php');
   require_once('class/class.temporary_result_neurons.php');
+  define('KNOWN_CONNECTION', 1);
+  define('KNOWN_NON_CONNECTION', -1);
+  define('P_INHIBITORY_CONN',1);
+  define('P_EXCITATORY_CONN',2);
+  define('BLACK','#000000');
+  define('GRAY', '#AAAAAA');
+  define('ORANGE', '#FF8C00');
+  define('WHITE','#FFFFFF');
+  define('EXCIT_FONT_COLOR','#339900');
+  define('INHIBIT_FONT_COLOR','#CC0000');
+?>
+<script>
+$.ajax({
+  type: 'GET',
+  cache: false,
+  contentType: 'application/json; charset=utf-8',
+  url: 'load_matrix_session_morphology.php',
+  success: function() {}
+});
+</script>
+
+<?php
+
+$morphology_connection_information= $_SESSION['morphology'];
+$array_decoded = json_decode($morphology_connection_information, true);
+$potential_conn_display_array = $array_decoded['potential_array'];
 
 // Check the UNVETTED color: ***************************************************************************
 function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = type_id,$id_property = propert_idy,
@@ -64,12 +91,19 @@ function check_color($type, $unvetted) //$type --> whether axons/dendrites or bo
  * $key - DG_Smo For Type SMo 0f DG
  * $color - red/blue or violet 
  * */
-function getUrlForLink($id,$img,$key,$color1) 
+function getUrlForLink($id_1,$id_2,$img,$key,$color1) 
 {
 	$url = '';
-	if($img!='')
-	{
-		$url ='<a href="property_page_morphology.php?id_neuron='.$id.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';	
+	if($color1!=''){
+		if($img!='')
+		{
+			$url ='<a href="property_page_connectivity.php?id_neuron='.$id_1.'&id_neuron_2='.$id_2.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';
+		}
+	}
+	else{
+		if($img!=''){
+			$url ='<a href="property_page_connectivity.php?id_neuron='.$id_1.'&id_neuron_2='.$id_2.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';
+		}
 	}
 	return ($url);	
 }
@@ -166,7 +200,15 @@ $n_CA1 = 0;
 $n_SUB = 0;
 $n_EC = 0;
 
-//header("Content-type: application/json;charset=utf-8");
+//array for selecting the nicknames for known conn
+$source_query = "SELECT DISTINCT nickname from Type order by position asc";
+$result       = mysqli_query($GLOBALS['conn'], $source_query);
+$sources      = result_set_to_array($result, 'nickname');
+//print_r($sources[2]);
+$id_query     = "SELECT DISTINCT id from Type order by position asc";
+$result_id    = mysqli_query($GLOBALS['conn'], $id_query);
+$id_array     = result_set_to_array($result_id, 'id');
+
 $responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "", 'Unknowncount' => $unknowncount, 'black'=>$bl, 'orange' =>$or, 'gray' =>$gr);
 
 
@@ -183,52 +225,104 @@ $unknowncount =0;
 $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 
-// read in potential connectivity csv file
-				$pot_conn_csv = file_get_contents('connectivity_data_files/potential_connectivity_matrix_v1.0alpha.csv', FILE_USE_INCLUDE_PATH);
+//The source query for Retriving the known and known non connections
+$explicit_target_and_source_base_query = "SELECT 
+t1.id as t1_id, t1.subregion as t1_subregion, t1.nickname as t1_nickname,
+t2.id as t2_id, t2.subregion as t2_subregion, t2.nickname as t2_nickname 
+FROM TypeTypeRel ttr 
+JOIN (Type t1, Type t2) ON ttr.Type1_id = t1.id AND ttr.Type2_id = t2.id";
 
-				$pot_rows = explode("\n", $pot_conn_csv); // Divide the potential connectivity file into an array of potential rows
-				$num_pot_rows = count($pot_rows); // Count the number of potential rows
-				unset($pot_rows[$num_pot_rows-1]); // Destroy the last row 
-				$pot_header = str_getcsv(array_shift($pot_rows));	// pulls out header row from array				
-				
-				$pot_conn_matrix = array();
-				
-				foreach ($pot_rows as $this_pot_row) {
-					$pot_conn_matrix[] = array_combine($pot_header, str_getcsv($this_pot_row));
-				}  
-				
-				// read in known connectivity csv file
-				$known_conn_csv = file_get_contents('connectivity_data_files/known_connectivity_matrix_v1.0alpha.csv', FILE_USE_INCLUDE_PATH);
-				
-				$known_rows = explode("\n", $known_conn_csv); // Divide the connectivity array into an array of rows
-				$num_known_rows = count($known_rows); // Retrieve the count of the number of rows given
-				unset($known_rows[$num_known_rows-1]); // Destroy the last row
-				
-				 
-				
-				$known_header = str_getcsv(array_shift($known_rows));	// pulls out header row from array
-					
-				$known_conn_matrix = array();
-				foreach ($known_rows as $this_known_row) {
-					$known_conn_matrix[] = array_combine($known_header, str_getcsv($this_known_row));
-				}			
-					
-				$num_columns = 0; 
+//read in the potential connectivity matrix from the database
+//print($number_type);
+//Computation for the potential connec array creation
+/*LEGEND for $known_matrix_array:
+0-blank
+4-Known connections
+6-Known non-connections
+*/
+
+
+for ($i = 0; $i < $number_type; $i++) {
+    for ($j = 0; $j < $number_type; $j++) {
+        $known_matrix_array[$i][$j] = 0;
+    }
+}
+$count_known = 0;
+$count_known_non=0;
+
+//retrived connection from conndata
+
+for ($r = 0; $r < $number_type; $r++) {
+    $explicit_target_query = "SELECT  Type2_id FROM Conndata WHERE Type1_id='$id_array[$r]' AND connection_status= 'positive'";
+
+    $explicit_nontarget_query = "SELECT  Type2_id FROM Conndata WHERE Type1_id='$id_array[$r]' AND connection_status= 'negative'";
+
+    $explicit_target_result = mysqli_query($GLOBALS['conn'], $explicit_target_query);
+    $result_target = result_set_to_array($explicit_target_result, "Type2_id");
+
+    $explicit_nontarget_result  = mysqli_query($GLOBALS['conn'], $explicit_nontarget_query);
+    $result_nontarget = result_set_to_array($explicit_nontarget_result, "Type2_id");
+
+    for ($c = 0; $c < $number_type; $c++) {
+        for ($k = 0; $k < count($result_target); $k++) {
+            if ($result_target[$k] == $id_array[$c]) {
+                $count_known++;
+                $known_matrix_array[$r][$c] = KNOWN_CONNECTION; //known _connection
+                break;
+            }
+        }
+        for ($m = 0; $m < count($result_nontarget); $m++) {
+            if ($result_nontarget[$m] == $id_array[$c]) {
+                $count_known_non++;
+                $known_matrix_array[$r][$c] = KNOWN_NON_CONNECTION; // known non-connection
+                break;
+            }
+
+        }
+    }
+}
+
+// Get the information fo potential connectivity from morphology
+/* LEGEND
+0-blank
+1-gray -Potential Inhibitory Connections
+2-black --Potential Excitatory Connections
+*/
+//$potential_conn_display_array = $_SESSION['pot_conn_array_d'];
+
+// To handle the special neuron cases
+
+for ($i=0; $i < $number_type; $i++) {
+  if(isset($id_search))
+    $id = $id_search[$i];
+  else
+    $id = $type->getID_array($i);
+
+  $type -> retrive_by_id($id); // Retrieve id
+  $excit_inhib =$type-> getExcit_Inhib();
+  // add known connection and known non connection data to connectivity matrix
+  for ($j=0; $j < $number_type; $j++) {
+    if($potential_conn_display_array[$i][$j] == 0)
+    {
+      if($known_matrix_array[$i][$j] == KNOWN_CONNECTION)
+      {
+        if ($excit_inhib=="i")
+        {
+          $potential_conn_display_array[$i][$j]=P_INHIBITORY_CONN;
+        }
+        elseif ($excit_inhib=="e")
+        {
+          $potential_conn_display_array[$i][$j]=P_EXCITATORY_CONN;
+        }
+      }
+    }
+  }
+}
+// create link and image for each connection
 for ($row=0; $row<$number_type; $row++) {
-	
-	$hippo_nickname = array("0"=>NULL,"1"=>NULL,"2"=>NULL,"3"=>NULL,"4"=>NULL,"5"=>NULL,"6"=>NULL,
-			"7"=>NULL,"8"=>NULL,"9"=>NULL,"10"=>NULL,"11"=>NULL,"12"=>NULL,"13"=>NULL,"14"=>NULL,"15"=>NULL,"16"=>NULL,"17"=>NULL,
-			"18"=>NULL,"19"=>NULL,"20"=>NULL,"21"=>NULL,"22"=>NULL,"23"=>NULL,"24"=>NULL,"25"=>NULL,"26"=>NULL,"27"=>NULL,"28"=>NULL,
-			"29"=>NULL,"30"=>NULL,"31"=>NULL,"32"=>NULL,"33"=>NULL,"34"=>NULL,"35"=>NULL,"36"=>NULL,"37"=>NULL,"38"=>NULL,"39"=>NULL,
-			"40"=>NULL,"41"=>NULL,"42"=>NULL,"43"=>NULL,"44"=>NULL,"45"=>NULL,"46"=>NULL,"47"=>NULL,"48"=>NULL,"49"=>NULL,"50"=>NULL,
-			"51"=>NULL,"52"=>NULL,"53"=>NULL,"54"=>NULL,"55"=>NULL,"56"=>NULL,"57"=>NULL,"58"=>NULL,"59"=>NULL,"60"=>NULL,"61"=>NULL,
-			"62"=>NULL,"63"=>NULL,"64"=>NULL,"65"=>NULL,"66"=>NULL,"67"=>NULL,"68"=>NULL,"69"=>NULL,"70"=>NULL,"71"=>NULL,"72"=>NULL,
-			"73"=>NULL,"74"=>NULL,"75"=>NULL,"76"=>NULL,"77"=>NULL,"78"=>NULL,"79"=>NULL,"80"=>NULL,"81"=>NULL,"82"=>NULL,"83"=>NULL,
-			"84"=>NULL,"85"=>NULL,"86"=>NULL,"87"=>NULL,"88"=>NULL,"89"=>NULL,"90"=>NULL,"91"=>NULL,"92"=>NULL,"93"=>NULL,"94"=>NULL,
-			"95"=>NULL,"96"=>NULL,"97"=>NULL,"98"=>NULL,"99"=>NULL,"100"=>NULL,"101"=>NULL,"102"=>NULL,"103"=>NULL,"104"=>NULL,"105"=>NULL,
-			"106"=>NULL,"107"=>NULL,"108"=>NULL,"109"=>NULL,"110"=>NULL,"111"=>NULL,"112"=>NULL,"113"=>NULL,"114"=>NULL,"115"=>NULL,"116"=>NULL,
-			"117"=>NULL,"118"=>NULL,"119"=>NULL,"120"=>NULL,"121"=>NULL);
-				
+			for($i = 0; $i < $number_type; $i++){
+		    $hippo_nickname[$i]=NULL;
+		  }		
 					// retrieve the id_type from Type
 					if (isset($research))
 						$id_type_row = $id_search[$row];
@@ -255,11 +349,10 @@ for ($row=0; $row<$number_type; $row++) {
 						$rowIdx = array_search($id_type_row, $known_header) - 1;
 						}
 						
-		//				if (strpos($nickname_type_row, '(+)') == TRUE)
 						if ($excit_inhib == 'e')
-							$fontColor='#339900';
+							$fontColor=EXCIT_FONT_COLOR;
 						if ($excit_inhib == 'i')
-							$fontColor='#CC0000';
+							$fontColor=INHIBIT_FONT_COLOR;
 						
 				for ($col=0; $col<$number_type; $col++) {
 					$image ="";
@@ -277,122 +370,81 @@ for ($row=0; $row<$number_type; $row++) {
 						$subregion_nickname_type = $subregion_type_col . " " . $nickname_type_col;
 						$position_col = $type->getPosition();
 						
-						if (!$research) {
-							$colIdx = $col;
-							if ( ($position_col == 201) || ($position_col == 301) || ($position_col == 401) || ($position_col == 501) || ($position_col == 601))
-							{
-								//print ("<td style='width:4px' bgcolor='#FF0000'></td>");
-							}
-					   }
-						else {		
-							$colIdx = array_search($id_type_col, $known_header) - 1;
-							if ($col !=0 And ( ($id_type_col == $first_CA3) || ($id_type_col == $first_CA2) || ($id_type_col == $first_CA1) || ($id_type_col == $first_SUB) || ($id_type_col == $first_EC)))
-							{
-								//print ("<td style='width:4px' bgcolor='#FF0000'></td>");
-							}
-						}
-						//echo " Known Conn Matrix ".$known_conn_matrix[$rowIdx][$known_header[$colIdx+1]]."\n";
-						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
+						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION) 
 						{
 								
-							$presynaptic_bg_color = '#FFFFFF';
+							$presynaptic_bg_color = WHITE;
 						}
 						else {
-							//echo " Potential Connection Matrix ".$pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]];
-							switch ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]]) {
-								case -1:
-									$presynaptic_bg_color = '#AAAAAA';
-									break;
+							// Potential connections determine background color
+							switch ($potential_conn_display_array[$row][$col]) {
 								case 1:
-									$presynaptic_bg_color = '#000000';
+									$presynaptic_bg_color = GRAY;
+									$responce->gray++;	
 									break;
-								case 4:
-									$presynaptic_bg_color = '#FF8C00';
+								case 2:
+									$presynaptic_bg_color = BLACK;
+									$responce->black++;
+									break;
+								case 9:
+									$presynaptic_bg_color = ORANGE;
+									$responce->orange++;
 									break;
 								default:
-									$presynaptic_bg_color = '#FFFFFF';
+									$presynaptic_bg_color = WHITE;
 									break;
 							}
 						}
-						/* echo " Bg Color ".$presynaptic_bg_color."\n\n";
-						echo " Row Idx : ".$rowIdx." Column Idx : ".$colIdx."\n";
-						
-						
-						echo " Value for Known Connectivity Matrix : ".$known_conn_matrix[$rowIdx][$known_header[$colIdx+1]]."\n"; */
-						
-						if ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 0)
+						// potential connection determines image to be displayed					
+						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION)
 						{
 							$responce->Unknowncount++;
-							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_nonconnection.png' height='20px' width='20px' border='0'/></div>";
+							$image = "<div style='background-color:" . $presynaptic_bg_color . "; padding:0 2px;'><img src='images/connectivity/known_nonconnection.png' height='20px' width='20px' border='0'/></div>";
 						}
-						elseif ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == 1)
+						elseif ($known_matrix_array[$row][$col] == KNOWN_CONNECTION)
 						{
 							$responce->knowncount++;
-							$image = "<div style='background-color:".$presynaptic_bg_color."; padding:0 2px;'><img src='images/connectivity/known_connection.png' height='20px' width='20px' border='0'/></div>";
+							$image = "<div style='background-color:" . $presynaptic_bg_color . "; padding:0 2px;'><img src='images/connectivity/known_connection.png' height='20px' width='20px' border='0'/></div>";
 						}
-						else if ( ($rowIdx != $colIdx) And ($known_conn_matrix[$rowIdx][$known_header[$colIdx+1]] == -1))
+						else if (($row != $col) And ($known_matrix_array[$row][$col] == 0)) 
 						{
-							if($presynaptic_bg_color=="#000000")
+							if($presynaptic_bg_color==BLACK)
 							{
-								$responce->black++;
-								$image = "<div style='background-color:".$presynaptic_bg_color.";width:100%; padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";width:100%; padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
 							}
-							else if($presynaptic_bg_color=="#FF8C00")
+							else if($presynaptic_bg_color==ORANGE)
 							{
-								$responce->orange++;
-								$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_orange.png' height='20px' width='20px' border='0'/></div>";
+								
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_orange.png' height='20px' width='20px' border='0'/></div>";
 							}
-							if($presynaptic_bg_color == "#AAAAAA")
+							if($presynaptic_bg_color == GRAY)
 							{	
-								$responce->gray++;	
-								$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
+								
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
 							}
 						} 
 						// space rows & columns using images on the main diagonal
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 0) )
+						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == KNOWN_NON_CONNECTION)) 
 						{
-							$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_white.png' height='20px' width='20px' border='0'/></div>";
-							//echo "Image = ".$image;
+							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_white.png' height='20px' width='20px' border='0'/></div>";
 						}
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == -1) )
+						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == P_INHIBITORY_CONN))
 						{
-							$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
+							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
 						}
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 1) )
+						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == P_EXCITATORY_CONN))
 						{
-							$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
+							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
 						}
-						elseif ( ($rowIdx == $colIdx) And ($pot_conn_matrix[$rowIdx][$pot_header[$colIdx+1]] == 4) )
-						{
-							$image = "<div style='background-color:".$presynaptic_bg_color.";padding:0 2px;'><img src='images/connectivity/spacer_orange.png' height='20px' width='20px' border='0'/></div>";
-						}
-						/* else
-						 $image =""; */
-						//echo " COLUMN ".$col." IMAGE ".$image;
 						$hippo_nickname[$col] = $image;
-						//echo " Col ".$col." Image is ".$image."\n\n";
 					}
-					$responce->rows[$row]['cell']=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>',
-					$hippo_nickname['0'],$hippo_nickname['1'],$hippo_nickname['2'],$hippo_nickname['3'],$hippo_nickname['4'],$hippo_nickname['5'],
-					$hippo_nickname['6'],$hippo_nickname['7'],$hippo_nickname['8'],$hippo_nickname['9'],$hippo_nickname['10'],$hippo_nickname['11'],
-					$hippo_nickname['12'],$hippo_nickname['13'],$hippo_nickname['14'],$hippo_nickname['15'],$hippo_nickname['16'],$hippo_nickname['17'],
-					$hippo_nickname['18'],$hippo_nickname['19'],$hippo_nickname['20'],$hippo_nickname['21'],$hippo_nickname['22'],$hippo_nickname['23'],
-					$hippo_nickname['24'],$hippo_nickname['25'],$hippo_nickname['26'],$hippo_nickname['27'],$hippo_nickname['28'],$hippo_nickname['29'],
-					$hippo_nickname['30'],$hippo_nickname['31'],$hippo_nickname['32'],$hippo_nickname['33'],$hippo_nickname['34'],$hippo_nickname['35'],
-					$hippo_nickname['36'],$hippo_nickname['37'],$hippo_nickname['38'],$hippo_nickname['39'],$hippo_nickname['40'],$hippo_nickname['41'],
-					$hippo_nickname['42'],$hippo_nickname['43'],$hippo_nickname['44'],$hippo_nickname['45'],$hippo_nickname['46'],
-					$hippo_nickname['47'],$hippo_nickname['48'],$hippo_nickname['49'],$hippo_nickname['50'],$hippo_nickname['51'],$hippo_nickname['52'],
-					$hippo_nickname['53'],$hippo_nickname['54'],$hippo_nickname['55'],$hippo_nickname['56'],$hippo_nickname['57'],$hippo_nickname['58'],
-					$hippo_nickname['59'],$hippo_nickname['60'],$hippo_nickname['61'],$hippo_nickname['62'],$hippo_nickname['63'],$hippo_nickname['64'],
-					$hippo_nickname['65'],$hippo_nickname['66'],$hippo_nickname['67'],$hippo_nickname['68'],$hippo_nickname['69'],$hippo_nickname['70'],
-					$hippo_nickname['71'],$hippo_nickname['72'],$hippo_nickname['73'],$hippo_nickname['74'],$hippo_nickname['75'],$hippo_nickname['76'],
-					$hippo_nickname['77'],$hippo_nickname['78'],$hippo_nickname['79'],$hippo_nickname['80'],$hippo_nickname['81'],$hippo_nickname['82'],
-					$hippo_nickname['83'],$hippo_nickname['84'],$hippo_nickname['85'],$hippo_nickname['86'],$hippo_nickname['87'],$hippo_nickname['88'],
-					$hippo_nickname['89'],$hippo_nickname['90'],$hippo_nickname['91'],$hippo_nickname['92'],$hippo_nickname['93'],$hippo_nickname['94'],
-					$hippo_nickname['95'],$hippo_nickname['96'],$hippo_nickname['97'],$hippo_nickname['98'],$hippo_nickname['99'],$hippo_nickname['100'],
-					$hippo_nickname['101'],$hippo_nickname['102'],$hippo_nickname['103'],$hippo_nickname['104'],$hippo_nickname['105'],$hippo_nickname['106'],
-					$hippo_nickname['107'],$hippo_nickname['108'],$hippo_nickname['109'],$hippo_nickname['110'],$hippo_nickname['111'],$hippo_nickname['112'],
-					$hippo_nickname['113'],$hippo_nickname['114'],$hippo_nickname['115'],$hippo_nickname['116'],$hippo_nickname['117'],$hippo_nickname['118'],
-					$hippo_nickname['119'],$hippo_nickname['120'],$hippo_nickname['121'] );
+					// create connectivity matrix array
+					$hippo_array=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>');
+				    for($i=0; $i<$number_type; $i++){
+				      array_push($hippo_array,$hippo_nickname[$i]);
+				    }
+				    $responce->rows[$row]['cell']=$hippo_array;
+
+
 }
 ?>

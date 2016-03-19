@@ -191,7 +191,9 @@ margin-bottom:0px !important;}
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"; /* IE8 */
     zoom: 1;
 }
-
+p {
+  margin: 0em;
+}
 </style>
 <script language="javascript">
 function OpenInNewTab(aEle)
@@ -251,16 +253,16 @@ if ($_SESSION['perm'] == NULL)
 $(function(){
 	var dataStr = <?php echo $jsonStr?>;;
 	//alert(dataStr.Unknowncount);
-	var tep1 = dataStr.knowncount;
-	var tep2 = dataStr.Unknowncount;
-	var tep3 = dataStr.black;
-	var tep4 = dataStr.orange;
-	var tep5 = dataStr.gray;
-	//document.getElementById("cle").innerHTML=tep1;
-	//document.getElementById("cle2").innerHTML=tep2;
-	//document.getElementById("cle3").innerHTML=tep3;
-	//document.getElementById("cle4").innerHTML=tep4;
-	//document.getElementById("cle5").innerHTML=tep5;
+	var innerHTML_knowncount = dataStr.knowncount;
+  var innerHTML_Unknowncount = dataStr.Unknowncount;
+  var Potential_Excitatory_Non_PCL = dataStr.black;
+  var Potential_Inhibitory_Non_PCL= dataStr.gray;
+	//count of each connection
+  document.getElementById("id_knowncount").innerHTML=innerHTML_knowncount;
+  document.getElementById("id_Unknowncount").innerHTML=innerHTML_Unknowncount;
+  document.getElementById("Potential_Excitatory_Non_PCL").innerHTML=Potential_Excitatory_Non_PCL;
+  document.getElementById("Potential_Inhibitory_Non_PCL").innerHTML=Potential_Inhibitory_Non_PCL;
+  //document.getElementById("Potential_Inhibitory_PCL_Only").innerHTML=Potential_Inhibitory_PCL_Only;
 
 	 var rotateFunction = function (grid, headerHeight) {
 	 // we use grid as context (if one have more as one table on the page)
@@ -686,14 +688,14 @@ $(function(){
 				<!-- <td width="10"><img src='images/connectivity/excitatory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#000000></td>
 				<td><font class='font5'>Potential Excitatory Connections</font></td>
-				<td align="right"><font class='font5'>1216</font></td>
+				<td align="right"><font class='font5'><p id="Potential_Excitatory_Non_PCL"></p></font></td>
 				<!--td align="right"><font class='font5'><p id="cle3"></p></font></td-->
 			</tr>
 			<tr height="20">
 				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
 				<td bgcolor=#AAAAAA></td>
 				<td><font class='font5'>Potential Inhibitory Connections</font></td>
-				<td align="right"><font class='font5'>2020</font></td> 
+				<td align="right"><font class='font5'><p id="Potential_Inhibitory_Non_PCL"></p></font></td> 
 				<!--td align="right"><font class='font5'><p id="cle5"></p></font></td-->
 			</tr>
 			<!--
@@ -701,7 +703,7 @@ $(function(){
 				< ! -- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -- >
 				<td bgcolor=#FF8C00></td>
 				<td><font class='font5'>Potential Inhibitory PCL-Only Connection</font></td>
-				<td align="right"><font class='font5'><p id="cle4"></p>0</font></td>
+				<td align="right"><font class='font5'><p id="PCL_Only"></p>0</font></td>
 			</tr>
 			-->
 			<!--
@@ -718,13 +720,13 @@ $(function(){
 			<tr height="20">
 				<td style="text-align:center"><img src='images/connectivity/known_connection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Connections</font></td>
-				<td align="right"><font class='font5'>167</font></td>
+				<td align="right"><font class='font5'><p id="id_knowncount"></p></font></td>
 				<!--td align="right"><font class='font5'><p id="cle"></p></font></td-->
 			</tr>
 			<tr height="20">
 				<td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
 				<td><font class='font5'>Known Non-Connections</font></td>
-				<td align="right"><font class='font5'>72</font></td> 
+				<td align="right"><font class='font5'><p id="id_Unknowncount"></p></font></td> 
 				<!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
 			</tr>
 			<!--  
