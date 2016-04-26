@@ -687,7 +687,7 @@ $(function(){
     				<script>
     					var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
     					if (isChrome) {
-    						document.write("<font class='font5'>View the <a href=\"connectivity/applications/Connectivity_Map.jnlp\">Potential Connectivity Map</a> (Java)");
+    						document.write("<font class='font5'>View the <a href=\"connectivity/applications/connectivity_map.jnlp\">Potential Connectivity Map</a> (Java)");
     						document.write("<br><br>(If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a>)</font>");
     					}
     					else {
@@ -695,7 +695,7 @@ $(function(){
         					
 					        // use JavaScript to get location of JNLP file relative to HTML page
 					        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
-					        var url = dir + "connectivity/applications/Connectivity_Map.jnlp";
+					        var url = dir + "connectivity/applications/connectivity_map.jnlp";
 					        deployJava.createWebStartLaunchButton(url, '1.7.0');
 					        document.write("<br><br>If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a></font>");
     					}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<jnlp spec="1.0+" codebase="http://hippocampome.org/csv2dv/connectivity/applications/" href="connectivity_map.jnlp">
+<jnlp spec="1.0+" codebase="http://hippocampome.org/csv2db/connectivity/applications/" href="connectivity_map.jnlp">
 
   <information>
     <title>Potential Connectivity Map</title>
