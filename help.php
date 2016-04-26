@@ -53,7 +53,8 @@
 			
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
 			<ul>
-			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>  			
+			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>
+			<li><a href='Help_ConnectivityJava.php'><font class="font7"> Java Connectivity Map Won't Launch</font></a></li>  			
 			</ul>
 			
 			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			

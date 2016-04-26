@@ -678,9 +678,31 @@ $(function(){
 	<td width="170" style="vertical-align:top">
 	
 		<table border="0" cellspacing="5">
-			<tr height="75" style='vertical-align:top'>
-				<td colspan="2" style="text-align:center"><font class='font5'>You can also view the entire<br>matrix as a <a href='images/connectivity/Connectivity_Matrix.jpg' target='_blank'>.jpg image</a></font></td>				
+			<tr height="50" style='vertical-align:top'>
+				<td colspan="2" style="text-align:center"><font class='font5'>View the entire matrix as a <a href='images/connectivity/Connectivity_Matrix.jpg' target='_blank'>.jpg image</a></font></td>				
 			</tr>
+			<tr height="100" style='vertical-align:top'>
+				<td colspan="2" style="text-align:center">
+					<script src="https://www.java.com/js/deployJava.js"></script>
+    				<script>
+    					var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    					if (isChrome) {
+    						document.write("<font class='font5'>View the <a href=\"connectivity/applications/Connectivity_Map.jnlp\">Potential Connectivity Map</a> (Java)");
+    						document.write("<br><br>(If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a>)</font>");
+    					}
+    					else {
+    						document.write("<font class='font5'>View the Potential Connectivity Map (JAVA)");
+        					
+					        // use JavaScript to get location of JNLP file relative to HTML page
+					        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
+					        var url = dir + "connectivity/applications/Connectivity_Map.jnlp";
+					        deployJava.createWebStartLaunchButton(url, '1.7.0');
+					        document.write("<br><br>If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a></font>");
+    					}
+				    </script>				    
+			    </td>					
+			</tr>
+			
 			<tr height="50">
 				<td colspan="2" style="text-align:center"><font class='font7'>Legend</font></td>
 			</tr>
