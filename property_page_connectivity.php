@@ -1395,12 +1395,23 @@ function show_only_authors(link, start1, stop1)
 									// known connection 
 									if ($type_show == ''){
 										if($known_unknown_flag==1){
-											if($number_of_quotes_axon!=0&&$number_of_quotes_dendrite!=0&&$number_of_quotes_somata!=0)
+											if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
 												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
-											else if($number_of_quotes_axon!=0&&$number_of_quotes_dendrite!=0)
+											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites"))
 												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/axon-dendrite.png'></td>");
-											else if($number_of_quotes_axon!=0&&$number_of_quotes_somata!=0)
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
+											else if(strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
+											else if(strstr($neuron_show_only_value,"Axons"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/axon.png'></td>");										   
+											else if(strstr($neuron_show_only_value,"Dendrites"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/dendrite.png'></td>");										  
+											else if(strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
+											else
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p></td>");										   
+
 										}
 										else if($known_unknown_flag==-1){
 											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p></td>");
