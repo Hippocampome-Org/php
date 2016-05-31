@@ -31,6 +31,7 @@ $.ajax({
 $morphology_connection_information= $_SESSION['morphology'];
 $array_decoded = json_decode($morphology_connection_information, true);
 $potential_conn_display_array = $array_decoded['potential_array'];
+$potn_conn_neuron_pcl_array=$array_decoded['potn_conn_neuron_pcl_array'];
 
 // Check the UNVETTED color: ***************************************************************************
 function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = type_id,$id_property = propert_idy,
@@ -85,26 +86,31 @@ function check_color($type, $unvetted) //$type --> whether axons/dendrites or bo
 	return ($link);
 }
 // check for link
-/*  
- * $id - Type id
- * $img - img path
- * $key - DG_Smo For Type SMo 0f DG
- * $color - red/blue or violet 
- * */
-function getUrlForLink($id_1,$id_2,$img,$key,$color1) 
+
+function getUrlForLink($id_type_row,$id_type_col,$link_parameter,$img,$know_unknow_flag=0,$special_neuron_id_axo_axonic,$special_neuron_id_basket) 
 {
 	$url = '';
-	if($color1!=''){
-		if($img!='')
-		{
-			$url ='<a href="property_page_connectivity.php?id_neuron='.$id_1.'&id_neuron_2='.$id_2.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';
+	if($img!='')
+	{
+		$axonic_basket_flag=0;
+		if(in_array($id_type_row, $special_neuron_id_axo_axonic) ){
+			$axonic_basket_flag=1;
 		}
+		elseif(in_array($id_type_row, $special_neuron_id_basket)){
+			$axonic_basket_flag=2;
+		}
+		$url ='<a href="property_page_connectivity.php?id1_neuron='.$id_type_row.'&val1_property='.$link_parameter[1].'&color1='.$link_parameter[2].
+		'&id2_neuron='.$id_type_col.'&val2_property='.$link_parameter[4].'&color2='.$link_parameter[5].
+		'&connection_type='.$link_parameter[6].'&known_conn_flag='.$know_unknow_flag.'&axonic_basket_flag='.$axonic_basket_flag.'&page=1" target="_blank"><img src="images/connectivity/'.$img.'" height="20px" width="20px" border="0"/></a>';
 	}
+	#}
+	/*
 	else{
 		if($img!=''){
 			$url ='<a href="property_page_connectivity.php?id_neuron='.$id_1.'&id_neuron_2='.$id_2.'&val_property='.$key.'&color='.$color1.'&page=1" target="_blank">'.$img.'</a>';
 		}
 	}
+	*/
 	return ($url);	
 }
 if(!isset($_GET['page'])) $page=1;
@@ -318,6 +324,19 @@ for ($i=0; $i < $number_type; $i++) {
     }
   }
 }
+
+//special case neuron types
+$special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
+WHERE perisomatic_targeting_flag=2) ORDER BY position";
+$result_special_case_basket = mysqli_query($GLOBALS['conn'], $special_case_basket);
+$special_neuron_id_basket = result_set_to_array($result_special_case_basket, 'id');
+
+// query to get axonic types
+$special_case_axo_axonic = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
+WHERE perisomatic_targeting_flag=1) ORDER BY position";
+$result_special_case_axo_axonic = mysqli_query($GLOBALS['conn'], $special_case_axo_axonic);
+$special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axonic, 'id');
+
 // create link and image for each connection
 for ($row=0; $row<$number_type; $row++) {
 			for($i = 0; $i < $number_type; $i++){
@@ -355,7 +374,8 @@ for ($row=0; $row<$number_type; $row++) {
 							$fontColor=INHIBIT_FONT_COLOR;
 						
 				for ($col=0; $col<$number_type; $col++) {
-					$image ="";
+						$image ="";
+						// link values
 						// retrieve the id_type from Type
 						if ($research)
 							$id_type_col = $id_search[$col];
@@ -369,7 +389,7 @@ for ($row=0; $row<$number_type; $row++) {
 						$nickname_type_col = str_replace('_', ' ', $nickname_type_col);
 						$subregion_nickname_type = $subregion_type_col . " " . $nickname_type_col;
 						$position_col = $type->getPosition();
-						
+						$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
 						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION) 
 						{
 								
@@ -378,11 +398,11 @@ for ($row=0; $row<$number_type; $row++) {
 						else {
 							// Potential connections determine background color
 							switch ($potential_conn_display_array[$row][$col]) {
-								case 1:
+								case P_INHIBITORY_CONN:
 									$presynaptic_bg_color = GRAY;
 									$responce->gray++;	
 									break;
-								case 2:
+								case P_EXCITATORY_CONN:
 									$presynaptic_bg_color = BLACK;
 									$responce->black++;
 									break;
@@ -399,43 +419,34 @@ for ($row=0; $row<$number_type; $row++) {
 						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION)
 						{
 							$responce->Unknowncount++;
-							$image = "<div style='background-color:" . $presynaptic_bg_color . "; padding:0 2px;'><img src='images/connectivity/known_nonconnection.png' height='20px' width='20px' border='0'/></div>";
+							$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"known_nonconnection.png",KNOWN_NON_CONNECTION,$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 						}
 						elseif ($known_matrix_array[$row][$col] == KNOWN_CONNECTION)
 						{
 							$responce->knowncount++;
-							$image = "<div style='background-color:" . $presynaptic_bg_color . "; padding:0 2px;'><img src='images/connectivity/known_connection.png' height='20px' width='20px' border='0'/></div>";
+							$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"known_connection.png",KNOWN_CONNECTION,$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 						}
-						else if (($row != $col) And ($known_matrix_array[$row][$col] == 0)) 
+						else if ($potential_conn_display_array[$row][$col] != 0) 
 						{
 							if($presynaptic_bg_color==BLACK)
 							{
-								$image = "<div style='background-color:" . $presynaptic_bg_color . ";width:100%; padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_black.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 							else if($presynaptic_bg_color==ORANGE)
 							{
 								
-								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_orange.png' height='20px' width='20px' border='0'/></div>";
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_orange.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 							if($presynaptic_bg_color == GRAY)
 							{	
-								
-								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_gray.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 						} 
-						// space rows & columns using images on the main diagonal
-						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == KNOWN_NON_CONNECTION)) 
-						{
-							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_white.png' height='20px' width='20px' border='0'/></div>";
-						}
-						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == P_INHIBITORY_CONN))
-						{
-							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_gray.png' height='20px' width='20px' border='0'/></div>";
-						}
-						elseif (($row == $col) And ($potential_conn_display_array[$row][$col] == P_EXCITATORY_CONN))
-						{
-							$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'><img src='images/connectivity/spacer_black.png' height='20px' width='20px' border='0'/></div>";
-						}
 						$hippo_nickname[$col] = $image;
 					}
 					// create connectivity matrix array

@@ -36,14 +36,15 @@ function checkNeuronProperty($color)
 		$part = "somata";	
 	return $part;
 }
+
 function create_temp_table ($name_temporary_table)
 {	
 	$drop_table ="DROP TABLE $name_temporary_table";
 	$query = mysqli_query($GLOBALS['conn'],$drop_table);
-	
 	$creatable=	"CREATE TABLE IF NOT EXISTS $name_temporary_table (
 				   id int(4) NOT NULL AUTO_INCREMENT,
 				   id_fragment int(10),
+				   id_neuron int(10),
 				   id_original int(10),
 				   quote text(2000),
 				   authors varchar(600),
@@ -68,25 +69,28 @@ function create_temp_table ($name_temporary_table)
 	$query = mysqli_query($GLOBALS['conn'],$creatable);
 }
 
-function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $citation_count, $type, $volume, $issue)
+function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $citation_count, $type, $volume, $issue,$id_neuron_conn=NULL)
 {
 	if ($open_access == NULL)
 		$open_access = -1;
 	if ($citation_count == NULL)
 		$citation_count = -1;
+	if($id_neuron_conn==NULL)
+		$id_neuron_conn=-1;
 	set_magic_quotes_runtime(0);	
-		if (get_magic_quotes_gpc()) {
-        	$publication = stripslashes($publication);  
-        	$quotes = stripslashes($quotes);   
-	$authors = stripslashes($authors);  
+	if (get_magic_quotes_gpc()) {
+    	$publication = stripslashes($publication);  
+    	$quotes = stripslashes($quotes);   
+		$authors = stripslashes($authors);  
 	}
-		$publication= mysqli_real_escape_string($GLOBALS['conn'],$publication);
+	$publication= mysqli_real_escape_string($GLOBALS['conn'],$publication);
 	$quote = mysqli_real_escape_string($GLOBALS['conn'],$quote);
 	$authors = mysqli_real_escape_string($GLOBALS['conn'],$authors);
 	$query_i = "INSERT INTO $table
 	  (id,
 	   id_fragment,
 	   id_original,
+	   id_neuron,
 	   quote,
 	   authors,
 	   title,
@@ -111,6 +115,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	  (NULL,
 	   '$id_fragment',
 	   '$id_original',
+	   '$id_neuron_conn',
 	   '$quote',
 	   '$authors',
 	   '$title',
@@ -134,19 +139,17 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
 
-// set property of morphology page
 
 $page = $_REQUEST['page'];
-$sub_show_only = $_SESSION['sub_show_only']; 
-$name_show_only_article = $_SESSION['name_show_only_article'];
-
+$sub_show_only = $_SESSION['conn_sub_show_only']; 
+$name_show_only_article = $_SESSION['conn_name_show_only_article'];
 
 $see_all = $_REQUEST['see_all']; 
 if ($see_all == 'Open All Evidence')
 {
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
@@ -155,7 +158,7 @@ if ($see_all == 'Close All Evidence')
 {
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '0'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
@@ -163,75 +166,81 @@ if ($see_all == 'Close All Evidence')
 // Change the show coloums in the temporary table: ------------------------------------------------
 if ($_REQUEST['show_1']) //  ==> ON
 {
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
-
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-				
 	$query = "UPDATE $name_temporary_table SET show1 =  '1' WHERE title = '$title_paper'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
 if ($_REQUEST['show_0']) //  ==> OFF
 {
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
-	
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	
 	$query = "UPDATE $name_temporary_table SET show1 =  '0' WHERE title = '$title_paper'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
-// --------------------------------------------------------------------------------------------------
-
-if ($page) // Come from another page
+// Request coming from the another page
+if ($page) 
 {
 	$name_show_only = 'all';
-	$_SESSION['name_show_only'] = $name_show_only;
-		
+	$_SESSION['conn_name_show_only'] = $name_show_only;
 	$sub_show_only = NULL;
-	$_SESSION['sub_show_only'] = $sub_show_only;	
-	
+	$_SESSION['conn_sub_show_only'] = $sub_show_only;	
 	$name_show_only_article = 'all';
 	$name_show_only_journal = 'all';	
 	
-	$id_neuron = $_REQUEST['id_neuron'];
-	$val_property = $_REQUEST['val_property'];
-	$color = $_REQUEST['color'];
+	$id_neuron = $_REQUEST['id1_neuron'];
+	$val_property = $_REQUEST['val1_property'];
+	$val_property = str_replace('_', ':', $val_property);
+	$color = $_REQUEST['color1'];
 	
-	
+	// get the connection neuron types  
+	for($i=1;$i<3;$i++){
+		$conn_id_neuron[$i-1] = $_REQUEST['id'.$i.'_neuron'];
+		$conn_val_property[$i-1] = str_replace('_', ':', $_REQUEST['val'.$i.'_property']);
+		$conn_color[$i-1] = $_REQUEST['color'.$i];
+	}
+	// get connection properties
+	$connection_type=$_REQUEST['connection_type'];
+	$known_unknown_flag=$_REQUEST['known_conn_flag'];
+	$axonic_basket_flag=$_REQUEST['axonic_basket_flag'];
+	// create temporary table
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
-	
 	$time_t = time();
-	
-	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
-	$_SESSION['morph_name_temporary_table'] = $name_temporary_table;
-
+	$name_temporary_table ='temp_'.$ip_address.'_'.$conn_id_neuron[0].$conn_color[0].'__'.$time_t;
+	$_SESSION['conn_name_temporary_table'] = $name_temporary_table;
 	create_temp_table($name_temporary_table);	
+	// add connection and its properties to session for future use
+	for($i=1;$i<3;$i++){
+		$_SESSION['id'.$i.'_neuron']=$conn_id_neuron[$i-1];
+		$_SESSION['val'.$i.'_property']=$conn_val_property[$i-1];
+		$_SESSION['color'.$i]=$conn_color[$i-1];
 
-	
-	$val_property = str_replace('_', ':', $val_property);
-
-	$_SESSION['id_neuron'] = $id_neuron;
-	$_SESSION['val_property'] = $val_property;	
-	$_SESSION['color'] = $color;
-	$neuron_show_only_value="";
-	if(strstr(checkNeuronProperty($color),"axons"))
-		$neuron_show_only_value=$neuron_show_only_value.",Axons";
-	if(strstr(checkNeuronProperty($color),"dendrites"))
+	}
+	$_SESSION['connection_type']=$connection_type;
+	$_SESSION['known_conn_flag']=$known_unknown_flag;
+	$_SESSION['axonic_basket_flag']=$axonic_basket_flag;
+	$neuron_show_only_value="Axons";
+	// find which checkbox to view out of axon, dendrite, soma and known
+	if(strstr(checkNeuronProperty($conn_color[1]),"dendrites"))
 		$neuron_show_only_value=$neuron_show_only_value.",Dendrites";
-	if(strstr(checkNeuronProperty($color),"somata"))
+	if(strstr(checkNeuronProperty($conn_color[1]),"somata")&&$axonic_basket_flag!=0)
 		$neuron_show_only_value=$neuron_show_only_value.",Somata";
-	$_SESSION['morph_neuron_show_only_value']=$neuron_show_only_value;
-	
+	if($known_unknown_flag!=0){
+		$neuron_show_only_value=$neuron_show_only_value.",Known";	
+	}
+	$_SESSION['conn_neuron_show_only_value']=$neuron_show_only_value;
+
+	// default parameter for displaying evidences
 	$page_in = 0;
 	$page_end = 10;
-	
-	$order_by = 'year';     //Default
+	$order_by = 'year';     
 	$type_order = 'DESC';
 	$_SESSION['order_by'] = $order_by;
 	$_SESSION['type_order'] = $type_order;
@@ -240,27 +249,24 @@ if ($page) // Come from another page
 else
 {
 	$order_ok = $_REQUEST['order_ok'];
-	if ($order_ok == 'GO')             // Was clicked the Order By options
+	// clicked the Order By options
+	if ($order_ok == 'GO')             
 	{
 		$order_by = $_REQUEST['order'];
 		$_SESSION['order_by'] = $order_by;
-		
 		if ($order_by == 'year')
 			$type_order = 'DESC';
 		else
 			$type_order = 'ASC';
-
 		$_SESSION['type_order'] = $type_order;
-			
 		$page_in = 0;
 		$page_end = 10;
 	}
-	else    // Was clicked the paginations
+	// clicked the paginations
+	else    
 	{
 		$order_by = $_SESSION['order_by'];
-
 		$type_order = $_SESSION['type_order'];
-	
 		if ($_REQUEST['up'])
 		{
 			$page_in = $_REQUEST['start'];
@@ -284,51 +290,58 @@ else
 		}
 	}
 
-
 	$flag = $_REQUEST['flag'];
 	
-	$id_neuron = $_SESSION['id_neuron'];
-	$val_property = $_SESSION['val_property'];
-	$color = $_SESSION['color'];
-	if(!$_SESSION['morph_neuron_show_only_value']){
-		$neuron_show_only_value="";
-		if(strstr(checkNeuronProperty($color),"axons"))
-			$neuron_show_only_value=$neuron_show_only_value.",Axons";
-		if(strstr(checkNeuronProperty($color),"dendrites"))
+	$id_neuron = $_SESSION['id1_neuron'];
+	$val_property = $_SESSION['val1_property'];
+	$color = $_SESSION['color1'];
+	
+	// get the connection neuron types  
+	for($i=1;$i<3;$i++){
+		$conn_id_neuron[$i-1] = $_SESSION['id'.$i.'_neuron'];
+		$conn_val_property[$i-1] = $_SESSION['val'.$i.'_property'];
+		$conn_color[$i-1] = $_SESSION['color'.$i];
+	}
+	// get connection properties
+	$connection_type=$_SESSION['connection_type'];
+	$axonic_basket_flag=$_SESSION['axonic_basket_flag'];
+	$known_unknown_flag=$_SESSION['known_conn_flag'];
+	// add connection and its properties to session for future use
+	if(!$_SESSION['conn_neuron_show_only_value']){
+		$neuron_show_only_value="Axons";
+		if(strstr(checkNeuronProperty($conn_color[1]),"dendrites"))
 			$neuron_show_only_value=$neuron_show_only_value.",Dendrites";
-		if(strstr(checkNeuronProperty($color),"somata"))
-			$neuron_show_only_value=$neuron_show_only_value.",Somata";	
-		$_SESSION['morph_neuron_show_only_value']=$neuron_show_only_value;
+		if(strstr(checkNeuronProperty($conn_color[1]),"somata")&&$axonic_basket_flag!=0)
+			$neuron_show_only_value=$neuron_show_only_value.",Somata";
+		if($known_unknown_flag==1){
+			$neuron_show_only_value=$neuron_show_only_value.",Known";	
+		}
+		$_SESSION['conn_neuron_show_only_value']=$neuron_show_only_value;
 	}
 	else{
-		$neuron_show_only_value=$_SESSION['morph_neuron_show_only_value'];
+		$neuron_show_only_value=$_SESSION['conn_neuron_show_only_value'];
 	}
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
-	
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 }
 
 
-// SHOW ONLY --------------------------------------------------------------
-// ------------------------------------------------------------------------
-$name_show_only_var = $_REQUEST['name_show_only_var'];
+// show only dropdown clicked
+$name_show_only_var = $_REQUEST['name_show_only_var']; 
 
 if ($name_show_only_var)
 {
 	$name_show_only = $_REQUEST['name_show_only'];
-	$_SESSION['name_show_only'] = $name_show_only;
+	$_SESSION['conn_name_show_only'] = $name_show_only;
 	
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
-	//$name_temporary_attachment=
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 
 	// Option: All:
 	if ($name_show_only == 'all')
 	{
 		$sub_show_only = 'all';
-		$_SESSION['sub_show_only'] = $sub_show_only;
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+		$_SESSION['conn_sub_show_only'] = $sub_show_only;
 	}
 	
 	// Option: Articles / books:
@@ -336,9 +349,7 @@ if ($name_show_only_var)
 	{
 		$name_show_only_article = 'all';
 		$sub_show_only = 'article';
-		$_SESSION['sub_show_only'] = $sub_show_only;
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
+		$_SESSION['conn_sub_show_only'] = $sub_show_only;
 	}
 
 	// Option: Publication:
@@ -346,9 +357,7 @@ if ($name_show_only_var)
 	{
 		$name_show_only_journal = 'all';
 		$sub_show_only = 'name_journal';
-		$_SESSION['sub_show_only'] = $sub_show_only;
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
+		$_SESSION['conn_sub_show_only'] = $sub_show_only;		
 	}
 
 	// Option: Authors:
@@ -356,36 +365,23 @@ if ($name_show_only_var)
 	{
 		$name_show_only_authors = 'all';
 		$sub_show_only = 'authors';
-		$_SESSION['sub_show_only'] = $sub_show_only;
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
+		$_SESSION['conn_sub_show_only'] = $sub_show_only;			
 	}
+	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);
+} 
 
-	// Option: Morphology:
-	if ($name_show_only == 'morphology')
-	{
-		$name_show_only_morphology = 'both';
-		$sub_show_only = 'morphology';
-		$_SESSION['sub_show_only'] = $sub_show_only;
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
-	}
-} // end if $name_show_only_var
-
-
-
-
-// ARTICLE - BOOK OPTION
+// ARTICLE - BOOK OPTION - for clicked Article/Book's evidences(quotes) set the show only flag to 1 in temporary table 
 $name_show_only_article_var = $_REQUEST['name_show_only_article_var'];
 if ($name_show_only_article_var)
 {
 	$name_show_only_article = $_REQUEST['name_show_only_article'];
-	$_SESSION['name_show_only_article'] = $name_show_only_article;
+	$_SESSION['conn_name_show_only_article'] = $name_show_only_article;
 
-	$name_show_only = $_SESSION['name_show_only'];
+	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -409,46 +405,39 @@ if ($name_show_only_article_var)
 				
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
-} // end if $name_show_only_article
+} 
 
-
-// JOURNAL OPTION
+// JOURNAL OPTION - for clicked journal's evidences(quotes) set the show only flag to 1 in temporary table 
 $name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
 if ($name_show_only_journal_var)
 {
 	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
-	$_SESSION['name_show_only_journal'] = $name_show_only_journal;
-
-	$name_show_only = $_SESSION['name_show_only'];
+	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 		
 	if ($name_show_only_journal == 'all')
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-	else
+	else{
 		$query = "UPDATE $name_temporary_table SET show_only =  '0' WHERE publication != '$name_show_only_journal'";
+	}
 	
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-
-} // end if $name_show_only_journal
+} 
 	
-// AUTHORS OPTION
+// AUTHORS OPTION - for clicked author's evidences(quotes) set the show only flag to 1 in temporary table 
 $name_show_only_authors_var  = $_REQUEST['name_show_only_authors_var'];
 if ($name_show_only_authors_var)
 {
 	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
-	$_SESSION['name_show_only_authors'] = $name_show_only_authors;
-
-	$name_show_only = $_SESSION['name_show_only'];
+	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
-
-
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 	if ($name_show_only_authors == 'all')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
@@ -458,7 +447,6 @@ if ($name_show_only_authors_var)
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '0'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-				
 		$query ="SELECT id FROM $name_temporary_table WHERE authors LIKE '%$name_show_only_authors%'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);					
 		while(list($id) = mysqli_fetch_row($rs))		
@@ -467,95 +455,51 @@ if ($name_show_only_authors_var)
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);
 		}	
 	}
-
-} // end if $name_show_only_authors	
-
-// MORPHOLOGY OPTION
-$name_show_only_morphology_var = $_REQUEST['name_show_only_morphology_var'];
-if ($name_show_only_morphology_var)
-{
-	$name_show_only_morphology = $_REQUEST['name_show_only_morphology'];
-	$_SESSION['name_show_only_morphology'] = $name_show_only_morphology;
-
-	$name_show_only = $_SESSION['name_show_only'];
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
-
-	$query = "UPDATE $name_temporary_table SET show_only =  '0'";
-	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
-	
-	if ($name_show_only_morphology == 'Axons')
-	{
-		$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE type = 'axons'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-	}
-	if ($name_show_only_morphology == 'Dendrites')
-	{
-		$query = "UPDATE $name_temporary_table SET show_only =  '1' WHERE type = 'dendrites'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-	}
-	if ($name_show_only_morphology == 'both')
-	{
-		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
-		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
-	}
-
-
-} // end if $name_show_only_morphology
+} 
 
 // axon, dedrite/soma, known checkbox checked or unchecked
 $neuron_show_only = $_REQUEST['neuron_show_only'];
 if ($neuron_show_only){
 	$neuron_show_only_value = $_REQUEST['neuron_show_only_value'];
-	$_SESSION['morph_neuron_show_only_value'] = $neuron_show_only_value;
+	$_SESSION['conn_neuron_show_only_value'] = $neuron_show_only_value;
 	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	$name_temporary_table = $_SESSION['conn_name_temporary_table'];
 
 }
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-
-$part=checkNeuronProperty($color);
+// find axon, dendrite or soma property
+$part = checkNeuronProperty($color);
+for($i=0;$i<2;$i++){
+	$conn_part[$i] = checkNeuronProperty($conn_color[$i]);
+}
 		
 $type = new type($class_type);
-$type -> retrive_by_id($id_neuron);
-
+$type -> retrive_by_id($conn_id_neuron[0]);
 $property = new property($class_property);
-
 $fragment = new fragment($class_fragment);
-
 $attachment_obj = new attachment($class_attachment);
-
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
-
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
-
 $articleevidencerel = new articleevidencerel($class_articleevidencerel);
-
 $article = new article($class_article);
-
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
-
 $author = new author($class_author);
-
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
 <script type="text/javascript">
 // Javascript function *****************************************************************************************************
 //================changes===========================
+// checkbox clicked hence change the selection and store it in session 
 function changeCheckbox(start1,stop1){
 	var axon = "";
 	var dendrite = "";
 	var soma="";
 	var known="";
 	var count=0;
-	if (document.getElementById('axoncheck') && document.getElementById('axoncheck').checked==true) {
+	if (document.getElementById('axoncheck')&&document.getElementById('axoncheck').checked==true) {
 		axon="Axons";
 		count++;
 	}
@@ -567,64 +511,57 @@ function changeCheckbox(start1,stop1){
 		soma="Somata";
 		count++;
 	}
+	if (document.getElementById('knowncheck') && document.getElementById('knowncheck').checked==true) {
+		known="Known";
+		count++;
+	}
 	var checkbox_clicked=axon+","+dendrite+","+soma+","+known;
-	var destination_page="property_page_morphology.php";
+	var destination_page="property_page_connectivity.php";
 	location.href = destination_page+"?neuron_show_only_value="+checkbox_clicked+"&start="+start1+"&stop="+stop1+"&neuron_show_only=1";
 }
-
-//====================================================
+// show only drop down clicked
 function show_only(link, start1, stop1)
 {
 	var name=link[link.selectedIndex].value;
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_morphology.php";
+	var destination_page = "property_page_connectivity.php";
 
 	location.href = destination_page+"?name_show_only="+name+"&start="+start2+"&stop="+stop2+"&name_show_only_var=1";
 }
-
+// show only article option selected
 function show_only_article(link, start1, stop1)
 {
 	var name=link[link.selectedIndex].value;
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_morphology.php";
+	var destination_page = "property_page_connectivity.php";
 	location.href = destination_page+"?name_show_only_article="+name+"&start=0&stop="+stop2+"&name_show_only_article_var=1";
 }
-
+// show only publication selected 
 function show_only_publication(link, start1, stop1)
 {
 	var name=link[link.selectedIndex].value;
 	var start2 = start1;
 	var stop2 = stop1;
-
-	var destination_page = "property_page_morphology.php";
+	var destination_page = "property_page_connectivity.php";
 	location.href = destination_page+"?name_show_only_journal="+name+"&start=0&stop="+stop2+"&name_show_only_journal_var=1";
 }
-
+// show only author selected 
 function show_only_authors(link, start1, stop1)
 {
 	var name=link[link.selectedIndex].value;
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_morphology.php";
+	var destination_page = "property_page_connectivity.php";
 	location.href = destination_page+"?name_show_only_authors="+name+"&start=0&stop="+stop2+"&name_show_only_authors_var=1";
 }
 
-function show_only_morphology(link, start1, stop1)
-{
-	var name=link[link.selectedIndex].value;
-	var start2 = start1;
-	var stop2 = stop1;
 
-	var destination_page = "property_page_morphology.php";
-	location.href = destination_page+"?name_show_only_morphology="+name+"&start=0&stop="+stop2+"&name_show_only_morphology_var=1";
-}
 </script>
-
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
 	$name=$type->getNickname();
@@ -632,9 +569,7 @@ function show_only_morphology(link, start1, stop1)
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
-
 <body>
-
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
@@ -642,10 +577,14 @@ function show_only_morphology(link, start1, stop1)
 ?>
 
 <div class='title_area'>
-	<font class="font1">Morphology evidence page</font>
+	<font class="font1">Connectivity Evidence Page</font>
 </div>
 
+
 <br><br /><br><br />
+
+<!-- ---------------------- -->
+
 <table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr height="40">
     <td></td>
@@ -659,25 +598,40 @@ function show_only_morphology(link, start1, stop1)
 		<table width="80%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">
-					Neuron Type
+					Connection Details  
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; <?php $id=$type->getId();
-								 $name=$type->getName();
-					print("<a href='neuron_page.php?id=$id'>$name</a>"); ?>
+					&nbsp; From:
+					 <?php 
+					    $type -> retrive_by_id($conn_id_neuron[0]);
+					 	$id=$type->getId();
+						$name=$type->getName();
+						$type -> retrive_by_id($conn_id_neuron[1]);
+						$id2=$type->getId();
+						$name2=$type -> getName();
+					print("<a href='neuron_page.php?id=$id'>$name</a>");?> 
 				</td>				
 			</tr>
 			<tr>
 				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;To: <?php print("<a href='neuron_page.php?id=$id2'>$name2</a>");?></td>
 			</tr>
 			<tr>
 				<td width="20%" align="right">
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
+					&nbsp; Type:
 				<?php
-					$name1 = checkNeuronProperty($color);						
-					print ("&nbsp; <strong>$name1</strong> in <strong>$val_property</strong>");
+					if ($connection_type == 1)
+						$conn_type="Potential Inhibitory";
+					else 
+						$conn_type="Potential Excitatory";
+					if ($known_unknown_flag == 1)
+						$conn_type=$conn_type." and Known";
+					elseif ($known_unknown_flag == -1)
+						$conn_type=" Known Non";
+					$conn_type=$conn_type." Connections ";
+					print ("<strong>$conn_type</strong>");
 				?>
 				</td>
 			</tr>								
@@ -694,7 +648,12 @@ function show_only_morphology(link, start1, stop1)
 		<br />			
 				
 		<?php
-			//echo $name_temporary_table;
+		// for evidences coming from morphology page
+		if($known_unknown_flag!=-1){
+			for($conn_cnt=0;$conn_cnt<2;$conn_cnt++){
+			$neuron_id_conn=$conn_id_neuron[$conn_cnt];
+			$part=$conn_part[$conn_cnt];
+			$val_property=$conn_val_property[$conn_cnt];
 			if ($part == 'axons_dendrites_somata')
 				$n_interraction = 3;
 			else if ($part == 'axons_dendrites' || $part == 'axons_somata' || $part == 'dendrites_somata')
@@ -704,27 +663,29 @@ function show_only_morphology(link, start1, stop1)
 						
 			for ($tt=0; $tt<$n_interraction; $tt++)
 			{
+				$part1[$tt]="";
 				if ($n_interraction == 1)
 				{	
 					// Axons or Dendrites
 					// Retrieve property_id from Property by using Type_id
-					$part1[$tt] = ucfirst($part);
-					$property  -> retrive_ID(1, $part, 'in', $val_property);
-					$n_property_id = $property -> getNumber_type();		
-
+					if(($conn_cnt==0&&$part=='axons')||($conn_cnt==1&&$part=='dendrites')||($conn_cnt==1&&$part=='somata'&&$axonic_basket_flag!=0)){
+						$part1[$tt] = ucfirst($part);
+						$property  -> retrive_ID(1, $part, 'in', $val_property);
+						$n_property_id = $property -> getNumber_type();				
+					}
 				}
 				else if ($n_interraction == 2)
 				{
 					// Axons and Dendrites
 					if($part == 'axons_dendrites')
 					{
-					 if ($tt == 0)
+					 if ($tt == 0 && $conn_cnt==0)
 					 {
 						$part1[$tt] = 'Axons';
 						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
 					 }
-					 if ($tt == 1)
+					 if ($tt == 1 && $conn_cnt==1 )
 					 {
 						$part1[$tt] = 'Dendrites';
 						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
@@ -734,13 +695,13 @@ function show_only_morphology(link, start1, stop1)
 					}
 					else if($part == 'axons_somata')
 					{
-					 if ($tt == 0)
+					 if ($tt == 0 && $conn_cnt==0)
 					 {
 						$part1[$tt] = 'Axons';
 						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
 					 }
-					 if ($tt == 1)
+					 if ($tt == 1 && $conn_cnt==1 && $axonic_basket_flag!=0)
 					 {
 						$part1[$tt] = 'Somata';
 						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
@@ -749,13 +710,13 @@ function show_only_morphology(link, start1, stop1)
 					}
                      else
 					 { 
-				     if ($tt == 0)
+				     if ($tt == 0 && $conn_cnt==1)
 					 {
 						$part1[$tt] = 'Dendrites';
 						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
 					 }
-					 if ($tt == 1)
+					 if ($tt == 1 && $conn_cnt==1 && $axonic_basket_flag!=0)
 					 {
 						$part1[$tt] = 'Somata';
 						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
@@ -766,19 +727,19 @@ function show_only_morphology(link, start1, stop1)
 				}
 				else
 				{
-					if ($tt == 0)
+					if ($tt == 0 && $conn_cnt==1 )
 					 {
 						$part1[$tt] = 'Dendrites';
 						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();										
 					 }
-					 if ($tt == 1)
+					 if ($tt == 1 && $conn_cnt==0)
 					 {
 						$part1[$tt] = 'Axons';
 						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();	
 					 }
-					  if ($tt == 2)
+					  if ($tt == 2 && $conn_cnt==1 && $axonic_basket_flag!=0)
 					 {
 						$part1[$tt] = 'Somata';
 						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
@@ -792,7 +753,7 @@ function show_only_morphology(link, start1, stop1)
 					$property_id[$i] = $property -> getProperty_id($i);
 
 					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
-					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id_neuron);				
+					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $conn_id_neuron[$conn_cnt]);				
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				}
 												
@@ -800,12 +761,9 @@ function show_only_morphology(link, start1, stop1)
 				for ($i=0; $i<$n_evidence_id; $i++)
 				{
 					$evidence_id[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
-				
 					// Retrieve Fragment_id frmo EvidenceFragmentRel by using Evidence_id
 					$evidencefragmentrel -> retrive_fragment_id($evidence_id[$i]);
-					
 					$n_fragment_id = $evidencefragmentrel -> getN_fragment_id();
-				
 					for ($i1=0; $i1<$n_fragment_id; $i1++)
 					{
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
@@ -824,13 +782,12 @@ function show_only_morphology(link, start1, stop1)
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					$page_location = $fragment -> getPage_location();
 				
-					//Retreive information from attachment table					
+					//Retreive information from attachment table
 					if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
 					{
 						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 						$id_article= $article -> getID();
 					}
-					
 					else 
 					{
 						// retrieve article_id from ArticleEvidenceRel by using Evidence_id
@@ -876,7 +833,58 @@ function show_only_morphology(link, start1, stop1)
 						
 						$author -> retrive_by_id($id_author);
 						$name_a = $author -> getName_author_array(0);
+						if($name_authors ==NULL)
+							$name_authors = $name_a;
+						else
+							$name_authors = $name_authors.', '.$name_a;
+					}
+					$pages= $first_page." - ".$last_page;
+					if ($page&&$part1[$tt]!="")
+					{
+							insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue,$neuron_id_conn);
+					}
+				}
+			  }	
+			}
+		}
+			
+		// logic for retriving conndata evidences
+		if($known_unknown_flag==1||$known_unknown_flag==-1){
+				if ($known_unknown_flag == 1)
+					$conn_type="positive";
+				elseif ($known_unknown_flag == -1)
+					$conn_type="negative";
+				$query_to_get_conn_evidence = "SELECT cr.ConnFragment_id,cd.Type1_id,cd.Type2_id,cd.connection_status,cd.connection_location,
+									cf.original_id,cf.dt,cf.quote,cf.page_location,cf.pmid_isbn ,a.id,a.title,a.publication,a.year,a.pmid_isbn,
+									a.first_page,a.last_page,a.pmcid,a.nihmsid,a.doi,a.open_access,a.citation_count,a.volume,a.issue
+									FROM Conndata cd, ConndataFragmentRel cr,ConnFragment cf,EvidenceFragmentRel ef,ArticleEvidenceRel ae,
+									Article a
+									WHERE cd.id=cr.Conndata_id AND cf.id=cr.ConnFragment_id
+									AND ef.Fragment_id=cr.ConnFragment_id
+									AND ef.Evidence_id=ae.Evidence_id
+									AND ae.Article_id=a.id
+									AND cd.Type1_id=".$conn_id_neuron[0]." AND cd.Type2_id=".$conn_id_neuron[1]." GROUP BY cf.original_id";
+				$conn_evidence_rs = mysqli_query($GLOBALS['conn'],$query_to_get_conn_evidence);
+				// get the article associated with these fragments
+				while(list($conn_fragment_id,$type1_id,$type2_id,$conn_status,$conn_location,$original_id,$conn_dt,$conn_quote,$conn_page_location,$conn_pmid_isbn,$id_article,$title,$publication,$year,$pmid_isbn,$first_page,$last_page,$pmcid,$nihmsid,$doi,$open_access,$citation_count,$volume,$issue) = mysqli_fetch_row($conn_evidence_rs))	{		
+					if ($title[$ui] == '.')
+						$title[$ui] = '';	
+					$articleauthorrel -> retrive_author_position($id_article);
+					$n_author = $articleauthorrel -> getN_author_id();
+					for ($ii3=0; $ii3<$n_author; $ii3++)
+						$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
 						
+					if ($auth_pos)	
+						sort ($auth_pos);
+					
+					$name_authors = NULL;
+					for ($ii3=0; $ii3<$n_author; $ii3++)
+					{
+						$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
+						$id_author = $articleauthorrel -> getAuthor_id_array(0);
+						
+						$author -> retrive_by_id($id_author);
+						$name_a = $author -> getName_author_array(0);
 						if($name_authors ==NULL)
 							$name_authors = $name_a;
 						else
@@ -885,29 +893,26 @@ function show_only_morphology(link, start1, stop1)
 					$pages= $first_page." - ".$last_page;
 					if ($page)
 					{
-						// Insert the data in the temporary table:	 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++				
-						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
-						// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+						insert_temporary($name_temporary_table, $conn_fragment_id, $original_id, $conn_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $conn_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, '', $volume, $issue);
 					}
 				}
-			}	
-								
+			}
 					// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$n_id_tot = 0;	 // Total number of articles:
 					while(list($id) = mysqli_fetch_row($rs))			
 						$n_id_tot = $n_id_tot + 1;
-						
+
 					// find the total number of quotes of type axon: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE  type='Axons'";	
+					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE type='Axons'";	
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$number_of_quotes_axon = 0;  // total number of axon quotes
 					while(list($id) = mysqli_fetch_row($rs))			
 						$number_of_quotes_axon = $number_of_quotes_axon + 1;	
 				
 					// find the total number of quotes of type dendrite: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE type='Dendrites'";	
+					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE  type='Dendrites'";	
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$number_of_quotes_dendrite = 0;  // total number of dendrite quotes
 					while(list($id) = mysqli_fetch_row($rs))			
@@ -918,14 +923,13 @@ function show_only_morphology(link, start1, stop1)
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$number_of_quotes_somata = 0;  // total number of somata quotes
 					while(list($id) = mysqli_fetch_row($rs))							
-					$number_of_quotes_somata = $number_of_quotes_somata + 1;
+						$number_of_quotes_somata = $number_of_quotes_somata + 1;
 				
-					// get number of quotes pairwise
+					// Get Articles title to view on connectivity property page				
 					if ($order_by == '-'){
 						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY type ASC LIMIT $page_in , 10";
 					}
 					else{
-					// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++					
 						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
 					}
 					$rs = mysqli_query($GLOBALS['conn'],$query);					
@@ -934,11 +938,8 @@ function show_only_morphology(link, start1, stop1)
 					{
 						$title_temp[$n_id] = $title;											
 						$n_id = $n_id + 1;
-					}					
-				?>	
-
-				<!-- ORDER BY: _______________________________________________________________________________________________________ -->
-					
+					}				
+				?>			
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>		
 						<?php 
@@ -946,11 +947,11 @@ function show_only_morphology(link, start1, stop1)
 							if ($n_id_tot != 1)
 							{
 						?>			
-							<td width="10%">
+							<td width="8%">
 								<font class="font2">Order by:</font>
 							</td>
-							<td width="15%">				
-							<form action="property_page_morphology.php" method="post" style="display:inline">
+							<td width="10%">				
+							<form action="property_page_connectivity.php" method="post" style="display:inline">
 								<select name='order' size='1' cols='10' class='select1'>
 								
 								<?php
@@ -971,7 +972,7 @@ function show_only_morphology(link, start1, stop1)
 								</select>
 						
 								</td>
-								<td width="10%">
+								<td width="8%">
 									<input type="submit" name='order_ok' value="GO"  />
 								</form>	
 								</td>
@@ -984,47 +985,59 @@ function show_only_morphology(link, start1, stop1)
 							}
 						?>
 
-						<td width="25%">
-							<?php 
+						<td width="45%">	
+							<form>
+								<?php 
 								// logic to view checkbox
 								$property_checked="".$neuron_show_only_value;
 								$property_checked=str_replace(",", "", $property_checked);
 								$property_checked=trim($property_checked);
-								//echo $property_checked;
 								if($number_of_quotes_axon != 0){
 									if(strstr($neuron_show_only_value,"Axons")){
 										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' checked ");
 										if($property_checked=="Axons")
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)'>axon</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)'>axon(from)</input></span>");
 									}
 									else
-										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' onclick='changeCheckbox($page_in,$page_end)'>axon</input></span>");
+										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' onclick='changeCheckbox($page_in,$page_end)'>axon(from)</input></span>");
 								}
 								if($number_of_quotes_dendrite != 0){
 									if(strstr($neuron_show_only_value,"Dendrites")){
 										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck' checked ");
 										if($property_checked=="Dendrites")
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >dendrite</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)' >dendrite(to)</input></span>");
 									}
 									else
-										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck'  onclick='changeCheckbox($page_in,$page_end)' >dendrite</input></span>");
+										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck'  onclick='changeCheckbox($page_in,$page_end)' >dendrite(to)</input></span>");
 								}
 								if($number_of_quotes_somata != 0){
 									if(strstr($neuron_show_only_value,"Somata")){
 										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck' checked ");
 										if($property_checked=="Somata")
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >somata</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)' >somata(to)</input></span>");
 									}
 									else
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck'  onclick='changeCheckbox($page_in,$page_end)' >somata</input></span>");
-							}?>
+										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck'  onclick='changeCheckbox($page_in,$page_end)' >somata(to)</input></span>");
+								}
+								if($known_unknown_flag ==1){
+									if(strstr($neuron_show_only_value,"Known")){
+										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='known' id='knowncheck' checked ");
+										if($property_checked=="Known")
+											print(" disabled ");
+										print("onclick='changeCheckbox($page_in,$page_end)' >known</input></span>");
+									}
+									else
+										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' >known</input></span>");
+								}?>
+							</form>
 							
 						</td>
+	
 						<td width="40%" align="center">
-						<form action="property_page_morphology.php" method="post" style="display:inline">
+						<form action="property_page_connectivity.php" method="post" style="display:inline">
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start' value='<?php print $page_in; ?>' />
@@ -1042,14 +1055,13 @@ function show_only_morphology(link, start1, stop1)
 				************************************************************************************************************************************* -->				
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 				<tr>
-					<td width="15%" align="left">
+					<td width="8.5%" align="left">
 						<font class="font2">Show Only:</font> 
 					</td>
 					<td width="45%" align="left">
 					<?php 
+						// show only dropdown
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, $page_in, '10')\">");
-						
-				
 						if ($name_show_only)
 						{
 							if ($name_show_only == 'all')
@@ -1059,10 +1071,7 @@ function show_only_morphology(link, start1, stop1)
 							if ($name_show_only == 'name_journal')
 								$name_show_only1 = 'Name of Publication';
 							if ($name_show_only == 'authors')
-								$name_show_only1 = 'Authors';
-							if ($name_show_only == 'morphology')
-								$name_show_only1 = 'Morphology';
-																														
+								$name_show_only1 = 'Authors';																									
 							print ("<OPTION VALUE='$name_show_only1'>$name_show_only1</OPTION>");
 							print ("<OPTION VALUE='all'>-</OPTION>");
 						}
@@ -1090,7 +1099,6 @@ function show_only_morphology(link, start1, stop1)
 								if (strlen($pmid) < 10)
 									$number_of_articles_1 = $number_of_articles_1 + 1;							
 							}
-							
 						
 							if ($name_show_only_article == 'article')
 							{
@@ -1118,7 +1126,7 @@ function show_only_morphology(link, start1, stop1)
 							}							
 						}						
 					
-						// PUBLICATION: ++++++++++++++++++++++++
+						// PUBLICATION - retrive the publication and evidences count associated with them 
 						if ($sub_show_only == 'name_journal')
 						{						
 							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, $page_in, '10')\">");
@@ -1135,12 +1143,11 @@ function show_only_morphology(link, start1, stop1)
 							{	
 								// retrieve the number of articles for this publication:
 								$pub= mysqli_real_escape_string($GLOBALS['conn'],$pub);
-								$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE publication = '$pub'";
-								$rs1 = mysqli_query($GLOBALS['conn'],$query1);
+								$query_pub ="SELECT DISTINCT title FROM $name_temporary_table WHERE publication = '$pub'";
+								$rs_pub = mysqli_query($GLOBALS['conn'],$query_pub);
 								$n_pub1=0;					
-								while(list($id) = mysqli_fetch_row($rs1))							
+								while(list($id) = mysqli_fetch_row($rs_pub))							
 									$n_pub1 = $n_pub1 + 1;
-							
 								if ($pub == $name_show_only_journal);
 								else
 									print ("<OPTION VALUE='".htmlspecialchars($pub,ENT_QUOTES)."'>".stripslashes($pub)." ($n_pub1)</OPTION>");		
@@ -1148,7 +1155,7 @@ function show_only_morphology(link, start1, stop1)
 							print ("</select>");				
 						}
 						
-						// AUTHORS: ++++++++++++++++++++++++
+						// AUTHORS - retrive author and evidences count associated with them
 						$author_string="";
 						if ($sub_show_only == 'authors')
 						{
@@ -1165,9 +1172,7 @@ function show_only_morphology(link, start1, stop1)
 							$single_aut=split(',', $author_string);
 							$index=0;
 							$unique_authors=array();
-							for ($cnt=0; $cnt<count($single_aut); $cnt++)
-							{
-
+							for ($cnt=0; $cnt<count($single_aut); $cnt++){
 								if($single_aut[$cnt]){
 									if(!in_array(trim($single_aut[$cnt]), $unique_authors)){
 										$unique_authors[$index]=trim($single_aut[$cnt]);
@@ -1175,8 +1180,8 @@ function show_only_morphology(link, start1, stop1)
 									}
 								}
 							}
-							sort($unique_authors);					
-							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_authors(this, $page_in, '10')\">");	
+							sort($unique_authors);
+							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_authors(this, $page_in, '10')\">");
 							if ( ($name_show_only_authors != 'all') &&  ($name_show_only_authors != NULL) )
 							{
 								print ("<OPTION VALUE='$name_show_only_authors'>".stripslashes($name_show_only_authors)."</OPTION>");
@@ -1184,36 +1189,37 @@ function show_only_morphology(link, start1, stop1)
 							}
 							print ("<OPTION VALUE='all'> ALL </OPTION>");
 							
-							for ($i1=0; $i1<count($unique_authors); $i1++)
+							for ($index=0; $index<count($unique_authors); $index++)
 							{
-							
 								// retrieve the number of articles for this publication:
-								$aut= mysqli_real_escape_string($GLOBALS['conn'],$unique_authors[$i1]);
-								$query1 ="SELECT DISTINCT title FROM $name_temporary_table WHERE authors LIKE '%$aut%'";
-								$rs1 = mysqli_query($GLOBALS['conn'],$query1);
-								$n_auth1=0;					
-								while(list($id) = mysqli_fetch_row($rs1))	
-									$n_auth1 = $n_auth1 + 1;						
-								print ("<OPTION VALUE='".htmlspecialchars($aut,ENT_QUOTES)."'>".stripslashes($unique_authors[$i1])." ($n_auth1)</OPTION>");
+								if($unique_authors[$index]){
+									$aut= mysqli_real_escape_string($GLOBALS['conn'],$unique_authors[$index]);
+									$query_author ="SELECT DISTINCT title FROM $name_temporary_table WHERE authors LIKE '%$aut%'";
+									$rs_author = mysqli_query($GLOBALS['conn'],$query_author);
+									$n_auth1=0;					
+									while(list($id) = mysqli_fetch_row($rs_author))	
+										$n_auth1 = $n_auth1 + 1;						
+									print ("<OPTION VALUE='".htmlspecialchars($aut,ENT_QUOTES)."'>".stripslashes($unique_authors[$index])." ($n_auth1)</OPTION>");
+								}
 							}
 							print ("</select>");				
 						}						
 					?>	
 					</td>							
 				</tr>
-				</table>
+				</table>	
 				<br />
 
 			<?php	
 				// There are no results available:
 				if ($n_id == 0)
 					print ("<br><font class='font12'>There are no results available.</font><br><br>");
-									
+				$quote_count=0;					
 				for ($i=0; $i<$n_id; $i++)
 				{	
 				
 					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
+					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' order by type ";					
 					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
 							
@@ -1268,7 +1274,7 @@ function show_only_morphology(link, start1, stop1)
 						
 						if ($show1 == 0)
 						{
-							print ("<form action='property_page_morphology.php' method='post' style='display:inline'>");
+							print ("<form action='property_page_connectivity.php' method='post' style='display:inline'>");
 							print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
@@ -1278,7 +1284,7 @@ function show_only_morphology(link, start1, stop1)
 						}
 						if ($show1 == 1)
 						{
-							print ("<form action='property_page_morphology.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
+							print ("<form action='property_page_connectivity.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
 							print ("<input type='submit' name='show_0' value=' ' class='show0'>");
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
@@ -1322,7 +1328,7 @@ function show_only_morphology(link, start1, stop1)
 							</tr>																																		
 						</table>");
 						
-						// TABLE for Quotes: ------------------------------------------------------------------------------------------------------------------------------------------
+						// TABLE for Quotes: 
 						// Logic to form dynamic query to retrive evidences(axon,dendrite,soma & known) depending on checkbox selection 
 						$subquery=" and ( ";
 						$property_array=split(",",$neuron_show_only_value);
@@ -1332,67 +1338,76 @@ function show_only_morphology(link, start1, stop1)
 							}
 						}	
 						$subquery=substr($subquery,0,count($subquery)-4);
+						$subquery=str_replace("Known", "", $subquery);
 						$subquery=$subquery.")";
 						// Retrive evidences stored in temporary table
-						try
-						{					
-							$query = "SELECT distinct id_fragment, id_original, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery ORDER BY id_fragment ASC";	
-							$rs = mysqli_query($GLOBALS['conn'],$query);	
-							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
+						try {
+							$query = "SELECT distinct id_fragment, id_original,id_neuron, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ORDER BY type ";	
+							$rs = mysqli_query($GLOBALS['conn'],$query);			
+							while(list($id_fragment, $id_original,$id_neuron_conn, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
-							$quote_count++;	
-							if ($show1 == 1)
-							{
-								$type_show  = "";
-								$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY type ASC";
-								$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
-								$type_show = "";
-								while(list($type) = mysqli_fetch_row($rs_type))
-								{
-									$type_show  = $type_show . $type;
-								}				
-								if($color != ''){
-								if ($type_show == 'Axons')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-								if ($type_show == 'Dendrites')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-							    if ($type_show == 'Somata')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
-								if ($type_show == 'AxonsSomata')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
-								if ($type_show == 'AxonsDendrites')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
-								if ($type_show == 'DendritesSomata')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
-								if ($type_show == 'AxonsDendritesSomata')
-								print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
-								}
-								
-								if ($type_show == '')								
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'>");
-								
-								print ("<tr>");
-											
-								if ($type_show == 'Axons')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
-								if ($type_show == 'Dendrites')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");	
-								if ($type_show == 'Somata')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
-                                if ($type_show == 'AxonsSomata')	
-                                  print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
-                                if ($type_show == 'AxonsDendrites')	
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
-							    if ($type_show == 'DendritesSomata')
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
-								if ($type_show == 'AxonsDendritesSomata')
-                                 	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
-								if ($type_show == '')													
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'></td>");								
-								
-
-									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)*****************************
-									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+								$quote_count++;	
+								if ($show1 == 1)
+								{		
+									$type_show  = "";
+									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY type ASC";
+									$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
+									while(list($type) = mysqli_fetch_row($rs_type))
+									{
+										$type_show  = $type_show . $type;
+									}				
+								   
+								    // Logic for viewing image associated with evidence(quote)
+									if($color != ''){
+										if ($type_show == 'Axons')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
+										if ($type_show == 'Dendrites')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
+									    if ($type_show == 'Somata')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
+										if ($type_show == 'AxonsSomata')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
+										if ($type_show == 'AxonsDendrites')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
+										if ($type_show == 'DendritesSomata')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
+										if ($type_show == 'AxonsDendritesSomata')
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
+									}
+									if ($type_show == ''){								
+										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='known'>");
+									}
+									print ("<tr>");
+									if ($type_show == 'Axons')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
+									if ($type_show == 'Dendrites')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");	
+									if ($type_show == 'Somata')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+                                    if ($type_show == 'AxonsSomata')	
+                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+                                    if ($type_show == 'AxonsDendrites')	
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
+                                    if ($type_show == 'DendritesSomata')
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+									if ($type_show == 'AxonsDendritesSomata')
+                                      	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+									// known connection 
+									if ($type_show == ''){
+										if($known_unknown_flag==1){
+											if($number_of_quotes_axon!=0&&$number_of_quotes_dendrite!=0&&$number_of_quotes_somata!=0)
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+											else if($number_of_quotes_axon!=0&&$number_of_quotes_dendrite!=0)
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/axon-dendrite.png'></td>");
+											else if($number_of_quotes_axon!=0&&$number_of_quotes_somata!=0)
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+										}
+										else if($known_unknown_flag==-1){
+											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p></td>");
+										}
+									}
+									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
+									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron_conn);
 									$attachment = $attachment_obj -> getName();
 									$attachment_type = $attachment_obj -> getType();
 									$link_figure="";
@@ -1407,9 +1422,11 @@ function show_only_morphology(link, start1, stop1)
 									
 									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
 										$link_figure = "attachment/ephys/".$attachment_jpg;
-									}									
+									}
+									
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
+									// **************************************************************************************									
 									
 									print ("
 									<tr>	
@@ -1435,18 +1452,16 @@ function show_only_morphology(link, start1, stop1)
 										print("</td></tr>");
 	
 									print ("</table>");
-								
-									}		
-						}	
-					}
-					// if error occurs while retriving evidences show error message
-					catch (Exception $e) {
-						print ("<br><font class='font12'>Error Occured while processing.</font><br><br>");
-					}						
-				} 
-		?>
-
-			<!-- PAGINATION TABLE ********************************************************************** -->	
+	 							}		
+							}	
+						}
+						// if error occurs while retriving evidences show error message
+						catch (Exception $e) {
+							print ("<br><font class='font12'>Error Occured while processing.</font><br><br>");
+						}						
+					} 
+				?>
+			<!-- PAGINATION TABLE -->	
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>			
 						<td width="25%"></td>		
@@ -1467,7 +1482,8 @@ function show_only_morphology(link, start1, stop1)
 									$no_button_down = 1;
 								
 								if ($n_id_tot != 0){
-									print ("$page_in1 - $page_end1 of $n_id_tot articles ($quote_count Quotes)");	
+									if($neuron_show_only_value)
+										print ("$page_in1 - $page_end1 of $n_id_tot articles ($quote_count Quotes)");	
 								 
 								}
 								 // Last page:
@@ -1483,7 +1499,7 @@ function show_only_morphology(link, start1, stop1)
 							
 						&nbsp; &nbsp;
 						
-						<form action="property_page_morphology.php" method="post" style="display:inline">
+						<form action="property_page_connectivity.php" method="post" style="display:inline">
 							<?php 
 								if ($no_button_down == 1);
 								else
@@ -1496,7 +1512,7 @@ function show_only_morphology(link, start1, stop1)
 							<input type="hidden" name='stop' value='<?php print $page_end-10; ?>' />
 							
 						</form>	
-						<form action="property_page_morphology.php" method="post" style="display:inline">
+						<form action="property_page_connectivity.php" method="post" style="display:inline">
 						&nbsp; &nbsp;
 							
 							<?php 

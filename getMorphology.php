@@ -306,7 +306,7 @@ $n_SUB = 0;
 $n_EC = 0;
 
 //header("Content-type: application/json;charset=utf-8");
-$responce = (object) array('page' => 1, 'total' => $total_pages, 'records' =>$count, 'rows' => "", 'potential_array' =>$pon_conn_display_array);
+$responce = (object) array('page' => 1, 'total' => $total_pages, 'records' =>$count, 'rows' => "", 'potential_array' =>$pon_conn_display_array, 'potn_conn_neuron_pcl_array' =>$potn_conn_neuron_pcl);
 
 //$responce->page = $page;
 //$responce->total = $total_pages;
@@ -512,13 +512,13 @@ for ($i=0; $i < $number_type ; $i++) {
 */
 
 //special case neuron types
-$special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT type_id FROM EvidencePropertyTypeRel
+$special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
 WHERE perisomatic_targeting_flag=2) ORDER BY position";
 $result_special_case_basket = mysqli_query($GLOBALS['conn'], $special_case_basket);
 $special_neuron_id_basket = result_set_to_array($result_special_case_basket, 'id');
 
 // query to get axonic types
-$special_case_axo_axonic = "SELECT id FROM Type WHERE id in (SELECT DISTINCT type_id FROM EvidencePropertyTypeRel
+$special_case_axo_axonic = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
 WHERE perisomatic_targeting_flag=1) ORDER BY position";
 $result_special_case_axo_axonic = mysqli_query($GLOBALS['conn'], $special_case_axo_axonic);
 $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axonic, 'id');
@@ -547,9 +547,12 @@ while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQL_ASSOC))
 for ($i=0; $i < $number_type; $i++) {
   for ($j=0; $j < $number_type; $j++) {
     $pon_conn_display_array[$i][$j]=0;
+    $potn_conn_neuron_pcl[$i][$j]="";
   }
 }
-
+// create map
+$color_map=[AXONS_PRESENT => "red",AXONS_SOMA_PRESENT => "redSoma",DENDRITES_PRESENT => "blue",DENDRITES_SOMA_PRESENT => "blueSoma",
+AXONS_DENDRITES_PRESENT => "violet",AXONS_DENDRITES_SOMA_PRESENT => "violetSoma", ONLY_SOMA_PRESENT=> "somata"];
 // create connectivity matrix using morphology data
 for ($i = 0; $i < $number_type; $i++) {
     if (isset($id_search))
@@ -567,15 +570,41 @@ for ($i = 0; $i < $number_type; $i++) {
 					if ($pot_conn_array[$k][$src_column] == DENDRITES_PRESENT || $pot_conn_array[$k][$src_column] == DENDRITES_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_DENDRITES_SOMA_PRESENT) {
 						if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
 						    $pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
+						    // Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_INHIBITORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
+						    
 						} elseif($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
 							$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
+
+							// Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_EXCITATORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
 						}
 					}
 					if ($i == $k && ($pot_conn_array[$i][$j] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$i][$j] == AXONS_DENDRITES_SOMA_PRESENT)) {
 						if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
 							$pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
+
+							// Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_INHIBITORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
+
 						} else if ($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
 							$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
+
+							// Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_EXCITATORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
+
 						}
 					}
 				}
@@ -589,11 +618,24 @@ for ($i = 0; $i < $number_type; $i++) {
 		    if ($pot_conn_array[$i][$src_column] == AXONS_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_SOMA_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_DENDRITES_SOMA_PRESENT) { 
 		        for ($k = 0; $k < $number_type; $k++) {
 		            if ($pot_conn_array[$k][$src_column] == ONLY_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == DENDRITES_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_DENDRITES_SOMA_PRESENT) {
-						//$layer_array[$i][$k]=$col_array[$j];//for the clickable interface layer array
 						if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
 						  $pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
+
+						  // Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_INHIBITORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
+
 						} elseif($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
 						  $pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
+
+						  // Link code
+						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+						    P_EXCITATORY_CONN;
+						    $potn_conn_neuron_pcl[$i][$k]=$data;
+
 						}
 		            }
 		        }
@@ -618,5 +660,7 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
 	    }
     }
 }
+
 $responce->potential_array=$pon_conn_display_array;
+$responce->potn_conn_neuron_pcl_array=$potn_conn_neuron_pcl;
 ?>
