@@ -551,8 +551,8 @@ for ($i=0; $i < $number_type; $i++) {
   }
 }
 // create map
-$color_map=[AXONS_PRESENT => "red",AXONS_SOMA_PRESENT => "redSoma",DENDRITES_PRESENT => "blue",DENDRITES_SOMA_PRESENT => "blueSoma",
-AXONS_DENDRITES_PRESENT => "violet",AXONS_DENDRITES_SOMA_PRESENT => "violetSoma", ONLY_SOMA_PRESENT=> "somata"];
+$color_map=array(AXONS_PRESENT => "red",AXONS_SOMA_PRESENT => "redSoma",DENDRITES_PRESENT => "blue",DENDRITES_SOMA_PRESENT => "blueSoma",
+AXONS_DENDRITES_PRESENT => "violet",AXONS_DENDRITES_SOMA_PRESENT => "violetSoma", ONLY_SOMA_PRESENT=> "somata");
 // create connectivity matrix using morphology data
 for ($i = 0; $i < $number_type; $i++) {
     if (isset($id_search))
