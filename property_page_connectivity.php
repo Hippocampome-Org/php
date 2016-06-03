@@ -192,7 +192,8 @@ if ($page)
 	$sub_show_only = NULL;
 	$_SESSION['conn_sub_show_only'] = $sub_show_only;	
 	$name_show_only_article = 'all';
-	$name_show_only_journal = 'all';	
+	$name_show_only_journal = 'all';
+	$name_show_only_authors = 'all';	
 	
 	$id_neuron = $_REQUEST['id1_neuron'];
 	$val_property = $_REQUEST['val1_property'];
@@ -240,7 +241,8 @@ if ($page)
 	// default parameter for displaying evidences
 	$page_in = 0;
 	$page_end = 10;
-	$order_by = 'year';     
+	// default order
+	$order_by = '-';     
 	$type_order = 'DESC';
 	$_SESSION['order_by'] = $order_by;
 	$_SESSION['type_order'] = $type_order;
@@ -248,6 +250,11 @@ if ($page)
 }
 else
 {
+	$name_show_only = $_SESSION['conn_name_show_only'];
+	$_SESSION['conn_name_show_only'] = $name_show_only;
+	$name_show_only_journal = $_SESSION['conn_name_show_only_journal'];
+	$name_show_only_authors = $_SESSION['conn_name_show_only_authors'];
+	$name_show_only_article = $_SESSION['conn_name_show_only_article'];
 	$order_ok = $_REQUEST['order_ok'];
 	// clicked the Order By options
 	if ($order_ok == 'GO')             
@@ -348,6 +355,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'article_book')
 	{
 		$name_show_only_article = 'all';
+		$_SESSION['conn_name_show_only_article'] = $name_show_only_article;
 		$sub_show_only = 'article';
 		$_SESSION['conn_sub_show_only'] = $sub_show_only;
 	}
@@ -356,6 +364,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'name_journal')
 	{
 		$name_show_only_journal = 'all';
+		$_SESSION['conn_name_show_only_journal']=$name_show_only_journal;
 		$sub_show_only = 'name_journal';
 		$_SESSION['conn_sub_show_only'] = $sub_show_only;		
 	}
@@ -364,6 +373,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'authors')
 	{
 		$name_show_only_authors = 'all';
+		$_SESSION['conn_name_show_only_authors'] = $name_show_only_authors;
 		$sub_show_only = 'authors';
 		$_SESSION['conn_sub_show_only'] = $sub_show_only;			
 	}
@@ -377,7 +387,8 @@ if ($name_show_only_article_var)
 {
 	$name_show_only_article = $_REQUEST['name_show_only_article'];
 	$_SESSION['conn_name_show_only_article'] = $name_show_only_article;
-
+	$_SESSION['conn_name_show_only_journal'] = 'all';
+	$_SESSION['conn_name_show_only_authors'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -412,6 +423,9 @@ $name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
 if ($name_show_only_journal_var)
 {
 	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
+	$_SESSION['conn_name_show_only_journal'] = $name_show_only_journal;
+	$_SESSION['conn_name_show_only_article'] = 'all';
+	$_SESSION['conn_name_show_only_authors'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -425,15 +439,17 @@ if ($name_show_only_journal_var)
 	else{
 		$query = "UPDATE $name_temporary_table SET show_only =  '0' WHERE publication != '$name_show_only_journal'";
 	}
-	
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 } 
 	
 // AUTHORS OPTION - for clicked author's evidences(quotes) set the show only flag to 1 in temporary table 
 $name_show_only_authors_var  = $_REQUEST['name_show_only_authors_var'];
 if ($name_show_only_authors_var)
-{
+{	
 	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
+	$_SESSION['conn_name_show_only_authors'] = $name_show_only_authors;
+	$_SESSION['conn_name_show_only_article'] = 'all';
+	$_SESSION['conn_name_show_only_journal'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -498,22 +514,48 @@ function changeCheckbox(start1,stop1){
 	var dendrite = "";
 	var soma="";
 	var known="";
-	var count=0;
 	if (document.getElementById('axoncheck')&&document.getElementById('axoncheck').checked==true) {
 		axon="Axons";
-		count++;
 	}
 	if (document.getElementById('dendritecheck') && document.getElementById('dendritecheck').checked==true) {
 		dendrite="Dendrites";
-		count++;
 	}
 	if (document.getElementById('somatacheck') && document.getElementById('somatacheck').checked==true) {
 		soma="Somata";
-		count++;
 	}
 	if (document.getElementById('knowncheck') && document.getElementById('knowncheck').checked==true) {
 		known="Known";
-		count++;
+	}
+	var checkbox_clicked=axon+","+dendrite+","+soma+","+known;
+	var destination_page="property_page_connectivity.php";
+	location.href = destination_page+"?neuron_show_only_value="+checkbox_clicked+"&start="+start1+"&stop="+stop1+"&neuron_show_only=1";
+}
+function changePotentialCheckbox(start1,stop1){
+	var axon = "";
+	var dendrite = "";
+	var soma="";
+	var known="";
+	if (document.getElementById('axoncheck')&&document.getElementById('axoncheck').checked==true) {
+		axon="Axons";
+	}
+	if (document.getElementById('dendritecheck') && document.getElementById('dendritecheck').checked==true) {
+		dendrite="Dendrites";
+	}
+	if (document.getElementById('somatacheck') && document.getElementById('somatacheck').checked==true) {
+		soma="Somata";
+	}
+	if (document.getElementById('knowncheck') && document.getElementById('knowncheck').checked==true) {
+		known="Known";
+	}
+	if(document.getElementById('potentialcheck')&&document.getElementById('potentialcheck').checked==true){
+		axon="Axons";
+		dendrite="Dendrites";
+		soma="Somata";
+	}
+	if(document.getElementById('potentialcheck')&&document.getElementById('potentialcheck').checked==false){
+		axon="";
+		dendrite="";
+		soma="";
 	}
 	var checkbox_clicked=axon+","+dendrite+","+soma+","+known;
 	var destination_page="property_page_connectivity.php";
@@ -559,7 +601,6 @@ function show_only_authors(link, start1, stop1)
 	var destination_page = "property_page_connectivity.php";
 	location.href = destination_page+"?name_show_only_authors="+name+"&start=0&stop="+stop2+"&name_show_only_authors_var=1";
 }
-
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -812,7 +853,7 @@ function show_only_authors(link, start1, stop1)
 					$issue = $article -> getIssue();
 						
 						
-					// remove period in the title ------------------------------------------	
+					// remove period in the title 
 					if ($title[$ui] == '.')
 						$title[$ui] = '';	
 					
@@ -893,41 +934,61 @@ function show_only_authors(link, start1, stop1)
 					$pages= $first_page." - ".$last_page;
 					if ($page)
 					{
-						insert_temporary($name_temporary_table, $conn_fragment_id, $original_id, $conn_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $conn_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, '', $volume, $issue);
+						insert_temporary($name_temporary_table, $conn_fragment_id, $original_id, $conn_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $conn_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, 'Known', $volume, $issue);
 					}
 				}
 			}
-					// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+					
+					// find the total number of Articles: 
 					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$n_id_tot = 0;	 // Total number of articles:
 					while(list($id) = mysqli_fetch_row($rs))			
 						$n_id_tot = $n_id_tot + 1;
 
-					// find the total number of quotes of type axon: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE type='Axons'";	
+					// find the total number of quotes of type axon: 
+					$query = "SELECT total.count as totalcount,axon.count as axoncount,dendrite.count as dendritecount,
+							soma.count as somacount,known.count as knowncount
+							FROM
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table) as total,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Axons') as axon,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Dendrites') as dendrite,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Somata') as soma,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Known') as known
+							";	
 					$rs = mysqli_query($GLOBALS['conn'],$query);
-					$number_of_quotes_axon = 0;  // total number of axon quotes
-					while(list($id) = mysqli_fetch_row($rs))			
-						$number_of_quotes_axon = $number_of_quotes_axon + 1;	
+					$total_count_all=$number_of_quotes_axon = $number_of_quotes_dendrite=$number_of_quotes_somata=$number_of_quotes_known=0;
+					 // total number of axon quotes
+					while(list($total_count,$axon_count,$dendrite_count,$soma_count,$known_count) = mysqli_fetch_row($rs))	{		
+						$total_count_all=intval($total_count);
+						$number_of_quotes_axon = intval($axon_count);	
+						$number_of_quotes_dendrite = intval($dendrite_count);	
+						$number_of_quotes_somata = intval($soma_count);	
+						$number_of_quotes_known = intval($known_count);	
+					}
 				
-					// find the total number of quotes of type dendrite: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE  type='Dendrites'";	
+					$query = "SELECT total.count as totalcount,axon.count as axoncount,dendrite.count as dendritecount,
+							soma.count as somacount,known.count as knowncount
+							FROM
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE show_only=1) as total,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Axons' and show_only=1) as axon,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Dendrites' and show_only=1) as dendrite,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Somata' and show_only=1) as soma,
+							(SELECT DISTINCT count(quote) as count FROM $name_temporary_table WHERE type='Known' and show_only=1) as known
+							";	
 					$rs = mysqli_query($GLOBALS['conn'],$query);
-					$number_of_quotes_dendrite = 0;  // total number of dendrite quotes
-					while(list($id) = mysqli_fetch_row($rs))			
-						$number_of_quotes_dendrite = $number_of_quotes_dendrite + 1;
+					$show_only_total_count_all=$show_only_number_of_quotes_axon = $show_only_number_of_quotes_dendrite=$show_only_number_of_quotes_somata=$show_only_number_of_quotes_known=0;
+					 // total number of axon quotes
+					while(list($total_count,$axon_count,$dendrite_count,$soma_count,$known_count) = mysqli_fetch_row($rs))	{		
+						$show_only_total_count_all=intval($total_count);
+						$show_only_number_of_quotes_axon = intval($axon_count);	
+						$show_only_number_of_quotes_dendrite = intval($dendrite_count);	
+						$show_only_number_of_quotes_somata = intval($soma_count);	
+						$show_only_number_of_quotes_known = intval($known_count);	
+					}
 					
-					// find the total number of quotes of type somata: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-					$query = "SELECT DISTINCT quote FROM $name_temporary_table WHERE type='Somata'";	
-					$rs = mysqli_query($GLOBALS['conn'],$query);
-					$number_of_quotes_somata = 0;  // total number of somata quotes
-					while(list($id) = mysqli_fetch_row($rs))							
-						$number_of_quotes_somata = $number_of_quotes_somata + 1;
-				
-					// Get Articles title to view on connectivity property page				
 					if ($order_by == '-'){
-						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY type ASC LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT temp.title from (SELECT DISTINCT title,type FROM $name_temporary_table WHERE show_only = 1 ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ) temp LIMIT $page_in , 10";
 					}
 					else{
 						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
@@ -941,102 +1002,90 @@ function show_only_authors(link, start1, stop1)
 					}				
 				?>			
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
-					<tr>		
-						<?php 
-							// -----------------------------------------------------------------------------------------
-							if ($n_id_tot != 1)
-							{
-						?>			
-							<td width="8%">
-								<font class="font2">Order by:</font>
-							</td>
-							<td width="10%">				
-							<form action="property_page_connectivity.php" method="post" style="display:inline">
-								<select name='order' size='1' cols='10' class='select1'>
-								
-								<?php
-									if ($order_by)
-									{	
-										if ($order_by == 'year')
-											print ("<OPTION VALUE='$order_by'>Date</OPTION>");
-										if ($order_by == 'publication')
-											print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
-										if ($order_by == 'authors')
-											print ("<OPTION VALUE='$order_by'>Authors</OPTION>");							
-									}							
-								?>
-								<OPTION VALUE='-'>-</OPTION>
-								<OPTION VALUE='year'>Date</OPTION>
-								<OPTION VALUE='publication'>Journal / Book</OPTION>
-								<OPTION VALUE='authors'>First Authors</OPTION>
-								</select>
-						
-								</td>
-								<td width="8%">
-									<input type="submit" name='order_ok' value="GO"  />
-								</form>	
-								</td>
-						<?php
-							}
-							// ---------------------------------------------------------------------------------------------
-							else
-							{
-								print ("<td width='40%'></td>");
-							}
-						?>
-
-						<td width="45%">	
-							<form>
+					<tr>			
+						<td width="55%" align='center'>	
 								<?php 
 								// logic to view checkbox
 								$property_checked="".$neuron_show_only_value;
 								$property_checked=str_replace(",", "", $property_checked);
 								$property_checked=trim($property_checked);
-								if($number_of_quotes_axon != 0){
+								if($show_only_number_of_quotes_axon==0&&$number_of_quotes_axon != 0){
+									// don't print checkbox
+									//print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='axon' value='axon' id='axoncheck_disabled'  disabled > axon(from) </input></span>");
+								}
+								else if($number_of_quotes_axon != 0){
 									if(strstr($neuron_show_only_value,"Axons")){
-										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' checked ");
-										if($property_checked=="Axons")
+										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='axon' value='axon' id='axoncheck' checked ");
+										if($property_checked=="Axons"||(($show_only_number_of_quotes_dendrite+$show_only_number_of_quotes_somata+$show_only_number_of_quotes_known)== 0))
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)'>axon(from)</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)'>axon(from) </input></span>");
 									}
 									else
-										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' onclick='changeCheckbox($page_in,$page_end)'>axon(from)</input></span>");
+										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='axon' value='axon' id='axoncheck' onclick='changeCheckbox($page_in,$page_end)'>axon(from) </input></span>");
 								}
-								if($number_of_quotes_dendrite != 0){
+								if($show_only_number_of_quotes_dendrite==0&&$number_of_quotes_dendrite != 0){
+									// don't print checkbox
+									//print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='dendrite' value='dendrite' id='dendritecheck_disabled' disabled >dendrite(to) </input></span>");
+								}
+								else if($number_of_quotes_dendrite != 0){
 									if(strstr($neuron_show_only_value,"Dendrites")){
-										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck' checked ");
-										if($property_checked=="Dendrites")
+										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='dendrite' value='dendrite' id='dendritecheck' checked ");
+										if($property_checked=="Dendrites"||(($show_only_number_of_quotes_axon+$show_only_number_of_quotes_somata+$show_only_number_of_quotes_known)== 0))
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >dendrite(to)</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)' >dendrite(to) </input></span>");
 									}
 									else
-										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck'  onclick='changeCheckbox($page_in,$page_end)' >dendrite(to)</input></span>");
+										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='dendrite' value='dendrite' id='dendritecheck'  onclick='changeCheckbox($page_in,$page_end)' >dendrite(to) </input></span>");
 								}
-								if($number_of_quotes_somata != 0){
+								if($show_only_number_of_quotes_somata==0&&$number_of_quotes_somata != 0){
+									// don't print checkbox
+									//print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='somata' value='somata' id='somatacheck_disabled'  disabled >somata(to) </input></span>");
+								}
+								else if($number_of_quotes_somata != 0){
 									if(strstr($neuron_show_only_value,"Somata")){
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck' checked ");
-										if($property_checked=="Somata")
+										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='somata' value='somata' id='somatacheck' checked ");
+										if($property_checked=="Somata"||(($show_only_number_of_quotes_axon+$show_only_number_of_quotes_dendrite+$show_only_number_of_quotes_known)== 0))
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >somata(to)</input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)' >somata(to) </input></span>");
 									}
 									else
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck'  onclick='changeCheckbox($page_in,$page_end)' >somata(to)</input></span>");
+										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='somata' value='somata' id='somatacheck'  onclick='changeCheckbox($page_in,$page_end)' >somata(to) </input></span>");
 								}
-								if($known_unknown_flag ==1){
-									if(strstr($neuron_show_only_value,"Known")){
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='known' id='knowncheck' checked ");
-										if($property_checked=="Known")
-											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >known</input></span>");
+								if((($show_only_number_of_quotes_axon+$show_only_number_of_quotes_dendrite+$show_only_number_of_quotes_somata)== 0)&&(($number_of_quotes_axon+$number_of_quotes_dendrite+$number_of_quotes_somata)!= 0)){
+									// don't print checkbox
+									//print("<span style='color:rgb(0,0,0)' ><input type='checkbox' name='potential' value='potential' id='potentialcheck_disabled' opacity='0.1' disabled> potential  </input></span>");
+								}
+								else if(($number_of_quotes_axon+$number_of_quotes_dendrite+$number_of_quotes_somata)!= 0){
+									if(strstr($neuron_show_only_value,"Axons")||strstr($neuron_show_only_value,"Dendrites")||strstr($neuron_show_only_value,"Somata")){
+										print("<span style='color:rgb(0,0,0)' ><input type='checkbox' name='potential' value='potential' id='potentialcheck' checked ");
+										if(($known_unknown_flag ==1&&(!strstr($neuron_show_only_value,"Known")))||($known_unknown_flag==0)||$show_only_number_of_quotes_known==0)
+											print(" disabled  ");
+										print("onclick='changePotentialCheckbox($page_in,$page_end)' >potential </input></span>");
 									}
 									else
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' >known</input></span>");
+										print("<span style='color:rgb(0,0,0)' ><input type='checkbox' name='potential' value='potential' id='potentialcheck'  onclick='changePotentialCheckbox($page_in,$page_end)' >potential </input></span>");
+								}
+								if($show_only_number_of_quotes_known==0&&$known_unknown_flag ==1){
+									// don't print checkbox
+									//print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck_disabled' disabled>known </input></span>");
+								}
+								else if($known_unknown_flag ==1){
+									if(strstr($neuron_show_only_value,"Known")){
+										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck' checked ");
+										if($property_checked=="Known"||$show_only_total_count_all==$show_only_number_of_quotes_known)
+											print(" disabled ");
+										print("onclick='changeCheckbox($page_in,$page_end)'>known </input></span>");
+									}
+									else
+										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' >known </input></span>");
+								}
+								if($known_unknown_flag ==-1){
+									print("<span style='color:rgb(254,1,2)'><input type='checkbox' name='known' value='known' id='knowncheck'  checked disabled onclick='changeCheckbox($page_in,$page_end)' >known </input></span>");
 								}?>
-							</form>
 							
 						</td>
 	
-						<td width="40%" align="center">
+						<td width="25%" align="right">
 						<form action="property_page_connectivity.php" method="post" style="display:inline">
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
@@ -1051,14 +1100,10 @@ function show_only_authors(link, start1, stop1)
 				
 				<br />	
 				
-				<!-- TABLE SHOW ONLY *******************************************************************************************************************
-				************************************************************************************************************************************* -->				
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 				<tr>
-					<td width="8.5%" align="left">
-						<font class="font2">Show Only:</font> 
-					</td>
-					<td width="45%" align="left">
+					<td width="25%" align="left">
+						<font class="font2">Show:</font> 
 					<?php 
 						// show only dropdown
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, $page_in, '10')\">");
@@ -1082,11 +1127,12 @@ function show_only_authors(link, start1, stop1)
 						<OPTION VALUE='authors'>Authors</OPTION>
 						</select>					
 					</td>	
-					<td width="40%" align="left">
+					<td width="30%" align="center"> 
 					<?php 
-						// ARTICLE - BOOK: ++++++++++++++++++++++++
+						// ARTICLE - BOOK: 
 						if ($sub_show_only == 'article')
 						{
+							print("<font class='font2'>By:</font> ");
 							// retrieve the number of article or number of book:
 							$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table";	
 							$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -1124,13 +1170,11 @@ function show_only_authors(link, start1, stop1)
 								print ("<OPTION VALUE='article'>Article(s) ($number_of_articles_1)</OPTION>");
 								print ("</select>");
 							}							
-						}						
-					
-						// PUBLICATION - retrive the publication and evidences count associated with them 
+						}			
 						if ($sub_show_only == 'name_journal')
-						{						
-							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, $page_in, '10')\">");
-							
+						{		
+							print("<font class='font2'>By:</font> ");				
+							print ("<select name='order' size='1' cols='10' class='select1' style='width: 200px;'  onChange=\"show_only_publication(this, $page_in, '10')\">");
 							if ( ($name_show_only_journal != 'all') &&  ($name_show_only_journal != NULL) )
 								print ("<OPTION VALUE='$name_show_only_journal'>".stripslashes($name_show_only_journal)."</OPTION>");
 							
@@ -1156,9 +1200,11 @@ function show_only_authors(link, start1, stop1)
 						}
 						
 						// AUTHORS - retrive author and evidences count associated with them
-						$author_string="";
+						
 						if ($sub_show_only == 'authors')
 						{
+							print("<font class='font2'>By:</font> ");
+							$author_string="";
 							// retrieve the name of authors from temporary table:
 							$query ="SELECT distinct authors FROM $name_temporary_table";
 							$rs = mysqli_query($GLOBALS['conn'],$query);				
@@ -1181,13 +1227,13 @@ function show_only_authors(link, start1, stop1)
 								}
 							}
 							sort($unique_authors);
-							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_authors(this, $page_in, '10')\">");
+							print ("<select name='order' size='1' cols='10' class='select1' style='width: 200px;' onChange=\"show_only_authors(this, $page_in, '10')\">");
 							if ( ($name_show_only_authors != 'all') &&  ($name_show_only_authors != NULL) )
 							{
 								print ("<OPTION VALUE='$name_show_only_authors'>".stripslashes($name_show_only_authors)."</OPTION>");
 								print ("<OPTION VALUE='all'>-</OPTION>");
 							}
-							print ("<OPTION VALUE='all'> ALL </OPTION>");
+							print ("<OPTION VALUE='all'> All </OPTION>");
 							
 							for ($index=0; $index<count($unique_authors); $index++)
 							{
@@ -1206,6 +1252,40 @@ function show_only_authors(link, start1, stop1)
 						}						
 					?>	
 					</td>							
+					<?php 
+							if ($n_id_tot != 1)
+							{
+						?>			
+							<td width="25%" align="right">
+								<font class="font2">Order:</font>				
+							<form action="property_page_connectivity.php" method="post" style="display:inline">
+								<select name='order' size='1' cols='10' class='select1'>
+								<?php
+									if ($order_by)
+									{	
+										if ($order_by == 'year')
+											print ("<OPTION VALUE='$order_by'>Date</OPTION>");
+										if ($order_by == 'publication')
+											print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
+										if ($order_by == 'authors')
+											print ("<OPTION VALUE='$order_by'>First Authors</OPTION>");							
+									}							
+								?>
+								<OPTION VALUE='-'>-</OPTION>
+								<OPTION VALUE='year'>Date</OPTION>
+								<OPTION VALUE='publication'>Journal / Book</OPTION>
+								<OPTION VALUE='authors'>First Authors</OPTION>
+								</select>
+								<input type="submit" name='order_ok' value="GO"  />
+								</form>	
+							</td>
+						<?php
+							}
+							else
+							{
+								print ("<td width='25%'></td>");
+							}
+						?>
 				</tr>
 				</table>	
 				<br />
@@ -1218,13 +1298,14 @@ function show_only_authors(link, start1, stop1)
 				for ($i=0; $i<$n_id; $i++)
 				{	
 				
-					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' order by type ";					
+					// retrieve information about the authors, journals etc by using name of article:
+					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY type ";					
 					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
-							
+					//print($query);	
 					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
-					{			
+					{	
+						//print($id.":");		
 						$auth=array();
 						$authors2="";
 						$f_auth="";
@@ -1253,7 +1334,7 @@ function show_only_authors(link, start1, stop1)
 						$issue1 = $issue;
 					}					
 				
-					// TABLE OF THE ARTICLES: ************************************************************************************************
+					// TABLE OF THE ARTICLES: 
 						$first_author = NULL;
 						for ($yy=0; $yy<strlen($authors1); $yy++)
 						{
@@ -1338,83 +1419,82 @@ function show_only_authors(link, start1, stop1)
 							}
 						}	
 						$subquery=substr($subquery,0,count($subquery)-4);
-						$subquery=str_replace("Known", "", $subquery);
 						$subquery=$subquery.")";
 						// Retrive evidences stored in temporary table
 						try {
-							$query = "SELECT distinct id_fragment, id_original,id_neuron, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ORDER BY type ";	
-							$rs = mysqli_query($GLOBALS['conn'],$query);			
+							$query = "SELECT distinct id_fragment, id_original,id_neuron, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ";	
+							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment, $id_original,$id_neuron_conn, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
 								$quote_count++;	
 								if ($show1 == 1)
 								{		
 									$type_show  = "";
-									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY type ASC";
+									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY FIELD (type,'Axons','Dendrites','Somata','Known')";
 									$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
 									while(list($type) = mysqli_fetch_row($rs_type))
 									{
 										$type_show  = $type_show . $type;
 									}				
-								   
 								    // Logic for viewing image associated with evidence(quote)
-									if($color != ''){
+									if($type_show != ''){
 										if ($type_show == 'Axons')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-										if ($type_show == 'Dendrites')
+										else if ($type_show == 'Dendrites')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-									    if ($type_show == 'Somata')
+									    else if ($type_show == 'Somata')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
-										if ($type_show == 'AxonsSomata')
+										else if ($type_show == 'AxonsSomata')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
-										if ($type_show == 'AxonsDendrites')
+										else if ($type_show == 'AxonsDendrites')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
-										if ($type_show == 'DendritesSomata')
+										else if ($type_show == 'DendritesSomata')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
-										if ($type_show == 'AxonsDendritesSomata')
+										else if ($type_show == 'AxonsDendritesSomata')
 											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
-									}
-									if ($type_show == ''){								
-										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='known'>");
+										else if ($type_show == "Known")				
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='known'>");
+										else
+											print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='known'>");
+			
 									}
 									print ("<tr>");
 									if ($type_show == 'Axons')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
-									if ($type_show == 'Dendrites')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");	
-									if ($type_show == 'Somata')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
-                                    if ($type_show == 'AxonsSomata')	
-                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
-                                    if ($type_show == 'AxonsDendrites')	
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
-                                    if ($type_show == 'DendritesSomata')
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
-									if ($type_show == 'AxonsDendritesSomata')
-                                      	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon.png'></td>");
+									else if ($type_show == 'Dendrites')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/dendrite.png'></td>");	
+									else if ($type_show == 'Somata')		
+										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+                                    else if ($type_show == 'AxonsSomata')	
+                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+                                    else if ($type_show == 'AxonsDendrites')	
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon-dendrite.png'></td>");
+                                    else if ($type_show == 'DendritesSomata')
+										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+									else if ($type_show == 'AxonsDendritesSomata')
+                                      	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 									// known connection 
-									if ($type_show == ''){
+									if (strstr($type_show,"Known")){
 										if($known_unknown_flag==1){
 											if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:#339900;font-size:68%'>Known</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:#339900;font-size:68%'>Known</p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
 											else if(strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/axon.png'></td>");										   
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><img src='images/axon.png'></td>");										   
 											else if(strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><img src='images/dendrite.png'></td>");										  
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><img src='images/dendrite.png'></td>");										  
 											else if(strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'>  <p style='color:rgb(84,84,84);font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
-											else
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>Known</p></td>");										   
-
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
+											else if(strstr($neuron_show_only_value,"Known"))
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'> <p style='color:#339900;font-size:68%'>Known</p></td>");										   
 										}
 										else if($known_unknown_flag==-1){
-											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>Known</p></td>");
+											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:68%'>Known</p></td>");
 										}
 									}
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
@@ -1437,7 +1517,6 @@ function show_only_authors(link, start1, stop1)
 									
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
-									// **************************************************************************************									
 									
 									print ("
 									<tr>	
@@ -1475,7 +1554,7 @@ function show_only_authors(link, start1, stop1)
 			<!-- PAGINATION TABLE -->	
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>			
-						<td width="25%"></td>		
+						<td width="15%"></td>		
 						<td width="50%" align="center">
 							<font class="font3" id="combo-quote" style='display:block'>
 							<?php
@@ -1491,11 +1570,16 @@ function show_only_authors(link, start1, stop1)
 								
 								if ($page_in == 0) 
 									$no_button_down = 1;
-								
-								if ($n_id_tot != 0){
-									if($neuron_show_only_value)
-										print ("$page_in1 - $page_end1 of $n_id_tot articles ($quote_count Quotes)");	
-								 
+
+								$cnt=0;
+								$query = "SELECT distinct quote FROM $name_temporary_table WHERE show_only=1 $subquery";
+								$rs = mysqli_query($GLOBALS['conn'],$query);			
+								while(list($quote) = mysqli_fetch_row($rs))
+								{
+									$cnt++;
+								}
+								if($neuron_show_only_value&&$n_id_tot!=0){
+										print ("$page_in1 - $page_end1 of $n_id_tot articles ($cnt Quotes)");	
 								}
 								 // Last page:
 								 $last_page1 = $n_id_tot / 10;
@@ -1540,7 +1624,7 @@ function show_only_authors(link, start1, stop1)
 							<input type="hidden" name='value_last_page_final' value='<?php print $n_id_tot; ?>' />
 						</form>
 						</td>
-						<td width="25%"></td>	
+						<td width="15%"></td>	
 					</tr>
 				</table>
 
