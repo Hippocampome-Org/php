@@ -917,7 +917,7 @@ function show_only_authors(link, start1, stop1)
 						<OPTION VALUE='authors'>Authors</OPTION>
 						</select>					
 					</td>	
-					<td width="30%" align="center">
+					<td width="35%" align="center">
 					<?php 
 						// ARTICLE - BOOK: 
 						if ($sub_show_only == 'article')
@@ -1044,10 +1044,10 @@ function show_only_authors(link, start1, stop1)
 							if ($n_id_tot != 1)
 							{
 						?>			
-							<td width="25%" align="right">
+							<td width="20%" align="right">
 								<font class="font2">Order:</font>				
 							<form action="property_page_morphology.php" method="post" style="display:inline">
-								<select name='order' size='1' cols='10' class='select1'>
+								<select name='order' size='1' cols='10' class='select1' onchange="this.form.submit()">
 								<?php
 									if ($order_by)
 									{	
@@ -1064,7 +1064,7 @@ function show_only_authors(link, start1, stop1)
 								<OPTION VALUE='publication'>Journal / Book</OPTION>
 								<OPTION VALUE='authors'>First Authors</OPTION>
 								</select>
-								<input type="submit" name='order_ok' value="GO"  />
+								<input type="hidden" name='order_ok' value="GO"  />
 								</form>	
 							</td>
 						<?php
@@ -1338,7 +1338,7 @@ function show_only_authors(link, start1, stop1)
 								{
 									$cnt++;
 								}
-								if($neuron_show_only_value){
+								if($neuron_show_only_value&&$n_id_tot!=0){
 										print ("$page_in1 - $page_end1 of $n_id_tot articles ($cnt Quotes)");	
 								}
 								 // Last page:
