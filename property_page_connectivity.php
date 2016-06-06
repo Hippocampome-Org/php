@@ -674,7 +674,7 @@ function show_only_authors(link, start1, stop1)
 					if ($known_unknown_flag == 1)
 						$conn_type=$conn_type." and Known";
 					elseif ($known_unknown_flag == -1)
-						$conn_type=" Known Non";
+						$conn_type=" Refuted";
 					$conn_type=$conn_type." Connections ";
 					print ("<strong>$conn_type</strong>");
 				?>
@@ -694,7 +694,6 @@ function show_only_authors(link, start1, stop1)
 				
 		<?php
 		// for evidences coming from morphology page
-		if($known_unknown_flag!=-1){
 			for($conn_cnt=0;$conn_cnt<2;$conn_cnt++){
 			$neuron_id_conn=$conn_id_neuron[$conn_cnt];
 			$part=$conn_part[$conn_cnt];
@@ -891,7 +890,7 @@ function show_only_authors(link, start1, stop1)
 				}
 			  }	
 			}
-		}
+		
 			
 		// logic for retriving conndata evidences
 		if($known_unknown_flag==1||$known_unknown_flag==-1){
@@ -1090,13 +1089,20 @@ function show_only_authors(link, start1, stop1)
 										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck' checked ");
 										if($property_checked=="Known"||$show_only_total_count_all==$show_only_number_of_quotes_known)
 											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)'>known </input></span>");
+										print("onclick='changeCheckbox($page_in,$page_end)'><b>Known </b></input></span>");
 									}
 									else
-										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' >known </input></span>");
+										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' ><b>Known </b> </input></span>");
 								}
 								if($known_unknown_flag ==-1){
-									print("<span style='color:rgb(254,1,2)'><input type='checkbox' name='known' value='known' id='knowncheck'  checked disabled onclick='changeCheckbox($page_in,$page_end)' >known </input></span>");
+									if(strstr($neuron_show_only_value,"Known")){
+										print("<span style='color:rgb(254,1,2)' ><input type='checkbox' name='known' value='known' id='knowncheck' checked ");
+										if($property_checked=="Known"||$show_only_total_count_all==$show_only_number_of_quotes_known)
+											print(" disabled ");
+										print("onclick='changeCheckbox($page_in,$page_end)'><b>Refuted </b> </input></span>");
+									}
+									else
+										print("<span style='color:rgb(254,1,2)' ><input type='checkbox' name='known' value='known' id='knowncheck' checked disabled onclick='changeCheckbox($page_in,$page_end)' > <b>Refuted </b></input></span>");
 								}?>
 							
 						</td>
@@ -1374,10 +1380,10 @@ function show_only_authors(link, start1, stop1)
 							$type_show  = $type_show . $type;
 						}
 						//echo "$type_show";
-						if($known_unknown_flag==-1){
+						if($known_unknown_flag==-1&&strstr($type_show,"Known")){
 							print(" <td width='5%' align='center' bgcolor=red  valign='center'> ");
 						}
-						else if(strstr($type_show,"Known")){
+						else if($known_unknown_flag==1&&strstr($type_show,"Known")){
 							print(" <td width='5%' align='center' bgcolor='#339900'  valign='center'> ");
 						}
 						else{
@@ -1481,41 +1487,56 @@ function show_only_authors(link, start1, stop1)
 									}
 									print ("<tr>");
 									if ($type_show == 'Axons')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon.png'></td>");
+										print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon.png'></td>");
 									else if ($type_show == 'Dendrites')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/dendrite.png'></td>");	
+										print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/dendrite.png'></td>");	
 									else if ($type_show == 'Somata')		
-										print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+										print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
                                     else if ($type_show == 'AxonsSomata')	
-                                        print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+                                        print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
                                     else if ($type_show == 'AxonsDendrites')	
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon-dendrite.png'></td>");
+										print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><img src='images/axon-dendrite.png'></td>");
                                     else if ($type_show == 'DendritesSomata')
-										print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+										print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
 									else if ($type_show == 'AxonsDendritesSomata')
-                                      	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+                                      	print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'><p style='color:rgb(0,0,0);font-size:60%'>Potential</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 									// known connection 
 									if (strstr($type_show,"Known")){
 										if($known_unknown_flag==1){
 											if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:#339900;font-size:70%'><b>Known</b></p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:#339900;font-size:70%'><b>Known</b></p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
 											else if(strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon.png'></td>");										   
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon.png'></td>");										   
 											else if(strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/dendrite.png'></td>");										  
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/dendrite.png'></td>");										  
 											else if(strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
 											else if(strstr($neuron_show_only_value,"Known"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'> <p style='color:#339900;font-size:70%'><b>Known</b></p></td>");										   
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'> <p style='color:#339900;font-size:70%'><b>Known</b></p></td>");										   
 										}
 										else if($known_unknown_flag==-1){
-											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:70%'><b>Known</b></p></td>");
+											if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><img src='images/axon-dendrite.png'></td>");
+											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
+											else if(strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
+											else if(strstr($neuron_show_only_value,"Axons"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><img src='images/axon.png'></td>");										   
+											else if(strstr($neuron_show_only_value,"Dendrites"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><img src='images/dendrite.png'></td>");										  
+											else if(strstr($neuron_show_only_value,"Somata"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:rgb(254,1,2);font-size:70%'><b>Refuted</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
+											else if(strstr($neuron_show_only_value,"Known"))
+												print ("<td width='15.5%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:70%'><b> Refuted</b></p></td>");
 										}
 									}
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
