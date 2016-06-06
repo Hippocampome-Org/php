@@ -1024,6 +1024,7 @@ function show_only_authors(link, start1, stop1)
 								$property_checked="".$neuron_show_only_value;
 								$property_checked=str_replace(",", "", $property_checked);
 								$property_checked=trim($property_checked);
+								//echo "$property_checked....$neuron_show_only_value";
 								if($show_only_number_of_quotes_axon==0&&$number_of_quotes_axon != 0){
 									// don't print checkbox
 									//print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='axon' value='axon' id='axoncheck_disabled'  disabled > axon(from) </input></span>");
@@ -1073,7 +1074,7 @@ function show_only_authors(link, start1, stop1)
 								else if(($number_of_quotes_axon+$number_of_quotes_dendrite+$number_of_quotes_somata)!= 0){
 									if(strstr($neuron_show_only_value,"Axons")||strstr($neuron_show_only_value,"Dendrites")||strstr($neuron_show_only_value,"Somata")){
 										print("<span style='color:rgb(0,0,0)' ><input type='checkbox' name='potential' value='potential' id='potentialcheck' checked ");
-										if(($known_unknown_flag ==1&&(!strstr($neuron_show_only_value,"Known")))||($known_unknown_flag==0)||$show_only_number_of_quotes_known==0)
+										if(($known_unknown_flag !=0&&(!strstr($neuron_show_only_value,"Known")))||($known_unknown_flag==0)||$show_only_number_of_quotes_known==0)
 											print(" disabled  ");
 										print("onclick='changePotentialCheckbox($page_in,$page_end)' >potential </input></span>");
 									}
@@ -1094,7 +1095,11 @@ function show_only_authors(link, start1, stop1)
 									else
 										print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck'  onclick='changeCheckbox($page_in,$page_end)' ><b>Known </b> </input></span>");
 								}
-								if($known_unknown_flag ==-1){
+								if($show_only_number_of_quotes_known==0&&$known_unknown_flag ==-1){
+									// don't print checkbox
+									//print("<span style='color:#339900' ><input type='checkbox' name='known' value='known' id='knowncheck_disabled' disabled>known </input></span>");
+								}
+								else if($known_unknown_flag ==-1){
 									if(strstr($neuron_show_only_value,"Known")){
 										print("<span style='color:rgb(254,1,2)' ><input type='checkbox' name='known' value='known' id='knowncheck' checked ");
 										if($property_checked=="Known"||$show_only_total_count_all==$show_only_number_of_quotes_known)
@@ -1102,7 +1107,7 @@ function show_only_authors(link, start1, stop1)
 										print("onclick='changeCheckbox($page_in,$page_end)'><b>Refuted </b> </input></span>");
 									}
 									else
-										print("<span style='color:rgb(254,1,2)' ><input type='checkbox' name='known' value='known' id='knowncheck' checked disabled onclick='changeCheckbox($page_in,$page_end)' > <b>Refuted </b></input></span>");
+										print("<span style='color:rgb(254,1,2)' ><input type='checkbox' name='known' value='known' id='knowncheck' onclick='changeCheckbox($page_in,$page_end)' > <b>Refuted </b></input></span>");
 								}?>
 							
 						</td>
