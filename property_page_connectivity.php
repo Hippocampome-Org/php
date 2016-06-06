@@ -510,6 +510,8 @@ $author = new author($class_author);
 //================changes===========================
 // checkbox clicked hence change the selection and store it in session 
 function changeCheckbox(start1,stop1){
+	start1 = 0;
+	stop1 = 10;
 	var axon = "";
 	var dendrite = "";
 	var soma="";
@@ -531,6 +533,8 @@ function changeCheckbox(start1,stop1){
 	location.href = destination_page+"?neuron_show_only_value="+checkbox_clicked+"&start="+start1+"&stop="+stop1+"&neuron_show_only=1";
 }
 function changePotentialCheckbox(start1,stop1){
+	start1 = 0;
+	stop1 = 10;
 	var axon = "";
 	var dendrite = "";
 	var soma="";
@@ -939,8 +943,20 @@ function show_only_authors(link, start1, stop1)
 				}
 			}
 					
+
+					// Logic to form dynamic query to retrive evidences(axon,dendrite,soma & known) depending on checkbox selection 
+					$subquery=" and ( ";
+					$property_array=split(",",$neuron_show_only_value);
+					for($index=0;$index<count($property_array);$index++){
+						if($property_array[$index]){
+							$subquery=$subquery."type like '".$property_array[$index]."' or ";
+						}
+					}	
+					$subquery=substr($subquery,0,count($subquery)-4);
+					$subquery=$subquery.")";
+
 					// find the total number of Articles: 
-					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
+					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 $subquery";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$n_id_tot = 0;	 // Total number of articles:
 					while(list($id) = mysqli_fetch_row($rs))			
@@ -988,10 +1004,10 @@ function show_only_authors(link, start1, stop1)
 					}
 					
 					if ($order_by == '-'){
-						$query = "SELECT DISTINCT temp.title from (SELECT DISTINCT title,type FROM $name_temporary_table WHERE show_only = 1 ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ) temp LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT temp.title from (SELECT DISTINCT title,type FROM $name_temporary_table WHERE show_only = 1 $subquery ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ) temp LIMIT $page_in , 10";
 					}
 					else{
-						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 $subquery ORDER BY $order_by $type_order LIMIT $page_in , 10";
 					}
 					$rs = mysqli_query($GLOBALS['conn'],$query);					
 					$n_id = 0;
@@ -1349,10 +1365,24 @@ function show_only_authors(link, start1, stop1)
 						print ("
 							<tr>
 							<td width='10%' align='center'>
-							</td>
-							<td width='5%' align='center' class='table_neuron_page2' valign='center'>
-						");							
-						
+							</td> ");
+						$type_show  = "";
+						$query = "SELECT distinct type FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ";	
+						$rs = mysqli_query($GLOBALS['conn'],$query);	
+						while(list($type) = mysqli_fetch_row($rs))
+						{	
+							$type_show  = $type_show . $type;
+						}
+						//echo "$type_show";
+						if($known_unknown_flag==-1){
+							print(" <td width='5%' align='center' bgcolor=red  valign='center'> ");
+						}
+						else if(strstr($type_show,"Known")){
+							print(" <td width='5%' align='center' bgcolor='#339900'  valign='center'> ");
+						}
+						else{
+							print(" <td width='5%' align='center' class='table_neuron_page2' valign='center'> ");
+						}						
 						if ($show1 == 0)
 						{
 							print ("<form action='property_page_connectivity.php' method='post' style='display:inline'>");
@@ -1410,16 +1440,7 @@ function show_only_authors(link, start1, stop1)
 						</table>");
 						
 						// TABLE for Quotes: 
-						// Logic to form dynamic query to retrive evidences(axon,dendrite,soma & known) depending on checkbox selection 
-						$subquery=" and ( ";
-						$property_array=split(",",$neuron_show_only_value);
-						for($index=0;$index<count($property_array);$index++){
-							if($property_array[$index]){
-								$subquery=$subquery."type like '".$property_array[$index]."' or ";
-							}
-						}	
-						$subquery=substr($subquery,0,count($subquery)-4);
-						$subquery=$subquery.")";
+						
 						// Retrive evidences stored in temporary table
 						try {
 							$query = "SELECT distinct id_fragment, id_original,id_neuron, quote, page_location FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ORDER BY FIELD (type,'Known','Axons','Dendrites','Somata') ";	
@@ -1477,24 +1498,24 @@ function show_only_authors(link, start1, stop1)
 									if (strstr($type_show,"Known")){
 										if($known_unknown_flag==1){
 											if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:#339900;font-size:68%'>Known</p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:#339900;font-size:70%'><b>Known</b></p> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:#339900;font-size:68%'>Known</p><img src='images/axon-dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'> <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon-dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");
 											else if(strstr($neuron_show_only_value,"Dendrites")&&strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
+												print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");
 											else if(strstr($neuron_show_only_value,"Axons"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><img src='images/axon.png'></td>");										   
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/axon.png'></td>");										   
 											else if(strstr($neuron_show_only_value,"Dendrites"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><img src='images/dendrite.png'></td>");										  
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><img src='images/dendrite.png'></td>");										  
 											else if(strstr($neuron_show_only_value,"Somata"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:68%'>Known</p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'>  <p style='color:#339900;font-size:70%'><b>Known</b></p><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");										   
 											else if(strstr($neuron_show_only_value,"Known"))
-												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'> <p style='color:#339900;font-size:68%'>Known</p></td>");										   
+												print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'> <p style='color:#339900;font-size:70%'><b>Known</b></p></td>");										   
 										}
 										else if($known_unknown_flag==-1){
-											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:68%'>Known</p></td>");
+											print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(254,1,2);font-size:70%'><b>Known</b></p></td>");
 										}
 									}
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
