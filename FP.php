@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Help</title>
+<title>Firing Patterns</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -46,9 +46,13 @@ div.WordSection1
 	
 <BR><BR><BR><BR><BR>
 
-<IMG SRC="images/FP/FP_matrix.jpg">
-	
 <!-- ------------------------ -->
+
+You can view all of the firing pattern parameters in an online <a href="images/FP/Firing_pattern_parameters.htm">spreadsheet</a>
+
+<p>
+
+<IMG SRC="images/FP/FP_matrix.jpg">
 
 </body>
 
