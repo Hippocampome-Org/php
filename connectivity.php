@@ -747,7 +747,7 @@ $(function(){
 			</tr>
 			<tr height="20">
 				<td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
-				<td><font class='font5'>Known Non-Connections</font></td>
+				<td><font class='font5'>Refuted Connections</font></td>
 				<td align="right"><font class='font5'><p id="id_Unknowncount"></p></font></td> 
 				<!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
 			</tr>
