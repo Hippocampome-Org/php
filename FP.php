@@ -48,9 +48,9 @@ div.WordSection1
 
 <!-- ------------------------ -->
 
-You can view all of the firing pattern parameters in an online <a href="images/FP/Firing_pattern_parameters.htm">spreadsheet</a>.
-	
-<BR>
+You can view all of the firing pattern parameters in an online <a href="images/FP/Firing_pattern_parameters.htm">spreadsheet</a>
+
+<p>
 
 <IMG SRC="images/FP/FP_matrix.jpg">
 
