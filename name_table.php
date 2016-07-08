@@ -17,4 +17,6 @@
 	$class_evidenceevidencerel='EvidenceEvidenceRel';
 	$class_epdataevidencerel='EpdataEvidenceRel';
 	$class_epdata='Epdata';
+	$class_firing_pattern='FiringPattern';
+	$class_firing_pattern_rel='FiringPatternRel';
 ?>

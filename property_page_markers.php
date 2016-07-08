@@ -167,8 +167,19 @@ function header_row_special($title, $value) {
               }              
 
 $page = $_REQUEST['page'];
+$sub_show_only = $_SESSION['conn_sub_show_only']; 
+$name_show_only_article = $_SESSION['conn_name_show_only_article'];
+
 if ($page)
 {
+	$name_show_only = 'all';
+	$_SESSION['marker_name_show_only'] = $name_show_only;
+	$sub_show_only = NULL;
+	$_SESSION['marker_sub_show_only'] = $sub_show_only;	
+	$name_show_only_article = 'all';
+	$name_show_only_journal = 'all';
+	$name_show_only_authors = 'all';
+
 	$id_neuron = $_REQUEST['id_neuron'];
 	$val_property = $_REQUEST['val_property'];
 	$color = $_REQUEST['color'];
@@ -207,7 +218,7 @@ if ($page)
 	
 	
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$val_property_temp.$color_temporary_table.'__'.$time_t;
-	$_SESSION['name_temporary_table'] = $name_temporary_table;
+	$_SESSION['marker_name_temporary_table'] = $name_temporary_table;
 	create_temp_table ($name_temporary_table);
 
 	// default order by:
@@ -216,11 +227,15 @@ if ($page)
 	$_SESSION['order_by'] = $order_by;
 	$_SESSION['type_order'] = $type_order;
 	
-	$name_show_only = 'all';
-	$sub_show_only = NULL;
 }
 else
 {
+	$name_show_only = $_SESSION['marker_name_show_only'];
+	$_SESSION['marker_name_show_only'] = $name_show_only;
+	$name_show_only_journal = $_SESSION['marker_name_show_only_journal'];
+	$name_show_only_authors = $_SESSION['marker_name_show_only_authors'];
+	$name_show_only_article = $_SESSION['marker_name_show_only_article'];
+
 	$color=$_SESSION['colore'];	
 
 	$order_ok = $_REQUEST['order_ok'];
@@ -234,20 +249,20 @@ else
 		else
 			$type_order = 'ASC';
 
-		$_SESSION['type_order'] = $type_order;
-
-		$sub_show_only = $_REQUEST['sub_show_only'];		
-		$_SESSION['sub_show_only'] = $sub_show_only;			
+		$_SESSION['type_order'] = $type_order;			
+	}
+	else{
+		$order_by = $_SESSION['order_by'];
+		$type_order = $_SESSION['type_order'];
 	}
 
 	$flag = $_REQUEST['flag'];
 	
 	$id_neuron = $_SESSION['id_neuron'];
 	$val_property = $_SESSION['val_property'];
-	$sub_show_only = $_SESSION['sub_show_only'];
 
 	
-	$name_temporary_table = $_SESSION['name_temporary_table'];
+	$name_temporary_table = $_SESSION['marker_name_temporary_table'];
 	$id_change = $_REQUEST['id_change'];
 
 	// update the show1 variable in the temporary table:	
@@ -304,21 +319,21 @@ if ($name_show_only_var)
 	$type_order = $_SESSION['type_order'];
 
 	$name_show_only = $_REQUEST['name_show_only'];
-	$_SESSION['name_show_only'] = $name_show_only;
+	$_SESSION['marker_name_show_only'] = $name_show_only;
 	
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['name_temporary_table'];
+	$name_temporary_table = $_SESSION['marker_name_temporary_table'];
 	
 	$sub_show_only = $_REQUEST['sub_show_only'];
-	$_SESSION['sub_show_only'] = $sub_show_only;	
+	$_SESSION['marker_sub_show_only'] = $sub_show_only;	
 	
 
 	// Option: All:
 	if ($name_show_only == 'all')
 	{
 		$sub_show_only = 'all';
-		$_SESSION['sub_show_only'] = $sub_show_only;
+		$_SESSION['marker_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
@@ -327,8 +342,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'article_book')
 	{
 		$name_show_only_article = 'all';
+		$_SESSION['marker_name_show_only_article'] = $name_show_only_article;
 		$sub_show_only = 'article';
-		$_SESSION['sub_show_only'] = $sub_show_only;
+		$_SESSION['marker_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -337,8 +353,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'name_journal')
 	{
 		$name_show_only_journal = 'all';
+		$_SESSION['marker_name_show_only_journal']=$name_show_only_journal;
 		$sub_show_only = 'name_journal';
-		$_SESSION['sub_show_only'] = $sub_show_only;
+		$_SESSION['marker_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -347,8 +364,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'authors')
 	{
 		$name_show_only_authors = 'all';
+		$_SESSION['marker_name_show_only_authors'] = $name_show_only_authors;
 		$sub_show_only = 'authors';
-		$_SESSION['sub_show_only'] = $sub_show_only;
+		$_SESSION['marker_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -358,7 +376,7 @@ if ($name_show_only_var)
 	{
 		$name_show_only_morphology = 'both';
 		$sub_show_only = 'morphology';
-		$_SESSION['sub_show_only'] = $sub_show_only;
+		$_SESSION['marker_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -375,15 +393,17 @@ if ($name_show_only_article_var)
 	$order_by = $_SESSION['order_by'];
 	$type_order = $_SESSION['type_order'];
 
-	$sub_show_only = $_SESSION['sub_show_only'];
+	$sub_show_only = $_SESSION['marker_sub_show_only'];
 		
 	$name_show_only_article = $_REQUEST['name_show_only_article'];
-	$_SESSION['name_show_only_article'] = $name_show_only_article;
+	$_SESSION['marker_name_show_only_article'] = $name_show_only_article;
+	$_SESSION['marker_name_show_only_journal'] = 'all';
+	$_SESSION['marker_name_show_only_authors'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['name_temporary_table'];
+	$name_temporary_table = $_SESSION['marker_name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -418,15 +438,17 @@ if ($name_show_only_journal_var)
 	$order_by = $_SESSION['order_by'];
 	$type_order = $_SESSION['type_order'];
 
-	$sub_show_only = $_SESSION['sub_show_only'];
+	$sub_show_only = $_SESSION['marker_sub_show_only'];
 				
 	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
-	$_SESSION['name_show_only_journal'] = $name_show_only_journal;
+	$_SESSION['marker_name_show_only_journal'] = $name_show_only_journal;
+	$_SESSION['marker_name_show_only_article'] = 'all';
+	$_SESSION['marker_name_show_only_authors'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['name_temporary_table'];
+	$name_temporary_table = $_SESSION['marker_name_temporary_table'];
 
 	$query = "UPDATE $name_temporary_table SET show2 =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -448,15 +470,17 @@ if ($name_show_only_authors_var)
 	$order_by = $_SESSION['order_by'];
 	$type_order = $_SESSION['type_order'];
 
-	$sub_show_only = $_SESSION['sub_show_only'];
+	$sub_show_only = $_SESSION['marker_sub_show_only'];
 			
 	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
-	$_SESSION['name_show_only_authors'] = $name_show_only_authors;
+	$_SESSION['marker_name_show_only_authors'] = $name_show_only_authors;
+	$_SESSION['marker_name_show_only_article'] = 'all';
+	$_SESSION['marker_name_show_only_journal'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['name_temporary_table'];
+	$name_temporary_table = $_SESSION['marker_name_temporary_table'];
 
 
 	if ($name_show_only_authors == 'all')
@@ -1309,80 +1333,54 @@ else {
 				$n_show1 = $n_show1 + 1;
 		}			
 	?>
-		<!-- ORDER BY: _______________________________________________________________________________________________________ -->
-		<table width="80%" border="0" cellspacing="2" cellpadding="0">
-			<tr>		
-				<?php 
-					// -----------------------------------------------------------------------------------------
-					if ($n_show1 != 1)
-					{
-				?>			
-					<td width="10%">
-						<font class="font2">Order by:</font>
-					</td>
-					<td width="20%">				
-					<form action="property_page_markers.php" method="POST" style="display:inline">
-						<select name='order' size='1' cols='10' class='select1'>
-						
-						<?php
-							if ($order_by)
-							{	
-								if ($order_by == 'year')
-									print ("<OPTION VALUE='$order_by'>Date</OPTION>");
-								if ($order_by == 'publication')
-									print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
-								if ($order_by == 'authors')
-									print ("<OPTION VALUE='$order_by'>Authors</OPTION>");							
-							}							
-						?>
-						<OPTION VALUE='-'>-</OPTION>
-						<OPTION VALUE='year'>Date</OPTION>
-						<OPTION VALUE='publication'>Journal / Book</OPTION>
-						<OPTION VALUE='authors'>First Authors</OPTION>
-						</select>
-				
-						</td>
-						<td width="10%">
-							<input type="submit" name='order_ok' value="GO"  />
-							<input type="hidden" name='color' value='<?php print $color ?>'  />
-							<input type="hidden" name='sub_show_only' value='<?php print $sub_show_only ?>'  />
-							
- 						</form>	
-						</td>
-				<?php
-					}
-					// ---------------------------------------------------------------------------------------------
-					else
-					{
-						print ("<td width='40%'></td>");
-					}
-				?>
-
-				<td width="10%">
-				</td>
-				<td width="50%" align="center">
+	<table width="80%" border="0" cellspacing="2" cellpadding="0">
+		<tr>
+			<td width="20%" align="left">
+				<font class="font2">Animal:</font> 
+				<select id='animal_select' onchange='evidencetoggle()' style='width: 100px;' class='select1'>
+				<OPTION VALUE='all' >All</OPTION>
+				<OPTION VALUE='rat'>Rat</OPTION>
+				<OPTION VALUE='mouse'>Mouse</OPTION>
+				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
+				</select>					
+			</td>
+			<td width="20%" align="center">
+				<font class="font2">Protocol:</font> 
+				<select id='protocol_select' onchange='evidencetoggle()' style='width: 100px;' class='select1'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
+				<OPTION VALUE='mRNA'>mRNA</OPTION>
+				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
+				<OPTION VALUE='unknown'>unknown</OPTION>
+				</select>					
+			</td>
+	 				
+			<td width="20%" align="right">
+				<font class="font2">Expression:</font> 
+				<select id='expression_select' onchange='evidencetoggle()' class='select1'>
+				<OPTION VALUE='all'>All</OPTION>
+				<OPTION VALUE='positive'>positive</OPTION>
+				<OPTION VALUE='negative'>negative</OPTION>
+				<!--OPTION VALUE='positive and negative'>positive and negative</OPTION-->
+				</select>					
+			</td>
+			<td width="30%" align="right">
+					</form>	
 					<button  type="button" onclick ="evidencetoggle()" >Open All Evidence</button>
 					<button  type="button" onclick ="evidencetoggleclose()" >Close All Evidence</button>
 					<?php print ("<input type='hidden' name='name_show_only' value='$name_show_only'>"); ?>
 					</form>				
-				</td>						
-			</tr>
-		</table>
-
-		<br />	
-	<?php		
-	if ($n_show1 < 2);
-	else
-	{
-	?>
-		<!-- TABLE SHOW ONLY *******************************************************************************************************************
-		************************************************************************************************************************************* -->				
+			</td>	
+			
+		</tr>
+	</table>
+	<!--   END TABLE SHOW ONLY ***************************************************************************************************************-->
+	<br/>
+		<!-- ORDER BY: _______________________________________________________________________________________________________ -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<tr>
 			<td width="25%" align="left">
-				<font class="font2">Show Only:</font> 
-			</td>
-			<td width="35%" align="left">
+				<font class="font2">Show:</font> 
 			<?php 
 				print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, '$color')\">");
 					
@@ -1410,13 +1408,14 @@ else {
 				</select>					
 			</td>
 		
-			<td width="40%" align="left">
+			<td width="35%" align="center">
 			<?php 
 				// ARTICLE - BOOK: ++++++++++++++++++++++++
 
 				if ($sub_show_only == 'article')
 				{
 					// retrieve the number of article or number of book:
+					print("<font class='font2'>By:</font> ");
 					$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table WHERE show1 = '1'";	
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$number_of_articles_1 = 0;
@@ -1459,7 +1458,8 @@ else {
 				// PUBLICATION: ++++++++++++++++++++++++
 				if ($sub_show_only == 'name_journal')
 				{						
-					print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, '$color')\">");
+					print("<font class='font2'>By:</font> ");
+					print ("<select name='order' size='1' cols='10' class='select1' style='width: 200px;' onChange=\"show_only_publication(this, '$color')\">");
 					
 					if ( ($name_show_only_journal != 'all') &&  ($name_show_only_journal != NULL) )
 						print ("<OPTION VALUE='$name_show_only_journal'>$name_show_only_journal</OPTION>");
@@ -1490,6 +1490,7 @@ else {
 				if ($sub_show_only == 'authors')
 				{
 					// retrieve the name of authors from temporary table:
+					print("<font class='font2'>By:</font> ");
 					$query ="SELECT DISTINCT authors FROM $name_temporary_table WHERE show1 = '1'";
 					$rs = mysqli_query($GLOBALS['conn'],$query);				
 					
@@ -1540,63 +1541,56 @@ else {
 				}						
 			?>	
 			</td>							
-		</tr>
-		</table>
-		<!-- END TABLE SHOW ONLY ***************************************************************************************************************
-		************************************************************************************************************************************* -->	
-	<?php
-	}
-	?>
+	
+				<?php 
+					// -----------------------------------------------------------------------------------------
+					if ($n_show1 != 1)
+					{
+				?>			
+					<td width="25%" align="right">
+						<font class="font2">Order:</font>				
+					<form action="property_page_markers.php" method="POST" style="display:inline">
+						<select name='order' size='1' cols='10' class='select1' onchange="this.form.submit()">
+						
+						<?php
+							if ($order_by)
+							{	
+								if ($order_by == 'year')
+									print ("<OPTION VALUE='$order_by'>Date</OPTION>");
+								if ($order_by == 'publication')
+									print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
+								if ($order_by == 'authors')
+									print ("<OPTION VALUE='$order_by'>Authors</OPTION>");							
+							}							
+						?>
+						<OPTION VALUE='year'>-</OPTION>
+						<OPTION VALUE='year'>Date</OPTION>
+						<OPTION VALUE='publication'>Journal / Book</OPTION>
+						<OPTION VALUE='authors'>First Authors</OPTION>
+						</select>
+						<input type="hidden" name='order_ok' value="GO"/>
+ 						</form>	
+						</td>
+				<?php
+					}
+					// ---------------------------------------------------------------------------------------------
+					else
+					{
+						print ("<td width='25%'></td>");
+					}
+				?>
 
-		<br />
+		</table>
+
+		<br />	
+
 
 		<!-- TABLE SHOW ONLY *******************************************************************************************************************
 		************************************************************************************************************************************* -->				
-		<table width="80%" border="0" cellspacing="2" cellpadding="0">
-		<tr>
-			<td width="15%" align="left">
-				<font class="font2">Animal:</font> 
-			</td>
-			
-			<td width="30%" align="left">
-				<select id='animal_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all' >All</OPTION>
-				<OPTION VALUE='rat'>Rat</OPTION>
-				<OPTION VALUE='mouse'>Mouse</OPTION>
-				<OPTION VALUE='unspecified rodent'>Unspecified rodent</OPTION>
-				</select>					
-			</td>
-				<td width="15%" align="left">
-				<font class="font2">Protocol:</font> 
-			</td>
-			<td width="40%" align="left">
-				<select id='protocol_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all'>All</OPTION>
-				<OPTION VALUE='immunohistochemistry'>Immunohistochemistry</OPTION>
-				<OPTION VALUE='mRNA'>mRNA</OPTION>
-				<OPTION VALUE='immunohistochemistry and mRNA'>Immunohistochemistry and mRNA</OPTION>
-				<OPTION VALUE='unknown'>unknown</OPTION>
-				</select>					
-			</td>
-	 				
-			<td width="15%" align="left">
-				<font class="font2">Expression:</font> 
-			</td>
-			<td width="40%" align="left">
-				<select id='expression_select' onchange='evidencetoggle()'>
-				<OPTION VALUE='all'>All</OPTION>
-				<OPTION VALUE='positive'>positive</OPTION>
-				<OPTION VALUE='negative'>negative</OPTION>
-				<!--OPTION VALUE='positive and negative'>positive and negative</OPTION-->
-				</select>					
-			</td>
-			
-		</tr>
-	</table>
-	<!--   END TABLE SHOW ONLY ***************************************************************************************************************-->
-	<br/>
+		
 
 	<?php		
+
 		// Select only DOI, to have the exact number of articles and to show only one time the name of article.
 		$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue, secondary_pmid FROM $name_temporary_table ORDER BY $order_by $type_order ";	
 		//$query = "SELECT DISTINCT authors, title, publication, year, PMID, pages, pmcid, NIHMSID, doi, citation, show2, show_button, volume, issue, secondary_pmid FROM $name_temporary_table";

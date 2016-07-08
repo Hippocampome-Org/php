@@ -106,7 +106,12 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 	
 	?>
 <body>
-	<div class="table_position_search_page">
+	<div class="table_position_search_page" align='center'>
+	<table width="80%" border="0" cellspacing="2" cellpadding="0">
+		<tr>
+			<td width="80%" align="center" class="table_neuron_page3">Molecular Markers</td>			
+		</tr>			
+	</table>
 <?php 
 
 $n_result_tot = 0;
@@ -182,12 +187,11 @@ foreach ($predicateArr as $k => $v)
 	if(count($marker_id) > 0)
 	{
 ?>
-		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
-			<tr>
-				<td align="center" width="5%">&nbsp;</td>
-				<td align="center" width="10%">&nbsp;</td>
-				<td align="center" width='30%' class="table_neuron_page3"><?php echo $predicateArr[$k] ?></td>
-				<td align="right" width="55%">&nbsp;</td>
+
+		<table  border="0" width='80%' border='0' cellspacing='2' cellpadding='0'>
+			<tr>				
+				<td align="center" width='20%' class='table_neuron_page1'><?php echo $predicateArr[$k] ?></td>
+				<td align="left" width="60%" class='table_neuron_page1'>&nbsp;</td>
 			</tr>
 <?php
 		foreach ($marker_id as $idToConsider) {
@@ -210,7 +214,7 @@ foreach ($predicateArr as $k => $v)
 				
 				$id_t = $id;
 				$name_type = $type -> getNickname();
-				
+				$inhib_excit=$type->getExcit_Inhib();
 				if ((!empty($conf_notes_pi) && array_key_exists($id_t, $conf_notes_pi)) ||
 						(!empty($conf_notes_ni) && array_key_exists($id_t, $conf_notes_ni)))
 					$name_type = $name_type . " (inference)";					
@@ -241,12 +245,11 @@ foreach ($predicateArr as $k => $v)
 						$evidencepropertyyperel -> retrieve_conflict_note($objArr['negative_inference'], $id);
 						$conflict_note = $evidencepropertyyperel -> getConflict_note();
 					}
-				
-					//if ($unvetted == 1)
-					//	$font_col = 'font4_unvetted';
-					//else
-					//	$font_col = 'font4';
-					
+					if ($inhib_excit == 'e') {
+					    $font_class = 'font10a';
+					} else { 
+						$font_class = 'font11';
+					}
 					$mixed_conflict = $conflict_note;
 					
 					if (!$mixed_conflict)
@@ -254,15 +257,25 @@ foreach ($predicateArr as $k => $v)
 				}
 		
 ?>			<tr>
-				<td align='center' width='5%'>&nbsp;</td>
-				<td align='center' width='10%' class='table_neuron_page4'><?php print $n_result_tot?></td>
-				<td align='center' width='30%' class='table_neuron_page4'><a href='neuron_page.php?id=<?php echo $id_t ?>'><?php if($k!='mixed') {?><font class='font13'><?php } else {?><font class='<?php echo $font_col?>'><?php } echo $subregion_type." ".$name_type; if($k=='mixed'){ echo " (".$mixed_conflict.")"; } ?></font></a></td>
-				<td align='right' width='55%'>&nbsp;</td>
+				<td align='right' width='20%' ></td>
+				<td align='left' width='60%' class='table_neuron_page2'> 
+					<a href='neuron_page.php?id=<?php echo $id_t ?>'>
+						<?php if($inhib_excit == 'e'){?>
+						<font class='font10a'>
+						<?php } else {?>
+						<font class='font11'>
+						<?php } 
+						echo $subregion_type." ".$name_type; if($k=='mixed')
+						{ echo " (".$mixed_conflict.")"; } 
+						?>
+					</font>
+				</a>
+			</td>
 			</tr>
 <?php			}
 		}
 ?>
-		</table><br /> 
+		</table> 
 <?php }
 	  else {
 ?>

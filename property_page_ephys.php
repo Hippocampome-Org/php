@@ -397,6 +397,11 @@ if ($page) // Come from another page
 }
 else
 {
+	$name_show_only = $_SESSION['name_show_only'];
+	$_SESSION['name_show_only'] = $name_show_only;
+	$name_show_only_journal = $_SESSION['name_show_only_journal'];
+	$name_show_only_authors = $_SESSION['name_show_only_authors'];
+	$name_show_only_article = $_SESSION['name_show_only_article'];
 	$order_ok = $_REQUEST['order_ok'];
 	if ($order_ok == 'GO')             // Was clicked the Order By options
 	{
@@ -480,6 +485,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'article_book')
 	{
 		$name_show_only_article = 'all';
+		$_SESSION['name_show_only_article'] = $name_show_only_article;
 		$sub_show_only = 'article';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
@@ -490,6 +496,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'name_journal')
 	{
 		$name_show_only_journal = 'all';
+		$_SESSION['name_show_only_journal']=$name_show_only_journal;
 		$sub_show_only = 'name_journal';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
@@ -500,6 +507,7 @@ if ($name_show_only_var)
 	if ($name_show_only == 'authors')
 	{
 		$name_show_only_authors = 'all';
+		$_SESSION['name_show_only_authors'] = $name_show_only_authors;
 		$sub_show_only = 'authors';
 		$_SESSION['sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
@@ -518,6 +526,8 @@ if ($name_show_only_article_var)
 {
 	$name_show_only_article = $_REQUEST['name_show_only_article'];
 	$_SESSION['name_show_only_article'] = $name_show_only_article;
+	$_SESSION['name_show_only_journal'] = 'all';
+	$_SESSION['name_show_only_authors'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
@@ -555,6 +565,8 @@ if ($name_show_only_journal_var)
 {
 	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
 	$_SESSION['name_show_only_journal'] = $name_show_only_journal;
+	$_SESSION['name_show_only_article'] = 'all';
+	$_SESSION['name_show_only_authors'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
@@ -579,6 +591,8 @@ if ($name_show_only_authors_var)
 {
 	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
 	$_SESSION['name_show_only_authors'] = $name_show_only_authors;
+	$_SESSION['name_show_only_article'] = 'all';
+	$_SESSION['name_show_only_journal'] = 'all';
 
 	$name_show_only = $_SESSION['name_show_only'];
 	$page_in = $_REQUEST['start'];
@@ -1732,57 +1746,86 @@ function show_only_ephys(link, start1, stop1)
 				<!-- ORDER BY: _______________________________________________________________________________________________________ -->
 
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
-					<tr>		
-						<?php 
-							// -----------------------------------------------------------------------------------------
-							if ($n_id_tot != 1)
-							{
-						?>			
-							<td width="10%"><font class="font2">Order by:</font></td>
-								<td width="20%">
-									<form action="property_page_ephys.php" method="post"
-										style="display: inline">
-										<select name='order' size='1' cols='10' class='select1'>
-								
-								<?php
-									if ($order_by)
-									{	
-										if ($order_by == 'year')
-											print ("<OPTION VALUE='$order_by'>Date</OPTION>");
-										if ($order_by == 'publication')
-											print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
-										if ($order_by == 'authors')
-											print ("<OPTION VALUE='$order_by'>Authors</OPTION>");							
-									}							
-								?>
-								<OPTION VALUE='-'>-</OPTION>
-											<OPTION VALUE='year'>Date</OPTION>
-											<OPTION VALUE='publication'>Journal / Book</OPTION>
-											<OPTION VALUE='authors'>First Authors</OPTION>
-										</select>
-								
-								</td>
-								<td width="10%"><input type="submit" name='order_ok' value="GO" />
-									</form></td>
-						<?php
-							}
-							// ---------------------------------------------------------------------------------------------
-							else
-							{
-								print ("<td width='40%'></td>");
-							}
-						?>
-
+					<tr>
+						<td width='15%' align='left'>
+								<font class='font2'>Animal:</font>
 						
-						<td width="40%" align="center">
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_animal(this, $page_in, '10')\">");
+						if ($name_show_animal)
+						{
+							if ($name_show_animal == 'All')
+								$name_show_animal1 = 'All';
+							if ($name_show_animal == 'Rats')
+								$name_show_animal1 = 'Rats';								
+							if ($name_show_animal== 'Mice')
+								$name_show_animal1 = 'Mice';
+							
+							print ("<OPTION VALUE='$name_show_animal1'>$name_show_animal1</OPTION>");
+							print ("<OPTION VALUE='All'>----</OPTION>");
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Rats'>Rats</OPTION>
+						<OPTION value='Mice'>Mice</OPTION>
+						</td>
+						
+						<td width='25%' align='center'>
+						<font class='font2'>Protocol:</font>
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_protocol(this, $page_in, '10')\">");
+						if ($name_show_protocol)
+						{
+							if ($name_show_protocol == 'All')
+								$name_show_protocol1 = 'All';
+							if ($name_show_protocol == 'Patch_Clamp')
+								$name_show_protocol1 = 'Patch Clamp';
+							if ($name_show_protocol == 'Microelectrodes')
+								$name_show_protocol1 = 'Microelectrodes';								
+							
+							print ("<OPTION VALUE='$name_show_protocol1'>$name_show_protocol1</OPTION>");
+							print ("<OPTION VALUE='All'>----</OPTION>");
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Patch_Clamp'>Patch Clamp</OPTION>
+						<OPTION value='Microelectrodes'>Microelectrodes</OPTION>
+						</td>
+						
+						
+						<td width='20%' align='right'>
+						<font class='font2'>Temperature:</font>
+						
+						<?php 
+						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_temperature(this, $page_in, '10')\">");
+						if ($name_show_temperature)
+						{
+							if ($name_show_temperature == 'All')
+								$name_show_temperature1 = 'All';
+							if ($name_show_temperature == 'Body')
+								$name_show_temperature1 = 'Body';								
+							if ($name_show_temperature== 'Room')
+								$name_show_temperature1 = 'Room';
+							if ($name_show_temperature== 'Unknown')
+								$name_show_temperature1 = 'Unknown';
+							
+							print ("<OPTION VALUE='$name_show_temperature1'>$name_show_temperature1</OPTION>");
+							print ("<OPTION VALUE='All'>----</OPTION>");
+						}
+						?>
+						<OPTION value='All'>All</OPTION>
+						<OPTION value='Body'>Body</OPTION>
+						<OPTION value='Room'>Room</OPTION>
+						<OPTION value='Unknown'>Unknown</OPTION>
+						</select>
+						</td>		
+						<td width="30%" align="right">
 						<form action="property_page_ephys.php" method="post" style="display: inline">
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start'value='<?php print $page_in; ?>' /> 
 						<input type="hidden" name='stop' value='<?php print $page_end; ?>' />
 						<?php print ("<input type='hidden' name='name_show_only' value='$name_show_only'>"); ?>
-						
-						
 						</form>
 						</td>
 					</tr>
@@ -1794,14 +1837,10 @@ function show_only_ephys(link, start1, stop1)
 				************************************************************************************************************************************* -->
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 				<tr>
-					<td width="15%" align="left">
-						<font class="font2">Show Only:</font>
-					</td>
-					<td width="45%" align="left">
+					<td width="25%" align="left">
+						<font class="font2">Show:</font>
 					<?php 
 						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only(this, $page_in, '10')\">");
-						
-				
 						if ($name_show_only)
 						{
 							if ($name_show_only == 'all')
@@ -1824,11 +1863,12 @@ function show_only_ephys(link, start1, stop1)
 						<OPTION VALUE='authors'>Authors</OPTION>
 						</select>
 					</td>
-					<td width="40%" align="left">
+					<td width="35%" align="center">
 					<?php 
 						// ARTICLE - BOOK: ++++++++++++++++++++++++
 						if ($sub_show_only == 'article')
 						{
+							print("<font class='font2'>By:</font> ");
 							// retrieve the number of article or number of book:
 							$query = "SELECT DISTINCT title, PMID FROM $name_temporary_table";	
 							$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -1872,7 +1912,8 @@ function show_only_ephys(link, start1, stop1)
 						// PUBLICATION: ++++++++++++++++++++++++
 						if ($sub_show_only == 'name_journal')
 						{						
-							print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_only_publication(this, $page_in, '10')\">");
+							print("<font class='font2'>By:</font> ");
+							print ("<select name='order' size='1' cols='10' class='select1' style='width: 200px;'  onChange=\"show_only_publication(this, $page_in, '10')\">");
 							
 							if ( ($name_show_only_journal != 'all') &&  ($name_show_only_journal != NULL) )
 								print ("<OPTION VALUE='$name_show_only_journal'>$name_show_only_journal</OPTION>");
@@ -1902,6 +1943,7 @@ function show_only_ephys(link, start1, stop1)
 						$aut1 = NULL;
 						if ($sub_show_only == 'authors')
 						{
+							print("<font class='font2'>By:</font> ");
 							// retrieve the name of authors from temporary table:
 							$query ="SELECT DISTINCT authors FROM $name_temporary_table";
 							$rs = mysqli_query($GLOBALS['conn'],$query);				
@@ -1934,7 +1976,7 @@ function show_only_ephys(link, start1, stop1)
 							if ( ($name_show_only_authors != 'all') &&  ($name_show_only_authors != NULL) )
 							{
 								print ("<OPTION VALUE='$name_show_only_authors'>$name_show_only_authors</OPTION>");
-								print ("<OPTION VALUE='all'>---</OPTION>");
+								print ("<OPTION VALUE='all'>----</OPTION>");
 							}
 							print ("<OPTION VALUE='all'> ALL </OPTION>");
 							
@@ -1954,6 +1996,44 @@ function show_only_ephys(link, start1, stop1)
 						}						
 					?>	
 					</td>
+					<?php 
+							// -----------------------------------------------------------------------------------------
+							if ($n_id_tot != 1)
+							{
+						?>			
+							<td width="20%" align="right">
+								<font class="font2">Order:</font>
+								<form action="property_page_ephys.php" method="post"
+								style="display: inline">
+								<select name='order' size='1' cols='10' class='select1' onchange="this.form.submit()">
+								
+								<?php
+									if ($order_by)
+									{	
+										if ($order_by == 'year')
+											print ("<OPTION VALUE='$order_by'>Date</OPTION>");
+										if ($order_by == 'publication')
+											print ("<OPTION VALUE='$order_by'>Journal / Book</OPTION>");
+										if ($order_by == 'authors')
+											print ("<OPTION VALUE='$order_by'>Authors</OPTION>");							
+									}							
+								?>
+								<OPTION VALUE='year'>----</OPTION>
+								<OPTION VALUE='year'>Date</OPTION>
+								<OPTION VALUE='publication'>Journal / Book</OPTION>
+								<OPTION VALUE='authors'>First Authors</OPTION>
+								</select>
+								<input type="hidden" name='order_ok' value="GO"/>								
+								</form>
+							</td>
+						<?php
+							}
+							// ---------------------------------------------------------------------------------------------
+							else
+							{
+								print ("<td width='25%'></td>");
+							}
+						?>
 				</tr>
 				</table> 
 				<!-- END TABLE SHOW ONLY ***************************************************************************************************************
@@ -1962,89 +2042,7 @@ function show_only_ephys(link, start1, stop1)
 				<br />
 				
 				<!-- Animal and protocol and temperature-->
-						<table width='80%' border='0' cellspacing='2' cellpadding='5'>
-						<tr>
-								<td width='10%' align='left'>
-								<font class='font2'>Animal:</font>
-								</td>
-								<td width='20%' align='left'>
 						
-						<?php 
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_animal(this, $page_in, '10')\">");
-						if ($name_show_animal)
-						{
-							if ($name_show_animal == 'All')
-								$name_show_animal1 = 'All';
-							if ($name_show_animal == 'Rats')
-								$name_show_animal1 = 'Rats';								
-							if ($name_show_animal== 'Mice')
-								$name_show_animal1 = 'Mice';
-							
-							print ("<OPTION VALUE='$name_show_animal1'>$name_show_animal1</OPTION>");
-							print ("<OPTION VALUE='All'>----</OPTION>");
-						}
-						?>
-						<OPTION value='All'>All</OPTION>
-						<OPTION value='Rats'>Rats</OPTION>
-						<OPTION value='Mice'>Mice</OPTION>
-						</td>
-						
-						<td width='10%' align='left'>
-						<font class='font2'>Protocol:</font>
-						</td>
-						<td width='20%' align='left'>
-						<?php 
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_protocol(this, $page_in, '10')\">");
-						if ($name_show_protocol)
-						{
-							if ($name_show_protocol == 'All')
-								$name_show_protocol1 = 'All';
-							if ($name_show_protocol == 'Patch_Clamp')
-								$name_show_protocol1 = 'Patch Clamp';
-							if ($name_show_protocol == 'Microelectrodes')
-								$name_show_protocol1 = 'Microelectrodes';								
-							
-							print ("<OPTION VALUE='$name_show_protocol1'>$name_show_protocol1</OPTION>");
-							print ("<OPTION VALUE='All'>----</OPTION>");
-						}
-						?>
-						<OPTION value='All'>All</OPTION>
-						<OPTION value='Patch_Clamp'>Patch Clamp</OPTION>
-						<OPTION value='Microelectrodes'>Microelectrodes</OPTION>
-						</td>
-						
-						
-						<td width='10%' align='left'>
-						<font class='font2'>Temperature:</font>
-						</td>
-						<td width='20%' align='left'>
-						
-						<?php 
-						print ("<select name='order' size='1' cols='10' class='select1' onChange=\"show_temperature(this, $page_in, '10')\">");
-						if ($name_show_temperature)
-						{
-							if ($name_show_temperature == 'All')
-								$name_show_temperature1 = 'All';
-							if ($name_show_temperature == 'Body')
-								$name_show_temperature1 = 'Body';								
-							if ($name_show_temperature== 'Room')
-								$name_show_temperature1 = 'Room';
-							if ($name_show_temperature== 'Unknown')
-								$name_show_temperature1 = 'Unknown';
-							
-							print ("<OPTION VALUE='$name_show_temperature1'>$name_show_temperature1</OPTION>");
-							print ("<OPTION VALUE='All'>----</OPTION>");
-						}
-						?>
-						<OPTION value='All'>All</OPTION>
-						<OPTION value='Body'>Body</OPTION>
-						<OPTION value='Room'>Room</OPTION>
-						<OPTION value='Unknown'>Unknown</OPTION>
-						</select>
-						</td>
-						</tr>
-						</table>
-		
 			<?php
 			
 			// There are no results available:
