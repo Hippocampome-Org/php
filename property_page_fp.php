@@ -633,6 +633,9 @@ function show_only_authors(link, start1, stop1)
 				$pages= $first_page." - ".$last_page;
 				if ($page)
 				{
+					$fp_quote = quote_replaceIDwithName($fp_quote);
+					$interpretation = quote_replace_IDwithName($interpretation);
+					$linking_quote = quote_replaceIDwithName($linking_quote);
 					insert_temporary($name_temporary_table, $fp_id,$fp_fragment_id, $original_id, $fp_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $fp_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $volume, $issue,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim);
 				}
 			}
@@ -1046,7 +1049,7 @@ function show_only_authors(link, start1, stop1)
 										$link_figure = "attachment/morph/".$attachment_jpg;
 									}
 									
-									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
+									if($attachment_type=="fp_figure"||$attachment_type=="fp_table"){
 										$link_figure = "attachment/fp/".$attachment_jpg;
 									}
 									
@@ -1145,7 +1148,7 @@ function show_only_authors(link, start1, stop1)
 											</td>
 											<td width='15%' class='table_neuron_page2' align='center'>");
 							
-										if ($attachment_type=="ephys_figure"||$attachment_type=="ephys_table")
+										if ($attachment_type=="fp_figure"||$attachment_type=="fp_table")
 										{
 											//print($link_figure);
 											print ("<a href='$link_figure' target='_blank'>");

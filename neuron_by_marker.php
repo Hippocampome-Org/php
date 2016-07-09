@@ -97,19 +97,30 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 <!-- COPY IN ALL PAGES -->
-<div class='title_area'>
-	<font class="font1"><?php echo $title?></font>
-</div>
+
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 	
 	?>
 <body>
-	<div class="table_position_search_page" align='center'>
+	<div class='title_area'>
+	<font class="font1"><?php echo $title?></font>
+	</div>
+	
+	<div align='center'>
+	<table width="85%" border="0" cellspacing="2" cellpadding="0" class='body_table'>
+
+	<tr height="50">
+		<td></td>
+	</tr>
+	<tr>
+    <td align="center">
+		<br/><br/><br/>
+				
 	<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<tr>
-			<td width="80%" align="center" class="table_neuron_page3">Molecular Markers</td>			
+			<td width="20%" align="center" class="table_neuron_page3">Molecular Markers</td>			
 		</tr>			
 	</table>
 <?php 
@@ -184,16 +195,18 @@ foreach ($predicateArr as $k => $v)
 		list($marker_id, $conf_notes_unknown) = markers_search($evidencepropertyyperel, $property_1, $type, $k, $parameter);
 	}
 	
-	if(count($marker_id) > 0)
-	{
+	
 ?>
 
 		<table  border="0" width='80%' border='0' cellspacing='2' cellpadding='0'>
 			<tr>				
 				<td align="center" width='20%' class='table_neuron_page1'><?php echo $predicateArr[$k] ?></td>
-				<td align="left" width="60%" class='table_neuron_page1'>&nbsp;</td>
+				<td align="left" width="80%" class='table_neuron_page1'></td>
 			</tr>
+
 <?php
+	if(count($marker_id) > 0)
+	{
 		foreach ($marker_id as $idToConsider) {
 			$id = $idToConsider;
 			
@@ -258,7 +271,7 @@ foreach ($predicateArr as $k => $v)
 		
 ?>			<tr>
 				<td align='right' width='20%' ></td>
-				<td align='left' width='60%' class='table_neuron_page2'> 
+				<td align='left' width='80%' class='table_neuron_page2'> 
 					<a href='neuron_page.php?id=<?php echo $id_t ?>'>
 						<?php if($inhib_excit == 'e'){?>
 						<font class='font10a'>
@@ -268,7 +281,6 @@ foreach ($predicateArr as $k => $v)
 						echo $subregion_type." ".$name_type; if($k=='mixed')
 						{ echo " (".$mixed_conflict.")"; } 
 						?>
-					</font>
 				</a>
 			</td>
 			</tr>
@@ -279,9 +291,16 @@ foreach ($predicateArr as $k => $v)
 <?php }
 	  else {
 ?>
-	  	<div><font class="font3"><?php echo "No ".$k." type found " ?></font></div><br/>
+		<tr>
+				<td align='right' width='20%' ></td>
+	  	<td align='left' width='80%' class='table_neuron_page2'> 
+	  		<div><font><?php echo "No ".$k." type found " ?></font></div>
+	  	</td>
+	  </tr>
 <?php }
 	}?>
 	</table>
+	<br/><br/><br/>
 	</div>
 </body>
+</html>
