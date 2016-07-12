@@ -32,7 +32,7 @@ $firingpatternrel = new firingpatternrel($class_firing_pattern_rel);
 include ("function/icon.html"); 
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Pattern page</title>
+<title>Firing Pattern Parameter</title>
 <script src="lightbox/js/jquery-1.7.2.min.js"></script>
 <script src="lightbox/js/lightbox.js"></script>
 <link href="lightbox/css/lightbox.css" rel="stylesheet"/>

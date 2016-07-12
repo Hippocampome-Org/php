@@ -219,7 +219,12 @@ if ($page)
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
 	$time_t = time();
-	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.str_replace(".", "", $parameter).'__'.$time_t;
+	if($parameter=="-"){
+		$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron."_".'__'.$time_t;
+	}
+	else{
+		$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.str_replace(".", "", $parameter).'__'.$time_t;
+	}
 	$_SESSION['fp_name_temporary_table'] = $name_temporary_table;
 	create_temp_table($name_temporary_table);	
 	// add connection and its properties to session for future use
@@ -520,7 +525,7 @@ function show_only_authors(link, start1, stop1)
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
 	$name=$type->getNickname();
-	print("<title>Evidence - $name ($val_property)</title>");
+	print("<title>Evidence - $name ($parameter)</title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
@@ -590,7 +595,7 @@ function show_only_authors(link, start1, stop1)
     </table>
 		<br />			
 				
-		<?php			
+		<?php	
 		// logic for retriving conndata evidences
 			$query_to_get_fp_evidence = "SELECT fp.id as firing_pattern_id,f.id,f.original_id,f.dt,f.quote,f.page_location,f.pmid_isbn ,a.id,a.title,a.publication,a.year,a.pmid_isbn,
 					a.first_page,a.last_page,a.pmcid,a.nihmsid,a.doi,a.open_access,a.citation_count,a.volume,a.issue,f.interpretation,f.interpretation_notes,f.linking_pmid_isbn,f.linking_pmid_isbn_page,f.linking_quote,f.linking_page_location,fr.istim_pa as istim,fr.tstim_ms as tstim									
@@ -601,12 +606,10 @@ function show_only_authors(link, start1, stop1)
 					AND ef.Evidence_id=ae.Evidence_id
 					AND ae.Article_id=a.id
 					AND fp.overall_fp like '$parameter' AND  fr.Type_id='$id_neuron' AND fp.definition_parameter like 'parameter' ";
-			//echo $query_to_get_fp_evidence;
 			$fp_evidence_rs = mysqli_query($GLOBALS['conn'],$query_to_get_fp_evidence);
 			$id_neuron_fp=$id_neuron;
 			// get the article associated with these fragments
 			while(list($fp_id,$fp_fragment_id,$original_id,$fp_dt,$fp_quote,$fp_page_location,$fp_pmid_isbn,$id_article,$title,$publication,$year,$pmid_isbn,$first_page,$last_page,$pmcid,$nihmsid,$doi,$open_access,$citation_count,$volume,$issue,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim) = mysqli_fetch_row($fp_evidence_rs))	{		
-				//print(":$linking_quote");
 				if ($title[$ui] == '.')
 					$title[$ui] = '';	
 				$articleauthorrel -> retrive_author_position($id_article);
@@ -640,22 +643,8 @@ function show_only_authors(link, start1, stop1)
 				}
 			}
 								
-
-					// Logic to form dynamic query to retrive evidences(axon,dendrite,soma & known) depending on checkbox selection 
-					/*
-					$subquery=" and ( ";
-					$property_array=split(",",$neuron_show_only_value);
-					for($index=0;$index<count($property_array);$index++){
-						if($property_array[$index]){
-							$subquery=$subquery."type like '".$property_array[$index]."' or ";
-						}
-					}	
-					$subquery=substr($subquery,0,count($subquery)-4);
-					$subquery=$subquery.")";
-					*/
-					$subquery="";
 					// find the total number of Articles: 
-					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 $subquery";
+					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$n_id_tot = 0;	 // Total number of articles:
 					while(list($id) = mysqli_fetch_row($rs))			
@@ -679,10 +668,10 @@ function show_only_authors(link, start1, stop1)
 					}
 					
 					if ($order_by == '-'){
-						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 $subquery LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 LIMIT $page_in , 10";
 					}
 					else{
-						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 $subquery ORDER BY $order_by $type_order LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
 					}
 					$rs = mysqli_query($GLOBALS['conn'],$query);					
 					$n_id = 0;
@@ -1021,7 +1010,7 @@ function show_only_authors(link, start1, stop1)
 						
 						// Retrive evidences stored in temporary table
 						try {
-							$query = "SELECT id_fragment,fp_id, id_original,id_neuron,interpretation,interpretation_notes,linking_pmid_isbn,linking_pmid_isbn_page,linking_quote,linking_page_location, quote, page_location, istim,tstim FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery group by id_fragment ";	
+							$query = "SELECT id_fragment,fp_id, id_original,id_neuron,interpretation,interpretation_notes,linking_pmid_isbn,linking_pmid_isbn_page,linking_quote,linking_page_location, quote, page_location, istim,tstim FROM $name_temporary_table WHERE title = '$title_temp[$i]' group by id_fragment ";	
 							//print($query);
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment,$fp_id, $id_original,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location, $quote, $page_location,$istim,$tstim) = mysqli_fetch_row($rs))

@@ -492,6 +492,8 @@ for($i=0;$i<2;$i++){
 		
 $type = new type($class_type);
 $type -> retrive_by_id($conn_id_neuron[0]);
+$type2 = new type($class_type);
+$type2 -> retrive_by_id($conn_id_neuron[1]);
 $property = new property($class_property);
 $fragment = new fragment($class_fragment);
 $attachment_obj = new attachment($class_attachment);
@@ -610,7 +612,8 @@ function show_only_authors(link, start1, stop1)
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
 	$name=$type->getNickname();
-	print("<title>Evidence - $name ($val_property)</title>");
+	$name2=$type2->getNickname();
+	print("<title>Evidence - $name->$name2</title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
@@ -651,9 +654,9 @@ function show_only_authors(link, start1, stop1)
 					    $type -> retrive_by_id($conn_id_neuron[0]);
 					 	$id=$type->getId();
 						$name=$type->getName();
-						$type -> retrive_by_id($conn_id_neuron[1]);
-						$id2=$type->getId();
-						$name2=$type -> getName();
+						$type2 -> retrive_by_id($conn_id_neuron[1]);
+						$id2=$type2->getId();
+						$name2=$type2 -> getName();
 					print("<a href='neuron_page.php?id=$id'>$name</a>");?> 
 				</td>				
 			</tr>
