@@ -233,16 +233,7 @@ $(function(){
 	
 	//Printing parameters
 	$firingpattern->retrieve_parameter_to_show($parameter);
-	print firing_sub_table_head("Definition");
-	for($j=0; $j<88; $j++)
-	{
-		$parameter_method_values[$j] = call_user_func(array($firingpattern,$parameter_method_list[$j]));
-		if($parameter_method_values[$j] == 1)
-		{
-			print parameter_row($parameter_list[$j], $parameter_method_values[$j]);
-		}
-	}
-	print firing_sub_table_foot();	
+
 	
 	
 	$firingpattern->retrieve_by_overall_fp($parameter);

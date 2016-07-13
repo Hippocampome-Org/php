@@ -29,7 +29,7 @@ function getUrlForLink($id,$img,$key,$count1)
 	{
 		if($img != NULL)
 		{
-			$url ='<a href="property_page_fp.php?id_neuron='.$id.'&parameter='.$key.'&count='.$count1.'&page=1" target="_blank">'.$img.'</a>';	
+			$url ='<a style="text-decoration:none" href="property_page_fp.php?id_neuron='.$id.'&parameter='.$key.'&count='.$count1.'&page=1" target="_blank">'.$img.'</a>';	
 		}
 	}
 	return ($url);	

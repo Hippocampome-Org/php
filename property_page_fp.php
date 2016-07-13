@@ -571,7 +571,7 @@ function show_only_authors(link, start1, stop1)
 			</tr>
 			<tr>
 				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;Parameter: <?php print("<a href='neuron_by_pattern.php?pattern=$parameter'>$parameter</a>");?></td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;Firing Pattern: <?php print("<a href='neuron_by_pattern.php?pattern=$parameter'>$parameter</a>");?></td>
 			</tr>
 			<tr>
 				<td width="20%" align="right">
@@ -1072,11 +1072,11 @@ function show_only_authors(link, start1, stop1)
 												<tr>
 												<td width='70%' class='table_neuron_page2' align='left'> <a href='getParameters.php?neuron=$name&pattern=$parameter&fp_id=$fp_id' target='_blank'>Parameters</a>:");
 												if($tstim) {
-													print ("Tstim: <span>$tstim ms,</span>");
+													print ("Tstim: <span>".floor($tstim)." ms,</span>");
 													
 												} 
 												if($istim) {
-													print (" Istim: <span>$istim pA</span>");
+													print (" Istim: <span>".floor($istim)." pA</span>");
 												}
 											print ("</td><td width='15%' align='center'>");
 										}

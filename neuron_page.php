@@ -2003,7 +2003,6 @@ if ($text_file_creation)
 <tr>
 <td width='20%' align='right'> </td>
 <td align='left' width='80%' class='table_neuron_page2'>
-<div style="width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;">
 	<?php
 	$fp_count=0;
 	$firing_parameter=$_REQUEST['pattern'];
@@ -2017,50 +2016,60 @@ WHERE
         AND fpr.original_id = a.original_id
         AND fpr.Type_id = $id";
 	$rs_images = mysqli_query($GLOBALS['conn'],$query_to_get_images);
-	while(list($image) = mysqli_fetch_row($rs_images))	{		
-		print("<a href='attachment/fp/$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
-		$fp_count=$fp_count+1;
+	$fp_count=mysqli_num_rows($rs_images);
+	if($fp_count==0){
+		print("No image is associated with this neuron");
+	}
+	else{
+		print("<div style='width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;''>");
+		while(list($image) = mysqli_fetch_row($rs_images))	{		
+			print("<a href='attachment/fp/$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
 		}
-		if($fp_count==0){
-			print("No image is associated with this neuron");
-		}
-		
+		print("</div>");
+	}	
 	?>
-</div>
 </td>
 </tr>
 </table>	
+
 <table width='68%' border='0' cellspacing='2' cellpadding='0'>
 		<tr>
 		<td width='20%' align='right' class='table_neuron_page1'>
 		Parameter
 		</td>
-		<td align='left' width='20%' class='table_neuron_page1'>
-		</td>
-		<td align='left' width='60%' class='table_neuron_page1'>
-		</td>
-		</tr>
+		
 	<?php
 	$fp_count=0;
 	$firing_parameter=$_REQUEST['pattern'];
-	$query_to_get_images = "SELECT fp.overall_fp, COUNT(*) AS fp_count
+	$query_to_get_parameter = "SELECT fp.overall_fp, COUNT(*) AS fp_count
 		FROM FiringPatternRel fpr, FiringPattern fp
 		WHERE fpr.FiringPattern_id = fp.id AND fpr.Type_id = $id GROUP BY fp.overall_fp";
-	$rs_images = mysqli_query($GLOBALS['conn'],$query_to_get_images);
-	while(list($parameter,$firing_count) = mysqli_fetch_row($rs_images))	{		
-		print("<tr><td width='20%' align='right'> </td><td align='left' width='60%' class='table_neuron_page2'>");
-		print($parameter);
-		print("</td><td align='left' width='20%' class='table_neuron_page2'>");
-		print("<a align='left' href='property_page_fp.php?id_neuron=$id&parameter=$parameter&count=$firing_count&page=1' target='_blank'>[Evidence]</a>");
-		print("<a align='right' href='neuron_by_pattern.php?pattern=$parameter' target='_blank'>[Header]</a>");
-		print("</td></tr>");
-		$fp_count=$fp_count+1;
-	}
+	$rs_parameter = mysqli_query($GLOBALS['conn'],$query_to_get_parameter);
+	$fp_count=mysqli_num_rows($rs_parameter);
 	if($fp_count==0){
+		print("<td align='right' width='80%' class='table_neuron_page1'>
+		</td>
+		</tr>");
+		print("<tr><td width='20%' align='right'> </td><td align='left' width='80%' class='table_neuron_page2'>");
+		print(" No parameter associated with this neuron");
+		print("</td> </tr>");
+	}
+	else{
+		print("<td align='left' width='60%' class='table_neuron_page1'>
+		</td>
+		<td align='center' width='20%' class='table_neuron_page1'>
+			View page
+		</td>
+		</tr>");
+		while(list($parameter,$firing_count) = mysqli_fetch_row($rs_parameter))	{		
 			print("<tr><td width='20%' align='right'> </td><td align='left' width='60%' class='table_neuron_page2'>");
-			print("No parameter associated with this neuron");
-			print("</td><td align='left' width='20%' class='table_neuron_page2'></tr>");
+			print($parameter);
+			print("</td><td align='center' width='20%' class='table_neuron_page2'>");
+			print("<a align='left' href='property_page_fp.php?id_neuron=$id&parameter=$parameter&count=$firing_count&page=1' target='_blank'> [Evidence] </a>");
+			print("<a align='right' href='neuron_by_pattern.php?pattern=$parameter' target='_blank'> [Firing Pattern] </a>");
+			print("</td></tr>");
 		}
+	}
 	?>
 
 </table>

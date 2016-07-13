@@ -198,13 +198,19 @@ foreach ($predicateArr as $k => $v)
 	
 ?>
 
-		<table  border="0" width='80%' border='0' cellspacing='2' cellpadding='0'>
-			<tr>				
-				<td align="center" width='20%' class='table_neuron_page1'><?php echo $predicateArr[$k] ?></td>
-				<td align="left" width="80%" class='table_neuron_page1'></td>
-			</tr>
+		
 
 <?php
+	print("<table  border='0' width='80%' border='0' cellspacing='2' cellpadding='0'>");
+	print("<tr><td align='center' width='20%' class='table_neuron_page1'>$predicateArr[$k]</td>");
+	if($k=="unknown"){
+		print("<td align='left' width='80%' class='table_neuron_page1'></td></tr>");
+	}
+	else{
+		print("<td align='left' width='60%' class='table_neuron_page1'></td>
+				<td align='center' width='20%' class='table_neuron_page1'>View page</td>
+			</tr>");
+	}
 	if(count($marker_id) > 0)
 	{
 		foreach ($marker_id as $idToConsider) {
@@ -271,7 +277,7 @@ foreach ($predicateArr as $k => $v)
 		
 ?>			<tr>
 				<td align='right' width='20%' ></td>
-				<td align='left' width='80%' class='table_neuron_page2'> 
+				<td align='left' width='60%' class='table_neuron_page2'> 
 					<a href='neuron_page.php?id=<?php echo $id_t ?>'>
 						<?php if($inhib_excit == 'e'){?>
 						<font class='font10a'>
@@ -282,6 +288,27 @@ foreach ($predicateArr as $k => $v)
 						{ echo " (".$mixed_conflict.")"; } 
 						?>
 				</a>
+			</td>
+			<td align='center' width='20%' class='table_neuron_page2'>
+			<?php
+			if($k!="unknown"){
+				$query_to_get_color="select GROUP_CONCAT(sub.object SEPARATOR '-' ) as object from (
+								select distinct Type_id, p.object from property p,EvidencePropertyTypeRel eptr
+								where p.id=eptr.Property_id
+								and eptr.Type_id=$id
+								and p.subject like '$parameter'
+								and p.object not like 'unknown'
+								order by eptr.Type_id,FIELD(object,'positive','negative','positive_inference','negative_inference','weak_positive','unknown')
+								) as sub
+								group by sub.Type_id";
+				$rs_color = mysqli_query($GLOBALS['conn'],$query_to_get_color);
+				$row = mysqli_fetch_assoc($rs_color);
+				$color_val=$row['object'];
+				//print("$query_to_get_color,$color_val");
+				print("<a align='left' href='property_page_markers.php?id_neuron=$id&val_property=$parameter&color=$color_val&page=markers' target='_blank'> [Evidence] </a>
+					<a align='right' href='neuron_page.php?id=$id_t' target='_blank'> [Neuron] </a>");
+			}
+			?>
 			</td>
 			</tr>
 <?php			}
@@ -296,6 +323,7 @@ foreach ($predicateArr as $k => $v)
 	  	<td align='left' width='80%' class='table_neuron_page2'> 
 	  		<div><font><?php echo "No ".$k." type found " ?></font></div>
 	  	</td>
+	  	<td align='right' width='20%' class='table_neuron_page2'></td>
 	  </tr>
 <?php }
 	}?>
