@@ -292,15 +292,13 @@ foreach ($predicateArr as $k => $v)
 			<td align='center' width='20%' class='table_neuron_page2'>
 			<?php
 			if($k!="unknown"){
-				$query_to_get_color="select GROUP_CONCAT(sub.object SEPARATOR '-' ) as object from (
-								select distinct Type_id, p.object from property p,EvidencePropertyTypeRel eptr
-								where p.id=eptr.Property_id
-								and eptr.Type_id=$id
-								and p.subject like '$parameter'
-								and p.object not like 'unknown'
-								order by eptr.Type_id,FIELD(object,'positive','negative','positive_inference','negative_inference','weak_positive','unknown')
-								) as sub
-								group by sub.Type_id";
+				$query_to_get_color="SELECT GROUP_CONCAT(sub.object SEPARATOR '-') AS object
+						FROM (SELECT DISTINCT eptr.Type_id, p.object
+						    FROM Property p, EvidencePropertyTypeRel eptr
+						    WHERE p.id = eptr.Property_id  AND eptr.Type_id = $id AND p.subject LIKE '$parameter' AND p.object NOT LIKE 'unknown'
+						    ORDER BY eptr.Type_id , FIELD(p.object, 'positive', 'negative', 'positive_inference', 'negative_inference', 'weak_positive', 'unknown')
+							) AS sub
+						GROUP BY sub.Type_id";
 				$rs_color = mysqli_query($GLOBALS['conn'],$query_to_get_color);
 				$row = mysqli_fetch_assoc($rs_color);
 				$color_val=$row['object'];
