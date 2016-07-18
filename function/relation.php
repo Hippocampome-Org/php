@@ -68,6 +68,19 @@ function relation($n, $property, $part)
 			$relation = 'is not expressed';
 	}
 	
+	if ($property == 'Firing Pattern')
+	{
+		if ($n == 0)	
+			$relation = 'Reference Count =';
+		if ($n == 1)
+			$relation = 'Reference Count <';		
+		if ($n == 2)
+			$relation = 'Reference Count <=';
+		if ($n == 3)
+			$relation = 'Reference Count >';
+		if ($n == 4)
+			$relation = 'Reference Count >=';
+	}
 	return $relation;
 }
 ?>

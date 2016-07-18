@@ -80,7 +80,7 @@ $N = $_REQUEST['N'];
 	
 	// Insert the value in the temporary table: --------------------------------------------------------------
 	$value = $_REQUEST['value'];
-	if ($value)
+	if ($value||$value==0)
 	{	
 		$name_temporary_table = $_SESSION['name_temporary_table'];
 
@@ -154,7 +154,7 @@ if ($_REQUEST['clear_all'])
 
 
 
-$n_property = 5;
+$n_property = 6;
 
 ?>
 
@@ -338,10 +338,15 @@ include ("function/icon.html");
 				$n_part = 2;
 			if ($property1 == 'Major Neurontransmitter')	
 				$n_part = 2;								
-			
-			for ($i=0; $i<$n_part; $i++)
-				$value_part[$i] = part($i, $property1); 
-														
+			if($property1=='Firing Pattern'){
+				$value_part=partFiringPattern(); 
+				array_push($value_part,"All");
+				$n_part=count($value_part);
+			}
+			else{
+				for ($i=0; $i<$n_part; $i++)
+					$value_part[$i] = part($i, $property1); 
+			}											
 			print ("<td width='18%' align='center' class='table_neuron_page1'>");
 			print ("<select name='part' size='1' cols='10' class='select1' onChange=\"part(this, $id1)\">");
 			
@@ -481,6 +486,8 @@ include ("function/icon.html");
 				$n_relation = 3;
 			if ($property1 == 'Major Neurontransmitter')
 				$n_relation = 2;
+			if ($property1 == 'Firing Pattern')
+				$n_relation = 5;
 			
 			print ("<td width='22%' align='center' class='table_neuron_page1'>");									
 
@@ -587,6 +594,9 @@ include ("function/icon.html");
 				$type -> retrive_id();
 				$n_value = $type->getNumber_type();
 			}
+			if($property1 == 'Firing Pattern'){
+				$n_value = 5;
+			}
 			
 																
 			print ("<td width='31%' align='center' class='table_neuron_page1'>");
@@ -595,7 +605,7 @@ include ("function/icon.html");
 			else
 				print ("<select name='value' size='1' cols='10' class='select1' onChange=\"value1(this, $id1)\">");
 			
-			if ($value1)
+			if ($value1||$value1==0)
 				print ("<OPTION VALUE='$value1'>$value1</OPTION>");
 								
 	        print ("<OPTION VALUE='-'>-</OPTION>");

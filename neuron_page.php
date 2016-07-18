@@ -1978,21 +1978,14 @@ if ($text_file_creation)
 	  
 
 		</table>
-		</table>	
-
-			<br />	
-
-		</td>
-	</tr>
-</table>
-<table width="68%" border="0" cellspacing="2" cellpadding="0">
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">
 					Firing Pattern
 				</td>			
 			</tr>			
 		</table>
-<table width='68%' border='0' cellspacing='2' cellpadding='0'>
+<table width='80%' border='0' cellspacing='2' cellpadding='0'>
 		<tr>
 		<td width='20%' align='right' class='table_neuron_page1'>
 		Images
@@ -2032,7 +2025,7 @@ WHERE
 </tr>
 </table>	
 
-<table width='68%' border='0' cellspacing='2' cellpadding='0'>
+<table width='80%' border='0' cellspacing='2' cellpadding='0'>
 		<tr>
 		<td width='20%' align='right' class='table_neuron_page1'>
 		Parameter
@@ -2073,7 +2066,16 @@ WHERE
 	?>
 
 </table>
-<br /> <br />	<br />				
+		</table>	
+
+			<br />	
+
+		</td>
+	</tr>
+</table>
+
+<br /> <br />	<br />	
+
 </div>		
 
 </body>

@@ -11,6 +11,8 @@ function property($n)
 		$property = 'Connectivity';
 	if ($n == 4)
 		$property = 'Major Neurontransmitter';
+	if ($n == 5)
+		$property = 'Firing Pattern';
 	
 
 	return $property;

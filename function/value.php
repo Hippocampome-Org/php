@@ -100,7 +100,19 @@ function value($n, $property, $min, $max)
 		if ($n == 10)	
 			$value = $max.' mV'; 										
 	}
-	
+	if ($property == 'Firing Pattern')
+	{
+		if ($n == 0)
+			$value = '0'; 
+		if ($n == 1)
+			$value = '1'; 
+		if ($n == 2)	
+			$value = '2'; 
+		if ($n == 3)
+			$value = '3'; 
+		if ($n == 4)	
+			$value = '4'; 
+	}
 	return $value;
 
 }

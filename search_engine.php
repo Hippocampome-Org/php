@@ -395,6 +395,44 @@ function ephys_search($evidencepropertyyperel, $property_1, $type, $subject, $pr
 	
 	return $new_type_id;
 }
+// Firing pattern search
+
+function fp_search($subject, $predicate,$value)
+{
+	if(!$subject)
+		$subject="All";
+	if(!$predicate)
+		$predicate="All";
+	if($predicate!="All")
+		$predicate=substr($predicate,-2);
+	// retrieve neuron id:
+		$query_get_type_id = "SELECT DISTINCT sub.id
+			FROM(
+			SELECT DISTINCT t.nickname,t.id,fp_def.overall_fp as def_overall_fp, fpr.Type_id,fp.overall_fp,fp.id as firing_id
+			FROM (Type t CROSS JOIN FiringPattern fp_def) LEFT JOIN FiringPatternRel fpr ON t.id=fpr.Type_id 
+			LEFT JOIN FiringPattern fp ON fp.id=fpr.FiringPattern_id AND fp_def.overall_fp=fp.overall_fp
+			ORDER BY t.id
+			) as sub
+			GROUP BY sub.def_overall_fp,sub.id";
+		if($subject!="All" || $predicate!="All")
+			$query_get_type_id=$query_get_type_id." HAVING ";
+		if($subject!="All")
+		 	$query_get_type_id=$query_get_type_id." sub.def_overall_fp like '$subject' ";
+		if($subject!='All' && $predicate!="All")
+			$query_get_type_id=$query_get_type_id." AND";
+		if($predicate!="All")
+			$query_get_type_id=$query_get_type_id." COUNT(DISTINCT sub.firing_id) $predicate $value  ";
+
+	$rs_type_id = mysqli_query($GLOBALS['conn'],$query_get_type_id);
+	//print($query_get_type_id);
+	$index = 0;
+	while(list($id) = mysqli_fetch_row($rs_type_id))
+	{
+		$new_type_id[$index]=$id;
+		$index = $index + 1;
+	}
+	return $new_type_id;
+}
 
 
 // SEARCH Function for CONNECTIVITY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -688,6 +726,18 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		}
 		// END Script for ELETROPHISIOLOGY +++++++++++++++++++++++++++++++++++++++			
 		
+		// Firing Pattern 
+		if ($property == 'Firing Pattern')
+		{
+			$predicate = $relation;	
+			$subject=$part;
+			$res_fp = fp_search($subject, $predicate, $value);
+				
+			if ($res_fp != NULL)
+				$id_type_res = array_merge($id_type_res, $res_fp); 	
+		}
+		// End Firing Pattern
+
 		// Script for CONNECTIVITY +++++++++++++++++++++++++++++++++++++++++++
 		if ($property == 'Connectivity')
 		{
@@ -876,17 +926,12 @@ include ("function/icon.html");
 			
 			print ("" . $full_search_string_to_print . "<br>");
 			
-			if ($n_result_tot == 1)
-				print ("<font class='font3'> returned $n_result_tot result ($delta_time_format seconds)</font><br>");
-			else
-				print ("<font class='font3'> returned $n_result_tot results ($delta_time_format seconds)</font><br>");			
-		
+				
 		?>
 
 		<table border="0" cellspacing="3" cellpadding="0" class='table_result'>
 		<tr>
-			<td align="center" width="5%">  </td>
-			<td align="center" width="10%">  </td>
+			<td align="center" width="5%" >  </td>
 			
 			<?php
 				if($n_result_tot_unknown)
@@ -895,6 +940,7 @@ include ("function/icon.html");
 					{
 						$query_string = "SELECT N, operator, property, part, relation, value FROM $name_temporary_table";
 						//print ("$part : ($relation $value) ");
+						print("<td align='center' width='10%' class='table_neuron_page3'> Index </td>");
 						print ("<td align='center' width='30%' class='table_neuron_page3'> Neurons </td>");
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> $part : ($relation $value) </td>");
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> Is Expressed / Is Not Expressed </td>");
@@ -902,8 +948,10 @@ include ("function/icon.html");
 				}
 				else
 				{
-					if($n_result_tot)
+					if($n_result_tot){
+						print("<td align='center' width='10%' class='table_neuron_page3'> Index </td>");
 						print ("<td align='center' width='30%' class='table_neuron_page3'> Neuron Types </td>");
+					}
 				}
 			
 			?>
@@ -946,7 +994,7 @@ include ("function/icon.html");
 					<table border='0' cellspacing='3' cellpadding='0' class='table_result'>
 						<tr>
 							<td align='center' width='5%'>  </td>
-							<td align='center' width='10%'>  </td>
+							<td align='center' width='10%'> Index </td>
 							<td align='center' width='30%' class='table_neuron_page3'> Neurons with unknown expression </td>
 							<td align='right' width='55%'> </td>
 						</tr>
@@ -981,10 +1029,10 @@ include ("function/icon.html");
 		if ($n_result_tot == 0);
 		else {
 		
-			print ("<table border='0' cellspacing='3' cellpadding='3' class='table_result'>
+			print ("<table border='0'  cellspacing='3' cellpadding='3' class='table_result'>
 				<tr>
-					<td align='center' width='20%'>  </td>	
-					<td align='left'  class='table_neuron_page3' width='75%' colspan='4'> ");
+					<td align='center' width='5%'></td>
+					<td class='table_neuron_page3' align='center' colspan='5'> ");
 			
 			if ($n_result_tot == 1)
 				print ("View Result in a Matrix");
@@ -995,36 +1043,43 @@ include ("function/icon.html");
 				</td>		
 				</tr>
 				<tr>
-					<td align='center' width='20%'>  </td>
-					<td align='center' width='18%'>
+				<td align='center' width='5%'></td>
+					<td align='center' width='20%'>
 					<form action='morphology_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='morpology_matrix' value='MORPHOLOGY' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1' />
 					</form>	
 					</td>			
-					<td align='center' width='18%'> 
+					<td align='center' width='20%'> 
 					<form action='markers_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='markers_matrix' value='MARKERS' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1' />
 					</form>				
 					</td>
-					<td align='center' width='18%'> 
+					<td align='center' width='20%'> 
 					<form action='ephys_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='ephys_matrix' value='EPHYS' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1'  />
 					</form>	
 					</td>
-					<td align='center' width='18%'> 
+					<td align='center' width='20%'> 
 					<form action='connectivity.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='connectivity_matrix' value='CONNECTIVITY' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1'  />
 					</form>	
-					</td>			
-					<td align='right' width='10%'> </td>
+					</td>	
+					<td align='center' width='20%'> 
+					<form action='firing_patterns_search.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='fp_matrix' value='FP' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1'  />
+					</form>	
+					</td>				
+
 				</tr>
 				</table> <br /><br />");
 			}
