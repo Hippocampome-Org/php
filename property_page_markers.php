@@ -1009,10 +1009,10 @@ else {
 
 		              // mixed data
 		              else {
-		              	if (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences")) {
-		              		$conflict_note = "species/protocol/subcellular expression differences";
+						if ($conflict_note == "species/protocol differences")
 		              		$image_link = "<img src='images/marker/positive-negative-species_clear.png' border='0' width='15px' />";
-		              	}
+		              	elseif ($conflict_note == "subcellular expression differences")
+		              		$image_link = "<img src='images/marker/positive-negative-subcellular_clear.png' border='0' width='15px' />";
 		              	elseif ($conflict_note == "subtypes")
 		              		$image_link = "<img src='images/marker/positive-negative-subtypes_clear.png' border='0' width='15px' />";
 		              	elseif (($conflict_note == "conflicting data") || ($conflict_note == "unresolved")) {
@@ -1023,9 +1023,15 @@ else {
 		              		$image_link = "<img src='images/marker/positive-negative_inference_clear.png' border='0' width='15px' />";
 	              		elseif ($conflict_note == "positive inference; negative")
 		              		$image_link = "<img src='images/marker/positive_inference-negative_clear.png' border='0' width='15px' />";
-	              		elseif ($conflict_note == "positive inference; negative inference")
-		              		$image_link = "<img src='images/marker/positive_inference-negative_inference_clear.png' border='0' width='15px' />";
-
+	              		elseif ($conflict_note == "positive inference; negative inference") {
+		              		$image_link = "<img src='images/marker/positive_inference-negative_inference-subtypes_clear.png' border='0' width='15px' />";
+		              		$conflict_note = "inferential conflict likely due to subtypes";
+	              		}
+	              		elseif ($conflict_note == "unresolved inferential conflict")
+		              		$image_link = "<img src='images/marker/positive_inference-negative_inference-unresolved_clear.png' border='0' width='15px' />";
+	              		elseif ($conflict_note == "species/protocol inferential conflict")
+		              		$image_link = "<img src='images/marker/positive_inference-negative_inference-species_clear.png' border='0' width='15px' />";
+		              	
 		              	 
 		              	$mixed_data = true;
 		              	$print_color = "positive-negative";

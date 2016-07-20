@@ -211,12 +211,19 @@ function check_color($variable, $unvetted, $conflict_note)
 		else
 			$link[0] = "<img src='images/marker/positive-negative-subtypes.png' border='0' width='15px' />";
 	}
-	elseif (($conflict_note == "species/protocol differences") || ($conflict_note == "species/protocol/subcellular expression differences"))
+	elseif ($conflict_note == "species/protocol differences")
 	{
 		if ($unvetted == 1)
 			$link[0] = "<img src='images/marker/positive-negative-species_unvetted.png' border='0' width='15px' />";
 		else
 			$link[0] = "<img src='images/marker/positive-negative-species.png' border='0' width='15px' />";
+	}
+	elseif ($conflict_note == "subcellular expression differences")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive-negative-subcellular_unvetted.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/positive-negative-subcellular.png' border='0' width='15px' />";
 	}
 	elseif (($conflict_note == "conflicting data") || ($conflict_note == "unresolved"))
 	{
@@ -270,9 +277,23 @@ function check_color($variable, $unvetted, $conflict_note)
 	elseif ($conflict_note == "positive inference; negative inference")
 	{
 		if ($unvetted == 1)
-			$link[0] = "<img src='images/marker/positive_inference-negative_inference_unvetted.png' border='0' width='15px' />";
+			$link[0] = "<img src='images/marker/positive_inference-negative_inference-subtypes_unvetted.png' border='0' width='15px' />";
 		else
-			$link[0] = "<img src='images/marker/positive_inference-negative_inference.png' border='0' width='15px' />";
+			$link[0] = "<img src='images/marker/positive_inference-negative_inference-subtypes.png' border='0' width='15px' />";
+	}
+	elseif ($conflict_note == "unresolved inferential conflict")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive_inference-negative_inference-unresolved_unvetted.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/positive_inference-negative_inference-unresolved.png' border='0' width='15px' />";
+	}
+	elseif ($conflict_note == "species/protocol inferential conflict")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive_inference-negative_inference-species_unvetted.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/positive_inference-negative_inference-species.png' border='0' width='15px' />";
 	}
 	else {
 		$link[0] = "<img src='images/marker/negative_positive_unvetted.png' border='0' width='15px' />";
