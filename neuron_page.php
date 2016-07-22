@@ -78,6 +78,23 @@ if ($text_file_creation)
 <head>
 <?php
  include ("function/icon.html"); 
+// query to get connectivity matrix
+$morphology_connection_information= $_SESSION['morphology'];
+$array_decoded = json_decode($morphology_connection_information, true);
+$potential_conn_display_array = $array_decoded['potential_array'];
+$potn_conn_neuron_pcl_array=$array_decoded['potn_conn_neuron_pcl_array'];
+// query to get basket types
+$special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
+WHERE perisomatic_targeting_flag=2) ORDER BY position";
+$result_special_case_basket = mysqli_query($GLOBALS['conn'], $special_case_basket);
+$special_neuron_id_basket = result_set_to_array($result_special_case_basket, 'id');
+
+// query to get axonic types
+$special_case_axo_axonic = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
+WHERE perisomatic_targeting_flag=1) ORDER BY position";
+$result_special_case_axo_axonic = mysqli_query($GLOBALS['conn'], $special_case_axo_axonic);
+$special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axonic, 'id');
+
  ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
@@ -1651,7 +1668,65 @@ if ($text_file_creation)
 		
 		<!-- TABLE Potential postsynaptic connections: -->
 		<?php
-
+	//get link
+	function getLinkConnectivity($id_neuron2,$neuron2_name,$font_class,$view_type){
+		global $potn_conn_neuron_pcl_array;
+		$id = $_REQUEST['id'];
+		if($view_type=="Source"){
+			$source_neuron=$id;
+			$destination_neuron=$id_neuron2;
+		}
+		else if($view_type=="Destination"){
+			$source_neuron=$id_neuron2;
+			$destination_neuron=$id;
+		}
+		else {
+			return "Invalid Source or Destination Neuron";
+		}
+		$index_source=0;
+		$index_destination=0;
+		$know_unknow_flag=0;
+		$query_to_get_connection="SELECT DISTINCT c.connection_status FROM  Conndata c WHERE c.Type1_id=$source_neuron AND c.Type2_id=$destination_neuron";
+		$result_to_get_connection = mysqli_query($GLOBALS['conn'], $query_to_get_connection);
+		$connection = result_set_to_array($result_to_get_connection, 'connection_status');
+		if(count($connection)==1){
+			if($connection[0]=="positive")
+				$know_unknow_flag=1;
+			if($connection[0]=="negative")
+				$know_unknow_flag=-1;
+		}
+		$query_to_get_type="SELECT id FROM Type WHERE status = 'active' ORDER BY position ASC";
+		$result_to_get_type = mysqli_query($GLOBALS['conn'], $query_to_get_type);
+		$type_array = result_set_to_array($result_to_get_type, 'id');
+		for($i=0;$i<count($type_array);$i++){
+			if($type_array[$i]==$source_neuron)
+				$index_source=$i;
+			if($type_array[$i]==$destination_neuron)
+				$index_destination=$i;
+		}
+		$parameter_connection=split(",",$potn_conn_neuron_pcl_array[$index_source][$index_destination]);
+		if($parameter_connection){
+			return getUrlForLinkConnectivity($source_neuron,$destination_neuron,$parameter_connection[1],$parameter_connection[2],$parameter_connection[4],$parameter_connection[5],$parameter_connection[6],$know_unknow_flag,$neuron2_name,$font_class);
+		}
+	}
+	// get URL to connectivity evidences
+	function getUrlForLinkConnectivity($id_type_row,$id_type_col,$val1,$color1,$val2,$color2,$conn_type,$know_unknow_flag=0,$name,$font_class) 
+	{
+		//print("Data:$id_type_row,$id_type_col,$val1,$color1,$val2,$color2,$conn_type</br>");
+		global $special_neuron_id_axo_axonic,$special_neuron_id_basket;
+		$url = '';
+		$axonic_basket_flag=0;
+		if(in_array($id_type_row, $special_neuron_id_axo_axonic) ){
+			$axonic_basket_flag=1;
+		}
+		elseif(in_array($id_type_row, $special_neuron_id_basket)){
+			$axonic_basket_flag=2;
+		}
+		$url ='<a href="property_page_connectivity.php?id1_neuron='.$id_type_row.'&val1_property='.$val1.'&color1='.$color1.
+		'&id2_neuron='.$id_type_col.'&val2_property='.$val2.'&color2='.$color2.
+		'&connection_type='.$conn_type.'&known_conn_flag='.$know_unknow_flag.'&axonic_basket_flag='.$axonic_basket_flag.'&page=1" class='.$font_class.' target="_blank">'.$name.'</a>';
+		return ($url);	
+	}
       // STM Potential Pre-Post List
 
       // components of html
@@ -1688,7 +1763,7 @@ if ($text_file_creation)
         return $font_class;
       }
 
-      function name_row($record) {
+      function name_row($view_type,$record) {
         $name = to_name($record);
 	 $ex_in= $record["excit_inhib"];
         $id = $record["id"];
@@ -1697,13 +1772,12 @@ if ($text_file_creation)
         $html =
           "<tr>
             <td width='20%' align='right'/>
-            <td align='left' width='80%' class='table_neuron_page2'>
-              <a href='neuron_page.php?id=$id' class='$font_class'>
-                $name
-              </a>
-            </td>					
+            <td align='left' width='80%' class='table_neuron_page2'>"
+             .getLinkConnectivity($id,$name,$font_class,$view_type).
+            "</td>					
           </tr>";					
         return $html;
+        
       }
 
       function name_row_none($name_none) { // the list of targets or sources is empty
@@ -1870,7 +1944,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_sources as $source) { print name_row($source); }
+			foreach($list_explicit_sources as $source) { print name_row("Destination",$source); }
 	  print connection_table_foot();
 	  ?>
 	  </td>
@@ -1881,7 +1955,7 @@ if ($text_file_creation)
 	  if (count($list_potential_sources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_potential_sources as $source) { print name_row($source); }
+			foreach($list_potential_sources as $source) { print name_row("Destination",$source); }
 	  //foreach($net_sources as $source) { print name_row($source); }
 	  print connection_table_foot();
 	  ?>
@@ -1893,7 +1967,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_nonsources) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_nonsources as $source) { print name_row($source); }
+			foreach($list_explicit_nonsources as $source) { print name_row("Destination",$source); }
 	  print connection_table_foot();
 	  ?>
 	  </td>
@@ -1917,7 +1991,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_targets) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_targets as $target) { print name_row($target); }
+			foreach($list_explicit_targets as $target) { print name_row("Source",$target); }
 	  print connection_table_foot();
 	  ?>
 	  </td>
@@ -1928,7 +2002,7 @@ if ($text_file_creation)
 	  if (count($list_potential_targets) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_potential_targets as $target) { print name_row($target); }
+			foreach($list_potential_targets as $target) { print name_row("Source",$target); }
 	  //foreach($net_targets as $target) { print name_row($target); }
 	  print connection_table_foot();
 	  ?>
@@ -1940,7 +2014,7 @@ if ($text_file_creation)
 	  if (count($list_explicit_nontargets) < 1) // the list of targets or sources is empty
 			print name_row_none("none known");
 	  else
-			foreach($list_explicit_nontargets as $target) { print name_row($target); }
+			foreach($list_explicit_nontargets as $target) { print name_row("Source",$target); }
 	  print connection_table_foot();
 	  ?>
 	  </td>

@@ -432,18 +432,18 @@ for ($row=0; $row<$number_type; $row++) {
 						{
 							if($presynaptic_bg_color==BLACK)
 							{
-								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_black.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_black.png",0,$special_neuron_id_axo_axonic,$special_neuron_id_basket);
 								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 							else if($presynaptic_bg_color==ORANGE)
 							{
 								
-								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_orange.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_orange.png",0,$special_neuron_id_axo_axonic,$special_neuron_id_basket);
 								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 							if($presynaptic_bg_color == GRAY)
 							{	
-								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_gray.png",$special_neuron_id_axo_axonic,$special_neuron_id_basket);
+								$url=getUrlForLink($id_type_row,$id_type_col,$link_parameter,"spacer_gray.png",0,$special_neuron_id_axo_axonic,$special_neuron_id_basket);
 								$image = "<div style='background-color:" . $presynaptic_bg_color . ";padding:0 2px;'>".$url."</div>";
 							}
 						} 
