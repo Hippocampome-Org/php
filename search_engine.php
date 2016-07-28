@@ -1066,7 +1066,7 @@ include ("function/icon.html");
 					</form>	
 					</td>
 					<td align='center' width='20%'> 
-					<form action='connectivity.php' method='post' style='display:inline' target='_blank'>
+					<form action='connectivity_search.php' method='post' style='display:inline' target='_blank'>
 						<input type='submit' name='connectivity_matrix' value='CONNECTIVITY' />
 						<input type='hidden' name='table_result' value=$name_temporary_table_result />
 						<input type='hidden' name='research' value='1'  />

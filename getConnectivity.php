@@ -138,6 +138,7 @@ $type = new type($class_type);
 $type ->retrive_id();
 
 $number_type = $type ->getNumber_type();
+$total_neurons=$number_type;
 $research = $_REQUEST['research'];
 if (isset($research)) // From page of search; retrieve the id from search_table (temporary) -----------------------
 {
@@ -168,6 +169,7 @@ if (isset($research)) // From page of search; retrieve the id from search_table 
 
 	array_multisort($position_search, $id_search);
 	// sort($id_search);
+
 }
 $property = new property($class_property);
 
@@ -214,6 +216,11 @@ $sources      = result_set_to_array($result, 'nickname');
 $id_query     = "SELECT DISTINCT id from Type order by position asc";
 $result_id    = mysqli_query($GLOBALS['conn'], $id_query);
 $id_array     = result_set_to_array($result_id, 'id');
+for($index_neuron=0;$index_neuron<count($id_array);$index_neuron++){
+	$key=$id_array[$index_neuron];
+	$neuron_map[$key]=$index_neuron;
+}
+
 
 $responce = (object) array('page' => $page, 'total' => $total_pages, 'records' =>$count, 'rows' => "", 'Unknowncount' => $unknowncount, 'black'=>$bl, 'orange' =>$or, 'gray' =>$gr);
 
@@ -248,8 +255,8 @@ JOIN (Type t1, Type t2) ON ttr.Type1_id = t1.id AND ttr.Type2_id = t2.id";
 */
 
 
-for ($i = 0; $i < $number_type; $i++) {
-    for ($j = 0; $j < $number_type; $j++) {
+for ($i = 0; $i < $total_neurons; $i++) {
+    for ($j = 0; $j < $total_neurons; $j++) {
         $known_matrix_array[$i][$j] = 0;
     }
 }
@@ -258,7 +265,7 @@ $count_known_non=0;
 
 //retrived connection from conndata
 
-for ($r = 0; $r < $number_type; $r++) {
+for ($r = 0; $r < $total_neurons; $r++) {
     $explicit_target_query = "SELECT  Type2_id FROM Conndata WHERE Type1_id='$id_array[$r]' AND connection_status= 'positive'";
 
     $explicit_nontarget_query = "SELECT  Type2_id FROM Conndata WHERE Type1_id='$id_array[$r]' AND connection_status= 'negative'";
@@ -269,7 +276,7 @@ for ($r = 0; $r < $number_type; $r++) {
     $explicit_nontarget_result  = mysqli_query($GLOBALS['conn'], $explicit_nontarget_query);
     $result_nontarget = result_set_to_array($explicit_nontarget_result, "Type2_id");
 
-    for ($c = 0; $c < $number_type; $c++) {
+    for ($c = 0; $c < $total_neurons; $c++) {
         for ($k = 0; $k < count($result_target); $k++) {
             if ($result_target[$k] == $id_array[$c]) {
                 $count_known++;
@@ -298,16 +305,12 @@ for ($r = 0; $r < $number_type; $r++) {
 
 // To handle the special neuron cases
 
-for ($i=0; $i < $number_type; $i++) {
-  if(isset($id_search))
-    $id = $id_search[$i];
-  else
-    $id = $type->getID_array($i);
-
+for ($i=0; $i < $total_neurons; $i++) {
+  $id = $type->getID_array($i);
   $type -> retrive_by_id($id); // Retrieve id
   $excit_inhib =$type-> getExcit_Inhib();
   // add known connection and known non connection data to connectivity matrix
-  for ($j=0; $j < $number_type; $j++) {
+  for ($j=0; $j < $total_neurons; $j++) {
     if($potential_conn_display_array[$i][$j] == 0)
     {
       if($known_matrix_array[$i][$j] == KNOWN_CONNECTION)
@@ -342,6 +345,7 @@ for ($row=0; $row<$number_type; $row++) {
 			for($i = 0; $i < $number_type; $i++){
 		    $hippo_nickname[$i]=NULL;
 		  }		
+		  			$actual_row=$row;
 					// retrieve the id_type from Type
 					if (isset($research))
 						$id_type_row = $id_search[$row];
@@ -360,27 +364,15 @@ for ($row=0; $row<$number_type; $row++) {
 					$nickname_type_row = str_replace('_', ' ', $nickname_type_row);
 					$subregion_nickname_type_row = $subregion_type_row . ":" . $nickname_type_row;
 					$position_row = $type->getPosition();
-					
-					if (!isset($research)) {
-						$rowIdx = $row;
-					}
-					else {
-						$rowIdx = array_search($id_type_row, $known_header) - 1;
-						}
+				
+					if ($excit_inhib == 'e')
+						$fontColor=EXCIT_FONT_COLOR;
+					if ($excit_inhib == 'i')
+						$fontColor=INHIBIT_FONT_COLOR;
 						
-						if ($excit_inhib == 'e')
-							$fontColor=EXCIT_FONT_COLOR;
-						if ($excit_inhib == 'i')
-							$fontColor=INHIBIT_FONT_COLOR;
-						
-				for ($col=0; $col<$number_type; $col++) {
+				for ($col=0; $col<$total_neurons; $col++) {
 						$image ="";
-						// link values
-						// retrieve the id_type from Type
-						if ($research)
-							$id_type_col = $id_search[$col];
-						else
-							$id_type_col = $type->getID_array($col);
+						$id_type_col = $type->getID_array($col);
 						
 						$type -> retrive_by_id($id_type_col);
 						$nickname_type_col = $type->getNickname();
@@ -389,10 +381,18 @@ for ($row=0; $row<$number_type; $row++) {
 						$nickname_type_col = str_replace('_', ' ', $nickname_type_col);
 						$subregion_nickname_type = $subregion_type_col . " " . $nickname_type_col;
 						$position_col = $type->getPosition();
-						$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
+						// retrive search neuron information
+						if(isset($research)){
+							$row=$neuron_map[$id_type_row];
+							$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
+							
+						}
+						// get link parameters	
+						else{
+							$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
+						}
 						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION) 
 						{
-								
 							$presynaptic_bg_color = WHITE;
 						}
 						else {
@@ -451,10 +451,12 @@ for ($row=0; $row<$number_type; $row++) {
 					}
 					// create connectivity matrix array
 					$hippo_array=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>');
-				    for($i=0; $i<$number_type; $i++){
+				    for($i=0; $i<$total_neurons; $i++){
 				      array_push($hippo_array,$hippo_nickname[$i]);
 				    }
+				    $row=$actual_row;
 				    $responce->rows[$row]['cell']=$hippo_array;
+				    
 
 
 }
