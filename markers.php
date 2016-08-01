@@ -142,8 +142,8 @@ include ("function/icon.html");
 	top: 48.5px !important;
 }  
 .title_area_marker {
-	position:absolute; top: 80px; left: 50px;
-	width: 700px;
+	position:absolute; top: 80px; left: 55px;
+	width: 900px;
 	border:none;
 }
  .expandChrome {
@@ -163,6 +163,7 @@ include ("function/icon.html");
 }
 </style>
 <script language="javascript">
+
 function OpenInNewTab(aEle)
 {
 	//var win = window.open(aEle.href,'_self'); // stay in same tab
@@ -601,6 +602,30 @@ function HideShowColumns ()
 			});
 		} 
 	});
+	$("#checkbox3").click(function() {	
+			ShowHideInference();
+	});
+}
+function ShowHideInference(){
+			var negative_inference=$("img[src='images/marker/negative_inference.png']");
+			var positive_inference=$("img[src='images/marker/positive_inference.png']");
+			var species_inference=$("img[src='images/marker/positive_inference-negative_inference-species.png']");
+			var subtypes_inference=$("img[src='images/marker/positive_inference-negative_inference-subtypes.png']");
+			var unresolved_inference=$("img[src='images/marker/positive_inference-negative_inference-unresolved.png']");
+			if ($("#checkbox3").is(':checked')) {
+				negative_inference.parents("a").show();
+				positive_inference.parents("a").show();
+				species_inference.parents("a").show();
+				subtypes_inference.parents("a").show();
+				unresolved_inference.parents("a").show();
+			}
+			else{
+				negative_inference.parents("a").hide();
+				positive_inference.parents("a").hide();
+				species_inference.parents("a").hide();
+				subtypes_inference.parents("a").hide();
+				unresolved_inference.parents("a").hide();
+			}
 }
 function HideColumn ()
 {
@@ -635,7 +660,7 @@ function ShowColumn ()
 }
 </script>
 </head>
-<body>
+<body onload="ShowHideInference()">
 <!-- COPY IN ALL PAGES -->
 <?php 
 include ("function/title.php");
@@ -643,11 +668,13 @@ include ("function/menu_main.php");
 ?>	
 <div class="title_area_marker">   
 		<form id="myform">
-      <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
+      <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
-        <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2"/><span style="color: rgb(0, 0, 153);">All Markers</span></input>
+        <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2"/><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
+        <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
 		</form>
 </div>
+
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
