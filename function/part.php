@@ -133,7 +133,7 @@ function partFiringPattern()
 {
 	$part=array();
 	$index=0;
-	$query_to_get_firing_pattern = "SELECT DISTINCT overall_fp FROM FiringPattern";
+	$query_to_get_firing_pattern = "SELECT DISTINCT overall_fp FROM FiringPattern WHERE definition_parameter like 'definition'";
 	$rs_firing_pattern = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern);	
 	while(list($firing_pattern) = mysqli_fetch_row($rs_firing_pattern))						
 		$part[$index++] = $firing_pattern;

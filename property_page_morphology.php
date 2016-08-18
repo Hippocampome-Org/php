@@ -1242,21 +1242,21 @@ function show_only_authors(link, start1, stop1)
 								print ("<tr>");
 											
 								if ($type_show == 'Axons')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/axon.png'></td>");
+									print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/axon.png'></td>");
 								if ($type_show == 'Dendrites')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><img src='images/dendrite.png'></td>");	
+									print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/dendrite.png'></td>");	
 								if ($type_show == 'Somata')		
-									print ("<td width='15%' rowspan='3' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+									print ("<td width='15%' rowspan='6' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
                                 if ($type_show == 'AxonsSomata')	
-                                  print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+                                  print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
                                 if ($type_show == 'AxonsDendrites')	
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
+									print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
 							    if ($type_show == 'DendritesSomata')
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+									print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
 								if ($type_show == 'AxonsDendritesSomata')
-                                 	print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+                                 	print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 								if ($type_show == '')													
-									print ("<td width='15%' rowspan='3' align='right' valign='top' style='display:table-cell'></td>");								
+									print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell'></td>");								
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
 									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
 									$attachment = $attachment_obj -> getName();
@@ -1277,6 +1277,34 @@ function show_only_authors(link, start1, stop1)
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
 									
+
+									// get protocol age species and interpretation
+									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM Fragment WHERE id=$id_fragment ";
+									$rs_to_get_info = mysqli_query($GLOBALS['conn'],$query_to_get_info);	
+									while(list($interpretation_notes,$protocol,$age_weight,$species_descriptor,$species_tag) = mysqli_fetch_row($rs_to_get_info)){
+									//print("Data:,$protocol,$age_weight,$species_descriptor,$species_tag");
+									if($protocol){
+										print("	<tr>
+										<td width='70%' class='table_neuron_page2' align='left'>
+											PROTOCOL: $protocol
+										</td>
+										<td width='15%' align='center'> </td></tr>");
+									}
+									if($species_descriptor ){
+										print("<tr>	
+										<td width='70%' class='table_neuron_page2' align='left'>
+											SPECIES: $species_descriptor 
+											</td>
+										<td width='15%' align='center'> </td></tr>");
+									}
+									if($age_weight){
+										print("	<tr>
+										<td width='70%' class='table_neuron_page2' align='left'>
+											Age/Weight: $age_weight
+										</td>
+										<td width='15%' align='center'> </td></tr>");
+									}
+									// view info
 									print ("
 									<tr>	
 										<td width='70%' class='table_neuron_page2' align='left'>
@@ -1287,8 +1315,11 @@ function show_only_authors(link, start1, stop1)
 									print ("</td></tr>	
 									<tr>		
 										<td width='70%' class='table_neuron_page2' align='left'>
-											<em>$quote</em>
-										</td>
+											<em>$quote</em>");
+									if($interpretation_notes){
+										print("</br></br> Interepretation Notes: $interpretation_notes");
+									}
+									print("</td>
 										<td width='15%' class='table_neuron_page2' align='center'>");
 										
 										if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
@@ -1301,8 +1332,8 @@ function show_only_authors(link, start1, stop1)
 										print("</td></tr>");
 	
 									print ("</table>");
-								
-									}		
+									}
+								}		
 						}	
 					}
 					// if error occurs while retriving evidences show error message

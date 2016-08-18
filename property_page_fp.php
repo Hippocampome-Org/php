@@ -2,6 +2,9 @@
   include ("permission_check.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jquery-ui-1.10.2.custom/js/jquery.jqGrid.src-custom.js" type="text/javascript"></script>
 
 <?php
 include ("function/quote_manipulation.php");
@@ -46,7 +49,6 @@ function create_temp_table ($name_temporary_table)
 					show_only int(30),
 					volume varchar(20),
 					issue varchar(20),
-
 					interpretation varchar(200),
 					interpretation_notes varchar(800),
 					linking_pmid_isbn varchar(80),
@@ -475,6 +477,26 @@ $author = new author($class_author);
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script>
+$(document).ready(function(){
+     $("span[id^='flip']").click(function(){
+     	if ( $(this).next().next().is(':visible') ){
+     		$(this).text("View All Parameters");
+     	}
+     	else{
+     		$(this).text("Hide All Parameters");
+     	}
+     	$(this).next().next().slideToggle("fast");
+    });
+});
+</script>
+<style>
+.panel {
+    padding: 0px;
+    display: none;
+    text-align: left;
+}
+</style>
 <script type="text/javascript">
 // Javascript function *****************************************************************************************************
 //================changes===========================
@@ -1015,6 +1037,7 @@ function show_only_authors(link, start1, stop1)
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment,$fp_id, $id_original,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location, $quote, $page_location,$istim,$tstim) = mysqli_fetch_row($rs))
 							{	
+								//print($fp_id);
 								$quote_count++;	
 								if ($show1 == 1)
 								{		
@@ -1070,15 +1093,68 @@ function show_only_authors(link, start1, stop1)
 										if ($istim||$tstim) {
 											print ("</td></tr>
 												<tr>
-												<td width='70%' class='table_neuron_page2' align='left'> <a href='getParameters.php?neuron=$name&pattern=$parameter&fp_id=$fp_id' target='_blank'>Parameters</a>:");
+												<td width='70%' class='table_neuron_page2' align='left'>Parameters:");
 												if($tstim) {
-													print ("Tstim: <span>".floor($tstim)." ms,</span>");
+													print (" Tstim: <span>".floor($tstim)." ms,</span>");
 													
 												} 
 												if($istim) {
 													print (" Istim: <span>".floor($istim)." pA</span>");
 												}
-											print ("</td><td width='15%' align='center'>");
+												print ("<span style='float:right;cursor: pointer;text-align:right' align='right' id='flip_$fp_id'> View All Parameters</span></br>");
+												print("<div class='panel' id='panel_$fp_id'> ");
+												print("<table width='100%' border='1' cellspacing='2' cellpadding='3'>");
+												print("<tr><th width='80%'>Name</th><th width='20%'>Value</th></tr>");
+												// retrive parameters
+												
+												$query_for_view_flag="SELECT * FROM FiringPattern WHERE overall_fp='$parameter' AND definition_parameter like 'definition'";
+												$query_for_values="SELECT * FROM FiringPattern WHERE id=$fp_id";
+												$query_for_description="SELECT * FROM FiringPattern WHERE id=3";
+												$query_for_units="SELECT * FROM FiringPattern WHERE id=4";
+												$query_for_digits="SELECT * FROM FiringPattern WHERE id=5";
+												$query_for_name="SELECT * FROM FiringPattern WHERE id=1";
+												
+												$result_view_flag = mysqli_query($GLOBALS['conn'],$query_for_view_flag);
+												$result_values = mysqli_query($GLOBALS['conn'],$query_for_values);
+												$result_description = mysqli_query($GLOBALS['conn'],$query_for_description);
+												$result_units = mysqli_query($GLOBALS['conn'],$query_for_units);
+												$result_digits = mysqli_query($GLOBALS['conn'],$query_for_digits);
+												$result_name = mysqli_query($GLOBALS['conn'],$query_for_name);
+												
+												$row_view_flag=mysqli_fetch_array($result_view_flag, MYSQL_BOTH);
+												$row_values=mysqli_fetch_array($result_values, MYSQL_BOTH);
+												$row_description=mysqli_fetch_array($result_description, MYSQL_BOTH);
+												$row_units=mysqli_fetch_array($result_units, MYSQL_BOTH);
+												$row_digits=mysqli_fetch_array($result_digits, MYSQL_BOTH);
+												$row_name=mysqli_fetch_array($result_name, MYSQL_BOTH);
+												
+												for($index=2;$index<count($row_name);$index++){
+													if($row_view_flag[$index] and $row_view_flag[$index]!='definition' ){
+														$value_of_parameter=$row_values[$index];
+														if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+															print("<tr>");
+															print("<td width='80%' align='left'>");
+															print($row_name[$index]);
+															if($row_description[$index])
+																print(" [".$row_description[$index]."] ");
+															print("</td>");
+															print("<td width='20%' align='left'>");
+															if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+																if(is_numeric($value_of_parameter)){
+																	$value_of_parameter=number_format((float)$value_of_parameter,$row_digits[$index], '.', '');
+																	print($value_of_parameter);
+																	if($row_units[$index])
+																		print(" ".$row_units[$index]);
+																}
+															}
+															print("</td>");
+															print("</tr>");
+														}
+													}
+
+												}
+												print("</table>");
+												print("<div></td><td width='15%' align='center'>");
 										}
 										// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
 										if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
