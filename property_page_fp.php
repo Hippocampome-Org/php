@@ -599,8 +599,12 @@ function show_only_authors(link, start1, stop1)
 				<td width="20%" align="right">
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
-					&nbsp; Occurance:
+					&nbsp; 
 				<?php
+					if($fp_count<2)
+						print("Occurrence:");
+					else
+						print("Occurrences:");
 					print ("<strong>$fp_count</strong>");
 				?>
 				</td>
@@ -1095,11 +1099,11 @@ function show_only_authors(link, start1, stop1)
 												<tr>
 												<td width='70%' class='table_neuron_page2' align='left'>Parameters:");
 												if($tstim) {
-													print (" Tstim: <span>".floor($tstim)." ms,</span>");
+													print (" Tstim = <span>".floor($tstim)." ms,</span>");
 													
 												} 
 												if($istim) {
-													print (" Istim: <span>".floor($istim)." pA</span>");
+													print (" Istim = <span>".floor($istim)." pA</span>");
 												}
 												print ("<span style='float:right;cursor: pointer;text-align:right' align='right' id='flip_$fp_id'> View All Parameters</span></br>");
 												print("<div class='panel' id='panel_$fp_id'> ");

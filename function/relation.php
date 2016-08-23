@@ -71,15 +71,28 @@ function relation($n, $property, $part)
 	if ($property == 'Firing Pattern')
 	{
 		if ($n == 0)	
-			$relation = 'Reference Count =';
+			$relation = 'Occurrences =';
 		if ($n == 1)
-			$relation = 'Reference Count <';		
+			$relation = 'Occurrences <';		
 		if ($n == 2)
-			$relation = 'Reference Count <=';
+			$relation = 'Occurrences <=';
 		if ($n == 3)
-			$relation = 'Reference Count >';
+			$relation = 'Occurrences >';
 		if ($n == 4)
-			$relation = 'Reference Count >=';
+			$relation = 'Occurrences >=';
+	}
+	if ($property == 'Firing Pattern Parameter')
+	{
+		if ($n == 0)
+			$relation = '=';
+		if ($n == 1)
+			$relation = '<';		
+		if ($n == 2)
+			$relation = '<=';
+		if ($n == 3)
+			$relation = '>';
+		if ($n == 4)
+			$relation = '>=';
 	}
 	return $relation;
 }

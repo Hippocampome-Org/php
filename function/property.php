@@ -13,6 +13,8 @@ function property($n)
 		$property = 'Major Neurontransmitter';
 	if ($n == 5)
 		$property = 'Firing Pattern';
+	if ($n == 6)
+		$property = 'Firing Pattern Parameter';
 	
 
 	return $property;
