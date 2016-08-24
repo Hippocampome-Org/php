@@ -444,7 +444,6 @@ function fp_parameter_search($subject, $predicate,$value,$fp_name){
 	$index_of_parameter=getIndexOfParameter($subject);
 	if($index_of_parameter!=-1 and $predicate!="" and $value!="" ){
 		$precision=getDigitOfParameter($index_of_parameter);
-		//print("$index_of_parameter,$precision,$predicate, $value");
 		$query_get_type_id = "SELECT DISTINCT fpr.Type_id FROM FiringPattern fp,FiringPatternRel fpr
 				WHERE fp.id=fpr.FiringPattern_id 
 				AND fp.definition_parameter like 'parameter' 

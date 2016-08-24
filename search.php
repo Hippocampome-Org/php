@@ -178,6 +178,7 @@ function part(link, i0)
 	var N = i0;
 
 	var destination_page = "search.php";
+	part_name=encodeURIComponent(part_name);
 	location.href = destination_page+"?part="+part_name+"&N="+N;
 }
 
