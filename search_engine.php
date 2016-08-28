@@ -12,8 +12,10 @@ require_once('class/class.epdataevidencerel.php');
 require_once('class/class.epdata.php');
 require_once('class/class.typetyperel.php');
 
+include ("function/firing_pattern_parameters.php");
 include ("function/name_ephys.php");
 include ("function/stm_lib.php");
+include ("function/value.php");
 
 $type = new type($class_type);
 $type -> retrive_id();
@@ -434,6 +436,29 @@ function fp_search($subject, $predicate,$value)
 	return $new_type_id;
 }
 
+// Search for firing pattern parameter
+function fp_parameter_search($subject, $predicate,$value,$fp_name){
+	// retrieve neuron id:
+	$values=split(" ", $value);
+	$value=$values[0];
+	$index_of_parameter=getIndexOfParameter($subject);
+	if($index_of_parameter!=-1 and $predicate!="" and $value!="" ){
+		$precision=getDigitOfParameter($index_of_parameter);
+		$query_get_type_id = "SELECT DISTINCT fpr.Type_id FROM FiringPattern fp,FiringPatternRel fpr
+				WHERE fp.id=fpr.FiringPattern_id 
+				AND fp.definition_parameter like 'parameter' 
+				AND fp.".$fp_name[$index_of_parameter-1]." NOT LIKE 'no value'
+				AND ROUND(fp.".$fp_name[$index_of_parameter-1].",$precision)"." $predicate $value ";
+		$rs_type_id = mysqli_query($GLOBALS['conn'],$query_get_type_id);
+		$index = 0;
+		while(list($id) = mysqli_fetch_row($rs_type_id))
+		{
+			$new_type_id[$index]=$id;
+			$index = $index + 1;
+		}
+	}
+	return $new_type_id;
+}
 
 // SEARCH Function for CONNECTIVITY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function connectivity_search ($evidencepropertyyperel, $property_1, $type, $part, $rel, $val)
@@ -595,7 +620,8 @@ $name_temporary_table_result = "search_result_table_".$ip_address."__".$time_t;
 //print("...name_temporary_table_result:-".$name_temporary_table_result);
 //MyDelete ends
 
-
+//print($name_temporary_table_result);
+//print($name_temporary_table_search);
 
 create_result_table_result($name_temporary_table_result);
 
@@ -737,7 +763,17 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 				$id_type_res = array_merge($id_type_res, $res_fp); 	
 		}
 		// End Firing Pattern
-
+		// Firing pattern parameter
+		if ($property == 'Firing Pattern Parameter')
+		{
+			$predicate = $relation;	
+			$subject=$part;
+			$res_fp = fp_parameter_search($subject, $predicate, $value,$firing_pattern_parameter_names);
+				
+			if ($res_fp != NULL)
+				$id_type_res = array_merge($id_type_res, $res_fp); 	
+		}
+		// End Firing pattern parameter
 		// Script for CONNECTIVITY +++++++++++++++++++++++++++++++++++++++++++
 		if ($property == 'Connectivity')
 		{

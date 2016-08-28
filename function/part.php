@@ -133,10 +133,36 @@ function partFiringPattern()
 {
 	$part=array();
 	$index=0;
-	$query_to_get_firing_pattern = "SELECT DISTINCT overall_fp FROM FiringPattern";
+	$query_to_get_firing_pattern = "SELECT DISTINCT overall_fp FROM FiringPattern WHERE definition_parameter like 'definition'";
 	$rs_firing_pattern = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern);	
 	while(list($firing_pattern) = mysqli_fetch_row($rs_firing_pattern))						
 		$part[$index++] = $firing_pattern;
+	return $part;
+}
+
+function partFiringPatternParameter()
+{
+	$part=array();
+	$part_view=array();
+	$index=0;
+	$query_to_get_firing_pattern_parameter = "SELECT *  FROM FiringPattern WHERE id=1";
+	$rs_firing_pattern_parameter = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern_parameter);	
+	$firing_pattern_parameter=mysqli_fetch_array($rs_firing_pattern_parameter, MYSQLI_NUM);
+
+	$query_to_get_firing_pattern = "SELECT * FROM FiringPattern WHERE definition_parameter like 'definition'";
+	$rs_firing_pattern = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern);	
+	while($firing_pattern = mysqli_fetch_array($rs_firing_pattern,MYSQLI_NUM)){						
+		for($ind=2;$ind<(count($firing_pattern)-1) ;$ind++ ){	
+			if($firing_pattern[$ind]==1)
+				$part_view[$ind-2] = 1;
+		}
+	}
+	$index=0;
+	for($ind=2;$ind<(count($firing_pattern_parameter)-1) ;$ind++ ){	
+		//print($firing_pattern__parameter[$ind].",");
+		if($part_view[$ind-2]==1)
+			$part[$index++] = $firing_pattern_parameter[$ind];
+	}
 	return $part;
 }
 ?>

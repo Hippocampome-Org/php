@@ -154,7 +154,7 @@ if ($_REQUEST['clear_all'])
 
 
 
-$n_property = 6;
+$n_property = 7;
 
 ?>
 
@@ -178,6 +178,7 @@ function part(link, i0)
 	var N = i0;
 
 	var destination_page = "search.php";
+	part_name=encodeURIComponent(part_name);
 	location.href = destination_page+"?part="+part_name+"&N="+N;
 }
 
@@ -264,11 +265,7 @@ include ("function/icon.html");
 			<td align="center" width="31%" class='table_neuron_page3'> Value </td>
 			<td align="center" width="8%" class='table_neuron_page3'>  Operator </td>
 		</tr>
-		</table>
-		
-		<!-- TABLE SEARCH -->
-		<table border="0" cellspacing="3" cellpadding="0" class='table_search'>
-		<?php
+	<?php
 		
 		$temporary_search -> retrieve_n_search();
 		$n_search = $temporary_search -> getN_search();
@@ -304,7 +301,7 @@ include ("function/icon.html");
 				print ("<td align='center' width='4%'> </td>");
 				
 			// Property **************************************************************************************************
-			print ("<td width='17%' align='center' class='table_neuron_page1'>");
+			print ("<td width='22%' align='center' class='table_neuron_page1'>");
 			print ("<select name='property' size='1' cols='10' class='select1' onChange=\"property(this, $id1)\">");
 			
 			if ($property1)
@@ -338,10 +335,17 @@ include ("function/icon.html");
 				$n_part = 2;
 			if ($property1 == 'Major Neurontransmitter')	
 				$n_part = 2;								
-			if($property1=='Firing Pattern'){
-				$value_part=partFiringPattern(); 
-				array_push($value_part,"All");
-				$n_part=count($value_part);
+			if($property1=='Firing Pattern' or $property1=='Firing Pattern Parameter'){
+				if($property1=='Firing Pattern'){
+					$value_part=partFiringPattern(); 
+					array_push($value_part,"All");
+					$n_part=count($value_part);
+				}
+				if($property1=='Firing Pattern Parameter'){
+					$value_part=partFiringPatternParameter(); 
+					$n_part=count($value_part);
+				}
+
 			}
 			else{
 				for ($i=0; $i<$n_part; $i++)
@@ -445,23 +449,25 @@ include ("function/icon.html");
 			}
 			else // if ($property1 != 'Molecular markers')
 			{
-				for ($c = 0; $c < count($value_part); $c++)
-				{
-					$value_part_temp[$c] = $value_part[$c];
-				}
-				for ($c = 0; $c < count($value_part); $c++)
-				{
-					$lowercase = strtolower($value_part[$c]);
-					$value_part[$c] = $lowercase;
-				}
-				sort($value_part);
-				for ($c = 0; $c < count($value_part); $c++)
-				{
-					for($cc=0;$cc<count($value_part_temp);$cc++)
+				if($property1 !='Firing Pattern Parameter'){
+					for ($c = 0; $c < count($value_part); $c++)
 					{
-						if(strcasecmp($value_part[$c],$value_part_temp[$cc])==0)
+						$value_part_temp[$c] = $value_part[$c];
+					}
+					for ($c = 0; $c < count($value_part); $c++)
+					{
+						$lowercase = strtolower($value_part[$c]);
+						$value_part[$c] = $lowercase;
+					}
+					sort($value_part);
+					for ($c = 0; $c < count($value_part); $c++)
+					{
+						for($cc=0;$cc<count($value_part_temp);$cc++)
 						{
-							$value_part[$c]=$value_part_temp[$cc];
+							if(strcasecmp($value_part[$c],$value_part_temp[$cc])==0)
+							{
+								$value_part[$c]=$value_part_temp[$cc];
+							}
 						}
 					}
 				}
@@ -488,10 +494,12 @@ include ("function/icon.html");
 				$n_relation = 2;
 			if ($property1 == 'Firing Pattern')
 				$n_relation = 5;
+			if ($property1 == 'Firing Pattern Parameter')
+				$n_relation = 5;
 			
 			print ("<td width='22%' align='center' class='table_neuron_page1'>");									
 
-			print ("<select name='relation' size='1' cols='10' class='select1' onChange=\"relation(this, $id1)\">");
+			print ("<select name='relation' size='1' cols='10' class='select1'  onChange=\"relation(this, $id1)\">");
 			
 			if ($relation1)
 				print ("<OPTION VALUE='$relation1'>$relation1</OPTION>");
@@ -581,6 +589,50 @@ include ("function/icon.html");
 				// ---------------------------------------------------------------------------------------------------------
 						
 			}	
+			// firing pattern parameter
+			if ($property1 == 'Firing Pattern Parameter') {	
+				$min=null;
+				$max=null;
+				$min_value1 = 0;
+	            $max_value1 = 0; 
+	            $mean_value1= 0;
+	            $unit="";
+				if($part1 and $part1!="-"){
+					$index_of_param=getIndexOfParameter($part1);
+					//print("indes:$index_of_param");
+					if($index_of_param!=-1){
+						$query_to_get_firing_pattern_parameter_value = "SELECT * FROM FiringPattern fp WHERE definition_parameter LIKE 'parameter'";
+						$rs_firing_pattern_parameter_value = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern_parameter_value);	
+						while($firing_pattern = mysqli_fetch_array($rs_firing_pattern_parameter_value,MYSQLI_NUM)){
+							if(is_numeric($firing_pattern[$index_of_param]) and $min==null)
+								$min=$firing_pattern[$index_of_param];
+							elseif(is_numeric($firing_pattern[$index_of_param]) and $min>$firing_pattern[$index_of_param])
+								$min=$firing_pattern[$index_of_param];
+
+							if(is_numeric($firing_pattern[$index_of_param]) and $max==null)
+								$max=$firing_pattern[$index_of_param];
+							elseif(is_numeric($firing_pattern[$index_of_param]) and $max<$firing_pattern[$index_of_param])
+								$max=$firing_pattern[$index_of_param];						
+						}
+						$digit_precision=getDigitOfParameter($index_of_param);
+						$min_value1 = number_format((float)$min,$digit_precision, '.', '');
+		            	$max_value1 = number_format((float)$max,$digit_precision, '.', '');
+		            	//print("Digit precision:$digit_precision,$min_value1,$max_value1 ");
+		            	$mean_value1 = number_format((($min_value1 + $max_value1) / 2),$digit_precision, '.', '');
+						$unit =	getUnitOfParameter($index_of_param);
+						//print("$unit,$index_of_param");
+					}
+					
+				}
+				//print("$name_temporary_table,$unit,$index_of_param");
+				//print("$min_value1,$max_value1");
+	            // Mean: 
+	            
+				$query = "UPDATE $name_temporary_table SET max = '$max_value1', min = '$min_value1', mean = '$mean_value1' WHERE id = '$id1' ";	
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			
+
+			}
 							
 			if ($property1 == 'Morphology')
 				$n_value = 33;
@@ -596,6 +648,9 @@ include ("function/icon.html");
 			}
 			if($property1 == 'Firing Pattern'){
 				$n_value = 5;
+			}
+			if($property1 == 'Firing Pattern Parameter'){
+				$n_value = 11;
 			}
 			
 																
@@ -614,6 +669,8 @@ include ("function/icon.html");
 					$value_value = value_ephys($i, $property1, $min_value1, $max_value1, $unit);
 	            elseif ($property1 == 'Connectivity')
 					$value_value = value_connectivity($i, $type);
+				elseif ($property1 == 'Firing Pattern Parameter') 
+					$value_value = value_fp_parameter($i, $property1, $min_value1, $max_value1, $unit,$digit_precision);
 	            else
 					$value_value = value($i, $property1, $min_value1, $max_value1); 
 				
@@ -724,16 +781,17 @@ include ("function/icon.html");
 		<!-- Table for minimun, maximun and mean value for Electrophysiological data -->
 		<div align="left">
 		<?php
-		$query = "SELECT DISTINCT part, max, min, mean FROM $name_temporary_table WHERE property = 'Electrophysiology'";
+		$query = "SELECT DISTINCT part, max, min, mean,property FROM $name_temporary_table WHERE property = 'Electrophysiology' or property='Firing Pattern Parameter'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$m1 = 0;
-		while(list($part, $max, $min, $mean) = mysqli_fetch_row($rs))
+		while(list($part, $max, $min, $mean,$property_val) = mysqli_fetch_row($rs))
 		{
 			$part_3[$m1] = $part;
 			$max_3[$m1] = $max;
 			$min_3[$m1] = $min;
 			$mean_3[$m1] = $mean;
 			$m1 = $m1 + 1;
+			$fp_parameter=$property_val;
 		}	
 		?>	
 		
@@ -746,7 +804,19 @@ include ("function/icon.html");
 				<table border="0" cellpadding="0" cellspacing="0" class='table_search2'>
 				<tr>
 					<td width='100%' align='center' bgcolor='#6699CC'>
-						<font class='font6'><strong>Electrophysiology <?php print $part_3[$i6]; ?>:</strong></font>
+						<?php
+							if($fp_parameter=='Electrophysiology'){
+								print("<font class='font6'><strong>Electrophysiology :");
+								print($part_3[$i6]); 
+								print("</strong></font>");
+							}
+							else{
+								print("<font class='font6'><strong>Parameter : ");
+								print($part_3[$i6]); 
+								print("</strong></font>");
+							}
+
+						?>
 					</td>
 				</tr>	
 				<tr>
