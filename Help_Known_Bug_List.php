@@ -99,15 +99,6 @@ and potential connectivity with other neuronal types.<o:p></o:p></span></p>
 page summarizes all of the known bibliographic citations that support a given
 piece of knowledge, by presenting original quotations or figures that support
 that knowledge.<o:p></o:p></span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 088: Amend the import scripts and database to handle the interpretation notes for the morphological evidence.
-</span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
-Issue 089: Modify the <span class=SpellE>php</span> code on the morphology Evidence pages to display any interpretation notes.
-</span></p>
-
 </div>
 </body>
 </html>

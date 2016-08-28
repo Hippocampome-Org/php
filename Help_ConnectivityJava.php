@@ -60,17 +60,21 @@ div.WordSection1
  <tr>
   <td width=967 valign=top style='width:725.4pt;padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>
-  The connectivity map is a Java program designed to run on the user's machine. The program allows the user to view the connectivity of one or all of the neuron types
-  in an anatomical context. Being a Java program, it is subject to constraints imposed by local security settings in the Java Control Panel of your machine. If the 
-  Connectivity Map fails to launch, please try the following to troubleshoot:
-  <ul>
+  normal'><span style='font-size:12.0pt;font-family:"Arial","sans-serif"'>
+  <br>The connectivity map allows the user to explore the connectivity of one or all of the neuron types
+  in a (hippocampal-formation-wide) anatomical context.  It is designed to be downloaded and run on the user's machine. Because 
+  the program is Java-based, it is subject to constraints imposed by local security settings 
+  in the Java Control Panel of your system. If the Connectivity Map fails to launch, please try 
+  the following to troubleshoot:
+  <ol>
 	<li>Update your Java Runtime Environment (JRE) to the latest version</li>
-	<li>Locate and open the Java Control Panel in your system</li>
+	<li>Locate and open the Java Control Panel in your system (e.g. in the Control Panel on Windows machines or System Preferences on Macs)</li>
 	<li>Go to the Security tab and click on the Edit Site List button</li>
 	<li>Add a new entry to the exception list using the following URL: http://hippocampome.org</li>
 	<li>Save the new preferences and close</li>
-  </ul>
+	<li>Download the file again.  If the browser informs you that this type of file can harm your computer and asks whether you want to keep it, choose to do so.</li>
+	<li><B>**Right click**</B> on the downloaded .jnlp file and choose to "Open" or "Launch" it.  Alternatively (Mac only), right-click (or Control-click) the .jnlp file and then select "Open With > Java Web Start.app"; then click "Open" in the dialog box which appears.</li>
+  </ol>
   </span></p>
   </td>
  </tr>
