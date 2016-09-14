@@ -108,6 +108,13 @@ $(function(){
 		  };
 </script>
 <script type="text/javascript" src="style/resolution.js"></script>
+<style>
+.title_area2 {
+	position:absolute; top: 80px; left: 50px;
+	width: 1000px;
+	border:none;
+}
+</style>
 </head>
 
 <body>
@@ -167,11 +174,17 @@ $(function(){
 	}
 ?>
 
-<div class='title_area'>
-	<font class="font1"><?php echo $title?></font>
+<div class='title_area2'>
+	<font class="font1"><?php
+	$query = "SELECT fp_name FROM FiringPattern WHERE overall_fp like '$parameter'";
+	$rs = mysqli_query($GLOBALS['conn'],$query);
+	$row_data = mysqli_fetch_row($rs);
+	$fp_name_val=$row_data[0];
+	print("$fp_name_val ($title)");
+	?></font>
 </div>
 
-<div align="center">
+<div align="center">	
 <table width="85%" border="0" cellspacing="2" cellpadding="0" class='body_table'>
 	<tr height="50">
 		<td></td>

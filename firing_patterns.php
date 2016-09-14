@@ -284,34 +284,34 @@ $(function()
 			researchVar: research,
 			table_result : table
 		},
-		colNames:['','Neuron Type','<a href="neuron_by_pattern.php?pattern=ASP.SLN" onClick="OpenInNewTab(this);">ASP.SLN</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.SLN" onClick="OpenInNewTab(this);">TSTUT.SLN</a>','<a href="neuron_by_pattern.php?pattern=D.TSTUT.SLN" onClick="OpenInNewTab(this);">D.TSTUT.SLN</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.TSTUT.SLN" onClick="OpenInNewTab(this);">TSTUT.TSTUT.SLN</a>','<a href="neuron_by_pattern.php?pattern=TSWB.SLN" onClick="OpenInNewTab(this);">TSWB.SLN</a>','<a href="neuron_by_pattern.php?pattern=NASP" onClick="OpenInNewTab(this);">NASP</a>','<a href="neuron_by_pattern.php?pattern=D.NASP" onClick="OpenInNewTab(this);">D.NASP</a>','<a href="neuron_by_pattern.php?pattern=ASP.NASP" onClick="OpenInNewTab(this);">ASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.NASP" onClick="OpenInNewTab(this);">TSTUT.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSWB.NASP" onClick="OpenInNewTab(this);">TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=D.TSWB.NASP" onClick="OpenInNewTab(this);">D.TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=PSTUT" onClick="OpenInNewTab(this);">PSTUT</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.PSTUT" onClick="OpenInNewTab(this);">TSTUT.PSTUT</a>','<a href="neuron_by_pattern.php?pattern=TSWB.PSWB" onClick="OpenInNewTab(this);">TSWB.PSWB</a>','<a href="neuron_by_pattern.php?pattern=ASP." onClick="OpenInNewTab(this);">ASP.</a>','<a href="neuron_by_pattern.php?pattern=D.ASP." onClick="OpenInNewTab(this);">D.ASP.</a>','<a href="neuron_by_pattern.php?pattern=ASP.ASP." onClick="OpenInNewTab(this);">ASP.ASP.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.ASP." onClick="OpenInNewTab(this);">TSTUT.ASP.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT." onClick="OpenInNewTab(this);">TSTUT.</a>','<a href="neuron_by_pattern.php?pattern=D.TSTUT." onClick="OpenInNewTab(this);">D.TSTUT.</a>','<a href="neuron_by_pattern.php?pattern=TSWB." onClick="OpenInNewTab(this);">TSWB.</a>','<a href="neuron_by_pattern.php?pattern=D." onClick="OpenInNewTab(this);">D.</a>','<a href="neuron_by_pattern.php?pattern=-" onClick="OpenInNewTab(this);">-</a>'],	
+		colNames:['','Neuron Type','<a href="neuron_by_pattern.php?pattern=ASP." onClick="OpenInNewTab(this);">ASP.</a>','<a href="neuron_by_pattern.php?pattern=ASP.ASP." onClick="OpenInNewTab(this);">ASP.ASP.</a>','<a href="neuron_by_pattern.php?pattern=ASP.NASP" onClick="OpenInNewTab(this);">ASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=ASP.SLN" onClick="OpenInNewTab(this);">ASP.SLN</a>','<a href="neuron_by_pattern.php?pattern=D." onClick="OpenInNewTab(this);">D.</a>','<a href="neuron_by_pattern.php?pattern=D.ASP." onClick="OpenInNewTab(this);">D.ASP.</a>','<a href="neuron_by_pattern.php?pattern=D.FASP.NASP" onClick="OpenInNewTab(this);">D.FASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=D.NASP" onClick="OpenInNewTab(this);">D.NASP</a>','<a href="neuron_by_pattern.php?pattern=D.PSTUT" onClick="OpenInNewTab(this);">D.PSTUT</a>','<a href="neuron_by_pattern.php?pattern=D.TSWB.NASP" onClick="OpenInNewTab(this);">D.TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=FASP." onClick="OpenInNewTab(this);">FASP.</a>','<a href="neuron_by_pattern.php?pattern=FASP.ASP." onClick="OpenInNewTab(this);">FASP.ASP.</a>','<a href="neuron_by_pattern.php?pattern=FASP.NASP" onClick="OpenInNewTab(this);">FASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=FASP.SLN" onClick="OpenInNewTab(this);">FASP.SLN</a>','<a href="neuron_by_pattern.php?pattern=NASP" onClick="OpenInNewTab(this);">NASP</a>','<a href="neuron_by_pattern.php?pattern=PSTUT" onClick="OpenInNewTab(this);">PSTUT</a>','<a href="neuron_by_pattern.php?pattern=PSWB" onClick="OpenInNewTab(this);">PSWB</a>','<a href="neuron_by_pattern.php?pattern=TSTUT." onClick="OpenInNewTab(this);">TSTUT.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.ASP." onClick="OpenInNewTab(this);">TSTUT.ASP.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.NASP" onClick="OpenInNewTab(this);">TSTUT.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.SLN" onClick="OpenInNewTab(this);">TSTUT.SLN</a>','<a href="neuron_by_pattern.php?pattern=TSWB.NASP" onClick="OpenInNewTab(this);">TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSWB.SLN" onClick="OpenInNewTab(this);">TSWB.SLN</a>'],	
 		colModel :
 		[
 			{name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {return 'id=\'type' + rowId + "\'";}},
 			{name:'NeuronType', index:'nickname', width:250,sortable:false},
-			{name:'ASPSLN', index:'ASPSLN', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUTSLN', index:'TSTUTSLN', width:15,height:50,search:false,sortable:false},
-			{name:'DTSTUTSLN', index:'DTSTUTSLN', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUTTSTUTSLN', index:'TSTUTTSTUTSLN', width:15,height:50,search:false,sortable:false},
-			{name:'TSWBSLN', index:'TSWBSLN', width:15,height:50,search:false,sortable:false},
-			{name:'NASP', index:'NASP', width:15,height:50,search:false,sortable:false},
-			{name:'DNASP', index:'DNASP', width:15,height:50,search:false,sortable:false},
-			{name:'ASPNASP', index:'ASPNASP', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUTNASP', index:'TSTUTNASP', width:15,height:50,search:false,sortable:false},
-			{name:'TSWBNASP', index:'TSWBNASP', width:15,height:50,search:false,sortable:false},
-			{name:'PSTUT', index:'PSTUT', width:15,height:50,search:false,sortable:false},
-			{name:'DTSWBNASP', index:'DTSWBNASP', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUTPSTUT', index:'TSTUTPSTUT', width:15,height:50,search:false,sortable:false},
-			{name:'TSWBPSWB', index:'TSWBPSWB', width:15,height:50,search:false,sortable:false},
 			{name:'ASP', index:'ASP', width:15,height:50,search:false,sortable:false},
-			{name:'DASP', index:'DASP', width:15,height:50,search:false,sortable:false},
 			{name:'ASPASP', index:'ASPASP', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUTASP', index:'TSTUTASP', width:15,height:50,search:false,sortable:false},
-			{name:'TSTUT', index:'TSTUT', width:15,height:50,search:false,sortable:false},
-			{name:'DTSTUT', index:'DTSTUT', width:15,height:50,search:false,sortable:false},
-			{name:'TSWB', index:'TSWB', width:15,height:50,search:false,sortable:false},
+			{name:'ASPNASP', index:'ASPNASP', width:15,height:50,search:false,sortable:false},
+			{name:'ASPSLN', index:'ASPSLN', width:15,height:50,search:false,sortable:false},
 			{name:'D', index:'D', width:15,height:50,search:false,sortable:false},
-			{name:'-', index:'-', width:15,height:50,search:false,sortable:false}
+			{name:'DASP', index:'DASP', width:15,height:50,search:false,sortable:false},
+			{name:'DFASPNASP', index:'DFASPNASP', width:15,height:50,search:false,sortable:false},
+			{name:'DNASP', index:'DNASP', width:15,height:50,search:false,sortable:false},
+			{name:'DPSTUT', index:'DPSTUT', width:15,height:50,search:false,sortable:false},
+			{name:'DTSWBNASP', index:'DTSWBNASP', width:15,height:50,search:false,sortable:false},
+			{name:'FASP', index:'FASP', width:15,height:50,search:false,sortable:false},
+			{name:'FASPASP', index:'FASPASP', width:15,height:50,search:false,sortable:false},
+			{name:'FASPNASP', index:'FASPNASP', width:15,height:50,search:false,sortable:false},
+			{name:'FASPSLN', index:'FASPSLN', width:15,height:50,search:false,sortable:false},
+			{name:'NASP', index:'NASP', width:15,height:50,search:false,sortable:false},
+			{name:'PSTUT', index:'PSTUT', width:15,height:50,search:false,sortable:false},
+			{name:'PSWB', index:'PSWB', width:15,height:50,search:false,sortable:false},
+			{name:'TSTUT', index:'TSTUT', width:15,height:50,search:false,sortable:false},
+			{name:'TSTUTASP', index:'TSTUTASP', width:15,height:50,search:false,sortable:false},
+			{name:'TSTUTNASP', index:'TSTUTNASP', width:15,height:50,search:false,sortable:false},
+			{name:'TSTUTSLN', index:'TSTUTSLN', width:15,height:50,search:false,sortable:false},
+			{name:'TSWBNASP', index:'TSWBNASP', width:15,height:50,search:false,sortable:false},
+			{name:'TSWBSLN', index:'TSWBSLN', width:15,height:50,search:false,sortable:false}
 			], 
 		rowNum: 122,
 		rowList:[122],
@@ -368,8 +368,8 @@ $(function()
 		//var is_ieedge = navigator.userAgent.toLowerCase().indexOf('edge') > -1;
 		
 	}
-	$("#nGrid_TSTUTTSTUTSLN").css("height","120");
-	$("#nGrid_TSTUTPSTUT").css("height","120");
+	$("#nGrid_TSTUTNASP").css("height","120");
+	$("#nGrid_TSTUTSLN").css("height","120");
 	var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 	$("#nGrid").mouseover(function(e)
 	{

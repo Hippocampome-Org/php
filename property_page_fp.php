@@ -593,7 +593,14 @@ function show_only_authors(link, start1, stop1)
 			</tr>
 			<tr>
 				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;Firing Pattern: <?php print("<a href='neuron_by_pattern.php?pattern=$parameter'>$parameter</a>");?></td>
+				<?php
+					$query = "SELECT fp_name FROM FiringPattern WHERE overall_fp like '$parameter'";
+					$rs = mysqli_query($GLOBALS['conn'],$query);
+					$row_data = mysqli_fetch_row($rs);
+					$fp_name_val=$row_data[0];
+					print("<td align='left' width='80%' class='table_neuron_page2'>&nbsp;&nbsp;Firing Pattern: <a href='neuron_by_pattern.php?pattern=$parameter'>$fp_name_val ($parameter)</a></td>");
+				?>
+				
 			</tr>
 			<tr>
 				<td width="20%" align="right">
@@ -1078,22 +1085,7 @@ function show_only_authors(link, start1, stop1)
 											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
 											</td>
 											<td width='15%' align='center'>");
-									if ($interpretation||$interpretation_notes) {
-											print ("</td></tr>
-												<tr>
-												<td width='70%' class='table_neuron_page2' align='left'>");
-												if($interpretation) {
-													print ("Interpretation: <span>$interpretation</span>");
-													if($interpretation_notes) {
-														print ("<br>Interpretation notes: <span>$interpretation_notes</span>");
-													}
-												} else {
-													if($interpretation_notes) {
-														print ("Interpretation notes: <span>$interpretation_notes</span>");
-													}
-												}
-											print ("</td><td width='15%' align='center'>");
-										}
+
 										if ($istim||$tstim) {
 											print ("</td></tr>
 												<tr>
@@ -1132,7 +1124,7 @@ function show_only_authors(link, start1, stop1)
 												$row_digits=mysqli_fetch_array($result_digits, MYSQL_BOTH);
 												$row_name=mysqli_fetch_array($result_name, MYSQL_BOTH);
 												
-												for($index=2;$index<count($row_name);$index++){
+												for($index=3;$index<count($row_name);$index++){
 													if($row_view_flag[$index] and $row_view_flag[$index]!='definition' ){
 														$value_of_parameter=$row_values[$index];
 														if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
