@@ -225,7 +225,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2016 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
-          <br />Last Update: 28 Aug 2016 (<a href="Help_Release_Notes.php">v1.0 R 1K</a>)</font>
+          <br />Last Update: 24 Sep 2016 (<a href="Help_Release_Notes.php">v1.0 R 1L</a>)</font>
           <br />
         </div>
     </td>   

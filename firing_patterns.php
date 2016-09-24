@@ -419,7 +419,7 @@ include ("function/menu_main.php");
 <table width="50%" border="0" cellspacing="0" class='body_table' style="border-width:10px; border-color:white">
 	<tr>
 		<td><font class='font5' style="width=20%;"><strong>Legend:</strong></font></td>
-		<td><font class='font5' style="width=40%"># of pattern occurences in reference(s)</font></td>
+		<td><font class='font5' style="width=40%"># of pattern occurrences in reference(s)</font></td>
 		
 		<td bgcolor="#FF8C00" class='legendClass'><font color="#FF8C00"> </font></td>
 		<td style="height:100%; width:5%;"><font class='font5'>1</font></td>
