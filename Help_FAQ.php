@@ -176,13 +176,15 @@ electrophysiology data, why are rats preferred over mice and other rodent
 species?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
 line-height:115%'><o:p></o:p></span></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><a
-href="#NTP">Neuron Term Portal</a><o:p></o:p></span></p>
+<p class=MsoNormal><a href="#NTP"><span style='font-size:16.0pt;
+line-height:115%'>Neuron Term Portal</span></a><span style='font-size:16.0pt;
+line-height:115%'> <o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><span
-style='mso-tab-count:1'>          </span><a href="#NTP_sources">Q:<span
-style='mso-tab-count:1'>     </span>How are the definitions in the Neuron Term
-Portal derived?</a><o:p></o:p></span></p>
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
+href="#NTP_sources"><span style='font-size:16.0pt;line-height:115%'>
+How are the definitions in the Neuron Term Portal derived?</span></a><span
+style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal><a href="#collaborations"><span style='font-size:16.0pt;
 line-height:115%'>Collaborations</span></a><span style='font-size:16.0pt;
