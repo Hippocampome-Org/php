@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>FAQs</title>
+<title>FAQ</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <style>
 <!--
@@ -81,7 +81,7 @@ ul
 </style>
 </head>
 
-<body lang=EN-US link=blue vlink=purple>
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
 
 <!-- COPY IN ALL PAGES -->
 <?php 
@@ -93,7 +93,7 @@ ul
 <BR><BR><BR><BR><BR><BR><BR>
 		
 <div class='title_area'>
-	<font class="font1">Frequently Asked Questions</font>
+	<font class="font1">FAQ</font>
 </div>
 
 <div class=WordSection1>
@@ -128,21 +128,20 @@ line-height:115%'><span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span></span><a
 href="#link_to_both"><span style='font-size:16.0pt;line-height:115%'>If a new
-paper publishes data on cells with axonal/dendritic branching in <span
-class=SpellE>SMo</span> that lumps together cells that have no projections to
-Sub with those that do (i.e., DG Neurogliaform and MOPP), will the data be
-linked with both, or only one of the two cell types defined in the knowledge
-base?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
-line-height:115%'><o:p></o:p></span></span></p>
+paper publishes data on cells with axonal/dendritic branching in SMo that lumps
+together cells that have no projections to Sub with those that do (i.e., DG
+Neurogliaform and MOPP), will the data be linked with both, or only one of the
+two cell types defined in the knowledge base?</span></a><span
+class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 class=MsoHyperlink><span style='font-size:16.0pt;line-height:115%;color:windowtext;
 text-decoration:none;text-underline:none'>Q:<span style='mso-tab-count:1'>     </span></span></span><a
 href="#MEC_LEC"><span style='font-size:16.0pt;line-height:115%'>Reference is
 made to MEC LII stellate cells but EC LIII pyramidal cells [without the M], and
-EC LII basket-multipolar [without the M] but MEC LIII superficial <span
-class=SpellE>trilayered</span> interneurons. Is this intentional?</span></a><span
-style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></p>
+EC LII basket-multipolar [without the M] but MEC LIII superficial trilayered
+interneurons. Is this intentional?</span></a><span style='font-size:16.0pt;
+line-height:115%'><o:p></o:p></span></p>
 
 <p class=MsoNormal><a href="#curation"><span style='font-size:16.0pt;
 line-height:115%'>Curation</span></a><span style='font-size:16.0pt;line-height:
@@ -176,6 +175,14 @@ href="#Ephys_rats_over_mice"><span style='font-size:16.0pt;line-height:115%'>For
 electrophysiology data, why are rats preferred over mice and other rodent
 species?</span></a><span class=MsoHyperlink><span style='font-size:16.0pt;
 line-height:115%'><o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><a
+href="#NTP">Neuron Term Portal</a><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'><span
+style='mso-tab-count:1'>          </span><a href="#NTP_sources">Q:<span
+style='mso-tab-count:1'>     </span>How are the definitions in the Neuron Term
+Portal derived?</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><a href="#collaborations"><span style='font-size:16.0pt;
 line-height:115%'>Collaborations</span></a><span style='font-size:16.0pt;
@@ -244,13 +251,13 @@ Basket and Axo-Axonic cells, form separate neuron types in Hippocampome.org?<o:p
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Although
-the main categorization property is <span class=SpellE>axo</span>-dendritic
-pattern, the secondary properties listed below are sufficient to uniquely
-separate neuron types.<span style='mso-spacerun:yes'>  </span>Such significance
-is placed on these secondary properties because they can dramatically affect
-the behavior of the type in a neuronal network. In the case of CA1 Axo-axonic
-cells, they specifically target the axon initial segments of CA1 Pyramidal
-cells and ignore any other targets. <o:p></o:p></span></p>
+the main categorization property is axo-dendritic pattern, the secondary
+properties listed below are sufficient to uniquely separate neuron types.<span
+style='mso-spacerun:yes'>  </span>Such significance is placed on these
+secondary properties because they can dramatically affect the behavior of the
+type in a neuronal network. In the case of CA1 Axo-axonic cells, they specifically
+target the axon initial segments of CA1 Pyramidal cells and ignore any other
+targets. <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><span style='mso-tab-count:1'>          </span>-Primary
@@ -292,8 +299,7 @@ style='mso-spacerun:yes'>  </span>This can be accomplished directly by
 presentation of a reconstruction, schematic, or text description of the neuron;
 or indirectly by a citation that provides such a description.<span
 style='mso-spacerun:yes'>  </span>In two special cases, data can be linked in
-the absence of a description of the <span class=SpellE>axo</span>-dendritic
-pattern. <o:p></o:p></span></p>
+the absence of a description of the axo-dendritic pattern. <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><span style='mso-tab-count:1'>          </span>The
@@ -307,14 +313,10 @@ path). <o:p></o:p></span></p>
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="link_to_both"><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>If
-a new paper publishes data on cells with axonal/dendritic branching in </span></b></a><span
-class=SpellE><span style='mso-bookmark:link_to_both'><b style='mso-bidi-font-weight:
-normal'><span style='font-size:16.0pt;line-height:115%'>SMo</span></b></span></span><span
-style='mso-bookmark:link_to_both'><b style='mso-bidi-font-weight:normal'><span
-style='font-size:16.0pt;line-height:115%'> that lumps together cells that have
-no projections to Sub with those that do (i.e., DG Neurogliaform and MOPP),
-will the data be linked with both, or only one of the two cell types defined in
-the knowledge base?<o:p></o:p></span></b></span></p>
+a new paper publishes data on cells with axonal/dendritic branching in SMo that
+lumps together cells that have no projections to Sub with those that do (i.e.,
+DG Neurogliaform and MOPP), will the data be linked with both, or only one of
+the two cell types defined in the knowledge base?<o:p></o:p></span></b></a></p>
 
 <span style='mso-bookmark:link_to_both'></span>
 
@@ -328,15 +330,10 @@ class=MsoHyperlink><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%;color:windowtext;text-decoration:none;
 text-underline:none'>Q:<span style='mso-tab-count:1'>     </span>Reference is
 made to MEC LII stellate cells but EC LIII pyramidal cells [without the M], and
-EC LII basket-multipolar [without the M] but MEC LIII superficial </span></b></span></a><span
-class=SpellE><span style='mso-bookmark:MEC_LEC'><span class=MsoHyperlink><b
-style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
-115%;color:windowtext;text-decoration:none;text-underline:none'>trilayered</span></b></span></span></span><span
-style='mso-bookmark:MEC_LEC'><span class=MsoHyperlink><b style='mso-bidi-font-weight:
-normal'><span style='font-size:16.0pt;line-height:115%;color:windowtext;
-text-decoration:none;text-underline:none'> interneurons. Is this intentional?</span></b></span></span><span
-style='mso-bookmark:MEC_LEC'><b style='mso-bidi-font-weight:normal'><span
-style='font-size:16.0pt;line-height:115%'><o:p></o:p></span></b></span></p>
+EC LII basket-multipolar [without the M] but MEC LIII superficial trilayered
+interneurons. Is this intentional?</span></b></span></a><span style='mso-bookmark:
+MEC_LEC'><b style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;
+line-height:115%'><o:p></o:p></span></b></span></p>
 
 <span style='mso-bookmark:MEC_LEC'></span>
 
@@ -359,8 +356,8 @@ style='font-size:16.0pt;line-height:115%'>Curation<o:p></o:p></span></b></a></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name=annotation><b style='mso-bidi-font-weight:normal'><span style='font-size:
-16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>Who is
-doing the annotating and review of the knowledge base?<o:p></o:p></span></b></a></p>
+16.0pt;line-height:115%'>Q:<span style='mso-tab-count:1'>     </span>Who is doing
+the annotating and review of the knowledge base?<o:p></o:p></span></b></a></p>
 
 <span style='mso-bookmark:annotation'></span>
 
@@ -438,10 +435,43 @@ have plans to make the species displayed a selectable user option.<o:p></o:p></s
 <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
 style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></b></p>
 
-<p class=MsoNormal><a name=collaborations><b style='mso-bidi-font-weight:normal'><span
-style='font-size:16.0pt;line-height:115%'>Collaborations</span></b></a><b
+<p class=MsoNormal style='tab-stops:0in'><a name=collaborations></a><a
+name=NTP><span style='mso-bookmark:collaborations'><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt;line-height:115%'>Neuron Term Portal<span
+class=msoIns><ins cite="mailto:Diek" datetime="2016-10-11T12:56"><o:p></o:p></ins></span></span></b></span></a></p>
+
+<span style='mso-bookmark:NTP'></span>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='mso-bookmark:collaborations'><a name="NTP_sources"><b style='mso-bidi-font-weight:
+normal'><span style='font-size:16.0pt;line-height:115%'><span class=msoIns><ins
+cite="mailto:Diek" datetime="2016-10-11T12:56">Q:<span style='mso-tab-count:
+1'>     </span></ins></span>How are the definitions in the Neuron Term Portal
+derived?<o:p></o:p></span></b></a></span></p>
+
+<span style='mso-bookmark:NTP_sources'></span>
+
+<p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
+style='mso-bookmark:collaborations'><span style='font-size:16.0pt;line-height:
+115%'><span class=msoIns><ins cite="mailto:Diek" datetime="2016-10-11T12:56">A:
+<span style='mso-tab-count:1'>    </span></ins></span>The definitions are
+derived from 26 sources: BIOPORTAL, CRISP, Gene Ontology, Hippocampome.org,
+MeSH, NCBI Gene, NCBI Protein, Neurolex, Protein Ontology, Allen Brain Atlas,
+ChEBI, MBF Bioscience, Medical College of Wisconsin, Merriam-Webster Medical,
+NeuroElectro, NIST InChI Trust, Scholarpedia, UTHealth Neuroscience, Wolfram
+MathWorld, Cambridge Dictionaries, Macmillan Dictionary, Merriam-Webster
+Dictionary, Oxford Dictionaries, TheFreeDictionary, Wikipedia, Wiktionary.<b
+style='mso-bidi-font-weight:normal'><span class=msoIns><ins cite="mailto:Diek"
+datetime="2016-10-11T12:56"><o:p></o:p></ins></span></b></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:collaborations'><span
+style='font-size:16.0pt;line-height:115%'><span class=msoIns><ins
+cite="mailto:Diek" datetime="2016-10-11T12:56"><o:p>&nbsp;</o:p></ins></span></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:collaborations'><b
 style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
-115%'> <o:p></o:p></span></b></p>
+115%'>Collaborations</span></b></span><b style='mso-bidi-font-weight:normal'><span
+style='font-size:16.0pt;line-height:115%'> <o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><a
 name="does_collaborate"><b style='mso-bidi-font-weight:normal'><span
@@ -454,20 +484,19 @@ style='mso-bidi-font-weight:normal'><span style='font-size:16.0pt;line-height:
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>We
 fervently think that scientific progress is significantly expedited by
 information sharing.<span style='mso-spacerun:yes'>  </span>Two examples of
-collaborative relations are with <span class=SpellE>NeuroElectro</span> and
-NIF.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+collaborative relations are with NeuroElectro and NIF.<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>Hippocapome.org shared mined electrophysiological data with <span
-class=SpellE>NeuroElectro</span> in May 2014 as a ‘gold standard’ testbed to
-help validate the <span class=SpellE>NeuroElectro</span> automated literature
-mining protocol. We will continue to monitor future updates of <span
-class=SpellE>NeuroElectro</span> content for new additional information related
+line-height:115%'>Hippocapome.org shared mined electrophysiological data with
+NeuroElectro in May 2014 as a ‘gold standard’ testbed to help validate the
+NeuroElectro automated literature mining protocol. We will continue to monitor
+future updates of NeuroElectro content for new additional information related
 to hippocampus neurons.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:16.0pt;
-line-height:115%'>We have given NIF scraping access to our website for inclusion
-of Hippocampome.org content in their search portal.<o:p></o:p></span></p>
+line-height:115%'>We have given NIF scraping access to our website for
+inclusion of Hippocampome.org content in their search portal.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>
@@ -487,8 +516,8 @@ is no mention of gap junctions - will these data be added later?<o:p></o:p></spa
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'>A:<span style='mso-tab-count:1'>     </span>Yes,
 we are in the early stages of annotation information concerning gap junctions
-and other synaptic information, which will be added to Hippocampome.org in future
-updates.<o:p></o:p></span></p>
+and other synaptic information, which will be added to Hippocampome.org in
+future updates.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><span
 style='font-size:16.0pt;line-height:115%'><o:p>&nbsp;</o:p></span></p>

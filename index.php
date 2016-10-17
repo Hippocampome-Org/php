@@ -187,6 +187,9 @@ jQuery(document).ready(function() {
       <a href="http://elifesciences.org/content/4/e09960">
       <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i></a>.
       eLife 2015;4:e09960.
+      <br><br>
+      <b>*NEW*</b> The release of v1.1 includes the Neuron Term Portal, which allows one to view definitions for 
+      terms and phrases used on this website.
       </font>
 
       <br><br>
@@ -222,6 +225,8 @@ jQuery(document).ready(function() {
           <br><br>
           <hr class='hr2'/>
           <font class='font3' color='#000000'>
+          <a href="Help_Terms_of_Use.php">Terms of Use</a>
+          <br><br>
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2016 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
