@@ -126,6 +126,15 @@ Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"
 marker inference expressions will be added<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
+"Arial","sans-serif"'>The following issues will be addressed in v1.5:<o:p></o:p></span></p>
+
+<p class=MsoListParagraph style='text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:
+Symbol'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:"Arial","sans-serif"'>Izhikevich modeling
+parameters will be added<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
 "Arial","sans-serif"'>The following issues will be addressed in v2.0:<o:p></o:p></span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span

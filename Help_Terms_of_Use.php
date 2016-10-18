@@ -99,7 +99,7 @@ normal'><span style='font-size:20.0pt;line-height:115%'>Terms of Use<o:p></o:p><
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%'>When using
 data found on or downloaded from Hippoocampome.org in your publication(s),
-please include citations such as those listed below:<o:p></o:p></span></p>
+please include the following citations:<o:p></o:p></span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in;mso-list:l0 level1 lfo1'><![if !supportLists]><span
 style='font-size:16.0pt;line-height:115%;mso-fareast-font-family:"Times New Roman"'><span
