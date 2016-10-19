@@ -730,7 +730,7 @@ include ("function/menu_main.php");
 			<font class='font5'>Pale versions of the colors in the matrix indicate interpretations of neuronal property information that have not yet been fully verified.</font>
 			
 			</br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-			<font class='font5'>Twenty matrix markers displayed by default are from our publication.</font>
+			<font class='font5'>Twenty matrix markers displayed by default were shown in our 2015 eLife publication (<a href="http://elifesciences.org/content/4/e09960">Wheeler et al., eLife 2015;4:e09960</a>).</font>
 		</td>
 	</tr>
 </table>
