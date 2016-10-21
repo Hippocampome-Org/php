@@ -55,6 +55,7 @@
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
 			<ul>
 			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>
+			<li><a href='data/netlist.csv'><font class="font7"> Netlist</font></a></li>
 			<li><a href='Help_ConnectivityJava.php'><font class="font7"> Java Connectivity Map Won't Launch</font></a></li>  			
 			</ul>
 			
