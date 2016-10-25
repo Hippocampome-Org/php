@@ -160,7 +160,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.1 - Released: 10/17/2016
+      v1.2 - Released: 10/25/2016
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -190,11 +190,15 @@ jQuery(document).ready(function() {
       <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i></a>.
       eLife 2015;4:e09960.
       <br><br>
-      <b>*NEW*</b> The release of v1.1 includes the Neuron Term Portal, which allows one to view definitions for 
+      The release of v1.1 includes the Neuron Term Portal, which allows one to view definitions for 
       terms and phrases used on this website. Reference: <b>Hamilton et al., 2016</b>
       <a href="http://link.springer.com/article/10.1007/s40708-016-0053-3">
       <i>Name-calling in the hippocampus (and beyond): coming to terms with neuron types and properties</i></a>.
       Brain Informatics (2016); doi:10.1007/s40708-016-0053-3.
+      <br><br>
+      <b>*NEW*</b> The release of v1.2 includes a clickable Connectivity Matrix and an interactive Connectivity Navigator.
+      Reference: <b>Rees et al., 2016</b> <i>Graph theoretic and motif analyses of the hippocampal neuron type potential connectome</i>.
+      eNeuro (2016).
       </font>
 
       <br><br>
@@ -234,7 +238,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015-2016 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
-          <br />Last Update: 17 Oct 2016 (<a href="Help_Release_Notes.php">v1.1</a>)</font>
+          <br />Last Update: 25 Oct 2016 (<a href="Help_Release_Notes.php">v1.2</a>)</font>
           <br />
         </div>
     </td>   
