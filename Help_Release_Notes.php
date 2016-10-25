@@ -103,7 +103,7 @@ font-family:"Arial","sans-serif"'>v1.2 (25 Oct 2016):</span></p>
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>�<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.2
-includes a clickable Connectivity Matrix and an interactive Connectivity Navigator.
+includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the ability to Search by Connectivity.
 </span></p>
 
 </BR>

@@ -196,7 +196,8 @@ jQuery(document).ready(function() {
       <i>Name-calling in the hippocampus (and beyond): coming to terms with neuron types and properties</i></a>.
       Brain Informatics (2016); doi:10.1007/s40708-016-0053-3.
       <br><br>
-      <b>*NEW*</b> The release of v1.2 includes a clickable Connectivity Matrix and an interactive Connectivity Navigator.
+      <b>*NEW*</b> The release of v1.2 includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
+      ability to Search by Connectivity.
       Reference: <b>Rees et al., 2016</b> <i>Graph theoretic and motif analyses of the hippocampal neuron type potential connectome</i>.
       eNeuro (2016).
       </font>
