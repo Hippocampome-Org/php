@@ -99,6 +99,13 @@ jQuery(document).ready(function() {
 		url: 'load_matrix_session_firing.php',
 		success: function() {}
   });
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_firing_parameter.php',
+    success: function() {}
+  });
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
@@ -126,6 +133,7 @@ if ($permission1 != 0) {
         <li><a href="ephys.php">Electrophysiology</a></li>
         <li><a href="connectivity.php">Connectivity</a></li>
         <li><a href="firing_patterns.php">Firing patterns</a></li>
+        <li><a href="firing_patterns_parameters.php">Firing pattern parameters</a></li>
       </ul>
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>

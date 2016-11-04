@@ -49,10 +49,92 @@ jQuery(document).ready(function() {
 		url: 'load_matrix_session_firing.php',
 		success: function() {}
   });
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_matrix_session_firing_parameter.php',
+    success: function() {}
+  });
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>
+<!-- Code for generating csv file from the matrices-->
+<script>
+$(document).ready(function(){
+    $("#csvKN").click(function(){
+          generateMatrix("KN","Know Connections Matrix.csv");
+    });
+    $("#csvPE").click(function(){
+          generateMatrix("PE","Potential Excitatory Connections Matrix.csv");
+    });
+    $("#csvPI").click(function(){
+          generateMatrix("PI","Potential Inhibitory Connections Matrix.csv");
+    });
+    $("#csvCN").click(function(){
+          generateMatrix("CN","Netlist.csv");
+    });
+  function generateMatrix(matrixName,fileName){
+    var BLACK="rgb(0, 0, 0)"
+    var GRAY="rgb(170, 170, 170)"
+     var trs=[];
+      var tds=[]
+      var link=[];
+      var neuronId=[];
+      var neuronName=[];
+      var id;
+      var knownConnection=[];
+      var index=0;
+      for(var row=1;row<=122;row++){
+        trs = $("#"+row);
+        tds = trs.find("td");
+        var name=$(tds[1]).text().trim();
+        link = $(tds[1]).find("a");
+        var id=$(link).attr("href").trim();
+        var id_val=id.substring(id.lastIndexOf('=')+1,id.length);
+        neuronName[row-1]=name;
+        neuronId[row-1]=id_val;
+      }
 
+      for(var row=1;row<=122;row++){
+        trs = $("#"+row);
+        tds = trs.find("td");
+        for(var column=2;column<124;column++){
+            link = $(tds[column]).find("div");
+            if(link.length!=0){
+              var image=$(link[0]).find("img");
+              var img=$(image[0]).attr("src").trim();
+              var img_name=img.substring(img.lastIndexOf('/')+1,img.length);
+              var column_back_colour=$(link[0]).css('background-color');
+              if((matrixName=="CN" || matrixName=="KN") &&img_name=="known_connection.png"){
+                  knownConnection[index++]=neuronName[row-1]+","+neuronName[column-2];
+              }
+              else if((matrixName=="CN" || matrixName=="PE") && column_back_colour==BLACK){
+                    knownConnection[index++]=neuronName[row-1]+","+neuronName[column-2];
+              }
+              else if((matrixName=="CN" || matrixName=="PI") && column_back_colour==GRAY){
+                  knownConnection[index++]=neuronName[row-1]+","+neuronName[column-2];
+              }
+            }
+        }
+    }
+    var csvContent = "data:text/csv;charset=utf-8,";
+    csvContent +="From (pre-synaptic type),To (post-synaptic type)\n";
+    knownConnection.forEach(function(infoArray, index){
+       var dataString = infoArray;
+       csvContent += index < knownConnection.length ? dataString+ "\n" : dataString;
+
+    }); 
+    var encodedUri = encodeURI(csvContent);
+    var linkDownload = document.createElement("a");
+    linkDownload.setAttribute("href", encodedUri);
+    linkDownload.setAttribute("download", fileName);
+    document.body.appendChild(linkDownload); 
+    linkDownload.click(); 
+  }
+
+});
+</script>
 
 <?php
 //	session_start();
@@ -709,7 +791,16 @@ $(function(){
 				    </script>				    
 			    </td>					
 			</tr>
-			
+			<tr height="50">
+        <td colspan="2" style="text-align:center"><font class='font7'>Download</font></td>
+      </tr>
+      <tr height="20">
+        <td style="text-align:center"><a href="#"><img id="csvCN" src='images/ExportCSV.png' width="30px" border="0"/></a></td>
+        <td><font class='font5'>Netlist</font></td>
+        <td></font></td> 
+        <!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
+      </tr>
+     
 			<tr height="50">
 				<td colspan="2" style="text-align:center"><font class='font7'>Legend</font></td>
 			</tr>
@@ -758,6 +849,8 @@ $(function(){
 				<td align="right"><font class='font5'><p id="id_Unknowncount"></p></font></td> 
 				<!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
 			</tr>
+      
+       
 			<!--  
 			<tr height="20"></tr>
 			<tr>			

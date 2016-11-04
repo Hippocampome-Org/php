@@ -241,25 +241,25 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		if($hippo_count[$name_firing[$j]] == 1)
 		{
 			$bgColor = ORANGE;
-			$hippo[$name_firing[$j]] = "<div style='background-color:".$bgColor."'> </div>";
+			$hippo[$name_firing[$j]] = "<div style='background-color:".$bgColor."'><font color='white'> 1</font></div>";
 			$hippo_color[$name_firing[$j]] = $hippo_count[$name_firing[$j]];
 		}
 		elseif($hippo_count[$name_firing[$j]] == 2)
 		{
 			$bgColor = BLUE;
-			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'> </div>";
+			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'><font color='white'> 2</font></div>";
 			$hippo_color[$name_firing[$j]] = $hippo_count[$name_firing[$j]];
 		}
 		elseif($hippo_count[$name_firing[$j]] == 3)
 		{
 			$bgColor = BROWN;
-			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'> </div>";
+			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'><font color='white'> 3</font></div>";
 			$hippo_color[$name_firing[$j]] = $hippo_count[$name_firing[$j]];
 		}
 		elseif($hippo_count[$name_firing[$j]] == 4)
 		{
 			$bgColor = GRAY;
-			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'> </div>";
+			$hippo[$name_firing[$j]] = "<div style='background-color:" .$bgColor. "'><font color='white'> 4</font></div>";
 			$hippo_color[$name_firing[$j]] = $hippo_count[$name_firing[$j]];
 		}
 		/*else
