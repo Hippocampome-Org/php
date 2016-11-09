@@ -199,7 +199,7 @@ jQuery(document).ready(function() {
       <b>*NEW*</b> The release of v1.2 includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
       ability to Search by Connectivity.
       Reference: <b>Rees et al., 2016</b> <i>Graph theoretic and motif analyses of the hippocampal neuron type potential connectome</i>.
-      eNeuro (2016).
+      eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
       </font>
 
       <br><br>
