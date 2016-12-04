@@ -77,7 +77,7 @@ function create_temp_table ($name_temporary_table)
 	time varchar(32),
 	volume varchar(20),
 	issue varchar(20),
-	locationValue varchar(30),
+	locationValue varchar(256),
 	PRIMARY KEY (id))DEFAULT CHARSET=utf8;";
 	$query = mysqli_query($GLOBALS['conn'],$creatable);
 
@@ -94,8 +94,16 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 	if (get_magic_quotes_gpc()) {
 		$publication = stripslashes($publication);
 		$res = stripslashes($res);
+		$quote = stripslashes($quote);   
+		$authors = stripslashes($authors); 
+		$linking_quote = stripslashes($linking_quote);
+		$linking_page_location = stripslashes($linking_page_location);
 	}
 	$publication= mysqli_real_escape_string($GLOBALS['conn'],$publication);
+	$quote = mysqli_real_escape_string($GLOBALS['conn'],$quote);
+	$authors = mysqli_real_escape_string($GLOBALS['conn'],$authors);
+	$linking_quote = mysqli_real_escape_string($GLOBALS['conn'],$linking_quote);
+	$linking_page_location = mysqli_real_escape_string($GLOBALS['conn'],$linking_page_location);
 	$query_i = "INSERT INTO $table
 	(id,
 		i1_counter,
@@ -178,7 +186,6 @@ function insert_temporary($table, $i1_counter, $id_fragment, $id_original, $quot
 	   '$locationValue'	   
 	   )";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);
-		
 	//if id_original is NULL
 	if ($id_original) {
 		$query1="UPDATE $table set id_original = '$id_original' where id_fragment='$id_fragment' AND i1_counter='$i1_counter'";

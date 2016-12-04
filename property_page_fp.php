@@ -76,7 +76,7 @@ function insert_temporary($table,$fp_id, $id_fragment, $id_original, $quote, $au
 	set_magic_quotes_runtime(0);	
 	if (get_magic_quotes_gpc()) {
     	$publication = stripslashes($publication);  
-    	$quotes = stripslashes($quotes);   
+    	$quote = stripslashes($quote);   
 		$authors = stripslashes($authors); 
 		$linking_quote = stripslashes($linking_quote);
 		$linking_page_location = stripslashes($linking_page_location);
@@ -1085,16 +1085,17 @@ function show_only_authors(link, start1, stop1)
 											Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
 											</td>
 											<td width='15%' align='center'>");
-
 										if ($istim||$tstim) {
 											print ("</td></tr>
 												<tr>
 												<td width='70%' class='table_neuron_page2' align='left'>Parameters:");
-												if($tstim) {
-													print (" Tstim = <span>".floor($tstim)." ms,</span>");
+												if($tstim && trim($tstime)!='no value') {
+													print (" Tstim = <span>".floor($tstim)." ms</span>");
+													if($istim && trim($istim)!='no value') 
+														print(",");
 													
 												} 
-												if($istim) {
+												if($istim && trim($istim)!='no value') {
 													print (" Istim = <span>".floor($istim)." pA</span>");
 												}
 												print ("<span style='float:right;cursor: pointer;text-align:right' align='right' id='flip_$fp_id'> View All Parameters</span></br>");
@@ -1150,8 +1151,13 @@ function show_only_authors(link, start1, stop1)
 
 												}
 												print("</table>");
-												print("<div></td><td width='15%' align='center'>");
+												print("<div></td><td width='15%' class='table_neuron_page2' align='center'>");
+												print ("<a href='download_spike_data.php?id=$fp_id' target='_blank'>");
+												print ("<img src='images/ExportISI.png' border='0' width='50%'>");
+												print ("</br>ISI Data </a>");
 										}
+										// Download spike data
+										
 										// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
 										if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
 											print ("</td></tr>

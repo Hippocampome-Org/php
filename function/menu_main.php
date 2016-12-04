@@ -21,6 +21,7 @@
 			<li><a href="ephys.php">Electrophysiology</a></li>
 			<li><a href="connectivity.php">Connectivity</a></li>
 			<li><a href="firing_patterns.php">Firing patterns</a></li>
+			<li><a href="firing_patterns_parameters.php">Firing pattern parameters</a></li>
 	
 		</ul></li>
 	
