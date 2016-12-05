@@ -215,10 +215,10 @@ $(function(){
 <div style="width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;">
 	<?php
 	$firing_parameter=$_REQUEST['pattern'];
-	$query_to_get_images = "SELECT DISTINCT name FROM Attachment WHERE parameter LIKE '$firing_parameter'";
+	$query_to_get_images = "SELECT DISTINCT name FROM Attachment WHERE parameter LIKE '$firing_parameter' group by substr(original_id,5,length(original_id)) order by name";
 	$rs_images = mysqli_query($GLOBALS['conn'],$query_to_get_images);
 	while(list($image) = mysqli_fetch_row($rs_images))			
-		print("<a href='attachment/fp/$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
+		print("<a href='view_fp_image?image=$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
 		//print("<div style='border-left:medium #CC0000 solid; height:300px;' />");
 		
 	?>

@@ -449,6 +449,26 @@ margin:0 auto;
 .tabellauno td {
 text-align: center;
 }
+.tabellaunopar th#header1, .tabellaunopar th#header2, .tabellaunopar th#header3 {text-align:left; padding-left:0.5em;}
+
+/* Change with resolution ------------------------------------------------------------- */	
+.tabellaunopar {
+float:left;
+margin:0 auto;
+padding:0;
+width:564px;
+/* position:absolute;
+left:20px; */
+}
+
+.tabellaunopar caption {
+font-size:1.2em; 
+margin:0 auto;
+}
+
+.tabellaunopar td {
+text-align: center;
+}
 
 .tabelladue {
 margin:0;

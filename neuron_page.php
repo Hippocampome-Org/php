@@ -1664,8 +1664,97 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		?>	
 
 		<br />
+		<!-- TABLE Firing pattern : -->
+		<table width="80%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td width="20%" align="center" class="table_neuron_page3">
+					Firing Pattern
+				</td>			
+			</tr>			
+		</table>
+<table width='80%' border='0' cellspacing='2' cellpadding='0'>
+		<tr>
+		<td width='20%' align='right' class='table_neuron_page1'>
+		Images
+		</td>
+		<td align='left' width='80%' class='table_neuron_page1'>
+		</td>
+		</tr>
+<tr>
+<td width='20%' align='right'> </td>
+<td align='left' width='80%' class='table_neuron_page2'>
+	<?php
+	$fp_count=0;
+	$firing_parameter=$_REQUEST['pattern'];
+	$query_to_get_images = "SELECT 
+    DISTINCT a.name
+FROM
+    FiringPatternRel fpr,
+    Attachment a
+WHERE
+    a.cell_id = fpr.Type_id
+        AND fpr.original_id = a.original_id
+        AND fpr.Type_id = $id";
+	$rs_images = mysqli_query($GLOBALS['conn'],$query_to_get_images);
+	$fp_count=mysqli_num_rows($rs_images);
+	if($fp_count==0){
+		print("No image is associated with this neuron");
+	}
+	else{
+		print("<div style='width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;''>");
+		while(list($image) = mysqli_fetch_row($rs_images))	{		
+			print("<a href='attachment/fp/$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
+		}
+		print("</div>");
+	}	
+	?>
+</td>
+</tr>
+</table>	
+
+<table width='80%' border='0' cellspacing='2' cellpadding='0'>
+		<tr>
+		<td width='20%' align='right' class='table_neuron_page1'>
+		Parameters
+		</td>
 		
-		
+	<?php
+	$fp_count=0;
+	$firing_parameter=$_REQUEST['pattern'];
+	$query_to_get_parameter = "SELECT fp.overall_fp, COUNT(*) AS fp_count
+		FROM FiringPatternRel fpr, FiringPattern fp
+		WHERE fpr.FiringPattern_id = fp.id AND fpr.Type_id = $id GROUP BY fp.overall_fp";
+	$rs_parameter = mysqli_query($GLOBALS['conn'],$query_to_get_parameter);
+	$fp_count=mysqli_num_rows($rs_parameter);
+	if($fp_count==0){
+		print("<td align='right' width='80%' class='table_neuron_page1'>
+		</td>
+		</tr>");
+		print("<tr><td width='20%' align='right'> </td><td align='left' width='80%' class='table_neuron_page2'>");
+		print(" No parameter associated with this neuron");
+		print("</td> </tr>");
+	}
+	else{
+		print("<td align='left' width='60%' class='table_neuron_page1'>
+		</td>
+		<td align='center' width='20%' class='table_neuron_page1'>
+			View page
+		</td>
+		</tr>");
+		while(list($parameter,$firing_count) = mysqli_fetch_row($rs_parameter))	{		
+			print("<tr><td width='20%' align='right'> </td><td align='left' width='60%' class='table_neuron_page2'>");
+			print($parameter);
+			print("</td><td align='center' width='20%' class='table_neuron_page2'>");
+			print("<a align='left' href='property_page_fp.php?id_neuron=$id&parameter=$parameter&count=$firing_count&page=1' target='_blank'> [Evidence] </a>");
+			print("<a align='right' href='neuron_by_pattern.php?pattern=$parameter' target='_blank'> [Firing Pattern] </a>");
+			print("</td></tr>");
+		}
+	}
+	?>
+
+</table>
+
+		<br />
 		<!-- TABLE Potential postsynaptic connections: -->
 		<?php
 	//get link
@@ -1929,6 +2018,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
       $net_sources = array_unique($net_sources);
       $net_sources = get_sorted_records($net_sources);  --> 
 
+
       
 
       <table width='80%' border='0' cellspacing='2' cellpadding='0' >
@@ -1973,9 +2063,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 	  </td>
 	  </tr>
 	  </table>
-	  
 	 
-      
       
       <table width='80%' border='0' cellspacing='2' cellpadding='0'>
       <tr>
@@ -2024,94 +2112,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 	  
 
 		</table>
-		<table width="80%" border="0" cellspacing="2" cellpadding="0">
-			<tr>
-				<td width="20%" align="center" class="table_neuron_page3">
-					Firing Pattern
-				</td>			
-			</tr>			
-		</table>
-<table width='80%' border='0' cellspacing='2' cellpadding='0'>
-		<tr>
-		<td width='20%' align='right' class='table_neuron_page1'>
-		Images
-		</td>
-		<td align='left' width='80%' class='table_neuron_page1'>
-		</td>
-		</tr>
-<tr>
-<td width='20%' align='right'> </td>
-<td align='left' width='80%' class='table_neuron_page2'>
-	<?php
-	$fp_count=0;
-	$firing_parameter=$_REQUEST['pattern'];
-	$query_to_get_images = "SELECT 
-    DISTINCT a.name
-FROM
-    FiringPatternRel fpr,
-    Attachment a
-WHERE
-    a.cell_id = fpr.Type_id
-        AND fpr.original_id = a.original_id
-        AND fpr.Type_id = $id";
-	$rs_images = mysqli_query($GLOBALS['conn'],$query_to_get_images);
-	$fp_count=mysqli_num_rows($rs_images);
-	if($fp_count==0){
-		print("No image is associated with this neuron");
-	}
-	else{
-		print("<div style='width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;''>");
-		while(list($image) = mysqli_fetch_row($rs_images))	{		
-			print("<a href='attachment/fp/$image' target='_blank'><img style='float:left;' title='$image' src='attachment/fp/$image' border='1' width='160' height='90' alt='Image Missing' /></a>");
-		}
-		print("</div>");
-	}	
-	?>
-</td>
-</tr>
-</table>	
-
-<table width='80%' border='0' cellspacing='2' cellpadding='0'>
-		<tr>
-		<td width='20%' align='right' class='table_neuron_page1'>
-		Parameter
-		</td>
 		
-	<?php
-	$fp_count=0;
-	$firing_parameter=$_REQUEST['pattern'];
-	$query_to_get_parameter = "SELECT fp.overall_fp, COUNT(*) AS fp_count
-		FROM FiringPatternRel fpr, FiringPattern fp
-		WHERE fpr.FiringPattern_id = fp.id AND fpr.Type_id = $id GROUP BY fp.overall_fp";
-	$rs_parameter = mysqli_query($GLOBALS['conn'],$query_to_get_parameter);
-	$fp_count=mysqli_num_rows($rs_parameter);
-	if($fp_count==0){
-		print("<td align='right' width='80%' class='table_neuron_page1'>
-		</td>
-		</tr>");
-		print("<tr><td width='20%' align='right'> </td><td align='left' width='80%' class='table_neuron_page2'>");
-		print(" No parameter associated with this neuron");
-		print("</td> </tr>");
-	}
-	else{
-		print("<td align='left' width='60%' class='table_neuron_page1'>
-		</td>
-		<td align='center' width='20%' class='table_neuron_page1'>
-			View page
-		</td>
-		</tr>");
-		while(list($parameter,$firing_count) = mysqli_fetch_row($rs_parameter))	{		
-			print("<tr><td width='20%' align='right'> </td><td align='left' width='60%' class='table_neuron_page2'>");
-			print($parameter);
-			print("</td><td align='center' width='20%' class='table_neuron_page2'>");
-			print("<a align='left' href='property_page_fp.php?id_neuron=$id&parameter=$parameter&count=$firing_count&page=1' target='_blank'> [Evidence] </a>");
-			print("<a align='right' href='neuron_by_pattern.php?pattern=$parameter' target='_blank'> [Firing Pattern] </a>");
-			print("</td></tr>");
-		}
-	}
-	?>
-
-</table>
 		</table>	
 
 			<br />	

@@ -57,6 +57,7 @@ function create_temp_table ($name_temporary_table)
 					linking_page_location varchar(80),
 					istim varchar(32),
 					tstim varchar(32),
+					fp_original_name varchar(256),
 					PRIMARY KEY (id));";
 	$query = mysqli_query($GLOBALS['conn'],$creatable);
 }
@@ -64,7 +65,7 @@ function create_temp_table ($name_temporary_table)
 function insert_temporary($table,$fp_id, $id_fragment, $id_original, $quote, $authors, 
 	$title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, 
 	$open_access, $citation_count,  $volume, $issue,$id_neuron_fp=NULL,
-	$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim)
+	$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim,$fp_original_name)
 {
 	
 	if ($open_access == NULL)
@@ -117,7 +118,8 @@ function insert_temporary($table,$fp_id, $id_fragment, $id_original, $quote, $au
 	   linking_quote,
 	   linking_page_location,
 	   istim,
-	   tstim
+	   tstim,
+	   fp_original_name
 	   )
 	VALUES
 	  (NULL,
@@ -150,7 +152,8 @@ function insert_temporary($table,$fp_id, $id_fragment, $id_original, $quote, $au
 	   '$linking_quote',
 	   '$linking_page_location',
 	   '$istim',
-	   '$tstim'  
+	   '$tstim',
+	   '$fp_original_name'  
 	   )";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
@@ -631,7 +634,7 @@ function show_only_authors(link, start1, stop1)
 		<?php	
 		// logic for retriving conndata evidences
 			$query_to_get_fp_evidence = "SELECT fp.id as firing_pattern_id,f.id,f.original_id,f.dt,f.quote,f.page_location,f.pmid_isbn ,a.id,a.title,a.publication,a.year,a.pmid_isbn,
-					a.first_page,a.last_page,a.pmcid,a.nihmsid,a.doi,a.open_access,a.citation_count,a.volume,a.issue,f.interpretation,f.interpretation_notes,f.linking_pmid_isbn,f.linking_pmid_isbn_page,f.linking_quote,f.linking_page_location,fr.istim_pa as istim,fr.tstim_ms as tstim									
+					a.first_page,a.last_page,a.pmcid,a.nihmsid,a.doi,a.open_access,a.citation_count,a.volume,a.issue,f.interpretation,f.interpretation_notes,f.linking_pmid_isbn,f.linking_pmid_isbn_page,f.linking_quote,f.linking_page_location,fr.istim_pa as istim,fr.tstim_ms as tstim,fp.fp_name									
 					FROM Fragment f, EvidenceFragmentRel ef,ArticleEvidenceRel ae, Article a,FiringPatternRel fr,FiringPattern fp
 					WHERE fr.FiringPattern_id=fp.id
 					AND fr.original_id=f.original_id 
@@ -642,7 +645,7 @@ function show_only_authors(link, start1, stop1)
 			$fp_evidence_rs = mysqli_query($GLOBALS['conn'],$query_to_get_fp_evidence);
 			$id_neuron_fp=$id_neuron;
 			// get the article associated with these fragments
-			while(list($fp_id,$fp_fragment_id,$original_id,$fp_dt,$fp_quote,$fp_page_location,$fp_pmid_isbn,$id_article,$title,$publication,$year,$pmid_isbn,$first_page,$last_page,$pmcid,$nihmsid,$doi,$open_access,$citation_count,$volume,$issue,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim) = mysqli_fetch_row($fp_evidence_rs))	{		
+			while(list($fp_id,$fp_fragment_id,$original_id,$fp_dt,$fp_quote,$fp_page_location,$fp_pmid_isbn,$id_article,$title,$publication,$year,$pmid_isbn,$first_page,$last_page,$pmcid,$nihmsid,$doi,$open_access,$citation_count,$volume,$issue,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim,$fp_original_name) = mysqli_fetch_row($fp_evidence_rs))	{		
 				if ($title[$ui] == '.')
 					$title[$ui] = '';	
 				$articleauthorrel -> retrive_author_position($id_article);
@@ -672,7 +675,7 @@ function show_only_authors(link, start1, stop1)
 					$fp_quote = quote_replaceIDwithName($fp_quote);
 					$interpretation = quote_replace_IDwithName($interpretation);
 					$linking_quote = quote_replaceIDwithName($linking_quote);
-					insert_temporary($name_temporary_table, $fp_id,$fp_fragment_id, $original_id, $fp_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $fp_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $volume, $issue,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim);
+					insert_temporary($name_temporary_table, $fp_id,$fp_fragment_id, $original_id, $fp_quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $fp_page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $volume, $issue,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location,$istim,$tstim,$fp_original_name);
 				}
 			}
 								
@@ -1043,10 +1046,10 @@ function show_only_authors(link, start1, stop1)
 						
 						// Retrive evidences stored in temporary table
 						try {
-							$query = "SELECT id_fragment,fp_id, id_original,id_neuron,interpretation,interpretation_notes,linking_pmid_isbn,linking_pmid_isbn_page,linking_quote,linking_page_location, quote, page_location, istim,tstim FROM $name_temporary_table WHERE title = '$title_temp[$i]' group by id_fragment ";	
+							$query = "SELECT id_fragment,fp_id, id_original,id_neuron,interpretation,interpretation_notes,linking_pmid_isbn,linking_pmid_isbn_page,linking_quote,linking_page_location, quote, page_location, istim,tstim,fp_original_name FROM $name_temporary_table WHERE title = '$title_temp[$i]' group by id_fragment ";	
 							//print($query);
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
-							while(list($id_fragment,$fp_id, $id_original,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location, $quote, $page_location,$istim,$tstim) = mysqli_fetch_row($rs))
+							while(list($id_fragment,$fp_id, $id_original,$id_neuron_fp,$interpretation,$interpretation_notes,$linking_pmid_isbn,$linking_pmid_isbn_page,$linking_quote,$linking_page_location, $quote, $page_location,$istim,$tstim,$fp_original_name) = mysqli_fetch_row($rs))
 							{	
 								//print($fp_id);
 								$quote_count++;	
@@ -1156,8 +1159,15 @@ function show_only_authors(link, start1, stop1)
 												print ("<img src='images/ExportISI.png' border='0' width='50%'>");
 												print ("</br>ISI Data </a>");
 										}
-										// Download spike data
-										
+										// fp_original_name Author original FP description
+
+										if ($fp_original_name) {
+											print ("</td></tr>
+												<tr>
+												<td width='70%' class='table_neuron_page2' align='left'>Author original FP description: ");
+												print($fp_original_name);
+												print("<td width='15%' align='center'>");
+										}
 										// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
 										if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
 											print ("</td></tr>

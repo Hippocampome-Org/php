@@ -28,9 +28,17 @@ function getFPViewParameters($fp_parameters_array,$fp_pattern,$flag)
 	$row_units=mysqli_fetch_array($result_units, MYSQLI_BOTH);
 	$row_description=mysqli_fetch_array($result_description, MYSQLI_BOTH);
 	
-	$ind=0;
+	$ind=2;
+	if($flag=="MR"){
+		$fp_view_name_mr[0]="tstim_ms";
+		$fp_view_name_mr[1]="istim_pa";
+	}
+	else{
+		$fp_view_name_hr[0]="<span title='Duration of stimulation'>Tstim (ms)</span>";
+		$fp_view_name_hr[1]="<span title='Amplitude of stimulation'>Istim (pA)</span>";
+	}
 	while ($row_view_flag =  mysqli_fetch_array($result_view_flag,MYSQLI_BOTH)) {
-		for($index=0;$index<count($fp_parameters_array);$index++){
+		for($index=2;$index<count($fp_parameters_array);$index++){
 			$key=$fp_parameters_array[$index];
 			$key_col=$row_view_flag[$key];
 			// get human readable name
@@ -59,10 +67,13 @@ function getFPViewParameters($fp_parameters_array,$fp_pattern,$flag)
 			
 		}
 	}
-	if($flag=="MR")
-		return $fp_view_name_mr;
-	else
+
+	if($flag=="MR"){
+			return $fp_view_name_mr;
+	}
+	else{
 		return $fp_view_name_hr;
+	}
 }
 function getUrlForLink($fp_param_array,$fp_pattern) 
 {
@@ -234,7 +245,7 @@ $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 $hippo = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.FASP.NASP"=>NULL, "D.NASP."=>NULL, "D.PSTUT"=>NULL, "D.TSWB.NASP"=>NULL, "FASP."=>NULL, "FASP.ASP."=>NULL, "FASP.NASP"=>NULL, "FASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL,  "-"=>NULL);
 $name_firing = array("0"=>"ASP.", "1"=>"ASP.ASP.", "2"=>"ASP.NASP", "3"=>"ASP.SLN", "4"=>"D.", "5"=>"D.ASP.", "6"=>"D.FASP.NASP", "7"=>"D.NASP", "8"=>"D.PSTUT", "9"=>"D.TSWB.NASP", "10"=>"FASP.", "11"=>"FASP.ASP.", "12"=>"FASP.NASP", "13"=>"FASP.SLN", "14"=>"NASP", "15"=>"PSTUT", "16"=>"PSWB", "17"=>"TSTUT.", "18"=>"TSTUT.ASP.", "19"=>"TSTUT.NASP", "20"=>"TSTUT.SLN", "21"=>"TSWB.NASP",  "22"=>"TSWB.SLN", "23"=>"-");
-$firing_pattern_parameter_values=array("delay_ms","pfs_ms","swa_mv","nisi","isiav_ms","sd_ms","max_isi_ms","min_isi_ms","first_isi_ms","isiav1_2_ms","isiav1_3_ms","isiav1_4_ms","last_isi_ms","isiavn_n_1_ms","isiavn_n_2_ms","isiavn_n_3_ms","maxisi_minisi","maxisin_isin_m1","maxisin_isin_p1","ai","rdmax","df","sf","tmax_scaled","isimax_scaled","isiav_scaled","sd_scaled","slope","intercept","slope1","intercept1","css_yc1","xc1","slope2","intercept2","slope3","intercept3","xc2","yc2","f1_2","f1_2crit","f2_3","f2_3crit","f3_4","f3_4crit","p1_2","p2_3","p3_4","p1_2uv","p2_3uv","p3_4uv","isii_isii_m1","i","isiav_i_n_isi1_i_m1","maxisij_isij_m1","maxisij_isij_p1","nisi_c","isiav_ms_c","maxisi_ms_c","minisi_ms_c","first_isi_ms_c","tmax_scaled_c","isimax_scaled_c","isiav_scaled_c","sd_scaled_c","slope_c","intercept_c","slope1_c","intercept1_c","css_yc1_c","xc1_c","slope2_c","intercept2_c","slope3_c","intercept3_c","xc2_c","yc2_c","f1_2_c","f1_2crit_c","f2_3_c","f2_3crit_c","f3_4_c","f3_4crit_c","p1_2_c","p2_3_c","p3_4_c","p1_2uv_c","p2_3uv_c","p3_4uv_c","m_2p","c_2p","m_3p","c1_3p","c2_3p","m1_4p","c1_4p","m2_4p","c2_4p","n_isi_cut_3p","n_isi_cut_4p","f_12","f_crit_12","f_23","f_crit_23","f_34","f_crit_34","p_12","p_12_uv","p_23","p_23_uv","p_34","p_34_uv","m_fasp","c_fasp","n_isi_cut_fasp");
+$firing_pattern_parameter_values=array("tstim_ms","istim_pa","delay_ms","pfs_ms","swa_mv","nisi","isiav_ms","sd_ms","max_isi_ms","min_isi_ms","first_isi_ms","isiav1_2_ms","isiav1_3_ms","isiav1_4_ms","last_isi_ms","isiavn_n_1_ms","isiavn_n_2_ms","isiavn_n_3_ms","maxisi_minisi","maxisin_isin_m1","maxisin_isin_p1","ai","rdmax","df","sf","tmax_scaled","isimax_scaled","isiav_scaled","sd_scaled","slope","intercept","slope1","intercept1","css_yc1","xc1","slope2","intercept2","slope3","intercept3","xc2","yc2","f1_2","f1_2crit","f2_3","f2_3crit","f3_4","f3_4crit","p1_2","p2_3","p3_4","p1_2uv","p2_3uv","p3_4uv","isii_isii_m1","i","isiav_i_n_isi1_i_m1","maxisij_isij_m1","maxisij_isij_p1","nisi_c","isiav_ms_c","maxisi_ms_c","minisi_ms_c","first_isi_ms_c","tmax_scaled_c","isimax_scaled_c","isiav_scaled_c","sd_scaled_c","slope_c","intercept_c","slope1_c","intercept1_c","css_yc1_c","xc1_c","slope2_c","intercept2_c","slope3_c","intercept3_c","xc2_c","yc2_c","f1_2_c","f1_2crit_c","f2_3_c","f2_3crit_c","f3_4_c","f3_4crit_c","p1_2_c","p2_3_c","p3_4_c","p1_2uv_c","p2_3uv_c","p3_4uv_c","m_2p","c_2p","m_3p","c1_3p","c2_3p","m1_4p","c1_4p","m2_4p","c2_4p","n_isi_cut_3p","n_isi_cut_4p","f_12","f_crit_12","f_23","f_crit_23","f_34","f_crit_34","p_12","p_12_uv","p_23","p_23_uv","p_34","p_34_uv","m_fasp","c_fasp","n_isi_cut_fasp");
 $firing_pattern_names=array("ASP.","ASP.ASP.","ASP.NASP","ASP.SLN","D.","D.ASP.","D.FASP.NASP","D.NASP","D.PSTUT","D.TSWB.NASP","FASP.","FASP.ASP.","FASP.NASP","FASP.SLN","NASP","PSTUT","PSWB","TSTUT.","TSTUT.ASP.","TSTUT.NASP","TSTUT.SLN","TSWB.NASP","TSWB.SLN");
 // loop over firing pattern 
 for($fp_count=0;$fp_count<count($firing_pattern_names);$fp_count++)

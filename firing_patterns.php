@@ -65,6 +65,7 @@ jQuery(document).ready(function()
 <?php
 //$jsonStr = $_SESSION['firing'];
 $jsonStr = $_SESSION['firingpattern'];
+$jsonStrPar = $_SESSION['firingpatternparameter'];
 if($_SESSION['check']=="no_reload")
 	$_SESSION['check']='reload';
 require_once('class/class.type.php');
@@ -80,8 +81,16 @@ $table_result ="";
 if(isset($_REQUEST['table_result']))
 	$table_result = $_REQUEST['table_result'];
 include ("function/icon.html");
+
+// fp
+// view firing pattern matrix for selected dropdown
+if($_REQUEST['show_only'])
+	$indexFP = $_REQUEST['show_only'];
+else
+	$indexFP = 0;
+//fp ende
 ?>
-<title>Firing Pattern Matrix</title>
+<title>Firing Patterns Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
@@ -158,6 +167,16 @@ include ("function/icon.html");
 	width: 700px;
 	border:none;
 }
+.title_area_par {
+	position:absolute; top: 80px; left: 635px;
+	width: 500px;
+	border:none;
+}
+.title_area_par_tab {
+	position:absolute; top: 195px; left: 630px;
+	width: 500px;
+	border:none;
+}
  .expandChrome {
 	top: 93px !important;
 	}
@@ -183,6 +202,12 @@ include ("function/icon.html");
 }
 </style>
 <script language="javascript">
+function show_only(link)
+{
+	var value=link[link.selectedIndex].value;
+	var destination_page = "firing_patterns.php";
+	location.href = destination_page+"?show_only="+value;
+}
 function OpenInNewTab(aEle)
 {
 	//var win = window.open(aEle.href,'_self'); // stay in same tab
@@ -291,11 +316,11 @@ $(function()
 			researchVar: research,
 			table_result : table
 		},
-		colNames:['','Neuron Type','<a href="neuron_by_pattern.php?pattern=ASP." onClick="OpenInNewTab(this);">ASP.</a>','<a href="neuron_by_pattern.php?pattern=ASP.ASP." onClick="OpenInNewTab(this);">ASP.ASP.</a>','<a href="neuron_by_pattern.php?pattern=ASP.NASP" onClick="OpenInNewTab(this);">ASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=ASP.SLN" onClick="OpenInNewTab(this);">ASP.SLN</a>','<a href="neuron_by_pattern.php?pattern=D." onClick="OpenInNewTab(this);">D.</a>','<a href="neuron_by_pattern.php?pattern=D.ASP." onClick="OpenInNewTab(this);">D.ASP.</a>','<a href="neuron_by_pattern.php?pattern=D.FASP.NASP" onClick="OpenInNewTab(this);">D.FASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=D.NASP" onClick="OpenInNewTab(this);">D.NASP</a>','<a href="neuron_by_pattern.php?pattern=D.PSTUT" onClick="OpenInNewTab(this);">D.PSTUT</a>','<a href="neuron_by_pattern.php?pattern=D.TSWB.NASP" onClick="OpenInNewTab(this);">D.TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=FASP." onClick="OpenInNewTab(this);">FASP.</a>','<a href="neuron_by_pattern.php?pattern=FASP.ASP." onClick="OpenInNewTab(this);">FASP.ASP.</a>','<a href="neuron_by_pattern.php?pattern=FASP.NASP" onClick="OpenInNewTab(this);">FASP.NASP</a>','<a href="neuron_by_pattern.php?pattern=FASP.SLN" onClick="OpenInNewTab(this);">FASP.SLN</a>','<a href="neuron_by_pattern.php?pattern=NASP" onClick="OpenInNewTab(this);">NASP</a>','<a href="neuron_by_pattern.php?pattern=PSTUT" onClick="OpenInNewTab(this);">PSTUT</a>','<a href="neuron_by_pattern.php?pattern=PSWB" onClick="OpenInNewTab(this);">PSWB</a>','<a href="neuron_by_pattern.php?pattern=TSTUT." onClick="OpenInNewTab(this);">TSTUT.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.ASP." onClick="OpenInNewTab(this);">TSTUT.ASP.</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.NASP" onClick="OpenInNewTab(this);">TSTUT.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSTUT.SLN" onClick="OpenInNewTab(this);">TSTUT.SLN</a>','<a href="neuron_by_pattern.php?pattern=TSWB.NASP" onClick="OpenInNewTab(this);">TSWB.NASP</a>','<a href="neuron_by_pattern.php?pattern=TSWB.SLN" onClick="OpenInNewTab(this);">TSWB.SLN</a>'],	
+		colNames:['','Neuron Type','<a href="neuron_by_pattern.php?pattern=ASP." title="adapting spiking" onClick="OpenInNewTab(this);">ASP.</a>','<a title="adapting spiking followed by (slower) adapting spiking" href="neuron_by_pattern.php?pattern=ASP.ASP." onClick="OpenInNewTab(this);">ASP.ASP.</a>','<a title="non-adapting spiking preceded by adapting spiking" href="neuron_by_pattern.php?pattern=ASP.NASP" onClick="OpenInNewTab(this);">ASP.NASP</a>','<a title="silence preceded by adapting spiking" href="neuron_by_pattern.php?pattern=ASP.SLN" onClick="OpenInNewTab(this);">ASP.SLN</a>','<a title="delayed spiking" href="neuron_by_pattern.php?pattern=D." onClick="OpenInNewTab(this);">D.</a>','<a title="delayed adapting spiking" href="neuron_by_pattern.php?pattern=D.ASP." onClick="OpenInNewTab(this);">D.ASP.</a>','<a title="non-adapting spiking preceded by delayed fast-adapting spiking" href="neuron_by_pattern.php?pattern=D.FASP.NASP" onClick="OpenInNewTab(this);">D.FASP.NASP</a>','<a title="delayed non-adapting spiking" href="neuron_by_pattern.php?pattern=D.NASP" onClick="OpenInNewTab(this);">D.NASP</a>','<a title="delayed persistent stuttering" href="neuron_by_pattern.php?pattern=D.PSTUT" onClick="OpenInNewTab(this);">D.PSTUT</a>','<a title="non-adapting spiking preceded by delayed transient slow-wave bursting" href="neuron_by_pattern.php?pattern=D.TSWB.NASP" onClick="OpenInNewTab(this);">D.TSWB.NASP</a>','<a title="fast-adapting spiking" href="neuron_by_pattern.php?pattern=FASP." onClick="OpenInNewTab(this);">FASP.</a>','<a title="fast-adapting spiking followed by adapting spiking" href="neuron_by_pattern.php?pattern=FASP.ASP." onClick="OpenInNewTab(this);">FASP.ASP.</a>','<a title="non-adapting spiking preceded by fast-adapting spiking" href="neuron_by_pattern.php?pattern=FASP.NASP" onClick="OpenInNewTab(this);">FASP.NASP</a>','<a title="silence preceded by fast-adapting spiking" href="neuron_by_pattern.php?pattern=FASP.SLN" onClick="OpenInNewTab(this);">FASP.SLN</a>','<a title="non-adapting spiking" href="neuron_by_pattern.php?pattern=NASP" onClick="OpenInNewTab(this);">NASP</a>','<a title="persistent stuttering" href="neuron_by_pattern.php?pattern=PSTUT" onClick="OpenInNewTab(this);">PSTUT</a>','<a title="persistent slow-wave bursting" href="neuron_by_pattern.php?pattern=PSWB" onClick="OpenInNewTab(this);">PSWB</a>','<a title="transient stuttering" href="neuron_by_pattern.php?pattern=TSTUT." onClick="OpenInNewTab(this);">TSTUT.</a>','<a title="transient stuttering followed by adapting spiking" href="neuron_by_pattern.php?pattern=TSTUT.ASP." onClick="OpenInNewTab(this);">TSTUT.ASP.</a>','<a title="non-adapting spiking preceded by transient stuttering" href="neuron_by_pattern.php?pattern=TSTUT.NASP" onClick="OpenInNewTab(this);">TSTUT.NASP</a>','<a title="silence preceded by transient stuttering" href="neuron_by_pattern.php?pattern=TSTUT.SLN" onClick="OpenInNewTab(this);">TSTUT.SLN</a>','<a title="non-adapting spiking preceded by transient slow-wave bursting" href="neuron_by_pattern.php?pattern=TSWB.NASP" onClick="OpenInNewTab(this);">TSWB.NASP</a>','<a title="silence preceded by transient slow-wave bursting" href="neuron_by_pattern.php?pattern=TSWB.SLN" onClick="OpenInNewTab(this);">TSWB.SLN</a>'],	
 		colModel :
 		[
 			{name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {return 'id=\'type' + rowId + "\'";}},
-			{name:'NeuronType', index:'nickname', width:250,sortable:false},
+			{name:'NeuronType', index:'nickname', width:150,sortable:false},
 			{name:'ASP', index:'ASP', width:15,height:50,search:false,sortable:false},
 			{name:'ASPASP', index:'ASPASP', width:15,height:50,search:false,sortable:false},
 			{name:'ASPNASP', index:'ASPNASP', width:15,height:50,search:false,sortable:false},
@@ -337,7 +362,7 @@ $(function()
 		},
 		scrollerbar: false,
 		height: "402",
-		width: "705",
+		width: "580",
 		shrinkToFit: true,
 		gridComplete: function ()
 		{
@@ -346,7 +371,76 @@ $(function()
 		//	HideShowColumns();
 		} 
 	});
-	
+	// fp
+	var indexFP=<?php echo $indexFP?>;
+	var dataStrPHP = <?php echo $jsonStrPar?>;
+	var objJson={};
+	// only get firing pattern matrix for selected dropdown
+	objJson["page"] = 0;
+	objJson["total"] = 0;
+	objJson["records"] = null;
+	objJson["rows"] = dataStrPHP.rows[indexFP].data;
+	var dataStr=JSON.stringify(objJson);
+	var value=dataStrPHP.header[indexFP];
+	var columnNames=['','Neuron Type'];
+	var columnHeader=[
+	  {name:'type', index:'type', width:50,sortable:false,frozen: true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
+          return 'id=\'type' + rowId + "\'";   
+      } },
+      {name:'Neuron type', index:'nickname', width:150,sortable:false,frozen: true},
+    ];
+    for( var index=0;index<value.length;index++){
+    	var headers={};
+    	headers["name"]=index;
+    	headers["index"]=index;
+    	headers["width"]=100;
+    	headers["height"]=150;
+    	headers["search"]=false;
+    	headers["sortable"]=false;
+    	columnNames.push(value[index]);
+    	columnHeader.push(headers);
+    }
+
+	$("#nGridPar").jqGrid({
+	datatype: "jsonstring",
+	datastr: dataStr,
+    colNames:columnNames,
+    colModel :columnHeader, 
+   	rowNum:122,
+    rowList:[122],
+    viewrecords: true, 
+    gridview: true,
+    jsonReader : {
+      page: "page",
+      total: "total",
+      records: "records",
+      root:"rows",
+      repeatitems: true,
+      onSelectRow: function() {
+    	     return false;
+    	},
+      cell:"cell",
+      id: "invid"
+   },
+    scrollerbar:true,
+    height:"402",
+    width: "580",
+    shrinkToFit: false,
+    gridComplete: function () {
+    	var gridName = "nGridPar"; // Access the grid Name
+    	Merger(gridName,"type");
+		}  
+    });
+	for(index=0;index<value.length;index++){
+		$("#jqgh_nGridPar_"+index).mouseover(function(e) {
+			$(this).addClass('header_highlight');
+		}); 
+		$("#jqgh_nGridPar_"+index).mouseout(function(e) {
+			$(this).removeClass('header_highlight');
+		});
+	}
+	jQuery("#nGridPar").jqGrid("setFrozenColumns");
+	//fp end
 	if(checkVersion()=="9")
 	{
 		var myGrid = $('#nGrid');
@@ -411,7 +505,7 @@ include ("function/title.php");
 include ("function/menu_main.php");
 ?>	
 <div class="title_area_marker">   
-      <font class="font1">Browse Firing Pattern Matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
+      <font class="font1">Browse Firing Patterns Matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 </div>
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
@@ -421,7 +515,9 @@ include ("function/menu_main.php");
 			<div id="pager"></div>
 		</td>
 	</tr>
-</table>			
+</table>
+
+
 <table width="50%" border="0" cellspacing="0" class='body_table' style="border-width:10px; border-color:white">
 	<tr>
 		<td><font class='font5' style="width=20%;"><strong>Legend:</strong></font></td>
@@ -439,6 +535,36 @@ include ("function/menu_main.php");
 		<td style="height:100%; width:5%;"><font class='font5'>4</font></td>	
 	</tr>
 </table>
+</div>
+<div class="title_area_par">
+	<form id="myform">
+		<font class="font1"> Browse Firing Pattern Parameters Matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>   
+		</br>    
+		</br>
+		</br>
+		<span style="color: rgb(0, 0, 153);">Firing Pattern:</span>
+		<?php
+			print ("<select  name='check1'  onChange=\"show_only(this)\">");
+			$hippo = array("ASP.", "ASP.ASP.", "ASP.NASP", "ASP.SLN", "D.", "D.ASP.", "D.FASP.NASP", "D.NASP.", "D.PSTUT", "D.TSWB.NASP", "FASP.", "FASP.ASP.", "FASP.NASP", "FASP.SLN", "NASP", "PSTUT", "PSWB", "TSTUT.", "TSTUT.ASP.", "TSTUT.NASP", "TSTUT.SLN", "TSWB.NASP", "TSWB.SLN");
+			if($indexFP!=0){
+				print("<option value='".$indexFP."'>".$hippo[$indexFP]."</option>");
+			}
+			for($i=0;$i<count($hippo);$i++){
+				print("<option value='".$i."'>".$hippo[$i]."</option>");
+			}
+		?>
+		</select>
+	</form>
+</div>
+<div class="title_area_par_tab">
+<table border="0" cellspacing="0" cellpadding="0" class="tabellaunopar">
+	<tr>
+		<td>
+			<table id="nGridPar"></table>
+			<div id="pager"></div>
+		</td>
+	</tr>
+</table>	
 </div>
 </body>
 </html>

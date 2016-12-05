@@ -7,7 +7,9 @@ class utils_author_article
 	private $_book;
 	private $_year;
 	private $_pmid_isbn;
+	private $_fp;
 	private $_types_array;
+	private $_neuron;
 	function __construct() {
 		$this->_types_array=array();
    	}
@@ -188,6 +190,76 @@ class utils_author_article
 			}
 		return $author_article_array;
     }
+    // fetch all the article and type associated with the given firing pattern. 
+    public function getAuthorArticleRelatedToFP($temp_table_name){
+    	$author_article_array=array();
+		$index=0;
+		// Get the Evidence associated with type_id and using evidence retrive article and then authors.
+		$query_to_get_article=" SELECT TempSearch.neuron,fp.overall_fp,ArtAuthRel1.Article_id,Art.title,Art.publication,Art.year,Art.pmid_isbn,
+								GROUP_CONCAT(distinct Auth2.name ORDER BY ArtAuthRel1.Article_id,ArtAuthRel2.author_pos SEPARATOR ', ')  AS authors
+								FROM $temp_table_name TempSearch
+								INNER JOIN FiringPattern fp ON (fp.fp_name=TempSearch.neuron)
+								INNER JOIN FiringPatternRel fpr ON (fpr.FiringPattern_id=fp.id)
+								INNER JOIN Fragment f ON (f.original_id=fpr.original_id)
+								INNER JOIN EvidenceFragmentRel efr ON (efr.Fragment_id=f.id)
+								INNER JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Evidence_id = efr.Evidence_id)
+								INNER JOIN Article Art ON (Art.id=ArtEvdRel.Article_id)
+								INNER JOIN ArticleAuthorRel ArtAuthRel1 ON (ArtAuthRel1.Article_id=Art.id)
+								INNER JOIN Author Auth1 ON (Auth1.id=ArtAuthRel1.Author_id)
+								INNER JOIN ArticleAuthorRel ArtAuthRel2 ON (ArtAuthRel2.Article_id=ArtAuthRel1.Article_id)
+								INNER JOIN Author Auth2 ON (ArtAuthRel2.Author_id=Auth2.id)
+								GROUP BY ArtAuthRel1.Article_id,TempSearch.neuron
+								ORDER BY ArtAuthRel1.author_pos";
+			//print($query_to_get_article);
+			$result_set = mysqli_query($GLOBALS['conn'],$query_to_get_article);
+			if (!$result_set) {
+            	die("<p>Error in Listing Author and Article Records From Type.</p>");
+        	}
+			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
+			{
+				$neuron=$rows['neuron'];
+				$fp_name=$rows['overall_fp'];
+				$article_id=$rows['Article_id'];
+				$authors=$rows['authors'];
+				$article_title=$rows['title'];
+				$article_publication =$rows['publication'];
+				$article_pmid_isbn=$rows['pmid_isbn'];
+				$article_year = $rows['year'];
+				$article_year=substr($article_year,0,4);
+				// add author, article and type information for searched author in utils_author_article object
+				$author_article_array[$index]=new utils_author_article();
+				$author_article_array[$index]->setFP($fp_name);
+				$author_article_array[$index]->setNeuron($neuron);
+				$author_article_array[$index]->setAuthors($authors);
+				$author_article_array[$index]->setTitle($article_title);
+				$author_article_array[$index]->setBook($article_publication);
+				$author_article_array[$index]->setYear($article_year);
+				$author_article_array[$index]->setPmidIsbn($article_pmid_isbn);
+				// get the all neuron type associated with the fp original description
+				$index_type=0;
+				$types_array=array();
+				$query_to_get_type_fp="SELECT DISTINCT fpr.Type_id,t.name,t.nickname,t.status FROM FiringPattern fp, FiringPatternRel fpr,Type t
+				WHERE fp.id=fpr.FiringPattern_id AND t.id=fpr.Type_id
+				AND fp.fp_name like '$neuron'";
+				//print("<br>".$query_to_get_type_fp);
+				$result_set_fp = mysqli_query($GLOBALS['conn'],$query_to_get_type_fp);
+				if (!$result_set_fp) {
+	            	die("<p>Error in Listing Author and Article Records.</p>");
+	        	}
+				while($rows=mysqli_fetch_array($result_set_fp, MYSQL_ASSOC))
+				{
+					$types_array[$index_type]=new utils_type();
+					$types_array[$index_type]->setName($rows['name']);
+					$types_array[$index_type]->setNickname($rows['nickname']);
+					$types_array[$index_type]->setStatus($rows['status']);
+					$types_array[$index_type]->setId($rows['Type_id']);
+					$index_type++;	
+				}
+				$author_article_array[$index]->setTypesArray($types_array);
+				$index++;
+			}
+		return $author_article_array;
+    }
     // fetch all the article and type associated with the given article id. 
     public function getArticleTypesArray($article_id){
  		$types_array=array();
@@ -229,6 +301,22 @@ class utils_author_article
 		}
 		return $types_array;
     }
+    public function setFP($var)
+    {
+		  $this->_fp = $var;
+    }
+    public function getFP()
+    {
+		  return $this->_fp;
+    }	
+    public function setNeuron($var)
+    {
+		  $this->_neuron = $var;
+    }
+    public function getNeuron()
+    {
+		  return $this->_neuron;
+    }	
     public function setAuthors($var)
     {
 		  $this->_authors = $var;

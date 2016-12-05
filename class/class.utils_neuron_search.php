@@ -35,6 +35,28 @@ class utils_neuron_search{
         }
         return $searched_neurons_array;
     }
+    public function retriveSearchedFP(){
+        $searched_neurons_array=array();
+        $index=0; 
+        $temp_table=$this->get_table_name();
+        $query_to_get_searched_neuron="SELECT id,type_id,neuron FROM $temp_table";
+        $rs = mysqli_query($GLOBALS['conn'],$query_to_get_searched_neuron);
+        if (!$rs) {
+            die("<p>Error in Listing Neuron Tables." . mysql_error() . "</p>");
+        }
+        while($row=mysqli_fetch_array($rs, MYSQL_ASSOC))
+        {
+            $id = $row['id'];
+            $type_id = $row['type_id'];
+            $name=$row['neuron'];
+            $searched_neurons_array[$index]=new utils_neuron_search();
+            $searched_neurons_array[$index]->set_id($id);
+            $searched_neurons_array[$index]->set_type_id($type_id);
+            $searched_neurons_array[$index]->set_neuron($name);
+            $index++;   
+        }
+        return $searched_neurons_array;
+    }
     // create temporary table to poplulate search table on find neuron name page.
     public function create_temp_table ()
     { 
@@ -43,9 +65,9 @@ class utils_neuron_search{
         $query = mysqli_query($GLOBALS['conn'],$drop_table);
         $query= "CREATE TABLE IF NOT EXISTS  $temp_table(                    
                        id int(4) NOT NULL AUTO_INCREMENT,
-                       type_id int(11),
+                       type_id varchar(22),
                        letter varchar(3),
-                       neuron varchar(200),
+                       neuron varchar(512),
                        PRIMARY KEY (id));";
         $rs = mysqli_query($GLOBALS['conn'],$query);
         if (!$rs) {
@@ -84,6 +106,7 @@ class utils_neuron_search{
         {
             $query = "UPDATE $temp_table SET type_id='$type_id', neuron = '$neuron' WHERE id='$id'";   
         }
+        print($query);
         $rs = mysqli_query($GLOBALS['conn'],$query);
     }
     // remove the neuron record at index $id.
