@@ -45,6 +45,10 @@
 			<font class='font1a'>Molecular markers:</font> &nbsp; &nbsp;
 			<ul>
 			<li><a href='Help_Marker_Abbreviations.php'><font class="font7"> Abbreviations</font></a></li>
+			<li><a href='data/High-conf-genes_CA1-SP.pdf'><font class="font7"> High-conf-genes_CA1-SP</font></a></li>
+			<li><a href='data/High-conf-genes_CA2-SP.pdf'><font class="font7"> High-conf-genes_CA2-SP</font></a></li>
+			<li><a href='data/High-conf-genes_CA3-SP.pdf'><font class="font7"> High-conf-genes_CA3-SP</font></a></li>
+			<li><a href='data/High-conf-genes_DG-SG.pdf'><font class="font7"> High-conf-genes_DG-SG</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Electrophysiology:</font> &nbsp; &nbsp;
