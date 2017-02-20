@@ -419,7 +419,12 @@ function fp_search($subject, $predicate,$value)
 		if($subject!="All" || $predicate!="All")
 			$query_get_type_id=$query_get_type_id." HAVING ";
 		if($subject!="All")
-		 	$query_get_type_id=$query_get_type_id." sub.def_overall_fp like '$subject' ";
+			if(strpos($subject,"Element") !== false){
+				$subject=str_replace(" Element", "", $subject);
+				$query_get_type_id=$query_get_type_id." sub.def_overall_fp like '%$subject%' ";
+			}
+			else
+		 		$query_get_type_id=$query_get_type_id." sub.def_overall_fp like '$subject' ";
 		if($subject!='All' && $predicate!="All")
 			$query_get_type_id=$query_get_type_id." AND";
 		if($predicate!="All")

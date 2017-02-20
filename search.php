@@ -339,6 +339,8 @@ include ("function/icon.html");
 				if($property1=='Firing Pattern'){
 					$value_part=partFiringPattern(); 
 					array_push($value_part,"All");
+					$phenotype=array("ASP Element","D Element","FASP Element","TSTUT Element","TSWB Element","NASP Element","PSTUT Element","PSWB Element","SLN Element");
+					$value_part=array_merge($phenotype,$value_part);
 					$n_part=count($value_part);
 				}
 				if($property1=='Firing Pattern Parameter'){
@@ -587,7 +589,27 @@ include ("function/icon.html");
 				$query = "UPDATE $name_temporary_table SET max = '$max_value1', min = '$min_value1', mean = '$mean_value1' WHERE id = '$id1' ";	
 				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 				// ---------------------------------------------------------------------------------------------------------
+
+				// Electrophysiology
+				$valuesOfEphys=array();
+				$index=0;
+				$query_to_get_ephys = "SELECT DISTINCT e.value1 
+										FROM EvidencePropertyTypeRel eptr, Epdata e, EpdataEvidenceRel eer, Property p
+										WHERE e.id=eer.Epdata_id
+										AND eer.Evidence_id=eptr.Evidence_id
+										AND p.id=eptr.Property_id
+										AND p.subject like '$part2'";
+				#print($query_to_get_ephys);
+				$rs_ephys = mysqli_query($GLOBALS['conn'],$query_to_get_ephys);	
+				while(list($ephys) = mysqli_fetch_row($rs_ephys))						
+					$valuesOfEphys[$index++] = $ephys;	
+
+				sort($valuesOfEphys);
+				$valuesOfEphys=array_unique($valuesOfEphys);
 						
+				for($ind=0;$ind<count($valuesOfEphys);$ind++){
+					$valuesOfEphys[$ind]=$valuesOfEphys[$ind]." ".$unit;
+				}					
 			}	
 			// firing pattern parameter
 			if ($property1 == 'Firing Pattern Parameter') {	
@@ -597,13 +619,19 @@ include ("function/icon.html");
 	            $max_value1 = 0; 
 	            $mean_value1= 0;
 	            $unit="";
+				$index=0;
+	            $valuesOf=array();
+	            #print("Part1 is:$part1");
 				if($part1 and $part1!="-"){
 					$index_of_param=getIndexOfParameter($part1);
 					//print("indes:$index_of_param");
 					if($index_of_param!=-1){
+						$digit_precision=getDigitOfParameter($index_of_param);
 						$query_to_get_firing_pattern_parameter_value = "SELECT * FROM FiringPattern fp WHERE definition_parameter LIKE 'parameter'";
 						$rs_firing_pattern_parameter_value = mysqli_query($GLOBALS['conn'],$query_to_get_firing_pattern_parameter_value);	
 						while($firing_pattern = mysqli_fetch_array($rs_firing_pattern_parameter_value,MYSQLI_NUM)){
+							if(is_numeric($firing_pattern[$index_of_param]))
+								$valuesOf[$index++]=$firing_pattern[$index_of_param];
 							if(is_numeric($firing_pattern[$index_of_param]) and $min==null)
 								$min=$firing_pattern[$index_of_param];
 							elseif(is_numeric($firing_pattern[$index_of_param]) and $min>$firing_pattern[$index_of_param])
@@ -612,15 +640,33 @@ include ("function/icon.html");
 							if(is_numeric($firing_pattern[$index_of_param]) and $max==null)
 								$max=$firing_pattern[$index_of_param];
 							elseif(is_numeric($firing_pattern[$index_of_param]) and $max<$firing_pattern[$index_of_param])
-								$max=$firing_pattern[$index_of_param];						
+								$max=$firing_pattern[$index_of_param];		
 						}
-						$digit_precision=getDigitOfParameter($index_of_param);
+						
 						$min_value1 = number_format((float)$min,$digit_precision, '.', '');
 		            	$max_value1 = number_format((float)$max,$digit_precision, '.', '');
 		            	//print("Digit precision:$digit_precision,$min_value1,$max_value1 ");
 		            	$mean_value1 = number_format((($min_value1 + $max_value1) / 2),$digit_precision, '.', '');
 						$unit =	getUnitOfParameter($index_of_param);
 						//print("$unit,$index_of_param");
+
+
+
+						//to get individual values
+						
+						$valuesOfParameter=array();
+						$index=0;	
+						for($ind=0;$ind<count($valuesOf);$ind++){
+							$val=number_format((float)$valuesOf[$ind],$digit_precision, '.', '');
+							if(!(in_array($val, $valuesOfParameter))){
+								$valuesOfParameter[$index++]=$val;
+							}
+						}
+						sort($valuesOfParameter);	
+
+						for($ind=0;$ind<count($valuesOfParameter);$ind++){
+							$valuesOfParameter[$ind]=$valuesOfParameter[$ind]." ".$unit;
+						}
 					}
 					
 				}
@@ -639,7 +685,7 @@ include ("function/icon.html");
 			if ($property1 == 'Molecular markers')
 				$n_value = 0;
 			if ($property1 == 'Electrophysiology')
-				$n_value = 11;
+				$n_value = count($valuesOfEphys);
 			if ($property1 == 'Major Neurontransmitter')
 				$n_value = 0;
 			if ($property1 == 'Connectivity') {
@@ -650,7 +696,7 @@ include ("function/icon.html");
 				$n_value = 5;
 			}
 			if($property1 == 'Firing Pattern Parameter'){
-				$n_value = 11;
+				$n_value = count($valuesOfParameter);
 			}
 			
 																
@@ -666,11 +712,13 @@ include ("function/icon.html");
 	        print ("<OPTION VALUE='-'>-</OPTION>");
         	for ($i=0; $i<$n_value; $i++) {
 	            if ($property1 == 'Electrophysiology') // STM hack for correct ephys units
-					$value_value = value_ephys($i, $property1, $min_value1, $max_value1, $unit);
+					$value_value = $valuesOfEphys[$i];
 	            elseif ($property1 == 'Connectivity')
 					$value_value = value_connectivity($i, $type);
-				elseif ($property1 == 'Firing Pattern Parameter') 
-					$value_value = value_fp_parameter($i, $property1, $min_value1, $max_value1, $unit,$digit_precision);
+				elseif ($property1 == 'Firing Pattern Parameter') {
+					//$value_value = value_fp_parameter($i, $property1, $min_value1, $max_value1, $unit,$digit_precision);
+					$value_value = $valuesOfParameter[$i];
+				}
 	            else
 					$value_value = value($i, $property1, $min_value1, $max_value1); 
 				

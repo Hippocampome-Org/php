@@ -127,6 +127,7 @@ function value_ephys($n, $property, $min, $max, $unit) {
   return $value;
 }
 
+
 function value_fp_parameter($n, $property, $min, $max, $unit,$digit_precision) {	
   $range = $max - $min;
   $step = $range / 10.;
