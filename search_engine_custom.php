@@ -11,7 +11,7 @@ require_once('SearchEngine/Parser.php');
 require_once('SearchEngine/MorphologyPage.php');
 require_once('SearchEngine/Term.php');
 require_once('SearchEngine/QueryUtil.php');
-require_once('SearchEngine/page.php');
+require_once('SearchEngine/Page.php');
 require_once("access_db.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
