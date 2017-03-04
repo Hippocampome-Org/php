@@ -57,13 +57,30 @@ class evidencepropertyyperel
 	{
 		$table 	= $this->getName_table();
 		$table1 = "Property";
-		
 		$query = "SELECT DISTINCT ev.Type_id
 			FROM $table ev
 			JOIN $table1 pr
 			ON (ev.Property_id = pr.id)
-			WHERE conflict_note = '$Conflict_note' and pr.subject = '$Subject'";
-			
+			WHERE ev.conflict_note = '$Conflict_note' and pr.subject = '$Subject'";
+		//echo "$query";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+			$this->setType_id_array($id, $n);		
+			$n = $n +1;
+		}
+		$this->setN_Type_id($n);
+	}
+	public function retrive_Type_id_by_Subject_overrideIn($Subject, $Conflict_note)
+	{
+		$table 	= $this->getName_table();
+		$table1 = "Property";
+		$query = "SELECT DISTINCT ev.Type_id
+			FROM $table ev
+			JOIN $table1 pr
+			ON (ev.Property_id = pr.id)
+			WHERE ev.conflict_note in ($Conflict_note) and pr.subject = '$Subject'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))

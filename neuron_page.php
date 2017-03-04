@@ -113,7 +113,8 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
   <script>
   $(function(){
 	  
-	 $( "#list_acc" ).accordion({collapsible:true,active:null,heightStyle: "content",autoHeight:false});
+	$( "#list_acc" ).accordion({collapsible:true,active:null,heightStyle: "content",autoHeight:false});
+	$( "#list_supp_ids" ).accordion({collapsible:true,active:null,heightStyle: "content",autoHeight:false});
     $( "#accordion" ).accordion({collapsible:true,heightStyle: "content",event: "click hoverintent"});
     });
 
@@ -623,6 +624,67 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</tr>						
 		</table>
 		<br />
+		<!-- Table Supplementary PMIDS -->
+		<?php
+		   $array_supp_ids = array();
+	       $index=0;
+	       $query_to_get_supp_ids="SELECT DISTINCT supplemental_pmids FROM EvidencePropertyTypeRel 
+								WHERE Type_id=$id AND
+								supplemental_pmids IS NOT NULL";
+	       $rs_supp_ids = mysqli_query($GLOBALS['conn'],$query_to_get_supp_ids);
+	       if (!$rs_supp_ids) {
+	           echo("<p>Error in Listing Supplementary PMIDs </p>");
+	       }
+	       else{
+		       while($row=mysqli_fetch_array($rs_supp_ids, MYSQLI_NUM)){
+		           $val=trim($row[0]);
+		           if($val!=""){
+		           		if(strpos($val,",")!==false){
+		           			$val_array=explode(",", $val);
+		           			for($ind=0;$ind<count($val_array);$ind++)
+		           				$array_supp_ids[$index++]=trim($val_array[$ind]);
+		           		}
+		           		else
+		           			$array_supp_ids[$index++]=$val;
+		           }
+		       }
+			if(count($array_supp_ids)>0){
+				print('<table width="80%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="20%" align="right" class="table_neuron_page1">
+							Supplemental PMIDs
+						</td>
+						<td align="left" width="80%" class="table_neuron_page1">
+						</td>				
+					</tr>
+					<tr>
+						<td width="20%" align="right">
+						</td>
+						<td align="left" width="80%" class="table_neuron_page2">
+							<div id="list_supp_ids" align="left">
+								<em class="for_accordion">
+									<font size="1.5" align="left"><b>Click here to view the list of PMIDs</b></font>
+								</em>
+								<div id="accordion" align="left"');
+									print("<ul>");
+									for($ind=0;$ind<count($array_supp_ids);$ind++){
+										print("<li>");
+										$sup_pmid_val=$array_supp_ids[$ind];
+										print("<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=PMID: $sup_pmid_val' target='_blank'><font class='font13'>$sup_pmid_val</font></a>");
+		           						print("</li>");
+		           					}
+		           					print("</ul>");
+							print('</div>
+							</div>
+						</td>				
+					</tr>			
+				</table>');
+			}
+		}
+		?>
+
+
+
 
 		<!-- TABLE Morphology -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">

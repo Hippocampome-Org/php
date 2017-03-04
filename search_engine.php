@@ -173,31 +173,31 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 {
 	if ($predicate == 'is expressed')
 	{
-		$predicate3[1] = 'positive';
+		$predicate3[1] = "'positive','positive inference'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'is not expressed')
 	{
-		$predicate3[1] = 'negative';
+		$predicate3[1] = "'negative','negative inference'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'expression differences')
 	{
-		$predicate3[1] = 'species/protocol/subcellular expression differences';
+		$predicate3[1] = "'species/protocol','subcellular expression differences'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'subtypes')
 	{
-		$predicate3[1] = 'subtypes';
+		$predicate3[1] = "'subtypes'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'unresolved mixed')
 	{
-		$predicate3[1] = 'unresolved';
+		$predicate3[1] = "'unresolved','unresolved inferential conflict'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
@@ -214,7 +214,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 		if(($i == 1) && ($predicate3[$i] != 'unknown'))
 		{
 			// Call the function to search for the appropriate Type Ids
-			$evidencepropertyyperel -> retrive_Type_id_by_Subject_override($subject, $predicate3[$i]);
+			$evidencepropertyyperel -> retrive_Type_id_by_Subject_overrideIn($subject, $predicate3[$i]);
 		}
 		else // if it unknown
 		{
@@ -1035,7 +1035,7 @@ include ("function/icon.html");
 					<table border='0' cellspacing='3' cellpadding='0' class='table_result'>
 						<tr>
 							<td align='center' width='5%'>  </td>
-							<td align='center' width='10%'> Index </td>
+							<td align='center' width='10%' class='table_neuron_page3'> Index </td>
 							<td align='center' width='30%' class='table_neuron_page3'> Neurons with unknown expression </td>
 							<td align='right' width='55%'> </td>
 						</tr>
