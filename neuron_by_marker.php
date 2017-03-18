@@ -95,17 +95,41 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 	print("<title>" . $title . " expression</title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
+<style>
+.title_area2 {
+	position:absolute; top: 80px; left: 50px;
+	width: 1000px;
+	border:none;
+}
+</style>
 </head>
 <!-- COPY IN ALL PAGES -->
 
 <?php 
 	include ("function/title.php");
-	include ("function/menu_main.php");
-	
-	?>
+	include ("function/menu_main.php");	
+?>
 <body>
-	<div class='title_area'>
-	<font class="font1"><?php echo $title?></font>
+	<div class='title_area2'>
+	<font class="font1">
+	<?php
+	$markerName=$parameter;
+	if (strpos($parameter,'\\') != false) 
+		$markerName = str_replace('\\', '\\\\', $markerName);
+	$query_to_get_name="SELECT p.object
+						FROM Property p
+						WHERE subject like '$markerName'
+						AND predicate like 'has name'";
+	//print($query_to_get_name);
+	$rs_name = mysqli_query($GLOBALS['conn'],$query_to_get_name);
+	$row_name = mysqli_fetch_assoc($rs_name);
+	$name_val=$row_name['object'];
+	if($name_val!="")
+		print("$name_val [$title]");
+	else
+		print($title);
+	?>
+	</font>
 	</div>
 	
 	<div align='center'>
@@ -318,7 +342,7 @@ foreach ($predicateArr as $k => $v)
 ?>
 		<tr>
 				<td align='right' width='20%' ></td>
-	  	<td align='left' width='80%' class='table_neuron_page2'> 
+	  	<td align='left' width='60%' class='table_neuron_page2'> 
 	  		<div><font><?php echo "No ".$k." type found " ?></font></div>
 	  	</td>
 	  	<td align='right' width='20%' class='table_neuron_page2'></td>

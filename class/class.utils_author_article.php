@@ -267,20 +267,27 @@ class utils_author_article
 		// retrive the neuron type associated with article using evidence id.
 		// article to evidence link is found in ArticleEvidenceRel table. All these evidence are further mapped to one or more evidence
 		// in table EvidenceEvidenceRel(source=evidence2_id and it is evidence_id in ArticleEvidenceRel table)
-    	$query_to_get_type= " SELECT DISTINCT Art.id as article_id,Art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
+    	$query_to_get_type= " SELECT DISTINCT Art.id as article_id,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
 								FROM Article Art
 								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Article_id = Art.id)
 								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (ArtEvdRel.Evidence_id=EvdPrptTypRel.Evidence_id)
 								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.Type_id)
 								where Art.id=$article_id
 								UNION
-								SELECT DISTINCT Art.id as article_id,Art.title,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
+								SELECT DISTINCT Art.id as article_id,Typ.id as type_id,Typ.name,Typ.nickname,Typ.status
 								from Article Art
 								INNER  JOIN ArticleEvidenceRel ArtEvdRel ON (ArtEvdRel.Article_id = Art.id)
 								INNER  JOIN EvidenceEvidenceRel EvdEvdRel ON (EvdEvdRel.Evidence2_id=ArtEvdRel.Evidence_id)
 								INNER  JOIN EvidencePropertyTypeRel EvdPrptTypRel ON (EvdEvdRel.Evidence1_id=EvdPrptTypRel.Evidence_id)
 								INNER  JOIN Type Typ ON (Typ.id=EvdPrptTypRel.Type_id)
 								WHERE Art.id=$article_id 
+								UNION
+								SELECT DISTINCT Art.id AS article_id, Typ.id AS type_id,
+								Typ.name, Typ.nickname, 'SUPPLEMENTAL' as status
+								FROM EvidencePropertyTypeRel eptr,Article Art,Type typ
+								WHERE eptr.Type_id=Typ.id 
+								AND LOCATE(Art.pmid_isbn,eptr.supplemental_pmids) 
+								AND Art.id=$article_id 
 								ORDER BY type_id ";
 		$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
 		if (!$article_type) {

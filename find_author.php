@@ -344,7 +344,10 @@ if ($_REQUEST['clear_all'])
 					if($type_status!=NULL&&$type_status!='frozen')
 					{
 						$count++;
-						print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname</a><br/>");
+						if($type_status=='SUPPLEMENTAL')
+							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+						else
+							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname</a><br/>");
 					}	
 				}
 				if ($count==0) {
