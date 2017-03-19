@@ -284,14 +284,14 @@ class utils_author_article
 								UNION
 								SELECT DISTINCT Art.id AS article_id, Typ.id AS type_id,
 								Typ.name, Typ.nickname, 'SUPPLEMENTAL' as status
-								FROM EvidencePropertyTypeRel eptr,Article Art,Type typ
+								FROM EvidencePropertyTypeRel eptr,Article Art,Type Typ
 								WHERE eptr.Type_id=Typ.id 
 								AND LOCATE(Art.pmid_isbn,eptr.supplemental_pmids) 
 								AND Art.id=$article_id 
 								ORDER BY type_id ";
 		$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
 		if (!$article_type) {
-			die("<p>Error in Listing Type Tables.</p>");
+			die("<p>Error in Listing Types Table.</p>");
 		}
 		while($rows=mysqli_fetch_array($article_type, MYSQL_ASSOC))
 		{
