@@ -74,18 +74,24 @@ class evidencepropertyyperel
 	}
 	public function retrive_Type_id_by_Subject_overrideIn($Subject, $Conflict_note)
 	{
+		$inferences=array("positive inference","negative inference","unresolved inferential conflict");
 		$table 	= $this->getName_table();
 		$table1 = "Property";
-		$query = "SELECT DISTINCT ev.Type_id
+		$query = "SELECT DISTINCT ev.Type_id,ev.conflict_note
 			FROM $table ev
 			JOIN $table1 pr
 			ON (ev.Property_id = pr.id)
 			WHERE ev.conflict_note in ($Conflict_note) and pr.subject = '$Subject'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
-		while(list($id) = mysqli_fetch_row($rs))
+		while(list($id,$conflict) = mysqli_fetch_row($rs))
 		{	
-			$this->setType_id_array($id, $n);		
+			if(in_array($conflict, $inferences)){
+				$type_conflict="_".$id."_".$conflict;
+				$this->setType_id_array($type_conflict, $n);
+			}
+			else
+				$this->setType_id_array($id, $n);		
 			$n = $n +1;
 		}
 		$this->setN_Type_id($n);

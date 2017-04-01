@@ -91,7 +91,16 @@ class type
 			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}
-	
+	public function get_supertype($id){
+		$query = "SELECT supertype FROM Type WHERE id ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$supertype_value="";
+		while($rows=mysqli_fetch_array($rs, MYSQL_ASSOC))
+		{	
+			$supertype_value=$rows['supertype'];
+		}
+		return $supertype_value;
+	}
 
 	public function retrive_by_excit_inhib($pred)   // Retrive all data by excit_inhib
 	{

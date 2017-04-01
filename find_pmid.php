@@ -16,7 +16,39 @@ $author_1 = new author($class_author);
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
 $article = new article($class_article);	
 
-
+function getSupplemental($sup_id){
+	$types_array=array();
+	$index=0;   	
+	// retrive the neuron type associated with article using evidence id.
+	// article to evidence link is found in ArticleEvidenceRel table. All these evidence are further mapped to one or more evidence
+	// in table EvidenceEvidenceRel(source=evidence2_id and it is evidence_id in ArticleEvidenceRel table)
+	$query_to_get_type= " SELECT DISTINCT
+						    Typ.id AS type_id,
+						    Typ.name,
+						    Typ.nickname,
+						    'SUPPLEMENTAL' AS status
+						FROM
+						    EvidencePropertyTypeRel eptr,
+						    Type Typ
+						WHERE
+						    eptr.Type_id = Typ.id
+						    AND LOCATE('$sup_id', eptr.supplemental_pmids)";
+	//print($query_to_get_type);
+	$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
+	if (!$article_type) {
+		die("<p>Error in Listing Types Table.</p>");
+	}
+	while($rows=mysqli_fetch_array($article_type, MYSQL_ASSOC))
+	{
+		$types_array[$index]=new utils_type();
+		$types_array[$index]->setName($rows['name']);
+		$types_array[$index]->setNickname($rows['nickname']);
+		$types_array[$index]->setStatus($rows['status']);
+		$types_array[$index]->setId($rows['type_id']);
+		$index++;	
+	}
+	return $types_array;
+}
 // Go to the search: --------------------------------------------------------------------------
 if ($_REQUEST['search_pmid'])
 {
@@ -301,6 +333,54 @@ else
 
 			} // end $i1
 			print ("</tbody></table>");			
+		}
+		// for supplement id without articles
+		else if($pmid!=""){
+			$n_id_article=1;
+			$sup_types=getSupplemental($pmid);
+			if(count($sup_types)!=0){
+				print ("<table border='0'  class='table_result' id='tab_res' width='100%'>");
+				print ("<thead><tr>
+						<td align='center' width='20%' class='table_neuron_page1'> <strong>Authors</strong> </td>
+						<td align='center' width='40%' class='table_neuron_page1'> <strong>Title </strong></td>
+						<td align='center' width='10%' class='table_neuron_page1'> <strong>Journal/Book</strong> </td>
+						<td align='center' width='5%' class='table_neuron_page1'> <strong>Year </strong></td>
+						<td align='center' width='5%' class='table_neuron_page1'> <strong>PMID</strong></td>
+						<td align='center' width='20%' class='table_neuron_page1'> <strong>Types</strong></td>
+					</tr></thead><tbody>");
+				$value_link ='PMID: '.$pmid;
+				$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";	
+	
+				print ("<tr>
+						<td align='left' width='20%' class='table_neuron_page4'></td>
+						<td align='left' width='40%' class='table_neuron_page4'></td>
+						<td align='left' width='10%' class='table_neuron_page4'></td>
+						<td align='left' width='5%' class='table_neuron_page4'></td>
+						<td align='left' width='5%' class='table_neuron_page4'>$link2 <font class='font13'><strong>$pmid</strong></font> </a> </td>
+						<td align='left' width='20%' class='table_neuron_page4'>");
+
+				$count=0;
+				for ($j=0; $j < sizeof($sup_types) ; $j++)
+				{
+					$type_name=$sup_types[$j]->getName();
+					$type_nickname=$sup_types[$j]->getNickname();
+					$type_status =$sup_types[$j]->getStatus();
+					$type_id = $sup_types[$j]->getId();
+					if($type_status!=NULL&&$type_status!='frozen')
+					{
+						$count++;
+						print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+						
+					}
+				}
+				
+				if ($count==0) 
+				{
+					print("(to be determined)");
+				}
+				
+			}
+
 		}
 		
 		

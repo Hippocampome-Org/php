@@ -252,14 +252,20 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				<td width="20%" align="right" class="table_neuron_page1">
 					Name
 				</td>
-				<td align="left" width="80%" class="table_neuron_page1">
+				<td align="left" width="50%" class="table_neuron_page1">
+				</td>
+				<td align="center" width="30%" class="table_neuron_page1">
+					Supertype
 				</td>				
 			</tr>
 			<tr>
 				<td width="20%" align="right">
 				</td>
-				<td align="left" width="80%" class="table_neuron_page2">
+				<td align="left" width="50%" class="table_neuron_page2">
 					<?php print $type->getName(); ?> 
+				</td>	
+				<td align="center" width="30%" class="table_neuron_page2">
+					<?php print $type->get_supertype($id); ?> 
 				</td>				
 			</tr>			
 		</table>

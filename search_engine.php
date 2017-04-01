@@ -185,7 +185,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 	}
 	if ($predicate == 'expression differences')
 	{
-		$predicate3[1] = "'species/protocol','subcellular expression differences'";
+		$predicate3[1] = "'species/protocol differences','subcellular expression differences'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
@@ -889,8 +889,7 @@ include ("function/icon.html");
     <td width="80%">
 		<!-- ****************  BODY **************** -->
 		<?php
-		
-		
+			$inference_array=array();
 			$query = "SELECT DISTINCT id_type FROM $name_temporary_table_result";
 			$rs = mysqli_query($GLOBALS['conn'],$query);
 			$n_result_tot=0;
@@ -930,6 +929,17 @@ include ("function/icon.html");
 				}
 				else
 				{
+					if (strpos($id, '_') === 0)
+					{
+						$old_id=$id;
+						$id=substr($id,1,strlen($id));
+						$conflictArr=explode("_", $id);
+						$id=$conflictArr[0];
+						$conflictNote=$conflictArr[1];
+						$inference_array[$id]=$conflictNote;
+						$up_temp ="UPDATE $name_temporary_table_result SET id_type='$id' WHERE id_type='$old_id'";
+						$rs_up_temp = mysqli_query($GLOBALS['conn'],$up_temp);
+					}
 					//$type -> retrive_by_id($id);
 					$type -> retrieve_by_id($id);
 					$status = $type -> getStatus();		
@@ -983,6 +993,7 @@ include ("function/icon.html");
 						//print ("$part : ($relation $value) ");
 						print("<td align='center' width='10%' class='table_neuron_page3'> Index </td>");
 						print ("<td align='center' width='30%' class='table_neuron_page3'> Neurons </td>");
+						print('<td align="right" width="55%"> </td>');
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> $part : ($relation $value) </td>");
 						//print ("<td align='center' width='30%' class='table_neuron_page3'> Is Expressed / Is Not Expressed </td>");
 					}					
@@ -992,11 +1003,11 @@ include ("function/icon.html");
 					if($n_result_tot){
 						print("<td align='center' width='10%' class='table_neuron_page3'> Index </td>");
 						print ("<td align='center' width='30%' class='table_neuron_page3'> Neuron Types </td>");
+						print('<td align="right" width="55%"> </td>');
 					}
 				}
 			
 			?>
-			<td align="right" width="55%"> </td>
 		</tr>
 		</table>
 		
@@ -1010,13 +1021,19 @@ include ("function/icon.html");
 				for ($i=0; $i<$n_result_tot; $i++)
 				{
 					$i9=$i+1;
+					
 					print ("
 							<tr>
 								<td align='center' width='5%'>  </td>
 								<td align='center' width='10%' class='table_neuron_page4'> $i9 </td>
 								<td align='center' width='30%' class='table_neuron_page4'> 
 									<a href='neuron_page.php?id=$id_t[$i]'>
-										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>
+										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>");
+					if(array_key_exists($id_t[$i], $inference_array)){
+							print("<font class='font4'>(".$inference_array[$id_t[$i]].") </font>");
+							unset($inference_array[$id_t[$i]]);
+					}
+					print("	
 									</a>
 								</td>
 								<td align='right' width='55%'> </td>

@@ -134,7 +134,14 @@
                             WHERE c.Type1_id=t1.id AND c.Type2_id=t2.id
                             AND c.Type1_id in ($preSynNeuronCond)
                             AND c.Type2_id in ($postSynNeuronCond)
-                            AND c.connection_status like 'positive' 
+                            AND (c.connection_status like 'positive' OR c.connection_status like 'potential')
+                            AND NOT EXISTS (
+                                            SELECT *
+                                            FROM Conndata c1
+                                            WHERE c.Type1_id=c1.Type1_id
+                                            AND c.Type2_id=c1.Type2_id
+                                            AND c1.connection_status like 'negative'
+                                            )
                             ORDER BY c.Type1_id,c.Type2_id
                              ";
                 #print($query_to_get_type);

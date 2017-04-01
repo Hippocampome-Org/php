@@ -430,7 +430,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	if ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 	
-	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
+	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
 			getUrlForLink($id,$hippo['DG:SMo'],'DG_SMo',$hippo_color['DG:SMo']),
 			getUrlForLink($id,$hippo['DG:SMi'],'DG_SMi',$hippo_color['DG:SMi']),
 			getUrlForLink($id,$hippo['DG:SG'],'DG_SG',$hippo_color['DG:SG']),
@@ -660,6 +660,26 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
 	    }
     }
 }
+// Save potential connection to database
+for ($row_index = 0; $row_index < $number_type; $row_index++) {
+    for ($col_index = 0; $col_index < $number_type; $col_index++) {
+    	 $source = $type->getID_array($row_index);
+    	 $destination = $type->getID_array($col_index);
+    	 if($pon_conn_display_array[$row_index][$col_index]!=0){
+    	 	$query="SELECT * FROM Conndata WHERE Type1_id='$source' AND Type2_id='$destination' AND connection_status='potential'";
+			$result=mysqli_query($GLOBALS['conn'], $query);
+			if(mysqli_num_rows($result)==0){
+			 	#set time zone
+			 	date_default_timezone_set('America/New_York');
+				$date_curr=date('Y-m-d H:i:s');
+				$query="INSERT INTO Conndata VALUES (NULL,'$date_curr','$source','$destination','potential',NULL)";
+				mysqli_query($GLOBALS['conn'], $query);
+			}
+    	 }
+    }
+}
+
+
 
 $responce->potential_array=$pon_conn_display_array;
 $responce->potn_conn_neuron_pcl_array=$potn_conn_neuron_pcl;

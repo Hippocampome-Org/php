@@ -5,7 +5,7 @@ require_once('SearchEngine/Parser.php');
 require_once('SearchEngine/MorphologyPage.php');
 require_once('SearchEngine/Term.php');
 require_once('SearchEngine/QueryUtil.php');
-require_once('SearchEngine/page.php');
+require_once('SearchEngine/Page.php');
 require_once("access_db.php");
 
 if($_REQUEST['query_str']){
