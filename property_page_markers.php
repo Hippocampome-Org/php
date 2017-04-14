@@ -984,7 +984,6 @@ else {
 	              		elseif ($conflict_note=="negative")
 	              			$image_link = "<img src='images/marker/negative_clear.png' border='0' width='8px' />";
 	              		
-
               			$mixed_data = false;
               			$conflict_note = "";
               			$conflict_explanation_statement = "";
@@ -994,6 +993,27 @@ else {
 		              	else
 		              		$dissent_note = NULL;
 		              }
+		              
+		              elseif (($conflict_note == "confirmed positive") || ($conflict_note == "confirmed negative")) {
+		              	if ($conflict_note == "confirmed positive") {
+		              		$print_color = "positive";
+		              		$image_link = "<img src='images/marker/positive_confirmed_clear.png' border='0' width='8px' />";
+		              	}
+	              		elseif ($conflict_note == "confirmed negative") {
+	              			$print_color = "negative";
+	              			$image_link = "<img src='images/marker/negative_confirmed_clear.png' border='0' width='8px' />";
+	              		}              			
+	              		
+              			$mixed_data = false;
+              			$conflict_note = "; confirmed by inference(s)";
+              			$conflict_explanation_statement = "";
+		              	
+		              	if ($individual_calls_conflict)
+		              		$dissent_note = "* Contradictory evidence exists (open all evidence to view)";
+		              	else
+		              		$dissent_note = NULL;
+		              }
+		              
 		              elseif (($conflict_note == "positive inference") || ($conflict_note == "negative inference")) {
 		              	$print_color = $conflict_note;
 		              	 
@@ -1005,6 +1025,21 @@ else {
               			$mixed_data = false;
               			$conflict_note = "";
               			$conflict_explanation_statement = "";
+		              }
+		              
+		              elseif (($conflict_note == "confirmed positive inference") || ($conflict_note == "confirmed negative inference")) {
+		              	if ($conflict_note=="confirmed positive inference") {
+		              		$print_color = "positive inference";
+		              		$image_link = "<img src='images/marker/positive_inference_confirm_clear.png' border='0' width='8px' />";
+		              	}
+	              		elseif ($conflict_note=="confirmed negative inference") {
+	              			$print_color = "negative inference";
+		              		$image_link = "<img src='images/marker/negative_inference_confirm_clear.png' border='0' width='8px' />";
+	              		}
+		              		 
+	              		$mixed_data = false;
+	              		$conflict_note = "; confirmed by additional inferences";
+	              		$conflict_explanation_statement = "";
 		              }
 
 		              // mixed data
@@ -1758,8 +1793,8 @@ else {
               // STM Formatting header
 
 			  if (($expression == $print_color) || ($print_color == "positive-negative") || 
-	  		  ($expression == "positive (inference)" && $print_color == "positive") || ($expression == "negative (inference)" && $print_color == "negative") ||
-	  		  ($expression == "positive (inference)" && $print_color == "positive inference") || ($expression == "negative (inference)" && $print_color == "negative inference"))
+		  		  ($expression == "positive (inference)" && $print_color == "positive") || ($expression == "negative (inference)" && $print_color == "negative") ||
+		  		  ($expression == "positive (inference)" && $print_color == "positive inference") || ($expression == "negative (inference)" && $print_color == "negative inference"))
               	$header_html = header_row("EXPRESSION", $expression);
 			  else 
 			  	$header_html = header_row("EXPRESSION (* contradictory evidence)", $expression);

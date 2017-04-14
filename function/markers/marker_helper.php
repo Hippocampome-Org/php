@@ -232,6 +232,8 @@ function check_color($variable, $unvetted, $conflict_note)
 		else
 			$link[0] = "<img src='images/marker/positive-negative-conflicting.png' border='0' width='15px' />";
 	}
+	
+	
 	elseif ($conflict_note == "positive")
 	{
 		if ($unvetted == 1)
@@ -246,6 +248,24 @@ function check_color($variable, $unvetted, $conflict_note)
 		else
 			$link[0] = "<img src='images/marker/negative.png' border='0' width='15px' />";
 	}
+	
+	
+	elseif ($conflict_note == "confirmed positive")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive_confirmed_unvetted.png' border='0' width='15px' />";
+		else
+			$link[0] = "<img src='images/marker/positive_confirmed.png' border='0' width='15px' />";
+	}
+	elseif ($conflict_note == "confirmed negative")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/negative_confirmed_unvetted.png' border='0' width='15px' />";
+		else
+			$link[0] = "<img src='images/marker/negative_confirmed.png' border='0' width='15px' />";
+	}
+	
+	
 	elseif ($conflict_note == "positive inference")
 	{
 		if ($unvetted == 1)
@@ -260,6 +280,24 @@ function check_color($variable, $unvetted, $conflict_note)
 		else
 			$link[0] = "<img src='images/marker/negative_inference.png' border='0' width='15px' />";
 	}
+	
+	
+	elseif ($conflict_note == "confirmed positive inference")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/positive_inference_confirmed_unvetted.png' border='0' width='15px' />";
+		else
+			$link[0] = "<img src='images/marker/positive_inference_confirmed.png' border='0' width='15px' />";
+	}
+	elseif ($conflict_note == "confirmed negative inference")
+	{
+		if ($unvetted == 1)
+			$link[0] = "<img src='images/marker/negative_inference_confirmed_unvetted.png' border='0' width='15px' />";
+		else
+			$link[0] = "<img src='images/marker/negative_inference_confirmed.png' border='0' width='15px' />";
+	}
+	
+	
 	elseif ($conflict_note == "positive; negative inference")
 	{
 		if ($unvetted == 1)
@@ -274,7 +312,7 @@ function check_color($variable, $unvetted, $conflict_note)
 		else
 			$link[0] = "<img src='images/marker/positive_inference-negative.png' border='0' width='15px' />";
 	}
-	elseif ($conflict_note == "positive inference; negative inference")
+	elseif ($conflict_note == "positive inference; negative inference" || $conflict_note == "inferential subtypes")
 	{
 		if ($unvetted == 1)
 			$link[0] = "<img src='images/marker/positive_inference-negative_inference-subtypes_unvetted.png' border='0' width='15px' />";

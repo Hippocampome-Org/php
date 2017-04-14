@@ -152,11 +152,13 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 $n_result_tot = 0;
 $id_t = Array();
 $pos_Array = Array();
-$pos_intr_Array = Array();
+/*$pos_intr_Array = Array();
+$pos_conf_intr_Array = Array();
 $pos_inf_intr_Array = Array();
+$pos_inf_conf_intr_Array = Array();
 $neg_Array = Array();
 $neg_inf_Array = Array();
-$mixed_type = Array();
+$mixed_type = Array();*/
 $name_type = "";
 $subregion_type ="";
 $position_type = "";
@@ -190,23 +192,58 @@ foreach ($predicateArr as $k => $v)
 	elseif($k == 'positive' || $k == 'negative') {
 		if(!empty($evidencepropertyyperel)){
 			list($pos_intr_Array, $conf_notes_pos) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive', $parameter);
+			list($pos_conf_intr_Array, $conf_notes_pos_conf) = markers_search($evidencepropertyyperel, $property_1, $type, 'confirmed positive', $parameter);
 			list($pos_inf_intr_Array, $conf_notes_pi) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference', $parameter);
-			list($neg_Array, $conf_notes_neg) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative', $parameter);
-			list($neg_inf_Array, $conf_notes_ni) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative inference', $parameter);
-
-			if (!empty($pos_intr_Array) && !empty($pos_inf_intr_Array))
-				$pos_combined_array = array_merge($pos_intr_Array, $pos_inf_intr_Array);
-			elseif (!empty($pos_intr_Array))
-				$pos_combined_array = $pos_intr_Array;
-			elseif (!empty($pos_inf_intr_Array))
-				$pos_combined_array = $pos_inf_intr_Array;
+			list($pos_inf_conf_intr_Array, $conf_notes_pi_conf) = markers_search($evidencepropertyyperel, $property_1, $type, 'confirmed positive inference', $parameter);
 			
-			if (!empty($neg_Array) && !empty($neg_inf_Array))
-				$neg_combined_array = array_merge($neg_Array, $neg_inf_Array);
-			elseif (!empty($neg_Array))
-				$neg_combined_array = $neg_Array;
-			elseif (!empty($neg_inf_Array))
-				$neg_combined_array = $neg_inf_Array; 
+			list($neg_Array, $conf_notes_neg) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative', $parameter);
+			list($neg_conf_Array, $conf_notes_neg_conf) = markers_search($evidencepropertyyperel, $property_1, $type, 'confirmed negative', $parameter);
+			list($neg_inf_Array, $conf_notes_ni) = markers_search($evidencepropertyyperel, $property_1, $type, 'negative inference', $parameter);
+			list($neg_inf_conf_Array, $conf_notes_ni_conf) = markers_search($evidencepropertyyperel, $property_1, $type, 'confirmed negative inference', $parameter);
+
+			$arrayOfPosArrays = array();
+			$arrayOfPosArrays[0] = $pos_intr_Array;
+			$arrayOfPosArrays[1] = $pos_conf_intr_Array;
+			$arrayOfPosArrays[2] = $pos_inf_intr_Array;
+			$arrayOfPosArrays[3] = $pos_inf_conf_intr_Array;
+			
+			$pos_combined_array = array();
+			
+			foreach($arrayOfPosArrays as $arr) {
+				if(is_array($arr)) {
+					$pos_combined_array = array_merge($pos_combined_array, $arr);
+				}
+			}
+			
+			$arrayOfNegArrays = array();
+			$arrayOfNegArrays[0] = $neg_Array;
+			$arrayOfNegArrays[1] = $neg_conf_Array;
+			$arrayOfNegArrays[2] = $neg_inf_Array;
+			$arrayOfNegArrays[3] = $neg_inf_conf_Array;
+			
+			$neg_combined_array = array();
+			
+			foreach($arrayOfNegArrays as $arr) {
+				if(is_array($arr)) {
+					$neg_combined_array = array_merge($neg_combined_array, $arr);
+				}
+			}
+			
+
+			/*if (!empty($pos_intr_Array) && !empty($pos_inf_intr_Array))
+			 $pos_combined_array = array_merge($pos_intr_Array, $pos_inf_intr_Array);
+			 elseif (!empty($pos_intr_Array))
+			 $pos_combined_array = $pos_intr_Array;
+			 elseif (!empty($pos_inf_intr_Array))
+			 $pos_combined_array = $pos_inf_intr_Array;
+			 	
+			 if (!empty($neg_Array) && !empty($neg_inf_Array))
+			 	$neg_combined_array = array_merge($neg_Array, $neg_inf_Array);
+		 	elseif (!empty($neg_Array))
+			 	$neg_combined_array = $neg_Array;
+		 	elseif (!empty($neg_inf_Array))
+			 	$neg_combined_array = $neg_inf_Array; */
+			 
 			
 			if((!empty($pos_combined_array)) && (!empty($neg_combined_array))) {
 				$mixed_type = array_intersect($pos_combined_array, $neg_combined_array);
@@ -260,7 +297,15 @@ foreach ($predicateArr as $k => $v)
 				$inhib_excit=$type->getExcit_Inhib();
 				if ((!empty($conf_notes_pi) && array_key_exists($id_t, $conf_notes_pi)) ||
 						(!empty($conf_notes_ni) && array_key_exists($id_t, $conf_notes_ni)))
-					$name_type = $name_type . " (inference)";					
+					$name_type = $name_type . " (inference)";
+						
+				if ((!empty($conf_notes_pos_conf) && array_key_exists($id_t, $conf_notes_pos_conf)) ||
+						(!empty($conf_notes_neg_conf) && array_key_exists($id_t, $conf_notes_neg_conf)))
+					$name_type = $name_type . " (confirmed by inference)";
+							
+				if ((!empty($conf_notes_pi_conf) && array_key_exists($id_t, $conf_notes_pi_conf)) ||
+						(!empty($conf_notes_ni_conf) && array_key_exists($id_t, $conf_notes_ni_conf)))
+					$name_type = $name_type . " (inference confirmed by additional inference(s))";						
 				
 				//$subregion_type = $type -> getSubregion();
 				$position_type = $type -> getPosition();

@@ -61,7 +61,8 @@ class evidencepropertyyperel
 			FROM $table ev
 			JOIN $table1 pr
 			ON (ev.Property_id = pr.id)
-			WHERE ev.conflict_note = '$Conflict_note' and pr.subject = '$Subject'";
+			WHERE ev.conflict_note = '$Conflict_note'
+			and pr.subject = '$Subject' and pr.object != 'unknown'";
 		//echo "$query";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
@@ -74,14 +75,15 @@ class evidencepropertyyperel
 	}
 	public function retrive_Type_id_by_Subject_overrideIn($Subject, $Conflict_note)
 	{
-		$inferences=array("positive inference","negative inference","unresolved inferential conflict");
+		$inferences=array("confirmed positive","positive inference","confirmed positive inference","confirmed negative","negative inference","confirmed negative inference","unresolved inferential conflict");
 		$table 	= $this->getName_table();
 		$table1 = "Property";
 		$query = "SELECT DISTINCT ev.Type_id,ev.conflict_note
 			FROM $table ev
 			JOIN $table1 pr
 			ON (ev.Property_id = pr.id)
-			WHERE ev.conflict_note in ($Conflict_note) and pr.subject = '$Subject'";
+			WHERE ev.conflict_note in ($Conflict_note)
+			and pr.subject = '$Subject' and pr.object != 'unknown'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id,$conflict) = mysqli_fetch_row($rs))

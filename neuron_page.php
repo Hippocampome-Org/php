@@ -1046,41 +1046,42 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 			elseif ($val == 'unknown')
 				$hippo_unknown[$remapped_part] = 1;
 			
-				
-			// maintain separate arrays for positive (+ wk pos) and negative evidence
-			if ($conflict_note == 'positive' || $conflict_note == 'positive inference') {
-				$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
-				$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
-				$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
-				$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
-				
-				if ($val == 'weak_positive')
-					$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
-				else
-					$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
-				
-				$marker_pos_disp_counter++;
+			if ($val != 'unknown') {
+				// maintain separate arrays for positive (+ wk pos) and negative evidence
+				if ($conflict_note == 'positive' || $conflict_note == 'positive inference' || $conflict_note == 'confirmed positive' || $conflict_note == 'confirmed positive inference') {
+					$pos_array['part_key'][$marker_pos_disp_counter] = $remapped_part;
+					$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
+					$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
+					$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
+					
+					if ($val == 'weak_positive')
+						$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
+					else
+						$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
+					
+					$marker_pos_disp_counter++;
+				}
+				elseif ($conflict_note == 'negative' || $conflict_note == 'negative inference' || $conflict_note == 'confirmed negative' || $conflict_note == 'confirmed negative inference') {
+					$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
+					$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
+					$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
+					$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;												
+					
+					$marker_neg_disp_counter++;
+				}
+				elseif ($conflict_note != NULL) {
+					$mixed_array['part_key'][$marker_mixed_disp_counter] = $remapped_part;
+					$mixed_array['disp_name_key'][$marker_mixed_disp_counter] = $part;
+					$mixed_array['unvetted_key'][$marker_mixed_disp_counter] = $unvetted;
+					$mixed_array['conflict_key'][$marker_mixed_disp_counter] = $conflict_note;
+					
+					$marker_mixed_disp_counter++;
+				}				
 			}
-			elseif ($conflict_note == 'negative' || $conflict_note == 'negative inference') {
-				$neg_array['part_key'][$marker_neg_disp_counter] = $remapped_part;
-				$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
-				$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
-				$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;												
-				
-				$marker_neg_disp_counter++;
-			}
-			elseif ($conflict_note != NULL) {
-				$mixed_array['part_key'][$marker_mixed_disp_counter] = $remapped_part;
-				$mixed_array['disp_name_key'][$marker_mixed_disp_counter] = $part;
-				$mixed_array['unvetted_key'][$marker_mixed_disp_counter] = $unvetted;
-				$mixed_array['conflict_key'][$marker_mixed_disp_counter] = $conflict_note;
-				
-				$marker_mixed_disp_counter++;
-			}					
 			
 				
 			$hippo_property_id[$part] = $this_id;
-		}				
+		}
 
 		
 		
@@ -1210,8 +1211,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							$disp_marker_name = $pos_array['disp_name_key'][$j];
 						
 						$pos_conflict = $pos_array['conflict_key'][$j];
-						if ($pos_conflict == "positive inference")
+						if ($pos_conflict == "confirmed positive")
+							$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+						elseif ($pos_conflict == "positive inference")
 							$disp_marker_name = $disp_marker_name . ' (inference)';
+						elseif ($pos_conflict == "confirmed positive inference")
+							$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+						
 						
 						// if NULL, marker needs to be remapped; just print name (w/o URL)
 						if ($this_marker_URL_start == NULL) {
@@ -1286,8 +1292,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$disp_marker_name = $neg_array['disp_name_key'][$j];
 						
 						$neg_conflict = $neg_array['conflict_key'][$j];
-						if ($neg_conflict == "negative inference")
+						if ($neg_conflict == "confirmed negative")
+							$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+						elseif ($neg_conflict == "negative inference")
 							$disp_marker_name = $disp_marker_name . ' (inference)';
+						elseif ($neg_conflict == "confirmed negative inference")
+							$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
 
 							// if NULL, marker needs to be remapped; just print name (w/o URL)
 							if ($this_marker_URL_start == NULL) {

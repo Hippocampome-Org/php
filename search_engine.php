@@ -173,13 +173,13 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 {
 	if ($predicate == 'is expressed')
 	{
-		$predicate3[1] = "'positive','positive inference'";
+		$predicate3[1] = "'positive inference','positive','confirmed positive inference','confirmed positive'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'is not expressed')
 	{
-		$predicate3[1] = "'negative','negative inference'";
+		$predicate3[1] = "'negative inference','negative','confirmed negative inference','confirmed negative'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
@@ -250,7 +250,7 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-// SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// SEARCH Function for MAJOR NEUROTRANSMITTER: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function major_neurontransmitter_search($property_1, $type, $subject, $predicate)
 {
 	$new_type_id_nan = array();
