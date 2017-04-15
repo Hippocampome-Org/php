@@ -1,110 +1,107 @@
 <?php
 
 //$n_markers = 36;
-$n_markers = 100;
+$n_markers = 97;
 
 // Name in alphabetic order for MARKERS: ************************************
 $name_markers = array(
 		"0"=>"CB",
 		"1"=>"CR",
-		"2"=>"PV",
-		"3"=>"CB1",
-		"4"=>"Mus2R",
-		"5"=>"Sub_P_Rec",
-		"6"=>"5HT_3",
-		"7"=>"GABAa_alfa",
-		"8"=>"mGluR1a",
-		"9"=>"vGluT3",
+		"2"=>"PV",		
+		"3"=>"5HT_3",
+		"4"=>"CB1",
+		"5"=>"GABAa_alfa",
+		"6"=>"mGluR1a",
+		"7"=>"Mus2R",
+		"8"=>"Sub_P_Rec",		
+		"9"=>"vGluT3",		
 		"10"=>"CCK",
 		"11"=>"ENK",
-		"12"=>"NPY",
-		"13"=>"SOM",
-		"14"=>"VIP",
-		"15"=>"NG",
+		"12"=>"NG",
+		"13"=>"NPY",
+		"14"=>"SOM",
+		"15"=>"VIP",		
 		"16"=>"a-act2",
 		"17"=>"CoupTF_2",
 		"18"=>"nNOS",
-		"19"=>"RLN",
+		"19"=>"RLN",		
 		"20"=>"AChE",
 		"21"=>"AMIGO2",
-		"22"=>"AMPAR2_3",
-		"23"=>"AR-beta1",
-		"24"=>"AR-beta2",
-		"25"=>"BDNF",
-		"26"=>"Bok",
-		"27"=>"Caln",
-		"28"=>"CaM",
-		"29"=>"CGRP",
-		"30"=>"ChAT",
-		"31"=>"Chrna2",
-		"32"=>"CRF",
-		"33"=>"Ctip2",
-		"34"=>"Cx36",
-		"35"=>"CXCR4",
-		"36"=>"Disc1",
-		"37"=>"DYN",
-		"38"=>"EAAT3",
-		"39"=>"ErbB4",
-		"40"=>"GABA-B1",
-		"41"=>"GABAa_delta",
-		"42"=>"GABAa_alpha2",
-		"43"=>"GABAa_alpha3",
-		"44"=>"GABAa_alpha4",
-		"45"=>"GABAa_alpha5",
-		"46"=>"GABAa_alpha6",
-		"47"=>"GABAa_beta1",
-		"48"=>"GABAa_beta2",
-		"49"=>"GABAa_beta3",
-		"50"=>"GABAa_gamma1",
-		"51"=>"GABAa_gamma2",
-		"52"=>"GAT_1",
-		"53"=>"GAT-3",
-		"54"=>"GluA1",
-		"55"=>"GluA2",
+		"22"=>"AR-beta1",
+		"23"=>"AR-beta2",
+		"24"=>"BDNF",
+		"25"=>"Bok",
+		"26"=>"Caln",
+		"27"=>"CaM",
+		"28"=>"CGRP",
+		"29"=>"ChAT",
+		"30"=>"Chrna2",
+		"31"=>"CRF",
+		"32"=>"Ctip2",
+		"33"=>"Cx36",
+		"34"=>"CXCR4",
+		"35"=>"Disc1",
+		"36"=>"DYN",
+		"37"=>"EAAT3",
+		"38"=>"ErbB4",				
+		"39"=>"GABAa_alpha2",
+		"40"=>"GABAa_alpha3",
+		"41"=>"GABAa_alpha4",
+		"42"=>"GABAa_alpha5",
+		"43"=>"GABAa_alpha6",
+		"44"=>"GABAa_beta1",
+		"45"=>"GABAa_beta2",
+		"46"=>"GABAa_beta3",
+		"47"=>"GABAa_delta",
+		"48"=>"GABAa_gamma1",
+		"49"=>"GABAa_gamma2",
+		"50"=>"GABA-B1",
+		"51"=>"GAT_1",
+		"52"=>"GAT-3",
+		"53"=>"GluA1",
+		"54"=>"GluA2",
+		"55"=>"GluA2_3",
 		"56"=>"GluA3",
 		"57"=>"GluA4",
-		"58"=>"GluR2_3",
-		"59"=>"GlyT2",
-		"60"=>"Id_2",
-		"61"=>"Kv3_1",
-		"62"=>"Man1a",
-		"63"=>"Math-2",
-		"64"=>"mGluR1",
-		"65"=>"mGluR2",
-		"66"=>"mGluR2_3",
-		"67"=>"mGluR3",
-		"68"=>"mGluR4",
-		"69"=>"mGluR5",
-		"70"=>"mGluR5a",
-		"71"=>"mGluR7a",
-		"72"=>"mGluR8a",
-		"73"=>"MOR",
-		"74"=>"Mus1R",
-		"75"=>"Mus3R",
-		"76"=>"Mus4R",
-		"77"=>"NECAB1",
-		"78"=>"Neuropilin2",
-		"79"=>"NKB",
-		"80"=>"p-CREB",
-		"81"=>"PCP4",
-		"82"=>"PPE",
-		"83"=>"PPTA",
-		"84"=>"PPTB",
-		"85"=>"Prox1",
-		"86"=>"PSA-NCAM",
-		"87"=>"SATB1",
-		"88"=>"SATB2",
-		"89"=>"SCIP",
-		"90"=>"SPO",
-		"91"=>"SubP",
-		"92"=>"TH",
-		"93"=>"vAChT",
-		"94"=>"vGAT",
-		"95"=>"vGlut1",
-		"96"=>"vGluT2",
-		"97"=>"VIAAT",
-		"98"=>"VILIP",
-		"99"=>"Y1"
+		"58"=>"GlyT2",
+		"59"=>"Id_2",
+		"60"=>"Kv3_1",
+		"61"=>"Man1a",
+		"62"=>"Math-2",
+		"63"=>"mGluR1",
+		"64"=>"mGluR2",
+		"65"=>"mGluR2_3",
+		"66"=>"mGluR3",
+		"67"=>"mGluR4",
+		"68"=>"mGluR5",
+		"69"=>"mGluR5a",
+		"70"=>"mGluR7a",
+		"71"=>"mGluR8a",
+		"72"=>"MOR",
+		"73"=>"Mus1R",
+		"74"=>"Mus3R",
+		"75"=>"Mus4R",
+		"76"=>"NECAB1",
+		"77"=>"Neuropilin2",
+		"78"=>"NKB",
+		"79"=>"p-CREB",
+		"80"=>"PCP4",
+		"81"=>"PPE",
+		"82"=>"PPTA",
+		"83"=>"Prox1",
+		"84"=>"PSA-NCAM",
+		"85"=>"SATB1",
+		"86"=>"SATB2",
+		"87"=>"SCIP",
+		"88"=>"SPO",
+		"89"=>"SubP",
+		"90"=>"TH",
+		"91"=>"vAChT",
+		"92"=>"vGAT",
+		"93"=>"vGlut1",
+		"94"=>"vGluT2",
+		"95"=>"VILIP",
+		"96"=>"Y1"
 );
 
 
@@ -129,12 +126,10 @@ function remap_marker_names($old_name) {
 		$new_name = 'GAT_1';
 	elseif ($old_name == 'mGluR2/3')
 		$new_name = 'mGluR2_3';
-	elseif ($old_name == 'AMPAR2_3')
-		$new_name = 'AMPAR 2/3';
 	elseif ($old_name == 'Kv3_1')
 		$new_name = 'Kv3.1';
-	elseif ($old_name == 'GluR2/3')
-		$new_name = 'GluR2_3';
+	elseif ($old_name == 'GluA2/3')
+		$new_name = 'GluA2_3';
 	elseif ($old_name == 'Id_2')
 		$new_name = 'Id-2';
 	elseif ($old_name == 'GABAa_delta')
@@ -461,10 +456,8 @@ function getUrlForLink($id,$img,$key,$color1)
 			$keyProperty = "GAT-1";
 		elseif($key=="mGluR2_3")
 			$keyProperty = "mGluR2/3";
-		elseif($key=="GluR2_3")
-			$keyProperty = "GluR2/3";
-		elseif($key=="AMPAR2_3")
-			$keyProperty = "AMPAR 2/3";
+		elseif($key=="GluA2_3")
+			$keyProperty = "GluA2/3";
 		elseif($key=="Kv3_1")
 			$keyProperty = "Kv3.1";
 		elseif($key=="Id_2")
@@ -519,10 +512,8 @@ function getUrlText($id,$key,$color1)
 		$keyProperty = "GAT-1";
 	elseif($key=="mGluR2_3")
 		$keyProperty = "mGluR2/3";
-	elseif($key=="GluR2_3")
-		$keyProperty = "GluR2/3";
-	elseif($key=="AMPAR2/3")
-		$keyProperty = "AMPAR 2/3";
+	elseif($key=="GluA2_3")
+		$keyProperty = "GluA2/3";
 	elseif($key=="Kv3_1")
 		$keyProperty = "Kv3.1";
 	elseif($key=="Id_2")

@@ -2,27 +2,27 @@
 
 $untracked_markers_array = array();
 $name_markers = array(
-						"CB",
-						"CR",
-						"PV",
-						"CB1",
-						"Mus2R",
-						"Sub P Rec",
-						"5HT-3",
-						"GABAa &alpha; 1",	
-						"mGluR1a",
-						"vGluT3",
-						"CCK",
-						"ENK",
-						"NPY",
-						"SOM",
-						"VIP",
-						"NG",
-						"&alpha;-act2",
-						"CoupTF II",
-						"nNOS",
-						"RLN",  
-					);
+		"CB",
+		"CR",
+		"PV",
+		"5HT-3",
+		"CB1",
+		"GABAa &alpha; 1",
+		"mGluR1a",
+		"Mus2R",
+		"Sub P Rec",
+		"vGluT3",
+		"CCK",
+		"ENK",
+		"NG",
+		"NPY",
+		"SOM",
+		"VIP",
+		"&alpha;-act2",
+		"CoupTF II",
+		"nNOS",
+		"RLN",  
+	);
 
 function getSubject_untracked()
 {

@@ -5,16 +5,22 @@
 <?php
 $parameter=$_GET['marker'];
 
-//&prop;-act2 ; GABAa &prop
 if ($parameter=="alpha-actinin-2")
-	$title = "&prop;-act2";
+	$title = "&alpha;-act2";
 elseif ($parameter=="Gaba-a-alpha")
-	$title = "GABAa &prop;1";
-else
+	$title = "GABAa &alpha;1";
+else {
 	$title = $parameter;
+	$title = str_replace("\alpha ", " &alpha;", $title);
+	$title = str_replace("\beta ", " &beta;", $title);
+	$title = str_replace("\delta", " &delta;", $title);
+	$title = str_replace("\gamma ", " &gamma;", $title);
+}
+
 if (strpos($parameter,'\\') != false) {
 	$parameter = str_replace('\\', '\\\\', $parameter);
 }
+
 
 $predicateArr=array('positive'=>'Types with positive expression','negative'=>'Types with negative expression','mixed'=>'Types with mixed expression','unknown'=>'Types with unknown expression');
 
@@ -41,6 +47,8 @@ $epdata = new epdata($class_epdata);
 $typetyperel = new typetyperel();
 
 $objArr = $property_1->retrievePropertyIdByName($parameter);
+
+
 // SEARCH Function for MARKERS: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function markers_search($evidencepropertyyperel, $property_1, $type, $predicate, $parameter) {	
 	$n_tot = 0;				// Variable to be used as an index for storing the resultant Type ID
@@ -86,6 +94,8 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 	return array($new_type_id, $new_type_conflict_note);
 }
 ?>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -152,13 +162,13 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $predicate,
 $n_result_tot = 0;
 $id_t = Array();
 $pos_Array = Array();
-/*$pos_intr_Array = Array();
+$pos_intr_Array = Array();
 $pos_conf_intr_Array = Array();
 $pos_inf_intr_Array = Array();
 $pos_inf_conf_intr_Array = Array();
 $neg_Array = Array();
 $neg_inf_Array = Array();
-$mixed_type = Array();*/
+$mixed_type = Array();
 $name_type = "";
 $subregion_type ="";
 $position_type = "";
@@ -173,12 +183,14 @@ foreach ($predicateArr as $k => $v)
         	$pos_neg_all = array();
         	
 			list($pos_neg_all[], $conf_notes_subtypes) = markers_search($evidencepropertyyperel, $property_1, $type, 'subtypes', $parameter);
-			list($pos_neg_all[], $conf_notes_spse) = markers_search($evidencepropertyyperel, $property_1, $type, 'species/protocol/subcellular expression differences', $parameter);
+			list($pos_neg_all[], $conf_notes_se) = markers_search($evidencepropertyyperel, $property_1, $type, 'subcellular expression differences', $parameter);
+			list($pos_neg_all[], $conf_notes_sp) = markers_search($evidencepropertyyperel, $property_1, $type, 'species/protocol differences', $parameter);
 			list($pos_neg_all[], $conf_notes_unresolved) = markers_search($evidencepropertyyperel, $property_1, $type, 'unresolved', $parameter);
 			list($pos_neg_all[], $conf_notes_pni) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive; negative inference', $parameter);
 			list($pos_neg_all[], $conf_notes_pin) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference; negative', $parameter);
 			list($pos_neg_all[], $conf_notes_pini) = markers_search($evidencepropertyyperel, $property_1, $type, 'positive inference; negative inference', $parameter);
-			
+			list($pos_neg_all[], $conf_notes_unresolvedInf) = markers_search($evidencepropertyyperel, $property_1, $type, 'unresolved inferential conflict', $parameter);
+			list($pos_neg_all[], $conf_notes_spInf) = markers_search($evidencepropertyyperel, $property_1, $type, 'species/protocol inferential conflict', $parameter);
 			
         	$marker_id = array();
 
@@ -313,7 +325,8 @@ foreach ($predicateArr as $k => $v)
 				
 				if($k=='mixed') {
 					if ((!empty($conf_notes_subtypes) && array_key_exists($id_t, $conf_notes_subtypes)) ||
-							(!empty($conf_notes_spse) && array_key_exists($id_t, $conf_notes_spse)) ||
+							(!empty($conf_notes_se) && array_key_exists($id_t, $conf_notes_se)) ||
+							(!empty($conf_notes_sp) && array_key_exists($id_t, $conf_notes_sp)) ||
 							(!empty($conf_notes_unresolved) && array_key_exists($id_t, $conf_notes_unresolved))) {
 						$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive']);
 						$unvetted = $evidencepropertyyperel -> getUnvetted();
@@ -321,7 +334,9 @@ foreach ($predicateArr as $k => $v)
 						$conflict_note = $evidencepropertyyperel -> getConflict_note();
 					}
 					elseif ((!empty($conf_notes_pin) && array_key_exists($id_t, $conf_notes_pin)) ||							
-							(!empty($conf_notes_pini) && array_key_exists($id_t, $conf_notes_pini))) {
+							(!empty($conf_notes_pini) && array_key_exists($id_t, $conf_notes_pini)) ||
+							(!empty($conf_notes_unresolvedInf) && array_key_exists($id_t, $conf_notes_unresolvedInf)) ||
+							(!empty($conf_notes_spInf) && array_key_exists($id_t, $conf_notes_spInf))) {
 						$evidencepropertyyperel -> retrive_unvetted($id,$objArr['positive_inference']);
 						$unvetted = $evidencepropertyyperel -> getUnvetted();
 						$evidencepropertyyperel -> retrieve_conflict_note($objArr['positive_inference'], $id);

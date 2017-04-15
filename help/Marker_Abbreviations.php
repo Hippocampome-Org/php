@@ -510,22 +510,6 @@ div.WordSection2
     height:12.75pt'>
     <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
     normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-    color:black'>PPTB</span></p>
-    </td>
-    <td width=456 nowrap colspan=2 valign=bottom style='width:4.75in;padding:
-    0in 5.4pt 0in 5.4pt;height:12.75pt'>
-    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-    normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-    color:black'>preprotachykinin B</span></p>
-    </td>
-    <td width=205 nowrap valign=bottom style='width:153.45pt;padding:0in 5.4pt 0in 5.4pt;
-    height:12.75pt'></td>
-   </tr>
-   <tr style='height:12.75pt'>
-    <td width=258 nowrap valign=bottom style='width:193.45pt;padding:0in 5.4pt 0in 5.4pt;
-    height:12.75pt'>
-    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-    normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
     color:black'>PV</span></p>
     </td>
     <td width=456 nowrap colspan=2 valign=bottom style='width:4.75in;padding:
@@ -625,20 +609,6 @@ div.WordSection2
     <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
     normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
     color:black'>vesicular glutamate transporter 3</span></p>
-    </td>
-   </tr>
-   <tr style='height:12.75pt'>
-    <td width=258 nowrap valign=bottom style='width:193.45pt;padding:0in 5.4pt 0in 5.4pt;
-    height:12.75pt'>
-    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-    normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-    color:black'>VIAAT</span></p>
-    </td>
-    <td width=661 nowrap colspan=3 valign=bottom style='width:495.45pt;
-    padding:0in 5.4pt 0in 5.4pt;height:12.75pt'>
-    <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-    normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-    color:black'>vesicular inhibitory amino acid transporter</span></p>
     </td>
    </tr>
    <tr style='height:12.75pt'>

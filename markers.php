@@ -85,7 +85,8 @@ include ("function/icon.html");
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
 <style>
-#nGrid_PV,#nGrid_vGluT3,#nGrid_NG,#nGrid_RLN
+
+#nGrid_PV,#nGrid_vGluT3,#nGrid_VIP,#nGrid_RLN
 {
 	border-right:medium solid #000099;
 }
@@ -154,10 +155,10 @@ include ("function/icon.html");
 	border:none;
 }
  .expandChrome {
-	top: 93px !important;
+	top: 98px !important;
 	}
 .expandOther {
-	top: 105px !important;
+	top: 99px !important;
 }
 .expandIE9 {
 	top: 85px !important;
@@ -279,132 +280,131 @@ $(function()
 			researchVar: research,
 			table_result : table
 		},
-		colNames:['','Neuron Type','Neurite<br>Pattern','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=Sub P Rec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &prop;1</a>','<a href="neuron_by_marker.php?marker=mGluR1a" onClick="OpenInNewTab(this);">mGluR1a</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGluT3</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&prop;-act2</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=nNOS" onClick="OpenInNewTab(this);">nNOS</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=AMIGO2" onClick="OpenInNewTab(this);">AMIGO2</a>','<a href="neuron_by_marker.php?marker=AMPAR 2/3" onClick="OpenInNewTab(this);">AMPAR2/3</a>','<a href="neuron_by_marker.php?marker=AR-beta1" onClick="OpenInNewTab(this);">AR-beta1</a>','<a href="neuron_by_marker.php?marker=AR-beta2" onClick="OpenInNewTab(this);">AR-beta2</a>','<a href="neuron_by_marker.php?marker=BDNF" onClick="OpenInNewTab(this);">BDNF</a>','<a href="neuron_by_marker.php?marker=Bok" onClick="OpenInNewTab(this);">Bok</a>','<a href="neuron_by_marker.php?marker=Caln" onClick="OpenInNewTab(this);">Caln</a>','<a href="neuron_by_marker.php?marker=CaM" onClick="OpenInNewTab(this);">CaM</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=Chrna2" onClick="OpenInNewTab(this);">Chrna2</a>','<a href="neuron_by_marker.php?marker=CRF" onClick="OpenInNewTab(this);">CRF</a>','<a href="neuron_by_marker.php?marker=Ctip2" onClick="OpenInNewTab(this);">Ctip2</a>','<a href="neuron_by_marker.php?marker=Cx36" onClick="OpenInNewTab(this);">Cx36</a>','<a href="neuron_by_marker.php?marker=CXCR4" onClick="OpenInNewTab(this);">CXCR4</a>','<a href="neuron_by_marker.php?marker=Disc1" onClick="OpenInNewTab(this);">Disc1</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=EAAT3" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ErbB4" onClick="OpenInNewTab(this);">ErbB4</a>','<a href="neuron_by_marker.php?marker=GABA-B1" onClick="OpenInNewTab(this);">GABA-B1</a>','<a href="neuron_by_marker.php?marker=GABAa \\delta" onClick="OpenInNewTab(this);">GABAa\delta</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 2" onClick="OpenInNewTab(this);">GABAa\alpha2</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 3" onClick="OpenInNewTab(this);">GABAa\alpha3</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 4" onClick="OpenInNewTab(this);">GABAa\alpha4</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 5" onClick="OpenInNewTab(this);">GABAa\alpha5</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 6" onClick="OpenInNewTab(this);">GABAa\alpha6</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 1" onClick="OpenInNewTab(this);">GABAa\beta1</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 2" onClick="OpenInNewTab(this);">GABAa\beta2</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 3" onClick="OpenInNewTab(this);">GABAa\beta3</a>','<a href="neuron_by_marker.php?marker=GABAa\\gamma 1" onClick="OpenInNewTab(this);">GABAa\gamma1</a>','<a href="neuron_by_marker.php?marker=GABAa\\gamma 2" onClick="OpenInNewTab(this);">GABAa\gamma2</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=GAT-3" onClick="OpenInNewTab(this);">GAT-3</a>','<a href="neuron_by_marker.php?marker=GluA1" onClick="OpenInNewTab(this);">GluA1</a>','<a href="neuron_by_marker.php?marker=GluA2" onClick="OpenInNewTab(this);">GluA2</a>','<a href="neuron_by_marker.php?marker=GluA3" onClick="OpenInNewTab(this);">GluA3</a>','<a href="neuron_by_marker.php?marker=GluA4" onClick="OpenInNewTab(this);">GluA4</a>','<a href="neuron_by_marker.php?marker=GluR2/3" onClick="OpenInNewTab(this);">GluR2/3</a>','<a href="neuron_by_marker.php?marker=GlyT2" onClick="OpenInNewTab(this);">GlyT2</a>','<a href="neuron_by_marker.php?marker=Id-2" onClick="OpenInNewTab(this);">Id-2</a>','<a href="neuron_by_marker.php?marker=Kv3.1" onClick="OpenInNewTab(this);">Kv3.1</a>','<a href="neuron_by_marker.php?marker=Man1a" onClick="OpenInNewTab(this);">Man1a</a>','<a href="neuron_by_marker.php?marker=Math-2" onClick="OpenInNewTab(this);">Math-2</a>','<a href="neuron_by_marker.php?marker=mGluR1" onClick="OpenInNewTab(this);">mGluR1</a>','<a href="neuron_by_marker.php?marker=mGluR2" onClick="OpenInNewTab(this);">mGluR2</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGluR3" onClick="OpenInNewTab(this);">mGluR3</a>','<a href="neuron_by_marker.php?marker=mGluR4" onClick="OpenInNewTab(this);">mGluR4</a>','<a href="neuron_by_marker.php?marker=mGluR5" onClick="OpenInNewTab(this);">mGluR5</a>','<a href="neuron_by_marker.php?marker=mGluR5a" onClick="OpenInNewTab(this);">mGluR5a</a>','<a href="neuron_by_marker.php?marker=mGluR7a" onClick="OpenInNewTab(this);">mGluR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus1R" onClick="OpenInNewTab(this);">Mus1R</a>','<a href="neuron_by_marker.php?marker=Mus3R" onClick="OpenInNewTab(this);">Mus3R</a>','<a href="neuron_by_marker.php?marker=Mus4R" onClick="OpenInNewTab(this);">Mus4R</a>','<a href="neuron_by_marker.php?marker=NECAB1" onClick="OpenInNewTab(this);">NECAB1</a>','<a href="neuron_by_marker.php?marker=Neuropilin2" onClick="OpenInNewTab(this);">Neuropilin2</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=p-CREB" onClick="OpenInNewTab(this);">p-CREB</a>','<a href="neuron_by_marker.php?marker=PCP4" onClick="OpenInNewTab(this);">PCP4</a>','<a href="neuron_by_marker.php?marker=PPE" onClick="OpenInNewTab(this);">PPE</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=PPTB" onClick="OpenInNewTab(this);">PPTB</a>','<a href="neuron_by_marker.php?marker=Prox1" onClick="OpenInNewTab(this);">Prox1</a>','<a href="neuron_by_marker.php?marker=PSA-NCAM" onClick="OpenInNewTab(this);">PSA-NCAM</a>','<a href="neuron_by_marker.php?marker=SATB1" onClick="OpenInNewTab(this);">SATB1</a>','<a href="neuron_by_marker.php?marker=SATB2" onClick="OpenInNewTab(this);">SATB2</a>','<a href="neuron_by_marker.php?marker=SCIP" onClick="OpenInNewTab(this);">SCIP</a>','<a href="neuron_by_marker.php?marker=SPO" onClick="OpenInNewTab(this);">SPO</a>','<a href="neuron_by_marker.php?marker=Sub P" onClick="OpenInNewTab(this);">SubP</a>','<a href="neuron_by_marker.php?marker=TH" onClick="OpenInNewTab(this);">TH</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGAT" onClick="OpenInNewTab(this);">vGAT</a>','<a href="neuron_by_marker.php?marker=vGlut1" onClick="OpenInNewTab(this);">vGlut1</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=VIAAT" onClick="OpenInNewTab(this);">VIAAT</a>','<a href="neuron_by_marker.php?marker=VILIP" onClick="OpenInNewTab(this);">VILIP</a>','<a href="neuron_by_marker.php?marker=Y1" onClick="OpenInNewTab(this);">Y1</a>'],	
+				
+		colNames:['','Neuron Type','Neurite<br>Pattern','<a href="neuron_by_marker.php?marker=CB" onClick="OpenInNewTab(this);">CB</a>','<a href="neuron_by_marker.php?marker=CR" onClick="OpenInNewTab(this);">CR</a>','<a href="neuron_by_marker.php?marker=PV" onClick="OpenInNewTab(this);">PV</a>','<a href="neuron_by_marker.php?marker=5HT-3" onClick="OpenInNewTab(this);">5HT-3</a>','<a href="neuron_by_marker.php?marker=CB1" onClick="OpenInNewTab(this);">CB1</a>','<a href="neuron_by_marker.php?marker=Gaba-a-alpha" onClick="OpenInNewTab(this);">GABAa &alpha;1</a>','<a href="neuron_by_marker.php?marker=mGluR1a" onClick="OpenInNewTab(this);">mGluR1a</a>','<a href="neuron_by_marker.php?marker=Mus2R" onClick="OpenInNewTab(this);">Mus2R</a>','<a href="neuron_by_marker.php?marker=Sub P Rec" onClick="OpenInNewTab(this);">Sub P Rec</a>','<a href="neuron_by_marker.php?marker=vGluT3" onClick="OpenInNewTab(this);">vGluT3</a>','<a href="neuron_by_marker.php?marker=CCK" onClick="OpenInNewTab(this);">CCK</a>','<a href="neuron_by_marker.php?marker=ENK" onClick="OpenInNewTab(this);">ENK</a>','<a href="neuron_by_marker.php?marker=NG" onClick="OpenInNewTab(this);">NG</a>','<a href="neuron_by_marker.php?marker=NPY" onClick="OpenInNewTab(this);">NPY</a>','<a href="neuron_by_marker.php?marker=SOM" onClick="OpenInNewTab(this);">SOM</a>','<a href="neuron_by_marker.php?marker=VIP" onClick="OpenInNewTab(this);">VIP</a>','<a href="neuron_by_marker.php?marker=alpha-actinin-2" onClick="OpenInNewTab(this);">&alpha;-act2</a>','<a href="neuron_by_marker.php?marker=CoupTF II" onClick="OpenInNewTab(this);">CoupTF II</a>','<a href="neuron_by_marker.php?marker=nNOS" onClick="OpenInNewTab(this);">nNOS</a>','<a href="neuron_by_marker.php?marker=RLN" onClick="OpenInNewTab(this);">RLN</a>','<a href="neuron_by_marker.php?marker=AChE" onClick="OpenInNewTab(this);">AChE</a>','<a href="neuron_by_marker.php?marker=AMIGO2" onClick="OpenInNewTab(this);">AMIGO2</a>','<a href="neuron_by_marker.php?marker=AR-beta1" onClick="OpenInNewTab(this);">AR-beta1</a>','<a href="neuron_by_marker.php?marker=AR-beta2" onClick="OpenInNewTab(this);">AR-beta2</a>','<a href="neuron_by_marker.php?marker=BDNF" onClick="OpenInNewTab(this);">BDNF</a>','<a href="neuron_by_marker.php?marker=Bok" onClick="OpenInNewTab(this);">Bok</a>','<a href="neuron_by_marker.php?marker=Caln" onClick="OpenInNewTab(this);">Caln</a>','<a href="neuron_by_marker.php?marker=CaM" onClick="OpenInNewTab(this);">CaM</a>','<a href="neuron_by_marker.php?marker=CGRP" onClick="OpenInNewTab(this);">CGRP</a>','<a href="neuron_by_marker.php?marker=ChAT" onClick="OpenInNewTab(this);">ChAT</a>','<a href="neuron_by_marker.php?marker=Chrna2" onClick="OpenInNewTab(this);">Chrna2</a>','<a href="neuron_by_marker.php?marker=CRF" onClick="OpenInNewTab(this);">CRF</a>','<a href="neuron_by_marker.php?marker=Ctip2" onClick="OpenInNewTab(this);">Ctip2</a>','<a href="neuron_by_marker.php?marker=Cx36" onClick="OpenInNewTab(this);">Cx36</a>','<a href="neuron_by_marker.php?marker=CXCR4" onClick="OpenInNewTab(this);">CXCR4</a>','<a href="neuron_by_marker.php?marker=Disc1" onClick="OpenInNewTab(this);">Disc1</a>','<a href="neuron_by_marker.php?marker=DYN" onClick="OpenInNewTab(this);">DYN</a>','<a href="neuron_by_marker.php?marker=EAAT3" onClick="OpenInNewTab(this);">EAAT3</a>','<a href="neuron_by_marker.php?marker=ErbB4" onClick="OpenInNewTab(this);">ErbB4</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 2" onClick="OpenInNewTab(this);">GABAa &alpha;2</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 3" onClick="OpenInNewTab(this);">GABAa &alpha;3</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 4" onClick="OpenInNewTab(this);">GABAa &alpha;4</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 5" onClick="OpenInNewTab(this);">GABAa &alpha;5</a>','<a href="neuron_by_marker.php?marker=GABAa\\alpha 6" onClick="OpenInNewTab(this);">GABAa &alpha;6</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 1" onClick="OpenInNewTab(this);">GABAa &beta;1</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 2" onClick="OpenInNewTab(this);">GABAa &beta;2</a>','<a href="neuron_by_marker.php?marker=GABAa\\beta 3" onClick="OpenInNewTab(this);">GABAa &beta;3</a>','<a href="neuron_by_marker.php?marker=GABAa \\delta" onClick="OpenInNewTab(this);">GABAa &delta;</a>','<a href="neuron_by_marker.php?marker=GABAa\\gamma 1" onClick="OpenInNewTab(this);">GABAa &gamma;1</a>','<a href="neuron_by_marker.php?marker=GABAa\\gamma 2" onClick="OpenInNewTab(this);">GABAa &gamma;2</a>','<a href="neuron_by_marker.php?marker=GABA-B1" onClick="OpenInNewTab(this);">GABAb 1</a>','<a href="neuron_by_marker.php?marker=GAT-1" onClick="OpenInNewTab(this);">GAT-1</a>','<a href="neuron_by_marker.php?marker=GAT-3" onClick="OpenInNewTab(this);">GAT-3</a>','<a href="neuron_by_marker.php?marker=GluA1" onClick="OpenInNewTab(this);">GluA1</a>','<a href="neuron_by_marker.php?marker=GluA2" onClick="OpenInNewTab(this);">GluA2</a>','<a href="neuron_by_marker.php?marker=GluA2/3" onClick="OpenInNewTab(this);">GluA2/3</a>','<a href="neuron_by_marker.php?marker=GluA3" onClick="OpenInNewTab(this);">GluA3</a>','<a href="neuron_by_marker.php?marker=GluA4" onClick="OpenInNewTab(this);">GluA4</a>','<a href="neuron_by_marker.php?marker=GlyT2" onClick="OpenInNewTab(this);">GlyT2</a>','<a href="neuron_by_marker.php?marker=Id-2" onClick="OpenInNewTab(this);">Id-2</a>','<a href="neuron_by_marker.php?marker=Kv3.1" onClick="OpenInNewTab(this);">Kv3.1</a>','<a href="neuron_by_marker.php?marker=Man1a" onClick="OpenInNewTab(this);">Man1a</a>','<a href="neuron_by_marker.php?marker=Math-2" onClick="OpenInNewTab(this);">Math-2</a>','<a href="neuron_by_marker.php?marker=mGluR1" onClick="OpenInNewTab(this);">mGluR1</a>','<a href="neuron_by_marker.php?marker=mGluR2" onClick="OpenInNewTab(this);">mGluR2</a>','<a href="neuron_by_marker.php?marker=mGluR2/3" onClick="OpenInNewTab(this);">mGluR2/3</a>','<a href="neuron_by_marker.php?marker=mGluR3" onClick="OpenInNewTab(this);">mGluR3</a>','<a href="neuron_by_marker.php?marker=mGluR4" onClick="OpenInNewTab(this);">mGluR4</a>','<a href="neuron_by_marker.php?marker=mGluR5" onClick="OpenInNewTab(this);">mGluR5</a>','<a href="neuron_by_marker.php?marker=mGluR5a" onClick="OpenInNewTab(this);">mGluR5a</a>','<a href="neuron_by_marker.php?marker=mGluR7a" onClick="OpenInNewTab(this);">mGluR7a</a>','<a href="neuron_by_marker.php?marker=mGluR8a" onClick="OpenInNewTab(this);">mGluR8a</a>','<a href="neuron_by_marker.php?marker=MOR" onClick="OpenInNewTab(this);">MOR</a>','<a href="neuron_by_marker.php?marker=Mus1R" onClick="OpenInNewTab(this);">Mus1R</a>','<a href="neuron_by_marker.php?marker=Mus3R" onClick="OpenInNewTab(this);">Mus3R</a>','<a href="neuron_by_marker.php?marker=Mus4R" onClick="OpenInNewTab(this);">Mus4R</a>','<a href="neuron_by_marker.php?marker=NECAB1" onClick="OpenInNewTab(this);">NECAB1</a>','<a href="neuron_by_marker.php?marker=Neuropilin2" onClick="OpenInNewTab(this);">Neuropilin2</a>','<a href="neuron_by_marker.php?marker=NKB" onClick="OpenInNewTab(this);">NKB</a>','<a href="neuron_by_marker.php?marker=p-CREB" onClick="OpenInNewTab(this);">p-CREB</a>','<a href="neuron_by_marker.php?marker=PCP4" onClick="OpenInNewTab(this);">PCP4</a>','<a href="neuron_by_marker.php?marker=PPE" onClick="OpenInNewTab(this);">PPE</a>','<a href="neuron_by_marker.php?marker=PPTA" onClick="OpenInNewTab(this);">PPTA</a>','<a href="neuron_by_marker.php?marker=Prox1" onClick="OpenInNewTab(this);">Prox1</a>','<a href="neuron_by_marker.php?marker=PSA-NCAM" onClick="OpenInNewTab(this);">PSA-NCAM</a>','<a href="neuron_by_marker.php?marker=SATB1" onClick="OpenInNewTab(this);">SATB1</a>','<a href="neuron_by_marker.php?marker=SATB2" onClick="OpenInNewTab(this);">SATB2</a>','<a href="neuron_by_marker.php?marker=SCIP" onClick="OpenInNewTab(this);">SCIP</a>','<a href="neuron_by_marker.php?marker=SPO" onClick="OpenInNewTab(this);">SPO</a>','<a href="neuron_by_marker.php?marker=Sub P" onClick="OpenInNewTab(this);">SubP</a>','<a href="neuron_by_marker.php?marker=TH" onClick="OpenInNewTab(this);">TH</a>','<a href="neuron_by_marker.php?marker=vAChT" onClick="OpenInNewTab(this);">vAChT</a>','<a href="neuron_by_marker.php?marker=vGAT" onClick="OpenInNewTab(this);">vGAT</a>','<a href="neuron_by_marker.php?marker=vGlut1" onClick="OpenInNewTab(this);">vGlut1</a>','<a href="neuron_by_marker.php?marker=vGluT2" onClick="OpenInNewTab(this);">vGluT2</a>','<a href="neuron_by_marker.php?marker=VILIP" onClick="OpenInNewTab(this);">VILIP</a>','<a href="neuron_by_marker.php?marker=Y1" onClick="OpenInNewTab(this);">Y1</a>'],
+			
 		colModel :
 		[
 			{name:'type', index:'type', width:50,sortable:false,cellattr: function (rowId, tv, rawObject, cm, rdata) {return 'id=\'type' + rowId + "\'";}},
-			{name:'NeuronType', index:'nickname', width:175,sortable:false},
+			{name:'NeuronType', index:'nickname', width:175, sortable:false},
 			{name:'NeuritePattern', index:'NeuritePattern', width:50,hidden:true},
-			{name:'CB',index:'CB',width:15,height:150,search:false,sortable:false},
-			{name:'CR',index:'CR',width:15,height:150,search:false,sortable:false},
-			{name:'PV',index:'PV',width:15,height:150,search:false,sortable:false,
+			{name:'CB',index:'CB',width:15, search:false,sortable:false},
+			{name:'CR',index:'CR',width:15,search:false,sortable:false},
+			{name:'PV',index:'PV',width:15,search:false,sortable:false,
 				cellattr: function(rowId, tv, rawObject, cm, rdata) 
 					{
 						return 'style="border-right:medium solid #000099;"';
 					}
 			},
-			{name:'CB1',index:'CB1',width:15,height:150,search:false,sortable:false},
-			{name:'Mus2R',index:'Mus2R',width:15,height:150,search:false,sortable:false},
-			{name:'SubPRec',index:'SubPRec',width:15,height:150,search:false,sortable:false},
-			{name:'5HT-3',index:'5HT-3',width:15,height:150,search:false,sortable:false},
-			{name:'GABAa', index:'GABAa', width:15,height:150,search:false,sortable:false},
-			{name:'mGluR1a',index:'mGluR1a',width:15,height:150,search:false,sortable:false},
-			{name:'vGluT3',index:'vGluT3',width:15,height:150,search:false,sortable:false,
+			{name:'5HT-3',index:'5HT-3',width:15,search:false,sortable:false},
+			{name:'CB1',index:'CB1',width:15,search:false,sortable:false},									
+			{name:'GABAa', index:'GABAa', width:15,search:false,sortable:false},
+			{name:'mGluR1a',index:'mGluR1a',width:15,search:false,sortable:false},
+			{name:'Mus2R',index:'Mus2R',width:15,search:false,sortable:false},
+			{name:'SubPRec',index:'SubPRec',width:15,search:false,sortable:false},
+			{name:'vGluT3',index:'vGluT3',width:15,search:false,sortable:false,
 				cellattr: function(rowId, tv, rawObject, cm, rdata) 
 					{
 						return 'style="border-right:medium solid #000099;"';
 					}
 			},
-			{name:'CCK',index:'CCK',width:15,height:150,search:false,sortable:false},
-			{name:'ENK',index:'ENK',width:15,height:150,search:false,sortable:false},
-			{name:'NPY',index:'NPY',width:15,height:150,search:false,sortable:false},
-			{name:'SOM',index:'SOM',width:15,height:150,search:false,sortable:false},
-			{name:'VIP',index:'VIP',width:15,height:150,search:false,sortable:false},
-			{name:'NG',index:'NG',width:15,height:150,search:false,sortable:false,
+			{name:'CCK',index:'CCK',width:15,search:false,sortable:false},
+			{name:'ENK',index:'ENK',width:15,search:false,sortable:false},
+			{name:'NG',index:'NG',width:15,search:false,sortable:false},
+			{name:'NPY',index:'NPY',width:15,search:false,sortable:false},
+			{name:'SOM',index:'SOM',width:15,search:false,sortable:false},
+			{name:'VIP',index:'VIP',width:15,search:false,sortable:false,
 			cellattr: function(rowId, tv, rawObject, cm, rdata) 
 				{
 					return 'style="border-right:medium solid #000099;"';
 				}
 			},
-			{name:'a-act2',index:'a-act2',width:15,height:150,search:false,sortable:false},
-			{name:'CoupTFII',index:'CoupTFII',width:15,height:150,search:false,sortable:false},
-			{name:'nNos',index:'nNos',width:15,height:150,search:false,sortable:false},
-			{name:'RLN',index:'RLN',width:15,height:150,search:false,sortable:false,
+			{name:'a-act2',index:'a-act2',width:15,search:false,sortable:false},
+			{name:'CoupTFII',index:'CoupTFII',width:15,search:false,sortable:false},
+			{name:'nNos',index:'nNos',width:15,search:false,sortable:false},
+			{name:'RLN',index:'RLN',width:15,search:false,sortable:false,
 				cellattr: function(rowId, tv, rawObject, cm, rdata) 
 					{
 						return 'style="border-right:medium solid #000099;"';
 					}
 			},
-			{name:'AChE',index:'AChE',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'AMIGO2',index:'AMIGO2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'AMPAR2_3',index:'AMPAR2_3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'AR-beta1',index:'AR-beta1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'AR-beta2',index:'AR-beta2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'BDNF',index:'BDNF',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Bok',index:'Bok',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Caln',index:'Caln',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'CaM',index:'CaM',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'CGRP',index:'CGRP',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'ChAT',index:'ChAT',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Chrna2',index:'Chrna2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'CRF',index:'CRF',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Ctip2',index:'Ctip2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Cx36',index:'Cx36',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'CXCR4',index:'CXCR4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Disc1',index:'Disc1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'DYN',index:'DYN',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'EAAT3',index:'EAAT3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'ErbB4',index:'ErbB4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABA-B1',index:'GABA-B1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_delta',index:'GABAa_delta',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_alpha2',index:'GABAa_alpha2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_alpha3',index:'GABAa_alpha3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_alpha4',index:'GABAa_alpha4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_alpha5',index:'GABAa_alpha5',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_alpha6',index:'GABAa_alpha6',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_beta1',index:'GABAa_beta1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_beta2',index:'GABAa_beta2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_beta3',index:'GABAa_beta3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_gamma1',index:'GABAa_gamma1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GABAa_gamma2',index:'GABAa_gamma2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GAT-1',index:'GAT-1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GAT-3',index:'GAT-3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GluA1',index:'GluA1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GluA2',index:'GluA2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GluA3',index:'GluA3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GluA4',index:'GluA4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GluR2_3',index:'GluR2_3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'GlyT2',index:'GlyT2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Id-2',index:'Id-2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Kv3_1',index:'Kv3_1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Man1a',index:'Man1a',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Math-2',index:'Math-2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR1',index:'mGluR1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR2',index:'mGluR2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR2_3',index:'mGluR2_3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR3',index:'mGluR3',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR4',index:'mGluR4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR5',index:'mGluR5',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR5a',index:'mGluR5a',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR7a',index:'mGluR7a',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'mGluR8a',index:'mGluR8a',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'MOR',index:'MOR',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Mus1R',index:'Mus1R',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Mus3R',index:'Mus3R',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Mus4R',index:'Mus4R',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'NECAB1',index:'NECAB1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Neuropilin2',index:'Neuropilin2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'NKB',index:'NKB',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'p-CREB',index:'p-CREB',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'PCP4',index:'PCP4',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'PPE',index:'PPE',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'PPTA',index:'PPTA',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'PPTB',index:'PPTB',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Prox1',index:'Prox1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'PSA-NCAM',index:'PSA-NCAM',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'SATB1',index:'SATB1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'SATB2',index:'SATB2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'SCIP',index:'SCIP',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'SPO',index:'SPO',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'SubP',index:'SubP',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'TH',index:'TH',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'vAChT',index:'vAChT',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'vGAT',index:'vGAT',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'vGlut1',index:'vGlut1',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'vGluT2',index:'vGluT2',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'VIAAT',index:'VIAAT',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'VILIP',index:'VILIP',width:15,height:150,search:false,sortable:false,hidden:true},
-			{name:'Y1',index:'Y1',width:15,height:150,search:false,sortable:false,hidden:true}	
+			{name:'AChE',index:'AChE',width:15,search:false,sortable:false,hidden:true},
+			{name:'AMIGO2',index:'AMIGO2',width:15,search:false,sortable:false,hidden:true},
+			{name:'AR-beta1',index:'AR-beta1',width:15,search:false,sortable:false,hidden:true},
+			{name:'AR-beta2',index:'AR-beta2',width:15,search:false,sortable:false,hidden:true},
+			{name:'BDNF',index:'BDNF',width:15,search:false,sortable:false,hidden:true},
+			{name:'Bok',index:'Bok',width:15,search:false,sortable:false,hidden:true},
+			{name:'Caln',index:'Caln',width:15,search:false,sortable:false,hidden:true},
+			{name:'CaM',index:'CaM',width:15,search:false,sortable:false,hidden:true},
+			{name:'CGRP',index:'CGRP',width:15,search:false,sortable:false,hidden:true},
+			{name:'ChAT',index:'ChAT',width:15,search:false,sortable:false,hidden:true},
+			{name:'Chrna2',index:'Chrna2',width:15,search:false,sortable:false,hidden:true},
+			{name:'CRF',index:'CRF',width:15,search:false,sortable:false,hidden:true},
+			{name:'Ctip2',index:'Ctip2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Cx36',index:'Cx36',width:15,search:false,sortable:false,hidden:true},
+			{name:'CXCR4',index:'CXCR4',width:15,search:false,sortable:false,hidden:true},
+			{name:'Disc1',index:'Disc1',width:15,search:false,sortable:false,hidden:true},
+			{name:'DYN',index:'DYN',width:15,search:false,sortable:false,hidden:true},
+			{name:'EAAT3',index:'EAAT3',width:15,search:false,sortable:false,hidden:true},
+			{name:'ErbB4',index:'ErbB4',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_alpha2',index:'GABAa_alpha2',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_alpha3',index:'GABAa_alpha3',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_alpha4',index:'GABAa_alpha4',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_alpha5',index:'GABAa_alpha5',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_alpha6',index:'GABAa_alpha6',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_beta1',index:'GABAa_beta1',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_beta2',index:'GABAa_beta2',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_beta3',index:'GABAa_beta3',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_delta',index:'GABAa_delta',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_gamma1',index:'GABAa_gamma1',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABAa_gamma2',index:'GABAa_gamma2',width:15,search:false,sortable:false,hidden:true},
+			{name:'GABA-B1',index:'GABA-B1',width:15,search:false,sortable:false,hidden:true},
+			{name:'GAT-1',index:'GAT-1',width:15,search:false,sortable:false,hidden:true},
+			{name:'GAT-3',index:'GAT-3',width:15,search:false,sortable:false,hidden:true},
+			{name:'GluA1',index:'GluA1',width:15,search:false,sortable:false,hidden:true},
+			{name:'GluA2',index:'GluA2',width:15,search:false,sortable:false,hidden:true},
+			{name:'GluA2_3',index:'GluA2_3',width:15,search:false,sortable:false,hidden:true},
+			{name:'GluA3',index:'GluA3',width:15,search:false,sortable:false,hidden:true},
+			{name:'GluA4',index:'GluA4',width:15,search:false,sortable:false,hidden:true},
+			{name:'GlyT2',index:'GlyT2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Id-2',index:'Id-2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Kv3_1',index:'Kv3_1',width:15,search:false,sortable:false,hidden:true},
+			{name:'Man1a',index:'Man1a',width:15,search:false,sortable:false,hidden:true},
+			{name:'Math-2',index:'Math-2',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR1',index:'mGluR1',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR2',index:'mGluR2',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR2_3',index:'mGluR2_3',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR3',index:'mGluR3',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR4',index:'mGluR4',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR5',index:'mGluR5',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR5a',index:'mGluR5a',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR7a',index:'mGluR7a',width:15,search:false,sortable:false,hidden:true},
+			{name:'mGluR8a',index:'mGluR8a',width:15,search:false,sortable:false,hidden:true},
+			{name:'MOR',index:'MOR',width:15,search:false,sortable:false,hidden:true},
+			{name:'Mus1R',index:'Mus1R',width:15,search:false,sortable:false,hidden:true},
+			{name:'Mus3R',index:'Mus3R',width:15,search:false,sortable:false,hidden:true},
+			{name:'Mus4R',index:'Mus4R',width:15,search:false,sortable:false,hidden:true},
+			{name:'NECAB1',index:'NECAB1',width:15,search:false,sortable:false,hidden:true},
+			{name:'Neuropilin2',index:'Neuropilin2',width:15,search:false,sortable:false,hidden:true},
+			{name:'NKB',index:'NKB',width:15,search:false,sortable:false,hidden:true},
+			{name:'p-CREB',index:'p-CREB',width:15,search:false,sortable:false,hidden:true},
+			{name:'PCP4',index:'PCP4',width:15,search:false,sortable:false,hidden:true},
+			{name:'PPE',index:'PPE',width:15,search:false,sortable:false,hidden:true},
+			{name:'PPTA',index:'PPTA',width:15,search:false,sortable:false,hidden:true},
+			{name:'Prox1',index:'Prox1',width:15,search:false,sortable:false,hidden:true},
+			{name:'PSA-NCAM',index:'PSA-NCAM',width:15,search:false,sortable:false,hidden:true},
+			{name:'SATB1',index:'SATB1',width:15,search:false,sortable:false,hidden:true},
+			{name:'SATB2',index:'SATB2',width:15,search:false,sortable:false,hidden:true},
+			{name:'SCIP',index:'SCIP',width:15,search:false,sortable:false,hidden:true},
+			{name:'SPO',index:'SPO',width:15,search:false,sortable:false,hidden:true},
+			{name:'SubP',index:'SubP',width:15,search:false,sortable:false,hidden:true},
+			{name:'TH',index:'TH',width:15,search:false,sortable:false,hidden:true},
+			{name:'vAChT',index:'vAChT',width:15,search:false,sortable:false,hidden:true},
+			{name:'vGAT',index:'vGAT',width:15,search:false,sortable:false,hidden:true},
+			{name:'vGlut1',index:'vGlut1',width:15,search:false,sortable:false,hidden:true},
+			{name:'vGluT2',index:'vGluT2',width:15,search:false,sortable:false,hidden:true},
+			{name:'VILIP',index:'VILIP',width:15,search:false,sortable:false,hidden:true},
+			{name:'Y1',index:'Y1',width:15,search:false,sortable:false,hidden:true}	
 		], 
 		rowNum: 122,
 		rowList:[122],
@@ -435,7 +435,7 @@ $(function()
 	jQuery("#nGrid").jqGrid('setGroupHeaders', { useColSpanStyle: true, 
 		groupHeaders:[ 
 		{startColumnName: 'CB', numberOfColumns: 3, titleText: '<b>Ca2+ binding proteins<b>'},
-		{startColumnName: 'CB1', numberOfColumns: 7, titleText: '<b>Receptors/Transporters</b>'},
+		{startColumnName: '5HT-3', numberOfColumns: 7, titleText: '<b>Receptors/Transporters</b>'},
 		{startColumnName: 'CCK', numberOfColumns: 6, titleText: '<b>Neuropeptides</b>'},
 		{startColumnName: 'a-act2', numberOfColumns: 4, titleText: '<b>Misc</b>'},
 		] 
@@ -445,12 +445,12 @@ $(function()
 		var myGrid = $('#nGrid');
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
-		for(var i=3;i<103;i++)
+		for(var i=3;i<=99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotateIE9");
 		} 
-		for(var i=23;i<103;i++)
+		for(var i=23;i<=$99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("expandIE9");
@@ -462,7 +462,7 @@ $(function()
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
 		var htmlAttri =  "top: 105px !important";
-		for(var i=3;i<103;i++)
+		for(var i=3;i<=99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotate");
@@ -476,29 +476,28 @@ $(function()
 			is_chrome = 0;
 		}
 		if (is_chrome) {
-			for(var i=23;i<103;i++)
+			for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandChrome");
 			}
 		}
 		else if (is_ie || is_ietrident || is_ieedge) {
-			for(var i=23;i<103;i++)
+			for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandIEOther");
 			}
 		}
 		else {
-		    for(var i=23;i<103;i++)
+		    for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandOther");
 			}
 		}
 	}
-	$("#nGrid_5HT-3").css("height","80");
-	$("#nGrid_act2").css("height","80");
+	$("#nGrid_CB").css("height","80");
 	var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
 	$("#nGrid").mouseover(function(e)
 	{
@@ -579,7 +578,7 @@ function HideShowColumns ()
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
-			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AMPAR2_3","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
+			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Y1"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
@@ -593,7 +592,7 @@ function HideShowColumns ()
 		}
 		else {
 			myGrid.setGridWidth("722");
-			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AMPAR2_3","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA3","GluA4","GluR2_3","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","PPTB","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VIAAT","VILIP","Y1"]);
+			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Y1"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth("722");
@@ -644,12 +643,12 @@ function HideColumn ()
 {
 	// Position of the name column
 	var myGrid = $('#nGrid');
-	for(var i=22;i<39;i++)
+	for(var i=21;i<98;i++)
 	{
 		myGrid.jqGrid('hideCol', myGrid.getGridParam("colModel")[i].name);
 	}
 	var a = $("#nGrid").jqGrid('getGridParam','colModel');
-	for(var i=0;i<21;i++)
+	for(var i=0;i<20;i++)
 	{
 		(a[i].width)="15";
 	}
@@ -662,14 +661,18 @@ function ShowColumn ()
 {
 	// Position of the name column
 	var myGrid = $('#nGrid');
-	for(var i=22;i<39;i++)
+	for(var i=21;i<98;i++)
 	{
 		myGrid.jqGrid('showCol', myGrid.getGridParam("colModel")[i].name);
+	}
+	for(var i=0;i<20;i++)
+	{
+		(a[i].width)="15";
 	}
 	$("ui-jqgrid .ui-jqgrid-hdiv ").width(988);
 	$(".ui-th-column").width(15);
 	$("#nGrid_type").width(49);
-	$("th#nGrid_Neuron").width(171);
+	$("th#nGrid_Neuron").width(133);
 }
 </script>
 </head>

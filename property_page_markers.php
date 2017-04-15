@@ -1760,7 +1760,12 @@ else {
 							//$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
 
 							// retrieve the attachament from the "Attachment" table with original_id and cell_id and parameter *******
-							$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron, $val_property);
+							$isInference = strpos($expression,"inference");
+							if ($isInference>0)
+								$id_neuron_for_attachement = 0;
+							else
+								$id_neuron_for_attachement = $id_neuron;
+							$attachment_obj -> retrieve_attachment_by_original_id($id_original, $id_neuron_for_attachement, $val_property);
 							$attachment = $attachment_obj -> getName();
 							$attachment_type = $attachment_obj -> getType();
 									

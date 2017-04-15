@@ -175,27 +175,6 @@ marker abbreviations<o:p></o:p></span></u></b></p>
   "Times New Roman";color:black'>-induced gene and ORF (open reading frame) 2<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:5;height:15.0pt'>
-  <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
-  mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
-  mso-border-top-themecolor:background1;mso-border-alt:solid white .5pt;
-  mso-border-themecolor:background1;padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>AMPAR2/3<o:p></o:p></span></p>
-  </td>
-  <td width=678 nowrap valign=bottom style='width:508.5pt;border-top:none;
-  border-left:none;border-bottom:solid white 1.0pt;mso-border-bottom-themecolor:
-  background1;border-right:solid white 1.0pt;mso-border-right-themecolor:background1;
-  mso-border-top-alt:solid white .5pt;mso-border-top-themecolor:background1;
-  mso-border-left-alt:solid white .5pt;mso-border-left-themecolor:background1;
-  mso-border-alt:solid white .5pt;mso-border-themecolor:background1;padding:
-  0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>AMPA receptor 2/3<o:p></o:p></span></p>
-  </td>
- </tr>
  <tr style='mso-yfti-irow:6;height:15.0pt'>
   <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
   mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
@@ -1155,27 +1134,6 @@ marker abbreviations<o:p></o:p></span></u></b></p>
   mso-fareast-font-family:"Times New Roman";color:black'>AMPA receptor 4<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:49;height:15.0pt'>
-  <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
-  mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
-  mso-border-top-themecolor:background1;mso-border-alt:solid white .5pt;
-  mso-border-themecolor:background1;padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>GluR2/3<o:p></o:p></span></p>
-  </td>
-  <td width=678 nowrap valign=bottom style='width:508.5pt;border-top:none;
-  border-left:none;border-bottom:solid white 1.0pt;mso-border-bottom-themecolor:
-  background1;border-right:solid white 1.0pt;mso-border-right-themecolor:background1;
-  mso-border-top-alt:solid white .5pt;mso-border-top-themecolor:background1;
-  mso-border-left-alt:solid white .5pt;mso-border-left-themecolor:background1;
-  mso-border-alt:solid white .5pt;mso-border-themecolor:background1;padding:
-  0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>AMPA receptor 2/3<o:p></o:p></span></p>
-  </td>
- </tr>
  <tr style='mso-yfti-irow:50;height:15.0pt'>
   <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
   mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
@@ -1825,28 +1783,6 @@ marker abbreviations<o:p></o:p></span></u></b></p>
   "Times New Roman";color:black'>; substance P<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style='mso-yfti-irow:80;height:15.0pt'>
-  <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
-  mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
-  mso-border-top-themecolor:background1;mso-border-alt:solid white .5pt;
-  mso-border-themecolor:background1;padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>PPTB<o:p></o:p></span></p>
-  </td>
-  <td width=678 nowrap valign=bottom style='width:508.5pt;border-top:none;
-  border-left:none;border-bottom:solid white 1.0pt;mso-border-bottom-themecolor:
-  background1;border-right:solid white 1.0pt;mso-border-right-themecolor:background1;
-  mso-border-top-alt:solid white .5pt;mso-border-top-themecolor:background1;
-  mso-border-left-alt:solid white .5pt;mso-border-left-themecolor:background1;
-  mso-border-alt:solid white .5pt;mso-border-themecolor:background1;padding:
-  0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span class=SpellE><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>preprotachykinin</span></span><span
-  style='font-size:14.0pt;font-family:"Arial","sans-serif";mso-fareast-font-family:
-  "Times New Roman";color:black'> B<o:p></o:p></span></p>
-  </td>
  </tr>
  <tr style='mso-yfti-irow:81;height:15.0pt'>
   <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
@@ -2222,28 +2158,6 @@ marker abbreviations<o:p></o:p></span></u></b></p>
   normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
   mso-fareast-font-family:"Times New Roman";color:black'>vesicular glutamate
   transporter 2<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:98;height:15.0pt'>
-  <td width=187 nowrap valign=bottom style='width:140.25pt;border:solid white 1.0pt;
-  mso-border-themecolor:background1;border-top:none;mso-border-top-alt:solid white .5pt;
-  mso-border-top-themecolor:background1;mso-border-alt:solid white .5pt;
-  mso-border-themecolor:background1;padding:0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>VIAAT<o:p></o:p></span></p>
-  </td>
-  <td width=678 nowrap valign=bottom style='width:508.5pt;border-top:none;
-  border-left:none;border-bottom:solid white 1.0pt;mso-border-bottom-themecolor:
-  background1;border-right:solid white 1.0pt;mso-border-right-themecolor:background1;
-  mso-border-top-alt:solid white .5pt;mso-border-top-themecolor:background1;
-  mso-border-left-alt:solid white .5pt;mso-border-left-themecolor:background1;
-  mso-border-alt:solid white .5pt;mso-border-themecolor:background1;padding:
-  0in 5.4pt 0in 5.4pt;height:15.0pt'>
-  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'><span style='font-size:14.0pt;font-family:"Arial","sans-serif";
-  mso-fareast-font-family:"Times New Roman";color:black'>vesicular inhibitory
-  amino acid transporter<o:p></o:p></span></p>
   </td>
  </tr>
  <tr style='mso-yfti-irow:99;height:15.0pt'>

@@ -327,14 +327,14 @@ include ("function/icon.html");
 			if ($property1 == 'Molecular markers')
 			{
 				getSubject_untracked();	// Function to store all the untracked Subjects from the property table (function/part.php)
-				$n_part = 96;
+				$n_part = 97;
 			}
 			if ($property1 == 'Electrophysiology')
 				$n_part = 10;		
 			if ($property1 == 'Connectivity')
 				$n_part = 2;
 			if ($property1 == 'Major Neurontransmitter')	
-				$n_part = 2;								
+				$n_part = 2;
 			if($property1=='Firing Pattern' or $property1=='Firing Pattern Parameter'){
 				if($property1=='Firing Pattern'){
 					$value_part=partFiringPattern(); 
