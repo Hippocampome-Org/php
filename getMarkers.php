@@ -141,6 +141,10 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 
 	$hippo_property_id = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"5HT_3"=>NULL,"CB1"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NG"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AR-beta1"=>NULL,"AR-beta2"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_delta"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GABA-B1"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA2_3"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPE"=>NULL,"PPTA"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"TH"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
 
+	$hippo_property_id_arr = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"5HT-3"=>NULL,"CB1"=>NULL,"Gaba-a-alpha"=>NULL,"mGluR1a"=>NULL,"Mus2R"=>NULL,"Sub P Rec"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NG"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"alpha-actinin-2"=>NULL,"CoupTF II"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AR-beta1"=>NULL,"AR-beta2"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABAa\\alpha 2"=>NULL,"GABAa\\alpha 3"=>NULL,"GABAa\alpha 4"=>NULL,"GABAa\alpha 5"=>NULL,"GABAa\alpha 6"=>NULL,"GABAa\beta 1"=>NULL,"GABAa\beta 2"=>NULL,"GABAa\beta 3"=>NULL,"GABAa \\delta"=>NULL,"GABAa\gamma 1"=>NULL,"GABAa\gamma 2"=>NULL,"GABA-B1"=>NULL,"GAT-1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA2/3"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GlyT2"=>NULL,"Id-2"=>NULL,"Kv3.1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2/3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPE"=>NULL,"PPTA"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"Sub P"=>NULL,"TH"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
+
+	
+
 	$hippo_property = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"5HT_3"=>NULL,"CB1"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NG"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AR-beta1"=>NULL,"AR-beta2"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_delta"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GABA-B1"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA2_3"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPE"=>NULL,"PPTA"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"TH"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
 
 	$hippo = array("CB"=>NULL,"CR"=>NULL,"PV"=>NULL,"5HT_3"=>NULL,"CB1"=>NULL,"GABAa_alfa"=>NULL,"mGluR1a"=>NULL,"Mus2R"=>NULL,"Sub_P_Rec"=>NULL,"vGluT3"=>NULL,"CCK"=>NULL,"ENK"=>NULL,"NG"=>NULL,"NPY"=>NULL,"SOM"=>NULL,"VIP"=>NULL,"a-act2"=>NULL,"CoupTF_2"=>NULL,"nNOS"=>NULL,"RLN"=>NULL,"AChE"=>NULL,"AMIGO2"=>NULL,"AR-beta1"=>NULL,"AR-beta2"=>NULL,"BDNF"=>NULL,"Bok"=>NULL,"Caln"=>NULL,"CaM"=>NULL,"CGRP"=>NULL,"ChAT"=>NULL,"Chrna2"=>NULL,"CRF"=>NULL,"Ctip2"=>NULL,"Cx36"=>NULL,"CXCR4"=>NULL,"Disc1"=>NULL,"DYN"=>NULL,"EAAT3"=>NULL,"ErbB4"=>NULL,"GABAa_alpha2"=>NULL,"GABAa_alpha3"=>NULL,"GABAa_alpha4"=>NULL,"GABAa_alpha5"=>NULL,"GABAa_alpha6"=>NULL,"GABAa_beta1"=>NULL,"GABAa_beta2"=>NULL,"GABAa_beta3"=>NULL,"GABAa_delta"=>NULL,"GABAa_gamma1"=>NULL,"GABAa_gamma2"=>NULL,"GABA-B1"=>NULL,"GAT_1"=>NULL,"GAT-3"=>NULL,"GluA1"=>NULL,"GluA2"=>NULL,"GluA2_3"=>NULL,"GluA3"=>NULL,"GluA4"=>NULL,"GlyT2"=>NULL,"Id_2"=>NULL,"Kv3_1"=>NULL,"Man1a"=>NULL,"Math-2"=>NULL,"mGluR1"=>NULL,"mGluR2"=>NULL,"mGluR2_3"=>NULL,"mGluR3"=>NULL,"mGluR4"=>NULL,"mGluR5"=>NULL,"mGluR5a"=>NULL,"mGluR7a"=>NULL,"mGluR8a"=>NULL,"MOR"=>NULL,"Mus1R"=>NULL,"Mus3R"=>NULL,"Mus4R"=>NULL,"NECAB1"=>NULL,"Neuropilin2"=>NULL,"NKB"=>NULL,"p-CREB"=>NULL,"PCP4"=>NULL,"PPE"=>NULL,"PPTA"=>NULL,"Prox1"=>NULL,"PSA-NCAM"=>NULL,"SATB1"=>NULL,"SATB2"=>NULL,"SCIP"=>NULL,"SPO"=>NULL,"SubP"=>NULL,"TH"=>NULL,"vAChT"=>NULL,"vGAT"=>NULL,"vGlut1"=>NULL,"vGluT2"=>NULL,"VILIP"=>NULL,"Y1"=>NULL);
@@ -370,5 +374,28 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			);
 
 }
+
+//Retrieve header names from database by creating [key,value] pair
+		$headernames= array();
+		
+		$keys=array_keys($hippo_property_id_arr);
+		for($ind=0;$ind<97;$ind++){
+    		$key=$keys[$ind];
+    		
+    		$post = mysql_real_escape_string($key);
+
+    		$header_query= "Select Distinct P.object from Property P where P.subject='$post' and P.predicate='has name'";
+    		
+    		$header_result=mysqli_query($GLOBALS['conn'],$header_query);
+     
+    		$rows = mysqli_fetch_array($header_result, MYSQL_ASSOC);
+    
+    		$headernames[$key]=$rows['object'];
+    		print($key);
+    		
+    
+}
+
+    $responce->header=$headernames;
 //echo json_encode($responce);
 ?>
