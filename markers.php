@@ -146,6 +146,11 @@ include ("function/icon.html");
 	padding-left: 4px;
 }
 
+#jqgh_nGrid_NeuronType{
+	text-align: center;
+	padding-bottom: 60px;
+}
+
 .patternHeight {
 	top: 48.5px !important;
 }  
@@ -605,28 +610,39 @@ function HideShowColumns ()
 {
 	var myGrid = $('#nGrid');
 	var customWidth = screen.availWidth-100;
+
 	//myGrid.jqGrid('setFrozenColumns');
+	//set frozen columns when document is loaded
+	$(document).ready(function() {
+    myGrid.jqGrid('setColProp', 'type', {frozen: true });
+	myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
+	myGrid.jqGrid('setFrozenColumns');
+	myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+	
+	//myGrid.jqGrid('setGridParam', {autowidth: true});
+});
+	
 	$("#checkbox1").click(function() {
 		if ($("#checkbox1").is(':checked')) {
 			var myGrid = $("#nGrid");
 			myGrid.setGridWidth("722");
-			myGrid.jqGrid('setColProp', 'type', {frozen: true });
-			myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
+			//myGrid.jqGrid('setColProp', 'type', {frozen: true });
+			//myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
 			myGrid.jqGrid('setGridParam', {autowidth: true});
-			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
-			myGrid.jqGrid('setGridParam', {scrollerbar: true});
+			//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+			//myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["NeuritePattern"]);
 			$("#jqgh_nGrid_NeuronType").addClass("patternHeight");
 			$("#jqgh_nGrid_NeuritePattern").addClass("patternHeight");
-			myGrid.jqGrid('setFrozenColumns');
+			//myGrid.jqGrid('setFrozenColumns');
 			$("#checkbox2").click(function() {
 				if ($("#checkbox2").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
 					myGrid.jqGrid('setGridParam', {autowidth: true});
-					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 					myGrid.jqGrid('setGridParam', {scrollerbar: true});
 				} else {
-					myGrid.setGridWidth("722");
+					//myGrid.setGridWidth("722");  
 				}
 			});
 		}
@@ -650,19 +666,19 @@ function HideShowColumns ()
 		if ($("#checkbox2").is(':checked')) {
 			$("#jqgh_nGrid_NeuronType").addClass("patternHeight");
 			$("#jqgh_nGrid_NeuritePattern").addClass("patternHeight");
-			myGrid.jqGrid('setColProp', 'type', {frozen: true });
-			myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
-			myGrid.jqGrid('setFrozenColumns');
+			//myGrid.jqGrid('setColProp', 'type', {frozen: true });
+			//myGrid.jqGrid('setColProp', 'NeuronType', {frozen: true });
+			//myGrid.jqGrid('setFrozenColumns');
 			myGrid.setGridWidth(customWidth,false);
 			myGrid.jqGrid('setGridParam', {autowidth: true});
-			myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+			//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
 			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Y1"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
 					myGrid.jqGrid('setGridParam', {autowidth: true});
-					myGrid.jqGrid('setGridParam', {shrinkToFit: false});
+					//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 					myGrid.jqGrid('setGridParam', {scrollerbar: true});
 				} else {
 					myGrid.setGridWidth(customWidth,false);
@@ -687,6 +703,7 @@ function HideShowColumns ()
 			});
 		} 
 	});
+	
 	$("#checkbox3").click(function() {	
 			ShowHideInference();
 	});
@@ -765,7 +782,7 @@ include ("function/menu_main.php");
 		<form id="myform">
       <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
-        <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2"/><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
+        <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2" /><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
         <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
 		</form>
 </div>
