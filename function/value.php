@@ -170,5 +170,15 @@ function getDigitOfParameter($parameter_index){
 		return $firing_pattern_param_digit[$parameter_index];
 	return "0";			
 }
-
+// partUniqueId
+function partUniqueId()
+{
+	$part=array();
+	$index=0;
+	$query_to_get_unique_ids = "SELECT DISTINCT id FROM Type";
+	$rs_unique_ids = mysqli_query($GLOBALS['conn'],$query_to_get_unique_ids);	
+	while(list($unique_ids) = mysqli_fetch_row($rs_unique_ids))						
+		$part[$index++] = $unique_ids;
+	return $part;
+}
 ?>

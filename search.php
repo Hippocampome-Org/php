@@ -92,6 +92,7 @@ $N = $_REQUEST['N'];
 	$operator = $_REQUEST['operator'];
 	if ($operator)
 	{
+		print($name_temporary_table);
 		$N = $_REQUEST['N'];
 		$N_old = $N - 1;
 	
@@ -114,6 +115,10 @@ $N = $_REQUEST['N'];
 					$temporary_search -> insert_temporary($N, NULL, NULL, NULL, NULL, $operator);
 			}	
 		
+		}
+		else if($property3 == 'Unique Id'){
+			if ( ($relation3 != NULL ) && ($value3 != NULL)  && ($relation3 != '-' ) && ($value3 != '-'))
+				$temporary_search -> insert_temporary($N, NULL, NULL, NULL, NULL, $operator);
 		}	
 		else 
 		{
@@ -154,7 +159,7 @@ if ($_REQUEST['clear_all'])
 
 
 
-$n_property = 7;
+$n_property = 8;
 
 ?>
 
@@ -327,7 +332,7 @@ include ("function/icon.html");
 			if ($property1 == 'Molecular markers')
 			{
 				getSubject_untracked();	// Function to store all the untracked Subjects from the property table (function/part.php)
-				$n_part = 97;
+				$n_part = 96;
 			}
 			if ($property1 == 'Electrophysiology')
 				$n_part = 10;		
@@ -335,11 +340,13 @@ include ("function/icon.html");
 				$n_part = 2;
 			if ($property1 == 'Major Neurontransmitter')	
 				$n_part = 2;
+			if ($property1 == 'Unique Id')	
+				$n_part = 0;								
 			if($property1=='Firing Pattern' or $property1=='Firing Pattern Parameter'){
 				if($property1=='Firing Pattern'){
 					$value_part=partFiringPattern(); 
 					array_push($value_part,"All");
-					$phenotype=array("ASP Element","D Element","FASP Element","TSTUT Element","TSWB Element","NASP Element","PSTUT Element","PSWB Element","SLN Element");
+					$phenotype=array("ASP Element","D Element","RASP Element","TSTUT Element","TSWB Element","NASP Element","PSTUT Element","PSWB Element","SLN Element");
 					$value_part=array_merge($phenotype,$value_part);
 					$n_part=count($value_part);
 				}
@@ -352,8 +359,11 @@ include ("function/icon.html");
 			else{
 				for ($i=0; $i<$n_part; $i++)
 					$value_part[$i] = part($i, $property1); 
-			}											
+			}
+								
 			print ("<td width='18%' align='center' class='table_neuron_page1'>");
+			if($property1 != 'Unique Id'){
+
 			print ("<select name='part' size='1' cols='10' class='select1' onChange=\"part(this, $id1)\">");
 			
 			if ($part1)
@@ -480,6 +490,7 @@ include ("function/icon.html");
 				}
 			}
 			print ("</select>");
+			}
 			print ("</td>");				
 			// END Part **************************************************************************************************
 
@@ -488,7 +499,7 @@ include ("function/icon.html");
 				$n_relation = 2;
 			if ($property1 == 'Molecular markers')
 				$n_relation = 6;
-			if ($property1 == 'Electrophysiology')
+			if ($property1 == 'Electrophysiology'||$property1 == 'Unique Id')
 				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
 				$n_relation = 3;
@@ -679,6 +690,8 @@ include ("function/icon.html");
 			
 
 			}
+
+
 							
 			if ($property1 == 'Morphology')
 				$n_value = 33;
@@ -698,6 +711,10 @@ include ("function/icon.html");
 			if($property1 == 'Firing Pattern Parameter'){
 				$n_value = count($valuesOfParameter);
 			}
+			if($property1 == 'Unique Id'){
+				$valuesOfUniqueIds=partUniqueId();
+				$n_value = count($valuesOfUniqueIds);
+			}
 			
 																
 			print ("<td width='31%' align='center' class='table_neuron_page1'>");
@@ -713,6 +730,8 @@ include ("function/icon.html");
         	for ($i=0; $i<$n_value; $i++) {
 	            if ($property1 == 'Electrophysiology') // STM hack for correct ephys units
 					$value_value = $valuesOfEphys[$i];
+				elseif ($property1 == 'Unique Id')
+					$value_value = $valuesOfUniqueIds[$i];
 	            elseif ($property1 == 'Connectivity')
 					$value_value = value_connectivity($i, $type);
 				elseif ($property1 == 'Firing Pattern Parameter') {
@@ -773,6 +792,8 @@ include ("function/icon.html");
 			$n9=0;
 			while(list($N, $operator, $property, $part, $relation, $value) = mysqli_fetch_row($rs))
 			{	
+				if($property=='Unique Id')
+					$part=$property;
 				if (($part == '-') || ($part == NULL));
 				else
 				{

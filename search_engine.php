@@ -84,7 +84,18 @@ function information_by_id ($name_temporary_table, $id)
 	return $varr;
 }
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// SEARCH Function for Unique Ids: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+function unique_ids_search($relation,$value){
+	$part=array();
+	$index=0;
+	$query_to_get_unique_ids = "SELECT DISTINCT id FROM Type WHERE id $relation $value";
+	$rs_unique_ids = mysqli_query($GLOBALS['conn'],$query_to_get_unique_ids);	
+	while(list($unique_ids) = mysqli_fetch_row($rs_unique_ids))						
+		$part[$index++] = $unique_ids;
+	return $part;
 
+}
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // SEARCH Function for MORPHOLOGY: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 function morphology_search_for_hippocampal_formation ($evidencepropertyyperel, $property_1, $part, $rel, $val, $type)
 {	
@@ -805,7 +816,14 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 				$id_type_res = array_merge($id_type_res, $res_connectivity);
 		}
 		// END Script for CONNECTIVITY +++++++++++++++++++++++++++++++++++++++
+		//Unque Ids
+		if ($property == 'Unique Id')
+		{
+			$res_ids = unique_ids_search($relation,$value);
 				
+			if ($res_ids != NULL)
+				$id_type_res = array_merge($id_type_res, $res_ids); 	
+		}		
 	}  // End FOR $i1 (AND)
 
 

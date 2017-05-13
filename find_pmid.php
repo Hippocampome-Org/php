@@ -24,15 +24,26 @@ function getSupplemental($sup_id){
 	// in table EvidenceEvidenceRel(source=evidence2_id and it is evidence_id in ArticleEvidenceRel table)
 	$query_to_get_type= " SELECT DISTINCT
 						    Typ.id AS type_id,
-						    Typ.name,
 						    Typ.nickname,
+						    Typ.name,
 						    'SUPPLEMENTAL' AS status
 						FROM
 						    EvidencePropertyTypeRel eptr,
 						    Type Typ
 						WHERE
 						    eptr.Type_id = Typ.id
-						    AND LOCATE('$sup_id', eptr.supplemental_pmids)";
+						    AND LOCATE('$sup_id', eptr.supplemental_pmids)
+						  UNION 
+						SELECT DISTINCT
+							t.Type_id AS type_id,
+							t.name AS nickname, 
+							t.name,
+							'Onhold' AS status
+						FROM
+							Onhold t
+						WHERE
+							t.pmid_isbn=$sup_id"
+						    ;
 	//print($query_to_get_type);
 	$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
 	if (!$article_type) {
@@ -319,6 +330,8 @@ else
 						$count++;
 						if($type_status=='SUPPLEMENTAL')
 							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+						if($type_status=='Onhold')
+							print("$count)&nbsp;$type_nickname(Frozen)<br/>");
 						else
 							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname</a><br/>");
 					}	
@@ -369,7 +382,10 @@ else
 					if($type_status!=NULL&&$type_status!='frozen')
 					{
 						$count++;
-						print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+						if($type_status=='SUPPLEMENTAL')
+							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+						else if($type_status=='Onhold')
+							print("$count)&nbsp;$type_nickname(Frozen)<br/>");
 						
 					}
 				}

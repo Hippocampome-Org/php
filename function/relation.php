@@ -25,7 +25,7 @@ function relation($n, $property, $part)
 			$relation = 'unknown';									
 	}
 
-	if ($property == 'Electrophysiology')
+	if ($property == 'Electrophysiology' || $property == 'Unique Id')
 	{
 		if ($n == 0)
 			$relation = '=';

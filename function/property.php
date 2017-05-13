@@ -15,6 +15,8 @@ function property($n)
 		$property = 'Firing Pattern';
 	if ($n == 6)
 		$property = 'Firing Pattern Parameter';
+	if ($n == 7)
+		$property = 'Unique Id';
 	
 
 	return $property;

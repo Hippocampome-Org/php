@@ -125,6 +125,7 @@ $responce->page = $page;
 $responce->total = $total_pages;
 $responce->records = $count;
 
+
 if($research!="1")
 {
 	//$type -> retieve_ordered_List($start,$limit);
@@ -391,7 +392,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
     		$rows = mysqli_fetch_array($header_result, MYSQL_ASSOC);
     
     		$headernames[$key]=$rows['object'];
-    		print($key);
+    		
     		
     
 }

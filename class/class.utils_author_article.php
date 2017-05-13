@@ -288,6 +288,18 @@ class utils_author_article
 								WHERE eptr.Type_id=Typ.id 
 								AND LOCATE(Art.pmid_isbn,eptr.supplemental_pmids) 
 								AND Art.id=$article_id 
+								UNION
+                                SELECT DISTINCT
+									Art.id as article_id,
+									t.Type_id AS type_id,
+                                    t.name,
+									t.name AS nickname, 
+									'Onhold' AS status
+								FROM
+									Onhold t,Article Art
+								WHERE
+									Art.pmid_isbn=t.pmid_isbn
+                                    AND Art.id=$article_id
 								ORDER BY type_id ";
 		$article_type = mysqli_query($GLOBALS['conn'],$query_to_get_type);
 		if (!$article_type) {
