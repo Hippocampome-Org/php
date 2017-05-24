@@ -718,8 +718,8 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		// END Script for MARKERS +++++++++++++++++++++++++++++++++++++++		
 		
 		
-		// Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++++++
-		if ($property == 'Major Neurontransmitter')
+		// Script for Major Neurotransmitter +++++++++++++++++++++++++++++++++++++++++++
+		if ($property == 'Major Neurotransmitter')
 		{
 			
 			$subject = $part;
