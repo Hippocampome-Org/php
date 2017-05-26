@@ -742,7 +742,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 				$id_type_res = array_merge($id_type_res, $res_marker);
 		
 		}
-		// END Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++
+		// END Script for Major Neurotransmitter +++++++++++++++++++++++++++++++++++++++
 		
 		
 		// Script for ELECTROPHYSIOLOGY +++++++++++++++++++++++++++++++++++++++++++		
