@@ -17,10 +17,17 @@ require_once("access_db.php");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<script type="text/javascript">
+function hide(){
+		$('#conn tr > *:nth-child(1)').toggle();
+		$('#conn tr > *:nth-child(3)').toggle();
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<?php include ("function/icon.html"); ?>
 	<title>Search Engine</title>
 	<script type="text/javascript" src="style/resolution.js"></script>
+	<script type="text/javascript" src="lightbox/js/sorttable.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<script src="DataTables-1.9.4/media/js/jquery.js" type="text/javascript"></script>
 	<script src="DataTables-1.9.4/media/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -70,21 +77,27 @@ if($_REQUEST['search_engine']){
 		print('No Matching Connection Found');
 	}
 	else{
-		print('<table border="0" cellspacing="3" cellpadding="0" class="table_result">');
-		print('<tr><td align="center" width="5%" class="table_neuron_page3" > Index </td>');
-		print("<td align='center' width='40%' class='table_neuron_page3'> Source Neuron </td>");
-		print ("<td align='center' width='40%' class='table_neuron_page3'> Destination Neuron </td><td align='center' width='15%'></tr>");
+		print("<b>Total:".count($matchingConn)."</b><br>");
+		print('<input id="id_toggle" checked type="checkbox" name="Id" value="Id" onclick="hide()"> Neuron Id</input><br>');
+		print('<table id="conn" border="0" cellspacing="3" cellpadding="0" class="sortable" width="100%">');
+		print('<tr>');
+		print("<td align='center' width='20%' class='table_neuron_page3'> SID </td>");
+		print("<td align='center' width='30%' class='table_neuron_page3'> Presynaptic Cell Types </td>");
+		print ("<td align='center' width='20%' class='table_neuron_page3'>DID</td>");
+		print("<td align='center' width='30%' class='table_neuron_page3'> Postsynaptic Cell Types </td>");
 		for($i=0;$i<count($matchingConn);$i++){
-			print('<tr><td align="center" width="5%" class="table_neuron_page4">'.($i+1).'</td>');
-			print("<td align='center' width='40%' class='table_neuron_page4'>
+			print('<tr>');
+			print('<td align="center" width="20%" class="table_neuron_page4">'.$matchingConn[$i]->getSourceId().'</td>');
+			print("<td align='center' width='30%' class='table_neuron_page4'>
 				<a href='neuron_page.php?id=".$matchingConn[$i]->getSourceId()."'>
 				<font class='font13'>".$matchingConn[$i]->getSourceName() . "</font>
 				</a></td>");
-			print ("<td align='center' width='40%' class='table_neuron_page4'> 
+			print('<td align="center" width="20%" class="table_neuron_page4">'.$matchingConn[$i]->getDestinationId().'</td>');
+			print ("<td align='center' width='30%' class='table_neuron_page4'> 
 				<a href='neuron_page.php?id=".$matchingConn[$i]->getDestinationId()."'>
 				<font class='font13'>".$matchingConn[$i]->getDestinationName() . "</font>
 				</a></td>
-				<td align='center' width='15%'></tr>");
+				</tr>");
 		}
 		print("</table>");
 	}

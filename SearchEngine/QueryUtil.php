@@ -85,13 +85,14 @@ Class QueryUtil{
     public function  markerMatchingNeuron($subject,$value){
         $row_type = array();
         $index=0;
-        $query_get_type_id = "SELECT DISTINCT eptr.Type_id,p.object FROM Property p,EvidencePropertyTypeRel eptr
+        $query_get_type_id = "SELECT DISTINCT eptr.Type_id FROM Property p,EvidencePropertyTypeRel eptr
                             WHERE eptr.Property_id=p.id 
                             AND p.subject like '$subject'
                             AND p.predicate like 'has expression'
-                            AND p.object like '$value'
+                            AND (eptr.conflict_note like '$value' OR eptr.conflict_note like 'confirmed $value')
                             ORDER BY eptr.Type_id";
-        #echo $query_get_type_id;
+        //echo $query_get_type_id;
+        //print("<br>");
         $rs_type = mysqli_query($GLOBALS['conn'],$query_get_type_id);
         if (!$rs_type) {
             echo("<p>Error in Listing Neuron Type For Marker </p>");

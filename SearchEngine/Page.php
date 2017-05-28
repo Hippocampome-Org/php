@@ -37,6 +37,7 @@ class Page
     }
     // d+:SSM
     public  function typeWithMarker($markerCond){
+        //print($markerCond);
         $matchingNeuron=array();
         $operator=$this->getOperator($markerCond);
         if($operator!="") {
@@ -47,6 +48,10 @@ class Page
                     $operator="positive";
                 else if(strtolower($property)==Keyword::MK_DIR_NEG)
                     $operator="negative";
+                else if(strtolower($property)==Keyword::MK_INF_POS )
+                    $operator="positive inference";
+                else if(strtolower($property)==Keyword::MK_INF_NEG)
+                    $operator="negative inference";
                 else
                     return $matchingNeuron;
                 $propertyValue=trim($values[1]);
