@@ -10,7 +10,7 @@ function property($n)
 	if ($n == 3)
 		$property = 'Connectivity';
 	if ($n == 4)
-		$property = 'Major Neurontransmitter';
+		$property = 'Major Neurotransmitter';
 	if ($n == 5)
 		$property = 'Firing Pattern';
 	if ($n == 6)

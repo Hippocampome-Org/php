@@ -118,7 +118,7 @@ function part($n, $property)
 			$part = 'Post-synaptic output';
 	}
 	
-	if ($property == 'Major Neurontransmitter')
+	if ($property == 'Major Neurotransmitter')
 	{
 		if($n == 0)
 			$part = 'GABA';

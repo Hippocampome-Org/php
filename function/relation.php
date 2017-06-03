@@ -60,7 +60,7 @@ function relation($n, $property, $part)
 
 	}
 	
-	if ($property == 'Major Neurontransmitter')
+	if ($property == 'Major Neurotransmitter')
 	{
 		if ($n == 0)
 			$relation = 'is expressed';

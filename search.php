@@ -107,7 +107,7 @@ $N = $_REQUEST['N'];
 		$relation3 = $temporary_search -> getRelation();
 		$value3 = $temporary_search -> getValue();	
 					
-		if (($property3 == 'Molecular markers') || ($property3 == 'Major Neurontransmitter'))
+		if (($property3 == 'Molecular markers') || ($property3 == 'Major Neurotransmitter'))
 		{
 			if ( ($property3 != NULL) && ($part3 != NULL) && ($relation3 != NULL )
 			&& ($property3 != '-') && ($part3 != '-') && ($relation3 != '-' ) )
@@ -699,7 +699,7 @@ include ("function/icon.html");
 				$n_value = 0;
 			if ($property1 == 'Electrophysiology')
 				$n_value = count($valuesOfEphys);
-			if ($property1 == 'Major Neurontransmitter')
+			if ($property1 == 'Major Neurotransmitter')
 				$n_value = 0;
 			if ($property1 == 'Connectivity') {
 				$type -> retrive_id();
