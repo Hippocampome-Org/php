@@ -729,8 +729,8 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 		// END Script for MARKERS +++++++++++++++++++++++++++++++++++++++		
 		
 		
-		// Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++++++
-		if ($property == 'Major Neurontransmitter')
+		// Script for Major Neurotransmitter +++++++++++++++++++++++++++++++++++++++++++
+		if ($property == 'Major Neurotransmitter')
 		{
 			
 			$subject = $part;
@@ -753,7 +753,7 @@ for ($i=0; $i<=$a; $i++)   // Count for each OR
 				$id_type_res = array_merge($id_type_res, $res_marker);
 		
 		}
-		// END Script for Major Neurontransmitter +++++++++++++++++++++++++++++++++++++++
+		// END Script for Major Neurotransmitter +++++++++++++++++++++++++++++++++++++++
 		
 		
 		// Script for ELECTROPHYSIOLOGY +++++++++++++++++++++++++++++++++++++++++++		

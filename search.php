@@ -338,7 +338,7 @@ include ("function/icon.html");
 				$n_part = 10;		
 			if ($property1 == 'Connectivity')
 				$n_part = 2;
-			if ($property1 == 'Major Neurontransmitter')	
+			if ($property1 == 'Major Neurotransmitter')	
 				$n_part = 2;
 			if ($property1 == 'Unique Id')	
 				$n_part = 0;								
@@ -503,7 +503,7 @@ include ("function/icon.html");
 				$n_relation = 5;	
 			if ($property1 == 'Connectivity')
 				$n_relation = 3;
-			if ($property1 == 'Major Neurontransmitter')
+			if ($property1 == 'Major Neurotransmitter')
 				$n_relation = 2;
 			if ($property1 == 'Firing Pattern')
 				$n_relation = 5;
