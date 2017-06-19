@@ -150,7 +150,7 @@
                 $preSynNeuronCond = implode(",", $preSynNeuron);
                 $postSynNeuronCond = implode(",", $postSynNeuron);
                 $index = 0;
-                $query_to_get_type = "SELECT DISTINCT c.Type1_id,c.Type2_id,t1.nickname as sourceName,t2.nickname as DestName 
+                $query_to_get_type = "SELECT DISTINCT c.Type1_id,c.Type2_id,t1.name as sourceName,t1.nickname as sourceNickname,t2.name as DestName, t2.nickname as DestNickname 
                             FROM Conndata c,Type t1,Type t2
                             WHERE c.Type1_id=t1.id AND c.Type2_id=t2.id
                             AND c.Type1_id in ($preSynNeuronCond)
@@ -174,8 +174,10 @@
                     $record = new NeuronConnection();
                     $record->setSourceId($rows['Type1_id']);
                     $record->setSourceName($rows['sourceName']);
+                    $record->setSourceNickname($rows['sourceNickname']);
                     $record->setDestinationId($rows['Type2_id']);
                     $record->setDestinationName($rows['DestName']);
+                    $record->setDestinationNickname($rows['DestNickname']);
                     $types_array[$index] = $record;
                     $index++;
                 }
