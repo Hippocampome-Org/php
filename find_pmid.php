@@ -329,9 +329,9 @@ else
 					{
 						$count++;
 						if($type_status=='SUPPLEMENTAL')
-							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname (Suppl)</a><br/>");
 						if($type_status=='Onhold')
-							print("$count)&nbsp;$type_nickname((On-hold))<br/>");
+							print("$count)&nbsp;$type_nickname (On-hold)<br/>");
 						else
 							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname</a><br/>");
 					}	
@@ -383,9 +383,9 @@ else
 					{
 						$count++;
 						if($type_status=='SUPPLEMENTAL')
-							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname(S)</a><br/>");
+							print("$count)&nbsp;<a href='neuron_page.php?id=$type_id' target='_blank' title='".$type_name."'>$type_nickname (Suppl)</a><br/>");
 						else if($type_status=='Onhold')
-							print("$count)&nbsp;$type_nickname((On-hold))<br/>");
+							print("$count)&nbsp;$type_nickname (On-hold)<br/>");
 						
 					}
 				}
