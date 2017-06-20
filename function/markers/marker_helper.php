@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 //$n_markers = 36;
 $n_markers = 97;
 
@@ -196,8 +199,12 @@ function check_unvetted1($id, $id_property, $evidencepropertyyperel) // $id = ty
 }
 
 
-function check_color($variable, $unvetted, $conflict_note)
+function check_color($variable, $unvetted, $conflict_note,$permission)
 {
+
+
+	
+	
 	// Check the conflict_note:
 	if ($conflict_note == "subtypes")
 	{
@@ -250,14 +257,24 @@ function check_color($variable, $unvetted, $conflict_note)
 		if ($unvetted == 1)
 			$link[0] = "<img src='images/marker/positive_confirmed_unvetted.png' border='0' width='15px' />";
 		else
-			$link[0] = "<img src='images/marker/positive_confirmed.png' border='0' width='15px' />";
+		{	
+			if($permission!=1)
+				$link[0] = "<img src='images/marker/positive_confirmed.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/positive.png' border='0' width='15px' />";
+		}
 	}
 	elseif ($conflict_note == "confirmed negative")
 	{
 		if ($unvetted == 1)
 			$link[0] = "<img src='images/marker/negative_confirmed_unvetted.png' border='0' width='15px' />";
 		else
-			$link[0] = "<img src='images/marker/negative_confirmed.png' border='0' width='15px' />";
+		{
+			if($permission!=1)	
+				$link[0] = "<img src='images/marker/negative_confirmed.png' border='0' width='15px' />";
+			else
+				$link[0] = "<img src='images/marker/negative.png' border='0' width='15px' />";
+		}
 	}
 	
 	

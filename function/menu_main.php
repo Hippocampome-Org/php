@@ -5,6 +5,12 @@
 <head>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
 <title></title>
+<?php
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
+
+?>
 </head>
 
 <body>
@@ -20,7 +26,13 @@
 			<li><a href="markers.php">Molecular markers</a></li>
 			<li><a href="ephys.php">Electrophysiology</a></li>
 			<li><a href="connectivity.php">Connectivity</a></li>
+			<?php
+				if ($permission != 1 ) {
+			?>
 			<li><a href="firing_patterns.php">Firing patterns</a></li>
+			<?php   
+				}
+			?> 
 	
 		</ul></li>
 	
@@ -30,7 +42,13 @@
 	
 			<li><a href="find_author.php?searching=1">Author</a></li>
 			<li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
+			<?php
+				if ($permission != 1 ) {
+			?>
 			<li><a href="find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
+			<?php   
+				}
+			?> 
 			<li><a href="find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
 			<li class="subfirst"><a href="search.php?searching=1">Neuron Type</a></li>
 			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
@@ -41,7 +59,6 @@
 		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
 	
 	</ul>
-	
 	</div>  
 
 </body>

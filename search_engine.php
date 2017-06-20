@@ -33,6 +33,10 @@ $morphology_properties_query =
       JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'";
 
+ //to hide Firing Pattern button at the bottom page
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
 
 // Function to create the temporary table for the search field: ++++++++++++++++++++++++++++++++++
 function create_result_table_result ($name_temporary_table)
@@ -1114,7 +1118,7 @@ include ("function/icon.html");
 				print ("View Result in a Matrix");
 			else
 				print ("View Results in a Matrix");	
-			
+			if($permission!=1){
 			print ("
 				</td>		
 				</tr>
@@ -1158,6 +1162,47 @@ include ("function/icon.html");
 
 				</tr>
 				</table> <br /><br />");
+		}
+
+
+		else if($permission==1){
+			print ("
+				</td>		
+				</tr>
+				<tr>
+				<td align='center' width='5%'></td>
+					<td align='center' width='20%'>
+					<form action='morphology_search.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='morpology_matrix' value='MORPHOLOGY' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1' />
+					</form>	
+					</td>			
+					<td align='center' width='20%'> 
+					<form action='markers_search.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='markers_matrix' value='MARKERS' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1' />
+					</form>				
+					</td>
+					<td align='center' width='20%'> 
+					<form action='ephys_search.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='ephys_matrix' value='EPHYS' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1'  />
+					</form>	
+					</td>
+					<td align='center' width='20%'> 
+					<form action='connectivity_search.php' method='post' style='display:inline' target='_blank'>
+						<input type='submit' name='connectivity_matrix' value='CONNECTIVITY' />
+						<input type='hidden' name='table_result' value=$name_temporary_table_result />
+						<input type='hidden' name='research' value='1'  />
+					</form>	
+									
+
+				</tr>
+				</table> <br /><br />");
+		}
 			}
 		?>
 		

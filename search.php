@@ -166,6 +166,11 @@ $n_property = 8;
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<?php
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
+?>
 <script type="text/javascript">
 // Javascript function *****************************************************************************************************
 function property(link, i0)
@@ -308,17 +313,38 @@ include ("function/icon.html");
 			// Property **************************************************************************************************
 			print ("<td width='22%' align='center' class='table_neuron_page1'>");
 			print ("<select name='property' size='1' cols='10' class='select1' onChange=\"property(this, $id1)\">");
-			
-			if ($property1)
-				print ("<OPTION VALUE='$property1'>$property1</OPTION>");
-								
+			 
+			//Permission blocks the page content related to Firing Pattern
+  
+			if($property1){
+				if ($permission==1) {
+					if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
+						print ("");
+					else
+						print("<OPTION VALUE='$property1'>$property1</OPTION>");
+				
+					}
+				else
+					print("<OPTION VALUE='$property1'>$property1</OPTION>");
+
+				}		
+
 			print ("<OPTION VALUE='-'>-</OPTION>");
 			for ($i=0; $i<$n_property; $i++)
 			{
 				$value_property = property($i); 
 				
-				if ($value_property != $property1)
-					print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+				if (($value_property != $property1)){
+					if ($permission==1 ){
+						if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
+							print ("");
+						else
+							print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+					
+						}
+					else
+						print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+					}
 			}
 			print ("</select>");
 			print ("</td>");

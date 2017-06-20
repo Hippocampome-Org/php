@@ -10,9 +10,16 @@ include ("permission_check.php");
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jquery-ui-1.10.2.custom/js/jquery.jqGrid.src-custom.js" type="text/javascript"></script>
+<?php
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
+?>
 <script>
+
 jQuery(document).ready(function()
 {
+
 	$.ajax(
 	{
 		type: 'GET',
@@ -703,7 +710,7 @@ function HideShowColumns ()
 			});
 		} 
 	});
-	
+   
 	$("#checkbox3").click(function() {	
 			ShowHideInference();
 	});
@@ -778,14 +785,23 @@ function ShowColumn ()
 include ("function/title.php");
 include ("function/menu_main.php");
 ?>	
+
 <div class="title_area_marker">   
 		<form id="myform">
       <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
         <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2" /><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
+      <?php
+        if($permission!=1)
+        	{
+        ?>  
         <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
+        <?php
+			}
+		?>
 		</form>
 </div>
+
 
 <div class="table_position">
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
@@ -809,8 +825,10 @@ include ("function/menu_main.php");
 				else
 					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");			
 			}
-			?>		
+			?>	
+			 	 	
 			<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
+			
 			<img src='images/positive_half.png' width="7px" border="0"/> <font class='font5'>Positive</font> &nbsp;
 			<img src='images/negative_half.png' width="7px" border="0"/> <font class='font5'>Negative</font> &nbsp;
 			<img src="images/positive-negative-subtypes.png" width="13px" border="0"/> <font class='font5'>Positive-Negative (subtypes)</font> &nbsp;
@@ -822,22 +840,37 @@ include ("function/menu_main.php");
 			<img src='images/positive-negative_inference.png' width="13px" border="0"/> <font class='font5'>Positive; negative inference</font> &nbsp;
 			<img src='images/positive_inference-negative.png' width="13px" border="0"/> <font class='font5'>Negative; positive inference</font> &nbsp;
 			-->
-			 
+			<?php
+             	if($permission!=1)
+        			{
+        	?>
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				
 			<img src='images/positive_inference_half.png' width="7px" border="0"/> <font class='font5'>Positive inference</font> &nbsp;
 			<img src='images/negative_inference_half.png' width="7px" border="0"/> <font class='font5'>Negative inference</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-subtypes.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (subtypes)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-species.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (species/protocol differences)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-unresolved.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (unresolved)</font> &nbsp;
+			<?php
+					}		
+        	?>
 			
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<img src="images/unknown.png" width="13px" border="0"/> <font class='font5'>No Data Found </font> &nbsp; &nbsp; 
 			<img src="images/searching.png" width="13px" border="0"/> <font class='font5'>Search Incomplete </font> &nbsp; &nbsp;
+			
+			<?php
+             	if($permission!=1)
+        			{
+        	?>
 			<img src="images/positive_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_half_confirm.png" width="7px" border="0"/> 
 				<img src="images/positive_inference_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_inference_half_confirm.png" width="7px" border="0"/> 
 				<font class='font5'>Additional confirmation by inference(s) </font> &nbsp; &nbsp;
+			<?php
+					}
+        	?>
 			
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
@@ -853,5 +886,7 @@ include ("function/menu_main.php");
 	</tr>
 </table>
 </div>
+
+
 </body>
 </html>

@@ -25,7 +25,11 @@ if(isset($_REQUEST['table_result']))
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid.css" />
-
+<?php
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
+?>
 <style>
 #nGrid_PV,#nGrid_vGluT3,#nGrid_VIP,#nGrid_RLN
 {
@@ -654,7 +658,14 @@ include ("function/menu_main.php");
       <font class="font1">Browse molecular markers matrix&nbsp;&nbsp;&nbsp;&nbsp;</font>       
 			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
         <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2"/><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
-		<input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
+		<?php
+        if($permission!=1)
+        	{
+        ?>  
+        <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
+        <?php
+			}
+		?>
 		</form>
 </div>
 <div class="table_position">
@@ -675,6 +686,7 @@ include ("function/menu_main.php");
 	<tr>
 		<td>
 			<font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
+			
 			<img src='images/positive_half.png' width="7px" border="0"/> <font class='font5'>Positive</font> &nbsp;
 			<img src='images/negative_half.png' width="7px" border="0"/> <font class='font5'>Negative</font> &nbsp;
 			<img src="images/positive-negative-subtypes.png" width="13px" border="0"/> <font class='font5'>Positive-Negative (subtypes)</font> &nbsp;
@@ -686,22 +698,37 @@ include ("function/menu_main.php");
 			<img src='images/positive-negative_inference.png' width="13px" border="0"/> <font class='font5'>Positive; negative inference</font> &nbsp;
 			<img src='images/positive_inference-negative.png' width="13px" border="0"/> <font class='font5'>Negative; positive inference</font> &nbsp;
 			-->
-			 
+			<?php
+             	if($permission!=1)
+        			{
+        	?>
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				
 			<img src='images/positive_inference_half.png' width="7px" border="0"/> <font class='font5'>Positive inference</font> &nbsp;
 			<img src='images/negative_inference_half.png' width="7px" border="0"/> <font class='font5'>Negative inference</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-subtypes.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (subtypes)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-species.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (species/protocol differences)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-unresolved.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (unresolved)</font> &nbsp;
+			<?
+					}
+        	?>
 			
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<img src="images/unknown.png" width="13px" border="0"/> <font class='font5'>No Data Found </font> &nbsp; &nbsp; 
 			<img src="images/searching.png" width="13px" border="0"/> <font class='font5'>Search Incomplete </font> &nbsp; &nbsp;
+			<?php
+             	if($permission!=1)
+        			{
+        	?>
 			<img src="images/positive_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_half_confirm.png" width="7px" border="0"/> 
 				<img src="images/positive_inference_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_inference_half_confirm.png" width="7px" border="0"/> 
 				<font class='font5'>Additional confirmation by inference(s) </font> &nbsp; &nbsp;
+			<?
+					}
+        	?>
+		
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
 			&nbsp; &nbsp; 

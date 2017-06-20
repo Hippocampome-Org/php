@@ -8,6 +8,9 @@
   require_once('class/class.temporary_result_neurons.php');
   include("function/markers/marker_helper.php");
   
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
 
 if(!isset($_GET['page'])) $page=1;
 else $page = $_GET['page'];
@@ -247,7 +250,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	    $conflict_note = $evidencepropertyyperel -> getConflict_note();	    
 	    $nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);
 	    
-		$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
+		$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note,$permission);
 		
 		$hippo[$name_markers[$f1]] = $img[0];
 		
