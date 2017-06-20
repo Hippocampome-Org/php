@@ -11,15 +11,18 @@ class NeuronConnection
     private $sourceId;
     private $destinationId;
     private $sourceName;
+    private $sourceNickname;
     private $destinationName;
 
 
-    public function create($sourceId, $destinationId, $sourceName, $destinationName)
+    public function create($sourceId, $destinationId, $sourceName, $sourceNickname, $destinationName, $destinationNickname)
     {
         $this->sourceId = $sourceId;
         $this->destinationId = $destinationId;
         $this->sourceName = $sourceName;
+        $this->sourceNickname = $sourceNickname;
         $this->destinationName = $destinationName;
+        $this->destinationNickname = $destinationNickname;
     }
 
 
@@ -59,6 +62,18 @@ class NeuronConnection
     }
 
 
+    public function getSourceNickname()
+    {
+        return $this->sourceNickname;
+    }
+
+
+    public function setSourceNickname($sourceNickname)
+    {
+        $this->sourceNickname = $sourceNickname;
+    }
+
+
     public function getDestinationName()
     {
         return $this->destinationName;
@@ -68,6 +83,18 @@ class NeuronConnection
     public function setDestinationName($destinationName)
     {
         $this->destinationName = $destinationName;
+    }
+
+
+    public function getDestinationNickname()
+    {
+        return $this->destinationNickname;
+    }
+
+
+    public function setDestinationNickname($destinationNickname)
+    {
+        $this->destinationNickname = $destinationNickname;
     }
 
 

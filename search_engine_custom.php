@@ -20,7 +20,11 @@ require_once("access_db.php");
 <script type="text/javascript">
 function hide(){
 		$('#conn tr > *:nth-child(1)').toggle();
-		$('#conn tr > *:nth-child(3)').toggle();
+		$('#conn tr > *:nth-child(4)').toggle();
+}
+function show(){
+		$('#conn tr > *:nth-child(2)').toggle();
+		$('#conn tr > *:nth-child(5)').toggle();
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -34,7 +38,7 @@ function hide(){
 	<link rel="stylesheet" type="text/css" href="DataTables-1.9.4/media/css/demo_table_jui.css"/>
 	<link rel="stylesheet" type="text/css" href="DataTables-1.9.4/examples/examples_support/themes/smoothness/jquery-ui-1.8.4.custom.css"/>
 </head>
-<body>
+<body onload="show()">
 	<?php 
 		include ("function/title.php");
 		include ("function/menu_main.php");
@@ -78,24 +82,35 @@ if($_REQUEST['search_engine']){
 	}
 	else{
 		print("<b>Total:".count($matchingConn)."</b><br>");
-		print('<input id="id_toggle" checked type="checkbox" name="Id" value="Id" onclick="hide()"> Neuron Id</input><br>');
-		print('<table id="conn" border="0" cellspacing="3" cellpadding="0" class="sortable" width="100%">');
+		print('<input id="id_toggle" checked type="checkbox" name="Id" value="Id" onclick="hide()"> Neuron Id</input>&nbsp;&nbsp;&nbsp;&nbsp;');
+		print('<input id="sourceName_toggle" type="checkbox" name="sourceName" value="sourceName" onclick="show()"> Full Names</input><br>');
+		print('<table id="conn" border="0" cellspacing="3" cellpadding="0" class="sortable" width="200%">');
 		print('<tr>');
-		print("<td align='center' width='20%' class='table_neuron_page3'> SID </td>");
-		print("<td align='center' width='30%' class='table_neuron_page3'> Presynaptic Cell Types </td>");
-		print ("<td align='center' width='20%' class='table_neuron_page3'>DID</td>");
-		print("<td align='center' width='30%' class='table_neuron_page3'> Postsynaptic Cell Types </td>");
+		print("<td align='center' width='10%' class='table_neuron_page3'> Presynaptic ID </td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Presynaptic Cell Type Full Names </td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Presynaptic Cell Type Nicknames </td>");
+		print("<td align='center' width='10%' class='table_neuron_page3'> Postsynaptic ID</td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Postsynaptic Cell Type Full Names </td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Postsynaptic Cell Types Nicknames </td>");
 		for($i=0;$i<count($matchingConn);$i++){
 			print('<tr>');
-			print('<td align="center" width="20%" class="table_neuron_page4">'.$matchingConn[$i]->getSourceId().'</td>');
-			print("<td align='center' width='30%' class='table_neuron_page4'>
+			print('<td align="center" width="10%" class="table_neuron_page4">'.$matchingConn[$i]->getSourceId().'</td>');
+			print("<td align='center' width='20%' class='table_neuron_page4'>
 				<a href='neuron_page.php?id=".$matchingConn[$i]->getSourceId()."'>
 				<font class='font13'>".$matchingConn[$i]->getSourceName() . "</font>
 				</a></td>");
-			print('<td align="center" width="20%" class="table_neuron_page4">'.$matchingConn[$i]->getDestinationId().'</td>');
-			print ("<td align='center' width='30%' class='table_neuron_page4'> 
+			print("<td align='center' width='20%' class='table_neuron_page4'>
+				<a href='neuron_page.php?id=".$matchingConn[$i]->getSourceId()."'>
+				<font class='font13'>".$matchingConn[$i]->getSourceNickname() . "</font>
+				</a></td>");
+			print('<td align="center" width="10%" class="table_neuron_page4">'.$matchingConn[$i]->getDestinationId().'</td>');
+			print ("<td align='center' width='20%' class='table_neuron_page4'> 
 				<a href='neuron_page.php?id=".$matchingConn[$i]->getDestinationId()."'>
 				<font class='font13'>".$matchingConn[$i]->getDestinationName() . "</font>
+				</a></td>");
+			print ("<td align='center' width='20%' class='table_neuron_page4'> 
+				<a href='neuron_page.php?id=".$matchingConn[$i]->getDestinationId()."'>
+				<font class='font13'>".$matchingConn[$i]->getDestinationNickname() . "</font>
 				</a></td>
 				</tr>");
 		}
