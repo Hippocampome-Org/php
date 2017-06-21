@@ -709,7 +709,7 @@ include ("function/menu_main.php");
 			<img src='images/positive_inference-negative_inference-subtypes.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (subtypes)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-species.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (species/protocol differences)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-unresolved.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (unresolved)</font> &nbsp;
-			<?
+			<?php
 					}
         	?>
 			
@@ -725,7 +725,7 @@ include ("function/menu_main.php");
 				<img src="images/positive_inference_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_inference_half_confirm.png" width="7px" border="0"/> 
 				<font class='font5'>Additional confirmation by inference(s) </font> &nbsp; &nbsp;
-			<?
+			<?php
 					}
         	?>
 		
