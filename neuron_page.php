@@ -1759,6 +1759,10 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		?>	
 
 		<br />
+		<?php
+			if($permission!=1)
+			{
+		?>
 		<!-- TABLE Firing pattern : -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -1848,7 +1852,9 @@ WHERE
 	?>
 
 </table>
-
+<?php
+	}
+?>
 		<br />
 		<!-- TABLE Potential postsynaptic connections: -->
 		<?php
