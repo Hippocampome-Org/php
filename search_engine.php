@@ -1052,8 +1052,10 @@ include ("function/icon.html");
 									<a href='neuron_page.php?id=$id_t[$i]'>
 										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>");
 					if(array_key_exists($id_t[$i], $inference_array)){
+						if($permission!=1){
 							print("<font class='font4'>(".$inference_array[$id_t[$i]].") </font>");
 							unset($inference_array[$id_t[$i]]);
+						}
 					}
 					print("	
 									</a>

@@ -71,6 +71,11 @@ if ($text_file_creation)
 	echo("window.open('$name_file','', 'menubar=yes, width=900, height=700' );");
 	print ("</script>");
 }
+
+ //to hide Firing Pattern button at the bottom page
+$query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($permission) = mysqli_fetch_row($rs);
 ?>
 
 
@@ -1147,7 +1152,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();			
 			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);			
 			
-			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note);
+			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note, $permission);
 			
 			$hippo[$this_remapped_name] = $img[0];
 		
@@ -1212,11 +1217,20 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						
 						$pos_conflict = $pos_array['conflict_key'][$j];
 						if ($pos_conflict == "confirmed positive")
-							$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+							{
+								if($permission!=1)
+									$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+							}
 						elseif ($pos_conflict == "positive inference")
-							$disp_marker_name = $disp_marker_name . ' (inference)';
+							{
+								if($permission!=1)
+									$disp_marker_name = $disp_marker_name . ' (inference)';
+							}
 						elseif ($pos_conflict == "confirmed positive inference")
-							$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+							{
+								if($permission!=1)
+									$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+							}
 						
 						
 						// if NULL, marker needs to be remapped; just print name (w/o URL)
@@ -1293,11 +1307,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						
 						$neg_conflict = $neg_array['conflict_key'][$j];
 						if ($neg_conflict == "confirmed negative")
-							$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+							if($permission!=1)
+								$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
 						elseif ($neg_conflict == "negative inference")
-							$disp_marker_name = $disp_marker_name . ' (inference)';
+							if($permission!=1)
+								$disp_marker_name = $disp_marker_name . ' (inference)';
 						elseif ($neg_conflict == "confirmed negative inference")
-							$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+							if($permission!=1)
+								$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
 
 							// if NULL, marker needs to be remapped; just print name (w/o URL)
 							if ($this_marker_URL_start == NULL) {
