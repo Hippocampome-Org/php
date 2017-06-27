@@ -181,7 +181,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.2 - Released: 11/6/2016
+      v1.3 - Released: 06/27/2017
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -217,10 +217,18 @@ jQuery(document).ready(function() {
       <i>Name-calling in the hippocampus (and beyond): coming to terms with neuron types and properties</i></a>.
       Brain Informatics (2016); doi:10.1007/s40708-016-0053-3.
       <br><br>
-      <b>*NEW*</b> The release of v1.2 includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
-      ability to Search by Connectivity.
-      Reference: <b>Rees et al., 2016</b> <i>Graph theoretic and motif analyses of the hippocampal neuron type potential connectome</i>.
-      eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
+      The release of v1.2 includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
+      ability to Search by Connectivity. Reference: <b>Rees et al., 2016</b>
+      <a href="http://www.eneuro.org/content/3/6/ENEURO.0205-16.2016">
+      <i>Graph theoretic and motif analyses of the hippocampal neuron type
+      potential connectome</i></a>. eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
+      <br><br>
+      <b>*NEW*</b> The release of v1.3 includes a downloadable list of Allen Brain Atlas predictions of marker
+      expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
+      Reference: <b>Hamilton et al., 2017</b>
+      <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
+      <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
+      Journal of Pharmaceutical and Biomedical Analysis (2017); doi: 10.1016/j.jpba.2017.03.062.
       </font>
 
       <br><br>
@@ -260,7 +268,7 @@ jQuery(document).ready(function() {
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015-2017 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
-          <br />Last Update: 24 Jun 2017 (<a href="Help_Release_Notes.php">v1.2 R 1F</a>)</font>
+          <br />Last Update: 27 Jun 2017 (<a href="Help_Release_Notes.php">v1.3</a>)</font>
           <br />
         </div>
     </td>   

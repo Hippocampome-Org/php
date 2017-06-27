@@ -50,6 +50,8 @@
 			<li><a href='data/High-conf-genes_CA2-SP.pdf'><font class="font7"> High-conf-genes_CA2-SP</font></a></li>
 			<li><a href='data/High-conf-genes_CA3-SP.pdf'><font class="font7"> High-conf-genes_CA3-SP</font></a></li>
 			<li><a href='data/High-conf-genes_DG-SG.pdf'><font class="font7"> High-conf-genes_DG-SG</font></a></li>
+			<li><a href='data/GeneParcelExpressionConfidence.xlsx'><font class="font7"> Allen Brain Atlas gene expression confidence by parcel</font></a></li>
+			<li><a href='http://hippocampome.org/genexan'><font class="font7"> Gene Expression Analyzer</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Electrophysiology:</font> &nbsp; &nbsp;
