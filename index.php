@@ -183,6 +183,8 @@ jQuery(document).ready(function() {
       <font class='font2' color='#000000'>
       v1.3 - Released: 06/30/2017
       <br>
+      10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
+      <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
       of the hippocampus of normal adult, or adolescent, rodents at
@@ -206,29 +208,29 @@ jQuery(document).ready(function() {
       or email us at
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
-      Reference: <b>Wheeler et al., 2015</b>.
+      The release of v1.0 on 09/23/2015 includes 3,697 PoK and 13,888 PoE. Reference: <b>Wheeler et al., 2015</b>.
       <a href="http://elifesciences.org/content/4/e09960">
       <i>Hippocampome.org: A knowledge base of neuron types in the rodent hippocampus</i></a>.
       eLife 2015;4:e09960.
       <br><br>
-      The release of v1.1 includes the Neuron Term Portal, which allows one to view definitions for 
+      The release of v1.1 on 10/17/2016 includes 3,697 PoK, 13,888 PoE, and the Neuron Term Portal, which allows one to view definitions for 
       terms and phrases used on this website. Reference: <b>Hamilton et al., 2016</b>
       <a href="http://link.springer.com/article/10.1007/s40708-016-0053-3">
       <i>Name-calling in the hippocampus (and beyond): coming to terms with neuron types and properties</i></a>.
       Brain Informatics (2016); doi:10.1007/s40708-016-0053-3.
       <br><br>
-      The release of v1.2 includes a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
+      The release of v1.2 on 11/06/2016 includes 3,936 PoK, 14,399 PoE, and a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
       ability to Search by Connectivity. Reference: <b>Rees et al., 2016</b>
       <a href="http://www.eneuro.org/content/3/6/ENEURO.0205-16.2016">
       <i>Graph theoretic and motif analyses of the hippocampal neuron type
       potential connectome</i></a>. eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
       <br><br>
-      <b>*NEW*</b> The release of v1.3 includes a downloadable list of Allen Brain Atlas (ABA) predictions of marker
+      <b>*NEW*</b> The release of v1.3 on 06/30/2017 includes 10,822 PoK, 21,285 PoE, and a downloadable list of Allen Brain Atlas (ABA) predictions of marker
       expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
       Reference: <b>Hamilton et al., 2017</b>
       <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
       <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
-      Journal of Pharmaceutical and Biomedical Analysis (2017); doi: 10.1016/j.jpba.2017.03.062.
+      Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
       </font>
 
       <br><br>
