@@ -2205,7 +2205,7 @@ function show_only_authors(link, start1, stop1)
 									//print ("<tr><td width='15.5%' rowspan='3' align='right' valign='top' style='display:table-cell'> </td>");	
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
 									print ("<tr>");
-									print ("<td width='15%' rowspan='7' align='right' valign='top'></td>");
+									print ("<td width='15%' rowspan='11' align='right' valign='top'></td>");
 									print ("<td width='15%' align='left'> </td></tr>");									   
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
 									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron_fp);
@@ -2289,12 +2289,12 @@ function show_only_authors(link, start1, stop1)
 												$result_digits = mysqli_query($GLOBALS['conn'],$query_for_digits);
 												$result_name = mysqli_query($GLOBALS['conn'],$query_for_name);
 												
-												$row_view_flag=mysqli_fetch_array($result_view_flag, MYSQL_BOTH);
-												$row_values=mysqli_fetch_array($result_values, MYSQL_BOTH);
-												$row_description=mysqli_fetch_array($result_description, MYSQL_BOTH);
-												$row_units=mysqli_fetch_array($result_units, MYSQL_BOTH);
-												$row_digits=mysqli_fetch_array($result_digits, MYSQL_BOTH);
-												$row_name=mysqli_fetch_array($result_name, MYSQL_BOTH);
+												$row_view_flag=mysqli_fetch_array($result_view_flag, MYSQLI_BOTH);
+												$row_values=mysqli_fetch_array($result_values, MYSQLI_BOTH);
+												$row_description=mysqli_fetch_array($result_description, MYSQLI_BOTH);
+												$row_units=mysqli_fetch_array($result_units, MYSQLI_BOTH);
+												$row_digits=mysqli_fetch_array($result_digits, MYSQLI_BOTH);
+												$row_name=mysqli_fetch_array($result_name, MYSQLI_BOTH);
 												
 												for($index=3;$index<count($row_name);$index++){
 													if($row_view_flag[$index] and $row_view_flag[$index]!='definition' ){
@@ -2327,6 +2327,60 @@ function show_only_authors(link, start1, stop1)
 												print ("<img src='images/ExportISI.png' border='0' width='50%'>");
 												print ("</br>ISI Data </a>");
 										}
+
+										// Material methods
+										//  "Show all animal data", "Show all preparation data", "Show all ACSF data", "Show all recording method data
+										// array(7,12,15,35)
+										if ($istim||$tstim) {
+											// get data for material method
+											$query_for_material="SELECT * FROM MaterialMethod WHERE istim_pa = $istim AND tstim_ms= $tstim AND overall_fp = '$parameter' AND unique_id = $id_neuron";
+											#print($query_for_material);
+											$query_for_description="SELECT * FROM MaterialMethod WHERE id=1";
+											
+											$result_material = mysqli_query($GLOBALS['conn'],$query_for_material);
+											$result_description = mysqli_query($GLOBALS['conn'],$query_for_description);
+											
+											$row_material=mysqli_fetch_array($result_material, MYSQLI_BOTH);
+											$row_description=mysqli_fetch_array($result_description, MYSQLI_BOTH);
+
+											$material_method = array("Animal Data"=>8, "Preparation Data"=>13, "ACSF Data"=>16, "Recording Method Data"=>34);
+											$material_method_index = array(8, 13, 16, 34, 62);
+											$start = 0;
+											foreach ($material_method as $key => $value) {
+
+												print ("</td></tr>
+													<tr>
+													<td width='70%' class='table_neuron_page2' align='left'>$key:");
+												print ("<span style='float:right;cursor: pointer;text-align:right' align='right' id='flip_".$start."_$fp_id'> View All $key</span></br>");
+												print("<div class='panel' id='panel_".$start."_$fp_id'> ");
+												print("<table width='100%' border='1' cellspacing='2' cellpadding='3'>");
+												print("<tr><th width='80%'>Name</th><th width='20%'>Value</th></tr>");
+												// retrive parameters
+												
+												for($index = $value; $index < $material_method_index[$start+1]; $index++){
+													if($row_material[$index]){
+														$value_of_parameter=$row_material[$index];
+														if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+															print("<tr>");
+															print("<td width='80%' align='left'>");
+															print($row_description[$index]);
+															print("</td>");
+															print("<td width='20%' align='left'>");
+															if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+																print($value_of_parameter);
+															}
+															print("</td>");
+															print("</tr>");
+														}
+													}
+
+												}
+												print("</table>");
+												print("<div></td><td width='15%' class='table_neuron_page2' align='center'> ");
+												$start = $start + 1;
+											}
+										}
+
 										// fp_original_name Author original FP description
 
 										if ($fp_original_name) {
@@ -2334,7 +2388,7 @@ function show_only_authors(link, start1, stop1)
 												<tr>
 												<td width='70%' class='table_neuron_page2' align='left'>Author original FP description: ");
 												print($fp_original_name);
-												print("<td width='15%' align='center'>");
+												print("</td><td width='15%' align='center'>");
 										}
 										// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
 										if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
