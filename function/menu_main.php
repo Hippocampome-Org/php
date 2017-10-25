@@ -56,7 +56,15 @@ list($permission) = mysqli_fetch_row($rs);
 	
 		</ul></li>
 	
-		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
+		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a>
+		
+		<ul>
+		
+		    <li><a href="Help_Quickstart.php">Quickstart</a></li>
+		    <li><a href="Help_FAQ.php">FAQ</a></li>
+		    <li><a href="user_feedback_form_entry.php">User Feedback Form</a></li>
+		    		
+		</ul></li>
 	
 	</ul>
 	</div>  
