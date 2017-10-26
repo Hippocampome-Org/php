@@ -62,7 +62,9 @@ list($permission) = mysqli_fetch_row($rs);
 		
 		    <li><a href="Help_Quickstart.php">Quickstart</a></li>
 		    <li><a href="Help_FAQ.php">FAQ</a></li>
+		    <li><a href="Help_Known_Bug_List.php">Known Bugs and Issues</a></li>
 		    <li><a href="user_feedback_form_entry.php">User Feedback Form</a></li>
+		    <li><a href="Help_Other_Useful_Links.php">Other Useful Links</a></li>
 		    		
 		</ul></li>
 	
