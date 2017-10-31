@@ -110,14 +110,6 @@ separate tabs, and you click on the first tab, A:DG:SG, when you go to expand
 any of the citations, the contents of the tab immediately switch over to the
 second tab’s contents, D:DG:H.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
-"Arial","sans-serif"'>Issue #253 – The current version of <span class=SpellE>jqGrid</span>
-used by Hippocampome.org is 4.6 (as of 27-Nov-2015). The latest available
-version of <span class=SpellE>jqGrid</span> (as of 19-Oct-2015, per
-http://www.trirand.com/blog) is 5.0.1. Incorporating the latest version of <span
-class=SpellE>jqGrid</span> will likely fix the lag in rendering the full marker
-matrix problem.<o:p></o:p></span></p>
-
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span
 style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue
 #352 – The <span class=GramE>Include:</span>() function does not work for
