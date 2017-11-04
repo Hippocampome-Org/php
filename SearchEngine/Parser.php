@@ -24,7 +24,40 @@
             $this->searchQuery = $searchQuery;
         }
 
-
+        public function getIncludeNeuron($queryArray){
+            // condition for include neuron
+            $incNeuron=array();
+            for($index=0;$index<count($queryArray);$index++){
+                if(!is_array($queryArray[$index])) {
+                    if (stripos($queryArray[$index], Keyword::INC) === 0) {
+                        $result=$this->includeNeuron($queryArray,$index);
+                        $index=$result[0];
+                        $incNeuron=$result[1];
+                        // add include neuron to earlier result
+                        return $incNeuron;
+                        //print("Neuron included:");
+                        //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
+                    }
+                }
+            }
+        }
+        public function getExcludeNeuron($queryArray){
+            // condition for exclude neuron
+            $excNeuron=array();
+            for($index=0;$index<count($queryArray);$index++){
+                if(!is_array($queryArray[$index])) {
+                    if (stripos($queryArray[$index], Keyword::EXC) === 0) {
+                        $result=$this->excludeNeuron($queryArray,$index);
+                        $index=$result[0];
+                        $excNeuron=$result[1];
+                        // remove exclude neuron from earlier result
+                        return $excNeuron;
+                        //print("Neuron excluded:");
+                        //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
+                    }
+                }
+            } 
+        }
         public function parseSynapticNeuron($queryArray,$ind){
             $mathcingNeruonArray=array();
             //print("<pre>".print_r($queryArray,true)."</pre>");
@@ -79,29 +112,7 @@
                         //print("Neuron NTR:");
                         //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
                     }
-                    // condition for include neuron
-                    else if (stripos($queryArray[$index], Keyword::INC) === 0) {
-                        $result=$this->includeNeuron($queryArray,$index);
-                        $index=$result[0];
-                        $incNeuron=$result[1];
-                        // add include neuron to earlier result
-                        if(count($incNeuron)>0)
-                            $mathcingNeruonArray = array_merge($mathcingNeruonArray, $incNeuron);
-                        //print("Neuron included:");
-                        //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
-                    }
-                    // condition for exclude neuron
-                    else if (stripos($queryArray[$index], Keyword::EXC) === 0) {
-                        $result=$this->excludeNeuron($queryArray,$index);
-                        $index=$result[0];
-                        $incNeuron=$result[1];
-                        // remove exclude neuron from earlier result
-                        if(count($incNeuron)>0)
-                            $mathcingNeruonArray = array_diff($mathcingNeruonArray, $incNeuron);
-                        //print("Neuron excluded:");
-                        //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
-
-                    } else if (stripos($queryArray[$index], Operator::ANDD) !== false) {
+                    else if (stripos($queryArray[$index], Operator::ANDD) !== false) {
                         $result=$this->parseSynapticNeuron($queryArray,$index+1);
                         $index=$result[0];
                         $incNeuron=$result[1];
@@ -212,7 +223,24 @@
                         $resultPre=$this->parseSynapticNeuron($parsedQueryPreSynap,0);
                         $resultPost=$this->parseSynapticNeuron($parsedQueryPostSynap,0);
                         $preSynNeuron=$resultPre[1];
+                        // include, exclude these neuron
+                        $incNeuron=$this->getIncludeNeuron($parsedQueryPreSynap);
+                        //print("Include pre syn<pre>".print_r($incNeuron,true)."</pre>");
+                        if($incNeuron && (count($incNeuron))>0)
+                            $preSynNeuron=array_merge($preSynNeuron,$incNeuron);
+                        $excNeuron=$this->getExcludeNeuron($parsedQueryPreSynap);
+                        if($excNeuron && (count($excNeuron))>0)
+                            $preSynNeuron=array_diff($preSynNeuron,$excNeuron);
+                        //print("pre syn<pre>".print_r($preSynNeuron,true)."</pre>");
                         $postSynNeuron=$resultPost[1];
+                        // include, exclude these neuron
+                        $incNeuron=$this->getIncludeNeuron($parsedQueryPostSynap);
+                        if($incNeuron && (count($incNeuron))>0)
+                            $postSynNeuron=array_merge($postSynNeuron,$incNeuron);
+                        $excNeuron=$this->getExcludeNeuron($parsedQueryPostSynap);
+                        if($excNeuron && (count($excNeuron))>0)
+                            $postSynNeuron=array_diff($postSynNeuron,$excNeuron);
+                        //print("post syn<pre>".print_r($postSynNeuron,true)."</pre>");
                         $neuronConnection=$this->findConnection($preSynNeuron,$postSynNeuron);
                         //$test->findConnection(array(1000),array(1002,1009))
                         return $neuronConnection;
