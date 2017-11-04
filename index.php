@@ -272,7 +272,7 @@ jQuery(document).ready(function() {
           <br /><p><?php echo $info; ?>
           <br>
           10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
-          <br />Last Update: 3 Sep 2017 (<a href="Help_Release_Notes.php">v1.3 R 1B</a>)</font>
+          <br />Last Update: 4 Nov 2017 (<a href="Help_Release_Notes.php">v1.3 R 1C</a>)</font>
           <br />
         </div>
     </td>   
