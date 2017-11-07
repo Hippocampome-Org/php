@@ -12,7 +12,6 @@
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>	
-
 <BR><BR><BR><BR>
 
 <div class=WordSection1>
@@ -28,7 +27,7 @@ addressed in v1.4:<o:p></o:p></span></p>
 <p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
 text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Firing
 Patterns will be added to the knowledge base<o:p></o:p></span></p>
@@ -40,7 +39,7 @@ addressed in v1.5:<o:p></o:p></span></p>
 <p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
 text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Biomolecular
 marker inference expressions will be added to the knowledge base<o:p></o:p></span></p>
@@ -52,7 +51,7 @@ addressed in v1.6:<o:p></o:p></span></p>
 <p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
 text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Izhikevich
 modeling parameters will be added to the knowledge base<o:p></o:p></span></p>
@@ -64,7 +63,7 @@ addressed in v2.0:<o:p></o:p></span></p>
 <p class=MsoListParagraphCxSpFirst style='margin-left:1.25in;mso-add-space:
 auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Splitting
 of CA1 Pyramidal cells into superficial and deep subtypes<o:p></o:p></span></p>
@@ -72,7 +71,7 @@ of CA1 Pyramidal cells into superficial and deep subtypes<o:p></o:p></span></p>
 <p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
 auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Adult-born
 granule cells to be added<o:p></o:p></span></p>
@@ -80,7 +79,7 @@ granule cells to be added<o:p></o:p></span></p>
 <p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
 auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Extension
 of CA2 Pyramidal neuron axons into MEC LII<o:p></o:p></span></p>
@@ -88,7 +87,7 @@ of CA2 Pyramidal neuron axons into MEC LII<o:p></o:p></span></p>
 <p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
 auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Axonal
 connections from LIV-LVI neurons to extend into DG:SG_H and form possible
@@ -97,7 +96,7 @@ contacts with Granule cells and interneurons<o:p></o:p></span></p>
 <p class=MsoListParagraphCxSpLast style='margin-left:1.25in;mso-add-space:auto;
 text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
 style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>�<span
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
 style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Resolution
 of known connections and known non-connections between mossy fibers and CA2
@@ -899,7 +898,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Esp�sito</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Espósito</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> MS, <span
   class=SpellE>Piatti</span> VC, <span class=SpellE>Laplagne</span> DA,
@@ -1133,7 +1132,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> K, Bender R,
   Geiger JR, <span class=SpellE>Monyer</span> H, Jonas P, Frotscher M, <span
-  class=SpellE>L�bke</span> J<o:p></o:p></span></p>
+  class=SpellE>Lübke</span> J<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
@@ -1254,7 +1253,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Hosp</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> JA, <span
-  class=SpellE>Str�ber</span> M, <span class=SpellE>Yanagawa</span> Y, Obata K,
+  class=SpellE>Strüber</span> M, <span class=SpellE>Yanagawa</span> Y, Obata K,
   Vida I, Jonas P, <span class=SpellE>Bartos</span> M<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
@@ -1475,7 +1474,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Mart�nez</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Martínez</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> A, Ruiz M, Soriano
   E<o:p></o:p></span></p>
@@ -1801,7 +1800,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Katona
-  I, <span class=SpellE>Acs�dy</span> L, Freund TF<o:p></o:p></span></p>
+  I, <span class=SpellE>Acsády</span> L, Freund TF<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2148,13 +2147,13 @@ will be added under v2.0:<o:p></o:p></span></p>
   padding:0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>H�jos</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Hájos</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> N, <span
-  class=SpellE>Karl�cai</span> MR, <span class=SpellE>N�meth</span> B, <span
+  class=SpellE>Karlócai</span> MR, <span class=SpellE>Németh</span> B, <span
   class=SpellE>Ulbert</span> I, <span class=SpellE>Monyer</span> H, <span
-  class=SpellE>Szab�</span> G, <span class=SpellE>Erd�lyi</span> F, Freund TF, <span
-  class=SpellE>Guly�s</span> AI<o:p></o:p></span></p>
+  class=SpellE>Szabó</span> G, <span class=SpellE>Erdélyi</span> F, Freund TF, <span
+  class=SpellE>Gulyás</span> AI<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2272,7 +2271,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>T�th</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Tóth</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> K, <span
   class=SpellE>McBain</span> CJ<o:p></o:p></span></p>
@@ -2390,7 +2389,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Spruston
-  N, <span class=SpellE>L�bke</span> J, Frotscher M<o:p></o:p></span></p>
+  N, <span class=SpellE>Lübke</span> J, Frotscher M<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2507,13 +2506,13 @@ will be added under v2.0:<o:p></o:p></span></p>
   padding:0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>H�jos</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Hájos</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> N,&nbsp;<span
-  class=SpellE>Karl�cai</span> MR,&nbsp;<span class=SpellE>N�meth</span>
+  class=SpellE>Karlócai</span> MR,&nbsp;<span class=SpellE>Németh</span>
   B,&nbsp;<span class=SpellE>Ulbert</span> I,&nbsp;<span class=SpellE>Monyer</span>
-  H,&nbsp;<span class=SpellE>Szab�</span> G,&nbsp;<span class=SpellE>Erd�lyi</span>
-  F,&nbsp;Freund TF,&nbsp;<span class=SpellE>Guly�s</span> AI<o:p></o:p></span></p>
+  H,&nbsp;<span class=SpellE>Szabó</span> G,&nbsp;<span class=SpellE>Erdélyi</span>
+  F,&nbsp;Freund TF,&nbsp;<span class=SpellE>Gulyás</span> AI<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2736,7 +2735,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> L, <span
   class=SpellE>Amrein</span> I, <span class=SpellE>Knuesel</span> I, <span
-  class=SpellE>S�rensen</span> JC, <span class=SpellE>Wolfer</span> DP<o:p></o:p></span></p>
+  class=SpellE>Sørensen</span> JC, <span class=SpellE>Wolfer</span> DP<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -2839,7 +2838,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Mizuseki</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> K, <span
-  class=SpellE>Diba</span> K, <span class=SpellE>Pastalkova</span> E, Buzs�ki G<o:p></o:p></span></p>
+  class=SpellE>Diba</span> K, <span class=SpellE>Pastalkova</span> E, Buzsáki G<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -3485,7 +3484,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Parra
-  P, <span class=SpellE>Guly�s</span> AI, Miles R.<o:p></o:p></span></p>
+  P, <span class=SpellE>Gulyás</span> AI, Miles R.<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3625,7 +3624,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>20345910<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>20345910<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -3702,7 +3701,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Parra
-  P, <span class=SpellE>Guly�s</span> AI, Miles R.<o:p></o:p></span></p>
+  P, <span class=SpellE>Gulyás</span> AI, Miles R.<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3808,10 +3807,10 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Le�o</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Leão</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> RN,&nbsp;<span
-  class=SpellE>Mikulovic</span> S,&nbsp;<span class=SpellE>Le�o</span>
+  class=SpellE>Mikulovic</span> S,&nbsp;<span class=SpellE>Leão</span>
   KE,&nbsp;<span class=SpellE>Munguba</span> H,&nbsp;<span class=SpellE>Gezelius</span>
   H,&nbsp;<span class=SpellE>Enjin</span> A,&nbsp;Patra K,&nbsp;Eriksson
   A,&nbsp;Loew LM,&nbsp;Tort AB,&nbsp;<span class=SpellE>Kullander</span>&nbsp;K<o:p></o:p></span></p>
@@ -3916,7 +3915,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Parra
-  P, <span class=SpellE>Guly�s</span> AI, Miles R.<o:p></o:p></span></p>
+  P, <span class=SpellE>Gulyás</span> AI, Miles R.<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4338,7 +4337,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Tyan
   L, <span class=SpellE>Chamberland</span> S, <span class=SpellE>Magnin</span>
-  E, <span class=SpellE>Camir�</span> O, <span class=SpellE>Francavilla</span>
+  E, <span class=SpellE>Camiré</span> O, <span class=SpellE>Francavilla</span>
   R, David LS, <span class=SpellE>Deisseroth</span> K, Topolnik L<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
@@ -4449,7 +4448,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Tyan
   L, <span class=SpellE>Chamberland</span> S, <span class=SpellE>Magnin</span>
-  E, <span class=SpellE>Camir�</span> O, <span class=SpellE>Francavilla</span>
+  E, <span class=SpellE>Camiré</span> O, <span class=SpellE>Francavilla</span>
   R, David LS, <span class=SpellE>Deisseroth</span> K, Topolnik L<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
@@ -4688,8 +4687,8 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Opioid
-  receptor subtype expression defines morphologically distinct classes of hippocampal
-  interneurons<o:p></o:p></span></p>
+  receptor subtype expression defines morphologically distinct classes of
+  hippocampal interneurons<o:p></o:p></span></p>
   </td>
   <td width=171 valign=bottom style='width:102.45pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -5117,7 +5116,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Guly�s</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Gulyás</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> AI, Freund TF<o:p></o:p></span></p>
   </td>
@@ -6386,7 +6385,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Parra
-  P, <span class=SpellE>Guly�s</span> AI, Miles R.<o:p></o:p></span></p>
+  P, <span class=SpellE>Gulyás</span> AI, Miles R.<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
@@ -7005,7 +7004,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Camir�</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Camiré</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> O, Topolnik L<o:p></o:p></span></p>
   </td>
@@ -7214,7 +7213,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Zemankovics</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> R, <span
-  class=SpellE>Veres</span> JM, Oren I, <span class=SpellE>H�jos</span> N<o:p></o:p></span></p>
+  class=SpellE>Veres</span> JM, Oren I, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -7439,7 +7438,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Lee
-  SH, <span class=SpellE>F�ldy</span> C, <span class=SpellE>Soltesz</span> I<o:p></o:p></span></p>
+  SH, <span class=SpellE>Földy</span> C, <span class=SpellE>Soltesz</span> I<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
@@ -7476,7 +7475,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>20534847<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>20534847<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;
@@ -7548,7 +7547,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Lee
-  SY, <span class=SpellE>F�ldy</span> C, <span class=SpellE>Szabadics</span> J,
+  SY, <span class=SpellE>Földy</span> C, <span class=SpellE>Szabadics</span> J,
   <span class=SpellE>Soltesz</span> I<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
@@ -7582,7 +7581,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>21795548<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>21795548<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -7689,7 +7688,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>21115639<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>21115639<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -7796,7 +7795,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>22119146<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>22119146<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -7901,7 +7900,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>22250212<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>22250212<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -8018,7 +8017,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>22199168<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>22199168<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -8096,10 +8095,10 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Mart�nez</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Martínez</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> A, <span
-  class=SpellE>L�bke</span> J, Del R�o JA, Soriano E, Frotscher M<o:p></o:p></span></p>
+  class=SpellE>Lübke</span> J, Del Río JA, Soriano E, Frotscher M<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:
@@ -8136,7 +8135,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>8946282<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>8946282<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-top-alt:solid windowtext .5pt;
@@ -8206,10 +8205,10 @@ will be added under v2.0:<o:p></o:p></span></p>
   0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Mart�nez</span></span><span
+  mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Martínez</span></span><span
   style='font-size:16.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman";mso-bidi-font-family:"Times New Roman"'> A, <span
-  class=SpellE>L�bke</span> J, Del R�o JA, Soriano E, Frotscher M<o:p></o:p></span></p>
+  class=SpellE>Lübke</span> J, Del Río JA, Soriano E, Frotscher M<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -8242,7 +8241,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'><span
-  style='mso-spacerun:yes'>��� </span>8946282<o:p></o:p></span></p>
+  style='mso-spacerun:yes'>    </span>8946282<o:p></o:p></span></p>
   </td>
   <td width=107 nowrap valign=bottom style='width:63.9pt;border:none;
   border-right:solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;
@@ -8321,7 +8320,7 @@ will be added under v2.0:<o:p></o:p></span></p>
   normal'><span style='font-size:16.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman"'>Tyan
   L, <span class=SpellE>Chamberland</span> S, <span class=SpellE>Magnin</span>
-  E, <span class=SpellE>Camir�</span> O, <span class=SpellE>Francavilla</span>
+  E, <span class=SpellE>Camiré</span> O, <span class=SpellE>Francavilla</span>
   R, David LS, <span class=SpellE>Deisseroth</span> K, Topolnik L<o:p></o:p></span></p>
   </td>
   <td width=436 valign=bottom style='width:261.6pt;border-top:none;border-left:
