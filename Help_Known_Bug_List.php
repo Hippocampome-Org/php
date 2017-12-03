@@ -104,28 +104,14 @@ morphology, molecular biomarkers, electrophysiological properties, and known
 and potential connectivity with other neuronal types.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
-"Arial","sans-serif"'>Issue #85 – From a Neuron page, if you right click on two
+"Arial","sans-serif"'>Issue #85: From a Neuron page, if you right click on two
 links, such as first A:DG:SG and second D:DG:H, in order to open them in
 separate tabs, and you click on the first tab, A:DG:SG, when you go to expand
 any of the citations, the contents of the tab immediately switch over to the
-second tab’s contents, D:DG:H.<o:p></o:p></span></p>
-
-<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt'><span
-style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Issue
-#352 – The <span class=GramE>Include:</span>() function does not work for
-presynaptic connections. For example, in the following search query it does not
-work:<o:p></o:p></span></p>
+second tab's contents, D:DG:H.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
-"Arial","sans-serif"'>Connection:(Presynaptic:(Morphology:((Dendrites:DG:1111
-AND Axons:DG:0???) AND (<span class=SpellE>Soma<span class=GramE>:DG</span></span>:??1?
-OR <span class=SpellE>Soma<span class=GramE>:DG</span></span>:???1)) AND <span
-class=SpellE>electrophysiology:Max_Fr</span>:&gt;50 AND <span class=SpellE>Neurotransmitter:Inhibitory</span>,
-Include:(1009)), Postsynaptic:(<span class=SpellE>Morphology:Soma:DG</span>:??1?
-AND <span class=SpellE>Neurotransmitter<span class=GramE>:Excitatory</span></span>))<o:p></o:p></span></p>
-
-<p class=MsoNormal><span style='font-size:14.0pt;line-height:115%;font-family:
-"Arial","sans-serif"'>Issue #357 – The potential connection between DG (e<span
+"Arial","sans-serif"'>Issue #357: The potential connection between DG (e<span
 class=GramE>)2201p</span> Granule and CA3 (i)03330p Mossy-Fiber Associated is
 missing from the database.<o:p></o:p></span></p>
 
