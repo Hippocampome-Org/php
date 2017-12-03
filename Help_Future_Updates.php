@@ -24,83 +24,73 @@ Updates<o:p></o:p></span></b></p>
 line-height:115%;font-family:"Arial","sans-serif"'>The following issues will be
 addressed in v1.4:<o:p></o:p></span></p>
 
-<p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
-text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Firing
-Patterns will be added to the knowledge base<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Firing Patterns will be added to the knowledge base
+</span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:20.0pt;
 line-height:115%;font-family:"Arial","sans-serif"'>The following issues will be
 addressed in v1.5:<o:p></o:p></span></p>
 
-<p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
-text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Biomolecular
-marker inference expressions will be added to the knowledge base<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Biomolecular marker inference expressions will be added to the knowledge base
+</span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:20.0pt;
 line-height:115%;font-family:"Arial","sans-serif"'>The following issues will be
 addressed in v1.6:<o:p></o:p></span></p>
 
-<p class=MsoListParagraph style='margin-left:1.25in;mso-add-space:auto;
-text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Izhikevich
-modeling parameters will be added to the knowledge base<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Izhikevich modeling parameters will be added to the knowledge base
+</span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:20.0pt;
 line-height:115%;font-family:"Arial","sans-serif"'>The following issues will be
 addressed in v2.0:<o:p></o:p></span></p>
 
-<p class=MsoListParagraphCxSpFirst style='margin-left:1.25in;mso-add-space:
-auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Splitting
-of CA1 Pyramidal cells into superficial and deep subtypes<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Splitting of CA1 Pyramidal cells into superficial and deep subtypes
+</span></p>
 
-<p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
-auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Adult-born
-granule cells to be added<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Adult-born granule cells to be added
+</span></p>
 
-<p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
-auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Extension
-of CA2 Pyramidal neuron axons into MEC LII<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Extension of CA2 Pyramidal neuron axons into MEC LII
+</span></p>
 
-<p class=MsoListParagraphCxSpMiddle style='margin-left:1.25in;mso-add-space:
-auto;text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Axonal
-connections from LIV-LVI neurons to extend into DG:SG_H and form possible
-contacts with Granule cells and interneurons<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Axonal connections from LIV-LVI neurons to extend into DG:SG_H and form possible contacts with Granule cells and interneurons
+</span></p>
 
-<p class=MsoListParagraphCxSpLast style='margin-left:1.25in;mso-add-space:auto;
-text-indent:-.25in;mso-list:l1 level1 lfo1'><![if !supportLists]><span
-style='font-size:20.0pt;line-height:115%;font-family:Symbol;mso-fareast-font-family:
-Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
-style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Resolution
-of known connections and known non-connections between mossy fibers and CA2
-Pyramidal cells<o:p></o:p></span></p>
+<p class=MsoListParagraphCxSpFirst style='text-indent:1.25in'><span
+style='font-size:20.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:20.0pt;line-height:115%;font-family:"Arial","sans-serif"'>
+Resolution of known connections and known non-connections between mossy fibers and CA2 Pyramidal cells
+</span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:20.0pt;
 line-height:115%;font-family:"Arial","sans-serif"'>The following cell types
