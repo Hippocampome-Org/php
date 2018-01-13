@@ -23,7 +23,7 @@ class utils_author_article
 		$author_searched=array();
 	    $index=0;
 		// Get the Searched author names from temporary table
-		while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
+		while($rows=mysqli_fetch_array($result_set, MYSQLI_ASSOC))
 		{
 			$author_name=$rows['author'];
 			// Split the author name to get its initial
@@ -90,7 +90,7 @@ class utils_author_article
 			if (!$result_set) {
             	die("<p>Error in Listing Searched Author Records.</p>");
         	}
-			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
+			while($rows=mysqli_fetch_array($result_set, MYSQLI_ASSOC))
 			{
 				$author_name=$rows['name'];
 				$article_id=$rows['Article_id'];
@@ -168,7 +168,7 @@ class utils_author_article
 			if (!$result_set) {
             	die("<p>Error in Listing Author and Article Records From Type.</p>");
         	}
-			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
+			while($rows=mysqli_fetch_array($result_set, MYSQLI_ASSOC))
 			{
 				$article_id=$rows['Article_id'];
 				$authors=$rows['authors'];
@@ -215,7 +215,7 @@ class utils_author_article
 			if (!$result_set) {
             	die("<p>Error in Listing Author and Article Records From Type.</p>");
         	}
-			while($rows=mysqli_fetch_array($result_set, MYSQL_ASSOC))
+			while($rows=mysqli_fetch_array($result_set, MYSQLI_ASSOC))
 			{
 				$neuron=$rows['neuron'];
 				$fp_name=$rows['overall_fp'];
@@ -246,7 +246,7 @@ class utils_author_article
 				if (!$result_set_fp) {
 	            	die("<p>Error in Listing Author and Article Records.</p>");
 	        	}
-				while($rows=mysqli_fetch_array($result_set_fp, MYSQL_ASSOC))
+				while($rows=mysqli_fetch_array($result_set_fp, MYSQLI_ASSOC))
 				{
 					$types_array[$index_type]=new utils_type();
 					$types_array[$index_type]->setName($rows['name']);
@@ -305,7 +305,7 @@ class utils_author_article
 		if (!$article_type) {
 			die("<p>Error in Listing Types Table.</p>");
 		}
-		while($rows=mysqli_fetch_array($article_type, MYSQL_ASSOC))
+		while($rows=mysqli_fetch_array($article_type, MYSQLI_ASSOC))
 		{
 			$type_name=$rows['name'];
 			$type_nickname=$rows['nickname'];

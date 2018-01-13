@@ -288,7 +288,7 @@ for($fp_count=0;$fp_count<count($firing_pattern_names);$fp_count++)
 			if($fp_array[$id][$view_param_mr[$index]]){
 				$title=$fp_array[$id][$view_param_mr[$index]];
 				$data=$fp_array[$id][$view_param_mr[$index]];
-				$data=split(",",$data);
+				$data=explode(",",$data);
 				// multiple value of parameter
 				if(count($data)>1){
 					$min=min($data);

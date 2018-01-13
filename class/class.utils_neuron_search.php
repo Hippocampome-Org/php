@@ -20,7 +20,7 @@ class utils_neuron_search{
         if (!$rs) {
             die("<p>Error in Listing Neuron Tables." . mysql_error() . "</p>");
         }
-        while($row=mysqli_fetch_array($rs, MYSQL_ASSOC))
+        while($row=mysqli_fetch_array($rs, MYSQLI_ASSOC))
         {
             $id = $row['id'];
             $type_id = $row['type_id'];
@@ -44,7 +44,7 @@ class utils_neuron_search{
         if (!$rs) {
             die("<p>Error in Listing Neuron Tables." . mysql_error() . "</p>");
         }
-        while($row=mysqli_fetch_array($rs, MYSQL_ASSOC))
+        while($row=mysqli_fetch_array($rs, MYSQLI_ASSOC))
         {
             $id = $row['id'];
             $type_id = $row['type_id'];
@@ -78,7 +78,7 @@ class utils_neuron_search{
     public function insert_temporary($type_id,$letter, $neuron)
     {
         $temp_table=$this->get_table_name();
-        set_magic_quotes_runtime(0);
+        //set_magic_quotes_runtime(0);
         if (get_magic_quotes_gpc()) {
             $neuron = stripslashes($neuron);    
         }
@@ -93,7 +93,7 @@ class utils_neuron_search{
     public function update_temporary($id,$type_id,$letter, $neuron, $flag)
     {
         $temp_table=$this->get_table_name();
-        set_magic_quotes_runtime(0);   
+        //set_magic_quotes_runtime(0);   
         if (get_magic_quotes_gpc()) {
             $neuron = stripslashes($neuron);    
         }

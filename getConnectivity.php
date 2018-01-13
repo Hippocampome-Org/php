@@ -384,12 +384,12 @@ for ($row=0; $row<$number_type; $row++) {
 						// retrive search neuron information
 						if(isset($research)){
 							$row=$neuron_map[$id_type_row];
-							$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
+							$link_parameter=explode(",",$potn_conn_neuron_pcl_array[$row][$col]);
 							
 						}
 						// get link parameters	
 						else{
-							$link_parameter=split(",",$potn_conn_neuron_pcl_array[$row][$col]);
+							$link_parameter=explode(",",$potn_conn_neuron_pcl_array[$row][$col]);
 						}
 						if ($known_matrix_array[$row][$col] == KNOWN_NON_CONNECTION) 
 						{

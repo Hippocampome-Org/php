@@ -401,7 +401,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
     		
     		$header_result=mysqli_query($GLOBALS['conn'],$header_query);
      
-    		$rows = mysqli_fetch_array($header_result, MYSQL_ASSOC);
+    		$rows = mysqli_fetch_array($header_result, MYSQLI_ASSOC);
     
     		$headernames[$key]=$rows['object'];
     		

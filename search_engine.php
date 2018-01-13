@@ -459,7 +459,7 @@ function fp_search($subject, $predicate,$value)
 // Search for firing pattern parameter
 function fp_parameter_search($subject, $predicate,$value,$fp_name){
 	// retrieve neuron id:
-	$values=split(" ", $value);
+	$values=explode(" ", $value);
 	$value=$values[0];
 	$index_of_parameter=getIndexOfParameter($subject);
 	if($index_of_parameter!=-1 and $predicate!="" and $value!="" ){

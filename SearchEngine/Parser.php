@@ -60,7 +60,7 @@
         }
         public function parseSynapticNeuron($queryArray,$ind){
             $mathcingNeruonArray=array();
-            //print("<pre>".print_r($queryArray,true)."</pre>");
+            print("<pre>".print_r($queryArray,true)."</pre>");
 
             for($index=$ind;$index<count($queryArray);$index++){
                 if(!is_array($queryArray[$index])) {
