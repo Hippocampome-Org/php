@@ -535,7 +535,7 @@ if (!$result_pc_and_somapcl_flag) {
     print("<p>Error occured in Listing Connectivity Records.</p>");
 }
 // store pc and soma pcl flag values for each type in pc_flag and soma_pcl_flag_array.
-while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQL_ASSOC))
+while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQLI_ASSOC))
 {
     $pc_flag = $row['pc_flag'];
     $soma_pcl_flag=$row['soma_pcl_flag'];

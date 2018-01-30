@@ -37,7 +37,7 @@ class temporary_author
         if (!$author_records) {
             die("<p>Error in Listing Author Records.:" . mysql_error() . "</p>");
         }
-        while($rows=mysqli_fetch_array($author_records, MYSQL_ASSOC))
+        while($rows=mysqli_fetch_array($author_records, MYSQLI_ASSOC))
         {
             $authors_array[$index]=$rows['name'];
             $index++;   
@@ -53,7 +53,7 @@ class temporary_author
         if (!$author_records) {
             die("<p>Error in Listing Author Records.:" . mysql_error() . "</p>");
         }
-        while($rows=mysqli_fetch_array($author_records, MYSQL_ASSOC))
+        while($rows=mysqli_fetch_array($author_records, MYSQLI_ASSOC))
         {
             $id=$rows['id'];
             $letter=$rows['letter'];
@@ -69,7 +69,7 @@ class temporary_author
 
 	public function insert_temporary($letter, $author)
 	{
-		set_magic_quotes_runtime(0);
+		//set_magic_quotes_runtime(0);
 		if (get_magic_quotes_gpc()) {
         	$author = stripslashes($author);    
     	}
@@ -82,7 +82,7 @@ class temporary_author
 
 	public function update_temporary($letter, $author, $flag, $id)
 	{
-	set_magic_quotes_runtime(0);
+	//set_magic_quotes_runtime(0);
 	
     	if (get_magic_quotes_gpc()) {
         	$author = stripslashes($author);    

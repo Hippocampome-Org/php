@@ -77,7 +77,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 		$citation_count = -1;
 	if($id_neuron_conn==NULL)
 		$id_neuron_conn=-1;
-	set_magic_quotes_runtime(0);	
+	////set_magic_quotes_runtime(0);	
 	if (get_magic_quotes_gpc()) {
     	$publication = stripslashes($publication);  
     	$quotes = stripslashes($quotes);   
@@ -948,7 +948,7 @@ function show_only_authors(link, start1, stop1)
 
 					// Logic to form dynamic query to retrive evidences(axon,dendrite,soma & known) depending on checkbox selection 
 					$subquery=" and ( ";
-					$property_array=split(",",$neuron_show_only_value);
+					$property_array=explode(",",$neuron_show_only_value);
 					for($index=0;$index<count($property_array);$index++){
 						if($property_array[$index]){
 							$subquery=$subquery."type like '".$property_array[$index]."' or ";
@@ -1245,7 +1245,7 @@ function show_only_authors(link, start1, stop1)
 								else
 									$author_string=$author_string.",".$allauthors;
 							}
-							$single_aut=split(',', $author_string);
+							$single_aut=explode(',', $author_string);
 							$index=0;
 							$unique_authors=array();
 							for ($cnt=0; $cnt<count($single_aut); $cnt++){

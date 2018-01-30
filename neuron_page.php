@@ -374,12 +374,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				$u=0;
 				$auth=array();
 				$auth_first_name=array();
-				while($erows = mysqli_fetch_array($query_results, MYSQL_ASSOC))
+				while($erows = mysqli_fetch_array($query_results, MYSQLI_ASSOC))
 				{
 				$auth[$g]=$erows['auth_id'];
 				$fetch_auth_name="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auth[$g]'";
 				$resss=mysqli_query($GLOBALS['conn'],$fetch_auth_name);
-				while($drows = mysqli_fetch_array($resss, MYSQL_ASSOC))
+				while($drows = mysqli_fetch_array($resss, MYSQLI_ASSOC))
 				{
 				$auth_first_name[$u]=$drows['name_auth'];
 				//asort($auth_first_name);
@@ -410,7 +410,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$t="SELECT a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi FROM Article AS a WHERE a.title='$article_title[$i1]'";
 					$r=mysqli_query($GLOBALS['conn'],$t);
 					$l=0;
-					while($row = mysqli_fetch_array($r, MYSQL_ASSOC))
+					while($row = mysqli_fetch_array($r, MYSQLI_ASSOC))
 					{
 				
 						$publi=$row['pub'];
@@ -430,13 +430,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$g=0;
 					$auths=array();
 					$auth_name=array();
-					while($rows = mysqli_fetch_array($results, MYSQL_ASSOC))
+					while($rows = mysqli_fetch_array($results, MYSQLI_ASSOC))
 					{
 						$auths[$g]=$rows['auth_id'];
 						$fetch_auth="SELECT DISTINCT c.name AS name_auth FROM Author c WHERE c.id='$auths[$g]'";
 						$ress=mysqli_query($GLOBALS['conn'],$fetch_auth);
 						$u=0;
-						while($arows = mysqli_fetch_array($ress, MYSQL_ASSOC))
+						while($arows = mysqli_fetch_array($ress, MYSQLI_ASSOC))
 						{
 							$auth_name[$g]=$arows['name_auth'];
 							$auth_name[$g]=preg_replace("/'/", "&#39;", $auth_name[$g]);
@@ -1894,7 +1894,7 @@ WHERE
 			if($type_array[$i]==$destination_neuron)
 				$index_destination=$i;
 		}
-		$parameter_connection=split(",",$potn_conn_neuron_pcl_array[$index_source][$index_destination]);
+		$parameter_connection=explode(",",$potn_conn_neuron_pcl_array[$index_source][$index_destination]);
 		if($parameter_connection){
 			return getUrlForLinkConnectivity($source_neuron,$destination_neuron,$parameter_connection[1],$parameter_connection[2],$parameter_connection[4],$parameter_connection[5],$parameter_connection[6],$know_unknow_flag,$neuron2_name,$font_class);
 		}

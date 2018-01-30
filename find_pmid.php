@@ -49,7 +49,7 @@ function getSupplemental($sup_id){
 	if (!$article_type) {
 		die("<p>Error in Listing Types Table.</p>");
 	}
-	while($rows=mysqli_fetch_array($article_type, MYSQL_ASSOC))
+	while($rows=mysqli_fetch_array($article_type, MYSQLI_ASSOC))
 	{
 		$types_array[$index]=new utils_type();
 		$types_array[$index]->setName($rows['name']);

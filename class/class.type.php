@@ -95,7 +95,7 @@ class type
 		$query = "SELECT supertype FROM Type WHERE id ='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$supertype_value="";
-		while($rows=mysqli_fetch_array($rs, MYSQL_ASSOC))
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
 		{	
 			$supertype_value=$rows['supertype'];
 		}

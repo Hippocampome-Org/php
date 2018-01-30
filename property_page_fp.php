@@ -103,7 +103,7 @@ function insert_temporary($table,$fp_id, $id_fragment, $id_original, $quote, $au
 		$citation_count = -1;
 	if($id_neuron_conn==NULL)
 		$id_neuron_conn=-1;
-	set_magic_quotes_runtime(0);	
+	//set_magic_quotes_runtime(0);	
 	if (get_magic_quotes_gpc()) {
     	$publication = stripslashes($publication);  
     	$quote = stripslashes($quote);   
@@ -1994,7 +1994,7 @@ function show_only_authors(link, start1, stop1)
 								else
 									$author_string=$author_string.",".$allauthors;
 							}
-							$single_aut=split(',', $author_string);
+							$single_aut=explode(',', $author_string);
 							$index=0;
 							$unique_authors=array();
 							for ($cnt=0; $cnt<count($single_aut); $cnt++){
@@ -2333,8 +2333,8 @@ function show_only_authors(link, start1, stop1)
 										// array(7,12,15,35)
 										if ($istim||$tstim) {
 											// get data for material method
-											$query_for_material="SELECT * FROM MaterialMethod WHERE istim_pa = $istim AND tstim_ms= $tstim AND overall_fp = '$parameter' AND unique_id = $id_neuron";
-											#print($query_for_material);
+											$query_for_material="SELECT * FROM MaterialMethod WHERE istim_pa = '$istim' AND tstim_ms= '$tstim' AND overall_fp = '$parameter' AND unique_id = $id_neuron";
+											//print($query_for_material);
 											$query_for_description="SELECT * FROM MaterialMethod WHERE id=1";
 											
 											$result_material = mysqli_query($GLOBALS['conn'],$query_for_material);

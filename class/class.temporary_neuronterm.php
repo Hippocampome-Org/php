@@ -28,7 +28,7 @@ class temporary_neuronterm
 
 	public function insert_temporary($letter, $neuron)
 	{
-	set_magic_quotes_runtime(0);
+	//set_magic_quotes_runtime(0);
 		if (get_magic_quotes_gpc()) {
         	$neuron = stripslashes($neuron);    
     	}
@@ -41,7 +41,7 @@ class temporary_neuronterm
 
 	public function update_temporary($letter, $neuron, $flag, $id)
 	{
-	set_magic_quotes_runtime(0);
+	//set_magic_quotes_runtime(0);
 	
     	if (get_magic_quotes_gpc()) {
         	$neuron = stripslashes($neuron);    
