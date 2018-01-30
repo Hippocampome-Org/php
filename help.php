@@ -63,6 +63,7 @@
 			<ul>
   			<li><a href='Help_FP_Abbreviations.php'><font class="font7"> Abbreviations and Definitions</font></a></li>
   			<li><a href='Help_Principles_of_Classification_of_Firing_Pattern_Elements.php'><font class="font7"> Principles of Classification of Firing Pattern Elements</font></a></li>
+  			<li><a href='Help_Firing_Pattern_Identification_Pseudocode.php'><font class="font7"> Firing Pattern Identification Pseudocode</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
