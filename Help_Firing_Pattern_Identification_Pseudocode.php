@@ -73,8 +73,8 @@ style='font-size:14.0pt;mso-fareast-font-family:"Courier New"'><span
 style='mso-list:Ignore'>(i)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
 </span></span></span><![endif]><span style='font-size:14.0pt'>IF <span
 style='mso-bidi-font-weight:bold'>HAS_<span class=GramE>DELAY(</span>): </span>add
-“</span><b style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;
-color:windowtext'>D.</span></b><span style='font-size:14.0pt'>” <o:p></o:p></span></p>
+&quot;</span><b style='mso-bidi-font-weight:normal'><span style='font-size:
+14.0pt;color:windowtext'>D.</span></b><span style='font-size:14.0pt'>&quot; <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.25in'><span style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
 
@@ -84,14 +84,14 @@ style='mso-list:Ignore'>(ii)<span style='font:7.0pt "Times New Roman"'> </span><
 style='font-size:14.0pt'>IF HAS_TSTUT(): <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.5in;text-indent:.5in'><span
-style='font-size:14.0pt'>If <span class=SpellE>swa</span> &gt; MIN_SWA: add “</span><b
+style='font-size:14.0pt'>If <span class=SpellE>swa</span> &gt; MIN_SWA: add &quot;</span><b
 style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;color:windowtext'>TSWB.</span></b><span
-style='font-size:14.0pt'>” <o:p></o:p></span></p>
+style='font-size:14.0pt'>&quot; <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.5in;text-indent:.5in'><span
-style='font-size:14.0pt'>Else: add “</span><b style='mso-bidi-font-weight:normal'><span
-style='font-size:14.0pt;color:windowtext'>TSTUT.</span></b><span
-style='font-size:14.0pt'>” <o:p></o:p></span></p>
+style='font-size:14.0pt'>Else: add &quot;</span><b style='mso-bidi-font-weight:
+normal'><span style='font-size:14.0pt;color:windowtext'>TSTUT.</span></b><span
+style='font-size:14.0pt'>&quot; <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.5in;text-indent:.5in'><span
 style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
@@ -113,14 +113,14 @@ style='font-size:14.0pt'>IF STEADY_STATE_FIRING: <o:p></o:p></span></p>
 style='font-size:14.0pt'>IF HAS_<span class=GramE>PSTUT(</span>): <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:1.0in;text-indent:.5in'><span
-style='font-size:14.0pt'>If <span class=SpellE>swa</span>&gt; MIN_SWA: add “</span><b
+style='font-size:14.0pt'>If <span class=SpellE>swa</span>&gt; MIN_SWA: add &quot;</span><b
 style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;color:windowtext'>PSWB</span></b><span
-style='font-size:14.0pt'>” <o:p></o:p></span></p>
+style='font-size:14.0pt'>&quot; <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.5in;text-indent:.5in'><span
-style='font-size:14.0pt'>ELSE: add “</span><b style='mso-bidi-font-weight:normal'><span
-style='font-size:14.0pt;color:windowtext'>PSTUT</span></b><span
-style='font-size:14.0pt'>” <o:p></o:p></span></p>
+style='font-size:14.0pt'>ELSE: add &quot;</span><b style='mso-bidi-font-weight:
+normal'><span style='font-size:14.0pt;color:windowtext'>PSTUT</span></b><span
+style='font-size:14.0pt'>&quot; <o:p></o:p></span></p>
 
 <p class=Default style='margin-left:.5in;text-indent:.5in'><span
 style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
@@ -129,8 +129,8 @@ style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
 style='font-size:14.0pt;mso-fareast-font-family:"Courier New"'><span
 style='mso-list:Ignore'>(v)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
 </span></span></span><![endif]><span style='font-size:14.0pt'>IF HAS_SLN(): add
-“</span><b style='mso-bidi-font-weight:normal'><span style='font-size:14.0pt;
-color:windowtext'>SLN</span></b><span style='font-size:14.0pt'>”<o:p></o:p></span></p>
+&quot;</span><b style='mso-bidi-font-weight:normal'><span style='font-size:
+14.0pt;color:windowtext'>SLN</span></b><span style='font-size:14.0pt'>&quot;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
 normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
@@ -225,11 +225,11 @@ margin-left:1.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
 font-family:"Courier New";color:black'>Return TRUE <o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
-14.0pt;font-family:"Courier New";color:black'><span style='mso-tab-count:1'>    </span>IF
-<span style='mso-tab-count:1'> </span><span class=SpellE>pss</span> &gt; <span
-class=SpellE>ISIn</span> * TSTUT_PRE_FACTOR &amp;&amp;<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
+none;text-autospace:none'><span style='font-size:14.0pt;font-family:"Courier New";
+color:black'>IF <span style='mso-tab-count:1'> </span><span class=SpellE>pss</span>
+&gt; <span class=SpellE>ISIn</span> * TSTUT_PRE_FACTOR &amp;&amp;<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
@@ -238,15 +238,16 @@ style='font-size:14.0pt;font-family:"Courier New";color:black'>Freq(</span></spa
 style='font-size:14.0pt;font-family:"Courier New";color:black'>ISI1:n) &gt;
 MIN_TSTUT_FREQ &amp;&amp;<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
-14.0pt;font-family:"Courier New";color:black'><span style='mso-tab-count:2'>         </span><span
-class=SpellE><span class=GramE>swa</span></span> &gt; MIN_SWA<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
+mso-layout-grid-align:none;text-autospace:none'><span class=SpellE><span
+class=GramE><span style='font-size:14.0pt;font-family:"Courier New";color:black'>swa</span></span></span><span
+style='font-size:14.0pt;font-family:"Courier New";color:black'> &gt; MIN_SWA<o:p></o:p></span></p>
 
-<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal;mso-layout-grid-align:none;text-autospace:none'><span style='font-size:
-14.0pt;font-family:"Courier New";color:black'><span style='mso-tab-count:4'>                 </span>Return
-TRUE<o:p></o:p></span></p>
+<p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
+margin-left:.5in;margin-bottom:.0001pt;text-indent:1.0in;line-height:normal;
+mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
+font-family:"Courier New";color:black'>Return TRUE<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:1.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
@@ -264,8 +265,8 @@ style='font-size:14.0pt;font-family:"Times New Roman","serif";color:black'><o:p>
 margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
 none;text-autospace:none'><span style='font-size:14.0pt;font-family:"Courier New";
 color:black'>Fit ISIs against their latencies using 1 parameter (Y=c0), 2
-parameter (Y=m1X+c1), 3 parameter (Y=m2X+c2, Y=c3) and 4 parameter (Y=m4X+c4,
-Y=m5X+c5) piecewise linear fits<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+parameter (Y=m1X+c1), 3 parameter (Y=m2X+c2, Y=c3) and 4 parameter (Y=m4X+c4, Y=m5X+c5)
+piecewise linear fits<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
@@ -281,9 +282,9 @@ to 2 <span class=SpellE>parm</span> linear fit: <o:p></o:p></span></p>
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
-font-family:"Courier New";color:black'>Add “</span><b style='mso-bidi-font-weight:
+font-family:"Courier New";color:black'>Add &quot;</span><b style='mso-bidi-font-weight:
 normal'><span style='font-size:14.0pt;font-family:"Courier New"'>NASP/STEADY_STATE</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” </span><span
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; </span><span
 style='font-size:14.0pt;font-family:"Times New Roman","serif";color:black'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
@@ -305,9 +306,10 @@ font-family:"Courier New";color:black'>IF slope &gt; SLOPE_THRESHOLD: <o:p></o:p
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:1.0in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
-font-family:"Courier New";color:black'>Add “</span><b style='mso-bidi-font-weight:
+font-family:"Courier New";color:black'>Add &quot;</span><b style='mso-bidi-font-weight:
 normal'><span style='font-size:14.0pt;font-family:"Courier New"'>ASP.</span></b><span
-style='font-size:14.0pt;font-family:"Courier New"'>” <span style='color:black'><o:p></o:p></span></span></p>
+style='font-size:14.0pt;font-family:"Courier New"'>&quot; <span
+style='color:black'><o:p></o:p></span></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
@@ -317,9 +319,9 @@ font-family:"Courier New";color:black'>ELSE: <o:p></o:p></span></p>
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:1.0in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
-font-family:"Courier New";color:black'>Add “</span><b style='mso-bidi-font-weight:
+font-family:"Courier New";color:black'>Add &quot;</span><b style='mso-bidi-font-weight:
 normal'><span style='font-size:14.0pt;font-family:"Courier New"'>NASP</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” <o:p></o:p></span></p>
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
@@ -335,16 +337,16 @@ to 4 <span class=SpellE>parm</span> linear fit: <o:p></o:p></span></p>
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
-font-family:"Courier New";color:black'>Add “</span><b style='mso-bidi-font-weight:
+font-family:"Courier New";color:black'>Add &quot;</span><b style='mso-bidi-font-weight:
 normal'><span style='font-size:14.0pt;font-family:"Courier New"'>ASP.</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” <o:p></o:p></span></p>
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
 mso-layout-grid-align:none;text-autospace:none'><span style='font-size:14.0pt;
-font-family:"Courier New";color:black'>Add “</span><b style='mso-bidi-font-weight:
+font-family:"Courier New";color:black'>Add &quot;</span><b style='mso-bidi-font-weight:
 normal'><span style='font-size:14.0pt;font-family:"Courier New"'>NASP</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” <o:p></o:p></span></p>
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;text-indent:.5in;line-height:normal;
@@ -354,16 +356,16 @@ font-family:"Courier New";color:black'>Return <o:p></o:p></span></p>
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
 none;text-autospace:none'><span style='font-size:14.0pt;font-family:"Courier New";
-color:black'>Add “</span><b style='mso-bidi-font-weight:normal'><span
+color:black'>Add &quot;</span><b style='mso-bidi-font-weight:normal'><span
 style='font-size:14.0pt;font-family:"Courier New"'>ASP.</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” <o:p></o:p></span></p>
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
 none;text-autospace:none'><span style='font-size:14.0pt;font-family:"Courier New";
-color:black'>Add “</span><b style='mso-bidi-font-weight:normal'><span
+color:black'>Add &quot;</span><b style='mso-bidi-font-weight:normal'><span
 style='font-size:14.0pt;font-family:"Courier New"'>ASP.</span></b><span
-style='font-size:14.0pt;font-family:"Courier New";color:black'>” <o:p></o:p></span></p>
+style='font-size:14.0pt;font-family:"Courier New";color:black'>&quot; <o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:0in;
 margin-left:.5in;margin-bottom:.0001pt;line-height:normal;mso-layout-grid-align:
@@ -420,11 +422,11 @@ style='font-size:14.0pt'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
 style='font-size:14.0pt;line-height:107%;font-family:"Times New Roman","serif"'>Abbreviations:</span></i><span
 style='font-size:14.0pt;line-height:107%;font-family:"Times New Roman","serif"'>
-<i style='mso-bidi-font-style:normal'>ISI</i> – inter spike interval, <span
-class=SpellE><i style='mso-bidi-font-style:normal'>fsl</i></span> – first spike
+<i style='mso-bidi-font-style:normal'>ISI</i> - inter spike interval, <span
+class=SpellE><i style='mso-bidi-font-style:normal'>fsl</i></span> - first spike
 latency, <span class=SpellE><i style='mso-bidi-font-style:normal'>pss</i></span>
-– post spike silence, <span class=SpellE><i style='mso-bidi-font-style:normal'>swa</i></span>
-– slow after hyperpolarizing wave amplitude.<o:p></o:p></span></p>
+- post spike silence, <span class=SpellE><i style='mso-bidi-font-style:normal'>swa</i></span>
+- slow after hyperpolarizing wave amplitude.<o:p></o:p></span></p>
 
 <p class=MsoNormal><i style='mso-bidi-font-style:normal'><span
 style='font-size:14.0pt;line-height:107%;font-family:"Times New Roman","serif"'>Constants:
