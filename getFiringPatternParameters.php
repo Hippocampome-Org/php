@@ -310,7 +310,8 @@ for($fp_count=0;$fp_count<count($firing_pattern_names);$fp_count++)
 		}
 		if($flagShow){
 			// push type row for particular firing pattern 
-			$responce->rows[$fp_count]["data"][$type_index++]["cell"]=$column_array;
+			$rows[$fp_count]["data"][$type_index++]["cell"]=$column_array;
+			$responce->rows = $rows;
 		}
 	}
 	// push firing pattern headers(view only parameters) for particular firing pattern 

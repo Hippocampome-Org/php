@@ -430,7 +430,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	if ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 	
-	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
+	$rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
 			getUrlForLink($id,$hippo['DG:SMo'],'DG_SMo',$hippo_color['DG:SMo']),
 			getUrlForLink($id,$hippo['DG:SMi'],'DG_SMi',$hippo_color['DG:SMi']),
 			getUrlForLink($id,$hippo['DG:SG'],'DG_SG',$hippo_color['DG:SG']),
@@ -458,6 +458,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['EC:V'],'EC_V',$hippo_color['EC:V']),
 			getUrlForLink($id,$hippo['EC:VI'],'EC_VI',$hippo_color['EC:VI']),
 			);
+	$responce->rows = $rows;
 }
 
 //Procees to get the potential connectivity matrix

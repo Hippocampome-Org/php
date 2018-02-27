@@ -275,7 +275,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	elseif ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 	
-	$responce->rows[$i]['cell'] = array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
+	$rows[$i]['cell'] = array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 		getUrlForLink($id,$hippo['ASP.'],$name_firing['0'],$hippo_color['ASP.']),
 		getUrlForLink($id,$hippo['ASP.ASP.'],$name_firing['1'],$hippo_color['ASP.ASP.']),
 		getUrlForLink($id,$hippo['ASP.NASP'],$name_firing['2'],$hippo_color['ASP.NASP']),
@@ -302,7 +302,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		getUrlForLink($id,$hippo['-'],$name_firing['23'],$hippo_color['-'])
 		);
 	
-	
+	$responce->rows = $rows;
 	
 	
 }

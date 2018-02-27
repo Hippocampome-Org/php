@@ -271,7 +271,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	elseif ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 	
-	$responce->rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>','<span style="color:black;float:right">'.$neurite_pattern_soma_location.'</span>',
+	$rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>','<span style="color:black;float:right">'.$neurite_pattern_soma_location.'</span>',
 	
 			getUrlForLink($id,$hippo['CB'],$name_markers['0'],$hippo_color['CB']),
 			getUrlForLink($id,$hippo['CR'],$name_markers['1'],$hippo_color['CR']),
@@ -376,6 +376,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			getUrlForLink($id,$hippo['VILIP'],$name_markers['95'],$hippo_color['VILIP']),
 			getUrlForLink($id,$hippo['Y1'],$name_markers['96'],$hippo_color['Y1'])
 			);
+	$responce->rows = $rows;
 
 }
 

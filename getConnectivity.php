@@ -455,7 +455,8 @@ for ($row=0; $row<$number_type; $row++) {
 				      array_push($hippo_array,$hippo_nickname[$i]);
 				    }
 				    $row=$actual_row;
-				    $responce->rows[$row]['cell']=$hippo_array;
+				    $rows[$row]['cell']=$hippo_array;
+				    $responce->rows = $rows;
 				    
 
 

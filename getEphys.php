@@ -483,7 +483,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 	$neurite_pattern_new = implode('',$new_neurite_pattern);
 	//print_r($neurite_pattern_new);
 	
-	$responce->rows[$i]['cell'] =
+	$rows[$i]['cell'] =
 		array(	'<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
 			'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 			'<span style="color:black">'.$neurite_pattern_new.'</span>',
@@ -498,6 +498,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
   			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
   			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2) 
   		); 
+	$responce->rows = $rows;
 }
 //echo json_encode($responce);
 ?>
