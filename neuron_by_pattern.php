@@ -174,13 +174,13 @@ $(function(){
 	}
 ?>
 
-<div class='title_area2'>
+<div class='title_area2'; style="width:100%">
 	<font class="font1"><?php
 	$query = "SELECT fp_name FROM FiringPattern WHERE overall_fp like '$parameter'";
 	$rs = mysqli_query($GLOBALS['conn'],$query);
 	$row_data = mysqli_fetch_row($rs);
 	$fp_name_val=$row_data[0];
-	print("$fp_name_val ($title)");
+	print("$fp_name_val ($title) [<a href='Help_Principles_of_Classification_of_Firing_Pattern_Elements.php'>formal definition</a>]");
 	?></font>
 </div>
 
