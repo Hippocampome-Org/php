@@ -2453,7 +2453,7 @@ Definitions</span></u></b></p>
   height:15.6pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-family:"Arial","sans-serif";mso-fareast-font-family:
-  "Times New Roman";color:black'>Potassium <span class=SpellE>methylsulphate</span><o:p></o:p></span></p>
+  "Times New Roman";color:black'>Potassium <span class=SpellE>methyl sulfate</span><o:p></o:p></span></p>
   </td>
   <td width=110 nowrap valign=bottom style='width:66.0pt;border-top:none;
   border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
