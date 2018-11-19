@@ -1052,10 +1052,10 @@ include ("function/icon.html");
 									<a href='neuron_page.php?id=$id_t[$i]'>
 										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>");
 					if(array_key_exists($id_t[$i], $inference_array)){
-						if($permission!=1){
-							print("<font class='font4'>(".$inference_array[$id_t[$i]].") </font>");
-							unset($inference_array[$id_t[$i]]);
-						}
+						// if($permission!=1){
+							// print("<font class='font4'>(".$inference_array[$id_t[$i]].") </font>");
+							// unset($inference_array[$id_t[$i]]);
+						// }
 					}
 					print("	
 									</a>
@@ -1120,7 +1120,7 @@ include ("function/icon.html");
 				print ("View Result in a Matrix");
 			else
 				print ("View Results in a Matrix");	
-			if($permission!=1){
+			// if($permission!=1){
 			print ("
 				</td>		
 				</tr>
@@ -1164,10 +1164,10 @@ include ("function/icon.html");
 
 				</tr>
 				</table> <br /><br />");
-		}
+		// }
 
 
-		else if($permission==1){
+		/* else if($permission==1){
 			print ("
 				</td>		
 				</tr>
@@ -1204,7 +1204,7 @@ include ("function/icon.html");
 
 				</tr>
 				</table> <br /><br />");
-		}
+		} */
 			}
 		?>
 		

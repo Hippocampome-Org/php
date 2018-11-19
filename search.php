@@ -317,17 +317,17 @@ include ("function/icon.html");
 			//Permission blocks the page content related to Firing Pattern
   
 			if($property1){
-				if ($permission==1) {
-					if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
-						print ("");
-					else
+				// if ($permission==1) {
+					// if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
+						// print ("");
+					// else
 						print("<OPTION VALUE='$property1'>$property1</OPTION>");
 				
-					}
-				else
-					print("<OPTION VALUE='$property1'>$property1</OPTION>");
+					// }
+				// else
+					// print("<OPTION VALUE='$property1'>$property1</OPTION>");
 
-				}		
+				}	
 
 			print ("<OPTION VALUE='-'>-</OPTION>");
 			for ($i=0; $i<$n_property; $i++)
@@ -335,15 +335,15 @@ include ("function/icon.html");
 				$value_property = property($i); 
 				
 				if (($value_property != $property1)){
-					if ($permission==1 ){
-						if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
-							print ("");
-						else
+					// if ($permission==1 ){
+						// if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
+							// print ("");
+						// else
 							print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
 					
-						}
-					else
-						print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+						// }
+					// else
+						// print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
 					}
 			}
 			print ("</select>");

@@ -795,7 +795,8 @@ include ("function/menu_main.php");
         if($permission!=1)
         	{
         ?>  
-        <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
+        <!-- <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
+        -->
         <?php
 			}
 		?>
@@ -844,13 +845,14 @@ include ("function/menu_main.php");
              	if($permission!=1)
         			{
         	?>
-			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<!-- <br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				
 			<img src='images/positive_inference_half.png' width="7px" border="0"/> <font class='font5'>Positive inference</font> &nbsp;
 			<img src='images/negative_inference_half.png' width="7px" border="0"/> <font class='font5'>Negative inference</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-subtypes.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (subtypes)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-species.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (species/protocol differences)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-unresolved.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (unresolved)</font> &nbsp;
+			-->
 			<?php
 					}		
         	?>
@@ -863,11 +865,12 @@ include ("function/menu_main.php");
              	if($permission!=1)
         			{
         	?>
-			<img src="images/positive_half_confirm.png" width="7px" border="0"/>
+			<!-- <img src="images/positive_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_half_confirm.png" width="7px" border="0"/> 
 				<img src="images/positive_inference_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_inference_half_confirm.png" width="7px" border="0"/> 
 				<font class='font5'>Additional confirmation by inference(s) </font> &nbsp; &nbsp;
+			-->
 			<?php
 					}
         	?>

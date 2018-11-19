@@ -1218,18 +1218,18 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$pos_conflict = $pos_array['conflict_key'][$j];
 						if ($pos_conflict == "confirmed positive")
 							{
-								if($permission!=1)
-									$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+								// if($permission!=1)
+									// $disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
 							}
 						elseif ($pos_conflict == "positive inference")
 							{
-								if($permission!=1)
-									$disp_marker_name = $disp_marker_name . ' (inference)';
+								// if($permission!=1)
+									// $disp_marker_name = $disp_marker_name . ' (inference)';
 							}
 						elseif ($pos_conflict == "confirmed positive inference")
 							{
-								if($permission!=1)
-									$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+								// if($permission!=1)
+									// $disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
 							}
 						
 						
@@ -1307,14 +1307,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						
 						$neg_conflict = $neg_array['conflict_key'][$j];
 						if ($neg_conflict == "confirmed negative")
-							if($permission!=1)
-								$disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
+							; // if($permission!=1)
+								// $disp_marker_name = $disp_marker_name . ' (confirmed by inference)';
 						elseif ($neg_conflict == "negative inference")
-							if($permission!=1)
-								$disp_marker_name = $disp_marker_name . ' (inference)';
+							; // if($permission!=1)
+								// $disp_marker_name = $disp_marker_name . ' (inference)';
 						elseif ($neg_conflict == "confirmed negative inference")
-							if($permission!=1)
-								$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
+							; // if($permission!=1)
+								// $disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
 
 							// if NULL, marker needs to be remapped; just print name (w/o URL)
 							if ($this_marker_URL_start == NULL) {
@@ -1729,7 +1729,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 
 		<br />
 		
-		<!-- TABLE Notes: -->
+		<!-- TABLE 	: -->
 		<?php
 			$type -> retrive_notes($id);
 			$notes = $type -> getNotes();
@@ -1760,7 +1760,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 
 		<br />
 		<?php
-			if($permission!=1)
+			// if($permission!=1)
 			{
 		?>
 		<!-- TABLE Firing pattern : -->
