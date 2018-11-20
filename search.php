@@ -339,7 +339,7 @@ include ("function/icon.html");
 						// if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
 							// print ("");
 						// else
-							print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+							    print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
 					
 						// }
 					// else
