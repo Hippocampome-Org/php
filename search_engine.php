@@ -188,13 +188,15 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 {
 	if ($predicate == 'is expressed')
 	{
-		$predicate3[1] = "'positive inference','positive','confirmed positive inference','confirmed positive'";
+//		$predicate3[1] = "'positive inference','positive','confirmed positive inference','confirmed positive'";
+		$predicate3[1] = "'positive','confirmed positive'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
 	if ($predicate == 'is not expressed')
 	{
-		$predicate3[1] = "'negative inference','negative','confirmed negative inference','confirmed negative'";
+//		$predicate3[1] = "'negative inference','negative','confirmed negative inference','confirmed negative'";
+		$predicate3[1] = "'negative','confirmed negative'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}
@@ -212,7 +214,8 @@ function markers_search($evidencepropertyyperel, $property_1, $type, $subject, $
 	}
 	if ($predicate == 'unresolved mixed')
 	{
-		$predicate3[1] = "'unresolved','unresolved inferential conflict'";
+//		$predicate3[1] = "'unresolved','unresolved inferential conflict'";
+		$predicate3[1] = "'unresolved'";
 		$predicate3[2] = 'unknown';
 		$nn = 2;
 	}

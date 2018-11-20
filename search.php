@@ -318,9 +318,9 @@ include ("function/icon.html");
   
 			if($property1){
 				// if ($permission==1) {
-					// if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
-						// print ("");
-					// else
+					if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
+						print ("");
+					else
 						print("<OPTION VALUE='$property1'>$property1</OPTION>");
 				
 					// }
@@ -336,9 +336,9 @@ include ("function/icon.html");
 				
 				if (($value_property != $property1)){
 					// if ($permission==1 ){
-						// if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
-							// print ("");
-						// else
+						if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
+							print ("");
+						else
 							print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
 					
 						// }
