@@ -75,7 +75,9 @@ class evidencepropertyyperel
 	}
 	public function retrive_Type_id_by_Subject_overrideIn($Subject, $Conflict_note)
 	{
-		$inferences=array("confirmed positive","positive inference","confirmed positive inference","confirmed negative","negative inference","confirmed negative inference","unresolved inferential conflict");
+//		$inferences=array("confirmed positive","positive inference","confirmed positive inference","confirmed negative","negative inference","confirmed negative inference","unresolved inferential conflict");
+		$inferences=array("positive inference","confirmed positive inference","negative inference","confirmed negative inference","unresolved inferential conflict");
+//		$inferences=array("confirmed positive","confirmed negative");
 		$table 	= $this->getName_table();
 		$table1 = "Property";
 		$query = "SELECT DISTINCT ev.Type_id,ev.conflict_note
