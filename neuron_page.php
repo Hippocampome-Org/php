@@ -1638,7 +1638,7 @@ WHERE
 			$xpprelative_path = 'attachment/izhikevich/xppFiles/'.$izhmodelsmodelArray[$i]->getSub_Id().'.ode';
             $carlsimrelative = glob('attachment/izhikevich/carl_parms/'.$izhmodelsmodelArray[$i]->getSub_Id().'.*');
             $carlsimrelative_path = (count($carlsimrelative) > 0 ? $carlsimrelative[0]:"");
-            $pyplotsrelative_path = 'attachment/izhikevich/Pyplots/'.$izhmodelsmodelArray[$i]->getSub_Id().'.png';
+            $pyplotsrelative_path = 'attachment/izhikevich/PyPlots/'.$izhmodelsmodelArray[$i]->getSub_Id().'.png';
 			echo "<tr><td width='20%' align='right'></td>";
 			if($izhmodelsmodelArray[$i]->getPreferred() == 'N')
 			{
@@ -1686,7 +1686,7 @@ WHERE
     $izhmodelsmodelArray = $izhmodelsmodelObject->get_all_id($id);
     print("<div style='width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;''>");
     for($i = 0; $i< count($izhmodelsmodelArray);$i++){
-			$relative_image_path_array = glob('attachment/izhikevich/Pyplots/'.$izhmodelsmodelArray[$i]->getSub_Id().'*');
+			$relative_image_path_array = glob('attachment/izhikevich/PyPlots/'.$izhmodelsmodelArray[$i]->getSub_Id().'*');
             foreach($relative_image_path_array as $relative_image_path){
 			if(!file_exists($relative_image_path)){
 		     print("No image is associated with this neuron");
