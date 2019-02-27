@@ -2,7 +2,6 @@
 /*
 Author: Amar Gawade
 Created: 01/30/2017
-
 */
 include ("permission_check.php");
 require_once("SearchEngine/ParenthesisParser.php");
@@ -82,6 +81,7 @@ if($_REQUEST['search_engine']){
 	}
 	else{
 		print("<b>Total:".count($matchingConn)."</b><br>");
+		if(property_exists($matchingConn[0], 'destinationNickname')==1){
 		print('<input id="id_toggle" checked type="checkbox" name="Id" value="Id" onclick="hide()"> Neuron Id</input>&nbsp;&nbsp;&nbsp;&nbsp;');
 		print('<input id="sourceName_toggle" type="checkbox" name="sourceName" value="sourceName" onclick="show()"> Full Names</input><br>');
 		print('<table id="conn" border="0" cellspacing="3" cellpadding="0" class="sortable" width="200%">');
@@ -92,7 +92,17 @@ if($_REQUEST['search_engine']){
 		print("<td align='center' width='10%' class='table_neuron_page3'> Postsynaptic ID</td>");
 		print("<td align='center' width='20%' class='table_neuron_page3'> Postsynaptic Cell Type Full Names </td>");
 		print("<td align='center' width='20%' class='table_neuron_page3'> Postsynaptic Cell Types Nicknames </td>");
+	   }else{
+		print('<input id="id_toggle" checked type="checkbox" name="Id" value="Id" onclick="hide()"> Neuron Id</input>&nbsp;&nbsp;&nbsp;&nbsp;');
+		print('<input id="sourceName_toggle" type="checkbox" name="sourceName" value="sourceName" onclick="show()"> Full Names</input><br>');
+		print('<table id="conn" border="0" cellspacing="3" cellpadding="0" class="sortable" width="200%">');
+		print('<tr>');
+		print("<td align='center' width='10%' class='table_neuron_page3'> Neuron ID </td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Neuron Cell Type Full Names </td>");
+		print("<td align='center' width='20%' class='table_neuron_page3'> Neuron Cell Type Nicknames </td>");
+	}
 		for($i=0;$i<count($matchingConn);$i++){
+			if (property_exists($matchingConn[0], 'destinationNickname')==1){
 			print('<tr>');
 			print('<td align="center" width="10%" class="table_neuron_page4">'.$matchingConn[$i]->getSourceId().'</td>');
 			print("<td align='center' width='20%' class='table_neuron_page4'>
@@ -113,6 +123,18 @@ if($_REQUEST['search_engine']){
 				<font class='font13'>".$matchingConn[$i]->getDestinationNickname() . "</font>
 				</a></td>
 				</tr>");
+		}else{
+			print('<tr>');
+			print('<td align="center" width="10%" class="table_neuron_page4">'.$matchingConn[$i]->getSourceId().'</td>');
+			print("<td align='center' width='20%' class='table_neuron_page4'>
+				<a href='neuron_page.php?id=".$matchingConn[$i]->getSourceId()."'>
+				<font class='font13'>".$matchingConn[$i]->getSourceName() . "</font>
+				</a></td>");
+			print("<td align='center' width='20%' class='table_neuron_page4'>
+				<a href='neuron_page.php?id=".$matchingConn[$i]->getSourceId()."'>
+				<font class='font13'>".$matchingConn[$i]->getSourceNickname() . "</font>
+				</a></td></tr>");
+		}
 		}
 		print("</table>");
 	}

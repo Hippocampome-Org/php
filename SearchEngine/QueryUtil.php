@@ -83,6 +83,7 @@ Class QueryUtil{
         return $row_type;
     }
     public function  markerMatchingNeuron($subject,$value){
+        if($value=="negative"||$value=="negative inference"||$value=="positive"||$value=="positive inference"){
         $row_type = array();
         $index=0;
         $query_get_type_id = "SELECT DISTINCT eptr.Type_id FROM Property p,EvidencePropertyTypeRel eptr
@@ -100,7 +101,25 @@ Class QueryUtil{
         while($row=mysqli_fetch_array($rs_type, MYSQLI_NUM)){
             $row_type[$index++]=$row[0];
         }
-        #echo("Total Type Found:".count($row_type));
+        }else{
+        $row_type = array();
+        $index=0;
+        $query_get_type_id = "SELECT DISTINCT eptr.Type_id FROM Property p,EvidencePropertyTypeRel eptr
+                            WHERE eptr.Property_id=p.id 
+                            AND p.subject like '$subject'
+                            AND p.predicate like 'has expression'
+                            AND (eptr.conflict_note LIKE 'subtypes' OR eptr.conflict_note LIKE 'subcellular expression differences'  OR eptr.conflict_note LIKE 'species/protocol differences'  OR eptr.conflict_note LIKE 'unresolved')
+                            ORDER BY eptr.Type_id";
+        //echo $query_get_type_id;
+        //print("<br>");
+        $rs_type = mysqli_query($GLOBALS['conn'],$query_get_type_id);
+        if (!$rs_type) {
+            echo("<p>Error in Listing Neuron Type For Marker </p>");
+        }
+        while($row=mysqli_fetch_array($rs_type, MYSQLI_NUM)){
+            $row_type[$index++]=$row[0];
+        }
+    }
         return $row_type;
     }
     public function  ephysMatchingNeuron($property,$propertyValue,$operator,$roundDigit){

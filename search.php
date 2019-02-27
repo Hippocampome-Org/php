@@ -3,6 +3,7 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
+session_start();
 include ("function/property.php");
 include ("function/part.php");
 include ("function/relation.php");
@@ -317,17 +318,15 @@ include ("function/icon.html");
 			//Permission blocks the page content related to Firing Pattern
   
 			if($property1){
-				if ($permission==1) {
-					if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
-						print ("");
-					else
-						print("<OPTION VALUE='$property1'>$property1</OPTION>");
-				
-					}
-				else
-					print("<OPTION VALUE='$property1'>$property1</OPTION>");
-
-				}		
+                if ($permission==1 || $_SESSION["fp"]==0) {
+                    if ($property1=='Firing Pattern' || $property1=='Firing Pattern Parameter')
+                        print ("");
+                    else
+                        print("<OPTION VALUE='$property1'>$property1</OPTION>");
+                }
+                else
+                    print("<OPTION VALUE='$property1'>$property1</OPTION>");
+			}
 
 			print ("<OPTION VALUE='-'>-</OPTION>");
 			for ($i=0; $i<$n_property; $i++)
@@ -335,16 +334,16 @@ include ("function/icon.html");
 				$value_property = property($i); 
 				
 				if (($value_property != $property1)){
-					if ($permission==1 ){
-						if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
-							print ("");
-						else
-							print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
-					
-						}
-					else
-						print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
-					}
+                    if ($permission==1|| $_SESSION["fp"]==0){
+                        if ($value_property=='Firing Pattern' || $value_property=='Firing Pattern Parameter')
+                            print ("");
+                        else
+                            print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+
+                    }
+                    else
+                        print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+                }
 			}
 			print ("</select>");
 			print ("</td>");

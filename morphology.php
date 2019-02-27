@@ -62,6 +62,7 @@ jQuery(document).ready(function() {
 
 
 <?php
+
 //session_start();
 //$perm = $_SESSION['perm'];
 //if ($perm == NULL)
@@ -73,6 +74,7 @@ require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.temporary_result_neurons.php');
+
 // FUNCTIONS -------------------------------------------------------------------------------
 // Check the UNVETTED color: ***************************************************************************
 /* function check_unvetted1($id, $id_property, $evidencepropertyyperel)

@@ -3,6 +3,7 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
+session_start();
 $perm = $_SESSION['perm'];
 include ("function/neuron_page_text_file.php");
 include ("function/name_ephys_for_evidence.php");
@@ -27,43 +28,26 @@ require_once('class/class.article.php');
 require_once('class/class.author.php');
 require_once('class/class.articleevidencerel.php');
 require_once('class/class.articleauthorrel.php');
-
-
+require_once('class/class.izhmodelsmodel.php');
 $id = $_REQUEST['id'];
-	
 $type = new type($class_type);
 $type -> retrive_by_id($id);
-
 $synonym = new synonym($class_synonym);
-
 $property = new property($class_property);
-
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
-
 $epdataevidencerel = new epdataevidencerel($class_epdataevidencerel);
-
 $epdata = new epdata($class_epdata);
-
 $synonymtyperel = new synonymtyperel('SynonymTypeRel');
-
 $fragmenttyperel = new fragmenttyperel();
-
 $fragment = new fragment($class_fragment);
-
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
-
 $typetyperel = new typetyperel();
-
 $articleevidencerel = new articleevidencerel($class_articleevidencerel);
-
 $article = new article($class_article);
-
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
-
 $author = new author($class_author);
-
 $attachment_obj = new attachment($class_attachment);
-
+$izhmodelsmodelObject = new izhmodelsmodel($class_izhmodels_model);
 if ($text_file_creation)
 {
 	$name_file = neuron_page_text_file($id, $type, $synonymtyperel, $synonym, $evidencepropertyyperel, $property, $epdataevidencerel, $epdata, $class_type);
@@ -71,14 +55,11 @@ if ($text_file_creation)
 	echo("window.open('$name_file','', 'menubar=yes, width=900, height=700' );");
 	print ("</script>");
 }
-
  //to hide Firing Pattern button at the bottom page
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
 $rs = mysqli_query($conn,$query);
 list($permission) = mysqli_fetch_row($rs);
 ?>
-
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <?php
@@ -93,13 +74,11 @@ $special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id
 WHERE perisomatic_targeting_flag=2) ORDER BY position";
 $result_special_case_basket = mysqli_query($GLOBALS['conn'], $special_case_basket);
 $special_neuron_id_basket = result_set_to_array($result_special_case_basket, 'id');
-
 // query to get axonic types
 $special_case_axo_axonic = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
 WHERE perisomatic_targeting_flag=1) ORDER BY position";
 $result_special_case_axo_axonic = mysqli_query($GLOBALS['conn'], $special_case_axo_axonic);
 $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axonic, 'id');
-
  ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
@@ -109,20 +88,16 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 <script src="lightbox/js/jquery-1.11.0.min.js"></script>
 <script src="lightbox/js/lightbox.js"></script>
 <link href="lightbox/css/lightbox.css" rel="stylesheet"/>
-
 <script src="jqGrid-4/js/jquery-1.11.0.min.js"></script>
 <link rel="stylesheet" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
 <script src="jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css" />
-  
   <script>
   $(function(){
-	  
 	$( "#list_acc" ).accordion({collapsible:true,active:null,heightStyle: "content",autoHeight:false});
 	$( "#list_supp_ids" ).accordion({collapsible:true,active:null,heightStyle: "content",autoHeight:false});
     $( "#accordion" ).accordion({collapsible:true,heightStyle: "content",event: "click hoverintent"});
     });
-
   $.event.special.hoverintent = {
 		    setup: function() {
 		      $( this ).bind( "mouseover", jQuery.event.special.hoverintent.handler );
@@ -136,27 +111,22 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		        target = $( event.target ),
 		        previousX = event.pageX,
 		        previousY = event.pageY;
-		 
 		      function track( event ) {
 		        currentX = event.pageX;
 		        currentY = event.pageY;
 		      };
-		 
 		      function clear() {
 		        target
 		          .unbind( "mousemove", track )
 		          .unbind( "mouseout", clear );
 		        clearTimeout( timeout );
 		      }
-		 
 		      function handler() {
 		        var prop,
 		          orig = event;
-		 
 		        if ( ( Math.abs( previousX - currentX ) +
 		            Math.abs( previousY - currentY ) ) < 7 ) {
 		          clear();
-		 
 		          event = $.Event( "hoverintent" );
 		          for ( prop in orig ) {
 		            if ( !( prop in event ) ) {
@@ -167,7 +137,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		          // is fired asynchronously and the old event is no longer
 		          // usable (#6028)
 		          delete event.originalEvent;
-		 
 		          target.trigger( event );
 		        } else {
 		          previousX = currentX;
@@ -175,7 +144,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		          timeout = setTimeout( handler, 200 );
 		        }
 		      }
-		 
 		      timeout = setTimeout( handler, 200 );
 		      target.bind({
 		        mousemove: track,
@@ -186,34 +154,27 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
   </script>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
-
 <body>
-
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
 	include ("function/menu_main.php");
 ?>	
-
 <div class='title_area'>
 	<font class="font1">
 		<?php
 	 	//	print $type->getSubregion(); print " ";
 	  	//	print $type->getNickname();
-
 	  		if (strpos($type->getNickname(),$type->getSubregion()) !== false) {
     			print $type->getNickname();
 			}
-			
 			else{
 				print $type->getSubregion(); print " ";
 	  		print $type->getNickname();
 			}
-	  		
 	  ?>
 	  </font>
 </div>
-
 <!-- 
 <div align="center" class="title_3">
 	<table width="90%" border="0" cellspacing="2" cellpadding="0">
@@ -225,9 +186,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 	</table>
 </div>
 -->
-
 <!-- ---------------------- -->
-
 <div align="center">
 <table width="85%" border="0" cellspacing="2" cellpadding="0" class='body_table'>
   <tr height="95">
@@ -248,9 +207,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</td>				
 			</tr>		
 		</table>		
-		
 		<br />
-		
 		<!-- TABLE NAME -->		
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -274,9 +231,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</td>				
 			</tr>			
 		</table>
-		
 		<br />
-		
 		<!-- TABLE SYNONYM -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -290,11 +245,9 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				// Retrive the Synonim_id from synonymtyperel by ID type:
 				$synonymtyperel -> retrive_synonym_id($id);
 				$n_syn = $synonymtyperel -> getN_synonym();
-				
 				for ($i1=0; $i1<$n_syn; $i1++)
 				{
 					$Synonym_id = $synonymtyperel -> getSynonym_id($i1);
-					
 					$synonym -> retrive_by_id($Synonym_id);
 					$syn = $synonym -> getName();					
 					print ("				
@@ -309,9 +262,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				}
 			?>
 		</table>		
-		
 		<br />	
-
 		<!-- LIST of articles -->
 			<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -330,16 +281,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				// retrieve all evidence_id from EvidencePropertyTypeRel by using type_id
 				$evidencepropertyyperel -> retrive_evidence_id2($id);
 				$n_evidence_id_3 = $evidencepropertyyperel -> getN_evidence_id();
-				
 				$n_article_3=0;
 				for ($i1=0; $i1<$n_evidence_id_3; $i1++)
 				{
 					$evidence_id_for_articles = $evidencepropertyyperel -> getEvidence_id_array($i1);
-				
 					// retrieve id_article from ArticleEvidenceRel by using $evidence_id_for_articles
 					$articleevidencerel -> retrive_article_id($evidence_id_for_articles);
 					$id_article_3 = $articleevidencerel -> getarticle_id_array(0);
-
 					if ($id_article_3 == NULL);
 					else
 					{
@@ -347,7 +295,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$n_article_3 = $n_article_3 + 1;
 					}
 				}
-							
 				// To create an unique array for Id_article
 				sort($id_article_4);
 				$n_article_real = 0;
@@ -362,7 +309,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$n_article_real = $n_article_real + 1;
 					}
 				}
-
 				$art_id=array();
 				$auth_first_name_final=array();
 				$h=0;
@@ -389,30 +335,24 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				}
 				$auth_first_name_final[$i4]=$auth_first_name[0];
 					$art_id[$i4]=$id_article_4_unique[$i4];
-				
 				}
-				
 				array_multisort($auth_first_name_final,$art_id);
-
 				for ($i1=0; $i1<$n_article_real; $i1++)
 				{
 					$article -> retrive_by_id($art_id[$i1]);
 					$article_title[$i1] = $article -> getTitle();			
 				}
-				
 				//sort ($article_title);
 				print("<div id='accordion' align='left' class='table_neuron_page2'>");
 				for($i1=0; $i1<$n_article_real; $i1++)
 				{
 					$title_article_correct = NULL;
 					$art=$article_title[$i1];
-
 					$t="SELECT a.id,a.publication AS pub,a.volume AS vol,a.pmid_isbn AS pmid,a.issue AS iss,a.first_page AS first,a.last_page AS last,a.year AS yea,a.doi AS doi FROM Article AS a WHERE a.title='$article_title[$i1]'";
 					$r=mysqli_query($GLOBALS['conn'],$t);
 					$l=0;
 					while($row = mysqli_fetch_array($r, MYSQLI_ASSOC))
 					{
-				
 						$publi=$row['pub'];
 						$pm=$row['pmid'];
 						$is=$row['iss'];
@@ -424,7 +364,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$doi_list=$row['doi'];
 						$l++;
 					}					
-
 					$article_author_rel="SELECT DISTINCT b.Author_id AS auth_id FROM ArticleAuthorRel AS b WHERE b.Article_id='$article_id' ORDER BY b.author_pos";
 					$results=mysqli_query($GLOBALS['conn'],$article_author_rel);	
 					$g=0;
@@ -480,11 +419,9 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						else	
 							$tag  = $tag . ", morphology";							 
 					}
-					 
 					$tag_string = "<strong>Tags:</strong>" ;
 					$years=substr($ye, 0, 4);
 					print("<em class='for_accordion'><font size='0.5' color='#000066'>$auth_name[0] &nbsp;($years) <b>$publi</b></font></em>");
-					
 					if (strlen($pm) > 10 )
 					{
 						$linking = "<a href='$link_isbn$pm' target='_blank'>";
@@ -513,27 +450,22 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							$f_auth=substr($auth_name[$v],0,1);
 							print(" <a href='find_author.php?name_author=$auth_name[$v]&first_author=$f_auth&new=1&see_result=1'><font clont13'> $auth_name[$v]</font></a>,");
 						}
-
 					}		
 					if ($is != NULL)
 						$is_tot = "($is)";
 					else
 						$is_tot = "";
-					
 					if ($doi_list != NULL)
 						$doi_total = "DOI: $doi_list";
 					else
 						$doi_total = "";
-
 					if($volu!=null && $is_tot!=null)
 					{		
-					
 					if($doi_total!=null)
 					{		
 						print("	
 							$publi,
 					 	$ye, $volu $is_tot,
-					
 						Pages: $fir - $las <br/>
 						$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
 						$tag_string $tag <br/>
@@ -544,7 +476,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						print("
 								$publi,
 								$ye, $volu $is_tot,
-									
 								Pages: $fir - $las <br/>
 								$pmid_string <font class='font13'>$pm</font></a><br/>
 								$tag_string  $tag <br/>
@@ -557,7 +488,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							print("
 							$publi,
 							$ye, $volu,
-			
 							Pages: $fir - $las <br/>
 							$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
 							$tag_string  $tag <br/>
@@ -568,14 +498,11 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							print("
 									$publi,
 									$ye, $volu,
-										
 									Pages: $fir - $las <br/>
 									$pmid_string <font class='font13'>$pm</font></a><br/>
 									$tag_string  $tag <br/>
 									</div>");
 						}
-						
-						
 						}
 						elseif ($volu==null && $is_tot!=null)
 						{
@@ -584,7 +511,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								print("
 									$publi,
 									$ye, $is_tot,
-										
 									Pages: $fir - $las <br/>
 									$pmid_string <font class='font13'>$pm</font></a>; $doi_total  <br/>
 									$tag_string  $tag <br/>
@@ -595,7 +521,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								print("
 										$publi,
 										$ye, $is_tot,
-								
 										Pages: $fir - $las <br/>
 										$pmid_string <font class='font13'>$pm</font></a><br/>
 										$tag_string  $tag <br/>
@@ -619,14 +544,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								print("
 										$publi,
 										$ye,
-											
 										Pages: $fir - $las <br/>
 										$pmid_string <font class='font13'>$pm</font></a><br/>
 										$tag_string  $tag <br/>
 										</div>");
 							}
 						}
-						
 				}
 				?>
 				</div>
@@ -693,10 +616,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 			}
 		}
 		?>
-
-
-
-
 		<!-- TABLE Morphology -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -705,21 +624,16 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</td>			
 			</tr>			
 		</table>
-
 				<?php
-
 		// retrive propertytyperel.property_id By type.id 
 		$evidencepropertyyperel -> retrive_Property_id_by_Type_id($id);
-	
 		$n = $evidencepropertyyperel -> getN_Property_id();
 		$q=0;
 		for ($i5=0; $i5<$n; $i5++)
 		{
 			$property_id[$i5] = $evidencepropertyyperel -> getProperty_id_array($i5);		
 		}
-
     // STM Alternative implementation of morphology table
-        
     // HTML components
     function morphology_sub_table_head($title) {
       $html ="<table width='80%' border='0' cellspacing='2' cellpadding='0'>
@@ -732,7 +646,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</tr>";
       return $html;
     }
-    
     function parcel_row($parcel, $part) {
       global $id;
       $parcel_for_url = str_replace(':', '_', $parcel);
@@ -749,14 +662,11 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
         </tr>";
         return $html;
     }
-    
     function morphology_sub_table_foot(){
       $html = "</table>";
       return $html;
     }
-
     // useful functions
-
     // needed queries
     // object REGEXP ':' in query below is to select only parcels
     $morphology_properties_query =
@@ -764,59 +674,42 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
       FROM EvidencePropertyTypeRel eptr
       JOIN (Property p, Type t) ON (eptr.Property_id = p.id AND eptr.Type_id = t.id)
       WHERE predicate = 'in' AND object REGEXP ':'";
-
     $one_type_query = $morphology_properties_query . " AND eptr.Type_id = '$id'";
     $axon_query = $one_type_query . " AND subject = 'axons'";
     $dendrite_query = $one_type_query . " AND subject = 'dendrites'";
     $soma_query = $one_type_query . " AND subject = 'somata'";
-
     // get the lists
     $result = mysqli_query($GLOBALS['conn'],$soma_query);
     $soma_parcels = result_set_to_array($result, 'object');
-
     $result = mysqli_query($GLOBALS['conn'],$axon_query);
     $axon_parcels = result_set_to_array($result, 'object');
-
     $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
     $dendrite_parcels = result_set_to_array($result, 'object');
-
     // print it out
     print morphology_sub_table_head("Soma");
     foreach($soma_parcels as $parcel) { print parcel_row($parcel, "somata"); }
     print morphology_sub_table_foot();
-
     print morphology_sub_table_head("Axons");
     foreach($axon_parcels as $parcel) { print parcel_row($parcel, "axons"); }
     print morphology_sub_table_foot();
-
     print morphology_sub_table_head("Dendrites");
     foreach($dendrite_parcels as $parcel) { print parcel_row($parcel, "dendrites"); }
     print morphology_sub_table_foot();
-
 ?>
-
 		<br />	
-
 		<?php
 			// TABLE FIGURE ********************************************************************************************************************************
-		
 			// retrieve the name of figure: --------------------------------------------------
 			$fragmenttyperel -> retrive_fragment_id_priority_uno($id);
 			$id_fragment = $fragmenttyperel -> getFragment_id();
-			
 			$fragment ->  retrive_by_id($id_fragment);
-			
 			//$attachment = $fragment -> getAttachment();
 			//$attachment_type = $fragment -> getAttachment_type();
-	
-			
-			
 			//figures from attachment table.................
 			$id_original=$fragment -> getOriginal_id();
 			$attachment_obj -> retrive_attachment_by_original_id($id_original, $id);
 			$attachment = $attachment_obj -> getName();
 			$attachment_type = $attachment_obj -> getType();
-			
 			$link_figure="";
 			$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
 			//echo "$attachment_jpg";
@@ -824,54 +717,42 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				$link_figure = "attachment/marker/".$attachment_jpg;
 			//	echo "marker:-".$link_figure;
 			}
-			
 			if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
 				$link_figure = "attachment/morph/".$attachment_jpg;
 			//	echo "morph:-".$link_figure;
 			}
-			
 			if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
 				$link_figure = "attachment/ephys/".$attachment_jpg;
 				//echo "ephys:-".$link_figure;
 			}
-
-
-			
-			
 			// change PFD in JPG:
 			$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
 			//$link_figure = "figure/".$attachment_jpg;	
 		//	$link_figure = "attachment/morph/".$attachment_jpg;
 			// -------------------------------------------------------------------------------		
-		
 			// Citation figure: ***************************************************************
 			$fragment -> retrive_by_id($id_fragment);
 			$citation = $fragment -> getQuote();
 			$citation = quote_replaceIDwithName($citation);
 			$pmid_isbn = $fragment -> getPmid_isbn();
 			$pmid_isbn_page= $fragment -> getPmid_isbn_page();
-
 			//$original_id = $fragment -> getOriginal_id();
 			if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
 			{
 				$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 				$id_article= $article -> getID();
-
 			}
 			else 
 			{
 			// retrieve Evidence_id from EvidenceFragmentRel by using Fragment_id
 			$evidencefragmentrel -> retrieve_evidence_id($id_fragment);
 			$id_evidence = $evidencefragmentrel -> getEvidence_id_array(0);
-				
 			// retrieve Article_id from ArticleEvidenceRel by using Evidence_id
 			$articleevidencerel -> retrive_article_id($id_evidence);
 			$id_article = $articleevidencerel -> getArticle_id_array(0);
 			$article -> retrive_by_id($id_article) ;
 			}
-
 			// retrieve all information from article table by using article_id
-			
 			$title = $article -> getTitle();
 			$pmid_isbn = $article -> getPmid_isbn(); 
 			$issue = $article -> getIssue();
@@ -885,24 +766,19 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 			$open_access = $article -> getOpen_access(); 
 			$citation_count = $article -> getLast_page(); 
 			$volume = $article -> getVolume();
-			
 			// retrive the Author Position from ArticleAuthorRel
 			$articleauthorrel -> retrive_author_position($id_article);
 			$n_author = $articleauthorrel -> getN_author_id();
-			
 			for ($ii3=0; $ii3<$n_author; $ii3++)
 				$auth_pos[$ii3] = $articleauthorrel -> getAuthor_position_array($ii3);
-				
 			if ($auth_pos)	
 				sort ($auth_pos);
-			
 			$name_authors = NULL;
 			$name_authors_representative=NULL;
 			for ($ii3=0; $ii3<$n_author; $ii3++)
 			{
 				$articleauthorrel -> retrive_author_id($id_article, $auth_pos[$ii3]);
 				$id_author = $articleauthorrel -> getAuthor_id_array(0);
-				
 				$author -> retrive_by_id($id_author);
 				$name_a = $author -> getName_author_array(0);
 				$name_a = preg_replace("/'/", "&#39;", $name_a);
@@ -917,19 +793,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				{
 					$name_authors_representative=$name_b;
 				}
-		
 				$name_authors = $name_authors.', '.$name_a;
 			}
 			$name_authors[0] = '';			
  			//$name_authors_representative[0]= '';
 			$name_authors_representative=trim($name_authors_representative);
 			$name_authors = trim($name_authors);				
-
 			$pages= $first_page." - ".$last_page;
-
 			// ********************************************************************************
-
-			
 			if ($attachment_jpg != NULL)
 			{
 			?>
@@ -943,7 +814,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<?php
 						// TABLE OF THE ARTICLES: ************************************************************************************************
-						
 						if (strlen($pmid_isbn) > 10 )
 						{									
 							$link2 = "<a href='$link_isbn$pmid_isbn' target='_blank'>";
@@ -955,17 +825,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";								
 							$string_pmid = "<strong>PMID: </strong>".$link2;			
 						}
-						
 						if ($issue != NULL)
 							$issue_tot = "($issue),";
 						else
 							$issue_tot = "";
-							
 						if ($doi != NULL)
 							$doi_tot = "DOI: $doi";
 						else
 							$doi_tot = "";							
-						
 						print ("
 						<tr>
 							<td width='20%' align='right'>
@@ -978,14 +845,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							</td>
 						</tr>
 						");					
-
 					?>
 				</table>
 				<table>
 					<tr>
 						<td width="20%" align="center">
 							<br />
-		
 							<?php								
 							//	if ($attachment_type == 'figure')
 							if ($attachment_type=="morph_figure"||$attachment_type=="morph_table"||$attachment_type=="marker_figure"||$attachment_type=="marker_table"||$attachment_type=="ephys_figure"||$attachment_type=="ephys_table")	
@@ -993,7 +858,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 									print ("<a href='$link_figure' rel='lightbox' title='$citation'>");
 									print ("<img src='$link_figure' border='2' width='30%'>");
 									print ("</a>");
-								
 									print ("<br>");
 									print ("<em>$citation</em>");
 								}	
@@ -1001,24 +865,16 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							?>
 						</td>			
 					</tr>			
-							
 				</table>
-		
 					<br />	<br />
-							
 			<?php
 			}
-			
 			?>				
-							
-		
 		<!-- TABLE Molecular markers: -->
 		<?php
-
 		$marker_pos_disp_counter = 0;
 		$marker_neg_disp_counter = 0;
 		$marker_mixed_disp_counter = 0;
-		
 		// loop through all evidence to look for marker evidence
 		for ($i=0; $i<$n; $i++) {
 			$property -> retrive_by_id($property_id[$i]);
@@ -1026,31 +882,24 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 			$val = $property -> getVal();
 			$part = $property -> getPart();
 			$remapped_part = remap_marker_names($part);
-			
 			$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
 			$unvetted = $evidencepropertyyperel -> getUnvetted();
 			$evidencepropertyyperel -> retrieve_conflict_note($property_id[$i], $id);
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();
 			if ($conflict_note == 'positive inference; negative inference')
 				$conflict_note = "inferential conflict likely due to subtypes";
-			
-				
-				
 			if ($val == 'positive') 
 				$hippo_positive[$remapped_part] = 1;
 			elseif ($val == 'weak_positive')			
 				$hippo_weak_positive[$remapped_part] = 1;
 			elseif ($val == 'positive_inference')
 				$hippo_positive_inference[$remapped_part] = 1;
-
 			elseif ($val == 'negative')
 				$hippo_negative[$remapped_part] = 1;
 			elseif ($val == 'negative_inference')
 				$hippo_negative_inference[$remapped_part] = 1;
-				
 			elseif ($val == 'unknown')
 				$hippo_unknown[$remapped_part] = 1;
-			
 			if ($val != 'unknown') {
 				// maintain separate arrays for positive (+ wk pos) and negative evidence
 				if ($conflict_note == 'positive' || $conflict_note == 'positive inference' || $conflict_note == 'confirmed positive' || $conflict_note == 'confirmed positive inference') {
@@ -1058,12 +907,10 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$pos_array['disp_name_key'][$marker_pos_disp_counter] = $part;
 					$pos_array['unvetted_key'][$marker_pos_disp_counter] = $unvetted;
 					$pos_array['conflict_key'][$marker_pos_disp_counter] = $conflict_note;
-					
 					if ($val == 'weak_positive')
 						$pos_array['weak_key'][$marker_pos_disp_counter] = 1;
 					else
 						$pos_array['weak_key'][$marker_pos_disp_counter] = 0;
-					
 					$marker_pos_disp_counter++;
 				}
 				elseif ($conflict_note == 'negative' || $conflict_note == 'negative inference' || $conflict_note == 'confirmed negative' || $conflict_note == 'confirmed negative inference') {
@@ -1071,7 +918,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$neg_array['disp_name_key'][$marker_neg_disp_counter] = $part;
 					$neg_array['unvetted_key'][$marker_neg_disp_counter] = $unvetted;
 					$neg_array['conflict_key'][$marker_neg_disp_counter] = $conflict_note;												
-					
 					$marker_neg_disp_counter++;
 				}
 				elseif ($conflict_note != NULL) {
@@ -1079,17 +925,11 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$mixed_array['disp_name_key'][$marker_mixed_disp_counter] = $part;
 					$mixed_array['unvetted_key'][$marker_mixed_disp_counter] = $unvetted;
 					$mixed_array['conflict_key'][$marker_mixed_disp_counter] = $conflict_note;
-					
 					$marker_mixed_disp_counter++;
 				}				
 			}
-			
-				
 			$hippo_property_id[$part] = $this_id;
 		}
-
-		
-		
 		if ($marker_pos_disp_counter == 0)
 			$pos_array = NULL;
 		else {
@@ -1099,7 +939,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$pos_array['weak_key'], SORT_STRING | SORT_FLAG_CASE,
 					$pos_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 		}
-		
 		if ($marker_neg_disp_counter == 0)
 			$neg_array = NULL;
 		else {
@@ -1108,7 +947,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$neg_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 					$neg_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);
 		}
-		
 		if ($marker_mixed_disp_counter == 0)
 			$mixed_array = NULL;
 		else {						
@@ -1116,17 +954,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					$mixed_array['disp_name_key'], SORT_STRING | SORT_FLAG_CASE,
 					$mixed_array['unvetted_key'], SORT_STRING | SORT_FLAG_CASE,
 					$mixed_array['conflict_key'], SORT_STRING | SORT_FLAG_CASE);			
-			
-			
 			// remove duplicates
 		    $temp_array = array();     
 		    $key_array = array();
-		    
 		    $i = 0;
-		        
 		    for($z=0; $z<count($mixed_array['part_key']); $z++) {
 		    	$val = $mixed_array['part_key'][$z];
-		    	
 		        if (!in_array($val, $key_array)) {
 		            $key_array[$i] = $val;
 		            $temp_array['part_key'][$i] = $mixed_array['part_key'][$z];
@@ -1136,52 +969,36 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		            $i++;
 		        }          
 		    }
-
 			$mixed_array = $temp_array;
 			$mixed_exp_disp_counter = count($mixed_array);
 		}
-		
-		
-
 		$hippo_property = determinePosNegCombosForAllMarkers($name_markers, $hippo_positive, $hippo_negative, $hippo_weak_positive, $hippo_positive_inference, $hippo_negative_inference, $hippo_unknown);
-		
 		for ($f1=0; $f1<$n_markers; $f1++) {
 			$this_remapped_name = remap_marker_names($name_markers[$f1]);
-			
 			$evidencepropertyyperel -> retrieve_conflict_note($hippo_property_id[$this_remapped_name], $id);
 			$conflict_note = $evidencepropertyyperel -> getConflict_note();			
 			$nam_unv1 = check_unvetted1($id, $hippo_property_id[$this_remapped_name], $evidencepropertyyperel);			
-			
 			$img = check_color($hippo_property[$name_markers[$f1]], $nam_unv1, $conflict_note, $permission);
-			
 			$hippo[$this_remapped_name] = $img[0];
-		
 			if ($img[1] == NULL)
 				$hippo[$this_remapped_name] = $img[0];
 			else
 				$hippo_color[$this_remapped_name] = $img[1];
-			
 			$marker_URLs[$this_remapped_name] = getUrlText($id, $this_remapped_name, $hippo_color[$this_remapped_name]);
 		}
-		
 		?>
-				
-		
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="center" class="table_neuron_page3">Molecular markers</td>
 			</tr>
 		</table>
-		
 		<!-- Positive sub-table -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">Positive</td>
 				<td align="left" width="80%" class="table_neuron_page1"></td>
 			</tr>
-			
 			<?php
-
 				if ($marker_pos_disp_counter == 0) {
 					if ($id == '4094') { // Cajal-Retzius
 						print ("
@@ -1204,17 +1021,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					for ($j=0; $j<$marker_pos_disp_counter; $j++) {
 						$markerForLink = $pos_array['part_key'][$j];
 						$this_marker_URL_start = $marker_URLs[$markerForLink];
-
 						if ($pos_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
-						
 						if ($pos_array['weak_key'][$j] == 1)
 							$disp_marker_name = $pos_array['disp_name_key'][$j] . ' (weak positive)';
 						else					
 							$disp_marker_name = $pos_array['disp_name_key'][$j];
-						
 						$pos_conflict = $pos_array['conflict_key'][$j];
 						if ($pos_conflict == "confirmed positive")
 							{
@@ -1231,8 +1045,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								if($permission!=1)
 									$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
 							}
-						
-						
 						// if NULL, marker needs to be remapped; just print name (w/o URL)
 						if ($this_marker_URL_start == NULL) {
 							print ("
@@ -1265,16 +1077,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				} // end if ($marker_pos_disp_counter == 0) {
 			?>
 		</table>	
-	
 		<!-- Negative sub-table -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">Negative</td>
 				<td align="left" width="80%" class="table_neuron_page1"></td>				
 			</tr>	
-			
 			<?php
-
 				if ($marker_neg_disp_counter == 0) {
 					if ($id == '4094') { // Cajal-Retzius
 						print ("
@@ -1297,14 +1106,11 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					for ($j=0; $j<$marker_neg_disp_counter; $j++) {
 						$markerForLink = $neg_array['part_key'][$j];
 						$this_marker_URL_start = $marker_URLs[$markerForLink];
-
 						if ($neg_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
-							
 						$disp_marker_name = $neg_array['disp_name_key'][$j];
-						
 						$neg_conflict = $neg_array['conflict_key'][$j];
 						if ($neg_conflict == "confirmed negative")
 							if($permission!=1)
@@ -1315,7 +1121,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						elseif ($neg_conflict == "confirmed negative inference")
 							if($permission!=1)
 								$disp_marker_name = $disp_marker_name . ' (multiple confirming inferences)';
-
 							// if NULL, marker needs to be remapped; just print name (w/o URL)
 							if ($this_marker_URL_start == NULL) {
 								print ("
@@ -1348,14 +1153,12 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				} // end if ($marker_neg_disp_counter == 0) {
 			?>
 		</table>	
-	
 		<!-- Mixed expression sub-table -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">Mixed expression</td>
 				<td align="left" width="80%" class="table_neuron_page1"></td>
 			</tr>
-			
 			<?php								
 				if ($marker_mixed_disp_counter == 0) {
 					if ($id == '4094') { // Cajal-Retzius
@@ -1378,18 +1181,14 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					for ($j=0; $j<$marker_mixed_disp_counter; $j++) {
 						$markerForLink = $mixed_array['part_key'][$j];
 						$this_marker_URL_start = $marker_URLs[$markerForLink];
-						
 						if ($mixed_array['unvetted_key'][$j] == 1)
 							$font_col = 'font4_unvetted';
 						else
 							$font_col = 'font4';
-									
 						$disp_marker_name = $mixed_array['disp_name_key'][$j];
-						
 						$mixed_conflict = $mixed_array['conflict_key'][$j];
 						if (!$mixed_conflict)
 							$mixed_conflict = 'not yet determined';
-						
 						// if NULL, marker needs to be remapped; just print name (w/o URL)
 						if ($this_marker_URL_start == NULL) {
 							print ("
@@ -1420,10 +1219,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				}  // end if ($marker_pos_disp_counter == 0) {
 			?>
 		</table>		
-	
 		<br />
-		
-		
 		<!-- TABLE Electrophysiological properties: ******************************************************************************************************************** -->
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 			<tr>
@@ -1432,7 +1228,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 				</td>			
 			</tr>			
 		</table>		
-
 		<table width="80%" border="0" cellspacing="2" cellpadding="0">
 		<?php		
       			//$abbreviations = array();
@@ -1455,9 +1250,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						$complete_name = real_name_ephys_evidence($subject);
 						$res = show_ephys($subject);
 						$num_sources_counter = 0;
-						
 						$max_n_measurement = 0;
-						
 						for ($t1=0; $t1<$nn; $t1++) // for each source of this particular EP property
 						{
 							$evidence_id = $evidencepropertyyperel -> getEvidence_id_array($t1);
@@ -1468,7 +1261,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							{	
 								$num_sources_counter = $num_sources_counter + 1;
 								$epdata -> retrive_all_information($epdata_id);
-
 								// record min and max values
 								$value1 = $epdata -> getValue1();
 								if ($val_min == 0 && $val_max == 0)
@@ -1487,7 +1279,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 										$val_max = $value1;
 									}
 								}
-
 								// record N values
 								$n_measurement = $epdata -> getN();
 								if (!$n_measurement)
@@ -1495,9 +1286,7 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 									$n_measurement = 1;
 								}
 								$n_vals += $n_measurement;
-								
 								$gt_value = $epdata->getGt_value();
-
 								$rep_value = $epdata -> getRep_value();
 								if ($rep_value != NULL)
 								{
@@ -1526,10 +1315,8 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 									}
 									//$n_array[$num_sources_counter - 1] = $n_measurement;
 									//$error_sum += $error;
-									
 									if ($n_measurement > $max_n_measurement) {
 										$max_n_measurement = $n_measurement;
-										
 										$representative_value = $final_value;
 										$representative_n_measurement = $n_measurement;
 										$std_sem = $epdata->getStd_sem();
@@ -1541,7 +1328,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 											$representative_error = $error;
 										}
 										$max_n_statistics_strng = $representative_error;
-										
 										if ($gt_value != NULL) {
 											$max_gt_flag = 1;
 										}
@@ -1550,7 +1336,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 										}
 									}
 								}
-								
 								//else
                                 //{
 								//	$final_value_array[$num_sources_counter - 1] = 0;
@@ -1558,8 +1343,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								//}
 							}
 						} // end for $t1
-						
-						
 						/*$tot_value = 0;
 						$tot_n = 0;
 						$tot_n_squared = 0;
@@ -1570,7 +1353,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							$tot_n = $tot_n + $n_array[$y1];
 							$weighted_sum = $weighted_sum + ($final_value_array[$y1] * $n_array[$y1]);
 						} // end for $y1
-
 						// calculate weighted mean
 						if ($tot_n != 0)
 						{
@@ -1581,7 +1363,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						{
 							$mean_value = NULL;
 						}
-
 						// calculate weighted variance
 						if ($num_sources_counter <= 1)
 						{
@@ -1601,7 +1382,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						{
 							$weighted_std = number_format($weighted_std, $res[3], ".", "");
 						}
-
 						// calculate rep_value based weighted_std
 						if ($nn_rep_values > 0)
 						{
@@ -1612,11 +1392,9 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							$weighted_std = 0;
 						}
 						*/
-											
 						// retrieve UNVETTED:
 						$evidencepropertyyperel -> retrive_unvetted($id, $property_id[$i]);
 						$unvetted = $evidencepropertyyperel -> getUnvetted();
-	
 						if ($unvetted == 1)
 						{
 							$font_col = 'font4_unvetted';
@@ -1625,40 +1403,32 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 						{
 							$font_col = 'font4';
 						}
-	
 						//if ($mean_value)
 						if ($representative_value)
 						{
 							$ephys_disp_counter++;
-							
 							if ($ephys_disp_counter==1) {
 								print ("<tr><td width='20%' align='right'></td>");
 								print ("<td align='left' width='80%' class='table_neuron_page2'>");
 								print ("<strong>Key:</strong> [range] OR representative value&plusmn;SD (measurements); Number of sources (total measurements): [min , max]");
 								print ("</td></tr>");
-								
 								print ("<tr><td width='20%' align='right'></td>");
 								print ("<td align='left' width='80%' bgcolor='#FFFFFF'>");
 								print ("<BR>");
 								print ("</td></tr>");
 							}
-							
 							print ("<tr><td width='20%' align='right'></td>");
 							print ("<td align='left' width='80%' class='table_neuron_page2'>");
-							
 							if (!$max_gt_flag) {
 								$print_str = $representative_value;
 							}
 							else {
 								$print_str = ">" . $representative_value;
 							}
-							
 							if ($representative_error != 0) {
 								$print_str = $print_str . "&plusmn;" . $max_n_statistics_strng;
 							}
-							
 							$print_str = $print_str . " " . $res[2] . " (" . $representative_n_measurement . "); ";
-						    
 							if ($num_sources_counter == 1) {
 								$print_str = $print_str . " " . $nn . " source";
 							}
@@ -1666,8 +1436,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 								$print_str = $print_str . " " . $nn . " sources (" . $n_vals . "): ";
 								$print_str = $print_str . " [" . $val_min . " , " . $val_max . "]";
 							}
-							
- 
 							if ($res[0]=='Sag ratio')
 							{
 								print ("<strong>$complete_name:</strong> ");
@@ -1676,16 +1444,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							{
 								print ("<strong>$complete_name ($res[0]):</strong> ");
 							}
-
 							print ("<a href='property_page_ephys.php?id_ephys=$epdata_id&id_neuron=$id&ep=$subject&page=1' class='$font_col'>$print_str</a>");
 							print ("</td></tr>");		
-								
 						} // end if ($mean_value)
 						$mean_value = NULL;						
 					} // end else (if ($nn == 0))
 				} // end if ($predicate == 'is between');
 			} // end for $i
-			
 			if ($ephys_disp_counter == 0) {
 				if ($id == '4094') { // Cajal-Retzius
 					print ("
@@ -1703,8 +1468,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					");
 				}
 			}			
-
-
 /*			
 			      // Abbreviations Box
 			      $abbreviations = array_unique($abbreviations);
@@ -1723,17 +1486,13 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 							");	
 					}
 */					
-											
 		?>
 		</table>	
-
 		<br />
-		
 		<!-- TABLE Notes: -->
 		<?php
 			$type -> retrive_notes($id);
 			$notes = $type -> getNotes();
-		
 			if ($notes)
 			{
 		?>
@@ -1744,7 +1503,6 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 					</td>			
 				</tr>			
 			</table>	
-		
 			<table width="80%" border="0" cellspacing="2" cellpadding="0">
 				<tr>
 					<td align='left' width='20%'>	 
@@ -1757,10 +1515,9 @@ $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axo
 		<?php
 			}
 		?>	
-
 		<br />
 		<?php
-			if($permission!=1)
+			if($permission!=1&&$_SESSION["fp"]==1)
 			{
 		?>
 		<!-- TABLE Firing pattern : -->
@@ -1810,13 +1567,11 @@ WHERE
 </td>
 </tr>
 </table>	
-
 <table width='80%' border='0' cellspacing='2' cellpadding='0'>
 		<tr>
 		<td width='20%' align='right' class='table_neuron_page1'>
 		Parameters
 		</td>
-		
 	<?php
 	$fp_count=0;
 	$firing_parameter=$_REQUEST['pattern'];
@@ -1850,10 +1605,104 @@ WHERE
 		}
 	}
 	?>
-
 </table>
 <?php
-	}
+}
+?>
+<?php
+			if($permission!=1&&$_SESSION["im"]==1)
+			{
+				$izhmodelsmodelArray = $izhmodelsmodelObject->get_all_id($id);
+                if(count($izhmodelsmodelArray)>0){
+?>
+<br />
+<table width="80%" border="0" cellspacing="2" cellpadding="0">
+	<tr>
+		<td width="20%" align="center" class="table_neuron_page3">Izhikevich Model
+		</td>			
+	</tr>
+</table>
+<table width='80%' border='0' cellspacing='2' cellpadding='0'     style="table-layout: fixed;">
+	<tr>
+		<td align="center" width="10%" class="table_neuron_page1">Parameters
+		</td>
+		<td align="left" width="75%" class="table_neuron_page1">Single Compartment
+		</td>
+		<td align="center" width="15%" class="table_neuron_page1">Downloads
+		</td>				
+	</tr>
+		<?php
+		for($i = 0; $i< count($izhmodelsmodelArray);$i++)
+		{
+			$relative_path = 'attachment/izhikevich/FitFiles/fitfile_'.$izhmodelsmodelArray[$i]->getSub_Id().'.json';
+			$xpprelative_path = 'attachment/izhikevich/xppFiles/'.$izhmodelsmodelArray[$i]->getSub_Id().'.ode';
+            $carlsimrelative = glob('attachment/izhikevich/carl_parms/'.$izhmodelsmodelArray[$i]->getSub_Id().'.*');
+            $carlsimrelative_path = (count($carlsimrelative) > 0 ? $carlsimrelative[0]:"");
+            $pyplotsrelative_path = 'attachment/izhikevich/Pyplots/'.$izhmodelsmodelArray[$i]->getSub_Id().'.png';
+			echo "<tr><td width='20%' align='right'></td>";
+			if($izhmodelsmodelArray[$i]->getPreferred() == 'N')
+			{
+				echo "<td style = 'font-size: 10px;' class = 'table_neuron_page2'>";
+			}
+			else
+			{
+				echo "<td style = 'font-size: 10px;color: red' class = 'table_neuron_page2' >";
+			}
+			echo "<span style = 'width:60px;float: left' class = 'table_neuron_page5'>subtype: ".($i+1)."</span> <span style = 'width:68px;float: left'class = 'table_neuron_page5'>k=".round($izhmodelsmodelArray[$i]->getK(),2).";</span>";
+			echo "<span style = 'width: 68px; float: left' >a= ".round($izhmodelsmodelArray[$i]->getA(),3).";</span>";
+			echo "<span style = 'width: 68px; float: left' >b= ".round($izhmodelsmodelArray[$i]->getB(),3).";</span>";
+			echo "<span style = 'width: 68px; float: left' >d= ".round($izhmodelsmodelArray[$i]->getD(),3).";</span>";
+			echo "<span style = 'width: 68px; float: left' >C= ".round($izhmodelsmodelArray[$i]->getC(),3).";</span>";
+			echo "<span style = 'width: 80px; float: left' >Vr= ".round($izhmodelsmodelArray[$i]->getVr(),3).";</span>";
+			echo "<span style = 'width: 80px; float: left' >Vt= ".round($izhmodelsmodelArray[$i]->getVt(),3).";</span>";
+			echo "<span style = 'width: 90px; float: left' >Vpeak= ".round($izhmodelsmodelArray[$i]->getVpeak(),3).";</span>";
+			echo "<span style = 'width: 90px; float: left' >Vmin= ".round($izhmodelsmodelArray[$i]->getVmin(),3).";</span></td>";
+			 if(file_exists($carlsimrelative_path)){
+           	  $includecarlsimrelative_path = "<a href = '".$carlsimrelative_path."' download>[CSV]";
+           }else{
+           	$includecarlsimrelative_path="";
+           }
+           if(file_exists($xpprelative_path)){
+              $includexpprelative_path =	"<a href = '".$xpprelative_path."' download>[XPP]";
+           }else{
+           	 $includexpprelative_path="";
+           }
+			echo "<td width='20%' align='right' class = 'table_neuron_page2'><span width = '100%'><div width='30%' style = 'float: left;'><a href = '".$relative_path."' download>[FitFiles]".$includecarlsimrelative_path.$includexpprelative_path."</div></span> </td></tr>";
+		}
+		?>	
+</table>
+<table width='80%' border='0' cellspacing='2' cellpadding='0'>
+		<tr>
+		<td width='20%' align='right' class='table_neuron_page1'>
+		Images
+		</td>
+		<td align='left' width='80%' class='table_neuron_page1'>
+		</td>
+		</tr>
+<tr>
+<td width='20%' align='right'> </td>
+<td align='left' width='80%' class='table_neuron_page2'>
+	<?php
+    $izhmodelsmodelArray = $izhmodelsmodelObject->get_all_id($id);
+    print("<div style='width:100%; background-color:white; height:95px; overflow:scroll;overflow-x: scroll;overflow-y: scroll;''>");
+    for($i = 0; $i< count($izhmodelsmodelArray);$i++){
+			$relative_image_path_array = glob('attachment/izhikevich/Pyplots/'.$izhmodelsmodelArray[$i]->getSub_Id().'*');
+            foreach($relative_image_path_array as $relative_image_path){
+			if(!file_exists($relative_image_path)){
+		     print("No image is associated with this neuron");
+	         }
+	        else{
+			print("<a href='".$relative_image_path."' target='_blank'><img style='float:left;' title='$image' src='".$relative_image_path."' border='1' width='160' height='90' alt='Image Missing' /></a>");
+	    }
+	   }
+		}
+		print("</div>");
+	?>
+</td>
+</tr>
+</table>	
+<?php
+}}
 ?>
 		<br />
 		<!-- TABLE Potential postsynaptic connections: -->
@@ -1918,7 +1767,6 @@ WHERE
 		return ($url);	
 	}
       // STM Potential Pre-Post List
-
       // components of html
       function connection_table_head($title) {
         $html = "<table width='80%' border='0' cellspacing='2' cellpadding='0'>
@@ -1928,7 +1776,6 @@ WHERE
           </td>			
           </tr>			
           </table>		
-
           <table width='80%' border='0' cellspacing='2' cellpadding='0'>
           <tr>
           <td width='20%' align='left'>
@@ -1939,11 +1786,9 @@ WHERE
           </td>		
           </tr>			
           </table>
-
           <table width='80%' border='0' cellspacing='2' cellpadding='0'>";
         return $html;
       }
-
       function get_excit_inhib_font_class($name) {
         if ($name == 'e') {
           $font_class = 'font10a';
@@ -1952,7 +1797,6 @@ WHERE
         }
         return $font_class;
       }
-
       function name_row($view_type,$record) {
         $name = to_name($record);
 	 $ex_in= $record["excit_inhib"];
@@ -1967,9 +1811,7 @@ WHERE
             "</td>					
           </tr>";					
         return $html;
-        
       }
-
       function name_row_none($name_none) { // the list of targets or sources is empty
         $html =
           "<tr>
@@ -1981,15 +1823,12 @@ WHERE
           </tr>";					
         return $html;
       }
-
       function connection_table_foot() {
         $html= "</table>
           </br>";
         return $html;
       }
-
       // to build the base set of connections access queries defined in morphology section
-
       // queries to access TypeTypeRel and modify the connections
       $explicit_target_and_source_base_query =
         "SELECT
@@ -2001,15 +1840,13 @@ WHERE
       $explicit_nontarget_query = $explicit_target_and_source_base_query . " WHERE Type1_id = '$id' AND connection_status = 'negative'";
       $explicit_source_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'positive'";
       $explicit_nonsource_query = $explicit_target_and_source_base_query . " WHERE Type2_id = '$id' AND connection_status = 'negative'";
-
       // potential targets of output
       $result = mysqli_query($GLOBALS['conn'],$axon_query);
       $axon_parcels = result_set_to_array($result, 'object');
       //print "<br><br>AXON PARCELS<br>"; print_r($axon_parcels);
-
+      //print "<br><br>id:<br>"; print($id);
       $possible_targets = filter_types_by_morph_property('dendrites', $axon_parcels);
       //print "<br><br>POSSIBLE TARGETS:<br>"; print_r($possible_targets);
-
       $result = mysqli_query($GLOBALS['conn'],$explicit_target_query);
       $explicit_targets = null;
       $list_explicit_sources = null;
@@ -2018,21 +1855,17 @@ WHERE
       $list_explicit_targets = null;
       $explicit_targets = result_set_to_array($result, "t2_id");
       //print "<br><br>EXPLICIT TARGETS:<br>"; print_r($explicit_targets);
-
 	  if (count($explicit_targets) >= 1) {
 			$list_explicit_targets = array_unique($explicit_targets);
 			$list_explicit_targets = get_sorted_records($list_explicit_targets);
 	  }
-	  
       $result = mysqli_query($GLOBALS['conn'],$explicit_nontarget_query);
       $explicit_nontargets = result_set_to_array($result, "t2_id");
       //print "<br><br>EXPLICIT NONTARGETS:<br>"; print_r($explicit_nontargets);	  
-	  
 	  if (count($explicit_nontargets) >= 1) {
 			$list_explicit_nontargets = array_unique($explicit_nontargets);
 			$list_explicit_nontargets = get_sorted_records($list_explicit_nontargets);
 	  }
-	  
       $list_potential_targets = array_diff(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
       $list_potential_targets = array_unique($list_potential_targets);
       if (!empty ($list_potential_targets))
@@ -2040,88 +1873,66 @@ WHERE
 /*
       $net_targets = array_merge(array_diff($possible_targets, $explicit_nontargets), $explicit_targets);
       //print "<br><br>NET TARGETS:<br>"; print_r($net_targets);
-
       $net_targets = array_unique($net_targets);
       $net_targets = get_sorted_records($net_targets);
       //sort($net_targets);
 */
-
       // potential sources of input
       $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
-      
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
-      
       $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
-      
       if (count($explicit_sources) >= 1) {
       	$list_explicit_sources = array_unique($explicit_sources);
       	$list_explicit_sources = get_sorted_records($list_explicit_sources);
       }
-       
       $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
-      
       if (count($explicit_nonsources) >= 1) {
       	$list_explicit_nonsources = array_unique($explicit_nonsources);
       	$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
       }
-       
       $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       $list_potential_sources = array_unique($list_potential_sources);
       $list_potential_sources = get_sorted_records($list_potential_sources);
       /*
        $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
-      
       $net_sources = array_unique($net_sources);
       $net_sources = get_sorted_records($net_sources);
       */
-      
       // potential sources of input
       $result = mysqli_query($GLOBALS['conn'],$dendrite_query);
       $dendrite_parcels = result_set_to_array($result, 'object');
       //print "<br><br>DENDRITE PARCELS<br>"; print_r($dendrite_parcels);
-
       $possible_sources = filter_types_by_morph_property('axons', $dendrite_parcels);
       //print "<br><br>POSSIBLE SOURCES:<br>"; print_r($possible_sources);
-
       $result = mysqli_query($GLOBALS['conn'],$explicit_source_query);
       $explicit_sources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT SOURCES:<br>"; print_r($explicit_sources);
-
 	  if (count($explicit_sources) >= 1) {
 			$list_explicit_sources = array_unique($explicit_sources);
 			$list_explicit_sources = get_sorted_records($list_explicit_sources);
 	  }
-	  
       $result = mysqli_query($GLOBALS['conn'],$explicit_nonsource_query);
       $explicit_nonsources = result_set_to_array($result, "t1_id");
       //print "<br><br>EXPLICIT NONSOURCES:<br>"; print_r($explicit_nonsources);
-
 	  if (count($explicit_nonsources) >= 1) {
 			$list_explicit_nonsources = array_unique($explicit_nonsources);
 			$list_explicit_nonsources = get_sorted_records($list_explicit_nonsources);
 	  }
-	  
       $list_potential_sources = array_diff(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       $list_potential_sources = array_unique($list_potential_sources);
       $list_potential_sources = get_sorted_records($list_potential_sources); ?>
-
        <!--  $net_sources = array_merge(array_diff($possible_sources, $explicit_nonsources), $explicit_sources);
       //print "<br><br>NET SOURCES:<br>"; print_r($list_potential_sources);
-
       $net_sources = array_unique($net_sources);
       $net_sources = get_sorted_records($net_sources);  --> 
-
-
-      
-
       <table width='80%' border='0' cellspacing='2' cellpadding='0' >
       <tr>
       <td width="20%" align="center" class="table_neuron_page3"> Sources of Input </td>
@@ -2139,7 +1950,6 @@ WHERE
 	  print connection_table_foot();
 	  ?>
 	  </td>
-
 	  <td width='33%' align='center'>
 	  <?php
       print connection_table_head("Potential sources");
@@ -2151,7 +1961,6 @@ WHERE
 	  print connection_table_foot();
 	  ?>
 	  </td>
-	
       <td width='33%' align='center'>
 	  <?php
       print connection_table_head("Potential sources known to be avoided");
@@ -2164,14 +1973,11 @@ WHERE
 	  </td>
 	  </tr>
 	  </table>
-	 
-      
       <table width='80%' border='0' cellspacing='2' cellpadding='0'>
       <tr>
       <td width="20%" align="center" class="table_neuron_page3"> Targets of Output </td>
       </tr>
       </table>
-      
       <table width='80%' border='0' cellspacing='2' cellpadding='0' colspan='3'>
       <tr valign="top">
       <td width='33%' align='center'>
@@ -2184,7 +1990,6 @@ WHERE
 	  print connection_table_foot();
 	  ?>
 	  </td>
-	  
 	  <td width='33%' align='center'>
 	  <?php
       print connection_table_head("Potential targets");
@@ -2196,7 +2001,6 @@ WHERE
 	  print connection_table_foot();
 	  ?>
 	  </td>
-	  
 	  <td width='33%' align='center'>
 	  <?php
       print connection_table_head("Potential targets known to be avoided");
@@ -2208,23 +2012,13 @@ WHERE
 	  ?>
 	  </td>
 	  </tr>
-	  
-	  
-	  
-
 		</table>
-		
 		</table>	
-
 			<br />	
-
 		</td>
 	</tr>
 </table>
-
 <br /> <br />	<br />	
-
 </div>		
-
 </body>
 </html>

@@ -7,6 +7,9 @@ include("simphp-2.0.php");
 
 //-------user login required check----------
 $_SESSION['perm'] = 0;
+$_SESSION['fp']=0;
+$_SESSION['if']=0;
+$_SESSION['im']=0;
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
 $rs = mysqli_query($conn,$query);
 list($permission) = mysqli_fetch_row($rs);
@@ -30,6 +33,27 @@ if ($_SESSION['perm'] == 0) {
       }
       else;
     }
+      $query = "SELECT permission FROM user WHERE id=3";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
+              $_SESSION['fp']=1;
+          }
+      }
+      $query = "SELECT permission FROM user WHERE id=4";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
+              $_SESSION['if']=1;
+          }
+      }
+      $query = "SELECT permission FROM user WHERE id=5";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
+              $_SESSION['im']=1;
+          }
+      }
   }
 }
 // delete temporary table for the research: -----------------
@@ -133,12 +157,19 @@ if ($permission1 != 0) {
         <li><a href="ephys.php">Electrophysiology</a></li>
         <li><a href="connectivity.php">Connectivity</a></li>
          <?php 
-          if ($permission != 1 ) {
+          if ($permission != 1 && $_SESSION["fp"]==1) {
         ?>
         <li><a href="firing_patterns.php">Firing patterns</a></li>
          <?php   
           }
         ?> 
+          <?php 
+          if ($permission != 1 && $_SESSION["im"]==1) {
+        ?>
+        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
+        <?php   
+          }
+      ?> 
       </ul>
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
@@ -146,7 +177,7 @@ if ($permission1 != 0) {
         <li><a href="find_author.php?searching=1">Author</a></li>
         <li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
         <?php 
-          if ($permission != 1 ) {
+          if ($permission != 1 && $_SESSION["fp"]==1) {
         ?>
         <li><a href="find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
         <?php   
@@ -272,7 +303,7 @@ jQuery(document).ready(function() {
           <br /><p><?php echo $info; ?>
           <br>
           10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
-          <br />Last Update: 2 Mar 2018 (<a href="Help_Release_Notes.php">v1.3 R 1F</a>)</font>
+          <br />Last Update: 26 Feb 2019 (<a href="Help_Release_Notes.php">v1.3 R 1G</a>)</font>
           <br />
         </div>
     </td>   

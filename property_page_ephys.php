@@ -2,6 +2,36 @@
   include ("permission_check.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script src="jquery-ui-1.10.2.custom/js/jquery.jqGrid.src-custom.js" type="text/javascript"></script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script>
+$(document).ready(function(){
+     $("span[id^='flip']").click(function(){
+     	if ( $(this).next().next().is(':visible') ){
+     		$(this).text("View All Parameters");
+     	}
+     	else{
+     		$(this).text("Hide All Parameters");
+     	}
+     	$(this).next().next().slideToggle("fast");
+    });
+});
+</script>
+<style>
+.panel {
+    padding: 0px;
+    display: none;
+    text-align: left;
+}
+</style>
+<script type="text/javascript">
+
+
+
 <?php
 //include ("access_db.php");
 include ("function/name_ephys.php");
@@ -27,6 +57,7 @@ require_once('class/class.markerdata.php');
 require_once('class/class.evidenceevidencerel.php');
 require_once('class/class.epdata.php');
 require_once('class/class.epdataevidencerel.php');
+
 
 
 function create_temp_table ($name_temporary_table)
@@ -2066,12 +2097,13 @@ function show_only_ephys(link, start1, stop1)
 				while(list($id, $id_original, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
 				{			
 					$auth=array();
+
 					$authors2="";
 					$f_auth="";
 					$authors1 = $authors;
 					$temp=explode(",", $authors);
 					$auth=array_merge($auth,$temp);
-					for($x=0;$x<sizeof($auth);$x++)
+					for($x=1;$x<sizeof($auth);$x++)
 					{
 						$f_auth=substr(trim($auth[$x]),0,1);
 						$auth_final=trim($auth[$x]);
@@ -2194,7 +2226,7 @@ function show_only_ephys(link, start1, stop1)
 							if (($id_fragment == $id_fragment_old));//duplicate  neuron copies
 							print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
 							print ("<tr>");
-							print ("<td width='15%' rowspan='7' align='right' valign='top'></td>");
+							print ("<td width='15%' rowspan='11' align='right' valign='top'></td>");
 							print ("<td width='15%' align='left'> </td></tr>");
 						
 							// retrieve the attachament from "fragment" with original_id *****************************
@@ -2337,6 +2369,64 @@ function show_only_ephys(link, start1, stop1)
 								}									
 							}
 							
+
+
+#Ticket:361
+#get Animal Data, Preparation Data, ACSF Data, Recording Method Data using PMID
+
+
+									$query_for_material="SELECT * FROM MaterialMethod WHERE  pmid_isbn=$linking_pmid_isbn";
+											
+											$query_for_description="SELECT * FROM MaterialMethod WHERE id=1";
+											
+											$result_material = mysqli_query($GLOBALS['conn'],$query_for_material);
+											$result_description = mysqli_query($GLOBALS['conn'],$query_for_description);
+											if ($result_material){
+											if($result_material->num_rows !==0){
+
+											$row_material=mysqli_fetch_array($result_material, MYSQLI_BOTH);
+											$row_description=mysqli_fetch_array($result_description, MYSQLI_BOTH);
+											$material_method = array("Animal Data"=>8, "Preparation Data"=>13, "ACSF Data"=>16, "Recording Method Data"=>34);
+											$material_method_index = array(8, 13, 16, 34, 62);
+											$start = 0;
+											foreach ($material_method as $key => $value) {
+
+												print ("</td></tr>
+													<tr>
+													<td width='70%' class='table_neuron_page2' align='left'>$key:");
+												print ("<span style='float:right;cursor: pointer;text-align:right' align='right' id='flip_".$start."_$fp_id'> View All $key</span></br>");
+												print("<div class='panel' id='panel_".$start."_$fp_id'> ");
+												print("<table width='100%' border='1' cellspacing='2' cellpadding='3'>");
+												print("<tr><th width='80%'>Name</th><th width='20%'>Value</th></tr>");
+												// retrive parameters
+												
+												for($index = $value; $index < $material_method_index[$start+1]; $index++){
+													if($row_material[$index]){
+														$value_of_parameter=$row_material[$index];
+														if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+															print("<tr>");
+															print("<td width='80%' align='left'>");
+															print($row_description[$index]);
+															print("</td>");
+															print("<td width='20%' align='left'>");
+															if(trim($value_of_parameter)!='' and trim($value_of_parameter)!="no value" ){
+																print($value_of_parameter);
+															}
+															print("</td>");
+															print("</tr>");
+														}
+													}
+
+												}
+												print("</table>");
+												// print("<div></td><td width='15%' class='table_neuron_page2' align='center'> ");
+												$start = $start + 1;
+											}
+										}
+									}
+
+
+
 							print ("</td></tr>
 							<tr>
 							<td width='70%' class='table_neuron_page2' align='left'>
@@ -2446,6 +2536,17 @@ function show_only_ephys(link, start1, stop1)
 								print ("</td><td width='15%' align='center'>");
 							}
 							
+
+
+
+
+
+
+
+
+
+
+
 							// Display Linking information, if any.linking_cell_id, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location
 							if ($linking_pmid_isbn||$linking_pmid_isbn_page||$linking_quote||$linking_page_location) {
 								print ("</td></tr>

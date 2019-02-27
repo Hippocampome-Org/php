@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <?php
 //include ("access_db.php");
+session_start();
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
@@ -1040,10 +1041,17 @@ include ("function/icon.html");
 			{
 				//array_multisort($position_type, $id_t, $name_type);
 				array_multisort($position_type,$id_t,$subregion_type,$name_type);
+                $n=0;
 				for ($i=0; $i<$n_result_tot; $i++)
 				{
-					$i9=$i+1;
 					
+					if($permission==1||$_SESSION["if"]==0){
+					if(array_key_exists($id_t[$i], $inference_array)&&strpos($inference_array[$id_t[$i]],'inference')!=false){
+						continue;
+					}
+				    }
+				    $n=$n+1;
+				    $i9=$n;
 					print ("
 							<tr>
 								<td align='center' width='5%'>  </td>
@@ -1052,7 +1060,7 @@ include ("function/icon.html");
 									<a href='neuron_page.php?id=$id_t[$i]'>
 										<font class='font13'>$subregion_type[$i] $name_type[$i] </font>");
 					if(array_key_exists($id_t[$i], $inference_array)){
-						if($permission!=1){
+						if($permission!=1 && $_SESSION["if"]==1){
 							print("<font class='font4'>(".$inference_array[$id_t[$i]].") </font>");
 							unset($inference_array[$id_t[$i]]);
 						}
@@ -1120,7 +1128,7 @@ include ("function/icon.html");
 				print ("View Result in a Matrix");
 			else
 				print ("View Results in a Matrix");	
-			if($permission!=1){
+			if($permission!=1 && $_SESSION["fp"]==1){
 			print ("
 				</td>		
 				</tr>
@@ -1167,7 +1175,7 @@ include ("function/icon.html");
 		}
 
 
-		else if($permission==1){
+		else if($permission==1 || $_SESSION["fp"]==0){
 			print ("
 				</td>		
 				</tr>
