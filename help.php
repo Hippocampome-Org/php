@@ -52,6 +52,7 @@
 			<li><a href='data/High-conf-genes_DG-SG.pdf'><font class="font7"> High-conf-genes_DG-SG</font></a></li>
 			<li><a href='data/GeneParcelExpressionConfidence.xlsx'><font class="font7"> Allen Brain Atlas gene expression confidence by parcel</font></a></li>
 			<li><a href='http://hippocampome.org/genexan'><font class="font7"> Gene Expression Analyzer</font></a></li>
+			<li><a href='data/REIs.xlsx'><font class="font7"> Relational Expression Inferences (REIs)</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Electrophysiology:</font> &nbsp; &nbsp;
@@ -64,6 +65,13 @@
   			<li><a href='Help_FP_Abbreviations.php'><font class="font7"> Abbreviations and Definitions</font></a></li>
   			<li><a href='Help_Principles_of_Classification_of_Firing_Pattern_Elements.php'><font class="font7"> Principles of Classification of Firing Pattern Elements</font></a></li>
   			<li><a href='Help_Firing_Pattern_Identification_Pseudocode.php'><font class="font7"> Firing Pattern Identification Pseudocode</font></a></li>
+			</ul>
+			
+			<font class='font1a'>Simulation of Firing Patterns:</font> &nbsp; &nbsp;
+			<ul>
+  			<li><a href='Help_Model_Definition.php'><font class="font7"> Model Definition</font></a></li>
+  			<li><a href='Help_Model_Fitting.php'><font class="font7"> Model Fitting</font></a></li>
+  			<li><a href='Help_Model_Simulation.php'><font class="font7"> Model Simulation Using CARLsim</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
