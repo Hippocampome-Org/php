@@ -73,20 +73,27 @@ class Page
     public  function typeWithEphys($ephysCond){
         $matchingNeuron=array();
         $operator=$this->getOperator($ephysCond);
+        
         if($operator!="") {
             $values = explode($operator, $ephysCond);
+            //print("<pre>" . print_r($values, true) . "</pre>");
             if (count($values) == 2) {
                 $property=trim($values[0]);
                 $property=str_replace(Operator::COLON,"",$property);
-                $propertyValue=trim($values[1]);
+                $propertyValue=trim($values[1],',');
+                
+                //print("<pre>property value" . print($propertyValue) . "</pre>");
                 $roundDigit=0;
                 $queryUtil = new QueryUtil();
                 if($operator==Operator::COLON)
                     $operator=Operator::EQUAL_TO;
+                   
                 if(strpos($propertyValue,".")!==false){
                     $roundDigit=strlen($propertyValue)-(strpos($propertyValue,".")+1)+1;
                 }
-                #echo("OP:$property,$propertyValue,$operator:".stripos($ephysCond, Operator::COLON.Operator::LESS_THAN));
+                // echo("OP:$property,$propertyValue,$operator:".stripos($ephysCond, Operator::COLON.Operator::LESS_THAN));
+                //echo "OP:$property,$propertyValue,$operator";
+                //print("<pre>" . print($operator) . "</pre>");
                 $matchingNeuron = $queryUtil->ephysMatchingNeuron($property, $propertyValue, $operator,$roundDigit);
             } else {
                 print("<p>Invalid Electorphysiology Condition $ephysCond</p>");
