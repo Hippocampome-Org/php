@@ -81,6 +81,11 @@
 			<li><a href='Help_ConnectivityJava.php'><font class="font7"> Java Connectivity Map Won't Launch</font></a></li>  			
 			</ul>
 			
+			<font class='font1a'>Synaptome:</font> &nbsp; &nbsp;			
+			<ul>
+			<li><a href='synaptome.php'><font class="font7"> Requirements, Installation, and Advanced Access Instructions</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			
 			<ul>
 			<li><a href='images/morphology/Morphology_Matrix.jpg'><font class="font7"> Morphology Matrix</font></a></li>  			
