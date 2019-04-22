@@ -1762,21 +1762,30 @@ function show_only_ephys(link, start1, stop1)
 			// find the total number of Articles: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 			$rs = mysqli_query($GLOBALS['conn'],$query);
+			$imp = 0;
 			$n_id_tot = 0;	 // Total number of articles:
-			while(list($id) = mysqli_fetch_row($rs))
+			while(list($id) = mysqli_fetch_row($rs)){
+				
 				$n_id_tot = $n_id_tot + 1;
+			}
+			
+
+			
 			// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 			$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
 			$rs = mysqli_query($GLOBALS['conn'],$query);
 			$n_id = 0;
-	
+	        
 			while(list($title) = mysqli_fetch_row($rs))
 			{
 				$title_temp[$n_id] = $title;
 				$n_id = $n_id + 1;
 			}
-		
+
+            $query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
+		    $rs = mysqli_query($GLOBALS['conn'],$query);
+		    
 			?>
 		
 		
