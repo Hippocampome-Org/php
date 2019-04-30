@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=windows-1252">
 <meta name=Generator content="Microsoft Word 14 (filtered)">
+<title>Synaptome</title>
 <style>
 <!--
  /* Font Definitions */
@@ -65,6 +66,18 @@ h2
 	font-family:"Calibri Light","sans-serif";
 	color:#2F5496;
 	font-weight:normal;}
+p.MsoTitle, li.MsoTitle, div.MsoTitle
+	{mso-style-link:"Title Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:15.0pt;
+	margin-left:0in;
+	border:none;
+	padding:0in;
+	font-size:26.0pt;
+	font-family:"Calibri Light","sans-serif";
+	color:#323E4F;
+	letter-spacing:.25pt;}
 a:link, span.MsoHyperlink
 	{color:#0563C1;
 	text-decoration:underline;}
@@ -164,6 +177,13 @@ ul
 <body lang=EN-US link="#0563C1" vlink="#954F72">
 
 <div class=WordSection1>
+
+<div style='border:none;border-bottom:solid #4472C4 1.0pt;padding:0in 0in 4.0pt 0in'>
+
+<p class=MsoTitle><b><span class=msoIns><ins cite="mailto:Diek"
+datetime="2019-04-24T14:11">Hippocampome.org Synapse Knowledge Base</ins></span></b></p>
+
+</div>
 
 <h1>Requirements: </h1>
 

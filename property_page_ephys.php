@@ -2112,7 +2112,7 @@ function show_only_ephys(link, start1, stop1)
 					$authors1 = $authors;
 					$temp=explode(",", $authors);
 					$auth=array_merge($auth,$temp);
-					for($x=1;$x<sizeof($auth);$x++)
+					for($x=0;$x<sizeof($auth);$x++)
 					{
 						$f_auth=substr(trim($auth[$x]),0,1);
 						$auth_final=trim($auth[$x]);
