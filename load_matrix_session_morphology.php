@@ -11,19 +11,23 @@ if (file_exists($session_matrix_cache_file))
 {
   session_start();
   include ("access_db.php");
- 	 include ("permission_check.php");
+  $perm = $_SESSION['perm'];
+  include ("permission_check.php");
   $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
 }
 else
 {
+  // $h = fopen('log_test.txt', 'a');
+  // fwrite($h, 'In Load Matrix Session Morphology Loading from getmatrxi \n');
+  // fclose($h);
   include $get_matrix;
   $_SESSION[$matrix_type] = json_encode($responce);
   $fp = fopen($session_matrix_cache_file, 'w');
-  fwrite($fp, $_SESSION[$matrix_type]);
+  fwrite($fp, $_SESSION[$matrix_typex]);
   fclose($fp); 
 }
 
-//$_SESSION['morphology_set'] = 1;
-//echo "done";
+// $_SESSION['morphology_set'] = 1;
+// echo "done";
 
 ?>

@@ -187,105 +187,89 @@ datetime="2019-04-24T14:11">Hippocampome.org Synapse Knowledge Base</ins></span>
 
 <h1>Requirements: </h1>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>Our data mining tool relies on web technologies currently available
+<ul>
+
+    <li style='font:14.0pt "Verdana"'>Our data mining tool relies on web technologies currently available
 in Chromium-based browsers, including Google Chrome, Opera and Chromium itself.
 These technologies will soon be available in Mozilla Firefox and Microsoft Edge
-as well.</p>
+as well.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>You also need a Google (i.e. Gmail) account that is already signed-in.</p>
+    <li style='font:14.0pt "Verdana"'>You also need a Google (i.e. Gmail) account that is already signed-in.</li>
+
+</ul>
 
 <h1>Easy access:</h1>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span>To access data, please open the <a
 href="https://drive.google.com/drive/folders/0B9vJ9CsdswjUcUtOV1lMcEVpQ3M?usp=sharing">following
-link</a> and add the “synapse” folder to your own Google Drive. You need to do
+link</a> and add the "synapse" folder to your own Google Drive. You need to do
 this only once.</p>
 
 <p class=MsoNormal><img border=0 width=655 height=338 id="Picture 32"
 src="images/synaptome_files/image001.png"></p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Go to the “<span class=MsoHyperlink><span style='color:windowtext;
-text-decoration:none'>synapse”</span></span> folder and make a copy of the “Hippocampome.org/Synapse”
-and “FormTemplateReview” files. You need to do this step only once as well. The
+</span>Go to the "<span class=MsoHyperlink><span style='color:windowtext;
+text-decoration:none'>synapse"</span></span> folder and make a copy of the "Hippocampome.org/Synapse"
+and "FormTemplateReview" files. You need to do this step only once as well. The
 copied files will appear in the root of your drive, so you need to go back to
-“My Drive” to access these copies.</p>
+"My Drive" to access these copies.</p>
 
 <p class=MsoNormal><img border=0 width=547 height=579 id="Picture 35"
 src="images/synaptome_files/image002.jpg"></p>
 
-<p class=MsoNormal>When you open the “Copy of Hippocampome.org/Synapse”
-spreadsheet, you should see a new “Data Mining” menu that we have custom-built.</p>
+<p class=MsoNormal>When you open the "Copy of Hippocampome.org/Synapse"
+spreadsheet, you should see a new "Data Mining" menu that we have custom-built.</p>
 
 <p class=MsoNormal><img border=0 width=605 height=56 id="Picture 4"
 src="images/synaptome_files/image003.png"></p>
 
 <p class=MsoNormal>The Google Sheet you just copied has different tabs, some of
-which might be hidden. You can access them by going to “View” -&gt; “Hidden sheets.”</p>
+which might be hidden. You can access them by going to "View" -&gt; "Hidden sheets."</p>
 
 <p class=MsoNormal><img border=0 width=481 height=426 id="Picture 26"
 src="images/synaptome_files/image004.png"></p>
 
 <p class=MsoNormal>The list of tabs:</p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Master” tab has a list of all synapse types and a summary report
+<ul>
+
+    <li style='font:14.0pt "Verdana"'>The "Master" tab has a list of all synapse types and a summary report
 of all corresponding experiment IDs (eID) from evidence tab. If you want to
 know the property of a specific synapse type, you need to start here. Find the
 row assigned to that synapse type in order to get the eIDs. Then using eIDs, you
-need to find the relevant experiments in the “Evidence” tab.</p>
+need to find the relevant experiments in the "Evidence" tab.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Evidence” tab has all information regarding different
+    <li style='font:14.0pt "Verdana"'>The "Evidence" tab has all information regarding different
 experimental settings identified in papers and their mapping to different
 synapse types. Each experiment has a list of data IDs (dID). Knowing the dID
-you can find rows containing the synaptic data in the “SD” tab.</p>
+you can find rows containing the synaptic data in the "SD" tab.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The tab named “Proper” has a list of the proper mapping
+    <li style='font:14.0pt "Verdana"'>The tab named "Proper" has a list of the proper mapping
 confidence, which is a subset of the Master tab information. We separate these mappings
-because they can validate potential connections.</p>
+because they can validate potential connections.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Covariates” tab contains all the metadata. Each row contains
-the metadata of one paper.</p>
+    <li style='font:14.0pt "Verdana"'>The "Covariates" tab contains all the metadata. Each row contains
+the metadata of one paper.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Mo,” “Ma,” “CE,” “FP,” “Con,” “Cov,” and “Da” tabs have paper
+    <li style='font:14.0pt "Verdana"'>The "Mo," "Ma," "CE," "FP," "Con," "Cov," and "Da" tabs have paper
 excerpts related to morphology, markers, cell electrophysiology, firing
 patterns, connectivity, and synaptic electrophysiology data, respectively. Excerpts
-in the “My” tab are uncategorized.</p>
+in the "My" tab are uncategorized.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Cell types” tab contains a list of neuron types in Hippocampome.org.</p>
+    <li style='font:14.0pt "Verdana"'>The "Cell types" tab contains a list of neuron types in Hippocampome.org.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Papers” tab has a list of mined papers.</p>
+    <li style='font:14.0pt "Verdana"'>The "Papers" tab has a list of mined papers.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Reports.Papers” and “Reports.SynapseTypes” tabs pertain to mined
-papers/experiments and to potential connection mapping, respectively.</p>
+    <li style='font:14.0pt "Verdana"'>The "Reports.Papers" and "Reports.SynapseTypes" tabs pertain to mined
+papers/experiments and to potential connection mapping, respectively.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Synaptome” tab has a report of all measurement methods.</p>
+    <li style='font:14.0pt "Verdana"'>The "Synaptome" tab has a report of all measurement methods.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The “Abbreviations” tab defines the abbreviations used in the spreadsheet.</p>
+    <li style='font:14.0pt "Verdana"'>The "Abbreviations" tab defines the abbreviations used in the spreadsheet.</li>
+
+</ul>
 
 <h1>How to access the search engine from Google Sheets</h1>
 
@@ -293,7 +277,7 @@ style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&n
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>(1)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select the “Evidence” tab.</p>
+</span>Select the "Evidence" tab.</p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>(2)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -303,7 +287,7 @@ first four columns show the synapse types mapped to the experiment.</p>
 
 <p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>(3)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select “Check Query” from the Data Mining menu as shown in the following
+</span>Select "Check Query" from the Data Mining menu as shown in the following
 figure.</p>
 
 <p class=MsoNormal><img border=0 width=988 height=610 id="Picture 37"
@@ -318,36 +302,36 @@ src="images/synaptome_files/image007.png" alt="(1)"></span></span><span
 style='position:relative;z-index:251658242'><span style='position:absolute;
 left:453px;top:-3506px;width:176px;height:40px'><img width=176 height=40
 src="images/synaptome_files/image008.png" alt="(3)"></span></span>To use the Data Mining
-tool, grant execution authorization and press “Continue”. You need to do this
+tool, grant execution authorization and press "Continue". You need to do this
 only once. </p>
 
 <p class=MsoNormal><img border=0 width=547 height=203 id="Picture 40"
 src="images/synaptome_files/image009.png"></p>
 
-<p class=MsoNormal>Use your account that has access to the “Synapse” folder and
+<p class=MsoNormal>Use your account that has access to the "Synapse" folder and
 the Google Sheets copy.</p>
 
 <p class=MsoNormal><img border=0 width=382 height=278 id="Picture 43"
 src="images/synaptome_files/image010.jpg"></p>
 
-<p class=MsoNormal>On the next menu, press “Advanced” as highlighted in the
+<p class=MsoNormal>On the next menu, press "Advanced" as highlighted in the
 following figure.</p>
 
 <p class=MsoNormal><img border=0 width=703 height=475 id="Picture 48"
 src="images/synaptome_files/image011.png"></p>
 
-<p class=MsoNormal>Press “Go to Automation.” “Automation” is the source-code package
+<p class=MsoNormal>Press "Go to Automation." "Automation" is the source-code package
 name backing the Data Mining tool.</p>
 
 <p class=MsoNormal><img border=0 width=703 height=256 id="Picture 47"
 src="images/synaptome_files/image012.png"></p>
 
-<p class=MsoNormal>Press “Allow.”</p>
+<p class=MsoNormal>Press "Allow."</p>
 
 <p class=MsoNormal><img border=0 width=675 height=403 id="Picture 49"
 src="images/synaptome_files/image013.png"></p>
 
-<p class=MsoNormal>When the confirmation menu appears, press “OK.”</p>
+<p class=MsoNormal>When the confirmation menu appears, press "OK."</p>
 
 <p class=MsoNormal><img border=0 width=480 height=230 id="Picture 50"
 src="images/synaptome_files/image014.png"></p>
@@ -367,7 +351,7 @@ src="images/synaptome_files/image015.png"></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>(1)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select the “Evidence” tab of the sheet (see figure below).</p>
+</span>Select the "Evidence" tab of the sheet (see figure below).</p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>(2)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -375,7 +359,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
 
 <p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>(3)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select “Review References” from the Data Mining menu.</p>
+</span>Select "Review References" from the Data Mining menu.</p>
 
 <p class=MsoNormal><img border=0 width=838 height=520 id="Picture 51"
 src="images/synaptome_files/image016.png"></p>
@@ -383,63 +367,58 @@ src="images/synaptome_files/image016.png"></p>
 <p class=MsoNormal>Wait a few minutes for the review panel to pop up (refer to figure
 below). </p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The <b>Refs. </b>and<b> Figs. </b>buttons open and close all of the
-references and their figures, respectively.</p>
+<ul>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The <b>Green-Highlighter</b> tool allows for the highlighting of
+    <li style='font:14.0pt "Verdana"'>The <b>Refs. </b>and<b> Figs. </b>buttons open and close all of the
+references and their figures, respectively.</li>
+
+    <li style='font:14.0pt "Verdana"'>The <b>Green-Highlighter</b> tool allows for the highlighting of
 references using keywords or patterns formulated with regular expressions. Keyword
 highlighting is insensitive to the capitalization of the first character of the
-keyword. For example, the keyword “<b>A</b>mplitude” highlights “<b>a</b>mplitude”
+keyword. For example, the keyword "<b>A</b>mplitude" highlights "<b>a</b>mplitude"
 as well. We parse keywords and the patterns around the space character: the keyword
-“current clamp” highlights any instance of words “current” and “clamp.” To
+"current clamp" highlights any instance of words "current" and "clamp." To
 highlight a phrase containing space characters, replace the space characters with
-“\s” or any other relevant regular-expression token. For instance, “/current\sclamp/”
-highlights “current clamp” only. Regular expressions are very flexible in defining
-patterns. As an example, the regular expression “/IPS[PC]/” highlights both of
-the words “IPSP” and “IPSC”. The setting options for regular expressions is
-supported. For example, in the regular expression “/IPS[PC]/<b>i</b>”, the “i”
+"\s" or any other relevant regular-expression token. For instance, "/current\sclamp/"
+highlights "current clamp" only. Regular expressions are very flexible in defining
+patterns. As an example, the regular expression "/IPS[PC]/" highlights both of
+the words "IPSP" and "IPSC". The setting options for regular expressions is
+supported. For example, in the regular expression "/IPS[PC]/<b>i</b>", the "i"
 option makes it case insensitive. Both regular expressions and keywords can be
-used simultaneously: just separate them by space characters. For example, “Amplitude
-/current\sclamp/ /IPS[PC]/i” combines all the examples discussed above. Also, your
+used simultaneously: just separate them by space characters. For example, "Amplitude
+/current\sclamp/ /IPS[PC]/i" combines all the examples discussed above. Also, your
 browser’s search functionality will be unaffected and can be accessed by
-pressing the “CTRL” + “F” keys. </p>
+pressing the "CTRL" + "F" keys.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>PubMed access links:</b> Both links on top refer to the PubMed
+    <li style='font:14.0pt "Verdana"'><b>PubMed access links:</b> Both links on top refer to the PubMed
 site, but one of them will be via George Mason University’s EZProxy for off-campus
 access. The advanced setup section shows how to change this link with your own
-institution’s credentials. </p>
+institution’s credentials.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The<b> experiment review tool</b> shows all of the information related
+    <li style='font:14.0pt "Verdana"'>The<b> experiment review tool</b> shows all of the information related
 to one experiment. You can review all information very quickly by hovering the
 mouse pointer on this menu and rotating the mouse wheel. Any edit you make here
-will automatically get saved.</p>
+will automatically get saved.</li>
+
+</ul>
 
 <p class=MsoNormal><img border=0 width=668 height=495 id="Picture 58"
 src="images/synaptome_files/image017.png"></p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The<b> metadata</b><b> extraction tool</b> assists in the review,
-extraction, and storage of metadata in an appropriate row of the Covariates tab.
-</p>
+<ul>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>References section:</b> You can review the text, figures and
+    <li style='font:14.0pt "Verdana"'>The<b> metadata</b><b> extraction tool</b> assists in the review,
+extraction, and storage of metadata in an appropriate row of the Covariates tab.</li>
+
+    <li style='font:14.0pt "Verdana"'><b>References section:</b> You can review the text, figures and
 tables excerpts that are extracted from papers and linked to an experiment as its
 references. An excerpt’s location in the original paper is shown in yellow, the
 label in white, and the Reference ID (RefID) in pink. For example, 3300005 in
-the following figure is the RefID, p6779 the location, and “Rin; RMP; &#964;<sub>m</sub>”
+the following figure is the RefID, p6779 the location, and "Rin; RMP; &#964;<sub>m</sub>"
 the label. The postsynaptic neuron’s input resistance (PostSynRin) is extracted
-from this excerpt.<span style='font-family:"Segoe UI Emoji","sans-serif"'> </span></p>
+from this excerpt.</li>
+
+</ul>
 
 <p class=MsoNormal><img border=0 width=739 height=650 id="Picture 29"
 src="images/synaptome_files/image018.png"></p>
@@ -452,102 +431,85 @@ button removes the HTML text formatting. The <span style='font-family:"Segoe UI 
 icon next to it</span> opens a menu that assists typing Unicode characters. The
 following shortcuts are supported:</p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL B” makes the selected text bold.</p>
+<ul>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL I” makes the selected text italic.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL B" makes the selected text bold.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL .” is superscript formatting for the selected text.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL I" makes the selected text italic.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL ,” is subscript formatting for the selected text.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL ." is superscript formatting for the selected text.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL m” inserts “µ”.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL ," is subscript formatting for the selected text.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“CTRL F12” inserts “–”.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL m" inserts "µ".</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>“F2” is a shortcut for save.</p>
+    <li style='font:14.0pt "Verdana"'>"CTRL F12" inserts "–".</li>
+
+    <li style='font:14.0pt "Verdana"'>"F2" is a shortcut for save.</li>
+
+</ul>
 
 <p class=MsoNormal>Text excerpts are highlighted automatically in different
 colors to assist data extraction and referencing.</p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>Pink:</b> numbers.</p>
+<ul>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>Cornflower blue:</b> synaptic signals.</p>
+    <li style='font:14.0pt "Verdana"'><b>Pink:</b> numbers.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>Cyan:</b> metadata.</p>
+    <li style='font:14.0pt "Verdana"'><b>Cornflower blue:</b> synaptic signals.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>Yellow:</b> morphology, markers, electrophysiology and firing
-pattern.</p>
+    <li style='font:14.0pt "Verdana"'><b>Cyan:</b> metadata.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><b>Red:</b> keywords like “culture” that may abort data mining.</p>
+    <li style='font:14.0pt "Verdana"'><b>Yellow:</b> morphology, markers, electrophysiology and firing pattern.</li>
 
-<p class=MsoNormal>To review or modify the patterns, find the “refHighlights”
-function in the “Script Editor” (see advanced access).</p>
+    <li style='font:14.0pt "Verdana"'><b>Red:</b> keywords like "culture" that may abort data mining.</li>
+
+</ul>
+
+<p class=MsoNormal>To review or modify the patterns, find the "refHighlights"
+function in the "Script Editor" (see advanced access).</p>
 
 <h1>Advanced access</h1>
 
 <p class=MsoNormal>To access forms, </p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select “Tools” -&gt; “Script editor” from Google Sheets.</p>
+</span>Select "Tools" -&gt; "Script editor" from Google Sheets.</p>
 
 <p class=MsoNormal><img border=0 width=520 height=188 id="Picture 97"
 src="images/synaptome_files/image019.png"></p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Find the “DataMining.gs” file that automatically opens. </p>
+</span>Find the "DataMining.gs" file that automatically opens. </p>
 
 <p class=MsoNormal><img border=0 width=679 height=270 id="Picture 3"
 src="images/synaptome_files/image020.png"></p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(3)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Set the proper ID values for the “reviewFormID,” “dataExtractionFormID,”
-and “synapseSpreadsheetID” variables. You can find these IDs in the URL of the “Copy
-of FormTemplateReview,” “Copy of FormTemplateSynapticData,” and “Copy of
-Hippocampome.org/Synapse” files, respectively.</p>
+</span>Set the proper ID values for the "reviewFormID," "dataExtractionFormID,"
+and "synapseSpreadsheetID" variables. You can find these IDs in the URL of the "Copy
+of FormTemplateReview," "Copy of FormTemplateSynapticData," and "Copy of
+Hippocampome.org/Synapse" files, respectively.</p>
 
 <p class=MsoNormal><img border=0 width=1235 height=575 id="Picture 105"
 src="images/synaptome_files/image021.png"></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>(4)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>You can also change the values of “EZProxyLink” and “EZProxyName,” with those
+</span>You can also change the values of "EZProxyLink" and "EZProxyName," with those
 representing your own institute.</p>
 
 <p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>(5)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Select the “setup” function and press the “run” button. You need to do these
+</span>Select the "setup" function and press the "run" button. You need to do these
 steps only once.</p>
 
 <p class=MsoNormal><img border=0 width=333 height=155 id="Picture 8"
 src="images/synaptome_files/image022.png"></p>
 
 <p class=MsoNormal>Now you can go to the Google Sheet, select an experiment,
-and from the “Data Mining” menu either select the “Review Evidence” or “Extract
-Data” buttons.</p>
+and from the "Data Mining" menu either select the "Review Evidence" or "Extract
+Data" buttons.</p>
 
 <p class=MsoNormal><img border=0 width=768 height=498 id="Picture 108"
 src="images/synaptome_files/image023.png"></p>
@@ -557,12 +519,12 @@ src="images/synaptome_files/image023.png"></p>
 <p class=MsoNormal><img border=0 width=350 height=183 id="Picture 109"
 src="images/synaptome_files/image024.png"></p>
 
-<p class=MsoNormal>Wait a few minutes for the panel to open with the “review
-form” and references panels side by side. You can do any edits you want to the
+<p class=MsoNormal>Wait a few minutes for the panel to open with the "review
+form" and references panels side by side. You can do any edits you want to the
 form and then submit it. All changes will automatically be saved in the appropriate
 rows in the Evidence or Covariates tabs, on pressing the submit button. Be
 careful not to add or remove rows before submitting the form. If you are
-compelled to do so, you can appropriately edit the “Active Range” value.</p>
+compelled to do so, you can appropriately edit the "Active Range" value.</p>
 
 <p class=MsoNormal><img border=0 width=869 height=531 id="Picture 110"
 src="images/synaptome_files/image025.png"></p>
@@ -570,10 +532,10 @@ src="images/synaptome_files/image025.png"></p>
 <p class=MsoNormal><img border=0 width=866 height=574 id="Picture 2"
 src="images/synaptome_files/image026.png"></p>
 
-<p class=MsoNormal>If you select “Extract Data,” the data extraction menu
+<p class=MsoNormal>If you select "Extract Data," the data extraction menu
 opens. The confirmation menu is different here. You can choose to preload the
 data extraction form, with data extracted already. You need to know the data ID
-(dID) of the extracted data row for this purpose, for instance, “2” in the
+(dID) of the extracted data row for this purpose, for instance, "2" in the
 following example. You can also choose to not enter the dID in order to start
 from scratch. In this case, the program will do its best to prefill the form
 using information already available in the Evidence and Covariates tabs. </p>
@@ -598,11 +560,11 @@ saved in the SD tab.</p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'>(1)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>From the Google Sheet go to “Tools” -&gt; “Script editor.”</p>
+</span>From the Google Sheet go to "Tools" -&gt; "Script editor."</p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>(2)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Open the “Erev.gs” file.</p>
+</span>Open the "Erev.gs" file.</p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'>(3)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -610,13 +572,13 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
 
 <p class=MsoListParagraphCxSpLast style='text-indent:-.25in'>(4)<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Press the “run” button.</p>
+</span>Press the "run" button.</p>
 
 <p class=MsoNormal><img border=0 width=823 height=225 id="Picture 5"
 src="images/synaptome_files/image030.png"></p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(5)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Go to “View” -&gt; “Logs” to see the results.</p>
+</span>Go to "View" -&gt; "Logs" to see the results.</p>
 
 <p class=MsoNormal><img border=0 width=360 height=160 id="Picture 117"
 src="images/synaptome_files/image031.png"></p>
@@ -626,21 +588,17 @@ src="images/synaptome_files/image032.png"></p>
 
 <p class=MsoNormal><b>Notes:</b></p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>The junction-potential correction is different for voltages
+<ul>
+
+    <li style='font:14.0pt "Verdana"'>The junction-potential correction is different for voltages
 recorded in current-clamp (V<sub>ss</sub>, steady-state potential) or
-voltage-clamp (V<sub>h</sub>, holding potential).</p>
+voltage-clamp (V<sub>h</sub>, holding potential).</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>When using the junction-potential calculator, make sure the mobility
-value of all ions you want to use is present in the “Ion” database of the
-calculator.</p>
+    <li style='font:14.0pt "Verdana"'>When using the junction-potential calculator, make sure the mobility
+value of all ions you want to use is present in the "Ion" database of the
+calculator.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>Also, make sure you are using ion names supported by the
+    <li style='font:14.0pt "Verdana"'>Also, make sure you are using ion names supported by the
 calculator. Currently, we support &quot;acetate,&quot; &quot;ATP,&quot;
 &quot;Ba,&quot; &quot;Br,&quot; &quot;Ca,&quot; &quot;CeSO4,&quot; &quot;Cl,&quot;
 &quot;Cs,&quot; &quot;EGTA,&quot; &quot;F,&quot; &quot;gluconate,&quot; &quot;glucuronate,&quot;
@@ -649,7 +607,9 @@ calculator. Currently, we support &quot;acetate,&quot; &quot;ATP,&quot;
 &quot;methanesulfonate,&quot; &quot;Mg,&quot; &quot;Na,&quot; &quot;OH,&quot;
 &quot;SO4,&quot; &quot;TEA,&quot; &quot;Tris,&quot; &quot;QX314,&quot; &quot;Zn,&quot;
 &quot;phosphocreatine,&quot; or &quot;pyruvate,&quot; which cover all
-experiments mined so far.</p>
+experiments mined so far.</li>
+
+</ul>
 
 <h1>Text cleaner tool</h1>
 
@@ -660,27 +620,27 @@ from a PDF file.</p>
 src="images/synaptome_files/image033.png"></p>
 
 <p class=MsoNormal>Copying and pasting the text will yield a lot of unnecessary
-“end of the line” (EOL) and “ASCII control” characters. Paragraph marks in the
+"end of the line" (EOL) and "ASCII control" characters. Paragraph marks in the
 below figure show some of these hidden characters.</p>
 
 <p class=MsoNormal><img border=0 width=477 height=236 id="Picture 120"
 src="images/synaptome_files/image034.png"></p>
 
 <p class=MsoNormal>We need to delete all of the unnecessary EOLs and correct misspellings
-like “0 2,” which should be “O<sub>2</sub>”. The “Text Cleaner” tool largely automates
+like "0 2," which should be "O<sub>2</sub>". The "Text Cleaner" tool largely automates
 this process. We have discovered the most common error patterns and detect them
 with proper regular expressions. The text cleaner tool not only helps text
-extraction from PDF sources, but also from HTML. Some HTML pages use “small-caps”
+extraction from PDF sources, but also from HTML. Some HTML pages use "small-caps"
 characters that appear capitalized on the web pages, but, when pasted, turn to lower
-case. For instance, the “mM” text that is copied from the Journal of
-Neuroscience will convert to “mm” on pasting. Our tool reverts this unwelcome conversion.
+case. For instance, the "mM" text that is copied from the Journal of
+Neuroscience will convert to "mm" on pasting. Our tool reverts this unwelcome conversion.
 Many of the remaining spelling errors are recognized by the browser’s built-in spellcheck
 functionality. To access the text cleaner,</p>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span>Go to one of the tabs assigned for the excerpt storage, “Da” for example.
-Click on an empty cell under the “Excerpt” column,  then press “Data Mining” -&gt;
-“Text Cleaner.”</p>
+</span>Go to one of the tabs assigned for the excerpt storage, "Da" for example.
+Click on an empty cell under the "Excerpt" column,  then press "Data Mining" -&gt;
+"Text Cleaner."</p>
 
 <p class=MsoNormal><img border=0 width=422 height=421 id="Picture 24"
 src="images/synaptome_files/image035.png"></p>
@@ -707,8 +667,8 @@ src="images/synaptome_files/image037.png"></p>
 
 <p class=MsoNormal>In your own data mining endeavors, if you find a new recurring
 pattern that you wish to be automatically corrected, or if you want to modify, disable,
-or enable the existing patterns, you need to edit the “TextCleaner2.html” file.
-Each “replace” command in the “formatText” function controls one of the
+or enable the existing patterns, you need to edit the "TextCleaner2.html" file.
+Each "replace" command in the "formatText" function controls one of the
 patterns.</p>
 
 <p class=MsoNormal><img border=0 width=1009 height=683 id="Picture 21"
@@ -726,38 +686,29 @@ comment}</p>
 
 <p class=MsoNormal>where, </p>
 
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>V<sub>1</sub> is a single data point or the measure of central
-tendency, i.e. mean, median, or mode. </p>
+<ul>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>V<sub>2</sub> is the measure of spread, i.e. standard error,
-standard deviation, or interquartile range. </p>
+    <li style='font:14.0pt "Verdana"'>V<sub>1</sub> is a single data point or the measure of central
+tendency, i.e. mean, median, or mode.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>[V<sub>3</sub> to V<sub>4</sub>] is the range of data. V<sub>3</sub>
+    <li style='font:14.0pt "Verdana"'>V<sub>2</sub> is the measure of spread, i.e. standard error,
+standard deviation, or interquartile range.</li>
+
+    <li style='font:14.0pt "Verdana"'>[V<sub>3</sub> to V<sub>4</sub>] is the range of data. V<sub>3</sub>
 is the lower limit, and V<sub>4</sub> the upper limit. If the range had only upper
-or lower limits, we change the format to [&gt;V<sub>3</sub>], or [&lt;V<sub>4</sub>].
-</p>
+or lower limits, we change the format to [&gt;V<sub>3</sub>], or [&lt;V<sub>4</sub>].</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>V<sub>5</sub> is the sample size. </p>
+    <li style='font:14.0pt "Verdana"'>V<sub>5</sub> is the sample size.</li>
 
-<p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>Inner and outer comments describe the properties of the data
+    <li style='font:14.0pt "Verdana"'>Inner and outer comments describe the properties of the data
 entities. The comments should not have any comma and semicolon characters. If
-the comment had multiple sections, we separate them with colon character. </p>
+the comment had multiple sections, we separate them with colon character.</li>
 
-<p class=MsoListParagraphCxSpLast style='text-indent:-.25in'><span
-style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span>V<sub>6</sub> is the RefID of the excerpt from which data is
+    <li style='font:14.0pt "Verdana"'>V<sub>6</sub> is the RefID of the excerpt from which data is
 extracted. If multiple links to different excerpts are needed, we join RefIDs
-with “&amp;” character without any space. </p>
+with "&amp;" character without any space.</li>
+
+</ul>
 
 <p class=MsoNormal>Multiple data entities can be linked to a RefID set. In this
 case data entities are joined with semicolon. Data entities with different
@@ -820,8 +771,8 @@ excerpts are joined with comma, as in the following examples.</p>
 
 <h1>Data parser</h1>
 
-<p class=MsoNormal>Our custom JavaScript parser converts data to JSON or “stringify”
-them again. To access the parser, download the “parser.js” file in the synapse
+<p class=MsoNormal>Our custom JavaScript parser converts data to JSON or "stringify"
+them again. To access the parser, download the "parser.js" file in the synapse
 folder. In R, for instance, we use Google’s V8 JavaScript engine and our parser
 to convert the data.</p>
 
@@ -1382,7 +1333,7 @@ and calculated}&quot;</span>) <span style='color:#C45911'>%&gt;%</span> <br>
 <p class=MsoNormal>&nbsp;</p>
 
 <p class=MsoNormal>We use the parser and a set of customized helper functions
-to analyze the data and calculate conductance potencies in R. The file “SynapticDataAnalysis.Rmd”
+to analyze the data and calculate conductance potencies in R. The file "SynapticDataAnalysis.Rmd"
 in synapse folder gives access to the R source codes.</p>
 
 <h1>How to give us attribution</h1>
