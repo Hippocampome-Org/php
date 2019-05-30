@@ -104,7 +104,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://cmbn-approd01.uio.no/zoomgen/hippocampus/home.do" target='_blank'>The Rat Hippocampus Atlas</a></span></p>
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'><a href="http://cmbn-navigator.uio.no/rat_hippocampus_atlas/" target='_blank'>The Rat Hippocampus Atlas</a></span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>·<span
