@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html>
-<!-- Site for Hippocampus region models and theories that are described computationally in terms of spiking neural networks. 
-References: Javascript select redirect: https://www.webdeveloper.com/d/211180-drop-down-menus-with-url-link-options/2-->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Hippocampus Region Models and Theories</title>
+  <title id="title_id">Hippocampus Region Models and Theories</title>
   <link rel="stylesheet" type="text/css" href="main.css">
   <?php include('set_theme.php'); ?>
+  <?php include('function/hc_header.php'); ?>
 </head>
 <body>
+  <?php include("function/hc_body.php"); ?>  
   <div style="width:90%;position:relative;left:5%;">
-    <!-- start of header -->    
-    
-  <!-- end of header -->  
+  <br><br> 
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
   <script type='text/javascript'>
@@ -150,7 +147,7 @@ References: Javascript select redirect: https://www.webdeveloper.com/d/211180-dr
       $i++;      
       echo "<u>Citation</u>: " . $row["citation"].
       "<br><u>Url</u>: <a href='".$row["url"]."'>" . $row["url"].
-      "</a> <br><u>".$dim_desc."</u>: ".$row[$dim_id].". Dimension type description: ".$dim_type_desc."."."<span style='float:right;font-size:18px;'><a href='/browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
+      "</a> <br><u>".$dim_desc."</u>: ".$row[$dim_id].". Dimension type description: ".$dim_type_desc."."."<span style='float:right;font-size:18px;'><a href='browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
       if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory</label><div class='collapsible-content'><div class='content-inner'><p>
       ".$row["theory"]."
       </p></div><a style='font-size:10px'><hr></a></div></div>";

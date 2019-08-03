@@ -50,6 +50,12 @@ hr {
 .select-css {
     box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 }
+.select-css-main-menu {
+  background:#FFFFFF;
+  color:#000066;
+  font-color:#000066;
+  border: rgb(110, 110, 110);    
+}
 .select-css:hover {
     border-color: rgb(129,129,129);
 }

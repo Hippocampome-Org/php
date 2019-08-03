@@ -7,8 +7,9 @@
   -->
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Hippocampus Region Models and Theories</title>
-  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <?php include('set_theme.php'); ?>
+  <?php include('function/hc_header.php'); ?>
   <script type="text/javascript">
     function toggle_vis(elem_name) {
        var elem = document.getElementById(elem_name);
@@ -21,7 +22,9 @@
   </script>
 </head>
 <body>
+  <?php include("function/hc_body.php"); ?>
   <div style="width:90%;position:relative;left:5%;"> 
+    <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
   <script type='text/javascript'>
@@ -30,8 +33,9 @@
   <!-- end of header -->
 
   <?php
-  echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>This part of the site requires administrator access.<br><br><a href='/admin/mod_art.php'>Continue with username and password</a><br><br><a href='index.php'>Return to main site</a><br><br></div>";
+  echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>This part of the site requires administrator access.<br><br><a href='admin/mod_art.php'>Continue with username and password</a><br><br><a href='index.php'>Return to main site</a><br><br></div>";
   ?>
+  <br><br><br><br>
 </div>
 </body>
 </html>

@@ -14,6 +14,7 @@
   <title>Hippocampus Region Models and Theories</title>
   <link rel="stylesheet" type="text/css" href="main.css">
   <?php include('set_theme.php'); ?>
+  <?php include('function/hc_header.php'); ?>
   <script type="text/javascript">
     function toggle_vis(elem_name) {
      var elem = document.getElementById(elem_name);
@@ -26,7 +27,9 @@
 </script>
 </head>
 <body>
+  <?php include("function/hc_body.php"); ?> 
   <div style="width:90%;position:relative;left:5%;"> 
+    <br><br>
     <!-- start of header -->
     <?php echo file_get_contents('header.html'); ?>
     <script type='text/javascript'>
@@ -192,7 +195,7 @@
             }
             */
             // full details
-            echo "<span style='float:right;font-size:18px;'><a href='/browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
+            echo "<span style='float:right;font-size:18px;'><a href='browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
             // theory notes
             if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory</label><div class='collapsible-content'><div class='content-inner'><p>
             ".$row["theory"]."

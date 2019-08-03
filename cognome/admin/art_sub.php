@@ -8,10 +8,12 @@
   <title>Hippocampus Region Models and Theories</title>
   <link rel="stylesheet" type="text/css" href="../main.css">
   <?php include('set_theme.php'); ?>
+  <?php include('../function/hc_header.php'); ?>
 </head>
 <body>
+  <?php include("../function/hc_body.php"); ?>
   <div style="width:90%;position:relative;left:5%;">
-    
+    <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
   <script type='text/javascript'>
