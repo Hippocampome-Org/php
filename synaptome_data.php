@@ -39,6 +39,16 @@ window.onload = function()
 <script type="text/javascript">
 $(function(){
 // new entry
+jQuery("#master_header").jqGrid({
+  datatype: "local",
+  height: 0,
+    colNames:['Potential Connections', 'Validation', 'Experiment IDs'],  
+    colModel:[
+      {name:'suid',index:'suid', width:411},
+      {name:'presynaptic_neuron',index:'presynaptic_neuron', width:386},
+      {name:'tuid',index:'tuid', width:463}
+    ]    
+});
 jQuery("#list4").jqGrid({
   datatype: "local",
   height: 800,
@@ -98,6 +108,7 @@ var mydata;
 <table border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr>
     <td width="950">
+      <table id="master_header"></table>
       <table id="list4"></table>
     </td>
     <!-- LEGEND -->
@@ -170,7 +181,7 @@ var mydata;
         </tr>
         <tr height="20">
           <td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
-          <td><font class='font5'>Refuted Connections Testing</font></td>
+          <td><font class='font5'>Refuted Connections</font></td>
           <td align="right"><font class='font5'><p id="id_Unknowncount"></p></font></td> 
           <!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
         </tr>
