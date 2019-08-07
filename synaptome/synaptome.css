@@ -1,0 +1,21 @@
+.main_tabs {	
+	text-decoration: none;
+	border:2px solid rgb(150,150,150);
+	padding: 3px;
+}
+
+.tab_space {
+	font-size: 4px;
+}
+
+.main_tab_1 {
+	background-color: lightblue;
+}
+
+.main_tab_2 {
+	background-color: lightyellow;
+}
+
+.main_tab_3 {
+	background-color: lightgreen;
+}

@@ -26,6 +26,7 @@ session_start();
 			<li><a href="markers.php">Molecular markers</a></li>
 			<li><a href="ephys.php">Electrophysiology</a></li>
 			<li><a href="connectivity.php">Connectivity</a></li>
+			<li><a href="synaptome_data.php">Synaptome</a></li>
 			<?php
 				if ($permission != 1 && $_SESSION["fp"]==1) {
 			?>
