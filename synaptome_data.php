@@ -94,7 +94,7 @@ function update_tab_1() {
               include ("synaptome/master_50_rows.php");
             }
             else if ($matrix_tab=='mstr_all_rows') {
-              include ("synaptome/master_50_rows.php");
+              include ("synaptome/master_all_rows.php");
             } 
             else if ($matrix_tab=='n_by_m') {
               include ("synaptome/n_by_m.php");
