@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
+<link rel="stylesheet" href="synaptome/synaptome.css" type="text/css" />
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
@@ -443,6 +444,7 @@ $(function(){
     datatype: "jsonstring",
     datastr: dataStr,
     <?php
+      //$col_names_text = "'type',"."'presynaptic_neuron',";
       $col_names_text = "'presynaptic_neuron',";
       $col_model_text = "";
       $col_names_group = array();
@@ -457,8 +459,16 @@ $(function(){
         }
       }
       echo "colNames:[".$col_names_text."],";
+      $col_model_text."   {name:'type', index:'type', width:400,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
+          return 'id=\'type' + rowId + \"\'\";   
+      },frozen:true},";
       for ($i=0;$i<count($col_names_group);$i++) {
-        $col_model_text=$col_model_text."{name:'".$col_names_group[$i]."',index:'".$col_names_group[$i]."',width:200},";
+        if ($i==0) {
+          $col_model_text=$col_model_text."{name:'".$col_names_group[$i]."',index:'".$col_names_group[$i]."',width:200,height:400,search:false,sortable:false},";
+        }
+        else {
+          $col_model_text=$col_model_text."{name:'".$col_names_group[$i]."',index:'".$col_names_group[$i]."',width:20,height:400,search:false,sortable:false},";
+        }
       }
       echo "colModel:[".$col_model_text."],";
     ?> 
@@ -482,14 +492,15 @@ $(function(){
    	shrinkToFit:false,
     height:'440',
     width:'1050',
-   	/*gridComplete: function () {
+   	gridComplete: function () {
     	 var gridName = "nGrid"; // Access the grid Name
     	 $grid.jqGrid('setFrozenColumns');
-    	 rotateFunction($grid,235); 
+    	 rotateFunction($grid,435); 
     	 fixPositionsOfFrozenDivs.call($grid[0]);
-    	} */
+    	} 
     });
 
+  //,cellattr:function(){return 'class=\"rotate\";'}
 	//Merger(gridName,"type");
 	//$("#nGrid").triggerHandler("jqGridAfterGridComplete");
 	
@@ -534,6 +545,23 @@ $(function(){
 				}  */
 			}
 		}); 
+var mydata = [];
+<?php
+  $sql = "SELECT presynaptic_neuron FROM natemsut_synaptome.presynaptic_neurons;";
+  $result = $conn->query($sql);
+  $i=0;
+  if ($result->num_rows > 0) { 
+    while($row = $result->fetch_assoc()) { 
+    echo "mydata = [
+      {presynaptic_neuron:'".$row['presynaptic_neuron']."'}
+      ];
+      for(var i=0;i<=mydata.length;i++)
+        jQuery('#nGrid').jqGrid('addRowData',i+1,mydata);
+      ";
+      $i++;
+    }
+  }
+?>
 });
 
 </script>        
@@ -541,137 +569,9 @@ $(function(){
 
 <body>
 
-<!-- COPY IN ALL PAGES -->
-<?php 
-	include ("function/title.php");
-	include ("function/menu_main.php");
-?>	
-
-<div class='title_area'>
-	<font class="font1">Browse connectivity matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
-			}
-		?>
-</div>
-<div class="table_position">
-<table border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr>
     <td width="950">
 		<table id="nGrid"></table>
 		<div id="pager"></div>
-	</td>
-	<!-- LEGEND -->
-	<td width="170" style="vertical-align:top">
-	
-		<table border="0" cellspacing="5">
-			<tr height="50" style='vertical-align:top'>
-				<td colspan="2" style="text-align:center"><font class='font5'>View the entire matrix as a <a href='images/connectivity/Connectivity_Matrix.jpg' target='_blank'>.jpg image</a></font></td>				
-			</tr>
-			<tr height="100" style='vertical-align:top'>
-				<td colspan="2" style="text-align:center">
-					<script src="https://www.java.com/js/deployJava.js"></script>
-    				<script>
-    					var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    					if (isChrome) {
-    						document.write("<font class='font5'>View the <a href=\"connectivity/applications/connectivity_map.jnlp\">Potential Connectivity Map</a> (Java)");
-    						document.write("<br><br>(If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a>)</font>");
-    					}
-    					else {
-    						document.write("<font class='font5'>View the Potential Connectivity Map (JAVA)");
-        					
-					        // use JavaScript to get location of JNLP file relative to HTML page
-					        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
-					        var url = dir + "connectivity/applications/connectivity_map.jnlp";
-					        deployJava.createWebStartLaunchButton(url, '1.7.0');
-					        document.write("<br><br>If trouble launching, view <a href=\"Help_ConnectivityJava.php\" target=\"_blank\">help</a></font>");
-    					}
-				    </script>				    
-			    </td>					
-			</tr>
-			<tr height="50">
-        <td colspan="2" style="text-align:center"><font class='font7'>Download</font></td>
-      </tr>
-      <tr height="20">
-        <td style="text-align:center"><a href="#"><img id="csvCN" src='images/ExportCSV.png' width="30px" border="0"/></a></td>
-        <td><font class='font5'>Netlist</font></td>
-        <td></font></td> 
-        <!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
-      </tr>
-     
-			<tr height="50">
-				<td colspan="2" style="text-align:center"><font class='font7'>Legend</font></td>
-			</tr>
-			<tr height="20">
-				<!-- <td width="10"><img src='images/connectivity/excitatory.png' width="13px" border="0"/></td>  -->
-				<td bgcolor=#000000></td>
-				<td><font class='font5'>Potential Excitatory Connections</font></td>
-				<td align="right"><font class='font5'><p id="Potential_Excitatory_Non_PCL"></p></font></td>
-				<!--td align="right"><font class='font5'><p id="cle3"></p></font></td-->
-			</tr>
-			<tr height="20">
-				<!-- <td><img src='images/connectivity/inhibitory.png' width="13px" border="0"/></td>  -->
-				<td bgcolor=#AAAAAA></td>
-				<td><font class='font5'>Potential Inhibitory Connections</font></td>
-				<td align="right"><font class='font5'><p id="Potential_Inhibitory_Non_PCL"></p></font></td> 
-				<!--td align="right"><font class='font5'><p id="cle5"></p></font></td-->
-			</tr>
-			<!--
-			<tr>
-				< ! -- <td><img src='images/connectivity/PCL_only.png' width="13px" border="0"/></td>  -- >
-				<td bgcolor=#FF8C00></td>
-				<td><font class='font5'>Potential Inhibitory PCL-Only Connection</font></td>
-				<td align="right"><font class='font5'><p id="PCL_Only"></p>0</font></td>
-			</tr>
-			-->
-			<!--
-			<tr height="20"></tr>
-				<tr>
-					<td><img src='images/connectivity/AIS_targeting.png' width="13px" border="0"/></td>
-					<td><font class='font5'>PCL AIS Connection</font></td>
-				</tr>
-				<tr> 	
-					<td><img src='images/connectivity/perisomatic_targeting.png' width="13px" border="0"/></td>
-					<td><font class='font5'>PCL Perisomatic Connection</font></td>
-				</tr>  
-			-->
-			<tr height="20">
-				<td style="text-align:center"><img src='images/connectivity/known_connection.png' width="20px" border="0"/></td>
-				<td><font class='font5'>Known Connections</font></td>
-				<td align="right"><font class='font5'><p id="id_knowncount"></p></font></td>
-				<!--td align="right"><font class='font5'><p id="cle"></p></font></td-->
-			</tr>
-			<tr height="20">
-				<td style="text-align:center"><img src='images/connectivity/known_nonconnection.png' width="20px" border="0"/></td>
-				<td><font class='font5'>Refuted Connections</font></td>
-				<td align="right"><font class='font5'><p id="id_Unknowncount"></p></font></td> 
-				<!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
-			</tr>
-      
-       
-			<!--  
-			<tr height="20"></tr>
-			<tr>			
-				<td><font class='font5'>PCL:</font></td>
-				<td><font class='font5'>Principal Cell Layer</font></td>
-			</tr>
-		 	-->
-			<!--  
-				<tr>
-					<td><font class='font5'>AIS:</font></td>
-					<td><font class='font5'>Axon Intial Segment</font></td>
-				</tr>
-		 	-->
-		</table>
-	</td>
-	
-  </tr>
-</table>
-</div>
+ 
 </body>
 </html>

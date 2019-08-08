@@ -33,20 +33,20 @@
 text-align:center !important;
 margin-bottom:0px !important;
 }
-.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
-.ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:235px; 
+.ui-jqgrid .ui-jqgrid-htable th {/*height:22px;padding: 0px 2px;*/}
+.ui-jqgrid .ui-jqgrid-htable th div {/*overflow: hidden; position:relative; height:235px; 
 text-align:left;
-margin-bottom:5px;}
+margin-bottom:5px;*/}
 #frmCntr
-{	top:200px; 
+{	/*top:200px; 
 	left:80px;
-	position:absolute;
+	position:absolute;*/
 }
 #toCntr
 {
-	top:10px; 
+	/*top:10px; 
 	left:290px;
-	position:absolute;
+	position:absolute;*/
 }
 #jqgh_nGrid_Neuron_type{ 
 text-align:centre !important;

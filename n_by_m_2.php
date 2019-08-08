@@ -576,7 +576,24 @@ var mydata = [];
 ?>	
 
 <div class='title_area'>
-	<font class="font1">Browse connectivity matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font class="font1">Browse synaptome matrix</font>&nbsp;&nbsp;&nbsp;
+  <span class="main_tabs main_tab_1">
+    <!--<a href="?tab=mstr_50_rows">mstr_50_rows</a>-->
+    <a href="?tab=mstr_50_rows" style="text-decoration: none;">mstr_50_rows</a>
+  </span>
+  <span class="tab_space">&nbsp;</span>
+  <span class="main_tabs main_tab_2">
+    <a href="?tab=mstr_all_rows" style="text-decoration: none;">mstr_all_rows</a>
+  </span>
+  <span class="tab_space">&nbsp;</span>
+  <span class="main_tabs main_tab_3">
+    <a href="n_by_m_2.php" style="text-decoration: none;">n_by_m</a>
+  </span>
+  &nbsp;&nbsp;&nbsp;
+</div>
+
+<div class='title_area'>
+	<font class="font1">Browse synaptome matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<?php 
 			if ($research){
 				$full_search_string = $_SESSION['full_search_string'];
