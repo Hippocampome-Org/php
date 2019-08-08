@@ -77,7 +77,8 @@ function update_tab_1() {
   </span>
   <span class="tab_space">&nbsp;</span>
   <span class="main_tabs main_tab_3">
-    <a href="n_by_m_2.php" style="text-decoration: none;">n_by_m</a>
+    <!--<a href="n_by_m_2.php" style="text-decoration: none;">n_by_m</a>-->
+    <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
   </span>
   &nbsp;&nbsp;&nbsp;
 </div>
@@ -97,7 +98,7 @@ function update_tab_1() {
               include ("synaptome/master_all_rows.php");
             } 
             else if ($matrix_tab=='n_by_m') {
-              /*include ("n_by_m2.php");*/
+              include ("synaptome/n_by_m_4.php");
               /*header("Location: http://synapt.22web.org/n_by_m_2.php"); 
 exit();*/
             }                        
