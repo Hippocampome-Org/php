@@ -37,24 +37,15 @@ window.onload = function()
 }
 ?>
 
-<?php
-/*function switch_tabs($tab) {
-  if ($tab=='mstr_50_rows') {
-    echo "<script>document.getElementById('matrix_1').innerHTML = 'Fred Flinstone';</script>";
+<?php 
+  if (isset($_GET['tab'])) {
+    $matrix_tab = $_GET['tab'];
+    if ($matrix_tab=='n_by_m') {
+      echo "<style>.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
+          .ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:305px; text-align:left; margin-bottom:5px;top:-10px}</style>";
+    }
   }
-  else if ($tab=='mstr_all_rows') {
-    echo "<script>document.getElementById('matrix_1').innerHTML = 'Barney Rubble';</script>";
-  }
-}*/
-/*echo '
-<script>
-function update_tab_1() {  
-  document.getElementById(\'matrix_1\').innerHTML = "';
-  include ('synaptome/master_50_rows.php');
-  echo '"}
-</script>
-';*/
-?> 
+?>
 </head>
 
 <body>
@@ -90,7 +81,6 @@ function update_tab_1() {
       <div id="matrix_1">
         <?php 
           if (isset($_GET['tab'])) {
-            $matrix_tab = $_GET['tab'];
             if ($matrix_tab=='mstr_50_rows') {
               include ("synaptome/master_50_rows.php");
             }

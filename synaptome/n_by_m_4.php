@@ -368,7 +368,9 @@ $(function(){
     datastr: dataStr,
     <?php
       //$col_names_text = "'type',"."'presynaptic_neuron',";
-      $col_names_text = "'presynaptic_neuron',";
+      //$col_names_text = "'presynaptic_neuron',";
+      //$col_names_text = "'<div id=\"frmCntr\">FROM</div><div id=\"toCntr\" class=\"rotate\">TO</div>',";
+      $col_names_text = "'<img src=\"images/pre_post.gif\" style=\"top:14px;right:32px;position:relative;height:200px;width:200px;\">',";
       $col_model_text = "";
       $col_names_group = array();
       array_push($col_names_group, 'presynaptic_neuron');
