@@ -22,10 +22,10 @@ session_start();
 	
 		<ul>
 	
-			<li class="subfirst"><a href="morphology.php">Morphology</a></li>
-			<li><a href="markers.php">Molecular markers</a></li>
-			<li><a href="ephys.php">Electrophysiology</a></li>
-			<li><a href="connectivity.php">Connectivity</a></li>
+			<li class="subfirst"><!--a href="morphology.php"--><a href="#">Morphology</a></li>
+			<li><!--a href="markers.php"--><a href="#">Molecular markers</a></li>
+			<li><!--a href="ephys.php"--><a href="#">Electrophysiology</a></li>
+			<li><!--a href="connectivity.php"--><a href="#">Connectivity</a></li>
 			<li><a href="synaptome_data.php">Synaptome</a></li>
 			<?php
 				if ($permission != 1 && $_SESSION["fp"]==1) {
