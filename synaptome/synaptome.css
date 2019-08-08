@@ -19,3 +19,72 @@
 .main_tab_3 {
 	background-color: lightgreen;
 }
+
+.rotate
+{
+	-webkit-transform: rotate(-90deg);    /* Safari 3.1+, Chrome */
+    -moz-transform: rotate(-90deg);       /* Firefox 3.5+ */
+    -o-transform: rotate(-90deg);         /* Opera starting with 10.50+ */
+    -ms-transform: rotate(-90deg);        /* IE9 */
+     transform: rotate(-90deg);        /* CSS3 */
+}
+/* From connectivity.php */
+.ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
+text-align:center !important;
+margin-bottom:0px !important;
+}
+.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
+.ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:235px; 
+text-align:left;
+margin-bottom:5px;}
+#frmCntr
+{	top:200px; 
+	left:80px;
+	position:absolute;
+}
+#toCntr
+{
+	top:10px; 
+	left:290px;
+	position:absolute;
+}
+#jqgh_nGrid_Neuron_type{ 
+text-align:centre !important;
+margin-bottom:0px !important;}
+
+#nGrid_dg_non_ivy_ngf_0331,#nGrid_ca3_oriens_oriens_00003,#nGrid_ca2_sp_sr_0302,#nGrid_ca2_sp_sr_0302,#nGrid_ca1_oriens_oriens_0003,#nGrid_sub_pyramidal_ca1_331p
+{
+	width:auto !important;
+	border-right:solid medium red !important;
+}
+
+.ui-jqgrid tr.jqgrow td 
+{
+	height:20px !important;
+	padding:0px !important;
+} 
+.highlighted{
+	border-right: solid 1px Chartreuse !important;
+	border-left: solid 1px Chartreuse !important;
+	border-bottom:solid 1px Chartreuse !important; 
+}
+.highlighted_top{
+	border: solid 1px Chartreuse !important;
+}
+.rotate
+{
+	-webkit-transform: rotate(-90deg);    /* Safari 3.1+, Chrome */
+    -moz-transform: rotate(-90deg);       /* Firefox 3.5+ */
+    -o-transform: rotate(-90deg);         /* Opera starting with 10.50+ */
+    -ms-transform: rotate(-90deg);        /* IE9 */
+     transform: rotate(-90deg);        /* CSS3 */
+}
+.rotateOldIE
+{
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);       /* IE6, IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"; /* IE8 */
+    zoom: 1;
+}
+p {
+  margin: 0em;
+}
