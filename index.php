@@ -130,8 +130,9 @@ if ($permission1 != 0) {
       <ul>
         <li class="subfirst"><a href="morphology.php">Morphology</a></li>
         <li><a href="markers.php">Molecular markers</a></li>
-        <li><a href="ephys.php">Electrophysiology</a></li>
+        <li><a href="ephys.php">Membrane biophysics</a></li>
         <li><a href="connectivity.php">Connectivity</a></li>
+        <li><a href="synaptome.php">Synaptic physiology</a></li>
          <?php 
           if ($permission != 1 ) {
         ?>
@@ -174,16 +175,16 @@ jQuery(document).ready(function() {
 
 <table width=1100 class='index_table' id="table_load">
   <tr>    
-    <td width="55%">
+    <td width="50%">
     <!-- ****************  BODY **************** -->
       <font class='font1' color='#000000'>
       WELCOME TO THE HIPPOCAMPOME PORTAL
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.3 - Released: 06/30/2017
+      v1.4 - Released: 08/09/2019
       <br>
-      10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
+      KK,KKK Pieces of Knowledge (PoK) and EE,EEE Pieces of Evidence (PoE)
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -224,13 +225,6 @@ jQuery(document).ready(function() {
       <a href="http://www.eneuro.org/content/3/6/ENEURO.0205-16.2016">
       <i>Graph theoretic and motif analyses of the hippocampal neuron type
       potential connectome</i></a>. eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
-      <br><br>
-      <b>*NEW*</b> The release of v1.3 on 06/30/2017 includes 10,822 PoK, 21,285 PoE, and a downloadable list of Allen Brain Atlas (ABA) predictions of marker
-      expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
-      Reference: <b>Hamilton et al., 2017</b>
-      <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
-      <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
-      Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
       </font>
 
       <br><br>
@@ -253,8 +247,24 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="45%" style='vertical-align:top; padding-top:100px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:100px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
+      <font class='font2' color='#000000'>
+      <br><br><br><br><br><br>
+      The release of v1.3 on 06/30/2017 includes 10,822 PoK, 21,285 PoE, and a downloadable list of Allen Brain Atlas (ABA) predictions of marker
+      expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
+      Reference: <b>Hamilton et al., 2017</b>
+      <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
+      <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
+      Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
+      <br><br>
+      <b>*NEW*</b> The release of v1.4 on 08/09/2019 includes KK,KKK PoK, EE,EEE PoE, and the ability to access the 
+      Synapse Knowledge Base.
+      Reference: <b>Moradi and Ascoli, 2019</b>
+      <a href = "https://onlinelibrary.wiley.com/journal/10981063">
+      <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
+      Hippocampus 2019.
+      </font>
     </td>
   </tr>
 
@@ -267,12 +277,18 @@ jQuery(document).ready(function() {
           <font class='font3' color='#000000'>
           <a href="Help_Terms_of_Use.php">Terms of Use</a>
           <br><br>
-            NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015-2018 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
+            NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web
+            portal was vetted using the "fair use" criteria defined in
+            <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code,
+            &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable
+            for reuse.  Except otherwise noted, this web portal is &copy; 2015-2019 by George Mason University, under a
+            <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons
+            Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
           <br>
-          10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
-          <br />Last Update: 2 Mar 2018 (<a href="Help_Release_Notes.php">v1.3 R 1F</a>)</font>
+          KK,KKK Pieces of Knowledge (PoK) and EE,EEE Pieces of Evidence (PoE)
+          <br />Last Update: 9 Aug 2019 (<a href="Help_Release_Notes.php">v1.4</a>)</font>
           <br />
         </div>
     </td>   
