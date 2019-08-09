@@ -53,20 +53,20 @@ jQuery(document).ready(function() {
     <li class="topfirst"><a href="../morphology.php" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
       <ul>
         <li class="subfirst"><a href="../morphology.php">Morphology</a></li>
-        <li><a href="../markers.php">Molecular markers</a></li>
-        <li><a href="../ephys.php">Electrophysiology</a></li>
-        <li><a href="../connectivity.php">Connectivity</a></li>
+        <li><!--a href="../markers.php"--><a href="#">Molecular markers</a></li>
+        <li><!--a href="../ephys.php"--><a href="#">Electrophysiology</a></li>
+        <li><!--a href="../connectivity.php"--><a href="#">Connectivity</a></li>
          <?php 
           if ($permission != 1 && $_SESSION["fp"]==1) {
         ?>
-        <li><a href="../firing_patterns.php">Firing patterns</a></li>
+        <li><!--a href="../firing_patterns.php"--><a href="#">Firing patterns</a></li>
          <?php   
           }
         ?> 
           <?php 
           if ($permission != 1 && $_SESSION["im"]==1) {
         ?>
-        <li><a href="../Izhikevich_model.php">Izhikevich models</a></li>
+        <li><!--a href="../Izhikevich_model.php"--><a href="#">Izhikevich models</a></li>
         <?php   
           }
         ?> 
