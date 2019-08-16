@@ -1,0 +1,23 @@
+.ui-jqgrid .ui-jqgrid-htable th {
+	height:22px;
+	padding: 0px 2px;
+}
+.ui-jqgrid .ui-jqgrid-htable th div {
+	overflow: hidden; 
+	position:relative; 
+	height:305px; 
+	text-align:left; 
+	margin-bottom:5px;
+	top:-10px
+}
+
+th div {
+	left: 1px;
+	width: 435;
+	height: 435;	
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}

@@ -43,6 +43,7 @@ window.onload = function()
     if ($matrix_tab=='n_by_m') {
       echo "<style>.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
           .ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:305px; text-align:left; margin-bottom:5px;top:-10px}</style>";
+      echo "<link rel='stylesheet' href='synaptome/n_by_m.css' type='text/css' />";
     }
   }
 ?>
@@ -88,7 +89,7 @@ window.onload = function()
               include ("synaptome/master_all_rows.php");
             } 
             else if ($matrix_tab=='n_by_m') {
-              include ("synaptome/n_by_m_4.php");
+              include ("synaptome/n_by_m_6.php");
               /*header("Location: http://synapt.22web.org/n_by_m_2.php"); 
 exit();*/
             }                        
