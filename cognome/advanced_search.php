@@ -43,7 +43,7 @@
   search_option($conn, $sql, "Detail", "property", "properties", "all_off");  
   echo "<span style='display: inline-block;' style='a{text-decoration:none important!;color: #FFFFFF;};text-decoration:none important!;background-color:#000000; important!;'>Filter By:&nbsp<a href='?filter=detail'><input type='button' class='select-css' value='Level of Detail'></a>&nbsp;<a href='?filter=implmnt'><input type='button' class='select-css' value='Implementation Level'></a>&nbsp;<a href='?filter=theory'><input type='button' class='select-css' value='Theory'></a>&nbsp;<a href='?filter=keyword'><input type='button' class='select-css' value='Keyword'></a><br>";
   if ($filter=='detail') {
-    $prop_name = "Level of Detail";
+    $prop_name = "level of detail";
     $row_name = "detail_level";
     $tbl_name = "details";
     $prop_relation_tbl = "article_has_detail";
@@ -54,7 +54,7 @@
     search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='implmnt') {
-    $prop_name = "Implementation Level";
+    $prop_name = "implementation level";
     $row_name = "level";
     $tbl_name = "implementations";
     $prop_relation_tbl = "article_has_implmnt";
@@ -65,7 +65,7 @@
     search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='keyword') {
-    $prop_name = "Keyword";
+    $prop_name = "keyword";
     $row_name = "keyword";
     $tbl_name = "keywords";
     $prop_relation_tbl = "article_has_keyword";
@@ -76,7 +76,7 @@
     search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='theory') {
-    $prop_name = "Theory";
+    $prop_name = "theory";
     $row_name = "category";
     $tbl_name = "theory_category";
     $prop_relation_tbl = "article_has_theory";
