@@ -41,10 +41,13 @@ window.onload = function()
   if (isset($_GET['tab'])) {
     $matrix_tab = $_GET['tab'];
     if ($matrix_tab=='n_by_m') {
-      echo "<style>.ui-jqgrid .ui-jqgrid-htable th {height:22px;padding: 0px 2px;}
-          .ui-jqgrid .ui-jqgrid-htable th div {overflow: hidden; position:relative; height:305px; text-align:left; margin-bottom:5px;top:-10px}</style>";
+      echo "<style></style>";
       echo "<link rel='stylesheet' href='synaptome/n_by_m.css' type='text/css' />";
     }
+    if ($matrix_tab=='review_evidence') {
+      echo "<style></style>";
+      echo "<link rel='stylesheet' href='synaptome/review_evidence.css' type='text/css' />";
+    }    
   }
 ?>
 </head>
@@ -60,7 +63,6 @@ window.onload = function()
 <div class='title_area'>
   <font class="font1">Browse synaptome matrix</font>&nbsp;&nbsp;&nbsp;
   <span class="main_tabs main_tab_1">
-    <!--<a href="?tab=mstr_50_rows">mstr_50_rows</a>-->
     <a href="?tab=mstr_50_rows" style="text-decoration: none;">mstr_50_rows</a>
   </span>
   <span class="tab_space">&nbsp;</span>
@@ -68,8 +70,11 @@ window.onload = function()
     <a href="?tab=mstr_all_rows" style="text-decoration: none;">mstr_all_rows</a>
   </span>
   <span class="tab_space">&nbsp;</span>
+  <span class="main_tabs main_tab_4">
+    <a href="?tab=review_evidence" style="text-decoration: none;">review_evidence</a>
+  </span>  
+  <span class="tab_space">&nbsp;</span>
   <span class="main_tabs main_tab_3">
-    <!--<a href="n_by_m_2.php" style="text-decoration: none;">n_by_m</a>-->
     <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
   </span>
   &nbsp;&nbsp;&nbsp;
@@ -88,10 +93,11 @@ window.onload = function()
             else if ($matrix_tab=='mstr_all_rows') {
               include ("synaptome/master_all_rows.php");
             } 
+            else if ($matrix_tab=='review_evidence') {
+              include ("synaptome/review_evidence.php");
+            }                                    
             else if ($matrix_tab=='n_by_m') {
               include ("synaptome/n_by_m_6.php");
-              /*header("Location: http://synapt.22web.org/n_by_m_2.php"); 
-exit();*/
             }                        
           }
           else {

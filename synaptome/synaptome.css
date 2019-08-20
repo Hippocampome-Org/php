@@ -20,6 +20,10 @@
 	background-color: lightgreen;
 }
 
+.main_tab_4 {
+	background-color: lightgray;
+}
+
 .rotate
 {
 	-webkit-transform: rotate(-90deg);    /* Safari 3.1+, Chrome */
@@ -96,4 +100,7 @@ margin-bottom:0px !important;}
 }
 p {
   margin: 0em;
+}
+.title_area {
+	min-width:1000px;
 }
