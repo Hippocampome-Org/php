@@ -189,7 +189,15 @@ if ($permission1 != 0) {
         <li><a href="search_engine_custom.php">Search Engine</a></li>
       </ul>
     </li>
-    <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
+    <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/help.png" alt=""/>Help</span></a>
+      <ul>
+        <li><a href="Help_Quickstart.php">Quickstart</a></li>
+        <li><a href="Help_FAQ.php">FAQ</a></li>
+        <li><a href="Help_Known_Bug>List.php">Known Bugs and Issues</a></li>
+        <li><a href="user_feedback_form_entry.php">User Feedback Form</a></li>
+        <li><a href="Help_Other_Useful_Links.php">Other Useful Links</a></li>
+      </ul>
+    </li>
   </ul>
 </div>  
 <?php   
