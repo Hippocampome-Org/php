@@ -1,6 +1,6 @@
 <table class='main_table'>
 <tr><th>eID</th><th><center>Review Evidence</center></th></tr>
-<tr><td></td><td class="modalities_checkboxes" style="font-size: 18px;"><input type="checkbox" name="amp_check">Amplitude</input>&nbsp&nbsp<input type="checkbox" name="rise_check">Rise</input>&nbsp&nbsp<input type="checkbox" name="decay_check">Decay</input>&nbsp&nbsp<input type="checkbox" name="failure_check">Failure</input>&nbsp&nbsp<input type="checkbox" name="stp_check">STP</input>&nbsp&nbsp<input type="checkbox" name="ltp_check">LTP</input>&nbsp&nbsp<input type="checkbox" name="quantal_check">Quantal</input>&nbsp&nbsp<input type="checkbox" name="ec_check">Electrical Coupling</input>&nbsp<input type="button" name="amp_check" value="unfold all" style="position:absolute;right:7px;"></input></td></tr>
+<tr><td></td><td class="modalities_checkboxes" style="font-size: 18px;"><input type="checkbox" name="amp_check">Amplitude</input>&nbsp&nbsp<input type="checkbox" name="rise_check">Rise</input>&nbsp&nbsp<input type="checkbox" name="decay_check">Decay</input>&nbsp&nbsp<input type="checkbox" name="failure_check">Failure</input>&nbsp&nbsp<input type="checkbox" name="stp_check">STP</input>&nbsp&nbsp<input type="checkbox" name="ltp_check">LTP</input>&nbsp&nbsp<input type="checkbox" name="quantal_check">Quantal</input>&nbsp&nbsp<input type="checkbox" name="ec_check">Electrical Coupling</input>&nbsp<input type="button" name="amp_check" value="unfold all" style="position:relative;right:-40px;"></input></td></tr>
 <?php
 $eIDs = array();
 $eIDs[0] = 1;
@@ -14,13 +14,13 @@ $value_desc = array('Connectivity Ratios','Cell Type Ratios & Signals Motifs','N
 
 function value_section($row,$description) {
 	if ($row != '') {
-		echo $description."<br>";
-		echo $row."<br>";
+		echo $description."<br><div style='height:5px'></div>";
+		echo "<div class='main_table_val_sec'>".$row."</div><br>";
 	}
 }
 
 for ($i = 0; $i < sizeof($eIDs); $i++) {
-	echo "<tr><td>".$eIDs[$i]."</td><td>";
+	echo "<tr><td>".$eIDs[$i]."</td><td><div class='main_table_col_max'>";
 	$sql = "SELECT * FROM ".$tbl_name." WHERE eID = ".$eIDs[$i];
 	$result = $conn->query($sql); 
 	if ($i == 0) {
@@ -45,7 +45,7 @@ for ($i = 0; $i < sizeof($eIDs); $i++) {
 	  	
 	  }
 	}
-	echo "</td></tr>";
+	echo "</div></td></tr>";
 }
 ?>
 </table>
