@@ -26,7 +26,7 @@
  
 <br/>
 
-<div id="tester2" style="width:800px;height:550px;"></div>
+<div id="plotlyDiv" style="width:800px;height:550px;"></div>
 
  
  <br/>	
@@ -205,10 +205,10 @@ function calculate(inputCurrent,startIndex,endIndex) {
 function runPLOT() {
 	clearPLOT();
 	
-	TESTER = document.getElementById("tester2");
+	TESTER = document.getElementById("plotlyDiv");
 	
 	//alert(document.getElementById("toto").value);
-	document.getElementById("tester2").innerHTML="";
+	document.getElementById("plotlyDiv").innerHTML="";
 	var  I2 = parseFloat(document.getElementById("inputCurrentText").value);
 	var startTimeIndex =parseFloat(document.getElementById("inputStartTimeText").value);
 	var endTimeIndex =parseFloat(document.getElementById("inputEndTimeText").value);
@@ -282,7 +282,7 @@ function clearPLOT() {
 	xs = new Array();
 	ys = new Array();
 	
-	TESTER2 = document.getElementById("tester2");
+	TESTER2 = document.getElementById("plotlyDiv");
 	
 	Plotly.purge(TESTER2);
 	TESTER2.innerHTML="";

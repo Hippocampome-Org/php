@@ -20,14 +20,12 @@
 <tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td><tr>
 <tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td><tr>
 <tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td><tr>
-<tr><td><b>Parameter G <em>(Two-compartment models only)</em>:</b></td><td><input type="text" id="inputGParam" /></td><tr>
-<tr><td><b>Parameter P <em>(Two-compartment models only)</em>:</b></td><td><input type="text" id="inputPParam" /></td><tr>
 </table>
 <button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>
  
 <br/>
 
-<div id="tester2" style="width:800px;height:550px;"></div>
+<div id="plotlyDiv" style="width:800px;height:550px;"></div>
 
  
  <br/>	
@@ -51,10 +49,10 @@ var vt=<?php echo $_GET["paramVt"]; ?>;//-50.53342176093605;
 var vmin=<?php echo $_GET["paramVmin"]; ?>;//-56.97945472527379;
 var vpeak=<?php echo $_GET["paramVpeak"]; ?>;//0.5706428111684687;
 
-var gParam = 0;
-var pParam = 0;
-var G=0;//12;
-var P=0;//0.5;
+//var gParam = 0;
+//var pParam = 0;
+var G=<?php echo $_GET["paramG"]; ?>;//0.5706428111684687;;//12;
+var P=0.5;//0.5;
 //# input current
  
 
@@ -112,8 +110,6 @@ function rk4(index,x, y, dx, derivs, inputCurrent) {
 var derives2 = function(x, y, inputCurrent) {
     var dydx = [];
 
-	G = gParam;
-	P = pParam;
 	var ic1 = G*P*(y[2]-y[0]);//=G*0.5*(vv-v)
 	var ic2 = G*P*(y[0]-y[2]);//G*0.5*(v-vv)
 
@@ -214,15 +210,15 @@ function calculate(inputCurrent,startIndex,endIndex) {
 
 
 function runPLOT() {
-	TESTER = document.getElementById("tester2");
+	TESTER = document.getElementById("plotlyDiv");
 	
 	//alert(document.getElementById("toto").value);
-	document.getElementById("tester2").innerHTML="";
+	document.getElementById("plotlyDiv").innerHTML="";
 	var  I2 = parseFloat(document.getElementById("inputCurrentText").value);
 	var startTimeIndex =parseFloat(document.getElementById("inputStartTimeText").value);
 	var endTimeIndex =parseFloat(document.getElementById("inputEndTimeText").value);
-	gParam = parseFloat(document.getElementById("inputGParam").value);
-	pParam = parseFloat(document.getElementById("inputPParam").value);
+	//gParam = parseFloat(document.getElementById("inputGParam").value);
+	//pParam = parseFloat(document.getElementById("inputPParam").value);
 	
 	startStepIndex = startTimeIndex/step;
 	endStepIndex = endTimeIndex/step;
@@ -293,7 +289,7 @@ function clearPLOT() {
 	xs = new Array();
 	ys = new Array();
 	
-	TESTER2 = document.getElementById("tester2");
+	TESTER2 = document.getElementById("plotlyDiv");
 	
 	Plotly.purge(TESTER2);
 	TESTER2.innerHTML="";
