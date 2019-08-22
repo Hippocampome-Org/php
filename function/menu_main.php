@@ -24,8 +24,9 @@ session_start();
 	
 			<li class="subfirst"><a href="morphology.php">Morphology</a></li>
 			<li><a href="markers.php">Molecular markers</a></li>
-			<li><a href="ephys.php">Electrophysiology</a></li>
-			<li><a href="connectivity.php">Connectivity</a></li>
+            <li><a href="ephys.php">Membrane biophysics</a></li>
+            <li><a href="connectivity.php">Connectivity</a></li>
+            <li><a href="synaptome.php">Synaptic physiology</a></li>
 			<?php
 				if ($permission != 1 && $_SESSION["fp"]==1) {
 			?>
