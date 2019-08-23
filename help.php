@@ -96,6 +96,11 @@
 			<li><a href='synaptome.php'><font class="font7"> Requirements, Installation, and Advanced Access Instructions</font></a></li>
 			</ul>
 			
+			<font class='font1a'>Search:</font> &nbsp; &nbsp;			
+			<ul>
+  			<li><a href='Help_Search_Engine.php'><font class="font7"> Advanced Search Engine User Manual</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			
 			<ul>
 			<li><a href='images/morphology/Morphology_Matrix.jpg'><font class="font7"> Morphology Matrix</font></a></li>  			
@@ -116,7 +121,6 @@
   			<li><a href='Help_On-hold_Types.php'><font class="font7"> On-hold Types</font></a></li>
   			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
   			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Usage Scenario</font></a></li>
-  			<li><a href='Help_Search_Engine.php'><font class="font7"> Advanced Connectivity Search Engine User Manual</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
   			<li><a href='Help_Bibliography.php'><font class="font7"> Bibliography</font></a></li>
   			<li><a href='https://github.com/Hippocampome-Org/'><font class="font7"> Hippocampome.org GitHub code repository</font></a></li>
