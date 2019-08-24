@@ -161,7 +161,7 @@ function calculate(inputCurrent,startIndex,endIndex) {
 	
 	var endTimeIndex =parseFloat(document.getElementById("inputEndTimeText").value);
 	
-	maxSteps=Math.ceil((endTimeIndex/step)+1001);
+	maxSteps=Math.ceil((endTimeIndex/step)+100001);
 	
 	
 	
