@@ -12,7 +12,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html" />
-<script type="text/javascript" src="plotlyjs/plotly.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="plotlyjs/plotly-latest.min.js"></script>
 </head>
 
 <body>
