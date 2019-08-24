@@ -67,7 +67,7 @@ var u0=0;
 function rk4(index,x, y, dx, derivs, inputCurrent) {
  
 		
-		console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>x="+x+"|y="+y);
+		//console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>x="+x+"|y="+y);
 		if(index===0) {
 			return yStart;
 		}
@@ -106,7 +106,7 @@ var derives2 = function(x, y, inputCurrent) {
 
 	
 	
-	console.log("INPUT CURRENT>>>>>>>"+inputCurrent);
+	//console.log("INPUT CURRENT>>>>>>>"+inputCurrent);
  
 	dydx[0] = (k*(y[0]-vr)*(y[0]-vt)-y[1]+inputCurrent)/Cm;
 	
@@ -115,12 +115,12 @@ var derives2 = function(x, y, inputCurrent) {
 	dydx[1] = a*(b*(y[0]-vr) - y[1]);
 	
 	if(y[0]>vpeak) {
-		console.log("WARNING"+y[0]);
+		//console.log("WARNING"+y[0]);
 		y[0]=vmin;
 		y[1]+=d;
 	}
 
-	console.log("returned============================>"+dydx);
+	//console.log("returned============================>"+dydx);
 
     return dydx;
 }
@@ -130,16 +130,16 @@ var derives2 = function(x, y, inputCurrent) {
  
  
 var   x1 = 0.0;
-var    step = 0.1;
+var    step = 0.001;
 var    steps = 0;
-var    maxSteps = 10001;
+var    maxSteps = 1000001;
 
 
 var xStart = 0.0;
 var yStart = [v0, u0];
  
 function calculate(inputCurrent,startIndex,endIndex) {
-	console.log("TEST RANDOM="+inputCurrent);
+	//console.log("TEST RANDOM="+inputCurrent);
 	
 	var savedInputCurrent = inputCurrent;
 	
@@ -168,17 +168,17 @@ function calculate(inputCurrent,startIndex,endIndex) {
 		
 		
 		if(steps===100) {
-			console.log("HERE");
+			//console.log("HERE");
 		}
 		
-		console.log("STEP+++++++>>"+steps);
+		//console.log("STEP+++++++>>"+steps);
 	 
 		var returnedVal = rk4(steps,xStart, yStart, step, derives2, inputCurrent);
 
 		
 		//y=v_prev;
 	 
-		console.log("END=============================== y(" + x1 + ") =  \t" + JSON.stringify(returnedVal)  );
+		//console.log("END=============================== y(" + x1 + ") =  \t" + JSON.stringify(returnedVal)  );
 	 
 		xs.push(x1);
 		ys.push(returnedVal[0]);
@@ -221,8 +221,8 @@ function runPLOT() {
 	var x = [];
 	var y = [];
 	
-	//console.log(JSON.stringify(xs));
-	//console.log(JSON.stringify(ys));
+	////console.log(JSON.stringify(xs));
+	////console.log(JSON.stringify(ys));
 	
 	var data = [{ x: xs, y: ys }];
 	
@@ -269,7 +269,7 @@ function runPLOT() {
 
 function clearPLOT() {
 	x1 = 0.0;
-	step = 0.1;
+	step = 0.001;
 	steps = 0;
 	//maxSteps = 10001;
 
@@ -305,7 +305,7 @@ function clearPLOT() {
   
   3) Store spike array (when we reset equation)
   	if(y[0]>vpeak) {
-		console.log("WARNING"+y[0]);
+		//console.log("WARNING"+y[0]);
 		y[0]=vmin;
 		y[1]+=d;
 	}
