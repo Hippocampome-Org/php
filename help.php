@@ -82,6 +82,7 @@
   			<li><a href='Help_Model_Definition.php'><font class="font7"> Model Definition</font></a></li>
   			<li><a href='Help_Model_Fitting.php'><font class="font7"> Model Fitting</font></a></li>
   			<li><a href='Help_Model_Simulation.php'><font class="font7"> Model Simulation Using CARLsim</font></a></li>
+  			<li><a href='data/NeuroML2.zip'><font class="font7"> NeuroML2 files</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
