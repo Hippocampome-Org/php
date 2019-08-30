@@ -39,7 +39,7 @@
   <!-- main help descriptions -->
   <div class='article_details'>
   <u>Inclusion Criteria of Articles</u><br>
-  Articles that describe cognitive/behavioral functions that can be effectively computationally modeled using spiking neural networks.
+  Articles that describe cognitive/behavioral functions with neural activity that occurs in the hippocampal formation. The activity must be described as a spiking neural network computational model.
   </div>
   <br><div class='article_details'>
   <u>Subject</u><br>
