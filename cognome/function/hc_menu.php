@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 
 <div id="menu_main_button_new_clr">
   <ul id="css3menu0" class="topmenu">
-    <li class="topfirst"><!--a href="../morphology.php"--><a href="#" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
+    <li class="topfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
       <ul>
         <li class="subfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php">Morphology</a></li>
         <li><a href="http://www.hippocampome.org/phpdev/markers.php">Molecular markers</a></li>
