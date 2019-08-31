@@ -29,6 +29,11 @@ if ($_SESSION['perm'] == 0) {
     while(list($permission) = mysqli_fetch_row($rs)) {
       if ($permission == 1) { 
         $permission1 = $permission;
+        // server should keep session data for at least 1 day
+        ini_set('session.gc_maxlifetime', 86400);
+        // each client should remember their session id for exactly 1 day
+        session_set_cookie_params(86400);
+        session_start();         
         $_SESSION['perm'] = $permission1;
       }
       else;
