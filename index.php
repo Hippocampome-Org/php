@@ -6,7 +6,7 @@
 include("simphp-2.0.php");
 
 //-------user login required check----------
-$_SESSION['perm'] = 0;
+/*$_SESSION['perm'] = 0;*/
 $_SESSION['fp']=0;
 $_SESSION['if']=0;
 $_SESSION['im']=0;

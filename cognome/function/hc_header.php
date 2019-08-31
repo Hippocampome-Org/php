@@ -10,7 +10,7 @@
 References: Javascript select redirect: https://www.webdeveloper.com/d/211180-drop-down-menus-with-url-link-options/2-->
 <?php
 //-------user login required check----------
-$_SESSION['perm'] = 0;
+/*$_SESSION['perm'] = 0;*/
 $_SESSION['fp']=0;
 $_SESSION['if']=0;
 $_SESSION['im']=0;
