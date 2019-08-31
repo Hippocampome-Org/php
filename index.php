@@ -17,7 +17,7 @@ if ($permission == 1) {
   $_SESSION['perm'] = 1;
 }
 else{
-  $_SESSION['perm'] = 0;
+  //$_SESSION['perm'] = 0;
 }
 //-------------------------------------------
 //$_SESSION['perm'] = 0;
@@ -60,6 +60,14 @@ if ($_SESSION['perm'] == 0) {
           }
       }
   }
+}
+else if ($_SESSION['perm'] == 0) {
+  // server should keep session data for at least 1 day
+  ini_set('session.gc_maxlifetime', 86400);
+  // each client should remember their session id for exactly 1 day
+  session_set_cookie_params(86400);
+  session_start();         
+  $_SESSION['perm'] = 1;
 }
 // delete temporary table for the research: -----------------
 include("function/remove_table_research.php");
