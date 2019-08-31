@@ -52,24 +52,25 @@ jQuery(document).ready(function() {
   <ul id="css3menu0" class="topmenu">
     <li class="topfirst"><!--a href="../morphology.php"--><a href="#" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
       <ul>
-        <li class="subfirst"><!--a href="../morphology.php"--><a href="#">Morphology</a></li>
-        <li><!--a href="../markers.php"--><a href="#">Molecular markers</a></li>
-        <li><!--a href="../ephys.php"--><a href="#">Electrophysiology</a></li>
-        <li><!--a href="../connectivity.php"--><a href="#">Connectivity</a></li>
-         <?php 
+        <li class="subfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php">Morphology</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/markers.php">Molecular markers</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/ephys.php">Membrane biophysics</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/connectivity.php">Connectivity</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/synaptome.php">Synaptic physiology</a></li>
+         <!--?php 
           if ($permission != 1 && $_SESSION["fp"]==1) {
-        ?>
-        <li><!--a href="../firing_patterns.php"--><a href="#">Firing patterns</a></li>
-         <?php   
+        ?-->
+        <li><a href="http://www.hippocampome.org/phpdev/firing_patterns.php">Firing patterns</a></li>
+         <!--?php   
           }
-        ?> 
-          <?php 
+        ?--> 
+          <!--?php 
           if ($permission != 1 && $_SESSION["im"]==1) {
-        ?>
-        <li><!--a href="../Izhikevich_model.php"--><a href="#">Izhikevich models</a></li>
-        <?php   
+        ?-->
+        <li><a href="http://www.hippocampome.org/phpdev/Izhikevich_model.php">Izhikevich models</a></li>
+        <!--?php   
           }
-        ?> 
+        ?--> 
         <li><a href="index.php">Cognome</a></li>
       </ul>
     </li>

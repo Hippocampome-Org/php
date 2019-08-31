@@ -170,20 +170,21 @@ if ($permission1 != 0) {
         <li><a href="ephys.php">Electrophysiology</a></li>
         <li><a href="connectivity.php">Connectivity</a></li>
         <li><a href="cognome/index.php">Cognome</a></li>        
-         <?php 
+         <!--?php 
           if ($permission != 1 && $_SESSION["fp"]==1) {
-        ?>
+        ?-->
         <li><a href="firing_patterns.php">Firing patterns</a></li>
-         <?php   
+         <!--?php   
           }
-        ?> 
-          <?php 
+        ?--> 
+          <!--?php 
           if ($permission != 1 && $_SESSION["im"]==1) {
-        ?>
+        ?-->
         <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
-        <?php   
+        <!--?php   
           }
-        ?> 
+        ?--> 
+        <li><a href="index.php">Cognome</a></li>
       </ul>
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
