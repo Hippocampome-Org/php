@@ -187,24 +187,24 @@ if ($permission1 != 0) {
         <li><a href="/cognome/index.php">Cognome</a></li>
       </ul>
     </li>
-    <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
+    <li class="topmenu"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
       <ul>
-        <li><a href="find_author.php?searching=1">Author</a></li>
-        <li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/find_author.php?searching=1">Author</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
         <?php 
           if ($permission != 1 && $_SESSION["fp"]==1) {
         ?>
-        <li><a href="find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
         <?php   
           }
         ?> 
-        <li><a href="find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
-        <li class="subfirst"><a href="search.php?searching=1">Neuron Type</a></li>
-        <li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
-        <li><a href="search_engine_custom.php">Search Engine</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
+        <li class="subfirst"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1">Neuron Type</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/find_pmid.php?searching=1">PMID/ISBN</a></li>
+        <li><a href="http://www.hippocampome.org/phpdev/search_engine_custom.php">Search Engine</a></li>
       </ul>
     </li>
-    <li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
+    <li class="toplast"><a href="http://www.hippocampome.org/phpdev/help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a></li>
   </ul>
 </div>  
 <?php   
@@ -250,7 +250,7 @@ jQuery(document).ready(function() {
       If you have feedback on either functionality or content, or if you
       would like to be informed when the first official version is released,
       please fill out the
-      <a href="user_feedback_form_entry.php">feedback form</a>
+      <a href="http://www.hippocampome.org/phpdev/user_feedback_form_entry.php">feedback form</a>
       or email us at
       <a href="mailto:Hippocampome.org@gmail.com">Hippocampome.org@gmail.com</a>.
       <br><br>
@@ -311,14 +311,14 @@ jQuery(document).ready(function() {
           <!--  <a href='http://peg.gd/2yN' target="_blank">http://peg.gd/2yN</a> -->
           <hr class='hr2'/>
           <font class='font3' color='#000000'>
-          <a href="Help_Terms_of_Use.php">Terms of Use</a>
+          <a href="http://www.hippocampome.org/phpdev/Help_Terms_of_Use.php">Terms of Use</a>
           <br><br>
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015-2019 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <br /><p><?php echo $info; ?>
           <br>
           10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
-          <br />Last Update: 26 Feb 2019 (<a href="Help_Release_Notes.php">v1.3 R 1G</a>)</font>
+          <br />Last Update: 26 Feb 2019 (<a href="http://www.hippocampome.org/phpdev/Help_Release_Notes.php">v1.3 R 1G</a>)</font>
           <br />
         </div>
     </td>   
