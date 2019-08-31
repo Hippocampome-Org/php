@@ -1,3 +1,4 @@
+<?php include ("permission_check.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
