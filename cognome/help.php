@@ -53,6 +53,10 @@
   Press this to update the results based on the options selection made.
   <br><br><u>Notes</u><br>
   The most content so far has been added to the spatial memory category. Try using that one to try the site out. Currently the dimensions are populated with sample data that does not reflect real knowledge. A purpose of this is to show the functionality of the site before the real data is entered in. The real data will be updated in the site on a consistent basis.</div>
+  <br><div class='article_details'>
+  <u>Comments, Questions, and Thoughts?</u><br>
+  Send them to nsutton2 &lpar;&#8219;&agrave;&tcaron;&rpar; gmu.edu.
+  </div>  
 
   <?php
   include('mysql_connect.php');    
