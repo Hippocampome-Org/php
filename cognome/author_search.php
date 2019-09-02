@@ -198,7 +198,7 @@
             // full details
             echo "<span style='float:right;font-size:18px;'><a href='browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
             // theory notes
-            if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory</label><div class='collapsible-content'><div class='content-inner'><p>
+            if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory Notes</label><div class='collapsible-content'><div class='content-inner'><p>
             ".$row["theory"]."
             </p></div><a style='font-size:10px'><hr></a></div></div>";
             $i++;};
