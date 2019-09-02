@@ -12,7 +12,7 @@
       echo "<u>Citation</u>: " . $row["citation"].
       "<br><u>Url</u>: <a href='".$row["url"]."'>" . $row["url"].
       "</a> <br><u>".$dim_desc."</u>: ".$row[$dim_id].". Dimension type description: ".$dim_type_desc."."."<span style='float:right;font-size:18px;'><a href='browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
-      if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory</label><div class='collapsible-content'><div class='content-inner'><p>
+      if ($row["theory"]!='') {echo "<div class='wrap-collabsible'><input id='collapsible".$i."' class='toggle' type='checkbox'><label for='collapsible".$i."' class='lbl-toggle'>Theory Notes</label><div class='collapsible-content'><div class='content-inner'><p>
       ".$row["theory"]."
       </p></div><a style='font-size:10px'><hr></a></div></div>";
       $i++;};
