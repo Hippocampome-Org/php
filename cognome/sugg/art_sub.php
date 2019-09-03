@@ -290,7 +290,7 @@
         echo " because article already exists in the database.<br>Existing article has official id ".$art_off_id." and url <a href='".$_POST['url']."' target='_blank'>".$_POST['url']."</a> .<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
       }
       else if (isset($_POST['deactivated']) || isset($_POST['deactivated_2']) || isset($_POST['deactivated_2'])) {
-        echo "<br>Error: deleting articles and adding/removing types of dimension values has been put on hold for user submissions until the development team finds a way to track and manage these changes better. We are working on quickly enabling these features for user submission and not only administrator access. Thank you for your patience.<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+        echo "<br>Error: deleting articles and adding/removing types of dimension values has been put on hold for user submissions until the development team finds a way to track and manage these changes better. We are working on quickly enabling these features for user submissions and not only administrator access. Thank you for your patience.<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
       }
       else {
         echo "<br>Error: missing citation description<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
