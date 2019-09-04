@@ -28,7 +28,7 @@
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
   <script type='text/javascript'>
-    document.getElementById('header_title').innerHTML="<a href='mod_art.php' style='text-decoration: none;color:black !important'><span class='title_section'>Please Log In or Register</span></a>";
+    document.getElementById('header_title').innerHTML="<a href='login.php' style='text-decoration: none;color:black !important'><span class='title_section'>Please Log In or Register</span></a>";
   </script>
   <!-- end of header -->
   
@@ -58,9 +58,9 @@
       echo "<br><span style='font-size:1.3em;'>Successfully logged out.</span>";
     }
   }
-  echo "<form action='login.php' method='POST'><br>Username &nbsp&nbsp<input type='text' name='username'></input><br><br>Password &nbsp&nbsp<input type='password' name='password'></input><br><br><input type='submit' value='Login' style='font-size:.9em;padding-top:5px;padding-bottom:5px;padding-left:20px;padding-right:20px;'></form><br><br><span style='font-size:1.3em'><a href='register.php'>Register a New Account</a></span><br><br>";
+  echo "<form action='login.php' method='POST'><br>Username &nbsp&nbsp<input type='text' name='username'></input><br><br>Password &nbsp&nbsp<input type='password' name='password'></input><br><br><input type='submit' value='Login' style='font-size:.9em;padding-top:5px;padding-bottom:5px;padding-left:20px;padding-right:20px;'></form><br><br><span style='font-size:1.3em'><a href='reset_pass.php'>Reset Password</a></span><br><span style='font-size:1.3em'><a href='register.php'>Register a New Account</a></span><br><br>";
 
-  echo "</div>";  
+  echo "</div><br><br>";  
   
   $conn->close();
 

@@ -2,6 +2,8 @@ mysql_connect.php
 admin/mysql_connect.php
 search_methods/mysql_connect.php
 sugg/mysql_connect.php
+sugg/email_login.php
+sugg/reset_pass.php
 .DS_Store
 access_db.php
 .buildpath
