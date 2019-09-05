@@ -232,6 +232,10 @@
   // Check if article is existing one or new one
   $result = $conn->query("SELECT ID FROM natemsut_cog_sug.articles WHERE ID=".$art_num);
   if($result->num_rows == 0) { 
+    if($_POST['official_id'] == '') {
+        echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Error: missing official id description<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+        exit();
+    }
     // check for duplicate article
     $sql = "SELECT official_id FROM natemsut_cog_sug.articles WHERE official_id=\"".$art_off_id."\";";
     $result = $conn->query($sql);
