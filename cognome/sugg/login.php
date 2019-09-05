@@ -4,6 +4,7 @@
   <!--
     References: https://www.rexegg.com/regex-php.html
     https://www.washington.edu/accesscomputing/webd2/student/unit5/module2/lesson5.html
+    https://zinoui.com/blog/storing-passwords-securely
   -->
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Hippocampus Region Models and Theories</title>
@@ -36,8 +37,10 @@
   include('mysql_connect.php');  
 
   if (isset($_POST['username']) & isset($_POST['password'])) {
+    include('secret_key.php');
     //echo $_POST['username']."<br><br>".$_POST['password'];
-    $sql = "SELECT password FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
+    $sql = "SELECT AES_DECRYPT(`password`, '".$pass_enc_secret_key."') AS `password` FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
+    echo $sql;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) { 
       $pass_match = $result->fetch_assoc()['password'];

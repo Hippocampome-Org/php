@@ -4,6 +4,7 @@ search_methods/mysql_connect.php
 sugg/mysql_connect.php
 sugg/email_login.php
 sugg/reset_pass.php
+sugg/secret_key.php
 .DS_Store
 access_db.php
 .buildpath

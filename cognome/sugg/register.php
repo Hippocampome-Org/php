@@ -59,7 +59,8 @@
   }
 
   function reg_user($conn) {
-    $sql = "INSERT INTO `natemsut_cog_sug`.`accounts` (`username`, `password`, `real_name`, `email`, `affiliation`, `notes`) VALUES ('".$_POST['username']."', '".$_POST['password']."', '".$_POST['realname']."', '".$_POST['email']."', '".$_POST['affiliation']."', '".$_POST['notes']."');";
+    include('secret_key.php');
+    $sql = "INSERT INTO `natemsut_cog_sug`.`accounts` (`username`, `password`, `real_name`, `email`, `affiliation`, `notes`) VALUES ('".$_POST['username']."', AES_ENCRYPT('".$_POST['password']."', '".$pass_enc_secret_key."'), '".$_POST['realname']."', '".$_POST['email']."', '".$_POST['affiliation']."', '".$_POST['notes']."');";
     $result = $conn->query($sql);
   }
 
