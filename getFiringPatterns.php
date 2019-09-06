@@ -167,13 +167,13 @@ $neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 //$prev_subregion="NONE";
 
-$n_firing = 22;
+$n_firing = 23;
 for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the number of active neuron types to print each row in the data table
 {
-	$hippo = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP."=>NULL, "D.PSTUT"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL,  "-"=>NULL);
-	$hippo_color = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP"=>NULL, "D.PSTUT"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL, "-"=>NULL);
-	$hippo_count = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP"=>NULL, "D.PSTUT"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL, "-"=>NULL);
-	$name_firing = array("0"=>"ASP.", "1"=>"ASP.ASP.", "2"=>"ASP.NASP", "3"=>"ASP.SLN", "4"=>"D.", "5"=>"D.ASP.", "6"=>"D.RASP.NASP", "7"=>"D.NASP", "8"=>"D.PSTUT", "9"=>"D.TSWB.NASP", "10"=>"RASP.", "11"=>"RASP.ASP.", "12"=>"RASP.NASP", "13"=>"RASP.SLN", "14"=>"NASP", "15"=>"PSTUT", "16"=>"PSWB", "17"=>"TSTUT.", "18"=>"TSTUT.ASP.", "19"=>"TSTUT.NASP", "20"=>"TSTUT.SLN", "21"=>"TSWB.NASP",  "22"=>"TSWB.SLN", "23"=>"-");
+	$hippo = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP."=>NULL, "D.PSTUT"=>NULL, "D.TSTUT.NASP"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL,  "-"=>NULL);
+	$hippo_color = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP"=>NULL, "D.PSTUT"=>NULL, "D.TSTUT.NASP"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL, "-"=>NULL);
+	$hippo_count = array("ASP."=>NULL, "ASP.ASP."=>NULL, "ASP.NASP"=>NULL, "ASP.SLN"=>NULL, "D."=>NULL, "D.ASP."=>NULL, "D.RASP.NASP"=>NULL, "D.NASP"=>NULL, "D.PSTUT"=>NULL, "D.TSTUT.NASP"=>NULL, "D.TSWB.NASP"=>NULL, "RASP."=>NULL, "RASP.ASP."=>NULL, "RASP.NASP"=>NULL, "RASP.SLN"=>NULL, "NASP"=>NULL, "PSTUT"=>NULL, "PSWB"=>NULL, "TSTUT."=>NULL, "TSTUT.ASP."=>NULL, "TSTUT.NASP"=>NULL, "TSTUT.SLN"=>NULL, "TSWB.NASP"=>NULL, "TSWB.SLN"=>NULL, "-"=>NULL);
+	$name_firing = array("0"=>"ASP.", "1"=>"ASP.ASP.", "2"=>"ASP.NASP", "3"=>"ASP.SLN", "4"=>"D.", "5"=>"D.ASP.", "6"=>"D.RASP.NASP", "7"=>"D.NASP", "8"=>"D.PSTUT", "9"=>"D.TSTUT.NASP", "10"=>"D.TSWB.NASP", "11"=>"RASP.", "12"=>"RASP.ASP.", "13"=>"RASP.NASP", "14"=>"RASP.SLN", "15"=>"NASP", "16"=>"PSTUT", "17"=>"PSWB", "18"=>"TSTUT.", "19"=>"TSTUT.ASP.", "20"=>"TSTUT.NASP", "21"=>"TSTUT.SLN", "22"=>"TSWB.NASP",  "23"=>"TSWB.SLN", "24"=>"-");
 	$soma_location = array("DG:SMo"=>0, "DG:SMi"=>1, "DG:SG"=>2, "DG:H"=>3, 
 	                       "CA3:SLM"=>0, "CA3:SR"=>1, "CA3:SL"=>2, "CA3:SP"=>3, "CA3:SO"=>4, 
 						   "CA2:SLM"=>0, "CA2:SR"=>1, "CA2:SP"=>2, "CA2:SO"=>3,
@@ -285,21 +285,22 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		getUrlForLink($id,$hippo['D.RASP.NASP'],$name_firing['6'],$hippo_color['D.RASP.NASP']),
 		getUrlForLink($id,$hippo['D.NASP'],$name_firing['7'],$hippo_color['D.NASP']),
 		getUrlForLink($id,$hippo['D.PSTUT'],$name_firing['8'],$hippo_color['D.PSTUT']),
-		getUrlForLink($id,$hippo['D.TSWB.NASP'],$name_firing['9'],$hippo_color['D.TSWB.NASP']),
-		getUrlForLink($id,$hippo['RASP.'],$name_firing['10'],$hippo_color['RASP.']),
-		getUrlForLink($id,$hippo['RASP.ASP.'],$name_firing['11'],$hippo_color['RASP.ASP.']),
-		getUrlForLink($id,$hippo['RASP.NASP'],$name_firing['12'],$hippo_color['RASP.NASP']),
-		getUrlForLink($id,$hippo['RASP.SLN'],$name_firing['13'],$hippo_color['RASP.SLN']),
-		getUrlForLink($id,$hippo['NASP'],$name_firing['14'],$hippo_color['NASP']),
-		getUrlForLink($id,$hippo['PSTUT'],$name_firing['15'],$hippo_color['PSTUT']),
-		getUrlForLink($id,$hippo['PSWB'],$name_firing['16'],$hippo_color['PSWB']),
-		getUrlForLink($id,$hippo['TSTUT.'],$name_firing['17'],$hippo_color['TSTUT.']),
-		getUrlForLink($id,$hippo['TSTUT.ASP..'],$name_firing['18'],$hippo_color['TSTUT.ASP.']),
-		getUrlForLink($id,$hippo['TSTUT.NASP'],$name_firing['19'],$hippo_color['TSTUT.NASP']),
-		getUrlForLink($id,$hippo['TTSTUT.SLN'],$name_firing['20'],$hippo_color['TSTUT.SLN']),
-		getUrlForLink($id,$hippo['TSWB.NASP'],$name_firing['21'],$hippo_color['TSWB.NASP']),
-		getUrlForLink($id,$hippo['TSWB.SLN'],$name_firing['22'],$hippo_color['TSWB.SLN']),
-		getUrlForLink($id,$hippo['-'],$name_firing['23'],$hippo_color['-'])
+		getUrlForLink($id,$hippo['D.TSTUT.NASP'],$name_firing['9'],$hippo_color['D.TSTUT.NASP']),
+		getUrlForLink($id,$hippo['D.TSWB.NASP'],$name_firing['10'],$hippo_color['D.TSWB.NASP']),
+		getUrlForLink($id,$hippo['RASP.'],$name_firing['11'],$hippo_color['RASP.']),
+		getUrlForLink($id,$hippo['RASP.ASP.'],$name_firing['12'],$hippo_color['RASP.ASP.']),
+		getUrlForLink($id,$hippo['RASP.NASP'],$name_firing['13'],$hippo_color['RASP.NASP']),
+		getUrlForLink($id,$hippo['RASP.SLN'],$name_firing['14'],$hippo_color['RASP.SLN']),
+		getUrlForLink($id,$hippo['NASP'],$name_firing['15'],$hippo_color['NASP']),
+		getUrlForLink($id,$hippo['PSTUT'],$name_firing['16'],$hippo_color['PSTUT']),
+		getUrlForLink($id,$hippo['PSWB'],$name_firing['17'],$hippo_color['PSWB']),
+		getUrlForLink($id,$hippo['TSTUT.'],$name_firing['18'],$hippo_color['TSTUT.']),
+		getUrlForLink($id,$hippo['TSTUT.ASP..'],$name_firing['19'],$hippo_color['TSTUT.ASP.']),
+		getUrlForLink($id,$hippo['TSTUT.NASP'],$name_firing['20'],$hippo_color['TSTUT.NASP']),
+		getUrlForLink($id,$hippo['TTSTUT.SLN'],$name_firing['21'],$hippo_color['TSTUT.SLN']),
+		getUrlForLink($id,$hippo['TSWB.NASP'],$name_firing['22'],$hippo_color['TSWB.NASP']),
+		getUrlForLink($id,$hippo['TSWB.SLN'],$name_firing['23'],$hippo_color['TSWB.SLN']),
+		getUrlForLink($id,$hippo['-'],$name_firing['24'],$hippo_color['-'])
 		);
 	
 	$responce->rows = $rows;

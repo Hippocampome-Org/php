@@ -793,12 +793,12 @@ include ("function/menu_main.php");
 			<input type="checkbox" style="background-color: rgb(0, 0, 153);" value="check1" name="check1" id="checkbox1"><span style="color: rgb(0, 0, 153);">Neurite Patterns&nbsp;&nbsp;</span></input>
         <input type="checkbox" style="background-color: rgb(0, 0, 153); " value="check2" name="check2" id="checkbox2" /><span style="color: rgb(0, 0, 153);">All Markers&nbsp;&nbsp;</span></input>
       <?php
-        if($permission!=1 && $_SESSION["if"]==1)
-        	{
-        ?>  
+//        if($permission!=1 && $_SESSION["if"]==1)
+//        	{
+       ?>  
         <input type="checkbox" checked style="background-color: rgb(0, 0, 153); " value="check3" name="check3" id="checkbox3"/><span style="color: rgb(0, 0, 153);">Inferences</span></input>
         <?php
-			}
+//			}
 		?>
 		</form>
 </div>
@@ -842,8 +842,8 @@ include ("function/menu_main.php");
 			<img src='images/positive_inference-negative.png' width="13px" border="0"/> <font class='font5'>Negative; positive inference</font> &nbsp;
 			-->
 			<?php
-             	if($permission!=1 && $_SESSION["if"]==1)
-        			{
+//             	if($permission!=1 && $_SESSION["if"]==1)
+//        			{
         	?>
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				
@@ -853,7 +853,7 @@ include ("function/menu_main.php");
 			<img src='images/positive_inference-negative_inference-species.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (species/protocol differences)</font> &nbsp;
 			<img src='images/positive_inference-negative_inference-unresolved.png' width="13px" border="0"/> <font class='font5'>Positive inference; negative inference (unresolved)</font> &nbsp;
 			<?php
-					}		
+//					}		
         	?>
 			
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -861,8 +861,8 @@ include ("function/menu_main.php");
 			<img src="images/searching.png" width="13px" border="0"/> <font class='font5'>Search Incomplete </font> &nbsp; &nbsp;
 			
 			<?php
-             	if($permission!=1 && $_SESSION["if"]==1)
-        			{
+//             	if($permission!=1 && $_SESSION["if"]==1)
+//        			{
         	?>
 			<img src="images/positive_half_confirm.png" width="7px" border="0"/>
 				<img src="images/negative_half_confirm.png" width="7px" border="0"/> 
@@ -870,7 +870,7 @@ include ("function/menu_main.php");
 				<img src="images/negative_inference_half_confirm.png" width="7px" border="0"/> 
 				<font class='font5'>Additional confirmation by inference(s) </font> &nbsp; &nbsp;
 			<?php
-					}
+//					}
         	?>
 			
 			<br/>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
