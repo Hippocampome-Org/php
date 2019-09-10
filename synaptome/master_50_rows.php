@@ -9,7 +9,7 @@ jQuery("#master_header").jqGrid({
       {name:'suid',index:'suid', width:411},
       {name:'presynaptic_neuron',index:'presynaptic_neuron', width:386},
       {name:'tuid',index:'tuid', width:463}
-    ]    
+    ]
 });
 jQuery("#list4").jqGrid({
   datatype: "local",
@@ -31,13 +31,12 @@ jQuery("#list4").jqGrid({
       {name:'kinetics',index:'kinetics', width:80},
       {name:'st_plasticity',index:'st_plasticity', width:60},
       {name:'lt_plasticity',index:'lt_plasticity', width:60}
-    ]    
+    ]       
 });
 var mydata;
 <?php
   $sql = "SELECT * FROM natemsut_synaptome.master LIMIT 50;";
   $result = $conn->query($sql);
-  $i=0;
   if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) { 
     echo "mydata = [
@@ -46,7 +45,6 @@ var mydata;
       for(var i=0;i<=mydata.length;i++)
         jQuery('#list4').jqGrid('addRowData',i+1,mydata);
       ";
-      $i++;
     }
   }
 ?>

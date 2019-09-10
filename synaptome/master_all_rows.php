@@ -31,7 +31,7 @@ jQuery("#list4").jqGrid({
       {name:'kinetics',index:'kinetics', width:80},
       {name:'st_plasticity',index:'st_plasticity', width:60},
       {name:'lt_plasticity',index:'lt_plasticity', width:60}
-    ]    
+    ]        
 });
 var mydata;
 <?php

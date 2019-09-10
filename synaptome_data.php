@@ -74,6 +74,10 @@ window.onload = function()
     <a href="?tab=review_evidence" style="text-decoration: none;">review_evidence</a>
   </span>  
   <span class="tab_space">&nbsp;</span>
+  <span class="main_tabs main_tab_5">
+    <a href="?tab=papers" style="text-decoration: none;">papers</a>
+  </span>  
+  <span class="tab_space">&nbsp;</span>
   <span class="main_tabs main_tab_3">
     <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
   </span>
@@ -96,6 +100,9 @@ window.onload = function()
             else if ($matrix_tab=='review_evidence') {
               include ("synaptome/review_evidence.php");
             }                                    
+            else if ($matrix_tab=='papers') {
+              include ("synaptome/papers.php");
+            }            
             else if ($matrix_tab=='n_by_m') {
               include ("synaptome/n_by_m_6.php");
             }                        
