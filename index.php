@@ -1,10 +1,9 @@
 <?php
   include ("access_db.php");
+  include ("page_counter.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
 <?php
-include("simphp-2.0.php");
-
 //-------user login required check----------
 /*$_SESSION['perm'] = 0;*/
 $_SESSION['fp']=0;
@@ -185,6 +184,7 @@ if ($permission1 != 0) {
           }
         ?--> 
         <li><a href="cognome/index.php">Cognome</a></li>
+        <li><a href="http://synapt.22web.org">Synaptome</a></li>
       </ul>
     </li>
     <li class="topmenu"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
@@ -315,11 +315,12 @@ jQuery(document).ready(function() {
           <br><br>
             NOTICE: Non-licensed copyrighted content that may be incorporated into this not-for-profit, educational web portal was vetted using the "fair use" criteria defined in <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code, &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable for reuse.  Except otherwise noted, this web portal is &copy; 2015-2019 by George Mason University, under a <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons Attribution-ShareAlike [CC BY-SA] license</a>. 
 
-          <br /><p><?php echo $info; ?>
+          <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           10,822 Pieces of Knowledge (PoK) and 21,285 Pieces of Evidence (PoE)
           <br />Last Update: 26 Feb 2019 (<a href="http://www.hippocampome.org/phpdev/Help_Release_Notes.php">v1.3 R 1G</a>)</font>
           <br />
+          <br>
         </div>
     </td>   
   </tr>

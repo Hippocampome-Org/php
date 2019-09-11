@@ -71,7 +71,8 @@ jQuery(document).ready(function() {
         <!--?php   
           }
         ?--> 
-        <li><a href="index.php">Cognome</a></li>
+        <li><a href="index.php">Cognome</a></li>        
+        <li><a href="http://synapt.22web.org">Synaptome</a></li>
       </ul>
     </li>
     <li class="topmenu"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
