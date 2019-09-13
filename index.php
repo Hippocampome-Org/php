@@ -1,9 +1,10 @@
 <?php
   include ("access_db.php");
+  include ("page_counter.php");  
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
 <?php
-include("simphp-2.0.php");
+/* include("simphp-2.0.php"); */
 
 //-------user login required check----------
 $_SESSION['perm'] = 0;
@@ -332,7 +333,8 @@ jQuery(document).ready(function() {
             <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons
             Attribution-ShareAlike [CC BY-SA] license</a>. 
 
-          <br /><p><?php echo $info; ?>
+          <!-- <br /><p><?php echo $info; ?> -->
+          <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           19,598 Pieces of Knowledge (PoK) and 29,848 Pieces of Evidence (PoE)
           <br />Last Update: 06 Sep 2019 (<a href="Help_Release_Notes.php">v1.5</a>)</font>
