@@ -96,7 +96,7 @@
 
   echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>Sorted by: ".$dim_desc."</div></center><br>";
   if ($filter == 'no filter' | $prop_value == '') {
-    $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id." FROM articles, article_has_subject, ".$dim_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id ORDER BY ".$dim_relation.".`".$dim_id."`";
+    $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
   }
   else {
     if ($dim_relation != $prop_relation_tbl) {
@@ -107,7 +107,7 @@
       $prop_relation = '';
       $prop_tbl_join = '';
     }
-    $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id." FROM articles, article_has_subject, ".$dim_relation.$prop_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join." ORDER BY ".$dim_relation.".`".$dim_id."`;";
+    $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation.$prop_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join." ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
   }
 
   // display articles based on the user's selection

@@ -28,4 +28,33 @@
     $dim_desc = 'Theory Competition';
     $dim_relation = 'theory_has_competition'; break;    
   }
+  switch($property) {
+    case 1: $prop_id = 'id'; 
+    $prop_desc = 'All';
+    $prop_relation = 'articles'; break;
+    case 2: $prop_id = 'authors'; 
+    $prop_desc = 'Authors';
+    $prop_relation = 'articles'; break;
+    case 3: $prop_id = 'year';
+    $prop_desc = 'Year'; 
+    $prop_relation = 'articles'; break;
+    case 4: $prop_id = 'title'; 
+    $prop_desc = 'Title';
+    $prop_relation = 'articles'; break;
+    case 5: $prop_id = 'url'; 
+    $prop_desc = 'Url';
+    $prop_relation = 'articles'; break;  
+    case 6: $prop_id = 'theory'; 
+    $prop_desc = 'Theory Notes';
+    $prop_relation = 'articles'; break;
+    case 7: $prop_id = 'modeling_methods';
+    $prop_desc = 'Modeling Methods'; 
+    $prop_relation = 'articles'; break;
+    case 8: $prop_id = 'journal'; 
+    $prop_desc = 'Journal';
+    $prop_relation = 'articles'; break;
+    case 9: $prop_id = 'citation'; 
+    $prop_desc = 'Citation';
+    $prop_relation = 'articles'; break;       
+  }  
 ?>
