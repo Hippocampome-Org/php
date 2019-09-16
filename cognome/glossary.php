@@ -13,7 +13,7 @@
   $dim_desc=array(
     1=>"The detail level dimension provides the type of simulation model used in the work. The level of biological abstractness of the model can be infered from its
     core equations, without extensions to its complexity. The model included in the work at the lowest level is annotated as this property's value.",
-    2=>"The level of implementation dimension describes the completeness of the implementation of the model in the literature. This explains what level of implementation the simulation model is currently at in the literature.",
+    2=>"The level of implementation dimension describes the completeness of the implementation of the model in the literature. This explains what level of implementation the simulation model is currently at in the literature.<a href='inclusion_criteria.php' style='text-decoration: none;'><img src='info.gif' title='inclusion critera description' style='height:20px;width:20px;float:right;position:relative;'></a>",
     3=>"The theory category dimension describes which theories were found to be included in the literature. The term 'category' is used to explicitly differentiate this property from the theory 'competition' property.",
     4=>"The keyword dimension is used for annotating keywords that are useful to track for various research areas.");  
   for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
