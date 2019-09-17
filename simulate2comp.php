@@ -21,7 +21,8 @@
 <tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td><tr>
 <tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td><tr>
 </table>
-<button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>
+<button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>&nbsp;
+<button type="button" id="dataButton" style="visibility:hidden;" onclick="downloadData();">Download Data</button>
  
 <br/>
 
@@ -37,6 +38,7 @@
 var xs = new Array();
 var ys = new Array();
 var global = new Array();
+var data = new Array();
 
 //# model parameters
 var k=<?php echo $_GET["paramK"]; ?>;//1.2833102565689956;
@@ -231,7 +233,7 @@ function runPLOT() {
 	////console.log(JSON.stringify(xs));
 	////console.log(JSON.stringify(ys));
 	
-	var data = [{ x: xs, y: ys }];
+	data = [{ x: xs, y: ys }];
 	
 	var layout = {
 	  title: {
@@ -270,7 +272,7 @@ function runPLOT() {
 	
 	
 	Plotly.plot( TESTER, data, layout);
- 
+	document.getElementById("dataButton").style.visibility = "visible";
 	
 }
 
@@ -289,6 +291,8 @@ function clearPLOT() {
 	xs = new Array();
 	ys = new Array();
 	
+	data = new Array();
+	
 	TESTER2 = document.getElementById("plotlyDiv");
 	
 	Plotly.purge(TESTER2);
@@ -296,6 +300,31 @@ function clearPLOT() {
 	
 }
 
+
+
+
+function downloadData() {
+	var csvContent = "";
+
+	csvContent += "time,voltage,\r\n";
+	
+	for(i=0;i<data[0].x.length;i++) {
+		csvContent+=data[0].x[i]+","+data[0].y[i]+"\r\n";
+	}
+	
+	
+	csvData = new Blob([csvContent], { type: 'text/csv' }); 
+	var csvUrl = URL.createObjectURL(csvData);
+
+ 
+	var link = document.createElement("a");
+	link.setAttribute("href", csvUrl);
+	link.setAttribute("download", "export.csv");
+	document.body.appendChild(link); // Required for FF
+
+	link.click();
+	
+}
  
 </script>
 
