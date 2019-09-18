@@ -25,6 +25,7 @@ Granule,Lucidum LAX
 Granule,Lucidum ORAX
 Granule,Lucidum-Radiatum
 Granule,Spiny Lucidum
+Granule,Mossy Fiber-Associated
 Granule,Mossy Fiber-Associated ORDEN
 Granule,CA3 QuadD-LM
 Granule,CA2 Pyramidal
@@ -570,10 +571,6 @@ CA3 Bistratified,CA3 R-LM
 CA3 Bistratified,CA3 SO-SO
 CA3 Bistratified,CA3 Trilaminar
 CA3 Bistratified,CA2 Wide-Arbor Basket
-CA3 Interneuron Specific Oriens,CA3 Pyramidal
-CA3 Interneuron Specific Oriens,CA3c Pyramidal
-CA3 Interneuron Specific Oriens,CA3 Giant
-CA3 Interneuron Specific Oriens,CA3 Granule
 CA3 Interneuron Specific Oriens,CA3 Axo-axonic
 CA3 Interneuron Specific Oriens,CA3 Horizontal Axo-axonic
 CA3 Interneuron Specific Oriens,CA3 Basket
@@ -596,9 +593,6 @@ CA3 Interneuron Specific Oriens,CA3 R-LM
 CA3 Interneuron Specific Oriens,CA3 SO-SO
 CA3 Interneuron Specific Oriens,CA3 Trilaminar
 CA3 Interneuron Specific Oriens,CA2 Wide-Arbor Basket
-CA3 Interneuron Specific Quad,Hilar Ectopic Granule
-CA3 Interneuron Specific Quad,Mossy
-CA3 Interneuron Specific Quad,Mossy MOLDEN
 CA3 Interneuron Specific Quad,AIPRIM
 CA3 Interneuron Specific Quad,DG Axo-axonic
 CA3 Interneuron Specific Quad,DG Basket
@@ -609,10 +603,6 @@ CA3 Interneuron Specific Quad,HIPROM
 CA3 Interneuron Specific Quad,MOLAX
 CA3 Interneuron Specific Quad,Outer Molecular Layer
 CA3 Interneuron Specific Quad,Total Molecular Layer
-CA3 Interneuron Specific Quad,CA3 Pyramidal
-CA3 Interneuron Specific Quad,CA3c Pyramidal
-CA3 Interneuron Specific Quad,CA3 Giant
-CA3 Interneuron Specific Quad,CA3 Granule
 CA3 Interneuron Specific Quad,CA3 Axo-axonic
 CA3 Interneuron Specific Quad,CA3 Horizontal Axo-axonic
 CA3 Interneuron Specific Quad,CA3 Basket
@@ -1411,13 +1401,11 @@ CA1 Interneuron Specific LMO-O,CA1 Oriens-Bistratified Projecting
 CA1 Interneuron Specific LMO-O,CA1 OR-LM
 CA1 Interneuron Specific LMO-O,CA1 Perforant Path-Associated QuadD
 CA1 Interneuron Specific LMO-O,CA1 Quadrilaminar
-CA1 Interneuron Specific LMO-O,Schaffer Collateral-Associated
 CA1 Interneuron Specific LMO-O,Schaffer Collateral-Receiving R-Targeting
 CA1 Interneuron Specific LMO-O,CA1 SO-SO
 CA1 Interneuron Specific LMO-O,CA1 Hippocampo-subicular Projecting ENK+
 CA1 Interneuron Specific LMO-O,CA1 Trilaminar
 CA1 Interneuron Specific LMO-O,CA1 Radial Trilaminar
-CA1 Interneuron Specific LM-R,CA1 Radiatum Giant
 CA1 Interneuron Specific LM-R,CA1 Axo-axonic
 CA1 Interneuron Specific LM-R,CA1 Basket
 CA1 Interneuron Specific LM-R,CA1 Basket CCK+
@@ -1440,10 +1428,6 @@ CA1 Interneuron Specific LM-R,Schaffer Collateral-Associated
 CA1 Interneuron Specific LM-R,Schaffer Collateral-Receiving R-Targeting
 CA1 Interneuron Specific LM-R,CA1 Hippocampo-subicular Projecting ENK+
 CA1 Interneuron Specific LM-R,CA1 Radial Trilaminar
-CA1 Interneuron Specific LMR-R,CA1 Pyramidal
-CA1 Interneuron Specific LMR-R,CA1 Radiatum Giant
-CA1 Interneuron Specific LMR-R,CA1 Axo-axonic
-CA1 Interneuron Specific LMR-R,CA1 Basket
 CA1 Interneuron Specific LMR-R,CA1 Basket CCK+
 CA1 Interneuron Specific LMR-R,CA1 Bistratified
 CA1 Interneuron Specific LMR-R,CA1 Interneuron Specific LMR-R
@@ -1464,10 +1448,6 @@ CA1 Interneuron Specific LMR-R,Schaffer Collateral-Associated
 CA1 Interneuron Specific LMR-R,Schaffer Collateral-Receiving R-Targeting
 CA1 Interneuron Specific LMR-R,CA1 Hippocampo-subicular Projecting ENK+
 CA1 Interneuron Specific LMR-R,CA1 Radial Trilaminar
-CA1 Interneuron Specific O-R,CA1 Pyramidal
-CA1 Interneuron Specific O-R,CA1 Radiatum Giant
-CA1 Interneuron Specific O-R,CA1 Axo-axonic
-CA1 Interneuron Specific O-R,CA1 Basket
 CA1 Interneuron Specific O-R,CA1 Basket CCK+
 CA1 Interneuron Specific O-R,CA1 Bistratified
 CA1 Interneuron Specific O-R,CA1 Interneuron Specific LMR-R
@@ -1488,7 +1468,6 @@ CA1 Interneuron Specific O-R,Schaffer Collateral-Associated
 CA1 Interneuron Specific O-R,Schaffer Collateral-Receiving R-Targeting
 CA1 Interneuron Specific O-R,CA1 Hippocampo-subicular Projecting ENK+
 CA1 Interneuron Specific O-R,CA1 Radial Trilaminar
-CA1 Interneuron Specific O-Targeting QuadD,CA1 Pyramidal
 CA1 Interneuron Specific O-Targeting QuadD,CA1 Axo-axonic
 CA1 Interneuron Specific O-Targeting QuadD,CA1 Horizontal Axo-axonic
 CA1 Interneuron Specific O-Targeting QuadD,CA1 Back-Projection
@@ -1541,7 +1520,6 @@ CA1 Interneuron Specific R-O,CA1 SO-SO
 CA1 Interneuron Specific R-O,CA1 Hippocampo-subicular Projecting ENK+
 CA1 Interneuron Specific R-O,CA1 Trilaminar
 CA1 Interneuron Specific R-O,CA1 Radial Trilaminar
-CA1 Interneuron Specific RO-O,CA1 Pyramidal
 CA1 Interneuron Specific RO-O,CA1 Axo-axonic
 CA1 Interneuron Specific RO-O,CA1 Horizontal Axo-axonic
 CA1 Interneuron Specific RO-O,CA1 Back-Projection
@@ -2434,10 +2412,8 @@ MEC LII-III Pyramidal-Multiform,MEC LII-III Pyramidal-Multiform
 MEC LII-III Pyramidal-Multiform,MEC LII Oblique Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LII Stellate
 MEC LII-III Pyramidal-Multiform,LII-III Pyramidal-Tripolar
-MEC LII-III Pyramidal-Multiform,LEC LIII Multipolar Principal
 MEC LII-III Pyramidal-Multiform,MEC LIII Multipolar Principal
 MEC LII-III Pyramidal-Multiform,LIII Pyramidal
-MEC LII-III Pyramidal-Multiform,LEC LIII Complex Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LIII Complex Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LIII Bipolar Complex Pyramidal
 MEC LII-III Pyramidal-Multiform,LIII Pyramidal-Stellate
@@ -2450,21 +2426,17 @@ MEC LII-III Pyramidal-Multiform,LV Deep Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LV Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LV Superficial Pyramidal
 MEC LII-III Pyramidal-Multiform,MEC LV-VI Pyramidal-Polymorphic
-MEC LII-III Pyramidal-Multiform,LEC LVI Multipolar-Pyramidal
 MEC LII-III Pyramidal-Multiform,LII Axo-axonic
 MEC LII-III Pyramidal-Multiform,MEC LII Basket
 MEC LII-III Pyramidal-Multiform,LII Basket-Multipolar Interneuron
-MEC LII-III Pyramidal-Multiform,LEC LIII Multipolar Interneuron
 MEC LII-III Pyramidal-Multiform,MEC LIII Multipolar Interneuron
 MEC LII-III Pyramidal-Multiform,MEC LIII Superficial Multipolar Interneuron
 MEC LII-III Pyramidal-Multiform,LIII Pyramidal-Looking Interneuron
 MEC LII-III Pyramidal-Multiform,MEC LIII Superficial Trilayered Interneuron
 MEC LII Oblique Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LII Oblique Pyramidal,LII-III Pyramidal-Tripolar
-MEC LII Oblique Pyramidal,LEC LIII Multipolar Principal
 MEC LII Oblique Pyramidal,MEC LIII Multipolar Principal
 MEC LII Oblique Pyramidal,LIII Pyramidal
-MEC LII Oblique Pyramidal,LEC LIII Complex Pyramidal
 MEC LII Oblique Pyramidal,MEC LIII Complex Pyramidal
 MEC LII Oblique Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LII Oblique Pyramidal,LIII Pyramidal-Stellate
@@ -2474,7 +2446,6 @@ MEC LII Oblique Pyramidal,LIV-V Pyramidal-Horizontal
 MEC LII Oblique Pyramidal,LIV-VI Deep Multipolar Principal
 MEC LII Oblique Pyramidal,MEC LV Multipolar-Pyramidal
 MEC LII Oblique Pyramidal,MEC LV Superficial Pyramidal
-MEC LII Oblique Pyramidal,LEC LIII Multipolar Interneuron
 MEC LII Oblique Pyramidal,MEC LIII Multipolar Interneuron
 MEC LII Oblique Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LII Oblique Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -2512,10 +2483,8 @@ MEC LII Stellate,LI-II Pyramidal-Fan
 MEC LII Stellate,MEC LII-III Pyramidal-Multiform
 MEC LII Stellate,MEC LII Oblique Pyramidal
 MEC LII Stellate,LII-III Pyramidal-Tripolar
-MEC LII Stellate,LEC LIII Multipolar Principal
 MEC LII Stellate,MEC LIII Multipolar Principal
 MEC LII Stellate,LIII Pyramidal
-MEC LII Stellate,LEC LIII Complex Pyramidal
 MEC LII Stellate,MEC LIII Complex Pyramidal
 MEC LII Stellate,MEC LIII Bipolar Complex Pyramidal
 MEC LII Stellate,LIII Pyramidal-Stellate
@@ -2528,11 +2497,9 @@ MEC LII Stellate,LV Deep Pyramidal
 MEC LII Stellate,MEC LV Pyramidal
 MEC LII Stellate,MEC LV Superficial Pyramidal
 MEC LII Stellate,MEC LV-VI Pyramidal-Polymorphic
-MEC LII Stellate,LEC LVI Multipolar-Pyramidal
 MEC LII Stellate,LII Axo-axonic
 MEC LII Stellate,MEC LII Basket
 MEC LII Stellate,LII Basket-Multipolar Interneuron
-MEC LII Stellate,LEC LIII Multipolar Interneuron
 MEC LII Stellate,MEC LIII Multipolar Interneuron
 MEC LII Stellate,MEC LIII Superficial Multipolar Interneuron
 MEC LII Stellate,LIII Pyramidal-Looking Interneuron
@@ -2584,41 +2551,25 @@ LII-III Pyramidal-Tripolar,LIII Pyramidal-Looking Interneuron
 LII-III Pyramidal-Tripolar,MEC LIII Superficial Trilayered Interneuron
 LEC LIII Multipolar Principal,LI-II Multipolar-Pyramidal
 LEC LIII Multipolar Principal,LI-II Pyramidal-Fan
-LEC LIII Multipolar Principal,MEC LII-III Pyramidal-Multiform
-LEC LIII Multipolar Principal,MEC LII Oblique Pyramidal
-LEC LIII Multipolar Principal,MEC LII Stellate
 LEC LIII Multipolar Principal,LII-III Pyramidal-Tripolar
 LEC LIII Multipolar Principal,LEC LIII Multipolar Principal
-LEC LIII Multipolar Principal,MEC LIII Multipolar Principal
 LEC LIII Multipolar Principal,LIII Pyramidal
 LEC LIII Multipolar Principal,LEC LIII Complex Pyramidal
-LEC LIII Multipolar Principal,MEC LIII Complex Pyramidal
-LEC LIII Multipolar Principal,MEC LIII Bipolar Complex Pyramidal
 LEC LIII Multipolar Principal,LIII Pyramidal-Stellate
 LEC LIII Multipolar Principal,LIII Stellate
 LEC LIII Multipolar Principal,LIII-V Bipolar Pyramidal
 LEC LIII Multipolar Principal,LIV-V Pyramidal-Horizontal
 LEC LIII Multipolar Principal,LIV-VI Deep Multipolar Principal
-LEC LIII Multipolar Principal,MEC LV Multipolar-Pyramidal
 LEC LIII Multipolar Principal,LV Deep Pyramidal
-LEC LIII Multipolar Principal,MEC LV Pyramidal
-LEC LIII Multipolar Principal,MEC LV Superficial Pyramidal
-LEC LIII Multipolar Principal,MEC LV-VI Pyramidal-Polymorphic
 LEC LIII Multipolar Principal,LEC LVI Multipolar-Pyramidal
 LEC LIII Multipolar Principal,LII Axo-axonic
-LEC LIII Multipolar Principal,MEC LII Basket
 LEC LIII Multipolar Principal,LII Basket-Multipolar Interneuron
 LEC LIII Multipolar Principal,LEC LIII Multipolar Interneuron
-LEC LIII Multipolar Principal,MEC LIII Multipolar Interneuron
-LEC LIII Multipolar Principal,MEC LIII Superficial Multipolar Interneuron
 LEC LIII Multipolar Principal,LIII Pyramidal-Looking Interneuron
-LEC LIII Multipolar Principal,MEC LIII Superficial Trilayered Interneuron
 MEC LIII Multipolar Principal,MEC LII-III Pyramidal-Multiform
 MEC LIII Multipolar Principal,LII-III Pyramidal-Tripolar
-MEC LIII Multipolar Principal,LEC LIII Multipolar Principal
 MEC LIII Multipolar Principal,MEC LIII Multipolar Principal
 MEC LIII Multipolar Principal,LIII Pyramidal
-MEC LIII Multipolar Principal,LEC LIII Complex Pyramidal
 MEC LIII Multipolar Principal,MEC LIII Complex Pyramidal
 MEC LIII Multipolar Principal,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Multipolar Principal,LIII Pyramidal-Stellate
@@ -2631,8 +2582,6 @@ MEC LIII Multipolar Principal,LV Deep Pyramidal
 MEC LIII Multipolar Principal,MEC LV Pyramidal
 MEC LIII Multipolar Principal,MEC LV Superficial Pyramidal
 MEC LIII Multipolar Principal,MEC LV-VI Pyramidal-Polymorphic
-MEC LIII Multipolar Principal,LEC LVI Multipolar-Pyramidal
-MEC LIII Multipolar Principal,LEC LIII Multipolar Interneuron
 MEC LIII Multipolar Principal,MEC LIII Multipolar Interneuron
 MEC LIII Multipolar Principal,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Multipolar Principal,LIII Pyramidal-Looking Interneuron
@@ -2686,45 +2635,29 @@ LIII Pyramidal,LIII Pyramidal-Looking Interneuron
 LIII Pyramidal,MEC LIII Superficial Trilayered Interneuron
 LEC LIII Complex Pyramidal,LI-II Multipolar-Pyramidal
 LEC LIII Complex Pyramidal,LI-II Pyramidal-Fan
-LEC LIII Complex Pyramidal,MEC LII-III Pyramidal-Multiform
-LEC LIII Complex Pyramidal,MEC LII Oblique Pyramidal
-LEC LIII Complex Pyramidal,MEC LII Stellate
 LEC LIII Complex Pyramidal,LII-III Pyramidal-Tripolar
 LEC LIII Complex Pyramidal,LEC LIII Multipolar Principal
-LEC LIII Complex Pyramidal,MEC LIII Multipolar Principal
 LEC LIII Complex Pyramidal,LIII Pyramidal
 LEC LIII Complex Pyramidal,LEC LIII Complex Pyramidal
-LEC LIII Complex Pyramidal,MEC LIII Complex Pyramidal
-LEC LIII Complex Pyramidal,MEC LIII Bipolar Complex Pyramidal
 LEC LIII Complex Pyramidal,LIII Pyramidal-Stellate
 LEC LIII Complex Pyramidal,LIII Stellate
 LEC LIII Complex Pyramidal,LIII-V Bipolar Pyramidal
 LEC LIII Complex Pyramidal,LIV-V Pyramidal-Horizontal
 LEC LIII Complex Pyramidal,LIV-VI Deep Multipolar Principal
-LEC LIII Complex Pyramidal,MEC LV Multipolar-Pyramidal
 LEC LIII Complex Pyramidal,LV Deep Pyramidal
-LEC LIII Complex Pyramidal,MEC LV Pyramidal
-LEC LIII Complex Pyramidal,MEC LV Superficial Pyramidal
-LEC LIII Complex Pyramidal,MEC LV-VI Pyramidal-Polymorphic
 LEC LIII Complex Pyramidal,LEC LVI Multipolar-Pyramidal
 LEC LIII Complex Pyramidal,LII Axo-axonic
-LEC LIII Complex Pyramidal,MEC LII Basket
 LEC LIII Complex Pyramidal,LII Basket-Multipolar Interneuron
 LEC LIII Complex Pyramidal,LEC LIII Multipolar Interneuron
-LEC LIII Complex Pyramidal,MEC LIII Multipolar Interneuron
-LEC LIII Complex Pyramidal,MEC LIII Superficial Multipolar Interneuron
 LEC LIII Complex Pyramidal,LIII Pyramidal-Looking Interneuron
-LEC LIII Complex Pyramidal,MEC LIII Superficial Trilayered Interneuron
 MEC LIII Complex Pyramidal,LI-II Multipolar-Pyramidal
 MEC LIII Complex Pyramidal,LI-II Pyramidal-Fan
 MEC LIII Complex Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LIII Complex Pyramidal,MEC LII Oblique Pyramidal
 MEC LIII Complex Pyramidal,MEC LII Stellate
 MEC LIII Complex Pyramidal,LII-III Pyramidal-Tripolar
-MEC LIII Complex Pyramidal,LEC LIII Multipolar Principal
 MEC LIII Complex Pyramidal,MEC LIII Multipolar Principal
 MEC LIII Complex Pyramidal,LIII Pyramidal
-MEC LIII Complex Pyramidal,LEC LIII Complex Pyramidal
 MEC LIII Complex Pyramidal,MEC LIII Complex Pyramidal
 MEC LIII Complex Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Complex Pyramidal,LIII Pyramidal-Stellate
@@ -2739,7 +2672,6 @@ MEC LIII Complex Pyramidal,MEC LV Superficial Pyramidal
 MEC LIII Complex Pyramidal,LII Axo-axonic
 MEC LIII Complex Pyramidal,MEC LII Basket
 MEC LIII Complex Pyramidal,LII Basket-Multipolar Interneuron
-MEC LIII Complex Pyramidal,LEC LIII Multipolar Interneuron
 MEC LIII Complex Pyramidal,MEC LIII Multipolar Interneuron
 MEC LIII Complex Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Complex Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -2750,10 +2682,8 @@ MEC LIII Bipolar Complex Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LIII Bipolar Complex Pyramidal,MEC LII Oblique Pyramidal
 MEC LIII Bipolar Complex Pyramidal,MEC LII Stellate
 MEC LIII Bipolar Complex Pyramidal,LII-III Pyramidal-Tripolar
-MEC LIII Bipolar Complex Pyramidal,LEC LIII Multipolar Principal
 MEC LIII Bipolar Complex Pyramidal,MEC LIII Multipolar Principal
 MEC LIII Bipolar Complex Pyramidal,LIII Pyramidal
-MEC LIII Bipolar Complex Pyramidal,LEC LIII Complex Pyramidal
 MEC LIII Bipolar Complex Pyramidal,MEC LIII Complex Pyramidal
 MEC LIII Bipolar Complex Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Bipolar Complex Pyramidal,LIII Pyramidal-Stellate
@@ -2768,7 +2698,6 @@ MEC LIII Bipolar Complex Pyramidal,MEC LV Superficial Pyramidal
 MEC LIII Bipolar Complex Pyramidal,LII Axo-axonic
 MEC LIII Bipolar Complex Pyramidal,MEC LII Basket
 MEC LIII Bipolar Complex Pyramidal,LII Basket-Multipolar Interneuron
-MEC LIII Bipolar Complex Pyramidal,LEC LIII Multipolar Interneuron
 MEC LIII Bipolar Complex Pyramidal,MEC LIII Multipolar Interneuron
 MEC LIII Bipolar Complex Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Bipolar Complex Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -2902,10 +2831,8 @@ LIV-VI Deep Multipolar Principal,MEC LIII Multipolar Interneuron
 LIV-VI Deep Multipolar Principal,LIII Pyramidal-Looking Interneuron
 MEC LV Multipolar-Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LV Multipolar-Pyramidal,LII-III Pyramidal-Tripolar
-MEC LV Multipolar-Pyramidal,LEC LIII Multipolar Principal
 MEC LV Multipolar-Pyramidal,MEC LIII Multipolar Principal
 MEC LV Multipolar-Pyramidal,LIII Pyramidal
-MEC LV Multipolar-Pyramidal,LEC LIII Complex Pyramidal
 MEC LV Multipolar-Pyramidal,MEC LIII Complex Pyramidal
 MEC LV Multipolar-Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LV Multipolar-Pyramidal,LIII Pyramidal-Stellate
@@ -2918,8 +2845,6 @@ MEC LV Multipolar-Pyramidal,LV Deep Pyramidal
 MEC LV Multipolar-Pyramidal,MEC LV Pyramidal
 MEC LV Multipolar-Pyramidal,MEC LV Superficial Pyramidal
 MEC LV Multipolar-Pyramidal,MEC LV-VI Pyramidal-Polymorphic
-MEC LV Multipolar-Pyramidal,LEC LVI Multipolar-Pyramidal
-MEC LV Multipolar-Pyramidal,LEC LIII Multipolar Interneuron
 MEC LV Multipolar-Pyramidal,MEC LIII Multipolar Interneuron
 MEC LV Multipolar-Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LV Multipolar-Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -2961,10 +2886,8 @@ MEC LV Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LV Pyramidal,MEC LII Oblique Pyramidal
 MEC LV Pyramidal,MEC LII Stellate
 MEC LV Pyramidal,LII-III Pyramidal-Tripolar
-MEC LV Pyramidal,LEC LIII Multipolar Principal
 MEC LV Pyramidal,MEC LIII Multipolar Principal
 MEC LV Pyramidal,LIII Pyramidal
-MEC LV Pyramidal,LEC LIII Complex Pyramidal
 MEC LV Pyramidal,MEC LIII Complex Pyramidal
 MEC LV Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LV Pyramidal,LIII Pyramidal-Stellate
@@ -2977,11 +2900,9 @@ MEC LV Pyramidal,LV Deep Pyramidal
 MEC LV Pyramidal,MEC LV Pyramidal
 MEC LV Pyramidal,MEC LV Superficial Pyramidal
 MEC LV Pyramidal,MEC LV-VI Pyramidal-Polymorphic
-MEC LV Pyramidal,LEC LVI Multipolar-Pyramidal
 MEC LV Pyramidal,LII Axo-axonic
 MEC LV Pyramidal,MEC LII Basket
 MEC LV Pyramidal,LII Basket-Multipolar Interneuron
-MEC LV Pyramidal,LEC LIII Multipolar Interneuron
 MEC LV Pyramidal,MEC LIII Multipolar Interneuron
 MEC LV Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LV Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -2992,10 +2913,8 @@ MEC LV Superficial Pyramidal,MEC LII-III Pyramidal-Multiform
 MEC LV Superficial Pyramidal,MEC LII Oblique Pyramidal
 MEC LV Superficial Pyramidal,MEC LII Stellate
 MEC LV Superficial Pyramidal,LII-III Pyramidal-Tripolar
-MEC LV Superficial Pyramidal,LEC LIII Multipolar Principal
 MEC LV Superficial Pyramidal,MEC LIII Multipolar Principal
 MEC LV Superficial Pyramidal,LIII Pyramidal
-MEC LV Superficial Pyramidal,LEC LIII Complex Pyramidal
 MEC LV Superficial Pyramidal,MEC LIII Complex Pyramidal
 MEC LV Superficial Pyramidal,MEC LIII Bipolar Complex Pyramidal
 MEC LV Superficial Pyramidal,LIII Pyramidal-Stellate
@@ -3008,11 +2927,9 @@ MEC LV Superficial Pyramidal,LV Deep Pyramidal
 MEC LV Superficial Pyramidal,MEC LV Pyramidal
 MEC LV Superficial Pyramidal,MEC LV Superficial Pyramidal
 MEC LV Superficial Pyramidal,MEC LV-VI Pyramidal-Polymorphic
-MEC LV Superficial Pyramidal,LEC LVI Multipolar-Pyramidal
 MEC LV Superficial Pyramidal,LII Axo-axonic
 MEC LV Superficial Pyramidal,MEC LII Basket
 MEC LV Superficial Pyramidal,LII Basket-Multipolar Interneuron
-MEC LV Superficial Pyramidal,LEC LIII Multipolar Interneuron
 MEC LV Superficial Pyramidal,MEC LIII Multipolar Interneuron
 MEC LV Superficial Pyramidal,MEC LIII Superficial Multipolar Interneuron
 MEC LV Superficial Pyramidal,LIII Pyramidal-Looking Interneuron
@@ -3021,31 +2938,19 @@ MEC LV-VI Pyramidal-Polymorphic,LIV-V Pyramidal-Horizontal
 MEC LV-VI Pyramidal-Polymorphic,LIV-VI Deep Multipolar Principal
 MEC LV-VI Pyramidal-Polymorphic,LV Deep Pyramidal
 MEC LV-VI Pyramidal-Polymorphic,MEC LV-VI Pyramidal-Polymorphic
-MEC LV-VI Pyramidal-Polymorphic,LEC LVI Multipolar-Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LII-III Pyramidal-Multiform
 LEC LVI Multipolar-Pyramidal,LII-III Pyramidal-Tripolar
 LEC LVI Multipolar-Pyramidal,LEC LIII Multipolar Principal
-LEC LVI Multipolar-Pyramidal,MEC LIII Multipolar Principal
 LEC LVI Multipolar-Pyramidal,LIII Pyramidal
 LEC LVI Multipolar-Pyramidal,LEC LIII Complex Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LIII Complex Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LIII Bipolar Complex Pyramidal
 LEC LVI Multipolar-Pyramidal,LIII Pyramidal-Stellate
 LEC LVI Multipolar-Pyramidal,LIII Stellate
 LEC LVI Multipolar-Pyramidal,LIII-V Bipolar Pyramidal
 LEC LVI Multipolar-Pyramidal,LIV-V Pyramidal-Horizontal
 LEC LVI Multipolar-Pyramidal,LIV-VI Deep Multipolar Principal
-LEC LVI Multipolar-Pyramidal,MEC LV Multipolar-Pyramidal
 LEC LVI Multipolar-Pyramidal,LV Deep Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LV Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LV Superficial Pyramidal
-LEC LVI Multipolar-Pyramidal,MEC LV-VI Pyramidal-Polymorphic
 LEC LVI Multipolar-Pyramidal,LEC LVI Multipolar-Pyramidal
 LEC LVI Multipolar-Pyramidal,LEC LIII Multipolar Interneuron
-LEC LVI Multipolar-Pyramidal,MEC LIII Multipolar Interneuron
-LEC LVI Multipolar-Pyramidal,MEC LIII Superficial Multipolar Interneuron
 LEC LVI Multipolar-Pyramidal,LIII Pyramidal-Looking Interneuron
-LEC LVI Multipolar-Pyramidal,MEC LIII Superficial Trilayered Interneuron
 LII Axo-axonic,LI-II Multipolar-Pyramidal
 LII Axo-axonic,LI-II Pyramidal-Fan
 LII Axo-axonic,MEC LII-III Pyramidal-Multiform
@@ -3074,10 +2979,8 @@ MEC LII Basket,MEC LII-III Pyramidal-Multiform
 MEC LII Basket,MEC LII Oblique Pyramidal
 MEC LII Basket,MEC LII Stellate
 MEC LII Basket,LII-III Pyramidal-Tripolar
-MEC LII Basket,LEC LIII Multipolar Principal
 MEC LII Basket,MEC LIII Multipolar Principal
 MEC LII Basket,LIII Pyramidal
-MEC LII Basket,LEC LIII Complex Pyramidal
 MEC LII Basket,MEC LIII Complex Pyramidal
 MEC LII Basket,MEC LIII Bipolar Complex Pyramidal
 MEC LII Basket,LIII Pyramidal-Stellate
@@ -3090,7 +2993,6 @@ MEC LII Basket,MEC LV Superficial Pyramidal
 MEC LII Basket,LII Axo-axonic
 MEC LII Basket,MEC LII Basket
 MEC LII Basket,LII Basket-Multipolar Interneuron
-MEC LII Basket,LEC LIII Multipolar Interneuron
 MEC LII Basket,MEC LIII Multipolar Interneuron
 MEC LII Basket,MEC LIII Superficial Multipolar Interneuron
 MEC LII Basket,LIII Pyramidal-Looking Interneuron
@@ -3117,33 +3019,23 @@ LII Basket-Multipolar Interneuron,LEC LIII Multipolar Interneuron
 LII Basket-Multipolar Interneuron,MEC LIII Superficial Multipolar Interneuron
 LII Basket-Multipolar Interneuron,LIII Pyramidal-Looking Interneuron
 LII Basket-Multipolar Interneuron,MEC LIII Superficial Trilayered Interneuron
-LEC LIII Multipolar Interneuron,MEC LII-III Pyramidal-Multiform
 LEC LIII Multipolar Interneuron,LII-III Pyramidal-Tripolar
 LEC LIII Multipolar Interneuron,LEC LIII Multipolar Principal
-LEC LIII Multipolar Interneuron,MEC LIII Multipolar Principal
 LEC LIII Multipolar Interneuron,LIII Pyramidal
 LEC LIII Multipolar Interneuron,LEC LIII Complex Pyramidal
-LEC LIII Multipolar Interneuron,MEC LIII Complex Pyramidal
-LEC LIII Multipolar Interneuron,MEC LIII Bipolar Complex Pyramidal
 LEC LIII Multipolar Interneuron,LIII Pyramidal-Stellate
 LEC LIII Multipolar Interneuron,LIII Stellate
 LEC LIII Multipolar Interneuron,LIII-V Bipolar Pyramidal
-LEC LIII Multipolar Interneuron,MEC LV Superficial Pyramidal
 LEC LIII Multipolar Interneuron,LEC LIII Multipolar Interneuron
-LEC LIII Multipolar Interneuron,MEC LIII Multipolar Interneuron
-LEC LIII Multipolar Interneuron,MEC LIII Superficial Multipolar Interneuron
 LEC LIII Multipolar Interneuron,LIII Pyramidal-Looking Interneuron
-LEC LIII Multipolar Interneuron,MEC LIII Superficial Trilayered Interneuron
 MEC LIII Multipolar Interneuron,LI-II Multipolar-Pyramidal
 MEC LIII Multipolar Interneuron,LI-II Pyramidal-Fan
 MEC LIII Multipolar Interneuron,MEC LII-III Pyramidal-Multiform
 MEC LIII Multipolar Interneuron,MEC LII Oblique Pyramidal
 MEC LIII Multipolar Interneuron,MEC LII Stellate
 MEC LIII Multipolar Interneuron,LII-III Pyramidal-Tripolar
-MEC LIII Multipolar Interneuron,LEC LIII Multipolar Principal
 MEC LIII Multipolar Interneuron,MEC LIII Multipolar Principal
 MEC LIII Multipolar Interneuron,LIII Pyramidal
-MEC LIII Multipolar Interneuron,LEC LIII Complex Pyramidal
 MEC LIII Multipolar Interneuron,MEC LIII Complex Pyramidal
 MEC LIII Multipolar Interneuron,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Multipolar Interneuron,LIII Pyramidal-Stellate
@@ -3156,7 +3048,6 @@ MEC LIII Multipolar Interneuron,MEC LV Superficial Pyramidal
 MEC LIII Multipolar Interneuron,LII Axo-axonic
 MEC LIII Multipolar Interneuron,MEC LII Basket
 MEC LIII Multipolar Interneuron,LII Basket-Multipolar Interneuron
-MEC LIII Multipolar Interneuron,LEC LIII Multipolar Interneuron
 MEC LIII Multipolar Interneuron,MEC LIII Multipolar Interneuron
 MEC LIII Multipolar Interneuron,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Multipolar Interneuron,LIII Pyramidal-Looking Interneuron
@@ -3167,10 +3058,8 @@ MEC LIII Superficial Multipolar Interneuron,MEC LII-III Pyramidal-Multiform
 MEC LIII Superficial Multipolar Interneuron,MEC LII Oblique Pyramidal
 MEC LIII Superficial Multipolar Interneuron,MEC LII Stellate
 MEC LIII Superficial Multipolar Interneuron,LII-III Pyramidal-Tripolar
-MEC LIII Superficial Multipolar Interneuron,LEC LIII Multipolar Principal
 MEC LIII Superficial Multipolar Interneuron,MEC LIII Multipolar Principal
 MEC LIII Superficial Multipolar Interneuron,LIII Pyramidal
-MEC LIII Superficial Multipolar Interneuron,LEC LIII Complex Pyramidal
 MEC LIII Superficial Multipolar Interneuron,MEC LIII Complex Pyramidal
 MEC LIII Superficial Multipolar Interneuron,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Superficial Multipolar Interneuron,LIII Pyramidal-Stellate
@@ -3183,7 +3072,6 @@ MEC LIII Superficial Multipolar Interneuron,MEC LV Superficial Pyramidal
 MEC LIII Superficial Multipolar Interneuron,LII Axo-axonic
 MEC LIII Superficial Multipolar Interneuron,MEC LII Basket
 MEC LIII Superficial Multipolar Interneuron,LII Basket-Multipolar Interneuron
-MEC LIII Superficial Multipolar Interneuron,LEC LIII Multipolar Interneuron
 MEC LIII Superficial Multipolar Interneuron,MEC LIII Multipolar Interneuron
 MEC LIII Superficial Multipolar Interneuron,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Superficial Multipolar Interneuron,LIII Pyramidal-Looking Interneuron
@@ -3214,10 +3102,8 @@ MEC LIII Superficial Trilayered Interneuron,MEC LII-III Pyramidal-Multiform
 MEC LIII Superficial Trilayered Interneuron,MEC LII Oblique Pyramidal
 MEC LIII Superficial Trilayered Interneuron,MEC LII Stellate
 MEC LIII Superficial Trilayered Interneuron,LII-III Pyramidal-Tripolar
-MEC LIII Superficial Trilayered Interneuron,LEC LIII Multipolar Principal
 MEC LIII Superficial Trilayered Interneuron,MEC LIII Multipolar Principal
 MEC LIII Superficial Trilayered Interneuron,LIII Pyramidal
-MEC LIII Superficial Trilayered Interneuron,LEC LIII Complex Pyramidal
 MEC LIII Superficial Trilayered Interneuron,MEC LIII Complex Pyramidal
 MEC LIII Superficial Trilayered Interneuron,MEC LIII Bipolar Complex Pyramidal
 MEC LIII Superficial Trilayered Interneuron,LIII Pyramidal-Stellate
@@ -3230,7 +3116,6 @@ MEC LIII Superficial Trilayered Interneuron,MEC LV Superficial Pyramidal
 MEC LIII Superficial Trilayered Interneuron,LII Axo-axonic
 MEC LIII Superficial Trilayered Interneuron,MEC LII Basket
 MEC LIII Superficial Trilayered Interneuron,LII Basket-Multipolar Interneuron
-MEC LIII Superficial Trilayered Interneuron,LEC LIII Multipolar Interneuron
 MEC LIII Superficial Trilayered Interneuron,MEC LIII Multipolar Interneuron
 MEC LIII Superficial Trilayered Interneuron,MEC LIII Superficial Multipolar Interneuron
 MEC LIII Superficial Trilayered Interneuron,LIII Pyramidal-Looking Interneuron

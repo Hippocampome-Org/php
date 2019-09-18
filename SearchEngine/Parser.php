@@ -61,7 +61,6 @@
         public function parseSynapticNeuron($queryArray,$ind){
             $mathcingNeruonArray=array();
             //print("<pre>".print_r($queryArray,true)."</pre>");
-
             for($index=$ind;$index<count($queryArray);$index++){
                 if(!is_array($queryArray[$index])) {
                     if (stripos($queryArray[$index], Name::MORPH) === 0) {
@@ -146,11 +145,43 @@
                         //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
                         //print("ANND NOT");
                     }
+                }else if (is_array($queryArray[$index]) && stripos($queryArray[$index-1], Keyword::EXC) ===false && stripos($queryArray[$index-1], Keyword::INC) ===false) {
+                    $result=$this->parseSynapticNeuron($queryArray[$index],0);
+                    return $result;
                 }
             }
             return array($index,$mathcingNeruonArray);
         }
-
+        public function findNeuron($neuron){
+             $types_array = array();
+            //print("<br>Connection to be found Are:<br>");
+            //print("<pre>" . print_r($neuron, true) . "</pre>");
+        
+            if(count($neuron)!=0) {
+                $neuron = implode(",", $neuron);
+                $index = 0;
+                $query_to_get_type = "SELECT DISTINCT c.Type1_id,t1.name as sourceName,t1.nickname as sourceNickname
+                            FROM Conndata c,Type t1
+                            WHERE c.Type1_id=t1.id 
+                            AND c.Type1_id in ($neuron)
+                            ORDER BY c.Type1_id
+                             ";
+                //print($query_to_get_type);
+                $conn_type = mysqli_query($GLOBALS['conn'], $query_to_get_type);
+                if (!$conn_type) {
+                    die("<p>Error in Listing Type Tables In Connection.</p>");
+                }
+                while ($rows = mysqli_fetch_array($conn_type, MYSQLI_ASSOC)) {
+                    $record = new NeuronConnection();
+                    $record->setSourceId($rows['Type1_id']);
+                    $record->setSourceName($rows['sourceName']);
+                    $record->setSourceNickname($rows['sourceNickname']);
+                    $types_array[$index] = $record;
+                    $index++;
+                }
+            }
+            return $types_array;
+        }
         public function findConnection($preSynNeuron,$postSynNeuron){
             $types_array = array();
             //print("<br>Connection to be found Are:<br>");
@@ -217,9 +248,12 @@
             if(count($parsedQuery)==$fillLengthConn){
                 if(stripos($parsedQuery[$connStart],Name::CONN)!==false){
                     $parsedQueryConn=$parsedQuery[1];
+                    //print("<pre>".print_r($parsedQueryConn,true)."</pre>");
+                    //if connection query proceed
                     if(count($parsedQueryConn)>=($fillLengthPre+$fillLengthPost) && stripos($parsedQueryConn[$presynStart], Keyword::CONN_PRESYN) !== false && stripos($parsedQueryConn[$postsynStart], Keyword::CONN_POSTSYN) !== false) {
                         $parsedQueryPreSynap=$parsedQueryConn[$presynStart+1];
                         $parsedQueryPostSynap=$parsedQueryConn[$postsynStart+1];
+                        
                         $resultPre=$this->parseSynapticNeuron($parsedQueryPreSynap,0);
                         $resultPost=$this->parseSynapticNeuron($parsedQueryPostSynap,0);
                         $preSynNeuron=$resultPre[1];
@@ -245,6 +279,18 @@
                         //$test->findConnection(array(1000),array(1002,1009))
                         return $neuronConnection;
                     }
+                }else if(stripos($parsedQuery[$connStart],"Neuron")!==false){
+                      $parsedQueryPreSynap=$parsedQuery[1];
+                      $resultPre=$this->parseSynapticNeuron($parsedQueryPreSynap,0);
+                      $preSynNeuron=$resultPre[1];
+                      $incNeuron=$this->getIncludeNeuron($parsedQueryPreSynap);
+                      if($incNeuron && (count($incNeuron))>0)
+                         $preSynNeuron=array_merge($preSynNeuron,$incNeuron);
+                      $excNeuron=$this->getExcludeNeuron($parsedQueryPreSynap);
+                      if($excNeuron && (count($excNeuron))>0)
+                         $preSynNeuron=array_diff($preSynNeuron,$excNeuron);
+                      $neuroncon = $this->findNeuron($preSynNeuron);
+                      return $neuroncon;
                 }
             }
             //$morph=new Morphology();
@@ -360,6 +406,7 @@
                 $neuronIncArray = $queryArray[$index + 1];
                 // skip the next index
                 $index++;
+                 #print_r($queryArray);
                 if(is_array($queryArray[$index])) {
                     $result =$this->neuronMatchingInnerCond($queryArray[$index], 0, $pageType);
                     $matchingNeuron=$result[1];
@@ -451,7 +498,7 @@
                     }
                 }
             }
-            //print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
+            print("<pre>" . print_r($mathcingNeruonArray, true) . "</pre>");
             return array($index,$excNeuron);
         }
         public function neuronMatchingInnerCond($queryArray,$ind,$pageType){

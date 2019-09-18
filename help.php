@@ -35,6 +35,16 @@
   			<li><a href='Help_Feedback_Submissions.php'><font class="font7"> Feedback Submissions</font></a></li>
 			</ul>
 			
+			<font class='font1a'>ABA Counts Database:</font> &nbsp; &nbsp;
+			<ul> 
+			<li><a href='attachment/ABA_Counts_Database/ReadMe - ABA Counts Database.docx'><font class="font7"> ReadMe - ABA Counts Database.docx</font></a></li>
+  			<li><a href='attachment/ABA_Counts_Database/ReadMe - ABA Counts Database.txt'><font class="font7"> ReadMe - ABA Counts Database.txt</font></a></li>
+  			<li><a href='attachment/ABA_Counts_Database/Masked_Segmentations.zip'><font class="font7"> Masked_Segmentations.zip</font></a>
+  			<li><a href='attachment/ABA_Counts_Database/Output_Files.zip'><font class="font7"> Output_Files.zip</font></a></li>
+  			<li><a href='attachment/ABA_Counts_Database/Scripts.zip'><font class="font7"> Scripts.zip</font></a></li>
+  			<li><a href='attachment/ABA_Counts_Database/Stereoinvestigator_Files.zip'><font class="font7"> Stereoinvestigator_Files.zip</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Morphology:</font> &nbsp; &nbsp;
 			<ul> 
 			<li><a href='Help_Morphological_Abbreviations.php'><font class="font7"> Abbreviations</font></a></li>
@@ -52,6 +62,7 @@
 			<li><a href='data/High-conf-genes_DG-SG.pdf'><font class="font7"> High-conf-genes_DG-SG</font></a></li>
 			<li><a href='data/GeneParcelExpressionConfidence.xlsx'><font class="font7"> Allen Brain Atlas gene expression confidence by parcel</font></a></li>
 			<li><a href='http://hippocampome.org/genexan'><font class="font7"> Gene Expression Analyzer</font></a></li>
+			<li><a href='data/REIs.xlsx'><font class="font7"> Relational Expression Inferences (REIs)</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Electrophysiology:</font> &nbsp; &nbsp;
@@ -66,11 +77,29 @@
   			<li><a href='Help_Firing_Pattern_Identification_Pseudocode.php'><font class="font7"> Firing Pattern Identification Pseudocode</font></a></li>
 			</ul>
 			
+			<font class='font1a'>Simulation of Firing Patterns:</font> &nbsp; &nbsp;
+			<ul>
+  			<li><a href='Help_Model_Definition.php'><font class="font7"> Model Definition</font></a></li>
+  			<li><a href='Help_Model_Fitting.php'><font class="font7"> Model Fitting</font></a></li>
+  			<li><a href='Help_Model_Simulation.php'><font class="font7"> Model Simulation Using CARLsim</font></a></li>
+  			<li><a href='data/NeuroML2.zip'><font class="font7"> NeuroML2 files</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Connectivity:</font> &nbsp; &nbsp;			
 			<ul>
 			<li><a href='Help_Connectivity.php'><font class="font7"> Definitions and Protocols</font></a></li>
 			<li><a href='data/netlist.csv'><font class="font7"> Netlist</font></a></li>
 			<li><a href='Help_ConnectivityJava.php'><font class="font7"> Java Connectivity Map Won't Launch</font></a></li>  			
+			</ul>
+			
+			<font class='font1a'>Synaptome:</font> &nbsp; &nbsp;			
+			<ul>
+			<li><a href='synaptome.php'><font class="font7"> Requirements, Installation, and Advanced Access Instructions</font></a></li>
+			</ul>
+			
+			<font class='font1a'>Search:</font> &nbsp; &nbsp;			
+			<ul>
+  			<li><a href='Help_Search_Engine.php'><font class="font7"> Advanced Search Engine User Manual</font></a></li>
 			</ul>
 			
 			<font class='font1a'>Hi-resolution images:</font> &nbsp; &nbsp;			
@@ -93,9 +122,9 @@
   			<li><a href='Help_On-hold_Types.php'><font class="font7"> On-hold Types</font></a></li>
   			<li><a href='Help_Supplemental_Evidence.php'><font class="font7"> Supplemental Evidence</font></a></li>
   			<li><a href='Help_Use_Case_Scenario.php'><font class="font7"> Usage Scenario</font></a></li>
-  			<li><a href='Help_Search_Engine.php'><font class="font7"> Advanced Connectivity Search Engine User Manual</font></a></li>
   			<li><a href='Hippocampome_Video_Overview/Hippocampome_Video_Overview_player.html' target="_blank"><font class="font7"> Hippocampome Video Overview</font></a></li>
   			<li><a href='Help_Bibliography.php'><font class="font7"> Bibliography</font></a></li>
+  			<li><a href='https://github.com/Hippocampome-Org/'><font class="font7"> Hippocampome.org GitHub code repository</font></a></li>
   			<li><a href='Help_Other_Useful_Links.php'><font class="font7"> Other Useful Links</font></a></li>
   			<li><a href='Help_Acknowledgements.php'><font class="font7"> Acknowledgements</font></a></li>
 			</ul>

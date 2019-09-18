@@ -37,22 +37,27 @@ class Page
     }
     // d+:SSM
     public  function typeWithMarker($markerCond){
-        //print($markerCond);
+        //print_r($markerCond);
         $matchingNeuron=array();
         $operator=$this->getOperator($markerCond);
         if($operator!="") {
             $values = explode($operator, $markerCond);
+            //print_r($values);
             if (count($values) == 2) {
                 $property=trim($values[0]);
-                if(strtolower($property)==Keyword::MK_DIR_POS )
+                if(strtolower($property)==Keyword::MK_DIR_POS ){
                     $operator="positive";
-                else if(strtolower($property)==Keyword::MK_DIR_NEG)
+                }else if(strtolower($property)==Keyword::MK_DIR_NEG)
                     $operator="negative";
                 else if(strtolower($property)==Keyword::MK_INF_POS )
                     $operator="positive inference";
                 else if(strtolower($property)==Keyword::MK_INF_NEG)
                     $operator="negative inference";
-                else
+                else if(strtolower($property)==Keyword::MK_DIR_POS_NEG||strtolower($property)==Keyword::MK_DIR_NEG_POS||strtolower($property)==Keyword::MK_DIR_PN)
+                    $operator="negative and positive";
+                else if(strtolower($property)==Keyword::MK_INF_POS_NEG||strtolower($property)==Keyword::MK_INF_NEG_POS||strtolower($property)==Keyword::MK_INF_PN)
+                    $operator="negative inference and positive inference";
+                else 
                     return $matchingNeuron;
                 $propertyValue=trim($values[1]);
                 $queryUtil = new QueryUtil();
@@ -68,20 +73,27 @@ class Page
     public  function typeWithEphys($ephysCond){
         $matchingNeuron=array();
         $operator=$this->getOperator($ephysCond);
+        
         if($operator!="") {
             $values = explode($operator, $ephysCond);
+            //print("<pre>" . print_r($values, true) . "</pre>");
             if (count($values) == 2) {
                 $property=trim($values[0]);
                 $property=str_replace(Operator::COLON,"",$property);
-                $propertyValue=trim($values[1]);
+                $propertyValue=trim($values[1],',');
+                
+                //print("<pre>property value" . print($propertyValue) . "</pre>");
                 $roundDigit=0;
                 $queryUtil = new QueryUtil();
                 if($operator==Operator::COLON)
                     $operator=Operator::EQUAL_TO;
+                   
                 if(strpos($propertyValue,".")!==false){
-                    $roundDigit=strlen($propertyValue)-(strpos($propertyValue,".")+1);
+                    $roundDigit=strlen($propertyValue)-(strpos($propertyValue,".")+1)+1;
                 }
-                #echo("OP:$property,$propertyValue,$operator:".stripos($ephysCond, Operator::COLON.Operator::LESS_THAN));
+                // echo("OP:$property,$propertyValue,$operator:".stripos($ephysCond, Operator::COLON.Operator::LESS_THAN));
+                //echo "OP:$property,$propertyValue,$operator";
+                //print("<pre>" . print($operator) . "</pre>");
                 $matchingNeuron = $queryUtil->ephysMatchingNeuron($property, $propertyValue, $operator,$roundDigit);
             } else {
                 print("<p>Invalid Electorphysiology Condition $ephysCond</p>");

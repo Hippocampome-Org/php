@@ -46,12 +46,15 @@ class MorphologyPage
                         $predicate=$this->relations[Operator::PRESENT];
                         $object=$this->parcels[$this->subregions[$ppl]+$ind];
                         $neuronFound=$queryUtil->morphMatchingNeuron($subject,$predicate,$object);
-                    }
-                    #print("<pre>".print_r($neuronFound,true)."</pre>");
 
-                    if(count($neuronFound)>0)
+                    }
+                    // print("<pre>".print_r($neuronFound,true)."</pre>");
+                    if(count($neuronFound)>0){
                         $matchingNeuron=array_intersect($matchingNeuron,$neuronFound);
-                }
+                    }else if (count($neuronFound)==0 && $matchingNeuron==$allNeuron && $pplValues[$ind]!=Operator::WILDCARD ) {
+                            return $neuronFound;
+                        }
+                    }
             }
             else{
                 print("<br>Invalid count of $propertyValue for condition $property<br>");
@@ -60,6 +63,7 @@ class MorphologyPage
         else{
             print("<br>Invalid morphology condition....$property....$propertyValue<br>");
         }
+
         return $matchingNeuron;
     }
 }

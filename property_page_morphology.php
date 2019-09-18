@@ -161,6 +161,7 @@ if ($see_all == 'Close All Evidence')
 if ($_REQUEST['show_1']) //  ==> ON
 {
 	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
+	
 	$title_paper = $_REQUEST['title'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];

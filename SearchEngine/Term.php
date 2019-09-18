@@ -51,9 +51,14 @@ Class Keyword{
     const MORP_AXONS="axons";
     const MORP_DENDRITES="dendrites";
     const MORP_SOMA="soma";
-
+    const MK_DIR_NEG_POS = "d-+";
+    const MK_DIR_POS_NEG = "d+-";
+    const MK_DIR_PN = "d±";
     const MK_DIR_POS="d+";
     const MK_DIR_NEG="d-";
+    const MK_INF_POS_NEG = "i+-";
+    const MK_INF_NEG_POS = "i-+";
+    const MK_INF_PN = "i±";
     const MK_INF_POS="i+";
     const MK_INF_NEG="i-";
 
