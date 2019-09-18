@@ -72,7 +72,7 @@ class PHPCount
         {
             // Set the database login credentials.
             self::$DB = new PDO(
-                'mysql:host='.$servername.';dbname=natemsut_counters',
+                'mysql:host='.$servername.';dbname=counters',
                 $username, // Username
                 $password, // Password
                 array(PDO::ATTR_PERSISTENT => true)
