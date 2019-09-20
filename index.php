@@ -224,9 +224,9 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.5 - Released: 09/06/2019
+      v1.6 - Released: 09/20/2019
       <br>
-      19,598 Pieces of Knowledge (PoK) and 29,848 Pieces of Evidence (PoE)
+      19,841 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -267,6 +267,13 @@ jQuery(document).ready(function() {
       <a href="http://www.eneuro.org/content/3/6/ENEURO.0205-16.2016">
       <i>Graph theoretic and motif analyses of the hippocampal neuron type
       potential connectome</i></a>. eNeuro Nov 2016, ENEURO.0205-16.2016; DOI: 10.1523/ENEURO.0205-16.2016.
+      <br><br>
+      The release of v1.3 on 06/30/2017 includes 10,822 PoK, 21,285 PoE, and a downloadable list of Allen Brain Atlas (ABA) predictions of marker
+      expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
+      Reference: <b>Hamilton et al., 2017</b>
+      <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
+      <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
+      Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
       </font>
 
       <br><br>
@@ -289,17 +296,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:0px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:140px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br><br>
-      The release of v1.3 on 06/30/2017 includes 10,822 PoK, 21,285 PoE, and a downloadable list of Allen Brain Atlas (ABA) predictions of marker
-      expressions and a utility for viewing the effects of thresholds on ABA marker expression predictions.
-      Reference: <b>Hamilton et al., 2017</b>
-      <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
-      <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
-      Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
-      <br><br>
+      <br><br><br><br><br><br>
       The release of v1.4 on 08/15/2019 includes an additional 7,946 PoK, 8,486 PoE, and the ability to
       access the Synapse Knowledge Base.
       Reference: <b>Moradi and Ascoli, 2019</b>
@@ -307,13 +307,20 @@ jQuery(document).ready(function() {
       <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
       Hippocampus 2019 (in press); doi: https://doi.org/10.1002/hipo.23148.
       <br><br>
-      <b>*NEW*</b> The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
+      The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
       <a href = "https://www.biorxiv.org/content/10.1101/633883v1">
       <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
       Relational Inferences.</i></a>
       Hippocampus 2019 (in press); doi: https://doi.org/10.1101/633883.
+      <br><br>
+      <b>*NEW*</b> The release of v1.6 on 09/20/2019 includes an additional 243 PoK, 187 PoE, and firing pattern
+      phenotypes in the knowledge base.
+      Reference: <b>Komendantov, et al., 2019</b>
+      <a href = "https://www.biorxiv.org/content/10.1101/212084v2">
+      <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
+      Scientific Reports 2019 (in press); doi: https://doi.org/10.1101/212084.
       </font>
     </td>
   </tr>
@@ -338,8 +345,8 @@ jQuery(document).ready(function() {
           <!-- <br /><p><?php echo $info; ?> -->
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
-          19,598 Pieces of Knowledge (PoK) and 29,848 Pieces of Evidence (PoE)
-          <br />Last Update: 06 Sep 2019 (<a href="Help_Release_Notes.php">v1.5</a>)</font>
+          19,841 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
+          <br />Last Update: 20 Sep 2019 (<a href="Help_Release_Notes.php">v1.6</a>)</font>
           <br />
         </div>
     </td>   
