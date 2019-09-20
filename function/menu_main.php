@@ -27,13 +27,7 @@ session_start();
             <li><a href="ephys.php">Membrane biophysics</a></li>
             <li><a href="connectivity.php">Connectivity</a></li>
             <li><a href="synaptome.php">Synaptic physiology</a></li>
-	        <?php 
-	          if ($permission != 1 && $_SESSION["fp"]==1) {
-	        ?>
 	        <li><a href="firing_patterns.php">Firing patterns</a></li>
-	         <?php   
-	          }
-	        ?> 
 	          <?php 
 	          if ($permission != 1 && $_SESSION["im"]==1) {
 	        ?>
@@ -63,13 +57,7 @@ session_start();
 	
 			<li><a href="find_author.php?searching=1">Author</a></li>
 			<li><a href="find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
-			<?php
-				if ($permission != 1 && $_SESSION["fp"]==1) {
-			?>
 			<li><a href="find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
-			<?php   
-				}
-			?> 
 			<li><a href="find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
 			<li class="subfirst"><a href="search.php?searching=1">Neuron Type</a></li>
 			<li><a href="find_pmid.php?searching=1">PMID/ISBN</a></li>
