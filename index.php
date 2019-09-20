@@ -66,6 +66,8 @@ remove_table_by_tyme();
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>

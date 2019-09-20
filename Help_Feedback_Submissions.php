@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Feedback Submissions</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -110,17 +112,17 @@ organize the list based on layer. The list would include oriens, pyramidale,
 radiatum, etc. <span class=GramE>Thoughts?</span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;line-height:115%'><span
-style='mso-tab-count:1'>          </span>On 04/11/2013 5:14 PM,
+style='mso-tab-count:1'>Â Â Â Â Â Â Â Â Â  </span>On 04/11/2013 5:14 PM,
 Hippocampome.org wrote:<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
 line-height:115%'>The other bit of functionality that we are planning on
-implementing is parcel summary pages.<span style='mso-spacerun:yes'> 
+implementing is parcel summary pages.<span style='mso-spacerun:yes'>Â 
 </span>For instance, all in one page you could view everything we have
 accumulated about CA1 SR, such as cell types, etc.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
-line-height:115%'><span style='mso-tab-count:1'>          </span>On 4/12/2013
+line-height:115%'><span style='mso-tab-count:1'>Â Â Â Â Â Â Â Â Â  </span>On 4/12/2013
 10:45 <span class=GramE>AM</span>, J.E. wrote:<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:1.0in'><span style='font-size:14.0pt;
@@ -132,8 +134,8 @@ that idea. I think many others would as well.<o:p></o:p></span></p>
 line-height:115%'>On 05/14/2014 2:46 PM, Hippocampome.org wrote:<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-left:.5in'><span style='font-size:14.0pt;
-line-height:115%'><span style='mso-tab-count:1'>          </span><span
-style='mso-tab-count:1'>          </span>Parcel summary pages have been
+line-height:115%'><span style='mso-tab-count:1'>Â Â Â Â Â Â Â Â Â  </span><span
+style='mso-tab-count:1'>Â Â Â Â Â Â Â Â Â  </span>Parcel summary pages have been
 implemented.<o:p></o:p></span></p>
 
 </div>

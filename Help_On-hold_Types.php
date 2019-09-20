@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>On-hold Types</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -256,10 +258,10 @@ ul
   0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Anstötz</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AnstÃ¶tz</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> M, Cosgrove KE, Hack I, <span class=SpellE>Mugnaini</span>
-  E, Maccaferri G, <span class=SpellE>Lübke</span> JH<o:p></o:p></span></p>
+  E, Maccaferri G, <span class=SpellE>LÃ¼bke</span> JH<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -1031,7 +1033,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Soltesz</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> I1, Bourassa J, <span class=SpellE>Deschênes</span> M<o:p></o:p></span></p>
+  "Times New Roman"'> I1, Bourassa J, <span class=SpellE>DeschÃªnes</span> M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1230,9 +1232,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martí-Subirana</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­-Subirana</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> A, Soriano E, <span class=SpellE>García</span>-Verdugo JM<o:p></o:p></span></p>
+  "Times New Roman"'> A, Soriano E, <span class=SpellE>GarcÃ­a</span>-Verdugo JM<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1435,7 +1437,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Sauer JF1, <span class=SpellE>Strüber</span>
+  mso-fareast-font-family:"Times New Roman"'>Sauer JF1, <span class=SpellE>StrÃ¼ber</span>
   M, <span class=SpellE>Bartos</span> M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -1538,7 +1540,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Hosp</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> JA, <span class=SpellE>Strüber</span> M, <span
+  "Times New Roman"'> JA, <span class=SpellE>StrÃ¼ber</span> M, <span
   class=SpellE>Yanagawa</span> Y, Obata K, Vida I, Jonas P, <span class=SpellE>Bartos</span>
   M<o:p></o:p></span></p>
   </td>
@@ -1644,7 +1646,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Hosp</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> JA, <span class=SpellE>Strüber</span> M, <span
+  "Times New Roman"'> JA, <span class=SpellE>StrÃ¼ber</span> M, <span
   class=SpellE>Yanagawa</span> Y, Obata K, Vida I, Jonas P, <span class=SpellE>Bartos</span>
   M<o:p></o:p></span></p>
   </td>
@@ -1848,9 +1850,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Gulyás</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>GulyÃ¡s</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> AI1, <span class=SpellE>Hájos</span> N, Freund TF<o:p></o:p></span></p>
+  "Times New Roman"'> AI1, <span class=SpellE>HÃ¡jos</span> N, Freund TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1951,7 +1953,7 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Armstrong C, <span class=SpellE>Szabadics</span>
-  J, <span class=SpellE>Tamás</span> G, <span class=SpellE>Soltesz</span> I<o:p></o:p></span></p>
+  J, <span class=SpellE>TamÃ¡s</span> G, <span class=SpellE>Soltesz</span> I<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3173,7 +3175,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Sauer JF1, <span class=SpellE>Strüber</span>
+  mso-fareast-font-family:"Times New Roman"'>Sauer JF1, <span class=SpellE>StrÃ¼ber</span>
   M, <span class=SpellE>Bartos</span> M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -3275,7 +3277,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Sik</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> A1, <span class=SpellE>Penttonen</span> M, Buzsáki G<o:p></o:p></span></p>
+  "Times New Roman"'> A1, <span class=SpellE>Penttonen</span> M, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -3476,9 +3478,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> A, <span class=SpellE>Lübke</span> J, Del Río JA, Soriano
+  "Times New Roman"'> A, <span class=SpellE>LÃ¼bke</span> J, Del RÃ­o JA, Soriano
   E, <span class=SpellE>Frotscher</span> M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -3776,10 +3778,10 @@ ul
   0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Anstötz</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AnstÃ¶tz</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> M, Cosgrove KE, Hack I, <span class=SpellE>Mugnaini</span>
-  E, Maccaferri G, <span class=SpellE>Lübke</span> JH<o:p></o:p></span></p>
+  E, Maccaferri G, <span class=SpellE>LÃ¼bke</span> JH<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -4278,10 +4280,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -4382,7 +4384,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Lasztóczi</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>LasztÃ³czi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> B,&nbsp;<span class=SpellE>Tukker</span> JJ,&nbsp;Somogyi
   P,&nbsp;Klausberger T<o:p></o:p></span></p>
@@ -4486,10 +4488,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -4590,10 +4592,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -4790,7 +4792,7 @@ ul
   0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Lasztóczi</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>LasztÃ³czi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> B,&nbsp;<span class=SpellE>Tukker</span> JJ,&nbsp;Somogyi
   P,&nbsp;Klausberger T<o:p></o:p></span></p>
@@ -4892,7 +4894,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:45.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Freund TF1, Buzsáki G<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Freund TF1, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -5199,7 +5201,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Lasztóczi</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>LasztÃ³czi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> B,&nbsp;<span class=SpellE>Tukker</span> JJ,&nbsp;Somogyi
   P,&nbsp;Klausberger T<o:p></o:p></span></p>
@@ -5302,9 +5304,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Gulyás</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>GulyÃ¡s</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> AI1, Miles R, <span class=SpellE>Hájos</span> N, Freund
+  "Times New Roman"'> AI1, Miles R, <span class=SpellE>HÃ¡jos</span> N, Freund
   TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -5614,9 +5616,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> A, <span class=SpellE>Lübke</span> J, Del Río JA, Soriano
+  "Times New Roman"'> A, <span class=SpellE>LÃ¼bke</span> J, Del RÃ­o JA, Soriano
   E, <span class=SpellE>Frotscher</span> M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -5822,10 +5824,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6030,10 +6032,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6134,10 +6136,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6342,10 +6344,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6450,7 +6452,7 @@ ul
   "Times New Roman"'> S1, Klausberger T, <span class=SpellE>Marton</span> LF, <span
   class=SpellE>Dalezios</span> Y, Roberts JD, <span class=SpellE>Fuentealba</span>
   P, <span class=SpellE>Bushong</span> EA, <span class=SpellE>Henze</span> D,
-  Buzsáki G, Somogyi P<o:p></o:p></span></p>
+  BuzsÃ¡ki G, Somogyi P<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6650,10 +6652,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -6753,9 +6755,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Gulyás</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>GulyÃ¡s</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> AI1, Miles R, <span class=SpellE>Hájos</span> N, Freund
+  "Times New Roman"'> AI1, Miles R, <span class=SpellE>HÃ¡jos</span> N, Freund
   TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -6961,7 +6963,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Freund TF1, Buzsáki G<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Freund TF1, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7059,10 +7061,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7263,10 +7265,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7467,10 +7469,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7570,10 +7572,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> GG,&nbsp;<span class=SpellE>Holderith</span>&nbsp;N,&nbsp;<span
-  class=SpellE>Gulyás</span> AI,&nbsp;Freund TF,&nbsp;<span class=SpellE>Hájos</span>
+  class=SpellE>GulyÃ¡s</span> AI,&nbsp;Freund TF,&nbsp;<span class=SpellE>HÃ¡jos</span>
   N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -7674,10 +7676,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -7880,10 +7882,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -8500,7 +8502,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Tóth</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>TÃ³th</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> K1, Freund TF<o:p></o:p></span></p>
   </td>
@@ -8808,10 +8810,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> GG,&nbsp;<span class=SpellE>Holderith</span>&nbsp;N,&nbsp;<span
-  class=SpellE>Gulyás</span> AI,&nbsp;Freund TF,&nbsp;<span class=SpellE>Hájos</span>
+  class=SpellE>GulyÃ¡s</span> AI,&nbsp;Freund TF,&nbsp;<span class=SpellE>HÃ¡jos</span>
   N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -8912,7 +8914,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;Ruiz M,&nbsp;Soriano&nbsp;E<o:p></o:p></span></p>
   </td>
@@ -9017,7 +9019,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Sik</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> A1, <span class=SpellE>Penttonen</span> M, Buzsáki G<o:p></o:p></span></p>
+  "Times New Roman"'> A1, <span class=SpellE>Penttonen</span> M, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -9116,7 +9118,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;Ruiz M,&nbsp;Soriano&nbsp;E<o:p></o:p></span></p>
   </td>
@@ -9219,12 +9221,12 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:135.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Hájos</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>HÃ¡jos</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> N,&nbsp;<span class=SpellE>Karlócai</span> MR,&nbsp;<span
-  class=SpellE>Németh</span> B,&nbsp;<span class=SpellE>Ulbert</span> I,&nbsp;<span
-  class=SpellE>Monyer</span> H,&nbsp;<span class=SpellE>Szabó</span> G,&nbsp;<span
-  class=SpellE>Erdélyi</span> F,&nbsp;Freund TF,&nbsp;<span class=SpellE>Gulyás</span>
+  "Times New Roman"'> N,&nbsp;<span class=SpellE>KarlÃ³cai</span> MR,&nbsp;<span
+  class=SpellE>NÃ©meth</span> B,&nbsp;<span class=SpellE>Ulbert</span> I,&nbsp;<span
+  class=SpellE>Monyer</span> H,&nbsp;<span class=SpellE>SzabÃ³</span> G,&nbsp;<span
+  class=SpellE>ErdÃ©lyi</span> F,&nbsp;Freund TF,&nbsp;<span class=SpellE>GulyÃ¡s</span>
   AI<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -9325,7 +9327,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;Ruiz M,&nbsp;Soriano&nbsp;E<o:p></o:p></span></p>
   </td>
@@ -9428,7 +9430,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Martínez</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>MartÃ­nez</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;Ruiz M,&nbsp;Soriano&nbsp;E<o:p></o:p></span></p>
   </td>
@@ -10051,10 +10053,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Szabó</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>SzabÃ³</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> GG, Papp OI, <span class=SpellE>Máté</span> Z, <span
-  class=SpellE>Szabó</span> G, <span class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  "Times New Roman"'> GG, Papp OI, <span class=SpellE>MÃ¡tÃ©</span> Z, <span
+  class=SpellE>SzabÃ³</span> G, <span class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -10154,9 +10156,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Gulyás</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>GulyÃ¡s</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> AI1, Miles R, <span class=SpellE>Hájos</span> N, Freund
+  "Times New Roman"'> AI1, Miles R, <span class=SpellE>HÃ¡jos</span> N, Freund
   TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -10363,7 +10365,7 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Buhl&nbsp;EH,&nbsp;Han&nbsp;ZS,&nbsp;<span
-  class=SpellE>Lörinczi</span> Z,&nbsp;<span class=SpellE>Stezhka</span>
+  class=SpellE>LÃ¶rinczi</span> Z,&nbsp;<span class=SpellE>Stezhka</span>
   VV,&nbsp;<span class=SpellE>Karnup</span> SV,&nbsp;Somogyi P<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -10456,10 +10458,10 @@ ul
   0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Anstötz</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AnstÃ¶tz</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> M, Cosgrove KE, Hack I, <span class=SpellE>Mugnaini</span>
-  E, Maccaferri G, <span class=SpellE>Lübke</span> JH<o:p></o:p></span></p>
+  E, Maccaferri G, <span class=SpellE>LÃ¼bke</span> JH<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -11159,7 +11161,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Sik</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A1, <span class=SpellE>Ylinen</span> A, <span
-  class=SpellE>Penttonen</span> M, Buzsáki G<o:p></o:p></span></p>
+  class=SpellE>Penttonen</span> M, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -11673,7 +11675,7 @@ ul
   "Times New Roman"'> S1, Klausberger T, <span class=SpellE>Marton</span> LF, <span
   class=SpellE>Dalezios</span> Y, Roberts JD, <span class=SpellE>Fuentealba</span>
   P, <span class=SpellE>Bushong</span> EA, <span class=SpellE>Henze</span> D,
-  Buzsáki G, Somogyi P<o:p></o:p></span></p>
+  BuzsÃ¡ki G, Somogyi P<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -11777,7 +11779,7 @@ ul
   "Times New Roman"'> S1, Klausberger T, <span class=SpellE>Marton</span> LF, <span
   class=SpellE>Dalezios</span> Y, Roberts JD, <span class=SpellE>Fuentealba</span>
   P, <span class=SpellE>Bushong</span> EA, <span class=SpellE>Henze</span> D,
-  Buzsáki G, Somogyi P<o:p></o:p></span></p>
+  BuzsÃ¡ki G, Somogyi P<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -12055,7 +12057,7 @@ ul
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Frotscher</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> M, <span class=SpellE>Léránth</span> C<o:p></o:p></span></p>
+  "Times New Roman"'> M, <span class=SpellE>LÃ©rÃ¡nth</span> C<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -12148,7 +12150,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Frotscher</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> M, <span class=SpellE>Schlander</span> M, <span
-  class=SpellE>Léránth</span> C<o:p></o:p></span></p>
+  class=SpellE>LÃ©rÃ¡nth</span> C<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -12421,9 +12423,9 @@ ul
   0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Gulyás</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>GulyÃ¡s</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> AI, <span class=SpellE>Acsády</span> L, Freund TF<o:p></o:p></span></p>
+  "Times New Roman"'> AI, <span class=SpellE>AcsÃ¡dy</span> L, Freund TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -12515,7 +12517,7 @@ ul
   0in 5.4pt 0in 5.4pt;height:30.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Freund TF1, Buzsáki G<o:p></o:p></span></p>
+  mso-fareast-font-family:"Times New Roman"'>Freund TF1, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border:none;border-right:
   solid windowtext 1.0pt;mso-border-right-alt:solid windowtext .5pt;padding:
@@ -13173,7 +13175,7 @@ ul
   0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Tóth</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>TÃ³th</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> K1, Freund TF<o:p></o:p></span></p>
   </td>
@@ -13376,7 +13378,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Tyan</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Chamberland</span> S, <span
-  class=SpellE>Magnin</span> E, <span class=SpellE>Camiré</span> O, <span
+  class=SpellE>Magnin</span> E, <span class=SpellE>CamirÃ©</span> O, <span
   class=SpellE>Francavilla</span> R, David LS, <span class=SpellE>Deisseroth</span>
   K, Topolnik L<o:p></o:p></span></p>
   </td>
@@ -13784,7 +13786,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Acsády</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AcsÃ¡dy</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Arabadzisz</span> D, Freund TF<o:p></o:p></span></p>
   </td>
@@ -14196,7 +14198,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Acsády</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AcsÃ¡dy</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Arabadzisz</span> D, Freund TF<o:p></o:p></span></p>
   </td>
@@ -14606,7 +14608,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Sik</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A1, <span class=SpellE>Penttonen</span> M, <span
-  class=SpellE>Ylinen</span> A, Buzsáki G<o:p></o:p></span></p>
+  class=SpellE>Ylinen</span> A, BuzsÃ¡ki G<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -14812,7 +14814,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Zemankovics</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> R1, <span class=SpellE>Veres</span> JM, Oren I, <span
-  class=SpellE>Hájos</span> N<o:p></o:p></span></p>
+  class=SpellE>HÃ¡jos</span> N<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -15216,7 +15218,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Hájos</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>HÃ¡jos</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> N1, <span class=SpellE>Mody</span> I<o:p></o:p></span></p>
   </td>
@@ -15423,7 +15425,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Tyan</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Chamberland</span> S, <span
-  class=SpellE>Magnin</span> E, <span class=SpellE>Camiré</span> O, <span
+  class=SpellE>Magnin</span> E, <span class=SpellE>CamirÃ©</span> O, <span
   class=SpellE>Francavilla</span> R, David LS, <span class=SpellE>Deisseroth</span>
   K, Topolnik L<o:p></o:p></span></p>
   </td>
@@ -15518,7 +15520,7 @@ ul
   0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Acsády</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AcsÃ¡dy</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Arabadzisz</span> D, Freund TF<o:p></o:p></span></p>
   </td>
@@ -15616,9 +15618,9 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:105.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Acsády</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AcsÃ¡dy</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
-  "Times New Roman"'> L1, <span class=SpellE>Görcs</span> TJ, Freund TF<o:p></o:p></span></p>
+  "Times New Roman"'> L1, <span class=SpellE>GÃ¶rcs</span> TJ, Freund TF<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -15912,7 +15914,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Acsády</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AcsÃ¡dy</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> L1, <span class=SpellE>Arabadzisz</span> D, Freund TF<o:p></o:p></span></p>
   </td>
@@ -16218,7 +16220,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:75.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Tóth</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>TÃ³th</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> K1, Freund TF<o:p></o:p></span></p>
   </td>
@@ -16531,7 +16533,7 @@ ul
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
   mso-fareast-font-family:"Times New Roman"'>Buhl&nbsp;EH,&nbsp;Han&nbsp;ZS,&nbsp;<span
-  class=SpellE>Lörinczi</span> Z,&nbsp;<span class=SpellE>Stezhka</span>
+  class=SpellE>LÃ¶rinczi</span> Z,&nbsp;<span class=SpellE>Stezhka</span>
   VV,&nbsp;<span class=SpellE>Karnup</span> SV,&nbsp;Somogyi P<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -16631,10 +16633,10 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:1.25in'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span class=SpellE><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Anstötz</span></span><span
+  mso-fareast-font-family:"Times New Roman"'>AnstÃ¶tz</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> M, Cosgrove KE, Hack I, <span class=SpellE>Mugnaini</span>
-  E, Maccaferri G, <span class=SpellE>Lübke</span> JH<o:p></o:p></span></p>
+  E, Maccaferri G, <span class=SpellE>LÃ¼bke</span> JH<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -16735,7 +16737,7 @@ ul
   padding:0in 5.4pt 0in 5.4pt;height:60.0pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><span style='font-size:11.0pt;font-family:"Calibri","sans-serif";
-  mso-fareast-font-family:"Times New Roman"'>Seress L1, <span class=SpellE>Abrahám</span>
+  mso-fareast-font-family:"Times New Roman"'>Seress L1, <span class=SpellE>AbrahÃ¡m</span>
   H, Lin H, <span class=SpellE>Totterdell</span> S<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -16840,7 +16842,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Wouterlood</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> FG1, <span class=SpellE>Boekel</span> AJ, <span
-  class=SpellE>Aliane</span> V, <span class=SpellE>Beliën</span> JA, <span
+  class=SpellE>Aliane</span> V, <span class=SpellE>BeliÃ«n</span> JA, <span
   class=SpellE>Uylings</span> HB, Witter MP<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -17350,7 +17352,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Burgalossi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;<span class=SpellE>Herfst</span> L,&nbsp;von <span
-  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>Förste</span>
+  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>FÃ¶rste</span>
   H,&nbsp;<span class=SpellE>Haskic</span> K,&nbsp;Schmidt M,&nbsp;Brecht M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -17453,7 +17455,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Burgalossi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;<span class=SpellE>Herfst</span> L,&nbsp;von <span
-  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>Förste</span>
+  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>FÃ¶rste</span>
   H,&nbsp;<span class=SpellE>Haskic</span> K,&nbsp;Schmidt M,&nbsp;Brecht M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -17657,7 +17659,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Burgalossi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;<span class=SpellE>Herfst</span> L,&nbsp;von <span
-  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>Förste</span>
+  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>FÃ¶rste</span>
   H,&nbsp;<span class=SpellE>Haskic</span> K,&nbsp;Schmidt M,&nbsp;Brecht M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -17761,7 +17763,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Burgalossi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;<span class=SpellE>Herfst</span> L,&nbsp;von <span
-  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>Förste</span>
+  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>FÃ¶rste</span>
   H,&nbsp;<span class=SpellE>Haskic</span> K,&nbsp;Schmidt M,&nbsp;Brecht M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:
@@ -17864,7 +17866,7 @@ ul
   mso-fareast-font-family:"Times New Roman"'>Burgalossi</span></span><span
   style='font-size:11.0pt;font-family:"Calibri","sans-serif";mso-fareast-font-family:
   "Times New Roman"'> A,&nbsp;<span class=SpellE>Herfst</span> L,&nbsp;von <span
-  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>Förste</span>
+  class=SpellE>Heimendahl</span> M,&nbsp;<span class=SpellE>FÃ¶rste</span>
   H,&nbsp;<span class=SpellE>Haskic</span> K,&nbsp;Schmidt M,&nbsp;Brecht M<o:p></o:p></span></p>
   </td>
   <td width=153 valign=bottom style='width:114.55pt;border-top:none;border-left:

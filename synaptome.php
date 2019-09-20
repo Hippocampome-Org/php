@@ -4,6 +4,8 @@
 <html>
 
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv=Content-Type content="text/html; charset=windows-1252">
 <meta name=Generator content="Microsoft Word 14 (filtered)">
 <title>Synaptome</title>
@@ -202,7 +204,7 @@ as well.</li>
 
 <p class=MsoListParagraph style='text-indent:-.25in'>(1)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span>To access data, please open the <a
-href="https://drive.google.com/drive/folders/0B9vJ9CsdswjUcUtOV1lMcEVpQ3M?usp=sharing">following
+href="https://drive.google.com/drive/folders/1gV9iEh-AZIPpIFLsyyuPzabz5agtiKey?usp=sharing">following
 link</a> and add the "synapse" folder to your own Google Drive. You need to do
 this only once.</p>
 
@@ -1339,7 +1341,11 @@ in synapse folder gives access to the R source codes.</p>
 <h1>How to give us attribution</h1>
 
 <p class=MsoNormal>If you found our data or these tools useful in your own
-research.... [this section will be completed upon paper acceptance]</p>
+research, please cite our work: <b>Moradi and Ascoli, 2019</b>
+<a href = "https://www.biorxiv.org/content/10.1101/632760v2">
+<i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
+Hippocampus 2019 (in press); doi: https://doi.org/10.1101/632760.
+</p>
 
 </div>
 

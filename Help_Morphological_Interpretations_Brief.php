@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Help</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -124,7 +126,7 @@ and dendrites in black and axons in red.</span></p>
 line-height:200%'><span style='font-size:14.0pt;line-height:200%;font-family:
 "Arial","sans-serif"'>B)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:200%;font-family:"Arial","sans-serif"'>The
-assessed percentage of the axonal and dendritic trees in each layer.  A
+assessed percentage of the axonal and dendritic trees in each layer.Â  A
 reportable presence in a layer is at or above 15%.</span></p>
 
 <p class=MsoListParagraphCxSpMiddle style='margin-left:45.0pt;text-indent:-27.0pt;

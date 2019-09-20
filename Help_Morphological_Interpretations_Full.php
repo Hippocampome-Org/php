@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Help</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -214,27 +216,27 @@ style='text-transform:uppercase'> I</span>nterpretations</span></u></b></p>
 font-family:"Arial","sans-serif"'>&nbsp;</span></b></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><b><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>1–<span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>1Â–<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on a drawing or reconstruction of an actual
 neuron</span></b></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><b><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>2–<span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>2Â–<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on a schematic</span></b></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><b><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>3–<span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>3Â–<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on text where the locations are categorically
 stated</span></b></p>
 
 <p class=MsoNormal style='margin-left:1.0in;text-indent:-.5in'><b><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>4–<span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>4Â–<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on text where the locations are equivocal</span></b></p>
@@ -244,7 +246,7 @@ font-family:"Arial","sans-serif"'>&nbsp;</span></b></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:.15in;'><b><span style='font-size:14.0pt;
-font-family:"Arial","sans-serif"'>1–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+font-family:"Arial","sans-serif"'>1Â–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on a drawing or reconstruction of an actual
 neuron</span></b></p>
@@ -269,7 +271,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>If
 the proportion of branches / boutons / synapses is reported (i.e. 25% in SO,
 10% in SR, etc.), then the layer is recorded if the proportion is at least 15%
-of the entire tree.  If none of the proportions qualify (i.e. 12%, 10%, 8%,
+of the entire tree.Â  If none of the proportions qualify (i.e. 12%, 10%, 8%,
 etc.), compare the relative sizes of the proportions to the largest proportion
 (i.e. 12/12, 10/12, 8/12, etc.) and report those layers where the proportions
 are at least half the size of the largest proportion.</span></p>
@@ -281,7 +283,7 @@ are at least half the size of the largest proportion.</span></p>
 line-height:115%;font-family:"Arial","sans-serif"'>C.<span style='font:7.0pt "Times New Roman"'>&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>3-point
 Rule: Report an axonal/dendritic location if the given layer has at least 3
-points worth of branches.  (e.g. 2 terminating branches, 1 terminating + 1
+points worth of branches. Â (e.g. 2 terminating branches, 1 terminating + 1
 continuing branch, or 3 continuing branches), and the branches making up the
 three points are 15% or more of the total dendritic/axonal arbor.</span></p>
 
@@ -306,11 +308,11 @@ line-height:115%;font-family:"Arial","sans-serif"'>Definitions:</span></b></p>
   font-family:"Arial","sans-serif"'>invasion depth into the layer are both</span></p>
   <p class=MsoNormal style='margin-left:7.7pt'><span style='font-size:14.0pt;
   font-family:"Arial","sans-serif"'>at least 15%</span><span style='font-size:
-  14.0pt;font-family:"Arial","sans-serif"'> of the layer’s thickness).</span></p>
+  14.0pt;font-family:"Arial","sans-serif"'> of the layerÂ’s thickness).</span></p>
   <p class=MsoNormal style='margin-left:7.7pt'><span style='font-size:14.0pt;
   font-family:"Arial","sans-serif"'>(also see note below)</span></p>
   <p class=MsoNormal style='margin-left:7.7pt'><span style='font-size:14.0pt;
-  font-family:"Arial","sans-serif";color:red'> (2 points for each encircled
+  font-family:"Arial","sans-serif";color:red'>Â (2 points for each encircled
   branch)</span></p>
   </td>
   <td width=78 valign=top style='width:58.8pt;border:solid windowtext 1.0pt;
@@ -401,7 +403,7 @@ clear=all style='page-break-before:auto'>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:121.5pt;margin-bottom:
 12.0pt;margin-left:0.15in'><b><span style='font-size:14.0pt;
-font-family:"Arial","sans-serif"'>2–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+font-family:"Arial","sans-serif"'>2Â–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><span style='position:absolute;z-index:251670016;left:0px;
 margin-left:941px;margin-top:7px;width:125px;height:148px'><img width=125
 height=148 src="help/images/Morphological_Interpretations_Full_004.jpg"></span><b><span
@@ -427,7 +429,7 @@ stratum oriens and stratum radiatum.</span></p>
 line-height:150%;font-family:"Arial","sans-serif"'>&nbsp;</span></p>
 
 <p class=MsoNormal style='margin-left:0.15in;line-height:
-150%'><b><span style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>3–<span
+150%'><b><span style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>3Â–<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;line-height:150%;font-family:
 "Arial","sans-serif"'>Reporting axonal/dendritic locations based on text where
@@ -435,9 +437,9 @@ the locations are categorically stated</span></b></p>
 
 <p class=MsoNormal style='margin-left:.35in'><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'>e.g. Report CA1 O-LM neuron dendrites in 
-CA1 stratum oriens: “In the CA1 area, O-LM cells are located in stratum oriens and have horizontally extending dendrites
-with hairy spines on distal segments.” (Klausberger T, Eur J Neurosci, 2009
-Sep, 30 (6), pages: 947 – 957, PMID: </span><a
+CA1 stratum oriens: Â“In the CA1 area, O-LM cells are located in stratum oriens and have horizontally extending dendrites
+with hairy spines on distal segments.Â” (Klausberger T, Eur J Neurosci, 2009
+Sep, 30 (6), pages: 947 Â– 957, PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/19735288"><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'>19735288</span></a><span style='font-size:
 14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
@@ -447,7 +449,7 @@ line-height:150%;font-family:"Arial","sans-serif"'>&nbsp;</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:0.15in'><b><span style='font-size:14.0pt;
-font-family:"Arial","sans-serif"'>4–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+font-family:"Arial","sans-serif"'>4Â–<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></b><b><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Reporting
 axonal/dendritic locations based on text where the locations are equivocal</span></b><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'> </span></p>
@@ -455,14 +457,14 @@ style='font-size:14.0pt;font-family:"Arial","sans-serif"'> </span></p>
 <p class=MsoNormal style='margin-left:.35in'><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>e.g.
 Report dendrites in CA1 stratum radiatum (SR) and stratum lacunosum-moleculare
 (SLM), but omit dendrites in stratum pyramidale (SP) and stratum oriens (SO):
-“2. [CA1] Schaffer-associated interneurones. These &#64257;ve cells were
+Â“2. [CA1] Schaffer-associated interneurones. These &#64257;ve cells were
 multipolar, with most of their smooth or sparsely spiny dendritic arborisation
 contained within the SR and SLM (Figs. 10, 11) and only rarely entering the SP
-and SO.” (Pawelzik H, Hughes DI, and Thomson AM, J Comp Neurol, 2002 Feb 18,
-443 (4), pages: 346 – 367, PMID: </span><a
+and SO.Â” (Pawelzik H, Hughes DI, and Thomson AM, J Comp Neurol, 2002 Feb 18,
+443 (4), pages: 346 Â– 367, PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/11807843"><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'>11807843</span></a><span style='font-size:
-14.0pt;font-family:"Arial","sans-serif"'>).  </span></p>
+14.0pt;font-family:"Arial","sans-serif"'>).Â  </span></p>
 
 <p class=MsoNormal><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>&nbsp;</span></p>
 
@@ -491,47 +493,47 @@ font-family:"Arial","sans-serif"'>&nbsp;</span></b></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><u><span
   style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Report</span></u></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“most”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“mostÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“majority”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“majorityÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“superficial/deep
-  layer X”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“superficial/deep
+  layer XÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“usually”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“usuallyÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“proximal/distal
-  layer X”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“proximal/distal
+  layer XÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“septal/temporal
-  layer X”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“septal/temporal
+  layer XÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“all
-  layers”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“all
+  layersÂ”</span></p>
   </td>
   <td width=294 valign=top style='width:220.5pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0in 5.4pt 0in 5.4pt;height:206.5pt'>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><u><span
   style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Omit</span></u></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“a
-  few/some”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“a
+  few/someÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“minority”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“minorityÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“rarely”</span><span
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“rarelyÂ”</span><span
   style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'> </span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“at
-  the border of”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“at
+  the border ofÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“sometimes/occasional”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“sometimes/occasionalÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“toward
-  layer X”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“toward
+  layer XÂ”</span></p>
   <p class=MsoNormal style='margin-left:8.1pt;line-height:150%'><span
-  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>“a
-  small fraction/number of”</span></p>
+  style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>Â“a
+  small fraction/number ofÂ”</span></p>
   </td>
  </tr>
 </table>
@@ -543,42 +545,42 @@ margin-left:.5in'><span style='font-size:14.0pt;font-family:"Arial","sans-serif"
 margin-left:.5in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
 "Arial","sans-serif"'>2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>Interpreting
-ambivalent phrases.  </span></p>
+ambivalent phrases.Â  </span></p>
 
 <p class=MsoNormal style='margin-left:.75in;text-indent:-.75in;line-height:
 150%'><span style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'><span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span>i.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><u><span style='font-size:14.0pt;line-height:150%;font-family:
-"Arial","sans-serif"'>If not specifically defined otherwise by the author(s) …</span></u></p>
+"Arial","sans-serif"'>If not specifically defined otherwise by the author(s) Â…</span></u></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>entorhinal cortex
 deep layers are layers V-VI.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>entorhinal cortex
 superficial layers are layers I-III.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the alveus is part of
 stratum oriens (SO). </span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>hippocampus is CA1
 and CA3.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><img
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><img
 width=252 height=161 src="help/images/Morphological_Interpretations_Full_005.jpg"
 align=left hspace=24 style='margin-left:-24px;margin-right:24px'><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>apical dendrites are
@@ -588,101 +590,101 @@ style='font-size:14.0pt;font-family:"Arial","sans-serif"'> </span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “apical
-tuft” is interpreted as the portion of the apical dendritic tree located in
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“apical
+tuftÂ” is interpreted as the portion of the apical dendritic tree located in
 stratum lacunosum-moleculare (SLM).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “oblique
-dendrites” is interpreted as a subset of the apical dendrites located in
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“oblique
+dendritesÂ” is interpreted as a subset of the apical dendrites located in
 stratum radiatum (SR) for CA1/CA2.</span><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'> </span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “basal
-dendrites” is interpreted as the portion of the dendritic tree located in
-stratum oriens (SO).      </span></p>
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“basal
+dendritesÂ” is interpreted as the portion of the dendritic tree located in
+stratum oriens (SO).Â Â Â Â Â  </span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:12.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the stratum
 moleculare (SM) of the dentate gyrus (DG) is not specific enough for reporting
 locations of axons and dendrites.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “outer
-stratum moleculare” (SMo) of the dentate gyrus (DG) is interpreted as the
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“outer
+stratum moleculareÂ” (SMo) of the dentate gyrus (DG) is interpreted as the
 two-thirds of the layer farthest from the stratum granulosum (SG).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “inner
-stratum moleculare” (SMi) of the dentate gyrus (DG) is interpreted as the
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“inner
+stratum moleculareÂ” (SMi) of the dentate gyrus (DG) is interpreted as the
 one-third of the layer closest to the stratum granulosum (SG).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “perforant
-path termination zone” is interpreted as the outer stratum moleculare (SMo) for
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“perforant
+path termination zoneÂ” is interpreted as the outer stratum moleculare (SMo) for
 the dentate gyrus (DG), stratum lacunosum-moleculare (SLM) for CA1/CA2/CA3, and
 stratum moleculare (SM) for the subiculum.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “regio
-inferior” is interpreted as CA3 (see Blaabjerg M and Zimmer J, Prog Brain Res,
-2007, pages: 85 – 107. PMID: </span><a
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“regio
+inferiorÂ” is interpreted as CA3 (see Blaabjerg M and Zimmer J, Prog Brain Res,
+2007, pages: 85 Â– 107. PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/?term=17765713"><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>17765713</span></a><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “regio
-superior” is interpreted as CA1 (see Blaabjerg M and Zimmer J, Prog Brain Res,
-2007, pages: 85 – 107. PMID: </span><a
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“regio
+superiorÂ” is interpreted as CA1 (see Blaabjerg M and Zimmer J, Prog Brain Res,
+2007, pages: 85 Â– 107. PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/?term=17765713"><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>17765713</span></a><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “CA4” is
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“CA4Â” is
 interpreted as the dentate gyrus (DG) hilus (see Blaabjerg M and Zimmer J, Prog
-Brain Res, 2007, pages: 85 – 107. PMID: </span><a
+Brain Res, 2007, pages: 85 Â– 107. PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/?term=17765713"><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>17765713</span></a><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “fascia
-dentata” is interpreted as the dentate gyrus (DG) stratum granulosum (SG) and
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“fascia
+dentataÂ” is interpreted as the dentate gyrus (DG) stratum granulosum (SG) and
 stratum moleculare (SM) (see Blaabjerg M and Zimmer J, Prog Brain Res, 2007,
-pages: 85 – 107. PMID: </span><a
+pages: 85 Â– 107. PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/?term=17765713"><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>17765713</span></a><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “Brodmann
-Area 28” is interpreted as entorhinal cortex (EC) (see <span class=subpages>Witter
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“Brodmann
+Area 28Â” is interpreted as entorhinal cortex (EC) (see <span class=subpages>Witter
 M, 2011, Scholarpedia, 6 (10), page: </span></span><a
 href="http://www.scholarpedia.org/article/Entorhinal_cortex#Definition_and_history"><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>4380</span></a><span
@@ -690,38 +692,38 @@ style='font-size:14.0pt;font-family:"Arial","sans-serif"'>).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “lateral
-entorhinal area (LEA)” is interpreted as lateral entorhinal cortex (LEC).</span></p>
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“lateral
+entorhinal area (LEA)Â” is interpreted as lateral entorhinal cortex (LEC).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “medial
-entorhinal area (MEA)” is interpreted as medial entorhinal cortex (MEC).</span></p>
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“medial
+entorhinal area (MEA)Â” is interpreted as medial entorhinal cortex (MEC).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “Schaffer
-collaterals” refers specifically to CA3 pyramidal neuron axons.</span></p>
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“Schaffer
+collateralsÂ” refers specifically to CA3 pyramidal neuron axons.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
-style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase “mossy
-fibers” refers specifically to dentate gyrus granule cell axons.</span></p>
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the phrase Â“mossy
+fibersÂ” refers specifically to dentate gyrus granule cell axons.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats under 200 g
 and/or less than 3 weeks old are considered to be juveniles (Dumas TC, personal
 communication).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>rats at least 200 g
 and/or more than 3 weeks old are considered to be adults (Dumas TC, personal
 communication).</span></p>
@@ -734,41 +736,41 @@ style='font-size:14.0pt;line-height:150%;font-family:"Arial","sans-serif"'>&nbsp
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span>ii.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><u><span style='font-size:14.0pt;line-height:150%;font-family:
-"Arial","sans-serif"'>Despite what is stated by the author(s) …</span></u></p>
+"Arial","sans-serif"'>Despite what is stated by the author(s) Â…</span></u></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the location of
-“apical proximal dendrites” is reported as stratum radiatum (SR) for CA1/CA2,
+Â“apical proximal dendritesÂ” is reported as stratum radiatum (SR) for CA1/CA2,
 stratum lucidum (SL) for CA3, and inner stratum moleculare (SMi) for the
 dentate gyrus (DG).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>the location of
-“basal proximal dendrites” is reported as stratum oriens (SO) for CA1/CA2/CA3,
+Â“basal proximal dendritesÂ” is reported as stratum oriens (SO) for CA1/CA2/CA3,
 and the hilus (H) for the dentate gyrus (DG).</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>perisomatic axonal
 targeting, such as somata, proximal dendrites, and axon initial segments, is
 reported as stratum pyramidale (SP) for CA1/CA2/CA3/subiculum (SUB) and stratum
-granulosum (SG) for the dentate gyrus (DG).  This rule applies specifically to
+granulosum (SG) for the dentate gyrus (DG).Â  This rule applies specifically to
 basket and axo-axonic (a.k.a. chandelier) neurons.</span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>depictions of axons
 or dendrites in a principal cell layer do not have their locations reported if
 they are within ~100 </span><span style='font-size:14.0pt;font-family:"Arial","sans-serif"'>&#956;</span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>m of the soma, as
 they are considered to be perisomatic, i.e. part of the soma, as defined by
-Freund and Katona (Neuron, 2007 Oct 4, 56 (1), pages: 33 – 42, PMID: </span><a
+Freund and Katona (Neuron, 2007 Oct 4, 56 (1), pages: 33 Â– 42, PMID: </span><a
 href="http://www.ncbi.nlm.nih.gov/pubmed/17920013"><span style='font-size:14.0pt;
 font-family:"Arial","sans-serif"'>17920013</span></a><span style='font-size:
 14.0pt;font-family:"Arial","sans-serif"'>).</span><span style='font-size:14.0pt;
@@ -776,7 +778,7 @@ font-family:"Arial","sans-serif"'> </span></p>
 
 <p class=MsoNormal style='margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
 margin-left:1.0in;text-indent:-.25in'><span style='font-size:14.0pt;font-family:
-"Arial","sans-serif"'>…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+"Arial","sans-serif"'>Â…<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
 style='font-size:14.0pt;font-family:"Arial","sans-serif"'>
 CA2 stratum lucidum (SL) is interpreted as the incursion of mossy fibers,
 i.e. Granule cell axons, into CA2 stratum pyramidale (SP).

@@ -161,7 +161,6 @@ if ($see_all == 'Close All Evidence')
 if ($_REQUEST['show_1']) //  ==> ON
 {
 	$name_temporary_table = $_SESSION['morph_name_temporary_table'];
-	
 	$title_paper = $_REQUEST['title'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -456,6 +455,8 @@ $author = new author($class_author);
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <script type="text/javascript">
 // Javascript function 
 //================changes===========================

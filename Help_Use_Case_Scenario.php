@@ -4,6 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Usage Scenario</title>
 <script type="text/javascript" src="style/resolution.js"></script>
@@ -101,14 +103,14 @@ font-family:"Arial","sans-serif"'>Hippocampome Usage Scenario</span></u></b></p>
 .5in;line-height:200%'><span style='font-size:14.0pt;line-height:200%'>Consider
 the following scenario: a neuroscientist applies intracellular, stimulating
 current to a neuron in CA1 SLM and observes action potentials in a neuron with
-a soma in CA1 SO.<span style='mso-spacerun:yes'>  </span>Examination of the
+a soma in CA1 SO.<span style='mso-spacerun:yes'>Â  </span>Examination of the
 axons and dendrites of the presynaptic cell shows that it has dendrites in CA1
-SLM and axons in CA1 SR.<span style='mso-spacerun:yes'>  </span>The
+SLM and axons in CA1 SR.<span style='mso-spacerun:yes'>Â  </span>The
 Hippocampome indicates that this <span class=SpellE>axo</span>-dendritic
 pattern corresponds to the CA1 IS LM-R neuron type (also called CA1 IS2: Fig.
 13 </span><!--[if supportFields]><span style='font-size:14.0pt;line-height:
 200%'><span style='mso-element:field-begin'></span><span
-style='mso-spacerun:yes'> </span>ADDIN ZOTERO_ITEM CSL_CITATION
+style='mso-spacerun:yes'>Â </span>ADDIN ZOTERO_ITEM CSL_CITATION
 {&quot;citationID&quot;:&quot;ixLcm5bj&quot;,&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;(Hajos
 et al., 1996)&quot;,&quot;plainCitation&quot;:&quot;(Hajos et al., 1996)&quot;},&quot;citationItems&quot;:[{&quot;id&quot;:7238,&quot;uris&quot;:[&quot;http://zotero.org/users/274354/items/VRF3Q56I&quot;],&quot;uri&quot;:[&quot;http://zotero.org/users/274354/items/VRF3Q56I&quot;],&quot;itemData&quot;:{&quot;id&quot;:7238,&quot;type&quot;:&quot;article-journal&quot;,&quot;title&quot;:&quot;Target
 selectivity and neurochemical characteristics of VIP-immunoreactive
@@ -129,7 +131,7 @@ class=SpellE>Hajos</span> et al., 1996)</span><!--[if supportFields]><span
 style='font-size:14.0pt;line-height:200%'><span style='mso-element:field-end'></span></span><![endif]--><span
 style='font-size:14.0pt;line-height:200%'> and Fig. 1 </span><!--[if supportFields]><span
 style='font-size:14.0pt;line-height:200%'><span style='mso-element:field-begin'></span><span
-style='mso-spacerun:yes'> </span>ADDIN ZOTERO_ITEM CSL_CITATION
+style='mso-spacerun:yes'>Â </span>ADDIN ZOTERO_ITEM CSL_CITATION
 {&quot;citationID&quot;:&quot;1ofmsl6ohl&quot;,&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;(Klausberger
 and Somogyi, 2008)&quot;,&quot;plainCitation&quot;:&quot;(Klausberger and
 Somogyi,
@@ -158,18 +160,18 @@ dynamics&quot;,&quot;container-title-short&quot;:&quot;Science&quot;}}],&quot;sc
 style='font-size:14.0pt;mso-bidi-font-size:12.0pt;line-height:200%'>(Klausberger
 and Somogyi, 2008)</span><!--[if supportFields]><span style='font-size:14.0pt;
 line-height:200%'><span style='mso-element:field-end'></span></span><![endif]--><span
-style='font-size:14.0pt;line-height:200%'>).<span style='mso-spacerun:yes'> 
+style='font-size:14.0pt;line-height:200%'>).<span style='mso-spacerun:yes'>Â 
 </span>Labeling of the axons and dendrites of the postsynaptic neuron is
 incomplete, but it shows that the cell has dendrites in CA1 SLM, SR, and SP and
-axons in CA1 SP.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+axons in CA1 SP.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-indent:
 .5in;line-height:200%'><span style='font-size:14.0pt;line-height:200%'>In
 addition to the Hippocampome providing a list of candidate neurons types, it
 provides biomarker expression properties to distinguish them.<span
-style='mso-spacerun:yes'>  </span>Assume further that the postsynaptic neuron
+style='mso-spacerun:yes'>Â  </span>Assume further that the postsynaptic neuron
 is CB-positive and PV-negative, which points strongly to its being a CA1
-Oriens/alveus neuron.<span style='mso-spacerun:yes'>  </span>These happen to be
+Oriens/alveus neuron.<span style='mso-spacerun:yes'>Â  </span>These happen to be
 the only two biomarkers for which there is expression information for this
 neuron type; consequently, the researcher makes plans to extract the mRNA and
 preserves the slice in preparation for future experiments to ascertain a fuller
@@ -178,38 +180,38 @@ targets for future work.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
 200%'><span style='font-size:14.0pt;line-height:200%'><span style='mso-tab-count:
-1'>          </span>In speculating about the role of the presynaptic CA1 IS
+1'>Â Â Â Â Â Â Â Â Â  </span>In speculating about the role of the presynaptic CA1 IS
 LM-R neuron <i style='mso-bidi-font-style:normal'>in vivo</i>, the researcher
 uses the Hippocampome to identify neuron types with axons arborizing in CA1
-SLM.<span style='mso-spacerun:yes'>  </span>Interestingly, both excitatory and
+SLM.<span style='mso-spacerun:yes'>Â  </span>Interestingly, both excitatory and
 inhibitory neuron types have axons in this parcel.<span
-style='mso-spacerun:yes'>  </span>The potential excitatory inputs come from
+style='mso-spacerun:yes'>Â  </span>The potential excitatory inputs come from
 either CA1, Sub, or EC neuron types, so the researcher is able to convert the
 slice experiment to stimulate subicular pyramidal neurons and monitor an EPSP
-response in the IS LM-R neuron.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+response in the IS LM-R neuron.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;text-indent:
 .5in;line-height:200%'><span style='font-size:14.0pt;line-height:200%'>This
 information on the potential connection of Sub Pyramidal-CA1 projecting and CA1
 IS LM-R neuron types is part of the wiring diagram for the CA1 SLM local
 environment that can be created from knowledge in the Hippocampome.<span
-style='mso-spacerun:yes'>  </span>The researcher uses all of the wiring
+style='mso-spacerun:yes'>Â  </span>The researcher uses all of the wiring
 information, in combination with available electrophysiological properties in
 the Hippocampome for the neuron types, to create a realistic small network
 model centered on the CA1 IS LM-R neuron.<o:p></o:p></span></p>
 
 <p class=MsoBibliography><!--[if supportFields]><span style='mso-element:field-begin'></span><span
-style='mso-spacerun:yes'> </span>ADDIN ZOTERO_BIBL {&quot;custom&quot;:[]}
+style='mso-spacerun:yes'>Â </span>ADDIN ZOTERO_BIBL {&quot;custom&quot;:[]}
 CSL_BIBLIOGRAPHY <span style='mso-element:field-separator'></span><![endif]--><span
 class=SpellE><span class=GramE>Hajos</span></span><span class=GramE>, N., <span
 class=SpellE>Acsady</span>, L., and Freund, T.F. (1996).</span> <span
 class=GramE>Target selectivity and neurochemical characteristics of
 VIP-immunoreactive interneurons in the rat dentate gyrus.</span> Eur. J. <span
-class=SpellE>Neurosci</span>. <i>8</i>, 1415–1431.</p>
+class=SpellE>Neurosci</span>. <i>8</i>, 1415Â–1431.</p>
 
 <p class=MsoBibliography><span class=GramE>Klausberger, T., and Somogyi, P.
 (2008).</span> Neuronal diversity and temporal dynamics: the unity of
-hippocampal circuit operations. Science <i>321</i>, 53–57.</p>
+hippocampal circuit operations. Science <i>321</i>, 53Â–57.</p>
 
 <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
 200%'><!--[if supportFields]><span style='mso-element:field-end'></span><![endif]--><span

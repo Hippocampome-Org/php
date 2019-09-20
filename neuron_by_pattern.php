@@ -26,6 +26,8 @@ $firingpatternrel = new firingpatternrel($class_firing_pattern_rel);
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>
 <?php 
 include ("function/icon.html"); 
 ?>
@@ -181,8 +183,7 @@ $(function(){
 	$row_data = mysqli_fetch_row($rs);
 	$fp_name_val=$row_data[0];
 	print("$fp_name_val ($title)");
-	?>
-	[<a href="Help_Principles_of_Classification_of_Firing_Pattern_Elements.php">formal defintion</a>]</font>
+	?></font>
 </div>
 
 <div align="center">	

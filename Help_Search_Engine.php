@@ -4,6 +4,8 @@
 <html>
 
 <head>
+<!-- Google Analytics Tracking -->  
+<?php include_once("analytics.php") ?>	
 <meta http-equiv=Content-Type content="text/html; charset=windows-1252">
 <meta name=Generator content="Microsoft Word 14 (filtered)">
 <title>Query Language</title>
