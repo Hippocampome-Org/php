@@ -105,7 +105,7 @@ font-family:"Arial","sans-serif"'>v1.6 (20 Sep 2019):</span></p>
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.6
-includes an additional 243 PoK, 187 PoE, and firing pattern phenotypes in the knowledge base.
+includes an additional 3,640 PoK, 187 PoE, and firing pattern phenotypes in the knowledge base.
 </span></p>
 
 </BR>
