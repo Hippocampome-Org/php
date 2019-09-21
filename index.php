@@ -41,6 +41,20 @@ if ($_SESSION['perm'] == 0) {
               $_SESSION['im']=1;
           }
       }
+      $query = "SELECT permission FROM user WHERE id=6";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
+              $_SESSION['cg']=1;
+          }
+      }
+      $query = "SELECT permission FROM user WHERE id=7";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
+              $_SESSION['sp']=1;
+          }
+      }	  
   }
 }
 // delete temporary table for the research: -----------------
@@ -147,13 +161,27 @@ if ($permission1 != 0) {
         <li><a href="connectivity.php">Connectivity</a></li>
         <li><a href="synaptome.php">Synaptic physiology</a></li>
         <li><a href="firing_patterns.php">Firing patterns</a></li>
-          <?php 
-          if ($permission != 1 && $_SESSION["im"]==1) {
-        ?>
-        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
-        <?php   
-          }
-      ?> 
+	         <?php 
+	          if ($permission != 1 && $_SESSION["im"]==1) {
+	        ?>
+	        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
+	        <?php   
+	          }
+	        ?>
+	        <?php 
+	          if ($permission != 1 && $_SESSION["cg"]==1) {
+	        ?>
+	        <li><a href="http://hc.22web.org">Cognome</a></li>
+	         <?php   
+	          }
+	        ?> 
+	          <?php 
+	          if ($permission != 1 && $_SESSION["sp"]==1) {
+	        ?>
+	        <li><a href="http://synapt.22web.org">Synaptome</a></li>
+	        <?php   
+	          }
+	        ?> 	      
       </ul>
     </li>
     <li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
