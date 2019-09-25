@@ -228,7 +228,7 @@ jQuery(document).ready(function() {
       <font class='font2' color='#000000'>
       v1.6 - Released: 09/20/2019
       <br>
-      19,841 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
+      23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -317,7 +317,7 @@ jQuery(document).ready(function() {
       Relational Inferences.</i></a>
       Hippocampus 2019 (in press); doi: https://doi.org/10.1101/633883.
       <br><br>
-      <b>*NEW*</b> The release of v1.6 on 09/20/2019 includes an additional 243 PoK, 187 PoE, and firing pattern
+      <b>*NEW*</b> The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
       phenotypes in the knowledge base.
       Reference: <b>Komendantov, et al., 2019</b>
       <a href = "https://www.biorxiv.org/content/10.1101/212084v2">
@@ -347,7 +347,7 @@ jQuery(document).ready(function() {
           <!-- <br /><p><?php echo $info; ?> -->
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
-          19,841 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
+          23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
           <br />Last Update: 20 Sep 2019 (<a href="Help_Release_Notes.php">v1.6</a>)</font>
           <br />
         </div>
