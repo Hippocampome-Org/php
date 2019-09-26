@@ -233,7 +233,7 @@
   $result = $conn->query("SELECT ID FROM natemsut_cog_sug.articles WHERE ID=".$art_num);
   if($result->num_rows == 0) { 
     // check for missing official id    
-    if($_POST['official_id'] == '') {
+    if($art_off_id == '') {
         echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Error: missing official id description<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
         exit();
     }
