@@ -63,7 +63,7 @@ class PHPCount
 
     private static $dupstbl = false;
 
-    public static function InitDB($servername, $username, $password, $hitstbl, $dupstbl)
+    public static function InitDB($servername, $username, $password, $hitstbl, $dupstbl, $counters_db)
     {
         if(self::$DB)
             return;
@@ -72,7 +72,7 @@ class PHPCount
         {
             // Set the database login credentials.
             self::$DB = new PDO(
-                'mysql:host='.$servername.';dbname=counters',
+                'mysql:host='.$servername.';dbname='.$counters_db,
                 $username, // Username
                 $password, // Password
                 array(PDO::ATTR_PERSISTENT => true)
