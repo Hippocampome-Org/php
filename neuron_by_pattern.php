@@ -183,7 +183,8 @@ $(function(){
 	$row_data = mysqli_fetch_row($rs);
 	$fp_name_val=$row_data[0];
 	print("$fp_name_val ($title)");
-	?></font>
+	?>
+	[<a href="Help_Principles_of_Classification_of_Firing_Pattern_Elements.php">formal defintion</a>]</font>
 </div>
 
 <div align="center">	
