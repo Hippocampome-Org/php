@@ -307,7 +307,7 @@ jQuery(document).ready(function() {
       Reference: <b>Moradi and Ascoli, 2019</b>
       <a href = "https://doi.org/10.1002/hipo.23148">
       <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
-      Hippocampus 2019 (in press); doi: https://doi.org/10.1002/hipo.23148.
+      Hippocampus 2019 Aug 31; doi: https://doi.org/10.1002/hipo.23148.
       <br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
