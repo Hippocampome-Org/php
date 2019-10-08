@@ -30,7 +30,10 @@ var row_color_change='';
 for (i = 1;i < numRows; i++) {
   row_color_change = 'main_table_row_'+i;
   if (i == curRow & i != selected_row) {
-    document.getElementById(row_color_change).style.backgroundImage='linear-gradient(white 0%, white 94%, lightgreen 100%)';
+    document.getElementById(row_color_change).style.backgroundImage='linear-gradient(white 0%, white 94%, lightgreen 100%)'; 
+    document.getElementById(row_color_change).style.backgroundImage='-moz-linear-gradient(white 0%, white 94%, lightgreen 100%)'; 
+    document.getElementById(row_color_change).style.backgroundImage='-webkit-linear-gradient(white 0%, white 94%, lightgreen 100%)';
+    document.getElementById(row_color_change).style.backgroundImage='-ms-linear-gradient(white 0%, white 94%, lightgreen 100%)';        
   }
   else if (i != selected_row) {
     document.getElementById(row_color_change).style.backgroundImage='';    

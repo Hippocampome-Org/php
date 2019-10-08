@@ -40,14 +40,18 @@ window.onload = function()
 <?php 
   if (isset($_GET['tab'])) {
     $matrix_tab = $_GET['tab'];
-    if ($matrix_tab=='n_by_m') {
-      echo "<style></style>";
-      echo "<link rel='stylesheet' href='synaptome/n_by_m.css' type='text/css' />";
-    }
     if ($matrix_tab=='review_evidence') {
       echo "<style></style>";
       echo "<link rel='stylesheet' href='synaptome/review_evidence.css' type='text/css' />";
     }    
+    if ($matrix_tab=='n_by_m') {
+      echo "<style></style>";
+      echo "<link rel='stylesheet' href='synaptome/n_by_m.css' type='text/css' />";
+    }    
+  }
+  else {
+    echo "<style></style>";
+    echo "<link rel='stylesheet' href='synaptome/n_by_m.css' type='text/css' />";
   }
 ?>
 </head>
@@ -62,6 +66,11 @@ window.onload = function()
 
 <div class='title_area'>
   <font class="font1">Browse synaptome matrix</font>&nbsp;&nbsp;&nbsp;
+  <span class="tab_space">&nbsp;</span>
+  <span class="main_tabs main_tab_3">
+    <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
+  </span>  
+  <span class="tab_space">&nbsp;</span>
   <span class="main_tabs main_tab_1">
     <a href="?tab=mstr_50_rows" style="text-decoration: none;">mstr_50_rows</a>
   </span>
@@ -77,11 +86,6 @@ window.onload = function()
   <span class="main_tabs main_tab_5">
     <a href="?tab=papers" style="text-decoration: none;">papers</a>
   </span>  
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_3">
-    <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
-  </span>
-  &nbsp;&nbsp;&nbsp;
 </div>
 
 <div class="table_position">
@@ -108,7 +112,8 @@ window.onload = function()
             }                        
           }
           else {
-            include ("synaptome/master_50_rows.php");
+            /*header("Location: http://synapt.22web.org/synaptome_data.php?tab=n_by_m");*/
+            include ("synaptome/n_by_m_7.php");
           }
         ?>
       </div>
