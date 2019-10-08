@@ -1,23 +1,96 @@
-.ui-jqgrid .ui-jqgrid-htable th {
-	height:22px;
-	padding: 0px 2px;
-}
-.ui-jqgrid .ui-jqgrid-htable th div {
-	overflow: hidden; 
-	position:relative; 
-	height:305px; 
-	text-align:left; 
-	margin-bottom:5px;
-	top:-10px
+/*
+  reference: https://www.broculos.net/2013/12/vertical-text-for-table-headers-with-css.html
+*/
+
+.main_table {
+	height:700px;
+	width:1050px;
+	text-align: left;
+  	overflow-x: auto;
+  	display: block;
+  	white-space: nowrap;
+  	border-collapse: collapse;
+  	font-family: arial;
 }
 
-th div {
-	left: 1px;
-	width: 435;
-	height: 435;	
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	transform: rotate(-90deg);
+.main_table td {
+	border: 1px solid #7dcdeb;
+}
+
+div.vertical
+{
+ position: relative;
+ height: 300px;
+ width: 30px;
+ margin-left: 0;
+ padding-right: 0px;
+ writing-mode: vertical-lr;
+ /*filter: flipv fliph;*/
+ transform: rotate(180deg); 
+}
+
+td.vertical
+{
+ padding-bottom: 5px;
+ vertical-align: top;
+}
+
+.main_matrix_text 
+{
+  font-size: 11px;
+}
+
+.pre_post_transforms
+{
+	position:relative;
+	float:right;
+	vertical-align: bottom;
+	text-align:right;
+	top:52px;
+	/*right:90px;	*/
+	height:200px;
+	width:200px;
+}
+
+.main_table_header
+{
+	font-weight: bold;
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e5f3ff+0,e5f3ff+49,dbefff+50,cfedf9+51,e5f3ff+55 */
+background: #e5f3ff; /* Old browsers */
+background: -moz-linear-gradient(top,  #e5f3ff 0%, #e5f3ff 49%, #dbefff 50%, #cfedf9 51%, #e5f3ff 55%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 ); /* IE6-9 */
+	color: #006388;
+}
+
+.main_table_cell
+{
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.highlighted_bottom_border
+{
+	border: 1px solid #000000;
+	border-bottom: .0829em solid #ffeb94;
+	border-bottom: 1px solid #ffeb94;
+}
+
+.nonhighlighted_bottom_border
+{
+	border-bottom: .0829em solid #00FFFF;
+	border-bottom: 1px solid #00FFFF;
+	/*border-bottom: 1px solid black;*/
+}
+
+.highlighted_first_entry
+{
+	background-color: lightgrey;
+}
+
+.nothighlighted_first_entry
+{
+	background-color: white;
 }

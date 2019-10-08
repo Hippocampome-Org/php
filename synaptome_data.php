@@ -104,7 +104,7 @@ window.onload = function()
               include ("synaptome/papers.php");
             }            
             else if ($matrix_tab=='n_by_m') {
-              include ("synaptome/n_by_m_6.php");
+              include ("synaptome/n_by_m_7.php");
             }                        
           }
           else {
