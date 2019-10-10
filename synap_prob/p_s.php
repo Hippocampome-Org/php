@@ -5,7 +5,7 @@
   include('synap_prob/change_colors.php');
   $post_neuron_group = array();
   $pre_post_text = "<table class='nbym_cell1_a'><tr style='border:0px;'><td class='nbym_cell1_b' style='border:0px;'>presynaptic neuron</td><td class='vertical nbym_cell1_c' style='border:0px;'><div class='vertical nbym_cell1_d'>postsynaptic neuron</div></td></table>";
-  $sql = "SELECT DISTINCT target_name FROM hippocampome.potential_synapses;";
+  $sql = "SELECT DISTINCT target_name FROM potential_synapses;";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) { 
     array_push($post_neuron_group, $pre_post_text);
@@ -17,7 +17,7 @@
     }
   }
   $pre_neuron_group = array();
-  $sql = "SELECT DISTINCT source_name FROM hippocampome.potential_synapses;";
+  $sql = "SELECT DISTINCT source_name FROM potential_synapses;";
   $result = $conn->query($sql);
   $i=0;
   if ($result->num_rows > 0) { 
@@ -50,7 +50,7 @@
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
-        $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS p_s_avg FROM hippocampome.potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i]."' AND potential_synapses.target_name='".$post_neuron_group[$j]."';";
+        $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS p_s_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i]."' AND potential_synapses.target_name='".$post_neuron_group[$j]."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {

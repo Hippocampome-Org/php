@@ -5,7 +5,7 @@
   include('synap_prob/change_colors.php');
   $parcel_group = array();
   $groups_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b' style='border:0px;'>neuron type</td><td class='vertical nbyk_cell1_c' style='border:0px;'><div class='vertical nbyk_cell1_d'>parcel</div></td></table>";
-  $sql = "SELECT DISTINCT neurite FROM hippocampome.neurite_quantified;";
+  $sql = "SELECT DISTINCT neurite FROM neurite_quantified;";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) { 
     array_push($parcel_group, $groups_text);
@@ -17,7 +17,7 @@
     }
   }
   $neuron_group = array();
-  $sql = "SELECT DISTINCT hippocampome_neuronal_class FROM hippocampome.neurite_quantified;";
+  $sql = "SELECT DISTINCT hippocampome_neuronal_class FROM neurite_quantified;";
   $result = $conn->query($sql);
   $i=0;
   if ($result->num_rows > 0) { 
@@ -50,7 +50,7 @@
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
-        $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS average FROM hippocampome.neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
+        $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS average FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {
