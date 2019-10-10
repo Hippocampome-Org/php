@@ -59,7 +59,7 @@
               echo $average;
             }
             else {
-              echo 'N/A';
+              /*echo 'N/A';*/
             }
           }
         }

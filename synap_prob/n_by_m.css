@@ -1,5 +1,7 @@
 /*
   reference: https://www.broculos.net/2013/12/vertical-text-for-table-headers-with-css.html
+  https://codepen.io/philhoyt/pen/ujHzd
+  https://codepen.io/philhoyt
 */
 
 .ui-jqgrid .ui-jqgrid-htable th {
@@ -47,13 +49,13 @@ div.vertical
 div.verticle_n_by_k
 {
 	height: 80px;
-	width: 30px;
+	width: 50px;
 }
 
 div.verticle_n_by_n
 {
 	height: 300px;
-	width: 30px;
+	width: 50px;
 }
 
 td.vertical
@@ -96,6 +98,7 @@ td.vertical
 	text-align: center;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	min-width: 50px;
 }
 
 .highlighted_bottom_border
@@ -206,4 +209,95 @@ td.vertical
 	text-align: center;
 	font-family: arial;
 	font-size: 18px;
+	top:4px;	
+}
+
+.row_first_cell
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+/* CSS dropdown menu by https://codepen.io/philhoyt */
+#primary_nav_wrap
+{
+	/*margin-top:15px*/
+}
+
+#primary_nav_wrap ul
+{
+	list-style:none;
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+	z-index: 1;
+}
+
+#primary_nav_wrap ul a
+{
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:700;
+	font-size:12px;
+	line-height:32px;
+	padding:0 15px;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#primary_nav_wrap ul li
+{
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+}
+
+#primary_nav_wrap ul li.current-menu-item
+{
+	background:#ddd	
+}
+
+#primary_nav_wrap ul li:hover
+{
+	background:#f6f6f6
+}
+
+#primary_nav_wrap ul ul
+{
+	display:none;
+	position:absolute;
+	top:100%;
+	left:0;
+	background:#fff;
+	padding:0
+}
+
+#primary_nav_wrap ul ul li
+{
+	float:none;
+	width:200px
+}
+
+#primary_nav_wrap ul ul a
+{
+	line-height:120%;
+	padding:10px 15px	
+}
+
+#primary_nav_wrap ul ul ul
+{
+	top:0;
+	left:100%
+}
+
+#primary_nav_wrap ul li:hover > ul
+{
+	display:block
+}
+
+.top_matrix_menu
+{
+	position:relative;
+	top:2px;
 }

@@ -1,6 +1,9 @@
 <?php
   include ("permission_check.php");
 ?>
+<!--
+	Reference: javascript menu, http://www.javascriptkit.com/javatutors/dombos4.shtml
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -65,17 +68,47 @@ window.onload = function()
 ?>  
 
 <div class='title_area'>
-  <font class="font1">Browse synaptic connections matrix</font><span style='position:relative;width:300px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  <span style='position:relative;float:left;'><font class="font1">Browse synaptic connections matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<!-- nav id="primary_nav_wrap" style='position:relative;float:left;'>
+<ul>
+  <li class="current-menu-item"><a href="#">Home</a></li>
+  <li><a href="#">Menu 1</a>
+    <ul>
+      <li><a href="#">Sub Menu 1</a></li>
+      <li><a href="#">Sub Menu 2</a></li>
+      <li><a href="#">Sub Menu 3</a></li>
+      <li><a href="#">Sub Menu 4</a></li>
+ 	</ul>
+ </li>
+</ul>
+</nav -->
+<form name="main_matrix_selection">	
+<span class='top_matrix_menu'>	
+<select name="matrix_selection" size="1" onChange="go()">
+<option value="#">Select Data</option>
+<option value="?tab=a_d_l">Dendritic and Axonal Lengths</option>
+<option value="?tab=s_d">Somatic Distances</option>
+<option value="?tab=p_s">Synapse Probabilities</option>
+</select></span>
+
+<script type="text/javascript">
+function go(){
+location=
+document.main_matrix_selection.matrix_selection.
+options[document.main_matrix_selection.matrix_selection.selectedIndex].value
+}
+</script>
+<span><!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--></span>
   <?php
     if (isset($_GET['tab'])) {
       if ($matrix_tab=='a_d_l') {
-        echo "<span class='data_selection'>Dendritic and axonal lengths</span>";
+        echo "<span class='data_selection'>Dendritic and Axonal Lengths</span>";
       }    
       if ($matrix_tab=='s_d') {
-        echo "<span class='data_selection'>Somatic distances of dendrites and axons</span>";
+        echo "<span class='data_selection'>Somatic Distances of Dendrites and Axons</span>";
       }
       if ($matrix_tab=='p_s') {
-        echo "<span class='data_selection'>Probabilities of synapses</span>";
+        echo "<span class='data_selection'>Probabilities of Synapses</span>";
       }            
     }
     else {
@@ -105,10 +138,11 @@ window.onload = function()
     <a href="?tab=papers" style="text-decoration: none;">papers</a>
   </span>  
   -->
+</form>
 </div>
 
 <div class="table_position">
-<table border="0" cellspacing="0" cellpadding="0" class='body_table'>
+<table border="0" cellspacing="0" cellpadding="0" class='body_table' style='z-index: 0;'>
   <tr>
     <td width="950">
       <div id="matrix_1">
@@ -147,6 +181,7 @@ window.onload = function()
       </div>
     </td>
     <!-- LEGEND -->
+    <!--
     <td width="170" style="vertical-align:top;padding: 5px;">
       <?php 
         if (isset($_GET['tab'])) {
@@ -163,6 +198,7 @@ window.onload = function()
         }
       ?>      
     </td>
+	-->
   </tr>
 </table>
 </div>

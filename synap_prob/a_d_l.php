@@ -46,7 +46,7 @@
         }
       }
       else if ($j==0) {
-        echo "<td class='main_matrix_text' id='first_cell_".$i."'>".$neuron_group[$i]."</td>";
+        echo "<td class='main_matrix_text row_first_cell' id='first_cell_".$i."'>".$neuron_group[$i]."</td>";
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
@@ -59,7 +59,7 @@
               echo $average;
             }
             else {
-              echo 'N/A';
+              /*echo 'N/A';*/
             }
           }
         }
