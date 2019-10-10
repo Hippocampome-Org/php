@@ -57,6 +57,14 @@ window.onload = function()
     echo "<link rel='stylesheet' href='synap_prob/n_by_m.css' type='text/css' />";
   }
 ?>
+
+<script type="text/javascript">
+function go(){
+location=
+document.main_matrix_selection.matrix_selection.
+options[document.main_matrix_selection.matrix_selection.selectedIndex].value
+}
+</script>
 </head>
 
 <body>
@@ -69,19 +77,6 @@ window.onload = function()
 
 <div class='title_area'>
   <span style='position:relative;float:left;'><font class="font1">Browse synaptic connections matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<!-- nav id="primary_nav_wrap" style='position:relative;float:left;'>
-<ul>
-  <li class="current-menu-item"><a href="#">Home</a></li>
-  <li><a href="#">Menu 1</a>
-    <ul>
-      <li><a href="#">Sub Menu 1</a></li>
-      <li><a href="#">Sub Menu 2</a></li>
-      <li><a href="#">Sub Menu 3</a></li>
-      <li><a href="#">Sub Menu 4</a></li>
- 	</ul>
- </li>
-</ul>
-</nav -->
 <form name="main_matrix_selection">	
 <span class='top_matrix_menu'>	
 <select name="matrix_selection" size="1" onChange="go()">
@@ -91,53 +86,22 @@ window.onload = function()
 <option value="?tab=p_s">Synapse Probabilities</option>
 </select></span>
 
-<script type="text/javascript">
-function go(){
-location=
-document.main_matrix_selection.matrix_selection.
-options[document.main_matrix_selection.matrix_selection.selectedIndex].value
+<?php
+if (isset($_GET['tab'])) {
+  if ($matrix_tab=='a_d_l') {
+    echo "<span class='data_selection'>Dendritic and Axonal Lengths</span>";
+  }    
+  if ($matrix_tab=='s_d') {
+    echo "<span class='data_selection'>Somatic Distances of Dendrites and Axons</span>";
+  }
+  if ($matrix_tab=='p_s') {
+    echo "<span class='data_selection'>Probabilities of Synapses</span>";
+  }            
 }
-</script>
-<span><!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--></span>
-  <?php
-    if (isset($_GET['tab'])) {
-      if ($matrix_tab=='a_d_l') {
-        echo "<span class='data_selection'>Dendritic and Axonal Lengths</span>";
-      }    
-      if ($matrix_tab=='s_d') {
-        echo "<span class='data_selection'>Somatic Distances of Dendrites and Axons</span>";
-      }
-      if ($matrix_tab=='p_s') {
-        echo "<span class='data_selection'>Probabilities of Synapses</span>";
-      }            
-    }
-    else {
-      echo "<span class='data_selection'>Dendritic and axonal lengths</span>";
-    }
-  ?>
-  <!-- removed for synaptic connections testing -->
-  <!--
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_3">
-    <a href="?tab=n_by_m" style="text-decoration: none;">n_by_m</a>
-  </span>  
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_1">
-    <a href="?tab=mstr_50_rows" style="text-decoration: none;">mstr_50_rows</a>
-  </span>
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_2">
-    <a href="?tab=mstr_all_rows" style="text-decoration: none;">mstr_all_rows</a>
-  </span>
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_4">
-    <a href="?tab=review_evidence" style="text-decoration: none;">review_evidence</a>
-  </span>  
-  <span class="tab_space">&nbsp;</span>
-  <span class="main_tabs main_tab_5">
-    <a href="?tab=papers" style="text-decoration: none;">papers</a>
-  </span>  
-  -->
+else {
+  echo "<span class='data_selection'>Dendritic and axonal lengths</span>";
+}
+?>
 </form>
 </div>
 
@@ -174,31 +138,15 @@ options[document.main_matrix_selection.matrix_selection.selectedIndex].value
             }                      
           }
           else {
-            /*header("Location: http://synapt.22web.org/synaptome_data.php?tab=n_by_m");*/
             include ("synap_prob/a_d_l.php");
           }
         ?>
       </div>
     </td>
     <!-- LEGEND -->
-    <!--
-    <td width="170" style="vertical-align:top;padding: 5px;">
-      <?php 
-        if (isset($_GET['tab'])) {
-          $matrix_tab = $_GET['tab'];
-          if ($matrix_tab=='n_by_m' || $matrix_tab=='a_d_l' || $matrix_tab=='s_d' || $matrix_tab=='p_s') {
-            include('synap_prob/syn_con_side_menu.php');
-          }
-          else {
-            include('synap_prob/side_table_a.php');
-          }
-        }
-        else {
-          include('synap_prob/syn_con_side_menu.php');
-        }
-      ?>      
+    <td width="170" style="vertical-align:top;padding: 5px;">    
+    	
     </td>
-	-->
   </tr>
 </table>
 </div>

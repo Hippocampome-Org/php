@@ -69,6 +69,11 @@ td.vertical
 	font-size: 11px;
 }
 
+.main_matrix_text a
+{
+	color:black;
+}
+
 .pre_post_transforms
 {
 	position:relative;

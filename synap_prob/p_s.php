@@ -50,13 +50,13 @@
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
-        $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS p_s_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i]."' AND potential_synapses.target_name='".$post_neuron_group[$j]."';";
+        $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS ps_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i]."' AND potential_synapses.target_name='".$post_neuron_group[$j]."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {
-            $p_s_avg = $row['p_s_avg'];
-            if ($p_s_avg != '' && $p_s_avg != 0) {
-            echo $p_s_avg;            
+            $ps_avg = $row['ps_avg'];
+            if ($ps_avg != '' && $ps_avg != 0) {
+            echo "<a href='#' title='Variance Will Be\nAdded Later Here'>".$ps_avg."</a>";            
             }
             else {
               /*echo 'N/A';*/

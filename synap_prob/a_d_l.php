@@ -50,18 +50,21 @@
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
-        $sql = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS average FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
+        $sql = "SELECT STD(total_length) AS std_tl, AVG(total_length) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, COUNT(total_length) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {
-            $average = $row['average'];
-            if ($average != '' && $average != 0) {
-              echo $average;
+            $avg_trunk = $row['avg_trunk'];
+            if ($avg_trunk != '' && $avg_trunk != 0) {
+              echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_tl']."\nStandard Deviation: ".$row['std_tl']."'>".$avg_trunk."</a>";
             }
             else {
               /*echo 'N/A';*/
             }
           }
+          /*if ($collected_vals != null && count($collected_vals)>0) {
+            echo array_sum($collected_vals)/count($collected_vals);
+          }*/
         }
         echo "</td>";
       }

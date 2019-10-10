@@ -46,17 +46,17 @@
         }
       }
       else if ($j==0) {
-        echo "<td class='main_matrix_text' id='first_cell_".$i."'>".$neuron_group[$i]."</td>";
+        echo "<td class='main_matrix_text row_first_cell' id='first_cell_".$i."'>".$neuron_group[$i]."</td>";
       }
       else {
         echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i.")\" onmouseover=\"changebordercolor(".$i.")\">";
-        $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS average FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
+        $sql = "SELECT STD(mean_path_length) AS std_sd, AVG(mean_path_length) AS avg, COUNT(mean_path_length) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, MIN(mean_path_length) AS min_sd, MAX(mean_path_length) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j]."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {
-            $average = $row['average'];
-            if ($average != '' && $average != 0) {
-              echo $average;
+            $avg_trunk = $row['avg_trunk'];
+            if ($avg_trunk != '' && $avg_trunk != 0) {
+              echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_sd']."\nStandard Deviation: ".$row['std_sd']."\nMinimum Value: ".$row['min_sd']."\nMaximum Value: ".$row['max_sd']."'>".$avg_trunk."</a>";
             }
             else {
               /*echo 'N/A';*/
