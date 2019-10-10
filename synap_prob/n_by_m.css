@@ -1,0 +1,209 @@
+/*
+  reference: https://www.broculos.net/2013/12/vertical-text-for-table-headers-with-css.html
+*/
+
+.ui-jqgrid .ui-jqgrid-htable th {
+	height:22px;
+	padding: 0px 2px;
+}
+.ui-jqgrid .ui-jqgrid-htable th div {
+	overflow: hidden; 
+	position:relative; 
+	height:305px; 
+	text-align:left; 
+	margin-bottom:5px;
+	top:-10px
+}
+
+.main_table {
+	height:700px;
+	width:1050px;
+	text-align: left;
+  	overflow-x: auto;
+  	display: block;
+  	white-space: nowrap;
+  	border-collapse: collapse;
+  	font-family: arial;
+}
+
+.main_table td {
+	border: 1px solid #7dcdeb;
+}
+
+div.vertical
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+	-o-transform:  rotate(-90deg)
+	translate(-135px,150px);
+	-ms-transform: rotate(-90deg)
+	translate(-135px,150px);
+}
+
+div.verticle_n_by_k
+{
+	height: 80px;
+	width: 30px;
+}
+
+div.verticle_n_by_n
+{
+	height: 300px;
+	width: 30px;
+}
+
+td.vertical
+{
+	padding-bottom: 5px;
+	vertical-align: top;
+}
+
+.main_matrix_text 
+{
+	font-size: 11px;
+}
+
+.pre_post_transforms
+{
+	position:relative;
+	float:right;
+	vertical-align: bottom;
+	text-align:right;
+	top:52px;
+	/*right:90px;	*/
+	height:200px;
+	width:200px;
+}
+
+.main_table_header
+{
+	font-weight: bold;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e5f3ff+0,e5f3ff+49,dbefff+50,cfedf9+51,e5f3ff+55 */
+	background: #e5f3ff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e5f3ff 0%, #e5f3ff 49%, #dbefff 50%, #cfedf9 51%, #e5f3ff 55%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 ); /* IE6-9 */
+	color: #006388;
+}
+
+.main_table_cell
+{
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.highlighted_bottom_border
+{
+	border: 1px solid #000000;
+	border-bottom: .0829em solid #ffeb94;
+	border-bottom: 1px solid #ffeb94;
+}
+
+.nonhighlighted_bottom_border
+{
+	border-bottom: .0829em solid #00FFFF;
+	border-bottom: 1px solid #00FFFF;
+	/*border-bottom: 1px solid black;*/
+}
+
+.highlighted_first_entry
+{
+	background-color: lightgrey;
+}
+
+.nothighlighted_first_entry
+{
+	background-color: white;
+}
+
+.synpro_side_menu
+{
+	padding: 5px;
+	border: 2px solid grey;
+	font-family: arial;
+	font-size: 18px;
+	text-decoration: none;
+	color: black;
+	text-align: center;
+}
+
+.synpro_selections
+{
+	background-color:#f1f1f1;
+}
+
+.nbyk_cell1_a
+{
+	border:0px;
+	position:relative;
+	float:right;
+	bottom:-.8em;
+}
+
+.nbym_cell1_a
+{
+	border:0px;
+	position:relative;
+	float:right;
+	bottom:-4.0em;
+}
+
+.nbyk_cell1_b
+{
+	vertical-align: bottom;
+	border:0px;
+	position:relative;
+	left:-2.0em;
+	font-size: 14px;	
+}
+
+.nbym_cell1_b
+{
+	vertical-align: bottom;
+	border:0px;
+	position:relative;
+	left:-2.0em;
+	font-size: 14px;	
+}
+
+.nbyk_cell1_c
+{
+	border:0px;
+	position:relative;
+	float:right;
+	font-size: 14px;
+}
+
+.nbym_cell1_c
+{
+	border:0px;
+	position:relative;
+	float:right;
+	font-size: 14px;
+}
+
+.nbyk_cell1_d
+{
+	position:relative;
+	float:right;
+}
+
+.nbym_cell1_d
+{
+	position:relative;
+	float:right;
+}
+
+.data_selection
+{
+	position:relative;
+	text-align: center;
+	font-family: arial;
+	font-size: 18px;
+}

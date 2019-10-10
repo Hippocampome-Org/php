@@ -1,0 +1,4 @@
+	<div class='synpro_side_menu' style='background-color: lightgrey'>Select data to display:</div><br>
+	<a href='?tab=a_d_l' style="text-decoration: none;"><div class='synpro_side_menu synpro_selections'>Dendritic and axonal length for neuron types and parcels</div></a><br>
+	<a href='?tab=s_d' style="text-decoration: none;"><div  class='synpro_side_menu synpro_selections'>Somatic distances of dendrites and axons for neuron types and parcels</div></a><br>
+	<a href='?tab=p_s' style="text-decoration: none;"><div  class='synpro_side_menu synpro_selections'>Potential synapses between neuron types</div></a>
