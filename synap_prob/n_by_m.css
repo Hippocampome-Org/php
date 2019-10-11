@@ -42,6 +42,17 @@ div.vertical
 	transform: rotate(180deg);
 }
 
+div.vertical2
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+	top:-7px;
+}
+
 div.verticalIE
 {
 	-ms-transform: rotate(-90deg)
@@ -73,6 +84,16 @@ div.verticalOpera
 }
 
 div.vertical_fc
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+}
+
+div.vertical_fc2
 {
 	position: relative;
 	margin-left: 0;
@@ -123,6 +144,13 @@ div.vertical_fcSafari2
 div.horizontal_fc
 {
 
+}
+
+div.horizontal_fc2
+{
+	position:relative;
+	top:60px;
+	left:-20px;
 }
 
 div.horizontal_fcIE

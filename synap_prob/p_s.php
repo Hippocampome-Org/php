@@ -8,7 +8,12 @@
   $css_vertical = $getBrowser['css_vertical'];
   $first_cell_vert = $getBrowser['first_cell_vert'];
   $first_cell_horiz = $getBrowser['first_cell_horiz']; 
-  if ($css_vertical=='verticalIE') {
+  if ($css_vertical=='vertical') {
+    $css_vertical='vertical2';
+    $first_cell_vert='vertical_fc2';
+    $first_cell_horiz='horizontal_fc2';
+  }
+  else if ($css_vertical=='verticalIE') {
     $css_vertical='verticalIE2';
     $first_cell_vert='vertical_fcIE2';
     $first_cell_horiz='horizontal_fcIE2';
