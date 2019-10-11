@@ -11,6 +11,9 @@ $_SESSION['perm'] = 0;
 $_SESSION['fp']=0;
 $_SESSION['if']=0;
 $_SESSION['im']=0;
+$_SESSION['sy']=0;
+$_SESSION['cg']=0;
+$_SESSION['sp']=0;
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
 $rs = mysqli_query($conn,$query);
 list($permission) = mysqli_fetch_row($rs);
@@ -45,10 +48,17 @@ if ($_SESSION['perm'] == 0) {
       $rs = mysqli_query($conn,$query);
       while(list($permission) = mysqli_fetch_row($rs)) {
           if ($permission == 1) {
+              $_SESSION['sy']=1;
+          }
+      }      
+      $query = "SELECT permission FROM user WHERE id=7";
+      $rs = mysqli_query($conn,$query);
+      while(list($permission) = mysqli_fetch_row($rs)) {
+          if ($permission == 1) {
               $_SESSION['cg']=1;
           }
       }
-      $query = "SELECT permission FROM user WHERE id=7";
+      $query = "SELECT permission FROM user WHERE id=8";
       $rs = mysqli_query($conn,$query);
       while(list($permission) = mysqli_fetch_row($rs)) {
           if ($permission == 1) {
@@ -162,6 +172,13 @@ if ($permission1 != 0) {
         <li><a href="synaptome.php">Synaptic physiology</a></li>
         <li><a href="firing_patterns.php">Firing patterns</a></li>
 	    <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
+           <?php 
+            if ($permission != 1 && $_SESSION["sy"]==1) {
+          ?>
+          <li><a href="synapse_probabilities.php">Synapse probabilities</a></li>
+          <?php   
+            }
+          ?>          
 	        <?php 
 	          if ($permission != 1 && $_SESSION["cg"]==1) {
 	        ?>

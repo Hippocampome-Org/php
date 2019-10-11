@@ -29,6 +29,13 @@ session_start();
             <li><a href="synaptome.php">Synaptic physiology</a></li>
 	        <li><a href="firing_patterns.php">Firing patterns</a></li>
 	        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
+	         <?php 
+            if ($permission != 1 && $_SESSION["sy"]==1) {
+          ?>
+          <li><a href="synapse_probabilities.php">Synapse probabilities</a></li>
+          <?php   
+            }
+          ?> 
 	        <?php 
 	          if ($permission != 1 && $_SESSION["cg"]==1) {
 	        ?>
