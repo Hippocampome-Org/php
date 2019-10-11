@@ -99,6 +99,30 @@ font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 </BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 (08 Oct 2019):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.7
+includes Izhikevich models for most of the neuron types, downloadable parameter and CARLSim4-simulation files, and the
+ability to perform simulations of the firing patterns.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.6 R 1E (06 Oct 2019):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 453: [Advanced Search]: The explanation are missing.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.6 R 1D (03 Oct 2019):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span

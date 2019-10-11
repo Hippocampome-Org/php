@@ -161,13 +161,7 @@ if ($permission1 != 0) {
         <li><a href="connectivity.php">Connectivity</a></li>
         <li><a href="synaptome.php">Synaptic physiology</a></li>
         <li><a href="firing_patterns.php">Firing patterns</a></li>
-	         <?php 
-	          if ($permission != 1 && $_SESSION["im"]==1) {
-	        ?>
-	        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
-	        <?php   
-	          }
-	        ?>
+	    <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
 	        <?php 
 	          if ($permission != 1 && $_SESSION["cg"]==1) {
 	        ?>
@@ -226,7 +220,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.6 - Released: 09/20/2019
+      v1.6 - Released: 10/08/2019
       <br>
       23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
       <br>
@@ -298,10 +292,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:140px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:60px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br><br><br><br><br>
+      <br><br><br>
       The release of v1.4 on 08/15/2019 includes an additional 7,946 PoK, 8,486 PoE, and the ability to
       access the Synapse Knowledge Base.
       Reference: <b>Moradi and Ascoli, 2019</b>
@@ -317,12 +311,21 @@ jQuery(document).ready(function() {
       Relational Inferences.</i></a>
       Hippocampus 2019 (in press); doi: https://doi.org/10.1101/633883.
       <br><br>
-      <b>*NEW*</b> The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
+      The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
       phenotypes in the knowledge base.
       Reference: <b>Komendantov, et al., 2019</b>
       <a href = "https://www.biorxiv.org/content/10.1101/212084v2">
       <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
       Scientific Reports 2019 (in press); doi: https://doi.org/10.1101/212084.
+      <br><br>
+      <b>*NEW*</b> The release of v1.7 on 10/08/2019 includes Izhikevich models for most of the neuron types,
+      downloadable parameter and CARLSim4-simulation files, and the ability to perform simulations of the firing
+      patterns.
+      Reference: <b>Venkadesh, et al., 2019</b>
+      <a href = "https://www.biorxiv.org/content/10.1101/632430v1">
+      <i>Simple models of quantitative firing phenotypes in hippocampal neurons: comprehensive coverage of intrinsic
+      diversity.</i></a>
+      PLOS Computational Biology 2019 (in press); doi: https://doi.org/10.1101/632430.
       </font>
     </td>
   </tr>
@@ -348,7 +351,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
-          <br />Last Update: 03 Oct 2019 (<a href="Help_Release_Notes.php">v1.6 R 1D</a>)</font>
+          <br />Last Update: 08 Oct 2019 (<a href="Help_Release_Notes.php">v1.7</a>)</font>
           <br />
         </div>
     </td>   
