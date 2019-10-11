@@ -19,5 +19,5 @@
 	$class_epdata='Epdata';
 	$class_firing_pattern='FiringPattern';
 	$class_firing_pattern_rel='FiringPatternRel';
-	$class_izhmodels_model = 'temp_izhmodels_matrix_singlecompartm';
+	$class_izhmodels_model = 'izhmodels_single';
 ?>
