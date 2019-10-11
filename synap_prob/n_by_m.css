@@ -40,10 +40,115 @@ div.vertical
 	writing-mode: vertical-lr;
 	/*filter: flipv fliph;*/
 	transform: rotate(180deg);
-	-o-transform:  rotate(-90deg)
-	translate(-135px,150px);
+}
+
+div.verticalIE
+{
 	-ms-transform: rotate(-90deg)
-	translate(-135px,150px);
+	translate(-15px,50px);
+}
+
+div.verticalIE2
+{
+	-ms-transform: rotate(-90deg)
+	translate(-120px,160px);
+}
+
+div.verticalSafari
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-10px,50px);	
+}
+
+div.verticalSafari2
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-120px,160px);	
+}
+
+div.verticalOpera
+{
+	-o-transform:  rotate(-90deg)
+	translate(-135px,150px); /* Opera starting with 10.50 */
+}
+
+div.vertical_fc
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+}
+
+div.vertical_fcIE
+{
+	-webkit-transform: rotate(-90deg) /* Safari 3.1+, Chrome */
+	translate(10px,10px);
+	-moz-transform: rotate(-90deg) /* Firefox 3.5+ */
+	translate(10px,10px);
+	-o-transform: rotate(-90deg) /* Opera starting with 10.50 */
+	translate(10px,10px);
+	/* Internet Explorer: */
+	-ms-transform: rotate(-90deg)
+	translate(10px,10px);
+}
+
+div.vertical_fcIE2
+{
+	-webkit-transform: rotate(-90deg) /* Safari 3.1+, Chrome */
+	translate(10px,10px);
+	-moz-transform: rotate(-90deg) /* Firefox 3.5+ */
+	translate(10px,10px);
+	-o-transform: rotate(-90deg) /* Opera starting with 10.50 */
+	translate(10px,10px);
+	/* Internet Explorer: */
+	-ms-transform: rotate(-90deg)
+	translate(-30px,40px);
+}
+
+div.vertical_fcSafari
+{
+	-webkit-transform: rotate(-90deg)
+	translate(10px,10px);	
+}
+
+div.vertical_fcSafari2
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-30px,40px);	
+}
+
+div.horizontal_fc
+{
+
+}
+
+div.horizontal_fcIE
+{
+	position:relative;
+	top: 15px;
+}
+
+div.horizontal_fcIE2
+{
+	position:relative;
+	top: 110px;
+	left:50px;
+}
+
+div.horizontal_fcSafari
+{
+	position:relative;
+	top: 15px;
+}
+
+div.horizontal_fcSafari2
+{
+	position:relative;
+	top: 110px;
+	left:50px;
 }
 
 div.verticle_n_by_k

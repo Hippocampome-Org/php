@@ -3,8 +3,13 @@
 -->
 <?php
   include('synap_prob/change_colors.php');
+  include('synap_prob/browser_check.php');
+  $getBrowser = getBrowser();
+  $css_vertical = $getBrowser['css_vertical'];
+  $first_cell_vert = $getBrowser['first_cell_vert'];
+  $first_cell_horiz = $getBrowser['first_cell_horiz'];
   $parcel_group = array();
-  $groups_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b' style='border:0px;'>neuron type</td><td class='vertical nbyk_cell1_c' style='border:0px;'><div class='vertical nbyk_cell1_d'>parcel</div></td></table>";
+  $groups_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b ".$first_cell_horiz."' style='border:0px;'><div class='".$first_cell_horiz."'>neuron type</div></td><td class='".$first_cell_vert." nbyk_cell1_c' style='border:0px;'><div class='".$first_cell_vert." nbyk_cell1_d'>parcel</div></td></table>";
   $sql = "SELECT DISTINCT neurite FROM neurite_quantified;";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) { 
@@ -42,7 +47,7 @@
           echo "<td>".$parcel_group[$j]."</td>";
         }
         else {
-          echo "<td class='vertical verticle_n_by_k main_matrix_text'><div class='vertical verticle_n_by_k main_matrix_text'>".$parcel_group[$j]."</div></td>";
+          echo "<td class='".$css_vertical." verticle_n_by_k main_matrix_text'><div class='".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_group[$j]."</div></td>";
         }
       }
       else if ($j==0) {

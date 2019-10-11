@@ -3,8 +3,23 @@
 -->
 <?php
   include('synap_prob/change_colors.php');
+  include('synap_prob/browser_check.php');
+  $getBrowser = getBrowser();
+  $css_vertical = $getBrowser['css_vertical'];
+  $first_cell_vert = $getBrowser['first_cell_vert'];
+  $first_cell_horiz = $getBrowser['first_cell_horiz']; 
+  if ($css_vertical=='verticalIE') {
+    $css_vertical='verticalIE2';
+    $first_cell_vert='vertical_fcIE2';
+    $first_cell_horiz='horizontal_fcIE2';
+  } 
+  else if ($css_vertical=='verticalSafari') {
+    $css_vertical='verticalSafari2';
+    $first_cell_vert='vertical_fcSafari2';
+    $first_cell_horiz='horizontal_fcSafari2';
+  } 
   $post_neuron_group = array();
-  $pre_post_text = "<table class='nbym_cell1_a'><tr style='border:0px;'><td class='nbym_cell1_b' style='border:0px;'>presynaptic neuron</td><td class='vertical nbym_cell1_c' style='border:0px;'><div class='vertical nbym_cell1_d'>postsynaptic neuron</div></td></table>";
+  $pre_post_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b ".$first_cell_horiz."' style='border:0px;'><div class='".$first_cell_horiz."'>presynaptic neuron</td><td class='".$first_cell_vert." nbyk_cell1_c' style='border:0px;'><div class='".$first_cell_vert." nbym_cell1_d'>postsynaptic neuron</div></td></table>";
   $sql = "SELECT DISTINCT target_name FROM potential_synapses;";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) { 
@@ -42,7 +57,7 @@
           echo "<td>".$post_neuron_group[$j]."</td>";
         }
         else {
-          echo "<td class='vertical verticle_n_by_n main_matrix_text'><div class='vertical verticle_n_by_n main_matrix_text'>".$post_neuron_group[$j]."</div></td>";
+          echo "<td class='".$css_vertical." verticle_n_by_n main_matrix_text'><div class='".$css_vertical." verticle_n_by_n main_matrix_text'>".$post_neuron_group[$j]."</div></td>";
         }
       }
       else if ($j==0) {
