@@ -39,8 +39,8 @@
 
   // generate matrix
   echo "<table class='main_table'>";  
-  //for ($i=0;$i<count($neuron_group);$i++) {
-  for ($i=0;$i<30;$i++) {
+  for ($i=0;$i<count($neuron_group);$i++) {
+  //for ($i=0;$i<30;$i++) {
     for ($j=0;$j<count($parcel_group);$j++) {
       if ($i==0) {
         if ($j==0) {
