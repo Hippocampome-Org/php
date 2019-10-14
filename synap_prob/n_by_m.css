@@ -18,7 +18,7 @@
 }
 
 .main_table {
-	height:700px;
+	height:490px;
 	width:1050px;
 	text-align: left;
   	overflow-x: auto;
@@ -229,6 +229,36 @@ td.vertical
 	background: linear-gradient(to bottom,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 ); /* IE6-9 */
 	color: #006388;
+}
+
+.dg_area
+{
+	background-color: #810004;
+}
+
+.ca3_area
+{
+	background-color: #ca7e82;	
+}
+
+.ca2_area
+{
+	background-color: #fffea4;	
+}
+
+.ca1_area
+{
+	background-color: #ff5622;
+}
+
+.sub_area
+{
+	background-color: #ffc951;
+}
+
+.ec_area
+{
+	background-color: #216739;
 }
 
 .main_table_cell
