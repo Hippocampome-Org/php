@@ -9,6 +9,12 @@
 		hippocampome sites' hits. In this file, both tables specific to this site are 
 		specified. 
 
+		Also, on the database for the site, e.g., database "hippocampome", there needs
+		to be a table with the name "counters_db_id" and a column "database_id" of the
+		type int. That column should have one row with the int value that represents
+		which of the sites the one being accessed is, for example, for "hippocampome" 
+		it is 1, for "hippodevome" it is 2.
+
 		On each page, there needs to be two lines. 
 		<?php include ("page_counter.php"); ?>
 		<?php $webpage_id_number = 1; include('report_hits.php'); ?>
@@ -20,13 +26,42 @@
 		to be reported. The way they are displayed can be customized there if wanted.
 
 		Files needed on each site:
-		init_db_vars.php, page_counter.php, phpcount.php, report_hits.php
+		page_counter.php, phpcount.php, report_hits.php
 
 		Reference: https://defuse.ca/php-hit-counter.htm
 	*/
-	include ("init_db_vars.php");
-	$hits_table = "campome_hits";
-	$dups_table = "campome_nodupes";
-	InitDBVars($servername, $username, $password, $hits_table, $dups_table);
+	
+	$counters_db = 'counters';
+	$database_id = 0;
+	$sql = "SELECT database_id FROM ".$database.".counters_db_id;";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) { 
+		$row = $result->fetch_assoc();
+		$database_id = $row["database_id"];
+	}	
+	switch($database_id){
+		case 1: 
+			$hitstbl = "campome_hits";
+			$dupstbl = "campome_nodupes";
+		break;
+		case 2: 
+			$hitstbl = "devome_hits";
+			$dupstbl = "devome_nodupes";
+		break;
+		case 3: 
+			$hitstbl = "revome_hits";
+			$dupstbl = "revome_nodupes";
+		break;
+		case 4: 
+			$hitstbl = "csv2dbome_hits";
+			$dupstbl = "csv2dbome_nodupes";
+		break;		
+	}
+    $_SESSION['servername'] = $servername;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;	
+	$_SESSION['hitstbl'] = $hitstbl;
+	$_SESSION['dupstbl'] = $dupstbl;	
+	$_SESSION['counters_db'] = $counters_db;
 	require_once("phpcount.php");
 ?>
