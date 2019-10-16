@@ -128,17 +128,17 @@ else {
               include ("synap_prob/n_by_m_7.php");
             }  
             else if ($matrix_tab=='a_d_l') {
-              include ("synap_prob/a_d_l.php");
+              include ("synap_prob/n_by_k.php");
             }
             else if ($matrix_tab=='s_d') {
-              include ("synap_prob/s_d.php");
+              include ("synap_prob/n_by_k.php");
             }
             else if ($matrix_tab=='p_s') {
               include ("synap_prob/p_s.php");
             }                      
           }
           else {
-            include ("synap_prob/a_d_l.php");
+            include ("synap_prob/n_by_k.php");
           }
         ?>
       </div>

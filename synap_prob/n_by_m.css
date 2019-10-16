@@ -261,6 +261,47 @@ td.vertical
 	background-color: #216739;
 }
 
+.dg_area2
+{
+	color: #810004;
+}
+
+.ca3_area2
+{
+	color: #ca7e82;	
+}
+
+.ca2_area2
+{
+	color: #fffea4;	
+}
+
+.ca1_area2
+{
+	color: #ff5622;
+}
+
+.sub_area2
+{
+	color: #ffc951;
+}
+
+.ec_area2
+{
+	color: #216739;
+}
+
+.red_border
+{
+	border-top: .09em solid #ff5757;
+}
+
+.no_t_b_border
+{
+	border-top: 0px solid white !important;
+	border-bottom: 0px solid white !important;
+}
+
 .main_table_cell
 {
 	text-align: center;
