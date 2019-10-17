@@ -47,7 +47,8 @@
       while($row = $result->fetch_assoc()) {
         $neuron = $row[$col];
         $layers = $row['layers'];
-        $layer = explode(" ", $neuron)[0];
+        $layer_delim = explode(" ", $neuron);
+        $layer = $layer_delim[0];
         if ($neuron != '') {
           array_push($neuron_group_unsorted, $neuron);
           array_push($neuron_layers, $layer);
@@ -56,7 +57,7 @@
     }
 
     for ($i = 0; $i < sizeof($parcel_group); $i++) {  
-    //for ($i = 0; $i < 2; $i++) {  
+    //for ($i = 0; $i < 1; $i++) {  
       for ($j = 0; $j < sizeof($neuron_group_unsorted); $j++) {
         if ($neuron_layers[$j] == $parcel_group[$i]) {
           if (!in_array($neuron_group_unsorted[$j], $neuron_group)) {
@@ -73,7 +74,7 @@
   $col = "target_name";
   $sql = "SELECT DISTINCT ".$col.", layers FROM potential_synapses;";
   $pre_post_push = true;
-  $post_neuron_group = collect_neuron_names($sql, $conn, $col, true);   
+  $post_neuron_group = collect_neuron_names($sql, $conn, $col, true);  
 
   // collect pre neuron names
   $col = "source_name";
@@ -81,7 +82,7 @@
   $pre_post_push = false;
   $pre_neuron_group = collect_neuron_names($sql, $conn, $col, false);  
 
-  // construct table
+  // construct matrix
   echo "<table class='main_table'>";  
   $old_c=0;
   for ($i=0;$i<count($pre_neuron_group)+2;$i++) {
