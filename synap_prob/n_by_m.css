@@ -293,7 +293,11 @@ td.vertical
 
 .red_border
 {
-	border-top: .09em solid #ff5757;
+	/*border-top: .09em solid #ff5757;*/
+	background: -moz-linear-gradient(red 0%, white 6%, white 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(red 0%, white 6%, white 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(red 0%, white 6%, white 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 );*/ /* IE6-9 */
 }
 
 .no_t_b_border

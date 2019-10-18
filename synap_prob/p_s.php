@@ -171,10 +171,7 @@
           if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {
             echo " class='red_border'";
           }
-          echo "><td class='main_matrix_text main_table_cell";
-          echo " no_t_b_border";
-          echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
-          echo ">";          
+          echo "><td class='main_matrix_text main_table_cell no_t_b_border' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">";          
           switch($i){
             case $parcel_vert_pos[0];
             echo "<font class='dg_area2'>";
@@ -210,14 +207,25 @@
           echo "</td>";
         }
         else if ($j==1) {
-          echo "<td class='main_matrix_text row_first_cell' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$pre_neuron_group[$i_adj]."</td>";
+          echo "<td class='main_matrix_text row_first_cell";
+          if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {
+            echo " red_border' style='border-top: .09em solid #ff5757 !important;'";
+          }
+          echo " id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$pre_neuron_group[$i_adj]."</td>";
         }
         else {
-          echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
-          if ($j == $parcel_horiz_pos[0]-1 || $j == $parcel_horiz_pos[1]-1 || $j == $parcel_horiz_pos[2]-1 || $j == $parcel_horiz_pos[3]-1 || $j == $parcel_horiz_pos[4]-1) {
-            echo " style='border-right:4px solid #810004;'";
+          echo "<td class='main_matrix_text main_table_cell";
+          if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {
+            echo " red_border";
           }
-          echo ">";
+          echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
+          if ($j == $parcel_horiz_pos[0]-1 || $j == $parcel_horiz_pos[1]-1 || $j == $parcel_horiz_pos[2]-1 || $j == $parcel_horiz_pos[3]-1 || $j == $parcel_horiz_pos[4]-1) {
+            echo " style='border-right:4px solid #810004;";
+          }
+          if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {          
+            echo "border-top: .09em solid #ff5757 !important;'";
+          }
+          echo "'>";
           $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS ps_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i_adj]."' AND potential_synapses.target_name='".$post_neuron_group[$j_adj]."';";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) { 
