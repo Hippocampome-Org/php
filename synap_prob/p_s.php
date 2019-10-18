@@ -169,9 +169,16 @@
         if ($j==0) {
           echo "<tr id='main_table_row_".$i_adj."'";
           if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {
-            echo " class='red_border'";
+            echo " class='red_border2'";
           }
-          echo "><td class='main_matrix_text main_table_cell no_t_b_border' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">";          
+          echo "><td class='main_matrix_text main_table_cell";
+          if ($i == $parcel_vert_pos[1] || $i == $parcel_vert_pos[2] || $i == $parcel_vert_pos[3] || $i == $parcel_vert_pos[4] || $i == $parcel_vert_pos[5]) {
+            echo " red_border2";
+          }
+          else {
+            echo " no_t_b_border";
+          }
+          echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">";          
           switch($i){
             case $parcel_vert_pos[0];
             echo "<font class='dg_area2'>";

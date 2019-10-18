@@ -142,10 +142,15 @@
         if ($j==0) {
           echo "<tr id='main_table_row_".$i_adj."'";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
-            echo " class='red_border'";
+            echo " class='red_border2'";
           }
           echo "><td class='main_matrix_text main_table_cell";
-          echo " no_t_b_border";
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+            echo " red_border2";
+          }
+          else {
+            echo " no_t_b_border";
+          }
           echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
           //if ($i_adj != 18 || $i_adj != 40 || $i_adj != 45 || $i_adj != 85 || $i_adj != 88) {
           //  echo " class='no_t_b_border'";
@@ -186,10 +191,18 @@
           echo "</td>";
         }        
         else if ($j==1) {
-          echo "<td class='main_matrix_text row_first_cell' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$neuron_group[$i_adj]."</td>";
+          echo "<td class='main_matrix_text row_first_cell";
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+            echo " red_border' style='border-top: .09em solid #ff5757 !important;'";
+          }
+          echo "' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$neuron_group[$i_adj]."</td>";
         }
         else {
-          echo "<td class='main_matrix_text main_table_cell' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
+          echo "<td class='main_matrix_text main_table_cell";
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+            echo " red_border";
+          }
+          echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
           if ($j_adj == 10 || $j_adj == 22 || $j_adj == 32 || $j_adj == 42 || $j_adj == 50) {
             echo " style='border-right:4px solid #810004;'";
           }

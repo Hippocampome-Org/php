@@ -300,6 +300,14 @@ td.vertical
 	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 );*/ /* IE6-9 */
 }
 
+.red_border2
+{
+	background: -moz-linear-gradient(red 0%, white 6%, white 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(red 0%, white 6%, white 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(red 0%, white 6%, white 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	border-bottom: 0px solid white !important;
+}
+
 .no_t_b_border
 {
 	border-top: 0px solid white !important;
