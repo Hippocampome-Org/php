@@ -209,8 +209,8 @@
           echo ">";
 
           // detect appropriate matrix data to populate
-          if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {
-            $sql = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."';";
+          if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {  
+            $sql = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."' AND mean_path_length!='';";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) { 
               while($row = $result->fetch_assoc()) {
@@ -222,7 +222,7 @@
             }
           }
           else {
-            $sql = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."';";
+            $sql = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."' AND total_length!='';";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) { 
               while($row = $result->fetch_assoc()) {

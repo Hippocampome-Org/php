@@ -233,7 +233,7 @@
             echo "border-top: .09em solid #ff5757 !important;'";
           }
           echo "'>";
-          $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS ps_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i_adj]."' AND potential_synapses.target_name='".$post_neuron_group[$j_adj]."';";
+          $sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS ps_avg FROM potential_synapses WHERE potential_synapses.source_name='".$pre_neuron_group[$i_adj]."' AND potential_synapses.target_name='".$post_neuron_group[$j_adj]."' AND potential_synapses.potential_synapses!='';";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) { 
             while($row = $result->fetch_assoc()) {
