@@ -10,7 +10,11 @@
   $first_cell_horiz = $getBrowser['first_cell_horiz'];
   $groups_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b ".$first_cell_horiz."' style='border:0px;'><div class='".$first_cell_horiz."'>neuron type</div></td><td class='".$first_cell_vert." nbyk_cell1_c' style='border:0px;'><div class='".$first_cell_vert." nbyk_cell1_d'>parcel</div></td></tr></table>";  
   $parcel_group = array($groups_text, "DG:SMo:D", "DG:SMo:A", "DG:SMi:D", "DG:SMi:A", "DG:SG:D", "DG:SG:A", "DG:H:D", "DG:H:A", "DG:All:D", "DG:All:A", "CA3:SP:D", "CA3:SP:A", "CA3:SL:D", "CA3:SL:A", "CA3:SR:D", "CA3:SR:A", "CA3:SLM:D", "CA3:SLM:A", "CA3:SO:D", "CA3:SO:A", "CA3:All:D", "CA3:All:A", "CA2:All:D", "CA2:All:A", "CA2:SO:D", "CA2:SO:A", "CA2:SP:D", "CA2:SP:A", "CA2:SR:D", "CA2:SR:A", "CA2:SLM:D", "CA2:SLM:A", "CA1:SLM:D", "CA1:SLM:A", "CA1:SR:D", "CA1:SR:A", "CA1:SP:D", "CA1:SP:A", "CA1:SO:D", "CA1:SO:A", "CA1:All:D", "CA1:All:A", "Sub:SM:D", "Sub:SM:A", "Sub:SP:D", "Sub:SP:A", "Sub:PL:D", "Sub:PL:A", "Sub:All:D", "Sub:All:A", "EC:I:D", "EC:I:A", "EC:II:D", "EC:II:A", "EC:III:D", "EC:III:A", "EC:IV:D", "EC:IV:A", "EC:V:D", "EC:V:A", "EC:VI:D", "EC:VI:A", "EC:All:D", "EC:All:A");
+  $parcel_region = array();
+  $parcel_layers = array();
+  $parcel_a_d = array();
   $vert_parcel_group = array("DG", "CA3", "CA2", "CA1", "Sub", "EC");
+  $vert_red_lines = array(7,19,31,39,47);
 
   // Collect neuron types and sort them
   $neuron_group = array();
@@ -35,9 +39,7 @@
   for ($v_i = 0; $v_i < $number_of_parcels; $v_i++) {  
     for ($ng_i = 0; $ng_i < sizeof($neuron_type_unsorted); $ng_i++) {
       if ($neuron_parcel_unsorted[$ng_i] == $vert_parcel_group[$v_i]) {
-        //array_push($neuron_group, $neuron_type_unsorted[$ng_i]);
         $neuron_group[$nt_tot] = $neuron_type_unsorted[$ng_i];
-        //echo $neuron_type_unsorted[$ng_i]."<br>";
         $nt_tot++;
       }
     }
@@ -51,14 +53,28 @@
     }
   }
 
+  for ($i = 0; $i < count($parcel_group); $i++) {
+    $parcel_delim = explode(':', $parcel_group[$i]);
+    array_push($parcel_region, $parcel_delim[0]);
+    array_push($parcel_layers, $parcel_delim[1]);
+    array_push($parcel_a_d, $parcel_delim[2]);
+  }
+
+  include('change_html.php');
+
   // generate matrix
   echo "<table class='main_table'>";  
   /*$i = 0;*/
-  for ($i=0;$i<count($neuron_group)+2;$i++) {
-  //for ($i=0;$i<30;$i++) {
+  //for ($i=0;$i<count($neuron_group)+2;$i++) {
+  for ($i=0;$i<8;$i++) {
+    $all_totals='';
     for ($j=0;$j<count($parcel_group)+1;$j++) {
       $i_adj = $i-2;
       $j_adj = $j-1;
+      $output_data = false;
+      if ($j%2==0) {
+        $output_data = true;
+      }
       if ($i==0) {
         if ($j==0) {
           echo "<tr class='main_table_header'><td style='border-bottom:0px !important'>";
@@ -66,7 +82,7 @@
         else if ($j==1) {
           echo "<td style='border-bottom:0px'>";
         }
-        else {
+        else if ($output_data && $parcel_layers[$j_adj]!='All') {
           echo "<td style='border-left:2px white;border-right:2px white;padding:5px;'";
           if ($j_adj > 0 && $j_adj < 11) {
             echo " class='dg_area'><font style='font-size:14px;color:white;'>";
@@ -88,38 +104,32 @@
           }       
         }
 
-        echo "<center>";
+        if ($j<2||$output_data) {
+          echo "<center>";
 
-        switch($j){
-          case 6;
-          echo "DG";
-          break;
-          case 16;
-          echo "CA3";
-          break;
-          case 28;
-          echo "CA2";
-          break;
-          case 38;
-          echo "CA1";
-          break;
-          case 47;
-          echo "SUB";
-          break;
-          case 57;
-          echo "EC";
-          break;                   
+          switch($j) {
+            case 4;
+            echo "DG";
+            break;
+            case 16;
+            echo "CA3";
+            break;
+            case 28;
+            echo "CA2";
+            break;
+            case 38;
+            echo "CA1";
+            break;
+            case 46;
+            echo "SUB";
+            break;
+            case 56;
+            echo "EC";
+            break;                   
+          }
+
+          echo "</center></font></td>";
         }
-
-        echo "</center></font>";
-
-        if ($j==65) {
-          //echo "<td></tr></table></td>";
-          echo "</td>";
-        }
-        else {
-          echo "</td>";
-        } 
       }
       else if ($i==1) {
         if ($j==0) {
@@ -129,13 +139,12 @@
         else if ($j==1) {
           echo "<td style='border-top:0px'>".$parcel_group[$j_adj]."</td>";
         }
-        else {
+        else if ($output_data && $parcel_layers[$j_adj]!='All') {
           echo "<td class='".$css_vertical." verticle_n_by_k main_matrix_text' ";
-          if ($j_adj == 10 || $j_adj == 22 || $j_adj == 32 || $j_adj == 42 || $j_adj == 50 || $j_adj == 65) {
+          if ($j_adj == $vert_red_lines[0] || $j_adj == $vert_red_lines[1] || $j_adj ==  $vert_red_lines[2] || $j_adj ==  $vert_red_lines[3] || $j_adj ==  $vert_red_lines[4]) {
             echo " style='border-right:4px solid #810004;'";
           }
-          echo "><div class='".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_group[$j_adj]."</div></td>";
-          /*echo "</tr></table></td>";*/
+          echo "><div class='".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_layers[$j_adj]."</div></td>";
         }
       }
       else {
@@ -152,9 +161,6 @@
             echo " no_t_b_border";
           }
           echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
-          //if ($i_adj != 18 || $i_adj != 40 || $i_adj != 45 || $i_adj != 85 || $i_adj != 88) {
-          //  echo " class='no_t_b_border'";
-          //}
           echo ">";          
           switch($i_adj){
             case 0;
@@ -197,44 +203,92 @@
           }
           echo "' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$neuron_group[$i_adj]."</td>";
         }
-        else {
+        else if ($output_data && $parcel_layers[$j_adj]!='All') {
           echo "<td class='main_matrix_text main_table_cell";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border";
           }
           echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
-          if ($j_adj == 10 || $j_adj == 22 || $j_adj == 32 || $j_adj == 42 || $j_adj == 50) {
+          if ($j_adj == $vert_red_lines[0] || $j_adj == $vert_red_lines[1] || $j_adj ==  $vert_red_lines[2] || $j_adj ==  $vert_red_lines[3] || $j_adj ==  $vert_red_lines[4]) {
             echo " style='border-right:4px solid #810004;'";
           }
           echo ">";
-
-          // detect appropriate matrix data to populate
-          if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {  
-            $sql = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."' AND mean_path_length!='';";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) { 
-              while($row = $result->fetch_assoc()) {
-                $avg_trunk = $row['avg_trunk'];
-                if ($avg_trunk != '' && $avg_trunk != 0) {
-                  echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_sd']."\nStandard Deviation: ".$row['std_sd']."\nMinimum Value: ".$row['min_sd']."\nMaximum Value: ".$row['max_sd']."'>".$avg_trunk."</a>";
+          
+          for ($adi=0;$adi<2;$adi++) {
+            if ($adi==0) {
+              $j_adj2=$j_adj;
+              echo "&nbsp;";
+            }
+            if ($adi==1) {
+              $j_adj2=$j_adj+1;
+              echo "<hr class='hr_sub_cell'>";
+              echo "&nbsp;";
+            }
+            // detect appropriate matrix data to populate
+            if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {  
+              $sql = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND mean_path_length!='';";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                while($row = $result->fetch_assoc()) {
+                  $avg_trunk = $row['avg_trunk'];
+                  if ($avg_trunk != '' && $avg_trunk != 0) {
+                    echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_sd']."\nStandard Deviation: ".$row['std_sd']."\nMinimum Value: ".$row['min_sd']."\nMaximum Value: ".$row['max_sd']."'>".$avg_trunk."</a>";
+                  }
                 }
               }
             }
-          }
-          else {
-            $sql = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj]."' AND total_length!='';";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) { 
-              while($row = $result->fetch_assoc()) {
-                $avg_trunk = $row['avg_trunk'];
-                if ($avg_trunk != '' && $avg_trunk != 0) {
-                  echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_tl']."\nStandard Deviation: ".$row['std_tl']."'>".$avg_trunk."</a>";
+            else {
+              $sql = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND total_length!='';";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                while($row = $result->fetch_assoc()) {
+                  $avg_trunk = $row['avg_trunk'];
+                  if ($avg_trunk != '' && $avg_trunk != 0) {
+                    echo "<a href='#' title='Mean: ".$row['avg']."\nCount of Recorded Values: ".$row['count_tl']."\nStandard Deviation: ".$row['std_tl']."'>".$avg_trunk."</a>";
+                  }
                 }
               }
             }
+            echo "&nbsp;";
           }
           
-          echo "</td>";
+          if ($j<2||$output_data) {
+            echo "</td>";
+          }
+        }
+        else if ($output_data && $parcel_layers[$j_adj]=='All') {
+          for ($adi=0;$adi<2;$adi++) {
+            if ($adi==0) {
+              $j_adj2=$j_adj;
+              $a_or_d='Dendrite: ';
+              $prcl = '_________'.$parcel_region[$j_adj].'_________\\n';
+              $nl="\\n";
+            }
+            else {
+              $j_adj2=$j_adj+1;
+              $a_or_d='Axon: ';
+              $prcl = '';
+              $nl="";
+            }
+            if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {  
+              $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND mean_path_length!='';";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                $row = $result->fetch_assoc();
+                $all_totals = $all_totals.$prcl.$a_or_d.'Avg Somatic Distance: '.$row['avg'].'Values Count: '.$row['count_sd'].' '.$nl;
+              }
+            }
+            else {
+              $sql = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND total_length!='';";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                $row = $result->fetch_assoc();
+                $all_totals = $all_totals.$prcl.$a_or_d.'Avg Total Length: '.$row['avg'].' Values Count: '.$row['count_tl'].' '.$nl;
+              }
+            }
+          }
+          change_html("first_cell_".$i_adj, "<a title='".$all_totals."'>".$neuron_group[$i_adj]."</a>", false);
+          $all_totals=$all_totals."\\n";
         }
       }
     }    

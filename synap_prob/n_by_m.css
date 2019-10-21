@@ -264,31 +264,37 @@ td.vertical
 .dg_area2
 {
 	color: #810004;
+	font-weight:bold;
 }
 
 .ca3_area2
 {
 	color: #ca7e82;	
+	font-weight:bold;
 }
 
 .ca2_area2
 {
 	color: #fffea4;	
+	font-weight:bold;
 }
 
 .ca1_area2
 {
 	color: #ff5622;
+	font-weight:bold;
 }
 
 .sub_area2
 {
 	color: #ffc951;
+	font-weight:bold;
 }
 
 .ec_area2
 {
 	color: #216739;
+	font-weight:bold;
 }
 
 .red_border
@@ -320,6 +326,15 @@ td.vertical
 	padding-top: 5px;
 	padding-bottom: 5px;
 	min-width: 50px;
+}
+
+.hr_sub_cell
+{
+	font-size: 6px;
+	border-top: .07em solid #7dcdeb;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
 }
 
 .highlighted_bottom_border
