@@ -65,8 +65,8 @@
   // generate matrix
   echo "<table class='main_table'>";  
   /*$i = 0;*/
-  //for ($i=0;$i<count($neuron_group)+2;$i++) {
-  for ($i=0;$i<8;$i++) {
+  for ($i=0;$i<count($neuron_group)+2;$i++) {
+  //for ($i=0;$i<8;$i++) {
     $all_totals='';
     for ($j=0;$j<count($parcel_group)+1;$j++) {
       $i_adj = $i-2;
