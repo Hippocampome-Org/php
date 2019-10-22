@@ -49,9 +49,9 @@ function search_directory($dir, $articles_to_search, $max_matches, $query) {
 	    	if ($file != "." && $file != "..") {
 	    		if ($articles_to_search == "all" || $articles_searched < $articles_to_search) {
 	        		$total_results = search($dir.$file, $file, $max_matches, $query);
+	        		$articles_searched++;
 	        	}
 	    	}
-	    	$articles_searched++;
 
 	    	if ($articles_searched < 25 || $articles_searched == 50 || $articles_searched == 100 || $articles_searched == 150 || $articles_searched == 200 || $articles_searched == 250) {
 	    		report_results($results_text, $total_results, $query, $articles_searched);

@@ -284,7 +284,7 @@
   $sel_thy=array(); // theories
   $sel_kwd=array(); // keywords   
 
-  function chk_prop($sql, $conn, $tbl) {
+  function chk_prop($sql, $conn, $col) {
     /*
       Collect array of existing article properties
     */
@@ -292,7 +292,7 @@
     $result = $conn->query($sql);
     if ($result->num_rows > 0) { 
       while($row = $result->fetch_assoc()) { 
-        array_push($matches,$row[$tbl]);
+        array_push($matches,$row[$col]);
       }
     }    
     return $matches;
@@ -315,120 +315,105 @@
   /* 
     Collect and display existing article properties 
   */
-  if ($art_mod_id!='') {
-    $sql="SELECT subject_id FROM natemsut_hctm.article_has_subject WHERE article_id=".$art_mod_id;
-    $tbl="subject_id";
-    $sel_sbj=chk_prop($sql, $conn, $tbl);
-    $sql="SELECT detail_id FROM natemsut_hctm.article_has_detail WHERE article_id=".$art_mod_id;
-    $tbl="detail_id";
-    $sel_det=chk_prop($sql, $conn, $tbl);
-    $sql="SELECT level_id FROM natemsut_hctm.article_has_implmnt WHERE article_id=".$art_mod_id;
-    $tbl="level_id";
-    $sel_ipl=chk_prop($sql, $conn, $tbl);
-    $sql="SELECT theory_id FROM natemsut_hctm.article_has_theory WHERE article_id=".$art_mod_id;
-    $tbl="theory_id";
-    $sel_thy=chk_prop($sql, $conn, $tbl);
-    $sql="SELECT keyword_id FROM natemsut_hctm.article_has_keyword WHERE article_id=".$art_mod_id;
-    $tbl="keyword_id";
-    $sel_kwd=chk_prop($sql, $conn, $tbl);            
+  $tbl="natemsut_hctm.";     
+  if ($art_mod_id!='') {   
+    $col="subject_id";
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_subject WHERE article_id=".$art_mod_id;
+    $sel_sbj=chk_prop($sql, $conn, $col);
+    //
+    $col="detail_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_detail WHERE article_id=".$art_mod_id;
+    $sel_det=chk_prop($sql, $conn, $col);
+    //
+    $col="level_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_implmnt WHERE article_id=".$art_mod_id;
+    $sel_ipl=chk_prop($sql, $conn, $col);   
+    //
+    $col="theory_id";      
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_theory WHERE article_id=".$art_mod_id;
+    $sel_thy=chk_prop($sql, $conn, $col);
+    //
+    $col="keyword_id";      
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_keyword WHERE article_id=".$art_mod_id;
+    $sel_kwd=chk_prop($sql, $conn, $col);  
+    //
+    $col="scale_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_scale WHERE article_id=".$art_mod_id;
+    $sel_scl=chk_prop($sql, $conn, $col);  
+    //
+    $col="region_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
+    $sel_rgn=chk_prop($sql, $conn, $col);     
   }
 
   echo "<br><div class='article_details'>
   <center><u>Article Research Properties</u><br>
   Note: use control key to select multiple choices</center><br>
-  <table>  
-  <tr><td style='min-width:350px;'>Subjects:</td><td><select name='subjects[]' size='5' multiple class='select-css' style='min-width:400px;'>";
-  $sql = "SELECT subject FROM subjects";
-  $result = $conn->query($sql);
-  $subjects_group=array();
-  $i=0;
-  if ($result->num_rows > 0) { 
-    while($row = $result->fetch_assoc()) { 
-      $i=$i+1;
-      $selection='';      
-      if (in_array($i,$sel_sbj)) {
-        $selection='selected';
-      }
-      echo "<option value=".$i." ".$selection.">".$row["subject"]."</option>";
-      array_push($subjects_group,$row["subject"]);       
+  <table>";
+
+  function display_property($conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
+    echo "<tr><td style='min-width:350px;'>".$prop_desc."</td><td><select name='".$tbl."[]'";
+    if ($multi_sel) {
+      echo " size='5' multiple class='select-css' style='min-width:400px;'>";
     }
-  }  
-  echo "</select>&nbsp";
-  add_rem_buttons('Subject',$subjects_group);
-  echo "</td></tr><tr><td style='min-width:350px;'>Level of Detail:</td><td><select name='details[]' size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'><option></option>";
-  $sql = "SELECT detail_level FROM details";
-  $result = $conn->query($sql);
-  $details_group=array();  
-  $i=0;
-  if ($result->num_rows > 0) { 
-    while($row = $result->fetch_assoc()) { 
-      $i=$i+1;
-      $selection='';
-      if (in_array($i,$sel_det)) {
-        $selection='selected';
-      }
-      echo "<option value=".$i." ".$selection.">".$row["detail_level"]."</option>";
-      array_push($details_group,$row["detail_level"]);  
+    else {
+      echo " size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'>";
+      echo "<option></option>";
     }
+    $sql = "SELECT ".$col." FROM ".$tbl;
+    $result = $conn->query($sql);
+    $prop_group=array();  
+    $i=0;
+    if ($result->num_rows > 0) { 
+      while($row = $result->fetch_assoc()) { 
+        $i=$i+1;
+        $selection='';
+        if (in_array($i,$select_group)) {
+          $selection='selected';
+        }
+        echo "<option value=".$i." ".$selection.">".$row[$col]."</option>";
+        array_push($prop_group,$row[$col]);  
+      }
+    }
+    echo "</select>&nbsp";
+    add_rem_buttons($but_desc,$prop_group);
+    echo "</td></tr>";
   }
-  echo "</select>&nbsp";
-  add_rem_buttons('Detail',$details_group);
-  echo "</td></tr><tr><td style='min-width:350px;'>Implementation Level:</td><td><center><select name='implmnts[]' size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'><option></option>";
-  $sql = "SELECT level FROM implementations";
-  $result = $conn->query($sql);
-  $implmnts_group=array();   
-  $i=0;
-  if ($result->num_rows > 0) { 
-    while($row = $result->fetch_assoc()) { 
-      $i=$i+1;
-      $selection='';
-      if (in_array($i,$sel_ipl)) {
-        $selection='selected';
-      }
-      echo "<option value=".$i." ".$selection.">".$row["level"]."</option>";
-      array_push($implmnts_group,$row["level"]);      
-    }
-  }
-  echo "</select>&nbsp";
-  add_rem_buttons('Implementation',$implmnts_group);
-  echo "</center></td></tr><tr><td style='min-width:350px;'>Theories:</td><td style='min-width:450px;'><select name='theories[]' size='5' multiple class='select-css' style='min-width:400px;'>";
-  $sql = "SELECT category FROM theory_category";
-  $result = $conn->query($sql);
-  $theories_group=array();  
-  $i=0;
-  if ($result->num_rows > 0) { 
-    while($row = $result->fetch_assoc()) { 
-      $i=$i+1;
-      $selection='';
-      if (in_array($i,$sel_thy)) {
-        $selection='selected';
-      }
-      echo "<option value=".$i." ".$selection.">".$row["category"]."</option>";
-      array_push($theories_group,$row["category"]);       
-    }
-  }
-  echo "</select>&nbsp";
-  add_rem_buttons('Theory',$theories_group);
-  echo "</td></tr>
-  <tr><td style='min-width:350px;'>Keywords:</td><td><select name='keywords[]' size='5' multiple class='select-css' style='min-width:400px;'>";
-  $sql = "SELECT keyword FROM keywords";
-  $result = $conn->query($sql);
-  $keywords_group=array();    
-  $i=0;
-  if ($result->num_rows > 0) { 
-    while($row = $result->fetch_assoc()) { 
-      $i=$i+1;
-      $selection='';
-      if (in_array($i,$sel_kwd)) {
-        $selection='selected';
-      }
-      echo "<option value=".$i." ".$selection.">".$row["keyword"]."</option>";
-      array_push($keywords_group,$row["keyword"]);      
-    }
-  }  
-  echo "</select>&nbsp";
-  add_rem_buttons('Keyword',$keywords_group);
-  echo "</td></tr></table></div><br>";
+
+  // display evidence textboxes
+  include('display_evidence.php');     
+
+  $evid_loc_h=40; // location textbox height
+  $evid_des_h=100; // description textbox height
+  display_property($conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_det, true);
+  display_evidence($conn, "Subject", "Location", "sub_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Subject", "Description", "sub_desc", $evid_des_h, $art_mod_id);
+  //
+  display_property($conn, 'Level of Detail:', 'Detail', 'details', 'detail_level', $sel_det, false);
+  display_evidence($conn, "Detail", "Location", "det_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Detail", "Description", "det_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Network Scale:', 'Scale', 'network_scales', 'scale', $sel_scl, false);  
+  display_evidence($conn, "Scale", "Location", "scl_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Scale", "Description", "scl_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Implementation Level:', 'Implementation', 'implementations', 'level', $sel_ipl, false);
+  display_evidence($conn, "Implementation", "Location", "impl_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Implementation", "Description", "impl_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Anatomical Region:', 'Region', 'regions', 'region', $sel_rgn, true);
+  display_evidence($conn, "Region", "Location", "reg_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Region", "Description", "reg_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Theories:', 'Theory', 'theory_category', 'category', $sel_thy, true);
+  display_evidence($conn, "Theory", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Theory", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Keywords:', 'Keyword', 'keywords', 'keyword', $sel_kwd, true);
+  display_evidence($conn, "Keyword", "Location", "kwd_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Keyword", "Description", "kwd_desc", $evid_des_h, $art_mod_id);
+
+  echo "</table></div><br>";
   echo "<div class='article_details'><center><form action='art_sub.php' method='POST'>
   <span style='font-size:1.2em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span></center></div>";
 
