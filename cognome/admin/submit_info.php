@@ -55,10 +55,5 @@
   } 
 
   // submit evidence entries
-  //if ($_POST['sub_loc_evid']!='' || $_POST['sub_desc_evid']!='') {
-    $sub_loc_evid = $_POST['sub_loc_evid'];
-    $sub_desc_evid = $_POST['sub_desc_evid'];
-    $sql = "INSERT INTO `natemsut_hctm`.`evidence_of_subjects` (`article_id`, `evidence_position`, `evidence_description`) VALUES ('".$art_num."', '".$sub_loc_evid."', '".$sub_desc_evid."');";
-    $result = $conn->query($sql);    
-  //}    
+  include('sub_evidence.php');    
 ?>
