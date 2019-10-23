@@ -66,8 +66,8 @@
   // generate matrix
   echo "<table class='main_table'>";  
   /*$i = 0;*/
-  //for ($i=0;$i<count($neuron_group)+2;$i++) {
-  for ($i=0;$i<30;$i++) {
+  for ($i=0;$i<count($neuron_group)+2;$i++) {
+  //for ($i=0;$i<30;$i++) {
     $all_totals='';
     for ($j=0;$j<count($parcel_group)+1;$j++) {
       $i_adj = $i-2;
@@ -306,8 +306,8 @@
     echo "</tr>";
   }
   echo "</table>";
-  echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='4'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='4'> Excitatory</font>
+  echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='2'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Excitatory</font>
   &nbsp; &nbsp; 
-  <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='4'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='4'> Inhibitory</font>
+  <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='2'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Inhibitory</font>
   <br />";  
 ?>
