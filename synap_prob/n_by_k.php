@@ -4,6 +4,7 @@
 <?php
   include('synap_prob/change_colors.php');
   include('synap_prob/browser_check.php');
+  include('e_i_check.php');
   $getBrowser = getBrowser();
   $css_vertical = $getBrowser['css_vertical'];
   $first_cell_vert = $getBrowser['first_cell_vert'];
@@ -65,12 +66,20 @@
   // generate matrix
   echo "<table class='main_table'>";  
   /*$i = 0;*/
-  for ($i=0;$i<count($neuron_group)+2;$i++) {
-  //for ($i=0;$i<8;$i++) {
+  //for ($i=0;$i<count($neuron_group)+2;$i++) {
+  for ($i=0;$i<30;$i++) {
     $all_totals='';
     for ($j=0;$j<count($parcel_group)+1;$j++) {
       $i_adj = $i-2;
       $j_adj = $j-1;
+      // manual rules for organizing data (through row swaps) by green: Excitatory, red: Inhibitory
+      if ($i_adj==45) {$i_adj=54;}
+      else if ($i_adj==54) {$i_adj=45;}
+      if ($i_adj==46) {$i_adj=55;}
+      else if ($i_adj==55) {$i_adj=46;}
+      if ($i_adj==47) {$i_adj=56;}
+      else if ($i_adj==56) {$i_adj=46;}
+
       $output_data = false;
       if ($j%2==0) {
         $output_data = true;
@@ -150,11 +159,11 @@
       else {
         if ($j==0) {
           echo "<tr id='main_table_row_".$i_adj."'";
-          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " class='red_border2'";
           }
           echo "><td class='main_matrix_text main_table_cell";
-          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border2";
           }
           else {
@@ -198,14 +207,14 @@
         }        
         else if ($j==1) {
           echo "<td class='main_matrix_text row_first_cell";
-          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border' style='border-top: .09em solid #ff5757 !important;'";
           }
-          echo "' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".$neuron_group[$i_adj]."</td>";
+          echo "' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj])."</td>";
         }
         else if ($output_data && $parcel_layers[$j_adj]!='All') {
           echo "<td class='main_matrix_text main_table_cell";
-          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 45 || $i_adj == 85 || $i_adj == 88) {
+          if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border";
           }
           echo "' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\"";
@@ -287,7 +296,9 @@
               }
             }
           }
-          change_html("first_cell_".$i_adj, "<a title='".$all_totals."'>".$neuron_group[$i_adj]."</a>", false);
+          //$new_inner_html = e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj], $p_g, $e_neurons, $i_neurons);
+          $new_inner_html = e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj]);
+          change_html("first_cell_".$i_adj, "<a title='".$all_totals."'>".$new_inner_html."</a>", false);
           $all_totals=$all_totals."\\n";
         }
       }
@@ -295,5 +306,8 @@
     echo "</tr>";
   }
   echo "</table>";
-
+  echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='4'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='4'> Excitatory</font>
+  &nbsp; &nbsp; 
+  <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='4'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='4'> Inhibitory</font>
+  <br />";  
 ?>

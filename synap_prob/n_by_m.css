@@ -183,6 +183,8 @@ div.verticle_n_by_k
 {
 	height: 80px;
 	width: 50px;
+	text-align: center;
+	right:10px;
 }
 
 div.verticle_n_by_n
@@ -335,6 +337,21 @@ td.vertical
 	border-bottom: 0px;
 	border-left: 0px;
 	border-right: 0px;
+}
+
+.excite_green
+{
+	color:green !important;
+}
+
+.excite_green a
+{
+	color:green !important;
+}
+
+.inhib_red
+{
+	color:red;
 }
 
 .highlighted_bottom_border
