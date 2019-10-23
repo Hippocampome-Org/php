@@ -187,7 +187,7 @@
             echo "CA2(".$neuron_parcel_counts[2].")";
             echo "</font>";
             break;
-            case 45;
+            case 54;
             echo "<font class='ca1_area2'>";
             echo "CA1(".$neuron_parcel_counts[3].")";
             echo "</font>";
