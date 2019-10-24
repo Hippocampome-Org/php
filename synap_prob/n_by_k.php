@@ -267,7 +267,7 @@
         }
         else if ($output_data && $parcel_layers[$j_adj]=='All') {
           //find current parcel
-          $sql = "SELECT DISTINCT(subregion) AS subreg FROM hippocampome.neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."'";
+          $sql = "SELECT DISTINCT(subregion) AS subreg FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."'";
           $result = $conn->query($sql);
           $row = $result->fetch_assoc();
           $current_parcel=$row['subreg'];
@@ -305,7 +305,7 @@
           }
           $new_inner_html = e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj]);
           change_html("first_cell_".$i_adj, "<a title='".$all_totals."'>".$new_inner_html."</a>", false);
-          $all_totals=$all_totals."\\n";
+          $all_totals=$all_totals;
         }
       }
     }    
