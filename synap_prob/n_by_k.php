@@ -67,7 +67,7 @@
   echo "<table class='main_table'>";  
   /*$i = 0;*/
   for ($i=0;$i<count($neuron_group)+2;$i++) {
-  //for ($i=0;$i<30;$i++) {
+  //for ($i=0;$i<14;$i++) {
     $all_totals='';
     for ($j=0;$j<count($parcel_group)+1;$j++) {
       $i_adj = $i-2;
@@ -266,11 +266,18 @@
           }
         }
         else if ($output_data && $parcel_layers[$j_adj]=='All') {
+          //find current parcel
+          $sql = "SELECT DISTINCT(subregion) AS subreg FROM hippocampome.neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."'";
+          $result = $conn->query($sql);
+          $row = $result->fetch_assoc();
+          $current_parcel=$row['subreg'];
+
           for ($adi=0;$adi<2;$adi++) {
             if ($adi==0) {
               $j_adj2=$j_adj;
               $a_or_d='Dendrite: ';
-              $prcl = '_________'.$parcel_region[$j_adj].'_________\\n';
+              //$prcl = '_________'.$parcel_region[$j_adj].'_________\\n';
+              $prcl = '';
               $nl="\\n";
             }
             else {
@@ -279,24 +286,23 @@
               $prcl = '';
               $nl="";
             }
-            if (isset($_GET['tab']) && $_GET['tab'] == 's_d') {  
-              $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND mean_path_length!='';";
+            if (isset($_GET['tab']) && $_GET['tab'] == 's_d' && $current_parcel == $parcel_region[$j_adj]) {  
+              $sql = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND mean_path_length!='';";
               $result = $conn->query($sql);
               if ($result->num_rows > 0) { 
                 $row = $result->fetch_assoc();
-                $all_totals = $all_totals.$prcl.$a_or_d.'Avg Somatic Distance: '.$row['avg'].'Values Count: '.$row['count_sd'].' '.$nl;
+                $all_totals = $all_totals.$prcl.$a_or_d.'\\nAverage Somatic Distance: '.$row['avg'].'\\nValues Count: '.$row['count_sd'].'\\nStandard Deviation: '.$row['std'].$nl;
               }
             }
-            else {
-              $sql = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND total_length!='';";
+            else if ($current_parcel == $parcel_region[$j_adj]) {
+              $sql = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i_adj]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND total_length!='';";
               $result = $conn->query($sql);
               if ($result->num_rows > 0) { 
                 $row = $result->fetch_assoc();
-                $all_totals = $all_totals.$prcl.$a_or_d.'Avg Total Length: '.$row['avg'].' Values Count: '.$row['count_tl'].' '.$nl;
+                $all_totals = $all_totals.$prcl.$a_or_d.'\\nAverage Total Length: '.$row['avg'].' \\nValues Count: '.$row['count_tl'].'\\nStandard Deviation: '.$row['std'].$nl;
               }
             }
           }
-          //$new_inner_html = e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj], $p_g, $e_neurons, $i_neurons);
           $new_inner_html = e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj]);
           change_html("first_cell_".$i_adj, "<a title='".$all_totals."'>".$new_inner_html."</a>", false);
           $all_totals=$all_totals."\\n";
