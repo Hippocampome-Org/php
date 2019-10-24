@@ -237,7 +237,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.6 - Released: 10/08/2019
+      v1.7 - Released: 10/08/2019
       <br>
       23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
       <br>
