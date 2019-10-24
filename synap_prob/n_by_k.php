@@ -78,7 +78,7 @@
       if ($i_adj==46) {$i_adj=55;}
       else if ($i_adj==55) {$i_adj=46;}
       if ($i_adj==47) {$i_adj=56;}
-      else if ($i_adj==56) {$i_adj=46;}
+      else if ($i_adj==56) {$i_adj=47;}
 
       $output_data = false;
       if ($j%2==0) {
