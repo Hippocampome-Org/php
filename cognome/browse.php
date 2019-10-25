@@ -61,16 +61,19 @@
     $show_art_prop='display:none';
     if (isset($_GET['art_id'])) {
       $art_mod_id = $_GET['art_id'];
-      list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = setArtDetails($art_mod_id,$servername,$username,$password,$dbname);
+      //list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = getArtDetails($art_mod_id,$servername,$username,$password,$dbname);
+      list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = getArtDetails($art_mod_id, $conn);
+      list($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $kwd_evid_loc, $kwd_evid_des) = getResProperties($art_mod_id, $conn);
       $expand_art_list='';
       $show_art_prop='display:visible';
     }  
 
-    function setArtDetails($art_mod_id,$servername,$username,$password,$dbname) {
+    //function getArtDetails($art_mod_id,$servername,$username,$password,$dbname) {
+    function getArtDetails($art_mod_id, $conn) {
       // Create connection
-      $conn = new mysqli($servername, $username, $password, $dbname);    
+      //$conn = new mysqli($servername, $username, $password, $dbname);    
       // Check connection
-      if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); echo 'connection failed';}  
+      //if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); echo 'connection failed';}  
 
       $sql = "SELECT * FROM natemsut_hctm.articles WHERE ID=".$art_mod_id.";";
       $result = $conn->query($sql);
@@ -88,9 +91,32 @@
       $authors=$row["authors"];
       $art_off_id=$row["official_id"];
 
-      $conn->close();
+      //$conn->close();
 
       return array($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id);
+    }
+
+    function getResProperties($art_mod_id, $conn) { 
+
+      $sql = "SELECT evidence_of_details.evidence_position AS p1, evidence_of_details.evidence_description AS d1, evidence_of_implmnts.evidence_position AS p2, evidence_of_implmnts.evidence_description AS d2, evidence_of_keywords.evidence_position AS p3, evidence_of_keywords.evidence_description AS d3, evidence_of_regions.evidence_position AS p4, evidence_of_regions.evidence_description AS d4, evidence_of_scales.evidence_position AS p5, evidence_of_scales.evidence_description AS d5, evidence_of_subjects.evidence_position AS p6, evidence_of_subjects.evidence_description AS d6, evidence_of_theories.evidence_position AS p7, evidence_of_theories.evidence_description AS d7 FROM natemsut_hctm.evidence_of_details, natemsut_hctm.evidence_of_implmnts, natemsut_hctm.evidence_of_keywords, natemsut_hctm.evidence_of_regions, natemsut_hctm.evidence_of_scales, natemsut_hctm.evidence_of_subjects, natemsut_hctm.evidence_of_theories WHERE evidence_of_details.article_id=evidence_of_implmnts.article_id and evidence_of_details.article_id=evidence_of_keywords.article_id and evidence_of_details.article_id=evidence_of_regions.article_id and evidence_of_details.article_id=evidence_of_scales.article_id and evidence_of_details.article_id=evidence_of_subjects.article_id and evidence_of_details.article_id=evidence_of_theories.article_id and evidence_of_details.article_id=".$art_mod_id.";";
+      $result = $conn->query($sql);
+      $row = $result->fetch_assoc();
+      $sub_evid_loc=$row["p1"];
+      $sub_evid_des=$row["d1"];
+      $det_evid_loc=$row["p2"];
+      $det_evid_des=$row["d2"];
+      $scl_evid_loc=$row["p3"];
+      $scl_evid_des=$row["d3"];
+      $impl_evid_loc=$row["p4"];
+      $impl_evid_des=$row["d4"];
+      $rgn_evid_loc=$row["p5"];
+      $rgn_evid_des=$row["d5"];
+      $thy_evid_loc=$row["p6"];
+      $thy_evid_des=$row["d6"];
+      $kwd_evid_loc=$row["p7"];
+      $kwd_evid_des=$row["d7"];
+      
+      return array($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $kwd_evid_loc, $kwd_evid_des);
     }      
 
   // articles list
@@ -219,6 +245,11 @@
       echo "</td></tr>";  
     }       
 
+    function show_evidence($id, $desc, $e_loc, $e_des) {
+      $table = "<table style='min-width:100%;'><tr><td style='min-width:200px;'>Location:&nbsp;&nbsp;&nbsp;&nbsp;</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".$e_loc."</label></td></tr><tr><td style='min-width:200px;'>Description:</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".$e_des."</label></td></tr></table>";
+      echo "<tr><td></td><td class='browse_table_2'><div class='wrap-collabsible' id='evid_collap_".$id."'><input id='evid_".$id."' class='toggle' type='checkbox'><label for='evid_".$id."' class='lbl-toggle'>Evidence of ".$desc."</label><div class='collapsible-content'><div class='content-inner' style='font-size:22px;'>".$table."</div></div></input></div></td></tr>";      
+    }
+
     /* 
       Collect and display existing article properties 
     */
@@ -256,11 +287,19 @@
     echo "<br><div class='article_details' style='".$show_art_prop."'>
     <center><u>Article Research Properties</u><br><br><table style='min-width:100%'>";
     properties_included('Subjects',3,'subject','subjects',$sel_sbj,$conn,'multiple','Subjects Included','Subjects Not Included'); 
-    properties_included('Level of Detail',1,'detail_level','details',$sel_det,$conn,'single','Minimum Level of Detail Included','Other Levels of Detail'); 
+    show_evidence("sub", "Subjects", $sub_evid_loc, $sub_evid_des);
+    properties_included('Level of Detail',1,'detail_level','details',$sel_det,$conn,'single','Minimum Level of Detail Included','Other Levels of Detail');
+    show_evidence("det", "Level of Detail", $det_evid_loc, $det_evid_des); 
     properties_included('Network Scale',1,'scale','network_scales',$sel_scl,$conn,'single','Network Scale Included','Other Network Scales');
-    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$conn,'single','Minimum Implementation Level Included','Other Implementation Levels'); properties_included('Anatomical Region',3,'region','regions',$sel_rgn,$conn,'multiple','Anatomical Regions Included','Other Anatomical Regions');    
+    show_evidence("scl", "Network Scale", $scl_evid_loc, $scl_evid_des);
+    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$conn,'single','Minimum Implementation Level Included','Other Implementation Levels'); 
+    show_evidence("impl", "Implementation Level", $impl_evid_loc, $impl_evid_des);
+    properties_included('Anatomical Region',3,'region','regions',$sel_rgn,$conn,'multiple','Anatomical Regions Included','Other Anatomical Regions'); 
+    show_evidence("rgn", "Anatomical Region", $rgn_evid_loc, $rgn_evid_des);   
     properties_included('Theories',3,'category','theory_category',$sel_thy,$conn,'multiple','Theories Included','Theories Not Included');    
+    show_evidence("thy", "Theories", $thy_evid_loc, $thy_evid_des);
     properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$conn,'multiple','Keywords Included','Keywords Not Included');
+    show_evidence("kwd", "Keywords", $kwd_evid_loc, $kwd_evid_des);
     echo "</table></div><br>";
 
     $conn->close();  
