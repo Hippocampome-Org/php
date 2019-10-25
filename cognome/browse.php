@@ -219,32 +219,46 @@
       echo "</td></tr>";  
     }       
 
-  /* 
-    Collect and display existing article properties 
-  */
+    /* 
+      Collect and display existing article properties 
+    */
+    $tbl="natemsut_hctm.";    
     if ($art_mod_id!='') {
-      $sql="SELECT subject_id FROM natemsut_hctm.article_has_subject WHERE article_id=".$art_mod_id;
-      $tbl="subject_id";
-      $sel_sbj=chk_prop($sql, $conn, $tbl);     
-      $sql="SELECT detail_id FROM natemsut_hctm.article_has_detail WHERE article_id=".$art_mod_id;
-      $tbl="detail_id";
-      $sel_det=chk_prop($sql, $conn, $tbl);
-      $sql="SELECT level_id FROM natemsut_hctm.article_has_implmnt WHERE article_id=".$art_mod_id;
-      $tbl="level_id";
-      $sel_ipl=chk_prop($sql, $conn, $tbl);
-      $sql="SELECT theory_id FROM natemsut_hctm.article_has_theory WHERE article_id=".$art_mod_id;
-      $tbl="theory_id";
-      $sel_thy=chk_prop($sql, $conn, $tbl);
-      $sql="SELECT keyword_id FROM natemsut_hctm.article_has_keyword WHERE article_id=".$art_mod_id;
-      $tbl="keyword_id";
-      $sel_kwd=chk_prop($sql, $conn, $tbl);            
+      $col="subject_id";
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_subject WHERE article_id=".$art_mod_id;
+      $sel_sbj=chk_prop($sql, $conn, $col);
+      //
+      $col="detail_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_detail WHERE article_id=".$art_mod_id;
+      $sel_det=chk_prop($sql, $conn, $col);
+      //
+      $col="level_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_implmnt WHERE article_id=".$art_mod_id;
+      $sel_ipl=chk_prop($sql, $conn, $col);   
+      //
+      $col="theory_id";      
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_theory WHERE article_id=".$art_mod_id;
+      $sel_thy=chk_prop($sql, $conn, $col);
+      //
+      $col="keyword_id";      
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_keyword WHERE article_id=".$art_mod_id;
+      $sel_kwd=chk_prop($sql, $conn, $col); 
+      //
+      $col="scale_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_scale WHERE article_id=".$art_mod_id;
+      $sel_scl=chk_prop($sql, $conn, $col);  
+      //
+      $col="region_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
+      $sel_rgn=chk_prop($sql, $conn, $col);                 
     }
 
     echo "<br><div class='article_details' style='".$show_art_prop."'>
     <center><u>Article Research Properties</u><br><br><table style='min-width:100%'>";
     properties_included('Subjects',3,'subject','subjects',$sel_sbj,$conn,'multiple','Subjects Included','Subjects Not Included'); 
     properties_included('Level of Detail',1,'detail_level','details',$sel_det,$conn,'single','Minimum Level of Detail Included','Other Levels of Detail'); 
-    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$conn,'single','Minimum Implementation Level Included','Other Implementation Levels'); 
+    properties_included('Network Scale',1,'scale','network_scales',$sel_scl,$conn,'single','Network Scale Included','Other Network Scales');
+    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$conn,'single','Minimum Implementation Level Included','Other Implementation Levels'); properties_included('Anatomical Region',3,'region','regions',$sel_rgn,$conn,'multiple','Anatomical Regions Included','Other Anatomical Regions');    
     properties_included('Theories',3,'category','theory_category',$sel_thy,$conn,'multiple','Theories Included','Theories Not Included');    
     properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$conn,'multiple','Keywords Included','Keywords Not Included');
     echo "</table></div><br>";

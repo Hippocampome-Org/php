@@ -385,7 +385,7 @@
 
   $evid_loc_h=40; // location textbox height
   $evid_des_h=100; // description textbox height
-  display_property($conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_det, true);
+  display_property($conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_sbj, true);
   display_evidence($conn, "Subject", "Location", "sub_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Subject", "Description", "sub_desc", $evid_des_h, $art_mod_id);
   //
