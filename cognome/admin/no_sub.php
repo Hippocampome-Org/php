@@ -11,7 +11,7 @@
 	<div style="width:90%;position:relative;left:5%;"> 
 	<?php include("../function/hc_body.php"); 
 
-	echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>No new submission yet detected.";
+	echo "<br><div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>No new submission yet detected.";
 	echo "<br><br></div>";  
 
 	?>
