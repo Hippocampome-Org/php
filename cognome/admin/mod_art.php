@@ -134,7 +134,7 @@
   Import from pubmed id:&nbsp;<textarea name='pubmed_id' style='max-width:200px;max-height:25px;font-size:22px;overflow:hidden;resize:none;position:relative;top:5px;'>".$_POST['pubmed_id']."</textarea>&nbsp;&nbsp;<button style='min-width:75px;min-height:25px;position:relative;top:-2px;font-size:22px;'>Import</button>&nbsp;&nbsp;&nbsp;&nbsp;E.g. 27870120</form><br>
   <form action='art_sub.php' method='POST' target='iframe-form'>
   <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span>
-  <br><br>Submission Status:<iframe style='display:block;height:200px;width:600px;' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
+  <br><br>Submission Status:<iframe style='display:block;height:250px;width:600px;' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
   echo "</center></div><br><div class='article_details'>";
   $pubmed_id=$_POST['pubmed_id'];
   $pubmed_html=file_get_contents('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='.$pubmed_id.'retmode=json&rettype=abstract');

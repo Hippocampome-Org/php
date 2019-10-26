@@ -76,7 +76,7 @@
     if ($sub_success=='true') {
       date_default_timezone_set('America/New_York');
       $date = date('m/d/Y h:i:s a', time());
-      echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Literature collection update successful.<br>Submission received at: ".$date.".";
+      echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Literature collection update successful.<br>Submission received at: ".$date." EST.";
       //echo "<br><br><a href='mod_art.php'>Back to update articles collection page</a><br>";
       echo "<br><br></div>";
     }
