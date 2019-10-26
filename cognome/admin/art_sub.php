@@ -13,9 +13,9 @@
 <body>
   <?php include("../function/hc_body.php"); ?>
   <div style="width:90%;position:relative;left:5%;">
-    <br><br>
+    <!--<br><br>-->
   <!-- start of header -->
-  <?php echo file_get_contents('header.html'); ?>
+  <!--?php echo file_get_contents('header.html'); ?-->
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML='Literature Submission';
   </script>
@@ -39,7 +39,9 @@
     if($result->num_rows == 0) { 
       // check for missing official id
       if($art_off_id == '') {
-          echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Error: missing official id description<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+          echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Error: missing official id description";
+          //echo "<br><br><a href='mod_art.php'>Back to update articles collection page</a>";
+          echo "<br><br></div>";
           exit();
       }
       // check for duplicate article
@@ -54,10 +56,14 @@
         $sub_success='false';
         echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Article submission not successful";
         if ($_POST['citation'] != '') {
-          echo " because article already exists in the database.<br>Existing article has official id ".$art_off_id." and url <a href='".$_POST['url']."' target='_blank'>".$_POST['url']."</a> .<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+          echo " because article already exists in the database.<br>Existing article has official id ".$art_off_id." and url <a href='".$_POST['url']."' target='_blank'>".$_POST['url']."</a> .";
+          //echo "<br><br><a href='mod_art.php'>Back to update articles collection page</a>";
+          echo "<br><br></div>";
         }
         else {
-          echo "<br>Error: missing citation description<br><br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+          echo "<br>Error: missing citation description.";
+          //echo "<br><br><a href='mod_art.php'>Back to update articles collection page</a>";
+          echo "<br><br></div>";
         }
       } 
     } 
@@ -67,8 +73,11 @@
     }
 
     if ($sub_success=='true') {
-      echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Literature collection update successful.<br>
-      <br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+      date_default_timezone_set('America/New_York');
+      $date = date('m/d/Y h:i:s a', time());
+      echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>Literature collection update successful.<br>Submission received at: ".$date.".";
+      //echo "<br><br><a href='mod_art.php'>Back to update articles collection page</a><br>";
+      echo "<br><br></div>";
     }
   }
   $conn->close();

@@ -4,6 +4,7 @@
   <!--
     References: https://www.rexegg.com/regex-php.html
     https://www.washington.edu/accesscomputing/webd2/student/unit5/module2/lesson5.html
+    https://ctrlq.org/code/19233-submit-forms-with-javascript
   -->
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Hippocampus Region Models and Theories</title>
@@ -131,9 +132,10 @@
   echo "<br><div class='article_details'><center>
   <form action='#' method='POST'>
   Import from pubmed id:&nbsp;<textarea name='pubmed_id' style='max-width:200px;max-height:25px;font-size:22px;overflow:hidden;resize:none;position:relative;top:5px;'>".$_POST['pubmed_id']."</textarea>&nbsp;&nbsp;<button style='min-width:75px;min-height:25px;position:relative;top:-2px;font-size:22px;'>Import</button>&nbsp;&nbsp;&nbsp;&nbsp;E.g. 27870120</form><br>
-  <form action='art_sub.php' method='POST'>
-  <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span></center></div>";
-  echo "<br><div class='article_details'>";
+  <form action='art_sub.php' method='POST' target='iframe-form'>
+  <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span>
+  <br><br>Submission Status:<iframe style='display:block;height:200px;width:600px;' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
+  echo "</center></div><br><div class='article_details'>";
   $pubmed_id=$_POST['pubmed_id'];
   $pubmed_html=file_get_contents('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='.$pubmed_id.'retmode=json&rettype=abstract');
 
@@ -414,7 +416,7 @@
   display_evidence($conn, "Keyword", "Description", "kwd_desc", $evid_des_h, $art_mod_id);
 
   echo "</table></div><br>";
-  echo "<div class='article_details'><center><form action='art_sub.php' method='POST'>
+  echo "<div class='article_details'><center>
   <span style='font-size:1.2em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span></center></div>";
 
   $conn->close();
