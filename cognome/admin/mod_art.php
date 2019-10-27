@@ -134,7 +134,7 @@
   Import from pubmed id:&nbsp;<textarea name='pubmed_id' style='max-width:200px;max-height:25px;font-size:22px;overflow:hidden;resize:none;position:relative;top:5px;'>".$_POST['pubmed_id']."</textarea>&nbsp;&nbsp;<button style='min-width:75px;min-height:25px;position:relative;top:-2px;font-size:22px;'>Import</button>&nbsp;&nbsp;&nbsp;&nbsp;E.g. 27870120</form><br>
   <form action='art_sub.php' method='POST' target='iframe-form'>
   <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span>
-  <br><br>Submission Status:<iframe style='display:block;height:250px;width:600px;' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
+  <br><br>Submission Status:<iframe style='display:block;height:250px;width:600px;border-top:1px solid rgb(190,190,190);border-left:1px solid rgb(190,190,190);' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
   echo "</center></div><br><div class='article_details'>";
   $pubmed_id=$_POST['pubmed_id'];
   $pubmed_html=file_get_contents('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='.$pubmed_id.'retmode=json&rettype=abstract');
@@ -345,7 +345,11 @@
     //
     $col="region_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
-    $sel_rgn=chk_prop($sql, $conn, $col);     
+    $sel_rgn=chk_prop($sql, $conn, $col);   
+    //
+    $col="neuron_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_neuron WHERE article_id=".$art_mod_id;
+    $sel_nrn=chk_prop($sql, $conn, $col);      
   }
 
   echo "<br><div class='article_details'>
@@ -410,6 +414,10 @@
   display_property($conn, 'Theories:', 'Theory', 'theory_category', 'category', $sel_thy, true);
   display_evidence($conn, "Theory", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Theory", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
+  //
+  display_property($conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrn, true);
+  display_evidence($conn, "Neuron", "Location", "nrn_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Neuron", "Description", "nrn_desc", $evid_des_h, $art_mod_id);
   //
   display_property($conn, 'Keywords:', 'Keyword', 'keywords', 'keyword', $sel_kwd, true);
   display_evidence($conn, "Keyword", "Location", "kwd_loc", $evid_loc_h, $art_mod_id);

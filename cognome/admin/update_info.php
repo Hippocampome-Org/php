@@ -26,6 +26,11 @@
     process_deletions($conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update);
     process_additions($conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update);       
   }  
+  if ($_POST['neuron_types']!='') {
+    $neuron_type_update=$_POST['neuron_types'];
+    process_deletions($conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);
+    process_additions($conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);       
+  }  
   if ($_POST['regions']!='') {
     $regions_list = $_POST['regions'];  
     process_deletions($conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list);

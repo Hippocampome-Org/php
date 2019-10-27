@@ -63,7 +63,15 @@
       else if ($evid_type=='Description') {
         $existing_entry = get_existing_text($conn, "evidence_of_theories", "evidence_description", $art_mod_id);
       }
-    }    
+    }  
+    else if ($prop_desc == "Neuron") {
+      if ($evid_type == "Location") {
+        $existing_entry = get_existing_text($conn, "evidence_of_neurons", "evidence_position", $art_mod_id);
+      }
+      else if ($evid_type=='Description') {
+        $existing_entry = get_existing_text($conn, "evidence_of_neurons", "evidence_description", $art_mod_id);
+      }
+    }      
     else if ($prop_desc == "Keyword") {
       if ($evid_type == "Location") {
         $existing_entry = get_existing_text($conn, "evidence_of_keywords", "evidence_position", $art_mod_id);

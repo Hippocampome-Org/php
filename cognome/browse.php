@@ -63,7 +63,7 @@
       $art_mod_id = $_GET['art_id'];
       //list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = getArtDetails($art_mod_id,$servername,$username,$password,$dbname);
       list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = getArtDetails($art_mod_id, $conn);
-      list($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $kwd_evid_loc, $kwd_evid_des) = getResProperties($art_mod_id, $conn);
+      list($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $nrn_evid_loc, $nrn_evid_des, $kwd_evid_loc, $kwd_evid_des) = getResProperties($art_mod_id, $conn);
       $expand_art_list='';
       $show_art_prop='display:visible';
     }  
@@ -98,7 +98,7 @@
 
     function getResProperties($art_mod_id, $conn) { 
 
-      $sql = "SELECT evidence_of_details.evidence_position AS p2, evidence_of_details.evidence_description AS d2, evidence_of_implmnts.evidence_position AS p4, evidence_of_implmnts.evidence_description AS d4, evidence_of_keywords.evidence_position AS p7, evidence_of_keywords.evidence_description AS d7, evidence_of_regions.evidence_position AS p5, evidence_of_regions.evidence_description AS d5, evidence_of_scales.evidence_position AS p3, evidence_of_scales.evidence_description AS d3, evidence_of_subjects.evidence_position AS p1, evidence_of_subjects.evidence_description AS d1, evidence_of_theories.evidence_position AS p6, evidence_of_theories.evidence_description AS d6 FROM natemsut_hctm.evidence_of_details, natemsut_hctm.evidence_of_implmnts, natemsut_hctm.evidence_of_keywords, natemsut_hctm.evidence_of_regions, natemsut_hctm.evidence_of_scales, natemsut_hctm.evidence_of_subjects, natemsut_hctm.evidence_of_theories WHERE evidence_of_details.article_id=evidence_of_implmnts.article_id and evidence_of_details.article_id=evidence_of_keywords.article_id and evidence_of_details.article_id=evidence_of_regions.article_id and evidence_of_details.article_id=evidence_of_scales.article_id and evidence_of_details.article_id=evidence_of_subjects.article_id and evidence_of_details.article_id=evidence_of_theories.article_id and evidence_of_details.article_id=".$art_mod_id.";";
+      $sql = "SELECT evidence_of_details.evidence_position AS p2, evidence_of_details.evidence_description AS d2, evidence_of_implmnts.evidence_position AS p4, evidence_of_implmnts.evidence_description AS d4, evidence_of_keywords.evidence_position AS p7, evidence_of_keywords.evidence_description AS d7, evidence_of_regions.evidence_position AS p5, evidence_of_regions.evidence_description AS d5, evidence_of_scales.evidence_position AS p3, evidence_of_scales.evidence_description AS d3, evidence_of_subjects.evidence_position AS p1, evidence_of_subjects.evidence_description AS d1, evidence_of_theories.evidence_position AS p6, evidence_of_theories.evidence_description AS d6, evidence_of_neurons.evidence_position AS p8, evidence_of_neurons.evidence_description AS d8 FROM natemsut_hctm.evidence_of_details, natemsut_hctm.evidence_of_implmnts, natemsut_hctm.evidence_of_keywords, natemsut_hctm.evidence_of_regions, natemsut_hctm.evidence_of_scales, natemsut_hctm.evidence_of_subjects, natemsut_hctm.evidence_of_theories, natemsut_hctm.evidence_of_neurons WHERE evidence_of_details.article_id=evidence_of_implmnts.article_id and evidence_of_details.article_id=evidence_of_keywords.article_id and evidence_of_details.article_id=evidence_of_regions.article_id and evidence_of_details.article_id=evidence_of_scales.article_id and evidence_of_details.article_id=evidence_of_subjects.article_id and evidence_of_details.article_id=evidence_of_theories.article_id and evidence_of_details.article_id=evidence_of_neurons.article_id and evidence_of_details.article_id=".$art_mod_id.";";
       $result = $conn->query($sql);
       $row = $result->fetch_assoc();
       $no_an = 'No annotation recorded yet';
@@ -144,8 +144,14 @@
       if ($row["d7"]!='') {
       $kwd_evid_des=$row["d7"];}
       else {$kwd_evid_des=$no_an;}
+      if ($row["p8"]!='') {
+      $nrn_evid_loc=$row["p8"];}
+      else {$nrn_evid_loc=$no_an;}
+      if ($row["d8"]!='') {
+      $nrn_evid_des=$row["d8"];}
+      else {$nrn_evid_des=$no_an;}      
       
-      return array($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $kwd_evid_loc, $kwd_evid_des);
+      return array($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $nrn_evid_loc, $nrn_evid_des, $kwd_evid_loc, $kwd_evid_des);
     }      
 
   // articles list
@@ -308,6 +314,10 @@
       $sql="SELECT ".$col." FROM ".$tbl."article_has_scale WHERE article_id=".$art_mod_id;
       $sel_scl=chk_prop($sql, $conn, $col);  
       //
+      $col="neuron_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_neuron WHERE article_id=".$art_mod_id;
+      $sel_nrn=chk_prop($sql, $conn, $col);      
+      //
       $col="region_id";    
       $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
       $sel_rgn=chk_prop($sql, $conn, $col);                 
@@ -327,6 +337,8 @@
     show_evidence("rgn", "Anatomical Region", $rgn_evid_loc, $rgn_evid_des);   
     properties_included('Theories',3,'category','theory_category',$sel_thy,$conn,'multiple','Theories Included','Theories Not Included');    
     show_evidence("thy", "Theories", $thy_evid_loc, $thy_evid_des);
+    properties_included('Neuron Types',3,'neuron','neuron_types',$sel_nrn,$conn,'multiple','Neuron Types Included','Neuron Types Not Included');    
+    show_evidence("nrn", "Neuron Types", $nrn_evid_loc, $nrn_evid_des);    
     properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$conn,'multiple','Keywords Included','Keywords Not Included');
     show_evidence("kwd", "Keywords", $kwd_evid_loc, $kwd_evid_des);
     echo "</table></div><br>";

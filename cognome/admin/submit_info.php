@@ -29,6 +29,14 @@
     $sql = "INSERT INTO `natemsut_hctm`.`article_has_scale` (`scale_id`, `article_id`) VALUES ('".$network_scales[0]."', '".$_POST['new_art_numb']."');";
     $result = $conn->query($sql);
   }  
+  if ($_POST['neuron_types']!='') {
+    $network_scales = $_POST['neuron_types'];
+    for ($i=0; $i<count($network_scales); $i++)
+    {    
+      $sql = "INSERT INTO `natemsut_hctm`.`article_has_neuron` (`neuron_id`, `article_id`) VALUES ('".$network_scales[$i]."', '".$_POST['new_art_numb']."');";
+      $result = $conn->query($sql);
+    }
+  }    
   if ($_POST['regions']!='') {
     $regions = $_POST['regions'];
     for ($i=0; $i<count($regions); $i++)

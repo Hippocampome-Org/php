@@ -10,8 +10,11 @@
     $prop_name = $_POST[$add_prop];
     $sql = "INSERT INTO `natemsut_hctm`.`".$tbl."` (`id`, `".$row_name."`) VALUES ('".$prop_id."', '".$prop_name."');";
     $result = $conn->query($sql);
-    echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>".$row_name." added: ".$prop_name."<br>
-    <br><a href='mod_art.php'>Back to update articles collection page</a><br><br></div>";
+    date_default_timezone_set('America/New_York');
+      $date = date('m/d/Y h:i:s a', time());
+    echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><br>".$row_name." added: ".$prop_name.".<br>Submission received at: ".$date." EST.";
+    //echo "<br><a href='mod_art.php'>Back to update articles collection page</a>";
+    echo "<br><br></div>";
   }
 
   function confirm_remove($tbl,$name,$rem_prop,$conn) {     
@@ -135,6 +138,12 @@
   else if (isset($_POST['remove_Theory']) && $_POST['remove_Theory']!= '') {
     remove_property('theory_category','category','remove_Theory',$conn);
   }  
+  else if (isset($_POST['add_Neuron']) && $_POST['add_Neuron']!= '') {
+    add_property('neuron_types','neuron','add_Neuron',$conn);
+  }
+  else if (isset($_POST['remove_Neuron']) && $_POST['remove_Neuron']!= '') {
+    remove_property('neuron_types','neuron','remove_Neuron',$conn);    
+  }   
   else if (isset($_POST['add_Keyword']) && $_POST['add_Keyword']!= '') {
     add_property('keywords','keyword','add_Keyword',$conn);
   }
@@ -148,7 +157,10 @@
     $sel_det=array(); // level of detail
     $sel_ipl=array(); // implementation level
     $sel_thy=array(); // theories
-    $sel_kwd=array(); // keywords   
+    $sel_kwd=array(); // keywords 
+    $sel_scl=array();
+    $sel_rgn=array();
+    $sel_nrn=array();  
 
     function chk_prop($sql, $conn, $tbl) {
       $matches=array();
@@ -177,6 +189,10 @@
       $sql="SELECT scale_id FROM natemsut_hctm.article_has_scale WHERE article_id=".$art_mod_id;
       $tbl="scale_id";
       $sel_scl=chk_prop($sql, $conn, $tbl);
+      //
+      $sql="SELECT neuron_id FROM natemsut_hctm.article_has_neuron WHERE article_id=".$art_mod_id;
+      $tbl="neuron_id";
+      $sel_nrn=chk_prop($sql, $conn, $tbl);       
       //
       $sql="SELECT region_id FROM natemsut_hctm.article_has_region WHERE article_id=".$art_mod_id;
       $tbl="region_id";
