@@ -16,8 +16,8 @@
     process_deletions($conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl);
     process_additions($conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl); 
   }
-  if ($_POST['implmnts']!='') {
-    $impl_lvl=$_POST['implmnts'];
+  if ($_POST['implementations']!='') {
+    $impl_lvl=$_POST['implementations'];
     process_deletions($conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl);
     process_additions($conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl);       
   }

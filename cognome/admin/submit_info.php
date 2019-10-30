@@ -19,9 +19,9 @@
     $sql = "INSERT INTO `natemsut_hctm`.`article_has_detail` (`detail_id`, `article_id`) VALUES ('".$details[0]."', '".$_POST['new_art_numb']."');";
     $result = $conn->query($sql);
   }
-  if ($_POST['implmnts']!='') {
-    $implmnts = $_POST['implmnts'];
-    $sql = "INSERT INTO `natemsut_hctm`.`article_has_implmnt` (`level_id`, `article_id`) VALUES ('".$implmnts[0]."', '".$_POST['new_art_numb']."');";
+  if ($_POST['implementations']!='') {
+    $implementations = $_POST['implementations'];
+    $sql = "INSERT INTO `natemsut_hctm`.`article_has_implmnt` (`level_id`, `article_id`) VALUES ('".$implementations[0]."', '".$_POST['new_art_numb']."');";
     $result = $conn->query($sql);
   }
   if ($_POST['network_scales']!='') {
