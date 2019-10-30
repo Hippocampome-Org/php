@@ -96,59 +96,73 @@
       return array($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id);
     }
 
-    function getResProperties($art_mod_id, $conn) { 
-
-      $sql = "SELECT evidence_of_details.evidence_position AS p2, evidence_of_details.evidence_description AS d2, evidence_of_implmnts.evidence_position AS p4, evidence_of_implmnts.evidence_description AS d4, evidence_of_keywords.evidence_position AS p7, evidence_of_keywords.evidence_description AS d7, evidence_of_regions.evidence_position AS p5, evidence_of_regions.evidence_description AS d5, evidence_of_scales.evidence_position AS p3, evidence_of_scales.evidence_description AS d3, evidence_of_subjects.evidence_position AS p1, evidence_of_subjects.evidence_description AS d1, evidence_of_theories.evidence_position AS p6, evidence_of_theories.evidence_description AS d6, evidence_of_neurons.evidence_position AS p8, evidence_of_neurons.evidence_description AS d8 FROM natemsut_hctm.evidence_of_details, natemsut_hctm.evidence_of_implmnts, natemsut_hctm.evidence_of_keywords, natemsut_hctm.evidence_of_regions, natemsut_hctm.evidence_of_scales, natemsut_hctm.evidence_of_subjects, natemsut_hctm.evidence_of_theories, natemsut_hctm.evidence_of_neurons WHERE evidence_of_details.article_id=evidence_of_implmnts.article_id and evidence_of_details.article_id=evidence_of_keywords.article_id and evidence_of_details.article_id=evidence_of_regions.article_id and evidence_of_details.article_id=evidence_of_scales.article_id and evidence_of_details.article_id=evidence_of_subjects.article_id and evidence_of_details.article_id=evidence_of_theories.article_id and evidence_of_details.article_id=evidence_of_neurons.article_id and evidence_of_details.article_id=".$art_mod_id.";";
+    function getResPropRow($conn, $tbl, $art_mod_id) {
+      $sql = "SELECT ".$tbl.".evidence_position AS position, ".$tbl.".evidence_description AS description FROM natemsut_hctm.".$tbl." WHERE ".$tbl.".article_id=".$art_mod_id.";";
+      echo $sql;
       $result = $conn->query($sql);
       $row = $result->fetch_assoc();
+
+      return $row;
+    }
+
+    function getResProperties($art_mod_id, $conn) { 
+
       $no_an = 'No annotation recorded yet';
-      if ($row["p1"]!='') {
-      $sub_evid_loc=$row["p1"];}
+      $row = getResPropRow($conn, "evidence_of_subjects", $art_mod_id);
+      if ($row["position"]!='') {
+      $sub_evid_loc=$row["position"];}
       else {$sub_evid_loc=$no_an;}
-      if ($row["d1"]!='') {
-      $sub_evid_des=$row["d1"];}
+      if ($row["description"]!='') {
+      $sub_evid_des=$row["description"];}
       else {$sub_evid_des=$no_an;}
-      if ($row["p2"]!='') {
-      $det_evid_loc=$row["p2"];}
+      $row = getResPropRow($conn, "evidence_of_details", $art_mod_id);
+      if ($row["position"]!='') {
+      $det_evid_loc=$row["position"];}
       else {$det_evid_loc=$no_an;}
-      if ($row["d2"]!='') {
-      $det_evid_des=$row["d2"];}
+      if ($row["description"]!='') {
+      $det_evid_des=$row["description"];}
       else {$det_evid_des=$no_an;}
-      if ($row["p3"]!='') {
-      $scl_evid_loc=$row["p3"];}
+      $row = getResPropRow($conn, "evidence_of_scales", $art_mod_id);
+      if ($row["position"]!='') {
+      $scl_evid_loc=$row["position"];}
       else {$scl_evid_loc=$no_an;}
-      if ($row["d3"]!='') {
-      $scl_evid_des=$row["d3"];}
+      if ($row["description"]!='') {
+      $scl_evid_des=$row["description"];}
       else {$scl_evid_des=$no_an;}
-      if ($row["p4"]!='') {
-      $impl_evid_loc=$row["p4"];}
+      $row = getResPropRow($conn, "evidence_of_implmnts", $art_mod_id);
+      if ($row["position"]!='') {
+      $impl_evid_loc=$row["position"];}
       else {$impl_evid_loc=$no_an;}
-      if ($row["d4"]!='') {
-      $impl_evid_des=$row["d4"];}
+      if ($row["description"]!='') {
+      $impl_evid_des=$row["description"];}
       else {$impl_evid_des=$no_an;}
-      if ($row["p5"]!='') {
-      $rgn_evid_loc=$row["p5"];}
+      $row = getResPropRow($conn, "evidence_of_regions", $art_mod_id);
+      if ($row["position"]!='') {
+      $rgn_evid_loc=$row["position"];}
       else {$rgn_evid_loc=$no_an;}
-      if ($row["d5"]!='') {
-      $rgn_evid_des=$row["d5"];}
+      if ($row["description"]!='') {
+      $rgn_evid_des=$row["description"];}
       else {$rgn_evid_des=$no_an;}
-      if ($row["p6"]!='') {
-      $thy_evid_loc=$row["p6"];}
+      $row = getResPropRow($conn, "evidence_of_theories", $art_mod_id);
+      if ($row["position"]!='') {
+      $thy_evid_loc=$row["position"];}
       else {$thy_evid_loc=$no_an;}
-      if ($row["d6"]!='') {
-      $thy_evid_des=$row["d6"];}
+      if ($row["description"]!='') {
+      $thy_evid_des=$row["description"];}
       else {$thy_evid_des=$no_an;}
-      if ($row["p7"]!='') {
-      $kwd_evid_loc=$row["p7"];}
+      $row = getResPropRow($conn, "evidence_of_keywords", $art_mod_id);
+      if ($row["position"]!='') {
+      $kwd_evid_loc=$row["position"];}
       else {$kwd_evid_loc=$no_an;}
-      if ($row["d7"]!='') {
-      $kwd_evid_des=$row["d7"];}
+      if ($row["description"]!='') {
+      $kwd_evid_des=$row["description"];}
       else {$kwd_evid_des=$no_an;}
-      if ($row["p8"]!='') {
-      $nrn_evid_loc=$row["p8"];}
+      $row = getResPropRow($conn, "evidence_of_neurons", $art_mod_id);
+      if ($row["position"]!='') {
+      $nrn_evid_loc=$row["position"];}
       else {$nrn_evid_loc=$no_an;}
-      if ($row["d8"]!='') {
-      $nrn_evid_des=$row["d8"];}
+      if ($row["description"]!='') {
+      $nrn_evid_des=$row["description"];}
       else {$nrn_evid_des=$no_an;}      
       
       return array($sub_evid_loc, $sub_evid_des, $det_evid_loc, $det_evid_des, $scl_evid_loc, $scl_evid_des, $impl_evid_loc, $impl_evid_des, $rgn_evid_loc, $rgn_evid_des, $thy_evid_loc, $thy_evid_des, $nrn_evid_loc, $nrn_evid_des, $kwd_evid_loc, $kwd_evid_des);

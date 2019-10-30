@@ -246,6 +246,8 @@
     Article details section
   */
   $det_lbl_wth='100px'; //article details label width
+  $dir='/cognome_articles_renamed/';
+  include('find_pdf.php');
   echo "<center><u>Article Details</u></center>
   <br>
   <br>
@@ -255,7 +257,7 @@
   <tr><td style='max-width:".$det_lbl_wth.";'>Year:</td><td><textarea name='year' style='max-width:70px;max-height:25px;font-size:22px;overflow:hidden;resize:none;'>".$year."</textarea></td></tr>  
   <tr><td style='max-width:".$det_lbl_wth.";'>Journal:</td><td><textarea name='journal' style='min-width:100%;min-height:25px;font-size:22px;'>".$journal."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Citation:</td><td><textarea name='citation' style='min-width:100%;min-height:125px;font-size:22px;'>".$citation."</textarea></td></tr>
-  <tr><td style='max-width:".$det_lbl_wth.";'>Url:</td><td><textarea name='url' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$url."</textarea></td></tr> 
+  <tr><td style='max-width:".$det_lbl_wth.";'>Url:</td><td><textarea name='url' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$url."</textarea><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href='".find_pdf($dir, $art_mod_id)."'>pdf</a></td></tr> 
   <tr><td style='max-width:".$det_lbl_wth.";'>Authors:</td><td><textarea name='authors' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$authors."</textarea></td></tr> 
   <tr><td style='max-width:".$det_lbl_wth.";'>Abstract:</td><td><textarea name='abstract' style='min-width:100%;min-height:200px;font-size:22px;'>".$abstract."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Theory Notes:</td><td><textarea name='theory' style='min-width:100%;min-height:50px;font-size:22px;'>".$theory."</textarea></td></tr>
