@@ -98,7 +98,6 @@
 
     function getResPropRow($conn, $tbl, $art_mod_id) {
       $sql = "SELECT ".$tbl.".evidence_position AS position, ".$tbl.".evidence_description AS description FROM natemsut_hctm.".$tbl." WHERE ".$tbl.".article_id=".$art_mod_id.";";
-      echo $sql;
       $result = $conn->query($sql);
       $row = $result->fetch_assoc();
 
