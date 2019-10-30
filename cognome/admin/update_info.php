@@ -36,8 +36,8 @@
     process_deletions($conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list);
     process_additions($conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list);       
   }  
-  if ($_POST['theories']!='') {
-    $theories = $_POST['theories'];  
+  if ($_POST['theory_category']!='') {
+    $theories = $_POST['theory_category'];  
     process_deletions($conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories);
     process_additions($conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories);       
   }

@@ -45,8 +45,8 @@
       $result = $conn->query($sql);
     } 
   }
-  if ($_POST['theories']!='') {
-    $theories = $_POST['theories'];
+  if ($_POST['theory_category']!='') {
+    $theories = $_POST['theory_category'];
     for ($i=0; $i<count($theories); $i++)
     {
       $sql = "INSERT INTO `natemsut_hctm`.`article_has_theory` (`theory_id`, `article_id`) VALUES ('".$theories[$i]."', '".$_POST['new_art_numb']."');";
