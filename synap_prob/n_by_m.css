@@ -183,8 +183,9 @@ div.verticle_n_by_k
 {
 	height: 80px;
 	width: 50px;
-	text-align: center;
-	right:10px;
+	/*text-align: center;*/
+	/* right:10px; */
+	font-size: 13px;
 }
 
 div.verticle_n_by_n
@@ -232,6 +233,46 @@ td.vertical
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 ); /* IE6-9 */
 	color: #006388;
 }
+
+/*reference: https://stackoverflow.com/questions/15811653/table-with-fixed-header-and-fixed-column-on-pure-css*/
+/*
+.fixed_header div {	
+  max-width: 40em;
+  max-height: 20em;
+  overflow: scroll;
+  position: relative;
+}
+
+.fixed_header table {
+  position: relative;
+  border-collapse: collapse;
+}
+
+.fixed_header td, th {
+  padding: 0.25em;
+}
+
+.fixed_header thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #000;
+  color: #FFF;
+}
+
+.fixed_header thead th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
+.fixed_header tbody th {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  background: #FFF;
+  border-right: 1px solid #CCC;
+}
+*/
 
 .dg_area
 {

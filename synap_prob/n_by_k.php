@@ -63,8 +63,8 @@
 
   include('change_html.php');
 
-  // generate matrix
-  echo "<table class='main_table'>";  
+  // generate matrix   
+  echo "<div class='fixed_header'><table class='main_table fixed_header'>";  
   /*$i = 0;*/
   for ($i=0;$i<count($neuron_group)+2;$i++) {
   //for ($i=0;$i<14;$i++) {
@@ -79,6 +79,13 @@
       else if ($i_adj==55) {$i_adj=46;}
       if ($i_adj==47) {$i_adj=56;}
       else if ($i_adj==56) {$i_adj=47;}
+      // manual rules for organizing column order as listed on the morphology page
+      if ($j_adj==11) {$j_adj=17;}
+      else if ($j_adj==17) {$j_adj=11;}
+      if ($j_adj==13) {$j_adj=15;}
+      else if ($j_adj==15) {$j_adj=13;} 
+      //if ($j_adj==21) {$j_adj=25;}
+      //else if ($j_adj==25) {$j_adj=21;}     
 
       $output_data = false;
       if ($j%2==0) {
@@ -86,30 +93,31 @@
       }
       if ($i==0) {
         if ($j==0) {
-          echo "<tr class='main_table_header'><td style='border-bottom:0px !important'>";
+          echo "<thead><tr class='main_table_header fixed_header'>";         
+          echo "<td style='border-bottom:0px !important'>";
         }
         else if ($j==1) {
-          echo "<td style='border-bottom:0px'>";
+          echo "<td style='border-bottom:0px' class='fixed_header'>";
         }
         else if ($output_data && $parcel_layers[$j_adj]!='All') {
           echo "<td style='border-left:2px white;border-right:2px white;padding:5px;'";
           if ($j_adj > 0 && $j_adj < 11) {
-            echo " class='dg_area'><font style='font-size:14px;color:white;'>";
+            echo " class='dg_area fixed_header'><font style='font-size:14px;color:white;'>";
           }
           else if ($j_adj < 23) {
-            echo " class='ca3_area'><font style='font-size:14px;color:white;'>";
+            echo " class='ca3_area fixed_header'><font style='font-size:14px;color:white;'>";
           }
           else if ($j_adj < 33) {
-            echo " class='ca2_area'><font style='font-size:14px;color:#000993;'>";
+            echo " class='ca2_area fixed_header'><font style='font-size:14px;color:#000993;'>";
           }
           else if ($j_adj < 43) {
-            echo " class='ca1_area'><font style='font-size:14px;color:#000993;'>";
+            echo " class='ca1_area fixed_header'><font style='font-size:14px;color:#000993;'>";
           }
           else if ($j_adj < 51) {
-            echo " class='sub_area'><font style='font-size:14px;color:#000993;'>";
+            echo " class='sub_area fixed_header'><font style='font-size:14px;color:#000993;'>";
           }
           else if ($j_adj < 65) {
-            echo " class='ec_area'><font style='font-size:14px;color:white;'>";
+            echo " class='ec_area fixed_header'><font style='font-size:14px;color:white;'>";
           }       
         }
 
@@ -142,27 +150,27 @@
       }
       else if ($i==1) {
         if ($j==0) {
-          echo "<tr class='main_table_header'>";          
+          echo "<tr class='main_table_header fixed_header'>";          
           echo "<td style='border-top:0px !important'></td>";
         }        
         else if ($j==1) {
           echo "<td style='border-top:0px'>".$parcel_group[$j_adj]."</td>";
         }
         else if ($output_data && $parcel_layers[$j_adj]!='All') {
-          echo "<td class='".$css_vertical." verticle_n_by_k main_matrix_text' ";
+          echo "<td class='fixed_header ".$css_vertical." verticle_n_by_k main_matrix_text' ";
           if ($j_adj == $vert_red_lines[0] || $j_adj == $vert_red_lines[1] || $j_adj ==  $vert_red_lines[2] || $j_adj ==  $vert_red_lines[3] || $j_adj ==  $vert_red_lines[4]) {
             echo " style='border-right:4px solid #810004;'";
           }
-          echo "><div class='".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_layers[$j_adj]."</div></td>";
+          echo "><div class='fixed_header ".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_layers[$j_adj]."</div></td>";
         }
       }
       else {
         if ($j==0) {
-          echo "<tr id='main_table_row_".$i_adj."'";
+          echo "</thead><tbody><tr id='main_table_row_".$i_adj."'";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
-            echo " class='red_border2'";
+            echo " class='fixed_header red_border2'";
           }
-          echo "><td class='main_matrix_text main_table_cell";
+          echo "><td class='fixed_header main_matrix_text main_table_cell";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border2";
           }
@@ -173,32 +181,32 @@
           echo ">";          
           switch($i_adj){
             case 0;
-            echo "<font class='dg_area2'>";
+            echo "<font class='fixed_header dg_area2'>";
             echo "DG(".$neuron_parcel_counts[0].")";
             echo "</font>";
             break;
             case 18;
-            echo "<font class='ca3_area2'>";
+            echo "<font class='fixed_header ca3_area2'>";
             echo "CA3(".$neuron_parcel_counts[1].")";
             echo "</font>";
             break;
             case 40;
-            echo "<font class='ca2_area2'>";
+            echo "<font class='fixed_header ca2_area2'>";
             echo "CA2(".$neuron_parcel_counts[2].")";
             echo "</font>";
             break;
             case 54;
-            echo "<font class='ca1_area2'>";
+            echo "<font class='fixed_header ca1_area2'>";
             echo "CA1(".$neuron_parcel_counts[3].")";
             echo "</font>";
             break;
             case 85;
-            echo "<font class='sub_area2'>";
+            echo "<font class='fixed_header sub_area2'>";
             echo "SUB(".$neuron_parcel_counts[4].")";
             echo "</font>";
             break;
             case 88;
-            echo "<font class='ec_area2'>";
+            echo "<font class='fixed_header ec_area2'>";
             echo "EC(".$neuron_parcel_counts[5].")";
             echo "</font>";
             break;                   
@@ -206,14 +214,14 @@
           echo "</td>";
         }        
         else if ($j==1) {
-          echo "<td class='main_matrix_text row_first_cell";
+          echo "<td class='fixed_header main_matrix_text row_first_cell";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border' style='border-top: .09em solid #ff5757 !important;'";
           }
           echo "' id='first_cell_".$i_adj."' onClick=\"changerowcolor(".$i_adj.")\" onmouseover=\"changebordercolor(".$i_adj.")\">".e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj])."</td>";
         }
         else if ($output_data && $parcel_layers[$j_adj]!='All') {
-          echo "<td class='main_matrix_text main_table_cell";
+          echo "<td class='fixed_header main_matrix_text main_table_cell";
           if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
             echo " red_border";
           }
@@ -311,7 +319,7 @@
     }    
     echo "</tr>";
   }
-  echo "</table>";
+  echo "</tbody></table></div>";
   echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='2'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Excitatory</font>
   &nbsp; &nbsp; 
   <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='2'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Inhibitory</font>
