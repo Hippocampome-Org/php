@@ -322,6 +322,6 @@
   echo "</tbody></table></div>";
   echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='2'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Excitatory</font>
   &nbsp; &nbsp; 
-  <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='2'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Inhibitory</font>
+  <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='2'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Inhibitory&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='http://www.hippocampome.org/phpdev/synap_prob/dal/synapse_probabilities.html'>Realtime loading preview</a></font>
   <br />";  
 ?>

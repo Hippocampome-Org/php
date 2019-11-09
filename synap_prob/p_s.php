@@ -249,6 +249,6 @@
     }    
     echo "</tr>";
   }
-  echo "</table>";
+  echo "</table>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='http://www.hippocampome.org/phpdev/synap_prob/dal/synapse_probabilities.html'>Realtime loading preview</a>";
 
 ?>

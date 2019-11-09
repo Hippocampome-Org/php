@@ -71,7 +71,7 @@ options[document.main_matrix_selection.matrix_selection.selectedIndex].value
 
 <!-- COPY IN ALL PAGES -->
 <?php 
-  include ("function/title.php");
+  include ("synap_prob/function/title.php");
   include ("function/menu_main.php");
 ?>  
 
@@ -80,7 +80,10 @@ options[document.main_matrix_selection.matrix_selection.selectedIndex].value
 <form name="main_matrix_selection">	
 <span class='top_matrix_menu'>	
 <select name="matrix_selection" size="1" onChange="go()">
-<option value="#">Select Data</option>
+<option value="#" selected>Select Data</option>
+<!-- option value="../../synap_prob/dal/synapse_probabilities.html">Dendritic and Axonal Lengths</option -->
+<!-- option value="../../synap_prob/sd/synapse_probabilities.html">Somatic Distances</option -->
+<!-- option value="../../synap_prob/sp/synapse_probabilities.html">Synapse Probabilities</option -->
 <option value="?tab=a_d_l">Dendritic and Axonal Lengths</option>
 <option value="?tab=s_d">Somatic Distances</option>
 <option value="?tab=p_s">Synapse Probabilities</option>

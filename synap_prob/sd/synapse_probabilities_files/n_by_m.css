@@ -1,0 +1,597 @@
+/*
+  reference: https://www.broculos.net/2013/12/vertical-text-for-table-headers-with-css.html
+  https://codepen.io/philhoyt/pen/ujHzd
+  https://codepen.io/philhoyt
+*/
+
+.ui-jqgrid .ui-jqgrid-htable th {
+	height:22px;
+	padding: 0px 2px;
+}
+.ui-jqgrid .ui-jqgrid-htable th div {
+	overflow: hidden; 
+	position:relative; 
+	height:305px; 
+	text-align:left; 
+	margin-bottom:5px;
+	top:-10px
+}
+
+.main_table {
+	height:535px;
+	width:1050px;
+	text-align: left;
+  	overflow-x: auto;
+  	display: block;
+  	white-space: nowrap;
+  	border-collapse: collapse;
+  	font-family: arial;
+}
+
+.main_table td {
+	border: 1px solid #7dcdeb;
+}
+
+div.vertical
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+}
+
+div.vertical2
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+	top:-7px;
+}
+
+div.verticalIE
+{
+	-ms-transform: rotate(-90deg)
+	translate(-15px,50px);
+}
+
+div.verticalIE2
+{
+	-ms-transform: rotate(-90deg)
+	translate(-120px,160px);
+}
+
+div.verticalSafari
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-10px,50px);	
+}
+
+div.verticalSafari2
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-120px,160px);	
+}
+
+div.verticalOpera
+{
+	-o-transform:  rotate(-90deg)
+	translate(-135px,150px); /* Opera starting with 10.50 */
+}
+
+div.vertical_fc
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+}
+
+div.vertical_fc2
+{
+	position: relative;
+	margin-left: 0;
+	padding-right: 0px;
+	writing-mode: vertical-lr;
+	/*filter: flipv fliph;*/
+	transform: rotate(180deg);
+}
+
+div.vertical_fcIE
+{
+	-webkit-transform: rotate(-90deg) /* Safari 3.1+, Chrome */
+	translate(10px,10px);
+	-moz-transform: rotate(-90deg) /* Firefox 3.5+ */
+	translate(10px,10px);
+	-o-transform: rotate(-90deg) /* Opera starting with 10.50 */
+	translate(10px,10px);
+	/* Internet Explorer: */
+	-ms-transform: rotate(-90deg)
+	translate(10px,10px);
+}
+
+div.vertical_fcIE2
+{
+	-webkit-transform: rotate(-90deg) /* Safari 3.1+, Chrome */
+	translate(10px,10px);
+	-moz-transform: rotate(-90deg) /* Firefox 3.5+ */
+	translate(10px,10px);
+	-o-transform: rotate(-90deg) /* Opera starting with 10.50 */
+	translate(10px,10px);
+	/* Internet Explorer: */
+	-ms-transform: rotate(-90deg)
+	translate(-30px,40px);
+}
+
+div.vertical_fcSafari
+{
+	-webkit-transform: rotate(-90deg)
+	translate(10px,10px);	
+}
+
+div.vertical_fcSafari2
+{
+	-webkit-transform: rotate(-90deg)
+	translate(-30px,40px);	
+}
+
+div.horizontal_fc
+{
+
+}
+
+div.horizontal_fc2
+{
+	position:relative;
+	top:60px;
+	left:-20px;
+}
+
+div.horizontal_fcIE
+{
+	position:relative;
+	top: 15px;
+}
+
+div.horizontal_fcIE2
+{
+	position:relative;
+	top: 110px;
+	left:50px;
+}
+
+div.horizontal_fcSafari
+{
+	position:relative;
+	top: 15px;
+}
+
+div.horizontal_fcSafari2
+{
+	position:relative;
+	top: 110px;
+	left:50px;
+}
+
+div.verticle_n_by_k
+{
+	height: 80px;
+	width: 50px;
+	/*text-align: center;*/
+	/* right:10px; */
+	font-size: 13px;
+}
+
+div.verticle_n_by_n
+{
+	height: 300px;
+	width: 50px;
+}
+
+td.vertical
+{
+	padding-bottom: 5px;
+	vertical-align: top;
+}
+
+.main_matrix_text 
+{
+	font-size: 11px;
+}
+
+.main_matrix_text a
+{
+	color:black;
+}
+
+.pre_post_transforms
+{
+	position:relative;
+	float:right;
+	vertical-align: bottom;
+	text-align:right;
+	top:52px;
+	/*right:90px;	*/
+	height:200px;
+	width:200px;
+}
+
+.main_table_header
+{
+	font-weight: bold;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e5f3ff+0,e5f3ff+49,dbefff+50,cfedf9+51,e5f3ff+55 */
+	background: #e5f3ff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e5f3ff 0%, #e5f3ff 49%, #dbefff 50%, #cfedf9 51%, #e5f3ff 55%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #e5f3ff 0%,#e5f3ff 49%,#dbefff 50%,#cfedf9 51%,#e5f3ff 55%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 ); /* IE6-9 */
+	color: #006388;
+}
+
+/*reference: https://stackoverflow.com/questions/15811653/table-with-fixed-header-and-fixed-column-on-pure-css*/
+/*
+.fixed_header div {	
+  max-width: 40em;
+  max-height: 20em;
+  overflow: scroll;
+  position: relative;
+}
+
+.fixed_header table {
+  position: relative;
+  border-collapse: collapse;
+}
+
+.fixed_header td, th {
+  padding: 0.25em;
+}
+
+.fixed_header thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background: #000;
+  color: #FFF;
+}
+
+.fixed_header thead th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
+.fixed_header tbody th {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  background: #FFF;
+  border-right: 1px solid #CCC;
+}
+*/
+
+.dg_area
+{
+	background-color: #810004;
+}
+
+.ca3_area
+{
+	background-color: #ca7e82;	
+}
+
+.ca2_area
+{
+	background-color: #fffea4;	
+}
+
+.ca1_area
+{
+	background-color: #ff5622;
+}
+
+.sub_area
+{
+	background-color: #ffc951;
+}
+
+.ec_area
+{
+	background-color: #216739;
+}
+
+.dg_area2
+{
+	color: #810004;
+	font-weight:bold;
+}
+
+.ca3_area2
+{
+	color: #ca7e82;	
+	font-weight:bold;
+}
+
+.ca2_area2
+{
+	color: #fffea4;	
+	font-weight:bold;
+}
+
+.ca1_area2
+{
+	color: #ff5622;
+	font-weight:bold;
+}
+
+.sub_area2
+{
+	color: #ffc951;
+	font-weight:bold;
+}
+
+.ec_area2
+{
+	color: #216739;
+	font-weight:bold;
+}
+
+.red_border
+{
+	/*border-top: .09em solid #ff5757;*/
+	background: -moz-linear-gradient(red 0%, white 6%, white 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(red 0%, white 6%, white 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(red 0%, white 6%, white 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5f3ff', endColorstr='#e5f3ff',GradientType=0 );*/ /* IE6-9 */
+}
+
+.red_border2
+{
+	background: -moz-linear-gradient(red 0%, white 6%, white 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(red 0%, white 6%, white 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(red 0%, white 6%, white 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	border-bottom: 0px solid white !important;
+}
+
+.no_t_b_border
+{
+	border-top: 0px solid white !important;
+	border-bottom: 0px solid white !important;
+}
+
+.main_table_cell
+{
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	min-width: 50px;
+}
+
+.hr_sub_cell
+{
+	font-size: 6px;
+	border-top: .07em solid #7dcdeb;
+	border-bottom: 0px;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+.excite_green
+{
+	color:green !important;
+}
+
+.excite_green a
+{
+	color:green !important;
+}
+
+.inhib_red
+{
+	color:red;
+}
+
+.highlighted_bottom_border
+{
+	border: 1px solid #000000;
+	border-bottom: .0829em solid #ffeb94;
+	border-bottom: 1px solid #ffeb94;
+}
+
+.nonhighlighted_bottom_border
+{
+	border-bottom: .0829em solid #00FFFF;
+	border-bottom: 1px solid #00FFFF;
+	/*border-bottom: 1px solid black;*/
+}
+
+.highlighted_first_entry
+{
+	background-color: lightgrey;
+}
+
+.nothighlighted_first_entry
+{
+	background-color: white;
+}
+
+.synpro_side_menu
+{
+	padding: 5px;
+	border: 2px solid grey;
+	font-family: arial;
+	font-size: 18px;
+	text-decoration: none;
+	color: black;
+	text-align: center;
+}
+
+.synpro_selections
+{
+	background-color:#f1f1f1;
+}
+
+.nbyk_cell1_a
+{
+	border:0px;
+	position:relative;
+	float:right;
+	bottom:-.8em;
+}
+
+.nbym_cell1_a
+{
+	border:0px;
+	position:relative;
+	float:right;
+	bottom:-4.0em;
+}
+
+.nbyk_cell1_b
+{
+	vertical-align: bottom;
+	border:0px;
+	position:relative;
+	left:-2.0em;
+	font-size: 14px;	
+}
+
+.nbym_cell1_b
+{
+	vertical-align: bottom;
+	border:0px;
+	position:relative;
+	left:-2.0em;
+	font-size: 14px;	
+}
+
+.nbyk_cell1_c
+{
+	border:0px;
+	position:relative;
+	float:right;
+	font-size: 14px;
+}
+
+.nbym_cell1_c
+{
+	border:0px;
+	position:relative;
+	float:right;
+	font-size: 14px;
+}
+
+.nbyk_cell1_d
+{
+	position:relative;
+	float:right;
+}
+
+.nbym_cell1_d
+{
+	position:relative;
+	float:right;
+}
+
+.data_selection
+{
+	position:relative;
+	text-align: center;
+	font-family: arial;
+	font-size: 18px;
+	top:4px;	
+}
+
+.row_first_cell
+{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+/* CSS dropdown menu by https://codepen.io/philhoyt */
+#primary_nav_wrap
+{
+	/*margin-top:15px*/
+}
+
+#primary_nav_wrap ul
+{
+	list-style:none;
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+	z-index: 1;
+}
+
+#primary_nav_wrap ul a
+{
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:700;
+	font-size:12px;
+	line-height:32px;
+	padding:0 15px;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#primary_nav_wrap ul li
+{
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+}
+
+#primary_nav_wrap ul li.current-menu-item
+{
+	background:#ddd	
+}
+
+#primary_nav_wrap ul li:hover
+{
+	background:#f6f6f6
+}
+
+#primary_nav_wrap ul ul
+{
+	display:none;
+	position:absolute;
+	top:100%;
+	left:0;
+	background:#fff;
+	padding:0
+}
+
+#primary_nav_wrap ul ul li
+{
+	float:none;
+	width:200px
+}
+
+#primary_nav_wrap ul ul a
+{
+	line-height:120%;
+	padding:10px 15px	
+}
+
+#primary_nav_wrap ul ul ul
+{
+	top:0;
+	left:100%
+}
+
+#primary_nav_wrap ul li:hover > ul
+{
+	display:block
+}
+
+.top_matrix_menu
+{
+	position:relative;
+	top:2px;
+}
