@@ -72,6 +72,11 @@ border:none;
 	width:700px;
 	border:none;
 }
+#menu_main_button_new_clr{
+	position:absolute; top: 10px; left: 600px;
+	width:700px;
+	border:none;
+}
 
 /* Change with resolution ------------------------------------------------------------- */
 	.main_button{
