@@ -309,7 +309,7 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:60px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:50px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
       <br><br><br>
@@ -323,26 +323,26 @@ jQuery(document).ready(function() {
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
-      <a href = "https://www.biorxiv.org/content/10.1101/633883v1">
+      <a href = "https://onlinelibrary.wiley.com/doi/full/10.1002/hipo.23165">
       <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
       Relational Inferences.</i></a>
-      Hippocampus 2019 (in press); doi: https://doi.org/10.1101/633883.
+      Hippocampus 2019 Oct 9; doi: 10.1002/hipo.23165.
       <br><br>
       The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
       phenotypes in the knowledge base.
       Reference: <b>Komendantov, et al., 2019</b>
-      <a href = "https://www.biorxiv.org/content/10.1101/212084v2">
+      <a href = "https://www.nature.com/articles/s41598-019-52611-w">
       <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
-      Scientific Reports 2019 (in press); doi: https://doi.org/10.1101/212084.
+      Scientific Reports 2019 Nov 29;9(1):17915; doi: 10.1038/s41598-019-52611-w.
       <br><br>
       <b>*NEW*</b> The release of v1.7 on 10/08/2019 includes Izhikevich models for most of the neuron types,
       downloadable parameter and CARLSim4-simulation files, and the ability to perform simulations of the firing
       patterns.
       Reference: <b>Venkadesh, et al., 2019</b>
-      <a href = "https://www.biorxiv.org/content/10.1101/632430v1">
+      <a href = "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007462">
       <i>Simple models of quantitative firing phenotypes in hippocampal neurons: comprehensive coverage of intrinsic
       diversity.</i></a>
-      PLOS Computational Biology 2019 (in press); doi: https://doi.org/10.1101/632430.
+      PLOS Computational Biology 2019 Oct 28;15(10):e1007462; doi: 10.1371/journal.pcbi.1007462.
       </font>
     </td>
   </tr>
@@ -368,7 +368,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
-          <br />Last Update: 08 Oct 2019 (<a href="Help_Release_Notes.php">v1.7</a>)</font>
+          <br />Last Update: 15 Oct 2019 (<a href="Help_Release_Notes.php">v1.7 R 1A</a>)</font>
           <br />
         </div>
     </td>   
