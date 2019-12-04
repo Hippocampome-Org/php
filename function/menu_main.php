@@ -66,6 +66,16 @@ session_start();
 	
 		</ul></li>
 	
+	     <li class="topmenu"><a style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/tools.ico" alt="" id="image_find"/>Tools</span></a>
+      		<ul>
+       	 		<!-- <li><a href="">Pixel Counter Program</a></li> -->
+        		<li><a href="connprob.php">Connection Probabilities</a></li>
+        		<li><a href="https://github.com/k1moradi/SynapseModelersWorkshop/archive/master.zip">Synapse Modelers</a></li>
+        		<!-- <li><a href="">Liquid Junction Potential Calculator</a></li>
+        		<li><a href="">Simulator</a></li>
+        		<li><a href="">Post Synaptic Potential Responce</a></li> -->
+      		</ul>
+    	</li>
 		<li class="toplast"><a href="help.php" style="height:32px;line-height:32px;"><img src="function/menu_support_files/help.png" alt=""/>Help</a>
 		
 		<ul>
