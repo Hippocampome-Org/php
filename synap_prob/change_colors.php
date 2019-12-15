@@ -13,8 +13,10 @@
 		document.getElementById(row_color_change).style.backgroundImage='';    
 		document.getElementById(row_color_change).style.backgroundColor='#ffeb94';
 		/* change old row highlight back */
-		document.getElementById(old_row_color_change).style.backgroundImage='';    
-		document.getElementById(old_row_color_change).style.backgroundColor='#FFFFFF';
+		if (row_color_change != old_row_color_change) {
+			document.getElementById(old_row_color_change).style.backgroundImage='';    
+			document.getElementById(old_row_color_change).style.backgroundColor='#FFFFFF';
+		}
 	}
 	function changebordercolor(curRow)
 	{

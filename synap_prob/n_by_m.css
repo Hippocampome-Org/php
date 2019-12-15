@@ -4,7 +4,7 @@
   https://codepen.io/philhoyt
 */
 
-.ui-jqgrid .ui-jqgrid-htable th {
+/*.ui-jqgrid .ui-jqgrid-htable th {
 	height:22px;
 	padding: 0px 2px;
 }
@@ -15,18 +15,104 @@
 	text-align:left; 
 	margin-bottom:5px;
 	top:-10px
-}
+}*/
 
-.main_table {
+/*.main_table {
 	height:535px;
 	width:1050px;
 	text-align: left;
-  	overflow-x: auto;
   	display: block;
+  	overflow-x: auto;
   	white-space: nowrap;
   	border-collapse: collapse;
   	font-family: arial;
-}
+}*/
+
+/* fixed rows and columns */
+
+    table.fixed_table {
+	  position: relative;
+	  /*width: 700px;*/
+	  width:1050px;
+	  /*background-color: #aaa;*/
+	  overflow: hidden;
+	  border-collapse: collapse;
+	  font-family: arial;
+	}
+
+	/*thead*/
+	table.fixed_table thead {
+	  position: relative;
+	  display: block; /*seperates the header from the body allowing it to be positioned*/
+	  width: 1050px;
+	  overflow: visible;
+	}
+
+	table.fixed_table thead th {
+	  /*background-color: #99a;*/
+	  min-width: 120px;
+	  height: 32px;
+	  /*border: 1px solid #222;*/
+	}
+
+	table.fixed_table thead td:nth-child(1) {/*first cell in the header*/
+	  position: relative;
+	  display: block; /*seperates the first cell in the header from the header*/
+	  /*background-color: #88b;*/
+	}
+
+	table.fixed_table thead td:nth-child(2) {/*first cell in the header*/
+	  position: relative;
+	  display: block; /*seperates the first cell in the header from the header*/
+	  /*background-color: #88b;*/
+	}
+	table.fixed_table2 thead td:nth-child(3) {/*first cell in the header*/
+	  min-width: 45px !important;
+	}
+
+	table.fixed_table2 thead td:nth-child(4) {/*first cell in the header*/
+	  min-width: 45px !important;
+	}
+
+	table.fixed_table2 thead td:nth-child(5) {/*first cell in the header*/
+	  min-width: 45px !important;
+	}
+
+	table.fixed_table2 thead td:nth-child(6) {/*first cell in the header*/
+	  min-width: 46px !important;
+	}		
+
+	/*tbody*/
+	table.fixed_table tbody {
+	  position: relative;
+	  display: block; /*seperates the tbody from the header*/
+	  width: 1050px;
+	  height: 239px;
+	  overflow: scroll;
+	}
+
+	table.fixed_table tbody td {
+	  /*background-color: #bbc;
+	  min-width: 120px;*/
+	  /*border: 1px solid #222;*/
+	}
+
+	table.fixed_table tbody tr td:nth-child(1) {  /*the first cell in each tr*/
+	  position: relative;
+	  display: block; /*seperates the first column from the tbody*/
+	  height: 40px;
+	  background-color: #FFFFFF;
+	}
+
+	table.fixed_table tbody tr td:nth-child(2) {  /*the first cell in each tr*/
+	  position: relative;
+	  display: visible; /*seperates the first column from the tbody*/
+	  height: 40px;
+	  background-color: #FFFFFF;
+	  min-width: 192px !important;
+	}
+
+/* *********************** */
 
 .main_table td {
 	border: 1px solid #7dcdeb;
@@ -277,6 +363,7 @@ td.vertical
 .dg_area
 {
 	background-color: #810004;
+	z-index:-1 !important;
 }
 
 .ca3_area
@@ -524,7 +611,7 @@ td.vertical
 	float:left;
 	margin:0;
 	padding:0
-	z-index: 1;
+	/*z-index: 1;*/
 }
 
 #primary_nav_wrap ul a
