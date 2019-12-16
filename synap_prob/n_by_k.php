@@ -9,9 +9,15 @@
   $css_vertical = $getBrowser['css_vertical'];
   $first_cell_vert = $getBrowser['first_cell_vert'];
   $first_cell_horiz = $getBrowser['first_cell_horiz'];
+  $fixed_table_a_d_l = $getBrowser['fixed_table_a_d_l'];
+  $fixed_table_s_d = $getBrowser['fixed_table_s_d'];
+  $cell_1x1_label1a = $getBrowser['cell_1x1_label1a'];
+  $cell_1x1_label1b = $getBrowser['cell_1x1_label1b'];
+  $cell_1x1_label2a = $getBrowser['cell_1x1_label2a'];  
+  $cell_1x1_label2b = $getBrowser['cell_1x1_label2b'];
   /* $groups_text = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b ".$first_cell_horiz."' style='border:0px;'><div class='".$first_cell_horiz."'>neuron type</div></td><td class='".$first_cell_vert." nbyk_cell1_c' style='border:0px;'><div class='".$first_cell_vert." nbyk_cell1_d'>parcel</div></td></tr></table>";  */
   //$groups_text = "<table><tr style='border:0px;'><td style='border:0px;'><div>neuron type</div></td><td style='border:0px;'><div>parcel</div></td></tr></table>";
-  $groups_text = "<div class='".$first_cell_vert." nbyk_cell1_d main_table_header' style='width:247px !important;z-index:10000 !important;border:0px solid !important;font-size:16px;'><div style='position:relative;bottom:30px;'>parcel</div></div><div class='nbyk_cell1_d main_table_header' style='position:relative;width:247px !important;z-index:1000 !important;height:45px;font-size:16px;'>&nbsp;&nbsp;&nbsp;<div style='position:relative;left:60px;'>neuron type</div></div>";
+  $groups_text = "<div class='".$first_cell_vert." nbyk_cell1_d main_table_header ".$cell_1x1_label1a."'><div class='".$cell_1x1_label1b."'>parcel</div></div><div class='nbyk_cell1_d main_table_header ".$cell_1x1_label2a."'>&nbsp;&nbsp;&nbsp;<div class='".$cell_1x1_label2b."'>neuron type</div></div>";
   $parcel_group = array($groups_text, "DG:SMo:D", "DG:SMo:A", "DG:SMi:D", "DG:SMi:A", "DG:SG:D", "DG:SG:A", "DG:H:D", "DG:H:A", "DG:All:D", "DG:All:A", "CA3:SP:D", "CA3:SP:A", "CA3:SL:D", "CA3:SL:A", "CA3:SR:D", "CA3:SR:A", "CA3:SLM:D", "CA3:SLM:A", "CA3:SO:D", "CA3:SO:A", "CA3:All:D", "CA3:All:A", "CA2:All:D", "CA2:All:A", "CA2:SO:D", "CA2:SO:A", "CA2:SP:D", "CA2:SP:A", "CA2:SR:D", "CA2:SR:A", "CA2:SLM:D", "CA2:SLM:A", "CA1:SLM:D", "CA1:SLM:A", "CA1:SR:D", "CA1:SR:A", "CA1:SP:D", "CA1:SP:A", "CA1:SO:D", "CA1:SO:A", "CA1:All:D", "CA1:All:A", "Sub:SM:D", "Sub:SM:A", "Sub:SP:D", "Sub:SP:A", "Sub:PL:D", "Sub:PL:A", "Sub:All:D", "Sub:All:A", "EC:I:D", "EC:I:A", "EC:II:D", "EC:II:A", "EC:III:D", "EC:III:A", "EC:IV:D", "EC:IV:A", "EC:V:D", "EC:V:A", "EC:VI:D", "EC:VI:A", "EC:All:D", "EC:All:A");
   $parcel_region = array();
   $parcel_layers = array();
@@ -86,8 +92,8 @@
   // generate matrix   
 
   echo "<table class='fixed_table main_table";
-  if ($_GET['tab'] == 'a_d_l') {
-    echo " fixed_table2";
+  if ($_GET['tab'] == 'a_d_l' || $_GET['tab'] == '') {
+    echo " ".$fixed_table_a_d_l;
   }
   echo "'>";
   for ($i=0;$i<14;$i++) {
