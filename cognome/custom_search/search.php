@@ -20,16 +20,32 @@ function report_results($results_text, $total_results, $query, $articles_searche
 	// report overall results
 	$results_text = 'Total Article Matches<br><br>';
 	for ($i = 0; $i < sizeof($total_results); $i++) {
-		$results_text = $results_text.$total_results[$i]." for keyterm \"".$query[$i]."\"<br>";
+		$results_text = $results_text.$total_results[$i]." for keyterm \"".trim($query[$i])."\"<br>";
 	}
 	$results_text = $results_text."<br>".$articles_searched." total articles searched";
 	echo "<script>update_overall('".$results_text."')</script>";	
 }
 
-function search_directory($dir, $articles_to_search, $max_matches, $query) {
+function search_directory($dir, $articles_to_search, $max_matches, $query, $range) {
 	global $tot_mch;
 	global $total_results;
 	$articles_searched = 0;
+	$articles_processed = 0;
+
+	$range_search=false;
+	if ($range != '') {
+		$range_search=true;
+		$range_parsed = preg_split("/-/i", $range);
+		if (count($range_parsed) == 1) {
+			$start_range=$range;
+			$end_range=$range;
+		}
+		else if (count($range_parsed) == 2) {
+			$start_range=$range_parsed[0];
+			$end_range=$range_parsed[1];
+			echo "range found: ".$start_range."\t".$end_range."<br><br>";
+		}
+	}
 
 	// describe overall results
 	$total_results = array_fill(0, sizeof($query), 0);
@@ -39,25 +55,45 @@ function search_directory($dir, $articles_to_search, $max_matches, $query) {
 	}
 	</script>";
 
-	echo "<br><div class='wrap-collabsible' id='art_select'><input id='collapsible_ovrl_rslts' class='toggle' type='checkbox' checked><label for='collapsible_ovrl_rslts' class='lbl-toggle'>Overall Results</label><div class='collapsible-content'><div class='content-inner' style='font-size:22px;' id='overall_results_summary'>";
+	echo "<br><div class='wrap-collabsible' id='art_select'><input id='collapsible_ovrl_rslts' class='toggle' type='checkbox' checked><label for='collapsible_ovrl_rslts' class='lbl-toggle'>Overall Results</label><div class='collapsible-content'><div class='content-inner' style='font-size:22px;height:300px;overflow:auto;' id='overall_results_summary'>";
 	echo "Overall results<br>";
 	echo "<br>Now loading overall results. Please wait until the search is completed for the results to display here.</div></input></div></div>";
 
+	$articles_list=array();
 	// run directory search
 	if ($handle = opendir($dir)) {
 	    while ($file = readdir($handle)) {
 	    	if ($file != "." && $file != "..") {
-	    		if ($articles_to_search == "all" || $articles_searched < $articles_to_search) {
-	        		$total_results = search($dir.$file, $file, $max_matches, $query);
-	        		$articles_searched++;
-	        	}
-	    	}
-
-	    	if ($articles_searched < 25 || $articles_searched == 50 || $articles_searched == 100 || $articles_searched == 150 || $articles_searched == 200 || $articles_searched == 250) {
-	    		report_results($results_text, $total_results, $query, $articles_searched);
+	    		array_push($articles_list,$file);
 	    	}
 	    }
-	    closedir($handle);
+	}
+	closedir($handle);
+	sort($articles_list); #, SORT_STRING
+	/*foreach($articles_list as $art_print) {
+    	echo $art_print." ";
+	}*/
+
+	for ($i = 0; $i < count($articles_list); $i++) {
+    	if ($articles_to_search == "all" || $articles_searched < $articles_to_search) {
+			$art_file_id=$articles_processed+1;
+			if ($range_search) {
+				#echo "stats: ".$art_file_id." ".$start_range." ".$end_range."<br><br>";
+				if ($art_file_id >= $start_range && $art_file_id <= $end_range) {
+					$total_results = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+					$articles_searched++;
+				}
+			}
+			else {
+    			$total_results = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+    			$articles_searched++;
+    		}
+    		$articles_processed++;
+    	}
+
+    	if ($articles_searched < 25 || $articles_searched == 50 || $articles_searched == 100 || $articles_searched == 150 || $articles_searched == 200 || $articles_searched == 250) {
+    		report_results($results_text, $total_results, $query, $articles_searched);
+    	}
 	}
 
 	report_results($results_text, $total_results, $query, $articles_searched);
@@ -85,8 +121,8 @@ function search($file, $filename, $max_matches, $query) {
 	$file_contents = preg_replace('/\n/', ' ', $file_contents); // remove newlines	
 
 	for ($f_i = 0; $f_i < sizeof($query); $f_i++) {
-		// set patterns
-		$pattern_keyterm = $query[$f_i];
+		// set patterns and remove leading or trailing whitespace type of chars
+		$pattern_keyterm = trim($query[$f_i]);
 		$pattern = "/(.{1,500}[ -\(]".$pattern_keyterm."[\)s -].{1,500})/i"; // /i is case insensitive
 		$num_matches = preg_match_all($pattern, $file_contents, $matches);
 

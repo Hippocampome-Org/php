@@ -1,5 +1,9 @@
 <?php
   function sub_evidence($conn, $loc_evid, $desc_evid, $col, $art_num) {
+    $spec_chr = array("–", "'", "-", '"', "&quot;"); // original charactor
+    $fixed_chr = array("-", "'", "-", "'", ""); // fixed charactor
+    $loc_evid=str_replace($spec_chr, $fixed_chr, $loc_evid);
+    $desc_evid=str_replace($spec_chr, $fixed_chr, $desc_evid);
     // submit evidence entries
     if ($loc_evid!='' || $desc_evid!='') {
       // check for entry      
