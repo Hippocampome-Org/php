@@ -104,19 +104,23 @@
 	  min-width: 44px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 52px !important;
+	  /*min-width: 52px !important;*/
+	  min-width: 46px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 44px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 50px !important;
+	  /*min-width: 50px !important;*/
+	  min-width: 43px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 45px !important;
+	  /*min-width: 45px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_chrome thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 45px !important;
@@ -166,19 +170,23 @@
 	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 53px !important;
+	  /*min-width: 53px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 52px !important;
+	  /*min-width: 52px !important;*/
+	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 48px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 46px !important;
+	  /*min-width: 46px !important;*/
+	  min-width: 48px !important;
 	}
 	table.fixed_table_a_d_l_chrome_win thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 45px !important;
@@ -230,19 +238,23 @@
 	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 52px !important;
+	  /*min-width: 52px !important;*/
+	  min-width: 46px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 44px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 46px !important;
+	  /*min-width: 46px !important;*/
+	  min-width: 48px !important;
 	}
 	table.fixed_table_a_d_l_MSIE thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 46px !important;
@@ -291,19 +303,23 @@
 	  min-width: 43px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 50px !important;
+	  /*min-width: 50px !important;*/
+	  min-width: 43px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 50px !important;
+	  /*min-width: 50px !important;*/
+	  min-width: 46px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 45px !important;
+	  /*min-width: 45px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Firefox thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 45px !important;
@@ -353,19 +369,23 @@
 	  min-width: 43px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 50px !important;
+	  /*min-width: 50px !important;*/
+	  min-width: 43px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 50px !important;
+	  /*min-width: 50px !important;*/
+	  min-width: 46px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 45px !important;
+	  /*min-width: 45px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Safari thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 45px !important;
@@ -415,19 +435,23 @@
 	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(16) {/*first cell in the header*/
-	  min-width: 53px !important;
+	  /*min-width: 53px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(17) {/*first cell in the header*/
-	  min-width: 52px !important;
+	  /*min-width: 52px !important;*/
+	  min-width: 45px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(18) {/*first cell in the header*/
 	  min-width: 48px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(19) {/*first cell in the header*/
-	  min-width: 51px !important;
+	  /*min-width: 51px !important;*/
+	  min-width: 47px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(20) {/*first cell in the header*/
-	  min-width: 46px !important;
+	  /*min-width: 46px !important;*/
+	  min-width: 48px !important;
 	}
 	table.fixed_table_a_d_l_Edge thead td:nth-child(22) {/*first cell in the header*/
 	  min-width: 45px !important;
