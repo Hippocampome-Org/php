@@ -87,7 +87,7 @@ function getBrowser() {
       $fixed_table_a_d_l = 'fixed_table fixed_table_a_d_l_chrome_win';
     }
     if ($ub=='Firefox' || $ub=='Netscape') {
-      $fixed_table_a_d_l = 'fixed_table fixed_table_a_d_l_firefox';
+      $fixed_table_a_d_l = 'fixed_table fixed_table_a_d_l_Firefox';
     }   
     $cell_1x1_label1a = 'cell_1x1_label1a_chrome';
     $cell_1x1_label1b = 'cell_1x1_label1b_chrome';
