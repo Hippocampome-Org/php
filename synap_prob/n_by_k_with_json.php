@@ -9,6 +9,12 @@ $getBrowser       = getBrowser();
 $css_vertical     = $getBrowser['css_vertical'];
 $first_cell_vert  = $getBrowser['first_cell_vert'];
 $first_cell_horiz = $getBrowser['first_cell_horiz'];
+$fixed_table_a_d_l = $getBrowser['fixed_table_a_d_l'];
+$fixed_table_s_d = $getBrowser['fixed_table_s_d'];
+$cell_1x1_label1a = $getBrowser['cell_1x1_label1a'];
+$cell_1x1_label1b = $getBrowser['cell_1x1_label1b'];
+$cell_1x1_label2a = $getBrowser['cell_1x1_label2a'];  
+$cell_1x1_label2b = $getBrowser['cell_1x1_label2b'];
 if(isset($_GET['tab']) && $_GET['tab'] == 's_d'){
    $cacheFile = "cache/n_by_k_s_d.json";
    $session_variable = "n_by_k_s_d";
@@ -24,7 +30,7 @@ if (file_exists($cacheFile)) {
     $result = $data->result;
     echo $result;
 } else {
-    $groups_text       = "<table class='nbyk_cell1_a'><tr style='border:0px;'><td class='nbyk_cell1_b " . $first_cell_horiz . "' style='border:0px;'><div class='" . $first_cell_horiz . "'>neuron type</div></td><td class='" . $first_cell_vert . " nbyk_cell1_c' style='border:0px;'><div class='" . $first_cell_vert . " nbyk_cell1_d'>parcel</div></td></tr></table>";
+    $groups_text = "<div class='".$first_cell_vert." nbyk_cell1_d main_table_header ".$cell_1x1_label1a."'><div class='".$cell_1x1_label1b."'>parcel</div></div><div class='nbyk_cell1_d main_table_header ".$cell_1x1_label2a."'>&nbsp;&nbsp;&nbsp;<div class='".$cell_1x1_label2b."'>neuron type</div></div>";
     $parcel_group      = array(
         $groups_text,
         "DG:SMo:D",
@@ -154,11 +160,32 @@ if (file_exists($cacheFile)) {
         array_push($parcel_a_d, $parcel_delim[2]);
     }
     include('change_html.php');
-    
+
     // generate matrix   
     $final_result = array(
-        "<div class='fixed_header'><table class='main_table fixed_header'>"
-    );
+        "
+      <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js'></script>
+      <script type='text/javascript'>
+        $(document).ready(function() {
+        $('table.fixed_table tbody').scroll(function(e) { //detect a scroll event on the tbody
+          /*
+          Setting the thead left value to the negative valule of tbody.scrollLeft will make it track the movement
+          of the tbody element. Setting an elements left value to that of the tbody.scrollLeft left makes it maintain       it's relative position at the left of the table.    
+          */
+          $('table.fixed_table thead').css('left', -$('table.fixed_table tbody').scrollLeft()); //fix the thead relative to the body scrolling
+          $('table.fixed_table thead td:nth-child(1)').css('left', $('table.fixed_table tbody').scrollLeft()); //fix the first cell of the header
+          $('table.fixed_table tbody td:nth-child(1)').css('left', $('table.fixed_table tbody').scrollLeft()); //fix the first column of tdbody
+          $('table.fixed_table thead td:nth-child(2)').css('left', $('table.fixed_table tbody').scrollLeft()); //fix the first cell of the header
+          $('table.fixed_table tbody td:nth-child(2)').css('left', $('table.fixed_table tbody').scrollLeft()); //fix the first column of tdbody      
+          });
+        });
+      </script>
+
+      <table class='fixed_table main_table");
+      if ($_GET['tab'] == 'a_d_l' || $_GET['tab'] == '') {
+        array_push($final_result, " ".$fixed_table_a_d_l);
+      }
+    array_push($final_result, "'>");
     /*$i = 0;*/
     for ($i = 0; $i < count($neuron_group) + 2; $i++) {
         //for ($i=0;$i<14;$i++) {
@@ -202,24 +229,24 @@ if (file_exists($cacheFile)) {
             }
             if ($i == 0) {
                 if ($j == 0) {
-                    array_push($final_result, "<thead><tr class='main_table_header fixed_header'>");
-                    array_push($final_result, "<td style='border-bottom:0px !important'>");
+                    array_push($final_result, "<thead><tr class='main_table_header'>");
+                    array_push($final_result, "<td style='border-bottom:0px !important;z-index:1000 !important;width:247px;height:25px;border:0px !important;' class='nbyk_cell1_d main_table_header no_t_b_border'>");
                 } else if ($j == 1) {
-                    array_push($final_result, "<td style='border-bottom:0px' class='fixed_header'>");
+                    array_push($final_result, "<td style='border-bottom:0px;width:247px;height:7px;border:0px !important;' class='nbyk_cell1_d main_table_header no_t_b_border'>");
                 } else if ($output_data && $parcel_layers[$j_adj] != 'All') {
                     array_push($final_result, "<td style='border-left:2px white;border-right:2px white;padding:5px;'");
                     if ($j_adj > 0 && $j_adj < 11) {
-                        array_push($final_result, " class='dg_area fixed_header'><font style='font-size:14px;color:white;'>");
+                        array_push($final_result, " class='dg_area'><font style='font-size:14px;color:white;'>");
                     } else if ($j_adj < 23) {
-                        array_push($final_result, " class='ca3_area fixed_header'><font style='font-size:14px;color:white;'>");
+                        array_push($final_result, " class='ca3_area'><font style='font-size:14px;color:white;'>");
                     } else if ($j_adj < 33) {
-                        array_push($final_result, " class='ca2_area fixed_header'><font style='font-size:14px;color:#000993;'>");
+                        array_push($final_result, " class='ca2_area'><font style='font-size:14px;color:#000993;'>");
                     } else if ($j_adj < 43) {
-                        array_push($final_result, " class='ca1_area fixed_header'><font style='font-size:14px;color:#000993;'>");
+                        array_push($final_result, " class='ca1_area'><font style='font-size:14px;color:#000993;'>");
                     } else if ($j_adj < 51) {
-                        array_push($final_result, " class='sub_area fixed_header'><font style='font-size:14px;color:#000993;'>");
+                        array_push($final_result, " class='sub_area'><font style='font-size:14px;color:#000993;'>");
                     } else if ($j_adj < 65) {
-                        array_push($final_result, " class='ec_area fixed_header'><font style='font-size:14px;color:white;'>");
+                        array_push($final_result, " class='ec_area'><font style='font-size:14px;color:white;'>");
                     }
                 }
                 
@@ -251,24 +278,24 @@ if (file_exists($cacheFile)) {
                 }
             } else if ($i == 1) {
                 if ($j == 0) {
-                    array_push($final_result, "<tr class='main_table_header fixed_header'>");
+                    array_push($final_result, "<tr class='main_table_header'>");
                     array_push($final_result, "<td style='border-top:0px !important'></td>");
                 } else if ($j == 1) {
-                    array_push($final_result, "<td style='border-top:0px'>" . $parcel_group[$j_adj] . "</td>");
+                    array_push($final_result, "<td style='border:0px solid' class='no_t_b_border'>".$parcel_group[$j_adj]."</td>");
                 } else if ($output_data && $parcel_layers[$j_adj] != 'All') {
-                    array_push($final_result, "<td class='fixed_header " . $css_vertical . " verticle_n_by_k main_matrix_text' ");
+                    array_push($final_result, "<td class='".$css_vertical." verticle_n_by_k main_matrix_text' style='");
                     if ($j_adj == $vert_red_lines[0] || $j_adj == $vert_red_lines[1] || $j_adj == $vert_red_lines[2] || $j_adj == $vert_red_lines[3] || $j_adj == $vert_red_lines[4]) {
-                        array_push($final_result, " style='border-right:4px solid #810004;'");
+                        array_push($final_result, " border-right:4px solid #810004;");
                     }
-                    array_push($final_result, "><div class='fixed_header " . $css_vertical . " verticle_n_by_k main_matrix_text'>" . $parcel_layers[$j_adj] . "</div></td>");
+                    array_push($final_result, "border-bottom:0px solid white'><div class='".$css_vertical." verticle_n_by_k main_matrix_text'>".$parcel_layers[$j_adj]."</div></td>");
                 }
             } else {
                 if ($j == 0) {
-                    array_push($final_result, "</thead><tbody><tr id='main_table_row_" . $i_adj . "'");
+                    array_push($final_result, "<tr id='main_table_row_".$i_adj."'");
                     if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
-                        array_push($final_result, " class='fixed_header red_border2'");
+                        array_push($final_result, " class='red_border2'");
                     }
-                    array_push($final_result, "><td class='fixed_header main_matrix_text main_table_cell");
+                    array_push($final_result, "><td class='main_matrix_text main_table_cell");
                     if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
                         array_push($final_result, " red_border2");
                     } else {
@@ -278,45 +305,45 @@ if (file_exists($cacheFile)) {
                     array_push($final_result, ">");
                     switch ($i_adj) {
                         case 0;
-                            array_push($final_result, "<font class='fixed_header dg_area2'>");
+                            array_push($final_result, "<font class='dg_area2'>");
                             array_push($final_result, "DG(" . $neuron_parcel_counts[0] . ")");
                             array_push($final_result, "</font>");
                             break;
                         case 18;
-                            array_push($final_result, "<font class='fixed_header ca3_area2'>");
+                            array_push($final_result, "<font class='ca3_area2'>");
                             array_push($final_result, "CA3(" . $neuron_parcel_counts[1] . ")");
                             array_push($final_result, "</font>");
                             break;
                         case 40;
-                            array_push($final_result, "<font class='fixed_header ca2_area2'>");
+                            array_push($final_result, "<font class='ca2_area2'>");
                             array_push($final_result, "CA2(" . $neuron_parcel_counts[2] . ")");
                             array_push($final_result, "</font>");
                             break;
                         case 54;
-                            array_push($final_result, "<font class='fixed_header ca1_area2'>");
+                            array_push($final_result, "<font class='ca1_area2'>");
                             array_push($final_result, "CA1(" . $neuron_parcel_counts[3] . ")");
                             array_push($final_result, "</font>");
                             break;
                         case 85;
-                            array_push($final_result, "<font class='fixed_header sub_area2'>");
+                            array_push($final_result, "<font class='sub_area2'>");
                             array_push($final_result, "SUB(" . $neuron_parcel_counts[4] . ")");
                             array_push($final_result, "</font>");
                             break;
                         case 88;
-                            array_push($final_result, "<font class='fixed_header ec_area2'>");
+                            array_push($final_result, "<font class='ec_area2'>");
                             array_push($final_result, "EC(" . $neuron_parcel_counts[5] . ")");
                             array_push($final_result, "</font>");
                             break;
                     }
                     array_push($final_result, "</td>");
                 } else if ($j == 1) {
-                    array_push($final_result, "<td class='fixed_header main_matrix_text row_first_cell");
+                    array_push($final_result, "<td class='main_matrix_text row_first_cell");
                     if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
                         array_push($final_result, " red_border' style='border-top: .09em solid #ff5757 !important;'");
                     }
                     array_push($final_result, "' id='first_cell_" . $i_adj . "' onClick=\"changerowcolor(" . $i_adj . ")\" onmouseover=\"changebordercolor(" . $i_adj . ")\">" . e_i_check($parcel_region[$i_adj], $neuron_group[$i_adj]) . "</td>");
                 } else if ($output_data && $parcel_layers[$j_adj] != 'All') {
-                    array_push($final_result, "<td class='fixed_header main_matrix_text main_table_cell");
+                    array_push($final_result, "<td class='main_matrix_text main_table_cell");
                     if ($i_adj == 18 || $i_adj == 40 || $i_adj == 54 || $i_adj == 85 || $i_adj == 88) {
                         array_push($final_result, " red_border");
                     }
@@ -409,9 +436,10 @@ if (file_exists($cacheFile)) {
             }
         }
         array_push($final_result, "</tr>");
+        if ($i == 1) {array_push($final_result, "</thead>");}
     }
     // echo implode("",$final_result);
-    array_push($final_result, "</tbody></table></div>");
+    array_push($final_result, "</table>");
     array_push($final_result, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face='Verdana, Arial, Helvetica, sans-serif' color='#339900' size='2'> +/green: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Excitatory</font>
   &nbsp; &nbsp; 
   <font face='Verdana, Arial, Helvetica, sans-serif' color='#CC0000' size='2'> -/red: </font> <font face='Verdana, Arial, Helvetica, sans-serif' size='2'> Inhibitory&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='http://www.hippocampome.org/phpdev/synap_prob/dal/synapse_probabilities.html'>Realtime loading preview</a></font>
