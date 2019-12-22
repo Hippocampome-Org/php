@@ -21,10 +21,10 @@
         document.getElementsByName('search_query')[0].value += ', '
       }
       if (id == "subjects_btn") {
-        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, temporal sequences, delayed conditioning, pattern completion, pattern separation, long-term memory, consolidation, reinforcement learning, visual memory, recognition memory, episodic_memory, declarative_memory, working_memory, epilepsy, schizophrenia';
+        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, association memory, associative memories, temporal sequences, delayed conditioning, pattern completion, pattern separation, long-term memory, long-term memories, consolidation, reinforcement learning, visual memory, visual memories, auditory, tactile, taste, smell, recognition memory, recognition memories, episodic, declarative, working memory, working memories, epilepsy, schizophrenia';
       }
       else if (id == "level_btn") {
-        document.getElementsByName('search_query')[0].value += 'Hodgkin-Huxley, Izhikevich, Integrate-and-fire, Mean fields, Abstract cognition, Spike response, Firing rate';
+        document.getElementsByName('search_query')[0].value += 'Hodgkin-Huxley, Izhikevich, Integrate-and-fire, Integrate and fire, Mean field, Abstract cognition, Spike response, Firing rate';
       }      
       else if (id == "scale_btn") {
         document.getElementsByName('search_query')[0].value += 'network scale, network size, population size';
@@ -33,16 +33,16 @@
         document.getElementsByName('search_query')[0].value += 'modeling equations, modeling formulas, equations used in modeling';
       }
       else if (id == "region_btn") {
-        document.getElementsByName('search_query')[0].value += 'dentate gyrus, cornu ammonis i, ca1, cornu ammonis ii, ca2, cornu ammonis iii, ca3, subiculum, entorhinal cortex, basal ganglia';
+        document.getElementsByName('search_query')[0].value += 'dentate gyrus, dg, cornu ammonis i, ca1, cornu ammonis ii, ca2, cornu ammonis iii, ca3, subiculum, entorhinal cortex, ec, mec, basal ganglia';
       }
       else if (id == "theories_btn") {
-        document.getElementsByName('search_query')[0].value += 'attractor network, oscillatory interference, self-organizing map, theta phase precession, velocity controlled oscillator';
+        document.getElementsByName('search_query')[0].value += 'attractor network, oscillatory interference, self-organizing map, self organizing map, theta phase precession, velocity controlled oscillator';
       }
       else if (id == "neurons_btn") {
         document.getElementsByName('search_query')[0].value += 'Granule, Hilar Ectopic Granule, Semilunar Granule, Mossy, Mossy MOLDEN, AIPRIM, DG Axo-axonic, DG Basket, DG Basket CCK+, HICAP, HIPP, HIPROM, MOCAP, MOLAX, MOPP, DG Neurogliaform, Outer Molecular Layer, Total Molecular Layer, CA3 Pyramidal, CA3c Pyramidal, CA3 Giant, CA3 Granule, CA3 Axo-axonic, CA3 Horizontal Axo-axonic, CA3 Basket, CA3 Basket CCK+, CA3 Bistratified, CA3 Interneuron Specific Oriens, CA3 Interneuron Specific Quad, CA3 Ivy, CA3 LMR-Targeting, Lucidum LAX, Lucidum ORAX, Lucidum-Radiatum, Spiny Lucidum, Mossy Fiber-Associated, Mossy Fiber-Associated ORDEN, CA3 O-LM, CA3 QuadD-LM, CA3 Radiatum, CA3 R-LM, CA3 SO-SO, CA3 Trilaminar, CA2 Pyramidal, CA2 Basket, CA2 Wide-Arbor Basket, CA2 Bistratified, CA2 SP-SR, CA1 Pyramidal, Cajal-Retzius, CA1 Radiatum Giant, CA1 Axo-axonic, CA1 Horizontal Axo-axonic, CA1 Back-Projection, CA1 Basket, CA1 Basket CCK+, CA1 Horizontal Basket, CA1 Bistratified, CA1 Interneuron Specific LMO-O, CA1 Interneuron Specific LM-R, CA1 Interneuron Specific LMR-R, CA1 Interneuron Specific O-R, CA1 Interneuron Specific O-Targeting QuadD, CA1 Interneuron Specific R-O, CA1 Interneuron Specific RO-O, CA1 Ivy, CA1 LMR, CA1 LMR Projecting, CA1 Neurogliaform, CA1 Neurogliaform Projecting, CA1 O-LM, CA1 Recurrent O-LM, CA1 O-LMR, CA1 Oriens/Alveus, CA1 Oriens-Bistratified, CA1 Oriens-Bistratified Projecting, CA1 OR-LM, CA1 Perforant Path-Associated, CA1 Perforant Path-Associated QuadD, CA1 Quadrilaminar, CA1 Radiatum, CA1 R-Receiving Apical-Targeting, Schaffer Collateral-Associated, Schaffer Collateral-Receiving R-Targeting, CA1 SO-SO, CA1 Hippocampo-subicular Projecting ENK+, CA1 Trilaminar, CA1 Radial Trilaminar, SUB EC-Projecting Pyramidal, SUB CA1-Projecting Pyramidal, SUB Axo-axonic, LI-II Multipolar-Pyramidal, LI-II Pyramidal-Fan, MEC LII-III Pyramidal-Multiform, MEC LII Oblique Pyramidal, MEC LII Stellate, LII-III Pyramidal-Tripolar, LEC LIII Multipolar Principal, MEC LIII Multipolar Principal, LIII Pyramidal, LEC LIII Complex Pyramidal, MEC LIII Complex Pyramidal, MEC LIII Bipolar Complex Pyramidal, LIII Pyramidal-Stellate, LIII Stellate, LIII-V Bipolar Pyramidal, LIV-V Pyramidal-Horizontal, LIV-VI Deep Multipolar Principal, MEC LV Multipolar-Pyramidal, LV Deep Pyramidal, MEC LV Pyramidal, MEC LV Superficial Pyramidal, MEC LV-VI Pyramidal-Polymorphic, LEC LVI Multipolar-Pyramidal, LII Axo-axonic, MEC LII Basket, LII Basket-Multipolar Interneuron, LEC LIII Multipolar Interneuron, MEC LIII Multipolar Interneuron, MEC LIII Superficial Multipolar Interneuron, LIII Pyramidal-Looking Interneuron, MEC LIII Superficial Trilayered Interneuron';
       }
       else if (id == "keywords_btn") {
-        document.getElementsByName('search_query')[0].value += 'theta, rhythm, ion channel, rodent, pathfinding, beta, gamma, review, full scale, place cell, grid cell, alpha';
+        document.getElementsByName('search_query')[0].value += 'alpha, beta, gamma, theta, rhythm, ion channel, rodent, pathfinding, path finding, review, full scale, place cell, grid cell';
       }                              
     }
   </script>
