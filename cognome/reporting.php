@@ -101,11 +101,21 @@
   for($i=1;$i<$dim_count+1;$i++) {
     $sql = "SELECT dimension FROM dimensions WHERE id=".$i;
     $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-    $sql2 = "SELECT COUNT(*) FROM ".$dim_tbl[$i];
-    $result2 = $conn->query($sql2);
-    $row2 = $result2->fetch_assoc();
-    echo "<tr><td>".$row["dimension"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><tr>";
+    if ($result->num_rows > 0) {       
+      while($row = $result->fetch_assoc()) {     
+    //$result = $conn->query($sql);
+    //$row = $result->fetch_assoc();
+        $sql2 = "SELECT COUNT(*) FROM ".$dim_tbl[$i];
+        $result2 = $conn->query($sql2);
+        if ($result2->num_rows > 0) {       
+          while($row2 = $result2->fetch_assoc()) { 
+    //$result2 = $conn->query($sql2);
+    //$row2 = $result2->fetch_assoc();
+            echo "<tr><td>".$row["dimension"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><tr>";
+          }
+        }
+      }
+    }
   }
   
   echo "</table></div></center>";
