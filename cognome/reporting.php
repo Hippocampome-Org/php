@@ -85,7 +85,7 @@
   */
   echo "<br><div class='article_details'><center><u>Dimensions</u></center>";
 
-  echo "<table cellspacing='5px' cellpadding='30px' style='font-size:20px;'><tr><th><u>Dimension</u></th><th><u>Articles</u></th><br>";
+  echo "<table cellspacing='5px' cellpadding='30px' style='font-size:20px;'><tr><th><u>Dimension</u></th><th><u>Annotations</u></th><th><u>Articles</u></th><br>";
   
   $dim_tbl=array(
     1=>"article_has_detail",
@@ -100,18 +100,20 @@
   $dim_count = $row["COUNT(*)"];   
   for($i=1;$i<$dim_count+1;$i++) {
     $sql = "SELECT dimension FROM dimensions WHERE id=".$i;
+    $sql2 = "SELECT COUNT(*) FROM ".$dim_tbl[$i];
+    $sql3 = "SELECT COUNT(DISTINCT article_id) FROM natemsut_hctm.".$dim_tbl[$i].";";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {       
-      while($row = $result->fetch_assoc()) {     
-    //$result = $conn->query($sql);
-    //$row = $result->fetch_assoc();
-        $sql2 = "SELECT COUNT(*) FROM ".$dim_tbl[$i];
+      while($row = $result->fetch_assoc()) {          
         $result2 = $conn->query($sql2);
         if ($result2->num_rows > 0) {       
           while($row2 = $result2->fetch_assoc()) { 
-    //$result2 = $conn->query($sql2);
-    //$row2 = $result2->fetch_assoc();
-            echo "<tr><td>".$row["dimension"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><tr>";
+            $result3 = $conn->query($sql3);
+            if ($result3->num_rows > 0) {       
+              while($row3 = $result3->fetch_assoc()) {             
+                echo "<tr><td>".$row["dimension"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(DISTINCT article_id)"]."</center></td><tr>";
+              }
+            }
           }
         }
       }
@@ -191,6 +193,7 @@
 
     echo "<td width='50px' style='word-wrap:break-word'><center>";      
     $sql = "SELECT DISTINCT COUNT(*) FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2.";";
+    //$sql = "SELECT DISTINCT COUNT(*) FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2." AND ".$art1." < 92;";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     echo $row["COUNT(*)"];
