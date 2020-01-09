@@ -254,3 +254,19 @@ input[type='checkbox'] {
 .methods_topic {
   text-decoration: underline;
 }
+
+table.reporting_table {
+  font-size:14px;
+  border:0px;
+  border-spacing: 0px 0px;
+}
+
+table.reporting_table th, table.reporting_table td {
+  border-left:1px solid black;
+  padding-left:4px;
+}
+
+.reporting_table_head {
+  border:1px solid black !important;
+  /*padding:2px;*/
+}

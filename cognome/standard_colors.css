@@ -77,3 +77,17 @@ background-color:rgb(229, 229, 229);
   color:black !important;
   font-color:black !important;
 }
+
+table.reporting_table {
+  background-color:rgb(229, 229, 229);
+}
+
+.reporting_table_head {
+  background-color:rgb(209, 209, 209);
+}
+
+.reporting_table_body {
+  background-color:rgb(224, 224, 224);
+  border-top:1px solid rgb(224, 224, 224);
+  border-bottom:1px solid rgb(224, 224, 224);
+}

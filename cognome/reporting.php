@@ -17,11 +17,20 @@
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML='General Statistics and Reporting';
   </script>
-  <!-- end of header -->    
+  <!-- end of header -->   
 
   <center>
   <?php
   include('mysql_connect.php');    
+
+  /* Determine if article cutoff should occur with a starting max id
+     and a ending max id. */
+  if ($_GET['only_evidence_anno']==true) {
+    $GLOBALS['art_cutoff_use'] = true;
+  }
+  $GLOBALS['art_start_cutoff'] = 101;
+  $GLOBALS['art_end_cutoff'] = 313;
+  error_reporting(0);
 
   /*
   Glossary
@@ -49,9 +58,13 @@
     Report literature statistics
   */
   $sql = "SELECT COUNT(*) FROM natemsut_hctm.articles";
+  if ($GLOBALS['art_cutoff_use']==true) {
+    $sql = $sql." WHERE (id <= ".$GLOBALS['art_start_cutoff']." OR id >= ".$GLOBALS['art_end_cutoff'].");";
+  }
   $result = $conn->query($sql);
   $article_count = $result->fetch_assoc();
-  echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"]."</div>";
+  echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
+  echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a></div>";
 
   echo "<br><div class='article_details'><center><u>Subjects</u></center><br>";
 
@@ -64,15 +77,20 @@
   
   for($i=1;$i<$dim_count+1;$i++) {
     $sql = "SELECT subject FROM subjects WHERE id=".$i;
+    $sql2 = "SELECT COUNT(*) FROM article_has_subject WHERE subject_id=".$i;
+    $sql3 = "SELECT COUNT(*) FROM article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
+    $sql4 = "SELECT COUNT(*) FROM article_has_subject, article_has_keyword WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_keyword.article_id";
+    if ($GLOBALS['art_cutoff_use']==true) {
+       $sql2 = $sql2." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
+       $sql3 = $sql3." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
+       $sql4 = $sql4." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
+    }
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    $sql2 = "SELECT COUNT(*) FROM article_has_subject WHERE subject_id=".$i;
     $result2 = $conn->query($sql2);
     $row2 = $result2->fetch_assoc();
-    $sql3 = "SELECT COUNT(*) FROM article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
     $result3 = $conn->query($sql3);
     $row3 = $result3->fetch_assoc();
-    $sql4 = "SELECT COUNT(*) FROM article_has_subject, article_has_keyword WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_keyword.article_id";
     $result4 = $conn->query($sql4);
     $row4 = $result4->fetch_assoc();            
     echo "<tr><td>".$row["subject"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(*)"]."</center></td><td><center>".$row4["COUNT(*)"]."</center></td>";
@@ -92,7 +110,8 @@
     2=>"article_has_implmnt",
     3=>"article_has_theory",
     4=>"article_has_keyword",
-    5=>"theory_has_competition");
+    5=>"article_has_region",
+    6=>"article_has_scale");
 
   $sql = "SELECT COUNT(*) FROM natemsut_hctm.dimensions";
   $result = $conn->query($sql);
@@ -101,7 +120,11 @@
   for($i=1;$i<$dim_count+1;$i++) {
     $sql = "SELECT dimension FROM dimensions WHERE id=".$i;
     $sql2 = "SELECT COUNT(*) FROM ".$dim_tbl[$i];
-    $sql3 = "SELECT COUNT(DISTINCT article_id) FROM natemsut_hctm.".$dim_tbl[$i].";";
+    $sql3 = "SELECT COUNT(DISTINCT article_id) FROM natemsut_hctm.".$dim_tbl[$i];
+    if ($GLOBALS['art_cutoff_use']==true) {
+       $sql2 = $sql2." WHERE (article_id <= ".$GLOBALS['art_start_cutoff']." OR article_id >= ".$GLOBALS['art_end_cutoff'].");";
+       $sql3 = $sql3." WHERE (article_id <= ".$GLOBALS['art_start_cutoff']." OR article_id >= ".$GLOBALS['art_end_cutoff'].");";
+    }
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) {          
@@ -127,38 +150,50 @@
 
     Note: index i is dimension type, j is dimension property, k is subject
   */
+  //header('Content-Type: text/plain'); // for tab charactors
+
   $wrap_col_numb = 4;
   $dim_id_names=array(
     1=>"detail_id",
     2=>"level_id",
     3=>"theory_id",
     4=>"keyword_id",
-    5=>"theory_id_1");  
+    5=>"region_id",
+    6=>"scale_id");  
+  $dim_heading=array(
+    1=>"Levels of Detail",
+    2=>"Implementation Levels",
+    3=>"Theory Categories",
+    4=>"Keywords",
+    5=>"Anatomical Regions",
+    6=>"Network Scales");
 
   $art_id_names=array(
     1=>"article_has_detail.article_id",
     2=>"article_has_implmnt.article_id",
     3=>"article_has_theory.article_id",
     4=>"article_has_keyword.article_id",
-    5=>"theory_has_competition.theory_id_2");
+    5=>"article_has_region.article_id",
+    6=>"article_has_scale.article_id");
 
   echo "</div><div style='min-width:1700px;position:relative;left:10%;'>";
   echo "<br><center><div class='article_details'><center><u>Articles with Dimension Values</u></center>";
+  echo "<br>Individual counts of a dimensions value annotations given a subject are listed. Each entry in the matrices<br>below contains the count value on the left and percentage within its group on the right.<br>";
 
   $sql = "SELECT COUNT(*) FROM natemsut_hctm.subjects";
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();    
   $dim_count = $row["COUNT(*)"]; 
 
-  echo "<br><table width='400px' style='font-size:14px;'>";
+  echo "<br><table width='400px' class='reporting_table'>";
   for($i=1;$i<(sizeof($dim_name)+1);$i++) {
-    echo "<tr width='300px' style='width:500px;'><th><u>Subject</u>";
+    echo "<tr width='300px' style='width:500px;'><th class='reporting_table_head'><br><u>".$dim_heading[$i]."</u><br><br>";
+    echo "</th></tr>";
+    echo "<tr width='300px' style='width:500px;' class='reporting_table_head'><th class='reporting_table_head'><u>Subject</u>";
     for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
-      echo "<th width='50px' style='word-wrap:break-word'><u>".$dim_name[$i][$j]."</u></th>";
+      echo "<th width='50px' style='word-wrap:break-word' class='reporting_table_head'><u>".$dim_name[$i][$j]."</u></th>";
     }    
-    #echo "<tr style='width:500px;'>";
     disp_dim_arts($dim_name, $subj_names, $i, $j, "article_has_subject", $dim_tbl, "subject_id", $dim_id_names, "article_has_subject.article_id", $art_id_names, $conn);
-    #echo "</tr>";
     echo "</th></tr>"; 
   }
   echo "</table>";  
@@ -166,7 +201,7 @@
   function disp_dim_arts($dim_name, $subj_names, $i, $j, $subj_tbl, $dim_tbl, $subj_id_name, $dim_id_names, $subj_art_id, $art_id_names, $conn) {
     for($k=1;$k<(sizeof($subj_names)+1);$k++) {
       echo "<tr width='300px' style='width:500px;'>";
-      echo "<td width='50px' style='word-wrap:break-word'>".$subj_names[$k]."</td>";
+      echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_body'>".$subj_names[$k]."</td>";
 
       for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
         $table1 = $subj_tbl;
@@ -178,25 +213,88 @@
         $art1 = $subj_art_id;
         $art2 = $art_id_names[$i];
 
-        dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn);
+        dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, false);
       }
       echo "</tr>";      
     }   
+    /* display totals for all subjects */
+    echo "<tr width='300px' style='width:500px;'>";
+    echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_head'>all</td>";
+    for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
+      $table1 = $subj_tbl;
+      $table2 = $dim_tbl[$i];
+      $id_name_1 = $subj_id_name;
+      $id_name_2 = $dim_id_names[$i];
+      $id_val_1 = $k;
+      $id_val_2 = $j;
+      $art1 = $subj_art_id;
+      $art2 = $art_id_names[$i];
+      dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, true);
+    }
+    echo "</tr>";
   }
 
-  function dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn) {
+  function dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, $all_toggle) {
     /*
       Number of articles given a subject and dimension value
 
       Example query: SELECT DISTINCT COUNT(*) FROM natemsut_hctm.article_has_detail, natemsut_hctm.article_has_subject WHERE detail_id = 3 AND subject_id = 2 AND article_has_detail.article_id = article_has_subject.article_id;
     */
 
-    echo "<td width='50px' style='word-wrap:break-word'><center>";      
-    $sql = "SELECT DISTINCT COUNT(*) FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2.";";
+    if ($all_toggle==false) {
+      echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_body'><center>";
+      $sql = "SELECT DISTINCT COUNT(*) FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
+      if ($GLOBALS['art_cutoff_use']==true) {
+        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+      }
+    }
+    else {
+      echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_head'><center>";
+      $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
+      if ($GLOBALS['art_cutoff_use']==true) {
+        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+      }
+    }
+    //echo $sql."<bR>";
     //$sql = "SELECT DISTINCT COUNT(*) FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2." AND ".$art1." < 92;";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
-    echo $row["COUNT(*)"];
+    if ($all_toggle==false) {
+      $dim_val = $row["COUNT(*)"];
+      $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
+      if ($GLOBALS['art_cutoff_use']==true) {
+        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+      }
+      $result = $conn->query($sql);
+      $row2 = $result->fetch_assoc();
+      $dim_val_total = $row2["COUNT(".$id_name_2.")"];
+      /* avoid division by zero */
+      if ($dim_val_total > 0) {
+        $percent = round($dim_val/$dim_val_total, 3)*100;
+      }
+      else {
+        $percent = 0;
+      }
+      echo "<div style='position:relative;width:100px;font-size:17px;'><span style='float:left'>".$dim_val."</span><span style='float:right'>".$percent."%</span></div>";
+    }
+    else {
+      $dim_val_total = $row["COUNT(".$id_name_2.")"];
+      $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM natemsut_hctm.".$table1.", natemsut_hctm.".$table2." WHERE ".$art1." = ".$art2;
+      if ($GLOBALS['art_cutoff_use']==true) {
+        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+      }
+      $result = $conn->query($sql);
+      $row2 = $result->fetch_assoc();
+      $all_dim_val = $row2["COUNT(".$id_name_2.")"];
+      /* avoid division by zero */
+      if ($all_dim_val > 0) {
+        $percent = round($dim_val_total/$all_dim_val, 3)*100;
+      }
+      else {
+        $percent = 0;
+      }
+      echo $dim_val_total." (".$percent."% of all)";
+    }
     echo "</center></td>";      
   }
 
