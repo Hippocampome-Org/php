@@ -1,11 +1,14 @@
 <html>
 <!--
 This page is for generating the axon-dendrite lengths json file
+
+$parcels_skip are parcels to skip when reporting non-all groups
 -->
 <?php
 	include ("../../permission_check.php"); // must be logged in
 
-	$parcel_group = array($groups_text, "DG:SMo:D", "DG:SMo:A", "DG:SMi:D", "DG:SMi:A", "DG:SG:D", "DG:SG:A", "DG:H:D", "DG:H:A", "DG:All:D", "DG:All:A", "CA3:SP:D", "CA3:SP:A", "CA3:SL:D", "CA3:SL:A", "CA3:SR:D", "CA3:SR:A", "CA3:SLM:D", "CA3:SLM:A", "CA3:SO:D", "CA3:SO:A", "CA3:All:D", "CA3:All:A", "CA2:All:D", "CA2:All:A", "CA2:SO:D", "CA2:SO:A", "CA2:SP:D", "CA2:SP:A", "CA2:SR:D", "CA2:SR:A", "CA2:SLM:D", "CA2:SLM:A", "CA1:SLM:D", "CA1:SLM:A", "CA1:SR:D", "CA1:SR:A", "CA1:SP:D", "CA1:SP:A", "CA1:SO:D", "CA1:SO:A", "CA1:All:D", "CA1:All:A", "Sub:SM:D", "Sub:SM:A", "Sub:SP:D", "Sub:SP:A", "Sub:PL:D", "Sub:PL:A", "Sub:All:D", "Sub:All:A", "EC:I:D", "EC:I:A", "EC:II:D", "EC:II:A", "EC:III:D", "EC:III:A", "EC:IV:D", "EC:IV:A", "EC:V:D", "EC:V:A", "EC:VI:D", "EC:VI:A", "EC:All:D", "EC:All:A");
+	$parcel_group = array("DG:SMo:D", "DG:SMo:A", "DG:SMi:D", "DG:SMi:A", "DG:SG:D", "DG:SG:A", "DG:H:D", "DG:H:A", "DG:All:D", "DG:All:A", "CA3:SP:D", "CA3:SP:A", "CA3:SL:D", "CA3:SL:A", "CA3:SR:D", "CA3:SR:A", "CA3:SLM:D", "CA3:SLM:A", "CA3:SO:D", "CA3:SO:A", "CA3:All:D", "CA3:All:A", "CA2:All:D", "CA2:All:A", "CA2:SO:D", "CA2:SO:A", "CA2:SP:D", "CA2:SP:A", "CA2:SR:D", "CA2:SR:A", "CA2:SLM:D", "CA2:SLM:A", "CA1:SLM:D", "CA1:SLM:A", "CA1:SR:D", "CA1:SR:A", "CA1:SP:D", "CA1:SP:A", "CA1:SO:D", "CA1:SO:A", "CA1:All:D", "CA1:All:A", "Sub:SM:D", "Sub:SM:A", "Sub:SP:D", "Sub:SP:A", "Sub:PL:D", "Sub:PL:A", "Sub:All:D", "Sub:All:A", "EC:I:D", "EC:I:A", "EC:II:D", "EC:II:A", "EC:III:D", "EC:III:A", "EC:IV:D", "EC:IV:A", "EC:V:D", "EC:V:A", "EC:VI:D", "EC:VI:A", "EC:All:D", "EC:All:A");
+	$parcels_skip = array(8,9,20,21,22,23,40,41,48,49,62,63);
 	$write_output = array();
 	$parcel_region = array();
 	$parcel_layers = array();
@@ -57,44 +60,65 @@ This page is for generating the axon-dendrite lengths json file
 		array_push($parcel_a_d, $parcel_delim[2]);
 	}	
 
+	/* Maunally sorted neuron group
+	Note: the auto sorted one no longer used due to
+	needing the same ordering as on the morphology page */
+	$neuron_group = array("Granule", "Hilar Ectopic Granule", "Semilunar Granule", "Mossy", "Mossy MOLDEN", "AIPRIM", "DG Axo-Axonic", "DG Basket", "DG BC CCK+", "HICAP", "HIPP", "HIPROM", "MOCAP", "MOLAX", "MOPP", "DG Neurogliaform", "Outer Molecular Layer", "Total Molecular Layer", "CA3 Pyramidal", "CA3c Pyramidal", "CA3 Giant", "CA3 Granule", "CA3 Axo-Axonic", "CA3 Horizontal AA", "CA3 Basket", "CA3 BC CCK+", "CA3 Bistratified", "CA3 IS Oriens", "CA3 IS Quad", "CA3 Ivy", "CA3 LMR-Targeting", "Lucidum LAX", "Lucidum ORAX", "Lucidum-Radiatum", "Spiny Lucidum", "Mossy Fiber-Associated", "MFA ORDEN", "CA3 O-LM", "CA3 QuadD-LM", "CA3 Radiatum", "CA3 R-LM", "CA3 SO-SO", "CA3 Trilaminar", "CA2 Pyramidal", "CA2 Basket", "CA2 Wide-Arbor BC", "CA2 Bistratified", "CA2 SP-SR", "CA1 Pyramidal", "Cajal-Retzius", "CA1 Radiatum Giant", "CA1 Axo-axonic", "CA1 Horizontal AA", "CA1 Back-Projection", "CA1 Basket", "CA1 BC CCK+", "CA1 Horizontal BC", "CA1 Bistratified", "CA1 IS LMO-O", "CA1 IS LM-R", "CA1 IS LMR-R", "CA1 IS O-R", "CA1 IS O-Target QuadD", "CA1 IS R-O", "CA1 IS RO-O", "CA1 Ivy", "CA1 LMR", "CA1 LMR Projecting", "CA1 Neurogliaform", "CA1 NGF Projecting", "CA1 O-LM", "CA1 Recurrent O-LM", "CA1 O-LMR", "CA1 Oriens/Alveus", "CA1 Oriens-Bistratified", "CA1 O-Bistrat Projecting", "CA1 OR-LM", "CA1 Perforant Path-Assoc", "CA1 PPA QuadD", "CA1 Quadrilaminar", "CA1 Radiatum", "CA1 R-Recv Apical-Target", "Schaffer Collateral-Assoc", "SCR R-Targeting", "CA1 SO-SO", "CA1 Hipp-SUB Proj ENK+", "CA1 Trilaminar", "CA1 Radial Trilaminar", "SUB EC-Proj Pyramidal", "SUB CA1-Proj Pyramidal", "SUB Axo-axonic", "LI-II Multipolar-Pyramidal", "LI-II Pyramidal-Fan", "MEC LII-III PC-Multiform", "MEC LII Oblique Pyramidal", "MEC LII Stellate", "LII-III Pyramidal-Tripolar", "LEC LIII Multipolar Principal", "MEC LIII Multipolar Principal", "LIII Pyramidal", "LEC LIII Complex Pyramidal", "MEC LIII Complex Pyramidal", "MEC LIII BP Cmplx PC", "LIII Pyramidal-Stellate", "LIII Stellate", "LIII-V Bipolar Pyramidal", "LIV-V Pyramidal-Horiz", "LIV-VI Deep Multipolar", "MEC LV Multipolar-PC", "LV Deep Pyramidal", "MEC LV Pyramidal", "MEC LV Superficial PC", "MEC LV-VI PC-Polymorph", "LEC LVI Multipolar-PC", "LII Axo-Axonic", "MEC LII Basket", "LII Basket Multipolar Interneuron", "LEC LIII Multipolar Interneuron", "MEC LIII Multipolar Interneuron", "MEC LIII Superficial MPI", "LIII Pyramidal-Looking Interneuron", "MEC LIII Superficial Trilayered Interneuron");
+
 	echo "<br>Completed record: ";
-	//for ($i = 0; $i < count($neuron_group) + 2; $i++) {
-	for ($i = 0; $i < 2; $i++) {
+	/*
+	$i is row that is a neuron type
+	The lines "array_push($write_output, $entry_output."\"\",\n");"
+	is to account for the first 2 non-value columns
+	
+	$j is column that is a parcel type
+	*/
+	for ($i = 0; $i < count($neuron_group); $i++) {
+	//for ($i = 0; $i < 100; $i++) {
 		$all_totals='';
 		echo $i." ";
-		for ($j=0;$j<count($parcel_group)+1;$j=$j+2) {
-			$entry_output = "\"";
-			for ($adi=0;$adi<2;$adi++) {
-	            if ($adi==0) {
-	              $j_adj2=$j;
-	              //echo "&nbsp;";
-	              //array_push($write_output, "&nbsp;");
-	              $entry_output = $entry_output."&nbsp;";
-	            }
-	            if ($adi==1) {
-	              $j_adj2=$j+1;
-	              //echo "<hr class='hr_sub_cell'>";
-	              //echo "&nbsp;";
-	              $entry_output = $entry_output."<hr class='hr_sub_cell'>&nbsp;";
-	            }
-	            // detect appropriate matrix data to populate            
-				$sql = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='".$neuron_group[$i]."' AND neurite_quantified.neurite='".$parcel_group[$j_adj2]."' AND mean_path_length!='';";
-				//array_push($write_output, $sql);
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) { 
-					while($row = $result->fetch_assoc()) {
-					  $avg_trunk = $row['avg_trunk'];
-					  if ($avg_trunk != '' && $avg_trunk != 0) {
-					    $value_result = "<center><a href='#' title='Mean: ".$row['avg']."\\nCount of Recorded Values: ".$row['count_sd']."\\nStandard Deviation: ".$row['std_sd']."\\nMinimum Value: ".$row['min_sd']."\\nMaximum Value: ".$row['max_sd']."'>".$avg_trunk."</a></center>";
-					    //echo $value_result;
-					    $entry_output = $entry_output.$value_result;
-					  }
-					}
-				}			
-			}
+		array_push($write_output, $entry_output."\"\",");
+		array_push($write_output, $entry_output."\"\",");
+		for ($j=0;$j<count($parcel_group);$j=$j+2) {
+			if (!in_array($j, $parcels_skip)) {
+				$entry_output = "\"";
+				$i_adj = $i;
+				$j_adj = $j;
+				// manual rules for organizing column order as listed on the morphology page
+				if ($j == 10) {$j_adj = 16;}
+				else if ($j == 12) {$j_adj = 14;}
+				else if ($j == 14) {$j_adj = 12;}
+				else if ($j == 16) {$j_adj = 10;}
+				for ($adi=0;$adi<2;$adi++) {
+		            if ($adi == 0) {
+	                    $j_adj2 = $j_adj;
+	                    $entry_output = $entry_output."&nbsp;";
+	                }
+	                if ($adi == 1) {
+	                    $j_adj2 = $j_adj + 1;
+	                    $entry_output = $entry_output."<hr class='hr_sub_cell'>&nbsp;";
+	                }
+	            
+	                $sql    = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND total_length!='';";
+	                //$entry_output = $entry_output.$sql."<br>";
+	                $result = $conn->query($sql);
+	                if ($result->num_rows > 0) {
+	                    while ($row = $result->fetch_assoc()) {
+	                        $avg_trunk = $row['avg_trunk'];
+	                        if ($avg_trunk != '' && $avg_trunk != 0) {
+	                        	//$entry_output = $entry_output.$i_adj." ".$sql." ";
+	                            $entry_output = $entry_output."<a href='#' title='Mean: " . $row['avg'] . "<br>Count of Recorded Values: " . $row['count_tl'] . "<br>Standard Deviation: " . $row['std_tl'] . "'>" . $avg_trunk . "</a>";
+	                        }
+	                    }
+	                }                        			
+				}
+			$entry_output = $entry_output."\",";
+			//echo "<br>".$i." ".$j_adj2." ".$entry_output;
 			//echo "&nbsp;";
-			array_push($write_output, $entry_output."\",");
+			array_push($write_output, $entry_output);				
+			}
 		}
+		//echo "<br>".$i." ".$sql;
 	}
 
 	/*
