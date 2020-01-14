@@ -341,7 +341,11 @@ if ($_REQUEST['clear_all'])
 					$type_nickname=$typ_rec[$j]->getNickname();
 					$type_status =$typ_rec[$j]->getStatus();
 					$type_id = $typ_rec[$j]->getId();
-					if($type_status!=NULL&&$type_status!='frozen')
+					if($type_status=='Onhold'){
+						$count++;
+						print("$count)&nbsp;$type_name<br/>");
+//					}elseif($type_status!=NULL&&$type_status!='frozen')
+					}elseif($type_status!=NULL)
 					{
 						$count++;
 						if($type_status=='SUPPLEMENTAL')
