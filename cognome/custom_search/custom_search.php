@@ -21,7 +21,7 @@
         document.getElementsByName('search_query')[0].value += ', '
       }
       if (id == "subjects_btn") {
-        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, association memory, associative memories, time cell, delayed conditioning, pattern completion, pattern separation, long term memory, long term memories, long-term memory, long-term memories, consolidation, reinforcement learning, visual memory, visual memories, auditory, tactile, taste, smell, recognition memory, recognition memories, episodic, declarative, working memory, working memories, epilepsy, schizophrenia';
+        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, association memory, associative memories, autoassociative, autoassociation, heteroassociative, heteroassociation, time cell, delayed conditioning, pattern completion, pattern separation, long term memory, long term memories, long-term memory, long-term memories, consolidation, reinforcement learning, visual memory, visual memories, auditory, tactile, taste, smell, recognition memory, recognition memories, episodic, declarative, working memory, working memories, epilepsy, schizophrenia';
       }
       else if (id == "level_btn") {
         document.getElementsByName('search_query')[0].value += 'Hodgkin-Huxley, Hodgkin Huxley, Izhikevich, Integrate-and-fire, Integrate and fire, Mean field, Abstract cognition, Spike response, Firing rate';
