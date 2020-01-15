@@ -497,15 +497,7 @@ $("#nGrid").mouseout(function(e) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<?php
-if (isset($_GET['tab'])) {
-  $matrix_tab = $_GET['tab'];
-  if ($matrix_tab=='a_d_l') {echo "<title>Dendritic and axonal lengths</title>";}    
-  if ($matrix_tab=='s_d') {echo "<title>Somatic Distances of Dendrites and Axons</title>";}
-  if ($matrix_tab=='p_s') {echo "<title>Probabilities of Synapses</title>";}            
-}
-else {echo "<title>Dendritic and axonal lengths</title>";}
-?>
+<title>Dendritic and axonal lengths</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -523,28 +515,12 @@ else {echo "<title>Dendritic and axonal lengths</title>";}
 <span class='top_matrix_menu'>	
 <select name="matrix_selection" size="1" onChange="go()">
 <option value="#" selected>Select Data</option>
-<option value="?tab=a_d_l">Dendritic and Axonal Lengths</option>
-<option value="?tab=s_d">Somatic Distances</option>
-<option value="?tab=p_s">Synapse Probabilities</option>
+<option value="synapse_probabilities_dal.php">Dendritic and Axonal Lengths</option>
+<option value="synapse_probabilities_sd.php">Somatic Distances</option>
+<option value="synapse_probabilities_ps.php">Synapse Probabilities</option>
 </select></span>
 
-<?php
-if (isset($_GET['tab'])) {
-  $matrix_tab = $_GET['tab'];
-  if ($matrix_tab=='a_d_l') {
-    echo "<span class='data_selection'>Dendritic and Axonal Lengths</span>";
-  }    
-  if ($matrix_tab=='s_d') {
-    echo "<span class='data_selection'>Somatic Distances of Dendrites and Axons</span>";
-  }
-  if ($matrix_tab=='p_s') {
-    echo "<span class='data_selection'>Probabilities of Synapses</span>";
-  }            
-}
-else {
-  echo "<span class='data_selection'>Dendritic and axonal lengths</span>";
-}
-?>
+<span class='data_selection'>Dendritic and Axonal Lengths</span>
 </form>
 </div>
 
