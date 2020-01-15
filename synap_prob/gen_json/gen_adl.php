@@ -68,7 +68,7 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	needing the same ordering as on the morphology page */
 	$neuron_group = array("Granule", "Hilar Ectopic Granule", "Semilunar Granule", "Mossy", "Mossy MOLDEN", "AIPRIM", "DG Axo-Axonic", "DG Basket", "DG BC CCK+", "HICAP", "HIPP", "HIPROM", "MOCAP", "MOLAX", "MOPP", "DG Neurogliaform", "Outer Molecular Layer", "Total Molecular Layer", "CA3 Pyramidal", "CA3c Pyramidal", "CA3 Giant", "CA3 Granule", "CA3 Axo-Axonic", "CA3 Horizontal AA", "CA3 Basket", "CA3 BC CCK+", "CA3 Bistratified", "CA3 IS Oriens", "CA3 IS Quad", "CA3 Ivy", "CA3 LMR-Targeting", "Lucidum LAX", "Lucidum ORAX", "Lucidum-Radiatum", "Spiny Lucidum", "Mossy Fiber-Associated", "MFA ORDEN", "CA3 O-LM", "CA3 QuadD-LM", "CA3 Radiatum", "CA3 R-LM", "CA3 SO-SO", "CA3 Trilaminar", "CA2 Pyramidal", "CA2 Basket", "CA2 Wide-Arbor BC", "CA2 Bistratified", "CA2 SP-SR", "CA1 Pyramidal", "Cajal-Retzius", "CA1 Radiatum Giant", "CA1 Axo-axonic", "CA1 Horizontal AA", "CA1 Back-Projection", "CA1 Basket", "CA1 BC CCK+", "CA1 Horizontal BC", "CA1 Bistratified", "CA1 IS LMO-O", "CA1 IS LM-R", "CA1 IS LMR-R", "CA1 IS O-R", "CA1 IS O-Target QuadD", "CA1 IS R-O", "CA1 IS RO-O", "CA1 Ivy", "CA1 LMR", "CA1 LMR Projecting", "CA1 Neurogliaform", "CA1 NGF Projecting", "CA1 O-LM", "CA1 Recurrent O-LM", "CA1 O-LMR", "CA1 Oriens/Alveus", "CA1 Oriens-Bistratified", "CA1 O-Bistrat Projecting", "CA1 OR-LM", "CA1 Perforant Path-Assoc", "CA1 PPA QuadD", "CA1 Quadrilaminar", "CA1 Radiatum", "CA1 R-Recv Apical-Target", "Schaffer Collateral-Assoc", "SCR R-Targeting", "CA1 SO-SO", "CA1 Hipp-SUB Proj ENK+", "CA1 Trilaminar", "CA1 Radial Trilaminar", "SUB EC-Proj Pyramidal", "SUB CA1-Proj Pyramidal", "SUB Axo-axonic", "LI-II Multipolar-Pyramidal", "LI-II Pyramidal-Fan", "MEC LII-III PC-Multiform", "MEC LII Oblique Pyramidal", "MEC LII Stellate", "LII-III Pyramidal-Tripolar", "LEC LIII Multipolar Principal", "MEC LIII Multipolar Principal", "LIII Pyramidal", "LEC LIII Complex Pyramidal", "MEC LIII Complex Pyramidal", "MEC LIII BP Cmplx PC", "LIII Pyramidal-Stellate", "LIII Stellate", "LIII-V Bipolar Pyramidal", "LIV-V Pyramidal-Horiz", "LIV-VI Deep Multipolar", "MEC LV Multipolar-PC", "LV Deep Pyramidal", "MEC LV Pyramidal", "MEC LV Superficial PC", "MEC LV-VI PC-Polymorph", "LEC LVI Multipolar-PC", "LII Axo-Axonic", "MEC LII Basket", "LII Basket Multipolar Interneuron", "LEC LIII Multipolar Interneuron", "MEC LIII Multipolar Interneuron", "MEC LIII Superficial MPI", "LIII Pyramidal-Looking Interneuron", "MEC LIII Superficial Trilayered Interneuron");
 
-	echo "<br>Completed record: ";
+	echo "<br>Completed processing record: ";
 	/*
 	$i is row that is a neuron type
 	The lines "array_push($write_output, $entry_output."\"\",\n");"
@@ -114,8 +114,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	                }                        			
 				}
 				$entry_output = $entry_output."\",";
-				//echo "<br>".$i." ".$j_adj2." ".$entry_output;
-				//echo "&nbsp;";
 				array_push($write_output, $entry_output);				
 			} 
 		}
@@ -134,7 +132,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	        }
 	        for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
                 $sql    = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND total_length!='';";
-                //echo "<br>".$i." ".$sql;
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     $row        = $result->fetch_assoc();
@@ -147,17 +144,16 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	    		$all_totals = $all_totals . 'Average Total Length: 0\\nValues Count: 0\\nStandard Deviation: 0';
 	    	}
 	    }
-		//$all_totals = "\"".$all_totals."\",";
 		array_push($parcel_output, $all_totals);
-		//echo "<br>".$i." ".$all_totals;
 	}
 	/*
 	Read from input files
 	*/
-	$json_template_file = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/n_by_k_template.json";
+	$path_to_files = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/";
+	$json_template_file = $path_to_files."n_by_k_template.json";
 	$json_template = file($json_template_file);
 
-	$json_template_file = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/neuron_classes_2.json";
+	$json_template_file = $path_to_files."neuron_classes.json";
 	$neuron_classes = file($json_template_file);
 
 	/* 
@@ -168,7 +164,7 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	$new_row is used because a new row occurs every certain
 	number of columns when reading the file.
 	*/
-	$json_template_file = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/adl_db_results.json";
+	$json_template_file = $path_to_files."adl_db_results.json";
 	$output_file = fopen($json_template_file, 'w') or die("Can't open file.");
 	/* specify rows to use from template file */
 	$init_row = 0;
@@ -182,7 +178,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 		array_push($template_rows, ($init_row+($new_row*$r_i)));
 		array_push($parcel_rows, ($init_row2+($new_row*$r_i)));
 	}	
-	//echo $template_rows[0]." ".$template_rows[1]." ".$template_rows[2]." ".$template_rows[3];
 
 	for ($o_i = 0; $o_i<count($json_template); $o_i++) {
 		if ($o_i==(count($json_template)-1)) {
@@ -190,7 +185,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 		}
 		else if (in_array($o_i, $template_rows)) {
 			fwrite($output_file, $json_template[$o_i]);
-			echo "<br>json_templ ".$o_i." ".$json_template[$o_i];
 		}
 		else if (in_array($o_i, $parcel_rows)) {
 			$line_start = substr($neuron_classes[$parc_out], 0, 34);
@@ -203,7 +197,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 				$full_line = "\"\",";
 			}
 			fwrite($output_file, $full_line);
-			echo "<br>parcel_out ".$o_i." ".$full_line;
 			$parc_out++;
 		}
 		else {
@@ -214,8 +207,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 				$text_output = "\"\",\n";
 			}
 			fwrite($output_file, $text_output);
-			//echo "no mod<br>";
-			echo "<br>text_output ".$o_i." ".$text_output;
 		}
 	}
 	fclose($output_file);

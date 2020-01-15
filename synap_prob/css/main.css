@@ -112,3 +112,23 @@ margin-bottom:0px !important;}
   background-color: #6f6ca7 !important;
   color: rgb(255, 255, 255) !important;
 }
+
+.top_matrix_menu
+{
+  position:relative;
+  top:2px;
+}
+
+.data_selection
+{
+  position:relative;
+  text-align: center;
+  font-family: arial;
+  font-size: 18px;
+  top:4px;  
+}
+
+.title_area {
+  min-width:1000px;
+  width:1000px;
+}
