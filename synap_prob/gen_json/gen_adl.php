@@ -12,8 +12,12 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	$write_output = array();
 	$parcel_region = array();
 	$parcel_layers = array();
+	$parcel_output = array();
 	$parcel_a_d = array();
 	$vert_parcel_group = array("DG", "CA3", "CA2", "CA1", "Sub", "EC");
+	$all_parcel_dend = array("DG:All:D", "CA3:All:D", "CA2:All:D", "CA1:All:D", "Sub:All:D", "EC:All:D");
+	$all_parcel_axon = array("DG:All:A", "CA3:All:A", "CA2:All:A", "CA1:All:A", "Sub:All:A", "EC:All:A");
+	$all_parcel_search = array();
 
 	// Collect neuron types and sort them
 	$neuron_group = array();
@@ -31,7 +35,6 @@ $parcels_skip are parcels to skip when reporting non-all groups
 		    array_push($neuron_type_unsorted, $neuron_type);
 		    array_push($neuron_parcel_unsorted, $row['subregion']);
 		  }
-		  //echo $neuron_type."<br>";
 		}
 	}
 	$number_of_parcels = sizeof($vert_parcel_group);
@@ -65,7 +68,7 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	needing the same ordering as on the morphology page */
 	$neuron_group = array("Granule", "Hilar Ectopic Granule", "Semilunar Granule", "Mossy", "Mossy MOLDEN", "AIPRIM", "DG Axo-Axonic", "DG Basket", "DG BC CCK+", "HICAP", "HIPP", "HIPROM", "MOCAP", "MOLAX", "MOPP", "DG Neurogliaform", "Outer Molecular Layer", "Total Molecular Layer", "CA3 Pyramidal", "CA3c Pyramidal", "CA3 Giant", "CA3 Granule", "CA3 Axo-Axonic", "CA3 Horizontal AA", "CA3 Basket", "CA3 BC CCK+", "CA3 Bistratified", "CA3 IS Oriens", "CA3 IS Quad", "CA3 Ivy", "CA3 LMR-Targeting", "Lucidum LAX", "Lucidum ORAX", "Lucidum-Radiatum", "Spiny Lucidum", "Mossy Fiber-Associated", "MFA ORDEN", "CA3 O-LM", "CA3 QuadD-LM", "CA3 Radiatum", "CA3 R-LM", "CA3 SO-SO", "CA3 Trilaminar", "CA2 Pyramidal", "CA2 Basket", "CA2 Wide-Arbor BC", "CA2 Bistratified", "CA2 SP-SR", "CA1 Pyramidal", "Cajal-Retzius", "CA1 Radiatum Giant", "CA1 Axo-axonic", "CA1 Horizontal AA", "CA1 Back-Projection", "CA1 Basket", "CA1 BC CCK+", "CA1 Horizontal BC", "CA1 Bistratified", "CA1 IS LMO-O", "CA1 IS LM-R", "CA1 IS LMR-R", "CA1 IS O-R", "CA1 IS O-Target QuadD", "CA1 IS R-O", "CA1 IS RO-O", "CA1 Ivy", "CA1 LMR", "CA1 LMR Projecting", "CA1 Neurogliaform", "CA1 NGF Projecting", "CA1 O-LM", "CA1 Recurrent O-LM", "CA1 O-LMR", "CA1 Oriens/Alveus", "CA1 Oriens-Bistratified", "CA1 O-Bistrat Projecting", "CA1 OR-LM", "CA1 Perforant Path-Assoc", "CA1 PPA QuadD", "CA1 Quadrilaminar", "CA1 Radiatum", "CA1 R-Recv Apical-Target", "Schaffer Collateral-Assoc", "SCR R-Targeting", "CA1 SO-SO", "CA1 Hipp-SUB Proj ENK+", "CA1 Trilaminar", "CA1 Radial Trilaminar", "SUB EC-Proj Pyramidal", "SUB CA1-Proj Pyramidal", "SUB Axo-axonic", "LI-II Multipolar-Pyramidal", "LI-II Pyramidal-Fan", "MEC LII-III PC-Multiform", "MEC LII Oblique Pyramidal", "MEC LII Stellate", "LII-III Pyramidal-Tripolar", "LEC LIII Multipolar Principal", "MEC LIII Multipolar Principal", "LIII Pyramidal", "LEC LIII Complex Pyramidal", "MEC LIII Complex Pyramidal", "MEC LIII BP Cmplx PC", "LIII Pyramidal-Stellate", "LIII Stellate", "LIII-V Bipolar Pyramidal", "LIV-V Pyramidal-Horiz", "LIV-VI Deep Multipolar", "MEC LV Multipolar-PC", "LV Deep Pyramidal", "MEC LV Pyramidal", "MEC LV Superficial PC", "MEC LV-VI PC-Polymorph", "LEC LVI Multipolar-PC", "LII Axo-Axonic", "MEC LII Basket", "LII Basket Multipolar Interneuron", "LEC LIII Multipolar Interneuron", "MEC LIII Multipolar Interneuron", "MEC LIII Superficial MPI", "LIII Pyramidal-Looking Interneuron", "MEC LIII Superficial Trilayered Interneuron");
 
-	echo "<br>Completed record: ";
+	echo "<br>Completed processing record: ";
 	/*
 	$i is row that is a neuron type
 	The lines "array_push($write_output, $entry_output."\"\",\n");"
@@ -74,7 +77,7 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	$j is column that is a parcel type
 	*/
 	for ($i = 0; $i < count($neuron_group); $i++) {
-	//for ($i = 0; $i < 100; $i++) {
+	//for ($i = 0; $i < 5; $i++) {
 		$all_totals='';
 		echo $i." ";
 		array_push($write_output, $entry_output."\"\",");
@@ -100,32 +103,58 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	                }
 	            
 	                $sql    = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND total_length!='';";
-	                //$entry_output = $entry_output.$sql."<br>";
 	                $result = $conn->query($sql);
 	                if ($result->num_rows > 0) {
 	                    while ($row = $result->fetch_assoc()) {
 	                        $avg_trunk = $row['avg_trunk'];
 	                        if ($avg_trunk != '' && $avg_trunk != 0) {
-	                        	//$entry_output = $entry_output.$i_adj." ".$sql." ";
-	                            $entry_output = $entry_output."<a href='#' title='Mean: " . $row['avg'] . "<br>Count of Recorded Values: " . $row['count_tl'] . "<br>Standard Deviation: " . $row['std_tl'] . "'>" . $avg_trunk . "</a>";
+	                            $entry_output = $entry_output."<a href='#' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_tl'] . "\\nStandard Deviation: " . $row['std_tl'] . "'>" . $avg_trunk . "</a>";
 	                        }
 	                    }
 	                }                        			
 				}
-			$entry_output = $entry_output."\",";
-			//echo "<br>".$i." ".$j_adj2." ".$entry_output;
-			//echo "&nbsp;";
-			array_push($write_output, $entry_output);				
-			}
+				$entry_output = $entry_output."\",";
+				array_push($write_output, $entry_output);				
+			} 
 		}
-		//echo "<br>".$i." ".$sql;
+		// find all parcel values
+		for ($adi = 0; $adi < 2; $adi++) {
+	        if ($adi == 0) {
+	            $a_or_d = 'Dendrite: ';
+	            $prcl   = '';
+	            $nl     = "\\n";
+	            $all_parcel_search = new ArrayObject($all_parcel_dend);
+	        } else {
+	            $a_or_d = 'Axon: ';
+	            $prcl   = '';
+	            $nl     = "";
+	            $all_parcel_search = new ArrayObject($all_parcel_axon);
+	        }
+	        for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
+                $sql    = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND total_length!='';";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $row        = $result->fetch_assoc();
+                    if ($row['count_tl'] > 0) {
+                    $all_totals = $all_totals . $prcl . $a_or_d . '\\nAverage Total Length: ' . $row['avg'] . ' \\nValues Count: ' . $row['count_tl'] . '\\nStandard Deviation: ' . $row['std'] . $nl;
+                	}
+                }
+	    	}
+	    	if ($all_totals=='') {
+	    		$all_totals = $all_totals . 'Average Total Length: 0\\nValues Count: 0\\nStandard Deviation: 0';
+	    	}
+	    }
+		array_push($parcel_output, $all_totals);
 	}
-
 	/*
-	Read from Json Template
+	Read from input files
 	*/
-	$myFile = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/n_by_k_template.json";
-	$json_template = file($myFile);
+	$path_to_files = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/";
+	$json_template_file = $path_to_files."n_by_k_template.json";
+	$json_template = file($json_template_file);
+
+	$json_template_file = $path_to_files."neuron_classes.json";
+	$neuron_classes = file($json_template_file);
 
 	/* 
 	Write to File 
@@ -135,28 +164,40 @@ $parcels_skip are parcels to skip when reporting non-all groups
 	$new_row is used because a new row occurs every certain
 	number of columns when reading the file.
 	*/
-	$myFile = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/adl_db_results.json";
-	$myFileLink = fopen($myFile, 'w') or die("Can't open file.");
+	$json_template_file = $path_to_files."adl_db_results.json";
+	$output_file = fopen($json_template_file, 'w') or die("Can't open file.");
 	/* specify rows to use from template file */
 	$init_row = 0;
 	$init_row2 = 1;
 	$new_row = 28;
 	$max_rows = 100000;
 	$template_rows = array();
+	$parcel_rows = array();
+	$parc_out = 0;
 	for ($r_i = 0; $r_i < $max_rows; $r_i++) {
 		array_push($template_rows, ($init_row+($new_row*$r_i)));
-		array_push($template_rows, ($init_row2+($new_row*$r_i)));
+		array_push($parcel_rows, ($init_row2+($new_row*$r_i)));
 	}	
-	//echo $template_rows[0]." ".$template_rows[1]." ".$template_rows[2]." ".$template_rows[3];
 
 	for ($o_i = 0; $o_i<count($json_template); $o_i++) {
 		if ($o_i==(count($json_template)-1)) {
-			fwrite($myFileLink, "\"\"]]}"); // last line
+			fwrite($output_file, "\"\"]]}"); // last line
 		}
-		else if (in_array($o_i, $template_rows)) {// || ($o_i-2)%$new_row || ($o_i-3)%$new_row) {
-			fwrite($myFileLink, $json_template[$o_i]);
-			//echo count($json_template)."mod<br>";
-			//echo "<br>".$o_i." ".$json_template[$o_i];
+		else if (in_array($o_i, $template_rows)) {
+			fwrite($output_file, $json_template[$o_i]);
+		}
+		else if (in_array($o_i, $parcel_rows)) {
+			$line_start = substr($neuron_classes[$parc_out], 0, 34);
+			$title = $parcel_output[$parc_out];
+			$line_end = substr($neuron_classes[$parc_out], 34);
+			if ($line_start != '') {
+				$full_line = $line_start." title='".$title."'".$line_end;
+			}
+			else {
+				$full_line = "\"\",";
+			}
+			fwrite($output_file, $full_line);
+			$parc_out++;
 		}
 		else {
 			if ($write_output[$o_i] != "") {
@@ -165,12 +206,10 @@ $parcels_skip are parcels to skip when reporting non-all groups
 			else {
 				$text_output = "\"\",\n";
 			}
-			fwrite($myFileLink, $text_output);
-			//echo "no mod<br>";
-			//echo "<br>".$o_i." ".$text_output;
+			fwrite($output_file, $text_output);
 		}
 	}
-	fclose($myFileLink);
+	fclose($output_file);
 
 	echo "<br><br><center>Json file successfully written.";
 

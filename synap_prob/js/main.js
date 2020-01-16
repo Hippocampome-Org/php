@@ -74,3 +74,9 @@ function checkVersion() {
     return ver;
 }
 checkVersion();
+
+function go(){
+location=
+document.main_matrix_selection.matrix_selection.
+options[document.main_matrix_selection.matrix_selection.selectedIndex].value
+}
