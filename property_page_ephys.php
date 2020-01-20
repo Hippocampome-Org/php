@@ -2261,7 +2261,7 @@ function show_only_ephys(link, start1, stop1)
 							if($duplicate_count >= 2)
 							{
 								//retrieve protocol_tag from attachment table
-								$query1 = "SELECT protocol_tag FROM attachment where original_id='$id_original'";
+								$query1 = "SELECT protocol_tag FROM Attachment where original_id='$id_original'";
 								$rs1 = mysqli_query($GLOBALS['conn'],$query1);
 								$result_array = result_set_to_array($rs1,'protocol_tag');
 								$result_array1 = array_reverse($result_array);
