@@ -4,6 +4,9 @@ This software is for generating json files
 
 Note: $path_to_files must be an existing and read/write access
 granted directory to read/write files with this software.
+For example on linux, run
+$ chmod -R 777 <directory>
+where <directory> is the $path_to_files folder
 
 Author: Nate Sutton 
 Date:   2020
@@ -16,6 +19,27 @@ Date:   2020
 	include ("../../permission_check.php"); // must be logged in
 
 	$path_to_files = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/";
+
+	/*
+	Read from input files
+
+	Note: these are pre-existing files, not ones generates by this page.
+	*/
+	$json_template_file = $path_to_files."neuron_groups.json";
+	$neuron_groups = file($json_template_file);
+
+	$json_template_file = $path_to_files."neuron_groups_ordered.json";
+	$neuron_groups_ordered = file($json_template_file);
+
+	$json_template_file = $path_to_files."neuron_classes.json";
+	$neuron_classes = file($json_template_file);
+
+	$json_template_file = $path_to_files."neuron_classes_ordered.json";
+	$neuron_classes_ordered = file($json_template_file);
+
+	$json_template_file = $path_to_files."json_new_line.json";
+	$json_new_line = file($json_template_file);
+	$json_new_line = $json_new_line[0];
 
 	$page = '';
 	if (isset($_GET['page'])) {
@@ -85,7 +109,7 @@ Date:   2020
 
 	$neuron_group_long = array("DG Granule (+)2201p", "DG Hilar Ectopic Granule (+)2203p", "DG Semilunar Granule (+)2311p", "DG Mossy (+)0103", "DG Mossy MOLDEN (+)2323", "DG AIPRIM (-)2333", "DG Axo-Axonic (-)2233", "DG Basket (-)2232", "DG Basket CCK+ (-)2232", "DG HICAP (-)2322", "DG HIPP (-)1002", "DG HIPROM (-)1333p", "DG MOCAP (-)0331", "DG MOLAX (-)3302", "DG MOPP (-)3000", "DG Neurogliaform (-)3000p", "DG Outer Molecular Layer (-)3222", "DG Total Molecular Layer (-)3303", "CA3 Pyramidal (+)23223p", "CA3c Pyramidal (+)03223p", "CA3 Giant (+)22010", "CA3 Granule (+)22100", "CA3 Axo-Axonic (-)22232", "CA3 Horizontal Axo-Axonic (-)00012", "CA3 Basket (-)22232", "CA3 Basket CCK+ (-)22232", "CA3 Bistratified (-)03333", "CA3 Interneuron Specific Oriens (-)01113", "CA3 Interneuron Specific Quad (-)03333p", "CA3 Ivy (-)03333", "CA3 LMR-Targeting (-)33200", "CA3 Lucidum LAX (-)02310", "CA3 Lucidum ORAX (-)03311", "CA3 Lucidum-Radiatum (-)03300", "CA3 Spiny Lucidum Dentate-Projecting (-)01320p", "CA3 Mossy Fiber-Associated (-)03330p", "CA3 Mossy Fiber-Associated ORDEN (-)02332p", "CA3 O-LM (-)11003", "CA3 QuadD-LM (-)12222", "CA3 Radiatum (-)03000", "CA3 R-LM (-)12000", "CA3 SO-SO (-)00003", "CA3 Trilaminar (-)01113p", "CA2 Pyramidal (+)2333p", "CA2 Basket (-)2232", "CA2 Wide-Arbor Basket (-)2232p", "CA2 Bistratified (-)0313p", "CA2 SP-SR (-)0322", "CA1 Pyramidal (+)2223p", "CA1 Radiatum Giant (+)2201", "CA1 Axo-Axonic (-)2232", "CA1 Horizontal Axo-Axonic (-)0012", "CA1 Back-Projection (-)1133p", "CA1 Basket (-)2232", "CA1 Basket CCK+ (-)2232", "CA1 Horizontal Basket (-)0012", "CA1 Bistratified (-)0333", "CA1 Interneuron Specific LMO-O (-)2003", "CA1 Interneuron Specific LM-R (-)2100", "CA1 Interneuron Specific LMR-R (-)2300", "CA1 Interneuron Specific O-R (-)0102", "CA1 Interneuron Specific O-Targeting QuadD (-)2223", "CA1 Interneuron Specific R-O (-)0221", "CA1 Interneuron Specific RO-O (-)0203", "CA1 Ivy (-)0333", "CA1 LMR (-)3300", "CA1 LMR Projecting (-)3300p", "CA1 Neurogliaform (-)3000", "CA1 Neurogliaform Projecting (-)3000p", "CA1 O-LM (-)1002", "CA1 Recurrent O-LM (-)1003", "CA1 O-LMR (-)1102", "CA1 Oriens/Alveus (-)2233", "CA1 Oriens-Bistratified (-)0103", "CA1 Oriens-Bistratified Projecting (-)1113p", "CA1 OR-LM (-)1202", "CA1 Perforant Path-Associated (-)3200p", "CA1 Perforant Path-Associated QuadD (-)3222", "CA1 Quadrilaminar (-)3333", "CA1 Radiatum (-)0300", "CA1 R-Receiving Apical-Targeting (-)1300", "CA1 Schaffer Collateral-Assoc (-)2311", "CA1 Schaffer Collateral-Receiving R-Targeting (-)0322", "CA1 SO-SO (-)0003", "CA1 Hippocampo-Subicular Projecting ENK+ (-)0313p", "CA1 Trilaminar (-)0113p", "CA1 Radial Trilaminar (-)2333", "SUB EC-Projecting Pyramidal (+)331p", "SUB CA1-Projecting Pyramidal (+)331p", "SUB Axo-axonic (-)210", "EC LI-II Multipolar-Pyramidal (+)231000", "EC LI-II Pyramidal-Fan (+)331000p", "MEC LII-III Pyramidal-Multiform (+)233111", "MEC LII Oblique Pyramidal (+)221100", "MEC LII Stellate (+)331111p", "EC LII-III Pyramidal-Tripolar (+)333000p", "LEC LIII Multipolar Principal (+)113330", "MEC LIII Multipolar Principal (+)003310", "EC LIII Pyramidal (+)223111p", "LEC LIII Complex Pyramidal (+)233310", "MEC LIII Complex Pyramidal (+)313300", "MEC LIII Bipolar Complex Pyramidal (+)133100", "EC LIII Pyramidal-Stellate (+)223200p", "EC LIII Stellate (+)223000", "EC LIII-V Bipolar Pyramidal (+)223331", "EC LIV-V Pyramidal-Horizontal (+)220233p", "EC LIV-VI Deep Multipolar Principal (+)000333p", "MEC LV Multipolar-Pyramidal (+)001331", "EC LV Deep Pyramidal (+)220033", "MEC LV Pyramidal (+)331131p", "MEC LV Superficial Pyramidal (+)213330", "MEC LV-VI Pyramidal-Polymorphic (+)000023", "LEC LVI Multipolar-Pyramidal (+)001133", "EC LII Axo-Axonic (-)030000", "MEC LII Basket (-)031000", "EC LII Basket-Multipolar (-)230000", "LEC LIII Multipolar Interneuron (-)023000", "MEC LIII Multipolar Interneuron (-)113220", "MEC LIII Superficial Multipolar Interneuron (-)233000", "EC LIII Pyramidal-Looking Interneuron (-)023300", "MEC LIII Superficial Trilayered Interneuron (-)333000");
 
-	echo "<br><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2></center><hr>";
+	echo "<br><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>";
 
 	if ($page!='') {
 		echo "<br>Completed processing record: ";
@@ -176,7 +200,6 @@ Date:   2020
 		    	elseif ($page == 'sd') {
 		    		for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
 	                    $sql    = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND mean_path_length!='';";
-	                    //echo $sql;
 	                    $result = $conn->query($sql);
 	                    if ($result->num_rows > 0 && $row['avg'] != '' && $row['count_sd'] != '' && $row['std'] != '') {
 	                        $row        = $result->fetch_assoc();
@@ -209,40 +232,17 @@ Date:   2020
 						if ($ps_avg != '' && $ps_avg != 0) {
 							$entry_output = $entry_output."<a href='#' title='Variance Will Be\\nAdded Later Here'>".$ps_avg."</a>";            
 						}
-						//$entry_output = $entry_output.$sql;
 					}
-				} 	
-				//$entry_output = $entry_output."test";			
+				} 			
 				array_push($write_output, $entry_output);	
 			}
 		} 
 	}
-	
-	/*
-	Read from input files
-	*/
-	$json_template_file = $path_to_files."n_by_k_template.json";
-	$json_template = file($json_template_file);
-
-	$json_template_file = $path_to_files."neuron_groups_ordered.json";
-	$neuron_groups_ordered = file($json_template_file);
-
-	$json_template_file = $path_to_files."neuron_classes.json";
-	$neuron_classes = file($json_template_file);
-
-	$json_template_file = $path_to_files."neuron_classes_ordered.json";
-	$neuron_classes_ordered = file($json_template_file);
-
-	$json_template_file = $path_to_files."json_new_line.json";
-	$json_new_line = file($json_template_file);
-	$json_new_line = $json_new_line[0];
 
 	/* 
 	Write to File 
-	Note: file must be already created as a blank file and
-	write access must be set for the user running this page.
-
-	$new_row is used because a new row occurs every certain
+	
+	$new_row_col is used because a new row occurs every certain
 	number of columns when reading the file.
 	*/
 	if ($page == 'dal') {
@@ -256,75 +256,26 @@ Date:   2020
 	}
 	echo "<br>";
 
-	if (false) {
+	if ($page == 'dal' || $page == 'sd') {
 		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
 		/* specify rows to use from template file */
-		$init_row = 0;
-		$init_row2 = 1;
-		$new_row = 28;
-		$max_rows = 100000;
-		$neuron_group_rows = array();
-		$parcel_rows = array();
-		$parc_out = 0;
-		for ($r_i = 0; $r_i < $max_rows; $r_i++) {
-			array_push($neuron_group_rows, ($init_row+($new_row*$r_i)));
-			array_push($parcel_rows, ($init_row2+($new_row*$r_i)));
-		}	
-
-		for ($o_i = 0; $o_i<count($json_template); $o_i++) {
-			if ($o_i==(count($json_template)-1)) {
-				fwrite($output_file, "\"\"]]}"); // last line
-			}
-			else if (in_array($o_i, $neuron_group_rows)) {
-				fwrite($output_file, $json_template[$o_i]);
-			}
-			else if (in_array($o_i, $parcel_rows)) {
-				$line_start = substr($neuron_classes[$parc_out], 0, 34);
-				$title = $parcel_output[$parc_out];
-				$line_end = substr($neuron_classes[$parc_out], 34);
-				if ($line_start != '') {
-					$full_line = $line_start." title='".$title."'".$line_end;
-				}
-				else {
-					$full_line = "\"\",";
-				}
-				fwrite($output_file, $full_line);
-				$parc_out++;
-			}
-			else {
-				if ($write_output[$o_i] != "") {
-					$text_output = $write_output[$o_i]."\n";
-				}
-				else {
-					$text_output = "\"\",\n";
-				}
-				fwrite($output_file, $text_output);
-			}
-		}
-		fclose($output_file);	
-
-		echo "<br><br><center>Json file successfully written.<br>";
-	}
-	elseif ($page == 'dal' || $page == 'sd') {
-		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
-		/* specify rows to use from template file */
-		$init_row = 0;
-		$init_row2 = 1;
-		$new_gen_row = 28;
+		$init_col = 0;
+		$init_col2 = 1;
+		$new_row_col = 28;
 		$total_neuron_classes = 122;
 		$max_rows = 100000;
 		/* specify indices */
-		$neuron_group_rows_adj = array(); // new file indexes
-		$neuron_class_rows_adj = array();
-		$total_rows = ($total_neuron_classes*$new_gen_row)+(2*$total_neuron_classes);
+		$neuron_group_cols = array(); // new file indexes
+		$neuron_class_cols = array();
+		$total_rows = ($total_neuron_classes*$new_row_col)+(2*$total_neuron_classes);
 		$t_out = 0;		
 		$n_out = 0;		
 		$p_out = 0;
 		$nl = $json_new_line; // new line
 		/* create arrays of selected template indexes */
 		for ($r_i = 0; $r_i < $max_rows; $r_i++) {
-			array_push($neuron_group_rows_adj, ($init_row+($new_gen_row*$r_i)));
-			array_push($neuron_class_rows_adj, ($init_row2+($new_gen_row*$r_i)));
+			array_push($neuron_group_cols, ($init_col+($new_row_col*$r_i)));
+			array_push($neuron_class_cols, ($init_col2+($new_row_col*$r_i)));
 		}	
 
 		for ($o_i = 0; $o_i<$total_rows; $o_i++) {
@@ -332,12 +283,12 @@ Date:   2020
 				$last_index = count($write_output)-1; // last line
 				fwrite($output_file, $write_output[$last_index]."]}]}"); 
 			}
-			elseif (in_array($o_i, $neuron_group_rows_adj)) {
+			elseif (in_array($o_i, $neuron_group_cols)) {
 				//if ($o_i>2) {fwrite($output_file, "\"\"]},{\"cell\":[");}
 				fwrite($output_file, $neuron_groups_ordered[$t_out]);
 				$t_out++;
 			}
-			elseif (in_array($o_i, $neuron_class_rows_adj)) {
+			elseif (in_array($o_i, $neuron_class_cols)) {
 				$line_start = substr($neuron_classes[$n_out], 0, 34);
 				$title = $parcel_output[$n_out];
 				$line_end = substr($neuron_classes[$n_out], 34);
@@ -371,22 +322,22 @@ Date:   2020
 	elseif ($page=='ps') {
 		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
 		/* specify rows to use from template file */
-		$init_row = 0;
-		$init_row2 = 1;
-		$new_gen_row = 123;
+		$init_col = 0;
+		$init_col2 = 1;
+		$new_row_col = 123;
 		$max_rows = 100000;
 		/* specify indices */
-		$neuron_group_rows_adj = array(); // new file indexes
-		$neuron_class_rows_adj = array();
-		$total_rows = ($new_gen_row*$new_gen_row)+(2*$new_gen_row);
+		$neuron_group_cols = array(); // new file indexes
+		$neuron_class_cols = array();
+		$total_rows = ($new_row_col*$new_row_col)+(2*$new_row_col);
 		$t_out = 0;		
 		$n_out = 0;		
 		$p_out = 0;
 		$nl = $json_new_line; // new line
 		/* create arrays of selected template indexes */
 		for ($r_i = 0; $r_i < $max_rows; $r_i++) {
-			array_push($neuron_group_rows_adj, ($init_row+($new_gen_row*$r_i)));
-			array_push($neuron_class_rows_adj, ($init_row2+($new_gen_row*$r_i)));
+			array_push($neuron_group_cols, ($init_col+($new_row_col*$r_i)));
+			array_push($neuron_class_cols, ($init_col2+($new_row_col*$r_i)));
 		}	
 
 		for ($o_i = 0; $o_i<$total_rows; $o_i++) {
@@ -394,12 +345,12 @@ Date:   2020
 				$last_index = count($write_output)-1; // last line
 				fwrite($output_file, "\"".$write_output[$last_index]."\"]}]}"); 
 			}
-			elseif (in_array($o_i, $neuron_group_rows_adj)) {
+			elseif (in_array($o_i, $neuron_group_cols)) {
 				//if ($o_i>2) {fwrite($output_file, "\"\"]},{\"cell\":[");}
 				fwrite($output_file, $neuron_groups_ordered[$t_out]);
 				$t_out++;
 			}
-			elseif (in_array($o_i, $neuron_class_rows_adj)) {
+			elseif (in_array($o_i, $neuron_class_cols)) {
 				fwrite($output_file, $neuron_classes_ordered[$n_out]);
 				$n_out++;
 			}
