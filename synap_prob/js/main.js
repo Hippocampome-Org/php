@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-  $.ajax({
+  /*$.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_synap_prob.php',
+    url: 'synap_prob/load_matrix_session_sd.php',
     success: function() {}
   });
   $.ajax({
@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 		contentType: 'application/json; charset=utf-8',
 		url: 'load_matrix_session_firing_parameter.php',
 		success: function() {}
-  });
+  });*/
   $('div#menu_main_button_new_clr').css('display','block');
 });
 

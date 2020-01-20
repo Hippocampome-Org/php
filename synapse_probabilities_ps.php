@@ -8,18 +8,37 @@
 <?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html" />
 
+<?php 
+  /* set json data to load */
+  $matrix_type = "probabilities_of_synapses";
+  $session_matrix_cache_file = "synap_prob/gen_json/ps_db_results.json";
+  $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+  $jsonStr = $_SESSION[$matrix_type]; 
+?>
 <?php include_once("synap_prob/hco_header_1.php") ?>
+
 <link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
+<style type="text/css">
+.ui-jqgrid-hdiv {
+  /*height:200px; !important;*/
+  /*width:200px;*/
+}
+</style>
+
+<?php
+  $neuron_types = array('Granule', 'Hilar Ectopic Granule', 'Semilunar Granule', 'Mossy', 'Mossy MOLDEN', 'AIPRIM', 'DG Axo-Axonic', 'DG Basket', 'DG BC CCK+', 'HICAP', 'HIPP', 'HIPROM', 'MOCAP', 'MOLAX', 'MOPP', 'DG Neurogliaform', 'Outer Molecular Layer', 'Total Molecular Layer', 'CA3 Pyramidal', 'CA3c Pyramidal', 'CA3 Giant', 'CA3 Granule', 'CA3 Axo-Axonic', 'CA3 Horizontal AA', 'CA3 Basket', 'CA3 BC CCK+', 'CA3 Bistratified', 'CA3 IS Oriens', 'CA3 IS Quad', 'CA3 Ivy', 'CA3 LMR-Targeting', 'Lucidum LAX', 'Lucidum ORAX', 'Lucidum-Radiatum', 'Spiny Lucidum', 'Mossy Fiber-Associated', 'MFA ORDEN', 'CA3 O-LM', 'CA3 QuadD-LM', 'CA3 Radiatum', 'CA3 R-LM', 'CA3 SO-SO', 'CA3 Trilaminar', 'CA2 Pyramidal', 'CA2 Basket', 'CA2 Wide-Arbor BC', 'CA2 Bistratified', 'CA2 SP-SR', 'CA1 Pyramidal', 'Cajal-Retzius', 'CA1 Radiatum Giant', 'CA1 Axo-axonic', 'CA1 Horizontal AA', 'CA1 Back-Projection', 'CA1 Basket', 'CA1 BC CCK+', 'CA1 Horizontal BC', 'CA1 Bistratified', 'CA1 IS LMO-O', 'CA1 IS LM-R', 'CA1 IS LMR-R', 'CA1 IS O-R', 'CA1 IS O-Target QuadD', 'CA1 IS R-O', 'CA1 IS RO-O', 'CA1 Ivy', 'CA1 LMR', 'CA1 LMR Projecting', 'CA1 Neurogliaform', 'CA1 NGF Projecting', 'CA1 O-LM', 'CA1 Recurrent O-LM', 'CA1 O-LMR', 'CA1 Oriens/Alveus', 'CA1 Oriens-Bistratified', 'CA1 O-Bistrat Projecting', 'CA1 OR-LM', 'CA1 Perforant Path-Assoc', 'CA1 PPA QuadD', 'CA1 Quadrilaminar', 'CA1 Radiatum', 'CA1 R-Recv Apical-Target', 'Schaffer Collateral-Assoc', 'SCR R-Targeting', 'CA1 SO-SO', 'CA1 Hipp-SUB Proj ENK+', 'CA1 Trilaminar', 'CA1 Radial Trilaminar', 'SUB EC-Proj Pyramidal', 'SUB CA1-Proj Pyramidal', 'SUB Axo-axonic', 'LI-II Multipolar-Pyramidal', 'LI-II Pyramidal-Fan', 'MEC LII-III PC-Multiform', 'MEC LII Oblique Pyramidal', 'MEC LII Stellate', 'LII-III Pyramidal-Tripolar', 'LEC LIII Multipolar Principal', 'MEC LIII Multipolar Principal', 'LIII Pyramidal', 'LEC LIII Complex Pyramidal', 'MEC LIII Complex Pyramidal', 'MEC LIII BP Cmplx PC', 'LIII Pyramidal-Stellate', 'LIII Stellate', 'LIII-V Bipolar Pyramidal', 'LIV-V Pyramidal-Horiz', 'LIV-VI Deep Multipolar', 'MEC LV Multipolar-PC', 'LV Deep Pyramidal', 'MEC LV Pyramidal', 'MEC LV Superficial PC', 'MEC LV-VI PC-Polymorph', 'LEC LVI Multipolar-PC', 'LII Axo-Axonic', 'MEC LII Basket', 'LII Basket Multipolar Interneuron', 'LEC LIII Multipolar Interneuron', 'MEC LIII Multipolar Interneuron', 'MEC LIII Superficial MPI', 'LIII Pyramidal-Looking Interneuron', 'MEC LIII Superficial Trilayered Interneuron');
+  $neuron_IDs = array('Granule', 'Hilar Ectopic Granule', 'Semilunar Granule', 'Mossy', 'Mossy MOLDEN', 'AIPRIM', 'DG Axo-Axonic', 'DG Basket', 'DG BC CCK_plus', 'HICAP', 'HIPP', 'HIPROM', 'MOCAP', 'MOLAX', 'MOPP', 'DG Neurogliaform', 'Outer Molecular Layer', 'Total Molecular Layer', 'CA3 Pyramidal', 'CA3c Pyramidal', 'CA3 Giant', 'CA3 Granule', 'CA3 Axo-Axonic', 'CA3 Horizontal AA', 'CA3 Basket', 'CA3 BC CCK_plus', 'CA3 Bistratified', 'CA3 IS Oriens', 'CA3 IS Quad', 'CA3 Ivy', 'CA3 LMR-Targeting', 'Lucidum LAX', 'Lucidum ORAX', 'Lucidum-Radiatum', 'Spiny Lucidum', 'Mossy Fiber-Associated', 'MFA ORDEN', 'CA3 O-LM', 'CA3 QuadD-LM', 'CA3 Radiatum', 'CA3 R-LM', 'CA3 SO-SO', 'CA3 Trilaminar', 'CA2 Pyramidal', 'CA2 Basket', 'CA2 Wide-Arbor BC', 'CA2 Bistratified', 'CA2 SP-SR', 'CA1 Pyramidal', 'Cajal-Retzius', 'CA1 Radiatum Giant', 'CA1 Axo-axonic', 'CA1 Horizontal AA', 'CA1 Back-Projection', 'CA1 Basket', 'CA1 BC CCK_plus', 'CA1 Horizontal BC', 'CA1 Bistratified', 'CA1 IS LMO-O', 'CA1 IS LM-R', 'CA1 IS LMR-R', 'CA1 IS O-R', 'CA1 IS O-Target QuadD', 'CA1 IS R-O', 'CA1 IS RO-O', 'CA1 Ivy', 'CA1 LMR', 'CA1 LMR Projecting', 'CA1 Neurogliaform', 'CA1 NGF Projecting', 'CA1 O-LM', 'CA1 Recurrent O-LM', 'CA1 O-LMR', 'CA1 Oriens/Alveus', 'CA1 Oriens-Bistratified', 'CA1 O-Bistrat Projecting', 'CA1 OR-LM', 'CA1 Perforant Path-Assoc', 'CA1 PPA QuadD', 'CA1 Quadrilaminar', 'CA1 Radiatum', 'CA1 R-Recv Apical-Target', 'Schaffer Collateral-Assoc', 'SCR R-Targeting', 'CA1 SO-SO', 'CA1 Hipp-SUB Proj ENK_plus', 'CA1 Trilaminar', 'CA1 Radial Trilaminar', 'SUB EC-Proj Pyramidal', 'SUB CA1-Proj Pyramidal', 'SUB Axo-axonic', 'LI-II Multipolar-Pyramidal', 'LI-II Pyramidal-Fan', 'MEC LII-III PC-Multiform', 'MEC LII Oblique Pyramidal', 'MEC LII Stellate', 'LII-III Pyramidal-Tripolar', 'LEC LIII Multipolar Principal', 'MEC LIII Multipolar Principal', 'LIII Pyramidal', 'LEC LIII Complex Pyramidal', 'MEC LIII Complex Pyramidal', 'MEC LIII BP Cmplx PC', 'LIII Pyramidal-Stellate', 'LIII Stellate', 'LIII-V Bipolar Pyramidal', 'LIV-V Pyramidal-Horiz', 'LIV-VI Deep Multipolar', 'MEC LV Multipolar-PC', 'LV Deep Pyramidal', 'MEC LV Pyramidal', 'MEC LV Superficial PC', 'MEC LV-VI PC-Polymorph', 'LEC LVI Multipolar-PC', 'LII Axo-Axonic', 'MEC LII Basket', 'LII Basket Multipolar Interneuron', 'LEC LIII Multipolar Interneuron', 'MEC LIII Multipolar Interneuron', 'MEC LIII Superficial MPI', 'LIII Pyramidal-Looking Interneuron', 'MEC LIII Superficial Trilayered Interneuron');
+?>
 
 <!-- ************* Start of Matrix Section ************* -->
 
 <script type="text/javascript">
 $(function(){
 	$('#super_check').change(function() {
-		var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-		var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
+		var bgColorArray = ["","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633",""];
+		var fontColorArray = ["","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF",""];
 		if ($("#super_check").is(':checked')) {
            $("#nGrid").jqGrid('showCol',["Supertype"]);
 		}
@@ -46,6 +65,7 @@ $(function(){
 
     
     headerHeight = $("thead:first tr th").height();
+    /* headerHeight = 45; */
    for (iCol = 0; iCol < cm.length; iCol++) 
     {
         cmi = cm[iCol];
@@ -68,6 +88,8 @@ $(function(){
             }
             headDiv.parent().css("zoom",1);
         } 
+        /*headDiv.height(200);*/
+        /*headDiv.width(55);*/
     }
  }  
 	function Merger(gridName,cellName){
@@ -159,6 +181,7 @@ $(function(){
         });
 
         // increase the height of the resizing span
+        //resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
         resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
         headerRow.find("span.ui-jqgrid-resize").each(function () {
             this.style.cssText = resizeSpanHeight;
@@ -184,12 +207,21 @@ $(function(){
     $grid.jqGrid({
 	datatype: "jsonstring",
 	datastr: dataStr,
-    colNames:['','Neuron Type','<a href="parcel_page.php?parcel=SMo&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMo</a>','<a href="parcel_page.php?parcel=SMi&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMi</a>','<a href="parcel_page.php?parcel=SG&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SG</a>','<a href="parcel_page.php?parcel=H&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">H</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SL&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SL</a>','<a href="parcel_page.php?parcel=SP&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SM&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SM</a>','<a href="parcel_page.php?parcel=SP&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=PL&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">PL</a>','<a href="parcel_page.php?parcel=I&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">I</a>','<a href="parcel_page.php?parcel=II&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">II</a>','<a href="parcel_page.php?parcel=III&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">III</a>','<a href="parcel_page.php?parcel=IV&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">IV</a>','<a href="parcel_page.php?parcel=V&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">V</a>','<a href="parcel_page.php?parcel=VI&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">VI</a>'],
+    colNames:['','<div id="frmCntr_2">Pre</div><div id="toCntr_2" class="rotate">Post</div>',
+    <?php
+      for ($i = 0; $i < count($neuron_types); $i++) {
+        echo "'".$neuron_types[$i]."'";
+        if ($i != count($neuron_types)-1) {
+          echo ", ";
+        }
+      }
+    ?>
+    ],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'" + ' style="height:75px;"';  
       }, frozen:true},
-      {name:'Neuron type', index:'nickname', width:200,sortable:false,frozen:true,
+      {name:'Neuron_Type_2', index:'Neuron_Type_2', width:200,sortable:false,frozen:true,
       cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
           return 'style="height:75px;"';
@@ -197,73 +229,15 @@ $(function(){
    	  },
       //{name:'Supertype', index:'supertype', width:300,sortable:false,hidden: true},
           //,searchoptions: {sopt: ['bw','bn','cn','in','ni','ew','en','nc']}},
-      {name:'SMo', index:'DG_SMo', width:head_col_width,search:false,sortable:false},
-      {name:'SMi', index:'DG_SMi', width:head_col_width,height:250,search:false,sortable:false},
-      {name:'SG', index:'DG_SG', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'H', index:'DG_H', width:head_col_width,height:150,search:false,sortable:false, 
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-          return 'style="border-right:medium solid #C08181;"';
-       }
-      },
-      {name:'SLM', index:'CA3_SLM', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-             return 'style="border-left:medium solid #770000;"';
-       }},
-      {name:'SR', index:'CA3_SR', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'SL', index:'CA3_SL', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'SP', index:'CA3_SP', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'SO', index:'CA3_SO', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-             return 'style="border-right:medium solid #C08181;"';
-       }},
-      {name:'2_SLM', index:'CA2_SLM', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-             return 'style="border-left:medium solid #770000;"';
-       }},
-      {name:'2_SR', index:'CA2_SR', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'2_SP', index:'CA2_SP', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'2_SO', index:'CA2_SO', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-             return 'style="border-right:medium solid #C08181;"';
-       }},
-      {name:'1_SLM', index:'CA1_SLM', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-             return 'style="border-left:medium solid #770000;"';
-       }},
-      {name:'1_SR', index:'CA1_SR', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'1_SP', index:'CA1_SP', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'1_SO', index:'CA1_SO', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-                return 'style="border-right:medium solid #C08181;"';
-       }},
-      {name:'SUB_SM', index:'SUB_SM', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-                return 'style="border-left:medium solid #770000;"';
-       }},
-      {name:'SUB_SP', index:'SUB_SP', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'SUB_PL', index:'SUB_PL', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-                   return 'style="border-right:medium solid #C08181;"';
-       }},
-      {name:'I', index:'EC_I', width:head_col_width,height:150,search:false,sortable:false,
-       cellattr: function(rowId, tv, rawObject, cm, rdata) 
-       {
-                   return 'style="border-left:medium solid #770000;"';
-       }},
-      {name:'II', index:'EC_II', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'III', index:'EC_III', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'IV', index:'EC_IV', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'V', index:'EC_V', width:head_col_width,height:150,search:false,sortable:false},
-      {name:'VI', index:'EC_VI', width:head_col_width,height:150,search:false,sortable:false}
+      <?php
+        for ($i = 0; $i < count($neuron_IDs); $i++) {
+          $neuron = str_replace(' ', '_', $neuron_IDs[$i]);
+          echo "{name:'".$neuron."', index:'".$neuron."', width:head_col_width,search:false,sortable:false}";
+          if ($i != count($neuron_IDs)-1) {
+            echo ", ";
+          }
+        }
+      ?>      
  	], 
     //multiselect: true,
    /* pager: '#pager',*/
@@ -302,154 +276,39 @@ $(function(){
 	jQuery("#nGrid").jqGrid('setGroupHeaders', { useColSpanStyle: true, 
 		groupHeaders:[ 
 		{startColumnName: 'Type', numberOfColumns: 2, titleText: '<b>Neuron Type<b>'},
-		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b><div style=\'width:100%;height:100%;position:relative;top:3px;left:2px;\' class=\'dg_color\'><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);" style=\'position:relative;top:5px;\'>DG</a><b></div>', ID: 'test',
+		{startColumnName: 'Granule', numberOfColumns: 18, titleText: '<b><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);">DG</a><b>', ID: 'test',
        cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
             return ' style="background: rgb(119, 0, 0) !important;"';
        }},
-		{startColumnName: 'SLM', numberOfColumns: 5, titleText: '<b><a id="ca3_subregion" href="parcel_page.php?subregion=CA3&type=subregion" onClick="OpenInNewTab(this);">CA3</a></b>'},
-		{startColumnName: '2_SLM', numberOfColumns: 4, titleText: '<b><a id="ca2_subregion" href="parcel_page.php?subregion=CA2&type=subregion" onClick="OpenInNewTab(this);">CA2</a></b>'},
-		{startColumnName: '1_SLM', numberOfColumns: 4, titleText: '<b><a id="ca1_subregion" href="parcel_page.php?subregion=CA1&type=subregion" onClick="OpenInNewTab(this);">CA1</a></b>'},
-		{startColumnName: 'SUB_SM', numberOfColumns: 3, titleText: '<b><a id="sub_subregion" href="parcel_page.php?subregion=SUB&type=subregion" onClick="OpenInNewTab(this);">SUB</a></b>'},
-		{startColumnName: 'I', numberOfColumns: 6, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC</a></b>'}
+		{startColumnName: 'CA3_Pyramidal', numberOfColumns: 25, titleText: '<b><a id="ca3_subregion" href="parcel_page.php?subregion=CA3&type=subregion" onClick="OpenInNewTab(this);">CA3</a></b>'},
+		{startColumnName: 'CA2_Pyramidal', numberOfColumns: 5, titleText: '<b><a id="ca2_subregion" href="parcel_page.php?subregion=CA2&type=subregion" onClick="OpenInNewTab(this);">CA2</a></b>'},
+		{startColumnName: 'CA1_Pyramidal', numberOfColumns: 40, titleText: '<b><a id="ca1_subregion" href="parcel_page.php?subregion=CA1&type=subregion" onClick="OpenInNewTab(this);">CA1</a></b>'},
+		{startColumnName: 'SUB_EC-Proj_Pyramidal', numberOfColumns: 3, titleText: '<b><a id="sub_subregion" href="parcel_page.php?subregion=SUB&type=subregion" onClick="OpenInNewTab(this);">SUB</a></b>'},
+		{startColumnName: 'LI-II_Multipolar-Pyramidal', numberOfColumns: 31, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC</a></b>'}
 		] 
 	});
 	if(checkVersion()=="9")
 	{
-		$("#jqgh_nGrid_SMo").addClass("rotateIE9");
-		$("#jqgh_nGrid_SMi").addClass("rotateIE9");
-		$("#jqgh_nGrid_SG").addClass("rotateIE9");
-		$("#jqgh_nGrid_H").addClass("rotateIE9");
-		$("#jqgh_nGrid_SLM").addClass("rotateIE9");
-		$("#jqgh_nGrid_SR").addClass("rotateIE9");
-		$("#jqgh_nGrid_SL").addClass("rotateIE9");
-		$("#jqgh_nGrid_SP").addClass("rotateIE9");
-		$("#jqgh_nGrid_SO").addClass("rotateIE9");
-		$("#jqgh_nGrid_2_SLM").addClass("rotateIE9");
-		$("#jqgh_nGrid_2_SR").addClass("rotateIE9");
-		$("#jqgh_nGrid_2_SP").addClass("rotateIE9");
-		$("#jqgh_nGrid_2_SO").addClass("rotateIE9");
-		$("#jqgh_nGrid_1_SLM").addClass("rotateIE9");
-		$("#jqgh_nGrid_1_SR").addClass("rotateIE9");
-		$("#jqgh_nGrid_1_SP").addClass("rotateIE9");
-		$("#jqgh_nGrid_1_SO").addClass("rotateIE9");
-		$("#jqgh_nGrid_SUB_SM").addClass("rotateIE9");
-		$("#jqgh_nGrid_SUB_SP").addClass("rotateIE9");
-		$("#jqgh_nGrid_SUB_PL").addClass("rotateIE9");
-		$("#jqgh_nGrid_I").addClass("rotateIE9");
-		$("#jqgh_nGrid_II").addClass("rotateIE9");
-		$("#jqgh_nGrid_III").addClass("rotateIE9");
-		$("#jqgh_nGrid_IV").addClass("rotateIE9");
-		$("#jqgh_nGrid_V").addClass("rotateIE9");
-		$("#jqgh_nGrid_VI").addClass("rotateIE9");
+		$("#jqgh_nGrid_Granule").addClass("rotateIE9");
 	}
 	else
 	{
-		$("#jqgh_nGrid_SMo").addClass("rotate");
-		$("#jqgh_nGrid_SMi").addClass("rotate");
-		$("#jqgh_nGrid_SG").addClass("rotate");
-		$("#jqgh_nGrid_H").addClass("rotate");
-		$("#jqgh_nGrid_SLM").addClass("rotate");
-		$("#jqgh_nGrid_SR").addClass("rotate");
-		$("#jqgh_nGrid_SL").addClass("rotate");
-		$("#jqgh_nGrid_SP").addClass("rotate");
-		$("#jqgh_nGrid_SO").addClass("rotate");
-		$("#jqgh_nGrid_2_SLM").addClass("rotate");
-		$("#jqgh_nGrid_2_SR").addClass("rotate");
-		$("#jqgh_nGrid_2_SP").addClass("rotate");
-		$("#jqgh_nGrid_2_SO").addClass("rotate");
-		$("#jqgh_nGrid_1_SLM").addClass("rotate");
-		$("#jqgh_nGrid_1_SR").addClass("rotate");
-		$("#jqgh_nGrid_1_SP").addClass("rotate");
-		$("#jqgh_nGrid_1_SO").addClass("rotate");
-		$("#jqgh_nGrid_SUB_SM").addClass("rotate");
-		$("#jqgh_nGrid_SUB_SP").addClass("rotate");
-		$("#jqgh_nGrid_SUB_PL").addClass("rotate");
-		$("#jqgh_nGrid_I").addClass("rotate");
-		$("#jqgh_nGrid_II").addClass("rotate");
-		$("#jqgh_nGrid_III").addClass("rotate");
-		$("#jqgh_nGrid_IV").addClass("rotate");
-		$("#jqgh_nGrid_V").addClass("rotate");
-		$("#jqgh_nGrid_VI").addClass("rotate");
+		$("#jqgh_nGrid_Granule").addClass("rotate");
     }
 	
-	$("#jqgh_nGrid_SMo").css("height","25");
-	$("#jqgh_nGrid_SMo").css("top","12");
-	$("#jqgh_nGrid_SMi").css("height","25");
-	$("#jqgh_nGrid_SMi").css("top","12");
-	$("#jqgh_nGrid_SG").css("height","25");
-	$("#jqgh_nGrid_SG").css("top","12");
-	$("#jqgh_nGrid_H").css("height","25");
-	$("#jqgh_nGrid_H").css("top","12");
-	$("#jqgh_nGrid_SLM").css("height","25");
-	$("#jqgh_nGrid_SLM").css("top","12");
+  <?php
+    /*
+    for ($i = 0; $i < count($neuron_IDs); $i++) {
+      $neuron = str_replace(' ', '_', $neuron_IDs[$i]); //replace spaces
+      echo "$('#jqgh_nGrid_".$neuron."').addClass('header_adjust');";
+      echo "$('#jqgh_nGrid_".$neuron."').css('height','30');";
+    }
+    */
+  ?>
 	
-	
-	$("#jqgh_nGrid_SR").css("height","25");
-	$("#jqgh_nGrid_SR").css("top","12");
-	
-	$("#jqgh_nGrid_SL").css("height","25");
-	$("#jqgh_nGrid_SL").css("top","12");
-	
-	$("#jqgh_nGrid_SP").css("height","25");
-	$("#jqgh_nGrid_SP").css("top","12");
-	
-	$("#jqgh_nGrid_SO").css("height","25");
-	$("#jqgh_nGrid_SO").css("top","12");
-	
-	$("#jqgh_nGrid_2_SLM").css("height","25");
-	$("#jqgh_nGrid_2_SLM").css("top","12");
-	
-	$("#jqgh_nGrid_2_SR").css("height","25");
-	$("#jqgh_nGrid_2_SR").css("top","12");
-	
-	$("#jqgh_nGrid_2_SP").css("height","25");
-	$("#jqgh_nGrid_2_SP").css("top","12");
-	
-	$("#jqgh_nGrid_2_SO").css("height","25");
-	$("#jqgh_nGrid_2_SO").css("top","12");
-	
-	$("#jqgh_nGrid_1_SLM").css("height","25");
-	$("#jqgh_nGrid_1_SLM").css("top","12");
-	
-	$("#jqgh_nGrid_1_SR").css("height","25");
-	$("#jqgh_nGrid_1_SR").css("top","12");
-	
-	$("#jqgh_nGrid_1_SP").css("height","25");
-	$("#jqgh_nGrid_1_SP").css("top","12");
-	
-	$("#jqgh_nGrid_1_SO").css("height","25");
-	$("#jqgh_nGrid_1_SO").css("top","12");
-	
-	$("#jqgh_nGrid_SUB_SM").css("height","25");
-	$("#jqgh_nGrid_SUB_SM").css("top","12");
-	
-	$("#jqgh_nGrid_SUB_SP").css("height","25");
-	$("#jqgh_nGrid_SUB_SP").css("top","12");
-	
-	$("#jqgh_nGrid_SUB_PL").css("height","25");
-	$("#jqgh_nGrid_SUB_PL").css("top","12");
-	
-	$("#jqgh_nGrid_I").css("height","25");
-	$("#jqgh_nGrid_I").css("top","12");
-	
-	$("#jqgh_nGrid_II").css("height","25");
-	$("#jqgh_nGrid_II").css("top","12");
-	
-	$("#jqgh_nGrid_III").css("height","25");
-	$("#jqgh_nGrid_III").css("top","12");
-	
-	$("#jqgh_nGrid_IV").css("height","25");
-	$("#jqgh_nGrid_IV").css("top","12");
-	
-	$("#jqgh_nGrid_V").css("height","25");
-	$("#jqgh_nGrid_V").css("top","12");
-	
-	$("#jqgh_nGrid_VI").css("height","25");
-	$("#jqgh_nGrid_VI").css("top","12");
-	
-	var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-	var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
+	var bgColorArray = ["","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633",""];
+	var fontColorArray = ["","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF",""];
 	var $i=0;
 	$(".jqg-second-row-header").children().each(function()
 	{
@@ -470,13 +329,6 @@ var cm = $("#nGrid").jqGrid('getGridParam', 'colModel');
         var ci = $.jgrid.getCellIndex($td[0]); // works mostly as $td[0].cellIndex
 		$row = "#"+rowId+" td"; 
 		$($row).addClass('highlighted_top');
-
-		/* for(var i=0;i<count;i++)
-		{
-			$colSelected = "tr#"+i+" td:eq("+ci+")";
-			$($colSelected).addClass('highlighted');
-			
-		}  */
 	}
 });
 $("#nGrid").mouseout(function(e) {

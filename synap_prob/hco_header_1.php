@@ -7,7 +7,6 @@
 	<script src='jqGrid-4/js/jquery.jqGrid.src.js' type='text/javascript'></script>
 	<script src='synap_prob/js/main.js' type='text/javascript'></script>";
 
-	$jsonStr = $_SESSION['morphology'];
 	require_once('class/class.type.php');
 	require_once('class/class.property.php');
 	require_once('class/class.evidencepropertyyperel.php');

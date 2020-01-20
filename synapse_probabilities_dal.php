@@ -8,7 +8,15 @@
 <?php include_once("analytics.php") ?>
 <meta http-equiv="Content-Type" content="text/html" />
 
+<?php 
+  /* set json data to load */
+  $matrix_type = "dend_axon_lengths";
+  $session_matrix_cache_file = "synap_prob/gen_json/adl_db_results.json";
+  $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+  $jsonStr = $_SESSION[$matrix_type]; 
+?>
 <?php include_once("synap_prob/hco_header_1.php") ?>
+
 <link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
@@ -18,8 +26,8 @@
 <script type="text/javascript">
 $(function(){
 	$('#super_check').change(function() {
-		var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-		var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
+		var bgColorArray = ["","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633",""];
+		var fontColorArray = ["","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF",""];
 		if ($("#super_check").is(':checked')) {
            $("#nGrid").jqGrid('showCol',["Supertype"]);
 		}
@@ -184,12 +192,12 @@ $(function(){
     $grid.jqGrid({
 	datatype: "jsonstring",
 	datastr: dataStr,
-    colNames:['','Neuron Type','<a href="parcel_page.php?parcel=SMo&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMo</a>','<a href="parcel_page.php?parcel=SMi&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMi</a>','<a href="parcel_page.php?parcel=SG&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SG</a>','<a href="parcel_page.php?parcel=H&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">H</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SL&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SL</a>','<a href="parcel_page.php?parcel=SP&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SM&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SM</a>','<a href="parcel_page.php?parcel=SP&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=PL&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">PL</a>','<a href="parcel_page.php?parcel=I&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">I</a>','<a href="parcel_page.php?parcel=II&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">II</a>','<a href="parcel_page.php?parcel=III&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">III</a>','<a href="parcel_page.php?parcel=IV&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">IV</a>','<a href="parcel_page.php?parcel=V&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">V</a>','<a href="parcel_page.php?parcel=VI&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">VI</a>'],
+    colNames:['','<div id="frmCntr">Neuron</div><div id="toCntr" class="rotate">Parcel</div>','<a href="parcel_page.php?parcel=SMo&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMo</a>','<a href="parcel_page.php?parcel=SMi&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SMi</a>','<a href="parcel_page.php?parcel=SG&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SG</a>','<a href="parcel_page.php?parcel=H&subregion=DG&type=parcel" onClick="OpenInNewTab(this);" target="_blank">H</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SL&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SL</a>','<a href="parcel_page.php?parcel=SP&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA3&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA2&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SLM&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SLM</a>','<a href="parcel_page.php?parcel=SR&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SR</a>','<a href="parcel_page.php?parcel=SP&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=SO&subregion=CA1&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SO</a>','<a href="parcel_page.php?parcel=SM&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SM</a>','<a href="parcel_page.php?parcel=SP&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">SP</a>','<a href="parcel_page.php?parcel=PL&subregion=SUB&type=parcel" onClick="OpenInNewTab(this);" target="_blank">PL</a>','<a href="parcel_page.php?parcel=I&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">I</a>','<a href="parcel_page.php?parcel=II&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">II</a>','<a href="parcel_page.php?parcel=III&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">III</a>','<a href="parcel_page.php?parcel=IV&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">IV</a>','<a href="parcel_page.php?parcel=V&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">V</a>','<a href="parcel_page.php?parcel=VI&subregion=EC&type=parcel" onClick="OpenInNewTab(this);" target="_blank">VI</a>'],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'" + ' style="height:75px;"';  
       }, frozen:true},
-      {name:'Neuron type', index:'nickname', width:200,sortable:false,frozen:true,
+      {name:'Neuron_Type', index:'Neuron_Type', width:200,sortable:false,frozen:true,
       cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
           return 'style="height:75px;"';
@@ -302,7 +310,7 @@ $(function(){
 	jQuery("#nGrid").jqGrid('setGroupHeaders', { useColSpanStyle: true, 
 		groupHeaders:[ 
 		{startColumnName: 'Type', numberOfColumns: 2, titleText: '<b>Neuron Type<b>'},
-		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b><div style=\'width:100%;height:100%;position:relative;top:3px;left:2px;\' class=\'dg_color\'><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);" style=\'position:relative;top:5px;\'>DG</a><b></div>', ID: 'test',
+		{startColumnName: 'SMo', numberOfColumns: 4, titleText: '<b><a id="dg_subregion" href="parcel_page.php?subregion=DG&type=subregion" onClick="OpenInNewTab(this);">DG</a><b>', ID: 'test',
        cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
             return ' style="background: rgb(119, 0, 0) !important;"';
@@ -448,8 +456,8 @@ $(function(){
 	$("#jqgh_nGrid_VI").css("height","25");
 	$("#jqgh_nGrid_VI").css("top","12");
 	
-	var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-	var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
+	var bgColorArray = ["","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633",""];
+	var fontColorArray = ["","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF",""];
 	var $i=0;
 	$(".jqg-second-row-header").children().each(function()
 	{
