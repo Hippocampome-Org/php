@@ -8,6 +8,11 @@ Date:   2020
 <head>
 	<title>Json Generation</title>
 	<link rel="icon" href="../../images/Hippocampome_logo.ico">
+	<style>
+	body {
+    	background-color: lightgrey;
+	}
+	</style>
 </head>
 <body>
 <?php
@@ -19,7 +24,7 @@ Date:   2020
 
 	echo "<h3><center>Choose Json file to create:</center></h3>";
 
-	echo "<center><button onclick=\"window.location.href = '?page=dal';\" style='padding:10px;'>Generate Dendrite Axon Length Json</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=sd';\" style='padding:10px;'>Generate Synaptic Distance Json</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=ps';\" style='padding:10px;'>Generate Number of Potential Synapses Json</button><br><br><button onclick=\"window.location.href = '?page=noc';\" style='padding:10px;'>Generate Number of Contacts Json</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=prosyn';\" style='padding:10px;'>Synaptic Probabilities Json</button></center><br><hr>";
+	echo "<center><button onclick=\"window.location.href = '?page=dal';\" style='padding:20px;font-size:20px;'>Dendrite Axon Length</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=sd';\" style='padding:20px;font-size:20px;'>Synaptic Distance</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=ps';\" style='padding:20px;font-size:20px;'>Number of Potential Synapses</button><br><br><button onclick=\"window.location.href = '?page=noc';\" style='padding:20px;font-size:20px;'>Number of Contacts</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=prosyn';\" style='padding:20px;font-size:20px;'>Synaptic Probabilities</button></center><br><hr>";
 
 	if ($page!='') {
 		echo "<br>Completed processing record: ";
@@ -281,7 +286,7 @@ Date:   2020
 		/* specify rows to use from template file */
 		$init_col = 0;
 		$init_col2 = 1;
-		$new_row_col = 123;
+		$new_row_col = 124;
 		$max_rows = 100000;
 		/* specify indices */
 		$neuron_group_cols = array(); // new file indexes
