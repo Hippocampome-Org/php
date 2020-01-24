@@ -10,8 +10,8 @@
 
 <?php 
   /* set json data to load */
-  $matrix_type = "probabilities_of_synapses";
-  $session_matrix_cache_file = "synap_prob/gen_json/ps_db_results.json";
+  $matrix_type = "number_of_contacts";
+  $session_matrix_cache_file = "synap_prob/gen_json/noc_db_results.json";
   $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
   $jsonStr = $_SESSION[$matrix_type]; 
 ?>
@@ -347,7 +347,7 @@ $("#nGrid").mouseout(function(e) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Number of Potential Synapses</title>
+<title>Number of Contacts</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -372,7 +372,7 @@ $("#nGrid").mouseout(function(e) {
 <option value="synapse_probabilities_sypr.php">Synaptic Probabilities</option>
 </select></span>
 
-<span class='data_selection'>Number of Potential Synapses</span>
+<span class='data_selection'>Number of Contacts</span>
 </form>
 </div>
 

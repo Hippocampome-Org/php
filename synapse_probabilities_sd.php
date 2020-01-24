@@ -505,7 +505,7 @@ $("#nGrid").mouseout(function(e) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Somatic Distances</title>
+<title>Somatic Distances of Dendrites and Axons</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -525,10 +525,12 @@ $("#nGrid").mouseout(function(e) {
 <option value="#" selected>Select Data</option>
 <option value="synapse_probabilities_dal.php">Dendritic and Axonal Lengths</option>
 <option value="synapse_probabilities_sd.php">Somatic Distances</option>
-<option value="synapse_probabilities_ps.php">Synapse Probabilities</option>
+<option value="synapse_probabilities_ps.php">Number of Potential Synapses</option>
+<option value="synapse_probabilities_noc.php">Number of Contacts</option>
+<option value="synapse_probabilities_sypr.php">Synaptic Probabilities</option>
 </select></span>
 
-<span class='data_selection'>Somatic Distances</span>
+<span class='data_selection'>Somatic Distances of Dendrites and Axons</span>
 </form>
 </div>
 

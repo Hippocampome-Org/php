@@ -525,7 +525,9 @@ $("#nGrid").mouseout(function(e) {
 <option value="#" selected>Select Data</option>
 <option value="synapse_probabilities_dal.php">Dendritic and Axonal Lengths</option>
 <option value="synapse_probabilities_sd.php">Somatic Distances</option>
-<option value="synapse_probabilities_ps.php">Synapse Probabilities</option>
+<option value="synapse_probabilities_ps.php">Number of Potential Synapses</option>
+<option value="synapse_probabilities_noc.php">Number of Contacts</option>
+<option value="synapse_probabilities_sypr.php">Synaptic Probabilities</option>
 </select></span>
 
 <span class='data_selection'>Dendritic and Axonal Lengths</span>
