@@ -1305,7 +1305,7 @@ function show_only_authors(link, start1, stop1)
 									}	
 									if($attachment_type=="synpro_figure"){
 										$link_figure = "attachment/neurites/".$attachment_jpg;
-										echo $link_figure;
+										//echo $link_figure;
 									}								
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
