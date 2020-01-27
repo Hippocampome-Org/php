@@ -12,6 +12,13 @@ Date:   2020
 	body {
     	background-color: lightgrey;
 	}
+	.button {
+		padding:20px;
+		font-size:20px;
+		border-radius: 30px;
+		border-color: darkgrey;
+		border: 2px solid darkgrey;
+	}
 	</style>
 </head>
 <body>
@@ -24,7 +31,7 @@ Date:   2020
 
 	echo "<h3><center>Choose Json file to create:</center></h3>";
 
-	echo "<center><button onclick=\"window.location.href = '?page=dal';\" style='padding:20px;font-size:20px;'>Dendrite Axon Length</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=sd';\" style='padding:20px;font-size:20px;'>Synaptic Distance</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=ps';\" style='padding:20px;font-size:20px;'>Number of Potential Synapses</button><br><br><button onclick=\"window.location.href = '?page=noc';\" style='padding:20px;font-size:20px;'>Number of Contacts</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=prosyn';\" style='padding:20px;font-size:20px;'>Synaptic Probabilities</button></center><br><hr>";
+	echo "<center><button onclick=\"window.location.href = '?page=dal';\" class='button'>Dendrite Axon Length</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=sd';\" class='button'>Somatic Distance</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=ps';\" class='button'>Number of Potential Synapses</button><br><br><button onclick=\"window.location.href = '?page=noc';\" class='button'>Number of Contacts</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=prosyn';\" class='button'>Synaptic Probabilities</button></center><br><hr>";
 
 	if ($page!='') {
 		echo "<br>Completed processing record: ";
@@ -68,7 +75,10 @@ Date:   2020
 			                    while ($row = $result->fetch_assoc()) {
 			                        $avg_trunk = $row['avg_trunk'];
 			                        if ($avg_trunk != '' && $avg_trunk != 0) {
-			                            $entry_output = $entry_output."<a href='#' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_tl'] . "\\nStandard Deviation: " . $row['std_tl'] . "'>" . $avg_trunk . "</a>";
+			                            $entry_output = $entry_output."<a href='property_page_synpro.php?id_neuron=".$neuron_ids[$i_adj]."&val_property=".$parcel_ids[$j_adj2]."&color=violetSoma&page=1' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_tl'] . "\\nStandard Deviation: " . $row['std_tl'] . "' style='color:";
+			                            	if ($adi) {$entry_output = $entry_output."blue";} 
+			                            	else {$entry_output = $entry_output."red";}
+			                            $entry_output = $entry_output." !important'>" . $avg_trunk . "</a>";                            	
 			                        }
 			                    }
 			                }  
@@ -80,7 +90,10 @@ Date:   2020
 	                            while ($row = $result->fetch_assoc()) {
 	                                $avg_trunk = $row['avg_trunk'];
 	                                if ($avg_trunk != '' && $avg_trunk != 0) {
-			                            $entry_output = $entry_output."<a href='#' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_sd'] . "\\nStandard Deviation: " . $row['std_sd'] . "\\nMinimum Value: " . $row['min_sd'] . "\\nMaximum Value: " . $row['max_sd'] . "'>" . $avg_trunk . "</a>";
+			                            $entry_output = $entry_output."<a href='property_page_synpro.php?id_neuron=".$neuron_ids[$i_adj]."&val_property=".$parcel_ids[$j_adj2]."&color=violetSoma&page=1' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_sd'] . "\\nStandard Deviation: " . $row['std_sd'] . "\\nMinimum Value: " . $row['min_sd'] . "\\nMaximum Value: " . $row['max_sd'] . "' style='color:";
+			                            	if ($adi) {$entry_output = $entry_output."blue";} 
+			                            	else {$entry_output = $entry_output."red";}
+			                            $entry_output = $entry_output." !important'>" . $avg_trunk . "</a>";
 			                        }
 			                    }
 			                }
