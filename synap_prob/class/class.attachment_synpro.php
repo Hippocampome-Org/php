@@ -1,5 +1,5 @@
 <?php
-class attachment
+class attachment_synpro
 {
 	private $_name_table;
 	private $_a_id;
@@ -16,7 +16,6 @@ class attachment
 		$this->_name_table = $name;
 	}
 	
-
 	
 	public function retrive_by_id($id ,$id_neuron) 
     {
@@ -33,6 +32,25 @@ class attachment
 			$this->setProtocol_tag($protocol_tag);
 			$this->setType($type);	
 				
+		}
+	}
+
+	public function retrive_by_props($ref_id, $id_neuron, $id_neurite) 
+    {
+		$table="attachment_neurite";
+		
+		//$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM $table WHERE id = '$id' and cell_id = '$id_neuron'";
+		$query = "SELECT id, cell_identifier, reference_ID, name_of_file_containing_figure, 'morph_figure' AS type, null AS protocol_tag FROM $table WHERE reference_ID='$ref_id' AND cell_identifier='$id_neuron' AND neurite='$id_neurite'";
+		//echo $query;
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
+		{	
+			$this->setID($id);
+			$this->setCell_id($cell_id);
+			$this->setOriginal_id($original_id);	
+			$this->setName($name);	
+			$this->setProtocol_tag($protocol_tag);
+			$this->setType($type);					
 		}
 	}
 	

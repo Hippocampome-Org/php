@@ -11,6 +11,7 @@ require_once('class/class.synonym.php');
 require_once('class/class.fragment.php');
 require_once('synap_prob/class/class.fragment_synpro.php');
 require_once('class/class.attachment.php');
+require_once('synap_prob/class/class.attachment_synpro.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('synap_prob/class/class.evidencepropertyyperel_synpro.php');
 require_once('class/class.article.php');
@@ -450,7 +451,7 @@ $type -> retrive_by_id($id_neuron);
 $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
 $fragment = new fragment_synpro($class_fragment);
-$attachment_obj = new attachment($class_attachment);
+$attachment_obj = new attachment_synpro($class_attachment);
 //$evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 $evidencepropertyyperel = new evidencepropertyyperel_synpro($class_evidence_property_type_rel);
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
@@ -1273,10 +1274,22 @@ function show_only_authors(link, start1, stop1)
 									if ($type_show == '')									
 										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell'></td>");								
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
-									$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+									//$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+									$original_id = $fragment -> getOriginal_id();
+									if ($type_show == 'Dendrites') {
+										$neurite_ref = $val_property.":D";
+									}
+									else {
+										$neurite_ref = $val_property.":A";	
+									}
+									//$neurite_ref = $val_property.":D";
+									//echo $type_show."<br>";
+
+									$attachment_obj -> retrive_by_props($original_id, $id_neuron, $neurite_ref);
 									$attachment = $attachment_obj -> getName();
-									//echo "attach: ".$attachment."<br><br><br>";
-									$attachment_type = $attachment_obj -> getType();
+									//echo "attach: ".$attachment."<br><br><br>oi: $original_id<br>in: $id_neuron<br>vp: $neurite_ref";
+									//$attachment_type = $attachment_obj -> getType();
+									$attachment_type="synpro_figure";
 									$link_figure="";
 									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
 									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
@@ -1289,7 +1302,11 @@ function show_only_authors(link, start1, stop1)
 									
 									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
 										$link_figure = "attachment/ephys/".$attachment_jpg;
-									}									
+									}	
+									if($attachment_type=="synpro_figure"){
+										$link_figure = "attachment/neurites/".$attachment_jpg;
+										echo $link_figure;
+									}								
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
 									
@@ -1339,7 +1356,8 @@ function show_only_authors(link, start1, stop1)
 										print("</td>
 											<td width='15%' class='table_neuron_page2' align='center'>");
 											
-											if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
 											{
 												print ("<a href='$link_figure' target='_blank'>");
 												print ("<img src='$link_figure' border='0' width='80%'>");
