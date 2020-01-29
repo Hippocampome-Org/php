@@ -51,7 +51,7 @@ class attachment_synpro
 			$this->setProtocol_tag($protocol_tag);
 			$this->setType($type);								
 		}
-		echo $query."<br>".$name;
+		//echo $query."<br>".$name;
 	}
 	
 	public function retrieve_by_originalId($original_id ,$id_neuron) 
