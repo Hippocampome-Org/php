@@ -40,8 +40,7 @@ class attachment_synpro
 		$table="attachment_neurite";
 		
 		//$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM $table WHERE id = '$id' and cell_id = '$id_neuron'";
-		$query = "SELECT id, cell_identifier, reference_ID, name_of_file_containing_figure, 'morph_figure' AS type, null AS protocol_tag FROM $table WHERE reference_ID='$ref_id' AND cell_identifier='$id_neuron' AND neurite='$id_neurite'";
-		//echo $query;
+		$query = "SELECT id, cell_identifier, reference_ID, name_of_file_containing_figure, 'synpro_figure' AS type, null AS protocol_tag FROM $table WHERE reference_ID='$ref_id' AND cell_identifier='$id_neuron' AND neurite='$id_neurite'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
 		{	
@@ -50,7 +49,8 @@ class attachment_synpro
 			$this->setOriginal_id($original_id);	
 			$this->setName($name);	
 			$this->setProtocol_tag($protocol_tag);
-			$this->setType($type);					
+			$this->setType($type);	
+			//echo $query."<br>".$name;							
 		}
 	}
 	

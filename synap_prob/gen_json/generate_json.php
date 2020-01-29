@@ -75,7 +75,14 @@ Date:   2020
 			                    while ($row = $result->fetch_assoc()) {
 			                        $avg_trunk = $row['avg_trunk'];
 			                        if ($avg_trunk != '' && $avg_trunk != 0) {
-			                            $entry_output = $entry_output."<a href='property_page_synpro.php?id_neuron=".$neuron_ids[$i_adj]."&val_property=".$parcel_ids[$j_adj2]."&color=violetSoma&page=1' title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_tl'] . "\\nStandard Deviation: " . $row['std_tl'] . "' style='color:";
+			                            $entry_output = $entry_output."<a href='property_page_synpro.php?id_neuron=".$neuron_ids[$i_adj]."&val_property=".$parcel_ids[$j_adj2];
+				                            if ($adi == 0){
+				                            	$entry_output = $entry_output."&color=violetSoma&page=1'"; // intentionally no difference with returning 'violetSoma' for A or D but if statment left here if wanted a difference in the future
+				                            }
+				                            else {
+				                            	$entry_output = $entry_output."&color=violetSoma&page=1'";	
+				                            }
+			                            	$entry_output = $entry_output." title='Mean: " . $row['avg'] . "\\nCount of Recorded Values: " . $row['count_tl'] . "\\nStandard Deviation: " . $row['std_tl'] . "' style='color:";
 			                            	if ($adi) {$entry_output = $entry_output."blue";} 
 			                            	else {$entry_output = $entry_output."red";}
 			                            $entry_output = $entry_output." !important'>" . $avg_trunk . "</a>";                            	
