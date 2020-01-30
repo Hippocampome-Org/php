@@ -381,29 +381,9 @@ $("#nGrid").mouseout(function(e) {
 	<tr>
 		<td>
 			<table id="nGrid"></table>
-		</td>
-	</tr>
-</table>		
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
-  <tr>
-    <td>
-		<!-- ****************  BODY **************** -->
-		<?php 
-			if ($research){
-				$full_search_string = $_SESSION['full_search_string'];
-				if ($number_type == 1)
-					print ("<font class='font3'> $number_type Result  [$full_search_string]</font>");
-				else
-					print ("<font class='font3'> $number_type Results  [$full_search_string]</font>");
-			}
-		?>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>
-		&nbsp; &nbsp; 
-		<font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font>
-		<br />
-		<br />
-	</td>
-	</tr>
+		</td>	
+  <?php echo file_get_contents('synap_prob/n_m_footer.html');?>
+  </tr>
 </table>
 </div>
 </body>
