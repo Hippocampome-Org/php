@@ -11,7 +11,7 @@
         <td></font></td> 
       </tr>            
       <tr height="20">
-        <td style="float:right"><a href="synap_prob/data/potential_synapses.xlsx"><img id="csvCN" src='synap_prob/media/ExportXLSX.png' width="30px" border="0"/></a></td>
+        <td style="float:right"><a href="synap_prob/data/Potential.Synapses.4.0.xlsx"><img id="csvCN" src='synap_prob/media/ExportXLSX.png' width="30px" border="0"/></a></td>
         <td><span style="float:left"><font class='font5'>&nbsp;&nbsp;&nbsp;&nbsp;XLSX Matrix Data</font></span></td>
         <td></font></td> 
       </tr> 
