@@ -1,0 +1,85 @@
+'Granule', 'DG:All:D', 3538.94, r, 268.18
+'Granule', 'CA3:All:D', , r, 
+'Granule', 'CA2:All:D', , r, 
+'Granule', 'CA1:All:D', , r, 
+'Granule', 'Sub:All:D', , r, 
+'Granule', 'EC:All:D', , r, 
+'Granule', 'DG:All:A', 4512.30, r, 1290.80
+'Granule', 'CA3:All:A', , r, 
+'Granule', 'CA2:All:A', , r, 
+'Granule', 'CA1:All:A', , r, 
+'Granule', 'Sub:All:A', , r, 
+'Granule', 'EC:All:A', , r, 
+2258.01, 3.00, 148.10
+1280.93, 3.00, 121.98
+3329.75, 3.00, 628.46
+1131.72, 1.00, 0.00
+805.32, 3.00, 143.50
+'Hilar Ectopic Granule', 'DG:All:D', 6198.22, r, 0.00
+'Hilar Ectopic Granule', 'CA3:All:D', , r, 
+'Hilar Ectopic Granule', 'CA2:All:D', , r, 
+'Hilar Ectopic Granule', 'CA1:All:D', , r, 
+'Hilar Ectopic Granule', 'Sub:All:D', , r, 
+'Hilar Ectopic Granule', 'EC:All:D', , r, 
+'Hilar Ectopic Granule', 'DG:All:A', 1607.81, r, 0.00
+'Hilar Ectopic Granule', 'CA3:All:A', , r, 
+'Hilar Ectopic Granule', 'CA2:All:A', , r, 
+'Hilar Ectopic Granule', 'CA1:All:A', , r, 
+'Hilar Ectopic Granule', 'Sub:All:A', , r, 
+'Hilar Ectopic Granule', 'EC:All:A', , r, 
+2256.54, 1.00, 0.00
+1466.41, 1.00, 0.00
+2475.28, 1.00, 0.00
+1071.09, 1.00, 0.00
+536.72, 1.00, 0.00
+'Semilunar Granule', 'DG:All:D', 4354.62, r, 1099.02
+'Semilunar Granule', 'CA3:All:D', , r, 
+'Semilunar Granule', 'CA2:All:D', , r, 
+'Semilunar Granule', 'CA1:All:D', , r, 
+'Semilunar Granule', 'Sub:All:D', , r, 
+'Semilunar Granule', 'EC:All:D', , r, 
+'Semilunar Granule', 'DG:All:A', 6743.54, r, 400.51
+'Semilunar Granule', 'CA3:All:A', , r, 
+'Semilunar Granule', 'CA2:All:A', , r, 
+'Semilunar Granule', 'CA1:All:A', , r, 
+'Semilunar Granule', 'Sub:All:A', , r, 
+'Semilunar Granule', 'EC:All:A', , r, 
+3205.67, 2.00, 710.69
+1148.95, 2.00, 388.33
+562.69, 2.00, 68.68
+954.06, 2.00, 407.85
+4898.07, 2.00, 548.32
+657.44, 1.00, 0.00
+'Mossy', 'DG:All:D', 4792.85, r, 323.28
+'Mossy', 'CA3:All:D', , r, 
+'Mossy', 'CA2:All:D', , r, 
+'Mossy', 'CA1:All:D', , r, 
+'Mossy', 'Sub:All:D', , r, 
+'Mossy', 'EC:All:D', , r, 
+'Mossy', 'DG:All:A', 7473.15, r, 783.83
+'Mossy', 'CA3:All:A', , r, 
+'Mossy', 'CA2:All:A', , r, 
+'Mossy', 'CA1:All:A', , r, 
+'Mossy', 'Sub:All:A', , r, 
+'Mossy', 'EC:All:A', , r, 
+2104.15, 3.00, 947.97
+4792.85, 3.00, 323.28
+5369.00, 3.00, 622.08
+'Mossy MOLDEN', 'DG:All:D', 7399.00, r, 0.00
+'Mossy MOLDEN', 'CA3:All:D', , r, 
+'Mossy MOLDEN', 'CA2:All:D', , r, 
+'Mossy MOLDEN', 'CA1:All:D', , r, 
+'Mossy MOLDEN', 'Sub:All:D', , r, 
+'Mossy MOLDEN', 'EC:All:D', , r, 
+'Mossy MOLDEN', 'DG:All:A', 4784.93, r, 0.00
+'Mossy MOLDEN', 'CA3:All:A', , r, 
+'Mossy MOLDEN', 'CA2:All:A', , r, 
+'Mossy MOLDEN', 'CA1:All:A', , r, 
+'Mossy MOLDEN', 'Sub:All:A', , r, 
+'Mossy MOLDEN', 'EC:All:A', , r, 
+717.99, 1.00, 0.00
+746.49, 1.00, 0.00
+593.07, 1.00, 0.00
+675.05, 1.00, 0.00
+5259.47, 1.00, 0.00
+4191.86, 1.00, 0.00

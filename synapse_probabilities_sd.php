@@ -540,7 +540,9 @@ $("#nGrid").mouseout(function(e) {
 		<td>
 			<table id="nGrid"></table>
 		</td>	
-  <?php echo file_get_contents('synap_prob/n_k_footer.html');?>
+  <?php echo file_get_contents('synap_prob/n_k_footer_1.php');?>
+  <a href='synap_prob/data/sd_values.csv'><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/></a></td><td><span style='float:left'><font class='font5'>&nbsp;CSV Synaptic Distance Values</font></span>
+  <?php echo file_get_contents('synap_prob/n_k_footer_2.php');?>
   </tr>
 </table>
 </div>
