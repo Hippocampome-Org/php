@@ -12,7 +12,7 @@
       </tr>
       <tr height="50" width="200">
         <td colspan="2" style="text-align:center">
-          <font face="Verdana, Arial, Helvetica, sans-serif" size="2">Matrix Values:<br><font color="blue">blue: </font></font><font face="Verdana, Arial, Helvetica, sans-serif" size="2">&nbsp;&nbsp;&nbsp;Dentrite&nbsp;&nbsp;<br><font color="red" size="2">red: </font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Axon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+          <font face="Verdana, Arial, Helvetica, sans-serif" size="2">Matrix Values:<br><font color="red">red: </font></font><font face="Verdana, Arial, Helvetica, sans-serif" size="2">&nbsp;&nbsp;&nbsp;&nbsp;Axon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><font color="blue" size="2">blue: </font>&nbsp;&nbsp;Dendrite&nbsp;&nbsp;</font>
         </td>
       </tr>      
     </table>

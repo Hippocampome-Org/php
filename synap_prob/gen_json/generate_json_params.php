@@ -57,7 +57,10 @@
 	$all_parcel_axon = array("DG:All:A", "CA3:All:A", "CA2:All:A", "CA1:All:A", "Sub:All:A", "EC:All:A");
 	$all_parcel_search = array();
 
-	$parcel_group = array("DG:SMo:D", "DG:SMo:A", "DG:SMi:D", "DG:SMi:A", "DG:SG:D", "DG:SG:A", "DG:H:D", "DG:H:A", "DG:All:D", "DG:All:A", "CA3:SP:D", "CA3:SP:A", "CA3:SL:D", "CA3:SL:A", "CA3:SR:D", "CA3:SR:A", "CA3:SLM:D", "CA3:SLM:A", "CA3:SO:D", "CA3:SO:A", "CA3:All:D", "CA3:All:A", "CA2:All:D", "CA2:All:A", "CA2:SO:D", "CA2:SO:A", "CA2:SP:D", "CA2:SP:A", "CA2:SR:D", "CA2:SR:A", "CA2:SLM:D", "CA2:SLM:A", "CA1:SLM:D", "CA1:SLM:A", "CA1:SR:D", "CA1:SR:A", "CA1:SP:D", "CA1:SP:A", "CA1:SO:D", "CA1:SO:A", "CA1:All:D", "CA1:All:A", "Sub:SM:D", "Sub:SM:A", "Sub:SP:D", "Sub:SP:A", "Sub:PL:D", "Sub:PL:A", "Sub:All:D", "Sub:All:A", "EC:I:D", "EC:I:A", "EC:II:D", "EC:II:A", "EC:III:D", "EC:III:A", "EC:IV:D", "EC:IV:A", "EC:V:D", "EC:V:A", "EC:VI:D", "EC:VI:A", "EC:All:D", "EC:All:A");
+	/* Important note: in $parcel_group the order of D 1st A 2cnd was swapped
+	manually here compared to original data to accomidate preferences stated for the
+	site. The new order is A 1st D 2cnd.*/
+	$parcel_group = array("DG:SMo:A", "DG:SMo:D", "DG:SMi:A", "DG:SMi:D", "DG:SG:A", "DG:SG:D", "DG:H:A", "DG:H:D", "DG:All:A", "DG:All:D", "CA3:SP:A", "CA3:SP:D", "CA3:SL:A", "CA3:SL:D", "CA3:SR:A", "CA3:SR:D", "CA3:SLM:A", "CA3:SLM:D", "CA3:SO:A", "CA3:SO:D", "CA3:All:A", "CA3:All:D", "CA2:All:A", "CA2:All:D", "CA2:SO:A", "CA2:SO:D", "CA2:SP:A", "CA2:SP:D", "CA2:SR:A", "CA2:SR:D", "CA2:SLM:A", "CA2:SLM:D", "CA1:SLM:A", "CA1:SLM:D", "CA1:SR:A", "CA1:SR:D", "CA1:SP:A", "CA1:SP:D", "CA1:SO:A", "CA1:SO:D", "CA1:All:A", "CA1:All:D", "Sub:SM:A", "Sub:SM:D", "Sub:SP:A", "Sub:SP:D", "Sub:PL:A", "Sub:PL:D", "Sub:All:A", "Sub:All:D", "EC:I:A", "EC:I:D", "EC:II:A", "EC:II:D", "EC:III:A", "EC:III:D", "EC:IV:A", "EC:IV:D", "EC:V:A", "EC:V:D", "EC:VI:A", "EC:VI:D", "EC:All:A", "EC:All:D");
 	/* Maunally sorted neuron group
 	Note: the auto sorted one no longer used due to
 	needing the same ordering as on the morphology page */

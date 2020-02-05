@@ -113,15 +113,15 @@ Date:   2020
 			// find all parcel values
 			for ($adi = 0; $adi < 2; $adi++) {
 		        if ($adi == 0) {
-		            $a_or_d = 'Dendrite: ';
-		            $prcl   = '';
-		            $nl     = "\\n";
-		            $all_parcel_search = new ArrayObject($all_parcel_dend);
-		        } else {
 		            $a_or_d = 'Axon: ';
 		            $prcl   = '';
-		            $nl     = "";
+		            $nl     = "\\n";
 		            $all_parcel_search = new ArrayObject($all_parcel_axon);
+		        } else {
+		            $a_or_d = 'Dendrite: ';
+		            $prcl   = '';
+		            $nl     = "";
+		            $all_parcel_search = new ArrayObject($all_parcel_dend);	            
 		        }
 		        if ($page == 'dal') {
 			        for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
