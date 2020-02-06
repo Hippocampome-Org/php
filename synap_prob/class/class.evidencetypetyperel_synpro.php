@@ -180,6 +180,26 @@ class evidencepropertyyperel_synpro
 		$this->setN_evidence_id($n);	
 	}	
 
+	public function retrive_evidence_id_nm($Property_id, $type_1_id, $type_2_id)
+	{
+		$table=$this->getName_table();		
+		$min_id=$this->_min_n_by_k_evidence_id;
+		$max_id=$this->_max_n_by_k_evidence_id;
+		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
+		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		//echo "sql: ".$query."<br>";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id,$linking_quote,$interpretation_notes) = mysqli_fetch_row($rs))
+		{			
+			$this->setEvidence_id_array($id, $n);
+			$this->setLinking_quote_array($linking_quote, $n);
+			$this->setInterpretation_notes_array($interpretation_notes, $n);
+			$n = $n +1;
+		}
+		$this->setN_evidence_id($n);	
+	}	
+
 	public function retrive_evidence_id1($Property_id)
 	{
 		$table=$this->getName_table();
