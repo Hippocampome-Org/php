@@ -571,7 +571,7 @@ function show_only_authors(link, start1, stop1)
 		<table width="80%" border="0" cellspacing="2" cellpadding="2">
 			<tr>
 				<td width="20%" align="right" class="table_neuron_page1">
-					Neurons:
+					Connection Details:
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
 					&nbsp; 
@@ -580,12 +580,12 @@ function show_only_authors(link, start1, stop1)
 					$pre_name=$type_source->getName();
 					$post_id=$type_target->getId();
 					$post_name=$type_target->getName();
-					print("Presynaptic: <a href='neuron_page.php?id=$pre_id'>$pre_name</a> and Postsynaptic: <a href='neuron_page.php?id=$post_id'>$post_name</a>"); ?>
+					print("From: <a href='neuron_page.php?id=$pre_id'>$pre_name</a> To: <a href='neuron_page.php?id=$post_id'>$post_name</a>"); ?>
 				</td>				
 			</tr>
 			<tr>
-				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Presynaptic Neuron ID: <?php echo $source_id?></strong></td>
+				<td width="20%" align="right"></td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp; <strong>Hippocampome Presynaptic Neuron ID: </strong> <strong><?php echo $source_id?></strong></td>
 			</tr>
 			<tr>
 				<td width="20%" align="right">
@@ -595,6 +595,31 @@ function show_only_authors(link, start1, stop1)
 					$name1 = checkNeuronProperty($color);						
 					print ("&nbsp; <strong>Hippocampome Postsynaptic Neuron ID: </strong> <strong>$target_id</strong>");
 				?>
+				</td>
+			</tr>
+			<tr>
+				<td width="20%" align="right">
+				</td>
+				<td align="left" width="80%" class="table_neuron_page2">
+					<?php
+					$target_E_or_I='';
+					echo "&nbsp;&nbsp;Type: <b>";
+					$query = "SELECT distinct target_E_or_I FROM number_of_contacts WHERE source_ID=$source_id and target_ID=$target_id;";
+					$rs = mysqli_query($GLOBALS['conn'],$query);
+					while($target_E_or_I = mysqli_fetch_row($rs))
+					{	
+						if ($target_E_or_I=='E') {
+							echo "Potential Excitatory Connections";
+						}
+						else if ($target_E_or_I=='I') {
+							echo "Potential Inhibitory Connections";
+						}
+					}
+					if ($target_E_or_I=='') {
+						echo "N/A";
+					}
+					echo "</b>";
+					?>
 				</td>
 			</tr>								
 		</table>
