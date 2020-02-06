@@ -639,7 +639,7 @@ function show_only_authors(link, start1, stop1)
 		</center>
 	<?php 
 	include ('synap_prob/n_m_params.php');
-	$cell_width='50px';
+	$cell_width='70px';
 	$cell_height='30px';
 	$cell_border='2px solid #5b82b7';
 	$parcel_group_match=null;
@@ -663,7 +663,7 @@ function show_only_authors(link, start1, stop1)
 
 	function query_value($source_id, $target_id, $parcel, $prop, $table) {
 		$query = "
-		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG($prop) AS DECIMAL(10,3))
+		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG($prop) AS DECIMAL(10,5))
 		FROM $table
 		WHERE source_ID=$source_id AND target_ID=$target_id AND neurite='$parcel'
 		AND $prop!=''
@@ -705,7 +705,7 @@ function show_only_authors(link, start1, stop1)
 	else if ($nm_page=='noc') {
 		report_parcel_values('Number of contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
 	}
-	else if ($nm_page=='synpro') {
+	else if ($nm_page=='prosyn') {
 		report_parcel_values('Probability of connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
 	}
 	?>					
