@@ -139,6 +139,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
  }
 // set property of synapse probability page
 $page = $_REQUEST['page'];
+$nm_page = $_GET['nm_page'];
 $sub_show_only = $_SESSION['synpro_sub_show_only']; 
 $name_show_only_article = $_SESSION['synpro_name_show_only_article'];
 
@@ -634,12 +635,12 @@ function show_only_authors(link, start1, stop1)
 </td>
 </tr>
     </table>
-		<br />
+		<br style='font-size: 8px;'>
 		</center>
 	<?php 
 	include ('synap_prob/n_m_params.php');
-	$cell_width='80px';
-	$cell_height='60px';
+	$cell_width='50px';
+	$cell_height='30px';
 	$cell_border='2px solid #5b82b7';
 	$parcel_group_match=null;
 	for($as_i=0;$as_i<count($find_parcel_group_id);$as_i++) {
@@ -678,10 +679,10 @@ function show_only_authors(link, start1, stop1)
 	}
 	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short) {
 	echo "
-	<span style='float:middle;font-size:20px' class='font1'>$title</span>
-	<font style='font-size:12px'><br>
+	<span style='float:middle;font-size:14px' class='font1'>$title</span>
+	<font style='font-size:4px'><br>
 	<br></font>";
-	echo "<table cellspacing='2' cellpadding='5' padding-top='5' class='font1' style='font-size:20px;bottom:20px;position:relative;'>
+	echo "<table cellspacing='2' cellpadding='5' padding-top='5' class='font1' style='font-size:14px;bottom:5px;position:relative;'>
 	<tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group_short);$pg_i++) {
 		echo "<td style='width:$cell_width;height:$cell_height;'>";
@@ -698,11 +699,17 @@ function show_only_authors(link, start1, stop1)
 	</tr>
 	</table>";
 	}
-	report_parcel_values('Potential number of synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
-	report_parcel_values('Number of contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
-	report_parcel_values('Probability of connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
+	if ($nm_page=='ps') {
+		report_parcel_values('Potential number of synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
+	}
+	else if ($nm_page=='noc') {
+		report_parcel_values('Number of contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
+	}
+	else if ($nm_page=='synpro') {
+		report_parcel_values('Probability of connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short);
+	}
 	?>					
-		<br />
+		
 		<center>
 		<?php
 			if ($part == 'axons_dendrites_somata')
