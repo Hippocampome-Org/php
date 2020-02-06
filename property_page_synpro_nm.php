@@ -602,20 +602,22 @@ function show_only_authors(link, start1, stop1)
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
 					<?php
-					$target_E_or_I='';
+					$E_or_I_found=false;
 					echo "&nbsp;&nbsp;Type: <b>";
 					$query = "SELECT distinct target_E_or_I FROM number_of_contacts WHERE source_ID=$source_id and target_ID=$target_id;";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
-					while($target_E_or_I = mysqli_fetch_row($rs))
+					while(list($target_E_or_I) = mysqli_fetch_row($rs))
 					{	
 						if ($target_E_or_I=='E') {
 							echo "Potential Excitatory Connections";
+							$E_or_I_found=true;
 						}
 						else if ($target_E_or_I=='I') {
 							echo "Potential Inhibitory Connections";
+							$E_or_I_found=true;
 						}
 					}
-					if ($target_E_or_I=='') {
+					if (!$E_or_I_found) {
 						echo "N/A";
 					}
 					echo "</b>";
