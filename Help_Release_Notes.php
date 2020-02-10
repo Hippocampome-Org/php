@@ -96,6 +96,251 @@ ul
 <p class=MsoNormal><b><u><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
+font-family:"Arial","sans-serif"'>v1.7 R 1H (07 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 478: [morph] Remove S:SG information for DG Basket CCK+.
+
+</BR>
+
+font-family:"Arial","sans-serif"'>v1.7 R 1H (07 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 459: [neurites] Display parcel breakdown of values on Evidence pages for synapse probabilities.
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1G (05 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 477: [neurites] Placement of values and misspelling.
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 461: [neurites] clicking on the values in the Somatic Distances of Dendrites and Axons matrix should link to an Evidence Page.
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 460: [neurites] clicking on the values in the Dendritic and Axonal Lengths matrix should link to an Evidence Page.
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1F (04 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 469: [neurites] Enable the downloading of a connectivity netlist with associated synaptic probabilities.
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1E (24 Jan 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 476: [neurites]: rename the current Probabilities of Synapses matrix to Number of Potential Synapses.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 475: [neurites] Clicking on the neuron-type names in the either the rows or columns of the Synaptic Probabilities matrix should link to a Neuron Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 474: [neurites] Clicking on the neuron-type names in the either the rows or columns of the Number of Contacts matrix should link to a Neuron Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 471: [neurites]: display the Synaptic Probabilities as a quantified neurite matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 470: [neurites] display the Number of Contacts as a quantified neurite matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 468: [neurites] Keep the column titles fixed so they don't scroll with the rest of the window.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 467: [neurites] Clicking on the neuron-type names in the either the rows or columns of the Probabilities of Synapses matrix should link to a Neuron Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 466: [neurites] Clicking on the parcel column names in the Somatic Distances of Dendrites and Axons matrix should link to a Parcel Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 465: [neurites] Clicking on the neuron-type names in the Somatic Distances of Dendrites and Axons matrix should link to a Neuron Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 464: [neurites] Clicking on the parcel column names in the Dendritic and Axonal Lengths matrix should link to a Parcel Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 463: [neurites] Clicking on the neuron-type names in the Dendritic and Axonal Lengths matrix should link to a Neuron Page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 355: [neurites] display quantified neurite data on the portal.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1D (20 Jan 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 444: [ephys]: On the Ephys Property page the "* preferred conditions *" tag is appearing improperly.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 399: [ephys]: Missing table figure on ephys page.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1C (17 Jan 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 379: [connectivity] Refuted connections not being listed properly on Neuron Pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 364: [FP] misspellings in figure caption.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 357: [connectivity] 1000 to 2036 potential connection is missing from database.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1B (05 Dec 2019):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 430: [tools] Add a Tools section pull down button selection on the Main page.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1A (25 Oct 2019):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+@ -119,6 +287,66 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 454: [neurites] Import neurites URD into the database.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 390: [Izhikevich] Update Help files for Izhikevich modeling.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 387: [Izhikevich] The Izhikevich section of the Neuron Pages doesn't seem to display all the data yet (fitfile, xpp file, carlsim file, voltage plots).
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 386: [Izhikevich] In the Izhikevich matrix the fields which take values '0' are displayed as empty cells.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 385: [Izhikevich] Round off to 2 decimal points for parameters k, b, Vr, Vt, Vpeak, Vmin, P and 3 decimal points for a.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 384: [Izhikevich] Display v3 information in the Izhikevich matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 383: [Izhikevich] Modify the pull-down menu for selecting the Izhikevich matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 382: [Izhikevich] On the Neuron Pages under the section on Izhikevich parameters the FitFiles do not download properly.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 374: [Izh]: Display modeling data in an expandable matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 373: [Izh]: Display modeling data on Neuron page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 354: [neurites] import quantified neurite data into the database.
+</span></p>
+
 </BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
@@ -111,12 +356,6 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 455: [neurites] Import neurites attachment spreadsheet into the database.
-</span></p>
-
-<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
-style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 454: [neurites] Import neurites URD into the database.
 </span></p>
 
 </BR>
