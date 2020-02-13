@@ -201,7 +201,7 @@ if ($page)
 	$ip_address = str_replace(':', '_', $ip_address);
 	$time_t = time();
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
-	echo "name_temporary_table: ".$name_temporary_table;
+	//echo "name_temporary_table: ".$name_temporary_table;
 	$_SESSION['synpro_name_temporary_table'] = $name_temporary_table;
 	create_temp_table($name_temporary_table);	
 	
@@ -1222,8 +1222,18 @@ function show_only_authors(link, start1, stop1)
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
+								/*
+								$no_records=False;
+								if ($id_fragment=='' && $id_original=='' && $quote=='' && $page_location=='' && $type=='') 
+								{
+									echo "Nothing found";
+								}
+								else echo "Found ".$id_fragment." ".$id_original." ".$quote." ".$page_location." ".$type;
+								*/
 								//$current_record = $id_fragment.$id_original.$quote.$page_location.$type;
 								$current_record = $id_original.$quote.$page_location.$type;
+								//echo "CURR REC ".$type;
+								$type_for_display=$type;
 							if (!in_array($current_record, $avoid_dups))
 							{	
 								$quote_count++;	
@@ -1237,41 +1247,42 @@ function show_only_authors(link, start1, stop1)
 										$type_show  = $type_show . $type;
 									}				
 									if($color != ''){
-									if ($type_show == 'Axons')
+									//if ($type_show == 'Axons')
+									if ($type_for_display == 'Axons')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-									if ($type_show == 'Dendrites')
+									if ($type_for_display == 'Dendrites')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-								    if ($type_show == 'Somata')
+								    if ($type_for_display == 'Somata')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
-									if ($type_show == 'AxonsSomata')
+									if ($type_for_display == 'AxonsSomata')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
-									if ($type_show == 'AxonsDendrites')
+									if ($type_for_display == 'AxonsDendrites')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
-									if ($type_show == 'DendritesSomata')
+									if ($type_for_display == 'DendritesSomata')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
-									if ($type_show == 'AxonsDendritesSomata')
+									if ($type_for_display == 'AxonsDendritesSomata')
 									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
 									}
 									
-									if ($type_show == '')								
+									if ($type_for_display == '')								
 										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'>");
 									print ("<tr>");
 												
-									if ($type_show == 'Axons')		
+									if ($type_for_display == 'Axons')		
 										print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/axon.png'></td>");
-									if ($type_show == 'Dendrites')		
+									if ($type_for_display == 'Dendrites')		
 										print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/dendrite.png'></td>");	
-									if ($type_show == 'Somata')		
+									if ($type_for_display == 'Somata')		
 										print ("<td width='15%' rowspan='6' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
-	                                if ($type_show == 'AxonsSomata')	
+	                                if ($type_for_display == 'AxonsSomata')	
 	                                  print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
-	                                if ($type_show == 'AxonsDendrites')	
+	                                if ($type_for_display == 'AxonsDendrites')	
 										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
-								    if ($type_show == 'DendritesSomata')
+								    if ($type_for_display == 'DendritesSomata')
 										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
-									if ($type_show == 'AxonsDendritesSomata')
+									if ($type_for_display == 'AxonsDendritesSomata')
 	                                 	print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
-									if ($type_show == '')									
+									if ($type_for_display == '')									
 										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell'></td>");								
 									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
 									//$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
@@ -1279,12 +1290,15 @@ function show_only_authors(link, start1, stop1)
 									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
 									//$dendrite_group = array('Dendrites');
 									//$axon_group = array('Axons');
-									//echo $type_show."<br>";
+									//echo "type_for_display ".$type_for_display." TYPE SHOW ".$type_show."<br>";
 									$original_id = $fragment -> getOriginal_id();
-									if (in_array($type_show,$dendrite_group)) {
+									//echo "VAL PROP ".$val_property."<BR>";
+									//if (in_array($type_show,$dendrite_group)) {
+									if (in_array($type_for_display,$dendrite_group)) {
 										$neurite_ref = $val_property.":D";
 									}
-									elseif (in_array($type_show,$axon_group)) {
+									//elseif (in_array($type_show,$axon_group)) {
+									elseif (in_array($type_for_display,$axon_group)) {
 										$neurite_ref = $val_property.":A";	
 									}
 									else {
@@ -1324,10 +1338,18 @@ function show_only_authors(link, start1, stop1)
 									// get protocol age species and interpretation
 									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM Fragment WHERE id=$id_fragment ";
 									$rs_to_get_info = mysqli_query($GLOBALS['conn'],$query_to_get_info);	
+									/*$segment1=array();#init
+									unset($segment1);#clear
+									$segment1=array();#recreate
+									$segment2=array();
+									unset($segment2);
+									$segment2=array();*/
+									$seg_1_text="";
+									$seg_2_text="";
 									while(list($interpretation_notes,$protocol,$age_weight,$species_descriptor,$species_tag) = mysqli_fetch_row($rs_to_get_info))
 									{
 										//print("Data:,$protocol,$age_weight,$species_descriptor,$species_tag");
-										if($protocol){
+										/*if($protocol){
 											print("	<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>
 												PROTOCOL: $protocol
@@ -1376,8 +1398,64 @@ function show_only_authors(link, start1, stop1)
 											else;
 											print("</td></tr>");
 
-										print ("</table>");
+										print ("</table>");*/
+										#$seg_1_text="";
+										if($protocol){
+											$seg_1_text=$seg_1_text."	<tr>
+											<td width='70%' class='table_neuron_page2' align='left'>
+												PROTOCOL: $protocol
+											</td>
+											<td width='15%' align='center'> </td></tr>";
+										}
+										if($species_descriptor ){
+											$seg_1_text=$seg_1_text."<tr>	
+											<td width='70%' class='table_neuron_page2' align='left'>
+												SPECIES: $species_descriptor 
+												</td>
+											<td width='15%' align='center'> </td></tr>";
+										}
+										if($age_weight){
+											$seg_1_text=$seg_1_text."	<tr>
+											<td width='70%' class='table_neuron_page2' align='left'>
+												Age/Weight: $age_weight
+											</td>
+											<td width='15%' align='center'> </td></tr>";
+										}
+										#$seg_2_text="";
+										if($interpretation_notes){
+											$seg_2_text=$seg_2_text."</br></br> Interepretation Notes: $interpretation_notes";
+										}
+										#array_push($segment1, $seg_1_text);
+										#array_push($segment2, $seg_2_text);
 									}
+									print ($seg_1_text);
+										// view info
+										print ("
+										<tr>	
+											<td width='70%' class='table_neuron_page2' align='left'>
+												Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
+											</td>
+											<td width='15%' align='center'>");																											
+											
+										print ("</td></tr>	
+										<tr>		
+											<td width='70%' class='table_neuron_page2' align='left'>
+												<em>$quote</em>");
+										print ($seg_2_text);
+										print("</td>
+											<td width='15%' class='table_neuron_page2' align='center'>");
+											
+											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
+											{
+												print ("<a href='$link_figure' target='_blank'>");
+												print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
+												print ("</a>");
+											}	
+											else;
+											print("</td></tr>");
+
+										print ("</table>");
 								}								
 							}
 							array_push($avoid_dups, $current_record);	
