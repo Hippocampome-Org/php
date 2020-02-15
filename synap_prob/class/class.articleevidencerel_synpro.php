@@ -39,8 +39,7 @@ class articleevidencerel_synpro
 		$max_id=$this->_max_n_by_k_evidence_id;
 
 		//$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id' AND Evidence_id>17505";
-		$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id' AND Evidence_id>=$min_id AND Evidence_id<=
-			$max_id;";
+		$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))

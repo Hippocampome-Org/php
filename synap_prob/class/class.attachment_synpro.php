@@ -51,8 +51,28 @@ class attachment_synpro
 			$this->setProtocol_tag($protocol_tag);
 			$this->setType($type);								
 		}
-		//echo $query."<br>".$name;
+		#echo $query."<br>".$name;
 	}
+
+	public function retrive_by_props_nbym($ref_id, $source_id, $target_id) 
+    {
+		$table="attachment_connectivity";
+		
+		//$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM $table WHERE id = '$id' and cell_id = '$id_neuron'";
+		//$query = "SELECT id, source_id, RefID, Figure, 'synpro_figure' AS type, null AS protocol_tag FROM $table WHERE RefID='$ref_id' AND source_id=$source_id AND target_id=$target_id";
+		$query = "SELECT id, source_id, RefID, Figure, 'synpro_figure' AS type, null AS protocol_tag FROM $table WHERE RefID=$ref_id AND source_id=$source_id AND target_id=$target_id";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
+		{	
+			$this->setID($id);
+			$this->setCell_id($cell_id);
+			$this->setOriginal_id($original_id);	
+			$this->setName($name);	
+			$this->setProtocol_tag($protocol_tag);
+			$this->setType($type);								
+		}
+		#echo $query."<br>".$name;
+	}	
 	
 	public function retrieve_by_originalId($original_id ,$id_neuron) 
     {

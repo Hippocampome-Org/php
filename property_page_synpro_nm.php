@@ -78,6 +78,8 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 		$open_access = -1;
 	if ($citation_count == NULL)
 		$citation_count = -1;
+	if ($PMID==NULL)
+		$PMID=-1;
 	////set_magic_quotes_runtime(0);	
 		if (get_magic_quotes_gpc()) {
         	$publication = stripslashes($publication);  
@@ -135,6 +137,7 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$volume' ,
 	   '$issue'   
 	   )";
+	   #echo $query_i."<BR>";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
 // set property of synapse probability page
@@ -202,7 +205,7 @@ if ($page)
 	$ip_address = str_replace(':', '_', $ip_address);
 	$time_t = time();
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
-	echo "name_temporary_table: ".$name_temporary_table;
+	//echo "name_temporary_table: ".$name_temporary_table;
 	$_SESSION['synpro_name_temporary_table'] = $name_temporary_table;
 	create_temp_table($name_temporary_table);	
 	
@@ -455,12 +458,16 @@ $target_id = $_REQUEST['id_neuron_target'];
 $type_target -> retrive_by_id($target_id);
 $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
+$class_fragment='SynproFragment';
 $fragment = new fragment_synpro($class_fragment);
 $attachment_obj = new attachment_synpro($class_attachment);
 //$evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
+$class_evidence_property_type_rel = 'SynproEvidencePropertyTypeRel';
 $evidencepropertyyperel = new evidencepropertyyperel_synpro($class_evidence_property_type_rel);
+$class_evidencefragmentrel='SynproEvidenceFragmentRel';
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
 //$articleevidencerel = new articleevidencerel($class_articleevidencerel);
+$class_articleevidencerel='SynproArticleEvidenceRel';
 $articleevidencerel = new articleevidencerel_synpro($class_articleevidencerel);
 $article = new article($class_article);
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
@@ -811,15 +818,20 @@ function show_only_authors(link, start1, stop1)
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				}							
 				$n_article = 0; // <-- Number of articles
+				#echo "****** test *******".$source_id." ".$target_id."<br>";
+				///////// find synpro evidence matches ///////////
+				$evidencepropertyyperel -> retrive_nbym_evidence_id($source_id, $target_id);
+				$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
+				//////////////////////////////////////////////////
 				for ($i=0; $i<$n_evidence_id; $i++)
 				{
 					$evidence_id[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
-				
+					
 					// Retrieve Fragment_id frmo EvidenceFragmentRel by using Evidence_id
 					$evidencefragmentrel -> retrive_fragment_id($evidence_id[$i]);
 					
 					$n_fragment_id = $evidencefragmentrel -> getN_fragment_id();
-				
+					
 					for ($i1=0; $i1<$n_fragment_id; $i1++)
 					{
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
@@ -830,14 +842,17 @@ function show_only_authors(link, start1, stop1)
 				{
 					// Retrieve Quote and page_location and original_id from Fragment bu using fragment_id:
 					$fragment -> retrive_by_id($fragment_id[$i]);
+
 					$quote = $fragment -> getQuote();
 					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
 					$pmid_isbn= $fragment -> getPmid_isbn();
+					#echo "$%$% ".$pmid_isbn."<br>";
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					$page_location = $fragment -> getPage_location();
 					//Retreive information from attachment table					
-					if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
+					//if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
+					if (False)
 					{
 						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 						$id_article= $article -> getID();
@@ -845,6 +860,7 @@ function show_only_authors(link, start1, stop1)
 					else 
 					{
 						// retrieve article_id from ArticleEvidenceRel by using Evidence_id
+						#echo "EID:::::".$evidence_id[$i]."<br>";
 						$articleevidencerel -> retrive_article_id($evidence_id[$i]);
 						$id_article = $articleevidencerel -> getArticle_id_array(0);
 						// retrieve all information from article table by using article_id
@@ -854,6 +870,7 @@ function show_only_authors(link, start1, stop1)
 					$publication = $article -> getPublication();
 					$year = $article -> getYear();
 					$pmid_isbn = $article -> getPmid_isbn(); 
+					#echo "$%$% ".$pmid_isbn."<br>";
 					$first_page = $article -> getFirst_page(); 
 					$last_page = $article -> getLast_page(); 
 					$pmcid = $article -> getPmcid(); 
@@ -888,13 +905,14 @@ function show_only_authors(link, start1, stop1)
 							$name_authors = $name_authors.', '.$name_a;
 					}
 					$pages= $first_page." - ".$last_page;
+
 					if ($page)
 					{
 						// Insert the data in the temporary table:	 
 						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
 					}
 				}
-			}			
+			}	
 					// find the total number of Articles: 
 					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -1336,10 +1354,13 @@ function show_only_authors(link, start1, stop1)
 								//$current_record = $id_fragment.$id_original.$quote.$page_location.$type;
 								$current_record = $id_original.$quote.$page_location.$type;
 							if (!in_array($current_record, $avoid_dups))
+							#if (true)
 							{	
 								$quote_count++;	
 								if ($show1 == 1)
+								#if (true)
 								{
+									#echo "f#@$#@$$$@";
 									$type_show  = "";
 									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY type ASC";
 									$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
@@ -1406,7 +1427,8 @@ function show_only_authors(link, start1, stop1)
 
 									//$attachment_obj -> retrive_by_props($original_id, $id_neuron, $neurite_ref);
 									$attachment_obj = new attachment_synpro($class_attachment); // this clears prior attachment results
-									$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
+									$attachment_obj -> retrive_by_props_nbym($id_original, $source_id, $target_id);
+									#echo "test5: ".$id_original." ".$source_id." ".$target_id."<br>";
 									$attachment = $attachment_obj -> getName();
 									//echo "<br>attach: ".$attachment."<br>oi: $id_original<br>in: $id_neuron<br>vp: $neurite_ref";
 									$attachment_type = $attachment_obj -> getType();
