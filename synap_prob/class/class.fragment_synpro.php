@@ -32,6 +32,7 @@ class fragment_synpro
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
+		#echo $query;
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysqli_fetch_row($rs))
 		{	

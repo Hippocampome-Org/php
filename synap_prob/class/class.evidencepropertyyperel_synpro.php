@@ -212,6 +212,28 @@ class evidencepropertyyperel_synpro
 		$this->setN_evidence_id($n);
 	}
 
+	public function retrive_nbym_evidence_id($source_id, $target_id)
+	{
+		$table=$this->getName_table();		
+		$min_id=$this->_min_n_by_k_evidence_id;
+		$max_id=$this->_max_n_by_k_evidence_id;
+		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
+		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE source_id = $source_id AND target_id = $target_id";
+		//echo "sql: ".$query."<br>";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id,$linking_quote,$interpretation_notes) = mysqli_fetch_row($rs))
+		{			
+			$this->setEvidence_id_array($id, $n);
+			$this->setLinking_quote_array($linking_quote, $n);
+			$this->setInterpretation_notes_array($interpretation_notes, $n);
+			$n = $n +1;
+			#echo "found hit eid".$id."<br>";
+		}
+		$this->setN_evidence_id($n);
+	}	
+
 	public function retrieve_morphology_evidence_id_by_type($type_id)
 	{
 		$table=$this->getName_table();
