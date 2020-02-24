@@ -166,7 +166,8 @@ class evidencepropertyyperel_synpro
 		$min_id=$this->_min_n_by_k_evidence_id;
 		$max_id=$this->_max_n_by_k_evidence_id;
 		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
-		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
 		//echo "sql: ".$query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
@@ -186,7 +187,8 @@ class evidencepropertyyperel_synpro
 		$min_id=$this->_min_n_by_k_evidence_id;
 		$max_id=$this->_max_n_by_k_evidence_id;
 		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
-		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		//$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
 		//echo "sql: ".$query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
@@ -205,7 +207,8 @@ class evidencepropertyyperel_synpro
 		$table=$this->getName_table();
 		$min_id=$this->_min_n_by_k_evidence_id;
 		$max_id=$this->_max_n_by_k_evidence_id;
-		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Property_id = '$Property_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		//$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Property_id = '$Property_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Property_id = '$Property_id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
@@ -221,7 +224,8 @@ class evidencepropertyyperel_synpro
 		$table=$this->getName_table();
 		$min_id=$this->_min_n_by_k_evidence_id;
 		$max_id=$this->_max_n_by_k_evidence_id;
-		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		//$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Type_id = '$type_id' AND Evidence_id>=$min_id AND Evidence_id<=$max_id;";
+		$query = "SELECT DISTINCT Evidence_id FROM $table WHERE Type_id = '$type_id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
