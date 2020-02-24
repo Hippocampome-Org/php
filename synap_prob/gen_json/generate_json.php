@@ -69,7 +69,7 @@ Date:   2020
 		                }
 		            
 		            	if ($page == 'dal') {
-			                $sql    = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND total_length!='';";
+			                $sql    = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group_hnc[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND total_length!='';";
 			                $result = $conn->query($sql);
 			                if ($result->num_rows > 0) {
 			                    while ($row = $result->fetch_assoc()) {
@@ -91,7 +91,7 @@ Date:   2020
 			                }  
 		                }
 		                elseif ($page == 'sd') {
-		                	$sql    = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND mean_path_length!='';";
+		                	$sql    = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group_hnc[$i_adj] . "' AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND mean_path_length!='';";
 			                $result = $conn->query($sql);
 	                        if ($result->num_rows > 0) {
 	                            while ($row = $result->fetch_assoc()) {
@@ -125,7 +125,7 @@ Date:   2020
 		        }
 		        if ($page == 'dal') {
 			        for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
-		                $sql    = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND total_length!='';";
+		                $sql    = "SELECT CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(total_length) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group_hnc[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND total_length!='';";
 		                $result = $conn->query($sql);
 		                if ($result->num_rows > 0) {
 		                    $row        = $result->fetch_assoc();
@@ -137,7 +137,7 @@ Date:   2020
 		    	}
 		    	elseif ($page == 'sd') {
 		    		for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
-	                    $sql    = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND mean_path_length!='';";
+	                    $sql    = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.hippocampome_neuronal_class='" . $neuron_group_hnc[$i_adj] . "' AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND mean_path_length!='';";
 	                    $result = $conn->query($sql);
 	                    if ($result->num_rows > 0 && $row['avg'] != '' && $row['count_sd'] != '' && $row['std'] != '') {
 	                        $row        = $result->fetch_assoc();
@@ -159,13 +159,13 @@ Date:   2020
 			array_push($parcel_output, $all_totals);	  
 		}
 		elseif ($page=='ps') {	
-			$write_output = n_by_m_values($conn, 'ps', $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids);
+			$write_output = n_by_m_values($conn, 'ps', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
 		} 
 		elseif ($page=='noc') {	
-			$write_output = n_by_m_values($conn, 'noc', $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids);
+			$write_output = n_by_m_values($conn, 'noc', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
 		}
 		elseif ($page=='prosyn') {	
-			$write_output = n_by_m_values($conn, 'prosyn', $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids);
+			$write_output = n_by_m_values($conn, 'prosyn', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
 		}
 	}
 
