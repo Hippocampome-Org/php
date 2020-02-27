@@ -314,6 +314,35 @@ class fragment_synpro
     {
     	return $this->_number_attachment;
     }	
+
+    public function prop_name_to_nq_name($prop_name)
+    {
+    	$nq_neurite_name='';
+    	$query = "SELECT neurite_quant_neurite FROM SynproPropParcelRel WHERE parcel='".$prop_name."';";
+		
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($neurite_quant_neurite) = mysqli_fetch_row($rs))
+		{	    	
+			# just saves the variable neurite_quant_neurite
+			$nq_neurite_name=$neurite_quant_neurite;
+		}
+
+		return $nq_neurite_name;
+    }
+
+    public function getNeuriteLength($neuron_id,$neurite,$refID)
+    {
+    	$length=Null;
+		$query = "SELECT CAST(total_length AS DECIMAL(10,2)) AS tl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($tl) = mysqli_fetch_row($rs))
+		{	    	
+			# just saves the variable neurite_quant_neurite
+			$length=$tl;
+		}
+
+		return $length;
+    }
 	
 }
 

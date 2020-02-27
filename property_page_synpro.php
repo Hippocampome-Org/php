@@ -552,8 +552,29 @@ function show_only_authors(link, start1, stop1)
 	include ("function/menu_main.php");
 ?>
 
-<div class='title_area'>
-	<font class="font1">Synapse probabilities evidence page</font>
+<div class='title_area' style="width:1200px">
+	<font class='font1'>
+<?php
+	if (isset($_REQUEST['color'])) {$color = $_REQUEST['color'];}
+	if (isset($_REQUEST['sp_page'])) {$sp_page=$_REQUEST['sp_page'];}
+	if ($sp_page=='dal') {
+		if ($color=='red') {
+			echo "Synapse Probabilities - Axonal Lengths Evidence Page";
+		}
+		else if ($color=='blue') {
+			echo "Synapse Probabilities - Dendritic Lengths Evidence Page";
+		}		
+	}
+	else if ($sp_page=='sd') {
+		if ($color=='red') {
+			echo "Synapse Probabilities - Somatic Distances of Axons Evidence Page";
+		}
+		else if ($color=='blue') {
+			echo "Synapse Probabilities - Somatic Distances of Dendrites Evidence Page";
+		}			
+	}
+?>
+</font>
 </div>
 
 <br><br /><br><br />
@@ -851,52 +872,25 @@ function show_only_authors(link, start1, stop1)
 					
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>		
-						<td width="55%" align='center'>	
-							<?php 
-								// logic to view checkbox
-								$property_checked="".$neuron_show_only_value;
-								$property_checked=str_replace(",", "", $property_checked);
-								$property_checked=trim($property_checked);
-								if($number_of_quotes_axon != 0&&$show_only_number_of_quotes_axon!=0){
-									
-									if(strstr($neuron_show_only_value,"Axons")){
-										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' checked ");
-										if($property_checked=="Axons"||($show_only_number_of_quotes_dendrite+$show_only_number_of_quotes_somata)==0)
-											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)'>axon </input></span>");
-									}
-									else
-										print("<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='violetSoma' value='axon' id='axoncheck' onclick='changeCheckbox($page_in,$page_end)'>axon </input></span>");
-								}
-								if($number_of_quotes_dendrite != 0&&$show_only_number_of_quotes_dendrite!=0){
-									if(strstr($neuron_show_only_value,"Dendrites")){
-										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck' checked ");
-										if($property_checked=="Dendrites" || ($show_only_number_of_quotes_axon+$show_only_number_of_quotes_somata)==0)
-											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >dendrite </input></span>");
-									}
-									else
-										print("<span style='color:rgb(1,1,153)' ><input type='checkbox' name='violetSoma' value='dendrite' id='dendritecheck'  onclick='changeCheckbox($page_in,$page_end)' >dendrite </input></span>");
-								}
-								if($number_of_quotes_somata != 0&&$show_only_number_of_quotes_somata!=0){
-									if(strstr($neuron_show_only_value,"Somata")){
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck' checked ");
-										if($property_checked=="Somata" ||($show_only_number_of_quotes_axon+$show_only_number_of_quotes_dendrite)==0)
-											print(" disabled ");
-										print("onclick='changeCheckbox($page_in,$page_end)' >somata </input></span>");
-									}
-									else
-										print("<span style='color:rgb(84,84,84)' ><input type='checkbox' name='violetSoma' value='somata' id='somatacheck'  onclick='changeCheckbox($page_in,$page_end)' >somata </input></span>");
-							}?>
-							
-						</td>
 						<td width="25%" align="right">
 						<form action="property_page_synpro.php" method="post" style="display:inline">
+						<?php
+							if (isset($_REQUEST['sp_page'])) {
+								$sp_page=$_REQUEST['sp_page'];
+								echo "<input type='hidden' name='sp_page' value='$sp_page'>";
+							}
+						?>
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start' value='<?php print $page_in; ?>' />
 						<input type="hidden" name='stop' value='<?php print $page_end; ?>' />
 						<?php print ("<input type='hidden' name='name_show_only' value='$name_show_only'>"); ?>
+						<?php print ("<input type='hidden' name='val_property' value='$val_property'>"); 
+						if (isset($_REQUEST['sp_page'])) {
+							$sp_page=$_REQUEST['sp_page'];
+							print ("<input type='hidden' name='sp_page' value='$sp_page'>");
+						}
+						?>
 						
 						</form>
 						</td>						
@@ -1080,6 +1074,13 @@ function show_only_authors(link, start1, stop1)
 								<OPTION VALUE='authors'>First Authors</OPTION>
 								</select>
 								<input type="hidden" name='order_ok' value="GO"  />
+								<?php print ("<input type='hidden' name='val_property' value='$val_property'>"); ?>
+								<?php
+								if (isset($_REQUEST['sp_page'])) {
+									$sp_page=$_REQUEST['sp_page'];
+									echo "<input type='hidden' name='sp_page' value='$sp_page'>";
+								}
+								?>
 								</form>	
 							</td>
 						<?php
@@ -1161,6 +1162,11 @@ function show_only_authors(link, start1, stop1)
 							print ("<input type='hidden' name='stop' value='$page_end' />");
 							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
 							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+							print ("<input type='hidden' name='val_property' value='$val_property'>");
+							if (isset($_REQUEST['sp_page'])) {
+								$sp_page=$_REQUEST['sp_page'];
+								print ("<input type='hidden' name='sp_page' value='$sp_page'>");
+							}
 							print ("</form>");
 						}
 						if ($show1 == 1)
@@ -1171,6 +1177,11 @@ function show_only_authors(link, start1, stop1)
 							print ("<input type='hidden' name='stop' value='$page_end' />");
 							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
 							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+							print ("<input type='hidden' name='val_property' value='$val_property'>");
+							if (isset($_REQUEST['sp_page'])) {
+								$sp_page=$_REQUEST['sp_page'];
+								print ("<input type='hidden' name='sp_page' value='$sp_page'>");
+							}
 							print ("</form>");
 						}	
 						if (strlen($PMID1) > 10 )
@@ -1288,52 +1299,33 @@ function show_only_authors(link, start1, stop1)
 	                                 	print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 									if ($type_for_display == '')									
 										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell'></td>");								
-									// retrieve the attachament from "attachment" with original_id and cell-id(id_neuron)
-									//$attachment_obj -> retrive_attachment_by_original_id($id_original, $id_neuron);
+									// retrieve the attachament
 									$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
 									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
-									//$dendrite_group = array('Dendrites');
-									//$axon_group = array('Axons');
-									//echo "type_for_display ".$type_for_display." TYPE SHOW ".$type_show."<br>";
 									$original_id = $fragment -> getOriginal_id();
-									//echo "VAL PROP ".$val_property."<BR>";
-									//if (in_array($type_show,$dendrite_group)) {
 									if (in_array($type_for_display,$dendrite_group)) {
 										$neurite_ref = $val_property.":D";
 									}
-									//elseif (in_array($type_show,$axon_group)) {
 									elseif (in_array($type_for_display,$axon_group)) {
 										$neurite_ref = $val_property.":A";	
 									}
-									else {
-										//$neurite_ref = $val_property.":A";	
-									}
-									//$neurite_ref = $val_property.":D";
-									//echo $type_show."<br>";
-
-									//$attachment_obj -> retrive_by_props($original_id, $id_neuron, $neurite_ref);
 									$attachment_obj = new attachment_synpro($class_attachment); // this clears prior attachment results
 									$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
 									$attachment = $attachment_obj -> getName();
-									//echo "<br>attach: ".$attachment."<br>oi: $id_original<br>in: $id_neuron<br>vp: $neurite_ref";
 									$attachment_type = $attachment_obj -> getType();
 									//$attachment_type="synpro_figure";
-									$link_figure="";
+									$link_figure="";									
 									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
-									if($attachment_type=="marker_figure"||$attachment_type=="marker_table"){
-										$link_figure = "attachment/marker/".$attachment_jpg;
-									}
-									
-									if($attachment_type=="morph_figure"||$attachment_type=="morph_table"){
-										$link_figure = "attachment/morph/".$attachment_jpg;
-									}
-									
-									if($attachment_type=="ephys_figure"||$attachment_type=="ephys_table"){
-										$link_figure = "attachment/ephys/".$attachment_jpg;
-									}	
+									// original article attachment
+									$attachment_obj2 = new attachment_synpro($class_attachment); // this clears prior attachment results
+									$attachment_obj2 -> retrive_by_props($id_original, $id_neuron, 'Original');
+									$art_orig_attachment = $attachment_obj2 -> getName();
+									$art_orig_attachment_type = $attachment_obj2 -> getType();
+									$art_orig_attachment_jpg = str_replace('jpg', 'jpeg', $art_orig_attachment);
+
 									if($attachment_type=="synpro_figure"){
 										$link_figure = "attachment/neurites/".$attachment_jpg;
-										//echo $link_figure;
+										$art_orig_link_figure = "attachment/neurites/".$art_orig_attachment_jpg;
 									}								
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
 									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
@@ -1342,68 +1334,10 @@ function show_only_authors(link, start1, stop1)
 									// get protocol age species and interpretation
 									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM Fragment WHERE id=$id_fragment ";
 									$rs_to_get_info = mysqli_query($GLOBALS['conn'],$query_to_get_info);	
-									/*$segment1=array();#init
-									unset($segment1);#clear
-									$segment1=array();#recreate
-									$segment2=array();
-									unset($segment2);
-									$segment2=array();*/
 									$seg_1_text="";
 									$seg_2_text="";
 									while(list($interpretation_notes,$protocol,$age_weight,$species_descriptor,$species_tag) = mysqli_fetch_row($rs_to_get_info))
 									{
-										//print("Data:,$protocol,$age_weight,$species_descriptor,$species_tag");
-										/*if($protocol){
-											print("	<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>
-												PROTOCOL: $protocol
-											</td>
-											<td width='15%' align='center'> </td></tr>");
-										}
-										if($species_descriptor ){
-											print("<tr>	
-											<td width='70%' class='table_neuron_page2' align='left'>
-												SPECIES: $species_descriptor 
-												</td>
-											<td width='15%' align='center'> </td></tr>");
-										}
-										if($age_weight){
-											print("	<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>
-												Age/Weight: $age_weight
-											</td>
-											<td width='15%' align='center'> </td></tr>");
-										}
-										// view info
-										print ("
-										<tr>	
-											<td width='70%' class='table_neuron_page2' align='left'>
-												Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
-											</td>
-											<td width='15%' align='center'>");																											
-											
-										print ("</td></tr>	
-										<tr>		
-											<td width='70%' class='table_neuron_page2' align='left'>
-												<em>$quote</em>");
-										if($interpretation_notes){
-											print("</br></br> Interepretation Notes: $interpretation_notes");
-										}
-										print("</td>
-											<td width='15%' class='table_neuron_page2' align='center'>");
-											
-											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
-											{
-												print ("<a href='$link_figure' target='_blank'>");
-												print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
-												print ("</a>");
-											}	
-											else;
-											print("</td></tr>");
-
-										print ("</table>");*/
-										#$seg_1_text="";
 										if($protocol){
 											$seg_1_text=$seg_1_text."	<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>
@@ -1433,6 +1367,47 @@ function show_only_authors(link, start1, stop1)
 										#array_push($segment2, $seg_2_text);
 									}
 									print ($seg_1_text);
+									// describe neurite statistics
+									$neuron_id=$id_neuron;
+									$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
+									$refID=$id_original;
+									$parcel=$val_property;
+									print ("
+										<tr>	
+											<td width='70%' class='table_neuron_page2' align='left'>");
+									if ($sp_page=='dal') {
+										$neurite_length=$fragment->getNeuriteLength($neuron_id,$nq_neurite_name,$refID);
+										if ($color=='red') {
+											print ("Axonal length ".$parcel.": ".$neurite_length." μm");										}
+										if ($color=='blue') {
+											print ("Dendritic length ".$parcel.": ".$neurite_length." μm");
+										}
+									}
+									else if ($sp_page=='sd') {
+										if ($color=='red') {
+										}
+										if ($color=='blue') {
+										}
+									}
+									print ("</td></tr>");
+									print ("
+										<tr>	
+											<td width='70%' class='table_neuron_page2' align='left'>");
+									
+											print ("Figure segmentation evidence for ".$neurite_ref.":");
+											print("</td>
+											<td width='15%' class='table_neuron_page2' align='center'>");
+											
+											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
+											{
+												print ("<a href='$link_figure' target='_blank'>");
+												print ("<img src='images/download_PNG.png' border='0' width='40%' style='background-color:white;'>");
+												print ("</a>");
+											}
+											print("</td></tr>");
+									//print ($id_fragment." ".$id_original." ".$id_neuron." ".$nq_neurite_name);
+
 										// view info
 										print ("
 										<tr>	
@@ -1452,8 +1427,8 @@ function show_only_authors(link, start1, stop1)
 											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
 											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
 											{
-												print ("<a href='$link_figure' target='_blank'>");
-												print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
+												print ("<a href='$art_orig_link_figure' target='_blank'>");
+												print ("<img src='$art_orig_link_figure' border='0' width='80%' style='background-color:white;'>");
 												print ("</a>");
 											}	
 											else;
@@ -1519,7 +1494,12 @@ function show_only_authors(link, start1, stop1)
 								else
 								{
 									print ("<input type='submit' name='first_page' value=' << ' class='botton1'/>");
-									print ("<input type='submit' name='down' value=' < ' class='botton1'/>");		
+									print ("<input type='submit' name='down' value=' < ' class='botton1'/>");
+									print ("<input type='hidden' name='val_property' value='$val_property'>");
+									if (isset($_REQUEST['sp_page'])) {
+										$sp_page=$_REQUEST['sp_page'];
+										print ("<input type='hidden' name='sp_page' value='$sp_page'>");
+									}
 								}
 							?>								
 							<input type="hidden" name='start' value='<?php print $page_in-10; ?>' />
@@ -1534,6 +1514,11 @@ function show_only_authors(link, start1, stop1)
 								{
 									print ("<input type='submit' name='up' value=' > ' class='botton1'/>");
 									print ("<input type='submit' name='last_page' value=' >> ' class='botton1'/>");
+									print ("<input type='hidden' name='val_property' value='$val_property'>");
+									if (isset($_REQUEST['sp_page'])) {
+										$sp_page=$_REQUEST['sp_page'];
+										print ("<input type='hidden' name='sp_page' value='$sp_page'>");
+									}
 								}
 							?>							
 							<input type="hidden" name='start' value='<?php print $page_in+10; ?>' />
