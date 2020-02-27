@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
 function OpenInNewTab(aEle)
 {
 	//alert(aEle.href);
-	var win = window.open(aEle.href,'_self');
+	var win = window.open(aEle.href,'_blank');
 	win.focus();
 }
 

@@ -137,7 +137,7 @@ $hippo_select = $_SESSION['hippo_select'];
 function OpenInNewTab(aEle)
 {
 	//alert(aEle.href);
-	var win = window.open(aEle.href,'_self');
+	var win = window.open(aEle.href,'_blank');
 	win.focus();
 }
 
@@ -499,7 +499,7 @@ function HideShowColumns ()
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Izhikevich Matrix</title>
+<title>Izhikevich Matrix Mockup</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 

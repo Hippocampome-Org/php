@@ -124,7 +124,7 @@ list($permission) = mysqli_fetch_row($rs);
 <script language="javascript">
 function OpenInNewTab(aEle)
 {
-	var win = window.open(aEle.href,'_self');
+	var win = window.open(aEle.href,'_blank');
 	win.focus();
 }
 function ctr(select_nick_name2, color, select_nick_name_check)

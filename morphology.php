@@ -246,7 +246,7 @@ $hippo_select = $_SESSION['hippo_select'];
 function OpenInNewTab(aEle)
 {
 	//alert(aEle.href);
-	var win = window.open(aEle.href,'_self');
+	var win = window.open(aEle.href,'_blank');
 	win.focus();
 }
 
