@@ -1422,9 +1422,9 @@ function show_only_authors(link, start1, stop1)
 										}
 										else {
 											if ($color=='red') {
-												print ("Somatic distance of axons in ".$parcel.": ".$somatic_distances[1]." μm, number of values = 1");										}
+												print ("Somatic distance of axons in ".$parcel.": ".$somatic_distances[1]." μm (n = 1)");										}
 											if ($color=='blue') {
-												print ("Somatic distance of dendrites in ".$parcel.": ".$somatic_distances[1]." μm, number of values = 1");
+												print ("Somatic distance of dendrites in ".$parcel.": ".$somatic_distances[1]." μm (n = 1)");
 											}			
 										}
 									}
