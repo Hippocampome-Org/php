@@ -190,13 +190,13 @@ Date:   2020
 				} 
 			}
 			elseif ($type == 'noc') {
-				$sql = "SELECT CAST(AVG(number_of_contacts) AS DECIMAL(10,5)) AS avg FROM number_of_contacts WHERE number_of_contacts.source_name='".$neuron_group_long[$i]."' AND number_of_contacts.target_name='".$neuron_group_long[$j]."' AND number_of_contacts.number_of_contacts!='';";
+				$sql = "SELECT CAST(AVG(number_of_contacts) AS DECIMAL(10,2)) AS avg FROM number_of_contacts WHERE number_of_contacts.source_name='".$neuron_group_long[$i]."' AND number_of_contacts.target_name='".$neuron_group_long[$j]."' AND number_of_contacts.number_of_contacts!='';";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
 						$avg = $row['avg'];
 						if ($avg != '' && $avg != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=noc' title='".$avg."' target='_blank'>".$avg."</a>";            
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=noc' title='".$avg."' target='_blank'>".$avg."</a></center>";            
 						}
 					}
 				} 	
