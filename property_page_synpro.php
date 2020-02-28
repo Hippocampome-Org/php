@@ -1339,6 +1339,14 @@ function show_only_authors(link, start1, stop1)
 									$seg_2_text="";
 									while(list($interpretation_notes,$protocol,$age_weight,$species_descriptor,$species_tag) = mysqli_fetch_row($rs_to_get_info))
 									{
+										if ($interpretation_notes=='NULL') {$interpretation_notes='';}
+										if ($protocol=='NULL') {$protocol='';}
+										if ($age_weight=='NULL') {$age_weight='';}
+										if ($species_descriptor=='NULL') {$species_descriptor='';}
+										if ($species_tag=='NULL') {$species_tag='';}
+										$species=$fragment->refid_to_species($id_original);
+										if ($species=='NULL') {$species='';}
+
 										if($protocol){
 											$seg_1_text=$seg_1_text."	<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>
@@ -1346,10 +1354,10 @@ function show_only_authors(link, start1, stop1)
 											</td>
 											<td width='15%' align='center'> </td></tr>";
 										}
-										if($species_descriptor){
+										if($species){
 											$seg_1_text=$seg_1_text."<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>
-												SPECIES: $species_descriptor 
+												SPECIES: $species 
 												</td>
 											<td width='15%' align='center'> </td></tr>";
 										}
