@@ -169,9 +169,13 @@ $post_name=$type_target->getName();
 	else if ($find_parcel_group_name[$parcel_group_match]=='EC') {
 			$parcel_group = $ec_group; $parcel_group_short = $ec_group_short;}
 
-	function query_value($source_id, $target_id, $parcel, $prop, $table) {
+	function query_value($source_id, $target_id, $parcel, $prop, $table, $nm_page) {
+		$decimal_places='DECIMAL(10,5)';
+		if ($nm_page=='noc') {
+			$decimal_places='DECIMAL(10,2)';
+		}
 		$query = "
-		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG($prop) AS DECIMAL(10,5))
+		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG($prop) AS ".$decimal_places.")
 		FROM $table
 		WHERE source_ID=$source_id AND target_ID=$target_id AND neurite='$parcel'
 		AND $prop!=''
@@ -182,8 +186,7 @@ $post_name=$type_target->getName();
 		while(list($sid, $son, $tid, $tan, $neu, $val) = mysqli_fetch_row($rs))
 		{	
 			echo $val;
-		}
-		//echo "<br>".$query;		
+		}		
 	}
 	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page) {
 	echo "
@@ -200,7 +203,7 @@ $post_name=$type_target->getName();
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
 		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id_neuron_source=".$source_id."&id_neuron_target=".$target_id."&color=".$color."&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-		query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table);
+		query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
 		echo "</a></td>";
 	}
 	echo "
@@ -208,13 +211,13 @@ $post_name=$type_target->getName();
 	</table>";
 	}
 	if ($nm_page=='ps') {
-		report_parcel_values('Potential number of synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
 	}
 	else if ($nm_page=='noc') {
-		report_parcel_values('Number of contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Number of Contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
 	}
 	else if ($nm_page=='prosyn') {
-		report_parcel_values('Probability of connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Probability of Connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
 	}
 	?>					
 </body>
