@@ -343,6 +343,37 @@ class fragment_synpro
 
 		return $length;
     }
+
+    public function getSomaticDistances($neuron_id,$neurite,$refID)
+    {
+    	$somatic_distances=array();
+		$query = "SELECT CAST(STD(mean_path_length) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(mean_path_length) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(mean_path_length) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($std_sd, $avg, $count_sd, $avg_trunk, $min_sd, $max_sd) = mysqli_fetch_row($rs))
+		{	    	
+			array_push($somatic_distances, $std_sd);
+			array_push($somatic_distances, $avg);
+			array_push($somatic_distances, $count_sd);
+			array_push($somatic_distances, $avg_trunk);
+			array_push($somatic_distances, $min_sd);
+			array_push($somatic_distances, $max_sd);
+		}
+
+		return $somatic_distances;
+    }    
+
+    public function getRarFile($neuron_id,$neurite_name,$refID)
+    {
+    	$rar_file='';
+		$query = "SELECT rar_file FROM attachment_neurite_rar WHERE neuron_id=".$neuron_id." AND neurite_name='".$neurite_name."' AND reference_ID=".$refID.";";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($rar_file_result) = mysqli_fetch_row($rs))
+		{	    	
+			$rar_file=$rar_file_result;
+		}
+
+		return $rar_file;
+    } 
 	
 }
 

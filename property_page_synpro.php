@@ -1283,22 +1283,23 @@ function show_only_authors(link, start1, stop1)
 										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'>");
 									print ("<tr>");
 												
+									$row_span=30;
 									if ($type_for_display == 'Axons')		
-										print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/axon.png'></td>");
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><img src='images/axon.png'></td>");
 									if ($type_for_display == 'Dendrites')		
-										print ("<td width='15%' rowspan='6' align='right' valign='top'><img src='images/dendrite.png'></td>");	
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><img src='images/dendrite.png'></td>");	
 									if ($type_for_display == 'Somata')		
-										print ("<td width='15%' rowspan='6' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
 	                                if ($type_for_display == 'AxonsSomata')	
-	                                  print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
+	                                  print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
 	                                if ($type_for_display == 'AxonsDendrites')	
-										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
 								    if ($type_for_display == 'DendritesSomata')
-										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
 									if ($type_for_display == 'AxonsDendritesSomata')
-	                                 	print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
+	                                 	print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
 									if ($type_for_display == '')									
-										print ("<td width='15%' rowspan='6' align='right' valign='top' style='display:table-cell'></td>");								
+										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");								
 									// retrieve the attachament
 									$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
 									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
@@ -1332,7 +1333,7 @@ function show_only_authors(link, start1, stop1)
 									
 
 									// get protocol age species and interpretation
-									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM Fragment WHERE id=$id_fragment ";
+									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM ".$class_fragment." WHERE id=$id_fragment ";
 									$rs_to_get_info = mysqli_query($GLOBALS['conn'],$query_to_get_info);	
 									$seg_1_text="";
 									$seg_2_text="";
@@ -1345,7 +1346,7 @@ function show_only_authors(link, start1, stop1)
 											</td>
 											<td width='15%' align='center'> </td></tr>";
 										}
-										if($species_descriptor ){
+										if($species_descriptor){
 											$seg_1_text=$seg_1_text."<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>
 												SPECIES: $species_descriptor 
@@ -1373,10 +1374,13 @@ function show_only_authors(link, start1, stop1)
 									$refID=$id_original;
 									$parcel=$val_property;
 									print ("
-										<tr>	
+											<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>");
 									if ($sp_page=='dal') {
 										$neurite_length=$fragment->getNeuriteLength($neuron_id,$nq_neurite_name,$refID);
+										$download_icon='images/download_PNG.png';
+										$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
+										$att_link=$link_figure;
 										if ($color=='red') {
 											print ("Axonal length ".$parcel.": ".$neurite_length." μm");										}
 										if ($color=='blue') {
@@ -1384,9 +1388,15 @@ function show_only_authors(link, start1, stop1)
 										}
 									}
 									else if ($sp_page=='sd') {
+										$somatic_distances=$fragment->getSomaticDistances($neuron_id,$nq_neurite_name,$refID);
+										$download_icon='images/download_RAR.png';
+										$att_desc="RAR compressed somatic-distance paths for ".$neurite_ref.":";
+										$att_link='attachment/neurites_rar/'.$fragment->getRarFile($neuron_id,$nq_neurite_name,$refID);
 										if ($color=='red') {
+											print ("Somatic distances of axons: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
 										}
 										if ($color=='blue') {
+											print ("Somatic distances of dendrites: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
 										}
 									}
 									print ("</td></tr>");
@@ -1394,15 +1404,16 @@ function show_only_authors(link, start1, stop1)
 										<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>");
 									
-											print ("Figure segmentation evidence for ".$neurite_ref.":");
+											print ($att_desc);
+											//print ($id_fragment);
 											print("</td>
 											<td width='15%' class='table_neuron_page2' align='center'>");
 											
 											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
 											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
 											{
-												print ("<a href='$link_figure' target='_blank'>");
-												print ("<img src='images/download_PNG.png' border='0' width='40%' style='background-color:white;'>");
+												print ("<a href='".$att_link."' target='_blank'>");
+												print ("<img src='".$download_icon."' border='0' width='40%' style='background-color:white;'>");
 												print ("</a>");
 											}
 											print("</td></tr>");
@@ -1414,8 +1425,7 @@ function show_only_authors(link, start1, stop1)
 											<td width='70%' class='table_neuron_page2' align='left'>
 												Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
 											</td>
-											<td width='15%' align='center'>");																											
-											
+											<td width='15%' align='center'>");	
 										print ("</td></tr>	
 										<tr>		
 											<td width='70%' class='table_neuron_page2' align='left'>
