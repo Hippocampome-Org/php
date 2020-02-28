@@ -374,6 +374,19 @@ class fragment_synpro
 
 		return $rar_file;
     } 
+
+    public function refid_to_species($refID)
+    {
+    	$species='';
+		$query = "SELECT species FROM neurite WHERE referenceID=".$refID.";";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($species_result) = mysqli_fetch_row($rs))
+		{	    	
+			$species=$species_result;
+		}
+
+		return $species;
+    } 
 	
 }
 
