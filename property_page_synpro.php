@@ -1385,14 +1385,25 @@ function show_only_authors(link, start1, stop1)
 											<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>");
 									if ($sp_page=='dal') {
-										$neurite_length=$fragment->getNeuriteLength($neuron_id,$nq_neurite_name,$refID);
+										$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
 										$download_icon='images/download_PNG.png';
 										$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
 										$att_link=$link_figure;
-										if ($color=='red') {
-											print ("Axonal length ".$parcel.": ".$neurite_length." μm");										}
-										if ($color=='blue') {
-											print ("Dendritic length ".$parcel.": ".$neurite_length." μm");
+										$values_count=$neurite_lengths[2];
+										if ($values_count>1) {
+											if ($color=='red') {
+												print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+											}
+											if ($color=='blue') {
+												print ("Dendritic lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+											}
+										}
+										else {
+											if ($color=='red') {
+												print ("Axonal length in ".$parcel.": ".$neurite_lengths[1]." μm");										}
+											if ($color=='blue') {
+												print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
+											}
 										}
 									}
 									else if ($sp_page=='sd') {
@@ -1400,11 +1411,21 @@ function show_only_authors(link, start1, stop1)
 										$download_icon='images/download_RAR.png';
 										$att_desc="RAR compressed somatic-distance paths for ".$neurite_ref.":";
 										$att_link='attachment/neurites_rar/'.$fragment->getRarFile($neuron_id,$nq_neurite_name,$refID);
-										if ($color=='red') {
-											print ("Somatic distances of axons: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
+										$values_count=$somatic_distances[2];
+										if ($values_count>1) {
+											if ($color=='red') {
+												print ("Somatic distances of axons: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
+											}
+											if ($color=='blue') {
+												print ("Somatic distances of dendrites: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
+											}
 										}
-										if ($color=='blue') {
-											print ("Somatic distances of dendrites: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
+										else {
+											if ($color=='red') {
+												print ("Somatic distance of axons in ".$parcel.": ".$somatic_distances[1]." μm, number of values = 1");										}
+											if ($color=='blue') {
+												print ("Somatic distance of dendrites in ".$parcel.": ".$somatic_distances[1]." μm, number of values = 1");
+											}			
 										}
 									}
 									print ("</td></tr>");
