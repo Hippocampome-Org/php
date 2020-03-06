@@ -315,6 +315,15 @@ class fragment_synpro
     	return $this->_number_attachment;
     }	
 
+    public function neuron_to_subregion($neuron_id)
+    {
+    	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
+    	$rs = mysqli_query($GLOBALS['conn'],$query);
+		$subregion = mysqli_fetch_row($rs)[0];
+
+		return $subregion;
+    }
+
     public function prop_name_to_nq_name($prop_name)
     {
     	$nq_neurite_name='';

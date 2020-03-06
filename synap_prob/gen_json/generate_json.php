@@ -178,38 +178,37 @@ Date:   2020
 		for ($j=0;$j<count($neuron_ids);$j++) {
 			$entry_output = "";
 			if ($type == 'ps') {
-				$sql = "SELECT CAST(AVG(potential_synapses) AS DECIMAL(5,5)) AS avg FROM potential_synapses WHERE potential_synapses.source_name='".$neuron_group_long[$i]."' AND potential_synapses.target_name='".$neuron_group_long[$j]."' AND potential_synapses.potential_synapses!='';";
+				$sql = "SELECT CAST(potential_synapses AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.potential_synapses!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
-						$avg = $row['avg'];
-						if ($avg != '' && $avg != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=ps' title='Variance Will Be\\nAdded Later Here' target='_blank'>".$avg."</a>";
+						$val = $row['val'];
+						if ($val != '' && $val != 0) {
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=ps' title='Variance Will Be\\nAdded Later Here' target='_blank'>".$val."</a>";
 						}
 					}
 				} 
 			}
 			elseif ($type == 'noc') {
-				$sql = "SELECT CAST(AVG(number_of_contacts) AS DECIMAL(10,2)) AS avg FROM number_of_contacts WHERE number_of_contacts.source_name='".$neuron_group_long[$i]."' AND number_of_contacts.target_name='".$neuron_group_long[$j]."' AND number_of_contacts.number_of_contacts!='';";
+				$sql = "SELECT CAST(number_of_contacts AS DECIMAL(5,2)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.number_of_contacts!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
-						$avg = $row['avg'];
-						if ($avg != '' && $avg != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=noc' title='".$avg."' target='_blank'>".$avg."</a></center>";            
+						$val = $row['val'];
+						if ($val != '' && $val != 0) {
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=noc' title='".$val."' target='_blank'>".$val."</a></center>";  
 						}
 					}
 				} 	
-				//$entry_output = $entry_output.$sql;
 			}		
 			elseif ($type == 'prosyn') {
-				$sql = "SELECT CAST(AVG(probability) AS DECIMAL(10,5)) AS avg FROM number_of_contacts WHERE number_of_contacts.source_name='".$neuron_group_long[$i]."' AND number_of_contacts.target_name='".$neuron_group_long[$j]."' AND number_of_contacts.number_of_contacts!='';";
+				$sql = "SELECT CAST(probability AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.probability!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
-						$avg = $row['avg'];
-						if ($avg != '' && $avg != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=prosyn' title='".$avg."' target='_blank'>".$avg."</a>";            
+						$val = $row['val'];
+						if ($val != '' && $val != 0) {
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=prosyn' title='".$val."' target='_blank'>".$val."</a>";            
 						}
 					}
 				} 	
