@@ -202,7 +202,8 @@ $post_name=$type_target->getName();
 	}
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
-		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id_neuron_source=".$source_id."&id_neuron_target=".$target_id."&color=".$color."&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
+		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&color1=red&id2_neuron=".$target_id."&color2=blueSoma&connection_type=2&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=ps' target='_blank' style='text-decoration:none'>";
+		//echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id_neuron_source=".$source_id."&id_neuron_target=".$target_id."&color=".$color."&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
 		query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
 		echo "</a></td>";
 	}
