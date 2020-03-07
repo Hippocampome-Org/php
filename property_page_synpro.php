@@ -1249,7 +1249,8 @@ function show_only_authors(link, start1, stop1)
 								$current_record = $id_original.$quote.$page_location.$type;
 								//echo "CURR REC ".$type;
 								$type_for_display=$type;
-							if (!in_array($current_record, $avoid_dups))
+							#if (!in_array($current_record, $avoid_dups))
+							if (true)
 							{	
 								$quote_count++;	
 								if ($show1 == 1)
