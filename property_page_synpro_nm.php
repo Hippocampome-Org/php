@@ -146,7 +146,8 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
  }
 
 
-$page = $_REQUEST['page'];
+$page = Null;
+if (isset($_REQUEST['page'])) {$page=$_REQUEST['page'];}
 $sub_show_only = $_SESSION['conn_sub_show_only']; 
 $name_show_only_article = $_SESSION['conn_name_show_only_article'];
 
@@ -154,12 +155,13 @@ $name_show_only_article = $_SESSION['conn_name_show_only_article'];
 $ip_address = $_SERVER['REMOTE_ADDR'];
 $ip_address = str_replace('.', '_', $ip_address);
 $time_t = time();
-if (!$_REQUEST['name_temporary_table']) {
+if (!isset($_REQUEST['name_temporary_table'])) {
 $name_temporary_table ='temp_'.$ip_address.'_'.$conn_id_neuron[0].$conn_color[0].'__'.$time_t;
 $conn_name_temporary_table = $name_temporary_table;
 }
 else {
-	$name_temporary_table = $_REQUEST['name_temporary_table'];
+	$name_temporary_table = Null;
+	if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 }
 //echo "<Br><br><Br><br><br><br>NTT: $name_temporary_table".$_REQUEST['name_temporary_table'];
 $_REQUEST['name_temporary_table'] = $name_temporary_table;
@@ -176,21 +178,37 @@ if ($page)
 	$name_show_only_journal = 'all';
 	$name_show_only_authors = 'all';	
 	
-	$id_neuron = $_REQUEST['id1_neuron'];
-	$val_property = $_REQUEST['val1_property'];
+	//$id_neuron = $_REQUEST['id1_neuron'];
+	$id_neuron = Null;
+	if (isset($_REQUEST['id_neuron'])) {$id_neuron=$_REQUEST['id_neuron'];}
+	//$val_property = $_REQUEST['val1_property'];
+	$val_property = Null;
+	if (isset($_REQUEST['val_property'])) {$val_property=$_REQUEST['val_property'];}
 	$val_property = str_replace('_', ':', $val_property);
-	$color = $_REQUEST['color1'];
+	//$color = $_REQUEST['color1'];
+	$color = Null;
+	if (isset($_REQUEST['color1'])) {$color=$_REQUEST['color1'];}
 	
 	// get the connection neuron types  
 	for($i=1;$i<3;$i++){
-		$conn_id_neuron[$i-1] = $_REQUEST['id'.$i.'_neuron'];
+		//$conn_id_neuron[$i-1] = $_REQUEST['id'.$i.'_neuron'];
+		$conn_id_neuron[$i-1] = Null;
+		if (isset($_REQUEST['id'.$i.'_neuron'])) {$conn_id_neuron[$i-1]=$_REQUEST['id'.$i.'_neuron'];}
 		$conn_val_property[$i-1] = str_replace('_', ':', $_REQUEST['val'.$i.'_property']);
-		$conn_color[$i-1] = $_REQUEST['color'.$i];
+		//$conn_color[$i-1] = $_REQUEST['color'.$i];
+		$conn_color[$i-1] = Null;
+		if (isset($_REQUEST['color'.$i])) {$conn_color[$i-1]=$_REQUEST['color'.$i];}
 	}
 	// get connection properties
-	$connection_type=$_REQUEST['connection_type'];
-	$known_unknown_flag=$_REQUEST['known_conn_flag'];
-	$axonic_basket_flag=$_REQUEST['axonic_basket_flag'];	
+	//$connection_type=$_REQUEST['connection_type'];
+	$connection_type = Null;
+	if (isset($_REQUEST['connection_type'])) {$connection_type=$_REQUEST['connection_type'];}
+	//$known_unknown_flag=$_REQUEST['known_conn_flag'];
+	$known_unknown_flag = Null;
+	if (isset($_REQUEST['known_conn_flag'])) {$known_unknown_flag=$_REQUEST['known_conn_flag'];}
+	//$axonic_basket_flag=$_REQUEST['axonic_basket_flag'];	
+	$axonic_basket_flag = Null;
+	if (isset($_REQUEST['axonic_basket_flag'])) {$axonic_basket_flag=$_REQUEST['axonic_basket_flag'];}
 	// add connection and its properties to session for future use
 	for($i=1;$i<3;$i++){
 		$_SESSION['id'.$i.'_neuron']=$conn_id_neuron[$i-1];
@@ -229,11 +247,15 @@ else
 	$name_show_only_journal = $_SESSION['conn_name_show_only_journal'];
 	$name_show_only_authors = $_SESSION['conn_name_show_only_authors'];
 	$name_show_only_article = $_SESSION['conn_name_show_only_article'];
-	$order_ok = $_REQUEST['order_ok'];
+	//$order_ok = $_REQUEST['order_ok'];
+	$order_ok = Null;
+	if (isset($_REQUEST['order_ok'])) {$order_ok=$_REQUEST['order_ok'];}
 	// clicked the Order By options
 	if ($order_ok == 'GO')             
 	{
-		$order_by = $_REQUEST['order'];
+		//$order_by = $_REQUEST['order'];
+		$order_by = Null;
+		if (isset($_REQUEST['order'])) {$order_by=$_REQUEST['order'];}
 		$_SESSION['order_by'] = $order_by;
 		if ($order_by == 'year')
 			$type_order = 'DESC';
@@ -248,30 +270,32 @@ else
 	{
 		$order_by = $_SESSION['order_by'];
 		$type_order = $_SESSION['type_order'];
-		if ($_REQUEST['up'])
+		if (isset($_REQUEST['up']) && $_REQUEST['up'])
 		{
 			$page_in = $_REQUEST['start'];
 			$page_end = $page_in+10;		
 		}
-		if ($_REQUEST['down'])
+		if (isset($_REQUEST['down']) && $_REQUEST['down'])
 		{
 			$page_in = $_REQUEST['start'];
 			$page_end = $page_in+10;		
 		}	
-		if ($_REQUEST['last_page'])
+		if (isset($_REQUEST['last_page']) && $_REQUEST['last_page'])
 		{
 			$value_last_page = $_REQUEST['value_last_page'];
 			$page_in = $value_last_page;
 			$page_end = $_REQUEST['value_last_page_final'];
 		}
-		if ($_REQUEST['first_page'])
+		if (isset($_REQUEST['first_page']) && $_REQUEST['first_page'])
 		{
 			$page_in = 0;
 			$page_end = 10;
 		}
 	}
 
-	$flag = $_REQUEST['flag'];
+	//$flag = $_REQUEST['flag'];
+	$flag = Null;
+	if (isset($_REQUEST['flag'])) {$flag=$_REQUEST['flag'];}
 	
 	$id_neuron = $_SESSION['id1_neuron'];
 	$val_property = $_SESSION['val1_property'];
@@ -302,21 +326,33 @@ else
 	else{
 		$neuron_show_only_value=$_SESSION['conn_neuron_show_only_value'];
 	}
-	$name_temporary_table = $_REQUEST['name_temporary_table'];
+	//$name_temporary_table = $_REQUEST['name_temporary_table'];
+	$name_temporary_table = Null;
+	if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 }
 
 
 // show only dropdown clicked
-$name_show_only_var = $_REQUEST['name_show_only_var']; 
+//$name_show_only_var = $_REQUEST['name_show_only_var']; 
+$name_show_only_var = Null;
+	if (isset($_REQUEST['name_show_only_var'])) {$name_show_only_var=$_REQUEST['name_show_only_var'];}
 
 if ($name_show_only_var)
 {
-	$name_show_only = $_REQUEST['name_show_only'];
+	//$name_show_only = $_REQUEST['name_show_only'];
+	$name_show_only = Null;
+	if (isset($_REQUEST['name_show_only'])) {$name_show_only=$_REQUEST['name_show_only'];}
 	$_SESSION['conn_name_show_only'] = $name_show_only;
 	
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_REQUEST['name_temporary_table'];
+	//$page_in = $_REQUEST['start'];
+	$page_in = Null;
+	if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+	//$page_end = $_REQUEST['stop'];
+	$page_end = Null;
+	if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
+	//$name_temporary_table = $_REQUEST['name_temporary_table'];
+	$name_temporary_table = Null;
+	if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 
 	// Option: All:
 	if ($name_show_only == 'all')
@@ -356,16 +392,26 @@ if ($name_show_only_var)
 } 
 
 // ARTICLE - BOOK OPTION - for clicked Article/Book's evidences(quotes) set the show only flag to 1 in temporary table 
-$name_show_only_article_var = $_REQUEST['name_show_only_article_var'];
+//$name_show_only_article_var = $_REQUEST['name_show_only_article_var'];
+$name_show_only_article_var = Null;
+if (isset($_REQUEST['name_show_only_article_var'])) {$name_show_only_article_var=$_REQUEST['name_show_only_article_var'];}
 if ($name_show_only_article_var)
 {
-	$name_show_only_article = $_REQUEST['name_show_only_article'];
+	//$name_show_only_article = $_REQUEST['name_show_only_article'];
+	$name_show_only_article = Null;
+	if (isset($_REQUEST['name_show_only_article'])) {$name_show_only_article=$_REQUEST['name_show_only_article'];}
 	$_SESSION['conn_name_show_only_article'] = $name_show_only_article;
 	$_SESSION['conn_name_show_only_journal'] = 'all';
 	$_SESSION['conn_name_show_only_authors'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
+	//$page_in = $_REQUEST['start'];
+	//$page_end = $_REQUEST['stop'];
+		//$page_in = $_REQUEST['start'];
+	$page_in = Null;
+	if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+	//$page_end = $_REQUEST['stop'];
+	$page_end = Null;
+	if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
 	$name_temporary_table = $_REQUEST['name_temporary_table'];
 
 	$query = "UPDATE `$name_temporary_table` SET show_only =  '1'";
@@ -393,17 +439,27 @@ if ($name_show_only_article_var)
 } 
 
 // JOURNAL OPTION - for clicked journal's evidences(quotes) set the show only flag to 1 in temporary table 
-$name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
+//$name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
+$name_show_only_journal_var = Null;
+if (isset($_REQUEST['name_show_only_journal_var'])) {$name_show_only_journal_var=$_REQUEST['name_show_only_journal_var'];}
 if ($name_show_only_journal_var)
 {
-	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
+	//$name_show_only_journal = $_REQUEST['name_show_only_journal'];
+	$name_show_only_journal = Null;
+	if (isset($_REQUEST['name_show_only_journal'])) {$name_show_only_journal=$_REQUEST['name_show_only_journal'];}
 	$_SESSION['conn_name_show_only_journal'] = $name_show_only_journal;
 	$_SESSION['conn_name_show_only_article'] = 'all';
 	$_SESSION['conn_name_show_only_authors'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_REQUEST['name_temporary_table'];
+	//$page_in = $_REQUEST['start'];
+	$page_in = Null;
+	if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+	//$page_end = $_REQUEST['stop'];
+	$page_end = Null;
+	if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}	
+	//$name_temporary_table = $_REQUEST['name_temporary_table'];
+	$name_temporary_table = Null;
+	if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 
 	$query = "UPDATE `$name_temporary_table` SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -417,16 +473,26 @@ if ($name_show_only_journal_var)
 } 
 	
 // AUTHORS OPTION - for clicked author's evidences(quotes) set the show only flag to 1 in temporary table 
-$name_show_only_authors_var  = $_REQUEST['name_show_only_authors_var'];
+//$name_show_only_authors_var  = $_REQUEST['name_show_only_authors_var'];
+$name_show_only_authors_var = Null;
+if (isset($_REQUEST['name_show_only_authors_var'])) {$name_show_only_authors_var=$_REQUEST['name_show_only_authors_var'];}
 if ($name_show_only_authors_var)
 {	
-	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
+	//$name_show_only_authors = $_REQUEST['name_show_only_authors'];
+	$name_show_only_authors = Null;
+	if (isset($_REQUEST['name_show_only_authors'])) {$name_show_only_authors=$_REQUEST['name_show_only_authors'];}
 	$_SESSION['conn_name_show_only_authors'] = $name_show_only_authors;
 	$_SESSION['conn_name_show_only_article'] = 'all';
 	$_SESSION['conn_name_show_only_journal'] = 'all';
 	$name_show_only = $_SESSION['conn_name_show_only'];
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
+	//$page_in = $_REQUEST['start'];
+	//$page_end = $_REQUEST['stop'];
+	//$page_in = $_REQUEST['start'];
+	$page_in = Null;
+	if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+	//$page_end = $_REQUEST['stop'];
+	$page_end = Null;
+	if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}	
 	$name_temporary_table = $_REQUEST['name_temporary_table'];
 	if ($name_show_only_authors == 'all')
 	{
@@ -448,14 +514,25 @@ if ($name_show_only_authors_var)
 } 
 
 // axon, dedrite/soma, known checkbox checked or unchecked
-$neuron_show_only = $_REQUEST['neuron_show_only'];
+//$neuron_show_only = $_REQUEST['neuron_show_only'];
+$neuron_show_only = Null;
+if (isset($_REQUEST['neuron_show_only'])) {$neuron_show_only=$_REQUEST['neuron_show_only'];}
 if ($neuron_show_only){
-	$neuron_show_only_value = $_REQUEST['neuron_show_only_value'];
+	//$neuron_show_only_value = $_REQUEST['neuron_show_only_value'];
+	$neuron_show_only_value = Null;
+	if (isset($_REQUEST['neuron_show_only_value'])) {$neuron_show_only_value=$_REQUEST['neuron_show_only_value'];}
 	$_SESSION['conn_neuron_show_only_value'] = $neuron_show_only_value;
 	$name_show_only = $_SESSION['conn_name_show_only'];
-	$page_in = $_REQUEST['start'];
-	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_REQUEST['name_temporary_table'];
+	//$page_in = $_REQUEST['start'];
+	//$page_end = $_REQUEST['stop'];
+	$page_in = Null;
+	if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+	//$page_end = $_REQUEST['stop'];
+	$page_end = Null;
+	if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
+	//$name_temporary_table = $_REQUEST['name_temporary_table'];
+	$name_temporary_table = Null;
+	if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 
 }
 // find axon, dendrite or soma property
@@ -967,21 +1044,36 @@ function show_only_authors(link, start1, stop1)
 			}
 					
 // check for evidence being open
-		$see_all = $_REQUEST['see_all']; 
+		//$see_all = $_REQUEST['see_all']; 
+		$see_all = Null;
+		if (isset($_REQUEST['see_all'])) {$see_all=$_REQUEST['see_all'];}
 		if ($see_all == 'Open All Evidence')
 		{
-			$page_in = $_REQUEST['start'];
-			$page_end = $_REQUEST['stop'];
-			$name_temporary_table = $_REQUEST['name_temporary_table'];
+			//$page_in = $_REQUEST['start'];
+			//$page_end = $_REQUEST['stop'];
+			$page_in = Null;
+			if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+			//$page_end = $_REQUEST['stop'];
+			$page_end = Null;
+			if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
+			//$name_temporary_table = $_REQUEST['name_temporary_table'];
+			$name_temporary_table = Null;
+			if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 			$query = "UPDATE `$name_temporary_table` SET show1 =  '1'";
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 		}
 
 		if ($see_all == 'Close All Evidence')
 		{
-			$page_in = $_REQUEST['start'];
-			$page_end = $_REQUEST['stop'];
-			$name_temporary_table = $_REQUEST['name_temporary_table'];
+			//$page_in = $_REQUEST['start'];
+			//$page_end = $_REQUEST['stop'];
+			$page_in = Null;
+			if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+			$page_end = Null;
+			if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
+			//$name_temporary_table = $_REQUEST['name_temporary_table'];
+			$name_temporary_table = Null;
+			if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
 			$query = "UPDATE `$name_temporary_table` SET show1 =  '0'";
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 		}
@@ -990,10 +1082,18 @@ function show_only_authors(link, start1, stop1)
 		//echo "<br><br><br><br><br><br>".$_REQUEST['show_1'].' '.$_REQUEST['title'];
 		if ($_REQUEST['show_1']) //  ==> ON
 		{
-			$name_temporary_table = $_REQUEST['name_temporary_table'];
-			$title_paper = $_REQUEST['title'];
-			$page_in = $_REQUEST['start'];
-			$page_end = $_REQUEST['stop'];
+			//$name_temporary_table = $_REQUEST['name_temporary_table'];
+			$name_temporary_table = Null;
+			if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
+			//$title_paper = $_REQUEST['title'];
+			$title_paper = Null;
+			if (isset($_REQUEST['title'])) {$title_paper=$_REQUEST['title'];}
+			//$page_in = $_REQUEST['start'];
+			//$page_end = $_REQUEST['stop'];
+			$page_in = Null;
+			if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+			$page_end = Null;
+			if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
 			$query = "UPDATE `$name_temporary_table` SET show1 =  '1' WHERE title = '$title_paper'";
 			//echo $query;
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
@@ -1010,10 +1110,18 @@ function show_only_authors(link, start1, stop1)
 		if ($_REQUEST['show_0']) //  ==> OFF
 		{
 			//echo "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>DFSFDFSD";
-			$name_temporary_table = $_REQUEST['name_temporary_table'];
-			$title_paper = $_REQUEST['title'];
-			$page_in = $_REQUEST['start'];
-			$page_end = $_REQUEST['stop'];
+			//$name_temporary_table = $_REQUEST['name_temporary_table'];
+			$name_temporary_table = Null;
+			if (isset($_REQUEST['name_temporary_table'])) {$name_temporary_table=$_REQUEST['name_temporary_table'];}
+			//$title_paper = $_REQUEST['title'];
+			$title_paper = Null;
+			if (isset($_REQUEST['title'])) {$title_paper=$_REQUEST['title'];}
+			//$page_in = $_REQUEST['start'];
+			//$page_end = $_REQUEST['stop'];
+			$page_in = Null;
+			if (isset($_REQUEST['start'])) {$page_in=$_REQUEST['start'];}
+			$page_end = Null;
+			if (isset($_REQUEST['stop'])) {$page_end=$_REQUEST['stop'];}
 			$query = "UPDATE `$name_temporary_table` SET show1 =  '0' WHERE title = '$title_paper'";
 			$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 		}

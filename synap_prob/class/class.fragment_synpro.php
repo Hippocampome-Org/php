@@ -317,9 +317,15 @@ class fragment_synpro
 
     public function neuron_to_subregion($neuron_id)
     {
+    	$subregion = Null;
+
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
     	$rs = mysqli_query($GLOBALS['conn'],$query);
-		$subregion = mysqli_fetch_row($rs)[0];
+		#$subregion = mysqli_fetch_row($rs)[0];
+		while(list($val_result) = mysqli_fetch_row($rs))
+		{
+			$subregion = $val_result;
+		}
 
 		return $subregion;
     }
