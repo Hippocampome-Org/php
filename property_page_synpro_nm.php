@@ -196,11 +196,11 @@ if ($page)
 	$name_show_only_authors = 'all';
 
 	$id1_neuron = $_REQUEST['id1_neuron'];
-	#echo "<br><br><br><br><br><br>$id1_neuron";
+	$id2_neuron = $_REQUEST['id2_neuron'];
 	$val1_property = $_REQUEST['val1_property'];
-	#$val1_property = $fragment -> neuron_to_subregion($id1_neuron);
-	#$fragment -> neuron_to_subregion2("1000");
+	$val2_property = $_REQUEST['val2_property'];
 	$color1 = $_REQUEST['color1'];
+	$color2 = $_REQUEST['color2'];
 	
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$ip_address = str_replace('.', '_', $ip_address);
@@ -213,8 +213,11 @@ if ($page)
 	
 	$val1_property = str_replace('_', ':', $val1_property);
 	$_SESSION['id1_neuron'] = $id1_neuron;
+	$_SESSION['id2_neuron'] = $id2_neuron;
 	$_SESSION['val1_property'] = $val1_property;	
+	$_SESSION['val2_property'] = $val2_property;	
 	$_SESSION['color1'] = $color1;
+	$_SESSION['color2'] = $color2;
 	$neuron_show_only_value="";
 	if(strstr(checkNeuronProperty($color1),"axons"))
 		$neuron_show_only_value=$neuron_show_only_value.",Axons";
@@ -285,10 +288,11 @@ else
 	}
 	$flag = $_REQUEST['flag'];
 	$id1_neuron = $_SESSION['id1_neuron'];
-	#echo "<br><br><br><br><br><br>$id1_neuron";
+	$id2_neuron = $_SESSION['id2_neuron'];
 	$val1_property = $_REQUEST['val1_property'];
-	#$val1_property = $fragment -> neuron_to_subregion($id1_neuron);
+	$val2_property = $_REQUEST['val2_property'];
 	$color1 = $_SESSION['color1'];
+	$color2 = $_SESSION['color2'];
 	if(!$_SESSION['synpro_neuron_show_only_value']){
 		$neuron_show_only_value="";
 		if(strstr(checkNeuronProperty($color1),"axons"))
@@ -453,9 +457,12 @@ if ($neuron_show_only){
 
 }
 $part=checkNeuronProperty($color1);
+$part2=checkNeuronProperty($color2);
 
 $type = new type($class_type);
 $type -> retrive_by_id($id1_neuron);
+$type2 = new type($class_type);
+$type2 -> retrive_by_id($id2_neuron);
 $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
 $class_fragment='SynproFragment';
@@ -547,7 +554,8 @@ function show_only_authors(link, start1, stop1)
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
 	$name=$type->getNickname();
-	print("<title>Evidence - $name ($val1_property)</title>");
+	$name2=$type2->getNickname();
+	print("<title>Evidence - $name ($val1_property) and $name2 ($val2_property) </title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
@@ -564,22 +572,16 @@ function show_only_authors(link, start1, stop1)
 	<font class='font1'>
 <?php
 	if (isset($_REQUEST['color1'])) {$color1 = $_REQUEST['color1'];}
-	if (isset($_REQUEST['sp_page'])) {$sp_page=$_REQUEST['sp_page'];}
-	if ($sp_page=='dal') {
-		if ($color1=='red') {
-			echo "Synapse Probabilities - Axonal Lengths Evidence Page";
-		}
-		else if ($color1=='blue') {
-			echo "Synapse Probabilities - Dendritic Lengths Evidence Page";
-		}		
+	if (isset($_REQUEST['color2'])) {$color1 = $_REQUEST['color2'];}
+	if (isset($_REQUEST['nm_page'])) {$nm_page=$_REQUEST['nm_page'];}
+	if ($nm_page=='ps') {
+		echo "Number of Potential Synapses Evidence Page";	
 	}
-	else if ($sp_page=='sd') {
-		if ($color1=='red') {
-			echo "Synapse Probabilities - Somatic Distances of Axons Evidence Page";
-		}
-		else if ($color1=='blue') {
-			echo "Synapse Probabilities - Somatic Distances of Dendrites Evidence Page";
-		}			
+	else if ($nm_page=='noc') {
+		echo "Number of Contacts Evidence Page";	
+	}
+	else if ($nm_page=='prosyn') {		
+		echo "Synaptic Probabilities Evidence Page";	
 	}
 ?>
 </font>
@@ -616,8 +618,9 @@ function show_only_authors(link, start1, stop1)
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
 				<?php
-					$name1 = checkNeuronProperty($color1);						
-					print ("&nbsp; <strong>$name1</strong> in <strong>$val1_property</strong>");
+					$name_neuron1 = checkNeuronProperty($color1);						
+					$name_neuron2 = checkNeuronProperty($color2);						
+					print ("&nbsp; <strong>$name_neuron1</strong> in <strong>$val1_property</strong>");
 				?>
 				</td>
 			</tr>								
@@ -729,7 +732,8 @@ function show_only_authors(link, start1, stop1)
 					$property_id[$i] = $property -> getProperty_id($i);
 
 					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
-					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);				
+					//$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);		
+					$evidencepropertyyperel -> retrive_evidence_id_n_by_n($property_id[$i], $id1_neuron, $id2_neuron);			
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				}							
 				$n_article = 0; // <-- Number of articles
