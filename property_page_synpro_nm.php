@@ -20,7 +20,7 @@ require_once('class/class.evidencefragmentrel.php');
 require_once('class/class.articleevidencerel.php');
 require_once('synap_prob/class/class.articleevidencerel_synpro.php');
 require_once('class/class.articleauthorrel.php');
-include ("synap_prob/functions/retreive_evidences.php");
+include ("synap_prob/functions/retrieve_evidences.php");
 
 $class_fragment='SynproFragment';
 $fragment = new fragment_synpro($class_fragment);
@@ -574,7 +574,13 @@ function show_only_authors(link, start1, stop1)
 <?php
 	if (isset($_REQUEST['color1'])) {$color1 = $_REQUEST['color1'];}
 	if (isset($_REQUEST['color2'])) {$color1 = $_REQUEST['color2'];}
-	if (isset($_REQUEST['nm_page'])) {$nm_page=$_REQUEST['nm_page'];}
+	if (isset($_REQUEST['nm_page'])) {
+		$nm_page=$_REQUEST['nm_page'];
+		$_SESSION['nm_page']=$nm_page;
+	}
+	if (isset($_SESSION['nm_page'])) {
+		$nm_page=$_SESSION['nm_page'];
+	}
 	if ($nm_page=='ps') {
 		echo "Number of Potential Synapses Evidence Page";	
 	}
@@ -607,12 +613,19 @@ function show_only_authors(link, start1, stop1)
 				<td align="left" width="80%" class="table_neuron_page2">
 					&nbsp; <?php $id=$type->getId();
 								 $name=$type->getName();
-					print("<a href='neuron_page.php?id=$id'>$name</a>"); ?>
+					print("From: <a href='neuron_page.php?id=$id'>$name</a>"); ?>
 				</td>				
 			</tr>
 			<tr>
 				<td width="20%" align="right">&nbsp;</td>
-				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
+				<!--td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php 
+				//echo $id
+				?></strong></td-->
+				<td align="left" width="80%" class="table_neuron_page2">
+					&nbsp; <?php $id2=$type->getId();
+								 $name_long2=$type2->getName();
+					print("To: <a href='neuron_page.php?id=$id2'>$name_long2</a>"); ?>
+				</td>
 			</tr>
 			<tr>
 				<td width="20%" align="right">
@@ -621,7 +634,7 @@ function show_only_authors(link, start1, stop1)
 				<?php
 					$name_neuron1 = checkNeuronProperty($color1);						
 					$name_neuron2 = checkNeuronProperty($color2);						
-					print ("&nbsp; <strong>$name_neuron1</strong> in <strong>$val1_property</strong>");
+					print ("&nbsp; <strong>Axons and dendrites</strong> in <strong>$val1_property</strong>");
 				?>
 				</td>
 			</tr>								
@@ -632,6 +645,24 @@ function show_only_authors(link, start1, stop1)
 <td class="table_neuron_page2" padding="5">
       All of the evidence provided on Hippocampome.org are quotes from scientific texts.  
 			However, because quoted passages may be difficult to understand in isolation, contextual information and expanded abbreviations set in square brackets have been added for clarity.
+</td>
+</tr>
+<tr>
+<td class="table_neuron_page2" padding="5">
+<?php 
+	if ($nm_page=="ps") 
+	{
+	echo "The average number of synapses per neuron pair is calculated by combining neuron type specific lengths of the presynaptic axons and the postsynaptic dendrites (evidenced below), the volume of the anatomical parcel in which they overlap, and estimates of the mean inter-bouton and inter-spine (or inter-shaft contact) distances as well as of the axon-dendrite interaction distance.";
+	}
+	else if ($nm_page=="noc") 
+	{
+	echo "The number of contacts per connected neuron pair is calculated by combining neuron type specific lengths and convex hulls of the presynaptic axons and the postsynaptic dendrites (evidenced below), and estimates of the mean inter-bouton and inter-spine (or inter-shaft contact) distances as well as of the axon-dendrite interaction distance.";
+	}
+	else if ($nm_page=="prosyn") 
+	{
+	echo "The connection probability for a pair of neuron types is calculated by combining neuron-type-specific convex hulls of the presynaptic axons and the postsynaptic dendrites (evidenced below) and the volume of the anatomical parcel in which they overlap.";
+	}
+?>
 </td>
 </tr>
     </table>
@@ -649,98 +680,33 @@ function show_only_authors(link, start1, stop1)
 						
 			for ($tt=0; $tt<$n_interraction; $tt++)
 			{
-				if ($n_interraction == 1)
-				{	
-					// Axons or Dendrites
-					// Retrieve property_id from Property by using Type_id
-					$part1[$tt] = ucfirst($part);
-					$property  -> retrive_ID(1, $part, 'in', $val1_property);
+				
+				if ($tt == 0)
+				{
+					$part1[$tt] = 'Axons';
+					$property  -> retrive_ID(1, 'axons', 'in', $val1_property);
+					$n_property_id = $property -> getNumber_type();								
+				}
+				if ($tt == 1)
+				{
+					$part1[$tt] = 'Dendrites';
+					$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property);
 					$n_property_id = $property -> getNumber_type();		
-
 				}
-				else if ($n_interraction == 2)
-				{
-					// Axons and Dendrites
-					if($part == 'axons_dendrites')
-					{
-					 if ($tt == 0)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();										
-					
-					 }
-					}
-					else if($part == 'axons_somata')
-					{
-					 if ($tt == 0)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-					}
-                     else
-					 { 
-				     if ($tt == 0)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-						 
-					 }						 
-				}
-				else
-				{
-					if ($tt == 0)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();	
-					 }
-					  if ($tt == 2)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val1_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-				}	
+				//$n_property_id = 2; // Always 2 for N by N
 				for ($i=0; $i<$n_property_id; $i++)
 				{
 					$property_id[$i] = $property -> getProperty_id($i);
 
 					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
 					// $i==0 is axons, $i==1 is dendrites
-					if ($i==0) {
-						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);		
+					if ($tt==0) {
+						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);	
+						//echo "<br>id1_neuron::<br>$id1_neuron<br>$n_property_id";	
 					}
-					else if ($i==1) {
-						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id2_neuron);			
+					else if ($tt==1) {
+						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id2_neuron);	
+						//echo "<br>id2_neuron::<br>$id2_neuron";		
 					}
 					//$evidencepropertyyperel -> retrive_evidence_id_n_by_n($property_id[$i], $id1_neuron, $id2_neuron);			
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
@@ -1263,7 +1229,8 @@ function show_only_authors(link, start1, stop1)
 						{	
 							$type_for_display=$type;
 							$quote_count++;
-							retrive_evidences($show1, $type_for_display, $fragment, $GLOBALS['conn'], $id1_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color1);
+							$attachment_obj = new attachment_synpro($class_attachment); // this clears prior attachment results
+							retrieve_evidences($show1, $type_for_display, $fragment, $GLOBALS['conn'], $id1_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color1, $nm_page, $page_location, $quote, $attachment_obj);
 						}					
 					}
 					// if error occurs while retriving evidences show error message
@@ -1281,7 +1248,7 @@ function show_only_authors(link, start1, stop1)
 						{	
 							$type_for_display=$type;
 							$quote_count++;
-							retrive_evidences($show1, $type_for_display, $fragment, $GLOBALS['conn'], $id2_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color2);
+							retrieve_evidences($show1, $type_for_display, $fragment, $GLOBALS['conn'], $id2_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color2, $nm_page, $page_location, $quote, $attachment_obj);
 						}					
 					}
 					// if error occurs while retriving evidences show error message

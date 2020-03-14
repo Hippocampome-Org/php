@@ -184,7 +184,7 @@ Date:   2020
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=ps' title='Variance Will Be\\nAdded Later Here' target='_blank'>".$val."</a>";
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='Variance Will Be\\nAdded Later Here' target='_blank'>".$val."</a>";
 						}
 					}
 				} 
@@ -196,7 +196,7 @@ Date:   2020
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=noc' title='".$val."' target='_blank'>".$val."</a></center>";  
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='".$val."' target='_blank'>".$val."</a></center>";  
 						}
 					}
 				} 	
@@ -208,7 +208,7 @@ Date:   2020
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=violetSoma&page=1&nm_page=prosyn' title='".$val."' target='_blank'>".$val."</a>";            
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='".$val."' target='_blank'>".$val."</a>";            
 						}
 					}
 				} 	

@@ -1,7 +1,7 @@
 <?php
 require_once('synap_prob/class/class.attachment_synpro.php');
 
-function retrive_evidences($show1, $type_for_display, $fragment, $conn, $id1_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color1)
+function retrieve_evidences($show1, $type_for_display, $fragment, $conn, $id1_neuron, $id_original, $val1_property, $name_temporary_table, $subquery, $id_fragment, $class_fragment, $color1, $nm_page, $page_location, $quote, $attachment_obj)
 {		
 	if ($show1 == 1)
 	{
@@ -131,14 +131,35 @@ function retrive_evidences($show1, $type_for_display, $fragment, $conn, $id1_neu
 		$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
 		$refID=$id_original;
 		$parcel=$val1_property;
-		print ("
-			<tr>
-			<td width='70%' class='table_neuron_page2' align='left'>");
-		$somatic_distances=$fragment->getSomaticDistances($neuron_id,$nq_neurite_name,$refID);
+		//print ("
+		//	<tr>
+		//	<td width='70%' class='table_neuron_page2' align='left'>");
+		//$somatic_distances=$fragment->getSomaticDistances($neuron_id,$nq_neurite_name,$refID);
+		/*
 		$download_icon='images/download_RAR.png';
 		$att_desc="RAR compressed somatic-distance paths for ".$neurite_ref.":";
 		$att_link='attachment/neurites_rar/'.$fragment->getRarFile($neuron_id,$nq_neurite_name,$refID);
-		$values_count=$somatic_distances[2];
+		*/
+		// retrieve the attachament
+		$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
+		$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
+		$original_id = $fragment -> getOriginal_id();
+		if (in_array($type_for_display,$dendrite_group)) {
+			$neurite_ref = $val1_property.":D";
+		}
+		elseif (in_array($type_for_display,$axon_group)) {
+			$neurite_ref = $val1_property.":A";	
+		}
+		$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
+		$attachment = $attachment_obj -> getName();
+		$attachment_type = $attachment_obj -> getType();
+		//$attachment_type="synpro_figure";								
+		$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+		$link_figure = "attachment/neurites/".$attachment_jpg;
+		$download_icon='images/download_PNG.png';
+		$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
+		$att_link=$link_figure;
+		/*$values_count=$somatic_distances[2];
 		if ($values_count>1) {
 			if ($color1=='red') {
 				print ("Somatic distances of axons: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
@@ -154,8 +175,38 @@ function retrive_evidences($show1, $type_for_display, $fragment, $conn, $id1_neu
 			if ($color1=='blue') {
 				print ("Somatic distance of dendrites in ".$parcel.": ".$somatic_distances[1]." μm (n = 1)");
 			}			
+		}*/
+		if ($nm_page=='prosyn' or $nm_page=='noc') {
+			print ("
+			<tr>
+			<td width='70%' class='table_neuron_page2' align='left'>");
+			$convexhullvolume=$fragment->getConvexHullVolume($neuron_id,$nq_neurite_name,$refID);
+			print ("Convex hull volume in ".$val1_property.": $convexhullvolume μm&sup3;");
+			print ("</td></tr>");
 		}
-		print ("</td></tr>");
+		if ($nm_page=='ps' or $nm_page=='noc') {
+			print ("
+			<tr>
+			<td width='70%' class='table_neuron_page2' align='left'>");
+			$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
+			$values_count=$neurite_lengths[2];
+			if ($values_count>1) {
+				if ($color1=='red') {
+					print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+				}
+				if ($color1=='blue') {
+					print ("Dendritic lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+				}
+			}
+			else {
+				if ($color1=='red') {
+					print ("Axonal length in ".$parcel.": ".$neurite_lengths[1]." μm");										}
+				if ($color1=='blue') {
+					print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
+				}
+			}
+			print ("</td></tr>");
+		}
 		print ("
 			<tr>	
 			<td width='70%' class='table_neuron_page2' align='left'>");
