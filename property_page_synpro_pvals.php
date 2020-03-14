@@ -20,7 +20,7 @@ function checkNeuronProperty($color)
 		$part = "dendrites_somata";
 	if ($color == 'violet')
 		$part = "axons_dendrites";
-	if ($color == 'violetSoma')
+	if ($color == 'blue')
 		$part = "axons_dendrites_somata";
 	if ($color == 'somata')
 		$part = "somata";	
@@ -116,6 +116,7 @@ $post_name=$type_target->getName();
 				<td align="left" width="80%" class="table_neuron_page2">
 					<?php
 					$E_or_I_found=false;
+					$E_or_I_val=Null;
 					echo "&nbsp;&nbsp;Type: <b>";
 					$query = "SELECT distinct target_E_or_I FROM number_of_contacts WHERE source_ID=$source_id and target_ID=$target_id;";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -124,10 +125,12 @@ $post_name=$type_target->getName();
 						if ($target_E_or_I=='E') {
 							echo "Potential Excitatory Connections";
 							$E_or_I_found=true;
+							$E_or_I_val=2;
 						}
 						else if ($target_E_or_I=='I') {
 							echo "Potential Inhibitory Connections";
 							$E_or_I_found=true;
+							$E_or_I_val=1;
 						}
 					}
 					if (!$E_or_I_found) {
@@ -188,7 +191,7 @@ $post_name=$type_target->getName();
 			echo $val;
 		}		
 	}
-	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page) {
+	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val) {
 	echo "
 	<span style='float:middle;font-size:12px;background-color:white;' class='table_neuron_page2'><strong>$title</strong></span>
 	<font style='font-size:4px'><br>
@@ -202,7 +205,10 @@ $post_name=$type_target->getName();
 	}
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
-		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&color1=red&id2_neuron=".$target_id."&color2=blueSoma&connection_type=2&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=ps' target='_blank' style='text-decoration:none'>";
+		//echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&color1=red&id2_neuron=".$target_id."&color2=blueSoma&connection_type=2&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
+		$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
+		$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
+		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
 		//echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id_neuron_source=".$source_id."&id_neuron_target=".$target_id."&color=".$color."&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
 		query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
 		echo "</a></td>";
@@ -212,13 +218,13 @@ $post_name=$type_target->getName();
 	</table>";
 	}
 	if ($nm_page=='ps') {
-		report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
 	}
 	else if ($nm_page=='noc') {
-		report_parcel_values('Number of Contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Number of Contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
 	}
 	else if ($nm_page=='prosyn') {
-		report_parcel_values('Probability of Connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page);
+		report_parcel_values('Probability of Connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
 	}
 	?>					
 </body>

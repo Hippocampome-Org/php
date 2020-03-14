@@ -631,6 +631,27 @@ function show_only_authors(link, start1, stop1)
 				<td width="20%" align="right">
 				</td>
 				<td align="left" width="80%" class="table_neuron_page2">
+					&nbsp; Type:
+				<?php
+					if (isset($_REQUEST['connection_type'])) {
+										$connection_type=$_REQUEST['connection_type'];}
+					if ($connection_type == 1)
+						$conn_type="Potential Inhibitory";
+					else 
+						$conn_type="Potential Excitatory";
+					if ($known_unknown_flag == 1)
+						$conn_type=$conn_type." and Known";
+					elseif ($known_unknown_flag == -1)
+						$conn_type=" Refuted";
+					$conn_type=$conn_type." Connections ";
+					print ("<strong>$conn_type</strong>");
+				?>
+				</td>
+			</tr>
+			<tr>
+				<td width="20%" align="right">
+				</td>
+				<td align="left" width="80%" class="table_neuron_page2">
 				<?php
 					$name_neuron1 = checkNeuronProperty($color1);						
 					$name_neuron2 = checkNeuronProperty($color2);						
