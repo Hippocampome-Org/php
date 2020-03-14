@@ -320,6 +320,7 @@ class fragment_synpro
     	$subregion = Null;
 
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
+    	echo $query;
     	$rs = mysqli_query($GLOBALS['conn'],$query);
 		#$subregion = mysqli_fetch_row($rs)[0];
 		while(list($val_result) = mysqli_fetch_row($rs))
@@ -329,6 +330,22 @@ class fragment_synpro
 
 		return $subregion;
     }
+
+    public function neuron_to_subregion2($neuron_id)
+    {
+    	#$subregion = Null;
+
+    	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
+    	#echo $query;
+    	$rs = mysqli_query($GLOBALS['conn'],$query);
+		#$subregion = mysqli_fetch_row($rs)[0];
+		while(list($val_result) = mysqli_fetch_row($rs))
+		{
+			$subregion = $val_result;
+		}
+
+		#return $subregion;
+    }    
 
     public function prop_name_to_nq_name($prop_name)
     {
