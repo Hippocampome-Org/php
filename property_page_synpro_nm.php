@@ -732,7 +732,7 @@ function show_only_authors(link, start1, stop1)
 					$part1[$tt] = 'Dendrites';
 					$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property_mod);
 					$n_property_id = $property -> getNumber_type();	
-					echo "n_property_id: ".$n_property_id;	
+					//echo "n_property_id: ".$n_property_id;	
 				}
 				//$n_property_id = 2; // Always 2 for N by N
 				for ($i=0; $i<$n_property_id; $i++)
