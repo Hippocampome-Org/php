@@ -118,16 +118,16 @@ $post_name=$type_target->getName();
 					$E_or_I_found=false;
 					$E_or_I_val=Null;
 					echo "&nbsp;&nbsp;Type: <b>";
-					$query = "SELECT distinct target_E_or_I FROM number_of_contacts WHERE source_ID=$source_id and target_ID=$target_id;";
+					$query = "SELECT distinct source_E_or_I FROM number_of_contacts WHERE source_ID=$source_id and target_ID=$target_id;";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
-					while(list($target_E_or_I) = mysqli_fetch_row($rs))
+					while(list($source_E_or_I) = mysqli_fetch_row($rs))
 					{	
-						if ($target_E_or_I=='E') {
+						if ($source_E_or_I=='E') {
 							echo "Potential Excitatory Connections";
 							$E_or_I_found=true;
 							$E_or_I_val=2;
 						}
-						else if ($target_E_or_I=='I') {
+						else if ($source_E_or_I=='I') {
 							echo "Potential Inhibitory Connections";
 							$E_or_I_found=true;
 							$E_or_I_val=1;
