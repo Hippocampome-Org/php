@@ -150,7 +150,7 @@ Date:   2020
 	                    }
 	                }*/
 	                //$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
-	                $all_totals = $neuron_group_hnc[$i_adj];
+	                //$all_totals = $neuron_group_long[$i_adj];
 		    	}
 		    }
 			if ($page == 'dal') {
@@ -164,7 +164,7 @@ Date:   2020
 		    		$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
 		    	}    	
 		    }*/
-			array_push($parcel_output, $all_totals);	  
+			array_push($parcel_output, $neuron_group_long2[$i_adj]."\\n".$all_totals);	  
 		}
 		elseif ($page=='ps') {	
 			$write_output = n_by_m_values($conn, 'ps', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
