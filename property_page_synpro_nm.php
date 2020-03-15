@@ -700,19 +700,39 @@ function show_only_authors(link, start1, stop1)
 			$part = 'axons_dendrites'; // always axons_dendrites for N by N
 						
 			for ($tt=0; $tt<$n_interraction; $tt++)
-			{
-				
+			{				
+				$val1_property_mod = $val1_property;
+				if ($val1_property=='DG:All') {
+					$val1_property_mod = 'DG';
+				}
+				else if ($val1_property=='CA1:All') {
+					$val1_property_mod = 'CA1';
+				}
+				else if ($val1_property=='CA2:All') {
+					$val1_property_mod = 'CA2';
+				}
+				else if ($val1_property=='CA3:All') {
+					$val1_property_mod = 'CA3';
+				}
+				else if ($val1_property=='Sub:All') {
+					$val1_property_mod = 'SUB';
+				}
+				else if ($val1_property=='EC:All') {
+					$val1_property_mod = 'EC';
+				}
 				if ($tt == 0)
 				{
 					$part1[$tt] = 'Axons';
-					$property  -> retrive_ID(1, 'axons', 'in', $val1_property);
-					$n_property_id = $property -> getNumber_type();								
+					$property  -> retrive_ID(1, 'axons', 'in', $val1_property_mod);
+					$n_property_id = $property -> getNumber_type();							
+					//echo "n_property_id: ".$n_property_id;
 				}
 				if ($tt == 1)
 				{
 					$part1[$tt] = 'Dendrites';
-					$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property);
-					$n_property_id = $property -> getNumber_type();		
+					$property  -> retrive_ID(1, 'dendrites', 'in', $val1_property_mod);
+					$n_property_id = $property -> getNumber_type();	
+					echo "n_property_id: ".$n_property_id;	
 				}
 				//$n_property_id = 2; // Always 2 for N by N
 				for ($i=0; $i<$n_property_id; $i++)
