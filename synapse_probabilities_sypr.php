@@ -205,7 +205,7 @@ $(function(){
     $grid.jqGrid({
 	datatype: "jsonstring",
 	datastr: dataStr,
-    colNames:['','<div id="frmCntr_2">Pre</div><div id="toCntr_2" class="rotate">Post</div>',
+    colNames:['','<div id="frmCntr_2">From</div><div id="toCntr_2" class="rotate">To</div>',
     <?php
       for ($i = 0; $i < count($neurons_with_links); $i++) {
         echo '"'.$neurons_with_links[$i].'"';

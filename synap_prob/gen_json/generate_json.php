@@ -141,14 +141,16 @@ Date:   2020
 			    	}
 		    	}
 		    	elseif ($page == 'sd') {
-		    		for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
+		    		/*for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
 	                    $sql    = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND mean_path_length!='';";
 	                    $result = $conn->query($sql);
 	                    if ($result->num_rows > 0 && $row['avg'] != '' && $row['count_sd'] != '' && $row['std'] != '') {
 	                        $row        = $result->fetch_assoc();
 	                        $all_totals = $all_totals . $prcl . $a_or_d . '\\nAverage Somatic Distance: ' . $row['avg'] . '\\nValues Count: ' . $row['count_sd'] . '\\nStandard Deviation: ' . $row['std'] . $nl;
 	                    }
-	                }
+	                }*/
+	                //$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
+	                $all_totals = $neuron_group_hnc[$i_adj];
 		    	}
 		    }
 			if ($page == 'dal') {
@@ -156,11 +158,12 @@ Date:   2020
 		    		$all_totals = $all_totals . 'Average Total Length: 0\\nValues Count: 0\\nStandard Deviation: 0';
 		    	}
 		    }
-		    elseif ($page == 'sd') {
+		    /*elseif ($page == 'sd') {
 				if ($all_totals=='') {
-		    		$all_totals = $all_totals . 'Average Somatic Distance: 0\\nValues Count: 0\\nStandard Deviation: 0';
+		    		//$all_totals = $all_totals . 'Average Somatic Distance: 0\\nValues Count: 0\\nStandard Deviation: 0';
+		    		$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
 		    	}    	
-		    }
+		    }*/
 			array_push($parcel_output, $all_totals);	  
 		}
 		elseif ($page=='ps') {	
