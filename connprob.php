@@ -34,11 +34,11 @@ include("function/menu_main.php");
                     <td><select id="target" onchange="targetSelected()" disabled></select></td>
                 </tr>
                 <tr>
-                    <td> Dentritic spine distance </td>
+                    <td> Dendritic spine distance </td>
                     <td><input id="spine_distance" type="text" disabled></td>
                 </tr>
                 <tr>
-                    <td> Inter bouton distance</td>
+                    <td> Inter-bouton distance</td>
                     <td><input id="bouton_distance" type="text" disabled></td>
                 </tr>
                 <tr>
