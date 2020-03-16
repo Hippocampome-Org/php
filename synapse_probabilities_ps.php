@@ -20,7 +20,7 @@
   include_once("synap_prob/synap_prob_params.php");
 ?>
 
-<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main_nbyn.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
 <style type="text/css">
@@ -52,44 +52,33 @@ $(function(){
 		});
 	});
 	var dataStr = <?php echo $jsonStr?>;
-		 var rotateFunction = function (grid, headerHeight) {
-	 // we use grid as context (if one have more as one table on the page)
-	 	var trHead = $("thead:first tr", grid.hdiv),
-        cm = grid.getGridParam("colModel") ,
-        ieVer = $.browser.version.substr(0, 3),
-        iCol, cmi, headDiv,
-        isSafariAndNotChrome = (($.browser.webkit || $.browser.safari) &&
-                               !(/(chrome)[ \/]([\w.]+)/i.test(navigator.userAgent))); 
-
-    
-    headerHeight = $("thead:first tr th").height();
-    /* headerHeight = 45; */
-   for (iCol = 0; iCol < cm.length; iCol++) 
-    {
-        cmi = cm[iCol];
-        // prevent text cutting based on the current column width
-        headDiv = $("th:eq(" + iCol + ") div", trHead);
-        if (!$.browser.msie || ieVer === "9.0" || document.documentMode >= 9) {
+		var rotateFunction = function (grid, headerHeight) {
+    	  // we use grid as context (if one have more as one table on the page)
+    	 	var trHead = $("thead:first tr", grid.hdiv),
+            cm = grid.getGridParam("colModel"),
+            iCol, cmi, headDiv
+        headerHeight = $("thead:first tr th").height();
+        for (iCol = 0; iCol < cm.length; iCol++) 
+        {
+            cmi = cm[iCol];
+            // prevent text cutting based on the current column width
+            headDiv = $("th:eq(" + iCol + ") div", trHead);
             headDiv.width(headerHeight)
-                   .addClass("rotate")
-                   .css("left",3);
+           .addClass("rotate")
+           .css("left",3);
         }
-        else {
-            // Internet Explorer 6.0-8.0 or Internet Explorer 9.0 in compatibility mode
-            headDiv.width(headerHeight).addClass("rotateOldIE");
-            if (ieVer === "8.0" || document.documentMode === 8) { // documentMode is important to test for IE compatibility mode
-            	headDiv.width(headerHeight)
-                .addClass("rotate")
-                .css("left",3);
-            } else {
-                headDiv.css("left", 3);
-            }
-            headDiv.parent().css("zoom",1);
-        } 
-        /*headDiv.height(200);*/
-        /*headDiv.width(55);*/
-    }
- }  
+        /*trHead = $("thead:second tr", grid.hdiv)
+        headerHeight = $("thead:second tr th").height();
+        for (iCol = 0; iCol < cm.length; iCol++) 
+        {
+            cmi = cm[iCol];
+            // prevent text cutting based on the current column width
+            headDiv = $("th:eq(" + iCol + ") div", trHead);
+            headDiv.width(headerHeight)
+           .addClass("rotate")
+           .css("left",3);
+        }*/
+     }  
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -133,6 +122,30 @@ $(function(){
 	var head_col_width = 50;
 	//alert(table);
 	$grid = $("#nGrid"),
+      resizeColumnHeader = function () {
+        var rowHight, resizeSpanHeight,
+            // get the header row which contains
+            headerRow = $(this).closest("div.ui-jqgrid-view")
+                .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+
+        // reset column height
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.height = '';
+        });
+
+        // increase the height of the resizing span
+        resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.cssText = resizeSpanHeight;
+        });
+
+        // set position of the dive with the column header text to the middle
+        rowHight = headerRow.height();
+        headerRow.find("div.ui-jqgrid-sortable").each(function () {
+            var ts = $(this);
+            ts.css('top', (rowHight - ts.outerHeight()) + 'px');
+        });
+    },
     fixPositionsOfFrozenDivs = function () {
         var $rows;
         if (typeof this.grid.fbDiv !== "undefined") {
@@ -286,6 +299,8 @@ $(function(){
 		{startColumnName: 'LI-II_Multipolar-Pyramidal', numberOfColumns: 31, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC</a></b>'}
 		] 
 	});
+  <?php include('synap_prob/nbyn_css_mods.php'); ?>
+  
 	if(checkVersion()=="9")
 	{
 		$("#jqgh_nGrid_Granule").addClass("rotateIE9");

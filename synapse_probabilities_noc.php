@@ -20,7 +20,7 @@
   include_once("synap_prob/synap_prob_params.php");
 ?>
 
-<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main_nbyn.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
 <style type="text/css">
@@ -140,6 +140,8 @@ $(function(){
             $('>table.ui-jqgrid-btable>tbody>tr', this.grid.fbDiv).each(function (i) {
                 var rowHight = $($rows[i]).height(); 
                 var rowHightFrozen = $(this).height();
+                /*var rowHight = "900px";
+                var rowHightFrozen = "900px";*/
                 if ($(this).hasClass("jqgrow")) {
                     $(this).height(rowHight);
                     rowHightFrozen = $(this).height();
@@ -155,8 +157,11 @@ $(function(){
             $rows = $('>div>table.ui-jqgrid-htable>thead>tr', this.grid.hDiv);
             $('>table.ui-jqgrid-htable>thead>tr', this.grid.fhDiv).each(function (i) {
                 var rowHight = $($rows[i]).height(), rowHightFrozen = $(this).height();
+                /*var rowHight = "900px";
+                var rowHightFrozen = "900px";*/
                 $(this).height(rowHight);
                 rowHightFrozen = $(this).height();
+
                 if (rowHight !== rowHightFrozen) {
                     $(this).height(rowHight + (rowHight - rowHightFrozen));
                 }
@@ -216,7 +221,7 @@ $(function(){
     ?>
     ],
     colModel :[
-	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
+	  {name:'type', index:'type', width:50,height:500,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'" + ' style="height:75px;"';  
       }, frozen:true},
       {name:'Neuron_Type_2', index:'Neuron_Type_2', width:200,sortable:false,frozen:true,
@@ -286,6 +291,34 @@ $(function(){
 		{startColumnName: 'LI-II_Multipolar-Pyramidal', numberOfColumns: 31, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC</a></b>'}
 		] 
 	});
+  <?php include('synap_prob/nbyn_css_mods.php'); ?>
+  
+  /*$("#jqgh_nGrid_Granule").css("style","width: 235px; left:-70px; top: 70px !important; position:relative;");*/
+  function resizeColHead() {
+        var rowHight, resizeSpanHeight,
+            // get the header row which contains
+            headerRow = $(this).closest("div.ui-jqgrid-view")
+                .find("table.ui-jqgrid-htable>thead>tr.ui-jqgrid-labels");
+
+        // reset column height
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.height = '';
+        });
+
+        // increase the height of the resizing span
+        resizeSpanHeight = 'height: ' + headerRow.height() + 'px !important; cursor: col-resize;';
+        headerRow.find("span.ui-jqgrid-resize").each(function () {
+            this.style.cssText = resizeSpanHeight;
+        });
+
+        // set position of the dive with the column header text to the middle
+        rowHight = headerRow.height();
+        headerRow.find("div.ui-jqgrid-sortable").each(function () {
+            var ts = $(this);
+            ts.css('top', (rowHight - ts.outerHeight()) + 'px');
+        });
+    }
+    /*resizeColHead();*/
 	if(checkVersion()=="9")
 	{
 		$("#jqgh_nGrid_Granule").addClass("rotateIE9");

@@ -140,31 +140,17 @@ Date:   2020
 		                }
 			    	}
 		    	}
-		    	elseif ($page == 'sd') {
-		    		/*for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
-	                    $sql    = "SELECT CAST(AVG(mean_path_length) AS DECIMAL(10,2)) AS avg, CAST(STD(total_length) AS DECIMAL(10,2)) AS std, CAST(COUNT(mean_path_length) AS DECIMAL(10,2)) AS count_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND mean_path_length!='';";
-	                    $result = $conn->query($sql);
-	                    if ($result->num_rows > 0 && $row['avg'] != '' && $row['count_sd'] != '' && $row['std'] != '') {
-	                        $row        = $result->fetch_assoc();
-	                        $all_totals = $all_totals . $prcl . $a_or_d . '\\nAverage Somatic Distance: ' . $row['avg'] . '\\nValues Count: ' . $row['count_sd'] . '\\nStandard Deviation: ' . $row['std'] . $nl;
-	                    }
-	                }*/
-	                //$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
-	                //$all_totals = $neuron_group_long[$i_adj];
-		    	}
 		    }
 			if ($page == 'dal') {
 		    	if ($all_totals=='') {
 		    		$all_totals = $all_totals . 'Average Total Length: 0\\nValues Count: 0\\nStandard Deviation: 0';
 		    	}
+		    	array_push($parcel_output, $neuron_group_long2[$i_adj]."\\n".$all_totals);	
 		    }
-		    /*elseif ($page == 'sd') {
-				if ($all_totals=='') {
-		    		//$all_totals = $all_totals . 'Average Somatic Distance: 0\\nValues Count: 0\\nStandard Deviation: 0';
-		    		$all_totals = $all_totals . $neuron_group_hnc[$i_adj];
-		    	}    	
-		    }*/
-			array_push($parcel_output, $neuron_group_long2[$i_adj]."\\n".$all_totals);	  
+		    elseif ($page == 'sd') {
+				array_push($parcel_output, $neuron_group_long2[$i_adj].$all_totals);
+		    }
+			  
 		}
 		elseif ($page=='ps') {	
 			$write_output = n_by_m_values($conn, 'ps', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
@@ -179,6 +165,7 @@ Date:   2020
 
 	function n_by_m_values($conn, $type, $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids) {
 		for ($j=0;$j<count($neuron_ids);$j++) {
+		//for ($j=0;$j<3;$j++) {
 			$entry_output = "";
 			if ($type == 'ps') {
 				$sql = "SELECT CAST(potential_synapses AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.potential_synapses!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";

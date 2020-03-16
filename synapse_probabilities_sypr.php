@@ -20,7 +20,7 @@
   include_once("synap_prob/synap_prob_params.php");
 ?>
 
-<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="synap_prob/css/main_nbyn.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
 <style type="text/css">
@@ -286,6 +286,8 @@ $(function(){
 		{startColumnName: 'LI-II_Multipolar-Pyramidal', numberOfColumns: 31, titleText: '<b><a id="ec_subregion" href="parcel_page.php?subregion=EC&type=subregion" onClick="OpenInNewTab(this);">EC</a></b>'}
 		] 
 	});
+  <?php include('synap_prob/nbyn_css_mods.php'); ?>
+  
 	if(checkVersion()=="9")
 	{
 		$("#jqgh_nGrid_Granule").addClass("rotateIE9");
