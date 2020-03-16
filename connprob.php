@@ -34,11 +34,11 @@ include("function/menu_main.php");
                     <td><select id="target" onchange="targetSelected()" disabled></select></td>
                 </tr>
                 <tr>
-                    <td> Dendritic spine distance </td>
+                    <td> Dendritic spine distance (μm)</td>
                     <td><input id="spine_distance" type="text" disabled></td>
                 </tr>
                 <tr>
-                    <td> Inter-bouton distance</td>
+                    <td> Inter-bouton distance (μm)</td>
                     <td><input id="bouton_distance" type="text" disabled></td>
                 </tr>
                 <tr>
@@ -46,7 +46,7 @@ include("function/menu_main.php");
                     <td> <input id="contacts" type="text" disabled></td>
                 </tr>
                 <tr>
-                    <td>Radius of interaction</td>
+                    <td>Radius of interaction (μm)</td>
                     <td><input id="interaction" type="text" disabled></td>
                 </tr>
             </table>
