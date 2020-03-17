@@ -489,22 +489,29 @@ $author = new author($class_author);
 <script type="text/javascript">
 // Javascript function 
 //================changes===========================
-function changeCheckbox(start1,stop1){
+function changeCheckbox(source_id,target_id,par_grp_conv,E_or_I_val,nm_page){
 	var axon = "";
 	var dendrite = "";
-	var soma="";
+	var checkbox_clicked = "";
 	if (document.getElementById('axoncheck') && document.getElementById('axoncheck').checked==true) {
-		axon="Axons";
+		axon="axons";
 	}
 	if (document.getElementById('dendritecheck') && document.getElementById('dendritecheck').checked==true) {
-		dendrite="Dendrites";
+		dendrite="dendrites";
 	}
-	if (document.getElementById('somatacheck') && document.getElementById('somatacheck').checked==true) {
-		soma="Somata";
+
+	if (axon!="" && dendrite!="") {
+		checkbox_clicked="axons_dendrites";
 	}
-	var checkbox_clicked=axon+","+dendrite+","+soma;
-	var destination_page="property_page_synpro_nm.php";
-	location.href = destination_page+"?neuron_show_only_value="+checkbox_clicked+"&start="+start1+"&stop="+stop1+"&neuron_show_only=1";
+	else if (axon!="") {
+		checkbox_clicked=axon;
+	}
+	else if (dendrite!="") {
+		checkbox_clicked=dendrite;
+	}
+
+	var destination_page="property_page_synpro_nm.php?id1_neuron="+source_id.toString()+"&val1_property="+par_grp_conv.toString()+"&color1=red&id2_neuron="+target_id.toString()+"&val2_property="+par_grp_conv.toString()+"&color2=blue&connection_type="+E_or_I_val.toString()+"&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page="+nm_page;
+	location.href = destination_page+"&part="+checkbox_clicked;
 }
 
 
@@ -690,14 +697,11 @@ function show_only_authors(link, start1, stop1)
 		<br />			
 
 		<?php
-			/*if ($part == 'axons_dendrites_somata')
-				$n_interraction = 3;
-			else if ($part == 'axons_dendrites' || $part == 'axons_somata' || $part == 'dendrites_somata')
-				$n_interraction = 2;
-			else 
-				$n_interraction = 1;*/
 			$n_interraction = 2; // always 2 for N by N
-			$part = 'axons_dendrites'; // always axons_dendrites for N by N
+			$part = 'axons_dendrites';
+			if (isset($_REQUEST['part'])) {
+				$part = $_REQUEST['part'];
+			}
 						
 			for ($tt=0; $tt<$n_interraction; $tt++)
 			{				
@@ -741,11 +745,11 @@ function show_only_authors(link, start1, stop1)
 
 					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
 					// $i==0 is axons, $i==1 is dendrites
-					if ($tt==0) {
+					if ($tt==0 && ($part=="axons" || $part=="axons_dendrites")) {
 						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);	
 						//echo "<br>id1_neuron::<br>$id1_neuron<br>$n_property_id";	
 					}
-					else if ($tt==1) {
+					else if ($tt==1 && ($part=="dendrites" || $part=="axons_dendrites")) {
 						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id2_neuron);	
 						//echo "<br>id2_neuron::<br>$id2_neuron";		
 					}
@@ -901,6 +905,29 @@ function show_only_authors(link, start1, stop1)
 					
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>		
+						<td width="55%" align='center'>
+							<?php
+							$source_id = $_REQUEST['id1_neuron'];
+							$target_id = $_REQUEST['id2_neuron'];
+							$par_grp_conv = $_REQUEST['val1_property'];
+							$E_or_I_val = $_REQUEST['connection_type'];
+							$nm_page = $_REQUEST['nm_page'];
+
+							$axon_check='';
+							$dendrite_check='';
+							if ($part == 'axons_dendrites') {
+								$axon_check='checked';
+								$dendrite_check='checked';
+							}
+							else if ($part == 'axons') {
+								$axon_check='checked';
+							}
+							else if ($part == 'dendrites') {
+								$dendrite_check='checked';
+							}
+							echo "<span style='color:rgb(254,1,2)'  ><input type='checkbox' name='axon' value='axon' id='axoncheck' $axon_check onclick='changeCheckbox(\"$source_id\",\"$target_id\",\"$par_grp_conv\",\"$E_or_I_val\",\"$nm_page\")'>axon(from) </input></span><span style='color:rgb(1,1,153)' ><input type='checkbox' name='dendrite' value='dendrite' id='dendritecheck' $dendrite_check onclick='changeCheckbox(\"$source_id\",\"$target_id\",\"$par_grp_conv\",\"$E_or_I_val\",\"$nm_page\")' >dendrite(to) </input></span>";
+							?>
+						</td>
 						<td width="25%" align="right">
 						<form action="property_page_synpro_nm.php" method="post" style="display:inline">
 						<?php
