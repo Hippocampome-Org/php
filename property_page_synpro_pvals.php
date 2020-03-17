@@ -185,6 +185,7 @@ $post_name=$type_target->getName();
 		GROUP BY source_ID, source_Name, target_ID, target_Name, neurite
 		LIMIT 500000;
 		";
+		//echo "<br>$query<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($sid, $son, $tid, $tan, $neu, $val) = mysqli_fetch_row($rs))
 		{	
@@ -205,13 +206,19 @@ $post_name=$type_target->getName();
 	}
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
-		//echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&color1=red&id2_neuron=".$target_id."&color2=blueSoma&connection_type=2&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-		$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
-		$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
-		echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-		//echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id_neuron_source=".$source_id."&id_neuron_target=".$target_id."&color=".$color."&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-		query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
-		echo "</a></td>";
+		$last_index = count($parcel_group)-1;
+		if ($pg_i != $last_index) {
+			$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
+			$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
+			query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+			echo "</a></td>";
+		}
+		else {
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
+			query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+			echo "</td>";
+		}
 	}
 	echo "
 	</tr>
