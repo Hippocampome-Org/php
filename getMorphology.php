@@ -264,9 +264,9 @@ else // not from search page --------------
 			//Retrieve types by Search conditions
 
 			//echo "Search ".$_GET['_search'];
-			/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
-			echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
-			echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
+			/* echo "Search Field : ".$_GET['searchField']; // â€“ the name of the field defined in colModel
+			echo "Search String : ".$_GET['searchString']; // â€“ the string typed in the search field
+			echo "Search Operator : ".$_GET['searchOper']; //â€“ the operator choosen in the search field (ex. equal, greater than, â€¦) */
 				
 		}
 }
@@ -514,6 +514,7 @@ for ($i=0; $i < $number_type ; $i++) {
 1-gray -Potential Inhibitory Connections
 2-black --Potential Excitatory Connections
 */
+
 //special case neuron types
 $special_case_basket = "SELECT id FROM Type WHERE id in (SELECT DISTINCT Type_id FROM EvidencePropertyTypeRel
 WHERE perisomatic_targeting_flag=2) ORDER BY position";
@@ -526,32 +527,35 @@ WHERE perisomatic_targeting_flag=1) ORDER BY position";
 $result_special_case_axo_axonic = mysqli_query($GLOBALS['conn'], $special_case_axo_axonic);
 $special_neuron_id_axo_axonic = result_set_to_array($result_special_case_axo_axonic, 'id');
 
-// query to get pc and soma pcl flag associated with all types
-$query_pc_and_somapcl_flag="SELECT DISTINCT e.Type_id,e.pc_flag,e.soma_pcl_flag,e.mec_lec_flag,e.is_flag 
+// query to get pc and soma_pcl flag associated with all types
+// portions of the query that formerly accessed the mec_lec and is flags have been removed 03/26/2020 DWW
+$query_pc_and_somapcl_flag="SELECT DISTINCT e.Type_id,e.pc_flag,e.soma_pcl_flag 
 FROM EvidencePropertyTypeRel e, Type t
-WHERE t.id=e.Type_id and e.pc_flag is not null and e.soma_pcl_flag is not null and e.mec_lec_flag is not null and e.is_flag is not null
+WHERE t.id=e.Type_id and e.pc_flag is not null and e.soma_pcl_flag is not null
 GROUP BY t.id
 ORDER BY t.position";
 $result_pc_and_somapcl_flag = mysqli_query($GLOBALS['conn'], $query_pc_and_somapcl_flag);
-
 
 $index=0;
 if (!$result_pc_and_somapcl_flag) {
     print("<p>Error occured in Listing Connectivity Records.</p>");
 }
 // store pc and soma pcl flag values for each type in pc_flag and soma_pcl_flag_array.
+// mec_lec and is flag-related code has been commented out 03/26/2020 DWW
 while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQLI_ASSOC))
 {
     $pc_flag = $row['pc_flag'];
     $soma_pcl_flag=$row['soma_pcl_flag'];
-    $mec_lec_flag = $row['mec_lec_flag'];
-    $is_flag = $row['is_flag'];
+//    $mec_lec_flag = $row['mec_lec_flag'];
+//    $is_flag = $row['is_flag'];
     $pc_flag_array[$index]=$pc_flag;
     $soma_pcl_flag_array[$index]=$soma_pcl_flag;
-    $mec_lec_flag_array[$index]=$mec_lec_flag;
-    $is_flag_array[$index] = $is_flag;
+//    $mec_lec_flag_array[$index]=$mec_lec_flag;
+//    $is_flag_array[$index] = $is_flag;
     $index++;   
 }
+
+// @nmsutton This is where a new query of TypeTypeRel accessing connection_status needs to be written
 
 // Initialize connectivity display array to zero
 for ($i=0; $i < $number_type; $i++) {
@@ -636,7 +640,8 @@ for ($i = 0; $i < $number_type; $i++) {
 						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
 						    P_INHIBITORY_CONN;
 						    $potn_conn_neuron_pcl[$i][$k]=$data;
-
+/* This code has been commented out because axo-axonic and basket connections are never excitatoty
+// 03/26/2020 DWW
 						} elseif($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
 						  $pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
 
@@ -645,7 +650,7 @@ for ($i = 0; $i < $number_type; $i++) {
 						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
 						    P_EXCITATORY_CONN;
 						    $potn_conn_neuron_pcl[$i][$k]=$data;
-
+*/
 						}
 		            }
 		        }
@@ -675,7 +680,7 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
     }
 }
 
-
+/* @nmsutton This is the section of code that needs to be rewritten to access the connection_status variable
  for ($row_index = 0; $row_index < $number_type; $row_index++) {
     $row_value = $mec_lec_flag_array[$row_index];
     $is_row_value = $is_flag_array[$row_index];
@@ -695,12 +700,12 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
 		    }
     }
 }
+*/
 
 
 
 
-
-
+/* This code section has been commented out due to disuse 03/26/2020 DWW
 // Save potential connection to database
 for ($row_index = 0; $row_index < $number_type; $row_index++) {
     for ($col_index = 0; $col_index < $number_type; $col_index++) {
@@ -719,7 +724,7 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
     	 }
     }
 }
-
+*/
 
 
 $responce->potential_array=$pon_conn_display_array;
