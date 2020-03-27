@@ -366,7 +366,7 @@ class fragment_synpro
     {
     	$neurite_lengths=array();
     	$query = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_tl, CAST(COUNT(total_length) AS DECIMAL(10,0)) AS count_tl, CAST(MIN(total_length) AS DECIMAL(10,2)) AS min_tl, CAST(MAX(total_length) AS DECIMAL(10,2)) AS max_tl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
-    	//echo "<br>".$query."<br>";
+    	//echo $query;
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($std, $avg, $count, $min, $max) = mysqli_fetch_row($rs))
 		{	    	
