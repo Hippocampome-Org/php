@@ -178,7 +178,7 @@ $post_name=$type_target->getName();
 			$decimal_places='DECIMAL(10,2)';
 		}
 		$query = "
-		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG($prop) AS ".$decimal_places.")
+		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG(CAST($prop AS ".$decimal_places.")) AS ".$decimal_places.")
 		FROM $table
 		WHERE source_ID=$source_id AND target_ID=$target_id AND neurite='$parcel'
 		AND $prop!=''
