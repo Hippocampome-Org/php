@@ -264,9 +264,9 @@ else // not from search page --------------
 			//Retrieve types by Search conditions
 
 			//echo "Search ".$_GET['_search'];
-			/* echo "Search Field : ".$_GET['searchField']; // â€“ the name of the field defined in colModel
-			echo "Search String : ".$_GET['searchString']; // â€“ the string typed in the search field
-			echo "Search Operator : ".$_GET['searchOper']; //â€“ the operator choosen in the search field (ex. equal, greater than, â€¦) */
+			/* echo "Search Field : ".$_GET['searchField']; // – the name of the field defined in colModel
+			echo "Search String : ".$_GET['searchString']; // – the string typed in the search field
+			echo "Search Operator : ".$_GET['searchOper']; //– the operator choosen in the search field (ex. equal, greater than, …) */
 				
 		}
 }
@@ -562,8 +562,16 @@ for ($i=0; $i < $number_type; $i++) {
   for ($j=0; $j < $number_type; $j++) {
     $pon_conn_display_array[$i][$j]=0;
     $potn_conn_neuron_pcl[$i][$j]="";
+    $connection_status_array[$i][$j] = "";
   }
 }
+
+$connection_status_query = "SELECT Type1_id, Type2_id, connection_status FROM TypeTypeRel;";
+$connection_status_result = mysqli_query($GLOBALS['conn'],$connection_status_query);
+while(list($Type1_id,$Type2_id,$connection_status) = mysqli_fetch_row($connection_status_result)){
+	$connection_status_array[$Type1_id][$Type2_id] = $connection_status;
+}
+
 // create map
 $color_map=array(AXONS_PRESENT => "red",AXONS_SOMA_PRESENT => "redSoma",DENDRITES_PRESENT => "blue",DENDRITES_SOMA_PRESENT => "blueSoma",
 AXONS_DENDRITES_PRESENT => "violet",AXONS_DENDRITES_SOMA_PRESENT => "violetSoma", ONLY_SOMA_PRESENT=> "somata");
@@ -623,6 +631,18 @@ for ($i = 0; $i < $number_type; $i++) {
 					}
 				}
 			}
+			/*
+			// code for potential connections
+			if ($connection_status_array[$i][$j]=='negative') {
+				$pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN;
+			}
+			else if ($connection_status_array[$i][$j]=='positive') {
+				$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN;
+			}
+			else if ($connection_status_array[$i][$j]=='potential') {
+				$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN;
+			}
+			*/
 		}
 	}
 	// check axon to soma link for axonic and basket neurons
@@ -680,27 +700,33 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
     }
 }
 
-/* @nmsutton This is the section of code that needs to be rewritten to access the connection_status variable
+/* @nmsutton This is the section of code that needs to be rewritten to access the connection_status variable*/
  for ($row_index = 0; $row_index < $number_type; $row_index++) {
-    $row_value = $mec_lec_flag_array[$row_index];
-    $is_row_value = $is_flag_array[$row_index];
+    //$row_value = $mec_lec_flag_array[$row_index];
+    //$is_row_value = $is_flag_array[$row_index];
     $row_id = $type->getID_array($row_index);
-	    for ($col_index = 0; $col_index < $number_type; $col_index++) {
-	    	$col_value = $mec_lec_flag_array[$col_index];
-	    	$is_col_value = $is_flag_array[$col_index];
-            $col_id = $type->getID_array($col_index);
-            if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
-            	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
-            }
-	    	if($row_value*$col_value==-1){
-	            $pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
-		    }
-		    if($is_row_value==1 && $is_col_value==-1){
-		    	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;    
-		    }
+    for ($col_index = 0; $col_index < $number_type; $col_index++) {
+    	//$col_value = $mec_lec_flag_array[$col_index];
+    	//$is_col_value = $is_flag_array[$col_index];
+        $col_id = $type->getID_array($col_index);
+        if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
+        	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
+        }
+        if ($connection_status_array[$row_id][$col_id]=='negative') {
+			$pon_conn_display_array[$row_index][$col_index] = 0;//NO_CONNECTION;
+			//echo "<br>".$row_id." ".$col_id;
+		}
+		//echo "<br>".$connection_status_array[$row_id][$col_id];
+        /*
+    	if($row_value*$col_value==-1){
+            $pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
+	    }
+	    if($is_row_value==1 && $is_col_value==-1){
+	    	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;    
+	    }
+	    */
     }
 }
-*/
 
 
 
