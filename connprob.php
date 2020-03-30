@@ -87,19 +87,22 @@ include("function/menu_main.php");
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
             let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
             let interaction = parseFloat(document.getElementById("interaction").value);
-            let contacts = parseFloat(document.getElementById("contacts").value);
+            //let contacts = parseFloat(document.getElementById("contacts").value);
             let presynaptic_selected = document.getElementById("source").value.trim();
             let postsynaptic_selected = document.getElementById("target").value.trim();
             let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
-            let c = vint /(spine_distance*bouton_distance);
+            let c = vint / (spine_distance * bouton_distance);
             dict.get(presynaptic_selected).columnNames.push("Total");
             dict.get(presynaptic_selected).columnNames.shift();
             let volumes_array = dict.get(presynaptic_selected).volumes;
-            let axons =  dict.get(presynaptic_selected).axons;
-            let dentrites = dict.get(postsynaptic_selected).dentrites;
+            let length_axons =  dict.get(presynaptic_selected).axons;
+            let length_dendrites = dict.get(postsynaptic_selected).dendrites;
+            for (var i = 0; i < axons.length; i++) { // step over local parcels
+            	num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+            }
             let final_result = [];
-            for (var i = 0; i < axons.length; i++) {
-                final_result.push((c * ((axons[i] * dentrites[i]) / volumes_array[i])) / contacts);
+            for (var i = 0; i < axons.length; i++) { // step over local parcels
+                final_result.push((c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i]);
             }
             final_result.push(final_result.reduce((a, b) => a + b, 0));
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
