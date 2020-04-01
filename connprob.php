@@ -3,9 +3,15 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!--
+Probability of Connection Tool
+
+Reference: https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+https://stackoverflow.com/questions/5316697/jquery-return-data-after-ajax-call-success
+-->
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Probability of Connection Tool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -41,10 +47,11 @@ include("function/menu_main.php");
                     <td> Inter-bouton distance (μm)</td>
                     <td><input id="bouton_distance" type="text" disabled></td>
                 </tr>
-                <tr>
+                <!-- tr>
                     <td>Number of contacts</td>
                     <td> <input id="contacts" type="text" disabled></td>
-                </tr>
+                </tr -->
+                <input id="contacts" type="hidden" />
                 <tr>
                     <td>Radius of interaction (μm)</td>
                     <td><input id="interaction" type="text" disabled></td>
@@ -56,9 +63,10 @@ include("function/menu_main.php");
     <div id="graph"></div>
 </div>
     <script>
-        function parse(data,volumes_index,columnNames_index){
+        let connDic = {};
+        function parse(data_1,volume_data,volumes_index,columnNames_index){
             let dict = new Map();
-            let datav = data.split(/\r?\n|\r/);
+            let datav = data_1.split(/\r?\n|\r/);
             let volumes = datav[volumes_index].split(",").slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
@@ -122,34 +130,59 @@ include("function/menu_main.php");
             }]
             Plotly.plot('graph', graphdata);
         }
-        function readData(url,volumes_index,columns_index){
+        function readData(url,volume_data,volumes_index,columns_index){
             $.ajax({
                 url:url,
                 dataType:"text",
                 success:[function(data){
-                   parse(data,volumes_index,columns_index);
+                   parse(data,volume_data,volumes_index,columns_index);
                 }]
             });
         }
-        let connDic = {};
+        function readVolumes(url){
+            var volume_data = [];
+            <?php
+                $csv_file = array_map('str_getcsv', file('data/DG-Table-2.csv'));
+                for ($i = 0; $i < count($csv_file); $i++) {
+                    if (count($csv_file[$i])>0) {
+                        $line = $csv_file[$i][0];
+                        for ($j = 1; $j < count($csv_file[$i]); $j++) {
+                            $line = $line.",".$csv_file[$i][$j];
+                        }
+                        echo "volume_data.push(\"".$line."\");";
+                    }
+                }
+                //echo "var vol_data = \"".$line."\";";
+            ?>
+            //document.getElementById("interaction").value=vol_data;
+            return volume_data;
+        }  
         function submitClicked(){
             let name = document.getElementById("source").value.split(" ")[0];
             if(name.includes("CA1")){
-                readData("data/CA1-Table-1.csv",0,1);
+                volume_data = readVolumes("data/CA1-Table-2.csv");
+                readData("data/CA1-Table-1.csv",volume_data,0,1);
             }else if(name.includes("CA2")){
-                readData("data/CA2-Table-1.csv",0,1);
+                volume_data = readVolumes("data/CA2-Table-2.csv");
+                readData("data/CA2-Table-1.csv",volume_data,0,1);
             }else if(name.includes("CA3")){
-                readData("data/CA3-Table-1.csv",0,1);
+                volume_data = readVolumes("data/CA3-Table-2.csv");
+                readData("data/CA3-Table-1.csv",volume_data,0,1);
             }else if(name.includes("DG")){
-                readData("data/DG-Table-1.csv",0,1);
+                volume_data = readVolumes("data/DG-Table-2.csv");
+                readData("data/DG-Table-1.csv",volume_data,0,1);
             }else if(name.includes("EC")){
-                readData("data/EC-Table-1.csv",2,3);
+                volume_data = readVolumes("data/EC-Table-2.csv");
+                readData("data/EC-Table-1.csv",volume_data,2,3);
             }else if(name.includes("MEC")){
-                readData("data/EC-Table-1.csv",1,3);
+                volume_data = readVolumes("data/EC-Table-2.csv");
+                readData("data/EC-Table-1.csv",volume_data,1,3);
             }else if(name.includes("LEC")){
-                readData("data/EC-Table-1.csv",0,3);
+                volume_data = readVolumes("data/EC-Table-2.csv");
+                readData("data/EC-Table-1.csv",volume_data,0,3);
             }else if(name.includes("SUB")){
-                readData("data/Sub-Table-1.csv",0,1);
+                volume_data = readVolumes("data/Sub-Table-2.csv");
+                readData("data/Sub-Table-1.csv",volume_data,0,1);
             }
         }
         function targetSelected(){
@@ -232,6 +265,11 @@ include("function/menu_main.php");
                 this.dentrites = dentrites
                 this.volumes = volumes
                 this.columnNames = columnNames
+            }
+        }
+        class Volumes{
+            constructor(data){
+                this.data = data
             }
         }
        init();
