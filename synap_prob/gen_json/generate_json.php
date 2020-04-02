@@ -95,7 +95,7 @@ limit significant digits using cast again.
 			                }  
 		                }
 		                elseif ($page == 'sd') {
-		                	$sql    = "SELECT CAST(STD(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(COUNT(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(CAST(mean_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND mean_path_length!='';";
+		                	$sql    = "SELECT CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, CAST(min_path_length AS DECIMAL(10,2)) AS min_sd, CAST(max_path_length AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND avg_path_length!='';";
 		                	//$entry_output = $entry_output.$sql."<br>";
 			                $result = $conn->query($sql);
 	                        if ($result->num_rows > 0) {
