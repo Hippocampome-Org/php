@@ -60,7 +60,10 @@ include("function/menu_main.php");
             <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled>Submit</button>
         </fieldset>
     </form>
-    <div id="graph"></div>
+    <div id="title1" style="display: none"><center>Number of Contacts</center></div>
+    <div id="graph_noc" style="height:250px"></div>
+    <div id="title2" style="display: none"><center>Synaptic Probabilities</center></div>
+    <div id="graph" style="height:250px"></div>
 </div>
     <script>
         let connDic = {};
@@ -126,24 +129,49 @@ include("function/menu_main.php");
             let c = vint /(spine_distance*bouton_distance);
             dict.get(presynaptic_selected).columnNames.push("Total");
             dict.get(presynaptic_selected).columnNames.shift();
+            vol_dict.get(presynaptic_selected).columnNames.push("Total");
+            vol_dict.get(presynaptic_selected).columnNames.shift();
             let volumes_array = dict.get(presynaptic_selected).volumes;
             let length_axons =  dict.get(presynaptic_selected).axons;
             let length_dendrites = dict.get(postsynaptic_selected).dentrites;
             let volume_axons =  vol_dict.get(presynaptic_selected).axons;
             let volume_dendrites = vol_dict.get(postsynaptic_selected).dentrites;
             let final_result = [];
+            let final_result_noc = [];
             let num_contacts = [];
             let final_result_val = "";
             for (var i = 0; i < length_axons.length; i++) {
                 num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 /*final_result.push((c * ((axons[i] * dentrites[i]) / volumes_array[i])) / contacts);*/
                 final_result.push((c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i]);
+                final_result_noc.push(num_contacts[i]);
             }
-            final_result.push(final_result.reduce((a, b) => a + b, 0));
+            var p_tally = 0;
+            for (var pi = 0; pi < length_axons.length; pi++) {
+                if (!isNaN(final_result[pi])) {
+                    p_tally = p_tally + final_result[pi];
+                }
+            }
+            //final_result.push(final_result.reduce((a, b) => a + b, 0));
+            final_result.push(p_tally);
+            var n_tally = 0;
+            for (var ni = 0; ni < length_axons.length; ni++) {
+                if (!isNaN(final_result_noc[ni])) {
+                    n_tally = n_tally + final_result_noc[ni];
+                }
+            }
+            //final_result_noc.push(final_result_noc.reduce((a, b) => a + b, 0));
+            final_result_noc.push(n_tally);
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
+            let result_noc = Array.from(final_result_noc, x => [x]);
+            document.getElementById('title1').style.display='block';
             let graphdata = [{
                 type: 'table',
+                layout: {
+                height: 100,
+                width: 1000
+                },
                 header: {
                     values: cname ,
                     align: "center",
@@ -159,6 +187,24 @@ include("function/menu_main.php");
                 }
             }]
             Plotly.plot('graph', graphdata);
+            document.getElementById('title2').style.display='block';
+            let noc_graphdata = [{
+                type: 'table',
+                header: {
+                    values: cname ,
+                    align: "center",
+                    line: {width: 1, color: 'black'},
+                    fill: {color: "grey"},
+                    font: {family: "Arial", size: 12, color: "white"}
+                },
+                cells: {
+                    values: final_result_noc,
+                    align: "center",
+                    line: {color: "black", width: 1},
+                    font: {family: "Arial", size: 11, color: ["black"]}
+                }
+            }]
+            Plotly.plot('graph_noc', noc_graphdata);
         }
         function readData(url,volume_data,volumes_index,columns_index){
             $.ajax({
@@ -169,10 +215,9 @@ include("function/menu_main.php");
                 }]
             });
         }
-        function readVolumes(url){
-            var volume_data = [];
-            <?php
-                $csv_file = array_map('str_getcsv', file('data/DG-Table-2.csv'));
+        <?php
+            function get_volumes($filename) {
+                $csv_file = array_map('str_getcsv', file($filename));
                 for ($i = 0; $i < count($csv_file); $i++) {
                     if (count($csv_file[$i])>0) {
                         $line = $csv_file[$i][0];
@@ -181,9 +226,29 @@ include("function/menu_main.php");
                         }
                         echo "volume_data.push(\"".$line."\");";
                     }
-                }
-                //echo "var vol_data = \"".$line."\";";
-            ?>
+                }   
+            }     
+        ?>
+        function readVolumes(url){
+            var volume_data = [];
+            if (url == 'data/CA1-Table-2.csv') {
+                <?php get_volumes('data/CA1-Table-2.csv'); ?>
+            }
+            else if (url == 'data/CA2-Table-2.csv') {
+                <?php get_volumes('data/CA2-Table-2.csv'); ?>
+            }
+            else if (url == 'data/CA3-Table-2.csv') {
+                <?php get_volumes('data/CA3-Table-2.csv'); ?>
+            }
+            else if (url == 'data/DG-Table-2.csv') {
+                <?php get_volumes('data/DG-Table-2.csv'); ?>
+            }
+            else if (url == 'data/EC-Table-2.csv') {
+                <?php get_volumes('data/EC-Table-2.csv'); ?>
+            }
+            else if (url == 'data/Sub-Table-2.csv') {
+                <?php get_volumes('data/Sub-Table-2.csv'); ?>
+            }
             //document.getElementById("interaction").value=vol_data;
             return volume_data;
         }  
