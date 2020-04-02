@@ -1,5 +1,5 @@
 <?php
-echo "$('#nGrid_Granule').css('height','235');
+echo "$('#nGrid_Granule').css('height','255');
 $('#nGrid_frozen').attr('style', 'width: 1px;height:400px;top:222px !important;position:relative !important;');
 $('#ui-jqgrid-labels').css('height','235');
 $('#jqgh_nGrid_Neuron_Type_2').css('top','120px');

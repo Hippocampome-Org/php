@@ -3,7 +3,7 @@
 }
 .frozen-div {
   position: absolute !important; 
-  height: 257px !important; 
+  height: 277px !important; 
   top: 0px !important; 
   left: 0px !important;
   z-index:5 !important;
@@ -173,7 +173,7 @@ p {
 #jqgh_nGrid_Neuron_Type_2
 { 
   margin-bottom:0px !important;
-  top:220px;
+  top:240px;
   position:relative;
   height:30px;
 }
