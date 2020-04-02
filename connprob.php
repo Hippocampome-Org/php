@@ -66,30 +66,54 @@ include("function/menu_main.php");
         let connDic = {};
         function parse(data_1,volume_data,volumes_index,columnNames_index){
             let dict = new Map();
+            let vol_dict = new Map();
             let datav = data_1.split(/\r?\n|\r/);
+            let vol_datav = volume_data;//.split(/\r?\n|\r/);
             let volumes = datav[volumes_index].split(",").slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
                     return value;
             });
+            let vol_volumes = vol_datav[volumes_index].split(",").slice(2).map(function(vol_item) {
+                    var vol_value = parseFloat(vol_item);
+                    if(isNaN(vol_value)) return 0;
+                    return vol_value;
+            });
+            //document.write(volumes[1]);
             let columnNames = datav[columnNames_index].split(",").slice(1)
+            let vol_columnNames = vol_datav[columnNames_index].split(",").slice(1)
             for(let count = 2; count<datav.length-1; count=count+2)
             {
                 let rowData = datav[count].split(",");
+                let volRowData = vol_datav[count].split(",");
                 let nextRowData = datav[count+1].split(",");
+                let volNextRowData = vol_datav[count+1].split(",");
                 let key = rowData[0];
+                //document.write(volRowData+" | "+volNextRowData+" | "+key+"<br>");
                 let firstRowData =rowData.slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
                     return value;
+                });
+                let volFirstRowData = volRowData.slice(2).map(function(vol_item) {
+                    var vol_value = parseFloat(vol_item);
+                    if(isNaN(vol_value)) return 0;
+                    return vol_value;
                 });
                 let secondRowData = nextRowData.slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
                     return value;
                 });
+                let volSecondRowData = volNextRowData.slice(2).map(function(vol_item) {
+                    var vol_value = parseFloat(vol_item);
+                    if(isNaN(vol_value)) return 0;
+                    return vol_value;
+                });
                 if(key!=="") {
                     dict.set(key, new Neuron(firstRowData, secondRowData, volumes, columnNames));
+                    vol_dict.set(key, new Neuron(volFirstRowData, volSecondRowData, vol_volumes, columnNames));
+                    /*vol_dict.set(key, new NeuronVolumes(firstRowData, secondRowData, volumes, columnNames));*/
                 }
             }
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
@@ -103,11 +127,17 @@ include("function/menu_main.php");
             dict.get(presynaptic_selected).columnNames.push("Total");
             dict.get(presynaptic_selected).columnNames.shift();
             let volumes_array = dict.get(presynaptic_selected).volumes;
-            let axons =  dict.get(presynaptic_selected).axons;
-            let dentrites = dict.get(postsynaptic_selected).dentrites;
+            let length_axons =  dict.get(presynaptic_selected).axons;
+            let length_dendrites = dict.get(postsynaptic_selected).dentrites;
+            let volume_axons =  vol_dict.get(presynaptic_selected).axons;
+            let volume_dendrites = vol_dict.get(postsynaptic_selected).dentrites;
             let final_result = [];
-            for (var i = 0; i < axons.length; i++) {
-                final_result.push((c * ((axons[i] * dentrites[i]) / volumes_array[i])) / contacts);
+            let num_contacts = [];
+            let final_result_val = "";
+            for (var i = 0; i < length_axons.length; i++) {
+                num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                /*final_result.push((c * ((axons[i] * dentrites[i]) / volumes_array[i])) / contacts);*/
+                final_result.push((c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i]);
             }
             final_result.push(final_result.reduce((a, b) => a + b, 0));
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
@@ -267,9 +297,12 @@ include("function/menu_main.php");
                 this.columnNames = columnNames
             }
         }
-        class Volumes{
-            constructor(data){
-                this.data = data
+        class NeuronVolumes{
+            constructor(axons,dentrites,volumes, columnNames){
+                this.axons = axons
+                this.dentrites = dentrites
+                this.volumes = volumes
+                this.columnNames = columnNames
             }
         }
        init();
