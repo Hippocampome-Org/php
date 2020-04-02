@@ -1,5 +1,5 @@
 .frozen-bdiv {
-  height:644px !important;
+  height:664px !important;
 }
 .frozen-div {
   position: absolute !important; 
@@ -27,8 +27,8 @@
   padding: 0px 2px !important;
 }
 .ui-state-default .ui-jqgrid-hdiv {
-  /*height:235px !important;*/
-  height:57px;
+  height:235px !important;
+  /*height:57px;*/
 }
 .ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
 /*  text-align:center !important;
@@ -48,19 +48,19 @@
 }
 #ca3_subregion,#dg_subregion,#ec_subregion
 {
-	color:white !important;
+  color:white !important;
 }
 #ca2_subregion,#ca1_subregion,#sub_subregion
 {
-	color:#000099 !important;
+  color:#000099 !important;
 }
 .highlighted{
-	border-right: solid 1px Chartreuse !important;
-	border-left: solid 1px Chartreuse !important;
-	border-bottom:solid 1px Chartreuse !important; 
+  border-right: solid 1px Chartreuse !important;
+  border-left: solid 1px Chartreuse !important;
+  border-bottom:solid 1px Chartreuse !important; 
 }
 .highlighted_top{
-	border: solid 1px Chartreuse !important;
+  border: solid 1px Chartreuse !important;
 }
 .rotate 
 {
@@ -110,13 +110,13 @@ p {
 }
 #nGrid_H,#nGrid_SO,#nGrid_2_SO,#nGrid_1_SO,#nGrid_SUB_PL
 {
-	border-right:medium solid #C08181;
-	width:auto !important;
+  border-right:medium solid #C08181;
+  width:auto !important;
 }
 #nGrid_SLM,#nGrid_2_SLM,#nGrid_1_SLM,#nGrid_SUB_SM,#nGrid_I
 {
-	border-left:medium solid #770000;
-	width:auto !important;
+  border-left:medium solid #770000;
+  width:auto !important;
 }
 .ui-jqgrid {
   font-size: 11px !important;
