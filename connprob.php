@@ -129,8 +129,8 @@ include("function/menu_main.php");
             let c = vint /(spine_distance*bouton_distance);
             dict.get(presynaptic_selected).columnNames.push("Total");
             dict.get(presynaptic_selected).columnNames.shift();
-            vol_dict.get(presynaptic_selected).columnNames.push("Total");
-            vol_dict.get(presynaptic_selected).columnNames.shift();
+            /*vol_dict.get(presynaptic_selected).columnNames.push("Total");
+            vol_dict.get(presynaptic_selected).columnNames.shift();*/
             let volumes_array = dict.get(presynaptic_selected).volumes;
             let length_axons =  dict.get(presynaptic_selected).axons;
             let length_dendrites = dict.get(postsynaptic_selected).dentrites;
@@ -141,9 +141,15 @@ include("function/menu_main.php");
             let num_contacts = [];
             let final_result_val = "";
             for (var i = 0; i < length_axons.length; i++) {
+                if (isNaN(length_axons[i])){length_axons[i]=0;}
+                if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
+                if (isNaN(volume_axons[i])){volume_axons[i]=0;}
+                if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}
                 num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
-                /*final_result.push((c * ((axons[i] * dentrites[i]) / volumes_array[i])) / contacts);*/
-                final_result.push((c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i]);
+                let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
+                if (isNaN(final_result_val)) {final_result_val = 0;}
+                final_result.push(final_result_val);
+                if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 final_result_noc.push(num_contacts[i]);
             }
             var p_tally = 0;
