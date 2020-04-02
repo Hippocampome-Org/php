@@ -180,7 +180,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='".$val."' target='_blank'>".$val."</a>";
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".$val."</a>";
 						}
 					}
 				} 
@@ -192,7 +192,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='".$val."' target='_blank'>".$val."</a></center>";  
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='' target='_blank'>".$val."</a></center>";  
 						}
 					}
 				} 	
@@ -204,7 +204,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='".$val."' target='_blank'>".$val."</a>";            
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='' target='_blank'>".$val."</a>";            
 						}
 					}
 				} 	
