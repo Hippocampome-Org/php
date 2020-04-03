@@ -151,7 +151,7 @@ include("function/menu_main.php");
                 final_result.push(parseFloat(final_result_val.toFixed(4)));
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(parseFloat(num_contacts[i].toFixed(1)));
+                final_result_noc.push(parseFloat(num_contacts[i].toFixed(2)));
             }
             /* compute totals */
             var p_tally = 1;
@@ -169,7 +169,7 @@ include("function/menu_main.php");
                     n_tally = n_tally + parseFloat(final_result_noc[ni]);
                 }
             }
-            final_result_noc.push(n_tally.toFixed(1));
+            final_result_noc.push(n_tally.toFixed(2));
 
             /* generate tables */
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
