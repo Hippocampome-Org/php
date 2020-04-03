@@ -57,13 +57,13 @@ include("function/menu_main.php");
                     <td><input id="interaction" type="text" disabled></td>
                 </tr>
             </table>
-            <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled>Submit</button>
+            <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled style="z-index:10;">Submit</button>
         </fieldset>
     </form>
     <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
-    <div id="graph" style="height:300px;position:relative;top:-20px;"></div>
+    <div id="graph" style="height:300px;position:relative;top:-20px;z-index:1"></div>
     <div id="title2" style="position:relative;bottom:100px;display: none;z-index:5"><center>Number of Contacts Per Connected Neuron Pair</center></div>
-    <div id="graph_noc" style="height:300px;position:relative;top:-180px;"></div>
+    <div id="graph_noc" style="height:300px;position:relative;top:-180px;z-index:1"></div>
 </div>
     <script>
         let connDic = {};
@@ -145,13 +145,13 @@ include("function/menu_main.php");
                 if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
                 if (isNaN(volume_axons[i])){volume_axons[i]=0;}
                 if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}
-                num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                num_contacts[i] = (1 / length_axons.length) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
                 final_result.push(parseFloat(final_result_val.toFixed(4)));
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(parseFloat(num_contacts[i].toFixed(2)));
+                final_result_noc.push(parseFloat(num_contacts[i].toFixed(1)));
             }
             /* compute totals */
             var p_tally = 1;
@@ -169,7 +169,7 @@ include("function/menu_main.php");
                     n_tally = n_tally + parseFloat(final_result_noc[ni]);
                 }
             }
-            final_result_noc.push(n_tally.toFixed(2));
+            final_result_noc.push(n_tally.toFixed(1));
 
             /* generate tables */
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
