@@ -60,10 +60,10 @@ include("function/menu_main.php");
             <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled>Submit</button>
         </fieldset>
     </form>
-    <div id="title1" style="display: none"><center>Number of Contacts</center></div>
-    <div id="graph_noc" style="height:250px"></div>
-    <div id="title2" style="display: none"><center>Synaptic Probabilities</center></div>
-    <div id="graph" style="height:250px"></div>
+    <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
+    <div id="graph" style="height:300px;position:relative;top:-20px;"></div>
+    <div id="title2" style="position:relative;bottom:100px;display: none;z-index:5"><center>Number of Contacts Per Connected Neuron Pair</center></div>
+    <div id="graph_noc" style="height:300px;position:relative;top:-180px;"></div>
 </div>
     <script>
         let connDic = {};
@@ -148,30 +148,34 @@ include("function/menu_main.php");
                 num_contacts[i] = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
-                final_result.push(final_result_val);
+                final_result.push(parseFloat(final_result_val.toFixed(4)));
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(num_contacts[i]);
+                if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
+                final_result_noc.push(parseFloat(num_contacts[i].toFixed(2)));
             }
-            var p_tally = 0;
+            /* compute totals */
+            var p_tally = 1;
             for (var pi = 0; pi < length_axons.length; pi++) {
                 if (!isNaN(final_result[pi])) {
-                    p_tally = p_tally + final_result[pi];
+                    //p_tally = p_tally * (1 - parseFloat(final_result[pi]));
+                    p_tally = p_tally * (1 - final_result[pi]);
                 }
             }
-            //final_result.push(final_result.reduce((a, b) => a + b, 0));
-            final_result.push(p_tally);
+            final_result.push(parseFloat(1 - p_tally).toFixed(4));
             var n_tally = 0;
             for (var ni = 0; ni < length_axons.length; ni++) {
                 if (!isNaN(final_result_noc[ni])) {
-                    n_tally = n_tally + final_result_noc[ni];
+                    //n_tally = n_tally + final_result_noc[ni];
+                    n_tally = n_tally + parseFloat(final_result_noc[ni]);
                 }
             }
-            //final_result_noc.push(final_result_noc.reduce((a, b) => a + b, 0));
-            final_result_noc.push(n_tally);
+            final_result_noc.push(n_tally.toFixed(2));
+
+            /* generate tables */
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
-            document.getElementById('title1').style.display='block';
+            document.getElementById('title2').style.display='block';
             let graphdata = [{
                 type: 'table',
                 layout: {
@@ -183,17 +187,18 @@ include("function/menu_main.php");
                     align: "center",
                     line: {width: 1, color: 'black'},
                     fill: {color: "grey"},
-                    font: {family: "Arial", size: 12, color: "white"}
+                    font: {family: "Arial", size: 16, color: "white"}
                 },
                 cells: {
                     values: result,
                     align: "center",
                     line: {color: "black", width: 1},
-                    font: {family: "Arial", size: 11, color: ["black"]}
+                    font: {family: "Arial", size: 16, color: ["black"]},
+                    height:30
                 }
             }]
             Plotly.plot('graph', graphdata);
-            document.getElementById('title2').style.display='block';
+            document.getElementById('title1').style.display='block';
             let noc_graphdata = [{
                 type: 'table',
                 header: {
@@ -201,13 +206,14 @@ include("function/menu_main.php");
                     align: "center",
                     line: {width: 1, color: 'black'},
                     fill: {color: "grey"},
-                    font: {family: "Arial", size: 12, color: "white"}
+                    font: {family: "Arial", size: 16, color: "white"}
                 },
                 cells: {
                     values: final_result_noc,
                     align: "center",
                     line: {color: "black", width: 1},
-                    font: {family: "Arial", size: 11, color: ["black"]}
+                    font: {family: "Arial", size: 16, color: ["black"]},
+                    height:30
                 }
             }]
             Plotly.plot('graph_noc', noc_graphdata);
