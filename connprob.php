@@ -148,7 +148,7 @@ include("function/menu_main.php");
                 num_contacts[i] = (1 / length_axons.length) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
-                final_result.push(parseFloat(final_result_val.toFixed(4)));
+                final_result.push(parseFloat(final_result_val.toFixed(3)));
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
                 final_result_noc.push(parseFloat(num_contacts[i].toFixed(2)));
@@ -161,7 +161,7 @@ include("function/menu_main.php");
                     p_tally = p_tally * (1 - final_result[pi]);
                 }
             }
-            final_result.push(parseFloat(1 - p_tally).toFixed(4));
+            final_result.push(parseFloat(1 - p_tally).toFixed(3));
             var n_tally = 0;
             for (var ni = 0; ni < length_axons.length; ni++) {
                 if (!isNaN(final_result_noc[ni])) {
