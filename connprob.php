@@ -140,12 +140,22 @@ include("function/menu_main.php");
             let final_result_noc = [];
             let num_contacts = [];
             let final_result_val = "";
+            let noc_non_zero = 0;
+            for (var i = 0; i < length_axons.length; i++) {
+                let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                if (noc!=0) {
+                    noc_non_zero = noc_non_zero + 1;
+                }
+            }
             for (var i = 0; i < length_axons.length; i++) {
                 if (isNaN(length_axons[i])){length_axons[i]=0;}
                 if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
                 if (isNaN(volume_axons[i])){volume_axons[i]=0;}
                 if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}
-                num_contacts[i] = (1 / length_axons.length) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                if (noc!=0) {
+                    num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                }
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
                 final_result.push(parseFloat(final_result_val.toFixed(3)));
