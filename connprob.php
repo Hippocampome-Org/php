@@ -353,12 +353,15 @@ include("function/menu_main.php");
                     let row = rows[count].split(",");
                     let target = row[1];
                     let source = row[3];
-                    if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
+                    //if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
+                    if (target !== undefined && source !== undefined) {
                         target = target.trim();
                         source = source.trim();
                         let targetName = target.split(" ")[0];
                         let sourceName = source.split(" ")[0];
-                        if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(target==="EC"||sourceName==="LEC"||sourceName==="MEC")) {
+                        //if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(target==="EC"||sourceName==="LEC"||sourceName==="MEC") || (sourceName==="CA3"&&target==="CA3c") || (sourceName==="CA3c"&&target==="CA3")) {
+                        //if (true) {
+                        if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(targetName==="EC"||targetName==="LEC"||targetName==="MEC") || (sourceName==="CA3"&&targetName==="CA3c") || (sourceName==="CA3c"&&targetName==="CA3")) {
                             if (!connDic[source]) {
                                 connDic[source] = [];
                             }
