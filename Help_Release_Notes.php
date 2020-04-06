@@ -97,12 +97,251 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1X (06 Apr 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 517: [tool]: Connection probabilities tool does not list all possible postsynaptic types.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 498: [neurites] In the column headers of the NxN matrices, increase the vertical spacing so that the entire neuron-type names can be seen.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1W (02 Apr 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 515: [markers] Update interpretation for MEC LII Stellate cell Evidence.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 512: [neurites] Remove "Variance will be added later here" from Numbers of Potential Synapses N x N matrix hover-over box.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1V (30 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 509: [connectivity] Modify php code to correctly read in and interpret the mec_lec_flag and is_flag.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1U (27 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 510: [neurites] The hover over windows for the Somatic Distances matrix are producing incorrect values.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1U (24 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 504: [connectivity]: CA3 Basket potential connections are missing.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1T (17 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 503: [neurites] Add in "axon (from)" and "dendrite (to)" toggles to the NxN Evidence pages.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1S (16 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 501: [[neurites] Strange characters still appearing in some of the figure captions.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1R (15 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 502: [neurites]: In the hover over window for the neuron type names, also list the full name of the neuron type.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 499: [neurites] Remove the hover-over window from the neuron-type names for the Somatic Distances of Dendrites and Axons matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 497: [neurites] In the header of the NxN matrices, change the phrase "Pre" to "FROM" and the phrase "Post" to "TO".
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 496: [neurites] Change the label "Neuron" to "Neuron Type" in the header of the NxK matrices.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 495: [neurites] Remove the "parcel" label from the header of the NxK matrices.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 492: [neurites] Craft the Evidence page for the Synaptic Probabilities.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 491: [neurites] Craft the Evidence page for the Number of Contacts.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 490: [neurites] Craft the Evidence page for the Number of Potential Synapses.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1Q (04 Mar 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 500: [neurites] neurites_quantified and number_of_contacts spreadsheets are not ingesting without errors.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1P (28 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 494: [neurites] Change the number of decimal places to 2 for the Number of Contacts matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 489: [neurites] N-by-k Evidence page bibliographic entries that are currently listed as "NULL" should be omitted instead.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 488: [neurites] Listing the proper species on the n-by-k Evidence pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 483: [neurites] Add .rar spreadsheet to the database ingest scripts.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 482: [neurites] Revamp the Number of Potential Synapses / Number of Contacts / Synaptic Probabilities Evidence pages.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 481: [neurites] [neurites] Revamp the somatic distances Evidence pages.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1O (27 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 480: [neurites] Clicking on values in a n-by-k or n-by-n synapse probabilities matrix should open a new tab.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 479: [neurites] Revamp the axonal-dendritic lengths Evidence pages.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1N (26 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 484: [neurites] Missing matrix entries.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1M (24 Feb 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 485: [neurites] The wrong Evidence page opens when clicking in the phpdev morphology matrix.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.7 R 1L (19 Feb 2020):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue #487: [Neuron Page] The listings for the connectivity section appear to be under the wrong headings.
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 487: [Neuron Page] The listings for the connectivity section appear to be under the wrong headings.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 486: [search] Firing patterns are missing from the Neuron Type search.
 </span></p>
 
 </BR>
