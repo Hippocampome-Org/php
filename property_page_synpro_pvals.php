@@ -173,6 +173,7 @@ $post_name=$type_target->getName();
 			$parcel_group = $ec_group; $parcel_group_short = $ec_group_short;}
 
 	function query_value($source_id, $target_id, $parcel, $prop, $table, $nm_page) {
+		$value_result = 0;
 		$decimal_places='DECIMAL(10,5)';
 		if ($nm_page=='noc') {
 			$decimal_places='DECIMAL(10,2)';
@@ -189,8 +190,11 @@ $post_name=$type_target->getName();
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($sid, $son, $tid, $tan, $neu, $val) = mysqli_fetch_row($rs))
 		{	
-			echo $val;
+			//echo $val;
+			$value_result = $val;
 		}		
+
+		return $value_result;
 	}
 	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val) {
 	echo "
@@ -207,16 +211,26 @@ $post_name=$type_target->getName();
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
 		$last_index = count($parcel_group)-1;
-		if ($pg_i != $last_index) {
+		$value_result = query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+		if ($value_result == 0 && $nm_page!='noc') {
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
+			echo "</td>";			
+		}
+		else if ($value_result == 0 && $nm_page=='noc') {
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
+			echo $value_result;
+			echo "</td>";
+		}
+		else if ($pg_i != $last_index) {
 			$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
 			$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-			query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+			echo $value_result;
 			echo "</a></td>";
 		}
 		else {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
-			query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+			echo $value_result;
 			echo "</td>";
 		}
 	}

@@ -1,9 +1,9 @@
 .frozen-bdiv {
-  height:684px !important;
+  height:669px !important;
 }
 .frozen-div {
   position: absolute !important; 
-  height: 287px !important; 
+  height: 282px !important; 
   top: 0px !important; 
   left: 0px !important;
   z-index:5 !important;
@@ -27,7 +27,7 @@
   padding: 0px 2px !important;
 }
 .ui-state-default .ui-jqgrid-hdiv {
-  height:235px !important;
+  height:240px !important;
   /*height:57px;*/
 }
 .ui-jqgrid .ui-jqgrid-htable th div.nGrid_Neuron_type{
@@ -173,7 +173,7 @@ p {
 #jqgh_nGrid_Neuron_Type_2
 { 
   margin-bottom:0px !important;
-  top:250px;
+  top:245px;
   position:relative;
   height:30px;
 }
