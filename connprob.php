@@ -156,6 +156,9 @@ include("function/menu_main.php");
                 if (noc!=0) {
                     num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 }
+                /*if (i == 3) {
+                    document.write("<br><br>"+length_axons[i]+" "+length_dendrites[i]+" "+volume_axons[i]+" "+volume_dendrites[i])
+                }*/
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
                 final_result.push(parseFloat(final_result_val.toFixed(3)));
