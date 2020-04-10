@@ -9,6 +9,10 @@ Note:
 The "CAST(STD(CAST" and similar entries is needed in below queries because it
 first needs to cast the db value from text into decimal, then take std(), then
 limit significant digits using cast again.
+
+reference: https://stackoverflow.com/questions/37618679/format-number-to-n-significant-digits-in-php
+https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
+
 -->
 <head>
 	<title>Json Generation</title>
