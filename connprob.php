@@ -351,8 +351,8 @@ include("function/menu_main.php");
                     let row = rows[count].split(",");
                     let source = row[1];
                     let target = row[3];
-                    //if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
-                    if (target !== undefined && source !== undefined) {
+                    if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
+                    //if (target !== undefined && source !== undefined) {
                         source = source.trim();
                         target = target.trim();
                         let sourceName = source.split(" ")[0];                        
