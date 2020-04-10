@@ -41,11 +41,11 @@ include("function/menu_main.php");
                 </tr>
                 <tr>
                     <td> Dendritic spine distance (μm)</td>
-                    <td><input id="spine_distance" type="text" disabled></td>
+                    <td><input id="spine_distance" type="text" value="1.09" disabled></td>
                 </tr>
                 <tr>
                     <td> Inter-bouton distance (μm)</td>
-                    <td><input id="bouton_distance" type="text" disabled></td>
+                    <td><input id="bouton_distance" type="text" value="6.2" disabled></td>
                 </tr>
                 <!-- tr>
                     <td>Number of contacts</td>
@@ -54,7 +54,7 @@ include("function/menu_main.php");
                 <input id="contacts" type="hidden" />
                 <tr>
                     <td>Radius of interaction (μm)</td>
-                    <td><input id="interaction" type="text" disabled></td>
+                    <td><input id="interaction" type="text" value="2" disabled></td>
                 </tr>
             </table>
             <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled style="z-index:10;">Submit</button>
