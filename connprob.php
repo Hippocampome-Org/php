@@ -128,9 +128,9 @@ include("function/menu_main.php");
             dict.get(presynaptic_selected).columnNames.shift();
             let volumes_array = dict.get(presynaptic_selected).volumes;
             let length_axons =  dict.get(presynaptic_selected).axons;
-            let length_dendrites = dict.get(postsynaptic_selected).dentrites;
+            let length_dendrites = dict.get(postsynaptic_selected).dendrites;
             let volume_axons =  vol_dict.get(presynaptic_selected).axons;
-            let volume_dendrites = vol_dict.get(postsynaptic_selected).dentrites;
+            let volume_dendrites = vol_dict.get(postsynaptic_selected).dendrites;
             let final_result = [];
             let final_result_noc = [];
             let num_contacts = [];
@@ -379,17 +379,17 @@ include("function/menu_main.php");
            }] });}
 
         class Neuron{
-            constructor(axons,dentrites,volumes, columnNames){
+            constructor(axons,dendrites,volumes, columnNames){
                 this.axons = axons
-                this.dentrites = dentrites
+                this.dendrites = dendrites
                 this.volumes = volumes
                 this.columnNames = columnNames
             }
         }
         class NeuronVolumes{
-            constructor(axons,dentrites,volumes, columnNames){
+            constructor(axons,dendrites,volumes, columnNames){
                 this.axons = axons
-                this.dentrites = dentrites
+                this.dendrites = dendrites
                 this.volumes = volumes
                 this.columnNames = columnNames
             }
