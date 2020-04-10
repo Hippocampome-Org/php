@@ -354,14 +354,14 @@ include("function/menu_main.php");
                     let rows = data.split(/\r?\n|\r/);
                     for(let count = 1; count<rows.length-1; count=count+1) {
                     let row = rows[count].split(",");
-                    let target = row[1];
-                    let source = row[3];
+                    let source = row[1];
+                    let target = row[3];
                     //if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
                     if (target !== undefined && source !== undefined) {
-                        target = target.trim();
                         source = source.trim();
+                        target = target.trim();
+                        let sourceName = source.split(" ")[0];                        
                         let targetName = target.split(" ")[0];
-                        let sourceName = source.split(" ")[0];
                         //if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(target==="EC"||sourceName==="LEC"||sourceName==="MEC") || (sourceName==="CA3"&&target==="CA3c") || (sourceName==="CA3c"&&target==="CA3")) {
                         //if (true) {
                         if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(targetName==="EC"||targetName==="LEC"||targetName==="MEC") || (sourceName==="CA3"&&targetName==="CA3c") || (sourceName==="CA3c"&&targetName==="CA3")) {
@@ -369,6 +369,7 @@ include("function/menu_main.php");
                                 connDic[source] = [];
                             }
                             connDic[source].push(target);
+                            //document.write(source+" "+target+"<br>");
                         }
                     }
                 }
