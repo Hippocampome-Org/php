@@ -82,7 +82,6 @@ include("function/menu_main.php");
                     if(isNaN(vol_value)) return 0;
                     return vol_value;
             });
-            //document.write(volumes[1]);
             let columnNames = datav[columnNames_index].split(",").slice(1)
             let vol_columnNames = vol_datav[columnNames_index].split(",").slice(1)
             for(let count = 2; count<datav.length-1; count=count+2)
@@ -92,7 +91,6 @@ include("function/menu_main.php");
                 let nextRowData = datav[count+1].split(",");
                 let volNextRowData = vol_datav[count+1].split(",");
                 let key = rowData[0];
-                //document.write(volRowData+" | "+volNextRowData+" | "+key+"<br>");
                 let firstRowData =rowData.slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
@@ -116,7 +114,6 @@ include("function/menu_main.php");
                 if(key!=="") {
                     dict.set(key, new Neuron(firstRowData, secondRowData, volumes, columnNames));
                     vol_dict.set(key, new Neuron(volFirstRowData, volSecondRowData, vol_volumes, columnNames));
-                    /*vol_dict.set(key, new NeuronVolumes(firstRowData, secondRowData, volumes, columnNames));*/
                 }
             }
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
@@ -129,8 +126,6 @@ include("function/menu_main.php");
             let c = vint /(spine_distance*bouton_distance);
             dict.get(presynaptic_selected).columnNames.push("Total");
             dict.get(presynaptic_selected).columnNames.shift();
-            /*vol_dict.get(presynaptic_selected).columnNames.push("Total");
-            vol_dict.get(presynaptic_selected).columnNames.shift();*/
             let volumes_array = dict.get(presynaptic_selected).volumes;
             let length_axons =  dict.get(presynaptic_selected).axons;
             let length_dendrites = dict.get(postsynaptic_selected).dentrites;
@@ -156,33 +151,33 @@ include("function/menu_main.php");
                 if (noc!=0) {
                     num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 }
-                /*if (i == 3) {
-                    document.write("<br><br>"+length_axons[i]+" "+length_dendrites[i]+" "+volume_axons[i]+" "+volume_dendrites[i])
-                }*/
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
-                final_result.push(parseFloat(final_result_val.toFixed(3)));
+                final_result.push(final_result_val.toPrecision(4));
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(parseFloat(num_contacts[i].toFixed(2)));
+                final_result_noc.push(num_contacts[i].toPrecision(3));
             }
             /* compute totals */
+            // probability
             var p_tally = 1;
             for (var pi = 0; pi < length_axons.length; pi++) {
                 if (!isNaN(final_result[pi])) {
-                    //p_tally = p_tally * (1 - parseFloat(final_result[pi]));
                     p_tally = p_tally * (1 - final_result[pi]);
                 }
             }
-            final_result.push(parseFloat(1 - p_tally).toFixed(3));
+            // parseFloat( .toString()) is for avoiding a trailing 0
+            final_result.push(parseFloat(1 - p_tally).toPrecision(4).toString());
+            // noc
             var n_tally = 0;
             for (var ni = 0; ni < length_axons.length; ni++) {
                 if (!isNaN(final_result_noc[ni])) {
-                    //n_tally = n_tally + final_result_noc[ni];
                     n_tally = n_tally + parseFloat(final_result_noc[ni]);
                 }
             }
-            final_result_noc.push(n_tally.toFixed(2));
+            //let noc_final = parseFloat(n_tally.toPrecision(3));
+            //final_result_noc.push(noc_final.toString());
+            final_result_noc.push(n_tally.toPrecision(3).toString());
 
             /* generate tables */
             let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);

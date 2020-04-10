@@ -1,5 +1,9 @@
 <?php
   include ("permission_check.php");
+
+  /* reference: https://stackoverflow.com/questions/37618679/format-number-to-n-significant-digits-in-php
+  https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
+  */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -25,6 +29,21 @@ function checkNeuronProperty($color)
 	if ($color == 'somata')
 		$part = "somata";	
 	return $part;
+}
+
+function toPrecision($value, $digits)
+{
+    if ($value == 0) {
+        $decimalPlaces = $digits - 1;
+    } elseif ($value < 0) {
+        $decimalPlaces = $digits - floor(log10($value * -1)) - 1;
+    } else {
+        $decimalPlaces = $digits - floor(log10($value)) - 1;
+    }
+
+    $answer = ($decimalPlaces > 0) ?
+        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+    return $answer; // (float) is to remove trailing 0
 }
 
 // set properties
@@ -225,12 +244,19 @@ $post_name=$type_target->getName();
 			$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
 			$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
-			echo $value_result;
+			if ($nm_page=='noc') {
+				echo toPrecision($value_result, 3);
+				//echo $value_result;
+			}
+			else {
+				echo toPrecision($value_result, 4);
+				//echo $value_result;
+			}
 			echo "</a></td>";
 		}
 		else {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
-			echo $value_result;
+			echo toPrecision($value_result, 4);
 			echo "</td>";
 		}
 	}

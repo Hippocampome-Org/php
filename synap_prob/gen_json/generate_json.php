@@ -42,6 +42,21 @@ limit significant digits using cast again.
 		echo "<br>Completed processing record: ";
 	}
 
+	function toPrecision($value, $digits)
+	{
+	    if ($value == 0) {
+	        $decimalPlaces = $digits - 1;
+	    } elseif ($value < 0) {
+	        $decimalPlaces = $digits - floor(log10($value * -1)) - 1;
+	    } else {
+	        $decimalPlaces = $digits - floor(log10($value)) - 1;
+	    }
+
+	    $answer = ($decimalPlaces > 0) ?
+	        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+	    return $answer; // (float) is to remove trailing 0
+	}
+
 	/*
 	Generate matrices section
 
@@ -180,7 +195,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".$val."</a>";
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".toPrecision($val,4)."</a>";
 						}
 					}
 				} 
@@ -192,7 +207,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='' target='_blank'>".$val."</a></center>";  
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='' target='_blank'>".toPrecision($val,3)."</a></center>";  
 						}
 					}
 				} 	
@@ -204,7 +219,7 @@ limit significant digits using cast again.
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='' target='_blank'>".$val."</a>";            
+							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='' target='_blank'>".toPrecision($val,4)."</a>";            
 						}
 					}
 				} 	
