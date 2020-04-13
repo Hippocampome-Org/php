@@ -386,7 +386,7 @@ $("#nGrid").mouseout(function(e) {
 		</td>
 	<?php echo file_get_contents('synap_prob/n_m_footer_1.php');?>
   <tr height="20">
-    <td style="float:right"><a href='synap_prob/data/sp_values.csv'><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/></a></td><td><span style='float:left'><font class='font5'>&nbsp;CSV Synapse Probabilities Values</font></span></td> 
+    <td style="float:right"><a href='synap_prob/data/sp_values.csv'><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/></a></td><td><span style='float:left'><font class='font5'>&nbsp;CSV for the Synaptic Probabilities</font></span></td> 
   </tr> 
   <?php echo file_get_contents('synap_prob/n_m_footer_2.php');?>
   </tr>
