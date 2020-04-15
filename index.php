@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
       Reference: <b>Moradi and Ascoli, 2019</b>
       <a href = "https://doi.org/10.1002/hipo.23148">
       <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
-      Hippocampus 2019 Aug 31; doi: https://doi.org/10.1002/hipo.23148.
+      Hippocampus 2020 Apr;30(4):314-331; doi: https://doi.org/10.1002/hipo.23148.
       <br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
@@ -269,7 +269,7 @@ jQuery(document).ready(function() {
       <a href = "https://onlinelibrary.wiley.com/doi/full/10.1002/hipo.23165">
       <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
       Relational Inferences.</i></a>
-      Hippocampus 2019 Oct 9; doi: 10.1002/hipo.23165.
+      Hippocampus 2020 May;30(5):472-487; doi: 10.1002/hipo.23165.
       <br><br>
       The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
       phenotypes in the knowledge base.
