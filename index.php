@@ -252,7 +252,7 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:50px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:30px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
       <br><br><br>
