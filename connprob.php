@@ -137,7 +137,12 @@ include("function/menu_main.php");
             let final_result_val = "";
             let noc_non_zero = 0;
             for (var i = 0; i < length_axons.length; i++) {
+                if (isNaN(length_axons[i])){length_axons[i]=0;}
+                if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
+                if (isNaN(volume_axons[i])){volume_axons[i]=0;}
+                if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}                
                 let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                if (isNaN(noc)){noc=0;} 
                 if (noc!=0) {
                     noc_non_zero = noc_non_zero + 1;
                 }
@@ -148,6 +153,7 @@ include("function/menu_main.php");
                 if (isNaN(volume_axons[i])){volume_axons[i]=0;}
                 if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}
                 let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
+                if (isNaN(noc)){noc=0;} 
                 if (noc!=0) {
                     num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
                 }
