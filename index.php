@@ -216,7 +216,7 @@ jQuery(document).ready(function() {
       terms and phrases used on this website. Reference: <b>Hamilton et al., 2016</b>
       <a href="http://link.springer.com/article/10.1007/s40708-016-0053-3">
       <i>Name-calling in the hippocampus (and beyond): coming to terms with neuron types and properties</i></a>.
-      Brain Informatics (2016); doi:10.1007/s40708-016-0053-3.
+      Brain Informatics 2017 Mar;4(1):1-12; doi:10.1007/s40708-016-0053-3.
       <br><br>
       The release of v1.2 on 11/06/2016 includes 3,936 PoK, 14,399 PoE, and a clickable Connectivity Matrix, an interactive Connectivity Navigator, and the
       ability to Search by Connectivity. Reference: <b>Rees et al., 2016</b>
