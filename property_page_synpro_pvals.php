@@ -256,7 +256,13 @@ $post_name=$type_target->getName();
 		}
 		else {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
-			echo toPrecision($value_result, 4);
+			//echo toPrecision($value_result, 4);
+			if ($nm_page=='noc') {
+				echo toPrecision($value_result, 3);
+			}
+			else {
+				echo toPrecision($value_result, 4);
+			}
 			echo "</td>";
 		}
 	}
