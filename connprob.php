@@ -67,7 +67,13 @@ include("function/menu_main.php");
 </div>
     <script>
         let connDic = {};
+        let sourceIDDic = {};
+        let targetIDDic = {};
         function parse(data_1,volume_data,volumes_index,columnNames_index){
+            let source = document.getElementById("source").value.trim();
+            let target = document.getElementById("target").value.trim();
+            let source_id = sourceIDDic[source];
+            let target_id = targetIDDic[target];
             let dict = new Map();
             let vol_dict = new Map();
             let datav = data_1.split(/\r?\n|\r/);
@@ -90,7 +96,7 @@ include("function/menu_main.php");
                 let volRowData = vol_datav[count].split(",");
                 let nextRowData = datav[count+1].split(",");
                 let volNextRowData = vol_datav[count+1].split(",");
-                let key = rowData[0];
+                let key = rowData[1];
                 let firstRowData =rowData.slice(2).map(function(item) {
                     var value = parseFloat(item);
                     if(isNaN(value)) return 0;
@@ -119,18 +125,16 @@ include("function/menu_main.php");
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
             let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
             let interaction = parseFloat(document.getElementById("interaction").value);
-            let contacts = parseFloat(document.getElementById("contacts").value);
-            let presynaptic_selected = document.getElementById("source").value.trim();
-            let postsynaptic_selected = document.getElementById("target").value.trim();
+            let contacts = parseFloat(document.getElementById("contacts").value);       
             let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
             let c = vint /(spine_distance*bouton_distance);
-            dict.get(presynaptic_selected).columnNames.push("Total");
-            dict.get(presynaptic_selected).columnNames.shift();
-            let volumes_array = dict.get(presynaptic_selected).volumes;
-            let length_axons =  dict.get(presynaptic_selected).axons;
-            let length_dendrites = dict.get(postsynaptic_selected).dendrites;
-            let volume_axons =  vol_dict.get(presynaptic_selected).axons;
-            let volume_dendrites = vol_dict.get(postsynaptic_selected).dendrites;
+            dict.get(source_id).columnNames.push("Total");
+            dict.get(source_id).columnNames.shift();
+            let volumes_array = dict.get(source_id).volumes;
+            let length_axons =  dict.get(source_id).axons;
+            let length_dendrites = dict.get(target_id).dendrites;
+            let volume_axons =  vol_dict.get(source_id).axons;
+            let volume_dendrites = vol_dict.get(target_id).dendrites;
             let final_result = [];
             let final_result_noc = [];
             let num_contacts = [];
@@ -186,7 +190,7 @@ include("function/menu_main.php");
             final_result_noc.push(n_tally.toPrecision(3).toString());
 
             /* generate tables */
-            let cname = Array.from(dict.get(presynaptic_selected).columnNames, x => [x]);
+            let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title2').style.display='block';
@@ -355,7 +359,9 @@ include("function/menu_main.php");
                     let rows = data.split(/\r?\n|\r/);
                     for(let count = 1; count<rows.length-1; count=count+1) {
                     let row = rows[count].split(",");
+                    let sourceID = row[0];
                     let source = row[1];
+                    let targetID = row[2];
                     let target = row[3];
                     if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
                     //if (target !== undefined && source !== undefined) {
@@ -370,6 +376,8 @@ include("function/menu_main.php");
                                 connDic[source] = [];
                             }
                             connDic[source].push(target);
+                            sourceIDDic[source] = sourceID;
+                            targetIDDic[target] = targetID;
                             //document.write(source+" "+target+"<br>");
                         }
                     }
