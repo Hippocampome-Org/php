@@ -1,4 +1,7 @@
 <?php
+  include ("permission_check.php");
+?>
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
