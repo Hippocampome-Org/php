@@ -292,15 +292,15 @@ include("function/menu_main.php");
             }else if(name.includes("DG")){
                 volume_data = readVolumes("data/DG-Table-2.csv");
                 readData("data/DG-Table-1.csv",volume_data,0,1);
-            }else if(name.includes("EC")){
-                volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,2,3);
             }else if(name.includes("MEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
                 readData("data/EC-Table-1.csv",volume_data,1,3);
             }else if(name.includes("LEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
                 readData("data/EC-Table-1.csv",volume_data,0,3);
+            }else if(name.includes("EC")){
+                volume_data = readVolumes("data/EC-Table-2.csv");
+                readData("data/EC-Table-1.csv",volume_data,2,3);
             }else if(name.includes("SUB")){
                 volume_data = readVolumes("data/Sub-Table-2.csv");
                 readData("data/Sub-Table-1.csv",volume_data,0,1);
