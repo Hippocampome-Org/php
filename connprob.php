@@ -353,8 +353,9 @@ include("function/menu_main.php");
             selectbox.options.add(optn);
         };
         function init() {
-            let exclude = ["DG Axo-Axonic", "DG Basket" ,"DG Basket CCK+", "CA3 Axo-Axonic", "CA3 Horizontal Axo-Axonic" ,"CA3 Basket","CA2 Basket" ,"CA3 Basket CCK+","CA2 Basket+","CA2 Wide-Arbor Basket"
+            let exclude_pre = ["DG Axo-Axonic", "DG Basket" ,"DG Basket CCK+", "CA3 Axo-Axonic", "CA3 Horizontal Axo-Axonic" ,"CA3 Basket","CA2 Basket" ,"CA3 Basket CCK+","CA2 Basket+","CA2 Wide-Arbor Basket"
                 ,"CA1 Axo-Axonic","CA1 Horizontal Axo-Axonic","CA1 Basket","CA1 Basket CCK+","CA1 Horizontal Basket","SUB Axo-axonic","EC LII Axo-Axonic","MEC LII Basket","EC LII Basket-Multipolar","CA3 Interneuron Specific Oriens","CA3 Lucidum LAX","CA3 Lucidum-Radiatum","LEC LIII Multipolar Interneuron","MEC LIII Multipolar Principal","MEC LIII Multipolar Interneuron","EC LIII Pyramidal-Looking Interneuron"]
+            let exclude_post = ["CA3 Lucidum LAX","MEC LIII Multipolar Interneuron","EC LIII Pyramidal-Looking Interneuron"]
             $.ajax({
                 url:"data/conndata.csv",
                 dataType:"text",
@@ -366,14 +367,11 @@ include("function/menu_main.php");
                     let source = row[1];
                     let targetID = row[2];
                     let target = row[3];
-                    if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
-                    //if (target !== undefined && source !== undefined) {
+                    if (target !== undefined && source !== undefined && !(exclude_pre.indexOf(source.trim()) > -1) && !(exclude_post.indexOf(target.trim()) > -1)) {
                         source = source.trim();
                         target = target.trim();
                         let sourceName = source.split(" ")[0];                        
                         let targetName = target.split(" ")[0];
-                        //if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(target==="EC"||sourceName==="LEC"||sourceName==="MEC") || (sourceName==="CA3"&&target==="CA3c") || (sourceName==="CA3c"&&target==="CA3")) {
-                        //if (true) {
                         if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(targetName==="EC"||targetName==="LEC"||targetName==="MEC") || (sourceName==="CA3"&&targetName==="CA3c") || (sourceName==="CA3c"&&targetName==="CA3")) {
                             if (!connDic[source]) {
                                 connDic[source] = [];
