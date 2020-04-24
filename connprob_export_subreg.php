@@ -63,6 +63,21 @@ include("function/menu_main.php");
             <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled style="z-index:10;">Submit</button>
         </fieldset>
     </form>
+    <form target="#">
+        <center><font size=4>Select Subregion to Export: </font><br>
+        <select name="subreg">
+            <option name="-" value="-">-</option>
+            <option name="CA1" value="CA1">CA1</option>
+            <option name="CA2" value="CA2">CA2</option>
+            <option name="CA3" value="CA3">CA3</option>
+            <option name="DG" value="DG">DG</option>
+            <option name="EC" value="EC">EC</option>
+            <option name="SUB" value="SUB">SUB</option>
+        </select><br>
+        <input type="submit" value="Export Subregion"></input>    
+        <br>    
+        <br></center>
+    </form>
     <div id="test_output_div"><textarea id="test_output" cols='150' rows='3000'></textarea></div>
     <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
     <div id="graph" style="height:300px;position:relative;top:-20px;z-index:1"></div>
@@ -360,8 +375,9 @@ include("function/menu_main.php");
             selectbox.options.add(optn);
         };
         function init() {
-            let exclude = ["DG Axo-Axonic", "DG Basket" ,"DG Basket CCK+", "CA3 Axo-Axonic", "CA3 Horizontal Axo-Axonic" ,"CA3 Basket","CA2 Basket" ,"CA3 Basket CCK+","CA2 Basket+","CA2 Wide-Arbor Basket"
-                ,"CA1 Axo-Axonic","CA1 Horizontal Axo-Axonic","CA1 Basket","CA1 Basket CCK+","CA1 Horizontal Basket","SUB Axo-axonic","EC LII Axo-Axonic","MEC LII Basket","EC LII Basket-Multipolar","CA3 Interneuron Specific Oriens","CA3 Lucidum LAX","CA3 Lucidum-Radiatum","LEC LIII Multipolar Interneuron","MEC LIII Multipolar Principal","MEC LIII Multipolar Interneuron","EC LIII Pyramidal-Looking Interneuron"]
+            let exclude_pre = ["CA3 Giant","CA3 Interneuron Specific Quad","CA3 Lucidum LAX","MEC LIII Multipolar Principal","LEC LIII Multipolar Interneuron","EC LIII Pyramidal-Looking Interneuron","DG Axo-Axonic", "DG Basket" ,"DG Basket CCK+", "CA3 Axo-Axonic", "CA3 Horizontal Axo-Axonic" ,"CA3 Basket","CA2 Basket" ,"CA3 Basket CCK+","CA2 Basket+","CA2 Wide-Arbor Basket"
+                ,"CA1 Axo-Axonic","CA1 Horizontal Axo-Axonic","CA1 Basket","CA1 Basket CCK+","CA1 Horizontal Basket","SUB Axo-axonic","EC LII Axo-Axonic","MEC LII Basket","EC LII Basket-Multipolar"]
+            let exclude_post = ["CA3 Giant", "CA3 Interneuron Specific Quad", "CA3 Lucidum LAX","MEC LIII Multipolar Principal","LEC LIII Multipolar Interneuron","EC LIII Pyramidal-Looking Interneuron"]
             $.ajax({
                 url:"data/conndata.csv",
                 dataType:"text",
@@ -373,14 +389,11 @@ include("function/menu_main.php");
                     let source = row[1];
                     let targetID = row[2];
                     let target = row[3];
-                    if (target !== undefined && source !== undefined && !(exclude.indexOf(source.trim()) > -1)) {
-                    //if (target !== undefined && source !== undefined) {
+                    if (target !== undefined && source !== undefined && !(exclude_pre.indexOf(source.trim()) > -1) && !(exclude_post.indexOf(target.trim()) > -1)) {
                         source = source.trim();
                         target = target.trim();
                         let sourceName = source.split(" ")[0];                        
                         let targetName = target.split(" ")[0];
-                        //if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(target==="EC"||sourceName==="LEC"||sourceName==="MEC") || (sourceName==="CA3"&&target==="CA3c") || (sourceName==="CA3c"&&target==="CA3")) {
-                        //if (true) {
                         if (sourceName === targetName || (sourceName==="EC"||sourceName==="LEC"||sourceName==="MEC")&&(targetName==="EC"||targetName==="LEC"||targetName==="MEC") || (sourceName==="CA3"&&targetName==="CA3c") || (sourceName==="CA3c"&&targetName==="CA3")) {
                             if (!connDic[source]) {
                                 connDic[source] = [];
@@ -408,11 +421,39 @@ include("function/menu_main.php");
                         let target_id = targetIDDic[target_desc];
 
                         let name = document.getElementById("source").value.split(" ")[0];
-                        //if (name.includes("CA1")) {  
-                        //if (name.includes("CA3")) {
-                        if (name.includes("LEC") || name.includes("MEC") || name.includes("EC")) {
-                            submitClicked(source_desc,target_desc,source_id,target_id);
-                        }
+                        <?php if (isset($_REQUEST['subreg'])) {
+                            $subreg = $_REQUEST['subreg'];
+                            if ($subreg == "CA1") {
+                                echo "if (name.includes('CA1')) {  
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                            if ($subreg == "CA2") {
+                                echo "if (name.includes('CA2')) {  
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                            if ($subreg == "CA3") {
+                                echo "if (name.includes('CA3')) {  
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                            if ($subreg == "DG") {
+                                echo "if (name.includes('DG')) {  
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                            if ($subreg == "EC") {
+                                echo "if (name.includes('LEC') || name.includes('MEC') || name.includes('EC')) {
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                            if ($subreg == "SUB") {
+                                echo "if (name.includes('SUB')) {  
+                                    submitClicked(source_desc,target_desc,source_id,target_id);
+                                }";
+                            }
+                        }?>
                     }
                 }
                 source_html.disabled = false;
