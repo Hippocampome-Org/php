@@ -63,21 +63,6 @@ include("function/menu_main.php");
             <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled style="z-index:10;">Submit</button>
         </fieldset>
     </form>
-    <form target="#">
-        <center><font size=4>Select Subregion to Export: </font><br>
-        <select name="subreg">
-            <option name="-" value="-">-</option>
-            <option name="CA1" value="CA1">CA1</option>
-            <option name="CA2" value="CA2">CA2</option>
-            <option name="CA3" value="CA3">CA3</option>
-            <option name="DG" value="DG">DG</option>
-            <option name="EC" value="EC">EC</option>
-            <option name="SUB" value="SUB">SUB</option>
-        </select><br>
-        <input type="submit" value="Export Subregion"></input>    
-        <br>    
-        <br></center>
-    </form>
     <div id="test_output_div"><textarea id="test_output" cols='150' rows='3000'></textarea></div>
     <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
     <div id="graph" style="height:300px;position:relative;top:-20px;z-index:1"></div>
@@ -88,12 +73,12 @@ include("function/menu_main.php");
         let connDic = {};
         let sourceIDDic = {};
         let targetIDDic = {};
-        function parse(data_1,volume_data,volumes_index,columnNames_index,source_desc,target_desc,source_id,target_id){
-            let source = source_desc;//document.getElementById("source").value.trim();
-            let target = target_desc;//document.getElementById("target").value.trim();
-            //let source_id = sourceIDDic[source];
-            //let target_id = targetIDDic[target];
-            //document.getElementById("test_output").value+=source_id+","+source+","+target_id+","+target+"\n";
+        function parse(data_1,volume_data,volumes_index,columnNames_index){
+            //document.getElementById("test_output").value+='\n* volumes_index: '+volumes_index;
+            let source = document.getElementById("source").value.trim();
+            let target = document.getElementById("target").value.trim();
+            let source_id = sourceIDDic[source];
+            let target_id = targetIDDic[target];
             let dict = new Map();
             let vol_dict = new Map();
             let datav = data_1.split(/\r?\n|\r/);
@@ -145,10 +130,11 @@ include("function/menu_main.php");
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
             let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
             let interaction = parseFloat(document.getElementById("interaction").value);
-            let contacts = parseFloat(document.getElementById("contacts").value);       
+            let contacts = parseFloat(document.getElementById("contacts").value); 
+            let presynaptic_selected = document.getElementById("source").value.trim();
+            let postsynaptic_selected = document.getElementById("target").value.trim();  
             let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
             let c = vint /(spine_distance*bouton_distance);
-            //document.getElementById("test_output").value+=dict.get(source_id).columnNames;            
             dict.get(source_id).columnNames.push("Total");
             dict.get(source_id).columnNames.shift();
             let volumes_array = dict.get(source_id).volumes;
@@ -161,6 +147,8 @@ include("function/menu_main.php");
             let num_contacts = [];
             let final_result_val = "";
             let noc_non_zero = 0;
+            let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
+            document.getElementById("test_output").value+='\n______________________NOC Values______________________\nNote: formula below is (if (noc!=0) otherwise num_contacts[i] = 0) and \nnoc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i])';
             for (var i = 0; i < length_axons.length; i++) {
                 if (isNaN(length_axons[i])){length_axons[i]=0;}
                 if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
@@ -170,7 +158,7 @@ include("function/menu_main.php");
                 if (isNaN(noc)){noc=0;} 
                 if (noc!=0) {
                     noc_non_zero = noc_non_zero + 1;
-                }
+                }               
             }
             for (var i = 0; i < length_axons.length; i++) {
                 if (isNaN(length_axons[i])){length_axons[i]=0;}
@@ -181,13 +169,30 @@ include("function/menu_main.php");
                 if (isNaN(noc)){noc=0;} 
                 if (noc!=0) {
                     num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
-                }
+                } 
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(num_contacts[i].toPrecision(3));                
+                final_result_noc.push(num_contacts[i].toPrecision(3));
+                document.getElementById("test_output").value+='\n______________________'+cname[i]+'______________________';
+                document.getElementById("test_output").value+='\nnoc: '+num_contacts[i]+' c: '+c+' '+'length_axons[i]: '+length_axons[i]+' length_dendrites[i]: '+length_dendrites[i]+' volume_axons[i]: '+volume_axons[i]+' volume_dendrites[i]: '+volume_dendrites[i];
+                if (noc!=0) {
+                document.getElementById("test_output").value+='\nFormula: '+num_contacts[i]+' = (1 / '+noc_non_zero+') + (4 * '+c+' * '+length_axons[i]+' * '+length_dendrites[i]+') / ('+volume_axons[i]+' + '+volume_dendrites[i]+')';                
+                }
+                else {
+                    document.getElementById("test_output").value+='\nFormula: '+num_contacts[i]+' (due to noc = 0) = (1 / '+noc_non_zero+') + (4 * '+c+' * '+length_axons[i]+' * '+length_dendrites[i]+') / ('+volume_axons[i]+' + '+volume_dendrites[i]+')'; 
+                }
+                /*document.getElementById("test_output").value+='\nfinal_result_val: c: '+c+' length_axons[i]: '+length_axons[i]+' length_dendrites[i]: '+length_dendrites[i]+' '+'volumes_array[i]: '+volumes_array[i]+' num_contacts[i]: '+num_contacts[i]+'\n'+final_result[i]+' = ('+c+' * (('+length_axons[i]+' * '+length_dendrites[i]+') / '+volumes_array[i]+')) / '+num_contacts[i];*/
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
                 final_result.push(final_result_val.toPrecision(4));
+            }
+            /*for (var i = 0; i < length_axons.length; i++) {
+                document.getElementById("test_output").value+='\nnoc: '+noc+' c: '+c+' '+'length_axons[i]: '+length_axons[i]+' length_dendrites[i]: '+length_dendrites[i]+' volume_axons[i]: '+volume_axons[i]+' volume_dendrites[i]: '+volume_dendrites[i];
+            }*/
+            document.getElementById("test_output").value+='\n______________________Probability Calc Values______________________';
+            for (var i = 0; i < length_axons.length; i++) {
+                document.getElementById("test_output").value+='\n______________________'+cname[i]+'______________________';
+                document.getElementById("test_output").value+='\nfinal_result_val: c: '+c+' length_axons[i]: '+length_axons[i]+' length_dendrites[i]: '+length_dendrites[i]+' '+'volumes_array[i]: '+volumes_array[i]+' num_contacts[i]: '+num_contacts[i]+'\nFormula: '+final_result[i]+' = ('+c+' * (('+length_axons[i]+' * '+length_dendrites[i]+') / '+volumes_array[i]+')) / '+num_contacts[i];
             }
             /* compute totals */
             // probability
@@ -211,10 +216,10 @@ include("function/menu_main.php");
             final_result_noc.push(n_tally.toPrecision(3).toString());
 
             /* generate tables */
-            let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
+            //let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
-            /*document.getElementById('title2').style.display='block';
+            document.getElementById('title2').style.display='block';
             let graphdata = [{
                 type: 'table',
                 layout: {
@@ -255,18 +260,15 @@ include("function/menu_main.php");
                     height:30
                 }
             }]
-            Plotly.plot('graph_noc', noc_graphdata);*/
-            if (document.getElementById("test_output").value == '') {
-                document.getElementById("test_output").value="source_id,source,target_id,target,"+cname+","+cname+"\n";
-            }
-            document.getElementById("test_output").value+=source_id+","+source+","+target_id+","+target+","+result+","+result_noc+"\n";
+            Plotly.plot('graph_noc', noc_graphdata);
+            document.getElementById("test_output").value+="\n______________________End Results______________________\n"+presynaptic_selected+","+postsynaptic_selected+"\n```\n\t\t\t\t"+cname+"\nProbabilities: "+result+"\nNOC: "+result_noc+"\n```";
         }
-        function readData(url,volume_data,volumes_index,columns_index,source_desc,target_desc,source_id,target_id){
+        function readData(url,volume_data,volumes_index,columns_index){
             $.ajax({
                 url:url,
                 dataType:"text",
                 success:[function(data){
-                   parse(data,volume_data,volumes_index,columns_index,source_desc,target_desc,source_id,target_id);
+                   parse(data,volume_data,volumes_index,columns_index);
                 }]
             });
         }
@@ -307,32 +309,32 @@ include("function/menu_main.php");
             //document.getElementById("interaction").value=vol_data;
             return volume_data;
         }  
-        function submitClicked(source_desc,target_desc,source_id,target_id){
+        function submitClicked(){
             let name = document.getElementById("source").value.split(" ")[0];
             if(name.includes("CA1")){
                 volume_data = readVolumes("data/CA1-Table-2.csv");
-                readData("data/CA1-Table-1.csv",volume_data,0,1,source_desc,target_desc,source_id,target_id);
+                readData("data/CA1-Table-1.csv",volume_data,0,1);
             }else if(name.includes("CA2")){
                 volume_data = readVolumes("data/CA2-Table-2.csv");
-                readData("data/CA2-Table-1.csv",volume_data,0,1,source_desc,target_desc,source_id,target_id);
+                readData("data/CA2-Table-1.csv",volume_data,0,1);
             }else if(name.includes("CA3")){
                 volume_data = readVolumes("data/CA3-Table-2.csv");
-                readData("data/CA3-Table-1.csv",volume_data,0,1,source_desc,target_desc,source_id,target_id);
+                readData("data/CA3-Table-1.csv",volume_data,0,1);
             }else if(name.includes("DG")){
                 volume_data = readVolumes("data/DG-Table-2.csv");
-                readData("data/DG-Table-1.csv",volume_data,0,1,source_desc,target_desc,source_id,target_id);
+                readData("data/DG-Table-1.csv",volume_data,0,1);
             }else if(name.includes("MEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,1,3,source_desc,target_desc,source_id,target_id);
+                readData("data/EC-Table-1.csv",volume_data,1,3);
             }else if(name.includes("LEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,0,3,source_desc,target_desc,source_id,target_id);
+                readData("data/EC-Table-1.csv",volume_data,0,3);
             }else if(name.includes("EC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,2,3,source_desc,target_desc,source_id,target_id);
+                readData("data/EC-Table-1.csv",volume_data,2,3);
             }else if(name.includes("SUB")){
                 volume_data = readVolumes("data/Sub-Table-2.csv");
-                readData("data/Sub-Table-1.csv",volume_data,0,1,source_desc,target_desc,source_id,target_id);
+                readData("data/Sub-Table-1.csv",volume_data,0,1);
             }
         }
         function targetSelected(){
@@ -411,50 +413,6 @@ include("function/menu_main.php");
                 addOption(source_html, "-", "-");
                 for (let key in connDic) {
                     addOption(source_html, key, key);
-                    sourceSelected();
-                    document.getElementById("source").value=key; 
-                    for(let value in connDic[key]){
-                        document.getElementById("target").value=connDic[key][value];
-                        let source_desc = key;
-                        let source_id = sourceIDDic[source_desc];
-                        let target_desc = connDic[key][value];
-                        let target_id = targetIDDic[target_desc];
-
-                        let name = document.getElementById("source").value.split(" ")[0];
-                        <?php if (isset($_REQUEST['subreg'])) {
-                            $subreg = $_REQUEST['subreg'];
-                            if ($subreg == "CA1") {
-                                echo "if (name.includes('CA1')) {  
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                            if ($subreg == "CA2") {
-                                echo "if (name.includes('CA2')) {  
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                            if ($subreg == "CA3") {
-                                echo "if (name.includes('CA3')) {  
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                            if ($subreg == "DG") {
-                                echo "if (name.includes('DG')) {  
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                            if ($subreg == "EC") {
-                                echo "if (name.includes('LEC') || name.includes('MEC') || name.includes('EC')) {
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                            if ($subreg == "SUB") {
-                                echo "if (name.includes('SUB')) {  
-                                    submitClicked(source_desc,target_desc,source_id,target_id);
-                                }";
-                            }
-                        }?>
-                    }
                 }
                 source_html.disabled = false;
            }] });}
