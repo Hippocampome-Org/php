@@ -692,7 +692,7 @@ include ("function/icon.html");
 
 			}
 
-			if ($property1 == 'Electrophysiology')
+			if ($property1 == 'Membrane biophysics')
 
 				$n_part = 10;		
 
