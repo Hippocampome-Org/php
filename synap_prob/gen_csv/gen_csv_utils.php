@@ -14,10 +14,13 @@
 	function refID_to_fragID($fragments, $refID) {
 		$found=false; // only return the first result found
 		for ($i=0;$i<count($fragments);$i++) {
-			if ($refID==$fragments[$i][1] && $found==false) {
+			$frag_id_temp = $fragments[$i][1];
+			if ($refID==$frag_id_temp && $found==false) {
 				$frag_id=$fragments[$i][0];
 				$found=true;
+				echo "found";
 			}
+			//echo "r:".$refID." f:".$frag_id_temp."|";
 		}
 		return $frag_id;
 	}	

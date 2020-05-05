@@ -93,7 +93,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		                }
 		            
 		            	if ($page == 'dal') {
-			                $sql    = "SELECT CAST(STD(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(AVG(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND total_length!='';";
+			                $sql    = "SELECT CAST(STD(CAST(filtered_total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(CAST(filtered_total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(AVG(CAST(filtered_total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, CAST(COUNT(CAST(filtered_total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_tl FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND filtered_total_length!='';";
 			                $result = $conn->query($sql);
 			                if ($result->num_rows > 0) {
 			                    while ($row = $result->fetch_assoc()) {
@@ -112,6 +112,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 			                        }
 			                    }
 			                }  
+			                //$entry_output = $entry_output.$sql;
 		                }
 		                elseif ($page == 'sd') {
 		                	$sql    = "SELECT CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, MIN(CAST(min_path_length AS DECIMAL(10,2))) AS min_sd, MAX(CAST(max_path_length AS DECIMAL(10,2))) AS max_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND avg_path_length!='';";
@@ -155,7 +156,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		        }
 		        if ($page == 'dal') {
 			        for ($s_i = 0; $s_i < count($all_parcel_search); $s_i++) {
-		                $sql    = "SELECT AVG(CAST(total_length AS DECIMAL(10,2))) AS avg, STD(CAST(total_length AS DECIMAL(10,2))) AS std, COUNT(CAST(total_length AS DECIMAL(10,2))) AS count_tl FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND total_length!='';";
+		                $sql    = "SELECT AVG(CAST(filtered_total_length AS DECIMAL(10,2))) AS avg, STD(CAST(filtered_total_length AS DECIMAL(10,2))) AS std, COUNT(CAST(filtered_total_length AS DECIMAL(10,2))) AS count_tl FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $all_parcel_search[$s_i] . "' AND filtered_total_length!='';";
 		                $result = $conn->query($sql);
 		                if ($result->num_rows > 0) {
 		                    $row        = $result->fetch_assoc();

@@ -36,7 +36,9 @@
 			$entry=array($row['id'], $row['original_id'], $row['dt'], $row['quote'], $row['page_location'], $row['pmid_isbn'], $row['pmid_isbn_page'], $row['type'], $row['attachment'], $row['attachment_type'], $row['source_id'], $row['target_id'], $row['parameter'], $row['interpretation'], $row['interpretation_notes'], $row['linking_cell_id'], $row['linking_pmid_isbn'], $row['linking_pmid_isbn_page'], $row['linking_quote'], $row['linking_page_location'], $row['species_tag'], $row['species_descriptor'], $row['age_weight'], $row['protocol']);
 			array_push($fragments, $entry);
 		}
-	}			
+	}	
+	//echo "count fragments:<br>";
+	//echo (count($fragments));
 
 	// create fragment_id evidence_id array
 	$evidence = array();
