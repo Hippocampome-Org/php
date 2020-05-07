@@ -613,7 +613,7 @@ function show_only_authors(link, start1, stop1)
 				<td align="left" width="80%" class="table_neuron_page2">
 					&nbsp; <?php $id=$type->getId();
 								 $name=$type->getName();
-					print("From: <a href='neuron_page.php?id=$id'>$name</a>"); ?>
+					print("From: <a href='neuron_page.php?id=$id1_neuron'>$name</a>"); ?>
 				</td>				
 			</tr>
 			<tr>
@@ -624,7 +624,7 @@ function show_only_authors(link, start1, stop1)
 				<td align="left" width="80%" class="table_neuron_page2">
 					&nbsp; <?php $id2=$type->getId();
 								 $name_long2=$type2->getName();
-					print("To: <a href='neuron_page.php?id=$id2'>$name_long2</a>"); ?>
+					print("To: <a href='neuron_page.php?id=$id2_neuron'>$name_long2</a>"); ?>
 				</td>
 			</tr>
 			<tr>
@@ -779,11 +779,13 @@ function show_only_authors(link, start1, stop1)
 					$pmid_isbn= $fragment -> getPmid_isbn();
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					$page_location = $fragment -> getPage_location();
+					echo "test ".$original_id;
 					//Retreive information from attachment table					
 					if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
 					{
 						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 						$id_article= $article -> getID();
+						echo "test11";
 					}
 					else 
 					{
@@ -792,8 +794,10 @@ function show_only_authors(link, start1, stop1)
 						$id_article = $articleevidencerel -> getArticle_id_array(0);
 						// retrieve all information from article table by using article_id
 						$article -> retrive_by_id($id_article) ;
+						echo "~ ".$evidence_id[$i]." ~ test22";
 					}
 					$title = $article -> getTitle();
+					echo $title;
 					$publication = $article -> getPublication();
 					$year = $article -> getYear();
 					$pmid_isbn = $article -> getPmid_isbn(); 
