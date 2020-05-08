@@ -1317,13 +1317,13 @@ function show_only_authors(link, start1, stop1)
 									$attachment_type = $attachment_obj -> getType();
 									//$attachment_type="synpro_figure";
 									$link_figure="";									
-									$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+									$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
 									// original article attachment
 									$attachment_obj2 = new attachment_synpro($class_attachment); // this clears prior attachment results
 									$attachment_obj2 -> retrive_by_props($id_original, $id_neuron, 'Original');
 									$art_orig_attachment = $attachment_obj2 -> getName();
 									$art_orig_attachment_type = $attachment_obj2 -> getType();
-									$art_orig_attachment_jpg = str_replace('jpg', 'jpeg', $art_orig_attachment);
+									$art_orig_attachment_jpg = $art_orig_attachment;//str_replace('jpg', 'jpeg', $art_orig_attachment);
 
 									if($attachment_type=="synpro_figure"){
 										$link_figure = "attachment/neurites/".$attachment_jpg;

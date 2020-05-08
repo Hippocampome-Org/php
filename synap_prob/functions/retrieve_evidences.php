@@ -67,13 +67,13 @@ function retrieve_evidences($show1, $type_for_display, $fragment, $conn, $id1_ne
 		$attachment_type = $attachment_obj -> getType();
 		//$attachment_type="synpro_figure";
 		$link_figure="";									
-		$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+		$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
 		// original article attachment
 		$attachment_obj2 = new attachment_synpro($class_attachment); // this clears prior attachment results
 		$attachment_obj2 -> retrive_by_props($id_original, $id1_neuron, 'Original');
 		$art_orig_attachment = $attachment_obj2 -> getName();
 		$art_orig_attachment_type = $attachment_obj2 -> getType();
-		$art_orig_attachment_jpg = str_replace('jpg', 'jpeg', $art_orig_attachment);
+		$art_orig_attachment_jpg = $art_orig_attachment;//str_replace('jpg', 'jpeg', $art_orig_attachment);
 
 		if($attachment_type=="synpro_figure"){
 			$link_figure = "attachment/neurites/".$attachment_jpg;
@@ -154,7 +154,7 @@ function retrieve_evidences($show1, $type_for_display, $fragment, $conn, $id1_ne
 		$attachment = $attachment_obj -> getName();
 		$attachment_type = $attachment_obj -> getType();
 		//$attachment_type="synpro_figure";								
-		$attachment_jpg = str_replace('jpg', 'jpeg', $attachment);
+		$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
 		$link_figure = "attachment/neurites/".$attachment_jpg;
 		$download_icon='images/download_PNG.png';
 		$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
