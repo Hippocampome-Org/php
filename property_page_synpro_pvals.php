@@ -90,7 +90,17 @@ $post_name=$type_target->getName();
 ?>
 
 <div class='title_area' style="width:1200px;">
-	<font class="font1">Synapse Probabilities - Parcel-Specific Potential Synapses Per Neuron Pair</font>
+	<?php
+	if ($nm_page=='ps') {
+		echo '<font class="font1">Number of Potential Synapses - Parcel-Specific Number of Potential Synapses Per Neuron Pair</font>';
+	}
+	if ($nm_page=='noc') {
+		echo '<font class="font1">Number of Contacts - Parcel-Specific Number of Contacts Per Neuron Pair</font>';
+	}
+	if ($nm_page=='prosyn') {
+		echo '<font class="font1">Synapse Probabilities - Parcel-Specific Potential Synapses Per Neuron Pair</font>';
+	}
+	?>
 </div>
 
 <br><br /><br><br />
@@ -205,7 +215,7 @@ $post_name=$type_target->getName();
 		GROUP BY source_ID, source_Name, target_ID, target_Name, neurite
 		LIMIT 500000;
 		";
-		//echo "<br>$query<br>";
+		//echo "<br><br><br><br><br><br>$query<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($sid, $son, $tid, $tan, $neu, $val) = mysqli_fetch_row($rs))
 		{	
