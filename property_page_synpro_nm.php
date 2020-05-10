@@ -743,11 +743,11 @@ function show_only_authors(link, start1, stop1)
 					// $i==0 is axons, $i==1 is dendrites
 					if ($tt==0) {
 						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id1_neuron);	
-						//echo "<br>id1_neuron::<br>$id1_neuron<br>$n_property_id";	
+						//echo "<br>id1_neuron:: $id1_neuron | ".$property_id[$i]."<br>";	
 					}
 					else if ($tt==1) {
 						$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id2_neuron);	
-						//echo "<br>id2_neuron::<br>$id2_neuron";		
+						//echo "<br>id2_neuron:: $id2_neuron | ".$property_id[$i]."<br>";	
 					}
 					//$evidencepropertyyperel -> retrive_evidence_id_n_by_n($property_id[$i], $id1_neuron, $id2_neuron);			
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
@@ -831,6 +831,53 @@ function show_only_authors(link, start1, stop1)
 							$name_authors = $name_authors.', '.$name_a;
 					}
 					$pages= $first_page." - ".$last_page;
+					//////
+					$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
+					$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
+					$type_for_display=$part1[$tt];//$type;
+					if (in_array($type_for_display,$dendrite_group)) {
+						$neurite_ref = $val1_property.":D";
+						$neuron_id=$id2_neuron;
+					}
+					elseif (in_array($type_for_display,$axon_group)) {
+						$neurite_ref = $val1_property.":A";	
+						$neuron_id=$id1_neuron;
+					}
+					$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
+					$refID=$original_id;
+					///
+					if ($nm_page=='prosyn' or $nm_page=='noc') {
+						print ("
+						<tr>
+						<td width='70%' class='table_neuron_page2' align='left'>");
+						$convexhullvolume=$fragment->getConvexHullVolume($neuron_id,$nq_neurite_name,$refID);
+						print ("Convex hull volume in ".$val1_property.": $convexhullvolume μm&sup3;");
+						print ("</td></tr>");
+					}
+					if ($nm_page=='ps' or $nm_page=='noc') {
+						print ("
+						<tr>
+						<td width='70%' class='table_neuron_page2' align='left'>");
+						$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
+						$values_count=$neurite_lengths[2];
+						if ($values_count>1) {
+							if ($color1=='red') {
+								print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+							}
+							if ($color1=='blue') {
+								print ("Dendritic lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
+							}
+						}
+						else {
+							if ($color1=='red') {
+								print ("Axonal length in ".$parcel.": ".$neurite_lengths[1]." μm");										}
+							if ($color1=='blue') {
+								print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
+							}
+						}
+						print ("</td></tr>");
+					}
+					//////
 					if ($page)
 					{
 						// Insert the data in the temporary table:	 
