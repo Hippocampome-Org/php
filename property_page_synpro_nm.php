@@ -831,7 +831,7 @@ function show_only_authors(link, start1, stop1)
 							$name_authors = $name_authors.', '.$name_a;
 					}
 					$pages= $first_page." - ".$last_page;
-					//////
+					////// check for values needed for article display ///////
 					$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
 					$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
 					$type_for_display=$part1[$tt];//$type;
@@ -847,42 +847,59 @@ function show_only_authors(link, start1, stop1)
 					$refID=$original_id;
 					///
 					if ($nm_page=='prosyn' or $nm_page=='noc') {
+						$convexhullvolume=$fragment->getConvexHullVolume($neuron_id,$nq_neurite_name,$refID);
+					}
+					if ($nm_page=='ps' or $nm_page=='noc' or $nm_page=='prosyn') {
+						$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
+					}
+					/*
+					if ($nm_page=='prosyn' or $nm_page=='noc') {
 						print ("
 						<tr>
 						<td width='70%' class='table_neuron_page2' align='left'>");
-						$convexhullvolume=$fragment->getConvexHullVolume($neuron_id,$nq_neurite_name,$refID);
 						print ("Convex hull volume in ".$val1_property.": $convexhullvolume μm&sup3;");
 						print ("</td></tr>");
 					}
-					if ($nm_page=='ps' or $nm_page=='noc') {
+					if ($nm_page=='ps' or $nm_page=='noc' or $nm_page=='prosyn') {
 						print ("
 						<tr>
 						<td width='70%' class='table_neuron_page2' align='left'>");
-						$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
 						$values_count=$neurite_lengths[2];
 						if ($values_count>1) {
-							if ($color1=='red') {
+							if (in_array($type_for_display,$axon_group)) {
 								print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
 							}
-							if ($color1=='blue') {
+							if (in_array($type_for_display,$dendrite_group)) {
 								print ("Dendritic lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
 							}
 						}
 						else {
-							if ($color1=='red') {
+							if (in_array($type_for_display,$axon_group)) {
 								print ("Axonal length in ".$parcel.": ".$neurite_lengths[1]." μm");										}
-							if ($color1=='blue') {
+							if (in_array($type_for_display,$dendrite_group)) {
 								print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
 							}
 						}
 						print ("</td></tr>");
 					}
-					//////
-					if ($page)
+					*/
+					////// filter articles //////
+					$filter_out = true;
+					if ($nm_page=='ps' && $neurite_lengths[1] != 0) {
+						$filter_out = false;
+					}
+					if ($nm_page=='noc' && $neurite_lengths[1] != 0 && $convexhullvolume != 0) {
+						$filter_out = false;
+					}
+					if ($nm_page=='prosyn' && $neurite_lengths[1] != 0 && $convexhullvolume != 0) {
+						$filter_out = false;
+					}
+					if ($page && $filter_out != true)
 					{
 						// Insert the data in the temporary table:	 
 						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
 					}
+					//////                 ///////
 				}
 			}			
 					// find the total number of Articles: 
