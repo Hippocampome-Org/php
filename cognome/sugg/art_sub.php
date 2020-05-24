@@ -1,3 +1,11 @@
+<?php if (!session_id()) {session_start();}
+/* check for login */
+if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
+  echo "<script>window.location.replace('login.php');</script>";
+  header("Location: login.php"); 
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +16,7 @@
   <title>Hippocampus Region Models and Theories</title>
   <link rel="stylesheet" type="text/css" href="../main.css">
   <?php include('set_theme.php'); ?>
-  <?php include('../function/hc_header.php'); ?>
-  <?php 
-  /* check for login */
-  if (!isset($_SESSION['user_login'])) {
-    header("Location: login.php"); 
-    exit();
-  }
-  ?>  
+  <?php include('../function/hc_header.php'); ?> 
 </head>
 <body>
   <?php include("../function/hc_body.php"); ?>

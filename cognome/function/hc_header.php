@@ -3,7 +3,7 @@
   page.
 -->
 <?php
-  include ("../access_db.php");
+  include ("../../access_db.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
 <!-- Site for Hippocampus region models and theories that are described computationally in terms of spiking neural networks. 
@@ -87,5 +87,5 @@ margin: -25px 0 0 -25px;
 }
 </style>
 <?php
-include("../function/icon.html");
+include("../../function/icon.html");
 ?>

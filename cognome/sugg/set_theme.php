@@ -1,4 +1,11 @@
 <?php
+/*if ( ! session_id() ) {
+
+session_start();
+
+}*/
+?>
+<?php
   /* 
     Set style theme for site display
   */

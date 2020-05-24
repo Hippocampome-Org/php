@@ -1,3 +1,4 @@
+<?php if (!session_id()) {session_start();} ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,26 +34,31 @@
   </script>
   <!-- end of header -->
   
-  <?php
-  include('mysql_connect.php');  
 
-  if (isset($_POST['username']) & isset($_POST['password'])) {
-    include('secret_key.php');
-    //echo $_POST['username']."<br><br>".$_POST['password'];
-    $sql = "SELECT AES_DECRYPT(`password`, '".$pass_enc_secret_key."') AS `password` FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
-    echo $sql;
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) { 
-      $pass_match = $result->fetch_assoc()['password'];
-      if ($pass_match == $_POST['password']) {
-        $_SESSION['user_login'] = $_POST['username'];
-        echo '<br>Registered user found. Redirecting in 3 seconds.<br>';
-        sleep(3);
-        header("Location: mod_art.php"); 
-        exit();        
-      }
-    }    
-  }
+  <!-- check for redirect -->
+<?php
+include('mysql_connect.php');  
+
+if (isset($_POST['username']) & isset($_POST['password'])) {
+  include('secret_key.php');
+  //echo $_POST['username']."<br><br>".$_POST['password'];
+  $sql = "SELECT AES_DECRYPT(`password`, '".$pass_enc_secret_key."') AS `password` FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
+  //echo $sql;
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) { 
+    $pass_match = $result->fetch_assoc()['password'];
+    if ($pass_match == $_POST['password']) {
+      $_SESSION['user_login'] = $_POST['username'];
+      echo '<br>Registered user found. Redirecting in 3 seconds.<br>';
+      sleep(3);
+      //header("Location: mod_art.php");
+      echo "<script>window.location.replace('mod_art.php');</script>";
+      exit();        
+    }
+  }    
+}
+?>
+  <?php
 
   echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:.7em;'>";
   if (isset($_GET['logout'])) {

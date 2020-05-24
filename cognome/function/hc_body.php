@@ -3,7 +3,6 @@
 	page.
 -->
 <div style="display:none;">
-<?php include("../simphp-2.0.php"); ?>
 </div>
-<?php include("function/title.php"); ?>  
-<?php include("function/hc_menu.php"); ?>
+<?php /*include("title.php");*/ ?>  
+<?php /*include("hc_menu.php");*/ ?>

@@ -4,42 +4,42 @@ jQuery(document).ready(function() {
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: '../load_matrix_session_markers.php',
+    url: '../../load_matrix_session_markers.php',
     success: function() {}
   }); 
   $.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: '../load_matrix_session_ephys.php',
+    url: '../../load_matrix_session_ephys.php',
     success: function() {}
   }); 
   $.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: '../load_matrix_session_morphology.php',
+    url: '../../load_matrix_session_morphology.php',
     success: function() {}
   });
   $.ajax({
       type: 'GET',
       cache: false,
       contentType: 'application/json; charset=utf-8',
-      url: '../load_matrix_session_connectivity.php',
+      url: '../../load_matrix_session_connectivity.php',
       success: function() {}
     });
   $.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: '../load_matrix_session_firing.php',
+    url: '../../load_matrix_session_firing.php',
     success: function() {}
   });
   $.ajax({
     type: 'GET',
     cache: false,
     contentType: 'application/json; charset=utf-8',
-    url: '../load_matrix_session_firing_parameter.php',
+    url: '../../load_matrix_session_firing_parameter.php',
     success: function() {}
   });
   /*
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 
 <div id="menu_main_button_new_clr">
   <ul id="css3menu0" class="topmenu">
-    <li class="topfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
+    <li class="topfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php" style="height:32px;line-height:32px;"><span><img src="../../function/menu_support_files/news.png" alt="" id="image_news"/>Browse</span></a>
       <ul>
         <li class="subfirst"><a href="http://www.hippocampome.org/phpdev/morphology.php">Morphology</a></li>
         <li><a href="http://www.hippocampome.org/phpdev/markers.php">Molecular markers</a></li>
@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
         <li><a href="http://synapt.22web.org">Synaptome</a></li>
       </ul>
     </li>
-    <li class="topmenu"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="../function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
+    <li class="topmenu"><a href="http://www.hippocampome.org/phpdev/search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="../../function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
       <ul>
         <li><a href="http://www.hippocampome.org/phpdev/find_author.php?searching=1">Author</a></li>
         <li><a href="http://www.hippocampome.org/phpdev/find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
@@ -92,7 +92,7 @@ jQuery(document).ready(function() {
         <li><a href="http://www.hippocampome.org/phpdev/search_engine_custom.php">Search Engine</a></li>
       </ul>
     </li>
-    <li class="toplast"><a href="http://www.hippocampome.org/phpdev/help.php" style="height:32px;line-height:32px;"><img src="../function/menu_support_files/help.png" alt=""/>Help</a></li>
+    <li class="toplast"><a href="http://www.hippocampome.org/phpdev/help.php" style="height:32px;line-height:32px;"><img src="../../function/menu_support_files/help.png" alt=""/>Help</a></li>
   </ul>
 </div>
 

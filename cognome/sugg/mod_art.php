@@ -1,3 +1,11 @@
+<?php if (!session_id()) {session_start();}
+/* check for login */
+if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
+  echo "<script>window.location.replace('login.php');</script>";
+  header("Location: login.php"); 
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +28,6 @@
       }
     }
   </script>
-  <?php 
-  /* check for login */
-  if (!isset($_SESSION['user_login'])) {
-    header("Location: login.php"); 
-    exit();
-  }
-  ?>
 </head>
 <body>
   <?php include("../function/hc_body.php"); ?>

@@ -28,7 +28,7 @@
   if ($_GET['only_evidence_anno']==true) {
     $GLOBALS['art_cutoff_use'] = true;
   }
-  $GLOBALS['art_start_cutoff'] = 101;
+  $GLOBALS['art_start_cutoff'] = 112;
   $GLOBALS['art_end_cutoff'] = 313;
   error_reporting(0);
 
