@@ -40,6 +40,7 @@
 
   echo "<form name='register' id='register' action='register.php' method='POST'><center>";
 
+  // search for recorded suggestions
   $sql = "SELECT * FROM $sugg_db.user_suggestions;";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) { 
@@ -52,7 +53,6 @@
       // get columns
       $all_cols = [];
       $sql_cols = "SHOW COLUMNS FROM $sugg_db.$tbl";
-      //echo $sql_cols;
       $result_cols = $conn->query($sql_cols);
       if ($result_cols->num_rows > 0) { 
         while($row_rslt = $result_cols->fetch_assoc()) { 
@@ -63,7 +63,6 @@
       // get sugg entries
       $sugg_entry = [];
       $sql2 = "SELECT * FROM $sugg_db.$tbl WHERE id=$id;";
-      //echo $sql2;
       $result2 = $conn->query($sql2);
       if ($result2->num_rows > 0) {
         $row2 = $result2->fetch_assoc();
@@ -80,7 +79,6 @@
       // get orig entries
       $orig_entry = [];
       $sql2 = "SELECT * FROM $orig_db.$tbl WHERE id=$id;";
-      //echo $sql2;
       $result2 = $conn->query($sql2);
       if ($result2->num_rows > 0) {
         $row2 = $result2->fetch_assoc();
@@ -94,23 +92,81 @@
       }
 
       // display differences
+      // search for sugg
+      $diff_found = False;      
       for ($i = 0; $i < count($sugg_entry);$i++) {
         if ($sugg_entry[$i] != $orig_entry[$i]) {
+          $diff_found = True;
+        }
+      }      
+      if ($diff_found) {
           echo "<div class='article_details' style='padding: .4rem;font-size:.7em;'><br>";
-          echo "<table>";
-          echo "<tr><td>User suggestion from:</td><td>$username</td></tr>";
-          echo "<tr><td>Suggested entry:</td></tr>";
-          echo "<tr><td>".$all_cols[$i]."</td><td>".$sugg_entry[$i]."</td></tr>";   
-          echo "<tr><td>Original entry:</td></tr>";
-          $orig_entry_data = '[no entry]';
-          if ($orig_entry[$i] != '') {
-            $orig_entry_data = $orig_entry[$i];
+          echo "Suggested entry:";
+          echo "<table style='padding: .4rem;font-size:.9em;'>";
+      }
+      $article_id = '';
+      for ($i = 0; $i < count($sugg_entry);$i++) {
+        if ($sugg_entry[$i] != $orig_entry[$i]) {
+          //echo "<tr><td>User suggestion from:</td><td>$username</td></tr>";
+          if ($tbl == 'article_has_subject') {
+            //echo "<tr><td>Tbl:</td><td>$tbl</td></tr>";
+            $current_col = $all_cols[$i];
+            $current_val = $sugg_entry[$i];
+            if ($current_col == 'article_id') {
+              $sql = "SELECT title FROM $sugg_db.articles WHERE id=$current_val;";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                echo "<tr><td>Article Name:</td><td>".$row['title']."</td></tr>";
+                echo "<tr><td>Article Link:</td><td><a href='/cognome/php/cognome/browse.php?art_id=$current_val' target='_blank'>link</a></td></tr>";                
+              }
+            }
+            else if ($current_col == 'subject_id') {
+              $sql = "SELECT subject FROM $sugg_db.subjects WHERE id=$current_val;";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                echo "<tr><td>Subject Added:</td><td>".$row['subject']."</td></tr>";
+              }
+            }  
           }
-          echo "<tr><td>".$all_cols[$i]."</td><td>".$orig_entry_data."</td></tr>";
-          echo "<tr><td><br></td></tr></table></div>";
         }
       }
-      //echo "<tr><td><br></td></tr></table><br></div><br>";
+      if ($diff_found) {
+        echo "<tr><td><br></td></tr></table></div><br>";
+      }
+      // search for orig
+      $diff_found_orig = False;
+      for ($i = 0; $i < count($sugg_entry);$i++) {
+        if ($sugg_entry[$i] != $orig_entry[$i] && $orig_entry[$i] != '') {
+          $diff_found_orig = True;
+        }
+      }
+      if ($diff_found_orig) {
+        echo "<div class='article_details' style='padding: .4rem;font-size:.7em;'><br>";
+        echo "Original entry:";
+        echo "<table style='padding: .4rem;font-size:.9em;'>";    
+      }   
+      for ($i = 0; $i < count($sugg_entry);$i++) {
+        if ($sugg_entry[$i] != $orig_entry[$i] && $orig_entry[$i] != '') {
+            echo "<tr><td>Original entry:</td></tr>";
+            $orig_entry_data = '[no entry]';
+            if ($orig_entry[$i] != '') {
+              $orig_entry_data = $orig_entry[$i];
+            }
+            echo "<tr><td>".$all_cols[$i]."</td><td>".$orig_entry_data."</td></tr>";
+            echo "<tr><td><br></td></tr>";
+            if ($all_cols[$i] == 'article_id') {
+              $article_id = $all_cols[$i];
+            }
+            else if ($all_cols[$i] != 'id') {
+              $object_id = $all_cols[$i];
+            }
+        }
+      }
+      if ($diff_found_orig) {
+        echo "<tr><td><br></td></tr></table></div><br>";
+      }
     }
   }
   echo "</center></form><br>";   
