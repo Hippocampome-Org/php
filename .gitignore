@@ -11,3 +11,4 @@ hits.txt
 figure
 figure_pdf
 synap_prob/data
+synap_model/db_access/access_db.php
