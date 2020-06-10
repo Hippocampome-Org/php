@@ -394,7 +394,7 @@ echo "<option value='synaptome_modeling.php?value=tau_r' $sel3>𝛕<sub>R</sub><
 echo "<option value='synaptome_modeling.php?value=tau_f' $sel4>𝛕<sub>F</sub></option>";
 echo "<option value='synaptome_modeling.php?value=u' $sel5>U</option>";
 echo "</select>";
-echo "&nbsp;&nbsp;<font class='font2'>Condition:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
+echo "&nbsp;&nbsp;<font class='font2'>Conditions:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
 echo "<select name='matrix_selection' size='1' onChange=''>";
 echo "<option value='#'>Species</option>";
 echo "<option value='synaptome_modeling.php?value=g' selected>Rat</option>";
