@@ -80,15 +80,14 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		//for ($j=0;$j<3;$j++) {
 			$entry_output = "";
 			if ($type == 'syn_model') {
-				#$sql = "SELECT CAST(potential_synapses AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.potential_synapses!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
-				$sql = "SELECT cv_g FROM tm_cond1 WHERE pre='DG Mossy MOLDEN (+)2323' AND post='DG Granule (+)2201p';";
+				$sql = "SELECT CAST(means_g AS DECIMAL(10,5)) as avg, CAST(std_g AS DECIMAL(10,5)) as std, CAST(min_g AS DECIMAL(10,5)) as min, CAST(max_g AS DECIMAL(10,5)) as max, CAST(cv_g AS DECIMAL(10,5)) as cv FROM tm_cond1 WHERE pre='".$neuron_group_long[$i]."' AND post='".$neuron_group_long[$j]."';";
 				//$entry_output = $entry_output.$sql;
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
-						$val = $row['cv_g'];
+						$val = $row['avg'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".toPrecision($val,4)."</a>";
+							$entry_output = $entry_output."<center><a href='synaptome.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."' title='Standard Deviation: ".$row['std']."\\nMin: ". $row['min']."\\nMax: ".$row['max']."\\nCoefficient of Variation: ".$row['cv']."' target='_blank'>".toPrecision($val,4)."</a></center>";
 						}
 					}
 				} 
@@ -106,7 +105,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	number of columns when reading the file.
 	*/
 	if ($page == 'syn_model') {
-		$json_output_file = $path_to_files."syn_mdl_db_results.json";
+		$json_output_file = $path_to_files."json_files/cond1_g.json";
 	}
 	echo "<br>";
 
@@ -137,7 +136,6 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 				fwrite($output_file, "\"".$write_output[$last_index]."\"]}]}"); 
 			}
 			elseif (in_array($o_i, $neuron_group_cols)) {
-				//if ($o_i>2) {fwrite($output_file, "\"\"]},{\"cell\":[");}
 				fwrite($output_file, $neuron_groups_ordered[$t_out]);
 				$t_out++;
 			}

@@ -11,7 +11,7 @@
 <?php 
   /* set json data to load */
   $matrix_type = "probabilities_of_synapses";
-  $session_matrix_cache_file = "synap_model/gen_json/syn_mdl_db_results.json";
+  $session_matrix_cache_file = "synap_model/gen_json/json_files/cond1_g.json";
   $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
   $jsonStr = $_SESSION[$matrix_type]; 
 ?>
@@ -374,20 +374,54 @@ $("#nGrid").mouseout(function(e) {
 	include ("function/menu_main.php");
 ?>		
 
-<div class='title_area'>
-  <span style='position:relative;float:left;'><font class="font1">Browse synaptic connections matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection"> 
-<span class='top_matrix_menu'>  
+  <span style='position:relative;'><font class="font1">Browse synaptome modeling values</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
 <select name="matrix_selection" size="1" onChange="go()">
-<option value="#" selected>Select Data</option>
-<option value="synapse_probabilities_dal.php">Dendritic and Axonal Lengths</option>
-<option value="synapse_probabilities_sd.php">Somatic Distances</option>
-<option value="synapse_probabilities_ps.php">Number of Potential Synapses</option>
-<option value="synapse_probabilities_noc.php">Number of Contacts</option>
-<option value="synapse_probabilities_sypr.php">Synaptic Probabilities</option>
-</select></span>
-
-<span class='data_selection'>Tsodyks-Markram Values</span>
+<?php
+$current_value = '';
+if (isset($_GET['value'])) {
+	$current_value = $_GET['value'];
+}
+else if ($current_value == '' || $current_value == 'g') {$sel1='selected';}
+else if ($current_value == 'tau_d') {$sel2='selected';}
+else if ($current_value == 'tau_r') {$sel3='selected';}
+else if ($current_value == 'tau_f') {$sel4='selected';}
+else if ($current_value == 'u') {$sel5='selected';}
+echo "<option value='synaptome_modeling.php?value=g' $sel1>G</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d' $sel2>𝛕<sub>D</sub></option>";
+echo "<option value='synaptome_modeling.php?value=tau_r' $sel3>𝛕<sub>R</sub></option>";
+echo "<option value='synaptome_modeling.php?value=tau_f' $sel4>𝛕<sub>F</sub></option>";
+echo "<option value='synaptome_modeling.php?value=u' $sel5>U</option>";
+echo "</select>";
+echo "&nbsp;&nbsp;<font class='font2'>Condition:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
+echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<option value='#'>Species</option>";
+echo "<option value='synaptome_modeling.php?value=g' selected>Rat</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d'>Mouse</option>";
+echo "</select>&nbsp;";
+echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<option value='#'>Gender</option>";
+echo "<option value='synaptome_modeling.php?value=g' selected>Male</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d'>Female</option>";
+echo "</select>&nbsp;";
+echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<option value='#'>Age</option>";
+echo "<option value='synaptome_modeling.php?value=g' selected>P14</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d'>P56</option>";
+echo "</select>&nbsp;";
+echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<option value='#'>Temp.</option>";
+echo "<option value='synaptome_modeling.php?value=g' selected>22 Celcius</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d'>32 Celcius</option>";
+echo "</select>&nbsp;";
+echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<option value='#'>Rec. Mode</option>";
+echo "<option value='synaptome_modeling.php?value=g' selected>Vh=-60</option>";
+echo "<option value='synaptome_modeling.php?value=tau_d'>Vss=-60</option>";
+echo "</select>";
+echo "</span>";
+?>
 </form>
 </div>
 
@@ -399,7 +433,7 @@ $("#nGrid").mouseout(function(e) {
 		</td>
   <?php echo file_get_contents('synap_prob/n_m_footer_1.php');?>
   <tr height="20">
-        <td style="float:right"><a href='synap_prob/data/nops_values.csv'><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/></a></td><td><span style='float:left'><font class='font5'>&nbsp;CSV for the Number of Potential Synapses</font></span></td> 
+        <td style="float:right"><!--a href='synap_prob/data/nops_values.csv'--><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/><!--/a--></td><td><span style='float:left'><font class='font5'>&nbsp;To be added later</font></span></td> 
       </tr> 
 	<?php echo file_get_contents('synap_prob/n_m_footer_2.php');?>
   </tr>

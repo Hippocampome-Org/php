@@ -36,6 +36,13 @@ session_start();
           <?php   
             }
           ?> 
+          <?php 
+            if ($permission != 1 && $_SESSION["cg"]==1) {
+          ?>
+          <li><a href="synaptome_modeling.php">Synaptic modeling</a></li>
+          <?php   
+            }
+          ?> 
 	        <?php 
 	          if ($permission != 1 && $_SESSION["cg"]==1) {
 	        ?>
