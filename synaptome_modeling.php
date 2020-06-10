@@ -377,17 +377,17 @@ $("#nGrid").mouseout(function(e) {
 <div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection"> 
   <span style='position:relative;'><font class="font1">Browse synaptome modeling values</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
-<select name="matrix_selection" size="1" onChange="go()">
 <?php
 $current_value = '';
 if (isset($_GET['value'])) {
 	$current_value = $_GET['value'];
 }
-else if ($current_value == '' || $current_value == 'g') {$sel1='selected';}
+if ($current_value == '' || $current_value == 'g') {$sel1='selected';}
 else if ($current_value == 'tau_d') {$sel2='selected';}
 else if ($current_value == 'tau_r') {$sel3='selected';}
 else if ($current_value == 'tau_f') {$sel4='selected';}
 else if ($current_value == 'u') {$sel5='selected';}
+echo "<select name='matrix_selection' size='1' onChange='go()'>;";
 echo "<option value='synaptome_modeling.php?value=g' $sel1>G</option>";
 echo "<option value='synaptome_modeling.php?value=tau_d' $sel2>𝛕<sub>D</sub></option>";
 echo "<option value='synaptome_modeling.php?value=tau_r' $sel3>𝛕<sub>R</sub></option>";
@@ -395,30 +395,30 @@ echo "<option value='synaptome_modeling.php?value=tau_f' $sel4>𝛕<sub>F</sub><
 echo "<option value='synaptome_modeling.php?value=u' $sel5>U</option>";
 echo "</select>";
 echo "&nbsp;&nbsp;<font class='font2'>Conditions:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
-echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<select name='matrix_selection2' size='1' onChange=''>";
 echo "<option value='#'>Species</option>";
-echo "<option value='synaptome_modeling.php?value=g' selected>Rat</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d'>Mouse</option>";
+echo "<option value='#' selected>Rat</option>";
+echo "<option value='#'>Mouse</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<select name='matrix_selection3' size='1' onChange=''>";
 echo "<option value='#'>Gender</option>";
-echo "<option value='synaptome_modeling.php?value=g' selected>Male</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d'>Female</option>";
+echo "<option value='#' selected>Male</option>";
+echo "<option value='#'>Female</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<select name='matrix_selection4' size='1' onChange=''>";
 echo "<option value='#'>Age</option>";
-echo "<option value='synaptome_modeling.php?value=g' selected>P14</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d'>P56</option>";
+echo "<option value='#' selected>P14</option>";
+echo "<option value='#'>P56</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<select name='matrix_selection5' size='1' onChange=''>";
 echo "<option value='#'>Temp.</option>";
-echo "<option value='synaptome_modeling.php?value=g' selected>22 Celcius</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d'>32 Celcius</option>";
+echo "<option value='#' selected>22 Celcius</option>";
+echo "<option value='#'>32 Celcius</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection' size='1' onChange=''>";
+echo "<select name='matrix_selection6' size='1' onChange=''>";
 echo "<option value='#'>Rec. Mode</option>";
-echo "<option value='synaptome_modeling.php?value=g' selected>Vh=-60</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d'>Vss=-60</option>";
+echo "<option value='#' selected>Vh=-60</option>";
+echo "<option value='#'>Vss=-60</option>";
 echo "</select>";
 echo "</span>";
 ?>
