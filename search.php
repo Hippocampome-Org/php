@@ -640,7 +640,12 @@ include ("function/icon.html");
 
 			if($property1){
 
-                print("<OPTION VALUE='$property1'>$property1</OPTION>");
+				$property1_adj = $property1;
+				if ($property1 == "Electrophysiology") {
+					$property1_adj = "Membrane Biophysics";
+				}				
+
+                print("<OPTION VALUE='$property1'>$property1_adj</OPTION>");
 
 			}
 
@@ -654,11 +659,14 @@ include ("function/icon.html");
 
 				$value_property = property($i); 
 
-				
+				$value_property_adj = $value_property;
+				if ($value_property == "Electrophysiology") {
+					$value_property_adj = "Membrane Biophysics";
+				}
 
 				if (($value_property != $property1)){
 
-                    print ("<OPTION VALUE='$value_property'>$value_property</OPTION>");
+                    print ("<OPTION VALUE='$value_property'>$value_property_adj</OPTION>");
 
                 }
 
