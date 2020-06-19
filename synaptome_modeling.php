@@ -24,9 +24,20 @@
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="jqGrid-4/css/ui.jqgrid_morph.css" />
 <style type="text/css">
-.ui-jqgrid-hdiv {
-  /*height:200px; !important;*/
-  /*width:200px;*/
+a.right_menu_link {
+	color:#000462;
+}
+a.right_menu_link:hover{
+	color:#9536c2;
+}
+a.right_menu_link:link {
+	color: #000462;
+}
+a.right_menu_link:visited {
+	color: #000462;
+}
+a.right_menu_link2 {
+	color:#000993
 }
 </style>
 
@@ -362,7 +373,7 @@ $("#nGrid").mouseout(function(e) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Synaptome Modeling Values</title>
+<title>Synaptic Parameters</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
@@ -376,7 +387,7 @@ $("#nGrid").mouseout(function(e) {
 
 <div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection"> 
-  <span style='position:relative;'><font class="font1">Browse synaptome modeling values</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
+  <span style='position:relative;'><font class="font1">Browse synaptic parameters</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
 <?php
 $current_value = '';
 if (isset($_GET['value'])) {
@@ -431,11 +442,11 @@ echo "</span>";
 		<td>
 			<table id="nGrid"></table>
 		</td>
-  <?php echo file_get_contents('synap_prob/n_m_footer_1.php');?>
+  <?php echo file_get_contents('synap_model/footer_1.php');?>
   <tr height="20">
         <td style="float:right"><!--a href='synap_prob/data/nops_values.csv'--><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/><!--/a--></td><td><span style='float:left'><font class='font5'>&nbsp;To be added later</font></span></td> 
       </tr> 
-	<?php echo file_get_contents('synap_prob/n_m_footer_2.php');?>
+	<?php echo file_get_contents('synap_model/footer_2.php');?>
   </tr>
 </table>
 </div>

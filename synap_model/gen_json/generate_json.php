@@ -87,7 +87,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 					while($row = $result->fetch_assoc()) {
 						$val = $row['avg'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='synaptome.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."' title='Standard Deviation: ".$row['std']."\\nMin: ". $row['min']."\\nMax: ".$row['max']."\\nCoefficient of Variation: ".$row['cv']."' target='_blank'>".toPrecision($val,4)."</a></center>";
+							$entry_output = $entry_output."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='Standard Deviation: ".$row['std']."\\nMin: ". $row['min']."\\nMax: ".$row['max']."\\nCoefficient of Variation: ".$row['cv']."' target='_blank'>".toPrecision($val,4)."</a></center>";
 						}
 					}
 				} 
