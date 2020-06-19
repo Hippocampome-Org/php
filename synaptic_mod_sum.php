@@ -99,9 +99,9 @@ td, th {
 		<td>Temperature</td>
 		<td>Recording<br>Mode<br>(-60 mV)</td>
 		<td>g</td>
-		<td>&tau;<sub>D</sub></td>
-		<td>&tau;<sub>R</sub></td>
-		<td>&tau;<sub>F</sub></td>
+		<td><font style='font-family: Times,"Times New Roman",monospace;'>&tau;</font><sub>d</sub></td>
+		<td><font style='font-family: Times,"Times New Roman",monospace;'>&tau;</font><sub>r</sub></td>
+		<td><font style='font-family: Times,"Times New Roman",monospace;'>&tau;</font><sub>f</sub></td>
 		<td>U</td>
 	</tr>
 	<?php
