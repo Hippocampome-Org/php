@@ -89,7 +89,7 @@ td, th {
 
 <center>
   <span style='position:relative;top:100px'><font class="font1">Summary of Synaptic Modeling Values</font><br><font style='font-size: 5px'><br></font>
-  <font>Presynaptic neuron: <?php echo "<a href='http://localhost/synaptome/php/neuron_page.php?id=$pre_id' target='_blank'>$pre_name</a>"; ?>&nbsp;&nbsp;&nbsp;&nbsp;Postsynaptic neuron: <?php echo "<a href='http://localhost/synaptome/php/neuron_page.php?id=$post_id' target='_blank'>$post_name</a>"; ?></font></span>
+  <font>Presynaptic neuron: <?php echo "<a href='neuron_page.php?id=$pre_id' target='_blank'>$pre_name</a>"; ?>&nbsp;&nbsp;&nbsp;&nbsp;Postsynaptic neuron: <?php echo "<a href='neuron_page.php?id=$post_id' target='_blank'>$post_name</a>"; ?></font></span>
 <span style='position:relative;top:125px'>
 <table>
 	<tr>
