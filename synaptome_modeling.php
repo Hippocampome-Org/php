@@ -373,7 +373,7 @@ $("#nGrid").mouseout(function(e) {
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Synaptic Parameters</title>
+<title>Synaptic Physiology</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
