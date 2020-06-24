@@ -88,73 +88,79 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	$i is row that is a neuron type	
 	$j is column that is a parcel type
 	*/
-	for ($i = 0; $i < count($neuron_ids); $i++) {
-		if ($page=='syn_model' || $page=='syn_model_1st') {	
-			$write_output = retreive_values($conn, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param);
+	if ($param_num < sizeof($params)) {
+		for ($i = 0; $i < count($neuron_ids); $i++) {
+			if ($page=='syn_model' || $page=='syn_model_1st') {	
+				$write_output = retreive_values($conn, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param);
+			}
 		}
-	}
 
-	/* 
-	Write to File 
-	
-	$new_row_col is used because a new row occurs every certain
-	number of columns when reading the file.
-	*/
-	if ($page=='syn_model' || $page=='syn_model_1st') {
-		$json_output_file = $path_to_files."json_files/cond".$cond_num."_".$param.".json";
-		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
-		/* specify rows to use from template file */
-		$init_col = 0;
-		$init_col2 = 1;
-		$new_row_col = 124;
-		$max_rows = 100000;
-		/* specify indices */
-		$neuron_group_cols = array(); // new file indexes
-		$neuron_class_cols = array();
-		$total_rows = ($new_row_col*$new_row_col)+(2*$new_row_col);
-		$t_out = 0;		
-		$n_out = 0;		
-		$p_out = 0;
-		$nl = $json_new_line; // new line
-		/* create arrays of selected template indexes */
-		for ($r_i = 0; $r_i < $max_rows; $r_i++) {
-			array_push($neuron_group_cols, ($init_col+($new_row_col*$r_i)));
-			array_push($neuron_class_cols, ($init_col2+($new_row_col*$r_i)));
-		}	
+		/* 
+		Write to File 
+		
+		$new_row_col is used because a new row occurs every certain
+		number of columns when reading the file.
+		*/
+		if ($page=='syn_model' || $page=='syn_model_1st') {
+			$json_output_file = $path_to_files."json_files/cond".$cond_num."_".$param.".json";
+			$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
+			/* specify rows to use from template file */
+			$init_col = 0;
+			$init_col2 = 1;
+			$new_row_col = 124;
+			$max_rows = 100000;
+			/* specify indices */
+			$neuron_group_cols = array(); // new file indexes
+			$neuron_class_cols = array();
+			$total_rows = ($new_row_col*$new_row_col)+(2*$new_row_col);
+			$t_out = 0;		
+			$n_out = 0;		
+			$p_out = 0;
+			$nl = $json_new_line; // new line
+			/* create arrays of selected template indexes */
+			for ($r_i = 0; $r_i < $max_rows; $r_i++) {
+				array_push($neuron_group_cols, ($init_col+($new_row_col*$r_i)));
+				array_push($neuron_class_cols, ($init_col2+($new_row_col*$r_i)));
+			}	
 
-		for ($o_i = 0; $o_i<$total_rows; $o_i++) {
-			if ($o_i==($total_rows-1)) {
-				$last_index = count($write_output)-1; // last line
-				fwrite($output_file, "\"".$write_output[$last_index]."\"]}]}"); 
-			}
-			elseif (in_array($o_i, $neuron_group_cols)) {
-				fwrite($output_file, $neuron_groups_ordered[$t_out]);
-				$t_out++;
-			}
-			elseif (in_array($o_i, $neuron_class_cols)) {
-				fwrite($output_file, $neuron_classes_ordered[$n_out]);
-				$n_out++;
-			}
-			else {
-				if ($write_output[$p_out] != "") {
-					$text_output = "\"".$write_output[$p_out]."\",".$nl;
+			for ($o_i = 0; $o_i<$total_rows; $o_i++) {
+				if ($o_i==($total_rows-1)) {
+					$last_index = count($write_output)-1; // last line
+					fwrite($output_file, "\"".$write_output[$last_index]."\"]}]}"); 
+				}
+				elseif (in_array($o_i, $neuron_group_cols)) {
+					fwrite($output_file, $neuron_groups_ordered[$t_out]);
+					$t_out++;
+				}
+				elseif (in_array($o_i, $neuron_class_cols)) {
+					fwrite($output_file, $neuron_classes_ordered[$n_out]);
+					$n_out++;
 				}
 				else {
-					$text_output = "\"\",".$nl;
+					if ($write_output[$p_out] != "") {
+						$text_output = "\"".$write_output[$p_out]."\",".$nl;
+					}
+					else {
+						$text_output = "\"\",".$nl;
+					}
+					fwrite($output_file, $text_output);
+					$p_out++;
 				}
-				fwrite($output_file, $text_output);
-				$p_out++;
 			}
-		}
-		fclose($output_file);			
-	}		
+			fclose($output_file);			
+		}		
 
-	if ($page!='') {
-		echo "<br><center>Json files condition #".$cond_num." param ".$param." successfully written.<br>";
-		echo "<br><hr><br><br>";
+		if ($page!='') {
+			echo "<br><center>Status: json files condition #".$cond_num." param ".$param." successfully written.<br>";
+			echo "<br><hr><br><br>";
+		}
+	}
+	else {
+			echo "<br><center>Status: moving to processing condition #".$cond_num."<br>";
+			echo "<br><hr><br><br>";
 	}
 
-	if (($page=='syn_model' || $page=='syn_model_1st') && !($cond_num == $num_conds && $param_num == sizeof($params))) {
+	if (($page=='syn_model' || $page=='syn_model_1st') && !($cond_num >= $num_conds && $param_num > sizeof($params))) {
 		if ($param_num <= sizeof($params)) {
 			$param_num == $param_num++;
 		}
