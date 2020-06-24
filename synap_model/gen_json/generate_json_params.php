@@ -19,6 +19,9 @@
 	$write_csv_output = array();
 	$parcel_csv_output = array();
 
+	$num_conds = 32;
+	$params = ["g","tau_d","tau_r","tau_f","u"];
+
 	/*
 	Read from input files
 

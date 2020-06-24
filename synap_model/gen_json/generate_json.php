@@ -32,19 +32,16 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 </head>
 <body>
 <?php
-	// import parameters for this software
-	include ("generate_json_params.php");	
+	include ("generate_json_params.php"); // import parameters for this software
+	$cond_num = $_REQUEST['cond_num'];
+	$param_num = $_REQUEST['param_num'];
+	$param = $params[$param_num];	
 
 	echo "<br><hr><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>";
 
+	echo "<h3><center>Choose Json files to create:</center></h3>";
 
-	echo "<h3><center>Choose Json file to create:</center></h3>";
-
-	echo "<center><button onclick=\"window.location.href = '?page=syn_model';\" class='button'>Synaptome Model Values</button></center><br><hr>";
-
-	if ($page!='') {
-		echo "<br>Completed processing record: ";
-	}
+	echo "<center><button onclick=\"window.location.href = '?page=syn_model_1st';\" class='button'>Synaptome Model Values 1st Condition</button>&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=syn_model&cond_num=1&param_num=0';\" class='button'>Synaptome Model Values All Conditions</button></center><br><hr>";
 
 	function toPrecision($value, $digits)
 	{
@@ -61,26 +58,13 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	    return $answer; // (float) is to remove trailing 0
 	}
 
-	/*
-	Generate matrices section
 
-	$i is row that is a neuron type	
-	$j is column that is a parcel type
-	*/
-	for ($i = 0; $i < count($neuron_ids); $i++) {
-	//for ($i = 0; $i < 5; $i++) {
-		if ($page!='') {echo $i." ";}
-		if ($page=='syn_model') {	
-			$write_output = retreive_values($conn, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids);
-		}
-	}
-
-	function retreive_values($conn, $type, $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids) {
+	function retreive_values($conn, $type, $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param) {
 		for ($j=0;$j<count($neuron_ids);$j++) {
 		//for ($j=0;$j<3;$j++) {
 			$entry_output = "";
 			if ($type == 'syn_model') {
-				$sql = "SELECT CAST(means_g AS DECIMAL(10,5)) as avg, CAST(std_g AS DECIMAL(10,5)) as std, CAST(min_g AS DECIMAL(10,5)) as min, CAST(max_g AS DECIMAL(10,5)) as max, CAST(cv_g AS DECIMAL(10,5)) as cv FROM tm_cond1 WHERE pre='".$neuron_group_long[$i]."' AND post='".$neuron_group_long[$j]."';";
+				$sql = "SELECT CAST(means_".$param." AS DECIMAL(10,5)) as avg, CAST(std_".$param." AS DECIMAL(10,5)) as std, CAST(min_".$param." AS DECIMAL(10,5)) as min, CAST(max_".$param." AS DECIMAL(10,5)) as max, CAST(cv_".$param." AS DECIMAL(10,5)) as cv FROM tm_cond".$cond_num." WHERE pre='".$neuron_group_long[$i]."' AND post='".$neuron_group_long[$j]."';";
 				//$entry_output = $entry_output.$sql;
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
@@ -95,7 +79,19 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 			array_push($write_output, $entry_output);	
 		}
 
-		return $write_output;
+		return $write_output;		
+	}
+
+	/*
+	Generate matrices section
+
+	$i is row that is a neuron type	
+	$j is column that is a parcel type
+	*/
+	for ($i = 0; $i < count($neuron_ids); $i++) {
+		if ($page=='syn_model' || $page=='syn_model_1st') {	
+			$write_output = retreive_values($conn, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param);
+		}
 	}
 
 	/* 
@@ -104,12 +100,8 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	$new_row_col is used because a new row occurs every certain
 	number of columns when reading the file.
 	*/
-	if ($page == 'syn_model') {
-		$json_output_file = $path_to_files."json_files/cond1_g.json";
-	}
-	echo "<br>";
-
-	if ($page == 'syn_model') {
+	if ($page=='syn_model' || $page=='syn_model_1st') {
+		$json_output_file = $path_to_files."json_files/cond".$cond_num."_".$param.".json";
 		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
 		/* specify rows to use from template file */
 		$init_col = 0;
@@ -153,14 +145,28 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 				fwrite($output_file, $text_output);
 				$p_out++;
 			}
-			if ($o_i == 100 || $o_i == 1000 || $o_i == 5000 || $o_i == 10000) {
-				echo "<br>Output line ".$o_i." written";
-			}
 		}
-		fclose($output_file);	
+		fclose($output_file);			
+	}		
 
-		echo "<br><br><center>Json file successfully written.<br><br><hr>";		
+	if ($page!='') {
+		echo "<br><center>Json files condition #".$cond_num." param ".$param." successfully written.<br>";
+		echo "<br><hr><br><br>";
 	}
-	echo "<br><br>";
+
+	if (($page=='syn_model' || $page=='syn_model_1st') && !($cond_num == $num_conds && $param_num == sizeof($params))) {
+		if ($param_num <= sizeof($params)) {
+			$param_num == $param_num++;
+		}
+		else {
+			$cond_num++;
+			$param_num = 0;
+		}
+		if (!($page=='syn_model_1st' && $cond_num > 1)) {
+			echo "<script>
+			window.location.replace('generate_json.php?page=syn_model&cond_num=".$cond_num."&param_num=".$param_num."');
+			</script>";
+		}
+	}
 ?>
 </body>
