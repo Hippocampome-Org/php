@@ -155,8 +155,12 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 			echo "<br><hr><br><br>";
 		}
 	}
-	else {
+	else if ($cond_num <= $num_conds) {
 			echo "<br><center>Status: moving to processing condition #".($cond_num + 1)."<br>";
+			echo "<br><hr><br><br>";
+	}
+	else if ($cond_num > $num_conds) {
+			echo "<br><center>Status: finished processing<br>";
 			echo "<br><hr><br><br>";
 	}
 
