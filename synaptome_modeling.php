@@ -162,7 +162,7 @@ $(function(){
 	}
 	var research = "<?php echo $research?>";
 	var table = "<?php if(isset($_REQUEST['table_result'])){echo $_REQUEST['table_result'];}?>";
-	var head_col_width = 50;
+	var head_col_width = 40;
 	//alert(table);
 	$grid = $("#nGrid"),
       resizeColumnHeader = function () {
@@ -273,12 +273,12 @@ $(function(){
     ],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
-          return 'id=\'type' + rowId + "\'" + ' style="height:75px;"';  
+          return 'id=\'type' + rowId + "\'" + ' style="height:40px;"';  
       }, frozen:true},
       {name:'Neuron_Type_2', index:'Neuron_Type_2', width:200,sortable:false,frozen:true,
       cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
-          return 'style="height:75px;"';
+          return 'style="height:40px;"';
        }
    	  },
       //{name:'Supertype', index:'supertype', width:300,sortable:false,hidden: true},
