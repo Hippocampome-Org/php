@@ -431,7 +431,7 @@ else if ($current_value == 'tau_d') {$sel2='selected';}
 else if ($current_value == 'tau_r') {$sel3='selected';}
 else if ($current_value == 'tau_f') {$sel4='selected';}
 else if ($current_value == 'u') {$sel5='selected';}
-echo "<select name='value_selection' size='1'>;";
+echo "<select name='value_selection' size='1' style='height:25px'>;";
 echo "<option value='g' $sel1>G</option>";
 echo "<option value='tau_d' $sel2>𝛕<sub>D</sub></option>";
 echo "<option value='tau_r' $sel3>𝛕<sub>R</sub></option>";
@@ -444,7 +444,7 @@ if (isset($_REQUEST['param_1'])) {
 }
 if ($param1_value == '' || $param1_value == 'Rat') {$sel1='selected';}
 else if ($param1_value == 'Mouse') {$sel2='selected';}
-echo "<select name='param_1' size='1'>";
+echo "<select name='param_1' size='1' style='height:25px'>";
 echo "<option value='Rat' $sel1>Rat</option>";
 echo "<option value='Mouse' $sel2>Mouse</option>";
 echo "</select></center></td><td><center>";
@@ -453,7 +453,7 @@ if (isset($_REQUEST['param_2'])) {
 }
 if ($param2_value == '' || $param2_value == 'Male') {$sel1='selected';}
 else if ($param2_value == 'Female') {$sel2='selected';}
-echo "<select name='param_2' size='1' onChange=''>";
+echo "<select name='param_2' size='1' style='height:25px'>";
 echo "<option value='Male' $sel1>Male</option>";
 echo "<option value='Female' $sel2>Female</option>";
 echo "</select></center></td><td><center>";
@@ -462,7 +462,7 @@ if (isset($_REQUEST['param_3'])) {
 }
 if ($param3_value == '' || $param3_value == 'P14') {$sel1='selected';}
 else if ($param3_value == 'P56') {$sel2='selected';}
-echo "<select name='param_3' size='1' onChange=''>";
+echo "<select name='param_3' size='1' style='height:25px'>";
 echo "<option value='P14' $sel1>P14</option>";
 echo "<option value='P56' $sel2>P56</option>";
 echo "</select></center></td><td><center>";
@@ -471,7 +471,7 @@ if (isset($_REQUEST['param_4'])) {
 }
 if ($param4_value == '' || $param4_value == 'T22') {$sel1='selected';}
 else if ($param4_value == 'T32') {$sel2='selected';}
-echo "<select name='param_4' size='1' onChange=''>";
+echo "<select name='param_4' size='1' style='height:25px'>";
 echo "<option value='T22' $sel1>22 Celcius</option>";
 echo "<option value='T32' $sel2>32 Celcius</option>";
 echo "</select></center></td><td><center>";
@@ -480,18 +480,18 @@ if (isset($_REQUEST['param_5'])) {
 }
 if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
 else if ($param5_value == 'Vss=-60') {$sel2='selected';}
-echo "<select name='param_5' size='1' onChange=''>";
+echo "<select name='param_5' size='1' style='height:25px'>";
 echo "<option value='Vh=-60' $sel1>Voltage-clamp</option>";
 echo "<option value='Vss=-60' $sel2>Current-clamp</option>";
 echo "</select></center></td><td>";
-echo "<input type='submit' value='Update' style='height:20px;' />";
+echo "<input type='submit' value='Update' style='height:25px;' />";
 ?>
 </td></tr>
 </form>
 </table>
 </div>
 
-<div class='table_position' style='position:relative;top:7em;'>
+<div class='table_position' style='position:relative;top:140px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
