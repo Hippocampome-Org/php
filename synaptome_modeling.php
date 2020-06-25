@@ -21,7 +21,7 @@
     die("Connection failed: " . mysqli_connect_error());
   }
 
-  $cond_id = 1;
+  $cond_id = 6; // default condition of species='Rat' AND sex='Male' AND age='P14' AND temp='T22' AND rec_mode='Vh=-60'
   // find condition based on parameters
   if (isset($_REQUEST['param_1']) && isset($_REQUEST['param_2']) && isset($_REQUEST['param_3']) && isset($_REQUEST['param_4']) && isset($_REQUEST['param_5'])) {
 	$species = $_REQUEST['param_1'];
