@@ -419,7 +419,8 @@ $("#nGrid").mouseout(function(e) {
 
 <div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection" method="post" action=""> 
-  <span style='position:relative;'><font class="font1">Browse synaptic parameters</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
+  <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center>Model Parameters:</font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
+  	<tr><td></td><td>&nbsp;&nbsp;</td><td><center>
 <?php
 $current_value = '';
 if (isset($_REQUEST['value_selection'])) {
@@ -436,8 +437,8 @@ echo "<option value='tau_d' $sel2>𝛕<sub>D</sub></option>";
 echo "<option value='tau_r' $sel3>𝛕<sub>R</sub></option>";
 echo "<option value='tau_f' $sel4>𝛕<sub>F</sub></option>";
 echo "<option value='u' $sel5>U</option>";
-echo "</select>";
-echo "&nbsp;&nbsp;<font class='font2'>Conditions:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
+echo "</select></center>";
+echo "</td><td><font class='font3'><center>Conditions:</center></font></td><td><center>";
 if (isset($_REQUEST['param_1'])) {
 	$param1_value = $_REQUEST['param_1'];
 }
@@ -446,7 +447,7 @@ else if ($param1_value == 'Mouse') {$sel2='selected';}
 echo "<select name='param_1' size='1'>";
 echo "<option value='Rat' $sel1>Rat</option>";
 echo "<option value='Mouse' $sel2>Mouse</option>";
-echo "</select>&nbsp;";
+echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_2'])) {
 	$param2_value = $_REQUEST['param_2'];
 }
@@ -455,7 +456,7 @@ else if ($param2_value == 'Female') {$sel2='selected';}
 echo "<select name='param_2' size='1' onChange=''>";
 echo "<option value='Male' $sel1>Male</option>";
 echo "<option value='Female' $sel2>Female</option>";
-echo "</select>&nbsp;";
+echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_3'])) {
 	$param3_value = $_REQUEST['param_3'];
 }
@@ -464,7 +465,7 @@ else if ($param3_value == 'P56') {$sel2='selected';}
 echo "<select name='param_3' size='1' onChange=''>";
 echo "<option value='P14' $sel1>P14</option>";
 echo "<option value='P56' $sel2>P56</option>";
-echo "</select>&nbsp;";
+echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_4'])) {
 	$param4_value = $_REQUEST['param_4'];
 }
@@ -473,23 +474,24 @@ else if ($param4_value == 'T32') {$sel2='selected';}
 echo "<select name='param_4' size='1' onChange=''>";
 echo "<option value='T22' $sel1>22 Celcius</option>";
 echo "<option value='T32' $sel2>32 Celcius</option>";
-echo "</select>&nbsp;";
+echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_5'])) {
 	$param5_value = $_REQUEST['param_5'];
 }
 if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
 else if ($param5_value == 'Vss=-60') {$sel2='selected';}
 echo "<select name='param_5' size='1' onChange=''>";
-echo "<option value='Vh=-60' $sel1>Vh=-60</option>";
-echo "<option value='Vss=-60' $sel2>Vss=-60</option>";
-echo "</select>&nbsp;";
+echo "<option value='Vh=-60' $sel1>Voltage-clamp</option>";
+echo "<option value='Vss=-60' $sel2>Current-clamp</option>";
+echo "</select></center></td><td>";
 echo "<input type='submit' value='Update' style='height:20px;' />";
-echo "</span>";
 ?>
+</td></tr>
 </form>
+</table>
 </div>
 
-<div class='table_position'>
+<div class='table_position' style='position:relative;top:7em;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
