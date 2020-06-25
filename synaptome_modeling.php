@@ -11,7 +11,39 @@
 <?php 
   /* set json data to load */
   $matrix_type = "probabilities_of_synapses";
-  $session_matrix_cache_file = "synap_model/gen_json/json_files/cond1_g.json";
+  $database = "synaptome";
+  // Create connection
+  if(is_null($conn2)){
+	$conn2 = mysqli_connect($servername, $username, $password, $database);   
+  }
+  if(!$conn2)
+  {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  $cond_id = 1;
+  // find condition based on parameters
+  if (isset($_REQUEST['param_1']) && isset($_REQUEST['param_2']) && isset($_REQUEST['param_3']) && isset($_REQUEST['param_4']) && isset($_REQUEST['param_5'])) {
+	$species = $_REQUEST['param_1'];
+	$sex = $_REQUEST['param_2'];
+	$age = $_REQUEST['param_3'];
+	$temp = $_REQUEST['param_4'];
+	$rec_mode = $_REQUEST['param_5'];
+	$query = "SELECT id FROM conditions WHERE species='$species' AND sex='$sex' AND age='$age' AND temp='$temp' AND rec_mode='$rec_mode'";
+	$rs = mysqli_query($conn2,$query);
+	//echo "<br><br><br><br><br><br>".$query;
+	while(list($cond_num) = mysqli_fetch_row($rs))
+	{
+		$cond_id = $cond_num;
+	}
+  }
+
+  $model_value = 'g';
+  if (isset($_REQUEST['value_selection'])) {
+	$model_value = $_REQUEST['value_selection'];
+  }
+
+  $session_matrix_cache_file = "synap_model/gen_json/json_files/cond".$cond_id."_".$model_value.".json";
   $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
   $jsonStr = $_SESSION[$matrix_type]; 
 ?>
@@ -386,51 +418,72 @@ $("#nGrid").mouseout(function(e) {
 ?>		
 
 <div class='title_area' style='width:1500px !important'>
-<form name="main_matrix_selection"> 
+<form name="main_matrix_selection" method="post" action=""> 
   <span style='position:relative;'><font class="font1">Browse synaptic parameters</font>&nbsp;&nbsp;<font class="font2">Value Selected:</font></span>
 <?php
 $current_value = '';
-if (isset($_GET['value'])) {
-	$current_value = $_GET['value'];
+if (isset($_REQUEST['value_selection'])) {
+	$current_value = $_REQUEST['value_selection'];
 }
 if ($current_value == '' || $current_value == 'g') {$sel1='selected';}
 else if ($current_value == 'tau_d') {$sel2='selected';}
 else if ($current_value == 'tau_r') {$sel3='selected';}
 else if ($current_value == 'tau_f') {$sel4='selected';}
 else if ($current_value == 'u') {$sel5='selected';}
-echo "<select name='matrix_selection' size='1' onChange='go()'>;";
-echo "<option value='synaptome_modeling.php?value=g' $sel1>G</option>";
-echo "<option value='synaptome_modeling.php?value=tau_d' $sel2>𝛕<sub>D</sub></option>";
-echo "<option value='synaptome_modeling.php?value=tau_r' $sel3>𝛕<sub>R</sub></option>";
-echo "<option value='synaptome_modeling.php?value=tau_f' $sel4>𝛕<sub>F</sub></option>";
-echo "<option value='synaptome_modeling.php?value=u' $sel5>U</option>";
+echo "<select name='value_selection' size='1'>;";
+echo "<option value='g' $sel1>G</option>";
+echo "<option value='tau_d' $sel2>𝛕<sub>D</sub></option>";
+echo "<option value='tau_r' $sel3>𝛕<sub>R</sub></option>";
+echo "<option value='tau_f' $sel4>𝛕<sub>F</sub></option>";
+echo "<option value='u' $sel5>U</option>";
 echo "</select>";
 echo "&nbsp;&nbsp;<font class='font2'>Conditions:</font>&nbsp;<span style='position:relative;' class='top_matrix_menu'>";
-echo "<select name='matrix_selection2' size='1' onChange=''>";
-echo "<option value='#'>Species</option>";
-echo "<option value='#' selected>Rat</option>";
-echo "<option value='#'>Mouse</option>";
+if (isset($_REQUEST['param_1'])) {
+	$param1_value = $_REQUEST['param_1'];
+}
+if ($param1_value == '' || $param1_value == 'Rat') {$sel1='selected';}
+else if ($param1_value == 'Mouse') {$sel2='selected';}
+echo "<select name='param_1' size='1'>";
+echo "<option value='Rat' $sel1>Rat</option>";
+echo "<option value='Mouse' $sel2>Mouse</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection3' size='1' onChange=''>";
-echo "<option value='#'>Gender</option>";
-echo "<option value='#' selected>Male</option>";
-echo "<option value='#'>Female</option>";
+if (isset($_REQUEST['param_2'])) {
+	$param2_value = $_REQUEST['param_2'];
+}
+if ($param2_value == '' || $param2_value == 'Male') {$sel1='selected';}
+else if ($param2_value == 'Female') {$sel2='selected';}
+echo "<select name='param_2' size='1' onChange=''>";
+echo "<option value='Male' $sel1>Male</option>";
+echo "<option value='Female' $sel2>Female</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection4' size='1' onChange=''>";
-echo "<option value='#'>Age</option>";
-echo "<option value='#' selected>P14</option>";
-echo "<option value='#'>P56</option>";
+if (isset($_REQUEST['param_3'])) {
+	$param3_value = $_REQUEST['param_3'];
+}
+if ($param3_value == '' || $param3_value == 'P14') {$sel1='selected';}
+else if ($param3_value == 'P56') {$sel2='selected';}
+echo "<select name='param_3' size='1' onChange=''>";
+echo "<option value='P14' $sel1>P14</option>";
+echo "<option value='P56' $sel2>P56</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection5' size='1' onChange=''>";
-echo "<option value='#'>Temp.</option>";
-echo "<option value='#' selected>22 Celcius</option>";
-echo "<option value='#'>32 Celcius</option>";
+if (isset($_REQUEST['param_4'])) {
+	$param4_value = $_REQUEST['param_4'];
+}
+if ($param4_value == '' || $param4_value == 'T22') {$sel1='selected';}
+else if ($param4_value == 'T32') {$sel2='selected';}
+echo "<select name='param_4' size='1' onChange=''>";
+echo "<option value='T22' $sel1>22 Celcius</option>";
+echo "<option value='T32' $sel2>32 Celcius</option>";
 echo "</select>&nbsp;";
-echo "<select name='matrix_selection6' size='1' onChange=''>";
-echo "<option value='#'>Rec. Mode</option>";
-echo "<option value='#' selected>Vh=-60</option>";
-echo "<option value='#'>Vss=-60</option>";
-echo "</select>";
+if (isset($_REQUEST['param_5'])) {
+	$param5_value = $_REQUEST['param_5'];
+}
+if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
+else if ($param5_value == 'Vss=-60') {$sel2='selected';}
+echo "<select name='param_5' size='1' onChange=''>";
+echo "<option value='Vh=-60' $sel1>Vh=-60</option>";
+echo "<option value='Vss=-60' $sel2>Vss=-60</option>";
+echo "</select>&nbsp;";
+echo "<input type='submit' value='Update' style='height:20px;' />";
 echo "</span>";
 ?>
 </form>
