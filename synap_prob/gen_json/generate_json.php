@@ -201,7 +201,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".toPrecision($val,4)."</a>";
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='' target='_blank'>".toPrecision($val,4)."</a></center>";
 						}
 					}
 				} 
@@ -225,7 +225,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 					while($row = $result->fetch_assoc()) {
 						$val = $row['val'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='' target='_blank'>".toPrecision($val,4)."</a>";            
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='' target='_blank'>".toPrecision($val,4)."</a></center>";            
 						}
 					}
 				} 	
