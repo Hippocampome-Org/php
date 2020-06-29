@@ -24,7 +24,7 @@ hr {
 /* collabsible section */
 .lbl-toggle {
   color: black;
-  background: rgb(222, 222, 222);
+  background: rgb(227, 227, 227);
 }
 
 .lbl-toggle:hover {
@@ -32,14 +32,14 @@ hr {
 }
 
 .article_details {
-  background: rgb(229, 229, 229);
+  background: rgb(239, 239, 239);
   padding: 1rem;
   border-radius: 18px;  
   font-size:24px;
 }
 
 .collapsible-content .content-inner {
-  background: rgb(234, 234, 234);
+  background: rgb(239, 239, 239);
   /*border-bottom: 1em;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;*/
@@ -61,11 +61,14 @@ hr {
 }
 .select-css:focus {
     border-color: rgb(129,129,129);
-    box-shadow: 0 0 1px 3px rgba(219,219,219.5);
+    box-shadow: 0 0 1px 3px rgba(229,229,229.5);
+}
+select {
+	background:rgb(234, 234, 234);;
 }
 option { /* Text and background colour, blue on light gray */
 color:#000000;
-background-color:rgb(229, 229, 229);
+background-color:rgb(234, 234, 234);
 }
 
 .title_section {
@@ -79,15 +82,15 @@ background-color:rgb(229, 229, 229);
 }
 
 table.reporting_table {
-  background-color:rgb(229, 229, 229);
+  background-color:rgb(234, 234, 234);
 }
 
 .reporting_table_head {
-  background-color:rgb(209, 209, 209);
+  background-color:rgb(214, 214, 214);
 }
 
 .reporting_table_body {
-  background-color:rgb(224, 224, 224);
-  border-top:1px solid rgb(224, 224, 224);
-  border-bottom:1px solid rgb(224, 224, 224);
+  background-color:rgb(229, 229, 229);
+  border-top:1px solid rgb(229, 229, 229);
+  border-bottom:1px solid rgb(229, 229, 229);
 }
