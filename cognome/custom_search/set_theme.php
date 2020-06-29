@@ -26,6 +26,6 @@
     }      
   }
   else {
-    echo "<link rel='stylesheet' type='text/css' href='../standard_colors.css'>";
+    echo "<link rel='stylesheet' type='text/css' href='../light_white_bg_colors.css'>";
   }
 ?>
