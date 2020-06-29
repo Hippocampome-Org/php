@@ -12,17 +12,20 @@
   }
   if (isset($_SESSION['site_theme'])) {
     $theme = $_SESSION['site_theme'];
-    if ($theme=='light') {
-      echo "<link rel='stylesheet' type='text/css' href='../standard_colors.css'>";
+    if ($theme=='light_white_bg') {
+      echo "<link rel='stylesheet' type='text/css' href='light_white_bg_colors.css'>";
+    }
+    else if ($theme=='light') {
+      echo "<link rel='stylesheet' type='text/css' href='standard_colors.css'>";
     }
     else if ($theme=='dark') {
-      echo "<link rel='stylesheet' type='text/css' href='../dark_colors.css'>";
+      echo "<link rel='stylesheet' type='text/css' href='dark_colors.css'>";
     }
     else if ($theme=='medium_dark') {
-      echo "<link rel='stylesheet' type='text/css' href='../medium_dark_colors.css'>";
+      echo "<link rel='stylesheet' type='text/css' href='medium_dark_colors.css'>";
     }      
   }
   else {
-    echo "<link rel='stylesheet' type='text/css' href='../standard_colors.css'>";
+    echo "<link rel='stylesheet' type='text/css' href='standard_colors.css'>";
   }
 ?>
