@@ -94,3 +94,8 @@ table.reporting_table {
   border-top:1px solid rgb(229, 229, 229);
   border-bottom:1px solid rgb(229, 229, 229);
 }
+
+input[type=button], input[type=submit] {
+  background-color:rgb(234, 234, 234);
+  background:rgb(234, 234, 234);
+}

@@ -42,7 +42,7 @@
   echo "<br>Sort By";
   search_option($conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
   search_option($conn, $sql, "Detail", "property", "properties", "all_off");  
-  echo "<span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Filter By:&nbsp<a href='?filter=detail'><input type='button' class='select-css' value='level of detail'></a>&nbsp;<a href='?filter=implmnt'><input type='button' class='select-css' value='implementation level'></a>&nbsp;<a href='?filter=theory'><input type='button' class='select-css' value='theory'></a>&nbsp;<a href='?filter=keyword'><input type='button' class='select-css' value='keyword'></a><br>";
+  echo "<span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Filter By:&nbsp<a href='?filter=detail'><input type='button' class='select-css light-bg' value='level of detail'></a>&nbsp;<a href='?filter=implmnt'><input type='button' class='select-css light-bg' value='implementation level'></a>&nbsp;<a href='?filter=theory'><input type='button' class='select-css light-bg' value='theory'></a>&nbsp;<a href='?filter=keyword'><input type='button' class='select-css light-bg' value='keyword'></a><br>";
   if ($filter=='detail') {
     $prop_name = "Level of Detail";
     $row_name = "detail_level";
@@ -88,7 +88,7 @@
     search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   echo "<input type='hidden' name='form_submitted' value='1' />
-  <br><span style='padding:20px'><input type='submit' value='   go   '  class='select-css'></span></span>
+  <br><span style='padding:20px'><input type='submit' value='   go   '  class='select-css light-bg'></span></span>
   </center></form><br>";
 
   // check for user's dimension selection
