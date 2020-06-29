@@ -12,7 +12,10 @@
   }
   if (isset($_SESSION['site_theme'])) {
     $theme = $_SESSION['site_theme'];
-    if ($theme=='light') {
+    if ($theme=='light_white_bg') {
+      echo "<link rel='stylesheet' type='text/css' href='light_white_bg_colors.css'>";
+    }
+    else if ($theme=='light') {
       echo "<link rel='stylesheet' type='text/css' href='standard_colors.css'>";
     }
     else if ($theme=='dark') {

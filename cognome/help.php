@@ -21,7 +21,11 @@
 
   <!-- theme section -->
   <?php
-  echo "<form action='help.php' method='POST'><div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:.9em;'>Choose theme&nbsp&nbsp<select name='site_theme' id='site_theme' size='1' class='select-css' style='position:relative;top:-2px;'><option value='#'>Theme</option><option value='light'";
+  echo "<form action='help.php' method='POST'><div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:.9em;'>Choose theme&nbsp&nbsp<select name='site_theme' id='site_theme' size='1' class='select-css' style='position:relative;top:-2px;'><option value='#'>Theme</option><option value='light_white_bg'";
+  if (isset($_POST['site_theme']) && $theme=='light_white_bg') {
+    echo " selected";
+  }
+    echo ">Light with White BG Theme</option><option value='light'";
   if (isset($_POST['site_theme']) && $theme=='light') {
     echo " selected";
   }
