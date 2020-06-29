@@ -67,8 +67,8 @@ select {
 	background:rgb(234, 234, 234);;
 }
 option { /* Text and background colour, blue on light gray */
-color:#000000;
-background-color:rgb(234, 234, 234);
+  color:#000000;
+  background-color:rgb(234, 234, 234);
 }
 
 .title_section {
@@ -95,7 +95,7 @@ table.reporting_table {
   border-bottom:1px solid rgb(229, 229, 229);
 }
 
-input[type=button], input[type=submit] {
+.light_bg {
   background-color:rgb(234, 234, 234);
   background:rgb(234, 234, 234);
 }
