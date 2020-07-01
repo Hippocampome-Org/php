@@ -1,6 +1,9 @@
 <?php
   include ("permission_check.php");
 ?>
+<!--
+	References: https://www.quickcleancode.com/simple-dropdown-menu-css/
+-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,11 +34,11 @@
 	$rec_mode = $_REQUEST['param_5'];
 	$query = "SELECT id FROM conditions WHERE species='$species' AND sex='$sex' AND age='$age' AND temp='$temp' AND rec_mode='$rec_mode'";
 	$rs = mysqli_query($conn2,$query);
-	//echo "<br><br><br><br><br><br>".$query;
 	while(list($cond_num) = mysqli_fetch_row($rs))
 	{
 		$cond_id = $cond_num;
 	}
+	/*echo "<br><br><br><br><br><br>".$query." cond ".$cond_num;*/
   }
 
   $model_value = 'g';
@@ -71,8 +74,55 @@ a.right_menu_link:visited {
 a.right_menu_link2 {
 	color:#000993
 }
-</style>
+/*           */
+nav li {
+   display: inline-block;
+   list-style-type: none;
+   position: relative;
+   color:black;
+   text-decoration: none;
+   /*background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);*/
+   width:70px;
+}
 
+nav li ul {
+   display: none;
+   position: absolute;
+   width: 100px;
+   left: 0;
+   top: 100%;
+   margin: 0;
+   padding: 0;
+   color:black;
+   text-decoration: none;
+   /*background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);*/
+   height:20px;
+}
+
+nav li:hover > ul {
+   display: block;
+   color:black;
+   text-decoration: none;
+   /*background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);*/
+}
+
+nav a {
+   padding: 5px 10px;
+   text-align: center;
+   /*background: #000;*/
+   height: 20px;
+   display: block;
+   color:black;
+   text-decoration: none;
+   height:20px;
+}
+/*.navigation li:first-child a {
+  background-color: blue;
+}
+.navigation li:last-child a {
+  background-color: yellow;
+}*/
+</style>
 <!-- ************* Start of Matrix Section ************* -->
 
 <script type="text/javascript">
@@ -419,41 +469,57 @@ $("#nGrid").mouseout(function(e) {
 
 <div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection" method="post" action=""> 
-  <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center>Model Parameters:</font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
+  <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center><a href="https://github.com/k1moradi/SynapseModelersWorkshop" target="_blank" title="4-state Tsodyks and Markram synapse model parameters" style="text-decoration:none;color:black">Model Parameters:</a></font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
   	<tr><td></td><td>&nbsp;&nbsp;</td><td><center>
 <?php
-$current_value = '';
-if (isset($_REQUEST['value_selection'])) {
-	$current_value = $_REQUEST['value_selection'];
-}
-if ($current_value == '' || $current_value == 'g') {$sel1='selected';}
-else if ($current_value == 'tau_d') {$sel2='selected';}
-else if ($current_value == 'tau_r') {$sel3='selected';}
-else if ($current_value == 'tau_f') {$sel4='selected';}
-else if ($current_value == 'u') {$sel5='selected';}
-echo "<select name='value_selection' size='1' style='height:25px;'>;";
+echo "<!--select name='value_selection' size='1' style='height:25px;'>;";
 echo "<option value='g' $sel1>G</option>";
 echo "<option value='tau_d' $sel2>𝛕<sub>D</sub></option>";
 echo "<option value='tau_r' $sel3>𝛕<sub>R</sub></option>";
 echo "<option value='tau_f' $sel4>𝛕<sub>F</sub></option>";
 echo "<option value='u' $sel5>U</option>";
-echo "</select></center>";
-echo "</td><td><font class='font3'><center>Conditions:</center></font></td><td><center>";
+echo "</select--></center>";
+
+echo "<nav style='z-index:100;position:relative;top:-23px;'>
+   <ul style='z-index:100'>
+      <li style='z-index:100;
+   background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);border:1px solid;border-color:rgb(100,100,100)'><a href='#' style='text-decoration:none'>";
+   $current_value = '';
+if (isset($_REQUEST['value_selection'])) {
+	$current_value = $_REQUEST['value_selection'];
+}
+if ($current_value == '' || $current_value == 'g') {echo "<span style='position:relative;top:-2px;left:5px;'>g</span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
+else if ($current_value == 'tau_d') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>d</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
+else if ($current_value == 'tau_r') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>r</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
+else if ($current_value == 'tau_f') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>f</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
+else if ($current_value == 'u') {echo "<span style='position:relative;top:-2px;left:5px;'>u</span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
+   echo "</a>
+         <ul style='z-index:100;border:4px;border-left-color:black;'>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;'><a href='?value_selection=g' style='text-decoration:none' onclick=\"this.closest('main_matrix_selection').submit();return false;\">g</a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_d' style='text-decoration:none' onclick=\"this.closest('main_matrix_selection').submit();return false;\">&tau;<sub>d</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_r' style='text-decoration:none'>&tau;<sub>r</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_f' style='text-decoration:none'>&tau;<sub>f</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=u' style='text-decoration:none'>u</a></li>
+         </ul>
+      </li>
+   </ul>
+</nav>";
+echo "</td><td><span style='position:relative;top:-23px;'><font class='font3'><center>Conditions:</center></font></span></td><td><center>";
 if (isset($_REQUEST['param_1'])) {
 	$param1_value = $_REQUEST['param_1'];
 }
 if ($param1_value == '' || $param1_value == 'Rat') {$sel1='selected';}
-else if ($param1_value == 'Mouse') {$sel2='selected';}
-echo "<select name='param_1' size='1' style='height:25px;'>";
+else if ($param1_value == 'Mice') {$sel2='selected';}
+echo "<select name='param_1' size='1' style='height:32px;position:relative;top:-23px;'>";
 echo "<option value='Rat' $sel1>Rat</option>";
-echo "<option value='Mouse' $sel2>Mouse</option>";
+echo "<option value='Mice' $sel2>Mouse</option>";
 echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_2'])) {
 	$param2_value = $_REQUEST['param_2'];
 }
 if ($param2_value == '' || $param2_value == 'Male') {$sel1='selected';}
 else if ($param2_value == 'Female') {$sel2='selected';}
-echo "<select name='param_2' size='1' style='height:25px;'>";
+echo "<select name='param_2' size='1' style='height:32px;position:relative;top:-23px;'>";
 echo "<option value='Male' $sel1>Male</option>";
 echo "<option value='Female' $sel2>Female</option>";
 echo "</select></center></td><td><center>";
@@ -462,7 +528,7 @@ if (isset($_REQUEST['param_3'])) {
 }
 if ($param3_value == '' || $param3_value == 'P14') {$sel1='selected';}
 else if ($param3_value == 'P56') {$sel2='selected';}
-echo "<select name='param_3' size='1' style='height:25px;'>";
+echo "<select name='param_3' size='1' style='height:32px;position:relative;top:-23px;'>";
 echo "<option value='P14' $sel1>P14</option>";
 echo "<option value='P56' $sel2>P56</option>";
 echo "</select></center></td><td><center>";
@@ -471,7 +537,7 @@ if (isset($_REQUEST['param_4'])) {
 }
 if ($param4_value == '' || $param4_value == 'T22') {$sel1='selected';}
 else if ($param4_value == 'T32') {$sel2='selected';}
-echo "<select name='param_4' size='1' style='height:25px;'>";
+echo "<select name='param_4' size='1' style='height:32px;position:relative;top:-23px;'>";
 echo "<option value='T22' $sel1>22 Celcius</option>";
 echo "<option value='T32' $sel2>32 Celcius</option>";
 echo "</select></center></td><td><center>";
@@ -480,11 +546,11 @@ if (isset($_REQUEST['param_5'])) {
 }
 if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
 else if ($param5_value == 'Vss=-60') {$sel2='selected';}
-echo "<select name='param_5' size='1' style='height:25px;'>";
+echo "<select name='param_5' size='1' style='height:32px;position:relative;top:-23px;'>";
 echo "<option value='Vh=-60' $sel1>Voltage-clamp</option>";
 echo "<option value='Vss=-60' $sel2>Current-clamp</option>";
 echo "</select></center></td><td>";
-echo "<input type='submit' value='Update' style='height:25px;' />";
+echo "<input type='submit' value='Update' style='height:32px;position:relative;top:-23px;' />";
 ?>
 </td></tr>
 </form>
