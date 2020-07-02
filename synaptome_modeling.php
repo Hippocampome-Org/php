@@ -555,7 +555,7 @@ echo "<input type='submit' value='Update' style='height:32px;position:relative;t
 </table>
 </div>
 <!--select id="value_selection" name="value_selection" value="">&nbsp;</select-->
-<select name='value_selection' id='value_selection' size='1' style='height:25px;'>
+<select name='value_selection' id='value_selection' size='1' style='height:25px;display:none'>
 <option value='g' $sel1>G</option>
 <option value='tau_d' $sel2>𝛕<sub>D</sub></option>
 <option value='tau_r' $sel3>𝛕<sub>R</sub></option>
