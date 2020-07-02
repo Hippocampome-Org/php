@@ -517,51 +517,62 @@ echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_2'])) {
 	$param2_value = $_REQUEST['param_2'];
 }
-if ($param2_value == '' || $param2_value == 'Male') {$sel1='selected';}
-else if ($param2_value == 'Female') {$sel2='selected';}
+if ($param2_value == '' || $param2_value == 'Male') {$sel3='selected';}
+else if ($param2_value == 'Female') {$sel4='selected';}
 echo "<select name='param_2' size='1' style='height:25px;position:relative;top:-23px;'>";
-echo "<option value='Male' $sel1>Male</option>";
-echo "<option value='Female' $sel2>Female</option>";
+echo "<option value='Male' $sel3>Male</option>";
+echo "<option value='Female' $sel4>Female</option>";
 echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_3'])) {
 	$param3_value = $_REQUEST['param_3'];
 }
-if ($param3_value == '' || $param3_value == 'P14') {$sel1='selected';}
-else if ($param3_value == 'P56') {$sel2='selected';}
+if ($param3_value == '' || $param3_value == 'P14') {$sel5='selected';}
+else if ($param3_value == 'P56') {$sel6='selected';}
 echo "<select name='param_3' size='1' style='height:25px;position:relative;top:-23px;'>";
-echo "<option value='P14' $sel1>P14</option>";
-echo "<option value='P56' $sel2>P56</option>";
+echo "<option value='P14' $sel5>P14</option>";
+echo "<option value='P56' $sel6>P56</option>";
 echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_4'])) {
 	$param4_value = $_REQUEST['param_4'];
 }
-if ($param4_value == '' || $param4_value == 'T22') {$sel1='selected';}
-else if ($param4_value == 'T32') {$sel2='selected';}
+if ($param4_value == '' || $param4_value == 'T22') {$sel7='selected';}
+else if ($param4_value == 'T32') {$sel8='selected';}
 echo "<select name='param_4' size='1' style='height:25px;position:relative;top:-23px;'>";
-echo "<option value='T22' $sel1>22 Celcius</option>";
-echo "<option value='T32' $sel2>32 Celcius</option>";
+echo "<option value='T22' $sel7>22 Celcius</option>";
+echo "<option value='T32' $sel8>32 Celcius</option>";
 echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_5'])) {
 	$param5_value = $_REQUEST['param_5'];
 }
-if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
-else if ($param5_value == 'Vss=-60') {$sel2='selected';}
+if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel9='selected';}
+else if ($param5_value == 'Vss=-60') {$sel10='selected';}
 echo "<select name='param_5' size='1' style='height:25px;position:relative;top:-23px;'>";
-echo "<option value='Vh=-60' $sel1>Voltage-clamp</option>";
-echo "<option value='Vss=-60' $sel2>Current-clamp</option>";
+echo "<option value='Vh=-60' $sel9>Voltage-clamp</option>";
+echo "<option value='Vss=-60' $sel10>Current-clamp</option>";
 echo "</select></center></td><td>";
 echo "<input type='submit' value='Update' style='height:25px;position:relative;top:-23px;' />";
 ?>
 </td></tr>
 </table>
 </div>
-<select name='value_selection' id='value_selection' size='1' style='height:25px;display:none'>
-	<option value='g' $sel1>G</option>
-	<option value='tau_d' $sel2>𝛕<sub>D</sub></option>
-	<option value='tau_r' $sel3>𝛕<sub>R</sub></option>
-	<option value='tau_f' $sel4>𝛕<sub>F</sub></option>
-	<option value='u' $sel5>U</option>
-</select>
+<?php
+$current_value = '';
+if (isset($_REQUEST['value_selection'])) {
+  $current_value = $_REQUEST['value_selection'];
+}
+if ($current_value == '' || $current_value == 'g') {$sel1B='selected';}
+else if ($current_value == 'tau_d') {$sel2B='selected';}
+else if ($current_value == 'tau_r') {$sel3B='selected';}
+else if ($current_value == 'tau_f') {$sel4B='selected';}
+else if ($current_value == 'u') {$sel5B='selected';}
+echo "<select name='value_selection' id='value_selection' size='1' style='display:none;'>;";
+echo "<option value='g' $sel1B>G</option>";
+echo "<option value='tau_d' $sel2B>𝛕<sub>D</sub></option>";
+echo "<option value='tau_r' $sel3B>𝛕<sub>R</sub></option>";
+echo "<option value='tau_f' $sel4B>𝛕<sub>F</sub></option>";
+echo "<option value='u' $sel5B>U</option>";
+echo "</select>";
+?>
 </form>
 
 <div class='table_position' style='position:relative;top:140px;'>
