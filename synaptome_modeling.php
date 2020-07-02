@@ -123,6 +123,13 @@ nav a {
   background-color: yellow;
 }*/
 </style>
+<script type="text/javascript">
+	function set_value_selection(new_val) {
+		document.getElementById('value_selection').value=new_val;
+		document.getElementById('main_matrix_selection').submit();
+		return false;
+	}
+</script>
 <!-- ************* Start of Matrix Section ************* -->
 
 <script type="text/javascript">
@@ -468,19 +475,11 @@ $("#nGrid").mouseout(function(e) {
 ?>		
 
 <div class='title_area' style='width:1500px !important'>
-<form name="main_matrix_selection" method="post" action=""> 
+<form name="main_matrix_selection" id="main_matrix_selection" method="post" action=""> 
   <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center><a href="https://github.com/k1moradi/SynapseModelersWorkshop" target="_blank" title="4-state Tsodyks and Markram synapse model parameters" style="text-decoration:none;color:black">Model Parameters:</a></font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
   	<tr><td></td><td>&nbsp;&nbsp;</td><td><center>
 <?php
-echo "<!--select name='value_selection' size='1' style='height:25px;'>;";
-echo "<option value='g' $sel1>G</option>";
-echo "<option value='tau_d' $sel2>𝛕<sub>D</sub></option>";
-echo "<option value='tau_r' $sel3>𝛕<sub>R</sub></option>";
-echo "<option value='tau_f' $sel4>𝛕<sub>F</sub></option>";
-echo "<option value='u' $sel5>U</option>";
-echo "</select--></center>";
-
-echo "<nav style='z-index:100;position:relative;top:-23px;'>
+echo "</center><nav style='z-index:100;position:relative;top:-23px;'>
    <ul style='z-index:100'>
       <li style='z-index:100;
    background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);border:1px solid;border-color:rgb(100,100,100)'><a href='#' style='text-decoration:none'>";
@@ -495,11 +494,11 @@ else if ($current_value == 'tau_f') {echo "<span style='position:relative;top:-2
 else if ($current_value == 'u') {echo "<span style='position:relative;top:-2px;left:5px;'>u</span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
    echo "</a>
          <ul style='z-index:100;border:4px;border-left-color:black;'>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;'><a href='?value_selection=g' style='text-decoration:none' onclick=\"this.closest('main_matrix_selection').submit();return false;\">g</a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_d' style='text-decoration:none' onclick=\"this.closest('main_matrix_selection').submit();return false;\">&tau;<sub>d</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_r' style='text-decoration:none'>&tau;<sub>r</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=tau_f' style='text-decoration:none'>&tau;<sub>f</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href='?value_selection=u' style='text-decoration:none'>u</a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;'><a href=\"javascript:set_value_selection('g')\" style='text-decoration:none'>g</a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_d')\" style='text-decoration:none'>&tau;<sub>d</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_r')\" style='text-decoration:none'>&tau;<sub>r</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_f')\" style='text-decoration:none'>&tau;<sub>f</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('u')\" style='text-decoration:none'>u</a></li>
          </ul>
       </li>
    </ul>
@@ -553,9 +552,17 @@ echo "</select></center></td><td>";
 echo "<input type='submit' value='Update' style='height:32px;position:relative;top:-23px;' />";
 ?>
 </td></tr>
-</form>
 </table>
 </div>
+<!--select id="value_selection" name="value_selection" value="">&nbsp;</select-->
+<select name='value_selection' id='value_selection' size='1' style='height:25px;'>
+<option value='g' $sel1>G</option>
+<option value='tau_d' $sel2>𝛕<sub>D</sub></option>
+<option value='tau_r' $sel3>𝛕<sub>R</sub></option>
+<option value='tau_f' $sel4>𝛕<sub>F</sub></option>
+<option value='u' $sel5>U</option>
+</select>
+</form>
 
 <div class='table_position' style='position:relative;top:140px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
