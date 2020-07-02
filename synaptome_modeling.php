@@ -538,8 +538,8 @@ if (isset($_REQUEST['param_4'])) {
 if ($param4_value == '' || $param4_value == 'T22') {$sel7='selected';}
 else if ($param4_value == 'T32') {$sel8='selected';}
 echo "<select name='param_4' size='1' style='height:25px;position:relative;top:-23px;'>";
-echo "<option value='T22' $sel7>22 Celcius</option>";
-echo "<option value='T32' $sel8>32 Celcius</option>";
+echo "<option value='T22' $sel7>22 Celsius</option>";
+echo "<option value='T32' $sel8>32 Celsius</option>";
 echo "</select></center></td><td><center>";
 if (isset($_REQUEST['param_5'])) {
 	$param5_value = $_REQUEST['param_5'];
