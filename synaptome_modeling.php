@@ -124,10 +124,11 @@ nav a {
 }*/
 </style>
 <script type="text/javascript">
-	function set_value_selection(new_val) {
+	function set_value_selection(new_val, new_desc) {
 		document.getElementById('value_selection').value=new_val;
-		document.getElementById('main_matrix_selection').submit();
-		return false;
+		/*document.getElementById('main_matrix_selection').submit();
+		return false;*/
+		document.getElementById('model_par_val').innerHTML=new_desc;
 	}
 </script>
 <!-- ************* Start of Matrix Section ************* -->
@@ -482,23 +483,23 @@ $("#nGrid").mouseout(function(e) {
 echo "</center><nav style='z-index:100;position:relative;top:-23px;'>
    <ul style='z-index:100'>
       <li style='z-index:100;
-   background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);border:1px solid;border-color:rgb(100,100,100)'><a href='#' style='text-decoration:none'>";
+   background: linear-gradient(180deg, rgba(247,247,247,1) 0%, rgba(221,221,221,1) 100%);border:1px solid;border-color:rgb(100,100,100)'>";
    $current_value = '';
 if (isset($_REQUEST['value_selection'])) {
 	$current_value = $_REQUEST['value_selection'];
 }
-if ($current_value == '' || $current_value == 'g') {echo "<span style='position:relative;top:-2px;left:5px;'>g</span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
-else if ($current_value == 'tau_d') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>d</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
-else if ($current_value == 'tau_r') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>r</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
-else if ($current_value == 'tau_f') {echo "<span style='position:relative;top:-2px;left:5px;'>&tau;<sub>f</sub></span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
-else if ($current_value == 'u') {echo "<span style='position:relative;top:-2px;left:5px;'>u</span><span style='position:relative;float:right;top:7px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' /></span>";}
-   echo "</a>
+if ($current_value == '' || $current_value == 'g') {echo "<span style='position:relative;top:-2px;left:31px;' id='model_par_val'>g</span><span style='position:relative;float:right;top:-3px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' />&nbsp;&nbsp;</span>";}
+else if ($current_value == 'tau_d') {echo "<span style='position:relative;top:-2px;left:31px' id='model_par_val'>&tau;<sub>d</sub></span><span style='position:relative;float:right;top:-3px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' />&nbsp;&nbsp;</span>";}
+else if ($current_value == 'tau_r') {echo "<span style='position:relative;top:-2px;left:31px' id='model_par_val'>&tau;<sub>r</sub></span><span style='position:relative;float:right;top:-3px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' />&nbsp;&nbsp;</span>";}
+else if ($current_value == 'tau_f') {echo "<span style='position:relative;top:-2px;left:31px' id='model_par_val'>&tau;<sub>f</sub></span><span style='position:relative;float:right;top:-3px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' />&nbsp;&nbsp;</span>";}
+else if ($current_value == 'u') {echo "<span style='position:relative;top:-2px;left:31px' id='model_par_val'>u</span><span style='position:relative;float:float:right;top:-3px;'><img src='synap_model/media/down_arrow.jpg' style='width:6px;' />&nbsp;&nbsp;</span>";}
+   echo "
          <ul style='z-index:100;border:4px;border-left-color:black;'>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;'><a href=\"javascript:set_value_selection('g')\" style='text-decoration:none'>g</a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_d')\" style='text-decoration:none'>&tau;<sub>d</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_r')\" style='text-decoration:none'>&tau;<sub>r</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_f')\" style='text-decoration:none'>&tau;<sub>f</sub></a></li>
-            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('u')\" style='text-decoration:none'>u</a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;'><a href=\"javascript:set_value_selection('g', 'g')\" style='text-decoration:none'>g</a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_d', '&tau;<sub>d</sub>')\" style='text-decoration:none'>&tau;<sub>d</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_r', '&tau;<sub>r</sub>')\" style='text-decoration:none'>&tau;<sub>r</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('tau_f', '&tau;<sub>f</sub>')\" style='text-decoration:none'>&tau;<sub>f</sub></a></li>
+            <li style='z-index:100;width:70px;background: rgb(247,247,247);border:1px solid;border-top-color:rgb(247,247,247);'><a href=\"javascript:set_value_selection('u', 'u')\" style='text-decoration:none'>u</a></li>
          </ul>
       </li>
    </ul>
@@ -509,7 +510,7 @@ if (isset($_REQUEST['param_1'])) {
 }
 if ($param1_value == '' || $param1_value == 'Rat') {$sel1='selected';}
 else if ($param1_value == 'Mice') {$sel2='selected';}
-echo "<select name='param_1' size='1' style='height:32px;position:relative;top:-23px;'>";
+echo "<select name='param_1' size='1' style='height:25px;position:relative;top:-23px;'>";
 echo "<option value='Rat' $sel1>Rat</option>";
 echo "<option value='Mice' $sel2>Mouse</option>";
 echo "</select></center></td><td><center>";
@@ -518,7 +519,7 @@ if (isset($_REQUEST['param_2'])) {
 }
 if ($param2_value == '' || $param2_value == 'Male') {$sel1='selected';}
 else if ($param2_value == 'Female') {$sel2='selected';}
-echo "<select name='param_2' size='1' style='height:32px;position:relative;top:-23px;'>";
+echo "<select name='param_2' size='1' style='height:25px;position:relative;top:-23px;'>";
 echo "<option value='Male' $sel1>Male</option>";
 echo "<option value='Female' $sel2>Female</option>";
 echo "</select></center></td><td><center>";
@@ -527,7 +528,7 @@ if (isset($_REQUEST['param_3'])) {
 }
 if ($param3_value == '' || $param3_value == 'P14') {$sel1='selected';}
 else if ($param3_value == 'P56') {$sel2='selected';}
-echo "<select name='param_3' size='1' style='height:32px;position:relative;top:-23px;'>";
+echo "<select name='param_3' size='1' style='height:25px;position:relative;top:-23px;'>";
 echo "<option value='P14' $sel1>P14</option>";
 echo "<option value='P56' $sel2>P56</option>";
 echo "</select></center></td><td><center>";
@@ -536,7 +537,7 @@ if (isset($_REQUEST['param_4'])) {
 }
 if ($param4_value == '' || $param4_value == 'T22') {$sel1='selected';}
 else if ($param4_value == 'T32') {$sel2='selected';}
-echo "<select name='param_4' size='1' style='height:32px;position:relative;top:-23px;'>";
+echo "<select name='param_4' size='1' style='height:25px;position:relative;top:-23px;'>";
 echo "<option value='T22' $sel1>22 Celcius</option>";
 echo "<option value='T32' $sel2>32 Celcius</option>";
 echo "</select></center></td><td><center>";
@@ -545,22 +546,21 @@ if (isset($_REQUEST['param_5'])) {
 }
 if ($param5_value == '' || $param5_value == 'Vh=-60') {$sel1='selected';}
 else if ($param5_value == 'Vss=-60') {$sel2='selected';}
-echo "<select name='param_5' size='1' style='height:32px;position:relative;top:-23px;'>";
+echo "<select name='param_5' size='1' style='height:25px;position:relative;top:-23px;'>";
 echo "<option value='Vh=-60' $sel1>Voltage-clamp</option>";
 echo "<option value='Vss=-60' $sel2>Current-clamp</option>";
 echo "</select></center></td><td>";
-echo "<input type='submit' value='Update' style='height:32px;position:relative;top:-23px;' />";
+echo "<input type='submit' value='Update' style='height:25px;position:relative;top:-23px;' />";
 ?>
 </td></tr>
 </table>
 </div>
-<!--select id="value_selection" name="value_selection" value="">&nbsp;</select-->
 <select name='value_selection' id='value_selection' size='1' style='height:25px;display:none'>
-<option value='g' $sel1>G</option>
-<option value='tau_d' $sel2>𝛕<sub>D</sub></option>
-<option value='tau_r' $sel3>𝛕<sub>R</sub></option>
-<option value='tau_f' $sel4>𝛕<sub>F</sub></option>
-<option value='u' $sel5>U</option>
+	<option value='g' $sel1>G</option>
+	<option value='tau_d' $sel2>𝛕<sub>D</sub></option>
+	<option value='tau_r' $sel3>𝛕<sub>R</sub></option>
+	<option value='tau_f' $sel4>𝛕<sub>F</sub></option>
+	<option value='u' $sel5>U</option>
 </select>
 </form>
 
