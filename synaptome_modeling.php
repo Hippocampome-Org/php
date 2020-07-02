@@ -477,7 +477,7 @@ $("#nGrid").mouseout(function(e) {
 
 <div class='title_area' style='width:1500px !important'>
 <form name="main_matrix_selection" id="main_matrix_selection" method="post" action=""> 
-  <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center><a href="https://github.com/k1moradi/SynapseModelersWorkshop" target="_blank" title="4-state Tsodyks and Markram synapse model parameters" style="text-decoration:none;color:black">Model Parameters:</a></font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
+  <table><tr><td><font class="font1">Browse synaptic parameters</font></td><td>&nbsp;&nbsp;</td><td><font class="font3"><center><a href="https://github.com/k1moradi/SynapseModelersWorkshop" target="_blank" title="4-state Tsodyks and Markram synapse model parameters" style="color:black">Model Parameters</a>:</font></td><td></td><td><font class="font3"><center>Species:</center></font></td><td><font class="font3"><center>Sex:</center></font></td><td><font class="font3"><center>Age:</center></font></td><td><font class="font3"><center>Temperature:</center></font></td><td><font class="font3"><center>Recording Mode (-60 mV):</center></font></td><td><font class="font3"><center>Submit:</center></font></td></tr>
   	<tr><td></td><td>&nbsp;&nbsp;</td><td><center>
 <?php
 echo "</center><nav style='z-index:100;position:relative;top:-23px;'>
