@@ -43,18 +43,46 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 
 	echo "<center><button onclick=\"window.location.href = '?page=syn_model_1st';\" class='button'>Synaptome Model Values 1st Condition</button>&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=syn_model&cond_num=1&param_num=0';\" class='button'>Synaptome Model Values All Conditions</button></center><br><hr>";
 
-	function toPrecision($value, $digits)
+	function toPrecision($value, $digits, $main_value)
 	{
-	    if ($value == 0) {
+		/* Convert number to a set precision. the strlen comparison is to satisfy the requested
+		condition that "standard deviations cannot be more accurate than the main values". */
+		// new val
+	    /*if ($value == 0) {
 	        $decimalPlaces = $digits - 1;
 	    } elseif ($value < 0) {
 	        $decimalPlaces = $digits - floor(log10($value * -1)) - 1;
 	    } else {
 	        $decimalPlaces = $digits - floor(log10($value)) - 1;
-	    }
+	    }*/
+	    $decimalPlaces = $digits - floor(log10($value)) - 1;
 
 	    $answer = ($decimalPlaces > 0) ?
 	        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+	    // main val
+		/*if ($main_value == 0) {
+	        $decimalPlaces2 = $digits - 1;
+	    } elseif ($value < 0) {
+	        $decimalPlaces2 = $digits - floor(log10($main_value2 * -1)) - 1;
+	    } else {
+	        $decimalPlaces2 = $digits - floor(log10($main_value2)) - 1;
+	    }*/
+	    $decimalPlaces2 = $digits - floor(log10($main_value)) - 1;
+
+	    /*$answer = ($decimalPlaces2 > 0) ?
+	        number_format($main_value, $decimalPlaces2) : round($main_value, $decimalPlaces2);*/
+
+	    // compare
+		$val_prec = ($decimalPlaces > 0) ? number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+		$main_val_prec = ($decimalPlaces2 > 0) ? number_format($main_value, $decimalPlaces2) : round($main_value, $decimalPlaces2);
+		if (strlen(strval($val_prec)) > strlen(strval($main_val_prec))) {
+			//$decimalPlaces = $decimalPlaces -1;
+			$answer = substr($answer, 0, -1);
+			//$answer = $answer.'cond_found '.$val_prec.' '.strlen(strval($val_prec)).' '.$main_val_prec.' '.strlen(strval($main_val_prec));
+		}
+		/*else {
+			$answer = $answer.'cond_not_found '.$val_prec.' '.strlen(strval($val_prec)).' '.$main_val_prec.' '.strlen(strval($main_val_prec));
+		}*/
 	    return $answer; // (float) is to remove trailing 0
 	}
 
@@ -71,7 +99,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 					while($row = $result->fetch_assoc()) {
 						$val = $row['avg'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4)." ± ".$row['std']." (n=100)\\n[". $row['min']." to ".$row['max']."]\\nCV=".$row['cv']."' target='_blank'>".toPrecision($val,4)."</a></center>";
+							$entry_output = $entry_output."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4,$val)." ± ".toPrecision($row['std'],4,$val)." (n=100)\\n[".toPrecision($row['min'],4,$val)." to ".toPrecision($row['max'],4,$val)."]\\nCV=".toPrecision($row['cv'],4,$val)."' target='_blank'>".toPrecision($val,4,$val)."</a></center>";
 						}
 					}
 				} 
