@@ -1,5 +1,5 @@
 <?php
-include ("../access_db.php");
+include ("access_db.php");
 $perm = $_SESSION['perm'];
 if ($perm == NULL) {
 	$query = "SELECT permission FROM user WHERE id = '2'";

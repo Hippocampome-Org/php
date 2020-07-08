@@ -29,7 +29,7 @@
   if ($_GET['only_evidence_anno']==true) {
     $GLOBALS['art_cutoff_use'] = true;
   }
-  $GLOBALS['art_start_cutoff'] = 112;
+  $GLOBALS['art_start_cutoff'] = 117;
   $GLOBALS['art_end_cutoff'] = 313;
   error_reporting(0);
 
@@ -58,15 +58,29 @@
   /*
     Report literature statistics
   */
+  // only evi adjustments
+  function only_evi_adj($temp_tbl, $temp_col) {
+    $sql = " AND ($temp_tbl$temp_col <= ".$GLOBALS['art_start_cutoff']." OR $temp_tbl$temp_col = 310 OR $temp_tbl$temp_col = 313 OR $temp_tbl$temp_col = 314 OR $temp_tbl$temp_col = 266 OR $temp_tbl$temp_col = 267 OR $temp_tbl$temp_col = 269 OR $temp_tbl$temp_col = 270 OR $temp_tbl$temp_col = 303 OR $temp_tbl$temp_col = 288 OR $temp_tbl$temp_col = 305);";
+    return $sql;
+  }
+
+  $only_evi = " WHERE (id <= ".$GLOBALS['art_start_cutoff']." OR id = 310 OR id = 313 OR id = 314 OR id = 266 OR id = 267 OR id = 269 OR id = 270 OR id = 303 OR id = 288 OR id = 305);";
+  $temp_tbl = "article_has_subject.";
+  $temp_col = "article_id";
+  $only_evi_2 = only_evi_adj($temp_tbl, $temp_col);
+  $temp_tbl = "";
+  $temp_col = "article_id";
+  $only_evi_3 = only_evi_adj($temp_tbl, $temp_col);
+
   $sql = "SELECT COUNT(*) FROM $selected_db.articles";
   if ($GLOBALS['art_cutoff_use']==true) {
-    $sql = $sql." WHERE (id <= ".$GLOBALS['art_start_cutoff']." OR id >= ".$GLOBALS['art_end_cutoff'].");";
+    $sql = $sql.$only_evi;
   }
   $result = $conn->query($sql);
   $article_count = $result->fetch_assoc();
   echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
   echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a><br><br>
-    Database version to use: <select name='param_1' size='1' style='height:25px;'><option value='core'>Core collection</option><option value='extended'>Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' /></div>";
+    Database version to use: <select name='param_1' size='1' style='height:25px;'><option value='core'>Core collection</option><option value='extended'>Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' />&nbsp;<font size=2>(Note: database switch not yet working)</font></div>";
 
   echo "<br><div class='article_details'><center><u>Subjects</u></center><br>";
 
@@ -83,9 +97,9 @@
     $sql3 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
     $sql4 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_keyword WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_keyword.article_id";
     if ($GLOBALS['art_cutoff_use']==true) {
-       $sql2 = $sql2." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
-       $sql3 = $sql3." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
-       $sql4 = $sql4." AND (article_has_subject.article_id <= ".$GLOBALS['art_start_cutoff']." OR article_has_subject.article_id >= ".$GLOBALS['art_end_cutoff'].");";
+       $sql2 = $sql2.$only_evi_2;
+       $sql3 = $sql3.$only_evi_2;
+       $sql4 = $sql4.$only_evi_2;
     }
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
@@ -124,8 +138,11 @@
     $sql2 = "SELECT COUNT(*) FROM $selected_db.".$dim_tbl[$i];
     $sql3 = "SELECT COUNT(DISTINCT article_id) FROM $selected_db.".$dim_tbl[$i];
     if ($GLOBALS['art_cutoff_use']==true) {
-       $sql2 = $sql2." WHERE (article_id <= ".$GLOBALS['art_start_cutoff']." OR article_id >= ".$GLOBALS['art_end_cutoff'].");";
-       $sql3 = $sql3." WHERE (article_id <= ".$GLOBALS['art_start_cutoff']." OR article_id >= ".$GLOBALS['art_end_cutoff'].");";
+      $temp_tbl = $dim_tbl[$i].".";
+      $temp_col = "article_id";
+      $only_evi_3 = " WHERE ($temp_tbl$temp_col <= ".$GLOBALS['art_start_cutoff']." OR $temp_tbl$temp_col = 310 OR $temp_tbl$temp_col = 313 OR $temp_tbl$temp_col = 314 OR $temp_tbl$temp_col = 266 OR $temp_tbl$temp_col = 267 OR $temp_tbl$temp_col = 269 OR $temp_tbl$temp_col = 270 OR $temp_tbl$temp_col = 303 OR $temp_tbl$temp_col = 288 OR $temp_tbl$temp_col = 305);";      
+      $sql2 = $sql2.$only_evi_3;
+      $sql3 = $sql3.$only_evi_3;
     }
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {       
@@ -247,14 +264,22 @@
       echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_body'><center>";
       $sql = "SELECT DISTINCT COUNT(*) FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";        
+        $temp_tbl = "";
+        $temp_col = $art1;
+        $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
+        $sql = $sql.$only_evi_temp;
       }
     }
     else {
       echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_head'><center>";
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        $temp_tbl = "";
+        $temp_col = $art1;
+        $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
+        $sql = $sql.$only_evi_temp;        
       }
     }
     //echo $sql."<bR>";
@@ -265,7 +290,11 @@
       $dim_val = $row["COUNT(*)"];
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        $temp_tbl = "";
+        $temp_col = $art1;
+        $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
+        $sql = $sql.$only_evi_temp;        
       }
       $result = $conn->query($sql);
       $row2 = $result->fetch_assoc();
@@ -283,7 +312,11 @@
       $dim_val_total = $row["COUNT(".$id_name_2.")"];
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        $sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
+        $temp_tbl = "";
+        $temp_col = $art1;
+        $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
+        $sql = $sql.$only_evi_temp;        
       }
       $result = $conn->query($sql);
       $row2 = $result->fetch_assoc();
