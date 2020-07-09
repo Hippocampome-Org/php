@@ -47,43 +47,24 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	{
 		/* Convert number to a set precision. the strlen comparison is to satisfy the requested
 		condition that "standard deviations cannot be more accurate than the main values". */
-		// new val
-	    /*if ($value == 0) {
-	        $decimalPlaces = $digits - 1;
-	    } elseif ($value < 0) {
-	        $decimalPlaces = $digits - floor(log10($value * -1)) - 1;
-	    } else {
-	        $decimalPlaces = $digits - floor(log10($value)) - 1;
-	    }*/
-	    $decimalPlaces = $digits - floor(log10($value)) - 1;
 
-	    $answer = ($decimalPlaces > 0) ?
-	        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
-	    // main val
-		/*if ($main_value == 0) {
-	        $decimalPlaces2 = $digits - 1;
-	    } elseif ($value < 0) {
-	        $decimalPlaces2 = $digits - floor(log10($main_value2 * -1)) - 1;
-	    } else {
-	        $decimalPlaces2 = $digits - floor(log10($main_value2)) - 1;
-	    }*/
-	    $decimalPlaces2 = $digits - floor(log10($main_value)) - 1;
-
-	    /*$answer = ($decimalPlaces2 > 0) ?
-	        number_format($main_value, $decimalPlaces2) : round($main_value, $decimalPlaces2);*/
-
-	    // compare
-		$val_prec = ($decimalPlaces > 0) ? number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
-		$main_val_prec = ($decimalPlaces2 > 0) ? number_format($main_value, $decimalPlaces2) : round($main_value, $decimalPlaces2);
-		if (strlen(strval($val_prec)) > strlen(strval($main_val_prec))) {
-			//$decimalPlaces = $decimalPlaces -1;
-			$answer = substr($answer, 0, -1);
-			//$answer = $answer.'cond_found '.$val_prec.' '.strlen(strval($val_prec)).' '.$main_val_prec.' '.strlen(strval($main_val_prec));
+		// find main value significant digits
+	    if ($main_value == 0) {
+		  $decimalPlaces = $digits - 1;
+		} elseif ($main_value < 0) {
+		  $decimalPlaces = $digits - floor(log10($main_value * -1)) - 1;
+		} else {
+		  $decimalPlaces = $digits - floor(log10($main_value)) - 1;
 		}
-		/*else {
-			$answer = $answer.'cond_not_found '.$val_prec.' '.strlen(strval($val_prec)).' '.$main_val_prec.' '.strlen(strval($main_val_prec));
-		}*/
-	    return $answer; // (float) is to remove trailing 0
+		$main_value_adj = ($decimalPlaces > 0) ?
+		  number_format($main_value, $decimalPlaces) : round($main_value, $decimalPlaces);
+
+	    // conver value to decimal places from main value
+		preg_match('/\.(.*)/', $main_value_adj, $fraction);
+		$mv_dec_places = strlen(strval($fraction[1]));
+		$val_dp_adj = number_format((float)$value, $mv_dec_places, '.', '');
+		
+	    return $val_dp_adj;
 	}
 
 
