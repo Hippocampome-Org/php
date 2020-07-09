@@ -15,6 +15,3 @@ adl_values.sql
 adl_values.csv
 
 repeat 3-5 for each csv file
-
-Note: for noc both noc_stats.sql and noc_stats_totals.sql need
-to be run for noc_values.sql
