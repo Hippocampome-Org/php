@@ -7,9 +7,9 @@
   -->
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Hippocampus Region Models and Theories</title>
-  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <?php include('set_theme.php'); ?>
-  <?php include('../function/hc_header.php'); ?>
+  <?php include('function/hc_header.php'); ?>
   <script type="text/javascript">
     function toggle_vis(elem_name) {
        var elem = document.getElementById(elem_name);
@@ -22,7 +22,7 @@
   </script>
 </head>
 <body>
-  <?php include('../function/hc_body.php'); ?>
+  <?php include('function/hc_body.php'); ?>
   <div style="width:90%;position:relative;left:5%;"> 
   <br><br>
   <!-- start of header -->
@@ -37,6 +37,8 @@
 
     echo "<div class='article_details'>
     <center><u>Methods Used to Search for Articles</u></center>
+    <br>The following are examples of material from methods used in searches. The descriptions below are non-exaustive. The content here is planned to be expanded to a significant extent once a second phase of searching commences, which is planned to start in August 2020. Systematic patterns of search terms for each subject will be described here.
+    <br>    
     <br><span class='methods_topic'>Searching for Subjects</span>
     <br>
     <br>Google Scholar:
