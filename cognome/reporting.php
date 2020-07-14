@@ -84,7 +84,7 @@
 
   echo "<br><div class='article_details'><center><u>Subjects</u></center><br>";
 
-  echo "<table cellspacing='5px' cellpadding='30px' style='font-size:20px;'><tr><th><u>Subject</u></th><th><u>Articles</u></th><th><u>Theories</u></th><th><u>Keywords</u></th>";
+  echo "<table cellspacing='5px' cellpadding='30px' style='font-size:20px;'><tr><th><u>Subject</u></th><th><u>Articles</u></th><th><u>Theories</u></th><th><u>Keywords</u></th><tr>";
 
   $sql = "SELECT COUNT(*) FROM $selected_db.subjects";
   $result = $conn->query($sql);
@@ -92,6 +92,13 @@
   $dim_count = $row["COUNT(*)"];   
   
   for($i=1;$i<$dim_count+1;$i++) {
+    $sql = "SELECT subject FROM $selected_db.subjects WHERE id=".$i;
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $subj_names[$i]=$row["subject"];
+  }
+
+  function find_subject_annos($i, $selected_db, $conn) {
     $sql = "SELECT subject FROM $selected_db.subjects WHERE id=".$i;
     $sql2 = "SELECT COUNT(*) FROM $selected_db.article_has_subject WHERE subject_id=".$i;
     $sql3 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
@@ -109,9 +116,28 @@
     $row3 = $result3->fetch_assoc();
     $result4 = $conn->query($sql4);
     $row4 = $result4->fetch_assoc();            
-    echo "<tr><td>".$row["subject"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(*)"]."</center></td><td><center>".$row4["COUNT(*)"]."</center></td>";
-    $subj_names[$i]=$row["subject"];
+    echo "<tr><td>".$row["subject"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(*)"]."</center></td><td><center>".$row4["COUNT(*)"]."</center></td></tr>";
   }
+  echo "<tr><td><center><u>Spatial Navigation and Memory</u></center></td></tr>";  
+  find_subject_annos(1, $selected_db, $conn);
+  echo "<tr><td><br><center><u>Non-spatial Learning and Memory</u></center></td></tr>";  
+  find_subject_annos(2, $selected_db, $conn);
+  find_subject_annos(6, $selected_db, $conn);
+  find_subject_annos(7, $selected_db, $conn);
+  find_subject_annos(8, $selected_db, $conn);
+  find_subject_annos(10, $selected_db, $conn);
+  find_subject_annos(11, $selected_db, $conn);
+  find_subject_annos(12, $selected_db, $conn);
+  find_subject_annos(14, $selected_db, $conn);
+  echo "<tr><td><br><center><u>Pattern Completion and Separation</u></center></td></tr>";  
+  find_subject_annos(5, $selected_db, $conn);
+  echo "<tr><td><br><center><u>Neurological Disorders</u></center></td></tr>";  
+  find_subject_annos(15, $selected_db, $conn);
+  find_subject_annos(16, $selected_db, $conn);
+  find_subject_annos(18, $selected_db, $conn);
+  echo "<tr><td><br><center><u>Other Models</u></center></td></tr>";  
+  find_subject_annos(3, $selected_db, $conn);
+  find_subject_annos(17, $selected_db, $conn);
   echo "</table></div>";
 
   /*
@@ -169,7 +195,6 @@
 
     Note: index i is dimension type, j is dimension property, k is subject
   */
-  //header('Content-Type: text/plain'); // for tab charactors
 
   $wrap_col_numb = 4;
   $dim_id_names=array(
@@ -264,7 +289,6 @@
       echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_body'><center>";
       $sql = "SELECT DISTINCT COUNT(*) FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";        
         $temp_tbl = "";
         $temp_col = $art1;
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
@@ -275,22 +299,18 @@
       echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_head'><center>";
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
         $temp_tbl = "";
         $temp_col = $art1;
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
         $sql = $sql.$only_evi_temp;        
       }
     }
-    //echo $sql."<bR>";
-    //$sql = "SELECT DISTINCT COUNT(*) FROM $selected_db.".$table1.", ".$table2." WHERE ".$id_name_1." = ".$id_val_1." AND ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2." AND ".$art1." < 92;";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     if ($all_toggle==false) {
       $dim_val = $row["COUNT(*)"];
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$id_name_2." = ".$id_val_2." AND ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
         $temp_tbl = "";
         $temp_col = $art1;
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
@@ -312,7 +332,6 @@
       $dim_val_total = $row["COUNT(".$id_name_2.")"];
       $sql = "SELECT DISTINCT COUNT(".$id_name_2.") FROM $selected_db.".$table1.", $selected_db.".$table2." WHERE ".$art1." = ".$art2;
       if ($GLOBALS['art_cutoff_use']==true) {
-        //$sql = $sql." AND (".$art1." <= ".$GLOBALS['art_start_cutoff']." OR ".$art1." >= ".$GLOBALS['art_end_cutoff'].");";
         $temp_tbl = "";
         $temp_col = $art1;
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
