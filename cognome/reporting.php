@@ -163,10 +163,18 @@
     $sql = "SELECT dimension FROM $selected_db.dimensions WHERE id=".$i;
     $sql2 = "SELECT COUNT(*) FROM $selected_db.".$dim_tbl[$i];
     $sql3 = "SELECT COUNT(DISTINCT article_id) FROM $selected_db.".$dim_tbl[$i];
+    if ($i == 6) {
+      $sql2 = "SELECT COUNT(*) FROM $selected_db.".$dim_tbl[$i]." WHERE scale_id != ''";
+      $sql3 = "SELECT COUNT(DISTINCT article_id) FROM $selected_db.".$dim_tbl[$i]." WHERE scale_id != ''";
+    }    
     if ($GLOBALS['art_cutoff_use']==true) {
       $temp_tbl = $dim_tbl[$i].".";
       $temp_col = "article_id";
-      $only_evi_3 = " WHERE ($temp_tbl$temp_col <= ".$GLOBALS['art_start_cutoff']." OR $temp_tbl$temp_col = 310 OR $temp_tbl$temp_col = 313 OR $temp_tbl$temp_col = 314 OR $temp_tbl$temp_col = 266 OR $temp_tbl$temp_col = 267 OR $temp_tbl$temp_col = 269 OR $temp_tbl$temp_col = 270 OR $temp_tbl$temp_col = 303 OR $temp_tbl$temp_col = 288 OR $temp_tbl$temp_col = 305);";      
+      $syntax_term = "WHERE";
+      if ($i == 6) {
+        $syntax_term = "AND";
+      }
+      $only_evi_3 = " $syntax_term ($temp_tbl$temp_col <= ".$GLOBALS['art_start_cutoff']." OR $temp_tbl$temp_col = 310 OR $temp_tbl$temp_col = 313 OR $temp_tbl$temp_col = 314 OR $temp_tbl$temp_col = 266 OR $temp_tbl$temp_col = 267 OR $temp_tbl$temp_col = 269 OR $temp_tbl$temp_col = 270 OR $temp_tbl$temp_col = 303 OR $temp_tbl$temp_col = 288 OR $temp_tbl$temp_col = 305);";      
       $sql2 = $sql2.$only_evi_3;
       $sql3 = $sql3.$only_evi_3;
     }
