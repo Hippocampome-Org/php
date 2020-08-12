@@ -14,7 +14,7 @@
 
 	include ("../../permission_check.php"); // must be logged in
 
-	$path_to_files = "/var/www/html/synapse_probabilities/php/synap_prob/gen_json/";
+	$path_to_files = "/var/www/html/php/synap_prob/gen_json/";
 	$csv_output = '';
 	$write_csv_output = array();
 	$parcel_csv_output = array();
