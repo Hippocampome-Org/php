@@ -194,8 +194,8 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		//for ($j=0;$j<3;$j++) {
 			$entry_output = "";
 			if ($type == 'ps') {
-				$sql = "SELECT CAST(potential_synapses AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.potential_synapses!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
-				//$entry_output = $entry_output.$sql;
+				#$sql = "SELECT CAST(potential_synapses AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.potential_synapses!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
+				$sql = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)) as val FROM SynproNPSTotal as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=".$neuron_ids[$i]." AND nt.target_id=".$neuron_ids[$j]." AND nt.source_id=ttr.type_id";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
@@ -207,7 +207,8 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 				} 
 			}
 			elseif ($type == 'noc') {
-				$sql = "SELECT CAST(number_of_contacts AS DECIMAL(5,2)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.number_of_contacts!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
+				#$sql = "SELECT CAST(number_of_contacts AS DECIMAL(5,2)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.number_of_contacts!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
+				$sql = "SELECT CAST(NC_mean_total AS DECIMAL(5,2)) as val FROM SynproNOCTotal as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=".$neuron_ids[$i]." AND nt.target_id=".$neuron_ids[$j]." AND nt.source_id=ttr.type_id";							
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
@@ -219,7 +220,8 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 				} 	
 			}		
 			elseif ($type == 'prosyn') {
-				$sql = "SELECT CAST(probability AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.probability!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
+				#$sql = "SELECT CAST(probability AS DECIMAL(10,5)) as val FROM number_of_contacts as nc, SynproTypeTypeRel as ttr WHERE nc.source_name='".$neuron_group_long[$i]."' AND nc.target_name='".$neuron_group_long[$j]."' AND nc.source_id=ttr.type_id AND nc.probability!='' AND nc.neurite=CONCAT((SELECT subregion FROM SynproTypeTypeRel WHERE type_id=nc.source_id),':All:Both');";
+				$sql = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)) as val FROM SynproCPTotal as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=".$neuron_ids[$i]." AND nt.target_id=".$neuron_ids[$j]." AND nt.source_id=ttr.type_id";				
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
