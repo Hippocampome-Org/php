@@ -201,31 +201,50 @@ $post_name=$type_target->getName();
 	else if ($find_parcel_group_name[$parcel_group_match]=='EC') {
 			$parcel_group = $ec_group; $parcel_group_short = $ec_group_short;}
 
-	function query_value($source_id, $target_id, $parcel, $prop, $table, $nm_page) {
+	function query_value($source_id, $target_id, $parcel, $prop, $table, $nm_page, $totals_col, $totals_table) {
 		$value_result = 0;
 		$decimal_places='DECIMAL(10,5)';
 		if ($nm_page=='noc') {
 			$decimal_places='DECIMAL(10,2)';
 		}
-		$query = "
+		preg_match('/(\w+):(\w+):\w+/', $parcel, $parcel_matches);
+		$subregion_name = $parcel_matches[1];
+		$parcel_name = $parcel_matches[2];
+		/*$query = "
 		SELECT source_ID, source_Name, target_ID, target_Name, neurite, CAST(AVG(CAST($prop AS ".$decimal_places.")) AS ".$decimal_places.")
 		FROM $table
 		WHERE source_ID=$source_id AND target_ID=$target_id AND neurite='$parcel'
 		AND $prop!=''
 		GROUP BY source_ID, source_Name, target_ID, target_Name, neurite
 		LIMIT 500000;
+		";*/
+		$query = "
+		SELECT source_ID, target_ID, subregion, parcel, CAST(AVG(CAST($prop AS ".$decimal_places.")) AS ".$decimal_places.")
+		FROM $table
+		WHERE source_ID=$source_id AND target_ID=$target_id AND subregion='$subregion_name' AND parcel='$parcel_name'
+		LIMIT 500000;
 		";
-		//echo "<br><br><br><br><br><br>$query<br>";
+		#echo "<br>$query<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($sid, $son, $tid, $tan, $neu, $val) = mysqli_fetch_row($rs))
+		while(list($sid, $tid, $subregion, $parcel_section, $val) = mysqli_fetch_row($rs))
 		{	
 			//echo $val;
 			$value_result = $val;
 		}		
+		if ($parcel_name == 'All' || $parcel_name == 'ALL' || $parcel_name == 'all') {
+			$query = "SELECT CAST($totals_col AS DECIMAL(10,5)) as val FROM $totals_table as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=$source_id AND nt.target_id=$target_id AND nt.source_id=ttr.type_id";
+			$rs = mysqli_query($GLOBALS['conn'],$query);
+			while(list($val) = mysqli_fetch_row($rs))
+			{	
+				//echo $val;
+				$value_result = $val;
+			}	
+		}
+		//echo "<br>$query<br>";
 
 		return $value_result;
 	}
-	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val) {
+	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val,$totals_col,$totals_table) {
 	echo "
 	<span style='float:middle;font-size:12px;background-color:white;' class='table_neuron_page2'><strong>$title</strong></span>
 	<font style='font-size:4px'><br>
@@ -240,7 +259,7 @@ $post_name=$type_target->getName();
 	echo "</tr><tr style='text-align:center'>";
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
 		$last_index = count($parcel_group)-1;
-		$value_result = query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page);
+		$value_result = query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page, $totals_col, $totals_table);
 		if ($value_result == 0 && $nm_page!='noc') {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
 			echo "</td>";			
@@ -281,13 +300,14 @@ $post_name=$type_target->getName();
 	</table>";
 	}
 	if ($nm_page=='ps') {
-		report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
+		//report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'potential_synapses', 'potential_synapses', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
+		report_parcel_values('Potential Number of Synapses', $source_id, $target_id, 'NPS_mean', 'SynproNoPS', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val,'NPS_mean_total','SynproNPSTotal');
 	}
 	else if ($nm_page=='noc') {
-		report_parcel_values('Number of Contacts', $source_id, $target_id, 'number_of_contacts', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
+		report_parcel_values('Number of Contacts', $source_id, $target_id, 'NOC_mean', 'SynproNOC', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val,'NOC_mean_total','SynproNOCTotal');
 	}
 	else if ($nm_page=='prosyn') {
-		report_parcel_values('Probability of Connection', $source_id, $target_id, 'probability', 'number_of_contacts', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val);
+		report_parcel_values('Probability of Connection', $source_id, $target_id, 'CP_mean', 'SynproCP', $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val,'CP_mean_total','SynproCPTotal');
 	}
 	?>					
 </body>
