@@ -81,22 +81,32 @@ function adjPrecision($old_val,$new_val,$digits)
 	*/
 	$adj_old_val = toPrecision($old_val,$digits);
 
-	preg_match('/\d?\.(\d+)/', $adj_old_val, $adj_old_val_matches);
-	$adj_old_val_digits = strlen($adj_old_val_matches[1]);
+	preg_match('/(\d+)\.(\d+)/', $adj_old_val, $adj_old_val_matches);
+	$old_val_whole = $adj_old_val_matches[1];
+	$old_val_fraction = $adj_old_val_matches[2];
+	$adj_old_val_digits = strlen($adj_old_val_matches[2]);
 
 	$adj_new_val = toPrecision($new_val,$digits);		
 
-	preg_match('/\d?\.(\d+)/', $adj_new_val, $adj_new_val_matches);		
-	$adj_new_val_digits = strlen($adj_new_val_matches[1]);
+	preg_match('/(\d+)\.(\d+)/', $adj_new_val, $adj_new_val_matches);	
+	$new_val_whole = $adj_new_val_matches[1];
+	$new_val_fraction = $adj_new_val_matches[2];
+	$adj_new_val_digits = strlen($adj_new_val_matches[2]);
 
 	if ($adj_old_val_digits < $adj_new_val_digits) {
 		$digits = $digits - 1;
+		//$digits = $old_val_fraction;
 	}
 	else if ($adj_old_val_digits > $adj_new_val_digits) {
 		$digits = $digits + 1;
+		//$digits = $old_val_fraction;
 	}
 
-	$adj_new_val2 = toPrecision($new_val,$digits);		
+	$adj_new_val2 = round($new_val,$adj_old_val_digits);//toPrecision($new_val,$digits);
+	//$adj_new_val2 = printf("%.2f", $adj_new_val2);
+	$adj_new_val2 = number_format($adj_new_val2,$adj_old_val_digits);
+	//$adj_new_val2 = toPrecision($adj_new_val2,$digits);
+	//echo "round($new_val,$adj_old_val_digits)<br>toPrecision($new_val,$digits)<br>".toPrecision($new_val,$digits)."<br>adj_new_val<br>$adj_new_val<br>adj_new_val_matches<br>".$adj_new_val_matches[2]."<br>adj_old_val_digits:$adj_old_val_digits<br>adj_new_val_digits:$adj_new_val_digits<br>";
 
 	return $adj_new_val2;
 }
@@ -300,6 +310,7 @@ $post_name=$type_target->getName();
 		}	
 		$results = array($value_result, $all_value_result);
 		//echo "<br>$query<br>";
+		//echo "all_value_result:$all_value_result<br>value_result:$value_result<br>";
 
 		return $results;
 	}
