@@ -48,6 +48,9 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 
 	function toPrecision($value, $digits)
 	{
+		/*
+			Set precision of digits
+		*/
 	    if ($value == 0) {
 	        $decimalPlaces = $digits - 1;
 	    } elseif ($value < 0) {
@@ -58,7 +61,45 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 
 	    $answer = ($decimalPlaces > 0) ?
 	        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+
+	    // remove tailing zeros
+	    preg_match('/(\d+)\.(\d+)/', $answer, $answer_matches);	
+	    $whole_number = $answer_matches[1];
+	    $fraction = $answer_matches[2];
+		$answer_digits = strlen($fraction);
+		if ($answer_digits > $digits) {
+			$answer_trimmed_digits = substr($fraction,0,($digits+1));
+			$answer = $whole_number.".".$answer_trimmed_digits;
+		}
+
 	    return $answer; // (float) is to remove trailing 0
+	}
+
+	function adjPrecision($old_val,$new_val,$digits)
+	{
+		/*
+			Make $old_van and $new_val match significant digits
+		*/
+		$adj_old_val = toPrecision($old_val,$digits);
+
+		preg_match('/\d?\.(\d+)/', $adj_old_val, $adj_old_val_matches);
+		$adj_old_val_digits = strlen($adj_old_val_matches[1]);
+
+		$adj_new_val = toPrecision($new_val,$digits);		
+
+		preg_match('/\d?\.(\d+)/', $adj_new_val, $adj_new_val_matches);		
+		$adj_new_val_digits = strlen($adj_new_val_matches[1]);
+
+		if ($adj_old_val_digits < $adj_new_val_digits) {
+			$digits = $digits - 1;
+		}
+		else if ($adj_old_val_digits > $adj_new_val_digits) {
+			$digits = $digits + 1;
+		}
+
+		$adj_new_val2 = toPrecision($new_val,$digits);		
+
+		return $adj_new_val2;
 	}
 
 	/*
@@ -201,7 +242,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='mean: ".toPrecision($val,4)."\\nstd: ".toPrecision($stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='mean: ".toPrecision($val,4)."\\nstd: ".adjPrecision($val,$stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";
 						}
 					}
 				} 
@@ -214,7 +255,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='mean: ".toPrecision($val,4)."\\nstd: ".toPrecision($stdev,4)."' target='_blank'>".toPrecision($val,3)."</a></center>";  
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='mean: ".toPrecision($val,3)."\\nstd: ".adjPrecision($val,$stdev,3)."' target='_blank'>".toPrecision($val,3)."</a></center>";  
 						}
 					}
 				} 	
@@ -227,7 +268,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='mean: ".toPrecision($val,4)."\\nstd: ".toPrecision($stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";            
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='mean: ".toPrecision($val,4)."\\nstd: ".adjPrecision($val,$stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";            
 						}
 					}
 				} 	
