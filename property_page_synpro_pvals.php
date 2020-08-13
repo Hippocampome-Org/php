@@ -31,20 +31,6 @@ function checkNeuronProperty($color)
 	return $part;
 }
 
-/*function toPrecision($value, $digits)
-{
-    if ($value == 0) {
-        $decimalPlaces = $digits - 1;
-    } elseif ($value < 0) {
-        $decimalPlaces = $digits - floor(log10($value * -1)) - 1;
-    } else {
-        $decimalPlaces = $digits - floor(log10($value)) - 1;
-    }
-
-    $answer = ($decimalPlaces > 0) ?
-        number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
-    return $answer; // (float) is to remove trailing 0
-}*/
 function toPrecision($value, $digits)
 {
 	/*
@@ -71,7 +57,7 @@ function toPrecision($value, $digits)
 		$answer = $whole_number.".".$answer_trimmed_digits;
 	}
 
-    return $answer; // (float) is to remove trailing 0
+    return $answer;
 }
 
 function adjPrecision($old_val,$new_val,$digits)
@@ -95,18 +81,14 @@ function adjPrecision($old_val,$new_val,$digits)
 
 	if ($adj_old_val_digits < $adj_new_val_digits) {
 		$digits = $digits - 1;
-		//$digits = $old_val_fraction;
 	}
 	else if ($adj_old_val_digits > $adj_new_val_digits) {
 		$digits = $digits + 1;
-		//$digits = $old_val_fraction;
 	}
 
-	$adj_new_val2 = round($new_val,$adj_old_val_digits);//toPrecision($new_val,$digits);
-	//$adj_new_val2 = printf("%.2f", $adj_new_val2);
+	// fix some rounding and trailing zeros
+	$adj_new_val2 = round($new_val,$adj_old_val_digits);
 	$adj_new_val2 = number_format($adj_new_val2,$adj_old_val_digits);
-	//$adj_new_val2 = toPrecision($adj_new_val2,$digits);
-	//echo "round($new_val,$adj_old_val_digits)<br>toPrecision($new_val,$digits)<br>".toPrecision($new_val,$digits)."<br>adj_new_val<br>$adj_new_val<br>adj_new_val_matches<br>".$adj_new_val_matches[2]."<br>adj_old_val_digits:$adj_old_val_digits<br>adj_new_val_digits:$adj_new_val_digits<br>";
 
 	return $adj_new_val2;
 }
