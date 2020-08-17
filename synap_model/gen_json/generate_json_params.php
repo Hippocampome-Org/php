@@ -14,7 +14,7 @@
 
 	include ("../db_access/permission_check.php"); // must be logged in
 
-	$path_to_files = "/var/www/html/synaptome/php/synap_model/gen_json/";
+	$path_to_files = "/var/www/html/php/synap_model/gen_json/";
 	$csv_output = '';
 	$write_csv_output = array();
 	$parcel_csv_output = array();

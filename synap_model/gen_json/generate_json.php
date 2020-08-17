@@ -41,7 +41,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 
 	echo "<h3><center>Choose Json files to create:</center></h3>";
 
-	echo "<center><button onclick=\"window.location.href = '?page=syn_model_1st';\" class='button'>Synaptome Model Values 1st Condition</button>&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=syn_model&cond_num=1&param_num=0';\" class='button'>Synaptome Model Values All Conditions</button></center><br><hr>";
+	echo "<center><button onclick=\"window.location.href = '?page=syn_model_1st&cond_num=1&param_num=0';\" class='button'>Synaptome Model Values 1st Condition</button>&nbsp;&nbsp;&nbsp;<button onclick=\"window.location.href = '?page=syn_model&cond_num=1&param_num=0';\" class='button'>Synaptome Model Values All Conditions</button></center><br><hr>";
 
 	function toPrecision($value, $digits, $main_value)
 	{
@@ -67,23 +67,65 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	    return $val_dp_adj;
 	}
 
+	function find_connectivity($neuron_id1, $neuron_id2, $conn2, $val) {
+		$connection_status = "";
+		$excit_inhib = "";
+		$status_html = "";
+		$sql = "SELECT connection_status FROM TypeTypeRel WHERE Type1_id = $neuron_id1 AND Type2_id = $neuron_id2;";
+		$result = $conn2->query($sql);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$connection_status = $row['connection_status'];
+			}
+		}
 
-	function retreive_values($conn, $type, $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param) {
+		$sql2 = "SELECT excit_inhib FROM Type WHERE id = $neuron_id1;";
+		$result2 = $conn2->query($sql2);
+		if ($result2->num_rows > 0) { 
+			while($row2 = $result2->fetch_assoc()) {
+				$excit_inhib = $row2['excit_inhib'];
+			}
+		}
+		if ($connection_status != "negative" && $val == '') {
+			/* non-potential */
+			$status_html = "<div style='width:100%;height:100%;'><br><br>";
+		}
+		else if ($connection_status == "negative") {
+			/* negated */
+			$status_html = "<div style='width:100%;height:100%;'><img src='synap_model/media/negation.png' width='100%' height='100%' border='0' />";
+		}
+		else if ($excit_inhib == "e") {
+			/* excitatory */
+			$status_html = "<div style='width:100%;height:100%;' class='custom_colors'><br><br>";
+		}
+		else if ($excit_inhib == "i") {
+			/* inhibitory */
+			$status_html = "<div style='width:100%;height:100%;background-color:#AAAAAA;'><br><br>";
+		}
+
+		return $status_html;
+	}
+
+	function retreive_values($conn, $conn2, $type, $neuron_group, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param) {
 		for ($j=0;$j<count($neuron_ids);$j++) {
 		//for ($j=0;$j<3;$j++) {
 			$entry_output = "";
 			if ($type == 'syn_model') {
+				$val = '';
 				$sql = "SELECT CAST(means_".$param." AS DECIMAL(10,5)) as avg, CAST(std_".$param." AS DECIMAL(10,5)) as std, CAST(min_".$param." AS DECIMAL(10,5)) as min, CAST(max_".$param." AS DECIMAL(10,5)) as max, CAST(cv_".$param." AS DECIMAL(10,5)) as cv FROM tm_cond".$cond_num." WHERE pre='".$neuron_group_long[$i]."' AND post='".$neuron_group_long[$j]."';";
 				//$entry_output = $entry_output.$sql;
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
 						$val = $row['avg'];
-						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4,$val)." ± ".toPrecision($row['std'],4,$val)." (n=100)\\n[".toPrecision($row['min'],4,$val)." to ".toPrecision($row['max'],4,$val)."]\\nCV=".toPrecision($row['cv'],4,$val)."' target='_blank'>".toPrecision($val,4,$val)."</a></center>";
-						}
 					}
+				}
+				if ($val != '' && $val != 0) {
+					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2,$val)."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4,$val)." ± ".toPrecision($row['std'],4,$val)." (n=100)\\n[".toPrecision($row['min'],4,$val)." to ".toPrecision($row['max'],4,$val)."]\\nCV=".toPrecision($row['cv'],4,$val)."' target='_blank'>".toPrecision($val,4,$val)."</a></center></div>";
 				} 
+				else {
+					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2,$val)."<center></center></div>";
+				}
 			}
 			array_push($write_output, $entry_output);	
 		}
@@ -100,7 +142,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	if ($param_num < sizeof($params)) {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
 			if ($page=='syn_model' || $page=='syn_model_1st') {	
-				$write_output = retreive_values($conn, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param);
+				$write_output = retreive_values($conn, $conn2, 'syn_model', $neuron_group_hnc, $neuron_group_long, $i, $write_output, $neuron_ids, $cond_num, $param);
 			}
 		}
 
@@ -175,13 +217,18 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 
 	if (($page=='syn_model' || $page=='syn_model_1st') && !($cond_num >= $num_conds && $param_num > sizeof($params))) {
 		if ($param_num <= sizeof($params)) {
-			$param_num == $param_num++;
+			$param_num++;
 		}
 		else {
 			$cond_num++;
 			$param_num = 0;
 		}
-		if (!($page=='syn_model_1st' && $cond_num > 1)) {
+		if ($page=='syn_model') {
+			echo "<script>
+			window.location.replace('generate_json.php?page=syn_model&cond_num=".$cond_num."&param_num=".$param_num."');
+			</script>";
+		}		
+		else if ($cond_num < 2) {
 			echo "<script>
 			window.location.replace('generate_json.php?page=syn_model&cond_num=".$cond_num."&param_num=".$param_num."');
 			</script>";

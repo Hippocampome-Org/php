@@ -74,6 +74,21 @@ a.right_menu_link:visited {
 a.right_menu_link2 {
 	color:#000993
 }
+.custom_colors {
+	background-color: black;
+}
+.custom_colors a:link {
+	color:white;
+}
+.custom_colors a:visited {
+	color:white;
+}
+.custom_colors a:hover {
+	color:white;
+}
+.custom_colors a:active {
+	color:white;
+}
 /*           */
 nav li {
    display: inline-block;
