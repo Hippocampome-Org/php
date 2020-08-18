@@ -346,12 +346,12 @@ $(function(){
     ],
     colModel :[
 	  {name:'type', index:'type', width:50,sortable:false,frozen:true,cellattr: function (rowId, tv, rawObject, cm, rdata) {
-          return 'id=\'type' + rowId + "\'" + ' style="height:75px;"';  
+          return 'id=\'type' + rowId + "\'" + ' style="height:50px;"';  
       }, frozen:true},
       {name:'Neuron_Type_2', index:'Neuron_Type_2', width:200,sortable:false,frozen:true,
       cellattr: function(rowId, tv, rawObject, cm, rdata) 
        {
-          return 'style="height:75px;"';
+          return 'style="height:50px;"';
        }
    	  },
       //{name:'Supertype', index:'supertype', width:300,sortable:false,hidden: true},
