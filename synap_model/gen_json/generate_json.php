@@ -88,7 +88,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		}
 		if ($connection_status != "negative" && $val == '') {
 			/* non-potential */
-			$status_html = "<div style='width:100%;height:100%;'><br><br>";
+			$status_html = "<div style='width:100%;height:100%;'><font style='font-size:5px'><br></font><br>";
 		}
 		else if ($connection_status == "negative") {
 			/* negated */
@@ -96,11 +96,11 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		}
 		else if ($excit_inhib == "e") {
 			/* excitatory */
-			$status_html = "<div style='width:100%;height:100%;' class='custom_colors'><br><br>";
+			$status_html = "<div style='width:100%;height:100%;' class='custom_colors'><font style='font-size:5px'><br></font><br>";
 		}
 		else if ($excit_inhib == "i") {
 			/* inhibitory */
-			$status_html = "<div style='width:100%;height:100%;background-color:#AAAAAA;'><br><br>";
+			$status_html = "<div style='width:100%;height:100%;background-color:#AAAAAA;'><font style='font-size:5px'><br></font><br>";
 		}
 
 		return $status_html;
@@ -112,19 +112,27 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 			$entry_output = "";
 			if ($type == 'syn_model') {
 				$val = '';
+				$std = '';
+				$min = '';
+				$max = '';
+				$cv = '';
 				$sql = "SELECT CAST(means_".$param." AS DECIMAL(10,5)) as avg, CAST(std_".$param." AS DECIMAL(10,5)) as std, CAST(min_".$param." AS DECIMAL(10,5)) as min, CAST(max_".$param." AS DECIMAL(10,5)) as max, CAST(cv_".$param." AS DECIMAL(10,5)) as cv FROM tm_cond".$cond_num." WHERE pre='".$neuron_group_long[$i]."' AND post='".$neuron_group_long[$j]."';";
 				//$entry_output = $entry_output.$sql;
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) { 
 					while($row = $result->fetch_assoc()) {
 						$val = $row['avg'];
+						$std = $row['std'];
+						$min = $row['min'];
+						$max = $row['max'];
+						$cv = $row['cv'];
 					}
 				}
 				if ($val != '' && $val != 0) {
-					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2,$val)."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4,$val)." ± ".toPrecision($row['std'],4,$val)." (n=100)\\n[".toPrecision($row['min'],4,$val)." to ".toPrecision($row['max'],4,$val)."]\\nCV=".toPrecision($row['cv'],4,$val)."' target='_blank'>".toPrecision($val,4,$val)."</a></center></div>";
+					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2, $val)."<center><a href='synaptic_mod_sum.php?pre_id=".$neuron_ids[$i]."&post_id=".$neuron_ids[$j]."' title='".toPrecision($val,4,$val)." ± ".toPrecision($std,4,$val)." (n=100)\\n[".toPrecision($min,4,$val)." to ".toPrecision($max,4,$val)."]\\nCV=".toPrecision($cv,4,$val)."' target='_blank'>".toPrecision($val,4,$val)."</a></center></div>";
 				} 
 				else {
-					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2,$val)."<center></center></div>";
+					$entry_output = $entry_output.find_connectivity($neuron_ids[$i], $neuron_ids[$j], $conn2, $val)."<center></center></div>";
 				}
 			}
 			array_push($write_output, $entry_output);	
@@ -230,7 +238,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		}		
 		else if ($cond_num < 2) {
 			echo "<script>
-			window.location.replace('generate_json.php?page=syn_model&cond_num=".$cond_num."&param_num=".$param_num."');
+			window.location.replace('generate_json.php?page=syn_model_1st&cond_num=".$cond_num."&param_num=".$param_num."');
 			</script>";
 		}
 	}
