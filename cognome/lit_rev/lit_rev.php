@@ -1,29 +1,92 @@
 <html>
 <head>
 	<title>Browse literature results</title>
+	<style>
+		.button_link {
+			height:19px;
+			width:28px;
+			border:1px solid black;
+			padding:4px;
+			font-size:13px;
+			font-family:arial;
+			text-decoration: none;
+			position:relative;
+			top:-3px;
+		}
+		.button_link a { 
+			text-decoration: none; 
+		}
+		textarea.custom_page {
+		    white-space: normal;
+		    text-align: center;
+		    -moz-text-align-last: center; /* Firefox 12+ */
+		    text-align-last: center;
+		    height:24px;
+		    width:38px;
+		    position:relative;
+		    top:5px;
+		    resize:none;
+		    font-size:12pt;
+		}
+	</style>
+	<link rel='stylesheet' type='text/css' href='medium_dark_colors.css'> 
 </head>
 <body>
-<div id="results" name="results"></div>
 <!--table border=1-->
 <?php
-$filename = "/extra_files/shared_files/vm_shared_folder/PoPCites.csv";
+$base_dir = "query_results/1/";
+$filename = $base_dir."PoPCites.csv";
+$query_file = $base_dir."query.csv";
+
+echo '<br><center><font style="font-size:22px">'.file_get_contents($query_file).'</font></center><br>';
+
+	$start = 1;
+	$end = 10;
+	if (isset($_REQUEST['start'])) {
+		if ($_REQUEST['start'] >= 0) {
+			$start = $_REQUEST['start'];
+		}
+	}
+	if (isset($_REQUEST['end'])) {
+		if ($_REQUEST['end'] >= 0) {
+			$end = $_REQUEST['end'];
+		}
+	}
+	if (isset($_REQUEST['custom_page'])) {
+		$custom_page = $_REQUEST['custom_page'];
+		$start = ($custom_page*10)-9;
+		$end = $custom_page*10;
+	}
+	else {
+		$custom_page = round(($end/980)*100);
+	}
+	$prev_start = $start - 10;
+  	$prev_end = $end - 10;
+	$next_start = $start + 10;
+  	$next_end = $end + 10;  	
+  	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
+	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
 
 function msleep($time)
 {
     usleep($time * 1000000);
 }
 
-function article_info($title)
+function article_info($title, $pop_authors)
 {
 	// insert html code
-	$title_adj="%22".$title."%22";
+	//$title_adj="%22".$title."%22";
 	$title_adj=str_replace(' ', '%20', $title);
-	//$title_adj=str_replace('"', '%22', $title);
 
-	//$pm_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&field=title&retmode=json&term=%22Three%20cases%20of%20enduring%20memory%20impairment%20after%20bilateral%20damage%20limited%20to%20the%20hippocampal%20formation%22";
-	$pm_api_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&field=title&retmode=json&term=$title_adj";
+	$pm_api_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&term=$title_adj%5Btitle%5D";
+	// pop authors //
+	foreach ($pop_authors as $author) {
+		$author = str_replace(',', '', $author);
+		if (strlen($author) > 3) {
+			$pm_api_url = $pm_api_url."%20".$author."%20%5Bauthor%5D";
+		}
+	}
 	$html=file_get_contents($pm_api_url);
-	//$html=file_get_contents("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&field=title&retmode=json&term=$title_adj");
 
 	// id //
 	$pattern='~.*idlist\"\:\[\"(\d+)\"\].*~';
@@ -67,8 +130,6 @@ function article_info($title)
 }
 // Open the file for reading
 $i = 0;
-$start = 1;
-$end = 10;
 $search_results = "";
 if (($h = fopen($filename, "r")) !== FALSE) 
 {
@@ -76,28 +137,37 @@ if (($h = fopen($filename, "r")) !== FALSE)
   // Convert each line into the local $data variable
   while (($data = fgetcsv($h, 10000, ",")) !== FALSE) 
   {		
-  	if ($i == 0) {
-  		$search_results = $search_results."<tr><td>PoP<br>Citations</td><td>PoP<br>Citations by Year</td><td>PoP<br>Authors</td><td>PoP<br>Title</td><td>PoP<br>Year</td><td>PoP<br>Journal</td></tr>";
-  	} 
-  	else if ($i >= $start && $i <= $end) {
+  	if ($i >= $start && $i <= $end) {
   		$title = $data[2];
+
+  		$search_results = $search_results."<tr><td>PoP<br>Citations</td><td>PoP<br>Citations by Year</td><td>PoP<br>Authors</td><td>PoP<br>Title</td><td>PoP<br>Year</td><td>PoP<br>Journal</td></tr>";
 	    // Read the data from a single line
 	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".$data[19]."</td><td>".$data[1]."</td><td>".$title."</td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
 
 		$search_results = $search_results."<tr><td>PM<br>ID</td><td>PM<br>Link</td><td>PM<br>Authors</td><td>PM<br>Abstract and Title</td><td>PM<br>Year</td><td>PM<br>Journal</td></tr>";
 
-	    $article_details = article_info($title);
+		$pop_authors = str_replace(',', '', $pop_authors);
+		$pop_authors = explode(" ", $data[1]);
+	    $article_details = article_info($title, $pop_authors);
 	    $pm_id = $article_details[0];
 	    if ($pm_id=='') {
 	    	$pm_id = 'N/A';
 	    }
 	    $pm_abstract = $article_details[1];
 	    if ($pm_abstract=='') {
-	    	$pm_abstract = 'N/A';
+	    	$pm_abstract = $data[23]."<br>";
+	    	//$pm_abstract = "<iframe src='".$data[6]."' width='100%' height='100%'></iframe>";
+	    	if (strlen(file_get_contents($data[6]))>100) {
+	    	//$pm_abstract = $pm_abstract."<object data=\"".$data[6]."\" style=\"width:100%;height:500px\"><embed src=\"".$data[6]."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
+	    	//$pm_abstract = $pm_abstract."<div style=\"width:100%;height:500px\"".file_get_contents($data[6])."</div>";
+	    	//$pm_abstract = "<iframe src='article_page.php?article_url=$data[6]' width='100%' height='100%'></iframe>";
+	    	$pm_abstract = $pm_abstract."<object data=\"article_page.php?article_url=".$data[6]."\" style=\"width:100%;height:500px\"><embed src=\"article_page.php?article_url=".$data[6]."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
+
+			}
 	    }	    
 	    $pm_title = $article_details[2];
 	    if ($pm_title=='') {
-	    	$pm_title = 'N/A';
+	    	//$pm_title = 'N/A';
 	    }
 	    $pm_api_url = $article_details[3];
 	    $pm_authors = $article_details[4];
@@ -114,7 +184,11 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    }
 	    $pm_url = $article_details[7];
 
-	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$data[6]."' target='_blank'>pm article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>$pm_title<br><br>$pm_abstract</td><td>$pm_year</td><td>$pm_journal</td></tr>";
+	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$data[6]."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
+	    if ($pm_title != '') {
+	    	$search_results = $search_results."$pm_title<br><br>";
+		}
+	    $search_results = $search_results."$pm_abstract</td><td>$pm_year</td><td>$pm_journal</td></tr>";
 
 	    msleep(.1);
 	}
@@ -125,8 +199,12 @@ if (($h = fopen($filename, "r")) !== FALSE)
 
   // Close the file
   fclose($h);
-
-	echo "<br><center><a href='?start=21&end=30'>prev</a>&nbsp;&nbsp;<a href='start=31&end=40'>next</a></center>";
+	$prev_start = $start - 10;
+  	$prev_end = $end - 10;
+	$next_start = $start + 10;
+  	$next_end = $end + 10;  	
+  	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
+	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
 }
 ?>
 </body>
