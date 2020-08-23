@@ -1,4 +1,7 @@
 <html>
+<!-- 
+	References: https://gist.github.com/hlashbrooke/ee208fb8be43d23da5a9
+-->
 <head>
 	<title>Browse literature results</title>
 	<style>
@@ -66,6 +69,21 @@ echo '<br><center><font style="font-size:22px">'.file_get_contents($query_file).
   	$next_end = $end + 10;  	
   	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
 	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
+
+function char_replace($find, $replace, $str)
+{
+	$newstr = "";
+	$strlen = strlen($str);
+	for( $i = 0; $i <= $strlen; $i++ ) {
+    	$char = substr($str, $i, 1);
+    	if ($char == $find) {
+    		$char == $replace;
+    	}
+    	$newstr = $newstr.$char;
+	}
+
+	return $newstr;
+}
 
 function msleep($time)
 {
@@ -182,7 +200,13 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    $pm_url = $article_details[7];
 
 	    if (substr($url, 0, 24)=='https://books.google.com') {
-	    	$search_phrase = 'dq=(%22hippocampus%22+OR+%22hippocampal+formation%22+OR+%22entorhinal+cortex%22+OR+%22cornu+ammonis+1%22+OR+%22cornu+ammonis+2%22+OR+%22cornu+ammonis+3%22+OR+%22dentate+gyrus%22+OR+%22Subiculum%22)+AND+(%22neural+network%22+OR+%22spiking%22+OR+%22firing%22+OR+%22circuit%22)+AND+(%22model%22+OR+%22computational%22)&ots=0mMs7MebUb&sig=dPNlCzCA7w0ge8CscNuX436mMDg#v=onepage&q=(%22hippocampus%22%20%22hippocampal%20formation%22%20%22entorhinal%20cortex%22%20%22cornu%20ammonis%201%22%20%22cornu%20ammonis%202%22%20%22cornu%20ammonis%203%22%20%22dentate%20gyrus%22%20%22Subiculum%22)%20(%22neural%20network%22%20%22spiking%22%20%22firing%22%20%22circuit%22)%20(%22model%22%20%22computational%22)&f=false';
+	    	// format query for book search
+	    	$query_html = file_get_contents($query_file);
+	    	$query_html2 = str_replace('Query: ', '', $query_html);
+	    	$query_html3 = str_replace(" ", "+", $query_html2);
+	    	//$query_html4 = str_replace("AND", "", $query_html3);
+	    	//$query_html4 = str_replace("AND", "", $query_html3);
+	    	$search_phrase = '&q='.$query_html3;//.'&f=false';
 	    	$url = $url.$search_phrase;
 	    }
 	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
