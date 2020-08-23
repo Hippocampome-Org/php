@@ -139,6 +139,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
   {		
   	if ($i >= $start && $i <= $end) {
   		$title = $data[2];
+  		$url = $data[6];
 
   		$search_results = $search_results."<tr><td>PoP<br>Citations</td><td>PoP<br>Citations by Year</td><td>PoP<br>Authors</td><td>PoP<br>Title</td><td>PoP<br>Year</td><td>PoP<br>Journal</td></tr>";
 	    // Read the data from a single line
@@ -156,12 +157,8 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    $pm_abstract = $article_details[1];
 	    if ($pm_abstract=='') {
 	    	$pm_abstract = $data[23]."<br>";
-	    	//$pm_abstract = "<iframe src='".$data[6]."' width='100%' height='100%'></iframe>";
-	    	if (strlen(file_get_contents($data[6]))>100) {
-	    	//$pm_abstract = $pm_abstract."<object data=\"".$data[6]."\" style=\"width:100%;height:500px\"><embed src=\"".$data[6]."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
-	    	//$pm_abstract = $pm_abstract."<div style=\"width:100%;height:500px\"".file_get_contents($data[6])."</div>";
-	    	//$pm_abstract = "<iframe src='article_page.php?article_url=$data[6]' width='100%' height='100%'></iframe>";
-	    	$pm_abstract = $pm_abstract."<object data=\"article_page.php?article_url=".$data[6]."\" style=\"width:100%;height:500px\"><embed src=\"article_page.php?article_url=".$data[6]."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
+	    	if (strlen(file_get_contents($url))>100) {
+	    	$pm_abstract = $pm_abstract."<object data=\"article_page.php?article_url=".$url."\" style=\"width:100%;height:500px\"><embed src=\"article_page.php?article_url=".$url."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
 
 			}
 	    }	    
@@ -184,7 +181,11 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    }
 	    $pm_url = $article_details[7];
 
-	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$data[6]."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
+	    if (substr($url, 0, 24)=='https://books.google.com') {
+	    	$search_phrase = 'dq=(%22hippocampus%22+OR+%22hippocampal+formation%22+OR+%22entorhinal+cortex%22+OR+%22cornu+ammonis+1%22+OR+%22cornu+ammonis+2%22+OR+%22cornu+ammonis+3%22+OR+%22dentate+gyrus%22+OR+%22Subiculum%22)+AND+(%22neural+network%22+OR+%22spiking%22+OR+%22firing%22+OR+%22circuit%22)+AND+(%22model%22+OR+%22computational%22)&ots=0mMs7MebUb&sig=dPNlCzCA7w0ge8CscNuX436mMDg#v=onepage&q=(%22hippocampus%22%20%22hippocampal%20formation%22%20%22entorhinal%20cortex%22%20%22cornu%20ammonis%201%22%20%22cornu%20ammonis%202%22%20%22cornu%20ammonis%203%22%20%22dentate%20gyrus%22%20%22Subiculum%22)%20(%22neural%20network%22%20%22spiking%22%20%22firing%22%20%22circuit%22)%20(%22model%22%20%22computational%22)&f=false';
+	    	$url = $url.$search_phrase;
+	    }
+	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
 	    if ($pm_title != '') {
 	    	$search_results = $search_results."$pm_title<br><br>";
 		}
