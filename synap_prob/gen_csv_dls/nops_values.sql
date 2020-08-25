@@ -1,7 +1,15 @@
-SELECT tr1.type_name as source_name, tr1.type_id as source_id, tr2.type_name as target_name, 
-tr2.type_id as target_id, NPS_mean_total as number_of_potential_synapses_mean, 
-NPS_stdev_total as number_of_potential_synapses_stdev
-FROM SynproTypeTypeRel as tr1, SynproTypeTypeRel as tr2,SynproNPSTotal as nps
-WHERE tr1.type_id = nps.source_id
+SELECT 
+    tr1.type_name_new AS source_name,
+    tr1.type_id AS source_id,
+    tr2.type_name_new AS target_name,
+    tr2.type_id AS target_id,
+    NPS_mean_total AS number_of_potential_synapses_mean,
+    NPS_stdev_total AS number_of_potential_synapses_stdev
+FROM
+    SynproTypeTypeRel AS tr1,
+    SynproTypeTypeRel AS tr2,
+    SynproNPSTotal AS nps
+WHERE
+    tr1.type_id = nps.source_id
 AND tr2.type_id = nps.target_id
-ORDER BY tr1.id, tr2.id;
+ORDER BY tr1.id , tr2.id;
