@@ -4,7 +4,7 @@ SELECT
     tr2.type_name_new AS target_name,
     tr2.type_id AS target_id,
     NPS_mean_total AS number_of_potential_synapses_mean,
-    NPS_stdev_total AS number_of_potential_synapses_stdev
+    IF(NPS_stdev_total!=0,NPS_stdev_total,'N/A') AS number_of_potential_synapses_stdev
 FROM
     SynproTypeTypeRel AS tr1,
     SynproTypeTypeRel AS tr2,

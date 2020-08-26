@@ -4,7 +4,7 @@ SELECT
     tr2.type_name_new AS target_name,
     tr2.type_id AS target_id,
     NC_mean_total AS number_of_contacts_mean,
-    NC_stdev_total AS number_of_contacts_stdev
+    IF(NC_stdev_total!=0,NC_stdev_total,'N/A') AS number_of_contacts_stdev
 FROM
     SynproTypeTypeRel AS tr1,
     SynproTypeTypeRel AS tr2,
