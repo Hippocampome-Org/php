@@ -8,7 +8,7 @@ SELECT
 FROM
     SynproTypeTypeRel AS tr1,
     SynproTypeTypeRel AS tr2,
-    SynproCPTotal AS cp
+    SynproTotalCP AS cp
 WHERE
     tr1.type_id = cp.source_id
 AND tr2.type_id = cp.target_id

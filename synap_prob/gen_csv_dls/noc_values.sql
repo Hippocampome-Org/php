@@ -8,7 +8,7 @@ SELECT
 FROM
     SynproTypeTypeRel AS tr1,
     SynproTypeTypeRel AS tr2,
-    SynproNOCTotal AS noc
+    SynproTotalNOC AS noc
 WHERE
     tr1.type_id = noc.source_id
 AND tr2.type_id = noc.target_id

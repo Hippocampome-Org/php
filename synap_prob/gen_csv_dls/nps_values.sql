@@ -8,7 +8,7 @@ SELECT
 FROM
     SynproTypeTypeRel AS tr1,
     SynproTypeTypeRel AS tr2,
-    SynproNPSTotal AS nps
+    SynproTotalNPS AS nps
 WHERE
     tr1.type_id = nps.source_id
 AND tr2.type_id = nps.target_id
