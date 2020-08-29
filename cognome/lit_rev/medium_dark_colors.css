@@ -51,36 +51,36 @@ hr {
 /* select colors */
 select {
 	color: rgb(200,200,200);
-	font-color:rgb(200, 200, 200);
+	font-color:#00629b;
 }
 select option { 
 	color: rgb(200,200,200);
-	font-color:rgb(200, 200, 200);
+	font-color:#00629b;
 }
 
 select option:first-child{
 	color: rgb(200,200,200);
-	font-color:rgb(200, 200, 200);
+	font-color:#00629b;
 }
 .select-css {
     /*box-shadow: 0 1px 0 1px rgba(0,0,0,.04);*/
 	background: rgb(79, 79, 79);
 	color: rgb(200,200,200);
-	font-color:rgb(200, 200, 200);
+	font-color:#00629b;
 	border: rgb(110, 110, 110);
 }
 .select-css:hover {
     /*border-color: rgb(129,129,129);*/
       background: rgb(79, 79, 79);
 	color: rgb(220,220,220);
-	font-color:rgb(220, 220, 220);
+	font-color:#00629b;
 }
 .select-css:focus {
     /*border-color: rgb(129,129,129);*/
     box-shadow: 0 0 1px 3px rgba(89,89,89,.5);
       background: rgb(79, 79, 79);
 	color: rgb(220,220,220);
-	font-color:rgb(220, 220, 220);
+	font-color:#00629b;
 }
 option { /* Text and background colour, blue on light gray */
 color:#000000;
@@ -114,19 +114,19 @@ background-color:rgb(79, 79, 79);
 
 .title_section a {
 	color:rgb(189, 189, 189) !important;
-	font-color:rgb(189, 189, 189) !important;
+	font-color:#00629b !important;
 }
 
 textarea {
 	color:rgb(189, 189, 189);
-	font-color:rgb(189, 189, 189);
+	font-color:#00629b;
 	background:rgb(59, 59, 59);
 	border: rgb(110, 110, 110);
 }
 
 input, button {
 	color: rgb(220,220,220);
-	font-color:rgb(220, 220, 220);
+	font-color:#00629b;
 	background:rgb(59, 59, 59);
 	border: rgb(110, 110, 110);
 }
@@ -154,9 +154,37 @@ input, button {
 }
 
 .button_link {
-  background-color:rgb(150,150,150);
+  background-color:rgb(60,60,60);
   color:rgb(200,200,200);
+  border-color:rgb(45,45,45);
+  border-style:solid;
+  margin:2px;
+  border-width: 0.01em;
 }
 .sd-flex-content {
   background-color: black;
+}
+
+.abstract_text {
+  font-size: 40px;
+  font-color: #00629b;
+  font-family: arial;
+  color: #00629b;
+}
+.abstract_text2 {
+  font-size: 40px;
+  font-color: rgb(150,150,150);
+  font-family: arial;
+  color: rgb(150,150,150);
+}
+
+body {
+  font-color:#00629b;
+  color: #00629b;
+}
+
+::selection {
+  font-color:#0073b6;
+  color: #0073b6;
+  background-color: rgb(118,118,118);
 }

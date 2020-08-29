@@ -33,6 +33,7 @@
 		}
 	</style>
 	<link rel='stylesheet' type='text/css' href='medium_dark_colors.css'> 
+	<!--link rel='stylesheet' type='text/css' href='light_white_bg_colors.css'--> 
 </head>
 <body>
 <!--table border=1-->
@@ -212,8 +213,12 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
 	    if ($pm_title != '') {
 	    	$search_results = $search_results."$pm_title<br><br>";
+			$search_results = $search_results."<font class='abstract_text'>";
 		}
-	    $search_results = $search_results."$pm_abstract</td><td>$pm_year</td><td>$pm_journal</td></tr>";
+		else {
+			$search_results = $search_results."<font class='abstract_text2'>";	
+		}
+	    $search_results = $search_results."$pm_abstract</font></td><td>$pm_year</td><td>$pm_journal</td></tr>";
 
 	    msleep(.1);
 	}
