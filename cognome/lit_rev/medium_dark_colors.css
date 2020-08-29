@@ -173,9 +173,9 @@ input, button {
 }
 .abstract_text2 {
   font-size: 40px;
-  font-color: rgb(150,150,150);
+  font-color: rgb(130,130,130);
   font-family: arial;
-  color: rgb(150,150,150);
+  color: rgb(130,130,130);
 }
 
 body {
@@ -184,7 +184,14 @@ body {
 }
 
 ::selection {
-  font-color:#0073b6;
-  color: #0073b6;
-  background-color: rgb(118,118,118);
+  font-color:#006aa7;
+  color: #006aa7;
+  background-color: rgb(136,136,136);
+}
+
+table, th, td {
+  border: 1px solid rgb(118,118,118);
+  font-color: rgb(150,150,150);
+  font-family: arial;
+  color: rgb(150,150,150);
 }
