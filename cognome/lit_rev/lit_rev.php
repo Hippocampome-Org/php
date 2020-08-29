@@ -162,7 +162,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 
   		$search_results = $search_results."<tr><td>PoP<br>Citations</td><td>PoP<br>Citations by Year</td><td>PoP<br>Authors</td><td>PoP<br>Title</td><td>PoP<br>Year</td><td>PoP<br>Journal</td></tr>";
 	    // Read the data from a single line
-	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".$data[19]."</td><td>".$data[1]."</td><td>".$title."</td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
+	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".$data[19]."</td><td>".$data[1]."</td><td><font class='abstract_text2'>".$title."</font></td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
 
 		$search_results = $search_results."<tr><td>PM<br>ID</td><td>PM<br>Link</td><td>PM<br>Authors</td><td>PM<br>Abstract and Title</td><td>PM<br>Year</td><td>PM<br>Journal</td></tr>";
 
