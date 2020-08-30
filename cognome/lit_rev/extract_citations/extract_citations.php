@@ -5,7 +5,8 @@
 <body>
 <?php
 $base_dir = "gs_results/1/";
-$filename = $base_dir."page1.txt";
+$filename = $base_dir."page5.txt";
+$current_year = date("Y");
 $max_lines = 200;
 $cite_found = false;
 $cite_found_counter = 0;
@@ -41,7 +42,7 @@ if (($fh = fopen($filename, "r")) !== FALSE)
 				$free_pub_found = false;		
 				$citations = $cited_by_results[1];
 				$cited_by_results = [];
-				$citations_per_year = floatval($citations)/floatval($year);
+				$citations_per_year = floatval($citations)/floatval(($current_year + 1 - $year));
 				// output article
 				echo $citations.",".$year.",".number_format($citations_per_year,2).",".trim($title_final).",".$authors.",".$journal.",".$url."<br>";
 				// reset

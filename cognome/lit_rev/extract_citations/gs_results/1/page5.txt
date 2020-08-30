@@ -1,0 +1,83 @@
+
+("hippocampus" OR "hippocampal formation" OR "entorhinal cortex" OR "cornu ammonis 1" OR "cornu ammonis 2" OR "cornu ammonis 3" OR "dentate gyrus" OR "subiculum") AND ("neural network" OR "spiking" OR "firing" OR "circuit") AND ("model" OR "computational")
+Nate
+
+
+Articles
+Page 5 of about 304,000 results (0.05 sec)
+Any time
+Since 2020
+Since 2019
+Since 2016
+Custom range...
+Sort by relevance
+Sort by date
+Computational models of the spatial and mnemonic functions of the hippocampus.
+N Burgess - 2007 - psycnet.apa.org
+… Neuronal computations underlying the firing of place cells and their role in navigation.
+Hippocampus, 6(6), 749-762 … Theta-Modulated Place-by-Direction Cells in the Hippocampal
+Formation in the Rat … Graded persistent activity in entorhinal cortex neurons …
+  Cited by 31 Related articles
+[HTML] frontiersin.org
+[HTML] A computational model for preplay in the hippocampus
+AH Azizi, L Wiskott, S Cheng - Frontiers in computational …, 2013 - frontiersin.org
+… However, this view of sequential activity in the hippocampus does not readily account … We recently
+proposed a conceptual framework for the hippocampal formation, in which the massive … Here we
+base our modeling on the continuous attractor neural network (CANN) with spike …
+  Cited by 41 Related articles All 18 versions 
+[PDF] wiley.com
+Learning in a geometric model of place cell firing
+C Barry, N Burgess - Hippocampus, 2007 - Wiley Online Library
+Abstract Following Hartley et al.(Hartley et al.(2000) Hippocampus 10: 369–379), we present
+a simple feed-forward model of place cell (PC) firing predicated on neocortical information
+regarding the environmental geometry surrounding the animal. Incorporating the idea of …
+  Cited by 51 Related articles All 9 versions
+[PDF] jneurosci.org
+Free from Publisher
+Cell assembly sequences arising from spike threshold adaptation keep track of time in the hippocampus
+V Itskov, C Curto, E Pastalkova… - Journal of …, 2011 - Soc Neuroscience
+  Cited by 119 Related articles All 26 versions
+A diffusely preprogrammed but sharply trainable hippocampus model
+W Kilmer, T McLardy - International Journal of Neuroscience, 1971 - Taylor & Francis
+… cells; Corn, commissural fibres of the hippo- campus; DG, dentate gyrus; Ent, entohinal … The
+recurrent connection between the hippocampus and the midbrain reticular formation's … pre-
+dominant excitation, followed by predominant inhibition, in hippocampal spiking activity when …
+  Cited by 43 Related articles All 5 versions
+[PDF] wiley.com
+Cellular and network properties of the subiculum in the pilocarpine model of temporal lobe epilepsy
+A Knopp, A Kivi, C Wozny… - Journal of …, 2005 - Wiley Online Library
+… Horizontal slices of 400 μm containing the entorhinal cortex, the subiculum, and the hippocampus
+were prepared with a Campden vibroslicer (Loughborough, UK) … Stimulation electrode was placed
+in the alveus. Sub, subiculum; DG, dentate gyrus; CA1, area CA1 …
+  Cited by 89 Related articles All 5 versions
+[PDF] wiley.com
+Grid cell mechanisms and function: contributions of entorhinal persistent spiking and phase resetting
+ME Hasselmo - Hippocampus, 2008 - Wiley Online Library
+… theta rhythmic spiking in the hippocampus (Fox et al., 1986; Klausberger et al., 2003) and in the
+entorhinal cortex (Frank et … Hippocampus … interneurons firing at different phases due to feedback
+interactions is mathematically similar to the persistent spiking model described here …
+  Cited by 204 Related articles All 10 versions
+[PDF] psu.edu
+Encoding and retrieval in the CA3 region of the hippocampus: a model of theta-phase separation
+S Kunec, ME Hasselmo… - Journal of …, 2005 - journals.physiology.org
+… Journal Menu. Home; Issues; Collections; Information; About. ARTICLES. Encoding and
+Retrieval in the CA3 Region of the Hippocampus: A Model of Theta-Phase Separation. Steve
+Kunec ,; Michael E. Hasselmo , and; Nancy Kopell. Steve Kunec …
+  Cited by 120 Related articles All 9 versions
+[HTML] sciencedirect.com
+[HTML] Modeling goal-directed spatial navigation in the rat based on physiological data from the hippocampal formation
+RA Koene, A Gorchetchnikov, RC Cannon… - Neural Networks, 2003 - Elsevier
+… spatial navigation in the rat based on physiological data from the hippocampal formation … further
+demonstrate the functional role of phase relationships in entorhinal cortex and prefrontal … explicit
+separation of the components of behavior requiring the hippocampus from those …
+  Cited by 106 Related articles All 21 versions
+[HTML] hindawi.com
+[HTML] … to behavior: entorhinal persistent spiking and membrane potential oscillations may underlie path integration, grid cell firing, and episodic memory
+ME Hasselmo, MP Brandon - Neural plasticity, 2008 - hindawi.com
+… Page 4. 4 Neural Plasticity in the hippocampus [36] and in the medial mammillary nucleus
+which receives output from the postsubiculum and medial entorhinal cortex [37] … 5.
+PERSISTENT SPIKING COULD UNDERLIE GRID CELL FIRING …
+  Cited by 76 Related articles All 19 versions 
+Previous
+1 2 3 4 5 6 7 8 9 10  
+HelpPrivacyTerms

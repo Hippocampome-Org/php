@@ -1,0 +1,82 @@
+
+("hippocampus" OR "hippocampal formation" OR "entorhinal cortex" OR "cornu ammonis 1" OR "cornu ammonis 2" OR "cornu ammonis 3" OR "dentate gyrus" OR "subiculum") AND ("neural network" OR "spiking" OR "firing" OR "circuit") AND ("model" OR "computational")
+Nate
+
+
+Articles
+Page 3 of about 304,000 results (0.04 sec)
+Any time
+Since 2020
+Since 2019
+Since 2016
+Custom range...
+Sort by relevance
+Sort by date
+[HTML] nature.com
+[HTML] Hippocampus-independent phase precession in entorhinal grid cells
+T Hafting, M Fyhn, T Bonnevie, MB Moser, EI Moser - Nature, 2008 - nature.com
+… Figure 4: Phase precession in entorhinal cortex after inactivation of the hippocampus. figure4.
+a, b, Firing fields and theta phase of an entorhinal grid cell recorded simultaneously with
+hippocampal place cells on the linear track before (a) and after (b) inactivation of the …
+  Cited by 420 Related articles All 15 versions
+[HTML] plos.org
+[HTML] Dual coding with STDP in a spiking recurrent neural network model of the hippocampus
+D Bush, A Philippides, P Husbands… - PLoS Comput Biol, 2010 - journals.plos.org
+The firing rate of single neurons in the mammalian hippocampus has been demonstrated to
+encode for a range of spatial and non-spatial stimuli. It has also been demonstrated that
+phase of firing, with respect to the theta oscillation that dominates the hippocampal EEG …
+  Cited by 30 Related articles All 23 versions 
+[PDF] wiley.com
+Circuit analysis of NMDAR hypofunction in the hippocampus, in vitro, and psychosis of schizophrenia
+R Greene - Hippocampus, 2001 - Wiley Online Library
+… of hippocampal pyramidal-cell activity was used to visualize the neu- ronal firing of 225 … of
+glutamate release by presynaptic N-methyl-D-aspartate autoreceptors in the entorhinal cortex …
+D-aspartate receptors in the Schaffer collaterol-commis- sural pathway of rat hippocampus …
+  Cited by 142 Related articles All 6 versions
+[PDF] jneurosci.org
+Free from Publisher
+The sync/desync model: How a synchronized hippocampus and a desynchronized neocortex code memories
+G Parish, S Hanslmayr, H Bowman - Journal of Neuroscience, 2018 - Soc Neuroscience
+  Cited by 26 Related articles All 11 versions
+[PDF] academia.edu
+[PDF] Computational modeling of entorhinal cortex
+ME Hasselmo, E Fransen, C Dickson… - Annals of the New York …, 2000 - academia.edu
+… effective encoding of long-term representations through synaptic modification in the hippocampal
+formation … entorhinal cortex which could synchronize input for optimal encoding in the
+hippocampus … region CA3 which should then match the afferent input from entorhinal cortex …
+  Cited by 75 Related articles All 8 versions 
+[HTML] sciencedirect.com
+[HTML] Mechanism of graded persistent cellular activity of entorhinal cortex layer v neurons
+E Fransén, B Tahvildari, AV Egorov, ME Hasselmo… - Neuron, 2006 - Elsevier
+… yet unknown) level of intracellular Ca 2+ concentration, sustained by spiking, is required … In
+entorhinal cortex layer V neurons, we have gathered evidence that biochemical signals may … The
+model reproduces all the experimental observations regarding graded firing in entorhinal …
+  Cited by 267 Related articles All 19 versions
+[PDF] physiology.org
+Spread of synchronous firing in longitudinal slices from the CA3 region of the hippocampus
+R Miles, RD Traub, RK Wong - Journal of Neurophysiology, 1988 - journals.physiology.org
+… 7. Increasing the threshold of neurons in a region of the model network reduced the speed at
+which synchronous firing spread … However in the CA3 region of the hippocampus synchro- nous
+burst firing appears to be initiated by a depolarization resulting from transmitter re …
+  Cited by 223 Related articles All 7 versions
+[HTML] nature.com
+[HTML] Effects of 5-HT on memory and the hippocampus: model and data
+M Meeter, L Talamini, JAJ Schmitt… - …, 2006 - nature.com
+… The model consisted of four layers representing subfields of the hippocampal formation (Figure
+1). An entorhinal cortex layer (EC) functioned as … The connectivity between the model layers reflects
+the known pathways in the hippocampus (for a review, see Witter et al, 2000) …
+  Cited by 67 Related articles All 21 versions
+[PDF] jneurosci.org
+Preictal activity of subicular, CA1, and dentate gyrus principal neurons in the dorsal hippocampus before spontaneous seizures in a rat model of temporal lobe …
+S Fujita, I Toyoda, AK Thamattoor… - Journal of …, 2014 - Soc Neuroscience
+  Cited by 49 Related articles All 6 versions
+[PDF] wiley.com
+Neural network modeling of the hippocampal formation spatial signals and their possible role in navigation: a modular approach
+PE Sharp, HT Blair, M Brown - Hippocampus, 1996 - Wiley Online Library
+… As shown in Figure 1, these areas include the entorhinal cortex (Quirk et al., 1992), the dentate
+gyrus Uung and McNaughton, 1993), the hippocampus proper (O'Keefe and … Page 6.
+HIPPOCAMPAL FORMATION SPATIAL SIGNALS 725 30" Cells 0" Cells 15" Cells AT …
+  Cited by 73 Related articles All 4 versions
+Previous
+1 2 3 4 5 6 7 8 9 10  
+HelpPrivacyTerms

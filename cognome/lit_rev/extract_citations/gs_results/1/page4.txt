@@ -1,0 +1,84 @@
+
+("hippocampus" OR "hippocampal formation" OR "entorhinal cortex" OR "cornu ammonis 1" OR "cornu ammonis 2" OR "cornu ammonis 3" OR "dentate gyrus" OR "subiculum") AND ("neural network" OR "spiking" OR "firing" OR "circuit") AND ("model" OR "computational")
+Nate
+
+
+Articles
+Page 4 of about 304,000 results (0.05 sec)
+Any time
+Since 2020
+Since 2019
+Since 2016
+Custom range...
+Sort by relevance
+Sort by date
+[PDF] royalsocietypublishing.org
+Neuronal rebound spiking, resonance frequency and theta cycle skipping may contribute to grid cell firing in medial entorhinal cortex
+ME Hasselmo - … Transactions of the Royal Society B …, 2014 - royalsocietypublishing.org
+… can account for the loss of grid cell firing with inactivation of the hippocampus [27] … Stellate cells
+in medial entorhinal cortex are only present in layer II and contain a hyperpolarization-activated …
+apart for cells with lower resonance frequency (e(ii)) and slower rebound spiking (f(ii …
+  Cited by 39 Related articles All 6 versions
+[HTML] springer.com
+[HTML] Firing properties of entorhinal cortex neurons and early alterations in an Alzheimer's disease transgenic model
+A Marcantoni, EF Raymond, E Carbone… - Pflügers Archiv-European …, 2014 - Springer
+The entorhinal cortex (EC) is divided into medial (MEC) and lateral (LEC) anatomical areas,
+and layer II neurons of these two regions project to granule cells of the dentate gyrus
+through the medial and lateral perforant pathways (MPP and LPP), respectively. Stellate …
+  Cited by 31 Related articles All 17 versions
+[BOOK] Gateway to memory: An introduction to neural network modeling of the hippocampus and learning
+MA Gluck, CE Myers - 2001 - books.google.com
+… Redundancy Compression Stimulus Competition in Entorhinal Cortex Backprojections from
+Entorhinal Cortex 260 265 … do?" researchers have been forced to look beyond the hippocampus
+to seek … we have tried to summarize—at a conceptual level—neural network modeling of …
+  Cited by 160 Related articles All 4 versions 
+[PDF] wiley.com
+Transitivity, flexibility, conjunctive representations, and the hippocampus. II. A computational analysis
+MJ Frank, JW Rudy, RC O'Reilly - Hippocampus, 2003 - Wiley Online Library
+… The hippocampal system receives inputs (via entorhinal cortex (EC) layer EC_in) from the entire
+cortical … and Eichenbaum's (1997) finding that rats with damage to the hippocampal formation
+perform at … with the close E, far F (Ef) pattern, the intact hippocampus constructs a …
+  Cited by 154 Related articles All 19 versions
+[PDF] researchgate.net
+[PDF] A reduced model for medial entorhinal cortex stellate cells: subthreshold oscillations, spiking and synchronization
+HG Rotstein, T Oppermann, JA White… - … of Computational …, 2006 - researchgate.net
+Entorhinal cortex layer II stellate cells display subthreshold oscillations (STOs). We study a
+single compartment biophysical model of such cells which qualitatively reproduces these
+STOs. We argue that in the interspike interval (ISI) the seven-dimensional model can be …
+  Cited by 28 Related articles All 6 versions 
+[PDF] springer.com
+[PDF] The dynamic structure underlying subthreshold oscillatory activity and the onset of spikes in a model of medial entorhinal cortex stellate cells
+HG Rotstein, T Oppermann, JA White… - Journal of computational …, 2006 - Springer
+… Abstract Medial entorhinal cortex layer II stellate cells display subthreshold oscillations (STOs) …
+give rise to the perforant path, the main afferent fiber system to the hippocampus … Mixed-mode
+oscillatory (MMO) activity, the coexistence of spiking and subthreshold oscillations, is a …
+  Cited by 71 Related articles All 15 versions
+[PDF] nature.com
+Cellular mechanisms of spatial navigation in the medial entorhinal cortex
+C Schmidt-Hieber, M Häusser - Nature neuroscience, 2013 - nature.com
+… during a field crossing, such as continuous attractor network models of grid cell firing … feature
+of the data, phase precession of intracellular theta oscillations and spiking with respect … for a
+quantitative understanding of the cellular basis of spatial navigation in the entorhinal cortex …
+  Cited by 224 Related articles All 12 versions
+[PDF] royalsocietypublishing.org
+Complementary learning systems within the hippocampus: a neural network modelling approach to reconciling episodic memory with statistical learning
+AC Schapiro, NB Turk-Browne… - … of the Royal …, 2017 - royalsocietypublishing.org
+… The model explains how known anatomical pathways in the hippocampus and subfield properties …
+It contains hippocampal subfields dentate gyrus (DG), cornu ammonis 3 (CA3), and CA1, as
+hidden … that learn to map input provided by superficial layers of entorhinal cortex (EC in …
+  Cited by 136 Related articles All 15 versions
+[PDF] jneurosci.org
+Free from Publisher
+Cognitive disorganization in hippocampus: a physiological model of the disorganization in psychosis
+AV Olypher, D Klement, AA Fenton - Journal of Neuroscience, 2006 - Soc Neuroscience
+  Cited by 99 Related articles All 8 versions
+[PDF] academia.edu
+[PDF] The hippocampus as a cognitive graph (abridged version)
+RU Muller, JL Kubie, R Saypoff - Hippocampus, 1991 - academia.edu
+… J. S . Taube, and GJ Quirk (199 I ) Spatial firing correlates of neurons in the hippocampal formation
+of freely … J., and A. Speakman (1987) Single unit activity in the rat hippocampus during a spatial
+memory task … 1990) Head-direction cells recorded from the post-subiculum in freely …
+  Cited by 96 Related articles All 5 versions 
+Previous
+1 2 3 4 5 6 7 8 9 10  
+HelpPrivacyTerms
