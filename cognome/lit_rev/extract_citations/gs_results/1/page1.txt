@@ -1,0 +1,85 @@
+
+("hippocampus" OR "hippocampal formation" OR "entorhinal cortex" OR "cornu ammonis 1" OR "cornu ammonis 2" OR "cornu ammonis 3" OR "dentate gyrus" OR "subiculum") AND ("neural network" OR "spiking" OR "firing" OR "circuit") AND ("model" OR "computational")
+Nate
+
+
+Articles
+About 304,000 results (0.04 sec)
+Any time
+Since 2020
+Since 2019
+Since 2016
+Custom range...
+Sort by relevance
+Sort by date
+[HTML] plos.org
+[HTML] Model-based spatial navigation in the hippocampus-ventral striatum circuit: A computational analysis
+IP Stoianov, CMA Pennartz, CS Lansink… - PLoS computational …, 2018 - journals.plos.org
+While the neurobiology of simple and habitual choices is relatively well known, our current
+understanding of goal-directed choices and planning in the brain is still limited. Theoretical
+work suggests that goal-directed computations can be productively associated to model …
+  Cited by 33 Related articles All 16 versions 
+[PDF] mitpressjournals.org
+A model of spatial map formation in the hippocampus of the rat
+KI Blum, LF Abbott - Neural computation, 1996 - MIT Press
+… Role of the dentate gyrus in hippocampal mnemonic processing … Models and Theoretical
+Frameworks for Hippocampal and Entorhinal Cortex Function in Memory and Navigation
+247-268 … Dual Coding with STDP in a Spiking Recurrent Neural Network Model of the …
+  Cited by 396 Related articles All 16 versions
+[PDF] wiley.com
+Population dynamics and theta rhythm phase precession of hippocampal place cell firing: a spiking neuron model
+MV Tsodyks, WE Skaggs, TJ Sejnowski… - …, 1996 - Wiley Online Library
+Abstract O'Keefe and Recce ([1993] Hippocampus 68: 317–330) have observed that the
+spatially selective firing of pyramidal cells in the CA1 field of the rat hippocampus tends to
+advance to earlier phases of the electroencephalogram theta rhythm as a rat passes through …
+  Cited by 356 Related articles All 10 versions
+[PDF] jneurosci.org
+Free from Publisher
+A spin glass model of path integration in rat medial entorhinal cortex
+MC Fuhs, DS Touretzky - Journal of Neuroscience, 2006 - Soc Neuroscience
+  Cited by 560 Related articles All 13 versions
+[PDF] wiley.com
+Simulation of spatial learning in the Morris water maze by a neural network model of the hippocampal formation and nucleus accumbens
+MA Brown, PE Sharp - Hippocampus, 1995 - Wiley Online Library
+Cells in the hippocampal formation show spatial firing correlates thought to be critical to the
+role played by this structure in spatial learning. Place cells in the hippocampus proper show
+location‐specific activity, whereas cells in the postsubiculum fire as a function of momentary …
+  Cited by 137 Related articles All 4 versions
+[PDF] cshlp.org
+Free from Publisher
+A simple neural network model of the hippocampus suggesting its pathfinding role in episodic memory retrieval
+AV Samsonovich, GA Ascoli - Learning & Memory, 2005 - learnmem.cshlp.org
+The goal of this work is to extend the theoretical understanding of the relationship between
+hippocampal spatial and memory functions to the level of neurophysiological mechanisms
+underlying spatial navigation and episodic memory retrieval. The proposed unifying theory …
+  Cited by 103 Related articles All 14 versions
+[PDF] academia.edu
+Hippocampus-inspired spiking neural network on FPGA
+M Mokhtar, DM Halliday, AM Tyrrell - International Conference on …, 2008 - Springer
+… The interesting aspect of this project is the incorporation of both spiking neurons and rate coding
+methods in designing a hippocampus-inspired spiking neural … Spiking neural network models
+can provide information on both the spike progression and firing frequencies that …
+  Cited by 27 Related articles All 10 versions
+[PDF] psu.edu
+A model of hippocampal function
+N Burgess, M Recce, J O'Keefe - Neural networks, 1994 - Elsevier
+… This paper considers the function of cells in the hippocampal formation in terms of their receptive …
+It is believed that the sensory inputs come from the entorhinal cortex, which has access to … and
+CA 1. Within these assumptions, we have a func- tional model of the hippocampus …
+  Cited by 463 Related articles All 17 versions
+[PDF] wiley.com
+An oscillatory interference model of grid cell firing
+N Burgess, C Barry, J O'keefe - Hippocampus, 2007 - Wiley Online Library
+We expand upon our proposal that the oscillatory interference mechanism proposed for the
+phase precession effect in place cells underlies the grid‐like firing pattern of dorsomedial
+entorhinal grid cells (O'Keefe and Burgess (2005) Hippocampus 15: 853–866). The original …
+  Cited by 654 Related articles All 23 versions
+[HTML] nih.gov
+[HTML] The boundary vector cell model of place cell firing and spatial memory
+C Barry, C Lever, R Hayman, T Hartley… - Reviews in the …, 2006 - ncbi.nlm.nih.gov
+… We then describe novel evidence that BVCs may exist in the hippocampal formation … 1 /. Since
+the initial discovery, cells with spatially modulated firing have been found in almost all areas of
+the hippocampus and in some surrounding areas (entorhinal cortex/ 17 /, subiculum …
+  Cited by 341 Related articles All 7 versions
+1	2	3	4	5	6	7	8	9	10	
+HelpPrivacyTerms

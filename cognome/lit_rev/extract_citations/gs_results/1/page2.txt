@@ -1,0 +1,84 @@
+
+("hippocampus" OR "hippocampal formation" OR "entorhinal cortex" OR "cornu ammonis 1" OR "cornu ammonis 2" OR "cornu ammonis 3" OR "dentate gyrus" OR "subiculum") AND ("neural network" OR "spiking" OR "firing" OR "circuit") AND ("model" OR "computational")
+Nate
+
+
+Articles
+Page 2 of about 304,000 results (0.12 sec)
+Any time
+Since 2020
+Since 2019
+Since 2016
+Custom range...
+Sort by relevance
+Sort by date
+[PDF] wiley.com
+Attractor neural network models of spatial maps in hippocampus
+M Tsodyks - Hippocampus, 1999 - Wiley Online Library
+… Alternatively, the path integration circuitry could be separate from the hippocampus, eg, in
+subiculum (Sharp et al., 1995) or parasubiculum (Redish and Touretzky, 1997) … 486 TSODYKS
+Page 7. hippocampus (via superficial layers of entorhinal cortex) with an input …
+  Cited by 130 Related articles All 5 versions
+[HTML] sciencedirect.com
+[HTML] A computational theory of episodic memory formation in the hippocampus
+ET Rolls - Behavioural brain research, 2010 - Elsevier
+… A quantitative computational theory of the operation of the hippocampus as an episodic … The
+dentate gyrus performs pattern separation by competitive learning to produce sparse
+representations … producing for example neurons with place-like fields from entorhinal cortex grid …
+  Cited by 238 Related articles All 11 versions
+[PDF] jneurosci.org
+Free from Publisher
+Boundary vector cells in the subiculum of the hippocampal formation
+C Lever, S Burton, A Jeewajee, J O'Keefe… - Journal of …, 2009 - Soc Neuroscience
+  Cited by 504 Related articles All 18 versions
+[HTML] sciencedirect.com
+[HTML] Nucleus accumbens, entorhinal cortex and latent inhibition: a neural network model
+NA Schmajuk, L Cox, JA Gray - Behavioural Brain Research, 2001 - Elsevier
+A neural network model of classical conditioning (Schmajuk, Lam, and Gray, J. Exp.
+Psychol.: Anim. Behav. Process, 22, 1996, 321–349) is applied to the description of the
+neural substrates of latent inhibition. Experimental data suggest that latent inhibition might …
+  Cited by 49 Related articles All 7 versions
+Sensory gating in a computer model of the CA3 neural network of the hippocampus
+KA Flach, LE Adler, GA Gerhardt, C Miller, P Bickford… - Biological …, 1996 - Elsevier
+We have developed a unique computer model of the CA3 region of the hippocampus that
+simulates the P50 auditory evoked potential response to repeated stimuli in order to study
+the neuronal circuits involved in a sensory processing deficit associated with schizophrenia …
+  Cited by 43 Related articles All 10 versions
+[HTML] sciencedirect.com
+[HTML] A multi-model deep convolutional neural network for automatic hippocampus segmentation and classification in Alzheimer's disease
+M Liu, F Li, H Yan, K Wang, Y Ma, L Shen, M Xu… - NeuroImage, 2020 - Elsevier
+Alzheimer's disease (AD) is a progressive and irreversible brain degenerative disorder. Mild
+cognitive impairment (MCI) is a clinical precursor of AD. Although some treatments can
+delay its progression, no effective cures are available for AD. Accurate early-stage diagnosis …
+  Cited by 5 Related articles All 6 versions
+[HTML] sciencedirect.com
+[HTML] Hippocampus, cortex, and basal ganglia: Insights from computational models of complementary learning systems
+HE Atallah, MJ Frank, RC O'Reilly - Neurobiology of learning and memory, 2004 - Elsevier
+… and retrieval of memories in the following manner: during encoding, the hippocampus develops
+relatively … CA3 (which is strongly facilitated by the very sparse dentate gyrus (DG) inputs … and Rudy
+(2001), our hippocampal model closely resembles other neural network models of …
+  Cited by 228 Related articles All 21 versions
+[PDF] wiley.com
+Grid cell firing may arise from interference of theta frequency membrane potential oscillations in single neurons
+ME Hasselmo, LM Giocomo, EA Zilli - Hippocampus, 2007 - Wiley Online Library
+… that interactions of subthreshold membrane potential oscillation frequency in different dendritic
+branches of entorhinal cortex stellate cells … (Hippocampus, 2007) … provides a consistent quantitative
+link between single cell physiological properties and properties of spiking units in …
+  Cited by 249 Related articles All 14 versions
+[PDF] wiley.com
+Modeling place fields in terms of the cortical inputs to the hippocampus
+T Hartley, N Burgess, C Lever, F Cacucci… - …, 2000 - Wiley Online Library
+… 2000 Wiley-Liss, Inc. KEY WORDS: model; space; rat; neural network INTRODUCTION Place
+cells in the hippocampus of the rat exhibit location-specific firing. A given cell fires only when
+the animal is in a particular part of its environment (the place field) …
+  Cited by 370 Related articles All 10 versions
+[PDF] wiley.com
+Neuronal computations underlying the firing of place cells and their role in navigation
+N Burgess, J O'Keefe - Hippocampus, 1996 - Wiley Online Library
+… EC, entorhinal cortex (mEC, medial EC; lEC, lateral EC); S, subiculum; pS, pre- and para … and
+functional brain imaging has begun to implicate the human hippocampal formation in tasks … can
+be used by navigational systems down- stream of the hippocampus during subsequent …
+  Cited by 289 Related articles All 8 versions
+Previous
+1	2	3	4	5	6	7	8	9	10	
+HelpPrivacyTerms
