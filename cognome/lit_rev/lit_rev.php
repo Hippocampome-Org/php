@@ -36,7 +36,6 @@
 	<!--link rel='stylesheet' type='text/css' href='light_white_bg_colors.css'--> 
 </head>
 <body>
-<!--table border=1-->
 <?php
 $base_dir = "query_results/1/";
 $filename = $base_dir."PoPCites.csv";
@@ -94,7 +93,6 @@ function msleep($time)
 function article_info($title, $pop_authors)
 {
 	// insert html code
-	//$title_adj="%22".$title."%22";
 	$title_adj=str_replace(' ', '%20', $title);
 
 	$pm_api_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&term=$title_adj%5Btitle%5D";
