@@ -37,8 +37,8 @@
 </head>
 <body>
 <?php
-$base_dir = "query_results/1/";
-$filename = $base_dir."PoPCites.csv";
+$base_dir = "query_results/2/";
+$filename = $base_dir."gs_articles.csv";
 $query_file = $base_dir."query.csv";
 
 echo '<br><center><font style="font-size:22px">'.file_get_contents($query_file).'</font></center><br>';
@@ -90,14 +90,14 @@ function msleep($time)
     usleep($time * 1000000);
 }
 
-function article_info($title, $pop_authors)
+function article_info($title, $gs_authors)
 {
 	// insert html code
 	$title_adj=str_replace(' ', '%20', $title);
 
 	$pm_api_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&retmode=json&term=$title_adj%5Btitle%5D";
-	// pop authors //
-	foreach ($pop_authors as $author) {
+	// gs authors //
+	foreach ($gs_authors as $author) {
 		$author = str_replace(',', '', $author);
 		if (strlen($author) > 3) {
 			$pm_api_url = $pm_api_url."%20".$author."%20%5Bauthor%5D";
@@ -156,17 +156,19 @@ if (($h = fopen($filename, "r")) !== FALSE)
   {		
   	if ($i >= $start && $i <= $end) {
   		$title = $data[2];
-  		$url = $data[6];
+  		//$url = $data[6];
+  		$url_orig = "https://scholar.google.com/scholar?q=".$title."&hl=en";
+  		$url = str_replace(" ", "+", $url_orig);
 
-  		$search_results = $search_results."<tr><td>PoP<br>Citations</td><td>PoP<br>Citations by Year</td><td>PoP<br>Authors</td><td>PoP<br>Title</td><td>PoP<br>Year</td><td>PoP<br>Journal</td></tr>";
+  		$search_results = $search_results."<tr><td>GS<br>Citations</td><td>GS<br>Citations by Year</td><td>GS<br>Authors</td><td>GS<br>Title</td><td>GS<br>Year</td><td>GS<br>Journal</td></tr>";
 	    // Read the data from a single line
 	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".$data[19]."</td><td>".$data[1]."</td><td><font class='abstract_text2'>".$title."</font></td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
 
 		$search_results = $search_results."<tr><td>PM<br>ID</td><td>PM<br>Link</td><td>PM<br>Authors</td><td>PM<br>Abstract and Title</td><td>PM<br>Year</td><td>PM<br>Journal</td></tr>";
 
-		$pop_authors = str_replace(',', '', $pop_authors);
-		$pop_authors = explode(" ", $data[1]);
-	    $article_details = article_info($title, $pop_authors);
+		$gs_authors = str_replace(',', '', $gs_authors);
+		$gs_authors = explode(" ", $data[1]);
+	    $article_details = article_info($title, $gs_authors);
 	    $pm_id = $article_details[0];
 	    if ($pm_id=='') {
 	    	$pm_id = 'N/A';
@@ -174,10 +176,11 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    $pm_abstract = $article_details[1];
 	    if ($pm_abstract=='') {
 	    	$pm_abstract = $data[23]."<br>";
-	    	if (strlen(file_get_contents($url))>100) {
-	    	$pm_abstract = $pm_abstract."<object data=\"article_page.php?article_url=".$url."\" style=\"width:100%;height:500px\"><embed src=\"article_page.php?article_url=".$url."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
+	    	//if (strlen(file_get_contents($url))>100) {
+	    	$article_url = str_replace(" ", "+", $title);
+	    	$pm_abstract = $pm_abstract."<object data=\"article_page.php?article_url=".$article_url."\" style=\"width:100%;height:500px\"><embed src=\"article_page.php?article_url=".$article_url."\" style=\"width:100%;height:500px\"> </embed>Error: Embedded data could not be displayed.</object>";
 
-			}
+			//}
 	    }	    
 	    $pm_title = $article_details[2];
 	    if ($pm_title=='') {
@@ -208,7 +211,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    	$search_phrase = '&q='.$query_html3;//.'&f=false';
 	    	$url = $url.$search_phrase;
 	    }
-	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>pop article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
+	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>gs article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
 	    if ($pm_title != '') {
 	    	$search_results = $search_results."$pm_title<br><br>";
 			$search_results = $search_results."<font class='abstract_text'>";
@@ -218,7 +221,8 @@ if (($h = fopen($filename, "r")) !== FALSE)
 		}
 	    $search_results = $search_results."$pm_abstract</font></td><td>$pm_year</td><td>$pm_journal</td></tr>";
 
-	    msleep(.1);
+	    //msleep(.1);
+	    msleep(.2);
 	}
 	$i++;
   }
