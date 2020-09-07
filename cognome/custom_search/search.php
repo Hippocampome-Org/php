@@ -31,6 +31,7 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	global $total_results;
 	$articles_searched = 0;
 	$articles_processed = 0;
+	$collection_results = array();
 
 	$range_search=false;
 	if ($range != '') {
@@ -80,12 +81,16 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 			if ($range_search) {
 				#echo "stats: ".$art_file_id." ".$start_range." ".$end_range."<br><br>";
 				if ($art_file_id >= $start_range && $art_file_id <= $end_range) {
-					$total_results = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+					$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+					$total_results = $results_group[0];
+					array_push($collection_results, $results_group[1]);
 					$articles_searched++;
 				}
 			}
 			else {
-    			$total_results = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+    			$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+    			$total_results = $results_group[0];
+    			array_push($collection_results, $results_group[1]);
     			$articles_searched++;
     		}
     		$articles_processed++;
@@ -97,11 +102,15 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	}
 
 	report_results($results_text, $total_results, $query, $articles_searched);
+
+	$article_results = array($articles_list, $collection_results);
+	return $article_results;
 }
 
 function search($file, $filename, $max_matches, $query) {
 	global $tot_mch;
 	global $total_results;
+	$matches_to_report = array();
 
 	// set file details
 	echo "<br><center><font style='font-size:20px;'>File: <a href='?fileview=".$file."' target='_blank'>".$filename."</a></font></center><br>";
@@ -156,10 +165,12 @@ function search($file, $filename, $max_matches, $query) {
 		else {
 			echo "<div style='background-color:#dedede;'><span style='font-size:22px;position:relative;left:33px;top:-4px;font-family:arial;'>0 matches for keyterm: \"".$pattern_keyterm."\"</span></div>";
 		}
+		array_push($matches_to_report, $num_matches);
 	}
 	echo "<br>";
 
-	return $total_results;
+	$results_group = array($total_results, $matches_to_report);
+	return $results_group;
 }
 ?>
 

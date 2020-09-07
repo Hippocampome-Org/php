@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="../main.css">
   <?php include('set_theme.php'); ?>
   <?php include('function/hc_header.php'); ?>
+  <?php ini_set('max_execution_time', '600'); ?>
   <script type="text/javascript">
     function toggle_vis(elem_name) {
       var elem = document.getElementById(elem_name);
@@ -59,7 +60,8 @@
     <!-- end of header -->
 
     <?php
-    $dir = "/home/natemsut/public_html/cognome/cognome/custom_search/literature/txt_ver/";
+    //$dir = "/home/natemsut/public_html/cognome/cognome/custom_search/literature/txt_ver/";
+    $dir = "/var/www/html/cognome_articles_renamed/missing/txt_ver/";
     //$dir = "http://localhost/general/cognome_articles/txt_ver_full/"; // directory of literature in text file format  
 
     if (isset($_GET['fileview'])) {
@@ -91,7 +93,7 @@
       make_button($kwd_button_ids[$b_i], $kwd_button_values[$b_i]);
     }
     echo "</div></input></div></div>";    
-    echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Max keyterm text sample results&nbsp;&nbsp;</span>";
+    echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Max keyterm text sample results:&nbsp;&nbsp;</span>";
     echo "<select name='max_keyterm_results' style='width:45px;height:30px;font-size:18px;position:relative;top:5px;'>";    
     for ($k_i = 1; $k_i <= 20; $k_i++) {
       echo "<option value='".$k_i."'";
@@ -107,7 +109,7 @@
     }
     echo "</select><br>";
     #echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>";
-    echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Number of articles to search&nbsp;&nbsp;</span>";
+    echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Number of articles to search:&nbsp;&nbsp;</span>";
     echo "<select name='articles_to_search' style='width:45px;height:30px;font-size:18px;'>";
     #position:relative;top:5px;'>"; 
     $max_art =array("all",10,50,100);
@@ -123,6 +125,17 @@
       }
       echo ">".$max_art[$a_i]."</option>";
     }
+    echo "</select>&nbsp;&nbsp;<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Save results to file:&nbsp;&nbsp;</span><select name='save_to_file' style='width:55px;height:30px;font-size:18px;'>";
+    echo "<option value='no' ";
+    if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='no') {
+      echo "selected";
+    }
+    echo ">no</option>";
+    echo "<option value='yes' ";
+    if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='yes') {
+      echo "selected";
+    }
+    echo ">yes</option>";    
     echo "</select></center>";    
     echo "<div class='wrap-collabsible' id='choose_articles' style='width:90%;position:relative;left:5%;'><input id='choose_articles_list' class='toggle' type='checkbox'><label for='choose_articles_list' class='lbl-toggle'>Articles Availible</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;height:600px;overflow:auto;'>";
     $sql = "SELECT * FROM natemsut_hctm.articles";
@@ -171,7 +184,7 @@
         $articles_to_search = "all";
       }
 
-      search_directory($dir, $articles_to_search, $max_matches, $query, $_POST['range']);
+      $article_results = search_directory($dir, $articles_to_search, $max_matches, $query, $_POST['range']);
 
       echo "</div>";
     }
@@ -179,5 +192,26 @@
     ?>
   <br><br><br><br><br>
   </div>
+  <?php
+    $output_filename = "results_csv/custom_search_results.csv";
+    if (isset($_REQUEST["save_to_file"]) && $_REQUEST["save_to_file"]=="yes") {
+      $output_file = fopen($output_filename, 'w') or die("Can't open file.");
+      // column names
+      fwrite($output_file, "file_name");
+      for ($i = 0; $i < sizeof($query); $i++) {
+        fwrite($output_file, ",".trim($query[$i]));
+      }
+      fwrite($output_file, "\n");
+      // row values
+      for ($i = 0; $i < sizeof($article_results[0]); $i++) {
+        fwrite($output_file, $article_results[0][$i]);
+        for ($j = 0; $j < sizeof($article_results[1][$i]); $j++) {
+          fwrite($output_file, ",".$article_results[1][$i][$j]);
+        }
+        fwrite($output_file, "\n");
+      }
+      fclose($output_file);
+    }
+  ?>
 </body>
 </html>
