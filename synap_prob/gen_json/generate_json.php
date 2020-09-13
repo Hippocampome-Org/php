@@ -102,6 +102,14 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 		return $adj_new_val2;
 	}
 
+	function na_for_zero($value) {
+		$new_value = strval($value);
+		if ($new_value == '0' | $new_value == '0.0' | $new_value == '0.00' | $new_value == '0.000' | $new_value == '0.0000' | $new_value == '0.00000' | $new_value == '0.000000') {
+			$new_value = "N/A";
+		}
+		return $new_value;
+	}
+
 	/*
 	Generate matrices section
 
@@ -242,7 +250,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='mean: ".toPrecision($val,4)."\\nstd: ".adjPrecision($val,$stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=ps' title='mean: ".toPrecision($val,4)."\\nstd: ".na_for_zero(adjPrecision($val,$stdev,4))."' target='_blank'>".toPrecision($val,4)."</a></center>";
 						}
 					}
 				} 
@@ -255,7 +263,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='mean: ".toPrecision($val,3)."\\nstd: ".adjPrecision($val,$stdev,3)."' target='_blank'>".toPrecision($val,3)."</a></center>";  
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=noc' title='mean: ".toPrecision($val,3)."\\nstd: ".na_for_zero(adjPrecision($val,$stdev,3))."' target='_blank'>".toPrecision($val,3)."</a></center>";  
 						}
 					}
 				} 	
@@ -268,7 +276,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 						$val = $row['val'];
 						$stdev = $row['stdev'];
 						if ($val != '' && $val != 0) {
-							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='mean: ".toPrecision($val,4)."\\nstd: ".adjPrecision($val,$stdev,4)."' target='_blank'>".toPrecision($val,4)."</a></center>";            
+							$entry_output = $entry_output."<center><a href='property_page_synpro_pvals.php?id_neuron_source=".$neuron_ids[$i]."&id_neuron_target=".$neuron_ids[$j]."&color=blue&page=1&nm_page=prosyn' title='mean: ".toPrecision($val,4)."\\nstd: ".na_for_zero(adjPrecision($val,$stdev,4))."' target='_blank'>".toPrecision($val,4)."</a></center>";            
 						}
 					}
 				} 	
