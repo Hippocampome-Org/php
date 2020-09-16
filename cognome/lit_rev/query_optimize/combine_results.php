@@ -1,7 +1,7 @@
 <html>
 <?php
 	$base_dir = "combined_results";
-	$file_dir = "1";
+	$file_dir = "3";
 	$list_file = $base_dir."/".$file_dir."/filelist.txt";
 	$file_list = array();
 	$line_num = 0;
@@ -48,7 +48,7 @@
 		$title = "";
 		$title_matches = array();
 
-		if (($fh = fopen($file_name, "r")) !== FALSE) 
+		if ($file_name!="" && ($fh = fopen($file_name, "r")) !== FALSE) 
 		{
 		  while (($line_array = fgetcsv($fh, 10000, ",")) !== FALSE)
 		  {	
@@ -111,18 +111,30 @@
   	// Output dataset
 	$output_file = fopen($output_filepath, 'w') or die("Can't open file.");
 	fwrite($output_file, "title,year\n");
-	foreach ($output_lines as $line) {
-		fwrite($output_file, $line);
-		fwrite($output_file, "\n");
-	}
-	fclose($output_file);	
 
 	$core_sum = 0;
-	for ($i = 0; $i < sizeof($core_found); $i++) {
+	/*for ($i = 0; $i < sizeof($core_found); $i++) {
 		if ($core_found[$i]==1) {
+			//fwrite($output_file, $core_articles[$i]."\n");
+			$core_sum++;
+		}
+	}*/
+	$avoid_dups = array();
+	foreach ($output_lines as $line) {
+		$dup_found = FALSE;
+		foreach ($avoid_dups as $found_title) {
+			if ($line == $found_title) {
+				$dup_found = TRUE;
+			}			
+		}
+		if ($dup_found == FALSE && $line!="\"\",0") {
+			fwrite($output_file, $line."\n");
+			array_push($avoid_dups, $line);
 			$core_sum++;
 		}
 	}
+	fclose($output_file);	
+
 	echo "<br><center><h3>Titles matched: ".$core_sum.".<br>Articles processed: ".$line_num.".<br>Results file creation completed.</h3></center>";
 	}
 
