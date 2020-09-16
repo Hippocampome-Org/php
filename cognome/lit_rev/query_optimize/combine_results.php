@@ -4,6 +4,8 @@
 	$file_dir = "1";
 	$list_file = $base_dir."/".$file_dir."/filelist.txt";
 	$file_list = array();
+	$line_num = 0;
+	$file_num = 0;
 	$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
@@ -14,6 +16,7 @@
 	}
 
 	echo "<br><center><h4><a href='combine_results.php' style='text-decoration:none'>Combine Results</a></h4></center><br>";
+	echo "<center><h3>Articles processed: <textarea id='articles_processed'>0</textarea><br>Files processed: <textarea id='files_processed'>0</textarea></h3></center>";
 
 	if ($run_extraction) {
 	if (($fh = fopen($list_file, "r")) !== FALSE) 
@@ -39,10 +42,9 @@
 
 	$core_found = array_fill(0, sizeof($core_articles), 0);
 
-	function extract_articles($file_desc, $output_lines, $core_articles, $core_found) {
+	function extract_articles($file_desc, $output_lines, $core_articles, $core_found, $line_num) {
 		$db_name = explode(',', $file_desc)[0];
 		$file_name = explode(',', $file_desc)[1];
-		$line_num = 0;
 		$title = "";
 		$title_matches = array();
 
@@ -61,8 +63,7 @@
 
 			if ($title != "Title") {
 				for ($i = 0; $i < sizeof($core_articles); $i++) {
-					//$title2 = str_replace("/","\/",$title); // add escape charactor
-					//$title3 = str_replace("-","\-",$title2);
+					// add escape charactors
 					$title2 = $title;
 					$special_chars = "~,`,!,@,#,$,%,^,&,*,(,),-,_,=,+,{,},|,:,;,\\\\,\\\",',<,>,.,?,/";
 					$schars_array = explode(",", $special_chars);
@@ -70,10 +71,10 @@
 						$escaped_char = "\\".$char;
 						$title2 = str_replace($char,$escaped_char,$title2);
 					}
+
 					$title4 = str_replace("[","",$title2);
 					$title5 = str_replace("]","",$title4);
 					$pattern = "/(".$title5.".*)/";
-					//echo $pattern."<br>";
 					$title_matches = array();
 					preg_match($pattern, $core_articles[$i], $title_matches);
 					if (sizeof($title_matches) > 0) {
@@ -83,18 +84,28 @@
 				}
 	  		}
 
+	  		if ($line_num % 2000 == 0) {
+	  			echo "<script>document.getElementById('articles_processed').value = '$line_num';</script>";
+	  			ob_flush(); // realtime update
+        		flush(); // realtime update
+	  		}
 		  	$line_num++;
 		  }
 		}
 
-		$results_array = array($output_lines, $core_found);
+		$results_array = array($output_lines, $core_found, $line_num);
 		return $results_array;
 	}
 
 	for ($i = 0; $i < sizeof($file_list); $i++) {
-		$results_array = extract_articles($file_list[$i], $output_lines, $core_articles, $core_found);
+		$file_num++;
+		$results_array = extract_articles($file_list[$i], $output_lines, $core_articles, $core_found, $line_num);
 		$output_lines = $results_array[0];
 		$core_found = $results_array[1];
+		$line_num = $results_array[2];
+		echo "<script>document.getElementById('files_processed').value = '$file_num';</script>";
+	  	ob_flush();
+        flush();
 	}
 
   	// Output dataset
@@ -112,7 +123,7 @@
 			$core_sum++;
 		}
 	}
-	echo "<br><center><h2>Titles matched: ".$core_sum."<br>Results file creation completed.</h2></center><br>";
+	echo "<br><center><h3>Titles matched: ".$core_sum.".<br>Articles processed: ".$line_num.".<br>Results file creation completed.</h3></center>";
 	}
 
 	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
