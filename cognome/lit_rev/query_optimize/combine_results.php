@@ -8,11 +8,12 @@
 	$file_list = array();
 	$line_num = 0;
 	$file_num = 0;
-	$progress_counter = 0;
+	$progress_counter = 0; // change this to resume progress at a certain point
 	$core_sum = 0;
 	$high_score = 0;
 	$output_dataset = FALSE;
-	$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
+	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
+	$output_filepath = "combined_results/combined/latest_high_score.csv";
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
@@ -27,12 +28,13 @@
 
 	echo "<br><center><h4><a href='combine_results.php' style='text-decoration:none'>Combine Results</a></h4></center><br>";
 	echo "<center><h3><table>
-	<tr><td>File combinations processed:</td><td><textarea id='combos_processed'>0</textarea></td></tr>
-	<tr><td>File combination currently processing:&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea id='current_processing'>0</textarea></td></tr>
-	<tr><td>Current combo articles processed:</td><td><textarea id='articles_processed'>0</textarea></td></tr>
-	<tr><td>Current combo files processed:</td><td><textarea id='files_processed'>0</textarea></td></tr>
-	<tr><td>Highest scoring files:</td><td><textarea id='high_score_files'>0</textarea></td></tr>
-	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>0</textarea></td></tr>
+	<tr><td>File combinations processed:</td><td><textarea id='combos_processed'>N/A</textarea></td></tr>
+	<tr><td>File combination currently processing:&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea id='current_processing'>N/A</textarea></td></tr>
+	<tr><td>Current combo articles processed:</td><td><textarea id='articles_processed'>N/A</textarea></td></tr>
+	<tr><td>Current combo files processed:</td><td><textarea id='files_processed'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring files:</td><td><textarea id='high_score_files'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td></tr>
+	<!--tr><td>Progress counter:</td><td><textarea id='progress_counter'>N/A</textarea></td></tr-->
 	</table></h3></center>";
 
 	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
@@ -113,7 +115,7 @@
 	}
 
 	// search file combinations
-	for ($i = 0; $i < pow(sizeof($gs_files),4); $i++) {
+	for ($i = $progress_counter; $i < pow(sizeof($gs_files),4); $i++) {
 		$file_list_array = generate_file_list(4, 1, $gs_files, $pm_files, $i);
 		$file_list = $file_list_array[0];
 		$file_numbers = $file_list_array[1];
@@ -147,17 +149,13 @@
 			echo "<script>document.getElementById('high_score_matches').value = '$core_sum';</script>";
 			echo "<script>document.getElementById('high_score_files').value = '$file_numbers';</script>";
 			$high_score = $core_sum;
-			//foreach ($output_lines)
-			//echo sizeof($output_lines)."<br>";
-			/*foreach ($output_lines as $test) {
-				echo $test."<br>";
-			}*/
+			$output_file = fopen($output_filepath, 'a') or die("Can't open file.");
+			fwrite($output_file, "$file_numbers,$core_sum,$i\n");
+			fclose($output_file);
 		}
-		echo "<script>document.getElementById('combos_processed').value = '$i';</script>";
+		echo "<script>document.getElementById('combos_processed').value = '".($i+1)."';</script>";
 		echo "<script>document.getElementById('current_processing').value = '$file_numbers';</script>";
-		//if ($line_num % 10000 == 0) {
-  			echo "<script>document.getElementById('articles_processed').value = '$line_num';</script>";
-  		//}
+  		echo "<script>document.getElementById('articles_processed').value = '$line_num';</script>";
 		echo "<script>document.getElementById('files_processed').value = '$file_num';</script>";
 		ob_flush();
 	    flush();
