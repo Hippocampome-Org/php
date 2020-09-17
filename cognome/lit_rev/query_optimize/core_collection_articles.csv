@@ -1,0 +1,201 @@
+title,year
+"Noise promotes independent control of gamma oscillations and grid firing within recurrent attractor networks.",2015
+"Cellular mechanisms of spatial navigation in the medial entorhinal cortex.",2013
+"Is there a geometric module for spatial orientation? Insights from a rodent navigation model.",2009
+"An entorhinal-hippocampal model for simultaneous cognitive map building",2015
+"Accurate path integration in continuous attractor network models of grid cells.",2009
+"Encoding and retrieval in a model of the hippocampal CA1 microcircuit.",2010
+"Conversion of a phase- to a rate-coded position signal by a three-stage model of theta cells, grid cells, and place cells.",2008
+"Modulation of hippocampal rhythms by subthreshold electric fields and network topology.",2013
+"A simple neural network model of the hippocampus suggesting its pathfinding role in episodic memory retrieval.",2005
+"A computational study on how theta modulated inhibition can account for the long temporal windows in the entorhinal-hippocampal loop.",2015
+"Synaptic conditions for auto-associative memory storage and pattern completion in Jensen et al.'s model of hippocampal area CA3.",2012
+"Flexible theta sequence compression mediated via phase precessing interneurons.",2016
+"Dual coding with STDP in a spiking recurrent neural network model of the hippocampus.",2010
+"Memory consolidation from seconds to weeks: a three-stage neural network model with autonomous reinstatement dynamics.",2014
+"The Neurobiological Basis of Cognition: Identification by Multi-Input, Multioutput Nonlinear Dynamic Modeling: A method is proposed for measuring and modeling human long-term memory formation by mathematical analysis and computer simulation of nerve-cell dynamics.",2010
+"Modeling new neuron function: a history of using computational neuroscience to study adult neurogenesis.",2011
+"A Model for Grid Firing and Theta-Nested Gamma Oscillations in Layer 2 of the Medial Entorhinal Cortex",2019
+"Internal representation of hippocampal neuronal population spans a time-distance continuum.",2019
+"Active dendritic integration as a mechanism for robust and precise grid cell firing.",2017
+"Hippocampal Spike-Timing Correlations Lead to Hexagonal Grid Fields.",2017
+"Inferring circuit mechanisms from sparse neural recording and global perturbation in grid cells.",2018
+"The SyncdeSync Model: How a Synchronized Hippocampus and a Desynchronized Neocortex Code Memories.",2018
+"The CAN-In network: A biologically inspired model for self-sustained theta oscillations and memory maintenance in the hippocampus.",2017
+"Supervised learning in spiking neural networks with FORCE training.",2017
+"FPGA implementation of hippocampal spiking network and its real-time simulation on dynamical neuromodulation of oscillations",2018
+"Dendrites of dentate gyrus granule cells contribute to pattern separation by controlling sparsity.",2017
+"ASP: Learning to Forget with Adaptive Synaptic Plasticity in Spiking Neural Networks",2018
+"Fast and Flexible Sequence Induction In Spiking Neural Networks Via Rapid Excitability Changes",2018
+"Two types of slow waves in anesthetized and sleeping brains.",2018
+"Vector Symbolic Spiking Neural Network Model of Hippocampal Subarea CA1 Novelty Detection Functionality.",2016
+"A hippocampus CA3 spiking neural network model for storage and retrieval of sequential memory.",2013
+"Recurrent network model for learning goal-directed sequences through reverse replay.",2018
+"Cognitive Navigation by Neuro-Inspired Localization, Mapping, and Episodic Memory.",2018
+"A Hippocampal Model for Behavioral Time Acquisition and Fast Bidirectional Replay of Spatio-Temporal Memory Sequences.",2018
+"Effects of brain-derived neurotrophic factor and noise on transitions in temporal lobe epilepsy in a hippocampal network.",2018
+"A Spiking Neurocomputational Model of High-Frequency Oscillatory Brain Responses to Words and Pseudowords.",2016
+"Combining Theory, Model, and Experiment to Explain How Intrinsic Theta Rhythms Are Generated in an In Vitro Whole Hippocampus Preparation without Oscillatory Inputs.",2017
+"On the role of the entorhinal cortex in the effective connectivity of the hippocampal formation.",2017
+"An integrative model of the intrinsic hippocampal theta rhythm.",2017
+"Intrinsic mechanisms stabilize encoding and retrieval circuits differentially in a hippocampal network model.",2014
+"Pattern separation of spiketrains in hippocampal neurons.",2019
+"Network models provide insights into how oriens-lacunosum-moleculare and bistratified cell interactions influence the power of local hippocampal CA1 theta oscillations.",2015
+"Pattern Separation in a Spiking Neural Network of Hippocampus Robust to Imbalanced Excitation/Inhibition.",2018
+"Parallel Brain Simulator: A Multi-scale and Parallel Brain-Inspired Neural Network Modeling and Simulation Platform.",2016
+"Spike Trains Synchrony with Changed Neuronal Networks Parameters in a Hippocampus CA3 Small-World Network Model.",2017
+"Acetylcholine disinhibits hippocampal circuits to enable rapid formation of overlapping memory ensembles. ",2017
+"HMSNN: Hippocampus inspired Memory Spiking Neural Network.",2016
+"In vitro large-scale experimental and theoretical studies for the realization of bi-directional brain-prostheses.",2013
+"A computationally efficient associative memory model of hippocampus CA3 by spiking neurons.",2013
+"Adult Neurogenesis: Implications on Human And Computational Decision Making.",2013
+"A model of hippocampal spiking responses to items during learning of a context-dependent task.",2014
+"A hippocampus CA3 small-world network with two types of stimuli.",2013
+"Spike trains synchrony with different coupling strengths in a hippocampus CA3 small-world network model.",2013
+"Velocity-Controlled Oscillators for Hippocampal Navigation on Spiking Neuromorphic Hardware.",2019
+"Neurogenesis and multiple plasticity mechanisms enhance associative memory retrieval in a spiking network model of the hippocampus.",2017
+"The race to learn: spike timing and STDP can coordinate learning and recall in CA3.",2011
+"InVivo Imaging of Dentate Gyrus Mossy Cells in Behaving Mice.",2017
+"Effects of 5-HT on memory and the hippocampus: model and data.",2006
+"A compressed sensing perspective of hippocampal function.",2014
+"Recurrent connections form a phase-locking neuronal tuner for frequency-dependent selective communication.",2013
+"Waypoint Path Planning With Synaptic-Dependent Spike Latency.",2019
+"Modeling driver cells in developing neuronal networks.",2018
+"Learning a sparse code for temporal sequences using STDP and sequence compression.",2011
+"Learning and prospective recall of noisy spike pattern episodes.",2013
+"Replay as wavefronts and theta sequences as bump oscillations in a grid cell attractor network.",2019
+"A multi-layer neural-mass model for learning sequences using theta/gamma oscillations.",2013
+"A neurocomputational model of classical conditioning phenomena: a putative role for the hippocampal region in associative learning.",2009
+"Distance-dependent inhibition facilitates focality of gamma oscillations in the dentate gyrus.",2017
+"Pronounced differences in signal processing and synaptic plasticity between piriform-hippocampal network stages: a prominent role for adenosine.",2015
+"Fast synaptic inhibition promotes synchronized gamma oscillations in hippocampal interneuron networks.",2002
+"Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model.",1996
+"Synaptic noise and physiological coupling generate high-frequency oscillations in a hippocampal computational model.",2009
+"Interneuronal mechanisms of hippocampal theta oscillations in a full-scale model of the rodent CA1 circuit.",2016
+"Phase shift in the 24-hour rhythm of hippocampal EEG spiking activity in a rat model of temporal lobe epilepsy.",2013
+"Can the hippocampus tell time? The temporo-septal engram shift model.",1999
+"Ketamine disrupts theta modulation of gamma in a computer model of hippocampus.",2011
+"Modular realignment of entorhinal grid cell activity as a basis for hippocampal remapping.",2011
+"Regulation of gamma-frequency oscillation by feedforward inhibition: A computational modeling study.",2019
+"Modulation of septo-hippocampal Theta activity by GABAA receptors: an experimental and computational approach.",2004
+"Network recruitment to coherent oscillations in a hippocampal computer model.",2011
+"Network Mechanisms Generating Abnormal and Normal Hippocampal High-Frequency Oscillations: A Computational Analysis.",2015
+"An oscillatory interference model of grid cell firing.",2007
+"A hybrid oscillatory interference/continuous attractor network model of grid cell firing.",2014
+"A spin glass model of path integration in rat medial entorhinal cortex.",2006
+"Feedback inhibition enables theta-nested gamma oscillations and grid firing fields.",2013
+"Cortical microcircuit determination through global perturbation and sparse sampling in grid cells.",2015
+"A model of grid cells based on a twisted torus topology.",2007
+"Recurrent inhibitory circuitry as a mechanism for grid formation.",2013
+"A model of grid cell development through spatial exploration and spike time-dependent plasticity.",2014
+"Phase precession and variable spatial scaling in a periodic attractor map model of medial entorhinal grid cells with realistic after-spike dynamics.",2012
+"Grid cells generate an analog error-correcting code for singularly precise neural computation.",2011
+"Environmental boundaries as an error correction mechanism for grid cells.",2015
+"Grid cells require excitatory drive from the hippocampus.",2013
+"A Topological Model of the Hippocampal Cell Assembly Network.",2016
+"Persistent Memories in Transient Networks",2017
+"The effects of theta precession on spatial learning and simplicial complex dynamics in a topological model of the hippocampal spatial map.",2014
+"Topological Schemas of Cognitive Maps and Spatial Learning.",2016
+"A topological paradigm for hippocampal spatial map formation using persistent homology.",2012
+"Rebound spiking in layer II medial entorhinal cortex stellate cells: Possible mechanism of grid cell function.",2016
+"Grid cell firing patterns may arise from feedback interaction between intrinsic rebound spiking and transverse traveling waves with multiple heading angles.",2014
+"Head direction is coded more strongly than movement direction in a population of entorhinal neurons.",2015
+"A model combining oscillations and attractor dynamics for generation of grid cell firing.",2012
+"A proposed function for hippocampal theta rhythm: separate phases of encoding and retrieval enhance reversal of prior learning.",2002
+"A model of episodic memory: mental time travel along encoded trajectories using grid cells.",2009
+"Toward a full-scale computational model of the rat dentate gyrus.",2012
+"The self-organization of grid cells in 3D.",2015
+"The spatial representations acquired in CA3 by self-organizing recurrent connections.",2013
+"How informative are spatial CA3 representations established by the dentate gyrus?",2010
+"Unveiling the metric structure of internal representations of space.",2013
+"A model for the differentiation between grid and conjunctive units in medial entorhinal cortex.",2013
+"Grid cells on the ball.",2013
+"Experience-dependent asymmetric shape of hippocampal receptive fields.",2000
+"Storage of 7 +/- 2 short-term memories in oscillatory subcycles.",1995
+"Uncovering spatial topology represented by rat hippocampal population neuronal codes.",2012
+"Grid cell hexagonal patterns formed by fast self-organized learning within entorhinal cortex.",2012
+"Space, time and learning in the hippocampus: how fine spatial and temporal scales are expanded into population codes for behavioral control.",2007
+"Contour Enhancement, Short Term Memory, and Constancies in Reverberating Neural Networks.",1982
+"Spiking neurons in a hierarchical self-organizing map model can learn to develop spatial and temporal properties of entorhinal grid cells and hippocampal place cells.",2013
+"How does the modular organization of entorhinal grid cells develop?",2014
+"Theta phase precession emerges from a hybrid computational model of a CA3 place cell.",2007
+"Grid cells and theta as oscillatory interference: theory and predictions.",2008
+"Population dynamics and theta rhythm phase precession of hippocampal place cell firing: a spiking neuron model.",1996
+"On the formation of gamma-coherent cell assemblies by oriens lacunosum-moleculare interneurons in the hippocampus.",2007
+"Ih tunes theta/gamma oscillations and cross-frequency coupling in an in silico CA3 model.",2013
+"Computational modeling and analysis of hippocampal-prefrontal information coding during a spatial decision-making task.",2014
+"A controlled attractor network model of path integration in the rat.",2005
+"Dual phase and rate coding in hippocampal place cells: theoretical significance and relationship to entorhinal grid cells.",2005
+"Scale-invariant memory representations emerge from moir interference between grid fields that produce theta oscillations: a computational model.",2007
+"A model of grid cells involving extra hippocampal path integration, and the hippocampal loop.",2007
+"Temporal frequency of subthreshold oscillations scales with entorhinal grid cell field spacing.",2007
+"Grid cell mechanisms and function: contributions of entorhinal persistent spiking and phase resetting.",2008
+"The emergence of grid cells: Intelligent design or just adaptation?",2008
+"Coupled noisy spiking neurons as velocity-controlled oscillators in a model of grid cell spatial firing.",2010
+"Cosine directional tuning of theta cell burst frequencies: evidence for spatial coding by oscillatory interference.",2011
+"A mathematical model for Cantor coding in the hippocampus.",2011
+"Hippocampus function modeling with neural network.",2009
+"Acetylcholine modulates gamma frequency oscillations in the hippocampus by activation of muscarinic M1 receptors.",2017
+"A computational model of pattern separation efficiency in the dentate gyrus with implications in schizophrenia.",2015
+"A cortical neural prosthesis for restoring and enhancing memory.",2011
+"Input-to-output transformation in a model of the rat hippocampal CA1 network.",2012
+"Size Matters: How Scaling Affects the Interaction between Grid and Border Cells.",2017
+"Associative memory of phase-coded spatiotemporal patterns in leaky Integrate and Fire networks.",2013
+"Predicting the distribution of synaptic strengths and cell firing correlations in a self-organizing, sequence prediction model.",1998
+"Restricted Boltzmann Machine Models of Hippocampal Coding and Neurogenesis.",2017
+"A computational model for preplay in the hippocampus.",2013
+"A computational theory of hippocampal function, and tests of the theory: new developments.",2015
+"A unified mathematical framework for coding time, space, and sequences in the hippocampal region.",2014
+"Comparative Experimental Studies on Spatial Memory and Learning in Rats and Robots.",2011
+"Complementary learning systems within the hippocampus: a neural network modelling approach to reconciling episodic memory with statistical learning.",2017
+"A neural model of normal and abnormal learning and memory consolidation: adaptively timed conditioning, hippocampus, amnesia, neurotrophins, and consciousness.",2017
+"Solving uncertainty during robot navigation by integrating grid cell and place cell firing based on rat spatial cognition studies.",2013
+"From grid cells to place cells with realistic field sizes.",2017
+"The transformation from grid cells to place cells is robust to noise in the grid pattern.",2014
+"Parametric Anatomical Modeling: a method for modeling the anatomical layout of neurons and their projections.",2014
+"The structure of networks that produce the transformation from grid cells to place cells.",2011
+"Neurogenesis paradoxically decreases both pattern separation and memory interference.",2015
+"Modeling place field activity with hierarchical slow feature analysis.",2015
+"Hippocampal theta rhythm and its coupling with gamma oscillations require fast inhibition onto parvalbumin-positive interneurons.",2009
+"A mechanism for the formation of hippocampal neuronal firing patterns that represent what happens where.",2011
+"An attractor network in the hippocampus: theory and neurophysiology.",2007
+"A Spiking neural network of the CA3 of the hippocampus can be a neural prosthesis for lost cognitive functions.",2007
+"Information transfer between rhythmically coupled networks: reading the hippocampal phase code.",2001
+"Spike-timing dependent plasticity and the cognitive map.",2010
+"Stdp and auto-associative network function.",2009
+"Theta Phase Coding and Acetylcholine Modulation in a Spiking Neural Network.",2008
+"Acquisition of temporal order requires an intact CA3 commissural/associational (C/A) feedback system in mice.",2019
+"Towards a large-scale biologically realistic model of the hippocampus.",2012
+"Theta oscillations gate the transmission of reliable sequences in the medial entorhinal cortex.",2019
+"RatLab: an easy to use tool for place code simulations.",2013
+"ARM-Cortex M3-Based Two-Wheel Robot for Assessing Grid Cell Model of Medial Entorhinal Cortex: Progress towards Building Robots with Biologically Inspired Navigation-Cognitive Maps.",2017
+"Technical integration of hippocampus, Basal Ganglia and physical models for spatial navigation.",2009
+"The role of topography in the transformation of spatiotemporal patterns by a large-scale, biologically realistic model of the rat dentate gyrus.",2013
+"Building, simulating and visualizing large spiking neural networks with NeuralSyns.",2014
+"Modeling the Impact of Recurrent Collaterals In CA 3 on Downstream CA 1 Firing Frequency.",2016
+"Complex-valued computational model of hippocampal CA3 recurrent collaterals.",2017
+"Hippocampal Based Model Reveals the Distinct Roles of Dentate Gyrus and CA3 during Robotic Spatial Navigation.",2014
+"Decoding Position to Analyze Spatial Information Encoding in a Large-Scale Neuronal Network Model of Rat Dentate Gyrus.",2018
+"Top Down Bottom up Brain Models.",2014
+"Evaluation of the oscillatory interference model of grid cell firing through analysis and measured period variance of some biological oscillators.",2009
+"Solving navigational uncertainty using grid cells on robots.",2010
+"Path integration and cognitive mapping in a continuous attractor neural network model.",1997
+"Using Hippocampal Plane Cells for Navigation, Exploiting Phase Coding.",1993
+"The Firing Rate Speed Code of Entorhinal Speed Cells Differs across Behaviorally Relevant Time Scales and Does Not Depend on Medial Septum Inputs.",2019
+"A neural microcircuit model for a scalable scale-invariant representation of time.",2019
+"Navigating with grid and place cells in cluttered environments.",2019
+"A Computational Model of Visual Recognition Memory via Grid Cells.",2019
+"Neural dynamics indicate parallel integration of environmental and self-motion information by place and grid cells.",2019
+"A neural-level model of spatial memory and imagery.",2018
+"Negative emotional content disrupts the coherence of episodic memories.",2018
+"Entorhinal cortex minimises uncertainty for optimal behaviour.",2018
+"Selforganization of modular activity of grid cells.",2017
+"A robust in vivo-like persistent firing supported by a hybrid of intracellular and synaptic mechanisms.",2015
+"A computational model of systems memory consolidation and reconsolidation.",2019
+"Tau and amyloid-related pathologies in the entorhinal cortex have divergent effects in the hippocampal circuit.",2017
+"Computer Model of Synapse Loss During an Alzheimer's Disease-Like Pathology in Hippocampal Subregions DG, CA3 and CA1-The Way to Chaos and Information Transfer.",2019
+"A theory of joint attractor dynamics in the hippocampus and the entorhinal cortex accounts for artificial hippocampal remapping and individual grid cell field-to-field variability",2020
+"A Unified Dynamic Model for Learning, Replay, and Sharp-Wave/Ripples.",2015
+"A novel pyramidal cell type promotes sharp-wave synchronization in the hippocampus.",2018
+"The Generation of Time in the Hippocampal Memory System.",2019
+"Goal-directed navigation based on path integration and decoding of grid cells in an artificial neural network.",2019

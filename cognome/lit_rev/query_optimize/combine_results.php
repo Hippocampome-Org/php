@@ -3,8 +3,8 @@
 	set_time_limit(0); // prevent processing time timeout.
 	include("generate_file_list.php");
 	$base_dir = "combined_results";
-	$file_dir = "3";
-	$list_file = $base_dir."/".$file_dir."/filelist.txt";
+	//$file_dir = "3";
+	//$list_file = $base_dir."/".$file_dir."/filelist.txt";
 	$file_list = array();
 	$line_num = 0;
 	$file_num = 0;
@@ -13,12 +13,14 @@
 	$high_score = 0;
 	$output_dataset = FALSE;
 	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
-	$output_filepath = "combined_results/combined/latest_high_score.csv";
+	$output_filepath = "combined_results/combined/latest_high_score_3.csv";
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
 	$gs_files = array(1,2,3,4,5,26,27,28,29);
 	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58);
+	$num_gs_files = "random";
+	$num_pm_files = "random";
 
 	// activation trigger
 	$run_extraction = FALSE;
@@ -34,7 +36,7 @@
 	<tr><td>Current combo files processed:</td><td><textarea id='files_processed'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring files:</td><td><textarea id='high_score_files'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td></tr>
-	<!--tr><td>Progress counter:</td><td><textarea id='progress_counter'>N/A</textarea></td></tr-->
+	<tr><td>Highest scoring total articles:</td><td><textarea id='high_total_art'>N/A</textarea></td></tr>
 	</table></h3></center>";
 
 	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
@@ -63,7 +65,7 @@
 
 	$core_found = array_fill(0, sizeof($core_articles), 0);
 
-	function extract_articles($file_desc, $output_lines, $core_articles, $core_found, $line_num) {
+	function extract_articles($file_desc, $output_lines, $core_articles, $core_found, $line_num, $current_line_num) {
 		$db_name = explode(',', $file_desc)[0];
 		$file_name = explode(',', $file_desc)[1];
 		$title = "";
@@ -107,26 +109,29 @@
 	  		}
 
 		  	$line_num++;
+		  	$current_line_num++;
 		  }
 		}
 
-		$results_array = array($output_lines, $core_found, $line_num);
+		$results_array = array($output_lines, $core_found, $line_num, $current_line_num);
 		return $results_array;
 	}
 
 	// search file combinations
 	for ($i = $progress_counter; $i < pow(sizeof($gs_files),4); $i++) {
-		$file_list_array = generate_file_list(4, 1, $gs_files, $pm_files, $i);
+		$file_list_array = generate_file_list($num_gs_files, $num_pm_files, $gs_files, $pm_files, $i);
 		$file_list = $file_list_array[0];
 		$file_numbers = $file_list_array[1];
 		$core_found = array_fill(0, sizeof($core_articles), 0);
 		$output_lines = array();
+		$current_line_num = 0;
 		for ($j = 0; $j < sizeof($file_list); $j++) {
 			$file_num++;
-			$results_array = extract_articles($file_list[$j], $output_lines, $core_articles, $core_found, $line_num);
+			$results_array = extract_articles($file_list[$j], $output_lines, $core_articles, $core_found, $line_num, $current_line_num);
 			$output_lines = $results_array[0];
 			$core_found = $results_array[1];
 			$line_num = $results_array[2];
+			$current_line_num = $results_array[3];
 		}
 
 		// count results
@@ -148,9 +153,10 @@
 		if ($core_sum >= $high_score) {
 			echo "<script>document.getElementById('high_score_matches').value = '$core_sum';</script>";
 			echo "<script>document.getElementById('high_score_files').value = '$file_numbers';</script>";
+			echo "<script>document.getElementById('high_total_art').value = '$current_line_num';</script>";
 			$high_score = $core_sum;
 			$output_file = fopen($output_filepath, 'a') or die("Can't open file.");
-			fwrite($output_file, "$file_numbers,$core_sum,$i\n");
+			fwrite($output_file, "$file_numbers,$core_sum,$i,$current_line_num\n");
 			fclose($output_file);
 		}
 		echo "<script>document.getElementById('combos_processed').value = '".($i+1)."';</script>";
