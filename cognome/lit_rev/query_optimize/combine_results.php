@@ -11,14 +11,18 @@
 	$progress_counter = 0; // change this to resume progress at a certain point
 	$core_sum = 0;
 	$high_score = 0;
+	$multi_score_thresholds = array(2000,3000,4000,5000,6000,7000,8000,9000,10000);
+	$multi_high_scores = array_fill(0, sizeof($multi_score_thresholds), 0);
+	$multi_article_totals = array_fill(0, sizeof($multi_score_thresholds), 0);
+	$multi_file_numbers = array_fill(0, sizeof($multi_score_thresholds), 0);
 	$output_dataset = FALSE;
 	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
-	$output_filepath = "combined_results/combined/latest_high_score_3.csv";
+	$output_filepath = "combined_results/combined/latest_high_score_5.csv";
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
-	$gs_files = array(1,2,3,4,5,26,27,28,29);
-	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58);
+	$gs_files = array(1,2,3,4,5,26,27,28,29,30);
+	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69);
 	$num_gs_files = "random";
 	$num_pm_files = "random";
 
@@ -30,13 +34,14 @@
 
 	echo "<br><center><h4><a href='combine_results.php' style='text-decoration:none'>Combine Results</a></h4></center><br>";
 	echo "<center><h3><table>
-	<tr><td>File combinations processed:</td><td><textarea id='combos_processed'>N/A</textarea></td></tr>
-	<tr><td>File combination currently processing:&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea id='current_processing'>N/A</textarea></td></tr>
-	<tr><td>Current combo articles processed:</td><td><textarea id='articles_processed'>N/A</textarea></td></tr>
-	<tr><td>Current combo files processed:</td><td><textarea id='files_processed'>N/A</textarea></td></tr>
-	<tr><td>Highest scoring files:</td><td><textarea id='high_score_files'>N/A</textarea></td></tr>
-	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td></tr>
-	<tr><td>Highest scoring total articles:</td><td><textarea id='high_total_art'>N/A</textarea></td></tr>
+	<tr><td>File combinations processed:</td><td><textarea id='combos_processed'>N/A</textarea></td><td>Highest scoring 3000 max:</td><td><textarea id='highest_3000'>N/A</textarea></td></tr>
+	<tr><td>File combination currently processing:&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea id='current_processing'>N/A</textarea></td><td>Highest scoring 4000 max:</td><td><textarea id='highest_4000'>N/A</textarea></td></tr>
+	<tr><td>Current combo articles processed:</td><td><textarea id='articles_processed'>N/A</textarea></td><td>Highest scoring 5000 max:</td><td><textarea id='highest_5000'>N/A</textarea></td></tr>
+	<tr><td>Current combo files processed:</td><td><textarea id='files_processed'>N/A</textarea></td><td>Highest scoring 6000 max:</td><td><textarea id='highest_6000'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring files:</td><td><textarea id='high_score_files'>N/A</textarea></td><td>Highest scoring 7000 max:</td><td><textarea id='highest_7000'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td><td>Highest scoring 8000 max:</td><td><textarea id='highest_8000'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring total articles:</td><td><textarea id='high_total_art'>N/A</textarea></td><td>Highest scoring 9000 max:</td><td><textarea id='highest_9000'>N/A</textarea></td></tr>
+	<tr><td>Highest scoring 2000 max:</td><td><textarea id='highest_2000'>N/A</textarea></td><td>Highest scoring 10000 max:</td><td><textarea id='highest_10000'>N/A</textarea></td></tr>
 	</table></h3></center>";
 
 	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
@@ -117,6 +122,24 @@
 		return $results_array;
 	}
 
+	function write_output($output_filepath, $output_file, $output_values) {
+		$file_numbers = $output_values[0];
+		$core_sum = $output_values[1];
+		$progress_marker = $output_values[2];
+		$current_line_num = $output_values[3];
+		$multi_high_scores = $output_values[4];
+		$multi_article_totals = $output_values[5];
+		$multi_file_numbers = $output_values[6];
+
+		$output_file = fopen($output_filepath, 'a') or die("Can't open file.");
+		fwrite($output_file, "$progress_marker,$file_numbers,$core_sum,$current_line_num");
+		for ($i = 0; $i < sizeof($multi_high_scores); $i++) {
+			fwrite($output_file, ",".$multi_file_numbers[$i].",".$multi_high_scores[$i].",".$multi_article_totals[$i]);
+		}
+		fwrite($output_file, "\n");
+		fclose($output_file);
+	}
+
 	// search file combinations
 	for ($i = $progress_counter; $i < pow(sizeof($gs_files),4); $i++) {
 		$file_list_array = generate_file_list($num_gs_files, $num_pm_files, $gs_files, $pm_files, $i);
@@ -155,9 +178,36 @@
 			echo "<script>document.getElementById('high_score_files').value = '$file_numbers';</script>";
 			echo "<script>document.getElementById('high_total_art').value = '$current_line_num';</script>";
 			$high_score = $core_sum;
-			$output_file = fopen($output_filepath, 'a') or die("Can't open file.");
-			fwrite($output_file, "$file_numbers,$core_sum,$i,$current_line_num\n");
-			fclose($output_file);
+			
+			$output_values = array_fill(0, 7, 0);
+			$output_values[0] = $file_numbers;
+			$output_values[1] = $core_sum;
+			$output_values[2] = $i;
+			$output_values[3] = $current_line_num;
+			$output_values[4] = $multi_high_scores;
+			$output_values[5] = $multi_article_totals;
+			$output_values[6] = $multi_file_numbers;
+
+			write_output($output_filepath, $output_file, $output_values);
+		}
+		for ($j = 0; $j < sizeof($multi_score_thresholds); $j++) {
+			if ($current_line_num <= $multi_score_thresholds[$j] && 
+				$core_sum >= $multi_high_scores[$j]) {
+				$multi_high_scores[$j] = $core_sum;
+				$multi_article_totals[$j] = $current_line_num;
+				$multi_file_numbers[$j] = $file_numbers;
+				$output_values = array_fill(0, 7, 0);
+				$output_values[0] = $file_numbers;
+				$output_values[1] = $core_sum;
+				$output_values[2] = $i;
+				$output_values[3] = $current_line_num;
+				$output_values[4] = $multi_high_scores;
+				$output_values[5] = $multi_article_totals;
+				$output_values[6] = $multi_file_numbers;
+
+				write_output($output_filepath, $output_file, $output_values);
+				echo "<script>document.getElementById('highest_".$multi_score_thresholds[$j]."').value = '$core_sum, $current_line_num';</script>";
+			}
 		}
 		echo "<script>document.getElementById('combos_processed').value = '".($i+1)."';</script>";
 		echo "<script>document.getElementById('current_processing').value = '$file_numbers';</script>";
