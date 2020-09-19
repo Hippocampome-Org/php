@@ -23,9 +23,9 @@
 	$output_lines = array();
 	$gs_files = array(1,2,3,4,5,26,27,28,29,30);
 	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69);
-	$num_gs_files = 2;//"random";
-	$num_pm_files = 3;//"random";
-	$max_lines_in_file = 1000; // max articles to search in each query
+	$num_gs_files = "random";//2;//4;
+	$num_pm_files = "random";//3;//1;
+	$max_lines_in_file = 2000; // max articles to search in each query
 	$firstline = TRUE;
 
 	// activation trigger
@@ -44,6 +44,7 @@
 	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td><td>Highest scoring 8000 max:</td><td><textarea id='highest_8000'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring total articles:</td><td><textarea id='high_total_art'>N/A</textarea></td><td>Highest scoring 9000 max:</td><td><textarea id='highest_9000'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring 2000 max:</td><td><textarea id='highest_2000'>N/A</textarea></td><td>Highest scoring 10000 max:</td><td><textarea id='highest_10000'>N/A</textarea></td></tr>
+	<tr><td>Current settings:</td><td style='font-size:16px'><center>GS files: $num_gs_files PM files: $num_pm_files<br>Max lines: $max_lines_in_file</center></td><td></td><td></td></tr>
 	</table></h3></center>";
 
 	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
