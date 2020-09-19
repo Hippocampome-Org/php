@@ -3,7 +3,7 @@
 max_lines=4500;
 input_file1=query_results_gs2;
 input_file2=query_results_gs5;
-input_file3=query_results_gs27;
+input_file3=query_results_gs29;
 input_file4=query_results_pm30;
 input_file5=query_results_pm66;
 input_path1=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/gs_results/csv_results/$input_file1.csv;
@@ -41,7 +41,7 @@ php output_titles_pm.php $cropped_file4;
 php output_titles_pm.php $cropped_file5;
 
 # combine results
-echo "title,year" > $output_dir$output_file;
+echo "title,year" > $results_dir$output_file;
 cat $mod_file1 $mod_file2 $mod_file3 $mod_file4 $mod_file5 >> $results_dir$output_file;
 
 # clean up temp files
