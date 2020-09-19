@@ -17,7 +17,8 @@
 	$multi_file_numbers = array_fill(0, sizeof($multi_score_thresholds), 0);
 	$output_dataset = FALSE;
 	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
-	$output_filepath = "combined_results/combined/latest_high_score_10.csv";
+	$output_filename = "latest_high_score_11.csv";
+	$output_filepath = "combined_results/combined/".$output_filename;
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
@@ -25,7 +26,7 @@
 	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69);
 	$num_gs_files = "random";//2;//4;
 	$num_pm_files = "random";//3;//1;
-	$max_lines_in_file = 2000; // max articles to search in each query
+	$max_lines_in_file = 4000; // max articles to search in each query
 	$firstline = TRUE;
 
 	// activation trigger
@@ -34,7 +35,7 @@
 		$run_extraction = TRUE;
 	}
 
-	echo "<br><center><h4><a href='combine_results.php' style='text-decoration:none'>Combine Results</a></h4></center><br>";
+	echo "<br><center><h4><a href='combine_results.php' style='text-decoration:none'>Combine Results</a></h4></center>";
 	echo "<center><h3><table>
 	<tr><td>File combinations processed:</td><td><textarea id='combos_processed'>N/A</textarea></td><td>Highest scoring 3000 max:</td><td><textarea id='highest_3000'>N/A</textarea></td></tr>
 	<tr><td>File combination currently processing:&nbsp;&nbsp;&nbsp;&nbsp;</td><td><textarea id='current_processing'>N/A</textarea></td><td>Highest scoring 4000 max:</td><td><textarea id='highest_4000'>N/A</textarea></td></tr>
@@ -44,10 +45,10 @@
 	<tr><td>Highest scoring matches:</td><td><textarea id='high_score_matches'>N/A</textarea></td><td>Highest scoring 8000 max:</td><td><textarea id='highest_8000'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring total articles:</td><td><textarea id='high_total_art'>N/A</textarea></td><td>Highest scoring 9000 max:</td><td><textarea id='highest_9000'>N/A</textarea></td></tr>
 	<tr><td>Highest scoring 2000 max:</td><td><textarea id='highest_2000'>N/A</textarea></td><td>Highest scoring 10000 max:</td><td><textarea id='highest_10000'>N/A</textarea></td></tr>
-	<tr><td>Current settings:</td><td style='font-size:16px'><center>GS files: $num_gs_files PM files: $num_pm_files<br>Max lines: $max_lines_in_file</center></td><td></td><td></td></tr>
+	<tr><td>Current settings:</td><td style='font-size:16px'><center>GS files: $num_gs_files<br>PM files: $num_pm_files<br>Max lines: $max_lines_in_file</center></td><td>Output file:</td><td style='font-size:16px'><center>$output_filename</center></td></tr>
 	</table></h3></center>";
 
-	echo "<br><center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
+	echo "<center><h4><a href='?run=yes' style='text-decoration:none'>Run extraction</a></h4></center><br>";
 
 	if ($run_extraction) {
 	/*if (($fh = fopen($list_file, "r")) !== FALSE) 
