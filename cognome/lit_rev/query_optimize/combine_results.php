@@ -17,14 +17,16 @@
 	$multi_file_numbers = array_fill(0, sizeof($multi_score_thresholds), 0);
 	$output_dataset = FALSE;
 	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
-	$output_filepath = "combined_results/combined/latest_high_score_5.csv";
+	$output_filepath = "combined_results/combined/latest_high_score_10.csv";
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
 	$gs_files = array(1,2,3,4,5,26,27,28,29,30);
 	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69);
-	$num_gs_files = "random";
-	$num_pm_files = "random";
+	$num_gs_files = 2;//"random";
+	$num_pm_files = 3;//"random";
+	$max_lines_in_file = 1000; // max articles to search in each query
+	$firstline = TRUE;
 
 	// activation trigger
 	$run_extraction = FALSE;
@@ -70,15 +72,16 @@
 
 	$core_found = array_fill(0, sizeof($core_articles), 0);
 
-	function extract_articles($file_desc, $output_lines, $core_articles, $core_found, $line_num, $current_line_num) {
+	function extract_articles($file_desc, $output_lines, $core_articles, $core_found, $line_num, $current_line_num, $max_lines_in_file) {
 		$db_name = explode(',', $file_desc)[0];
 		$file_name = explode(',', $file_desc)[1];
 		$title = "";
 		$title_matches = array();
+		$current_file_lines = 0;
 
 		if ($file_name!="" && ($fh = fopen($file_name, "r")) !== FALSE) 
 		{
-		  while (($line_array = fgetcsv($fh, 10000, ",")) !== FALSE)
+		  while (($line_array = fgetcsv($fh, 10000, ",")) !== FALSE && ($current_file_lines <= $max_lines_in_file))
 		  {	
 		  	if ($db_name == 'scholar') {
 		  		$title = str_replace("\"", "", $line_array[2]);
@@ -115,14 +118,17 @@
 
 		  	$line_num++;
 		  	$current_line_num++;
+		  	$current_file_lines++;
 		  }
 		}
+
+		fclose($fh);
 
 		$results_array = array($output_lines, $core_found, $line_num, $current_line_num);
 		return $results_array;
 	}
 
-	function write_output($output_filepath, $output_file, $output_values) {
+	function write_output($output_filepath, $output_file, $output_values, $max_lines_in_file, $firstline) {
 		$file_numbers = $output_values[0];
 		$core_sum = $output_values[1];
 		$progress_marker = $output_values[2];
@@ -130,14 +136,30 @@
 		$multi_high_scores = $output_values[4];
 		$multi_article_totals = $output_values[5];
 		$multi_file_numbers = $output_values[6];
+		$multi_score_thresholds = $output_values[7];
+		$num_gs_files = $output_values[8];
+		$num_pm_files = $output_values[9];
 
 		$output_file = fopen($output_filepath, 'a') or die("Can't open file.");
-		fwrite($output_file, "$progress_marker,$file_numbers,$core_sum,$current_line_num");
-		for ($i = 0; $i < sizeof($multi_high_scores); $i++) {
-			fwrite($output_file, ",".$multi_file_numbers[$i].",".$multi_high_scores[$i].",".$multi_article_totals[$i]);
+
+		if ($firstline == TRUE) {
+			fwrite($output_file, "file_numbers,total_matches,total_articles");
+			for ($i = 0; $i < sizeof($multi_high_scores); $i++) {
+				fwrite($output_file, ",file_numbers_".$multi_score_thresholds[$i].",total_matches_".$multi_score_thresholds[$i].",total_articles_".$multi_score_thresholds[$i]);
+			}
+			fwrite($output_file, ",progress_marker,$num_gs_files,$num_pm_files,$max_lines_in_file\n");
+			$firstline = FALSE;
 		}
-		fwrite($output_file, "\n");
+
+		fwrite($output_file, "\"$file_numbers\",$core_sum,$current_line_num");
+		for ($i = 0; $i < sizeof($multi_high_scores); $i++) {
+			fwrite($output_file, ",\"".$multi_file_numbers[$i]."\",".$multi_high_scores[$i].",".$multi_article_totals[$i]);
+		}
+		fwrite($output_file, ",$progress_marker,,,\n");
+
 		fclose($output_file);
+
+		return $firstline;
 	}
 
 	// search file combinations
@@ -150,7 +172,7 @@
 		$current_line_num = 0;
 		for ($j = 0; $j < sizeof($file_list); $j++) {
 			$file_num++;
-			$results_array = extract_articles($file_list[$j], $output_lines, $core_articles, $core_found, $line_num, $current_line_num);
+			$results_array = extract_articles($file_list[$j], $output_lines, $core_articles, $core_found, $line_num, $current_line_num, $max_lines_in_file);
 			$output_lines = $results_array[0];
 			$core_found = $results_array[1];
 			$line_num = $results_array[2];
@@ -187,8 +209,11 @@
 			$output_values[4] = $multi_high_scores;
 			$output_values[5] = $multi_article_totals;
 			$output_values[6] = $multi_file_numbers;
+			$output_values[7] = $multi_score_thresholds;
+			$output_values[8] = $num_gs_files;
+			$output_values[9] = $num_pm_files;
 
-			write_output($output_filepath, $output_file, $output_values);
+			$firstline = write_output($output_filepath, $output_file, $output_values, $max_lines_in_file, $firstline);
 		}
 		for ($j = 0; $j < sizeof($multi_score_thresholds); $j++) {
 			if ($current_line_num <= $multi_score_thresholds[$j] && 
@@ -204,8 +229,11 @@
 				$output_values[4] = $multi_high_scores;
 				$output_values[5] = $multi_article_totals;
 				$output_values[6] = $multi_file_numbers;
+				$output_values[7] = $multi_score_thresholds;
+				$output_values[8] = $num_gs_files;
+				$output_values[9] = $num_pm_files;
 
-				write_output($output_filepath, $output_file, $output_values);
+				$firstline = write_output($output_filepath, $output_file, $output_values, $max_lines_in_file, $firstline);
 				echo "<script>document.getElementById('highest_".$multi_score_thresholds[$j]."').value = '$core_sum, $current_line_num';</script>";
 			}
 		}
