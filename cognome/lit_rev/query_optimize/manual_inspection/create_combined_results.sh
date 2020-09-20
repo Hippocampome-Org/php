@@ -1,16 +1,19 @@
 #!/bin/bash
 
-max_lines=4500;
-input_file1=query_results_gs2;
+# variables to set
+max_lines=2000;
+input_file1=query_results_gs6;
 input_file2=query_results_gs5;
-input_file3=query_results_gs29;
-input_file4=query_results_pm30;
-input_file5=query_results_pm66;
+input_file3=query_results_pm30;
+input_file4=query_results_pm69;
+input_file5=query_results_pm33;
 input_path1=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/gs_results/csv_results/$input_file1.csv;
 input_path2=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/gs_results/csv_results/$input_file2.csv;
-input_path3=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/gs_results/csv_results/$input_file3.csv;
-input_path4=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/pubmed_results/30/$input_file4.csv;
-input_path5=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/pubmed_results/66/$input_file5.csv;
+input_path3=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/pubmed_results/30/$input_file3.csv;
+input_path4=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/pubmed_results/69/$input_file4.csv;
+input_path5=/var/www/html/cognome/php/cognome/lit_rev/extract_citations/pubmed_results/33/$input_file5.csv;
+
+# dynamic variables
 cropped_dir=temp_cropped/;
 output_dir=temp_output/;
 results_dir=results/;
@@ -45,5 +48,5 @@ echo "title,year" > $results_dir$output_file;
 cat $mod_file1 $mod_file2 $mod_file3 $mod_file4 $mod_file5 >> $results_dir$output_file;
 
 # clean up temp files
-rm $cropped_dir/*
-rm $output_dir/*
+#rm $cropped_dir/*
+#rm $output_dir/*

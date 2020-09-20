@@ -17,16 +17,16 @@
 	$multi_file_numbers = array_fill(0, sizeof($multi_score_thresholds), 0);
 	$output_dataset = FALSE;
 	//$output_filepath = "combined_results/combined/combined_".$file_dir.".csv";
-	$output_filename = "latest_high_score_11.csv";
+	$output_filename = "latest_high_score_14.csv";
 	$output_filepath = "combined_results/combined/".$output_filename;
 	$core_articles_path = "core_collection_articles.csv";
 	$core_articles = array();
 	$output_lines = array();
 	$gs_files = array(1,2,3,4,5,26,27,28,29,30);
 	$pm_files = array(29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69);
-	$num_gs_files = "random";//2;//4;
-	$num_pm_files = "random";//3;//1;
-	$max_lines_in_file = 4000; // max articles to search in each query
+	$num_gs_files = 4;//"random";//2;//4;
+	$num_pm_files = 1;//"random";//3;//1;
+	$max_lines_in_file = 2500; // max articles to search in each query
 	$firstline = TRUE;
 
 	// activation trigger
@@ -165,7 +165,10 @@
 	}
 
 	// search file combinations
-	for ($i = $progress_counter; $i < pow(sizeof($gs_files),4); $i++) {
+	//for ($i = $progress_counter; $i < pow(sizeof($gs_files),4); $i++) {
+	$i = -1;
+	while (TRUE) {
+		$i++;
 		$file_list_array = generate_file_list($num_gs_files, $num_pm_files, $gs_files, $pm_files, $i);
 		$file_list = $file_list_array[0];
 		$file_numbers = $file_list_array[1];
