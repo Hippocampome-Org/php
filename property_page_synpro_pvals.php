@@ -309,7 +309,7 @@ $post_name=$type_target->getName();
 				$query = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)), CAST(NPS_stdev_total AS DECIMAL(10,5)) FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id";
 			}
 			else {
-				$query = "SELECT NPS_mean, NPS_std FROM SynproNPS WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+				$query = "SELECT NPS_mean, NPS_std FROM SynproNoPS WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
 			}
 		}
 		if ($nm_page=='noc') {
@@ -317,7 +317,7 @@ $post_name=$type_target->getName();
 				$query = "SELECT CAST(NC_mean_total AS DECIMAL(10,5)), CAST(NC_stdev_total AS DECIMAL(10,5)) FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id";
 			}
 			else {
-				$query = "SELECT NC_mean, NC_std FROM SynproNumberOfContacts WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+				$query = "SELECT NC_mean, NC_std FROM SynproNOC WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
 			}
 		}
 		if ($nm_page=='prosyn') {
@@ -325,7 +325,7 @@ $post_name=$type_target->getName();
 				$query = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)), CAST(CP_stdev_total AS DECIMAL(10,5)) FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id";
 			}
 			else {
-				$query = "SELECT CP_mean, CP_std FROM SynproConnProb WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+				$query = "SELECT CP_mean, CP_std FROM SynproCP WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
 			}
 		}
 		$rs = mysqli_query($GLOBALS['conn'],$query);
