@@ -72,7 +72,7 @@ include("function/menu_main.php");
         let connDic = {};
         let sourceIDDic = {};
         let targetIDDic = {};
-        function parse(data_1,volume_data,volumes_index,columnNames_index){
+        function calc_values(data_1,volume_data,volumes_index,columnNames_index) {
             let source = document.getElementById("source").value.trim();
             let target = document.getElementById("target").value.trim();
             let source_id = sourceIDDic[source];
@@ -192,6 +192,18 @@ include("function/menu_main.php");
             //final_result_noc.push(noc_final.toString());
             final_result_noc.push(n_tally.toPrecision(3).toString());
 
+            var value_results = new Array();
+            value_results.push(dict, final_result, final_result_noc, source_id);
+
+            return value_results;
+        }
+        function parse(data_1,volume_data,volumes_index,columnNames_index){
+            var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
+            dict = value_results[0];
+            final_result = value_results[1];
+            final_result_noc = value_results[2];
+            source_id = value_results[3];
+
             /* generate tables */
             let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
@@ -214,61 +226,10 @@ include("function/menu_main.php");
             }
             noc_text += '</tr><tr>';
             for (let i = 0; i < result.length; i++) {
-              noc_text += "<td style='padding: 15px;'>"+result[i]+'</td>';
+              noc_text += "<td style='padding: 15px;'>"+final_result_noc[i]+'</td>';
             }
             noc_text += '</tr></table></center>';
             document.getElementById('title2').innerHTML = noc_text;
-            /*document.getElementById('title2').style.display='block';
-            let hovertexts = ['test'];
-            let graphdata = [{
-                type: 'table',
-                layout: {
-                height: 100,
-                width: 1000
-                },
-                header: {
-                    values: cname ,
-                    align: "center",
-                    line: {width: 1, color: 'black'},
-                    fill: {color: "grey"},
-                    font: {family: "Arial", size: 16, color: "white"}
-                },
-                cells: {
-                    values: result,
-                    align: "center",
-                    line: {color: "black", width: 1},
-                    font: {family: "Arial", size: 16, color: ["black"]},
-                    height:30,
-                    hoverinfo: 'values'
-                }
-            }]
-            Plotly.plot('graph', graphdata);
-            document.getElementById('title1').style.display='block';
-            let noc_graphdata = [{
-                type: 'table',
-                header: {
-                    values: cname ,
-                    align: "center",
-                    line: {width: 1, color: 'black'},
-                    fill: {color: "grey"},
-                    font: {family: "Arial", size: 16, color: "white"}
-                },
-                cells: {
-                    values: final_result_noc,
-                    align: "center",
-                    line: {color: "black", width: 1},
-                    font: {family: "Arial", size: 16, color: ["black"]},
-                    height:30,                    
-                    hoverinfo: 'final_result_noc',
-                    hovermode:'closest',
-                    title:'Hover on Points'
-                },
-                layout: {
-                    hovermode:'closest',
-                    title:'Hover on Points'
-                 }
-            }]
-            Plotly.plot('graph_noc', noc_graphdata);*/
         }
         function readData(url,volume_data,volumes_index,columns_index){
             $.ajax({
