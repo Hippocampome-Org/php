@@ -196,7 +196,30 @@ include("function/menu_main.php");
             let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
+            document.getElementById('title1').style.display='block';
+            let cp_text = "<center>Number of Contacts Per Connected Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
+            for (let i = 0; i < cname.length; i++) {
+              cp_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
+            }
+            cp_text += '</tr><tr>';
+            for (let i = 0; i < result.length; i++) {
+              cp_text += "<td style='padding: 15px;'><a title='test' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
+            }
+            cp_text += '</tr></table></center>';
+            document.getElementById('title1').innerHTML = cp_text;
             document.getElementById('title2').style.display='block';
+            let noc_text = "<center>Number of Contacts Per Connected Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
+            for (let i = 0; i < cname.length; i++) {
+              noc_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
+            }
+            noc_text += '</tr><tr>';
+            for (let i = 0; i < result.length; i++) {
+              noc_text += "<td style='padding: 15px;'>"+result[i]+'</td>';
+            }
+            noc_text += '</tr></table></center>';
+            document.getElementById('title2').innerHTML = noc_text;
+            /*document.getElementById('title2').style.display='block';
+            let hovertexts = ['test'];
             let graphdata = [{
                 type: 'table',
                 layout: {
@@ -215,7 +238,8 @@ include("function/menu_main.php");
                     align: "center",
                     line: {color: "black", width: 1},
                     font: {family: "Arial", size: 16, color: ["black"]},
-                    height:30
+                    height:30,
+                    hoverinfo: 'values'
                 }
             }]
             Plotly.plot('graph', graphdata);
@@ -234,10 +258,17 @@ include("function/menu_main.php");
                     align: "center",
                     line: {color: "black", width: 1},
                     font: {family: "Arial", size: 16, color: ["black"]},
-                    height:30
-                }
+                    height:30,                    
+                    hoverinfo: 'final_result_noc',
+                    hovermode:'closest',
+                    title:'Hover on Points'
+                },
+                layout: {
+                    hovermode:'closest',
+                    title:'Hover on Points'
+                 }
             }]
-            Plotly.plot('graph_noc', noc_graphdata);
+            Plotly.plot('graph_noc', noc_graphdata);*/
         }
         function readData(url,volume_data,volumes_index,columns_index){
             $.ajax({
