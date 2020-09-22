@@ -287,6 +287,7 @@ $post_name=$type_target->getName();
 			//echo $val;
 			if ($parcel_name == 'All' || $parcel_name == 'ALL' || $parcel_name == 'all') {
 				$value_result = $val;
+			//echo "<br>$query<br>$val";				
 			}
 			$all_value_result = $val;
 		}	
@@ -296,6 +297,60 @@ $post_name=$type_target->getName();
 
 		return $results;
 	}
+	function return_stats($source_id, $target_id, $par_grp_conv, $nm_page, $all_value_result) {
+		$subregion = explode("_", $par_grp_conv)[0];
+		$parcel = explode("_", $par_grp_conv)[1];
+		$stat_results = array();
+		$mean_result = 0;
+		$std_result = 0;
+
+		if ($nm_page=='ps') {
+			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
+				$query = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)), CAST(NPS_stdev_total AS DECIMAL(10,5)) FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id";
+			}
+			else {
+				$query = "SELECT NPS_mean, NPS_std FROM SynproNPS WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+			}
+		}
+		if ($nm_page=='noc') {
+			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
+				$query = "SELECT CAST(NC_mean_total AS DECIMAL(10,5)), CAST(NC_stdev_total AS DECIMAL(10,5)) FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id";
+			}
+			else {
+				$query = "SELECT NC_mean, NC_std FROM SynproNumberOfContacts WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+			}
+		}
+		if ($nm_page=='prosyn') {
+			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
+				$query = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)), CAST(CP_stdev_total AS DECIMAL(10,5)) FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id";
+			}
+			else {
+				$query = "SELECT CP_mean, CP_std FROM SynproConnProb WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
+			}
+		}
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($mean_db, $std_db) = mysqli_fetch_row($rs))
+		{	
+			$mean_result = $mean_db;
+			$std_result = $std_db;
+		}	
+
+		if ($nm_page=='noc') {
+			$mean = adjPrecision($all_value_result, $mean_result, 3); 
+			$std = adjPrecision($all_value_result, $std_result, 3);
+		}
+		else {
+			$mean = adjPrecision($all_value_result, $mean_result, 4); 	
+			$std = adjPrecision($all_value_result, $std_result, 4); 
+		}
+
+		//echo $query."<br>".$mean."<br>".$std;
+		array_push($stat_results, $mean);
+		array_push($stat_results, $std);
+
+		return $stat_results;
+	}
+
 	function report_parcel_values($title, $source_id, $target_id, $prop, $table, $cell_width, $cell_height, $cell_border, $parcel_group, $parcel_group_short,$color,$nm_page,$E_or_I_val,$totals_col,$totals_table) {
 	echo "
 	<span style='float:middle;font-size:12px;background-color:white;' class='table_neuron_page2'><strong>$title</strong></span>
@@ -309,11 +364,19 @@ $post_name=$type_target->getName();
 		echo "</strong></td>";
 	}
 	echo "</tr><tr style='text-align:center'>";
+
 	for ($pg_i=0;$pg_i<count($parcel_group);$pg_i++) {
 		$last_index = count($parcel_group)-1;
 		$results = query_value($source_id, $target_id, $parcel_group[$pg_i], $prop, $table, $nm_page, $totals_col, $totals_table);
 		$value_result = $results[0];
 		$all_value_result = $results[1];
+		$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
+		$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
+
+		$stat_results = return_stats($source_id, $target_id, $par_grp_conv, $nm_page, $all_value_result);
+		$stat_mean = $stat_results[0];
+		$stat_std = $stat_results[1];		
+
 		if ($value_result == 0 && $nm_page!='noc') {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
 			echo "</td>";			
@@ -324,9 +387,8 @@ $post_name=$type_target->getName();
 			echo "</td>";
 		}
 		else if ($pg_i != $last_index) {
-			$par_grp_conv = str_replace(':', '_', $parcel_group[$pg_i]);
-			$par_grp_conv = str_replace('_Both', '', $par_grp_conv);
-			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none'>";
+			// parcel-specific value
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none' title='mean: $stat_mean\nstd: $stat_std'>";
 			if ($nm_page=='noc') {
 				echo adjPrecision($all_value_result, $value_result, 3);
 				//echo toPrecision($value_result, 3);
@@ -340,13 +402,16 @@ $post_name=$type_target->getName();
 			echo "</a></td>";
 		}
 		else {
+			// total
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
 			//echo toPrecision($value_result, 4);
 			if ($nm_page=='noc') {
-				echo toPrecision($value_result, 3);
+				echo "<a href='#' title='mean: $stat_mean\nstd: $stat_std' style='text-decoration:none;color:black'>".toPrecision($value_result, 3)."</a>";
+				//echo toPrecision($value_result, 3);
 			}
 			else {
-				echo toPrecision($value_result, 4);
+				echo "<a href='#' title='mean: $stat_mean\nstd: $stat_std' style='text-decoration:none;color:black'>".toPrecision($value_result, 4)."</a>";
+				//echo toPrecision($value_result, 4);
 			}
 			echo "</td>";
 		}
