@@ -105,6 +105,8 @@ include("function/menu_main.php");
                     </td>
                 </tr>
             </table>
+            <input type="hidden" id="source_id" name="source_id" value="" />
+            <input type="hidden" id="target_id" name="target_id" value="" />
             <?php
                 echo "<button id='s' name='conn_submit' class='pure-button pure-button-primary' onclick='submitClicked()' ";
                 if (isset($_REQUEST["conn_submit"])) {
@@ -254,13 +256,24 @@ include("function/menu_main.php");
         function parse(data_1,volume_data,volumes_index,columnNames_index){
             <?php 
                 echo "let axon_lengths = 'test2';";
-                /*$sql    = "";
+                if (isset($_REQUEST["source"])) {
+                
+                $sql    = "SELECT unique_id, sl.sub_layer as subregion, SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',2),':',-1) as parcel, SUBSTRING_INDEX(neurite,':',-1) as neurite, filtered_total_length as length FROM neurite_quantified as nq, SynproSubLayers as sl WHERE nq.unique_id!='' AND nq.filtered_total_length != 0 AND nq.filtered_total_length != '' AND nq.neurite not like '%:All:%' AND nq.convexhull != 0 AND nq.convexhull != '' AND nq.unique_id = sl.neuron_id AND unique_id = ".$_REQUEST["source_id"];
+                //".$_REQUEST["source"];
+                //echo "document.write(\"".$sql."\");";
+                //echo "axon_lengths = \"$sql\"";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        echo "axon_lengths = ".$row['length'].";";
                     }
-                }*/
+                }
+                }
             ?>
+            let axon_lengths_group = array();
+            let dendrite_lengths_group = array();
+            let axon_volumes_group = array();
+            let dendrite_volumes_group = array();
 
             var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
             dict = value_results[0];
@@ -293,7 +306,6 @@ include("function/menu_main.php");
               noc_text += "<td style='padding: 15px;'>"+final_result_noc[i]+'</td>';
             }
             noc_text += '</tr></table></center>';
-            noc_text += axon_lengths;
             document.getElementById('title2').innerHTML = noc_text;
         }
         function readData(url,volume_data,volumes_index,columns_index){
@@ -377,6 +389,13 @@ include("function/menu_main.php");
             }
         }
         function submitClicked(){
+            let source = document.getElementById("source").value.trim();
+            let target = document.getElementById("target").value.trim();
+            let source_id = sourceIDDic[source];
+            let target_id = targetIDDic[target];
+            document.getElementById("source_id").value = source_id;
+            document.getElementById("target_id").value = target_id;
+
             document.forms["conn_form"].submit();
         }
         function targetSelected(){
@@ -515,9 +534,8 @@ include("function/menu_main.php");
         echo "targetSelected();";*/
         echo "setTimeout(() => {  document.getElementById('source').value='".$_REQUEST["source"]."';";
         //echo "document.write(document.getElementById('source').value);";
-        echo "createTables(); }, 2000);";
+        echo "createTables(); }, 1000);";
         echo "</script>";
-        echo "test".$_REQUEST["source"];
     }
     ?>
 </body>
