@@ -36,19 +36,55 @@ include("function/menu_main.php");
             <table>
                 <tr>
                    <td>Presynaptic</td>
-                    <td><select id="source" onchange="sourceSelected()" disabled></select></td>
+                    <td>
+                        <?php
+                            if (isset($_REQUEST["source"])) {
+                                echo "<select id='source' name='source' onchange='sourceSelected()' value='".$_REQUEST["source"]."'></select>";
+                            }
+                            else {
+                                echo "<select id='source' name='source' onchange='sourceSelected()' disabled></select>";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Postsynaptic</td>
-                    <td><select id="target" onchange="targetSelected()" disabled></select></td>
+                    <td>
+                        <?php
+                            if (isset($_REQUEST["target"])) {
+                                echo "<select id='target' name='target' onchange='targetSelected()' value='".$_REQUEST["target"]."'></select>";
+                            }
+                            else {
+                                echo "<select id='target' name='target' onchange='targetSelected()' disabled></select>";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td> Dendritic spine distance (μm)</td>
-                    <td><input id="spine_distance" type="text" value="1.09" disabled></td>
+                    <td>
+                        <?php
+                            if (isset($_REQUEST["spine_distance"])) {
+                                echo "<input id='spine_distance' name='spine_distance' type='text' value='".$_REQUEST["spine_distance"]."' />";
+                            }
+                            else {
+                                echo "<input id='spine_distance' name='spine_distance' type='text' value='1.09' disabled />";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td> Inter-bouton distance (μm)</td>
-                    <td><input id="bouton_distance" type="text" value="6.2" disabled></td>
+                    <td>
+                        <?php
+                            if (isset($_REQUEST["bouton_distance"])) {
+                                echo "<input id='bouton_distance' name='bouton_distance' type='text' value='".$_REQUEST["bouton_distance"]."' />";
+                            }
+                            else {
+                                echo "<input id='bouton_distance' name='bouton_distance' type='text' value='6.2' disabled />";
+                            }
+                        ?>
+                    </td>
                 </tr>
                 <!-- tr>
                     <td>Number of contacts</td>
@@ -57,10 +93,28 @@ include("function/menu_main.php");
                 <input id="contacts" type="hidden" />
                 <tr>
                     <td>Radius of interaction (μm)</td>
-                    <td><input id="interaction" type="text" value="2" disabled></td>
+                    <td>
+                        <?php
+                            if (isset($_REQUEST["interaction"])) {
+                                echo "<input id='interaction' name='interaction' type='text' value='".$_REQUEST["interaction"]."' />";
+                            }
+                            else {
+                                echo "<input id='interaction' name='interaction' type='text' value='2' disabled />";
+                            }
+                        ?>
+                    </td>
                 </tr>
             </table>
-            <button id="s" class="pure-button pure-button-primary" onclick="submitClicked()" disabled style="z-index:10;">Submit</button>
+            <?php
+                echo "<button id='s' name='conn_submit' class='pure-button pure-button-primary' onclick='submitClicked()' ";
+                if (isset($_REQUEST["conn_submit"])) {
+                    // no output
+                }
+                else {
+                    echo "disabled";
+                }
+                echo " style='z-index:10;'>Submit</button>";
+            ?>
         </fieldset>
     </form>
     <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
@@ -348,6 +402,11 @@ include("function/menu_main.php");
             for(let value in connDic[source]){
                 addOption(target,connDic[source][value],connDic[source][value]);
             }
+            <?php
+                //if (isset($_REQUEST["target"])) {
+                //    echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
+                //}
+            ?>
             target.disabled = false;
         }
         addOption = function(selectbox, text, value) {
@@ -395,6 +454,30 @@ include("function/menu_main.php");
                     addOption(source_html, key, key);
                 }
                 source_html.disabled = false;
+
+                <?php
+                if (isset($_REQUEST["source"])) {
+                    echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
+                }
+                ?>
+                sourceSelected();
+                /*let source = document.getElementById("source").value;
+                let target = document.getElementById("target");
+                target.disabled = true;
+                target.length = 0;
+                addOption(target, "-", "-");
+                addOption(target, "test", "test");
+                for(let value in connDic[source]){
+                    addOption(target,connDic[source][value],connDic[source][value]);
+                }
+                target.disabled = false;*/
+
+
+                <?php
+                    if (isset($_REQUEST["target"])) {
+                        echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
+                    }
+                ?>
            }] });}
 
         class Neuron{
@@ -415,5 +498,24 @@ include("function/menu_main.php");
         }
        init();
     </script>
+    <?php
+    //if (isset($_REQUEST["source"])) {
+        echo "<script>";
+        /*echo "let source = document.getElementById('source').value;
+            let target = document.getElementById('target');
+            target.disabled = true;
+            target.length = 0;
+            addOption(target, '+', '+');
+            for(let value in connDic[source]){
+                addOption(target,connDic[source][value],connDic[source][value]);
+            }
+            target.disabled = false;";*/
+        echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
+        echo "sourceSelected();";
+        echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
+        echo "targetSelected();";
+        echo "</script>";
+    //}
+    ?>
 </body>
 </html>
