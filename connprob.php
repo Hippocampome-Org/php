@@ -342,7 +342,13 @@ include("function/menu_main.php");
             //document.getElementById("interaction").value=vol_data;
             return volume_data;
         }  
-        function submitClicked(){
+        function createTables() {
+            <?php
+            if (isset($_REQUEST["source"])) {
+            echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
+            }
+            ?>
+            //document.write(document.getElementById("source").value);
             let name = document.getElementById("source").value.split(" ")[0];
             if(name.includes("CA1")){
                 volume_data = readVolumes("data/CA1-Table-2.csv");
@@ -369,6 +375,8 @@ include("function/menu_main.php");
                 volume_data = readVolumes("data/Sub-Table-2.csv");
                 readData("data/Sub-Table-1.csv",volume_data,0,1);
             }
+        }
+        function submitClicked(){
             document.forms["conn_form"].submit();
         }
         function targetSelected(){
@@ -499,23 +507,18 @@ include("function/menu_main.php");
        init();
     </script>
     <?php
-    //if (isset($_REQUEST["source"])) {
+    if (isset($_REQUEST["source"])) {
         echo "<script>";
-        /*echo "let source = document.getElementById('source').value;
-            let target = document.getElementById('target');
-            target.disabled = true;
-            target.length = 0;
-            addOption(target, '+', '+');
-            for(let value in connDic[source]){
-                addOption(target,connDic[source][value],connDic[source][value]);
-            }
-            target.disabled = false;";*/
-        echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
+        /*echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
         echo "sourceSelected();";
         echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
-        echo "targetSelected();";
+        echo "targetSelected();";*/
+        echo "setTimeout(() => {  document.getElementById('source').value='".$_REQUEST["source"]."';";
+        //echo "document.write(document.getElementById('source').value);";
+        echo "createTables(); }, 2000);";
         echo "</script>";
-    //}
+        echo "test".$_REQUEST["source"];
+    }
     ?>
 </body>
 </html>
