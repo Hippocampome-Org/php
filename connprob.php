@@ -30,7 +30,7 @@ include("function/title.php");
 include("function/menu_main.php");  
 ?> 
 <div id="main" class="main" style="padding-top: 1%; padding-left: 1%">
-    <form class="pure-form" onsubmit="return false;">
+    <form id="conn_form" class="pure-form" onsubmit="return false;">
         <fieldset>
             <h2>Probability of connection</h2>
             <table>
@@ -198,6 +198,16 @@ include("function/menu_main.php");
             return value_results;
         }
         function parse(data_1,volume_data,volumes_index,columnNames_index){
+            <?php 
+                echo "let axon_lengths = 'test2';";
+                /*$sql    = "";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                    }
+                }*/
+            ?>
+
             var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
             dict = value_results[0];
             final_result = value_results[1];
@@ -215,7 +225,7 @@ include("function/menu_main.php");
             }
             cp_text += '</tr><tr>';
             for (let i = 0; i < result.length; i++) {
-              cp_text += "<td style='padding: 15px;'><a title='test' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
+              cp_text += "<td style='padding: 15px;'><a title='"+axon_lengths+"' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
             }
             cp_text += '</tr></table></center>';
             document.getElementById('title1').innerHTML = cp_text;
@@ -229,6 +239,7 @@ include("function/menu_main.php");
               noc_text += "<td style='padding: 15px;'>"+final_result_noc[i]+'</td>';
             }
             noc_text += '</tr></table></center>';
+            noc_text += axon_lengths;
             document.getElementById('title2').innerHTML = noc_text;
         }
         function readData(url,volume_data,volumes_index,columns_index){
@@ -304,6 +315,7 @@ include("function/menu_main.php");
                 volume_data = readVolumes("data/Sub-Table-2.csv");
                 readData("data/Sub-Table-1.csv",volume_data,0,1);
             }
+            document.forms["conn_form"].submit();
         }
         function targetSelected(){
             let spine_distance = document.getElementById("spine_distance");
