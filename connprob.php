@@ -9,10 +9,11 @@ session_start();
 <!--
 Probability of Connection Tool
 
-Reference: https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+References: https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
 https://stackoverflow.com/questions/5316697/jquery-return-data-after-ajax-call-success
 https://gist.github.com/carolineartz/ae3f1021bb41de2b1935
 http://www.endmemo.com/js/jstatistics.php
+https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
 -->
 <head>
     <meta charset="UTF-8">
@@ -259,7 +260,10 @@ include("function/menu_main.php");
 
             return values;
         }
-        function parcel_volume(all_groups,subregion, parcel) {            
+        function parcel_volume(all_groups,subregion, parcel) {    
+            /*
+                toUpperCase() is used for case insensitive matching
+            */        
             let parcel_volumes_group = all_groups[4];
             let volume = 0;
 
@@ -267,8 +271,9 @@ include("function/menu_main.php");
                 let curr_subregion = parcel_volumes_group[i][0];
                 let curr_parcel = parcel_volumes_group[i][1];
                 let curr_vol = parcel_volumes_group[i][2];
+                //document.write((parcel.toString()).toUpperCase()+"<br>");
 
-                if (subregion == curr_subregion && parcel == curr_parcel) {
+                if ((subregion.toString()).toUpperCase() == (curr_subregion.toString()).toUpperCase() && (parcel.toString()).toUpperCase() == (curr_parcel.toString()).toUpperCase()) {
                     volume = curr_vol;
                 }
             }
@@ -310,14 +315,15 @@ include("function/menu_main.php");
             return Math.sqrt(variance(array));
         } 
         function sum(array) {
-            var total = 0;
-            for (var i=0; i<array.length; i++) {
-                total += array[i];
+            let total = 0;
+            for (let i=0; i<array.length; i++) {
+                total = total + parseFloat(array[i]);
             }
             return total;
         };
         function mean(array) {
-            var arraySum = sum(array);
+            let arraySum = sum(array);
+            //document.write((arraySum / array.length)+"<br>");
             
             return arraySum / array.length;
         }
@@ -347,6 +353,7 @@ include("function/menu_main.php");
             let axonal_length_mean = 0;
             let dendritic_length_mean = 0;
             let volume = 0;
+            
 
             for (let i = 0; i < axon_lengths_group.length; i++) {
                 let axon_neuron_id = axon_lengths_group[i][0];
@@ -356,7 +363,7 @@ include("function/menu_main.php");
                 let axon_length = axon_lengths_group[i][4];
                 let axon_volume = axon_lengths_group[i][5];
 
-                if (source_id == axon_neuron_id && source_subregion == axon_subregion && axon_neurite == "A") {
+                if (target_id == axon_neuron_id && target_subregion == axon_subregion && axon_neurite == "A") {
                     axon_lengths.push(axon_length);
                 }
             }
@@ -372,9 +379,12 @@ include("function/menu_main.php");
                     dendrite_lengths.push(dendrite_length);
                 }
             }
+            //document.write(dendrite_lengths);
+
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
             volume = parcel_volume(all_groups,source_subregion, parcel);
+            //document.write(parcel+"<br>");
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
 
@@ -558,6 +568,8 @@ include("function/menu_main.php");
                     foreach ($entry as $entry_value) {
                         echo "entry.push(\"".$entry_value."\");";
                     }
+                    //echo "document.write(entry[4]);";
+                    //echo "document.write(\"".$dendrite_group[0][4]."<br>\");";
                     echo "lengths_entry = Array(entry[0], entry[1], entry[2], entry[3], entry[4]);";
                     echo "volumes_entry = Array(entry[0], entry[1], entry[2], entry[3], entry[5]);";
                     echo "dendrite_lengths_group.push(lengths_entry);";
