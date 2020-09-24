@@ -460,7 +460,15 @@ include("function/menu_main.php");
             cp_text += '</tr><tr>';
             //document.write(result.length);
             for (let i = 0; i < result.length; i++) {
-              cp_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
+              cp_text += "<td style='padding: 15px;'>";
+              if (result[i] > 0) {
+                cp_text += "<a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>";
+              }
+              cp_text += result[i];
+              if (result[i] > 0) {
+                cp_text += "</a>";
+              }
+              cp_text += "</td>";
             }
             cp_text += '</tr></table></center>';
             document.getElementById('title1').innerHTML = cp_text;
@@ -471,7 +479,15 @@ include("function/menu_main.php");
             }
             noc_text += '</tr><tr>';
             for (let i = 0; i < result.length; i++) {
-              noc_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>"+final_result_noc[i]+'</a></td>';
+              noc_text += "<td style='padding: 15px;'>";
+              if (final_result_noc[i] > 0) {
+                noc_text += "<a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>";
+              }
+              noc_text += final_result_noc[i];
+              if (final_result_noc[i] > 0) {
+                noc_text += "</a>";
+              }
+              noc_text += "</td>";
             }
             noc_text += '</tr></table></center>';
             document.getElementById('title2').innerHTML = noc_text;
