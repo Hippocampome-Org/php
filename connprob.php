@@ -256,10 +256,6 @@ include("function/menu_main.php");
 
             return value_results;
         }
-        function neurite_values(all_groups,neuron_id,subregion,parcel,neurite) {
-
-            return values;
-        }
         function parcel_volume(all_groups,subregion, parcel) {    
             /*
                 toUpperCase() is used for case insensitive matching
@@ -327,15 +323,23 @@ include("function/menu_main.php");
             
             return arraySum / array.length;
         }
-        function nps_calcs(all_groups, parcel) {
+        function calc_stats(all_groups, parcel, n_parcels) {
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
             let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
             let interaction = parseFloat(document.getElementById("interaction").value);     
             let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
             let c = vint /(spine_distance*bouton_distance);
             let nps_values = Array();
+            let nc_values = Array();
+            let cp_values = Array();
             let nps_mean = 0;
             let nps_stdev = 0;
+            let noc_mean = 0;
+            let noc_stdev = 0;
+            let cp_mean = 0;
+            let cp_stdev = 0;
+            let overlap_volume_mean = 0;
+            let overlap_volume_stdev = 0;
             let source = document.getElementById("source").value.trim();
             let target = document.getElementById("target").value.trim();
             let source_id = sourceIDDic[source];
@@ -344,12 +348,13 @@ include("function/menu_main.php");
             let target_subregion = document.getElementById("source").value.split(" ")[0];
 
             let dendrite_lengths_group = all_groups[0];
-            //document.write(dendrite_lengths_group.length);
             let dendrite_volumes_group = all_groups[1];
             let axon_lengths_group = all_groups[2];
             let axon_volumes_group = all_groups[3];
-            let axon_lengths = Array();
             let dendrite_lengths = Array();
+            let dendrite_volumes = Array();
+            let axon_lengths = Array();
+            let axon_volumes = Array();
             let axonal_length_mean = 0;
             let dendritic_length_mean = 0;
             let volume = 0;
@@ -361,10 +366,12 @@ include("function/menu_main.php");
                 let axon_parcel = axon_lengths_group[i][2];
                 let axon_neurite = axon_lengths_group[i][3];
                 let axon_length = axon_lengths_group[i][4];
-                let axon_volume = axon_lengths_group[i][5];
+                let axon_volume = axon_volumes_group[i][4];
 
                 if (target_id == axon_neuron_id && target_subregion == axon_subregion && axon_neurite == "A") {
                     axon_lengths.push(axon_length);
+                    axon_volumes.push(axon_volume);
+                    //document.write(axon_volume);
                 }
             }
             for (let i = 0; i < dendrite_lengths_group.length; i++) {
@@ -373,26 +380,45 @@ include("function/menu_main.php");
                 let dendrite_parcel = dendrite_lengths_group[i][2];
                 let dendrite_neurite = dendrite_lengths_group[i][3];
                 let dendrite_length = dendrite_lengths_group[i][4];
-                let dendrite_volume = dendrite_lengths_group[i][5];
+                let dendrite_volume = dendrite_volumes_group[i][4];
 
                 if (source_id == dendrite_neuron_id && source_subregion == dendrite_subregion && dendrite_neurite == "D") {
                     dendrite_lengths.push(dendrite_length);
+                    dendrite_volumes.push(dendrite_volume);
                 }
             }
-            //document.write(dendrite_lengths);
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
             volume = parcel_volume(all_groups,source_subregion, parcel);
-            //document.write(parcel+"<br>");
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
 
+            // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
-            nps_values.push(nps_mean,nps_stdev);
+            nps_values.push(nps_mean, nps_stdev);
 
-            return nps_values;
+            // noc
+            let axonal_convex_hull_mean = mean(axon_volumes);
+            let axonal_convex_hull_stdev = stdev(axon_volumes);
+            let dendritic_convex_hull_mean = mean(dendrite_volumes);
+            let dendritic_convex_hull_stdev = stdev(dendrite_volumes);
+
+            overlap_volume_mean = ((axonal_convex_hull_mean + dendritic_convex_hull_mean) / 4)
+            overlap_volume_stdev = Math.sqrt(Math.pow(axonal_convex_hull_stdev,2) + Math.pow(dendritic_convex_hull_stdev,2));
+
+            //document.write(axonal_convex_hull_mean);
+            nc_mean = (1/n_parcels) + (c * axonal_length_mean * dendritic_length_mean) / overlap_volume_mean;
+            nc_stdev = nc_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2) + Math.pow((overlap_volume_stdev / overlap_volume_mean),2));
+            nc_values.push(nc_mean, nc_stdev);
+
+            // cp
+            cp_mean = nps_mean / nc_mean;
+            cp_stdev = cp_mean * Math.sqrt(Math.pow((nps_stdev / nps_mean),2) + Math.pow((nc_stdev / nc_mean),2));
+            cp_values.push(cp_mean, cp_stdev);
+
+            return cp_values;
         }
         function stdev_calcs(all_groups, parcels) {
             let stdev_values = Array(parcels.length);
@@ -402,7 +428,7 @@ include("function/menu_main.php");
                 stdev_values[i] = Array(Array(),Array());
                 if (i < (parcels.length - 1)) {
                     //nps_values.push(nps_calcs(all_groups, parcels[i]));
-                    stdev_values[i] = nps_calcs(all_groups, parcels[i]);
+                    stdev_values[i] = calc_stats(all_groups, parcels[i], parcels.length);
                 }
                 else {
                     // "total" parcel list entry
