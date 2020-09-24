@@ -11,6 +11,8 @@ Probability of Connection Tool
 
 Reference: https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
 https://stackoverflow.com/questions/5316697/jquery-return-data-after-ajax-call-success
+https://gist.github.com/carolineartz/ae3f1021bb41de2b1935
+http://www.endmemo.com/js/jstatistics.php
 -->
 <head>
     <meta charset="UTF-8">
@@ -253,7 +255,153 @@ include("function/menu_main.php");
 
             return value_results;
         }
-        function parse(data_1,volume_data,volumes_index,columnNames_index){
+        function neurite_values(all_groups,neuron_id,subregion,parcel,neurite) {
+
+            return values;
+        }
+        function parcel_volume(all_groups,subregion, parcel) {            
+            let parcel_volumes_group = all_groups[4];
+            let volume = 0;
+
+            for (var i = 0; i < parcel_volumes_group.length; i++) {
+                let curr_subregion = parcel_volumes_group[i][0];
+                let curr_parcel = parcel_volumes_group[i][1];
+                let curr_vol = parcel_volumes_group[i][2];
+
+                if (subregion == curr_subregion && parcel == curr_parcel) {
+                    volume = curr_vol;
+                }
+            }
+
+            return volume;
+        }
+        function variance(arr)
+        {
+            var len = 0;
+            var sum=0;
+            for(var i=0;i<arr.length;i++)
+            {
+                if (arr[i] == ""){}
+                /*else if (!isNum(arr[i]))
+                {
+                    alert(arr[i] + " is not number, Variance Calculation failed!");
+                    return 0;
+                }*/
+                else
+                {
+                    len = len + 1;
+                    sum = sum + parseFloat(arr[i]);
+                }
+            }
+            var v = 0;
+            if (len > 1)
+            {
+                var mean = sum / len;
+                for(var i=0;i<arr.length;i++)
+                {
+                    if (arr[i] == ""){}
+                    else { v = v + (arr[i] - mean) * (arr[i] - mean); }
+                }
+                return v / len;
+            }
+            else { return 0; }
+        }
+        function stdev(array) {
+            return Math.sqrt(variance(array));
+        } 
+        function sum(array) {
+            var total = 0;
+            for (var i=0; i<array.length; i++) {
+                total += array[i];
+            }
+            return total;
+        };
+        function mean(array) {
+            var arraySum = sum(array);
+            
+            return arraySum / array.length;
+        }
+        function nps_calcs(all_groups, parcel) {
+            let spine_distance = parseFloat(document.getElementById("spine_distance").value);
+            let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
+            let interaction = parseFloat(document.getElementById("interaction").value);     
+            let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
+            let c = vint /(spine_distance*bouton_distance);
+            let nps_values = Array();
+            let nps_mean = 0;
+            let nps_stdev = 0;
+            let source = document.getElementById("source").value.trim();
+            let target = document.getElementById("target").value.trim();
+            let source_id = sourceIDDic[source];
+            let target_id = targetIDDic[target];
+            let source_subregion = document.getElementById("source").value.split(" ")[0];
+            let target_subregion = document.getElementById("source").value.split(" ")[0];
+
+            let dendrite_lengths_group = all_groups[0];
+            //document.write(dendrite_lengths_group.length);
+            let dendrite_volumes_group = all_groups[1];
+            let axon_lengths_group = all_groups[2];
+            let axon_volumes_group = all_groups[3];
+            let axon_lengths = Array();
+            let dendrite_lengths = Array();
+            let axonal_length_mean = 0;
+            let dendritic_length_mean = 0;
+            let volume = 0;
+
+            for (let i = 0; i < axon_lengths_group.length; i++) {
+                let axon_neuron_id = axon_lengths_group[i][0];
+                let axon_subregion = axon_lengths_group[i][1];
+                let axon_parcel = axon_lengths_group[i][2];
+                let axon_neurite = axon_lengths_group[i][3];
+                let axon_length = axon_lengths_group[i][4];
+                let axon_volume = axon_lengths_group[i][5];
+
+                if (source_id == axon_neuron_id && source_subregion == axon_subregion && axon_neurite == "A") {
+                    axon_lengths.push(axon_length);
+                }
+            }
+            for (let i = 0; i < dendrite_lengths_group.length; i++) {
+                let dendrite_neuron_id = dendrite_lengths_group[i][0];
+                let dendrite_subregion = dendrite_lengths_group[i][1];
+                let dendrite_parcel = dendrite_lengths_group[i][2];
+                let dendrite_neurite = dendrite_lengths_group[i][3];
+                let dendrite_length = dendrite_lengths_group[i][4];
+                let dendrite_volume = dendrite_lengths_group[i][5];
+
+                if (source_id == dendrite_neuron_id && source_subregion == dendrite_subregion && dendrite_neurite == "D") {
+                    dendrite_lengths.push(dendrite_length);
+                }
+            }
+            dendritic_length_mean = mean(dendrite_lengths);
+            axonal_length_mean = mean(axon_lengths);
+            volume = parcel_volume(all_groups,source_subregion, parcel);
+            dendritic_length_stdev = stdev(dendrite_lengths);            
+            axonal_length_stdev = stdev(axon_lengths);
+
+            nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
+            nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
+            nps_values.push(nps_mean,nps_stdev);
+
+            return nps_values;
+        }
+        function stdev_calcs(all_groups, parcels) {
+            let stdev_values = Array(parcels.length);
+            let nps_values = Array();
+
+            for (var i = 0; i < parcels.length; i++) {
+                stdev_values[i] = Array(Array(),Array());
+                if (i < (parcels.length - 1)) {
+                    //nps_values.push(nps_calcs(all_groups, parcels[i]));
+                    stdev_values[i] = nps_calcs(all_groups, parcels[i]);
+                }
+                else {
+                    // "total" parcel list entry
+                }
+            }
+
+            return stdev_values;
+        }
+        function parse(data_1,volume_data,volumes_index,columnNames_index,all_groups){
             var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
             dict = value_results[0];
             final_result = value_results[1];
@@ -261,17 +409,21 @@ include("function/menu_main.php");
             source_id = value_results[3];
 
             /* generate tables */
-            let cname = Array.from(dict.get(source_id).columnNames, x => [x]);
+            let cname = Array.from(dict.get(source_id).columnNames, x => [x]); // cname = column name
+
+            let stdev_values = stdev_calcs(all_groups, cname);
+
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title1').style.display='block';
             let cp_text = "<center>Number of Contacts Per Connected Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
             for (let i = 0; i < cname.length; i++) {
               cp_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
-            }
+            } 
             cp_text += '</tr><tr>';
+            //document.write(result.length);
             for (let i = 0; i < result.length; i++) {
-              cp_text += "<td style='padding: 15px;'><a title='test1' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
+              cp_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][0]+"' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
             }
             cp_text += '</tr></table></center>';
             document.getElementById('title1').innerHTML = cp_text;
@@ -287,12 +439,12 @@ include("function/menu_main.php");
             noc_text += '</tr></table></center>';
             document.getElementById('title2').innerHTML = noc_text;
         }
-        function readData(url,volume_data,volumes_index,columns_index){
+        function readData(url,volume_data,volumes_index,columns_index,all_groups){
             $.ajax({
                 url:url,
                 dataType:"text",
                 success:[function(data){
-                   parse(data,volume_data,volumes_index,columns_index);
+                   parse(data,volume_data,volumes_index,columns_index,all_groups);
                 }]
             });
         }
@@ -337,6 +489,7 @@ include("function/menu_main.php");
             <?php
                 $axon_group = array();
                 $dendrite_group = array();
+                $parcel_volumes = array();
                 if (isset($_REQUEST["source"])) {
                     echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
                     $sql_general = "SELECT unique_id, sl.sub_layer as subregion, SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',2),':',-1) as parcel, SUBSTRING_INDEX(neurite,':',-1) as neurite, filtered_total_length as length, convexhull as volume FROM neurite_quantified as nq, SynproSubLayers as sl WHERE nq.unique_id!='' AND nq.filtered_total_length != 0 AND nq.filtered_total_length != '' AND nq.neurite not like '%:All:%' AND nq.convexhull != 0 AND nq.convexhull != '' AND nq.unique_id = sl.neuron_id";
@@ -357,6 +510,7 @@ include("function/menu_main.php");
                         }
                     }
                     $sql    = $sql_general." AND unique_id = ".$_REQUEST["target_id"];
+                    //echo "document.write(\"".$sql."\");";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -372,6 +526,17 @@ include("function/menu_main.php");
                             }
                         }
                     }
+                    $sql   = "SELECT * FROM SynproParcelVolumes;";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $entry = array();
+                            array_push($entry, $row['subregion']);
+                            array_push($entry, $row['parcel']);
+                            array_push($entry, $row['volume']);
+                            array_push($parcel_volumes, $entry);
+                        }
+                    }
                 }
             ?>
 
@@ -379,6 +544,7 @@ include("function/menu_main.php");
             let dendrite_volumes_group = Array();
             let axon_lengths_group = Array();
             let axon_volumes_group = Array();
+            let parcel_volumes_group = Array();
             <?php
                 echo "let entry = Array();";
                 echo "let entry2 = Array();";
@@ -407,34 +573,42 @@ include("function/menu_main.php");
                     echo "axon_lengths_group.push(lengths_entry2);";
                     echo "axon_volumes_group.push(volumes_entry2);";
                 }
+                foreach ($parcel_volumes as $entry3) {
+                    echo "entry3 = Array();";
+                    foreach ($entry3 as $entry_value3) {
+                        echo "entry3.push(\"".$entry_value3."\");";
+                    }
+                    echo "parcel_volumes_group.push(entry3);";
+                }
             ?>
             
+            all_groups = Array(dendrite_lengths_group, dendrite_volumes_group, axon_lengths_group, axon_volumes_group, parcel_volumes_group);
             //document.write(document.getElementById("source").value);
             let name = document.getElementById("source").value.split(" ")[0];
             if(name.includes("CA1")){
                 volume_data = readVolumes("data/CA1-Table-2.csv");
-                readData("data/CA1-Table-1.csv",volume_data,0,1);
+                readData("data/CA1-Table-1.csv",volume_data,0,1,all_groups);
             }else if(name.includes("CA2")){
                 volume_data = readVolumes("data/CA2-Table-2.csv");
-                readData("data/CA2-Table-1.csv",volume_data,0,1);
+                readData("data/CA2-Table-1.csv",volume_data,0,1,all_groups);
             }else if(name.includes("CA3")){
                 volume_data = readVolumes("data/CA3-Table-2.csv");
-                readData("data/CA3-Table-1.csv",volume_data,0,1);
+                readData("data/CA3-Table-1.csv",volume_data,0,1,all_groups);
             }else if(name.includes("DG")){
                 volume_data = readVolumes("data/DG-Table-2.csv");
-                readData("data/DG-Table-1.csv",volume_data,0,1);
+                readData("data/DG-Table-1.csv",volume_data,0,1,all_groups);
             }else if(name.includes("MEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,1,3);
+                readData("data/EC-Table-1.csv",volume_data,1,3,all_groups);
             }else if(name.includes("LEC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,0,3);
+                readData("data/EC-Table-1.csv",volume_data,0,3,all_groups);
             }else if(name.includes("EC")){
                 volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,2,3);
+                readData("data/EC-Table-1.csv",volume_data,2,3,all_groups);
             }else if(name.includes("SUB")){
                 volume_data = readVolumes("data/Sub-Table-2.csv");
-                readData("data/Sub-Table-1.csv",volume_data,0,1);
+                readData("data/Sub-Table-1.csv",volume_data,0,1,all_groups);
             }
         }
         function submitClicked(){
@@ -581,8 +755,12 @@ include("function/menu_main.php");
         echo "sourceSelected();";
         echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
         echo "targetSelected();";*/
+
+        /*  
+            timeout is to allow time for select options to populate before 
+            setting the value.
+        */
         echo "setTimeout(() => {  document.getElementById('source').value='".$_REQUEST["source"]."';";
-        //echo "document.write(document.getElementById('source').value);";
         echo "createTables(); }, 1000);";
         echo "</script>";
     }
