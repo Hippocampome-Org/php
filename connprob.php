@@ -346,7 +346,6 @@ include("function/menu_main.php");
             let target_id = targetIDDic[target];
             let source_subregion = document.getElementById("source").value.split(" ")[0];
             let target_subregion = document.getElementById("source").value.split(" ")[0];
-
             let dendrite_lengths_group = all_groups[0];
             let dendrite_volumes_group = all_groups[1];
             let axon_lengths_group = all_groups[2];
@@ -357,8 +356,8 @@ include("function/menu_main.php");
             let axon_volumes = Array();
             let axonal_length_mean = 0;
             let dendritic_length_mean = 0;
-            let volume = 0;
-            
+            let volume = 0;            
+            let stat_values = Array();
 
             for (let i = 0; i < axon_lengths_group.length; i++) {
                 let axon_neuron_id = axon_lengths_group[i][0];
@@ -418,7 +417,9 @@ include("function/menu_main.php");
             cp_stdev = cp_mean * Math.sqrt(Math.pow((nps_stdev / nps_mean),2) + Math.pow((nc_stdev / nc_mean),2));
             cp_values.push(cp_mean, cp_stdev);
 
-            return cp_values;
+            stat_values = Array(nc_values[0], nc_values[1], cp_values[0], cp_values[1]);
+
+            return stat_values;
         }
         function stdev_calcs(all_groups, parcels) {
             let stdev_values = Array(parcels.length);
@@ -452,14 +453,14 @@ include("function/menu_main.php");
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title1').style.display='block';
-            let cp_text = "<center>Number of Contacts Per Connected Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
+            let cp_text = "<center>Probability of Connection Per Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
             for (let i = 0; i < cname.length; i++) {
               cp_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
             } 
             cp_text += '</tr><tr>';
             //document.write(result.length);
             for (let i = 0; i < result.length; i++) {
-              cp_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][0]+"' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
+              cp_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>"+result[i]+'</a></td>';
             }
             cp_text += '</tr></table></center>';
             document.getElementById('title1').innerHTML = cp_text;
@@ -470,7 +471,7 @@ include("function/menu_main.php");
             }
             noc_text += '</tr><tr>';
             for (let i = 0; i < result.length; i++) {
-              noc_text += "<td style='padding: 15px;'>"+final_result_noc[i]+'</td>';
+              noc_text += "<td style='padding: 15px;'><a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>"+final_result_noc[i]+'</a></td>';
             }
             noc_text += '</tr></table></center>';
             document.getElementById('title2').innerHTML = noc_text;
