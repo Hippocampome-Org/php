@@ -423,18 +423,52 @@ include("function/menu_main.php");
         }
         function stdev_calcs(all_groups, parcels) {
             let stdev_values = Array(parcels.length);
+            let stdev_parcel_values = Array((parcels.length-1));
+            let total_nc_mean = 0;
+            let total_nc_stdev = 0;
+            let total_cp_mean = 0;
+            let total_cp_stdev = 0;
             let nps_values = Array();
+            let nc_means = Array();
+            let nc_stdev = Array();
+            let cp_means = Array();
+            let cp_stdev = Array();
 
+            // values per parcel
             for (var i = 0; i < parcels.length; i++) {
                 stdev_values[i] = Array(Array(),Array());
                 if (i < (parcels.length - 1)) {
                     //nps_values.push(nps_calcs(all_groups, parcels[i]));
                     stdev_values[i] = calc_stats(all_groups, parcels[i], parcels.length);
+                    nc_means.push(stdev_values[i][0]);
+                    nc_stdev.push(stdev_values[i][1]);
+                    cp_means.push(stdev_values[i][2]);
+                    cp_stdev.push(stdev_values[i][3]);
                 }
-                else {
+                /*else {
                     // "total" parcel list entry
+                }*/
+            }
+
+            var cp_mean_tally = 1;
+            var cp_stdev_tally = 1;
+            // total values
+            for (var i = 0; i < stdev_parcel_values.length; i++) {
+                total_nc_mean = mean(nc_means);
+                total_nc_stdev = stdev(nc_stdev);
+                // probability
+                if (!isNaN(cp_means[i])) {
+                    cp_mean_tally = cp_mean_tally * (1 - cp_means[i]);
+                }
+                if (!isNaN(cp_stdev[i])) {
+                    cp_stdev_tally = cp_stdev_tally * (1 - cp_stdev[i]);
                 }
             }
+            // parseFloat( .toString()) is for avoiding a trailing 0
+            total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString());
+            total_cp_stdev = (parseFloat(1 - cp_stdev_tally).toPrecision(4).toString());
+
+            stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
 
             return stdev_values;
         }
