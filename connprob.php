@@ -363,8 +363,13 @@ include("function/menu_main.php");
                 let axon_neurite = axon_lengths_group[i][3];
                 let axon_length = axon_lengths_group[i][4];
                 let axon_volume = axon_volumes_group[i][4];
+                //document.write(axon_lengths_group[1][2]+"<br>");
+                //if (parcel=='SMi') {document.write("axon length<br>"+parcel+"<br>"+((parcel.toString()).toUpperCase() == (axon_parcel.toString()).toUpperCase())+"<br>"+axon_parcel+"<br>");}
+                //document.write(target_id+"|"+axon_neuron_id+"|"+target_subregion+"|"+axon_subregion+"|"+(parcel.toString()).toUpperCase()+"|"+(axon_parcel.toString()).toUpperCase()+"|"+axon_neurite+"<br>");
 
-                if (target_id == axon_neuron_id && target_subregion == axon_subregion && axon_neurite == "A") {
+                if (source_id == axon_neuron_id && target_subregion == axon_subregion && (parcel.toString()).toUpperCase() == (axon_parcel.toString()).toUpperCase() && axon_neurite == "A") {
+                    //document.write((axon_parcel.toString()).toUpperCase());
+                    //if ((axon_parcel.toString()).toUpperCase()=='SMI') {document.write("axon length<br>test<br>");}
                     axon_lengths.push(axon_length);
                     axon_volumes.push(axon_volume);
                     //document.write(axon_volume);
@@ -377,8 +382,11 @@ include("function/menu_main.php");
                 let dendrite_neurite = dendrite_lengths_group[i][3];
                 let dendrite_length = dendrite_lengths_group[i][4];
                 let dendrite_volume = dendrite_volumes_group[i][4];
+                //document.write(dendrite_lengths_group[2][2]+"<br>");
 
-                if (source_id == dendrite_neuron_id && source_subregion == dendrite_subregion && dendrite_neurite == "D") {
+                if (target_id == dendrite_neuron_id && source_subregion == dendrite_subregion && (parcel.toString()).toUpperCase() == (dendrite_parcel.toString()).toUpperCase() && dendrite_neurite == "D") {
+                    //if (axon_parcel=='SMi') {document.write(dendrite_length+"<br>");}
+                    //document.write(dendrite_parcel);
                     dendrite_lengths.push(dendrite_length);
                     dendrite_volumes.push(dendrite_volume);
                 }
@@ -386,6 +394,7 @@ include("function/menu_main.php");
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
+            //if (parcel=='SMi') {document.write(axon_lengths_group[0][2]);}
             volume = parcel_volume(all_groups,source_subregion, parcel);
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
@@ -437,6 +446,7 @@ include("function/menu_main.php");
                     nc_stdev.push(stdev_values[i][1]);
                     cp_means.push(stdev_values[i][2]);
                     cp_stdev.push(stdev_values[i][3]);
+                    //if (parcels[i] == 'H') {document.write(parcels[i]+"<br>");}
                 }
             }
 
@@ -573,22 +583,6 @@ include("function/menu_main.php");
                     echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
                     $sql_general = "SELECT unique_id, sl.sub_layer as subregion, SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',2),':',-1) as parcel, SUBSTRING_INDEX(neurite,':',-1) as neurite, filtered_total_length as length, convexhull as volume FROM neurite_quantified as nq, SynproSubLayers as sl WHERE nq.unique_id!='' AND nq.filtered_total_length != 0 AND nq.filtered_total_length != '' AND nq.neurite not like '%:All:%' AND nq.convexhull != 0 AND nq.convexhull != '' AND nq.unique_id = sl.neuron_id";
                     $sql    = $sql_general." AND unique_id = ".$_REQUEST["source_id"];
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            $entry = array();
-                            array_push($entry, $row['unique_id']);
-                            array_push($entry, $row['subregion']);
-                            array_push($entry, $row['parcel']);
-                            array_push($entry, $row['neurite']);
-                            array_push($entry, $row['length']);
-                            array_push($entry, $row['volume']);
-                            if ($row['neurite'] == "D") {
-                                array_push($dendrite_group, $entry);
-                            }
-                        }
-                    }
-                    $sql    = $sql_general." AND unique_id = ".$_REQUEST["target_id"];
                     //echo "document.write(\"".$sql."\");";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -605,6 +599,23 @@ include("function/menu_main.php");
                             }
                         }
                     }
+                    $sql    = $sql_general." AND unique_id = ".$_REQUEST["target_id"];
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $entry = array();
+                            array_push($entry, $row['unique_id']);
+                            array_push($entry, $row['subregion']);
+                            array_push($entry, $row['parcel']);
+                            array_push($entry, $row['neurite']);
+                            array_push($entry, $row['length']);
+                            array_push($entry, $row['volume']);
+                            if ($row['neurite'] == "D") {
+                                array_push($dendrite_group, $entry);
+                            }
+                        }
+                    }
+                    //echo "document.write(\"".$sql."\")";                    
                     $sql   = "SELECT * FROM SynproParcelVolumes;";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
@@ -617,7 +628,9 @@ include("function/menu_main.php");
                         }
                     }
                 }
-                //echo "document.write(\"entry:<br>".$dendrite_group[1][4]."\")";
+                //echo "document.write(\"entry:<br>".$axon_group[2][2]."\")";
+                //echo "document.write(\"entry:<br>".sizeof($dendrite_group)."\")";
+                //echo "document.write(\"entry:<br>".$sql_general."\")";
             ?>
 
             let dendrite_lengths_group = Array();
