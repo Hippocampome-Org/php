@@ -329,13 +329,10 @@ include("function/menu_main.php");
             let interaction = parseFloat(document.getElementById("interaction").value);     
             let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
             let c = vint /(spine_distance*bouton_distance);
-            let nps_values = Array();
-            let nc_values = Array();
-            let cp_values = Array();
             let nps_mean = 0;
             let nps_stdev = 0;
-            let noc_mean = 0;
-            let noc_stdev = 0;
+            let nc_mean = 0;
+            let nc_stdev = 0;
             let cp_mean = 0;
             let cp_stdev = 0;
             let overlap_volume_mean = 0;
@@ -396,7 +393,6 @@ include("function/menu_main.php");
             // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
-            nps_values.push(nps_mean, nps_stdev);
 
             // noc
             let axonal_convex_hull_mean = mean(axon_volumes);
@@ -407,17 +403,16 @@ include("function/menu_main.php");
             overlap_volume_mean = ((axonal_convex_hull_mean + dendritic_convex_hull_mean) / 4)
             overlap_volume_stdev = Math.sqrt(Math.pow(axonal_convex_hull_stdev,2) + Math.pow(dendritic_convex_hull_stdev,2));
 
-            //document.write(axonal_convex_hull_mean);
             nc_mean = (1/n_parcels) + (c * axonal_length_mean * dendritic_length_mean) / overlap_volume_mean;
             nc_stdev = nc_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2) + Math.pow((overlap_volume_stdev / overlap_volume_mean),2));
-            nc_values.push(nc_mean, nc_stdev);
+            //if (nc_stdev > 3.5) {document.write(nc_stdev);}
 
             // cp
             cp_mean = nps_mean / nc_mean;
             cp_stdev = cp_mean * Math.sqrt(Math.pow((nps_stdev / nps_mean),2) + Math.pow((nc_stdev / nc_mean),2));
-            cp_values.push(cp_mean, cp_stdev);
+            //if (cp_stdev > 1) {document.write(cp_stdev+"<br>");}
 
-            stat_values = Array(nc_values[0], nc_values[1], cp_values[0], cp_values[1]);
+            stat_values = Array(nc_mean, nc_stdev, cp_mean, cp_stdev);
 
             return stat_values;
         }
@@ -428,7 +423,6 @@ include("function/menu_main.php");
             let total_nc_stdev = 0;
             let total_cp_mean = 0;
             let total_cp_stdev = 0;
-            let nps_values = Array();
             let nc_means = Array();
             let nc_stdev = Array();
             let cp_means = Array();
@@ -438,20 +432,17 @@ include("function/menu_main.php");
             for (var i = 0; i < parcels.length; i++) {
                 stdev_values[i] = Array(Array(),Array());
                 if (i < (parcels.length - 1)) {
-                    //nps_values.push(nps_calcs(all_groups, parcels[i]));
                     stdev_values[i] = calc_stats(all_groups, parcels[i], parcels.length);
                     nc_means.push(stdev_values[i][0]);
                     nc_stdev.push(stdev_values[i][1]);
                     cp_means.push(stdev_values[i][2]);
                     cp_stdev.push(stdev_values[i][3]);
                 }
-                /*else {
-                    // "total" parcel list entry
-                }*/
             }
 
             var cp_mean_tally = 1;
-            var cp_stdev_tally = 1;
+            //var cp_stdev_tally = 1;
+            var cp_stdev_tally = 0;
             // total values
             for (var i = 0; i < stdev_parcel_values.length; i++) {
                 total_nc_mean = mean(nc_means);
@@ -461,12 +452,13 @@ include("function/menu_main.php");
                     cp_mean_tally = cp_mean_tally * (1 - cp_means[i]);
                 }
                 if (!isNaN(cp_stdev[i])) {
-                    cp_stdev_tally = cp_stdev_tally * (1 - cp_stdev[i]);
+                    cp_stdev_tally += Math.pow((cp_stdev[i] / cp_means[i]),2);
                 }
             }
             // parseFloat( .toString()) is for avoiding a trailing 0
             total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString());
-            total_cp_stdev = (parseFloat(1 - cp_stdev_tally).toPrecision(4).toString());
+            total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
+            //(parseFloat(1 - cp_stdev_tally).toPrecision(4).toString());
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
 
@@ -496,7 +488,7 @@ include("function/menu_main.php");
             for (let i = 0; i < result.length; i++) {
               cp_text += "<td style='padding: 15px;'>";
               if (result[i] > 0) {
-                cp_text += "<a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>";
+                cp_text += "<a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>";
               }
               cp_text += result[i];
               if (result[i] > 0) {
@@ -515,7 +507,7 @@ include("function/menu_main.php");
             for (let i = 0; i < result.length; i++) {
               noc_text += "<td style='padding: 15px;'>";
               if (final_result_noc[i] > 0) {
-                noc_text += "<a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>";
+                noc_text += "<a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>";
               }
               noc_text += final_result_noc[i];
               if (final_result_noc[i] > 0) {
@@ -625,6 +617,7 @@ include("function/menu_main.php");
                         }
                     }
                 }
+                //echo "document.write(\"entry:<br>".$dendrite_group[1][4]."\")";
             ?>
 
             let dendrite_lengths_group = Array();
@@ -635,10 +628,10 @@ include("function/menu_main.php");
             <?php
                 echo "let entry = Array();";
                 echo "let entry2 = Array();";
-                echo "let lengths_entry;";
-                echo "let lengths_entry2;";
-                echo "let volumes_entry;";
-                echo "let volumes_entry2;";
+                echo "let lengths_entry = Array();";
+                echo "let lengths_entry2 = Array();";
+                echo "let volumes_entry = Array();";
+                echo "let volumes_entry2 = Array();";
 
                 foreach ($dendrite_group as $entry) {
                     echo "entry = Array();";
@@ -652,6 +645,7 @@ include("function/menu_main.php");
                     echo "dendrite_lengths_group.push(lengths_entry);";
                     echo "dendrite_volumes_group.push(volumes_entry);";
                 }
+                //echo "document.write(dendrite_lengths_group[1][4]);";
                 foreach ($axon_group as $entry2) {
                     echo "entry2 = Array();";
                     foreach ($entry2 as $entry_value2) {
