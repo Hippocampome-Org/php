@@ -326,7 +326,7 @@ include("function/menu_main.php");
             
             return arraySum / array.length;
         }
-        function calc_stats(all_groups, parcel, n_parcels) {
+        function calc_stats(all_groups, parcel) {
             let spine_distance = parseFloat(document.getElementById("spine_distance").value);
             let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
             let interaction = parseFloat(document.getElementById("interaction").value);     
@@ -358,6 +358,10 @@ include("function/menu_main.php");
             let dendritic_length_mean = 0;
             let volume = 0;            
             let stat_values = Array();
+            let parcels_axon = Array();
+            let parcels_dendrite = Array();
+            let parcels_both = Array();
+            let n_parcels = 0;
 
             for (let i = 0; i < axon_lengths_group.length; i++) {
                 let axon_neuron_id = axon_lengths_group[i][0];
@@ -370,6 +374,10 @@ include("function/menu_main.php");
                 if (source_id == axon_neuron_id && target_subregion == axon_subregion && (parcel.toString()).toUpperCase() == (axon_parcel.toString()).toUpperCase() && axon_neurite == "A") {
                     axon_lengths.push(axon_length);
                     axon_volumes.push(axon_volume);
+                }
+
+                if (source_id == axon_neuron_id && target_subregion == axon_subregion && axon_neurite == "A") {
+                    parcels_axon.push(axon_parcel);
                 }
             }
             for (let i = 0; i < dendrite_lengths_group.length; i++) {
@@ -384,7 +392,30 @@ include("function/menu_main.php");
                     dendrite_lengths.push(dendrite_length);
                     dendrite_volumes.push(dendrite_volume);
                 }
+
+                if (target_id == dendrite_neuron_id && source_subregion == dendrite_subregion && dendrite_neurite == "D") {
+                    parcels_dendrite.push(dendrite_parcel);
+                }
             }
+
+            // find number of parcels with values (n_parcels)
+            let parcel_found = false;
+            for (let i = 0; i < parcels_axon.length; i++) {
+                for (let j = 0; j < parcels_dendrite.length; j++) {
+                    if (parcels_axon[i] == parcels_dendrite[j]) {
+                        parcel_found = false;
+                        for (let k = 0; k < parcels_both.length; k++) {
+                            if (parcels_both[k] == parcels_axon[i]) {
+                                parcel_found = true;
+                            }
+                        }
+                        if (parcel_found == false) {
+                            parcels_both.push(parcels_axon[i]);
+                        }
+                    }
+                }
+            }
+            n_parcels = parcels_both.length;
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
@@ -432,7 +463,7 @@ include("function/menu_main.php");
             for (var i = 0; i < parcels.length; i++) {
                 stdev_values[i] = Array(Array(),Array());
                 if (i < (parcels.length - 1)) {
-                    stdev_values[i] = calc_stats(all_groups, parcels[i], parcels.length);
+                    stdev_values[i] = calc_stats(all_groups, parcels[i]);
                     nc_means.push(stdev_values[i][0]);
                     nc_stdev.push(stdev_values[i][1]);
                     cp_means.push(stdev_values[i][2]);
@@ -440,23 +471,26 @@ include("function/menu_main.php");
                 }
             }
 
+            var nc_stdev_tally = 0;
             var cp_mean_tally = 1;
-            //var cp_stdev_tally = 1;
             var cp_stdev_tally = 0;
             // total values
             for (var i = 0; i < stdev_parcel_values.length; i++) {
-                total_nc_mean = mean(nc_means);
-                total_nc_stdev = stdev(nc_stdev);
+                total_nc_mean = sum(nc_means);
+                if (!isNaN(nc_stdev[i])) {
+                    nc_stdev_tally += Math.pow(nc_stdev[i],2);
+                }
                 // probability
                 if (!isNaN(cp_means[i])) {
                     cp_mean_tally = cp_mean_tally * (1 - cp_means[i]);
                 }
                 if (!isNaN(cp_stdev[i])) {
-                    cp_stdev_tally += Math.pow((cp_stdev[i] / cp_means[i]),2);
+                    cp_stdev_tally += Math.pow(cp_stdev[i],2);
                 }
             }
+            total_nc_stdev = Math.sqrt(nc_stdev_tally);
             total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString()); // parseFloat( .toString()) is for avoiding a trailing 0
-            total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
+            total_cp_stdev = Math.sqrt(cp_stdev_tally);
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
 
