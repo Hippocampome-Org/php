@@ -308,12 +308,23 @@ include("function/menu_main.php");
             else { return 0; }
         }
         function stdev(array) {
-            return Math.sqrt(variance(array));
+            let new_array = Array();
+            for (let i = 0; i < array.length; i++) {
+                let value = parseFloat(array[i]);
+                if (!isNaN(value) && value > 0) {
+                    new_array.push(value);
+                }
+            }
+            return Math.sqrt(variance(new_array));
         } 
         function sum(array) {
             let total = 0;
             for (let i=0; i<array.length; i++) {
-                total = total + parseFloat(array[i]);
+                let value = parseFloat(array[i]);
+                if (!isNaN(value) && value > 0) {
+                    total = total + value;
+                    //document.write(parseFloat(array[i])+"<br>");
+                }
             }
             return total;
         };
@@ -395,6 +406,7 @@ include("function/menu_main.php");
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
             //if (parcel=='SMi') {document.write(axon_lengths_group[0][2]);}
+            //document.write(axon_lengths_group[0][4]);
             volume = parcel_volume(all_groups,source_subregion, parcel);
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
@@ -449,7 +461,7 @@ include("function/menu_main.php");
                     //if (parcels[i] == 'H') {document.write(parcels[i]+"<br>");}
                 }
             }
-
+            //document.write(mean(nc_means));
             var cp_mean_tally = 1;
             //var cp_stdev_tally = 1;
             var cp_stdev_tally = 0;
@@ -469,6 +481,8 @@ include("function/menu_main.php");
             total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString());
             total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
             //(parseFloat(1 - cp_stdev_tally).toPrecision(4).toString());
+            //test = Array(nc_stdev[0],nc_stdev[3]);
+            //document.write(stdev(test));
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
 
