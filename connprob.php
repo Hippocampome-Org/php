@@ -521,7 +521,7 @@ include("function/menu_main.php");
             for (let i = 0; i < result.length; i++) {
               cp_text += "<td style='padding: 5px;border: 1px solid black;'>";
               if (result[i] > 0) {
-                cp_text += "<a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>";
+                cp_text += "<a title='stdev: "+stdev_values[i][3].toPrecision(4)+"' style='text-decoration:none;color:black;'>";
               }
               cp_text += result[i];
               if (result[i] > 0) {
@@ -540,7 +540,7 @@ include("function/menu_main.php");
             for (let i = 0; i < result.length; i++) {
               noc_text += "<td style='padding: 5px;border: 1px solid black;'>";
               if (final_result_noc[i] > 0) {
-                noc_text += "<a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>";
+                noc_text += "<a title='stdev: "+stdev_values[i][1].toPrecision(3)+"' style='text-decoration:none;color:black;'>";
               }
               noc_text += final_result_noc[i];
               if (final_result_noc[i] > 0) {
