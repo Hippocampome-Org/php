@@ -122,9 +122,9 @@ include("function/menu_main.php");
             ?>
         </fieldset>
     </form>
-    <div id="title1" style="position:relative;top:60px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
+    <div id="title1" style="position:relative;top:-20px;display: none;z-index:5"><center>Probability of Connection Per Neuron Pair</center></div>
     <div id="graph" style="height:300px;position:relative;top:-20px;z-index:1"></div>
-    <div id="title2" style="position:relative;bottom:100px;display: none;z-index:5"><center>Number of Contacts Per Connected Neuron Pair</center></div>
+    <div id="title2" style="position:relative;bottom:300px;display: none;z-index:5"><center>Number of Contacts Per Connected Neuron Pair</center></div>
     <div id="graph_noc" style="height:300px;position:relative;top:-180px;z-index:1"></div>
 </div>
     <script>
@@ -512,14 +512,14 @@ include("function/menu_main.php");
             let result = Array.from(final_result, x => [x]);
             let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title1').style.display='block';
-            let cp_text = "<center>Probability of Connection Per Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
+            let cp_text = "<center>Probability of Connection Per Neuron Pair<br><br><table style='text-align:center;border: 1px solid black;width:88%;height:10px;table-layout: fixed;font-size:16px;'><tr style='background-color:grey;font-color:white;color:white;'>";
             for (let i = 0; i < cname.length; i++) {
-              cp_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
+              cp_text += "<td style='padding: 5px;font-color:white;color:white;border: 1px solid black;'>"+cname[i]+'</td>';
             } 
-            cp_text += '</tr><tr>';
+            cp_text += "</tr><tr style='border: 1px solid black;'>";
             //document.write(result.length);
             for (let i = 0; i < result.length; i++) {
-              cp_text += "<td style='padding: 15px;'>";
+              cp_text += "<td style='padding: 5px;border: 1px solid black;'>";
               if (result[i] > 0) {
                 cp_text += "<a title='"+stdev_values[i][3]+"' style='text-decoration:none;color:black;'>";
               }
@@ -532,13 +532,13 @@ include("function/menu_main.php");
             cp_text += '</tr></table></center>';
             document.getElementById('title1').innerHTML = cp_text;
             document.getElementById('title2').style.display='block';
-            let noc_text = "<center>Number of Contacts Per Connected Neuron Pair<table style='text-align:center;border: 1px solid black;'><tr>";
+            let noc_text = "<center>Number of Contacts Per Connected Neuron Pair<br><br><table style='text-align:center;border: 1px solid black;width:88%;height:10px;table-layout: fixed;font-size:16px;'><tr style='background-color:grey;font-color:white;color:white;'>";
             for (let i = 0; i < cname.length; i++) {
-              noc_text += "<td style='padding: 15px;'>"+cname[i]+'</td>';
+              noc_text += "<td style='padding: 5px;font-color:white;color:white;border: 1px solid black;'>"+cname[i]+'</td>';
             }
-            noc_text += '</tr><tr>';
+            noc_text += "</tr><tr style='border: 1px solid black;'>";
             for (let i = 0; i < result.length; i++) {
-              noc_text += "<td style='padding: 15px;'>";
+              noc_text += "<td style='padding: 5px;border: 1px solid black;'>";
               if (final_result_noc[i] > 0) {
                 noc_text += "<a title='"+stdev_values[i][1]+"' style='text-decoration:none;color:black;'>";
               }
