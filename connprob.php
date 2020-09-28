@@ -485,12 +485,12 @@ include("function/menu_main.php");
                     cp_mean_tally = cp_mean_tally * (1 - cp_means[i]);
                 }
                 if (!isNaN(cp_stdev[i])) {
-                    cp_stdev_tally += Math.pow(cp_stdev[i],2);
+                    cp_stdev_tally += Math.pow(cp_stdev[i]/cp_means[i],2);
                 }
             }
             total_nc_stdev = Math.sqrt(nc_stdev_tally);
             total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString()); // parseFloat( .toString()) is for avoiding a trailing 0
-            total_cp_stdev = Math.sqrt(cp_stdev_tally);
+            total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
 
