@@ -14,6 +14,7 @@ https://stackoverflow.com/questions/5316697/jquery-return-data-after-ajax-call-s
 https://gist.github.com/carolineartz/ae3f1021bb41de2b1935
 http://www.endmemo.com/js/jstatistics.php
 https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison
+https://stackoverflow.com/questions/53798216/toprecision-rounding-direction
 -->
 <head>
     <meta charset="UTF-8">
@@ -131,6 +132,22 @@ include("function/menu_main.php");
         let connDic = {};
         let sourceIDDic = {};
         let targetIDDic = {};
+        function toPrecision(number, precision, direction) {
+            var option = direction;
+            precision -= Math.floor(number).toString().length;
+            var order = Math.pow(10, precision);
+            number *= order;
+            if (direction == 'down') {
+                option = 'floor';
+            }
+            else if (direction == 'up') {
+                option = 'ceil';
+            }
+            else if (direction == 'normal') {
+                option = 'round';   
+            }
+            return (Math[option].call(null, number) / order);
+        }
         function calc_values(data_1,volume_data,volumes_index,columnNames_index) {
             let source = document.getElementById("source").value.trim();
             let target = document.getElementById("target").value.trim();
@@ -199,6 +216,7 @@ include("function/menu_main.php");
             let volume_dendrites = vol_dict.get(target_id).dendrites;
             let final_result = [];
             let final_result_noc = [];
+            let final_result_noc_noround = [];
             let num_contacts = [];
             let final_result_val = "";
             let noc_non_zero = 0;
@@ -226,6 +244,9 @@ include("function/menu_main.php");
                 if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
                 if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
                 final_result_noc.push(num_contacts[i].toPrecision(3));                
+                //final_result_noc.push(num_contacts[i]);
+                final_result_noc_noround.push(num_contacts[i]);      
+                //final_result_noc.push(toPrecision(num_contacts[i],3,"round"));                
                 let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
                 if (isNaN(final_result_val)) {final_result_val = 0;}
                 final_result.push(final_result_val.toPrecision(4));
@@ -244,12 +265,14 @@ include("function/menu_main.php");
             var n_tally = 0;
             for (var ni = 0; ni < length_axons.length; ni++) {
                 if (!isNaN(final_result_noc[ni])) {
-                    n_tally = n_tally + parseFloat(final_result_noc[ni]);
+                    n_tally = n_tally + parseFloat(final_result_noc_noround[ni]);
                 }
             }
             //let noc_final = parseFloat(n_tally.toPrecision(3));
             //final_result_noc.push(noc_final.toString());
             final_result_noc.push(n_tally.toPrecision(3).toString());
+            //final_result_noc.push(n_tally.toString());
+            //final_result_noc.push(toPrecision(n_tally,3,"round").toString());
 
             var value_results = new Array();
             value_results.push(dict, final_result, final_result_noc, source_id);
