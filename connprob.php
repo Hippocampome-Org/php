@@ -494,7 +494,7 @@ include("function/menu_main.php");
                 }
             }
             total_nc_stdev = Math.sqrt(nc_stdev_tally);
-            total_cp_mean = (parseFloat(1 - cp_mean_tally).toPrecision(4).toString()); // parseFloat( .toString()) is for avoiding a trailing 0
+            total_cp_mean = parseFloat(1 - cp_mean_tally).toString();//(parseFloat(1 - cp_mean_tally).toPrecision(4).toString()); // parseFloat( .toString()) is for avoiding a trailing 0
             total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
