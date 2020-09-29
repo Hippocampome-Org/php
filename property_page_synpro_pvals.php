@@ -298,15 +298,19 @@ $post_name=$type_target->getName();
 		return $results;
 	}
 	function return_stats($source_id, $target_id, $par_grp_conv, $nm_page, $all_value_result) {
-		$subregion = explode("_", $par_grp_conv)[0];
-		$parcel = explode("_", $par_grp_conv)[1];
+		//echo "par_grp_conv: ".$par_grp_conv;
+		preg_match('/(.*)_(.*)/', $par_grp_conv, $output_array);
+		$subregion = $output_array[1];
+		$parcel = $output_array[2];
+		//$subregion = explode("_", $par_grp_conv)[0];
+		//$parcel = explode("_", $par_grp_conv)[1];
 		$stat_results = array();
 		$mean_result = 0;
 		$std_result = 0;
 
 		if ($nm_page=='ps') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)), CAST(NPS_stdev_total AS DECIMAL(10,5)) FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id";
+				$query = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)), CAST(NPS_stdev_total AS DECIMAL(10,5)) FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT NPS_mean, NPS_std FROM SynproNoPS WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
@@ -314,7 +318,7 @@ $post_name=$type_target->getName();
 		}
 		if ($nm_page=='noc') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(NC_mean_total AS DECIMAL(10,5)), CAST(NC_stdev_total AS DECIMAL(10,5)) FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id";
+				$query = "SELECT CAST(NC_mean_total AS DECIMAL(10,5)), CAST(NC_stdev_total AS DECIMAL(10,5)) FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT NC_mean, NC_std FROM SynproNOC WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
@@ -322,7 +326,7 @@ $post_name=$type_target->getName();
 		}
 		if ($nm_page=='prosyn') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)), CAST(CP_stdev_total AS DECIMAL(10,5)) FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id";
+				$query = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)), CAST(CP_stdev_total AS DECIMAL(10,5)) FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT CP_mean, CP_std FROM SynproCP WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
@@ -343,10 +347,13 @@ $post_name=$type_target->getName();
 			$mean = adjPrecision($all_value_result, $mean_result, 4); 	
 			$std = adjPrecision($all_value_result, $std_result, 4); 
 		}
+		//echo $query."<br>".$mean_result."<br>".$std_result;
 
-		//echo $query."<br>".$mean."<br>".$std;
 		array_push($stat_results, $mean);
 		array_push($stat_results, $std);
+		//cho $query."<br>".$mean."<br>".$std;
+		//array_push($stat_results, 0.5);
+		//array_push($stat_results, 0.5);
 
 		return $stat_results;
 	}
@@ -375,7 +382,10 @@ $post_name=$type_target->getName();
 
 		$stat_results = return_stats($source_id, $target_id, $par_grp_conv, $nm_page, $all_value_result);
 		$stat_mean = $stat_results[0];
-		$stat_std = $stat_results[1];		
+		$stat_std = $stat_results[1];	
+		if (!($stat_std > 0)) {
+			$stat_std = "N/A";
+		}	
 
 		if ($value_result == 0 && $nm_page!='noc') {
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'>";
