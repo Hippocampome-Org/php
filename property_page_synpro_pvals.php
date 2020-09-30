@@ -231,7 +231,8 @@ $post_name=$type_target->getName();
 	$cell_border='2px solid #282d7b';
 	$parcel_group_match=null;
 	for($as_i=0;$as_i<count($find_parcel_group_id);$as_i++) {
-		if ($target_id==$find_parcel_group_id[$as_i]) {
+		//if ($target_id==$find_parcel_group_id[$as_i]) {
+		if ($source_id==$find_parcel_group_id[$as_i]) {
 			$parcel_group_match=$as_i;
 		}
 	}
