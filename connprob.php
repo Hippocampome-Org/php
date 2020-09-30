@@ -286,6 +286,7 @@ include("function/menu_main.php");
             //        
             let parcel_volumes_group = all_groups[4];
             let volume = 0;
+            //document.write(source_id+" "+target_id+" "+subregion+" "+parcel);
 
             for (var i = 0; i < parcel_volumes_group.length; i++) {
                 let curr_source_id = parcel_volumes_group[i][0];
@@ -475,7 +476,8 @@ include("function/menu_main.php");
 
             // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
-            //if (parcel === "H") {document.write(volume);}
+            //if (parcel === "II") {document.write(c+" "+axonal_length_mean+" "+dendritic_length_mean+" "+volume);}
+            //document.write(" test");
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
 
             // noc
@@ -724,7 +726,7 @@ include("function/menu_main.php");
                         }
                     }
                     //echo "document.write(\"".$sql."\")";                    
-                    $sql   = "SELECT * FROM SynproSelectedVolumes;";
+                    $sql   = "SELECT * FROM SynproVolumesSelected;";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
