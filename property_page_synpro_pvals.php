@@ -403,7 +403,12 @@ $post_name=$type_target->getName();
 		}
 		else if ($pg_i != $last_index) {
 			// parcel-specific value
-			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none' title='mean: $stat_mean\nstd: $stat_std'>";
+			$par_grp_conv_adj = $par_grp_conv;
+			// preg replace included to adjust text for evidence page description matching
+			$par_grp_conv_adj = preg_replace('/^MEC/', 'EC', $par_grp_conv_adj);
+			$par_grp_conv_adj = preg_replace('/^LEC/', 'EC', $par_grp_conv_adj);
+			//echo "<br><br><br>".$par_grp_conv_adj;
+			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv_adj."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv_adj."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none' title='mean: $stat_mean\nstd: $stat_std'>";
 			if ($nm_page=='noc') {
 				echo adjPrecision($all_value_result, $value_result, 3);
 				//echo toPrecision($value_result, 3);
