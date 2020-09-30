@@ -247,6 +247,10 @@ $post_name=$type_target->getName();
 			$parcel_group = $sub_group; $parcel_group_short = $sub_group_short;}
 	else if ($find_parcel_group_name[$parcel_group_match]=='EC') {
 			$parcel_group = $ec_group; $parcel_group_short = $ec_group_short;}
+	else if ($find_parcel_group_name[$parcel_group_match]=='MEC') {
+			$parcel_group = $mec_group; $parcel_group_short = $ec_group_short;}
+	else if ($find_parcel_group_name[$parcel_group_match]=='LEC') {
+			$parcel_group = $lec_group; $parcel_group_short = $ec_group_short;}
 
 	function query_value($source_id, $target_id, $parcel, $prop, $table, $nm_page, $totals_col, $totals_table) {
 		$value_result = 0;
