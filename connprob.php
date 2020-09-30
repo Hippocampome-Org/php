@@ -280,12 +280,35 @@ include("function/menu_main.php");
 
             return volume;
         }*/
-        function parcel_volume() {
+        function parcel_volume(all_groups, source_id, target_id, subregion, parcel) {    
+            //
+            //    toUpperCase() is used for case insensitive matching
+            //        
+            let parcel_volumes_group = all_groups[4];
+            let volume = 0;
+
+            for (var i = 0; i < parcel_volumes_group.length; i++) {
+                let curr_source_id = parcel_volumes_group[i][0];
+                let curr_target_id = parcel_volumes_group[i][1];
+                let curr_subregion = parcel_volumes_group[i][2];
+                let curr_parcel = parcel_volumes_group[i][3];
+                let curr_vol = parcel_volumes_group[i][4];
+
+                if ((source_id == curr_source_id) && (target_id == curr_target_id) && (subregion.toString()).toUpperCase() === (curr_subregion.toString()).toUpperCase() && (parcel.toString()).toUpperCase() === (curr_parcel.toString()).toUpperCase()) {
+                    volume = curr_vol;
+                }
+            }
+
+            return volume;
+        }
+        /*function parcel_volume(subregion, parcel) {
+            let volume = 0;
             <?php
                 $selected_volume = "";
+                if (isset($_REQUEST["source_id"]) && isset($_REQUEST["target_id"])) {
                 $source_id = $_REQUEST["source_id"];
                 $target_id = $_REQUEST["target_id"];
-                $sql = "SELECT selected_volume FROM SynproSelectedVolumes WHERE source_id=$source_id AND target_id=$target_id;";
+                $sql = "SELECT selected_volume FROM SynproSelectedVolumes WHERE source_id=$source_id AND target_id=$target_id AND subregion =  AND parcel='H';";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -293,11 +316,12 @@ include("function/menu_main.php");
                     }
                 }
 
-                echo "let volume = ".$selected_volume.";";
+                echo "volume = ".$selected_volume.";";
+                }
             ?>
 
             return volume;
-        }
+        }*/
         function variance(arr)
         {
             var len = 0;
@@ -428,14 +452,14 @@ include("function/menu_main.php");
             let parcel_found = false;
             for (let i = 0; i < parcels_axon.length; i++) {
                 for (let j = 0; j < parcels_dendrite.length; j++) {
-                    if (parcels_axon[i] == parcels_dendrite[j]) {
+                    if (parcels_axon[i] === parcels_dendrite[j]) {
                         parcel_found = false;
                         for (let k = 0; k < parcels_both.length; k++) {
-                            if (parcels_both[k] == parcels_axon[i]) {
+                            if (parcels_both[k] === parcels_axon[i]) {
                                 parcel_found = true;
                             }
                         }
-                        if (parcel_found == false) {
+                        if (parcel_found === false) {
                             parcels_both.push(parcels_axon[i]);
                         }
                     }
@@ -445,13 +469,13 @@ include("function/menu_main.php");
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
-            volume = parcel_volume();//parcel_volume(all_groups,source_subregion, parcel);
+            volume = parcel_volume(all_groups, source_id, target_id, source_subregion, parcel);//parcel_volume(all_groups,source_subregion, parcel);
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
 
             // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
-            //if (parcel === "II") {document.write(nps_mean);}
+            //if (parcel === "H") {document.write(volume);}
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
 
             // noc
@@ -559,8 +583,12 @@ include("function/menu_main.php");
             //document.write(result.length);
             for (let i = 0; i < result.length; i++) {
               cp_text += "<td style='padding: 5px;border: 1px solid black;'>";
-              if (result[i] > 0) {
-                cp_text += "<a title='mean: "+result[i]+"\nstdev: ";
+              let cp_final_mean = parseFloat(0.0).toPrecision(4);
+              if (parseFloat(stdev_values[i][2]).toPrecision(4) > 0) {
+                cp_final_mean = parseFloat(stdev_values[i][2]).toPrecision(4);
+              }
+              if (cp_final_mean > 0) {
+                cp_text += "<a title='mean: "+cp_final_mean+"\nstdev: ";
                 if (stdev_values[i][3].toPrecision(4) > 0) {
                     cp_text += stdev_values[i][3].toPrecision(4);
                 }
@@ -569,8 +597,8 @@ include("function/menu_main.php");
                 }
                 cp_text += "' style='text-decoration:none;color:black;'>";
               }
-              cp_text += result[i];
-              if (result[i] > 0) {
+              cp_text += cp_final_mean;//result[i];
+              if (cp_final_mean > 0) {
                 cp_text += "</a>";
               }
               cp_text += "</td>";
@@ -585,8 +613,12 @@ include("function/menu_main.php");
             noc_text += "</tr><tr style='border: 1px solid black;'>";
             for (let i = 0; i < result.length; i++) {
               noc_text += "<td style='padding: 5px;border: 1px solid black;'>";
-              if (final_result_noc[i] > 0) {
-                noc_text += "<a title='mean: "+final_result_noc[i]+"\nstdev: ";
+              let noc_final_mean = parseFloat(0.0).toPrecision(3);
+              if (parseFloat(stdev_values[i][0]).toPrecision(3) > 0) {
+                noc_final_mean = parseFloat(stdev_values[i][0]).toPrecision(3);
+              }
+              if (noc_final_mean > 0) {
+                noc_text += "<a title='mean: "+noc_final_mean+"\nstdev: ";
                 if (stdev_values[i][1].toPrecision(3) > 0) {
                     noc_text += stdev_values[i][1].toPrecision(3);
                 }
@@ -595,8 +627,8 @@ include("function/menu_main.php");
                 }
                 noc_text += "' style='text-decoration:none;color:black;'>";
               }
-              noc_text += final_result_noc[i];
-              if (final_result_noc[i] > 0) {
+              noc_text += noc_final_mean;
+              if (noc_final_mean > 0) {
                 noc_text += "</a>";
               }
               noc_text += "</td>";
@@ -692,14 +724,16 @@ include("function/menu_main.php");
                         }
                     }
                     //echo "document.write(\"".$sql."\")";                    
-                    $sql   = "SELECT * FROM SynproParcelVolumes;";
+                    $sql   = "SELECT * FROM SynproSelectedVolumes;";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $entry = array();
+                            array_push($entry, $row['source_id']);
+                            array_push($entry, $row['target_id']);
                             array_push($entry, $row['subregion']);
                             array_push($entry, $row['parcel']);
-                            array_push($entry, $row['volume']);
+                            array_push($entry, $row['selected_volume']);
                             array_push($parcel_volumes, $entry);
                         }
                     }
