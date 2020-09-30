@@ -261,10 +261,10 @@ include("function/menu_main.php");
 
             return value_results;
         }
-        function parcel_volume(all_groups,subregion, parcel) {    
-            /*
-                toUpperCase() is used for case insensitive matching
-            */        
+        /*function parcel_volume(all_groups,subregion, parcel) {    
+            //
+            //    toUpperCase() is used for case insensitive matching
+            //        
             let parcel_volumes_group = all_groups[4];
             let volume = 0;
 
@@ -277,6 +277,24 @@ include("function/menu_main.php");
                     volume = curr_vol;
                 }
             }
+
+            return volume;
+        }*/
+        function parcel_volume() {
+            <?php
+                $selected_volume = "";
+                $source_id = $_REQUEST["source_id"];
+                $target_id = $_REQUEST["target_id"];
+                $sql = "SELECT selected_volume FROM SynproSelectedVolumes WHERE source_id=$source_id AND target_id=$target_id;";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $selected_volume = $row['selected_volume'];
+                    }
+                }
+
+                echo "let volume = ".$selected_volume.";";
+            ?>
 
             return volume;
         }
@@ -350,7 +368,7 @@ include("function/menu_main.php");
             let source_id = sourceIDDic[source];
             let target_id = targetIDDic[target];
             let source_subregion = document.getElementById("source").value.split(" ")[0];
-            let target_subregion = document.getElementById("source").value.split(" ")[0];
+            let target_subregion = document.getElementById("target").value.split(" ")[0];
             let dendrite_lengths_group = all_groups[0];
             let dendrite_volumes_group = all_groups[1];
             let axon_lengths_group = all_groups[2];
@@ -375,13 +393,15 @@ include("function/menu_main.php");
                 let axon_neurite = axon_lengths_group[i][3];
                 let axon_length = axon_lengths_group[i][4];
                 let axon_volume = axon_volumes_group[i][4];
+                //if (parcel != "I") {document.write(parcel+" "+parcel.length+" "+axon_parcel+" "+axon_parcel.length+" "+(parcel===axon_parcel)+"<br>");}
+                //if (parcel != "I") {document.write((source_id === axon_neuron_id && source_subregion === axon_subregion && (parcel.toString()).toUpperCase() === (axon_parcel.toString()).toUpperCase() && axon_neurite === "A")+" "+axon_length+"<br>");}
 
-                if (source_id == axon_neuron_id && target_subregion == axon_subregion && (parcel.toString()).toUpperCase() == (axon_parcel.toString()).toUpperCase() && axon_neurite == "A") {
+                if (source_id === axon_neuron_id && source_subregion === axon_subregion && (parcel.toString()).toUpperCase() === (axon_parcel.toString()).toUpperCase() && axon_neurite === "A") {
                     axon_lengths.push(axon_length);
                     axon_volumes.push(axon_volume);
                 }
 
-                if (source_id == axon_neuron_id && target_subregion == axon_subregion && axon_neurite == "A") {
+                if (source_id === axon_neuron_id && source_subregion === axon_subregion && axon_neurite === "A") {
                     parcels_axon.push(axon_parcel);
                 }
             }
@@ -392,13 +412,14 @@ include("function/menu_main.php");
                 let dendrite_neurite = dendrite_lengths_group[i][3];
                 let dendrite_length = dendrite_lengths_group[i][4];
                 let dendrite_volume = dendrite_volumes_group[i][4];
+                //if (parcel != "I") {document.write(dendrite_length)+"<br>";}
 
-                if (target_id == dendrite_neuron_id && source_subregion == dendrite_subregion && (parcel.toString()).toUpperCase() == (dendrite_parcel.toString()).toUpperCase() && dendrite_neurite == "D") {
+                if (target_id === dendrite_neuron_id && target_subregion === dendrite_subregion && (parcel.toString()).toUpperCase() === (dendrite_parcel.toString()).toUpperCase() && dendrite_neurite == "D") {
                     dendrite_lengths.push(dendrite_length);
                     dendrite_volumes.push(dendrite_volume);
                 }
 
-                if (target_id == dendrite_neuron_id && source_subregion == dendrite_subregion && dendrite_neurite == "D") {
+                if (target_id === dendrite_neuron_id && target_subregion === dendrite_subregion && dendrite_neurite === "D") {
                     parcels_dendrite.push(dendrite_parcel);
                 }
             }
@@ -424,12 +445,13 @@ include("function/menu_main.php");
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
-            volume = parcel_volume(all_groups,source_subregion, parcel);
+            volume = parcel_volume();//parcel_volume(all_groups,source_subregion, parcel);
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
 
             // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
+            //if (parcel === "II") {document.write(nps_mean);}
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
 
             // noc
@@ -494,7 +516,7 @@ include("function/menu_main.php");
                 }
             }
             total_nc_stdev = Math.sqrt(nc_stdev_tally);
-            total_cp_mean = parseFloat(1 - cp_mean_tally).toString();//(parseFloat(1 - cp_mean_tally).toPrecision(4).toString()); // parseFloat( .toString()) is for avoiding a trailing 0
+            total_cp_mean = parseFloat(1 - cp_mean_tally).toString();// parseFloat( .toString()) is for avoiding a trailing 0
             total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
@@ -511,7 +533,19 @@ include("function/menu_main.php");
             /* generate tables */
             let cname = Array.from(dict.get(source_id).columnNames, x => [x]); // cname = column name
 
-            let stdev_values = stdev_calcs(all_groups, cname);
+            parcel = Array();
+            let parcel_entry = "";
+            for (let i = 0; i < cname.length; i++) {
+                parcel_entry = cname[i].toString();
+                parcel_entry = parcel_entry.replace("LI","I");
+                parcel_entry = parcel_entry.replace("LII","II");
+                parcel_entry = parcel_entry.replace("LIII","III");
+                parcel_entry = parcel_entry.replace("LIV","IV");
+                parcel_entry = parcel_entry.replace("LV","V");
+                parcel_entry = parcel_entry.replace("LVI","VI");
+                parcel.push(parcel_entry);
+            }
+            let stdev_values = stdev_calcs(all_groups, parcel);
             //document.write(stdev_values[3][0]);
 
             let result = Array.from(final_result, x => [x]);
