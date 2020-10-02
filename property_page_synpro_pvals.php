@@ -46,16 +46,18 @@ function toPrecision($value, $digits)
 
     $answer = ($decimalPlaces > 0) ?
         number_format($value, $decimalPlaces) : round($value, $decimalPlaces);
+    //$answer = round($value, $decimalPlaces);
+    //$answer = $value;
 
     // remove tailing zeros
-    preg_match('/(\d+)\.(\d+)/', $answer, $answer_matches);	
+    /*preg_match('/(\d+)\.(\d+)/', $answer, $answer_matches);	
     $whole_number = $answer_matches[1];
     $fraction = $answer_matches[2];
 	$answer_digits = strlen($fraction);
 	if ($answer_digits > $digits) {
 		$answer_trimmed_digits = substr($fraction,0,($digits+1));
 		$answer = $whole_number.".".$answer_trimmed_digits;
-	}
+	}*/
 
     return $answer;
 }
@@ -272,7 +274,7 @@ $post_name=$type_target->getName();
 		LIMIT 500000;
 		";*/
 		$query = "
-		SELECT source_ID, target_ID, subregion, parcel, CAST(AVG(CAST($prop AS ".$decimal_places.")) AS ".$decimal_places.")
+		SELECT source_ID, target_ID, subregion, parcel, AVG($prop)
 		FROM $table
 		WHERE source_ID=$source_id AND target_ID=$target_id AND subregion='$subregion_name' AND parcel='$parcel_name'
 		LIMIT 500000;
@@ -285,7 +287,7 @@ $post_name=$type_target->getName();
 			$value_result = $val;
 		}		
 
-		$query = "SELECT CAST($totals_col AS DECIMAL(10,5)) as val FROM $totals_table as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=$source_id AND nt.target_id=$target_id AND nt.source_id=ttr.type_id";
+		$query = "SELECT $totals_col as val FROM $totals_table as nt, SynproTypeTypeRel as ttr WHERE nt.source_id=$source_id AND nt.target_id=$target_id AND nt.source_id=ttr.type_id";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($val) = mysqli_fetch_row($rs))
 		{	
@@ -315,7 +317,7 @@ $post_name=$type_target->getName();
 
 		if ($nm_page=='ps') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(NPS_mean_total AS DECIMAL(10,5)), CAST(NPS_stdev_total AS DECIMAL(10,5)) FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id;";
+				$query = "SELECT NPS_mean_total, NPS_stdev_total FROM SynproNPSTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT NPS_mean, NPS_std FROM SynproNoPS WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
@@ -323,7 +325,7 @@ $post_name=$type_target->getName();
 		}
 		if ($nm_page=='noc') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(NC_mean_total AS DECIMAL(10,5)), CAST(NC_stdev_total AS DECIMAL(10,5)) FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id;";
+				$query = "SELECT NC_mean_total, NC_stdev_total FROM SynproNOCTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT NC_mean, NC_std FROM SynproNOC WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
@@ -331,7 +333,7 @@ $post_name=$type_target->getName();
 		}
 		if ($nm_page=='prosyn') {
 			if ($parcel == 'All' || $parcel == 'ALL' || $parcel == 'all') {
-				$query = "SELECT CAST(CP_mean_total AS DECIMAL(10,5)), CAST(CP_stdev_total AS DECIMAL(10,5)) FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id;";
+				$query = "SELECT CP_mean_total, CP_stdev_total FROM SynproCPTotal WHERE source_id=$source_id AND target_id=$target_id;";
 			}
 			else {
 				$query = "SELECT CP_mean, CP_std FROM SynproCP WHERE source_id = $source_id AND target_id = $target_id AND subregion = '$subregion' AND parcel = '$parcel';";
