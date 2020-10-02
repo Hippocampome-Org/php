@@ -103,10 +103,12 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 	}
 
 	function na_for_zero($value) {
-		$new_value = strval($value);
-		if ($new_value == '0' | $new_value == '0.0' | $new_value == '0.00' | $new_value == '0.000' | $new_value == '0.0000' | $new_value == '0.00000' | $new_value == '0.000000') {
+		$test_value = strval(toPrecision($value,3)); 
+		$new_value = $value;
+		if ($test_value == '0' | $test_value == '0.0' | $test_value == '0.00' | $test_value == '0.000' | $test_value == '0.0000' | $test_value == '0.00000' | $test_value == '0.000000') {
 			$new_value = "N/A";
 		}
+
 		return $new_value;
 	}
 
