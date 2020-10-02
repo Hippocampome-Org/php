@@ -345,12 +345,12 @@ $post_name=$type_target->getName();
 		}	
 
 		if ($nm_page=='noc') {
-			$mean = adjPrecision($all_value_result, $mean_result, 3); 
-			$std = adjPrecision($all_value_result, $std_result, 3);
+			$mean = toPrecision($mean_result, 3); //adjPrecision($all_value_result, $mean_result, 3); 
+			$std = toPrecision($std_result, 3);
 		}
 		else {
-			$mean = adjPrecision($all_value_result, $mean_result, 4); 	
-			$std = adjPrecision($all_value_result, $std_result, 4); 
+			$mean = toPrecision($mean_result, 4); 	
+			$std = toPrecision($std_result, 4); 
 		}
 		//echo $query."<br>".$mean_result."<br>".$std_result;
 
@@ -410,13 +410,13 @@ $post_name=$type_target->getName();
 			//echo "<br><br><br>".$par_grp_conv_adj;
 			echo "<td style='width:$cell_width;border:$cell_border;height:$cell_height;'><a href='property_page_synpro_nm.php?id1_neuron=".$source_id."&val1_property=".$par_grp_conv_adj."&color1=red&id2_neuron=".$target_id."&val2_property=".$par_grp_conv_adj."&color2=blue&connection_type=".$E_or_I_val."&known_conn_flag=1&axonic_basket_flag=0&page=1&nm_page=".$nm_page."' target='_blank' style='text-decoration:none' title='mean: $stat_mean\nstd: $stat_std'>";
 			if ($nm_page=='noc') {
-				echo adjPrecision($all_value_result, $value_result, 3);
-				//echo toPrecision($value_result, 3);
+				//echo adjPrecision($all_value_result, $value_result, 3);
+				echo toPrecision($value_result, 3);
 				//echo $value_result;
 			}
 			else {
-				echo adjPrecision($all_value_result, $value_result, 4);
-				//echo toPrecision($value_result, 4);
+				//echo adjPrecision($all_value_result, $value_result, 4);
+				echo toPrecision($value_result, 4);
 				//echo $value_result;
 			}
 			echo "</a></td>";
