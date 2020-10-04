@@ -374,6 +374,7 @@ include("function/menu_main.php");
             let source_subregion = document.getElementById("source").value.split(" ")[0];
             if (source_subregion == "CA3c") {source_subregion = "CA3";}
             let target_subregion = document.getElementById("target").value.split(" ")[0];
+            if (target_subregion == "CA3c") {target_subregion = "CA3";}
             let dendrite_lengths_group = all_groups[0];
             let dendrite_volumes_group = all_groups[1];
             let axon_lengths_group = all_groups[2];
