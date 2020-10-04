@@ -302,27 +302,6 @@ include("function/menu_main.php");
 
             return volume;
         }
-        /*function parcel_volume(subregion, parcel) {
-            let volume = 0;
-            <?php
-                $selected_volume = "";
-                if (isset($_REQUEST["source_id"]) && isset($_REQUEST["target_id"])) {
-                $source_id = $_REQUEST["source_id"];
-                $target_id = $_REQUEST["target_id"];
-                $sql = "SELECT selected_volume FROM SynproSelectedVolumes WHERE source_id=$source_id AND target_id=$target_id AND subregion =  AND parcel='H';";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $selected_volume = $row['selected_volume'];
-                    }
-                }
-
-                echo "volume = ".$selected_volume.";";
-                }
-            ?>
-
-            return volume;
-        }*/
         function variance(arr)
         {
             var len = 0;
@@ -393,6 +372,7 @@ include("function/menu_main.php");
             let source_id = sourceIDDic[source];
             let target_id = targetIDDic[target];
             let source_subregion = document.getElementById("source").value.split(" ")[0];
+            if (source_subregion == "CA3c") {source_subregion = "CA3";}
             let target_subregion = document.getElementById("target").value.split(" ")[0];
             let dendrite_lengths_group = all_groups[0];
             let dendrite_volumes_group = all_groups[1];
@@ -437,7 +417,9 @@ include("function/menu_main.php");
                 let dendrite_neurite = dendrite_lengths_group[i][3];
                 let dendrite_length = dendrite_lengths_group[i][4];
                 let dendrite_volume = dendrite_volumes_group[i][4];
-                //if (parcel != "I") {document.write(dendrite_length)+"<br>";}
+                if (parcel == "SLM") {
+                    //document.write(dendrite_length+"<br>");
+                }
 
                 if (target_id === dendrite_neuron_id && target_subregion === dendrite_subregion && (parcel.toString()).toUpperCase() === (dendrite_parcel.toString()).toUpperCase() && dendrite_neurite == "D") {
                     dendrite_lengths.push(dendrite_length);
@@ -476,7 +458,9 @@ include("function/menu_main.php");
 
             // nps
             nps_mean = c * axonal_length_mean * dendritic_length_mean / volume;
-            //if (parcel === "II") {document.write(c+" "+axonal_length_mean+" "+dendritic_length_mean+" "+volume);}
+            //if (parcel === "SLM") {document.write(c+" "+axonal_length_mean+" "+dendritic_length_mean+" "+volume);}
+            //if (true) {document.write(parcel+" "+c+" "+axonal_length_mean+" "+dendritic_length_mean+" "+volume);}
+            //if (parcel === "SR") {document.write(nps_mean);}
             //document.write(" test");
             nps_stdev = nps_mean * Math.sqrt(Math.pow((axonal_length_stdev / axonal_length_mean),2) + Math.pow((dendritic_length_stdev / dendritic_length_mean),2));
 
@@ -691,7 +675,7 @@ include("function/menu_main.php");
                 $parcel_volumes = array();
                 if (isset($_REQUEST["source"])) {
                     echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
-                    $sql_general = "SELECT unique_id, sl.sub_layer as subregion, SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',2),':',-1) as parcel, SUBSTRING_INDEX(neurite,':',-1) as neurite, filtered_total_length as length, convexhull as volume FROM neurite_quantified as nq, SynproSubLayers as sl WHERE nq.unique_id!='' AND nq.filtered_total_length != 0 AND nq.filtered_total_length != '' AND nq.neurite not like '%:All:%' AND nq.convexhull != 0 AND nq.convexhull != '' AND nq.unique_id = sl.neuron_id";
+                    $sql_general = "SELECT unique_id, sl.sub_layer as subregion, SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',2),':',-1) as parcel, SUBSTRING_INDEX(neurite,':',-1) as neurite, filtered_total_length as length, convexhull as volume FROM neurite_quantified as nq, SynproSubLayers as sl WHERE nq.unique_id!='' AND nq.filtered_total_length != 0 AND nq.filtered_total_length != '' AND nq.neurite not like '%:All:%' AND nq.convexhull != 0 AND nq.convexhull != '' AND nq.unique_id = sl.neuron_id AND ((sl.sub_layer = SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',1),':',-1)) OR (sl.sub_layer = 'MEC' AND SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',1),':',-1) = 'EC') OR (sl.sub_layer = 'LEC' AND SUBSTRING_INDEX(SUBSTRING_INDEX(neurite,':',1),':',-1) = 'EC'))";
                     $sql    = $sql_general." AND unique_id = ".$_REQUEST["source_id"];
                     //echo "document.write(\"".$sql."\");";
                     $result = $conn->query($sql);
