@@ -5,7 +5,7 @@
 	$ca3_group = array('CA3:SLM:Both','CA3:SR:Both','CA3:SL:Both','CA3:SP:Both','CA3:SO:Both','CA3:All:Both');
 	$ca2_group = array('CA2:SLM:Both','CA2:SR:Both','CA2:SP:Both','CA2:SO:Both','CA2:All:Both');
 	$ca1_group = array('CA1:SLM:Both', 'CA1:SR:Both', 'CA1:SP:Both', 'CA1:SO:Both', 'CA1:All:Both');
-	$sub_group = array('Sub:SM:Both','Sub:SP:Both','Sub:All:Both');
+	$sub_group = array('Sub:SM:Both','Sub:SP:Both','Sub:SL:Both','Sub:All:Both');
 	$ec_group = array('EC:I:Both','EC:II:Both','EC:III:Both','EC:IV:Both','EC:V:Both','EC:VI:Both','EC:All:Both');
 	$mec_group = array('MEC:I:Both','MEC:II:Both','MEC:III:Both','MEC:IV:Both','MEC:V:Both','MEC:VI:Both','MEC:All:Both');
 	$lec_group = array('LEC:I:Both','LEC:II:Both','LEC:III:Both','LEC:IV:Both','LEC:V:Both','LEC:VI:Both','LEC:All:Both');
@@ -13,6 +13,6 @@
 	$ca3_group_short = array('SLM','SR','SL','SP','SO','Total');
 	$ca2_group_short = array('SLM','SR','SP','SO','Total');
 	$ca1_group_short = array('SLM', 'SR', 'SP', 'SO', 'Total');
-	$sub_group_short = array('SM','SP','Total');
+	$sub_group_short = array('SM','SP','SL','Total');
 	$ec_group_short = array('I','II','III','IV','V','VI','Total');	
 ?>
