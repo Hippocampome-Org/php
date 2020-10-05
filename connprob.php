@@ -535,10 +535,10 @@ include("function/menu_main.php");
             return stdev_values;
         }
         function parse(data_1,volume_data,volumes_index,columnNames_index,all_groups){
-            var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
+            /*var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
             dict = value_results[0];
             final_result = value_results[1];
-            final_result_noc = value_results[2];
+            final_result_noc = value_results[2];*/
             //source_id = value_results[3];
             let source = document.getElementById("source").value.trim();
             let target = document.getElementById("target").value.trim();
@@ -585,8 +585,8 @@ include("function/menu_main.php");
             let stdev_values = stdev_calcs(all_groups, parcel);
             //document.write(stdev_values[3][0]);
 
-            let result = Array.from(final_result, x => [x]);
-            let result_noc = Array.from(final_result_noc, x => [x]);
+            //let result = Array.from(final_result, x => [x]);
+            //let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title1').style.display='block';
             let cp_text = "<center>Probability of Connection Per Neuron Pair<br><br><table style='text-align:center;border: 1px solid black;width:88%;height:10px;table-layout: fixed;font-size:16px;'><tr style='background-color:grey;font-color:white;color:white;'>";
             for (let i = 0; i < cname.length; i++) {
@@ -594,7 +594,7 @@ include("function/menu_main.php");
             } 
             cp_text += "</tr><tr style='border: 1px solid black;'>";
             //document.write(result.length);
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < cname.length; i++) {
               cp_text += "<td style='padding: 5px;border: 1px solid black;'>";
               let cp_final_mean = parseFloat(0.0).toPrecision(4);
               if (parseFloat(stdev_values[i][2]).toPrecision(4) > 0) {
@@ -624,7 +624,7 @@ include("function/menu_main.php");
               noc_text += "<td style='padding: 5px;font-color:white;color:white;border: 1px solid black;'>"+cname[i]+'</td>';
             }
             noc_text += "</tr><tr style='border: 1px solid black;'>";
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < cname.length; i++) {
               noc_text += "<td style='padding: 5px;border: 1px solid black;'>";
               let noc_final_mean = parseFloat(0.0).toPrecision(3);
               if (parseFloat(stdev_values[i][0]).toPrecision(3) > 0) {
