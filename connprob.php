@@ -539,10 +539,36 @@ include("function/menu_main.php");
             dict = value_results[0];
             final_result = value_results[1];
             final_result_noc = value_results[2];
-            source_id = value_results[3];
+            //source_id = value_results[3];
+            let source = document.getElementById("source").value.trim();
+            let target = document.getElementById("target").value.trim();
+            let source_id = sourceIDDic[source];
+            let target_id = targetIDDic[target];
+
+            let source_id_str = source_id.toString();
+            let subregion_number = source_id_str.substring(0, 1);
 
             /* generate tables */
-            let cname = Array.from(dict.get(source_id).columnNames, x => [x]); // cname = column name
+            let cname = Array();
+            if (subregion_number == 1) {
+                cname = Array('SMo', 'SMi', 'SG', 'H', 'Total');
+            }
+            if (subregion_number == 2) {
+                cname = Array('SLM', 'SR', 'SL', 'SP', 'SO', 'Total');
+            }
+            if (subregion_number == 3) {
+                cname = Array('SLM', 'SR', 'SP', 'SO', 'Total');
+            }
+            if (subregion_number == 4) {
+                cname = Array('SLM', 'SR', 'SP', 'SO', 'Total');
+            }
+            if (subregion_number == 5) {
+                cname = Array('SM', 'SP', 'PL', 'Total');
+            }
+            if (subregion_number == 6) {
+                cname = Array('LI', 'LII', 'LIII', 'LIV', 'LV', 'LVI', 'Total');
+            }
+            //let cname = Array.from(dict.get(source_id).columnNames, x => [x]); // cname = column name
 
             parcel = Array();
             let parcel_entry = "";
