@@ -132,154 +132,6 @@ include("function/menu_main.php");
         let connDic = {};
         let sourceIDDic = {};
         let targetIDDic = {};
-        function calc_values(data_1,volume_data,volumes_index,columnNames_index) {
-            let source = document.getElementById("source").value.trim();
-            let target = document.getElementById("target").value.trim();
-            let source_id = sourceIDDic[source];
-            let target_id = targetIDDic[target];
-            let dict = new Map();
-            let vol_dict = new Map();
-            let datav = data_1.split(/\r?\n|\r/);
-            let vol_datav = volume_data;//.split(/\r?\n|\r/);
-            let volumes = datav[volumes_index].split(",").slice(2).map(function(item) {
-                    var value = parseFloat(item);
-                    if(isNaN(value)) return 0;
-                    return value;
-            });
-            let vol_volumes = vol_datav[volumes_index].split(",").slice(2).map(function(vol_item) {
-                    var vol_value = parseFloat(vol_item);
-                    if(isNaN(vol_value)) return 0;
-                    return vol_value;
-            });
-            let columnNames = datav[columnNames_index].split(",").slice(1)
-            let vol_columnNames = vol_datav[columnNames_index].split(",").slice(1)
-            for(let count = 2; count<datav.length-1; count=count+2)
-            {
-                let rowData = datav[count].split(",");
-                let volRowData = vol_datav[count].split(",");
-                let nextRowData = datav[count+1].split(",");
-                let volNextRowData = vol_datav[count+1].split(",");
-                let key = rowData[1];
-                let firstRowData =rowData.slice(2).map(function(item) {
-                    var value = parseFloat(item);
-                    if(isNaN(value)) return 0;
-                    return value;
-                });
-                let volFirstRowData = volRowData.slice(2).map(function(vol_item) {
-                    var vol_value = parseFloat(vol_item);
-                    if(isNaN(vol_value)) return 0;
-                    return vol_value;
-                });
-                let secondRowData = nextRowData.slice(2).map(function(item) {
-                    var value = parseFloat(item);
-                    if(isNaN(value)) return 0;
-                    return value;
-                });
-                let volSecondRowData = volNextRowData.slice(2).map(function(vol_item) {
-                    var vol_value = parseFloat(vol_item);
-                    if(isNaN(vol_value)) return 0;
-                    return vol_value;
-                });
-                if(key!=="") {
-                    dict.set(key, new Neuron(firstRowData, secondRowData, volumes, columnNames));
-                    vol_dict.set(key, new Neuron(volFirstRowData, volSecondRowData, vol_volumes, columnNames));
-                }
-            }
-            let spine_distance = parseFloat(document.getElementById("spine_distance").value);
-            let bouton_distance = parseFloat(document.getElementById("bouton_distance").value);
-            let interaction = parseFloat(document.getElementById("interaction").value);
-            let contacts = parseFloat(document.getElementById("contacts").value);       
-            let vint = (4.0 / 3) * Math.PI * Math.pow(interaction, 3);
-            let c = vint /(spine_distance*bouton_distance);
-            dict.get(source_id).columnNames.push("Total");
-            dict.get(source_id).columnNames.shift();
-            let volumes_array = dict.get(source_id).volumes;
-            let length_axons =  dict.get(source_id).axons;
-            let length_dendrites = dict.get(target_id).dendrites;
-            let volume_axons =  vol_dict.get(source_id).axons;
-            let volume_dendrites = vol_dict.get(target_id).dendrites;
-            let final_result = [];
-            let final_result_noround = [];
-            let final_result_noc = [];
-            let final_result_noc_noround = [];
-            let num_contacts = [];
-            let final_result_val = "";
-            let noc_non_zero = 0;
-            for (var i = 0; i < length_axons.length; i++) {
-                if (isNaN(length_axons[i])){length_axons[i]=0;}
-                if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
-                if (isNaN(volume_axons[i])){volume_axons[i]=0;}
-                if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}                
-                let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
-                if (isNaN(noc)){noc=0;} 
-                if (noc!=0) {
-                    noc_non_zero = noc_non_zero + 1;
-                }
-            }
-            for (var i = 0; i < length_axons.length; i++) {
-                if (isNaN(length_axons[i])){length_axons[i]=0;}
-                if (isNaN(length_dendrites[i])){length_dendrites[i]=0;}
-                if (isNaN(volume_axons[i])){volume_axons[i]=0;}
-                if (isNaN(volume_dendrites[i])){volume_dendrites[i]=0;}
-                let noc = (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
-                if (isNaN(noc)){noc=0;} 
-                if (noc!=0) {
-                    num_contacts[i] = (1 / noc_non_zero) + (4 * c * length_axons[i] * length_dendrites[i]) / (volume_axons[i] + volume_dendrites[i]);
-                }
-                if (isNaN(num_contacts[i])) {num_contacts[i] = 0;}
-                if (!isFinite(num_contacts[i])) {num_contacts[i] = 0;}
-                final_result_noc.push(num_contacts[i].toPrecision(3));                
-                final_result_noc_noround.push(num_contacts[i]);                
-                let final_result_val = (c * ((length_axons[i] * length_dendrites[i]) / volumes_array[i])) / num_contacts[i];
-                if (isNaN(final_result_val)) {final_result_val = 0;}
-                final_result.push(final_result_val.toPrecision(4));
-                final_result_noround.push(final_result_val);
-            }
-            /* compute totals */
-            // probability
-            var p_tally = 1;
-            for (var pi = 0; pi < length_axons.length; pi++) {
-                if (!isNaN(final_result_noround[pi])) {
-                    p_tally = p_tally * (1 - final_result_noround[pi]);
-                }
-            }
-            // parseFloat( .toString()) is for avoiding a trailing 0
-            final_result.push(parseFloat(1 - p_tally).toPrecision(4).toString());
-            // noc
-            var n_tally = 0;
-            for (var ni = 0; ni < length_axons.length; ni++) {
-                if (!isNaN(final_result_noc_noround[ni])) {
-                    n_tally = n_tally + parseFloat(final_result_noc_noround[ni]);
-                }
-            }
-            //let noc_final = parseFloat(n_tally.toPrecision(3));
-            //final_result_noc.push(noc_final.toString());
-            final_result_noc.push(n_tally.toPrecision(3).toString());
-
-            var value_results = new Array();
-            value_results.push(dict, final_result, final_result_noc, source_id);
-
-            return value_results;
-        }
-        /*function parcel_volume(all_groups,subregion, parcel) {    
-            //
-            //    toUpperCase() is used for case insensitive matching
-            //        
-            let parcel_volumes_group = all_groups[4];
-            let volume = 0;
-
-            for (var i = 0; i < parcel_volumes_group.length; i++) {
-                let curr_subregion = parcel_volumes_group[i][0];
-                let curr_parcel = parcel_volumes_group[i][1];
-                let curr_vol = parcel_volumes_group[i][2];
-
-                if ((subregion.toString()).toUpperCase() == (curr_subregion.toString()).toUpperCase() && (parcel.toString()).toUpperCase() == (curr_parcel.toString()).toUpperCase()) {
-                    volume = curr_vol;
-                }
-            }
-
-            return volume;
-        }*/
         function parcel_volume(all_groups, source_id, target_id, subregion, parcel) {    
             //
             //    toUpperCase() is used for case insensitive matching
@@ -534,12 +386,7 @@ include("function/menu_main.php");
 
             return stdev_values;
         }
-        function parse(data_1,volume_data,volumes_index,columnNames_index,all_groups){
-            /*var value_results = calc_values(data_1,volume_data,volumes_index,columnNames_index);
-            dict = value_results[0];
-            final_result = value_results[1];
-            final_result_noc = value_results[2];*/
-            //source_id = value_results[3];
+        function parse(all_groups){
             let source = document.getElementById("source").value.trim();
             let target = document.getElementById("target").value.trim();
             let source_id = sourceIDDic[source];
@@ -568,7 +415,6 @@ include("function/menu_main.php");
             if (subregion_number == 6) {
                 cname = Array('LI', 'LII', 'LIII', 'LIV', 'LV', 'LVI', 'Total');
             }
-            //let cname = Array.from(dict.get(source_id).columnNames, x => [x]); // cname = column name
 
             parcel = Array();
             let parcel_entry = "";
@@ -585,15 +431,12 @@ include("function/menu_main.php");
             let stdev_values = stdev_calcs(all_groups, parcel);
             //document.write(stdev_values[3][0]);
 
-            //let result = Array.from(final_result, x => [x]);
-            //let result_noc = Array.from(final_result_noc, x => [x]);
             document.getElementById('title1').style.display='block';
             let cp_text = "<center>Probability of Connection Per Neuron Pair<br><br><table style='text-align:center;border: 1px solid black;width:88%;height:10px;table-layout: fixed;font-size:16px;'><tr style='background-color:grey;font-color:white;color:white;'>";
             for (let i = 0; i < cname.length; i++) {
               cp_text += "<td style='padding: 5px;font-color:white;color:white;border: 1px solid black;'>"+cname[i]+'</td>';
             } 
             cp_text += "</tr><tr style='border: 1px solid black;'>";
-            //document.write(result.length);
             for (let i = 0; i < cname.length; i++) {
               cp_text += "<td style='padding: 5px;border: 1px solid black;'>";
               let cp_final_mean = parseFloat(0.0).toPrecision(4);
@@ -654,7 +497,7 @@ include("function/menu_main.php");
                 url:url,
                 dataType:"text",
                 success:[function(data){
-                   parse(data,volume_data,volumes_index,columns_index,all_groups);
+                   parse(volume_data,volumes_index,columns_index,all_groups);
                 }]
             });
         }
@@ -672,29 +515,6 @@ include("function/menu_main.php");
                 }   
             }     
         ?>
-        function readVolumes(url){
-            var volume_data = [];
-            if (url == 'data/CA1-Table-2.csv') {
-                <?php get_volumes('data/CA1-Table-2.csv'); ?>
-            }
-            else if (url == 'data/CA2-Table-2.csv') {
-                <?php get_volumes('data/CA2-Table-2.csv'); ?>
-            }
-            else if (url == 'data/CA3-Table-2.csv') {
-                <?php get_volumes('data/CA3-Table-2.csv'); ?>
-            }
-            else if (url == 'data/DG-Table-2.csv') {
-                <?php get_volumes('data/DG-Table-2.csv'); ?>
-            }
-            else if (url == 'data/EC-Table-2.csv') {
-                <?php get_volumes('data/EC-Table-2.csv'); ?>
-            }
-            else if (url == 'data/Sub-Table-2.csv') {
-                <?php get_volumes('data/Sub-Table-2.csv'); ?>
-            }
-            //document.getElementById("interaction").value=vol_data;
-            return volume_data;
-        }  
         function createTables() {
             <?php
                 $axon_group = array();
@@ -804,31 +624,7 @@ include("function/menu_main.php");
             all_groups = Array(dendrite_lengths_group, dendrite_volumes_group, axon_lengths_group, axon_volumes_group, parcel_volumes_group);
             //document.write(document.getElementById("source").value);
             let name = document.getElementById("source").value.split(" ")[0];
-            if(name.includes("CA1")){
-                volume_data = readVolumes("data/CA1-Table-2.csv");
-                readData("data/CA1-Table-1.csv",volume_data,0,1,all_groups);
-            }else if(name.includes("CA2")){
-                volume_data = readVolumes("data/CA2-Table-2.csv");
-                readData("data/CA2-Table-1.csv",volume_data,0,1,all_groups);
-            }else if(name.includes("CA3")){
-                volume_data = readVolumes("data/CA3-Table-2.csv");
-                readData("data/CA3-Table-1.csv",volume_data,0,1,all_groups);
-            }else if(name.includes("DG")){
-                volume_data = readVolumes("data/DG-Table-2.csv");
-                readData("data/DG-Table-1.csv",volume_data,0,1,all_groups);
-            }else if(name.includes("MEC")){
-                volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,1,3,all_groups);
-            }else if(name.includes("LEC")){
-                volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,0,3,all_groups);
-            }else if(name.includes("EC")){
-                volume_data = readVolumes("data/EC-Table-2.csv");
-                readData("data/EC-Table-1.csv",volume_data,2,3,all_groups);
-            }else if(name.includes("SUB")){
-                volume_data = readVolumes("data/Sub-Table-2.csv");
-                readData("data/Sub-Table-1.csv",volume_data,0,1,all_groups);
-            }
+            parse(all_groups);
         }
         function submitClicked(){
             let source = document.getElementById("source").value.trim();
