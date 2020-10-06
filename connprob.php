@@ -396,24 +396,49 @@ include("function/menu_main.php");
             let subregion_number = source_id_str.substring(0, 1);
 
             /* generate tables */
+            <?php include("synap_prob/n_m_params.php"); ?>
             let cname = Array();
             if (subregion_number == 1) {
-                cname = Array('SMo', 'SMi', 'SG', 'H', 'Total');
-            }
+                <?php
+                    for ($i = 0; $i < count($dg_group_short); $i++) {
+                        echo "cname.push(\"".$dg_group_short[$i]."\");";
+                    }
+                ?>                
+            };
             if (subregion_number == 2) {
-                cname = Array('SLM', 'SR', 'SL', 'SP', 'SO', 'Total');
+                <?php
+                    for ($i = 0; $i < count($ca3_group_short); $i++) {
+                        echo "cname.push(\"".$ca3_group_short[$i]."\");";
+                    }
+                ?> 
             }
             if (subregion_number == 3) {
-                cname = Array('SLM', 'SR', 'SP', 'SO', 'Total');
+                <?php
+                    for ($i = 0; $i < count($ca2_group_short); $i++) {
+                        echo "cname.push(\"".$ca2_group_short[$i]."\");";
+                    }
+                ?> 
             }
             if (subregion_number == 4) {
-                cname = Array('SLM', 'SR', 'SP', 'SO', 'Total');
+                <?php
+                    for ($i = 0; $i < count($ca1_group_short); $i++) {
+                        echo "cname.push(\"".$ca1_group_short[$i]."\");";
+                    }
+                ?> 
             }
             if (subregion_number == 5) {
-                cname = Array('SM', 'SP', 'PL', 'Total');
+                <?php
+                    for ($i = 0; $i < count($sub_group_short); $i++) {
+                        echo "cname.push(\"".$sub_group_short[$i]."\");";
+                    }
+                ?> 
             }
             if (subregion_number == 6) {
-                cname = Array('LI', 'LII', 'LIII', 'LIV', 'LV', 'LVI', 'Total');
+                <?php
+                    for ($i = 0; $i < count($ec_group_short); $i++) {
+                        echo "cname.push(\"".$ec_group_short[$i]."\");";
+                    }
+                ?> 
             }
 
             parcel = Array();
@@ -728,7 +753,7 @@ include("function/menu_main.php");
                     }
                 ?>
            }] });}
-            
+
        init();
     </script>
     <?php
