@@ -305,7 +305,7 @@ include("function/menu_main.php");
 
             dendritic_length_mean = mean(dendrite_lengths);
             axonal_length_mean = mean(axon_lengths);
-            volume = parcel_volume(all_groups, source_id, target_id, source_subregion, parcel);//parcel_volume(all_groups,source_subregion, parcel);
+            volume = parcel_volume(all_groups, source_id, target_id, source_subregion, parcel);
             dendritic_length_stdev = stdev(dendrite_lengths);            
             axonal_length_stdev = stdev(axon_lengths);
 
@@ -379,7 +379,7 @@ include("function/menu_main.php");
                 }
             }
             total_nc_stdev = Math.sqrt(nc_stdev_tally);
-            total_cp_mean = parseFloat(1 - cp_mean_tally).toString();// parseFloat( .toString()) is for avoiding a trailing 0
+            total_cp_mean = parseFloat(1 - cp_mean_tally).toString(); // parseFloat( .toString()) is for avoiding a trailing 0
             total_cp_stdev = total_cp_mean * Math.sqrt(cp_stdev_tally);
 
             stdev_values[i] = Array(total_nc_mean, total_nc_stdev, total_cp_mean, total_cp_stdev);
@@ -667,11 +667,6 @@ include("function/menu_main.php");
             for(let value in connDic[source]){
                 addOption(target,connDic[source][value],connDic[source][value]);
             }
-            <?php
-                //if (isset($_REQUEST["target"])) {
-                //    echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
-                //}
-            ?>
             target.disabled = false;
         }
         addOption = function(selectbox, text, value) {
@@ -726,17 +721,6 @@ include("function/menu_main.php");
                 }
                 ?>
                 sourceSelected();
-                /*let source = document.getElementById("source").value;
-                let target = document.getElementById("target");
-                target.disabled = true;
-                target.length = 0;
-                addOption(target, "-", "-");
-                addOption(target, "test", "test");
-                for(let value in connDic[source]){
-                    addOption(target,connDic[source][value],connDic[source][value]);
-                }
-                target.disabled = false;*/
-
 
                 <?php
                     if (isset($_REQUEST["target"])) {
@@ -744,33 +728,12 @@ include("function/menu_main.php");
                     }
                 ?>
            }] });}
-
-        class Neuron{
-            constructor(axons,dendrites,volumes, columnNames){
-                this.axons = axons
-                this.dendrites = dendrites
-                this.volumes = volumes
-                this.columnNames = columnNames
-            }
-        }
-        class NeuronVolumes{
-            constructor(axons,dendrites,volumes, columnNames){
-                this.axons = axons
-                this.dendrites = dendrites
-                this.volumes = volumes
-                this.columnNames = columnNames
-            }
-        }
+            
        init();
     </script>
     <?php
     if (isset($_REQUEST["source"])) {
         echo "<script>";
-        /*echo "document.getElementById('source').value='".$_REQUEST["source"]."';";
-        echo "sourceSelected();";
-        echo "document.getElementById('target').value='".$_REQUEST["target"]."';";
-        echo "targetSelected();";*/
-
         /*  
             timeout is to allow time for select options to populate before 
             setting the value.
