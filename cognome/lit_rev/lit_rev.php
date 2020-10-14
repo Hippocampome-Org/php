@@ -37,11 +37,19 @@
 </head>
 <body>
 <?php
-$base_dir = "query_results/2/";
-$filename = $base_dir."gs_articles.csv";
-$query_file = $base_dir."query.csv";
+$base_dir = "query_results/final_selection/";
+$filename = "";
+$queryfile = "";
+if (isset($_REQUEST['file'])) {
+	$file=$_REQUEST['file'];
+	$filename = $base_dir.$file;	
+}
+if (isset($_REQUEST['query'])) {
+	$query=$_REQUEST['query'];
+	$queryfile = $base_dir.$query;
+}
 
-echo '<br><center><font style="font-size:22px">'.file_get_contents($query_file).'</font></center><br>';
+echo '<br><center><font style="font-size:22px">'.file_get_contents($queryfile).'</font></center><br>';
 
 	$start = 1;
 	$end = 10;
@@ -68,7 +76,7 @@ echo '<br><center><font style="font-size:22px">'.file_get_contents($query_file).
 	$next_start = $start + 10;
   	$next_end = $end + 10;  	
   	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
-	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
+	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
 
 function char_replace($find, $replace, $str)
 {
@@ -203,7 +211,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 
 	    if (substr($url, 0, 24)=='https://books.google.com') {
 	    	// format query for book search
-	    	$query_html = file_get_contents($query_file);
+	    	$query_html = file_get_contents($queryfile);
 	    	$query_html2 = str_replace('Query: ', '', $query_html);
 	    	$query_html3 = str_replace(" ", "+", $query_html2);
 	    	//$query_html4 = str_replace("AND", "", $query_html3);
@@ -211,7 +219,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    	$search_phrase = '&q='.$query_html3;//.'&f=false';
 	    	$url = $url.$search_phrase;
 	    }
-	    $search_results = $search_results."<tr><td>$pm_id</td><td><a href='".$url."' target='_blank'>gs article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
+	    $search_results = $search_results."<tr><td><center>$i</center></td><td><a href='".$url."' target='_blank'>gs article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
 	    if ($pm_title != '') {
 	    	$search_results = $search_results."$pm_title<br><br>";
 			$search_results = $search_results."<font class='abstract_text'>";
@@ -236,7 +244,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	$next_start = $start + 10;
   	$next_end = $end + 10;  	
   	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
-	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
+	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
 }
 ?>
 </body>
