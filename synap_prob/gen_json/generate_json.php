@@ -166,7 +166,7 @@ https://stackoverflow.com/questions/5149129/how-to-strip-trailing-zeros-in-php
 			                //$entry_output = $entry_output.$sql;
 		                }
 		                elseif ($page == 'sd') {
-		                	$sql    = "SELECT STD(avg_path_length) AS std_sd, AVG(avg_path_length) AS avg, COUNT(avg_path_length) AS count_sd, AVG(avg_path_length) AS avg_trunk, MIN(min_path_length) AS min_sd, MAX(max_path_length) AS max_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND avg_path_length!='';";
+		                	$sql    = "SELECT CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, CAST(MIN(CAST(min_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS min_sd, CAST(MAX(CAST(max_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE neurite_quantified.unique_id=".$neuron_ids[$i_adj]." AND neurite_quantified.neurite='" . $parcel_group[$j_adj2] . "' AND avg_path_length!='';";
 		                	//$entry_output = $entry_output.$sql."<br>";
 			                $result = $conn->query($sql);
 	                        if ($result->num_rows > 0) {
