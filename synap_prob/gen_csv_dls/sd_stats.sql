@@ -1,3 +1,6 @@
+# Note: cast as decimal is used here because the csv2db code imported the values as text columns
+# and not decimals. Decimals are needed to correctly find min() and max() values. The decimal(10,2)
+# setting is used to have 2 digits after the decimal place, which is wanted for synaptic distances.
 CREATE VIEW SynProSDStats AS SELECT 
 	GROUP_CONCAT(DISTINCT hippocampome_neuronal_class) as hippocampome_neuronal_class,
 	GROUP_CONCAT(DISTINCT unique_id) as unique_id,
