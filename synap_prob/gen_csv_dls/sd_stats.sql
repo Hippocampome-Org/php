@@ -1,4 +1,9 @@
-CREATE VIEW SynProSDStats AS SELECT hippocampome_neuronal_class, unique_id, neurite, neurite_id, 
+CREATE VIEW SynProSDStats AS SELECT 
+#hippocampome_neuronal_class, unique_id, neurite, neurite_id, 
+        GROUP_CONCAT(DISTINCT hippocampome_neuronal_class) as hippocampome_neuronal_class,
+        GROUP_CONCAT(DISTINCT unique_id) as unique_id,
+        GROUP_CONCAT(DISTINCT neurite) as neurite,
+        GROUP_CONCAT(DISTINCT neurite_id) as neurite_id,
 CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, 
 CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, 
 CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, 
