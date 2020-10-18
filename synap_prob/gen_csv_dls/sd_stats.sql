@@ -8,7 +8,7 @@ CREATE VIEW SynProSDStats AS SELECT
 	GROUP_CONCAT(DISTINCT neurite_id) as neurite_id,
 	CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, 
 	CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, 
-	CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS count_sd, 
+	CAST(COUNT(CAST(avg_path_length AS DECIMAL(10))) AS DECIMAL(10)) AS count_sd, 
 	CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_trunk, 
 	CAST(MIN(CAST(min_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS min_sd, 
 	CAST(MAX(CAST(max_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS max_sd
