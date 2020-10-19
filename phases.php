@@ -13,75 +13,20 @@ include("permission_check.php");
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="jquery-ui-1.10.2.custom/js/jquery.jqGrid.src-custom.js" type="text/javascript"></script>
-<script>
-jQuery(document).ready(function() {
-   $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_phases.php',
-    success: function() {}
-  });
-   $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_izhikevich_model.php',
-    success: function() {}
-  });
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_markers.php',
-    success: function() {}
-  }); 
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_ephys.php',
-    success: function() {}
-  }); 
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_morphology.php',
-    success: function() {}
-  });
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_connectivity.php',
-    success: function() {}
-  });
-  $.ajax({
-		type: 'GET',
-		cache: false,
-		contentType: 'application/json; charset=utf-8',
-		url: 'load_matrix_session_firing.php',
-		success: function() {}
-  });
-  $.ajax({
-		type: 'GET',
-		cache: false,
-		contentType: 'application/json; charset=utf-8',
-		url: 'load_matrix_session_firing_parameter.php',
-		success: function() {}
-  });
-  $('div#menu_main_button_new_clr').css('display','block');
-});
-</script>
-
-
 <?php
 require_once("load_matrix_session_phases.php");
 $jsonStr = $_SESSION['Phases'];
 $color_selected ='#EBF283';
 $research = $_REQUEST['research'];
 $hippo_select = $_SESSION['hippo_select'];
+?>
+
+<?php 
+  /* set json data to load */
+  $matrix_type = "phases";
+  $session_matrix_cache_file = "phases/gen_json/json_files/phases.json";
+  $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+  $jsonStr = $_SESSION[$matrix_type]; 
 ?>
 
 <style>
