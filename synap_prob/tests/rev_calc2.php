@@ -7,14 +7,14 @@
 <textarea rows="30" cols="170" id="examplecalc" name="examplecalc"></textarea>
 <script>
 <?php
-$source_id = 1041;
-$target_id = 1027;
+$source_id = 1002;
+$target_id = 1002;
 echo "let source_id = $source_id;";
 echo "let target_id = $target_id;";
 ?>
-let length_spine = 1.96;//1.09;
-let length_bouton = 4.7;//6.2;
-let radius_spine = 5;//2;
+let length_spine = 1.09;
+let length_bouton = 6.2;
+let radius_spine = 2;
 let c = ((4.0/3)*Math.PI*Math.pow(radius_spine,3))/(length_spine*length_bouton);
 let calcs = "";
 let parcels = Array("SMo","SMi","SG","H");
