@@ -1,3 +1,6 @@
+<?php
+  include ("/var/www/html/php/permission_check.php");
+?>
 <html>
 <!--
 This software is for generating json files
@@ -31,48 +34,100 @@ Date:   2020
 
 	echo "<center><button onclick=\"window.location.href = '?page=phases_matrix';\" class='button'>Generate phases matrix json</button></center><br><hr>";
 
-	function retrieve_values($conn, $i, $write_output, $neuron_ids) {
-			$entry_output = "";
-			if ($type == 'phases_matrix') {
-				$theta = '';
-				$swr_ratio = '';
-				$min_range = '';
-				$max_range = '';
-				$count = '';
-				$sql = "SELECT AVG(theta) AS theta, AVG(SWR_ratio) AS swr_ratio, MIN(theta) as min_range, MAX(theta) as max_range, COUNT(theta) as count FROM hippocsv2db.phases WHERE cellID = ".$neuron_ids[$i];
-				//$entry_output = $entry_output.$sql;
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) { 
-					while($row = $result->fetch_assoc()) {
-						$theta = $row['theta'];
-						$swr_ratio = $row['swr_ratio'];
-						$min_range = $row['min_range'];
-						$max_range = $row['max_range'];
-						$count = $row['count'];
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids) {
+		/*
+			If statement used below in theta min and max query to avoid blank values being reported as
+			0.0 which would be incorrect.
+		*/
+		$entry_output = "";
+		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
+		$min_range = ''; $max_range = ''; $count = '';
+		$theta_found = false; $spw_found = false; $other_found = false;
+
+		//$sql = "SELECT CAST(theta as DECIMAL(10,2)) AS theta_val, MIN(CAST(theta as DECIMAL(10,2))) as min_range, MAX(CAST(theta as DECIMAL(10,2))) as max_range, COUNT(theta) as count FROM phases WHERE cellID = ".$neuron_ids[$i]." ORDER BY CAST(metadataRank AS DECIMAL(10,2));";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val FROM phases WHERE cellID = ".$neuron_ids[$i]." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		//$entry_output = $entry_output.$sql;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) { 
+			//$row = $result->fetch_assoc();
+			while($row = $result->fetch_assoc()) {
+				if ($theta_found == false) {
+					$theta_id = $row['id'];
+					$theta = $row['theta_val'];
+					if ($theta != '') {
+						$theta_found = true;
 					}
 				}
-				if ($theta != '' && $theta != 0) {
-					$entry_output = $entry_output."<center><a href='property_page_pahses.php?pre_id=".$neuron_ids[$i]." title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$theta."</a></center></div>";
-				} 
 			}
-			array_push($write_output, $entry_output);	
 		}
+		$sql = "SELECT MIN(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$min_range = $row['min_range'];
+				$max_range = $row['max_range'];
+				$count = $row['count'];
+			}
+		}
+		if ($theta != '' && $theta != 0) {
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$theta."</a></center></div>\",";
+		} 
+		array_push($theta_values, $entry_output);
 
-		return $write_output;		
+		$entry_output = "";
+		//$sql = "SELECT AVG(CAST(SWR_ratio as DECIMAL(10,2))) AS swr_ratio_val, MIN(CAST(SWR_ratio as DECIMAL(10,2))) as min_range, MAX(CAST(SWR_ratio as DECIMAL(10,2))) as max_range, COUNT(SWR_ratio) as count FROM phases WHERE cellID = ".$neuron_ids[$i]." ORDER BY CAST(metadataRank AS DECIMAL(10,2));";
+		$sql = "SELECT AVG(CAST(SWR_ratio as DECIMAL(10,2))) AS swr_ratio_val, MIN(CAST(SWR_ratio as DECIMAL(10,2))) as min_range, MAX(CAST(SWR_ratio as DECIMAL(10,2))) as max_range, COUNT(SWR_ratio) as count FROM phases WHERE id = ".$theta_id;
+		//$entry_output = $entry_output.$sql;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) { 
+			$row = $result->fetch_assoc();
+			//while($row = $result->fetch_assoc()) {
+				$swr_ratio = $row['swr_ratio_val'];
+				if ($swr_ratio==0) {
+					$swr_ratio="";
+				}
+				$min_range = $row['min_range'];
+				$max_range = $row['max_range'];
+				$count = $row['count'];
+			//}
+		}
+		if ($theta != '' && $theta != 0) {
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></center></div>\",";
+		} 
+		array_push($spw_values, $entry_output);
+
+		$entry_output = "";
+		$sql = "SELECT AVG(recordingAssignment) AS recording_assignment_val, MIN(recordingAssignment) as min_range, MAX(recordingAssignment) as max_range, COUNT(recordingAssignment) as count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		//$entry_output = $entry_output.$sql;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$recording_assignment = $row['recording_assignment_val'];
+				$min_range = $row['min_range'];
+				$max_range = $row['max_range'];
+				$count = $row['count'];
+			}
+		}
+		if ($theta != '' && $theta != 0) {
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$recording_assignment."</a></center></div>\"]},";
+			//$entry_output = $entry_output."\"\"]},";
+		} 
+		array_push($other_values, $entry_output);
+
+		return Array($theta_values, $spw_values, $other_values);		
 	}
 
 	/*
 	Generate matrices section
-
-	$i is row that is a neuron type	
-	$j is column that is a parcel type
 	*/
-	if (true) {
+	if ($page=='phases_matrix') {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
-			if ($page=='phases_matrix') {	
-				$write_output = retrieve_values($conn, $i, $write_output, $neuron_ids);
-			}
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids);
+			$theta_values = $write_output[0];
+			$spw_values = $write_output[1];
+			$other_values = $write_output[2];
 		}
+		//echo $spw_values[1]."<br>";
 
 		/* 
 		Write to File 
@@ -80,82 +135,61 @@ Date:   2020
 		$new_row_col is used because a new row occurs every certain
 		number of columns when reading the file.
 		*/
-		if ($page=='phases_matrix') {
-			$json_output_file = $path_to_files."json_files/cond".$cond_num."_".$param.".json";
-			$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
-			/* specify rows to use from template file */
-			$init_col = 0;
-			$init_col2 = 1;
-			$new_row_col = 124;
-			$max_rows = 100000;
-			/* specify indices */
-			$neuron_group_cols = array(); // new file indexes
-			$neuron_class_cols = array();
-			$total_rows = ($new_row_col*$new_row_col)+(2*$new_row_col);
-			$t_out = 0;		
-			$n_out = 0;		
-			$p_out = 0;
-			$nl = $json_new_line; // new line
-			/* create arrays of selected template indexes */
-			for ($r_i = 0; $r_i < $max_rows; $r_i++) {
-				array_push($neuron_group_cols, ($init_col+($new_row_col*$r_i)));
-				array_push($neuron_class_cols, ($init_col2+($new_row_col*$r_i)));
-			}	
+		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
+		/* specify rows to use from template file */
+		$init_col = 0;
+		$init_col2 = 1;
+		$theta_col = 2;
+		$spw_col = 3;
+		$other_col = 4;
+		$new_row_col = 5;
+		$neuron_classes = 28;
+		$max_rows = 100000;
+		/* specify indices */
+		$neuron_group_cols = array(); // new file indexes
+		$theta_cols = array();
+		$spw_cols = array();
+		$other_cols = array();
+		$total_rows = $new_row_col*$neuron_classes;//($new_row_col*$new_row_col)+(2*$new_row_col);	
+		$i_t = 0;
+		$i_s = 0;
+		$i_o = 0;
+		//$n_out = 0;		
+		//$p_out = 0;
+		$nl = $json_new_line; // new line
+		/* create arrays of selected template indexes */
+		for ($i = 0; $i < $max_rows; $i++) {
+			array_push($neuron_group_cols, ($init_col+($new_row_col*$i)));
+			array_push($neuron_group_cols, ($init_col2+($new_row_col*$i)));
+			array_push($theta_cols, ($theta_col+($new_row_col*$i)));
+			array_push($spw_cols, ($spw_col+($new_row_col*$i)));
+			array_push($other_cols, ($other_col+($new_row_col*$i)));
+		}	
 
-			for ($o_i = 0; $o_i<$total_rows; $o_i++) {
-				if ($o_i==($total_rows-1)) {
-					$last_index = count($write_output)-1; // last line
-					fwrite($output_file, "\"".$write_output[$last_index]."\"]}]}"); 
-				}
-				elseif (in_array($o_i, $neuron_group_cols)) {
-					fwrite($output_file, $neuron_groups_ordered[$t_out]);
-					$t_out++;
-				}
-				elseif (in_array($o_i, $neuron_class_cols)) {
-					fwrite($output_file, $neuron_classes_ordered[$n_out]);
-					$n_out++;
-				}
-				else {
-					if ($write_output[$p_out] != "") {
-						$text_output = "\"".$write_output[$p_out]."\",".$nl;
-					}
-					else {
-						$text_output = "\"\",".$nl;
-					}
-					fwrite($output_file, $text_output);
-					$p_out++;
-				}
+		for ($i = 0; $i<$total_rows; $i++) {
+			if ($i==($total_rows-1)) {
+				$last_index = count($other_output[0])-1; // last line
+				fwrite($output_file, "\"".$other_output[0][$last_index]."\"]}]}"); 
 			}
-			fclose($output_file);			
-		}		
-
-		if ($page!='') {
-			echo "<br><center>Status: json files condition #".$cond_num." param ".$param." successfully written.<br>";
-			echo "<br><hr><br><br>";
+			elseif (in_array($i, $neuron_group_cols)) {
+				fwrite($output_file, $neuron_groups[$i]);
+			}
+			elseif (in_array($i, $theta_cols)) {
+				fwrite($output_file, $theta_values[$i_t].$nl);
+				$i_t++;
+			}
+			elseif (in_array($i, $spw_cols)) {
+				fwrite($output_file, $spw_values[$i_s].$nl);
+				//echo $i." ".$spw_values[$i_s]."<br>";
+				$i_s++;
+			}
+			elseif (in_array($i, $other_cols)) {
+				fwrite($output_file, $other_values[$i_o].$nl);
+				$i_o++;
+			}
 		}
-	}
-	else if ($cond_num <= $num_conds) {
-			echo "<br><center>Status: moving to processing condition #".($cond_num + 1)."<br>";
-			echo "<br><hr><br><br>";
-	}
-	else if ($cond_num > $num_conds) {
-			echo "<br><center>Status: finished processing<br>";
-			echo "<br><hr><br><br>";
-	}
-
-	if (($page=='phases_matrix') && !($cond_num >= $num_conds && $param_num > sizeof($params))) {
-		if ($param_num <= sizeof($params)) {
-			$param_num++;
-		}
-		else {
-			$cond_num++;
-			$param_num = 0;
-		}
-		if ($page=='phases_matrix') {
-			echo "<script>
-			window.location.replace('generate_json.php?page=phases_matrix&cond_num=".$cond_num."&param_num=".$param_num."');
-			</script>";
-		}
+		fclose($output_file);	
+		echo "<br><br>Json file written.";
 	}
 ?>
 </body>
