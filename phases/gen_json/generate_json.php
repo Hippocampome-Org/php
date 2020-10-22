@@ -41,12 +41,13 @@ Date:   2020
 		*/
 		$entry_output = "";
 		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
+		$species = ''; $age = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = '';
 		$theta_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val FROM phases WHERE cellID = ".$neuron_ids[$i]." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT age) as age, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingAssignment) as recordingAssignment, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -54,6 +55,11 @@ Date:   2020
 				if ($theta_found == false) {
 					$theta_id = $row['id'];
 					$theta = $row['theta_val'];
+					$species = $row['species'];
+					$age = $row['age'];
+					$gender = $row['gender'];
+					$rec = $row['recordingAssignment'];
+					$behav = $row['behavioralStatus'];
 					if ($theta != '') {
 						$theta_found = true;
 					}
@@ -70,7 +76,7 @@ Date:   2020
 			}
 		}
 		//if ($theta != '' && $theta != 0) {
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$theta."</a></center></div>\",";
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></center></div>\",";
 		//} 
 		array_push($theta_values, $entry_output);
 
