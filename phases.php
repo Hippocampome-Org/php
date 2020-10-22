@@ -375,6 +375,13 @@ function HideShowColumns ()
 <?php include ("function/icon.html"); ?>
 <title>Phases</title>
 <script type="text/javascript" src="style/resolution.js"></script>
+
+<script>
+  function update()
+  {
+    document.getElementById("test0").innerHTML="test";
+  }
+</script>
 </head>
 
 <body>
@@ -387,12 +394,23 @@ function HideShowColumns ()
 
 <div class='title_area'>
   <form id='supertypeForm'>
-    <font id= "title" class="font1">Browse Phases matrix</font>
-    <input type="checkbox" value="check1" name="check1" id="checkbox1"><span>Multi Compartment Model</span>
+    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font>
+    <br>
+    <table style='width:1000px;font-family:arial;font-size:18px'>
+    <tr><td style="width:150px">&nbsp;&nbsp;<u>Animal</u></td><td style="width:200px">&nbsp;&nbsp;<u>Age</u></td><td style="width:150px">&nbsp;&nbsp;<u>Sex</u></td><td style="width:250px">&nbsp;&nbsp;<u>Method</u></td><td style="width:450px">&nbsp;&nbsp;<u>Behavior</u></td></tr>
+    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>rats</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>adult</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>male</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>sharp pipette</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>freely moving</span></td></tr>
+    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>mice</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>young adult</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>female</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>whole-cell patch clamp</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>head-fixed awake</span></td></tr>
+    <tr><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>not reported</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>unknown</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>juxtacellular</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>REM sleep</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>optotagging</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>urethane</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>silicon probe</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>urethane plus ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>select all</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>select preferred</span></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>tetrode</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>ketamine, xylazine, acepromazine</span></td></tr>
+    </table>
+    <span style='width:1000px'><input type='button' value='update' onclick="update()" style='position:relative;left:410px' /></span>
   </form>
 </div>
 
-<div class='table_position'>
+<div class='table_position' style='position:relative;top:330px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
@@ -414,7 +432,6 @@ function HideShowColumns ()
       <tr>
         <td></td>
         <td>
-        <font class='font5'><strong> V 0.75 alpha</td>
     </td>
 		<tr>
 		</tr>

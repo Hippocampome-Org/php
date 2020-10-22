@@ -40,11 +40,16 @@
 	$json_new_line = file($json_template_file);
 	$json_new_line = $json_new_line[0];
 
+	$json_output_file = $path_to_files."json_files/phases.json";
+
 	$page = '';
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 	}
 	$write_output = array();
+	$theta_values = array();
+	$spw_values = array();
+	$other_values = array();
 	
 	/* Maunally sorted neuron group
 	Note: the auto sorted one no longer used due to

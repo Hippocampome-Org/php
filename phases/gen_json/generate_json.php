@@ -76,7 +76,7 @@ Date:   2020
 			}
 		}
 		//if ($theta != '' && $theta != 0) {
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></center></div>\",";
+			$entry_output = $entry_output."\"<center><span id='test".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
 		//} 
 		array_push($theta_values, $entry_output);
 
