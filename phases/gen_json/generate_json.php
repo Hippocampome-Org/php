@@ -42,14 +42,14 @@ Date:   2020
 		$entry_output = "";
 		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
 		$min_range = ''; $max_range = ''; $count = '';
-		$theta_found = false; $spw_found = false; $other_found = false;
+		$theta_found = false;
+		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 
-		//$sql = "SELECT CAST(theta as DECIMAL(10,2)) AS theta_val, MIN(CAST(theta as DECIMAL(10,2))) as min_range, MAX(CAST(theta as DECIMAL(10,2))) as max_range, COUNT(theta) as count FROM phases WHERE cellID = ".$neuron_ids[$i]." ORDER BY CAST(metadataRank AS DECIMAL(10,2));";
+		// theta section
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val FROM phases WHERE cellID = ".$neuron_ids[$i]." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
-			//$row = $result->fetch_assoc();
 			while($row = $result->fetch_assoc()) {
 				if ($theta_found == false) {
 					$theta_id = $row['id'];
@@ -69,48 +69,60 @@ Date:   2020
 				$count = $row['count'];
 			}
 		}
-		if ($theta != '' && $theta != 0) {
+		//if ($theta != '' && $theta != 0) {
 			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$theta."</a></center></div>\",";
-		} 
+		//} 
 		array_push($theta_values, $entry_output);
 
+		// swr ratio section
 		$entry_output = "";
-		//$sql = "SELECT AVG(CAST(SWR_ratio as DECIMAL(10,2))) AS swr_ratio_val, MIN(CAST(SWR_ratio as DECIMAL(10,2))) as min_range, MAX(CAST(SWR_ratio as DECIMAL(10,2))) as max_range, COUNT(SWR_ratio) as count FROM phases WHERE cellID = ".$neuron_ids[$i]." ORDER BY CAST(metadataRank AS DECIMAL(10,2));";
-		$sql = "SELECT AVG(CAST(SWR_ratio as DECIMAL(10,2))) AS swr_ratio_val, MIN(CAST(SWR_ratio as DECIMAL(10,2))) as min_range, MAX(CAST(SWR_ratio as DECIMAL(10,2))) as max_range, COUNT(SWR_ratio) as count FROM phases WHERE id = ".$theta_id;
+		$sql = "SELECT IF (SWR_ratio != 0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			$row = $result->fetch_assoc();
-			//while($row = $result->fetch_assoc()) {
-				$swr_ratio = $row['swr_ratio_val'];
-				if ($swr_ratio==0) {
-					$swr_ratio="";
-				}
-				$min_range = $row['min_range'];
-				$max_range = $row['max_range'];
-				$count = $row['count'];
-			//}
+			$swr_ratio = $row['swr_ratio_val'];
 		}
-		if ($theta != '' && $theta != 0) {
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></center></div>\",";
-		} 
-		array_push($spw_values, $entry_output);
-
-		$entry_output = "";
-		$sql = "SELECT AVG(recordingAssignment) AS recording_assignment_val, MIN(recordingAssignment) as min_range, MAX(recordingAssignment) as max_range, COUNT(recordingAssignment) as count FROM phases WHERE cellID = ".$neuron_ids[$i];
-		//$entry_output = $entry_output.$sql;
+		$sql = "SELECT MIN(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
-				$recording_assignment = $row['recording_assignment_val'];
 				$min_range = $row['min_range'];
 				$max_range = $row['max_range'];
 				$count = $row['count'];
 			}
+		}		
+		//if ($swr_ratio != '' && $swr_ratio != 0) {
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></center></div>\",";
+		//} 
+		array_push($spw_values, $entry_output);
+
+		// other column section
+		$entry_output = "";
+		$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$theta_id;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$ripple = $row['ripple'];
+				$gamma = $row['gamma'];
+				$run_stop_ratio = $row['run_stop_ratio'];
+				$epsilon = $row['epsilon'];
+			}
 		}
 		if ($theta != '' && $theta != 0) {
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$recording_assignment."</a></center></div>\"]},";
-			//$entry_output = $entry_output."\"\"]},";
+			if ($ripple != '') {
+				$other = "ripple";
+			}
+			else if ($gamma != '') {
+				$other = "gamma";
+			}
+			else if ($run_stop_ratio != '') {
+				$other = "run/stop ratio";
+			}
+			else if ($epsilon != '') {
+				$other = "epsilon";
+			}
+			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></center></div>\"]},";
 		} 
 		array_push($other_values, $entry_output);
 
