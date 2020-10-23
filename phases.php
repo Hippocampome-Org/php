@@ -140,25 +140,6 @@ if ($_SESSION['perm'] == NULL)
 
 $(function(){
 
-// All param implementeation will be done later
-/*	$('#all_parameters').change(function() {
-		var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-		var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
-		if ($("#all_parameters").is(':checked')) {
-           $("#nGrid").jqGrid('showCol',["Supertype"]);
-		}
-		else{
-			$("#nGrid").jqGrid('hideCol',["Supertype"]);
-		}
-		var $i=0;
-		$(".jqg-second-row-header").children().each(function()
-		{
-			$(this).css("background",bgColorArray[$i]);
-			$(this).css("color",fontColorArray[$i]);
-			$i++;	
-		});
-	});*/
-
 	var dataStr = <?php echo $jsonStr?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
@@ -376,16 +357,32 @@ function HideShowColumns ()
 <title>Phases</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 
-<script>
-  function update()
-  {
-    document.getElementById("test0").innerHTML="test";
+<?php
+  function is_checked($checkbox) {
+    if (isset($_GET[$checkbox]) && $_GET[$checkbox]=="checked") {
+      if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+        echo ""; // return nothing
+      }
+      else {
+        echo "checked";
+      }
+    }
+    else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      echo "checked"; 
+    }
   }
-</script>
+?>
+
 </head>
 
 <body>
-
+  <?php
+    //$conditions = "";
+    include("phases/update_values.php");
+    if ($_REQUEST="page"=="main_page") {
+      //include("phases/gen_json/generate_json.php");
+    }
+  ?>
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
@@ -398,15 +395,16 @@ function HideShowColumns ()
     <br>
     <table style='width:1000px;font-family:arial;font-size:18px'>
     <tr><td style="width:150px">&nbsp;&nbsp;<u>Animal</u></td><td style="width:200px">&nbsp;&nbsp;<u>Age</u></td><td style="width:150px">&nbsp;&nbsp;<u>Sex</u></td><td style="width:250px">&nbsp;&nbsp;<u>Method</u></td><td style="width:450px">&nbsp;&nbsp;<u>Behavior</u></td></tr>
-    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>rats</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>adult</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>male</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>sharp pipette</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>freely moving</span></td></tr>
-    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>mice</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>young adult</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>female</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>whole-cell patch clamp</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>head-fixed awake</span></td></tr>
-    <tr><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>not reported</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>unknown</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>juxtacellular</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>REM sleep</span></td></tr>
-    <tr><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>optotagging</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>urethane</span></td></tr>
-    <tr><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>silicon probe</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>urethane plus ketamine + xylazine</span></td></tr>
-    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>select all</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>select preferred</span></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>tetrode</span></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>ketamine + xylazine</span></td></tr>
-    <tr><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" value="check1" name="check1" id="checkbox1"><span>ketamine, xylazine, acepromazine</span></td></tr>
+    <tr><td><input type="checkbox" name="species_check1" value="checked" id="species_check1" <?php is_checked("species_check1") ?>><span>rats</span></td><td><input type="checkbox" name="age_check1" value="checked" id="age_check1" <?php is_checked("age_check1") ?>><span>adult</span></td><td><input type="checkbox" name="sex_check1" value="checked" id="sex_check1" <?php is_checked("sex_check1") ?>><span>male</span></td><td><input type="checkbox" name="method_check1" value="checked" id="method_check1" <?php is_checked("method_check1") ?>><span>sharp pipette</span></td><td><input type="checkbox" name="behavior_check1" value="checked" id="behavior_check1" <?php is_checked("behavior_check1") ?>><span>freely moving</span></td></tr>
+    <tr><td><input type="checkbox" name="species_check2" value="checked" id="species_check2" <?php is_checked("species_check2") ?>><span>mice</span></td><td><input type="checkbox" name="age_check2" value="checked" id="age_check2" <?php is_checked("age_check2") ?>><span>young adult</span></td><td><input type="checkbox" name="sex_check2" value="checked" id="sex_check2" <?php is_checked("sex_check2") ?>><span>female</span></td><td><input type="checkbox" name="method_check2" value="checked" id="method_check2" <?php is_checked("method_check2") ?>><span>whole-cell patch clamp</span></td><td><input type="checkbox" name="behavior_check2" value="checked" id="behavior_check2" <?php is_checked("behavior_check2") ?>><span>head-fixed awake</span></td></tr>
+    <tr><td></td><td><input type="checkbox" name="age_check3" value="checked" id="age_check3" <?php is_checked("age_check3") ?>><span>not reported</span></td><td><input type="checkbox" name="sex_check3" value="checked" id="sex_check3" <?php is_checked("sex_check3") ?>><span>unknown sex</span></td><td><input type="checkbox" name="method_check3" value="checked" id="method_check3" <?php is_checked("method_check3") ?>><span>juxtacellular</span></td><td><input type="checkbox" name="behavior_check3" value="checked" id="behavior_check3" <?php is_checked("behavior_check3") ?>><span>REM sleep</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check4" value="checked" id="method_check4" <?php is_checked("method_check4") ?>><span>optotagging</span></td><td><input type="checkbox" name="behavior_check4" value="checked" id="behavior_check4" <?php is_checked("behavior_check4") ?>><span>urethane</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check5" value="checked" id="method_check5" <?php is_checked("method_check5") ?>><span>silicon probe</span></td><td><input type="checkbox" name="behavior_check5" value="checked" id="behavior_check5" <?php is_checked("behavior_check5") ?>><span>urethane plus ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" <?php is_checked("select_check2") ?>><span>select preferred</span></td><td></td><td><input type="checkbox" name="method_check6" value="checked" id="method_check6" <?php is_checked("method_check6") ?>><span>tetrode</span></td><td><input type="checkbox" name="behavior_check6" value="checked" id="behavior_check6" <?php is_checked("behavior_check6") ?>><span>ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
     </table>
-    <span style='width:1000px'><input type='button' value='update' onclick="update()" style='position:relative;left:410px' /></span>
+    <span style='width:1000px'><input type='submit' value='update' style='position:relative;left:410px' /></span>
+    <input type="hidden" name="page" id="page" value="main_page" />
   </form>
 </div>
 

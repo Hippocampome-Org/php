@@ -8,9 +8,12 @@ This software is for generating json files
 Author: Nate Sutton 
 Date:   2020
 -->
+<?php
+if ($_REQUEST['page']!="main_page") {
+echo "
 <head>
 	<title>Json Generation</title>
-	<link rel="icon" href="../../images/Hippocampome_logo.ico">
+	<link rel='icon' href='../../images/Hippocampome_logo.ico'>
 	<style>
 	body {
     	background-color: lightgrey;
@@ -24,17 +27,22 @@ Date:   2020
 	}
 	</style>
 </head>
+";
+}
+?>
 <body>
 <?php
 	include ("generate_json_params.php"); // import parameters for this software
 
-	echo "<br><hr><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>";
+	if ($_REQUEST['page']!="main_page") {
+		echo "<br><hr><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>";
 
-	echo "<h3><center>Choose Json files to create:</center></h3>";
+		echo "<h3><center>Choose Json files to create:</center></h3>";
 
-	echo "<center><button onclick=\"window.location.href = '?page=phases_matrix';\" class='button'>Generate phases matrix json</button></center><br><hr>";
+		echo "<center><button onclick=\"window.location.href = '?page=phases_matrix';\" class='button'>Generate phases matrix json</button></center><br><hr>";
+	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions) {
 		/*
 			If statement used below in theta min and max query to avoid blank values being reported as
 			0.0 which would be incorrect.
@@ -47,7 +55,11 @@ Date:   2020
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT age) as age, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingAssignment) as recordingAssignment, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT age) as age, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingAssignment) as recordingAssignment, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
+		if ($conditions != "") {
+			$sql = $sql.$conditions;
+		}
+		$sql = $sql." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -67,6 +79,9 @@ Date:   2020
 			}
 		}
 		$sql = "SELECT MIN(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		if ($conditions != "") {
+			$sql = $sql.$conditions;
+		}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -75,14 +90,15 @@ Date:   2020
 				$count = $row['count'];
 			}
 		}
-		//if ($theta != '' && $theta != 0) {
-			$entry_output = $entry_output."\"<center><span id='test".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
-		//} 
+		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
 		array_push($theta_values, $entry_output);
 
 		// swr ratio section
 		$entry_output = "";
 		$sql = "SELECT IF (SWR_ratio != 0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
+		if ($conditions != "") {
+			$sql = $sql.$conditions;
+		}
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -90,6 +106,9 @@ Date:   2020
 			$swr_ratio = $row['swr_ratio_val'];
 		}
 		$sql = "SELECT MIN(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		if ($conditions != "") {
+			$sql = $sql.$conditions;
+		}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -99,13 +118,16 @@ Date:   2020
 			}
 		}		
 		//if ($swr_ratio != '' && $swr_ratio != 0) {
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></center></div>\",";
+			$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></span></center></div>\",";
 		//} 
 		array_push($spw_values, $entry_output);
 
 		// other column section
 		$entry_output = "";
 		$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$theta_id;
+		if ($conditions != "") {
+			$sql = $sql.$conditions;
+		}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -128,7 +150,7 @@ Date:   2020
 			else if ($epsilon != '') {
 				$other = "epsilon";
 			}
-			$entry_output = $entry_output."\"<center><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></center></div>\"]},";
+			$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		} 
 		array_push($other_values, $entry_output);
 
@@ -140,7 +162,7 @@ Date:   2020
 	*/
 	if ($page=='phases_matrix') {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids);
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$other_values = $write_output[2];
