@@ -1,45 +1,40 @@
 <?php
-  include ("/var/www/html/php/permission_check.php");
-?>
-<html>
-<!--
-This software is for generating json files
-
-Author: Nate Sutton 
-Date:   2020
--->
-<?php
-if ($_REQUEST['page']!="main_page") {
-echo "
-<head>
-	<title>Json Generation</title>
-	<link rel='icon' href='../../images/Hippocampome_logo.ico'>
-	<style>
-	body {
-    	background-color: lightgrey;
-	}
-	.button {
-		padding:20px;
-		font-size:20px;
-		border-radius: 30px;
-		border-color: darkgrey;
-		border: 2px solid darkgrey;
-	}
-	</style>
-</head>
-";
-}
-?>
-<body>
-<?php
 	include ("generate_json_params.php"); // import parameters for this software
 
-	if ($_REQUEST['page']!="main_page") {
-		echo "<br><hr><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>";
+	if ($page=="write_file" || $page==null) {
+		include ("/var/www/html/php/permission_check.php");
+		echo "
+		<html>
+		<!--
+		This software is for generating json files
 
-		echo "<h3><center>Choose Json files to create:</center></h3>";
+		Author: Nate Sutton 
+		Date:   2020
+		-->
 
-		echo "<center><button onclick=\"window.location.href = '?page=phases_matrix';\" class='button'>Generate phases matrix json</button></center><br><hr>";
+		<head>
+			<title>Json Generation</title>
+			<link rel='icon' href='../../images/Hippocampome_logo.ico'>
+			<style>
+			body {
+		    	background-color: lightgrey;
+			}
+			.button {
+				padding:20px;
+				font-size:20px;
+				border-radius: 30px;
+				border-color: darkgrey;
+				border: 2px solid darkgrey;
+			}
+			</style>
+		</head>
+		<body>
+		<br><hr><center><h2><a href='generate_json.php' style='color:black;text-decoration:none'>Json Generation Page</a></h2>Note: this page's operations require read and write access to a directory specified<br>in its source code. If that is not availible online this should be run offline to complete its operations.</center><br><hr>
+
+		<h3><center>Choose Json files to create:</center></h3>
+
+		<center><button onclick=\"window.location.href = '?page=write_file';\" class='button'>Generate phases matrix json</button></center><br><hr>
+		";
 	}
 
 	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions) {
@@ -160,14 +155,13 @@ echo "
 	/*
 	Generate matrices section
 	*/
-	if ($page=='phases_matrix') {
+	if ($page=="write_file" || $page=="main_page") {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
 			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$other_values = $write_output[2];
 		}
-		//echo $spw_values[1]."<br>";
 
 		/* 
 		Write to File 
@@ -175,7 +169,7 @@ echo "
 		$new_row_col is used because a new row occurs every certain
 		number of columns when reading the file.
 		*/
-		$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
+
 		/* specify rows to use from template file */
 		$init_col = 0;
 		$init_col2 = 1;
@@ -190,13 +184,13 @@ echo "
 		$theta_cols = array();
 		$spw_cols = array();
 		$other_cols = array();
-		$total_rows = $new_row_col*$neuron_classes;//($new_row_col*$new_row_col)+(2*$new_row_col);	
+		$total_rows = $new_row_col*$neuron_classes;	
 		$i_t = 0;
 		$i_s = 0;
 		$i_o = 0;
-		//$n_out = 0;		
-		//$p_out = 0;
-		$nl = $json_new_line; // new line
+		$nl = $json_new_line;
+		$json_output_string = "";
+
 		/* create arrays of selected template indexes */
 		for ($i = 0; $i < $max_rows; $i++) {
 			array_push($neuron_group_cols, ($init_col+($new_row_col*$i)));
@@ -206,30 +200,63 @@ echo "
 			array_push($other_cols, ($other_col+($new_row_col*$i)));
 		}	
 
+		if ($page=='write_file') {
+			$output_file = fopen($json_output_file, 'w') or die("Can't open file.");
+		}
+
 		for ($i = 0; $i<$total_rows; $i++) {
 			if ($i==($total_rows-1)) {
 				$last_index = count($other_output[0])-1; // last line
-				fwrite($output_file, "\"".$other_output[0][$last_index]."\"]}]}"); 
+				if ($page=='write_file') {
+					fwrite($output_file, "\"".$other_output[0][$last_index]."\"]}]}"); 
+				}
+				if ($page=='main_page') {
+					$json_output_string = $json_output_string."\"".$other_output[0][$last_index]."\"]}]}";
+				}
 			}
 			elseif (in_array($i, $neuron_group_cols)) {
-				fwrite($output_file, $neuron_groups[$i]);
+				if ($page=='write_file') {
+					fwrite($output_file, $neuron_groups[$i]);
+				}
+				if ($page=='main_page') {
+					$json_output_string = $json_output_string.$neuron_groups[$i];
+				}
 			}
 			elseif (in_array($i, $theta_cols)) {
-				fwrite($output_file, $theta_values[$i_t].$nl);
+				if ($page=='write_file') {
+					fwrite($output_file, $theta_values[$i_t].$nl);
+				}
+				if ($page=='main_page') {
+					$json_output_string = $json_output_string.$theta_values[$i_t].$nl;
+				}
 				$i_t++;
 			}
 			elseif (in_array($i, $spw_cols)) {
-				fwrite($output_file, $spw_values[$i_s].$nl);
-				//echo $i." ".$spw_values[$i_s]."<br>";
+				if ($page=='write_file') {
+					fwrite($output_file, $spw_values[$i_s].$nl);
+				}
+				if ($page=='main_page') {
+					$json_output_string = $json_output_string.$spw_values[$i_s].$nl;
+				}
 				$i_s++;
 			}
 			elseif (in_array($i, $other_cols)) {
-				fwrite($output_file, $other_values[$i_o].$nl);
+				if ($page=='write_file') {
+					fwrite($output_file, $other_values[$i_o].$nl);
+				}
+				if ($page=='main_page') {
+					$json_output_string = $json_output_string.$other_values[$i_o].$nl;
+				}
 				$i_o++;
 			}
 		}
-		fclose($output_file);	
-		echo "<br><br>Json file written.";
+		if ($page=='write_file') {
+			fclose($output_file);	
+			echo "<br><br>Json file written.";
+		}
 	}
+
+if ($page=="write_file" || $page="") {
+	echo "</body>";
+}
 ?>
-</body>

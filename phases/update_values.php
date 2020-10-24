@@ -1,5 +1,4 @@
 <?php
-$conditions = "";
 	$species=array();
 	$age=array();
 	$sex=array();

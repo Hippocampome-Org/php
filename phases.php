@@ -19,12 +19,23 @@ $jsonStr = $_SESSION['Phases'];
 $color_selected ='#EBF283';
 $research = $_REQUEST['research'];
 $hippo_select = $_SESSION['hippo_select'];
+
+$conditions = "";
+include("phases/update_values.php");
+if (isset($_GET['page']) && $_GET['page']=="main_page") {
+  include("phases/gen_json/generate_json.php");
+}
 ?>
 
 <?php 
   /* set json data to load */
   $matrix_type = "phases";
-  $session_matrix_cache_file = "phases/gen_json/json_files/phases.json";
+  /*if (isset($_GET['page']) && $_GET['page']=="main_page") {
+    $session_matrix_cache_file = $json_output_string;
+  }
+  else {*/
+    $session_matrix_cache_file = "phases/gen_json/json_files/phases.json";
+  //}
   $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
   $jsonStr = $_SESSION[$matrix_type]; 
 ?>
@@ -361,7 +372,7 @@ function HideShowColumns ()
   function is_checked($checkbox) {
     if (isset($_GET[$checkbox]) && $_GET[$checkbox]=="checked") {
       if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
-        echo ""; // return nothing
+        // return nothing
       }
       else {
         echo "checked";
@@ -376,13 +387,6 @@ function HideShowColumns ()
 </head>
 
 <body>
-  <?php
-    //$conditions = "";
-    include("phases/update_values.php");
-    if ($_REQUEST="page"=="main_page") {
-      //include("phases/gen_json/generate_json.php");
-    }
-  ?>
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
