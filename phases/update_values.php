@@ -60,13 +60,13 @@
 		array_push($behavior, "urethane");
 	}
 	if (isset($_REQUEST['behavior_check5']) && $_REQUEST['behavior_check5']=="checked") {
-		array_push($behavior, "urethane plus ketamine + xylazine");
+		array_push($behavior, "urethane plus supplemental doses of ketamine and xylazine");
 	}
 	if (isset($_REQUEST['behavior_check6']) && $_REQUEST['behavior_check6']=="checked") {
-		array_push($behavior, "ketamine + xylazine");
+		array_push($behavior, "ketamine and xylazine");
 	}
 	if (isset($_REQUEST['behavior_check7']) && $_REQUEST['behavior_check7']=="checked") {
-		array_push($behavior, "ketamine + xylazine plus acepromazine");
+		array_push($behavior, "ketamine, xylazine, and acepromazine");
 	}
 
 	// combine conditions
@@ -92,10 +92,10 @@
 	}
 
 	$conditions = report_condition($species, $conditions, "species");
-	$conditions = report_condition($age, $conditions, "age");
-	$conditions = report_condition($sex, $conditions, "sex");
-	$conditions = report_condition($method, $conditions, "method");
-	$conditions = report_condition($behavior, $conditions, "behavior");
+	$conditions = report_condition($age, $conditions, "agetype");
+	$conditions = report_condition($sex, $conditions, "gender");
+	$conditions = report_condition($method, $conditions, "recordingMethod");
+	$conditions = report_condition($behavior, $conditions, "behavioralStatus");
 
 	//echo "<br><br><br><br><br><br><br>".$conditions;
 

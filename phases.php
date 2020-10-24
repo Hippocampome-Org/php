@@ -30,14 +30,14 @@ if (isset($_GET['page']) && $_GET['page']=="main_page") {
 <?php 
   /* set json data to load */
   $matrix_type = "phases";
-  /*if (isset($_GET['page']) && $_GET['page']=="main_page") {
-    $session_matrix_cache_file = $json_output_string;
+  if (isset($_GET['page']) && $_GET['page']=="main_page") {
+    $jsonStr = $json_output_string;
   }
-  else {*/
+  else {
     $session_matrix_cache_file = "phases/gen_json/json_files/phases.json";
-  //}
-  $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
-  $jsonStr = $_SESSION[$matrix_type]; 
+    $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+    $jsonStr = $_SESSION[$matrix_type]; 
+  }
 ?>
 
 <style>
@@ -151,7 +151,7 @@ if ($_SESSION['perm'] == NULL)
 
 $(function(){
 
-	var dataStr = <?php echo $jsonStr?>;
+	var dataStr = <?php echo $jsonStr; ?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;

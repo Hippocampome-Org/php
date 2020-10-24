@@ -55,6 +55,7 @@
 			$sql = $sql.$conditions;
 		}
 		$sql = $sql." GROUP BY theta ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		//echo "<br><br><br><br><br><br><br><br>".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -132,21 +133,19 @@
 				$epsilon = $row['epsilon'];
 			}
 		}
-		if ($theta != '' && $theta != 0) {
-			if ($ripple != '') {
-				$other = "ripple";
-			}
-			else if ($gamma != '') {
-				$other = "gamma";
-			}
-			else if ($run_stop_ratio != '') {
-				$other = "run/stop ratio";
-			}
-			else if ($epsilon != '') {
-				$other = "epsilon";
-			}
-			$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></span></center></div>\"]},";
-		} 
+		if ($ripple != '') {
+			$other = "ripple";
+		}
+		else if ($gamma != '') {
+			$other = "gamma";
+		}
+		else if ($run_stop_ratio != '') {
+			$other = "run/stop ratio";
+		}
+		else if ($epsilon != '') {
+			$other = "epsilon";
+		}
+		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
 
 		return Array($theta_values, $spw_values, $other_values);		
