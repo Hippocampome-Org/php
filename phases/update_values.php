@@ -18,7 +18,7 @@
 		array_push($age, "young adult");
 	}
 	if (isset($_REQUEST['age_check3']) && $_REQUEST['age_check3']=="checked") {
-		array_push($age, "not reported");
+		array_push($age, "age not reported");
 	}
 	if (isset($_REQUEST['sex_check1']) && $_REQUEST['sex_check1']=="checked") {
 		array_push($sex, "male");
@@ -27,7 +27,7 @@
 		array_push($sex, "female");
 	}
 	if (isset($_REQUEST['sex_check3']) && $_REQUEST['sex_check3']=="checked") {
-		array_push($sex, "unknown sex");
+		array_push($sex, "unknown");
 	}
 	if (isset($_REQUEST['method_check1']) && $_REQUEST['method_check1']=="checked") {
 		array_push($method, "sharp pipette");
@@ -68,19 +68,47 @@
 	if (isset($_REQUEST['behavior_check7']) && $_REQUEST['behavior_check7']=="checked") {
 		array_push($behavior, "ketamine, xylazine, and acepromazine");
 	}
+	if (isset($_REQUEST['behavior_check8']) && $_REQUEST['behavior_check8']=="checked") {
+		array_push($behavior, "head fixed running");
+	}
 
 	// combine conditions
 	function report_condition($condition, $conditions, $cond_name) {
 		$entry = "";
+		$male_flag = false;
+		$female_flag = false;
+		$rem_flag = false;
 
 		for ($i = 0; $i < count($condition); $i++) {
+			if ($condition[$i]=="male") {
+				$male_flag = true;
+			}
+			else if ($condition[$i]=="female") {
+				$female_flag = true;
+			}
+			else if ($condition[$i]=="REM sleep") {
+				$rem_flag = true;
+			}
+
 			if (count($condition)==1) {
-				$entry = $entry." AND $cond_name = \"".$condition[$i]."\"";
+				if ($condition[$i] != "REM sleep") {
+					$entry = $entry." AND $cond_name = \"".$condition[$i]."\"";
+				}
+				else {
+					$entry = $entry." AND ($cond_name = \"".$condition[$i]."\" OR $cond_name = \"REM\")";
+				}
 			}
 			else if ($i==0) {
 				$entry = " AND ($cond_name = \"".$condition[$i]."\"".$entry;
 			}
 			else if ($i==(count($condition)-1)) {
+				if ($male_flag && $female_flag) {
+					$entry = $entry." OR $cond_name = \"male and female\"";
+				}
+				if ($rem_flag) {
+					$entry = $entry." OR $cond_name = \"REM\"";	
+				}
+
 				$entry = $entry." OR $cond_name = \"".$condition[$i]."\")";
 			}
 			else {
@@ -96,7 +124,4 @@
 	$conditions = report_condition($sex, $conditions, "gender");
 	$conditions = report_condition($method, $conditions, "recordingMethod");
 	$conditions = report_condition($behavior, $conditions, "behavioralStatus");
-
-	//echo "<br><br><br><br><br><br><br>".$conditions;
-
 ?>

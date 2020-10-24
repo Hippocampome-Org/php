@@ -44,13 +44,13 @@
 		*/
 		$entry_output = "";
 		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
-		$species = ''; $age = ''; $gender = ''; $rec = ''; $behav = '';
+		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = '';
 		$theta_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT age) as age, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingAssignment) as recordingAssignment, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -64,9 +64,9 @@
 					$theta_id = $row['id'];
 					$theta = $row['theta_val'];
 					$species = $row['species'];
-					$age = $row['age'];
+					$agetype = $row['agetype'];
 					$gender = $row['gender'];
-					$rec = $row['recordingAssignment'];
+					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					if ($theta != '') {
 						$theta_found = true;
@@ -86,7 +86,7 @@
 				$count = $row['count'];
 			}
 		}
-		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$age.", ".$gender.",\\n".$rec.",\\n".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
 		array_push($theta_values, $entry_output);
 
 		// swr ratio section
