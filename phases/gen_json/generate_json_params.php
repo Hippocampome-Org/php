@@ -54,6 +54,6 @@
 	/* Maunally sorted neuron group
 	Note: the auto sorted one no longer used due to
 	needing the same ordering as on the morphology page */
-	$neuron_group_short = array("Granule", "Mossy", "CA3 Pyramidal", "CA3c Pyramidal", "CA3 Axo-Axonic", "CA3 Basket", "CA3 BC CCK+", "CA2 Pyramidal", "CA1 LMR Projecting", "CA1 NGF Projecting", "Schaffer Collateral-Assoc", "CA1 Trilaminar", "CA1 Axo-axonic", "CA1 Hipp-SUB Proj ENK+", "CA1 O-LM", "CA1 Basket", "CA1 BC CCK+", "CA1 Bistratified", "CA1 Ivy", "CA1 Superficial Pyramidal", "CA1 Pyramidal", "CA1 Horizontal Basket CCK+", "CA1 Recurrent O-LMR", "SUB EC-Proj Pyramidal", "MEC LII Stellate", "MEC LII-III PC-Multiform", "LIII Pyramidal", "LV Deep Pyramidal");
-	$neuron_ids = array(1000, 1002, 2000, 2004, 2028, 2043, 2044, 3000, 4004, 4011, 4015, 4035, 4036, 4041, 4069, 4078, 4079, 4080, 4081, 4098, 4099, 4139, 4146, 5001, 6003, 6008, 6017, 6021);
+	$neuron_group_short = array("Granule", "Mossy", "CA3 Pyramidal", "CA3c Pyramidal", "CA3 Axo-Axonic", "CA3 Basket", "CA3 BC CCK+", "CA2 Pyramidal", "CA1 Superficial Pyramidal", "CA1 Pyramidal", "CA1 LMR Projecting", "CA1 NGF Projecting", "Schaffer Collateral-Assoc", "CA1 Trilaminar", "CA1 Axo-axonic", "CA1 Hipp-SUB Proj ENK+", "CA1 O-LM", "CA1 Basket", "CA1 BC CCK+", "CA1 Bistratified", "CA1 Ivy", "CA1 Horizontal Basket CCK+", "CA1 Recurrent O-LMR", "SUB EC-Proj Pyramidal", "MEC LII Stellate", "MEC LII-III PC-Multiform", "LIII Pyramidal", "LV Deep Pyramidal");
+	$neuron_ids = array(1000, 1002, 2000, 2004, 2028, 2043, 2044, 3000, 4098, 4099, 4004, 4011, 4015, 4035, 4036, 4041, 4069, 4078, 4079, 4080, 4081, 4139, 4146, 5001, 6003, 6008, 6017, 6021);
 ?>	

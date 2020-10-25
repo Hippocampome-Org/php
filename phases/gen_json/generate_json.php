@@ -46,11 +46,11 @@
 		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = '';
-		$theta_found = false;
+		$theta_found = false; $swr_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0.0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -74,7 +74,7 @@
 				}
 			}
 		}
-		$sql = "SELECT MIN(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT MIN(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -91,17 +91,31 @@
 
 		// swr ratio section
 		$entry_output = "";
-		$sql = "SELECT IF (SWR_ratio != 0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
+		//$sql = "SELECT IF (SWR_ratio != 0.0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, IF (GROUP_CONCAT(DISTINCT SWR_ratio) != 0.0, GROUP_CONCAT(DISTINCT CAST(SWR_ratio AS DECIMAL (10 , 2 ))), '') AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
+		$sql = $sql." GROUP BY swr_ratio ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
-			$row = $result->fetch_assoc();
-			$swr_ratio = $row['swr_ratio_val'];
+			while($row = $result->fetch_assoc()) {
+				if ($swr_found == false) {
+					$swr_ratio = $swr_ratio.$row['swr_ratio_val'];
+					$species = $row['species'];
+					$agetype = $row['agetype'];
+					$gender = $row['gender'];
+					$rec = $row['recordingMethod'];
+					$behav = $row['behavioralStatus'];
+					if ($swr_ratio != '') {
+						$swr_found = true;
+					}
+					//echo "cellid: ".$row['cellid']." swr_ratio: ".$swr_ratio." ".$sql."<br>\n";
+				}
+			}
 		}
-		$sql = "SELECT MIN(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT MIN(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -113,9 +127,7 @@
 				$count = $row['count'];
 			}
 		}		
-		//if ($swr_ratio != '' && $swr_ratio != 0) {
-			$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."' target='_blank'>".$swr_ratio."</a></span></center></div>\",";
-		//} 
+		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_ratio."</a></span></center></div>\",";
 		array_push($spw_values, $entry_output);
 
 		// other column section
