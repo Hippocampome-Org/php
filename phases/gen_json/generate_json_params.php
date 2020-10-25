@@ -14,7 +14,7 @@
 
 	include ("../db_access/permission_check.php"); // must be logged in
 
-	$path_to_files = "/var/www/html/php/phases/gen_json/";
+	$path_to_files = "phases/gen_json/";
 	$csv_output = '';
 	$write_csv_output = array();
 	$parcel_csv_output = array();
