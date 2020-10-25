@@ -115,6 +115,9 @@
 				$entry = $entry." OR $cond_name = \"".$condition[$i]."\"";
 			}
 		}
+		if (count($condition)==0) {
+			$entry = $entry." AND $cond_name = \"\"";
+		}
 
 		return $conditions.$entry;
 	}

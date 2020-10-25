@@ -367,8 +367,22 @@ function HideShowColumns ()
 <?php include ("function/icon.html"); ?>
 <title>Phases</title>
 <script type="text/javascript" src="style/resolution.js"></script>
-
+<script type = "text/javascript">
+  function unselect_all() {
+    window.location = "phases.php?page=main_page";
+  }
+  function select_all() {
+    window.location = "phases.php?selectall=true";
+  }  
+</script>
 <?php
+  if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+    echo "<script>unselect_all();</script>";
+  }
+  else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked") {
+    echo "<script>select_all();</script>";
+  }
+
   function is_checked($checkbox) {
     if (isset($_GET[$checkbox]) && $_GET[$checkbox]=="checked") {
       if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
@@ -379,6 +393,17 @@ function HideShowColumns ()
       }
     }
     else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+        // return nothing
+      }
+      else {      
+        echo "checked"; 
+      }
+    }
+    else if ($_GET['page']==null && $checkbox != "select_check1" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      echo "checked"; 
+    }
+    else if (isset($_GET['selectall']) && $_GET['selectall']=="true" && $checkbox != "select_check1" && $checkbox != "select_check2" && $checkbox != "select_check3") {
       echo "checked"; 
     }
   }
