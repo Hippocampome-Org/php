@@ -372,23 +372,27 @@ function HideShowColumns ()
     window.location = "phases.php?page=main_page";
   }
   function select_all() {
-    window.location = "phases.php?selectall=true";
+    //window.location = "phases.php?selectall=true";
+    window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&age_check3=checked&sex_check3=checked&method_check3=checked&behavior_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check6=checked&behavior_check7=checked&behavior_check8=checked&page=main_page&row_select=";
   }  
   function select_preferred() {
-    //document.write(document.getElementById("1").className);
     neuron_number = <?php echo count($neuron_ids) ?>;
     for (let i = 1; i < (neuron_number+1); i++) {
       // check for highlight
       if (document.getElementById(i).className.includes("ui-state-highlight")) {
-        //document.write(i+" is highlighted");
-        
-        //document.getElementById('supertypeForm').submit();
         document.getElementById('row_select').value=i;
       }
     }
   }
+  function subform() {
+    select_preferred();
+    document.getElementById('supertypeForm').submit();
+  }
 </script>
 <?php
+  if (!isset($_GET['page'])) {
+    echo "<script>select_all();</script>";
+  }
   if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
     echo "<script>unselect_all();</script>";
   }
@@ -446,7 +450,7 @@ function HideShowColumns ()
     <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span>select preferred</span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
     <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head fixed running</span></td></tr>
     </table>
-    <span style='width:1000px'><input type='submit' value='update' style='position:relative;left:410px' /></span>
+    <span style='width:1000px'><input type='button' value='update' onclick='javascript:subform()' style='position:relative;left:410px' /></span>
     <input type="hidden" name="page" id="page" value="main_page" />
     <input type="hidden" name="row_select" id="row_select" value="<?php if(isset($_GET['row_select'])) {echo $_GET['row_select'];} ?>" />
   </form>
