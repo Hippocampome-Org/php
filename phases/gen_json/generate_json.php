@@ -37,7 +37,7 @@
 		";
 	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr) {
 		/*
 			If statement used below in theta min and max query to avoid blank values being reported as
 			0.0 which would be incorrect.
@@ -48,6 +48,7 @@
 		$min_range = ''; $max_range = ''; $count = '';
 		$theta_found = false; $swr_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
+		$rank_entry_theta = array(); $rank_entry_swr = array();
 
 		// theta section
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0.0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
@@ -70,6 +71,11 @@
 					$behav = $row['behavioralStatus'];
 					if ($theta != '') {
 						$theta_found = true;
+						array_push($rank_entry_theta, $species);
+						array_push($rank_entry_theta, $agetype);
+						array_push($rank_entry_theta, $gender);
+						array_push($rank_entry_theta, $rec);
+						array_push($rank_entry_theta, $behav);
 					}
 				}
 			}
@@ -87,6 +93,7 @@
 			}
 		}
 		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
+		array_push($best_ranks_theta, $rank_entry_theta);
 		array_push($theta_values, $entry_output);
 
 		// swr ratio section
@@ -110,6 +117,11 @@
 					$behav = $row['behavioralStatus'];
 					if ($swr_ratio != '') {
 						$swr_found = true;
+						array_push($rank_entry_swr, $species);
+						array_push($rank_entry_swr, $agetype);
+						array_push($rank_entry_swr, $gender);
+						array_push($rank_entry_swr, $rec);
+						array_push($rank_entry_swr, $behav);
 					}
 					//echo "cellid: ".$row['cellid']." swr_ratio: ".$swr_ratio." ".$sql."<br>\n";
 				}
@@ -128,6 +140,7 @@
 			}
 		}		
 		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_ratio."</a></span></center></div>\",";
+		array_push($best_ranks_swr, $rank_entry_swr);
 		array_push($spw_values, $entry_output);
 
 		// other column section
@@ -160,7 +173,7 @@
 		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
 
-		return Array($theta_values, $spw_values, $other_values);		
+		return Array($theta_values, $spw_values, $other_values, $best_ranks_theta, $best_ranks_swr);		
 	}
 
 	/*
@@ -168,10 +181,12 @@
 	*/
 	if ($page=="write_file" || $page=="main_page") {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions);
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$other_values = $write_output[2];
+			$best_ranks_theta = $write_output[3];
+			$best_ranks_swr = $write_output[4];
 		}
 
 		/* 

@@ -374,6 +374,19 @@ function HideShowColumns ()
   function select_all() {
     window.location = "phases.php?selectall=true";
   }  
+  function select_preferred() {
+    //document.write(document.getElementById("1").className);
+    neuron_number = <?php echo count($neuron_ids) ?>;
+    for (let i = 1; i < (neuron_number+1); i++) {
+      // check for highlight
+      if (document.getElementById(i).className.includes("ui-state-highlight")) {
+        //document.write(i+" is highlighted");
+        
+        //document.getElementById('supertypeForm').submit();
+        document.getElementById('row_select').value=i;
+      }
+    }
+  }
 </script>
 <?php
   if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
@@ -430,11 +443,12 @@ function HideShowColumns ()
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check4" value="checked" id="method_check4" <?php is_checked("method_check4") ?>><span>optotagging</span></td><td><input type="checkbox" name="behavior_check4" value="checked" id="behavior_check4" <?php is_checked("behavior_check4") ?>><span>urethane</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check5" value="checked" id="method_check5" <?php is_checked("method_check5") ?>><span>silicon probe</span></td><td><input type="checkbox" name="behavior_check5" value="checked" id="behavior_check5" <?php is_checked("behavior_check5") ?>><span>urethane plus ketamine + xylazine</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check6" value="checked" id="method_check6" <?php is_checked("method_check6") ?>><span>tetrode</span></td><td><input type="checkbox" name="behavior_check6" value="checked" id="behavior_check6" <?php is_checked("behavior_check6") ?>><span>ketamine + xylazine</span></td></tr>
-    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" <?php is_checked("select_check2") ?>><span>select preferred</span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span>select preferred</span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
     <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head fixed running</span></td></tr>
     </table>
     <span style='width:1000px'><input type='submit' value='update' style='position:relative;left:410px' /></span>
     <input type="hidden" name="page" id="page" value="main_page" />
+    <input type="hidden" name="row_select" id="row_select" value="<?php if(isset($_GET['row_select'])) {echo $_GET['row_select'];} ?>" />
   </form>
 </div>
 
@@ -466,6 +480,61 @@ function HideShowColumns ()
 	
 </table>
 </div>
+<?php
+  /*
+    Update checkbox selection based on preferred conditions.
+  */
+  if (isset($_GET['row_select']) && $_GET['row_select'] != "") {
+    sleep(2);
+    $selected_conditions = array();
+    $selected_indices = array();
+    $i_r = $_GET['row_select'];
+    $selected_string = "";
+
+    //echo "<script>\nsetTimeout(() => {\n";
+    echo "<script>";
+
+    // collect conditions
+    for ($i = 0; $i < count($best_ranks_theta); $i++) {
+      array_push($selected_conditions, $best_ranks_theta[$i_r][$i]);
+      //echo $best_ranks_theta[$i_r][$i]."<br>\n";
+    }
+    for ($i = 0; $i < count($best_ranks_swr); $i++) {
+      array_push($selected_conditions, $best_ranks_swr[$i_r][$i]);
+      //echo $best_ranks_swr[$i_r][$i]."<br>\n";
+    }
+
+    // check boxes
+    $first_found = false;
+    for ($i = 0; $i < count($selected_conditions); $i++) {
+      for ($j = 0; $j < count($checkbox_values); $j++) {
+        if ($selected_conditions[$i] == $checkbox_values[$j]) {
+          //echo "document.getElementById(\"".$checkbox_group[$j]."\").value=\"checked\";\n";
+          //array_push($selected_indices, $j);
+          if ($first_found == false) {
+            $selected_string = $selected_string.$checkbox_group[$j]."=checked";
+            $first_found = true;
+          }
+          else {
+            $selected_string = $selected_string."&".$checkbox_group[$j]."=checked";
+          }
+        }
+      }
+    }
+    $redirect_page = "phases.php?".$selected_string."&page=main_page";
+    echo "window.location = \"$redirect_page\"";
+
+    // uncheck boxes
+    /*for ($i = 0; $i < count($checkbox_values); $i++) {
+      if (!in_array($i, $selected_indices)) {
+        echo "document.getElementById(\"".$checkbox_group[$i]."\").value=\"\";\n";
+      }
+    }*/
+
+    //echo "}, 4000);\n</script>\n";
+    echo "</script>\n";
+  }
+?>
 </body>
 </html>
 <?php
