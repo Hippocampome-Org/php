@@ -80,11 +80,11 @@
 				}
 			}
 		}
-		$sql = "SELECT MIN(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql2 = "SELECT MIN(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
-			$sql = $sql.$conditions;
+			$sql2 = $sql2.$conditions;
 		}
-		$result = $conn->query($sql);
+		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				$min_range = $row['min_range'];
@@ -127,11 +127,11 @@
 				}
 			}
 		}
-		$sql = "SELECT MIN(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql2 = "SELECT MIN(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
 		if ($conditions != "") {
-			$sql = $sql.$conditions;
+			$sql2 = $sql2.$conditions;
 		}
-		$result = $conn->query($sql);
+		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				$min_range = $row['min_range'];

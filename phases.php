@@ -488,7 +488,7 @@ function HideShowColumns ()
     sleep(2);
     $selected_conditions = array();
     $selected_indices = array();
-    $i_r = $_GET['row_select'];
+    $i_r = $_GET['row_select'] - 1;//$_GET['row_select'];
     $selected_string = "";
 
     //echo "<script>\nsetTimeout(() => {\n";
@@ -497,10 +497,24 @@ function HideShowColumns ()
     // collect conditions
     for ($i = 0; $i < count($best_ranks_theta); $i++) {
       array_push($selected_conditions, $best_ranks_theta[$i_r][$i]);
+      if ($best_ranks_theta[$i_r][$i] == "male and female") {
+        array_push($selected_conditions, "male");
+        array_push($selected_conditions, "female");
+      }
+      if ($best_ranks_theta[$i_r][$i] == "REM sleep") {
+        array_push($selected_conditions, "REM"); 
+      }
       //echo $best_ranks_theta[$i_r][$i]."<br>\n";
     }
     for ($i = 0; $i < count($best_ranks_swr); $i++) {
       array_push($selected_conditions, $best_ranks_swr[$i_r][$i]);
+      if ($best_ranks_swr[$i_r][$i] == "male and female") {
+        array_push($selected_conditions, "male");
+        array_push($selected_conditions, "female");
+      }
+      if ($best_ranks_swr[$i_r][$i] == "REM sleep") {
+        array_push($selected_conditions, "REM"); 
+      }
       //echo $best_ranks_swr[$i_r][$i]."<br>\n";
     }
 
