@@ -86,7 +86,7 @@
 			}
 		}
 		// find median
-		$sql2 = "SELECT CAST(AVG(pp.theta) AS DECIMAL(10,2)) as median_val FROM (SELECT p.theta, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.theta is NOT NULL AND p.theta!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_rank." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) );";
+		$sql2 = "SELECT CAST(AVG(pp.theta) AS DECIMAL(10,2)) as median_val FROM (SELECT p.theta, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.theta is NOT NULL AND p.theta!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_rank." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2));";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -150,7 +150,7 @@
 			}
 		}
 		// find median
-		$sql2 = "SELECT CAST(AVG(pp.SWR_ratio) AS DECIMAL(10,2)) as median_val FROM (SELECT p.SWR_ratio, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.SWR_ratio is NOT NULL AND p.SWR_ratio!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_swr_rank." ORDER BY CAST(p.SWR_ratio AS DECIMAL(10,2))) as pp WHERE pp.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) );";
+		$sql2 = "SELECT CAST(AVG(pp.SWR_ratio) AS DECIMAL(10,2)) as median_val FROM (SELECT p.SWR_ratio, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.SWR_ratio is NOT NULL AND p.SWR_ratio!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_swr_rank." ORDER BY CAST(p.SWR_ratio AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2));";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
