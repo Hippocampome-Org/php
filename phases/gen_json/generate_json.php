@@ -43,15 +43,17 @@
 			0.0 which would be incorrect.
 		*/
 		$entry_output = "";
-		$theta_id = ''; $theta = ''; $swr_ratio = ''; $other = '';
+		$id = ''; $theta = ''; $swr_ratio = ''; $other = '';
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = '';
 		$theta_found = false; $swr_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 		$rank_entry_theta = array(); $rank_entry_swr = array();
+		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
+		$theta_median = ''; $swr_median = '';
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(AVG(theta) AS DECIMAL(10,2)) as theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(AVG(theta) AS DECIMAL(10,2)) as theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -62,13 +64,14 @@
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				if ($theta_found == false) {
-					$theta_id = $row['id'];
+					$id = $row['id'];
 					$theta = $row['theta_val'];
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
+					$rank = $row['metadataRank'];
 					if ($theta != '') {
 						$theta_found = true;
 						array_push($rank_entry_theta, $species);
@@ -76,15 +79,26 @@
 						array_push($rank_entry_theta, $gender);
 						array_push($rank_entry_theta, $rec);
 						array_push($rank_entry_theta, $behav);
+						$lowest_rank = $rank;
+						$lowest_rank_id = $id;
 					}
 				}
 			}
 		}
-		$sql2 = "SELECT MIN(CAST(theta AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(theta AS DECIMAL (10 , 2 ))) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
-		if ($conditions != "") {
-			$sql2 = $sql2.$conditions;
-		}
+		// find median
+		$sql2 = "SELECT CAST(AVG(pp.theta) AS DECIMAL(10,2)) as median_val FROM (SELECT p.theta, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.theta is NOT NULL AND p.theta!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_rank." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) );";
 		$result = $conn->query($sql2);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$theta_median = $row['median_val'];
+			}
+		}
+		// find min and max
+		$sql4 = "SELECT MIN(CAST(theta AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(theta AS DECIMAL (10 , 2 ))) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
+		if ($conditions != "") {
+			$sql4 = $sql4.$conditions;
+		}
+		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				$min_range = $row['min_range'];
@@ -92,14 +106,14 @@
 				$count = $row['count'];
 			}
 		}
-		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
 		array_push($best_ranks_theta, $rank_entry_theta);
 		array_push($theta_values, $entry_output);
 
 		// swr ratio section
 		$entry_output = "";
 		//$sql = "SELECT IF (SWR_ratio != 0.0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(SWR_ratio) AS DECIMAL(10,2)) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(SWR_ratio) AS DECIMAL(10,2)) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -109,12 +123,14 @@
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				if ($swr_found == false) {
+					$id = $row['id'];
 					$swr_ratio = $swr_ratio.$row['swr_ratio_val'];
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
+					$rank = $row['metadataRank'];
 					if ($swr_ratio != '') {
 						$swr_found = true;
 						array_push($rank_entry_swr, $species);
@@ -122,16 +138,30 @@
 						array_push($rank_entry_swr, $gender);
 						array_push($rank_entry_swr, $rec);
 						array_push($rank_entry_swr, $behav);
+						if ($rank < $lowest_rank) {
+							$lowest_rank = $rank;
+							$lowest_rank_id = $id;
+						}
+						$lowest_swr_rank = $rank;
+						$lowest_swr_rank_id = $id;
 					}
 					//echo "cellid: ".$row['cellid']." swr_ratio: ".$swr_ratio." ".$sql."<br>\n";
 				}
 			}
 		}
-		$sql2 = "SELECT MIN(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
-		if ($conditions != "") {
-			$sql2 = $sql2.$conditions;
-		}
+		// find median
+		$sql2 = "SELECT CAST(AVG(pp.SWR_ratio) AS DECIMAL(10,2)) as median_val FROM (SELECT p.SWR_ratio, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.SWR_ratio is NOT NULL AND p.SWR_ratio!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_swr_rank." ORDER BY CAST(p.SWR_ratio AS DECIMAL(10,2))) as pp WHERE pp.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) );";
 		$result = $conn->query($sql2);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$swr_median = $row['median_val'];
+			}
+		}
+		$sql4 = "SELECT MIN(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
+		if ($conditions != "") {
+			$sql4 = $sql4.$conditions;
+		}
+		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				$min_range = $row['min_range'];
@@ -139,13 +169,13 @@
 				$count = $row['count'];
 			}
 		}		
-		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_ratio."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
 		array_push($best_ranks_swr, $rank_entry_swr);
 		array_push($spw_values, $entry_output);
 
 		// other column section
 		$entry_output = "";
-		$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$theta_id;
+		$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$lowest_rank_id;
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}

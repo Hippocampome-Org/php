@@ -2,6 +2,9 @@
 session_start();
 include("permission_check.php");
 ?>
+<!--
+  reference: https://stackoverflow.com/questions/1291152/simple-way-to-calculate-median-with-mysql
+  -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -219,7 +222,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','<a title=\'most commonly found theta rhythm phase\'>Theta</a>','<a title=\'sharp-wave ripple ratio\'>SWR ratio</a>','<a title=\'primary method used for finding experimentally reported values\'>Other</a>']
+    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a trough at zero degrees and calibrated to CA1 SP.\'>Theta</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR ratio</a>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
     ,colModel :[
 	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
