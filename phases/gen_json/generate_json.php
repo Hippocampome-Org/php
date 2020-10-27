@@ -51,7 +51,7 @@
 		$rank_entry_theta = array(); $rank_entry_swr = array();
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, IF (theta != 0.0, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))), '') AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(AVG(theta) AS DECIMAL(10)) as theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -80,7 +80,7 @@
 				}
 			}
 		}
-		$sql2 = "SELECT MIN(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (theta != 0.0, CAST(theta AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql2 = "SELECT MIN(CAST(theta AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(theta AS DECIMAL (10 , 2 ))) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql2 = $sql2.$conditions;
 		}
@@ -99,7 +99,7 @@
 		// swr ratio section
 		$entry_output = "";
 		//$sql = "SELECT IF (SWR_ratio != 0.0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, IF (GROUP_CONCAT(DISTINCT SWR_ratio) != 0.0, GROUP_CONCAT(DISTINCT CAST(SWR_ratio AS DECIMAL (10 , 2 ))), '') AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, IF (GROUP_CONCAT(DISTINCT SWR_ratio) != 0.0, GROUP_CONCAT(DISTINCT CAST(SWR_ratio AS DECIMAL (10 , 2 ))), '') AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -127,7 +127,7 @@
 				}
 			}
 		}
-		$sql2 = "SELECT MIN(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), 'NA')) AS min_range, MAX(IF (SWR_ratio != 0.0, CAST(SWR_ratio AS DECIMAL (10 , 2 )), -1E200)) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i];
+		$sql2 = "SELECT MIN(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql2 = $sql2.$conditions;
 		}
