@@ -219,7 +219,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','Theta','SWR ratio','Other']
+    colNames:['','Neuron Type','<a title=\'most commonly found theta rhythm phase\'>Theta</a>','<a title=\'sharp-wave ripple ratio\'>SWR ratio</a>','<a title=\'primary method used for finding experimentally reported values\'>Other</a>']
     ,colModel :[
 	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
@@ -227,7 +227,7 @@ $(function(){
       {name:'NeuronType', index:'nickname', width:175,sortable:false},
       {name:'Theta', index:'theta', width:75,search:false,sortable:false},
       {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
-      {name:'Other', index:'other', width:75,search:false,sortable:false}
+      {name:'Other', index:'other', width:75,search:false,sortable:false,title:'test'}
 	], 
    
     rowNum:122,
@@ -447,8 +447,8 @@ function HideShowColumns ()
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check4" value="checked" id="method_check4" <?php is_checked("method_check4") ?>><span>optotagging</span></td><td><input type="checkbox" name="behavior_check4" value="checked" id="behavior_check4" <?php is_checked("behavior_check4") ?>><span>urethane</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check5" value="checked" id="method_check5" <?php is_checked("method_check5") ?>><span>silicon probe</span></td><td><input type="checkbox" name="behavior_check5" value="checked" id="behavior_check5" <?php is_checked("behavior_check5") ?>><span>urethane plus ketamine + xylazine</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check6" value="checked" id="method_check6" <?php is_checked("method_check6") ?>><span>tetrode</span></td><td><input type="checkbox" name="behavior_check6" value="checked" id="behavior_check6" <?php is_checked("behavior_check6") ?>><span>ketamine + xylazine</span></td></tr>
-    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span>select preferred</span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
-    <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head fixed running</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span><a title="show the preferred conditions for the values in a selected row" style="text-decoration: none">select preferred</a></span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head-fixed running</span></td></tr>
     </table>
     <span style='width:1000px'><input type='button' value='update' onclick='javascript:subform()' style='position:relative;left:410px' /></span>
     <input type="hidden" name="page" id="page" value="main_page" />
