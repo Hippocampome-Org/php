@@ -46,7 +46,7 @@
 		$id = ''; $theta = ''; $swr_ratio = ''; $other = '';
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = '';
-		$theta_found = false; $swr_found = false;
+		$theta_found = false; $swr_found = false; $other_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 		$rank_entry_theta = array(); $rank_entry_swr = array();
 		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
@@ -175,17 +175,26 @@
 
 		// other column section
 		$entry_output = "";
-		$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$lowest_rank_id;
+		//$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$lowest_rank_id;
+		$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '') ORDER BY CAST(metadataRank AS DECIMAL (10 , 2 ))";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
-				$ripple = $row['ripple'];
-				$gamma = $row['gamma'];
-				$run_stop_ratio = $row['run_stop_ratio'];
-				$epsilon = $row['epsilon'];
+				if ($other_found==false) {
+					$ripple = $row['ripple'];
+					$gamma = $row['gamma'];
+					$run_stop_ratio = $row['run_stop_ratio'];
+					$epsilon = $row['epsilon'];		
+					$agetype = $row['agetype'];
+					$gender = $row['gender'];
+					$rec = $row['recordingMethod'];
+					$behav = $row['behavioralStatus'];
+					$rank = $row['metadataRank'];
+					$other_found=true;
+				}
 			}
 		}
 		if ($ripple != '') {
@@ -200,7 +209,7 @@
 		else if ($epsilon != '') {
 			$other = "epsilon";
 		}
-		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$other."' target='_blank'>".$other."</a></span></center></div>\"]},";
+		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
 
 		return Array($theta_values, $spw_values, $other_values, $best_ranks_theta, $best_ranks_swr);		
