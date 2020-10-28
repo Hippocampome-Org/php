@@ -455,7 +455,7 @@ function HideShowColumns ()
   </form>
 </div>
 
-<div class='table_position' style='position:relative;top:375px;'>
+<div class='table_position' style='position:relative;top:355px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
