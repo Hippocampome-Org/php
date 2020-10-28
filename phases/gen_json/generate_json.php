@@ -71,6 +71,8 @@
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
+					$parsed_rank = explode(',', $rank);
+					$rank = $parsed_rank[0];
 					if ($theta != '') {
 						$theta_found = true;
 						array_push($rank_entry_theta, $species);
@@ -136,6 +138,8 @@
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
+					$parsed_rank = explode(',', $rank);
+					$rank = $parsed_rank[0];
 					if ($swr_ratio != '') {
 						$swr_found = true;
 						array_push($rank_entry_swr, $species);
@@ -206,6 +210,8 @@
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
+					$parsed_rank = explode(',', $rank);
+					$rank = $parsed_rank[0];
 					$other_found=true;
 				}
 			}
