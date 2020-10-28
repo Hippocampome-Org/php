@@ -386,9 +386,17 @@ function HideShowColumns ()
         document.getElementById('row_select').value=i;
       }
     }
+    <?php
+      for ($i=0;$i<count($checkbox_group);$i++) {
+        echo "document.getElementById('".$checkbox_group[$i]."').value=\"checked\";\n";
+        $_GET['".$checkbox_group[$i]."']="checked";
+      }
+    ?>
   }
   function subform() {
-    select_preferred();
+    <?php if (isset($_GET['select_check2']) && $_GET['select_check2']=="checked") {
+      echo "select_preferred();";
+    }?>
     document.getElementById('supertypeForm').submit();
   }
 </script>
@@ -453,7 +461,7 @@ function HideShowColumns ()
     <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span>
       <a title="Show the preferred conditions for the values in a selected row.
 Select a row, click this checkbox, then click update." style="text-decoration: none">
-    select preferred</a></span></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
+    &nbsp;&nbsp;&nbsp;select most<center>preferred conditions</a></span></center></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
     <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head-fixed running</span></td></tr>
     </table>
     <span style='width:1000px'><input type='button' value='update' onclick='javascript:subform()' style='position:relative;left:410px' /></span>
@@ -462,7 +470,7 @@ Select a row, click this checkbox, then click update." style="text-decoration: n
   </form>
 </div>
 
-<div class='table_position' style='position:relative;top:355px;'>
+<div class='table_position' style='position:relative;top:375px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
