@@ -188,10 +188,11 @@
 		// other column section
 		$entry_output = "";
 		//$sql = "SELECT ripple, gamma, run_stop_ratio, epsilon FROM phases WHERE id = ".$lowest_rank_id;
-		$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '') ORDER BY CAST(metadataRank AS DECIMAL (10 , 2 ))";
+		$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '')";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
+		$sql = $sql." ORDER BY CAST(metadataRank AS DECIMAL (10 , 2 ))";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
