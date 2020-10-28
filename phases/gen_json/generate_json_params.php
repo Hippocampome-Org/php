@@ -52,6 +52,9 @@
 	$theta_values = array();
 	$spw_values = array();
 	$other_values = array();
+	$npage_theta = array();
+	$npage_swr = array();
+	$npage_other = array();
 	
 	/* Maunally sorted neuron group
 	Note: the auto sorted one no longer used due to

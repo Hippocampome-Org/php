@@ -37,10 +37,9 @@
 		";
 	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $npage_theta, $npage_swr, $npage_other) {
 		/*
-			If statement used below in theta min and max query to avoid blank values being reported as
-			0.0 which would be incorrect.
+			Return values for theta, swr_ratio, and other.
 		*/
 		$entry_output = "";
 		$id = ''; $theta = ''; $swr_ratio = ''; $other = '';
@@ -50,7 +49,7 @@
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 		$rank_entry_theta = array(); $rank_entry_swr = array();
 		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
-		$theta_median = ''; $swr_median = '';
+		$theta_median = ''; $swr_median = ''; $npage_entry = array();
 
 		// theta section
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(AVG(theta) AS DECIMAL(10,2)) as theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
@@ -109,6 +108,12 @@
 		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
 		array_push($best_ranks_theta, $rank_entry_theta);
 		array_push($theta_values, $entry_output);
+		array_push($npage_entry, $neuron_ids[$i]);
+		array_push($npage_entry, $theta_median);
+		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
+		array_push($npage_entry, $count);
+		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
+		array_push($npage_theta, $npage_entry);
 
 		// swr ratio section
 		$entry_output = "";
@@ -172,6 +177,13 @@
 		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
 		array_push($best_ranks_swr, $rank_entry_swr);
 		array_push($spw_values, $entry_output);
+		$npage_entry = array();
+		array_push($npage_entry, $neuron_ids[$i]);
+		array_push($npage_entry, $swr_median);
+		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
+		array_push($npage_entry, $count);
+		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
+		array_push($npage_swr, $npage_entry);
 
 		// other column section
 		$entry_output = "";
@@ -211,8 +223,13 @@
 		}
 		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
+		$npage_entry = array();
+		array_push($npage_entry, $neuron_ids[$i]);
+		array_push($npage_entry, $other);
+		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
+		array_push($npage_other, $npage_entry);
 
-		return Array($theta_values, $spw_values, $other_values, $best_ranks_theta, $best_ranks_swr);		
+		return Array($theta_values, $spw_values, $other_values, $best_ranks_theta, $best_ranks_swr, $npage_theta, $npage_swr, $npage_other);		
 	}
 
 	/*
@@ -220,12 +237,15 @@
 	*/
 	if ($page=="write_file" || $page=="main_page") {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr);
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $npage_theta, $npage_swr, $npage_other);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$other_values = $write_output[2];
 			$best_ranks_theta = $write_output[3];
 			$best_ranks_swr = $write_output[4];
+			$npage_theta = $write_output[5];
+			$npage_swr = $write_output[6];
+			$npage_other = $write_output[7];
 		}
 
 		/* 
