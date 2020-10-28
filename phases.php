@@ -379,24 +379,9 @@ function HideShowColumns ()
     window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&age_check3=checked&sex_check3=checked&method_check3=checked&behavior_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check6=checked&behavior_check7=checked&behavior_check8=checked&page=main_page&row_select=";
   }  
   function select_preferred() {
-    neuron_number = <?php echo count($neuron_ids) ?>;
-    for (let i = 1; i < (neuron_number+1); i++) {
-      // check for highlight
-      if (document.getElementById(i).className.includes("ui-state-highlight")) {
-        document.getElementById('row_select').value=i;
-      }
-    }
-    <?php
-      for ($i=0;$i<count($checkbox_group);$i++) {
-        echo "document.getElementById('".$checkbox_group[$i]."').value=\"checked\";\n";
-        $_GET['".$checkbox_group[$i]."']="checked";
-      }
-    ?>
+    window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&sex_check3=checked&method_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check7=checked&page=main_page";
   }
   function subform() {
-    <?php if (isset($_GET['select_check2']) && $_GET['select_check2']=="checked") {
-      echo "select_preferred();";
-    }?>
     document.getElementById('supertypeForm').submit();
   }
 </script>
@@ -409,6 +394,9 @@ function HideShowColumns ()
   }
   else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked") {
     echo "<script>select_all();</script>";
+  }
+  else if (isset($_GET['select_check2']) && $_GET['select_check2']=="checked") {
+    echo "<script>select_preferred();</script>";
   }
 
   function is_checked($checkbox) {
@@ -458,9 +446,8 @@ function HideShowColumns ()
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check4" value="checked" id="method_check4" <?php is_checked("method_check4") ?>><span>optotagging</span></td><td><input type="checkbox" name="behavior_check4" value="checked" id="behavior_check4" <?php is_checked("behavior_check4") ?>><span>urethane</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check5" value="checked" id="method_check5" <?php is_checked("method_check5") ?>><span>silicon probe</span></td><td><input type="checkbox" name="behavior_check5" value="checked" id="behavior_check5" <?php is_checked("behavior_check5") ?>><span>urethane plus ketamine + xylazine</span></td></tr>
     <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check6" value="checked" id="method_check6" <?php is_checked("method_check6") ?>><span>tetrode</span></td><td><input type="checkbox" name="behavior_check6" value="checked" id="behavior_check6" <?php is_checked("behavior_check6") ?>><span>ketamine + xylazine</span></td></tr>
-    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2" onclick="javascript:select_preferred()"><span>
-      <a title="Show the preferred conditions for the values in a selected row.
-Select a row, click this checkbox, then click update." style="text-decoration: none">
+    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td><input type="checkbox" name="select_check2" value="checked" id="select_check2"><span>
+      <a title="Show the most preferred conditions for all values in the matrix." style="text-decoration: none">
     &nbsp;&nbsp;&nbsp;select most<center>preferred conditions</a></span></center></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
     <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head-fixed running</span></td></tr>
     </table>
@@ -485,18 +472,20 @@ Select a row, click this checkbox, then click update." style="text-decoration: n
 		  <font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
     </td>
 	   <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font></td>
+		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
 		&nbsp; &nbsp; 
-		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
+		<td>
+    </td>
      <tr></tr>
       <tr>
         <td></td>
-        <td>
+        <td><font class='font5'>The median value of the set of most relevant values for each cell in the matrix is shown. A median function modification that is used<br> is the lower value closest to the set’s center, rather than average of two center values, is displayed for even numbered value sets.</font>
     </td>
 		<tr>
 		</tr>
 	
 </table>
+
 </div>
 <?php
   /*
