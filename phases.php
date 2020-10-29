@@ -2,6 +2,9 @@
 session_start();
 include("permission_check.php");
 ?>
+<!--
+  reference: https://stackoverflow.com/questions/1291152/simple-way-to-calculate-median-with-mysql
+  -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -13,75 +16,31 @@ include("permission_check.php");
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="jquery-ui-1.10.2.custom/js/jquery.jqGrid.src-custom.js" type="text/javascript"></script>
-<script>
-jQuery(document).ready(function() {
-   $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_phases.php',
-    success: function() {}
-  });
-   $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_izhikevich_model.php',
-    success: function() {}
-  });
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_markers.php',
-    success: function() {}
-  }); 
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_ephys.php',
-    success: function() {}
-  }); 
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_morphology.php',
-    success: function() {}
-  });
-  $.ajax({
-    type: 'GET',
-    cache: false,
-    contentType: 'application/json; charset=utf-8',
-    url: 'load_matrix_session_connectivity.php',
-    success: function() {}
-  });
-  $.ajax({
-		type: 'GET',
-		cache: false,
-		contentType: 'application/json; charset=utf-8',
-		url: 'load_matrix_session_firing.php',
-		success: function() {}
-  });
-  $.ajax({
-		type: 'GET',
-		cache: false,
-		contentType: 'application/json; charset=utf-8',
-		url: 'load_matrix_session_firing_parameter.php',
-		success: function() {}
-  });
-  $('div#menu_main_button_new_clr').css('display','block');
-});
-</script>
-
-
 <?php
 require_once("load_matrix_session_phases.php");
 $jsonStr = $_SESSION['Phases'];
 $color_selected ='#EBF283';
 $research = $_REQUEST['research'];
 $hippo_select = $_SESSION['hippo_select'];
+
+$conditions = "";
+include("phases/update_values.php");
+if (isset($_GET['page']) && $_GET['page']=="main_page") {
+  include("phases/gen_json/generate_json.php");
+}
+?>
+
+<?php 
+  /* set json data to load */
+  $matrix_type = "phases";
+  if (isset($_GET['page']) && $_GET['page']=="main_page") {
+    $jsonStr = $json_output_string;
+  }
+  else {
+    $session_matrix_cache_file = "phases/gen_json/json_files/phases.json";
+    $_SESSION[$matrix_type] = file_get_contents($session_matrix_cache_file);
+    $jsonStr = $_SESSION[$matrix_type]; 
+  }
 ?>
 
 <style>
@@ -195,26 +154,7 @@ if ($_SESSION['perm'] == NULL)
 
 $(function(){
 
-// All param implementeation will be done later
-/*	$('#all_parameters').change(function() {
-		var bgColorArray = ["","","","#770000","#C08181","#FFFF99","#FF6103","#FFCC33","#336633"];
-		var fontColorArray = ["","","","#FFFFFF","#FFFFFF","#000099","#000099","#000099","#FFFFFF"];
-		if ($("#all_parameters").is(':checked')) {
-           $("#nGrid").jqGrid('showCol',["Supertype"]);
-		}
-		else{
-			$("#nGrid").jqGrid('hideCol',["Supertype"]);
-		}
-		var $i=0;
-		$(".jqg-second-row-header").children().each(function()
-		{
-			$(this).css("background",bgColorArray[$i]);
-			$(this).css("color",fontColorArray[$i]);
-			$i++;	
-		});
-	});*/
-
-	var dataStr = <?php echo $jsonStr?>;
+	var dataStr = <?php echo $jsonStr; ?>;
 	function Merger(gridName,cellName){
 		var mya = $("#" + gridName + "").getDataIDs();	
 		var rowCount = mya.length;
@@ -282,7 +222,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','Theta','SWR ratio','Other']
+    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR ratio</a>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
     ,colModel :[
 	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
@@ -290,7 +230,7 @@ $(function(){
       {name:'NeuronType', index:'nickname', width:175,sortable:false},
       {name:'Theta', index:'theta', width:75,search:false,sortable:false},
       {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
-      {name:'Other', index:'other', width:75,search:false,sortable:false}
+      {name:'Other', index:'other', width:75,search:false,sortable:false,title:'test'}
 	], 
    
     rowNum:122,
@@ -430,10 +370,64 @@ function HideShowColumns ()
 <?php include ("function/icon.html"); ?>
 <title>Phases</title>
 <script type="text/javascript" src="style/resolution.js"></script>
+<script type = "text/javascript">
+  function unselect_all() {
+    window.location = "phases.php?page=main_page";
+  }
+  function select_all() {
+    //window.location = "phases.php?selectall=true";
+    window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&age_check3=checked&sex_check3=checked&method_check3=checked&behavior_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check6=checked&behavior_check7=checked&behavior_check8=checked&page=main_page&row_select=";
+  }  
+  function select_preferred() {
+    window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&sex_check3=checked&method_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check7=checked&page=main_page";
+  }
+  function subform() {
+    document.getElementById('supertypeForm').submit();
+  }
+</script>
+<?php
+  if (!isset($_GET['page'])) {
+    echo "<script>select_all();</script>";
+  }
+  if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+    echo "<script>unselect_all();</script>";
+  }
+  else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked") {
+    echo "<script>select_all();</script>";
+  }
+  else if (isset($_GET['select_check2']) && $_GET['select_check2']=="checked") {
+    echo "<script>select_preferred();</script>";
+  }
+
+  function is_checked($checkbox) {
+    if (isset($_GET[$checkbox]) && $_GET[$checkbox]=="checked") {
+      if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+        // return nothing
+      }
+      else {
+        echo "checked";
+      }
+    }
+    else if (isset($_GET['select_check1']) && $_GET['select_check1']=="checked" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      if (isset($_GET['select_check3']) && $_GET['select_check3']=="checked") {
+        // return nothing
+      }
+      else {      
+        echo "checked"; 
+      }
+    }
+    else if ($_GET['page']==null && $checkbox != "select_check1" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      echo "checked"; 
+    }
+    else if (isset($_GET['selectall']) && $_GET['selectall']=="true" && $checkbox != "select_check1" && $checkbox != "select_check2" && $checkbox != "select_check3") {
+      echo "checked"; 
+    }
+  }
+?>
+
 </head>
 
 <body>
-
 <!-- COPY IN ALL PAGES -->
 <?php 
 	include ("function/title.php");
@@ -442,12 +436,26 @@ function HideShowColumns ()
 
 <div class='title_area'>
   <form id='supertypeForm'>
-    <font id= "title" class="font1">Browse Phases matrix</font>
-    <input type="checkbox" value="check1" name="check1" id="checkbox1"><span>Multi Compartment Model</span>
+    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font>
+    <br>
+    <table style='width:1000px;font-family:arial;font-size:18px'>
+    <tr><td style="width:131px">&nbsp;&nbsp;<u>Animal</u></td><td style="width:200px">&nbsp;&nbsp;<u>Age</u></td><td style="width:150px">&nbsp;&nbsp;<u>Sex</u></td><td style="width:250px">&nbsp;&nbsp;<u>Method</u></td><td style="width:450px">&nbsp;&nbsp;<u>Behavior</u></td></tr>
+    <tr><td><input type="checkbox" name="species_check1" value="checked" id="species_check1" <?php is_checked("species_check1") ?>><span>rats</span></td><td><input type="checkbox" name="age_check1" value="checked" id="age_check1" <?php is_checked("age_check1") ?>><span>adult</span></td><td><input type="checkbox" name="sex_check1" value="checked" id="sex_check1" <?php is_checked("sex_check1") ?>><span>male</span></td><td><input type="checkbox" name="method_check1" value="checked" id="method_check1" <?php is_checked("method_check1") ?>><span>sharp pipette</span></td><td><input type="checkbox" name="behavior_check1" value="checked" id="behavior_check1" <?php is_checked("behavior_check1") ?>><span>freely moving</span></td></tr>
+    <tr><td><input type="checkbox" name="species_check2" value="checked" id="species_check2" <?php is_checked("species_check2") ?>><span>mice</span></td><td><input type="checkbox" name="age_check2" value="checked" id="age_check2" <?php is_checked("age_check2") ?>><span>young adult</span></td><td><input type="checkbox" name="sex_check2" value="checked" id="sex_check2" <?php is_checked("sex_check2") ?>><span>female</span></td><td><input type="checkbox" name="method_check2" value="checked" id="method_check2" <?php is_checked("method_check2") ?>><span>whole-cell patch clamp</span></td><td><input type="checkbox" name="behavior_check2" value="checked" id="behavior_check2" <?php is_checked("behavior_check2") ?>><span>head-fixed awake</span></td></tr>
+    <tr><td></td><td><input type="checkbox" name="age_check3" value="checked" id="age_check3" <?php is_checked("age_check3") ?>><span><a title='age not reported' style='text-decoration:none'>age not reported</a></span></td><td><input type="checkbox" name="sex_check3" value="checked" id="sex_check3" <?php is_checked("sex_check3") ?>><span><a title='unknown sex' style='text-decoration:none'>unknown sex</a></span></td><td><input type="checkbox" name="method_check3" value="checked" id="method_check3" <?php is_checked("method_check3") ?>><span>juxtacellular</span></td><td><input type="checkbox" name="behavior_check3" value="checked" id="behavior_check3" <?php is_checked("behavior_check3") ?>><span>REM sleep</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check4" value="checked" id="method_check4" <?php is_checked("method_check4") ?>><span>optotagging</span></td><td><input type="checkbox" name="behavior_check4" value="checked" id="behavior_check4" <?php is_checked("behavior_check4") ?>><span>urethane</span></td></tr>
+    <tr><td></td><td></td><td></td><td><input type="checkbox" name="method_check5" value="checked" id="method_check5" <?php is_checked("method_check5") ?>><span>silicon probe</span></td><td><input type="checkbox" name="behavior_check5" value="checked" id="behavior_check5" <?php is_checked("behavior_check5") ?>><span>urethane plus ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check2" value="checked" id="select_check2"><span><a title="Show the most preferred conditions for all values in the matrix." style="text-decoration: none">select most</a></span></td><td><a title="Show the most preferred conditions for all values in the matrix." style="text-decoration: none">preferred conditions</a></td><td></td><td><input type="checkbox" name="method_check6" value="checked" id="method_check6" <?php is_checked("method_check6") ?>><span>tetrode</span></td><td><input type="checkbox" name="behavior_check6" value="checked" id="behavior_check6" <?php is_checked("behavior_check6") ?>><span>ketamine + xylazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check1" value="checked" id="select_check1" <?php is_checked("select_check1") ?>><span>select all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check7" value="checked" id="behavior_check7" <?php is_checked("behavior_check7") ?>><span>ketamine + xylazine plus acepromazine</span></td></tr>
+    <tr><td><input type="checkbox" name="select_check3" value="checked" id="select_check3" <?php is_checked("select_check3") ?>><span>deselect all</span></td><td></td><td></td><td></td><td><input type="checkbox" name="behavior_check8" value="checked" id="behavior_check8" <?php is_checked("behavior_check8") ?>><span>head-fixed running</span></td></tr>
+    </table>
+    <span style='width:1000px'><input type='button' value='update' onclick='javascript:subform()' style='position:relative;left:410px' /></span>
+    <input type="hidden" name="page" id="page" value="main_page" />
+    <input type="hidden" name="row_select" id="row_select" value="<?php if(isset($_GET['row_select'])) {echo $_GET['row_select'];} ?>" />
   </form>
 </div>
 
-<div class='table_position'>
+<div class='table_position' style='position:relative;top:355px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
 		<td>
@@ -462,20 +470,90 @@ function HideShowColumns ()
 		  <font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
     </td>
 	   <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font></td>
+		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
 		&nbsp; &nbsp; 
-		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
+		<td>
+    </td>
      <tr></tr>
       <tr>
         <td></td>
-        <td>
-        <font class='font5'><strong> V 0.75 alpha</td>
+        <td><font class='font5'>The median value of the set of most relevant values for each cell in the matrix is shown. A median function modification that is used<br> is the lower value closest to the set’s center, rather than average of two center values, is displayed for even numbered value sets.</font>
     </td>
 		<tr>
 		</tr>
 	
 </table>
+
 </div>
+<?php
+  /*
+    Update checkbox selection based on preferred conditions.
+  */
+  if (isset($_GET['row_select']) && $_GET['row_select'] != "") {
+    sleep(2);
+    $selected_conditions = array();
+    $selected_indices = array();
+    $i_r = $_GET['row_select'] - 1;//$_GET['row_select'];
+    $selected_string = "";
+
+    //echo "<script>\nsetTimeout(() => {\n";
+    echo "<script>";
+
+    // collect conditions
+    for ($i = 0; $i < count($best_ranks_theta); $i++) {
+      array_push($selected_conditions, $best_ranks_theta[$i_r][$i]);
+      if ($best_ranks_theta[$i_r][$i] == "male and female") {
+        array_push($selected_conditions, "male");
+        array_push($selected_conditions, "female");
+      }
+      if ($best_ranks_theta[$i_r][$i] == "REM sleep") {
+        array_push($selected_conditions, "REM"); 
+      }
+      //echo $best_ranks_theta[$i_r][$i]."<br>\n";
+    }
+    for ($i = 0; $i < count($best_ranks_swr); $i++) {
+      array_push($selected_conditions, $best_ranks_swr[$i_r][$i]);
+      if ($best_ranks_swr[$i_r][$i] == "male and female") {
+        array_push($selected_conditions, "male");
+        array_push($selected_conditions, "female");
+      }
+      if ($best_ranks_swr[$i_r][$i] == "REM sleep") {
+        array_push($selected_conditions, "REM"); 
+      }
+      //echo $best_ranks_swr[$i_r][$i]."<br>\n";
+    }
+
+    // check boxes
+    $first_found = false;
+    for ($i = 0; $i < count($selected_conditions); $i++) {
+      for ($j = 0; $j < count($checkbox_values); $j++) {
+        if ($selected_conditions[$i] == $checkbox_values[$j]) {
+          //echo "document.getElementById(\"".$checkbox_group[$j]."\").value=\"checked\";\n";
+          //array_push($selected_indices, $j);
+          if ($first_found == false) {
+            $selected_string = $selected_string.$checkbox_group[$j]."=checked";
+            $first_found = true;
+          }
+          else {
+            $selected_string = $selected_string."&".$checkbox_group[$j]."=checked";
+          }
+        }
+      }
+    }
+    $redirect_page = "phases.php?".$selected_string."&page=main_page";
+    echo "window.location = \"$redirect_page\"";
+
+    // uncheck boxes
+    /*for ($i = 0; $i < count($checkbox_values); $i++) {
+      if (!in_array($i, $selected_indices)) {
+        echo "document.getElementById(\"".$checkbox_group[$i]."\").value=\"\";\n";
+      }
+    }*/
+
+    //echo "}, 4000);\n</script>\n";
+    echo "</script>\n";
+  }
+?>
 </body>
 </html>
 <?php
