@@ -469,8 +469,8 @@ $(function(){
  	], 
     //multiselect: true,
    /* pager: '#pager',*/
-    rowNum:123,
-    rowList:[123],
+    rowNum:122,
+    rowList:[122],
    /*  sortname: 'invid',
     sortorder: 'desc',*/
     viewrecords: true, 
