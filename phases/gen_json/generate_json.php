@@ -44,7 +44,7 @@
 		$entry_output = "";
 		$id = ''; $theta = ''; $swr_ratio = ''; $other = '';
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
-		$min_range = ''; $max_range = ''; $count = '';
+		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$theta_found = false; $swr_found = false; $other_found = false;
 		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 		$rank_entry_theta = array(); $rank_entry_swr = array();
@@ -68,6 +68,7 @@
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
+					if ($gender == 'unknown') {$gender2 = 'unknown sex';} else {$gender2 = $gender;}
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
@@ -107,7 +108,7 @@
 				$count = $row['count'];
 			}
 		}
-		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
 		array_push($best_ranks_theta, $rank_entry_theta);
 		array_push($theta_values, $entry_output);
 		array_push($npage_entry, $neuron_ids[$i]);
@@ -135,6 +136,7 @@
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
+					if ($gender == 'unknown') {$gender2 = 'unknown sex';} else {$gender2 = $gender;}
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
@@ -178,7 +180,7 @@
 				$count = $row['count'];
 			}
 		}		
-		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
 		array_push($best_ranks_swr, $rank_entry_swr);
 		array_push($spw_values, $entry_output);
 		$npage_entry = array();
@@ -207,6 +209,7 @@
 					$epsilon = $row['epsilon'];		
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
+					if ($gender == 'unknown') {$gender2 = 'unknown sex';} else {$gender2 = $gender;}
 					$rec = $row['recordingMethod'];
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
@@ -228,7 +231,7 @@
 		else if ($epsilon != '') {
 			$other = "epsilon";
 		}
-		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
+		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
 		$npage_entry = array();
 		array_push($npage_entry, $neuron_ids[$i]);
