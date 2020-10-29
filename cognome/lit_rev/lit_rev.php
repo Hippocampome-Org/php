@@ -168,9 +168,9 @@ if (($h = fopen($filename, "r")) !== FALSE)
   		$url_orig = "https://scholar.google.com/scholar?q=".$title."&hl=en";
   		$url = str_replace(" ", "+", $url_orig);
 
-  		$search_results = $search_results."<tr><td>GS<br>Citations</td><td>GS<br>Citations by Year</td><td>GS<br>Authors</td><td>GS<br>Title</td><td>GS<br>Year</td><td>GS<br>Journal</td></tr>";
+  		$search_results = $search_results."<tr><td>GS #$i<br>Citations</td><td>GS<br>Citations by Year</td><td>GS<br>Authors</td><td>GS<br>Title</td><td>GS<br>Year</td><td>GS<br>Journal</td></tr>";
 	    // Read the data from a single line
-	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".$data[19]."</td><td>".$data[1]."</td><td><font class='abstract_text2'>".$title."</font></td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
+	    $search_results = $search_results."<tr><td>".$data[0]."</td><td>".number_format($data[19], 2)."</td><td>".$data[1]."</td><td><font class='abstract_text2'>".$title."</font></td><td>".$data[3]."</td><td>".$data[4]."</td></tr>";
 
 		$search_results = $search_results."<tr><td>PM<br>ID</td><td>PM<br>Link</td><td>PM<br>Authors</td><td>PM<br>Abstract and Title</td><td>PM<br>Year</td><td>PM<br>Journal</td></tr>";
 
@@ -219,7 +219,7 @@ if (($h = fopen($filename, "r")) !== FALSE)
 	    	$search_phrase = '&q='.$query_html3;//.'&f=false';
 	    	$url = $url.$search_phrase;
 	    }
-	    $search_results = $search_results."<tr><td><center>$i</center></td><td><a href='".$url."' target='_blank'>gs article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a></td><td>$pm_authors</td><td>";
+	    $search_results = $search_results."<tr><td><center>$i</center></td><td><a href='".$url."' target='_blank'>gs article link</a><br><br><a href='$pm_api_url' target='_blank'>pm api query link</a><br><br><a href='$pm_url' target='_blank'>pm query link</a><br><br><a href='https://pubmed.ncbi.nlm.nih.gov/$pm_id/' target='_blank'>pm link</a></td><td>$pm_authors</td><td>";
 	    if ($pm_title != '') {
 	    	$search_results = $search_results."$pm_title<br><br>";
 			$search_results = $search_results."<font class='abstract_text'>";
