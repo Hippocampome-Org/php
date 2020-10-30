@@ -9,6 +9,10 @@
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
 $rs = mysqli_query($conn,$query);
 list($permission) = mysqli_fetch_row($rs);
+$devur2 = 0;
+$query = "SELECT permission FROM user WHERE password=\"dev2\""; // id=2 is anonymous user
+$rs = mysqli_query($conn,$query);
+list($devur2) = mysqli_fetch_row($rs);
 session_start();
 ?>
 </head>
@@ -37,24 +41,17 @@ session_start();
             }
           ?> 
           <?php 
-            if ($permission != 1 && $_SESSION["sy"]==1) {
+            if ($permission != 1 && $devur2==1) {
           ?>
           <li><a href="phases.php">Oscillation phases</a></li>
           <?php   
             }
           ?> 
 	        <?php 
-	          if ($permission != 1 && $_SESSION["cg"]==1) {
+	          if ($permission != 1 && $devur2==1) {
 	        ?>
 	        <li><a href="http://hc.22web.org">Cognome</a></li>
 	         <?php   
-	          }
-	        ?> 
-	          <?php 
-	          if ($permission != 1 && $_SESSION["sp"]==1) {
-	        ?>
-	        <li><a href="http://synapt.22web.org">Synaptome</a></li>
-	        <?php   
 	          }
 	        ?> 
 		</ul></li>
