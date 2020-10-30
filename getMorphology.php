@@ -203,7 +203,7 @@ if(!isset($_GET['page'])) $page=1;
 else $page = $_GET['page'];
 //page=1&rows=5&sidx=1&sord=asc
 // get how many rows we want to have into the grid - rowNum parameter in the grid
-if(!isset($_GET['rows'])) $limit=123;
+if(!isset($_GET['rows'])) $limit=122;
 else $limit = $_GET['rows'];
 
 // get index row - i.e. user click to sort. At first time sortname parameter -
