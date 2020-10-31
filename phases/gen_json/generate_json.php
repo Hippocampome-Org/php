@@ -346,8 +346,8 @@
 		$theta_col = 2;
 		$spw_col = 3;
 		$firingrate_col = 4;
-		$other_col = 4;
-		$new_row_col = 5;
+		$other_col = 5;
+		$new_row_col = 6;
 		$neuron_classes = 28;
 		$max_rows = 100000;
 		/* specify indices */
@@ -368,6 +368,7 @@
 		for ($i = 0; $i < $max_rows; $i++) {
 			array_push($neuron_group_cols, ($init_col+($new_row_col*$i)));
 			array_push($neuron_group_cols, ($init_col2+($new_row_col*$i)));
+			//echo ($init_col+($new_row_col*$i))." ".$neuron_groups[($init_col+($new_row_col*$i))]." ".($init_col2+($new_row_col*$i))." ".$neuron_groups[($init_col2+($new_row_col*$i))]." "."<br>\n";
 			array_push($theta_cols, ($theta_col+($new_row_col*$i)));
 			array_push($spw_cols, ($spw_col+($new_row_col*$i)));
 			array_push($firingrate_cols, ($firingrate_col+($new_row_col*$i)));
@@ -414,13 +415,14 @@
 				}
 				$i_s++;
 			}
-			//elseif (in_array($i, $firingrate_cols)) {
-			elseif (false) {
+			elseif (in_array($i, $firingrate_cols)) {
+			//elseif (false) {
 				if ($page=='write_file') {
 					fwrite($output_file, $firingrate_values[$i_f].$nl);
 				}
 				if ($page=='main_page') {
 					$json_output_string = $json_output_string.$firingrate_values[$i_f].$nl;
+					//$json_output_string = $json_output_string."\"firingrate\",".$nl;
 				}
 				$i_f++;
 			}
