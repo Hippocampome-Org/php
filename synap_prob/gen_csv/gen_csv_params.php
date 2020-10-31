@@ -18,7 +18,7 @@
 
 	// create $property parcel relation array
 	$prop_parcel_rel = array();
-	$sql = "SELECT property_id, parcel, property_desc, property_neurite FROM hippodevome.SynProPropParcelRel;";
+	$sql = "SELECT property_id, parcel, property_desc, property_neurite FROM SynProPropParcelRel;";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) { 
 		while($row = $result->fetch_assoc()) {
@@ -29,7 +29,7 @@
 
 	// create reference_id fragment_id array
 	$fragments = array();
-	$sql = "SELECT * FROM hippocsv2dbome.SynproFragment;";
+	$sql = "SELECT * FROM SynproFragment;";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) { 
 		while($row = $result->fetch_assoc()) {
@@ -42,7 +42,7 @@
 
 	// create fragment_id evidence_id array
 	$evidence = array();
-	$sql = "SELECT Fragment_id, Evidence_id FROM hippocsv2dbome.SynproEvidenceFragmentRel;";
+	$sql = "SELECT Fragment_id, Evidence_id FROM SynproEvidenceFragmentRel;";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) { 
 		while($row = $result->fetch_assoc()) {
