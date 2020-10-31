@@ -194,11 +194,11 @@
 
 		// in vivo firing rate section
 		$entry_output = "";
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(firingRate) AS DECIMAL(10,2)) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(firingRate) AS DECIMAL(10,2)) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadataRank, firingraterank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 )), CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -368,7 +368,6 @@
 		for ($i = 0; $i < $max_rows; $i++) {
 			array_push($neuron_group_cols, ($init_col+($new_row_col*$i)));
 			array_push($neuron_group_cols, ($init_col2+($new_row_col*$i)));
-			//echo ($init_col+($new_row_col*$i))." ".$neuron_groups[($init_col+($new_row_col*$i))]." ".($init_col2+($new_row_col*$i))." ".$neuron_groups[($init_col2+($new_row_col*$i))]." "."<br>\n";
 			array_push($theta_cols, ($theta_col+($new_row_col*$i)));
 			array_push($spw_cols, ($spw_col+($new_row_col*$i)));
 			array_push($firingrate_cols, ($firingrate_col+($new_row_col*$i)));
@@ -416,13 +415,11 @@
 				$i_s++;
 			}
 			elseif (in_array($i, $firingrate_cols)) {
-			//elseif (false) {
 				if ($page=='write_file') {
 					fwrite($output_file, $firingrate_values[$i_f].$nl);
 				}
 				if ($page=='main_page') {
 					$json_output_string = $json_output_string.$firingrate_values[$i_f].$nl;
-					//$json_output_string = $json_output_string."\"firingrate\",".$nl;
 				}
 				$i_f++;
 			}
