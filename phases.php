@@ -222,7 +222,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR ratio</a>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
+    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR ratio</a>','In vivo firing rate (Hz)','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
     ,colModel :[
 	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
@@ -230,6 +230,7 @@ $(function(){
       {name:'NeuronType', index:'nickname', width:175,sortable:false},
       {name:'Theta', index:'theta', width:75,search:false,sortable:false},
       {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
+      {name:'In vivo firing rate', index:'firingrate', width:75,search:false,sortable:false},
       {name:'Other', index:'other', width:75,search:false,sortable:false,title:'test'}
 	], 
    

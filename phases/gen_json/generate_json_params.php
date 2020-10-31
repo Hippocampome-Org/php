@@ -20,6 +20,7 @@
 	$parcel_csv_output = array();
 	$best_ranks_theta=array();
 	$best_ranks_swr=array();
+	$best_ranks_firingrate=array();
 
 	/*
 	Read from input files
@@ -51,9 +52,11 @@
 	$write_output = array();
 	$theta_values = array();
 	$spw_values = array();
+	$firingrate_values = array();
 	$other_values = array();
 	$npage_theta = array();
 	$npage_swr = array();
+	$npage_firingrate = array();
 	$npage_other = array();
 	
 	/* Maunally sorted neuron group
