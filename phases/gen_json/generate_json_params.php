@@ -76,6 +76,9 @@
 		if ($value == "male and female") {
 			$checkbox = "sex_check1=checked&sex_check2";
 		}
+		else if ($value == "unknown sex") {
+			$checkbox = "sex_check3";
+		}
 		else if ($checkbox == "") {
 			$checkbox = $value;
 		}
