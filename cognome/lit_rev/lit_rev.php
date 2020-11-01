@@ -40,13 +40,14 @@
 $base_dir = "query_results/final_selection/";
 $filename = "";
 $queryfile = "";
-if (isset($_REQUEST['file'])) {
+if (isset($_REQUEST['file']) && isset($_REQUEST['query'])) {
 	$file=$_REQUEST['file'];
 	$filename = $base_dir.$file;	
-}
-if (isset($_REQUEST['query'])) {
 	$query=$_REQUEST['query'];
 	$queryfile = $base_dir.$query;
+}
+else {
+	echo "<br><center>Error: please specify variables for an articles file and query file.</center>";
 }
 
 echo '<br><center><font style="font-size:22px">'.file_get_contents($queryfile).'</font></center><br>';
@@ -76,7 +77,12 @@ echo '<br><center><font style="font-size:22px">'.file_get_contents($queryfile).'
 	$next_start = $start + 10;
   	$next_end = $end + 10;  	
   	echo "<center>Page ".round(($end/980)*100)." of 98. Showing articles with ids $start to $end.</center>";
-	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Next</span></a></center></form>";
+	echo "<form action='lit_rev.php'><center><a href='?start=$prev_start&end=$prev_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Prev</span></a>&nbsp;Page <textarea name='custom_page' id='custom_page' class='custom_page'>$custom_page</textarea> <input type='submit' value='Go' style='height:25px;width:36px;position:relative;top:-3px;' />&nbsp;<a href='?start=$next_start&end=$next_end&file=$file&query=$query' style='text-decoration:none;'><span class='button_link'>Next</span></a></center>";
+	if (isset($prev_start) && isset($prev_end) && isset($file) && isset($query)) {
+		echo "<input type=\"hidden\" name=\"file\" value=\"$file\" />";
+		echo "<input type=\"hidden\" name=\"query\" value=\"$query\" />";
+	}
+	echo "</form>";
 
 function char_replace($find, $replace, $str)
 {
