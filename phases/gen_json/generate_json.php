@@ -53,11 +53,11 @@
 		$theta_median = ''; $swr_median = ''; $firingrate_median = ''; $npage_entry = array();
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(AVG(theta) AS DECIMAL(10,2)) as theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(GROUP_CONCAT(DISTINCT theta) AS DECIMAL (10 , 2 )) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//echo "<br><br><br><br><br><br><br><br>".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
@@ -122,11 +122,11 @@
 		// swr ratio section
 		$entry_output = "";
 		//$sql = "SELECT IF (SWR_ratio != 0.0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(SWR_ratio) AS DECIMAL(10,2)) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(GROUP_CONCAT(DISTINCT SWR_ratio) AS DECIMAL (10 , 2 )) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -194,7 +194,7 @@
 
 		// in vivo firing rate section
 		$entry_output = "";
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(AVG(firingRate) AS DECIMAL(10,2)) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(GROUP_CONCAT(DISTINCT firingRate) AS DECIMAL (10 , 2 )) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
