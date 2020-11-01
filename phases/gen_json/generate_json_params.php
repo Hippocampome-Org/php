@@ -66,4 +66,19 @@
 	$neuron_ids = array(1000, 1002, 2000, 2004, 2028, 2043, 2044, 3000, 4098, 4099, 4004, 4011, 4015, 4035, 4036, 4041, 4069, 4078, 4079, 4080, 4081, 4139, 4146, 5001, 6003, 6008, 6017, 6021);
 	$checkbox_group = array("species_check1","species_check2","age_check1","age_check2","age_check3","sex_check1","sex_check2","sex_check3","method_check1","method_check2","method_check3","method_check4","method_check5","method_check6","behavior_check1","behavior_check2","behavior_check3","behavior_check4","behavior_check5","behavior_check6","behavior_check7","behavior_check8");
 	$checkbox_values = array("rats","mice","adult","young adult","age not reported","male","female","unknown","sharp pipette","whole-cell patch clamp","juxtacellular","optotagging","silicon probe","tetrode","freely moving","head-fixed awake","REM sleep","urethane","urethane plus supplemental doses of ketamine and xylazine","ketamine and xylazine","ketamine, xylazine, and acepromazine","head fixed running");
+	function value2cbox($value, $checkbox_values, $checkbox_group) {
+		$checkbox = "";
+		for ($i = 0; $i < count($checkbox_values); $i++) {
+			if ($value == $checkbox_values[$i]) {
+				$checkbox = $checkbox_group[$i];
+			}
+		}
+		if ($value == "male and female") {
+			$checkbox = "sex_check1=checked&sex_check2";
+		}
+		else if ($checkbox == "") {
+			$checkbox = $value;
+		}
+		return $checkbox;
+	}
 ?>	
