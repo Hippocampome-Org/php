@@ -28,6 +28,7 @@
 	}
 	if (isset($_REQUEST['sex_check3']) && $_REQUEST['sex_check3']=="checked") {
 		array_push($sex, "unknown");
+		array_push($sex, "unknown sex");
 	}
 	if (isset($_REQUEST['method_check1']) && $_REQUEST['method_check1']=="checked") {
 		array_push($method, "sharp pipette");
