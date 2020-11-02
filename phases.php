@@ -222,7 +222,7 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR ratio</a>','<span style=\'position:relative;top:-10px;\'>In vivo<br>Firing Rate (Hz)</span>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
+    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR Ratio</a>','<span style=\'position:relative;top:-10px;\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
     ,colModel :[
 	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
           return 'id=\'type' + rowId + "\'";   
