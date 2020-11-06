@@ -8,17 +8,17 @@ include ("function/quote_manipulation.php");
 require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.synonym.php');
-require_once('class/class.fragment.php');
-require_once('synap_prob/class/class.fragment_synpro.php');
-require_once('class/class.attachment.php');
-require_once('synap_prob/class/class.attachment_synpro.php');
-require_once('class/class.evidencepropertyyperel.php');
-require_once('synap_prob/class/class.evidencepropertyyperel_synpro.php');
+//require_once('class/class.fragment.php');
+require_once('phases/class/class.fragment.php');
+//require_once('class/class.attachment.php');
+require_once('phases/class/class.attachment.php');
+//require_once('class/class.evidencepropertyyperel.php');
+require_once('phases/class/class.evidencepropertyyperel.php');
 require_once('class/class.article.php');
 require_once('class/class.author.php');
 require_once('class/class.evidencefragmentrel.php');
-require_once('class/class.articleevidencerel.php');
-require_once('synap_prob/class/class.articleevidencerel_synpro.php');
+//require_once('class/class.articleevidencerel.php');
+require_once('phases/class/class.articleevidencerel.php');
 require_once('class/class.articleauthorrel.php');
 
 function checkNeuronProperty($color)
@@ -139,8 +139,8 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
  }
 // set property of synapse probability page
 $page = $_REQUEST['page'];
-$sub_show_only = $_SESSION['synpro_sub_show_only']; 
-$name_show_only_article = $_SESSION['synpro_name_show_only_article'];
+$sub_show_only = $_SESSION['phases_sub_show_only']; 
+$name_show_only_article = $_SESSION['phases_name_show_only_article'];
 
 $see_all = $_REQUEST['see_all']; 
 // open all evidences
@@ -148,7 +148,7 @@ if ($see_all == 'Open All Evidence')
 {
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
@@ -157,14 +157,14 @@ if ($see_all == 'Close All Evidence')
 {
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show1 =  '0'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
 // Change the show coloums in the temporary table: 
 if ($_REQUEST['show_1']) //  ==> ON
 {
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -174,7 +174,7 @@ if ($_REQUEST['show_1']) //  ==> ON
 
 if ($_REQUEST['show_0']) //  ==> OFF
 {
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
@@ -185,9 +185,9 @@ if ($_REQUEST['show_0']) //  ==> OFF
 if ($page) 
 {
 	$name_show_only = 'all';
-	$_SESSION['synpro_name_show_only'] = $name_show_only;
+	$_SESSION['phases_name_show_only'] = $name_show_only;
 	$sub_show_only = NULL;
-	$_SESSION['synpro_sub_show_only'] = $sub_show_only;	
+	$_SESSION['phases_sub_show_only'] = $sub_show_only;	
 	$name_show_only_article = 'all';
 	$name_show_only_journal = 'all';	
 	$name_show_only_authors = 'all';
@@ -202,7 +202,7 @@ if ($page)
 	$time_t = time();
 	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
 	//echo "name_temporary_table: ".$name_temporary_table;
-	$_SESSION['synpro_name_temporary_table'] = $name_temporary_table;
+	$_SESSION['phases_name_temporary_table'] = $name_temporary_table;
 	create_temp_table($name_temporary_table);	
 	
 	$val_property = str_replace('_', ':', $val_property);
@@ -216,7 +216,7 @@ if ($page)
 		$neuron_show_only_value=$neuron_show_only_value.",Dendrites";
 	if(strstr(checkNeuronProperty($color),"somata"))
 		$neuron_show_only_value=$neuron_show_only_value.",Somata";
-	$_SESSION['synpro_neuron_show_only_value']=$neuron_show_only_value;
+	$_SESSION['phases_neuron_show_only_value']=$neuron_show_only_value;
 	
 	$page_in = 0;
 	$page_end = 10;
@@ -229,11 +229,11 @@ if ($page)
 }
 else
 {
-	$name_show_only = $_SESSION['synpro_name_show_only'];
-	$_SESSION['synpro_name_show_only'] = $name_show_only;
-	$name_show_only_journal = $_SESSION['synpro_name_show_only_journal'];
-	$name_show_only_authors = $_SESSION['synpro_name_show_only_authors'];
-	$name_show_only_article = $_SESSION['synpro_name_show_only_article'];
+	$name_show_only = $_SESSION['phases_name_show_only'];
+	$_SESSION['phases_name_show_only'] = $name_show_only;
+	$name_show_only_journal = $_SESSION['phases_name_show_only_journal'];
+	$name_show_only_authors = $_SESSION['phases_name_show_only_authors'];
+	$name_show_only_article = $_SESSION['phases_name_show_only_article'];
 
 	$order_ok = $_REQUEST['order_ok'];
 	if ($order_ok == 'GO')             // Was clicked the Order By options
@@ -281,7 +281,7 @@ else
 	$id_neuron = $_SESSION['id_neuron'];
 	$val_property = $_SESSION['val_property'];
 	$color = $_SESSION['color'];
-	if(!$_SESSION['synpro_neuron_show_only_value']){
+	if(!$_SESSION['phases_neuron_show_only_value']){
 		$neuron_show_only_value="";
 		if(strstr(checkNeuronProperty($color),"axons"))
 			$neuron_show_only_value=$neuron_show_only_value.",Axons";
@@ -289,12 +289,12 @@ else
 			$neuron_show_only_value=$neuron_show_only_value.",Dendrites";
 		if(strstr(checkNeuronProperty($color),"somata"))
 			$neuron_show_only_value=$neuron_show_only_value.",Somata";	
-		$_SESSION['synpro_neuron_show_only_value']=$neuron_show_only_value;
+		$_SESSION['phases_neuron_show_only_value']=$neuron_show_only_value;
 	}
 	else{
-		$neuron_show_only_value=$_SESSION['synpro_neuron_show_only_value'];
+		$neuron_show_only_value=$_SESSION['phases_neuron_show_only_value'];
 	}
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	
 }
 // SHOW ONLY 
@@ -304,16 +304,16 @@ if ($name_show_only_var)
 {
 	
 	$name_show_only = $_REQUEST['name_show_only'];
-	$_SESSION['synpro_name_show_only'] = $name_show_only;
+	$_SESSION['phases_name_show_only'] = $name_show_only;
 
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	// Option: All:
 	if ($name_show_only == 'all')
 	{
 		$sub_show_only = 'all';
-		$_SESSION['synpro_sub_show_only'] = $sub_show_only;
+		$_SESSION['phases_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	}
@@ -321,9 +321,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'article_book')
 	{
 		$name_show_only_article = 'all';
-		$_SESSION['synpro_name_show_only_article'] = $name_show_only_article;
+		$_SESSION['phases_name_show_only_article'] = $name_show_only_article;
 		$sub_show_only = 'article';
-		$_SESSION['synpro_sub_show_only'] = $sub_show_only;
+		$_SESSION['phases_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -331,9 +331,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'name_journal')
 	{
 		$name_show_only_journal = 'all';
-		$_SESSION['synpro_name_show_only_journal'] = $name_show_only_journal;
+		$_SESSION['phases_name_show_only_journal'] = $name_show_only_journal;
 		$sub_show_only = 'name_journal';
-		$_SESSION['synpro_sub_show_only'] = $sub_show_only;
+		$_SESSION['phases_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -341,9 +341,9 @@ if ($name_show_only_var)
 	if ($name_show_only == 'authors')
 	{
 		$name_show_only_authors = 'all';
-		$_SESSION['synpro_name_show_only_authors'] = $name_show_only_authors;
+		$_SESSION['phases_name_show_only_authors'] = $name_show_only_authors;
 		$sub_show_only = 'authors';
-		$_SESSION['synpro_sub_show_only'] = $sub_show_only;
+		$_SESSION['phases_sub_show_only'] = $sub_show_only;
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 		$rs2 = mysqli_query($GLOBALS['conn'],$query);			
 	}
@@ -353,13 +353,13 @@ $name_show_only_article_var = $_REQUEST['name_show_only_article_var'];
 if ($name_show_only_article_var)
 {
 	$name_show_only_article = $_REQUEST['name_show_only_article'];
-	$_SESSION['synpro_name_show_only_article'] = $name_show_only_article;
-	$_SESSION['synpro_name_show_only_journal'] = 'all';
-	$_SESSION['synpro_name_show_only_authors'] = 'all';
-	$name_show_only = $_SESSION['synpro_name_show_only'];
+	$_SESSION['phases_name_show_only_article'] = $name_show_only_article;
+	$_SESSION['phases_name_show_only_journal'] = 'all';
+	$_SESSION['phases_name_show_only_authors'] = 'all';
+	$name_show_only = $_SESSION['phases_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	$query ="SELECT id, PMID FROM $name_temporary_table";
@@ -387,13 +387,13 @@ $name_show_only_journal_var = $_REQUEST['name_show_only_journal_var'];
 if ($name_show_only_journal_var)
 {
 	$name_show_only_journal = $_REQUEST['name_show_only_journal'];
-	$_SESSION['synpro_name_show_only_journal'] = $name_show_only_journal;
-	$_SESSION['synpro_name_show_only_article'] = 'all';
-	$_SESSION['synpro_name_show_only_authors'] = 'all';
-	$name_show_only = $_SESSION['synpro_name_show_only'];
+	$_SESSION['phases_name_show_only_journal'] = $name_show_only_journal;
+	$_SESSION['phases_name_show_only_article'] = 'all';
+	$_SESSION['phases_name_show_only_authors'] = 'all';
+	$name_show_only = $_SESSION['phases_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$query = "UPDATE $name_temporary_table SET show_only =  '1'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 	if ($name_show_only_journal == 'all')
@@ -408,13 +408,13 @@ $name_show_only_authors_var  = $_REQUEST['name_show_only_authors_var'];
 if ($name_show_only_authors_var)
 {
 	$name_show_only_authors = $_REQUEST['name_show_only_authors'];
-	$_SESSION['synpro_name_show_only_authors'] = $name_show_only_authors;
-	$_SESSION['synpro_name_show_only_article'] = 'all';
-	$_SESSION['synpro_name_show_only_journal'] = 'all';
-	$name_show_only = $_SESSION['synpro_name_show_only'];
+	$_SESSION['phases_name_show_only_authors'] = $name_show_only_authors;
+	$_SESSION['phases_name_show_only_article'] = 'all';
+	$_SESSION['phases_name_show_only_journal'] = 'all';
+	$name_show_only = $_SESSION['phases_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	if ($name_show_only_authors == 'all')
 	{
 		$query = "UPDATE $name_temporary_table SET show_only =  '1'";
@@ -437,11 +437,11 @@ if ($name_show_only_authors_var)
 $neuron_show_only = $_REQUEST['neuron_show_only'];
 if ($neuron_show_only){
 	$neuron_show_only_value = $_REQUEST['neuron_show_only_value'];
-	$_SESSION['synpro_neuron_show_only_value'] = $neuron_show_only_value;
-	$name_show_only = $_SESSION['synpro_name_show_only'];
+	$_SESSION['phases_neuron_show_only_value'] = $neuron_show_only_value;
+	$name_show_only = $_SESSION['phases_name_show_only'];
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$name_temporary_table = $_SESSION['synpro_name_temporary_table'];
+	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 
 }
 $part=checkNeuronProperty($color);
@@ -450,17 +450,17 @@ $type = new type($class_type);
 $type -> retrive_by_id($id_neuron);
 $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
-$class_fragment='SynproFragment';
-$fragment = new fragment_synpro($class_fragment);
-$attachment_obj = new attachment_synpro($class_attachment);
+$class_fragment='phasesFragment';
+$fragment = new fragment_phases($class_fragment);
+$attachment_obj = new attachment_phases($class_attachment);
 //$evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
-$class_evidence_property_type_rel = 'SynproEvidencePropertyTypeRel';
-$evidencepropertyyperel = new evidencepropertyyperel_synpro($class_evidence_property_type_rel);
-$class_evidencefragmentrel='SynproEvidenceFragmentRel';
+$class_evidence_property_type_rel = 'phasesEvidencePropertyTypeRel';
+$evidencepropertyyperel = new evidencepropertyyperel_phases($class_evidence_property_type_rel);
+$class_evidencefragmentrel='phasesEvidenceFragmentRel';
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
 //$articleevidencerel = new articleevidencerel($class_articleevidencerel);
-$class_articleevidencerel='SynproArticleEvidenceRel';
-$articleevidencerel = new articleevidencerel_synpro($class_articleevidencerel);
+$class_articleevidencerel='phasesArticleEvidenceRel';
+$articleevidencerel = new articleevidencerel_phases($class_articleevidencerel);
 $article = new article($class_article);
 $articleauthorrel = new articleauthorrel($class_articleauthorrel);
 $author = new author($class_author);
@@ -487,7 +487,7 @@ function changeCheckbox(start1,stop1){
 		soma="Somata";
 	}
 	var checkbox_clicked=axon+","+dendrite+","+soma;
-	var destination_page="property_page_synpro.php";
+	var destination_page="property_page_phases.php";
 	location.href = destination_page+"?neuron_show_only_value="+checkbox_clicked+"&start="+start1+"&stop="+stop1+"&neuron_show_only=1";
 }
 
@@ -498,7 +498,7 @@ function show_only(link, start1, stop1)
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_synpro.php";
+	var destination_page = "property_page_phases.php";
 
 	location.href = destination_page+"?name_show_only="+name+"&start="+start2+"&stop="+stop2+"&name_show_only_var=1";
 }
@@ -509,7 +509,7 @@ function show_only_article(link, start1, stop1)
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_synpro.php";
+	var destination_page = "property_page_phases.php";
 	location.href = destination_page+"?name_show_only_article="+name+"&start=0&stop="+stop2+"&name_show_only_article_var=1";
 }
 
@@ -519,7 +519,7 @@ function show_only_publication(link, start1, stop1)
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_synpro.php";
+	var destination_page = "property_page_phases.php";
 	location.href = destination_page+"?name_show_only_journal="+name+"&start=0&stop="+stop2+"&name_show_only_journal_var=1";
 }
 
@@ -529,7 +529,7 @@ function show_only_authors(link, start1, stop1)
 	var start2 = start1;
 	var stop2 = stop1;
 
-	var destination_page = "property_page_synpro.php";
+	var destination_page = "property_page_phases.php";
 	location.href = destination_page+"?name_show_only_authors="+name+"&start=0&stop="+stop2+"&name_show_only_authors_var=1";
 }
 
@@ -867,7 +867,7 @@ function show_only_authors(link, start1, stop1)
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>		
 						<td width="25%" align="right">
-						<form action="property_page_synpro.php" method="post" style="display:inline">
+						<form action="property_page_phases.php" method="post" style="display:inline">
 						<?php
 							if (isset($_REQUEST['sp_page'])) {
 								$sp_page=$_REQUEST['sp_page'];
@@ -1049,7 +1049,7 @@ function show_only_authors(link, start1, stop1)
 						?>			
 							<td width="20%" align="right">
 								<font class="font2">Order:</font>				
-							<form action="property_page_synpro.php" method="post" style="display:inline">
+							<form action="property_page_phases.php" method="post" style="display:inline">
 								<select name='order' size='1' cols='10' class='select1' onchange="this.form.submit()">
 								<?php
 									if ($order_by)
@@ -1150,7 +1150,7 @@ function show_only_authors(link, start1, stop1)
 						
 						if ($show1 == 0)
 						{
-							print ("<form action='property_page_synpro.php' method='post' style='display:inline'>");
+							print ("<form action='property_page_phases.php' method='post' style='display:inline'>");
 							print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
@@ -1165,7 +1165,7 @@ function show_only_authors(link, start1, stop1)
 						}
 						if ($show1 == 1)
 						{
-							print ("<form action='property_page_synpro.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
+							print ("<form action='property_page_phases.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
 							print ("<input type='submit' name='show_0' value=' ' class='show0'>");
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
@@ -1305,21 +1305,21 @@ function show_only_authors(link, start1, stop1)
 									elseif (in_array($type_for_display,$axon_group)) {
 										$neurite_ref = $val_property.":A";	
 									}
-									$attachment_obj = new attachment_synpro($class_attachment); // this clears prior attachment results
+									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
 									$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
 									$attachment = $attachment_obj -> getName();
 									$attachment_type = $attachment_obj -> getType();
-									//$attachment_type="synpro_figure";
+									//$attachment_type="phases_figure";
 									$link_figure="";									
 									$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
 									// original article attachment
-									$attachment_obj2 = new attachment_synpro($class_attachment); // this clears prior attachment results
+									$attachment_obj2 = new attachment_phases($class_attachment); // this clears prior attachment results
 									$attachment_obj2 -> retrive_by_props($id_original, $id_neuron, 'Original');
 									$art_orig_attachment = $attachment_obj2 -> getName();
 									$art_orig_attachment_type = $attachment_obj2 -> getType();
 									$art_orig_attachment_jpg = $art_orig_attachment;//str_replace('jpg', 'jpeg', $art_orig_attachment);
 
-									if($attachment_type=="synpro_figure"){
+									if($attachment_type=="phases_figure"){
 										$link_figure = "attachment/neurites/".$attachment_jpg;
 										$art_orig_link_figure = "attachment/neurites/".$art_orig_attachment_jpg;
 									}								
@@ -1434,7 +1434,7 @@ function show_only_authors(link, start1, stop1)
 											<td width='15%' class='table_neuron_page2' align='center'>");
 											
 											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
+											if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
 											{
 												print ("<a href='".$att_link."' target='_blank'>");
 												print ("<img src='".$download_icon."' border='0' width='40%' style='background-color:white;'>");
@@ -1459,7 +1459,7 @@ function show_only_authors(link, start1, stop1)
 											<td width='15%' class='table_neuron_page2' align='center'>");
 											
 											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-											if ($attachment_type=="synpro_figure"&&$link_figure!='attachment/neurites/')
+											if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
 											{
 												print ("<a href='$art_orig_link_figure' target='_blank'>");
 												print ("<img src='$art_orig_link_figure' border='0' width='80%' style='background-color:white;'>");
@@ -1522,7 +1522,7 @@ function show_only_authors(link, start1, stop1)
 							?>
 							</font>
 						&nbsp; &nbsp;
-						<form action="property_page_synpro.php" method="post" style="display:inline">
+						<form action="property_page_phases.php" method="post" style="display:inline">
 							<?php 
 								if ($no_button_down == 1);
 								else
@@ -1540,7 +1540,7 @@ function show_only_authors(link, start1, stop1)
 							<input type="hidden" name='stop' value='<?php print $page_end-10; ?>' />
 							
 						</form>	
-						<form action="property_page_synpro.php" method="post" style="display:inline">
+						<form action="property_page_phases.php" method="post" style="display:inline">
 						&nbsp; &nbsp;
 							<?php 
 								if ($no_button_up == 1);
