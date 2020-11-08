@@ -163,14 +163,18 @@ if ($see_all == 'Close All Evidence')
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 }
 // Change the show coloums in the temporary table: 
-if ($_REQUEST['show_1']) //  ==> ON
+//echo "<br><br><br><br><br><br><br><br><br>";
+//echo $_SESSION['phases_name_temporary_table'];
+//echo "<br>";
+if (true)//$_REQUEST['show_1']) //  ==> ON
 {
 	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
+	$query = "UPDATE $name_temporary_table SET show1 =  '1' WHERE title = '$title_paper'";
+	//echo $query;
+	$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 	$page_in = $_REQUEST['start'];
 	$page_end = $_REQUEST['stop'];
-	$query = "UPDATE $name_temporary_table SET show1 =  '1' WHERE title = '$title_paper'";
-	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 
 if ($_REQUEST['show_0']) //  ==> OFF
@@ -182,6 +186,7 @@ if ($_REQUEST['show_0']) //  ==> OFF
 	$query = "UPDATE $name_temporary_table SET show1 =  '0' WHERE title = '$title_paper'";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
+//echo "<bR>show_0:".$_REQUEST['show_0'];
 // Request coming from another page
 //if ($page) 
 if (true)
@@ -202,10 +207,13 @@ if (true)
 	$ip_address = str_replace('.', '_', $ip_address);
 	$ip_address = str_replace(':', '_', $ip_address);
 	$time_t = time();
-	$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
 	//echo "name_temporary_table: ".$name_temporary_table;
-	$_SESSION['phases_name_temporary_table'] = $name_temporary_table;
-	create_temp_table($name_temporary_table);	
+	//if ($_SESSION['phases_name_temporary_table'] == NULL) {
+	//if (true) {
+		$name_temporary_table ='temp_'.$ip_address.'_'.$id_neuron.$color.'__'.$time_t;
+		$_SESSION['phases_name_temporary_table'] = $name_temporary_table;
+		create_temp_table($name_temporary_table);	
+	//}
 	
 	$val_property = str_replace('_', ':', $val_property);
 	$_SESSION['id_neuron'] = $id_neuron;
@@ -639,87 +647,7 @@ function show_only_authors(link, start1, stop1)
 					$property  -> retrive_ID(1, $part, 'in', $val_property);
 					$n_property_id = $property -> getNumber_type();	
 
-				}
-				/*else if ($n_interraction == 2)
-				{
-					// Axons and Dendrites
-					if($part == 'axons_dendrites')
-					{
-					 if ($tt == 0)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();										
-					
-					 }
-					}
-					else if($part == 'axons_somata')
-					{
-					 if ($tt == 0)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-					}
-                     else
-					 { 
-				     if ($tt == 0)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-						 
-					 }						 
-				}
-				else
-				{
-					if ($tt == 0)
-					 {
-						$part1[$tt] = 'Dendrites';
-						$property  -> retrive_ID(1, 'dendrites', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();										
-					 }
-					 if ($tt == 1)
-					 {
-						$part1[$tt] = 'Axons';
-						$property  -> retrive_ID(1, 'axons', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();	
-					 }
-					  if ($tt == 2)
-					 {
-						$part1[$tt] = 'Somata';
-						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
-						$n_property_id = $property -> getNumber_type();
-					 }
-				}	*/
-				/*for ($i=0; $i<$n_property_id; $i++)
-				{
-					$property_id[$i] = $property -> getProperty_id($i);
-
-					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
-					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id_neuron);				
-					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
-				}*/							
+				}					
 				$evidencepropertyyperel -> retrive_evidence_id($id_neuron);				
 				$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				$n_article = 0; // <-- Number of articles
@@ -813,12 +741,33 @@ function show_only_authors(link, start1, stop1)
 					}
 					$pages= $first_page." - ".$last_page;
 					if ($page)
+					//if ($_SESSION['phases_name_temporary_table'] == NULL)
 					{
 						// Insert the data in the temporary table:	 
 						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
 					}
 				}
 			}			
+			if (true)//$_REQUEST['show_1']) //  ==> ON
+			{
+				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
+				$title_paper = $_REQUEST['title'];
+				$query = "UPDATE $name_temporary_table SET show1 =  '1' WHERE title = '$title_paper'";
+				//echo $query;
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);		
+				$page_in = $_REQUEST['start'];
+				$page_end = $_REQUEST['stop'];
+			}
+
+			if ($_REQUEST['show_0']) //  ==> OFF
+			{
+				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
+				$title_paper = $_REQUEST['title'];
+				$page_in = $_REQUEST['start'];
+				$page_end = $_REQUEST['stop'];
+				$query = "UPDATE $name_temporary_table SET show1 =  '0' WHERE title = '$title_paper'";
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);	
+			}
 					// find the total number of Articles: 
 					$query = "SELECT DISTINCT title FROM $name_temporary_table";// WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
@@ -894,14 +843,11 @@ function show_only_authors(link, start1, stop1)
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start' value='<?php print $page_in; ?>' />
 						<input type="hidden" name='stop' value='<?php print $page_end; ?>' />
-						<?php print ("<input type='hidden' name='name_show_only' value='$name_show_only'>"); ?>
-						<?php print ("<input type='hidden' name='val_property' value='$val_property'>"); 
-						if (isset($_REQUEST['sp_page'])) {
-							$sp_page=$_REQUEST['sp_page'];
-							print ("<input type='hidden' name='sp_page' value='$sp_page'>");
-						}
+						<?php
+						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
+						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+						print ("<input type='hidden' name='val_property' value='$val_property'>");
 						?>
-						
 						</form>
 						</td>						
 					</tr>
@@ -1171,12 +1117,10 @@ function show_only_authors(link, start1, stop1)
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
 							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+							//echo "name_show_only: $name_show_only, show1: $show1";
 							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
 							print ("<input type='hidden' name='val_property' value='$val_property'>");
-							if (isset($_REQUEST['sp_page'])) {
-								$sp_page=$_REQUEST['sp_page'];
-								print ("<input type='hidden' name='sp_page' value='$sp_page'>");
-							}
+							print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
 							print ("</form>");
 						}
 						if ($show1 == 1)
@@ -1186,12 +1130,10 @@ function show_only_authors(link, start1, stop1)
 							print ("<input type='hidden' name='start' value='$page_in' />");
 							print ("<input type='hidden' name='stop' value='$page_end' />");
 							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+							//echo "name_show_only: $name_show_only, show1: $show1";
 							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
 							print ("<input type='hidden' name='val_property' value='$val_property'>");
-							if (isset($_REQUEST['sp_page'])) {
-								$sp_page=$_REQUEST['sp_page'];
-								print ("<input type='hidden' name='sp_page' value='$sp_page'>");
-							}
+							print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
 							print ("</form>");
 						}	
 						if (strlen($PMID1) > 10 )
@@ -1229,21 +1171,11 @@ function show_only_authors(link, start1, stop1)
 						</table>");
 						
 						// TABLE for Quotes:
-						// Logic to form dynamic query to retrive evidences(axon,dendrite,soma ) depending on checkbox selection 
-						$subquery=" and ( ";
-						$property_array=explode(",",$neuron_show_only_value);
-						for($index=0;$index<count($property_array);$index++){
-							if($property_array[$index]){
-								$subquery=$subquery."type like '".$property_array[$index]."' or ";
-							}
-						}	
-						$subquery=substr($subquery,0,count($subquery)-4);
-						$subquery=$subquery.")";
-						// Retrive evidences stored in temporary table
 						try
 						{			
 							$avoid_dups = array();		
-							$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery ORDER BY id_fragment ASC";	//echo $query;
+							//$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery ORDER BY id_fragment ASC";	echo $query;
+							$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	//echo $query;
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
@@ -1257,16 +1189,15 @@ function show_only_authors(link, start1, stop1)
 								*/
 								//$current_record = $id_fragment.$id_original.$quote.$page_location.$type;
 								$current_record = $id_original.$quote.$page_location.$type;
-								//echo "CURR REC ".$type;
 								$type_for_display=$type;
-							#if (!in_array($current_record, $avoid_dups))
+							//if (!in_array($current_record, $avoid_dups))
 							if (true)
 							{	
 								$quote_count++;	
 								if ($show1 == 1)
 								{
 									$type_show  = "";
-									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment $subquery ORDER BY type ASC";
+									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment ORDER BY type ASC";
 									$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
 									while(list($type) = mysqli_fetch_row($rs_type))
 									{
@@ -1395,7 +1326,7 @@ function show_only_authors(link, start1, stop1)
 									print ("
 											<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>");
-									if ($sp_page=='dal') {
+									if (true) {
 										$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
 										$download_icon='images/download_PNG.png';
 										$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
@@ -1417,30 +1348,7 @@ function show_only_authors(link, start1, stop1)
 											}
 										}
 									}
-									else if ($sp_page=='sd') {
-										$somatic_distances=$fragment->getSomaticDistances($neuron_id,$nq_neurite_name,$refID);
-										$download_icon='images/download_RAR.png';
-										$att_desc="RAR compressed somatic-distance paths for ".$neurite_ref.":";
-										$att_link='attachment/neurites_rar/'.$fragment->getRarFile($neuron_id,$nq_neurite_name,$refID);
-										$values_count=$somatic_distances[2];
-										if ($values_count>1) {
-											if ($color=='red') {
-												print ("Somatic distances of axons: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
-											}
-											if ($color=='blue') {
-												print ("Somatic distances of dendrites: mean ".$somatic_distances[1]." ± standard deviation ".$somatic_distances[0]." (n = ".$somatic_distances[2]."; min = ".$somatic_distances[3]."; max = ".$somatic_distances[4].")");
-											}
-										}
-										else {
-											if ($color=='red') {
-												print ("Somatic distance of axons in ".$parcel.": ".$somatic_distances[1]." μm (n = 1)");										}
-											if ($color=='blue') {
-												print ("Somatic distance of dendrites in ".$parcel.": ".$somatic_distances[1]." μm (n = 1)");
-											}			
-										}
-									}
-									print ("</td></tr>");
-									print ("
+									/*print ("
 										<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>");
 									
@@ -1456,7 +1364,7 @@ function show_only_authors(link, start1, stop1)
 												print ("<img src='".$download_icon."' border='0' width='40%' style='background-color:white;'>");
 												print ("</a>");
 											}
-											print("</td></tr>");
+											print("</td></tr>");*/
 									//print ($id_fragment." ".$id_original." ".$id_neuron." ".$nq_neurite_name);
 
 										// view info
@@ -1518,7 +1426,7 @@ function show_only_authors(link, start1, stop1)
 									$no_button_down = 1;
 								
 								$cnt=0;
-								$query = "SELECT distinct quote FROM $name_temporary_table WHERE show_only=1 $subquery";
+								$query = "SELECT distinct quote FROM $name_temporary_table WHERE show_only=1";
 								$rs = mysqli_query($GLOBALS['conn'],$query);			
 								while(list($quote) = mysqli_fetch_row($rs))
 								{
