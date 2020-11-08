@@ -31,18 +31,19 @@ class fragment_phases
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
-		#echo $query;
+		$query = "SELECT id, referenceID, cellID, location_in_reference, FTQ_ID, material_used, phase_parameter, phase_parameter_ID, authors, title, journal, year, PMID, pmid_isbn_page FROM $table WHERE id = '$id'";
+		//echo $query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysqli_fetch_row($rs))
+		while(list($id, $referenceID, $cellID, $location_in_reference, $FTQ_ID, $material_used, $phase_parameter, $phase_parameter_ID, $authors, $title, $journal, $year, $PMID, $pmid_isbn_page) = mysqli_fetch_row($rs))
 		{	
 			$this->setID($id);
-			$this->setOriginal_id($original_id);			
-			$this->setQuote($quote);
-			$this->setPage_location($page_location);
-			$this->setPmid_isbn($pmid_isbn);
+			$this->setOriginal_id($FTQ_ID);			
+			$this->setQuote($material_used);
+			//$this->setPage_location($page_location);
+			$this->setPmid_isbn($PMID);
+			//echo "PMID: $PMID";
 			$this->setPmid_isbn_page($pmid_isbn_page);
-			$this->setType($type);	
+			/*$this->setType($type);	
 			$this->setAttachment($attachment);	
 			$this->setAttachment_type($attachment_type);
 			$this->setInterpretation($interpretation);
@@ -52,26 +53,9 @@ class fragment_phases
 			$this->setLinking_pmid_isbn($linking_pmid_isbn);
 			$this->setLinking_pmid_isbn_page($linking_pmid_isbn_page);
 			$this->setLinking_quote($linking_quote);
-			$this->setLinking_page_location($linking_page_location);
+			$this->setLinking_page_location($linking_page_location);*/
 			
 		}
-			/*$this->setID(1);
-			$this->setOriginal_id(612028);			
-			$this->setQuote("Dentate granule cells <% 1000 %> communicate with their postsynaptic targets by three distinct terminal types.  These include the large mossy terminals filopodial extensions of the mossy terminals...");
-			$this->setPage_location("p3386");
-			$this->setPmid_isbn(9547246);
-			$this->setPmid_isbn_page(0);
-			$this->setType("data");	
-			$this->setAttachment("");	
-			$this->setAttachment_type("");
-			$this->setInterpretation("");
-			$this->setInterpretation_notes("");
-			//$this->setLinking_cell_id($linking_cell_id);
-			$this->setLinking_page_location("");
-			$this->setLinking_pmid_isbn(123456);
-			$this->setLinking_pmid_isbn_page(1234512345);
-			$this->setLinking_quote("");
-			$this->setLinking_page_location("");*/
 	}
 
 	public function retrive_attachment_array_by_original_id($id)
@@ -320,7 +304,7 @@ class fragment_phases
     	$subregion = Null;
 
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
-    	echo $query;
+    	//echo $query;
     	$rs = mysqli_query($GLOBALS['conn'],$query);
 		#$subregion = mysqli_fetch_row($rs)[0];
 		while(list($val_result) = mysqli_fetch_row($rs))
@@ -431,7 +415,7 @@ class fragment_phases
     	$somatic_distance=Null;
 		$query = "SELECT CAST(avg_path_length AS DECIMAL(10,2)) AS mpl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND avg_path_length!='';";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		echo $query."<br>";
+		//echo $query."<br>";
 		while(list($mpl) = mysqli_fetch_row($rs))
 		{	    	
 			$somatic_distance = $mpl;

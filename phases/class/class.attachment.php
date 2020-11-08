@@ -61,7 +61,7 @@ class attachment_phases
 		//$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM $table WHERE id = '$id' and cell_id = '$id_neuron'";
 		//$query = "SELECT id, source_id, RefID, Figure, 'phases_figure' AS type, null AS protocol_tag FROM $table WHERE RefID='$ref_id' AND source_id=$source_id AND target_id=$target_id";
 		$query = "SELECT id, source_id, RefID, Figure, 'phases_figure' AS type, null AS protocol_tag FROM $table WHERE RefID=$ref_id AND source_id=$source_id AND target_id=$target_id";
-		echo "<br>".$query;
+		//echo "<br>".$query;
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
 		{	
@@ -98,7 +98,7 @@ class attachment_phases
 		//print("original id:".$id);
 		//print("cell id".$id_neuron);
 		$query = "SELECT name, type FROM Attachment WHERE original_id = '$id' and cell_id = '$id_neuron'";
-		echo "<br>".$query;
+		//echo "<br>".$query;
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		if(list($attachment, $attachment_type) = mysqli_fetch_row($rs))
 		{

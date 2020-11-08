@@ -160,7 +160,7 @@ class evidencepropertyyperel_phases
 		$this->setN_Type_id($n);	
 	}		
 
-	public function retrive_evidence_id($Property_id, $type_id)
+	/*public function retrive_evidence_id($Property_id, $type_id)
 	{
 		$table=$this->getName_table();		
 		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Property_id = '$Property_id' AND Type_id = '$type_id'";
@@ -175,7 +175,24 @@ class evidencepropertyyperel_phases
 			$n = $n +1;
 		}
 		$this->setN_evidence_id($n);	
-	}	
+	}	*/
+
+	public function retrive_evidence_id($type_id)
+	{
+		$table=$this->getName_table();		
+		$query = "SELECT DISTINCT Evidence_id,linking_quote,interpretation_notes FROM $table WHERE Type_id = '$type_id'";
+		//echo "sql: ".$query."<br>";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id,$linking_quote,$interpretation_notes) = mysqli_fetch_row($rs))
+		{			
+			$this->setEvidence_id_array($id, $n);
+			$this->setLinking_quote_array($linking_quote, $n);
+			$this->setInterpretation_notes_array($interpretation_notes, $n);
+			$n = $n +1;
+		}
+		$this->setN_evidence_id($n);	
+	}
 
 	public function retrive_evidence_id_n_by_n($Property_id, $type1_id, $type2_id)
 	{

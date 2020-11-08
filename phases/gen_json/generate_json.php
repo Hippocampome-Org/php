@@ -109,7 +109,7 @@
 				$count = $row['count'];
 			}
 		}
-		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='theta".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$theta_median."</a></span></center></div>\",";
 		array_push($best_ranks_theta, $rank_entry_theta);
 		array_push($theta_values, $entry_output);
 		array_push($npage_entry, $neuron_ids[$i]);

@@ -35,11 +35,13 @@ class articleevidencerel_phases
 	public function retrive_article_id($evidence_id)
     {
 		$table=$this->getName_table();
-		$min_id=$this->_min_n_by_k_evidence_id;
-		$max_id=$this->_max_n_by_k_evidence_id;
+		//$min_id=$this->_min_n_by_k_evidence_id;
+		//$max_id=$this->_max_n_by_k_evidence_id;
 
 		//$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id' AND Evidence_id>17505";
-		$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id'";
+		//$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id'";
+		$query = "SELECT pmid FROM phases_fragment WHERE id='$evidence_id';";
+		//echo $query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))

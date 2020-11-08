@@ -135,10 +135,11 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$volume' ,
 	   '$issue'   
 	   )";
+	   //echo $query_i."<br>";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
 // set property of synapse probability page
-$page = $_REQUEST['page'];
+$page = true;//$_REQUEST['page'];
 $sub_show_only = $_SESSION['phases_sub_show_only']; 
 $name_show_only_article = $_SESSION['phases_name_show_only_article'];
 
@@ -182,7 +183,8 @@ if ($_REQUEST['show_0']) //  ==> OFF
 	$rs2 = mysqli_query($GLOBALS['conn'],$query);	
 }
 // Request coming from another page
-if ($page) 
+//if ($page) 
+if (true)
 {
 	$name_show_only = 'all';
 	$_SESSION['phases_name_show_only'] = $name_show_only;
@@ -450,13 +452,13 @@ $type = new type($class_type);
 $type -> retrive_by_id($id_neuron);
 $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
-$class_fragment='phasesFragment';
+$class_fragment='phases_fragment';
 $fragment = new fragment_phases($class_fragment);
 $attachment_obj = new attachment_phases($class_attachment);
 //$evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
-$class_evidence_property_type_rel = 'phasesEvidencePropertyTypeRel';
+$class_evidence_property_type_rel = 'phases_evidence_type_rel';
 $evidencepropertyyperel = new evidencepropertyyperel_phases($class_evidence_property_type_rel);
-$class_evidencefragmentrel='phasesEvidenceFragmentRel';
+$class_evidencefragmentrel='phases_evidence_fragment_rel';
 $evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
 //$articleevidencerel = new articleevidencerel($class_articleevidencerel);
 $class_articleevidencerel='phasesArticleEvidenceRel';
@@ -635,10 +637,10 @@ function show_only_authors(link, start1, stop1)
 					// Retrieve property_id from Property by using Type_id
 					$part1[$tt] = ucfirst($part);
 					$property  -> retrive_ID(1, $part, 'in', $val_property);
-					$n_property_id = $property -> getNumber_type();		
+					$n_property_id = $property -> getNumber_type();	
 
 				}
-				else if ($n_interraction == 2)
+				/*else if ($n_interraction == 2)
 				{
 					// Axons and Dendrites
 					if($part == 'axons_dendrites')
@@ -709,15 +711,17 @@ function show_only_authors(link, start1, stop1)
 						$property  -> retrive_ID(1, 'somata', 'in', $val_property);
 						$n_property_id = $property -> getNumber_type();
 					 }
-				}	
-				for ($i=0; $i<$n_property_id; $i++)
+				}	*/
+				/*for ($i=0; $i<$n_property_id; $i++)
 				{
 					$property_id[$i] = $property -> getProperty_id($i);
 
 					// Retrive Evidence_id from evidencepropertyyperel by using $property_id and $type_id:
 					$evidencepropertyyperel -> retrive_evidence_id($property_id[$i], $id_neuron);				
 					$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
-				}							
+				}*/							
+				$evidencepropertyyperel -> retrive_evidence_id($id_neuron);				
+				$n_evidence_id = $evidencepropertyyperel -> getN_evidence_id();
 				$n_article = 0; // <-- Number of articles
 				for ($i=0; $i<$n_evidence_id; $i++)
 				{
@@ -733,16 +737,21 @@ function show_only_authors(link, start1, stop1)
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
 						$n_article = $n_article + 1;
 					}
+
+					//echo $evidence_id[$i]." test<br>";	
 				}
 				for ($i=0; $i<$n_article; $i++)
 				{
 					// Retrieve Quote and page_location and original_id from Fragment bu using fragment_id:
 					$fragment -> retrive_by_id($fragment_id[$i]);
 					$quote = $fragment -> getQuote();
+					//echo $quote."<br>";
 					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
 					$pmid_isbn= $fragment -> getPmid_isbn();
+					//echo "pmid_isbn ".$pmid_isbn."<br>";
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
+					//echo "pmid_isbn_page: $pmid_isbn_page<br>";
 					$page_location = $fragment -> getPage_location();
 					//Retreive information from attachment table					
 					if ($pmid_isbn_page!=0 && $pmid_isbn_page!= NULL)
@@ -750,15 +759,22 @@ function show_only_authors(link, start1, stop1)
 						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 						$id_article= $article -> getID();
 					}
+					else if ($pmid_isbn == 25375253) {
+						$article -> retrive_by_pmid(25375253);
+						$id_article= $article -> getID();
+					}
 					else 
 					{
 						// retrieve article_id from ArticleEvidenceRel by using Evidence_id
 						$articleevidencerel -> retrive_article_id($evidence_id[$i]);
+						//echo $evidence_id[$i]."<br>";
 						$id_article = $articleevidencerel -> getArticle_id_array(0);
+						//echo $id_article."<br>";
 						// retrieve all information from article table by using article_id
 						$article -> retrive_by_id($id_article) ;
 					}
 					$title = $article -> getTitle();
+					//echo "title: $title";
 					$publication = $article -> getPublication();
 					$year = $article -> getYear();
 					$pmid_isbn = $article -> getPmid_isbn(); 
@@ -804,13 +820,13 @@ function show_only_authors(link, start1, stop1)
 				}
 			}			
 					// find the total number of Articles: 
-					$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1";
+					$query = "SELECT DISTINCT title FROM $name_temporary_table";// WHERE show_only = 1";
 					$rs = mysqli_query($GLOBALS['conn'],$query);
 					$n_id_tot = 0;	 // Total number of articles:
 					while(list($id) = mysqli_fetch_row($rs))			
 						$n_id_tot = $n_id_tot + 1;
 
-
+					//echo "$n_id_tot";
 					$query = "SELECT total.count as totalcount,axon.count as axoncount,dendrite.count as dendritecount,
 							soma.count as somacount
 							FROM
