@@ -331,7 +331,7 @@ class fragment_phases
 		#return $subregion;
     }    
 
-    public function prop_name_to_nq_name($prop_name)
+    /*public function prop_name_to_nq_name($prop_name)
     {
     	$nq_neurite_name='';
     	$query = "SELECT neurite_quant_neurite FROM SynproPropParcelRel WHERE parcel='".$prop_name."';";
@@ -448,7 +448,21 @@ class fragment_phases
 		}
 
 		return $species;
-    } 
+    } */
+
+    public function eid_to_location_in_reference($evidence_id) 
+    {
+    	$lir='';
+		$query = "SELECT location_in_reference FROM phases_fragment WHERE id='$evidence_id';";
+		//echo $query;
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($lir_result) = mysqli_fetch_row($rs))
+		{	    	
+			$lir=$lir_result;
+		}
+
+		return $lir;
+    }
 	
 }
 

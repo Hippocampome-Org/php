@@ -166,7 +166,7 @@ if ($see_all == 'Close All Evidence')
 //echo "<br><br><br><br><br><br><br><br><br>";
 //echo $_SESSION['phases_name_temporary_table'];
 //echo "<br>";
-if (true)//$_REQUEST['show_1']) //  ==> ON
+if ($_REQUEST['show_1']) //  ==> ON
 {
 	$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 	$title_paper = $_REQUEST['title'];
@@ -590,7 +590,7 @@ function show_only_authors(link, start1, stop1)
 <br><br /><br><br />
 <table width="85%" border="0" cellspacing="0" cellpadding="0" class='body_table'>
   <tr height="40">
-    <td><center>Note: this page is under development and incomplete.<br>Work is actively being done to complete it.</center></td>
+    <td><div class="title_area"><font class="font1">Phases Evidence Page</font></div></td>
   </tr>
   <tr>
     <td align="center">
@@ -748,7 +748,25 @@ function show_only_authors(link, start1, stop1)
 					}
 				}
 			}			
-			if (true)//$_REQUEST['show_1']) //  ==> ON
+
+			if ($see_all == 'Open All Evidence')
+			{
+				$page_in = $_REQUEST['start'];
+				$page_end = $_REQUEST['stop'];
+				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
+				$query = "UPDATE $name_temporary_table SET show1 =  '1'";
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);		
+			}
+			// close all evidences
+			if ($see_all == 'Close All Evidence')
+			{
+				$page_in = $_REQUEST['start'];
+				$page_end = $_REQUEST['stop'];
+				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
+				$query = "UPDATE $name_temporary_table SET show1 =  '0'";
+				$rs2 = mysqli_query($GLOBALS['conn'],$query);		
+			}
+			if ($_REQUEST['show_1']) //  ==> ON
 			{
 				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 				$title_paper = $_REQUEST['title'];
@@ -1246,14 +1264,14 @@ function show_only_authors(link, start1, stop1)
 									$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
 									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
 									$original_id = $fragment -> getOriginal_id();
-									if (in_array($type_for_display,$dendrite_group)) {
+									/*if (in_array($type_for_display,$dendrite_group)) {
 										$neurite_ref = $val_property.":D";
 									}
 									elseif (in_array($type_for_display,$axon_group)) {
 										$neurite_ref = $val_property.":A";	
-									}
+									}*/
 									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
-									$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
+									//$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
 									$attachment = $attachment_obj -> getName();
 									$attachment_type = $attachment_obj -> getType();
 									//$attachment_type="phases_figure";
@@ -1320,18 +1338,18 @@ function show_only_authors(link, start1, stop1)
 									print ($seg_1_text);
 									// describe neurite statistics
 									$neuron_id=$id_neuron;
-									$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
+									//$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
 									$refID=$id_original;
 									$parcel=$val_property;
 									print ("
 											<tr>
 											<td width='70%' class='table_neuron_page2' align='left'>");
 									if (true) {
-										$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
+										//$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
 										$download_icon='images/download_PNG.png';
-										$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
+										//$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
 										$att_link=$link_figure;
-										$values_count=$neurite_lengths[2];
+										/*$values_count=$neurite_lengths[2];
 										if ($values_count>1) {
 											if ($color=='red') {
 												print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
@@ -1346,7 +1364,7 @@ function show_only_authors(link, start1, stop1)
 											if ($color=='blue') {
 												print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
 											}
-										}
+										}*/
 									}
 									/*print ("
 										<tr>	
@@ -1368,10 +1386,11 @@ function show_only_authors(link, start1, stop1)
 									//print ($id_fragment." ".$id_original." ".$id_neuron." ".$nq_neurite_name);
 
 										// view info
+										$lir = $fragment->eid_to_location_in_reference($id_fragment);
 										print ("
 										<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>
-												Page location: <span title='$id_fragment (original: $id_original)'>$page_location</span>
+												Page location: $lir
 											</td>
 											<td width='15%' align='center'>");	
 										print ("</td></tr>	
