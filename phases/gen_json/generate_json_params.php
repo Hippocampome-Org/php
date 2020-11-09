@@ -45,10 +45,13 @@
 
 	$json_output_file = $path_to_files."json_files/phases.json";
 
-	$page = '';
+	if (!isset($page)) {
+		$page = '';
+	}
 	if (isset($_GET['page'])) {
 		$page = $_GET['page'];
 	}
+	//echo "<br><br><br><br><br><br><br><br><br>"."page: ".$page;
 	$write_output = array();
 	$theta_values = array();
 	$spw_values = array();

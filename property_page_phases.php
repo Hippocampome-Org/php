@@ -21,6 +21,10 @@ require_once('class/class.evidencefragmentrel.php');
 require_once('phases/class/class.articleevidencerel.php');
 require_once('class/class.articleauthorrel.php');
 
+$page="main_page";
+//$_REQUEST['page']=$page;
+include("phases/gen_json/generate_json.php");
+
 function checkNeuronProperty($color)
 {
 	$part="";
@@ -1244,22 +1248,7 @@ function show_only_authors(link, start1, stop1)
 									print ("<tr>");
 												
 									$row_span=30;
-									if ($type_for_display == 'Axons')		
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><img src='images/axon.png'></td>");
-									if ($type_for_display == 'Dendrites')		
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><img src='images/dendrite.png'></td>");	
-									if ($type_for_display == 'Somata')		
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p></td>");
-	                                if ($type_for_display == 'AxonsSomata')	
-	                                  print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axonsomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon.png'></td>");										   
-	                                if ($type_for_display == 'AxonsDendrites')	
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axondendrite'><img src='images/axon-dendrite.png'></td>");
-								    if ($type_for_display == 'DendritesSomata')
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-dendritesomata'><p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/dendrite.png'></td>");	
-									if ($type_for_display == 'AxonsDendritesSomata')
-	                                 	print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell' class='comboflag-axondendritesomata'> <p style='color:rgb(84,84,84);font-size:68%'>SOMA</p><img src='images/axon-dendrite.png'></td>");
-									if ($type_for_display == '')									
-										print ("<td width='15%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");								
+									print ("<td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");								
 									// retrieve the attachament
 									$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
 									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
@@ -1336,36 +1325,47 @@ function show_only_authors(link, start1, stop1)
 										#array_push($segment2, $seg_2_text);
 									}
 									print ($seg_1_text);
-									// describe neurite statistics
 									$neuron_id=$id_neuron;
-									//$nq_neurite_name = $fragment->prop_name_to_nq_name($neurite_ref);
 									$refID=$id_original;
 									$parcel=$val_property;
-									print ("
-											<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>");
-									if (true) {
-										//$neurite_lengths=$fragment->getNeuriteLengths($neuron_id,$nq_neurite_name,$refID);
-										$download_icon='images/download_PNG.png';
-										//$att_desc="Figure segmentation evidence for ".$neurite_ref.":";
-										$att_link=$link_figure;
-										/*$values_count=$neurite_lengths[2];
-										if ($values_count>1) {
-											if ($color=='red') {
-												print ("Axonal lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
-											}
-											if ($color=='blue') {
-												print ("Dendritic lengths: mean ".$neurite_lengths[1]." ± standard deviation ".$neurite_lengths[0]." (n = ".$neurite_lengths[2]."; min = ".$neurite_lengths[3]."; max = ".$neurite_lengths[4].")");
-											}
-										}
-										else {
-											if ($color=='red') {
-												print ("Axonal length in ".$parcel.": ".$neurite_lengths[1]." μm");										}
-											if ($color=='blue') {
-												print ("Dendritic length in ".$parcel.": ".$neurite_lengths[1]." μm");
-											}
-										}*/
-									}
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";
+									/*$write_output = retrieve_values($conn, 1, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other);
+									$theta_values = $write_output[0];
+									$spw_values = $write_output[1];
+									$firingrate_values = $write_output[2];
+									$other_values = $write_output[3];
+									$best_ranks_theta = $write_output[4];
+									$best_ranks_swr = $write_output[5];
+									$best_ranks_firingrate = $write_output[6];
+									$npage_theta = $write_output[7];
+									$npage_swr = $write_output[8];
+									$npage_firingrate = $write_output[9];
+									$npage_other = $write_output[10];	*/
+									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
+							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
+							      	$other_val = ''; $other_prop = '';
+							      	for ($i = 0; $i < count($npage_theta); $i++) {
+							      		if ($npage_theta[$i][0] == $id_neuron) {
+											$theta_val = $npage_theta[$i][1];
+											$theta_prop1 = $npage_theta[$i][2];
+											$theta_prop2 = $npage_theta[$i][3];
+											$theta_prop3 = $npage_theta[$i][4];
+											$swr_val = $npage_swr[$i][1];
+											$swr_prop1 = $npage_swr[$i][2];
+											$swr_prop2 = $npage_swr[$i][3];
+											$swr_prop3 = $npage_swr[$i][4];
+											$firingrate_val = $npage_firingrate[$i][1];
+											$firingrate_prop1 = $npage_firingrate[$i][2];
+											$firingrate_prop2 = $npage_firingrate[$i][3];
+											$firingrate_prop3 = $npage_firingrate[$i][4];
+											$other_val = $npage_other[$i][1];
+											$other_prop = $npage_other[$i][2];
+							      		}
+							      	}								
+									echo "Theta median: ".$theta_val."; Range: ".$theta_prop1."; Measurements: ".$theta_prop2."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
+									echo "</td></tr>";	
+									$download_icon='images/download_PNG.png';
+									$att_link=$link_figure;
 									/*print ("
 										<tr>	
 											<td width='70%' class='table_neuron_page2' align='left'>");
@@ -1385,33 +1385,33 @@ function show_only_authors(link, start1, stop1)
 											print("</td></tr>");*/
 									//print ($id_fragment." ".$id_original." ".$id_neuron." ".$nq_neurite_name);
 
-										// view info
-										$lir = $fragment->eid_to_location_in_reference($id_fragment);
-										print ("
-										<tr>	
-											<td width='70%' class='table_neuron_page2' align='left'>
-												Page location: $lir
-											</td>
-											<td width='15%' align='center'>");	
-										print ("</td></tr>	
-										<tr>		
-											<td width='70%' class='table_neuron_page2' align='left'>
-												<em>$quote</em>");
-										print ($seg_2_text);
-										print("</td>
-											<td width='15%' class='table_neuron_page2' align='center'>");
-											
-											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-											if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
-											{
-												print ("<a href='$art_orig_link_figure' target='_blank'>");
-												print ("<img src='$art_orig_link_figure' border='0' width='80%' style='background-color:white;'>");
-												print ("</a>");
-											}	
-											else;
-											print("</td></tr>");
+									// view info
+									$lir = $fragment->eid_to_location_in_reference($id_fragment);
+									print ("
+									<tr>	
+										<td width='70%' class='table_neuron_page2' align='left'>
+											Page location: $lir
+										</td>
+										<td width='15%' align='center'>");	
+									print ("</td></tr>	
+									<tr>		
+										<td width='70%' class='table_neuron_page2' align='left'>
+											<em>$quote</em>");
+									print ($seg_2_text);
+									print("</td>
+										<td width='15%' class='table_neuron_page2' align='center'>");
+										
+										//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
+										if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
+										{
+											print ("<a href='$art_orig_link_figure' target='_blank'>");
+											print ("<img src='$art_orig_link_figure' border='0' width='80%' style='background-color:white;'>");
+											print ("</a>");
+										}	
+										else;
+										print("test</td></tr>");
 
-										print ("</table>");
+									print ("</table>");
 								}								
 							}
 							array_push($avoid_dups, $current_record);	

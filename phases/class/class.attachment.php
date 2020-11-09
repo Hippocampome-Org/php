@@ -21,7 +21,7 @@ class attachment_phases
     {
 		$table=$this->getName_table();
 		
-		$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM Attachment WHERE id = '$id' and cell_id = '$id_neuron'";
+		$query = "SELECT id, cell_id, original_id, name, type, protocol_tag FROM attachment_phases WHERE id = '$id' and cell_id = '$id_neuron'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
 		{	
