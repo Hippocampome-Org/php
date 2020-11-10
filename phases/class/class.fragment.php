@@ -357,6 +357,18 @@ class fragment_phases
 		return $lir;
     }
 
+    public function neuron_id_to_array_index($neuron_id, $neuron_ids) 
+    {
+    	$array_index=0;
+		for ($i = 0; $i < count($neuron_ids); $i++) {
+			if ($neuron_id == $neuron_ids[$i]) {
+				$array_index = $i;
+			}
+		}
+
+		return $array_index;
+    }
+
 }
 
 ?>

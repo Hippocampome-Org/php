@@ -1333,9 +1333,11 @@ function show_only_authors(link, start1, stop1)
 									$neuron_id=$id_neuron;
 									$refID=$id_original;
 									$parcel=$val_property;
+									$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
+									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
 
-									for ($i = 0; $i < count($neuron_ids); $i++) {
-										$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
+									//for ($i = 0; $i < count($neuron_ids); $i++) {
+										$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
 										$theta_values = $write_output[0];
 										$spw_values = $write_output[1];
 										$firingrate_values = $write_output[2];
@@ -1347,7 +1349,7 @@ function show_only_authors(link, start1, stop1)
 										$npage_swr = $write_output[8];
 										$npage_firingrate = $write_output[9];
 										$npage_other = $write_output[10];
-									}
+									//}
 
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
