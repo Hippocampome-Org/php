@@ -556,7 +556,7 @@ function show_only_authors(link, start1, stop1)
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); 
 	$name=$type->getNickname();
-	print("<title>Evidence - $name ($val_property)</title>");
+	print("<title>Evidence - $name</title>");
 ?>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
@@ -1265,26 +1265,18 @@ function show_only_authors(link, start1, stop1)
 										$neurite_ref = $val_property.":A";	
 									}*/
 									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
-									//$attachment_obj -> retrive_by_props($id_original, $id_neuron, $neurite_ref);
+									$attachment_obj -> retrive_by_referenceID($referenceID);
 									$attachment = $attachment_obj -> getName();
 									$attachment_type = $attachment_obj -> getType();
 									//$attachment_type="phases_figure";
 									$link_figure="";									
 									$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
-									// original article attachment
-									$attachment_obj2 = new attachment_phases($class_attachment); // this clears prior attachment results
-									$attachment_obj2 -> retrive_by_props($id_original, $id_neuron, 'Original');
-									$art_orig_attachment = $attachment_obj2 -> getName();
-									$art_orig_attachment_type = $attachment_obj2 -> getType();
-									$art_orig_attachment_jpg = $art_orig_attachment;//str_replace('jpg', 'jpeg', $art_orig_attachment);
-
+									
 									if($attachment_type=="phases_figure"){
-										$link_figure = "attachment/neurites/".$attachment_jpg;
-										$art_orig_link_figure = "attachment/neurites/".$art_orig_attachment_jpg;
+										$link_figure = "attachment/phases/".$attachment_jpg;
 									}								
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-									$link_figure_pdf = "figure_pdf/".$attachment_pdf;
-									
+									$link_figure_pdf = "figure_pdf/".$attachment_pdf;						
 
 									// get protocol age species and interpretation
 									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM ".$class_fragment." WHERE id=$id_fragment ";
@@ -1336,20 +1328,18 @@ function show_only_authors(link, start1, stop1)
 									$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
 
-									//for ($i = 0; $i < count($neuron_ids); $i++) {
-										$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
-										$theta_values = $write_output[0];
-										$spw_values = $write_output[1];
-										$firingrate_values = $write_output[2];
-										$other_values = $write_output[3];
-										$best_ranks_theta = $write_output[4];
-										$best_ranks_swr = $write_output[5];
-										$best_ranks_firingrate = $write_output[6];
-										$npage_theta = $write_output[7];
-										$npage_swr = $write_output[8];
-										$npage_firingrate = $write_output[9];
-										$npage_other = $write_output[10];
-									//}
+									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
+									$theta_values = $write_output[0];
+									$spw_values = $write_output[1];
+									$firingrate_values = $write_output[2];
+									$other_values = $write_output[3];
+									$best_ranks_theta = $write_output[4];
+									$best_ranks_swr = $write_output[5];
+									$best_ranks_firingrate = $write_output[6];
+									$npage_theta = $write_output[7];
+									$npage_swr = $write_output[8];
+									$npage_firingrate = $write_output[9];
+									$npage_other = $write_output[10];
 
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
@@ -1386,24 +1376,6 @@ function show_only_authors(link, start1, stop1)
 									echo "</td></tr>";
 									$download_icon='images/download_PNG.png';
 									$att_link=$link_figure;
-									/*print ("
-										<tr>	
-											<td width='70%' class='table_neuron_page2' align='left'>");
-									
-											print ($att_desc);
-											//print ($id_fragment);
-											print("</td>
-											<td width='15%' class='table_neuron_page2' align='center'>");
-											
-											//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-											if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
-											{
-												print ("<a href='".$att_link."' target='_blank'>");
-												print ("<img src='".$download_icon."' border='0' width='40%' style='background-color:white;'>");
-												print ("</a>");
-											}
-											print("</td></tr>");*/
-									//print ($id_fragment." ".$id_original." ".$id_neuron." ".$nq_neurite_name);
 
 									// view info
 									$lir = $fragment->eid_to_location_in_reference($id_fragment);
@@ -1420,22 +1392,20 @@ function show_only_authors(link, start1, stop1)
 									print ($seg_2_text);
 									print("</td>
 										<td width='15%' class='table_neuron_page2' align='center'>");
-										
-										//if ($attachment_type=="morph_figure"||$attachment_type=="morph_table")
-										if ($attachment_type=="phases_figure"&&$link_figure!='attachment/neurites/')
-										{
-											print ("<a href='$art_orig_link_figure' target='_blank'>");
-											print ("<img src='$art_orig_link_figure' border='0' width='80%' style='background-color:white;'>");
-											print ("</a>");
-										}	
-										else;
-										print("</td></tr>");
+
+									if ($attachment_type=="phases_figure"&&$link_figure!='attachment/phases/')
+									{
+										print ("<a href='$link_figure' target='_blank'>");
+										print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
+										print ("</a>");
+									}	
+									else;
+									print("</td></tr>");
 
 									print ("</table>");
 								}								
 							}
-							array_push($avoid_dups, $current_record);	
-							//echo ($avoid_dups[0])."<br>";							
+							array_push($avoid_dups, $current_record);							
 						}	
 					}
 					// if error occurs while retriving evidences show error message

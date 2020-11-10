@@ -8,6 +8,7 @@ class attachment_phases
 	private $_name;	
 	private $_a_type;	
 	private $_protocol_tag;
+	private $_filename;
 	//unused
 	
 	
@@ -32,6 +33,22 @@ class attachment_phases
 			$this->setProtocol_tag($protocol_tag);
 			$this->setType($type);	
 				
+		}
+	}
+
+	public function retrive_by_referenceID($referenceID) 
+    {
+		$table=$this->getName_table();		
+		$query = "SELECT id, cell_identifier, reference_ID, name_of_file_containing_figure, 'phases_figure' AS type, null FROM attachment_phases WHERE reference_ID= '$referenceID'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($id,$cell_id, $original_id, $name, $type, $protocol_tag) = mysqli_fetch_row($rs))
+		{	
+			$this->setID($id);
+			$this->setCell_id($cell_id);
+			$this->setOriginal_id($original_id);	
+			$this->setName($name);	
+			$this->setProtocol_tag($protocol_tag);
+			$this->setType($type);				
 		}
 	}
 
@@ -201,9 +218,10 @@ class attachment_phases
 		  $this->_a_type = $val;
     }
 
- 	
-
-	
+	public function setFilename($val)
+    {
+		  $this->_filename = $val;
+    } 	
 			
  	// GET ++++++++++++++++++++++++++++++++++++++	
     public function getID()
@@ -246,7 +264,11 @@ class attachment_phases
     }
     //new ends
     
-    
+ 	public function getFilename()
+    {
+		  return $this->_filename;
+    }
+    //new ends   
 	
 }
 
