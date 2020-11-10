@@ -2,6 +2,7 @@
 class fragment_phases
 {
 	private $_name_table;
+	private $_referenceID;
 	private $_id;
 	private $_quote;
 	private $_original_id;
@@ -36,6 +37,7 @@ class fragment_phases
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id, $referenceID, $cellID, $location_in_reference, $FTQ_ID, $material_used, $phase_parameter, $phase_parameter_ID, $authors, $title, $journal, $year, $PMID, $pmid_isbn_page) = mysqli_fetch_row($rs))
 		{	
+			$this->setReferenceID($referenceID);
 			$this->setID($id);
 			$this->setOriginal_id($FTQ_ID);			
 			$this->setQuote($material_used);
@@ -102,6 +104,11 @@ class fragment_phases
 	}
 	 
 	// SET -------------------------------------
+	public function setReferenceID($val)
+    {
+		  $this->_referenceID = $val;
+    }
+
  	public function setID($val)
     {
 		  $this->_id = $val;
@@ -199,6 +206,11 @@ class fragment_phases
 	
 			
  	// GET ++++++++++++++++++++++++++++++++++++++	
+ 	public function getReferenceID()
+    {
+    	return $this->_referenceID;
+    }
+
     public function getID()
     {
     	return $this->_id;
@@ -330,125 +342,6 @@ class fragment_phases
 
 		#return $subregion;
     }    
-
-    /*public function prop_name_to_nq_name($prop_name)
-    {
-    	$nq_neurite_name='';
-    	$query = "SELECT neurite_quant_neurite FROM SynproPropParcelRel WHERE parcel='".$prop_name."';";
-		
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($neurite_quant_neurite) = mysqli_fetch_row($rs))
-		{	    	
-			# just saves the variable neurite_quant_neurite
-			$nq_neurite_name=$neurite_quant_neurite;
-		}
-
-		return $nq_neurite_name;
-    }
-
-    public function getNeuriteLengths($neuron_id,$neurite,$refID)
-    {
-    	$neurite_lengths=array();
-    	$query = "SELECT CAST(STD(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg_tl, CAST(COUNT(CAST(total_length AS DECIMAL(10,0))) AS DECIMAL(10,0)) AS count_tl, CAST(MIN(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS min_tl, CAST(MAX(CAST(total_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS max_tl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
-    	//echo $query;
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($std, $avg, $count, $min, $max) = mysqli_fetch_row($rs))
-		{	    	
-			array_push($neurite_lengths, $std);
-			array_push($neurite_lengths, $avg);
-			array_push($neurite_lengths, $count);
-			array_push($neurite_lengths, $min);
-			array_push($neurite_lengths, $max);
-		}
-
-		return $neurite_lengths;
-    }    
-
-    public function getConvexHullVolume($neuron_id,$neurite,$refID)
-    {
-    	$convexhull=0;
-    	//$query = "SELECT CAST(STD(total_length) AS DECIMAL(10,2)) AS std_tl, CAST(AVG(total_length) AS DECIMAL(10,2)) AS avg_tl, CAST(COUNT(total_length) AS DECIMAL(10,0)) AS count_tl, CAST(MIN(total_length) AS DECIMAL(10,2)) AS min_tl, CAST(MAX(total_length) AS DECIMAL(10,2)) AS max_tl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
-    	$query = "SELECT convexhull FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND convexhull!='';";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($convexhullvolume) = mysqli_fetch_row($rs))
-		{	    	
-			$convexhull = $convexhullvolume;
-		}
-
-		return $convexhull;
-    }    
-
-    public function getSingleNeuriteLength($neuron_id,$neurite,$refID)
-    {
-    	$length=Null;
-		$query = "SELECT CAST(total_length AS DECIMAL(10,2)) AS tl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND total_length!='';";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($tl) = mysqli_fetch_row($rs))
-		{	    	
-			# just saves the variable neurite_quant_neurite
-			$length=$tl;
-		}
-
-		return $length;
-    }
-
-    public function getSomaticDistances($neuron_id,$neurite,$refID)
-    {
-    	$somatic_distances=array();
-		$query = "SELECT CAST(STD(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS std_sd, CAST(AVG(CAST(avg_path_length AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS avg, CAST(COUNT(CAST(avg_path_length AS DECIMAL(10,0))) AS DECIMAL(10,0)) AS count_sd, CAST(min_path_length AS DECIMAL(10,2)) AS min_sd, CAST(max_path_length AS DECIMAL(10,2)) AS max_sd FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND avg_path_length!='';";
-		//echo $query."<br>";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($std_sd, $avg, $count_sd, $min_sd, $max_sd) = mysqli_fetch_row($rs))
-		{	    	
-			array_push($somatic_distances, $std_sd);
-			array_push($somatic_distances, $avg);
-			array_push($somatic_distances, $count_sd);
-			array_push($somatic_distances, $min_sd);
-			array_push($somatic_distances, $max_sd);
-		}
-
-		return $somatic_distances;
-    }    
-
-    public function getSingleSomaticDistance($neuron_id,$neurite,$refID)
-    {
-    	$somatic_distance=Null;
-		$query = "SELECT CAST(avg_path_length AS DECIMAL(10,2)) AS mpl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND avg_path_length!='';";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		//echo $query."<br>";
-		while(list($mpl) = mysqli_fetch_row($rs))
-		{	    	
-			$somatic_distance = $mpl;
-		}
-
-		return $somatic_distance;
-    }     
-
-    public function getRarFile($neuron_id,$neurite_name,$refID)
-    {
-    	$rar_file='';
-		$query = "SELECT rar_file FROM attachment_neurite_rar WHERE neuron_id=".$neuron_id." AND neurite_name='".$neurite_name."' AND reference_ID=".$refID.";";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($rar_file_result) = mysqli_fetch_row($rs))
-		{	    	
-			$rar_file=$rar_file_result;
-		}
-
-		return $rar_file;
-    } 
-
-    public function refid_to_species($refID)
-    {
-    	$species='';
-		$query = "SELECT species FROM neurite WHERE referenceID=".$refID.";";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($species_result) = mysqli_fetch_row($rs))
-		{	    	
-			$species=$species_result;
-		}
-
-		return $species;
-    } */
 
     public function eid_to_location_in_reference($evidence_id) 
     {

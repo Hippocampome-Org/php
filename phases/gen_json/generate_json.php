@@ -37,7 +37,7 @@
 		";
 	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID) {
 		/*
 			Return values for theta, swr_ratio, and other.
 		*/
@@ -51,14 +51,22 @@
 		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
 		$lowest_firingrate_rank = ''; $lowest_firingrate_rank_id = '';
 		$theta_median = ''; $swr_median = ''; $firingrate_median = ''; $npage_entry = array();
+		$pmid_condition = "";// AND PMID_or_ISBN = \"$pmid_limit\"";
+		$refid_condition = "";// AND referenceID = \"\\\"$referenceID\\\"\"";
 
 		// theta section
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(GROUP_CONCAT(DISTINCT theta) AS DECIMAL (10 , 2 )) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
+		if ($pmid_limit != "") {
+			$sql = $sql.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql = $sql.$refid_condition;
+		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
-		//echo "<br><br><br><br><br><br><br><br>".$sql;
+		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -89,17 +97,31 @@
 			}
 		}
 		// find median
-		$sql2 = "SELECT CAST(AVG(pp.theta) AS DECIMAL(10,2)) as median_val FROM (SELECT p.theta, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.theta is NOT NULL AND p.theta!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_rank." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2));";
+		$sql2 = "SELECT CAST(AVG(pp.theta) AS DECIMAL(10,2)) as median_val FROM (SELECT p.theta, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.theta is NOT NULL AND p.theta!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_rank;
+		if ($pmid_limit != "") {
+			$sql2 = $sql2.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql2 = $sql2.$refid_condition;
+		}
+		$sql2 = $sql2." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2))";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				$theta_median = $row['median_val'];
 			}
 		}
+		//if ($neuron_ids[$i] == 2000) {echo "<br><br><br><br><br><br><br><br>sql: ".$sql2;}
 		// find min and max
 		$sql4 = "SELECT MIN(CAST(theta AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(theta AS DECIMAL (10 , 2 ))) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql4 = $sql4.$conditions;
+		}
+		if ($pmid_limit != "") {
+			$sql4 = $sql4.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql4 = $sql4.$refid_condition;
 		}
 		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
@@ -126,7 +148,14 @@
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
+		if ($pmid_limit != "") {
+			$sql = $sql.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql = $sql.$refid_condition;
+		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -162,7 +191,14 @@
 			}
 		}
 		// find median
-		$sql2 = "SELECT CAST(AVG(pp.SWR_ratio) AS DECIMAL(10,2)) as median_val FROM (SELECT p.SWR_ratio, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.SWR_ratio is NOT NULL AND p.SWR_ratio!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_swr_rank." ORDER BY CAST(p.SWR_ratio AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2));";
+		$sql2 = "SELECT CAST(AVG(pp.SWR_ratio) AS DECIMAL(10,2)) as median_val FROM (SELECT p.SWR_ratio, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.SWR_ratio is NOT NULL AND p.SWR_ratio!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_swr_rank;
+		if ($pmid_limit != "") {
+			$sql2 = $sql2.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql2 = $sql2.$refid_condition;
+		}
+		$sql2 = $sql2." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2))";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -172,6 +208,12 @@
 		$sql4 = "SELECT MIN(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS max_range, COUNT(SWR_ratio) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql4 = $sql4.$conditions;
+		}
+		if ($pmid_limit != "") {
+			$sql4 = $sql4.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql4 = $sql4.$refid_condition;
 		}
 		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
@@ -197,6 +239,12 @@
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(GROUP_CONCAT(DISTINCT firingRate) AS DECIMAL (10 , 2 )) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
+		}
+		if ($pmid_limit != "") {
+			$sql = $sql.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql = $sql.$refid_condition;
 		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadataRank, firingraterank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 )), CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
@@ -233,7 +281,14 @@
 			}
 		}
 		// find median
-		$sql2 = "SELECT CAST(AVG(pp.firingRate) AS DECIMAL(10,2)) as median_val FROM (SELECT p.firingRate, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.firingRate is NOT NULL AND p.firingRate!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_firingrate_rank." ORDER BY CAST(p.firingRate AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2));";
+		$sql2 = "SELECT CAST(AVG(pp.firingRate) AS DECIMAL(10,2)) as median_val FROM (SELECT p.firingRate, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.firingRate is NOT NULL AND p.firingRate!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_firingrate_rank;
+		if ($pmid_limit != "") {
+			$sql2 = $sql2.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql2 = $sql2.$refid_condition;
+		}
+		$sql2 = $sql2." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2))";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -243,6 +298,12 @@
 		$sql4 = "SELECT MIN(CAST(firingRate AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(firingRate AS DECIMAL (10 , 2 ))) AS max_range, COUNT(firingRate) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
 		if ($conditions != "") {
 			$sql4 = $sql4.$conditions;
+		}
+		if ($pmid_limit != "") {
+			$sql4 = $sql4.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql4 = $sql4.$refid_condition;
 		}
 		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
@@ -269,6 +330,12 @@
 		$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '')";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
+		}
+		if ($pmid_limit != "") {
+			$sql = $sql.$pmid_condition;
+		}
+		if ($referenceID != "") {
+			$sql = $sql.$refid_condition;
 		}
 		$sql = $sql." ORDER BY CAST(metadataRank AS DECIMAL (10 , 2 ))";
 		$result = $conn->query($sql);
@@ -303,6 +370,9 @@
 		else if ($epsilon != '') {
 			$other = "epsilon";
 		}
+		else if ($pmid_limit !='') {
+			$other = "N/A";
+		}
 		$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		array_push($other_values, $entry_output);
 		$npage_entry = array();
@@ -319,7 +389,13 @@
 	*/
 	if ($page=="write_file" || $page=="main_page") {
 		for ($i = 0; $i < count($neuron_ids); $i++) {
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other);
+			if (!isset($pmid_limit)) {
+				$pmid_limit = '';
+			}
+			if (!isset($referenceID)) {
+				$referenceID = '';
+			}
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$firingrate_values = $write_output[2];

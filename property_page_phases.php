@@ -72,11 +72,12 @@ function create_temp_table ($name_temporary_table)
 				   show_only int(30),
 				   volume varchar(20),
 				   issue varchar(20),
+				   referenceID BIGint(25),
 				   PRIMARY KEY (id));";
 	$query = mysqli_query($GLOBALS['conn'],$creatable);
 }
 
-function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $citation_count, $type, $volume, $issue)
+function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, $title, $publication, $year, $PMID, $pages, $page_location, $id_evidence, $show1,  $pmcid, $nihmsid, $doi, $open_access, $citation_count, $type, $volume, $issue, $referenceID)
 {
 	if ($open_access == NULL)
 		$open_access = -1;
@@ -113,7 +114,8 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   type,
 	   show_only,
 	   volume,
-	   issue
+	   issue,
+	   referenceID
 	   )
 	VALUES
 	  (NULL,
@@ -137,7 +139,8 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   '$type',
 	   '1',
 	   '$volume' ,
-	   '$issue'   
+	   '$issue' ,
+	   '$referenceID'  
 	   )";
 	   //echo $query_i."<br>";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
@@ -681,6 +684,7 @@ function show_only_authors(link, start1, stop1)
 					$quote = quote_replaceIDwithName($quote);
 					$original_id = $fragment -> getOriginal_id();
 					$pmid_isbn= $fragment -> getPmid_isbn();
+					$referenceID= $fragment -> getReferenceID();
 					//echo "pmid_isbn ".$pmid_isbn."<br>";
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					//echo "pmid_isbn_page: $pmid_isbn_page<br>";
@@ -748,7 +752,7 @@ function show_only_authors(link, start1, stop1)
 					//if ($_SESSION['phases_name_temporary_table'] == NULL)
 					{
 						// Insert the data in the temporary table:	 
-						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue);
+						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue, $referenceID);
 					}
 				}
 			}			
@@ -1080,11 +1084,11 @@ function show_only_authors(link, start1, stop1)
 				for ($i=0; $i<$n_id; $i++)
 				{	
 					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
+					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue, referenceID FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
 					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
 							
-					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue) = mysqli_fetch_row($rs))
+					while(list($id, $authors, $publication, $year, $PMID, $pages, $page_location, $show, $pmcid, $nihmsid, $doi, $show_only, $volume, $issue, $referenceID_val) = mysqli_fetch_row($rs))
 					{			
 						$auth=array();
 						$authors2="";
@@ -1112,6 +1116,7 @@ function show_only_authors(link, start1, stop1)
 						$show_only1 = $show_only;
 						$volume1 = $volume;
 						$issue1 = $issue;
+						$referenceID = $referenceID_val;
 					}					
 					// TABLE OF THE ARTICLES: 
 						$first_author = NULL;
@@ -1328,19 +1333,22 @@ function show_only_authors(link, start1, stop1)
 									$neuron_id=$id_neuron;
 									$refID=$id_original;
 									$parcel=$val_property;
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";
-									/*$write_output = retrieve_values($conn, 1, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other);
-									$theta_values = $write_output[0];
-									$spw_values = $write_output[1];
-									$firingrate_values = $write_output[2];
-									$other_values = $write_output[3];
-									$best_ranks_theta = $write_output[4];
-									$best_ranks_swr = $write_output[5];
-									$best_ranks_firingrate = $write_output[6];
-									$npage_theta = $write_output[7];
-									$npage_swr = $write_output[8];
-									$npage_firingrate = $write_output[9];
-									$npage_other = $write_output[10];	*/
+
+									for ($i = 0; $i < count($neuron_ids); $i++) {
+										$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
+										$theta_values = $write_output[0];
+										$spw_values = $write_output[1];
+										$firingrate_values = $write_output[2];
+										$other_values = $write_output[3];
+										$best_ranks_theta = $write_output[4];
+										$best_ranks_swr = $write_output[5];
+										$best_ranks_firingrate = $write_output[6];
+										$npage_theta = $write_output[7];
+										$npage_swr = $write_output[8];
+										$npage_firingrate = $write_output[9];
+										$npage_other = $write_output[10];
+									}
+
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
 							      	$other_val = ''; $other_prop = '';
@@ -1361,9 +1369,19 @@ function show_only_authors(link, start1, stop1)
 											$other_val = $npage_other[$i][1];
 											$other_prop = $npage_other[$i][2];
 							      		}
-							      	}								
+							      	}					
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
 									echo "Theta median: ".$theta_val."; Range: ".$theta_prop1."; Measurements: ".$theta_prop2."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
 									echo "</td></tr>";	
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+									echo "Sharp-wave ripple ratio median: ".$swr_val."; Range: ".$swr_prop1."; Measurements: ".$swr_prop2."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
+									echo "</td></tr>";
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+									echo "Firing rates median: ".$firingrate_val."; Range: ".$firingrate_prop1."; Measurements: ".$firingrate_prop2."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
+									echo "</td></tr>";
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+									echo "Other: ".$other_val."; Representitive selection: ".str_replace("<br>", " ", $other_prop);
+									echo "</td></tr>";
 									$download_icon='images/download_PNG.png';
 									$att_link=$link_figure;
 									/*print ("
@@ -1409,7 +1427,7 @@ function show_only_authors(link, start1, stop1)
 											print ("</a>");
 										}	
 										else;
-										print("test</td></tr>");
+										print("</td></tr>");
 
 									print ("</table>");
 								}								
