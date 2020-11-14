@@ -38,15 +38,24 @@
   }  
   // neuron types
   $neuron_type_update = array();
+  $neuron_type_fuzzy_update = array();
   for ($i = 1; $i < $neuron_types_count; $i++) {
     if (isset($_POST["neuron_p$i"])) {
       array_push($neuron_type_update, $i);
     }
+    if (isset($_POST["neuron_f$i"])) {
+      array_push($neuron_type_fuzzy_update, $i);
+    }    
   }
-  if (count($neuron_type_update) > 0) {
+  //if (count($neuron_type_update) > 0) {
+
+  //}
     process_deletions($conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);
     process_additions($conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);    
-  }
+  //if (count($neuron_type_fuzzy_update) > 0) {
+    process_deletions($conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update);
+    process_additions($conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update);
+  //}
   // regions
   if ($_POST['regions']!='') {
     $regions_list = $_POST['regions'];  

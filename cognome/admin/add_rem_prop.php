@@ -54,7 +54,7 @@
     /*
       Create any deletion of values
     */
-    $verbose_comments=false;
+    $verbose_comments=true;//false;
 
     for ($i=0; $i<count($old_entry); $i++)
     { 
@@ -161,6 +161,7 @@
     $sel_scl=array();
     $sel_rgn=array();
     $sel_nrn=array();  
+    $sel_nrnfzy=array();  
 
     function chk_prop($sql, $conn, $tbl) {
       $matches=array();
@@ -192,7 +193,11 @@
       //
       $sql="SELECT neuron_id FROM natemsut_hctm.article_has_neuron WHERE article_id=".$art_mod_id;
       $tbl="neuron_id";
-      $sel_nrn=chk_prop($sql, $conn, $tbl);       
+      $sel_nrn=chk_prop($sql, $conn, $tbl);
+      //
+      $sql="SELECT neuron_id FROM natemsut_hctm.article_has_neuronfuzzy WHERE article_id=".$art_mod_id;
+      $tbl="neuron_id";
+      $sel_nrnfzy=chk_prop($sql, $conn, $tbl);       
       //
       $sql="SELECT region_id FROM natemsut_hctm.article_has_region WHERE article_id=".$art_mod_id;
       $tbl="region_id";

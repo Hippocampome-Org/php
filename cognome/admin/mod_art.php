@@ -360,7 +360,15 @@
     $col="neuron_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_neuron WHERE article_id=".$art_mod_id;
     $sel_nrn=chk_prop($sql, $conn, $col);      
+    //
+    $col="neuron_id";    
+    $sql="SELECT ".$col." FROM ".$tbl."article_has_neuronfuzzy WHERE article_id=".$art_mod_id;
+    $sel_nrnfzy=chk_prop($sql, $conn, $col);          
   }
+
+  $sel_nrntot = array();
+  array_push($sel_nrntot, $sel_nrn);
+  array_push($sel_nrntot, $sel_nrnfzy);
 
   echo "<br><div class='article_details'>
   <center><u>Article Research Properties</u><br>
@@ -370,6 +378,8 @@
   function display_property($conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
     echo "<tr><td style='min-width:350px;'>".$prop_desc."</td><td>";
     if ($but_desc == "Neuron") {
+      $sel_nrn = $select_group[0];
+      $sel_nrnfzy = $select_group[1];
       echo "<div style='width:400px;height:150px;overflow-y:scroll;line-height:20px;float:left;border:1px solid black;'><font style='font-size:18px;'><table>";
       $sql = "SELECT ".$col." FROM ".$tbl;
       $result = $conn->query($sql);
@@ -379,10 +389,14 @@
         while($row = $result->fetch_assoc()) { 
           $i=$i+1;
           $checked='';
-          if (in_array($i,$select_group)) {
+          if (in_array($i,$sel_nrn)) {
             $checked='checked';
           }
-          echo "<tr><td style='width:85px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked/>&nbsp;proper</td><td style='width:75px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' />&nbsp;fuzzy</td><td style='width:215px;border:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+          $checked_fzy='';
+          if (in_array($i,$sel_nrnfzy)) {
+            $checked_fzy='checked';
+          }
+          echo "<tr><td style='width:85px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked />&nbsp;proper</td><td style='width:75px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' $checked_fzy />&nbsp;fuzzy</td><td style='width:215px;border:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
         }
       }
       echo "</table></font></div>";
@@ -447,7 +461,7 @@
   display_evidence($conn, "Theory", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Theory", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrn, true);
+  display_property($conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrntot, true);
   display_evidence($conn, "Neuron", "Location", "nrn_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Neuron", "Description", "nrn_desc", $evid_des_h, $art_mod_id);
   //
