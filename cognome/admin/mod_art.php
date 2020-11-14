@@ -310,8 +310,8 @@
     /*
       Provides buttons to add or remove article property
     */
-    if (strcmp($property, 'Neuron') == 0) {
-      echo "<br><br><br><div style='height:17px;'></div>";
+    if ($property == "Neuron" || $property == "Subject" || $property == "Region" || $property == "Theory" || $property == "Keyword") {
+      echo "<br><br><br><div style='height:17px;'></div>&nbsp;";
     }
     //echo $propery;
     echo "<font style='font-size:1.3em;'><a href='javascript:toggle_vis(\"add_".$property."\")' style='text-decoration:none;color:black !important;'>+</a>&nbsp<a href='javascript:toggle_vis(\"remove_".$property."\")' style='text-decoration:none;color:black !important'>–</a></font>
@@ -371,8 +371,7 @@
   array_push($sel_nrntot, $sel_nrnfzy);
 
   echo "<br><div class='article_details'>
-  <center><u>Article Research Properties</u><br>
-  Note: use control key to select multiple choices</center><br>
+  <center><u>Article Research Properties</u></center><br>
   <table>";
 
   function display_property($conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
@@ -396,7 +395,25 @@
           if (in_array($i,$sel_nrnfzy)) {
             $checked_fzy='checked';
           }
-          echo "<tr><td style='width:85px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked />&nbsp;proper</td><td style='width:75px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' $checked_fzy />&nbsp;fuzzy</td><td style='width:215px;border:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+          echo "<tr><td style='width:85px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked />&nbsp;proper</td><td style='width:75px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' $checked_fzy />&nbsp;fuzzy</td><td style='width:220px;border-bottom:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+        }
+      }
+      echo "</table></font></div>";
+    }
+    else if ($but_desc == "Subject" || $but_desc == "Region" || $but_desc == "Theory" || $but_desc == "Keyword") {
+      echo "<div style='width:400px;height:150px;overflow-y:scroll;line-height:20px;float:left;border:1px solid black;'><font style='font-size:18px;'><table>";
+      $sql = "SELECT ".$col." FROM ".$tbl;
+      $result = $conn->query($sql);
+      $prop_group=array();  
+      $i=0;
+      if ($result->num_rows > 0) { 
+        while($row = $result->fetch_assoc()) { 
+          $i=$i+1;
+          $checked='';
+          if (in_array($i,$select_group)) {
+            $checked='checked';
+          }
+          echo "<tr><td style='width:25px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='$col$i' id='$col$i' style='display: inline;' $checked /></td><td style='width:375px;border-bottom:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
         }
       }
       echo "</table></font></div>";
