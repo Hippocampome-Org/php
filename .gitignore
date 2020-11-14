@@ -15,3 +15,4 @@ synap_model/db_access/access_db.php
 synap_model/gen_json/json_files
 cognome/access_db.php
 cognome/lit_rev/query_results
+cognome/admin/mysql_connect.php

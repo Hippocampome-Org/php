@@ -89,6 +89,7 @@
   /*
     Check for prior collected article details
   */
+  $art_mod_id = "";
   if (isset($_GET['art_mod_id'])) {
     $art_mod_id = $_GET['art_mod_id'];
     list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = setArtDetails($art_mod_id,$servername,$username,$password,$dbname);
@@ -136,8 +137,10 @@
   <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span>
   <br><br>Submission Status:<iframe style='display:block;height:250px;width:600px;border-top:1px solid rgb(190,190,190);border-left:1px solid rgb(190,190,190);' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
   echo "</center></div><br><div class='article_details'>";
-  $pubmed_id=$_POST['pubmed_id'];
-  $pubmed_html=file_get_contents('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='.$pubmed_id.'retmode=json&rettype=abstract');
+  if (isset($_POST['pubmed_id'])) {
+    $pubmed_id=$_POST['pubmed_id'];
+    $pubmed_html=file_get_contents('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id='.$pubmed_id.'retmode=json&rettype=abstract');
+  }
 
   /* populate article data */
   // title
@@ -257,7 +260,8 @@
   <tr><td style='max-width:".$det_lbl_wth.";'>Year:</td><td><textarea name='year' style='max-width:70px;max-height:25px;font-size:22px;overflow:hidden;resize:none;'>".$year."</textarea></td></tr>  
   <tr><td style='max-width:".$det_lbl_wth.";'>Journal:</td><td><textarea name='journal' style='min-width:100%;min-height:25px;font-size:22px;'>".$journal."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Citation:</td><td><textarea name='citation' style='min-width:100%;min-height:125px;font-size:22px;'>".$citation."</textarea></td></tr>
-  <tr><td style='max-width:".$det_lbl_wth.";'>Url:</td><td><textarea name='url' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$url."</textarea><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href='".find_pdf($dir, $art_mod_id)."' target='_blank'>pdf</a></td></tr> 
+  <tr><td style='max-width:".$det_lbl_wth.";'>Url:</td><td><textarea name='url' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$url."</textarea><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href='".find_pdf($dir, $art_mod_id)."' target='_blank'>Pdf</a>";
+  echo "&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://scholar.google.com/scholar?hl=en&as_sdt=0%2C47&q=".str_replace(" ", "+", $title)."' target='_blank' id='scholar_link'>Google Scholar</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='?art_mod_id=".($_GET['art_mod_id']+1)."#scholar_link'>Next</a></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Authors:</td><td><textarea name='authors' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$authors."</textarea></td></tr> 
   <tr><td style='max-width:".$det_lbl_wth.";'>Abstract:</td><td><textarea name='abstract' style='min-width:100%;min-height:200px;font-size:22px;'>".$abstract."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Theory Notes:</td><td><textarea name='theory' style='min-width:100%;min-height:50px;font-size:22px;'>".$theory."</textarea></td></tr>
@@ -306,7 +310,11 @@
     /*
       Provides buttons to add or remove article property
     */
-    echo "<font style='font-size:1.3em;'><a href='javascript:toggle_vis(\"add_".$property."\")' style='text-decoration:none;color:black !important'>+</a>&nbsp<a href='javascript:toggle_vis(\"remove_".$property."\")' style='text-decoration:none;color:black !important'>–</a></font>
+    if (strcmp($property, 'Neuron') == 0) {
+      echo "<br><br><br><div style='height:17px;'></div>";
+    }
+    //echo $propery;
+    echo "<font style='font-size:1.3em;'><a href='javascript:toggle_vis(\"add_".$property."\")' style='text-decoration:none;color:black !important;'>+</a>&nbsp<a href='javascript:toggle_vis(\"remove_".$property."\")' style='text-decoration:none;color:black !important'>–</a></font>
     <span style='display:none;' id='add_".$property."'><font style='font-size:.7em;'>Add ".$property.":</font><br><textarea name='add_".$property."' style='min-width:70%;max-height:25px;font-size:22px;'></textarea>&nbsp&nbsp&nbsp<input type='submit' value='  Add  ' style='height:28px;font-size:20px;position:relative;top:-7px;'></input></span>
     <span style='display:none;' id='remove_".$property."'><font style='font-size:.7em;'>Remove ".$property.":</font><br><select name='remove_".$property."' size='1' class='select-css' style='min-width:400px;position:relative;top:-7px;'>";
     echo "<option value='' ></option>";
@@ -360,30 +368,51 @@
   <table>";
 
   function display_property($conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
-    echo "<tr><td style='min-width:350px;'>".$prop_desc."</td><td><select name='".$tbl."[]'";
-    if ($multi_sel) {
-      echo " size='5' multiple class='select-css' style='min-width:400px;'>";
+    echo "<tr><td style='min-width:350px;'>".$prop_desc."</td><td>";
+    if ($but_desc == "Neuron") {
+      echo "<div style='width:400px;height:150px;overflow-y:scroll;line-height:20px;float:left;border:1px solid black;'><font style='font-size:18px;'><table>";
+      $sql = "SELECT ".$col." FROM ".$tbl;
+      $result = $conn->query($sql);
+      $prop_group=array();  
+      $i=0;
+      if ($result->num_rows > 0) { 
+        while($row = $result->fetch_assoc()) { 
+          $i=$i+1;
+          $checked='';
+          if (in_array($i,$select_group)) {
+            $checked='checked';
+          }
+          echo "<tr><td style='width:85px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked/>&nbsp;proper</td><td style='width:75px;border:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' />&nbsp;fuzzy</td><td style='width:215px;border:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+        }
+      }
+      echo "</table></font></div>";
     }
     else {
-      echo " size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'>";
-      echo "<option></option>";
-    }
-    $sql = "SELECT ".$col." FROM ".$tbl;
-    $result = $conn->query($sql);
-    $prop_group=array();  
-    $i=0;
-    if ($result->num_rows > 0) { 
-      while($row = $result->fetch_assoc()) { 
-        $i=$i+1;
-        $selection='';
-        if (in_array($i,$select_group)) {
-          $selection='selected';
-        }
-        echo "<option value=".$i." ".$selection.">".$row[$col]."</option>";
-        array_push($prop_group,$row[$col]);  
+      echo "<select name='".$tbl."[]'";
+      if ($multi_sel) {
+        echo " size='5' multiple class='select-css' style='min-width:400px;'>";
       }
+      else {
+        echo " size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'>";
+        echo "<option></option>";
+      }
+      $sql = "SELECT ".$col." FROM ".$tbl;
+      $result = $conn->query($sql);
+      $prop_group=array();  
+      $i=0;
+      if ($result->num_rows > 0) { 
+        while($row = $result->fetch_assoc()) { 
+          $i=$i+1;
+          $selection='';
+          if (in_array($i,$select_group)) {
+            $selection='selected';
+          }
+          echo "<option value=".$i." ".$selection.">".$row[$col]."</option>";
+          array_push($prop_group,$row[$col]);  
+        }
+      }
+      echo "</select>&nbsp";
     }
-    echo "</select>&nbsp";
     add_rem_buttons($but_desc,$prop_group);
     echo "</td></tr>";
   }
@@ -393,6 +422,7 @@
 
   $evid_loc_h=40; // location textbox height
   $evid_des_h=100; // description textbox height
+  if (isset($art_mod_id)) {
   display_property($conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_sbj, true);
   display_evidence($conn, "Subject", "Location", "sub_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Subject", "Description", "sub_desc", $evid_des_h, $art_mod_id);
@@ -424,10 +454,10 @@
   display_property($conn, 'Keywords:', 'Keyword', 'keywords', 'keyword', $sel_kwd, true);
   display_evidence($conn, "Keyword", "Location", "kwd_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Keyword", "Description", "kwd_desc", $evid_des_h, $art_mod_id);
+  }
 
   echo "</table></div><br>";
-  echo "<div class='article_details'><center>
-  <span style='font-size:1.2em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span></center></div>";
+  echo "<div class='article_details' style='position:fixed;bottom:10px;right:10px;'><span style='font-size:1.2em;'><input type='submit' value='  Submit  ' style='height:30px;font-size:22px;'></input></span></div>";
 
   $conn->close();
 
