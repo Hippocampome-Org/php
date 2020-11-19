@@ -78,6 +78,7 @@
 						array_push($rank_entry, $rec);
 						array_push($rank_entry, $behav);
 						$lowest_rank = $rank;
+						//echo "<br><br><br><br><br><br><br><br>sql: ".$lowest_rank;
 						$lowest_rank_id = $id;
 					}
 				}
@@ -86,7 +87,10 @@
 		$median = find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition);
 		//if ($neuron_ids[$i] == 2000) {echo "<br><br><br><br><br><br><br><br>sql: ".$sql2;}
 		// find min and max
-		$sql4 = "SELECT MIN(CAST(theta AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(theta AS DECIMAL (10 , 2 ))) AS max_range, COUNT(theta) AS count FROM phases WHERE cellID = $neuron_id AND theta != \"\"";
+		$sql4 = "SELECT MIN(CAST($col AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST($col AS DECIMAL (10 , 2 ))) AS max_range, COUNT($col) AS count FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		if ($lowest_rank != "") {
+			$sql4 = $sql4." AND metadataRank=".$lowest_rank;
+		}
 		if ($conditions != "") {
 			$sql4 = $sql4.$conditions;
 		}
@@ -113,18 +117,17 @@
 		array_push($npage_entry, $count);
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
 		array_push($npage, $npage_entry);*/
-		$entry_output = $entry_output;
 
 		$results = array($entry_output, $best_ranks, $values, $npage_entry, $npage);
 
 		return $results;
 	}
 
-	function find_median($conn, $col, $neuron_id, $lowest_firingrate_rank, $referenceID, $refid_condition) {
+	function find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition) {
 		$median = "";
 		$sql2 = "SELECT CAST(AVG(pp.$col) AS DECIMAL(10,2)) as median_val FROM (SELECT p.$col, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.$col is NOT NULL AND p.$col!='' AND p.cellid=$neuron_id";
-		if ($lowest_firingrate_rank != "") {
-			$sql2 = $sql2." AND p.metadataRank=".$lowest_firingrate_rank;
+		if ($lowest_rank != "") {
+			$sql2 = $sql2." AND p.metadataRank=".$lowest_rank;
 		} 
 		if ($referenceID != "") {
 			$sql2 = $sql2.$refid_condition;
