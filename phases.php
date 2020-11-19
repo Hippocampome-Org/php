@@ -25,6 +25,10 @@ $hippo_select = $_SESSION['hippo_select'];
 
 $conditions = "";
 include("phases/update_values.php");
+$other_all = "";
+if (isset($_REQUEST['other_all']) && $_REQUEST['other_all']=="checked") {
+  $other_all = "checked";
+}
 if (isset($_GET['page']) && $_GET['page']=="main_page") {
   include("phases/gen_json/generate_json.php");
 }
@@ -222,16 +226,41 @@ $(function(){
         researchVar: research,
         table_result : table
     } */
-    colNames:['','Neuron Type','<a title=\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\'>Theta (deg)</a>','<a title=\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\'>SWR Ratio</a>','<span style=\'position:relative;top:-10px;\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\'Miscellaneous secondary rhythm measurements.\'>Other</a>']
-    ,colModel :[
-	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
-          return 'id=\'type' + rowId + "\'";   
-      } },
-      {name:'NeuronType', index:'nickname', width:175,sortable:false},
-      {name:'Theta', index:'theta', width:75,search:false,sortable:false},
-      {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
-      {name:'In vivo firing rate', index:'firingrate', width:75,search:false,sortable:false},
-      {name:'Other', index:'other', width:75,search:false,sortable:false,title:'test'}
+    <?php
+      if ($other_all=="checked") {
+        echo "colNames:['','Neuron Type','<a title=\\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\\'>Theta (deg)</a>','<a title=\\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\\'>SWR Ratio</a>','<span style=\\'position:relative;top:-10px;\\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>DS ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Ripple (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Gamma (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Run/stop ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Epsilon</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Vrest (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Tau (ms)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APthresh (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>fAHP (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APpeak-trough (ms)</a>']
+        ,colModel :[
+         {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
+              return 'id=\\'type' + rowId + \"\\'\";   
+          } },
+          {name:'NeuronType', index:'nickname', width:175,sortable:false},
+          {name:'Theta', index:'theta', width:75,search:false,sortable:false},
+          {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
+          {name:'In vivo firing rate', index:'firingrate', width:75,search:false,sortable:false},
+          {name:'DS ratio', index:'DSratio', width:75,search:false,sortable:false},
+          {name:'Ripple', index:'Ripple', width:75,search:false,sortable:false},
+          {name:'Gamma', index:'Gamma', width:75,search:false,sortable:false},
+          {name:'RunOrStop ratio', index:'RunOrStopratio', width:75,search:false,sortable:false},
+          {name:'Epsilon', index:'Epsilon', width:75,search:false,sortable:false},
+          {name:'Vrest', index:'Vrest', width:75,search:false,sortable:false},
+          {name:'Tau', index:'Tau', width:75,search:false,sortable:false},
+          {name:'APthresh', index:'APthresh', width:75,search:false,sortable:false},
+          {name:'fAHP', index:'fAHP', width:75,search:false,sortable:false},
+          {name:'APpeakTrough', index:'APpeakTrough', width:75,search:false,sortable:false}";
+      }
+      else {
+        echo "colNames:['','Neuron Type','<a title=\\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\\'>Theta (deg)</a>','<a title=\\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\\'>SWR Ratio</a>','<span style=\\'position:relative;top:-10px;\\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Other</a>']
+        ,colModel :[
+    	   {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
+              return 'id=\\'type' + rowId + \"\\'\";   
+          } },
+          {name:'NeuronType', index:'nickname', width:175,sortable:false},
+          {name:'Theta', index:'theta', width:75,search:false,sortable:false},
+          {name:'SWR ratio', index:'SWRratio', width:75,search:false,sortable:false},
+          {name:'In vivo firing rate', index:'firingrate', width:75,search:false,sortable:false},
+          {name:'Other', index:'other', width:75,search:false,sortable:false,title:'test'}";
+      }
+    ?>
 	], 
    
     rowNum:122,
@@ -254,7 +283,14 @@ $(function(){
     //caption: 'Morphology Matrix',
     scrollerbar:false,
     height:"450",
-    width:"900",
+    <?php
+      if ($other_all=="checked") {
+        echo "width:\"2000\",";
+      }
+      else {
+        echo "width:\"900\",";
+      }
+    ?>
     shrinkToFit: true,
     gridComplete: function () {
     	var gridName = "nGrid"; // p the grid Name
@@ -459,7 +495,7 @@ function HideShowColumns ()
 
 <div class='title_area'>
   <form id='supertypeForm'>
-    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font>
+    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style='font-size:11px'>&nbsp;</font><input type="checkbox" name="other_all" value="checked" id="other_all" onclick="javascript:document.getElementById('supertypeForm').submit();" <?php is_checked("other_all") ?>/>&nbsp;All Other Values
     <br>
     <table style='width:1000px;font-family:arial;font-size:18px'>
     <tr><td style="width:131px">&nbsp;&nbsp;<u>Animal</u></td><td style="width:200px">&nbsp;&nbsp;<u>Age</u></td><td style="width:150px">&nbsp;&nbsp;<u>Sex</u></td><td style="width:250px">&nbsp;&nbsp;<u>Method</u></td><td style="width:450px">&nbsp;&nbsp;<u>Behavior</u></td></tr>

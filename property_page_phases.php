@@ -662,7 +662,7 @@ function show_only_authors(link, start1, stop1)
 				{
 					$evidence_id[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
 				
-					// Retrieve Fragment_id frmo EvidenceFragmentRel by using Evidence_id
+					// Retrieve Fragment_id from EvidenceFragmentRel by using Evidence_id
 					$evidencefragmentrel -> retrive_fragment_id($evidence_id[$i]);
 					
 					$n_fragment_id = $evidencefragmentrel -> getN_fragment_id();
