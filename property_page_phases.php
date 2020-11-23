@@ -145,8 +145,9 @@ function insert_temporary($table, $id_fragment, $id_original, $quote, $authors, 
 	   //echo $query_i."<br>";
 	$rs2 = mysqli_query($GLOBALS['conn'],$query_i);					
  }
-// set property of synapse probability page
+// set properties
 $page = true;//$_REQUEST['page'];
+$other_all = "";
 $sub_show_only = $_SESSION['phases_sub_show_only']; 
 $name_show_only_article = $_SESSION['phases_name_show_only_article'];
 
@@ -1328,7 +1329,7 @@ function show_only_authors(link, start1, stop1)
 									$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
 
-									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID);
+									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
 									$theta_values = $write_output[0];
 									$spw_values = $write_output[1];
 									$firingrate_values = $write_output[2];
