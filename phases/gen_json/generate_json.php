@@ -36,17 +36,15 @@
 		<center><button onclick=\"window.location.href = '?page=write_file';\" class='button'>Generate phases matrix json</button></center><br><hr>
 		";
 	}
-	function value_collect($conn, $i, $col, $neuron_id, $conditions, $referenceID, $refid_condition, $no_endline) {
+	function value_collect($conn, $i, $col, $neuron_id, $conditions, $referenceID, $refid_condition, $no_endline, $values, $best_ranks, $npage) {
 		// return value and properties
 
-		$entry_output = '';
-		$id = ''; $val = ''; $val_found=false; $rank_entry = array();
+		$entry_output = ''; $id = ''; $val = ''; $val_found=false; $rank_entry = array();
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
-		$lowest_rank = ''; $lowest_rank_id = ''; $median = '';
-		$values = array(); $npage = array(); $npage_entry = array(); $best_ranks = array();
+		$lowest_rank = ''; $lowest_rank_id = ''; $median = ''; $npage_entry = array();
 
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(GROUP_CONCAT(DISTINCT $col) AS DECIMAL (10 , 2 )) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -97,6 +95,7 @@
 		if ($referenceID != "") {
 			$sql4 = $sql4.$refid_condition;
 		}
+		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql4;
 		$result = $conn->query($sql4);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
@@ -106,7 +105,7 @@
 			}
 		}
 		$entry_output = $entry_output."\"<center><span id='$col".$i."'><a href='property_page_phases.php?id_neuron=$neuron_id' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>$median</a></span></center></div>\"";
-		if ($no_endline != "false") {
+		if ($no_endline == "true") {
 			$entry_output = $entry_output.",";
 		}
 		/*array_push($best_ranks, $rank_entry);
@@ -118,7 +117,7 @@
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
 		array_push($npage, $npage_entry);*/
 
-		$results = array($entry_output, $best_ranks, $values, $npage_entry, $npage);
+		$results = array($entry_output, $values, $best_ranks, $npage);
 
 		return $results;
 	}
@@ -158,11 +157,12 @@
 		$lowest_firingrate_rank = ''; $lowest_firingrate_rank_id = '';
 		$theta_median = ''; $swr_median = ''; $firingrate_median = ''; $npage_entry = array();
 		//$refid_condition = "";
-		$refid_condition = " AND referenceID = \"\\\"$referenceID\\\"\"";
+		$refid_condition = "";// AND referenceID = \"\\\"$referenceID\\\"\"";
 		$DS_ratio = ""; $Vrest = ""; $tau = ""; $APthresh = ""; $fAHP = ""; $APpeak_trough = "";
+		$values = array(); $best_ranks = array(); $npage = array(); 
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, CAST(GROUP_CONCAT(DISTINCT theta) AS DECIMAL (10 , 2 )) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -242,7 +242,7 @@
 		// swr ratio section
 		$entry_output = "";
 		//$sql = "SELECT IF (SWR_ratio != 0.0, CAST(SWR_ratio as DECIMAL(10,2)), '') AS swr_ratio_val FROM phases WHERE id = ".$theta_id;
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(GROUP_CONCAT(DISTINCT SWR_ratio) AS DECIMAL (10 , 2 )) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, GROUP_CONCAT(DISTINCT CAST(SWR_ratio AS DECIMAL (10 , 2 ))) AS swr_ratio_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND SWR_ratio != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -325,7 +325,7 @@
 
 		// in vivo firing rate section
 		$entry_output = "";
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, CAST(GROUP_CONCAT(DISTINCT firingRate) AS DECIMAL (10 , 2 )) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, GROUP_CONCAT(DISTINCT CAST(firingRate AS DECIMAL (10 , 2 ))) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -436,7 +436,7 @@
 			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 				//$median = find_median($conn, $other_all_group[$o_i], $neuron_ids[$i], $lowest_firingrate_rank, $referenceID, $refid_condition);
 				//$entry_output = $entry_output."\"<center><span id='other".$o_i."_".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other_all_group[$o_i]."</a></span></center></div>\"";
-				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true");
+				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
 				$entry_output = $entry_output.$results[0];
 				/*$best_ranks = $results[1];
 				$values = $results[2];
