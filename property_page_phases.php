@@ -470,6 +470,7 @@ $property = new property($class_property);
 //$fragment = new fragment($class_fragment);
 $class_fragment='phases_fragment';
 $fragment = new fragment_phases($class_fragment);
+$class_attachment='attachment_phases';
 $attachment_obj = new attachment_phases($class_attachment);
 //$evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 $class_evidence_property_type_rel = 'phases_evidence_type_rel';
@@ -841,10 +842,12 @@ function show_only_authors(link, start1, stop1)
 				
 					// get number of quotes pairwise
 					if ($order_by == '-'){
-						$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY type ASC LIMIT $page_in , 10";
+						//$query = "SELECT DISTINCT title FROM $name_temporary_table WHERE show_only = 1 ORDER BY type ASC LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT title FROM $name_temporary_table ORDER BY type ASC LIMIT $page_in , 10";
 					}
 					else{
-						$query = "SELECT DISTINCT title, $order_by FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
+						//$query = "SELECT DISTINCT title, $order_by FROM $name_temporary_table WHERE show_only = 1 ORDER BY $order_by $type_order LIMIT $page_in , 10";
+						$query = "SELECT DISTINCT title, $order_by FROM $name_temporary_table ORDER BY $order_by $type_order LIMIT $page_in , 10";
 					}
 					$rs = mysqli_query($GLOBALS['conn'],$query);					
 					$n_id = 0;
@@ -853,6 +856,7 @@ function show_only_authors(link, start1, stop1)
 						$title_temp[$n_id] = $title;											
 						$n_id = $n_id + 1;
 					}					
+					//echo $query." $n_id";
 				?>	
 
 					
@@ -1085,7 +1089,8 @@ function show_only_authors(link, start1, stop1)
 				for ($i=0; $i<$n_id; $i++)
 				{	
 					// retrieve information about the authors, journals and otehr by using name of article:
-					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue, referenceID FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";					
+					$show1=0;
+					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue, referenceID FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";
 					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
 							
@@ -1221,7 +1226,7 @@ function show_only_authors(link, start1, stop1)
 							//if (!in_array($current_record, $avoid_dups))
 							if (true)
 							{	
-								$quote_count++;	
+								//$quote_count++;	
 								if ($show1 == 1)
 								{
 									$type_show  = "";
@@ -1230,46 +1235,14 @@ function show_only_authors(link, start1, stop1)
 									while(list($type) = mysqli_fetch_row($rs_type))
 									{
 										$type_show  = $type_show . $type;
-									}				
-									if($color != ''){
-									//if ($type_show == 'Axons')
-									if ($type_for_display == 'Axons')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axon'>");
-									if ($type_for_display == 'Dendrites')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendrite'>");
-								    if ($type_for_display == 'Somata')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='somata'>");
-									if ($type_for_display == 'AxonsSomata')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axonsomata'>");
-									if ($type_for_display == 'AxonsDendrites')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendrite'>");
-									if ($type_for_display == 'DendritesSomata')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='dendritesomata'>");
-									if ($type_for_display == 'AxonsDendritesSomata')
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table' class='axondendritesomata'>");								
-									}
-									
-									if ($type_for_display == '')								
-										print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'>");
-									print ("<tr>");
-												
+									}	
 									$row_span=30;
-									print ("<td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");								
-									// retrieve the attachament
-									$dendrite_group = array('Dendrites', 'Somata', 'AxonsSomata', 'AxonsDendrites', 'DendritesSomata', 'AxonsDendritesSomata');
-									$axon_group = array('Axons','Somata','AxonsSomata','AxonsDendrites','AxonsDendritesSomata');
+									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");	
 									$original_id = $fragment -> getOriginal_id();
-									/*if (in_array($type_for_display,$dendrite_group)) {
-										$neurite_ref = $val_property.":D";
-									}
-									elseif (in_array($type_for_display,$axon_group)) {
-										$neurite_ref = $val_property.":A";	
-									}*/
 									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
 									$attachment_obj -> retrive_by_referenceID($referenceID);
 									$attachment = $attachment_obj -> getName();
 									$attachment_type = $attachment_obj -> getType();
-									//$attachment_type="phases_figure";
 									$link_figure="";									
 									$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
 									
@@ -1277,58 +1250,17 @@ function show_only_authors(link, start1, stop1)
 										$link_figure = "attachment/phases/".$attachment_jpg;
 									}								
 									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-									$link_figure_pdf = "figure_pdf/".$attachment_pdf;						
-
-									// get protocol age species and interpretation
-									$query_to_get_info = "SELECT interpretation_notes,protocol,age_weight,species_descriptor,species_tag  FROM ".$class_fragment." WHERE id=$id_fragment ";
-									$rs_to_get_info = mysqli_query($GLOBALS['conn'],$query_to_get_info);	
+									$link_figure_pdf = "figure_pdf/".$attachment_pdf;				
 									$seg_1_text="";
 									$seg_2_text="";
-									while(list($interpretation_notes,$protocol,$age_weight,$species_descriptor,$species_tag) = mysqli_fetch_row($rs_to_get_info))
-									{
-										if ($interpretation_notes=='NULL') {$interpretation_notes='';}
-										if ($protocol=='NULL') {$protocol='';}
-										if ($age_weight=='NULL') {$age_weight='';}
-										if ($species_descriptor=='NULL') {$species_descriptor='';}
-										if ($species_tag=='NULL') {$species_tag='';}
-										$species=$fragment->refid_to_species($id_original);
-										if ($species=='NULL') {$species='';}
-
-										if($protocol){
-											$seg_1_text=$seg_1_text."	<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>
-												PROTOCOL: $protocol
-											</td>
-											<td width='15%' align='center'> </td></tr>";
-										}
-										if($species){
-											$seg_1_text=$seg_1_text."<tr>	
-											<td width='70%' class='table_neuron_page2' align='left'>
-												SPECIES: $species 
-												</td>
-											<td width='15%' align='center'> </td></tr>";
-										}
-										if($age_weight){
-											$seg_1_text=$seg_1_text."	<tr>
-											<td width='70%' class='table_neuron_page2' align='left'>
-												Age/Weight: $age_weight
-											</td>
-											<td width='15%' align='center'> </td></tr>";
-										}
-										#$seg_2_text="";
-										if($interpretation_notes){
-											$seg_2_text=$seg_2_text."</br></br> Interepretation Notes: $interpretation_notes";
-										}
-										#array_push($segment1, $seg_1_text);
-										#array_push($segment2, $seg_2_text);
-									}
 									print ($seg_1_text);
 									$neuron_id=$id_neuron;
 									$refID=$id_original;
-									$parcel=$val_property;
+									//$parcel=$val_property;
 									$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
-
+									
+									$conditions = "";
 									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
 									$theta_values = $write_output[0];
 									$spw_values = $write_output[1];
@@ -1345,22 +1277,22 @@ function show_only_authors(link, start1, stop1)
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
 							      	$other_val = ''; $other_prop = '';
-							      	for ($i = 0; $i < count($npage_theta); $i++) {
-							      		if ($npage_theta[$i][0] == $id_neuron) {
-											$theta_val = $npage_theta[$i][1];
-											$theta_prop1 = $npage_theta[$i][2];
-											$theta_prop2 = $npage_theta[$i][3];
-											$theta_prop3 = $npage_theta[$i][4];
-											$swr_val = $npage_swr[$i][1];
-											$swr_prop1 = $npage_swr[$i][2];
-											$swr_prop2 = $npage_swr[$i][3];
-											$swr_prop3 = $npage_swr[$i][4];
-											$firingrate_val = $npage_firingrate[$i][1];
-											$firingrate_prop1 = $npage_firingrate[$i][2];
-											$firingrate_prop2 = $npage_firingrate[$i][3];
-											$firingrate_prop3 = $npage_firingrate[$i][4];
-											$other_val = $npage_other[$i][1];
-											$other_prop = $npage_other[$i][2];
+							      	for ($i_t = 0; $i_t < count($npage_theta); $i_t++) {
+							      		if ($npage_theta[$i_t][0] == $id_neuron) {
+											$theta_val = $npage_theta[$i_t][1];
+											$theta_prop1 = $npage_theta[$i_t][2];
+											$theta_prop2 = $npage_theta[$i_t][3];
+											$theta_prop3 = $npage_theta[$i_t][4];
+											$swr_val = $npage_swr[$i_t][1];
+											$swr_prop1 = $npage_swr[$i_t][2];
+											$swr_prop2 = $npage_swr[$i_t][3];
+											$swr_prop3 = $npage_swr[$i_t][4];
+											$firingrate_val = $npage_firingrate[$i_t][1];
+											$firingrate_prop1 = $npage_firingrate[$i_t][2];
+											$firingrate_prop2 = $npage_firingrate[$i_t][3];
+											$firingrate_prop3 = $npage_firingrate[$i_t][4];
+											$other_val = $npage_other[$i_t][1];
+											$other_prop = $npage_other[$i_t][2];
 							      		}
 							      	}					
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
@@ -1402,8 +1334,6 @@ function show_only_authors(link, start1, stop1)
 									}	
 									else;
 									print("</td></tr>");
-
-									print ("</table>");
 								}								
 							}
 							array_push($avoid_dups, $current_record);							
@@ -1416,7 +1346,7 @@ function show_only_authors(link, start1, stop1)
 				} 
 		?>
 			<!-- PAGINATION TABLE -->	
-				<table width="80%" border="0" cellspacing="2" cellpadding="0">
+				</table><table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>			
 						<td width="25%"></td>		
 						<td width="50%" align="center">

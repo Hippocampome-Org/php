@@ -407,41 +407,10 @@
 		// other column section
 		$entry_output = "";
 		if ($other_all == "checked") {
-			/*
-			$sql = "SELECT DS_ratio, ripple, gamma, run_stop_ratio, epsilon, Vrest, tau, APthresh, fAHP, APpeak_trough, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i];
-			if ($conditions != "") {
-				$sql = $sql.$conditions;
-			}
-			if ($referenceID != "") {
-				$sql = $sql.$refid_condition;
-			}
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0) { 
-				while($row = $result->fetch_assoc()) {
-					$DS_ratio = $row['DS_ratio'];
-					$ripple = $row['ripple'];
-					$gamma = $row['gamma'];
-					$run_stop_ratio = $row['run_stop_ratio'];		
-					$epsilon = $row['epsilon'];
-					$Vrest = $row['Vrest'];
-					$tau = $row['tau'];
-					$APthresh = $row['APthresh'];
-					$fAHP = $row['fAHP'];
-					$APpeak_trough = $row['APpeak_trough'];
-				}
-			}*/
 			$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-			//$other_all_group = array($DS_ratio, $ripple, $gamma, $run_stop_ratio, $epsilon, $Vrest, $tau, $APthresh, $fAHP, $APpeak_trough);
-			//$lowest_firingrate_rank = "";
 			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-				//$median = find_median($conn, $other_all_group[$o_i], $neuron_ids[$i], $lowest_firingrate_rank, $referenceID, $refid_condition);
-				//$entry_output = $entry_output."\"<center><span id='other".$o_i."_".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other_all_group[$o_i]."</a></span></center></div>\"";
 				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
 				$entry_output = $entry_output.$results[0];
-				/*$best_ranks = $results[1];
-				$values = $results[2];
-				$npage_entry = $results[3];
-				$npage = $results[4];*/
 
 				if ($o_i == (count($other_all_group) - 1)) {
 					$entry_output = $entry_output."]},";
