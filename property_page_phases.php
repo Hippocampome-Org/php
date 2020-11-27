@@ -1306,17 +1306,17 @@ function show_only_authors(link, start1, stop1)
 							      	}				
 							      	if ($all_theta != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Theta values: ".$all_theta."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
+									echo "Theta value(s): ".str_replace(",", ", ", $all_theta)."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
 									echo "</td></tr>";	
 									}
 									if ($all_swr != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "SWR ratio values: ".$all_swr."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
+									echo "SWR ratio value(s): ".str_replace(",", ", ", $all_swr)."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
 									echo "</td></tr>";
 									}
 									if ($all_fr != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Firing rate values: ".$all_fr."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
+									echo "Firing rate value(s): ".str_replace(",", ", ", $all_fr)."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
 									echo "</td></tr>";
 									}
 									/*if ($all_other != "") {
@@ -1326,7 +1326,7 @@ function show_only_authors(link, start1, stop1)
 									}*/
 									if ($other_frag != "") {
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Other values: ".$other_frag;
+									echo "Other value(s): ".$other_frag;
 									echo "</td></tr>";
 									}
 									$download_icon='images/download_PNG.png';
