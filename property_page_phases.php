@@ -663,7 +663,7 @@ function show_only_authors(link, start1, stop1)
 				for ($i=0; $i<$n_evidence_id; $i++)
 				{
 					$evidence_id[$i] = $evidencepropertyyperel -> getEvidence_id_array($i);
-				
+					//echo "$evidence_id[$i]: ".$evidence_id[$i]."<br>";
 					// Retrieve Fragment_id from EvidenceFragmentRel by using Evidence_id
 					$evidencefragmentrel -> retrive_fragment_id($evidence_id[$i]);
 					
@@ -687,6 +687,7 @@ function show_only_authors(link, start1, stop1)
 					$original_id = $fragment -> getOriginal_id();
 					$pmid_isbn= $fragment -> getPmid_isbn();
 					$referenceID= $fragment -> getReferenceID();
+					//echo $fragment_id[$i]." referenceID: ".$referenceID." | ";
 					//echo "pmid_isbn ".$pmid_isbn."<br>";
 					$pmid_isbn_page= $fragment -> getPmid_isbn_page();
 					//echo "pmid_isbn_page: $pmid_isbn_page<br>";
@@ -1091,6 +1092,7 @@ function show_only_authors(link, start1, stop1)
 					// retrieve information about the authors, journals and otehr by using name of article:
 					$show1=0;
 					$query = "SELECT id, authors, publication, year, PMID, pages, page_location, show1, pmcid, nihmsid, doi, show_only, volume, issue, referenceID FROM $name_temporary_table WHERE title = '$title_temp[$i]' ";
+					//echo "$query"."<br>";
 					$rs = mysqli_query($GLOBALS['conn'],$query);	
 					$auth=array();	
 							
@@ -1208,7 +1210,7 @@ function show_only_authors(link, start1, stop1)
 						{			
 							$avoid_dups = array();		
 							//$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery ORDER BY id_fragment ASC";	echo $query;
-							$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	//echo $query;
+							$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	//echo $query."<br>";
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
@@ -1261,6 +1263,8 @@ function show_only_authors(link, start1, stop1)
 									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
 									
 									$conditions = "";
+									$other_all = "checked";
+									$referenceID = $fragment -> frag_id_to_ref_id($id_fragment);
 									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
 									$theta_values = $write_output[0];
 									$spw_values = $write_output[1];
@@ -1273,6 +1277,11 @@ function show_only_authors(link, start1, stop1)
 									$npage_swr = $write_output[8];
 									$npage_firingrate = $write_output[9];
 									$npage_other = $write_output[10];
+									$all_vals = $write_output[11];									
+							      	$all_theta = ''; $all_swr = ''; $all_fr = ''; $all_other = '';
+									$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
+									$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
+									$other_frag = $all_vals[4];
 
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
@@ -1294,19 +1303,32 @@ function show_only_authors(link, start1, stop1)
 											$other_val = $npage_other[$i_t][1];
 											$other_prop = $npage_other[$i_t][2];
 							      		}
-							      	}					
+							      	}				
+							      	if ($all_theta != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Theta median: ".$theta_val."; Range: ".$theta_prop1."; Measurements: ".$theta_prop2."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
+									echo "Theta values: ".$all_theta."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
 									echo "</td></tr>";	
+									}
+									if ($all_swr != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Sharp-wave ripple ratio median: ".$swr_val."; Range: ".$swr_prop1."; Measurements: ".$swr_prop2."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
+									echo "SWR ratio values: ".$all_swr."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
 									echo "</td></tr>";
+									}
+									if ($all_fr != "") {	
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Firing rates median: ".$firingrate_val."; Range: ".$firingrate_prop1."; Measurements: ".$firingrate_prop2."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
+									echo "Firing rate values: ".$all_fr."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
 									echo "</td></tr>";
+									}
+									/*if ($all_other != "") {
 									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Other: ".$other_val."; Representitive selection: ".str_replace("<br>", " ", $other_prop);
+									echo "Other values: ".$all_other."; Representitive selection: ".str_replace("<br>", " ", $other_prop);
 									echo "</td></tr>";
+									}*/
+									if ($other_frag != "") {
+									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+									echo "Other values: ".$other_frag;
+									echo "</td></tr>";
+									}
 									$download_icon='images/download_PNG.png';
 									$att_link=$link_figure;
 

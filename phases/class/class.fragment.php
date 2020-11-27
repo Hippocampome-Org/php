@@ -369,6 +369,20 @@ class fragment_phases
 		return $array_index;
     }
 
+    public function frag_id_to_ref_id($frag_id) 
+    {
+    	$ref_id='';
+		$query = "SELECT referenceID FROM phases_fragment WHERE id='$frag_id';";
+		//echo $query;
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($referenceID) = mysqli_fetch_row($rs))
+		{	    	
+			$ref_id=$referenceID;
+		}
+
+		return $ref_id;
+    }
+
 }
 
 ?>

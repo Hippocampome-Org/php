@@ -43,6 +43,7 @@
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$lowest_rank = ''; $lowest_rank_id = ''; $median = ''; $npage_entry = array();
+		$val_frag = '';
 
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($conditions != "") {
@@ -51,7 +52,7 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if ($referenceID!="") {$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -79,6 +80,9 @@
 						//echo "<br><br><br><br><br><br><br><br>sql: ".$lowest_rank;
 						$lowest_rank_id = $id;
 					}
+				}
+				if ($row['val'] != "") {
+					$val_frag = $val_frag.$row['val']."; Representative selection: ".$species.", ".$agetype.", ".$gender2.", ".$rec.", ".$behav;
 				}
 			}
 		}
@@ -117,7 +121,7 @@
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
 		array_push($npage, $npage_entry);*/
 
-		$results = array($entry_output, $values, $best_ranks, $npage);
+		$results = array($entry_output, $val_frag, $best_ranks, $npage);
 
 		return $results;
 	}
@@ -156,8 +160,10 @@
 		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
 		$lowest_firingrate_rank = ''; $lowest_firingrate_rank_id = '';
 		$theta_median = ''; $swr_median = ''; $firingrate_median = ''; $npage_entry = array();
+		$all_theta = ''; $all_swr = ''; $all_fr = ''; $all_other = '';
 		//$refid_condition = "";
-		$refid_condition = "";// AND referenceID = \"\\\"$referenceID\\\"\"";
+		//$refid_condition = "";// AND referenceID = \"\\\"$referenceID\\\"\"";
+		$refid_condition = " AND referenceID = \"\\\"$referenceID\\\"\"";
 		$DS_ratio = ""; $Vrest = ""; $tau = ""; $APthresh = ""; $fAHP = ""; $APpeak_trough = "";
 		$values = array(); $best_ranks = array(); $npage = array(); 
 
@@ -169,7 +175,7 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if ($referenceID!="") {$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
@@ -178,6 +184,7 @@
 				if ($theta_found == false) {
 					$id = $row['id'];
 					$theta = $row['theta_val'];
+					$all_theta = $all_theta.$theta;
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
@@ -249,7 +256,7 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if ($referenceID!="") {$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		//$entry_output = $entry_output.$sql;
 		$result = $conn->query($sql);
@@ -258,6 +265,7 @@
 				if ($swr_found == false) {
 					$id = $row['id'];
 					$swr_ratio = $swr_ratio.$row['swr_ratio_val'];
+					$all_swr = $all_swr.$swr_ratio;
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
@@ -332,14 +340,16 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadataRank, firingraterank ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 )), CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadataRank, firingraterank";if ($referenceID!="") {$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 )), CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
 		//$entry_output = $entry_output.$sql;
+		//echo $sql."<br>";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				if ($firingrate_found == false) {
 					$id = $row['id'];
 					$firingrate = $firingrate.$row['firingRate_val'];
+					$all_fr = $all_fr.$firingrate;
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
@@ -406,11 +416,17 @@
 
 		// other column section
 		$entry_output = "";
+		$other_frag = "";
+		$val_frag = "";
 		if ($other_all == "checked") {
 			$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
 				$entry_output = $entry_output.$results[0];
+				$val_frag = $results[1];
+				if ($val_frag != "") {
+					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+				}
 
 				if ($o_i == (count($other_all_group) - 1)) {
 					$entry_output = $entry_output."]},";
@@ -449,8 +465,10 @@
 					}
 				}
 			}
+			// check ranking conditions
 			if ($ripple != '') {
 				$other = "ripple";
+				$all_other = $all_other." ripple: ".$ripple;
 			}
 			else if ($gamma != '') {
 				$other = "gamma";
@@ -464,6 +482,16 @@
 			else if ($pmid_limit !='') {
 				$other = "N/A";
 			}
+			// check remaining "all" conditions
+			if ($gamma != '') {
+				$all_other = $all_other." gamma: ".$gamma;
+			}
+			if ($run_stop_ratio != '') {
+				$all_other = $all_other." run_stop_ratio: ".$run_stop_ratio;
+			}
+			if ($epsilon != '') {
+				$all_other = $all_other." epsilon: ".$epsilon;
+			}
 			$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		}
 		array_push($other_values, $entry_output);
@@ -472,8 +500,14 @@
 		array_push($npage_entry, $other);
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
 		array_push($npage_other, $npage_entry);
+		$all_vals = array();
+		array_push($all_vals, $all_theta);
+		array_push($all_vals, $all_swr);
+		array_push($all_vals, $all_fr);
+		array_push($all_vals, $all_other);
+		array_push($all_vals, $other_frag);
 
-		return array($theta_values, $spw_values, $firingrate_values, $other_values, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other);	
+		return array($theta_values, $spw_values, $firingrate_values, $other_values, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $all_vals);	
 	}
 
 	/*
