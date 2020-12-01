@@ -7,17 +7,20 @@
     // submit evidence entries
     if ($loc_evid!='' || $desc_evid!='') {
       // check for entry      
-      $sql = "SELECT id FROM `natemsut_hctm`.`".$col."` WHERE (`article_id` = ".$art_num.");";   
+      $sql = "SELECT id FROM `natemsut_hctm`.`".$col."` WHERE (`article_id` = ".$art_num.");";
+      echo $sql."<br>";
       $result = $conn->query($sql);   
       $row = $result->fetch_assoc();
       $evid_id=$row["id"]; 
       // submit values 
       if ($evid_id!='') {
         $sql = "UPDATE `natemsut_hctm`.`".$col."` SET `evidence_position` = \"".$loc_evid."\", `evidence_description` = \"".$desc_evid."\" WHERE (`id` = ".$evid_id.");";
+        echo $sql."<br>";
         $result = $conn->query($sql);
       }
       else {
         $sql = "INSERT INTO `natemsut_hctm`.`".$col."` (`article_id`, `evidence_position`, `evidence_description`) VALUES ('".$art_num."', '".$loc_evid."', '".$desc_evid."');";
+        echo $sql."<br>";
         $result = $conn->query($sql); 
       }
     } 

@@ -56,7 +56,7 @@
         $existing_entry = get_existing_text($conn, "evidence_of_regions", "evidence_description", $art_mod_id);
       }
     }    
-    else if ($prop_desc == "Theory") {
+    else if ($prop_desc == "Theory or Computational<br>Network Model") {
       if ($evid_type == "Location") {
         $existing_entry = get_existing_text($conn, "evidence_of_theories", "evidence_position", $art_mod_id);
       }

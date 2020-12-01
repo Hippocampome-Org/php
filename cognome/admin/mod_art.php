@@ -474,9 +474,9 @@
   display_evidence($conn, "Region", "Location", "reg_loc", $evid_loc_h, $art_mod_id);
   display_evidence($conn, "Region", "Description", "reg_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Theories:', 'Theory', 'theory_category', 'category', $sel_thy, true);
-  display_evidence($conn, "Theory", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Theory", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
+  display_property($conn, 'Theories and Computational<br>Network Models:', 'Theory', 'theory_category', 'category', $sel_thy, true);
+  display_evidence($conn, "Theory or Computational<br>Network Model", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($conn, "Theory or Computational<br>Network Model", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
   //
   display_property($conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrntot, true);
   display_evidence($conn, "Neuron", "Location", "nrn_loc", $evid_loc_h, $art_mod_id);

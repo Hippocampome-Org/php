@@ -54,7 +54,7 @@
     /*
       Create any deletion of values
     */
-    $verbose_comments=true;//false;
+    $verbose_comments=false;
 
     for ($i=0; $i<count($old_entry); $i++)
     { 
