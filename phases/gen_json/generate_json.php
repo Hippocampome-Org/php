@@ -320,7 +320,7 @@
 				$count = $row['count'];
 			}
 		}		
-		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='swr_ratio".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$swr_median."</a></span></center></div>\",";
 		array_push($best_ranks_swr, $rank_entry_swr);
 		array_push($spw_values, $entry_output);
 		$npage_entry = array();
@@ -403,7 +403,7 @@
 				$count = $row['count'];
 			}
 		}		
-		$entry_output = $entry_output."\"<center><span id='firingrate".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$firingrate_median."</a></span></center></div>\",";
+		$entry_output = $entry_output."\"<center><span id='firingrate".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$firingrate_median."</a></span></center></div>\",";
 		array_push($best_ranks_firingrate, $rank_entry_firingrate);
 		array_push($firingrate_values, $entry_output);
 		$npage_entry = array();
@@ -455,88 +455,37 @@
 				$low_rank_entry = "";
 				$low_rank_cond = "";
 				$o_vals_tot = 0;
+
+				if ($val_frag != "") {
+					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+				}
 				for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 					if ($other_entries[$o_i] != "") {
 						if ($low_rank_entry == "") {
 							$low_rank_entry = $other_all_group[$o_i];
 							$low_rank_cond = $other_cond[$o_i];
+							$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
 						}
 						$o_vals_tot++;
 					}
 				}
 
 				if ($low_rank_entry != "") {
-					$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$low_rank_cond."' target='_blank'>".$low_rank_entry;
+
+					$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='".$low_rank_cond."' target='_blank'>";
+					$other = $low_rank_entry;
 					if ($o_vals_tot == 2) {
-						$entry_output = $entry_output." and 1 other";	
+						$other = $other." and 1 other";	
 					}
 					else if ($o_vals_tot > 2) {
-						$entry_output = $entry_output." and ".($o_vals_tot - 1)." others";		
+						$other = $other." and ".($o_vals_tot - 1)." others";		
 					}
-					$entry_output = $entry_output."</a></span></center></div>\"]},";
+					$entry_output = $entry_output.$other."</a></span></center></div>\"]},";
 				}
 				else {
 					$entry_output = "\"\"]},";
 				}
 			}
-		}
-		else if (false) {
-			$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '')";
-			if ($conditions != "") {
-				$sql = $sql.$conditions;
-			}
-			if ($referenceID != "") {
-				$sql = $sql.$refid_condition;
-			}
-			$sql = $sql." ORDER BY CAST(metadataRank AS DECIMAL (10 , 2 ))";
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0) { 
-				while($row = $result->fetch_assoc()) {
-					if ($other_found==false) {
-						$ripple = $row['ripple'];
-						$gamma = $row['gamma'];
-						$run_stop_ratio = $row['run_stop_ratio'];
-						$epsilon = $row['epsilon'];		
-						$agetype = $row['agetype'];
-						$gender = $row['gender'];
-						if ($gender == 'unknown') {$gender2 = 'unknown sex';} else {$gender2 = $gender;}
-						$rec = $row['recordingMethod'];
-						$behav = $row['behavioralStatus'];
-						$rank = $row['metadataRank'];
-						$parsed_rank = explode(',', $rank);
-						$rank = $parsed_rank[0];
-						$other_found=true;
-					}
-				}
-			}
-			// check ranking conditions
-			if ($ripple != '') {
-				$other = "ripple";
-				$all_other = $all_other." ripple: ".$ripple;
-			}
-			else if ($gamma != '') {
-				$other = "gamma";
-			}
-			else if ($run_stop_ratio != '') {
-				$other = "run/stop ratio";
-			}
-			else if ($epsilon != '') {
-				$other = "epsilon";
-			}
-			else if ($pmid_limit !='') {
-				$other = "N/A";
-			}
-			// check remaining "all" conditions
-			if ($gamma != '') {
-				$all_other = $all_other." gamma: ".$gamma;
-			}
-			if ($run_stop_ratio != '') {
-				$all_other = $all_other." run_stop_ratio: ".$run_stop_ratio;
-			}
-			if ($epsilon != '') {
-				$all_other = $all_other." epsilon: ".$epsilon;
-			}
-			$entry_output = $entry_output."\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='Representative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$other."</a></span></center></div>\"]},";
 		}
 		array_push($other_values, $entry_output);
 		$npage_entry = array();
