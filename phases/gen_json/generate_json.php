@@ -121,9 +121,9 @@
 		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
 		array_push($npage_entry, $count);
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
-		array_push($npage, $npage_entry);
+		//array_push($npage, $npage_entry);
 
-		$results = array($entry_output, $val_frag, $rank_entry, $npage);
+		$results = array($entry_output, $val_frag, $rank_entry, $npage_entry);
 
 		return $results;
 	}
@@ -264,8 +264,6 @@
 		array_push($npage_entry, $other);
 		array_push($npage_entry, $npage_entry_cond);
 		array_push($npage_other, $npage_entry);
-		//array_push($other_values, $results[0]);
-		//array_push($npage_other, $results[3]);
 		$all_vals = array();
 		array_push($all_vals, $all_theta);
 		array_push($all_vals, $all_swr);
