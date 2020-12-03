@@ -113,13 +113,13 @@
 			$entry_output = $entry_output.",";
 		}
 		/*array_push($best_ranks, $rank_entry);
-		array_push($values, $entry_output);
+		array_push($values, $entry_output);*/
 		array_push($npage_entry, $neuron_id);
 		array_push($npage_entry, $median);
 		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
 		array_push($npage_entry, $count);
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
-		array_push($npage, $npage_entry);*/
+		array_push($npage, $npage_entry);
 
 		$results = array($entry_output, $val_frag, $rank_entry, $npage);
 
@@ -168,7 +168,7 @@
 		$values = array(); $best_ranks = array(); $npage = array(); 
 
 		// theta section
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
+		/*$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST(theta AS DECIMAL (10 , 2 ))) AS theta_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND theta != \"\"";
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -244,7 +244,14 @@
 		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
 		array_push($npage_entry, $count);
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
-		array_push($npage_theta, $npage_entry);
+		array_push($npage_theta, $npage_entry);*/
+
+		$results = value_collect($conn, $i, "theta", $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true", $values, $best_ranks, $npage);
+		//$entry_output = $entry_output.$results[0];
+		array_push($theta_values, $results[0]);
+		//$val_frag = $results[1];
+		//$rank_entry = $results[2];
+		array_push($npage_theta, $results[3]);
 
 		// swr ratio section
 		$entry_output = "";
@@ -454,6 +461,7 @@
 			if ($other_all != "checked") {
 				$low_rank_entry = "";
 				$low_rank_cond = "";
+				$npage_entry_cond = "";
 				$o_vals_tot = 0;
 
 				if ($val_frag != "") {
@@ -464,6 +472,8 @@
 						if ($low_rank_entry == "") {
 							$low_rank_entry = $other_all_group[$o_i];
 							$low_rank_cond = $other_cond[$o_i];
+							$npage_entry_cond = str_replace("Representative selection: ", "", $low_rank_cond);
+							$npage_entry_cond = str_replace("\\n", "<br>", $npage_entry_cond);
 							$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
 						}
 						$o_vals_tot++;
@@ -491,7 +501,7 @@
 		$npage_entry = array();
 		array_push($npage_entry, $neuron_ids[$i]);
 		array_push($npage_entry, $other);
-		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
+		array_push($npage_entry, $npage_entry_cond);
 		array_push($npage_other, $npage_entry);
 		$all_vals = array();
 		array_push($all_vals, $all_theta);
