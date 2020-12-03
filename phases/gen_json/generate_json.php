@@ -121,7 +121,7 @@
 		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
 		array_push($npage, $npage_entry);*/
 
-		$results = array($entry_output, $val_frag, $best_ranks, $npage);
+		$results = array($entry_output, $val_frag, $rank_entry, $npage);
 
 		return $results;
 	}
@@ -418,25 +418,69 @@
 		$entry_output = "";
 		$other_frag = "";
 		$val_frag = "";
-		if ($other_all == "checked") {
-			$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+		$other_entries = array_fill(0, count($other_all_group), "");
+		$other_cond = array_fill(0, count($other_all_group), "");
+
+		//if ($other_all == "checked") {
+		if (true) {
 			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
 				$entry_output = $entry_output.$results[0];
 				$val_frag = $results[1];
-				if ($val_frag != "") {
-					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+				$rank_entry = $results[2];
+				$species = $rank_entry[0];
+				$agetype = $rank_entry[1];
+				$gender = $rank_entry[2];
+				$rec = $rank_entry[3];
+				$behav = $rank_entry[4];
+
+				if ($other_all == "checked") {
+					if ($val_frag != "") {
+						$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+					}
+
+					if ($o_i == (count($other_all_group) - 1)) {
+						$entry_output = $entry_output."]},";
+					}
+					else {
+						$entry_output = $entry_output.",";
+					}
 				}
 
-				if ($o_i == (count($other_all_group) - 1)) {
-					$entry_output = $entry_output."]},";
+				$other_entries[$o_i] = $val_frag;
+				$other_cond[$o_i] = "Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav;
+			}
+			if ($other_all != "checked") {
+				$low_rank_entry = "";
+				$low_rank_cond = "";
+				$o_vals_tot = 0;
+				for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
+					if ($other_entries[$o_i] != "") {
+						if ($low_rank_entry == "") {
+							$low_rank_entry = $other_all_group[$o_i];
+							$low_rank_cond = $other_cond[$o_i];
+						}
+						$o_vals_tot++;
+					}
+				}
+
+				if ($low_rank_entry != "") {
+					$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?pre_id=".$neuron_ids[$i]."' title='".$low_rank_cond."' target='_blank'>".$low_rank_entry;
+					if ($o_vals_tot == 2) {
+						$entry_output = $entry_output." and 1 other";	
+					}
+					else if ($o_vals_tot > 2) {
+						$entry_output = $entry_output." and ".($o_vals_tot - 1)." others";		
+					}
+					$entry_output = $entry_output."</a></span></center></div>\"]},";
 				}
 				else {
-					$entry_output = $entry_output.",";
+					$entry_output = "\"\"]},";
 				}
 			}
 		}
-		else {
+		else if (false) {
 			$sql = "SELECT cellid, ripple, gamma, run_stop_ratio, epsilon, metadataRank, species, agetype, gender, recordingMethod, behavioralStatus FROM phases WHERE cellid = ".$neuron_ids[$i]." AND (ripple != '' OR gamma != '' OR run_stop_ratio != '' OR epsilon != '') AND (theta != '' OR swr_ratio != '')";
 			if ($conditions != "") {
 				$sql = $sql.$conditions;
