@@ -43,7 +43,7 @@
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$lowest_rank = ''; $lowest_rank_id = ''; $median = ''; $npage_entry = array();
-		$val_frag = '';
+		$val_frag = ''; $lowest_frr = '';
 
 		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($conditions != "") {
@@ -52,7 +52,7 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingraterank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
 		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -79,6 +79,7 @@
 						$lowest_rank = $rank;
 						//echo "<br><br><br><br><br><br><br><br>sql: ".$lowest_rank;
 						$lowest_rank_id = $id;
+						if($col=="firingRate"){$lowest_frr=$row['firingRateRank'];}
 					}
 				}
 				if ($row['val'] != "") {
@@ -86,12 +87,15 @@
 				}
 			}
 		}
-		$median = find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition);
+		$median = find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition, $lowest_frr);
 		//if ($neuron_ids[$i] == 2000) {echo "<br><br><br><br><br><br><br><br>sql: ".$sql2;}
 		// find min and max
 		$sql4 = "SELECT MIN(CAST($col AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST($col AS DECIMAL (10 , 2 ))) AS max_range, COUNT($col) AS count FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($lowest_rank != "") {
 			$sql4 = $sql4." AND metadataRank=".$lowest_rank;
+		}
+		if ($lowest_frr != "") {
+			$sql4 = $sql4." AND firingRateRank=".$lowest_frr;
 		}
 		if ($conditions != "") {
 			$sql4 = $sql4.$conditions;
@@ -112,8 +116,6 @@
 		if ($no_endline == "true") {
 			$entry_output = $entry_output.",";
 		}
-		/*array_push($best_ranks, $rank_entry);
-		array_push($values, $entry_output);*/
 		array_push($npage_entry, $neuron_id);
 		array_push($npage_entry, $median);
 		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
@@ -126,12 +128,15 @@
 		return $results;
 	}
 
-	function find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition) {
+	function find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition, $lowest_frr) {
 		$median = "";
 		$sql2 = "SELECT CAST(AVG(pp.$col) AS DECIMAL(10,2)) as median_val FROM (SELECT p.$col, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.$col is NOT NULL AND p.$col!='' AND p.cellid=$neuron_id";
 		if ($lowest_rank != "") {
 			$sql2 = $sql2." AND p.metadataRank=".$lowest_rank;
 		} 
+		if ($lowest_frr != "") {
+			$sql2 = $sql2." AND p.firingRateRank=".$lowest_frr;
+		}
 		if ($referenceID != "") {
 			$sql2 = $sql2.$refid_condition;
 		}
@@ -175,89 +180,6 @@
 		array_push($spw_values, $results[0]);
 		array_push($npage_swr, $results[3]);
 
-		// in vivo firing rate section
-		/*$entry_output = "";
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT cellid) as cellid, GROUP_CONCAT(DISTINCT CAST(firingRate AS DECIMAL (10 , 2 ))) AS firingRate_val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank, GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
-		if ($conditions != "") {
-			$sql = $sql.$conditions;
-		}
-		if ($referenceID != "") {
-			$sql = $sql.$refid_condition;
-		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadataRank, firingraterank";if ($referenceID!="") {$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 )), CAST(GROUP_CONCAT(DISTINCT CAST(firingraterank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ));";
-		//$entry_output = $entry_output.$sql;
-		//echo $sql."<br>";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0) { 
-			while($row = $result->fetch_assoc()) {
-				if ($firingrate_found == false) {
-					$id = $row['id'];
-					$firingrate = $firingrate.$row['firingRate_val'];
-					$all_fr = $all_fr.$firingrate;
-					$species = $row['species'];
-					$agetype = $row['agetype'];
-					$gender = $row['gender'];
-					if ($gender == 'unknown') {$gender2 = 'unknown sex';} else {$gender2 = $gender;}
-					$rec = $row['recordingMethod'];
-					$behav = $row['behavioralStatus'];
-					$rank = $row['metadataRank'];
-					$parsed_rank = explode(',', $rank);
-					$rank = $parsed_rank[0];
-					if ($firingrate != '') {
-						$firingrate_found = true;
-						array_push($rank_entry_firingrate, $species);
-						array_push($rank_entry_firingrate, $agetype);
-						array_push($rank_entry_firingrate, $gender);
-						array_push($rank_entry_firingrate, $rec);
-						array_push($rank_entry_firingrate, $behav);
-						if ($rank < $lowest_rank) {
-							$lowest_rank = $rank;
-							$lowest_rank_id = $id;
-						}
-						$lowest_firingrate_rank = $rank;
-						$lowest_firingrate_rank_id = $id;
-					}
-				}
-			}
-		}
-		// find median
-		$sql2 = "SELECT CAST(AVG(pp.firingRate) AS DECIMAL(10,2)) as median_val FROM (SELECT p.firingRate, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.firingRate is NOT NULL AND p.firingRate!='' AND p.cellid=".$neuron_ids[$i]." AND p.metadataRank=".$lowest_firingrate_rank;
-		if ($referenceID != "") {
-			$sql2 = $sql2.$refid_condition;
-		}
-		$sql2 = $sql2." ORDER BY CAST(p.theta AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2))";
-		$result = $conn->query($sql2);
-		if ($result->num_rows > 0) { 
-			while($row = $result->fetch_assoc()) {
-				$firingrate_median = $row['median_val'];
-			}
-		}
-		$sql4 = "SELECT MIN(CAST(firingRate AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST(firingRate AS DECIMAL (10 , 2 ))) AS max_range, COUNT(firingRate) AS count FROM phases WHERE cellID = ".$neuron_ids[$i]." AND firingRate != \"\"";
-		if ($conditions != "") {
-			$sql4 = $sql4.$conditions;
-		}
-		if ($referenceID != "") {
-			$sql4 = $sql4.$refid_condition;
-		}
-		$result = $conn->query($sql4);
-		if ($result->num_rows > 0) { 
-			while($row = $result->fetch_assoc()) {
-				$min_range = $row['min_range'];
-				$max_range = $row['max_range'];
-				$count = $row['count'];
-			}
-		}		
-		$entry_output = $entry_output."\"<center><span id='firingrate".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>".$firingrate_median."</a></span></center></div>\",";
-		array_push($best_ranks_firingrate, $rank_entry_firingrate);
-		array_push($firingrate_values, $entry_output);
-		$npage_entry = array();
-		array_push($npage_entry, $neuron_ids[$i]);
-		array_push($npage_entry, $firingrate_median);
-		array_push($npage_entry, "[".$min_range.", ".$max_range."]");
-		array_push($npage_entry, $count);
-		array_push($npage_entry, $species.", ".$agetype.", ".$gender.",<br>".$rec.", ".$behav);
-		array_push($npage_firingrate, $npage_entry);*/
-
 		// firing rate
 		$results = value_collect($conn, $i, "firingRate", $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true", $values, $best_ranks, $npage);
 		array_push($firingrate_values, $results[0]);
@@ -271,72 +193,69 @@
 		$other_entries = array_fill(0, count($other_all_group), "");
 		$other_cond = array_fill(0, count($other_all_group), "");
 
-		//if ($other_all == "checked") {
-		if (true) {
-			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-				$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
-				$entry_output = $entry_output.$results[0];
-				$val_frag = $results[1];
-				$rank_entry = $results[2];
-				$species = $rank_entry[0];
-				$agetype = $rank_entry[1];
-				$gender = $rank_entry[2];
-				$rec = $rank_entry[3];
-				$behav = $rank_entry[4];
+		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
+			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false", $values, $best_ranks, $npage);
+			$entry_output = $entry_output.$results[0];
+			$val_frag = $results[1];
+			$rank_entry = $results[2];
+			$species = $rank_entry[0];
+			$agetype = $rank_entry[1];
+			$gender = $rank_entry[2];
+			$rec = $rank_entry[3];
+			$behav = $rank_entry[4];
 
-				if ($other_all == "checked") {
-					if ($val_frag != "") {
-						$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
-					}
-
-					if ($o_i == (count($other_all_group) - 1)) {
-						$entry_output = $entry_output."]},";
-					}
-					else {
-						$entry_output = $entry_output.",";
-					}
-				}
-
-				$other_entries[$o_i] = $val_frag;
-				$other_cond[$o_i] = "Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav;
-			}
-			if ($other_all != "checked") {
-				$low_rank_entry = "";
-				$low_rank_cond = "";
-				$npage_entry_cond = "";
-				$o_vals_tot = 0;
-
+			if ($other_all == "checked") {
 				if ($val_frag != "") {
 					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
 				}
-				for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-					if ($other_entries[$o_i] != "") {
-						if ($low_rank_entry == "") {
-							$low_rank_entry = $other_all_group[$o_i];
-							$low_rank_cond = $other_cond[$o_i];
-							$npage_entry_cond = str_replace("Representative selection: ", "", $low_rank_cond);
-							$npage_entry_cond = str_replace("\\n", "<br>", $npage_entry_cond);
-							$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
-						}
-						$o_vals_tot++;
-					}
-				}
 
-				if ($low_rank_entry != "") {
-
-					$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='".$low_rank_cond."' target='_blank'>";
-					$other = $low_rank_entry;
-					if ($o_vals_tot == 2) {
-						$other = $other." and 1 other";	
-					}
-					else if ($o_vals_tot > 2) {
-						$other = $other." and ".($o_vals_tot - 1)." others";		
-					}
-					$entry_output = $entry_output.$other."</a></span></center></div>\"]},";
+				if ($o_i == (count($other_all_group) - 1)) {
+					$entry_output = $entry_output."]},";
 				}
 				else {
-					$entry_output = "\"\"]},";
+					$entry_output = $entry_output.",";
 				}
+			}
+
+			$other_entries[$o_i] = $val_frag;
+			$other_cond[$o_i] = "Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav;
+		}
+		if ($other_all != "checked") {
+			$low_rank_entry = "";
+			$low_rank_cond = "";
+			$npage_entry_cond = "";
+			$o_vals_tot = 0;
+
+			if ($val_frag != "") {
+				$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+			}
+			for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
+				if ($other_entries[$o_i] != "") {
+					if ($low_rank_entry == "") {
+						$low_rank_entry = $other_all_group[$o_i];
+						$low_rank_cond = $other_cond[$o_i];
+						$npage_entry_cond = str_replace("Representative selection: ", "", $low_rank_cond);
+						$npage_entry_cond = str_replace("\\n", "<br>", $npage_entry_cond);
+						$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
+					}
+					$o_vals_tot++;
+				}
+			}
+
+			if ($low_rank_entry != "") {
+
+				$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."' title='".$low_rank_cond."' target='_blank'>";
+				$other = $low_rank_entry;
+				if ($o_vals_tot == 2) {
+					$other = $other." and 1 other";	
+				}
+				else if ($o_vals_tot > 2) {
+					$other = $other." and ".($o_vals_tot - 1)." others";		
+				}
+				$entry_output = $entry_output.$other."</a></span></center></div>\"]},";
+			}
+			else {
+				$entry_output = "\"\"]},";
 			}
 		}
 		array_push($other_values, $entry_output);
@@ -345,6 +264,8 @@
 		array_push($npage_entry, $other);
 		array_push($npage_entry, $npage_entry_cond);
 		array_push($npage_other, $npage_entry);
+		//array_push($other_values, $results[0]);
+		//array_push($npage_other, $results[3]);
 		$all_vals = array();
 		array_push($all_vals, $all_theta);
 		array_push($all_vals, $all_swr);
