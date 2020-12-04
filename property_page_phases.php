@@ -1148,6 +1148,7 @@ function show_only_authors(link, start1, stop1)
 							$other_all = "checked";
 							$referenceID = $fragment -> frag_id_to_ref_id($id_fragment);
 							$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all, $val_property);
+							//echo "val_property ".$val_property."<br>";
 							$theta_values = $write_output[0];
 							$spw_values = $write_output[1];
 							$firingrate_values = $write_output[2];
@@ -1164,8 +1165,8 @@ function show_only_authors(link, start1, stop1)
 							$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
 							$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
 							$other_frag = $all_vals[4];
-							//echo "all_other: ".$all_other."<br>";
 							$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+							$all_other_types = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 							$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 
 							$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
@@ -1190,13 +1191,15 @@ function show_only_authors(link, start1, stop1)
 					      		}
 					      	}			
 
+					      	$other_parsed = explode(":", $other_frag);
 					      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other");
 					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag");
 					      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
 
 					      	// test for hiding articles
 					      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-					      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+					      		//if (($val_property=="" || $val_property==$all_val_types[$i_vt] || in_array($val_property, $all_other_types)) && $all_val_results[$i_vt]!="") {
+					      		if (($val_property=="" || $val_property==$all_val_types[$i_vt] || ($val_property=="all_other" && in_array($all_val_types[$i_vt], $all_other_types))) && $all_val_results[$i_vt]!="") {
 				      				$hide_articles[$i] = false;
 				      			}
 				      		}
@@ -1231,10 +1234,25 @@ function show_only_authors(link, start1, stop1)
 								$neuron_id=$id_neuron;
 								$refID=$id_original;
 								
+								if ($val_property!="all_other") {
 								for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-						      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+						      		if (($val_property=="" || $val_property==$all_val_types[$i_vt] || ($val_property=="all_other" && in_array($all_val_types[$i_vt], $all_other_types))) && $all_val_results[$i_vt]!="") {
+						      			echo $i_vt." ";
 						      			$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
 						      		}
+						      	}
+						      	}
+						      	else {
+						      		for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
+						      			//echo $other_parsed[$i_of]."<br>";
+						      			if (in_array($other_parsed[$i_of], $all_other_types)) {
+						      				$frag_desc = $other_parsed[$i_of];
+						      				$frag_entry = $other_parsed[$i_of].$other_parsed[$i_of+1].$other_parsed[$i_of+2];
+						      				//echo $frag_entry."<br>";
+						      				$att_link = display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
+						      			}
+						      		}
+						      		//$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
 						      	}
 							}														
 						}	
@@ -1340,26 +1358,6 @@ function show_only_authors(link, start1, stop1)
 						echo "Other value(s): ".$curr_prop;
 					}
 					echo "</td></tr>";
-			      	/*if ($all_theta != "") {	
-					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-					echo "Theta value(s): ".str_replace(",", ", ", $all_theta)."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
-					echo "</td></tr>";	
-					}
-					if ($all_swr != "") {	
-					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-					echo "SWR ratio value(s): ".str_replace(",", ", ", $all_swr)."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
-					echo "</td></tr>";
-					}
-					if ($all_fr != "") {	
-					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-					echo "Firing rate value(s): ".str_replace(",", ", ", $all_fr)."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
-					echo "</td></tr>";
-					}
-					if ($other_frag != "") {
-					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-					echo "Other value(s): ".$other_frag;
-					echo "</td></tr>";
-					}*/
 					$att_link=$link_figure;
 
 					// view info

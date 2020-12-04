@@ -210,10 +210,12 @@
 			$gender = $rank_entry[2];
 			$rec = $rank_entry[3];
 			$behav = $rank_entry[4];
-			if ($results[4] != "" && ($val_property == $other_all_group[$o_i] || $val_property == "other" || $val_property == "")) {
+			if ($results[4] != "" && ($val_property == $other_all_group[$o_i] || $val_property == "all_other" || $val_property == "")) {
 				$all_other = $all_other.$other_all_group[$o_i].": ".$results[4];
-				//echo "other_all_group $other_all_group[$o_i] val_property $val_property";
+				//$all_other = $other_all_group[$o_i].": ".$results[4];
+				//echo "other_all_group $other_all_group[$o_i] val_property $val_property results[4] ".$results[4]." <br>";
 			}
+			//echo "other_all_group: $other_all_group[$o_i] val_property: $val_property<br>";
 
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
