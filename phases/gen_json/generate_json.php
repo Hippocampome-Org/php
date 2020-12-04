@@ -56,12 +56,14 @@
 		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
 		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
+		//if ($col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br><br>";}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
 				if ($val_found == false) {
 					$id = $row['id'];
 					$val = $row['val'];
+					//if ($val != "" && $col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br>";}
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
@@ -86,6 +88,7 @@
 				if ($val != "") {
 					$val_frag = $val_frag.$val."; Representative selection: ".$species.", ".$agetype.", ".$gender2.", ".$rec.", ".$behav;
 					$all_val = $val;
+					//echo $col." ".$all_val."<br>";
 				}
 			}
 		}
@@ -173,21 +176,23 @@
 		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 		$other_entries = array_fill(0, count($other_all_group), "");
 		$other_cond = array_fill(0, count($other_all_group), "");
+		$neuron_id = $neuron_ids[$i];
+		//echo $neuron_ids." i: ".$i."<br>";
 
 		// theta
-		$results = value_collect($conn, $i, "theta", $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true");
+		$results = value_collect($conn, $i, "theta", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
 		array_push($theta_values, $results[0]);
 		array_push($npage_theta, $results[3]);
 		$all_theta = $results[4];
 
 		// swr ratio
-		$results = value_collect($conn, $i, "swr_ratio", $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true");
+		$results = value_collect($conn, $i, "swr_ratio", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
 		array_push($spw_values, $results[0]);
 		array_push($npage_swr, $results[3]);
 		$all_swr = $results[4];
 
 		// firing rate
-		$results = value_collect($conn, $i, "firingRate", $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "true");
+		$results = value_collect($conn, $i, "firingRate", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
 		array_push($firingrate_values, $results[0]);
 		array_push($npage_firingrate, $results[3]);
 		$all_fr = $results[4];
@@ -196,7 +201,7 @@
 		$entry_output = "";
 		$npage_entry_cond = "";
 		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_ids[$i], $conditions, $referenceID, $refid_condition, "false");
+			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false");
 			$entry_output = $entry_output.$results[0];
 			$val_frag = $results[1];
 			$rank_entry = $results[2];
@@ -205,6 +210,8 @@
 			$gender = $rank_entry[2];
 			$rec = $rank_entry[3];
 			$behav = $rank_entry[4];
+			//if ($results[4] != "") { echo $other_all_group[$o_i]." ".$results[4]." "; }
+			$all_other = $all_other." ".$other_all_group[$o_i]." ".$results[4];
 
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
@@ -222,6 +229,7 @@
 			$other_entries[$o_i] = $val_frag;
 			$other_cond[$o_i] = "Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav;
 		}
+		//echo "<br>";
 		if ($other_all != "checked") {
 			$low_rank_entry = "";
 			$low_rank_cond = "";
@@ -245,7 +253,7 @@
 
 			if ($low_rank_entry != "") {
 
-				$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_ids[$i]."&val_property=all_other' title='".$low_rank_cond."' target='_blank'>";
+				$entry_output = "\"<center><span id='other".$i."'><a href='property_page_phases.php?id_neuron=".$neuron_id."&val_property=all_other' title='".$low_rank_cond."' target='_blank'>";
 				$other = $low_rank_entry;
 				if ($o_vals_tot == 2) {
 					$other = $other." and 1 other";	
@@ -261,7 +269,7 @@
 		}
 		array_push($other_values, $entry_output);
 		$npage_entry = array();
-		array_push($npage_entry, $neuron_ids[$i]);
+		array_push($npage_entry, $neuron_id);
 		array_push($npage_entry, $other);
 		array_push($npage_entry, $npage_entry_cond);
 		array_push($npage_other, $npage_entry);

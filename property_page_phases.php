@@ -1164,7 +1164,9 @@ function show_only_authors(link, start1, stop1)
 							$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
 							$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
 							$other_frag = $all_vals[4];
+							//echo "all_other: ".$all_other."<br>";
 							$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+							$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 
 							$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 					      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
@@ -1192,12 +1194,14 @@ function show_only_authors(link, start1, stop1)
 					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
 					      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
 
+					      	// test for hiding articles
 					      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
 					      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
 				      				$hide_articles[$i] = false;
 				      			}
 				      		}
 
+				      		// display quotes
 							if ($show1 == 1)
 							{
 								$type_show  = "";
@@ -1226,15 +1230,9 @@ function show_only_authors(link, start1, stop1)
 								print ($seg_1_text);
 								$neuron_id=$id_neuron;
 								$refID=$id_original;
-								$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
-								//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
 								
-								
-								
-						      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+								for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
 						      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
-						      			//echo "val_property: ".$val_property."<br>";
-						      			//display_article($authors1, $show1, $PMID1, $issue1, $doi1, $page_in, $page_end, $title_temp, $name_show_only, $val_property, $id_neuron);
 						      			$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
 						      		}
 						      	}
@@ -1248,18 +1246,9 @@ function show_only_authors(link, start1, stop1)
 				} 
 				// hide any irrelevant articles
 				for ($i=0; $i<$n_id; $i++) {
-					/*$hide = true;
-					for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-						//echo " val_property ".$val_property."<br>";
-			      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
-			      			//echo "test".$val_property;
-			      			$hide = false;
-			      		}
-			      	}*/
 			      	if ($hide_articles[$i] == true) {
 						echo "<script>document.getElementById('art_tbl$i').style='display:none';</script>";
 					}
-					//echo "<br>";
 				}
 				function display_article($authors1, $authors2, $publication1, $year1, $volume1, $issue_tot, $pages1, $string_pmid, $doi_tot, $show1, $PMID1, $issue1, $doi1, $page_in, $page_end, $title_temp, $name_show_only, $val_property, $id_neuron, $i) {
 					// TABLE OF THE ARTICLES: 
