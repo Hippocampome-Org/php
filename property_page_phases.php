@@ -225,7 +225,7 @@ if (true)
 		create_temp_table($name_temporary_table);	
 	//}
 	
-	$val_property = str_replace('_', ':', $val_property);
+	//$val_property = str_replace('_', ':', $val_property);
 	$_SESSION['id_neuron'] = $id_neuron;
 	$_SESSION['val_property'] = $val_property;	
 	$_SESSION['color'] = $color;
@@ -1085,6 +1085,7 @@ function show_only_authors(link, start1, stop1)
 				<br />
 
 			<?php	
+				$hide_articles = array_fill(0, $n_id, true);
 				// There are no results available:
 				if ($n_id == 0)
 					print ("<br><font class='font12'>There are no results available.</font><br><br>");
@@ -1128,204 +1129,219 @@ function show_only_authors(link, start1, stop1)
 						$issue1 = $issue;
 						$referenceID = $referenceID_val;
 					}					
-					// TABLE OF THE ARTICLES: 
-						$first_author = NULL;
-						for ($yy=0; $yy<strlen($authors1); $yy++)
-						{
-							if ($authors1[$yy] != ',')
-								$first_author = $first_author.$authors1[$yy];
-							else
-								break;	
-						}
+					
+					display_article($authors1, $authors2, $publication1, $year1, $volume1, $issue_tot, $pages1, $string_pmid, $doi_tot, $show1, $PMID1, $issue1, $doi1, $page_in, $page_end, $title_temp, $name_show_only, $val_property, $id_neuron, $i);
 						
-						print ("<table width='80%' border='0' cellspacing='2' cellpadding='5'>");
-						
-						print ("
-							<tr>
-							<td width='10%' align='center'>
-							</td>
-							<td width='5%' align='center' class='table_neuron_page2' valign='center'>
-						");							
-						
-						if ($show1 == 0)
-						{
-							print ("<form action='property_page_phases.php' method='post' style='display:inline'>");
-							print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
-							print ("<input type='hidden' name='start' value='$page_in' />");
-							print ("<input type='hidden' name='stop' value='$page_end' />");
-							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
-							//echo "name_show_only: $name_show_only, show1: $show1";
-							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
-							print ("<input type='hidden' name='val_property' value='$val_property'>");
-							print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
-							print ("</form>");
-						}
-						if ($show1 == 1)
-						{
-							print ("<form action='property_page_phases.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
-							print ("<input type='submit' name='show_0' value=' ' class='show0'>");
-							print ("<input type='hidden' name='start' value='$page_in' />");
-							print ("<input type='hidden' name='stop' value='$page_end' />");
-							print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
-							//echo "name_show_only: $name_show_only, show1: $show1";
-							print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
-							print ("<input type='hidden' name='val_property' value='$val_property'>");
-							print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
-							print ("</form>");
-						}	
-						if (strlen($PMID1) > 10 )
-						{									
-							$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
-							$string_pmid = "<strong>ISBN: </strong>".$link2;	
-						}
-						else
-						{
-							$value_link ='PMID: '.$PMID1;
-							$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";								
-							$string_pmid = "<strong>PMID: </strong>".$link2;			
-						}
-						
-						if ($issue1 != NULL)
-							$issue_tot = "($issue1),";
-						else
-							$issue_tot = "";
-							
-						if ($doi1 != NULL)
-							$doi_tot = "DOI: $doi1";
-						else
-							$doi_tot = "";							
-						
-						print ("
-							</td>							
-							<td align='left' width='85%' class='table_neuron_page2'>
-							
-							<font color='#000000'><strong>$title_temp[$i]</strong></font> <br>
-							$authors2 <br>
-							$publication1, $year1, $volume1 $issue_tot pages: $pages1 <br>
-							$string_pmid <font class='font13'>$PMID1</font></a>; $doi_tot
-							</td>	
-							</tr>																																		
-						</table>");
-						
-						// TABLE for Quotes:
-						try
-						{			
-							$avoid_dups = array();		
-							//$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' $subquery ORDER BY id_fragment ASC";	echo $query;
-							$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	//echo $query."<br>";
-							$rs = mysqli_query($GLOBALS['conn'],$query);	
-							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
-							{	
-								//$no_records=False;
-								//if ($id_fragment=='' && $id_original=='' && $quote=='' && $page_location=='' && $type=='') 
-								//{
-								//	echo "Nothing found";
-								//}
-								//else echo "Found ".$id_fragment." ".$id_original." ".$quote." ".$page_location." ".$type;
-								//$current_record = $id_fragment.$id_original.$quote.$page_location.$type;
-								$current_record = $id_original.$quote.$page_location.$type;
-								$type_for_display=$type;
-							//if (!in_array($current_record, $avoid_dups))
-							//if (true)
-							//{	
-								//$quote_count++;	
-								if ($show1 == 1)
+					// TABLE for Quotes:
+					try
+					{			
+						$avoid_dups = array();		
+						$query = "SELECT distinct id_fragment, id_original, quote, page_location, type FROM $name_temporary_table WHERE title = '$title_temp[$i]' ORDER BY id_fragment ASC";	
+						//echo $query."<br>";
+						$rs = mysqli_query($GLOBALS['conn'],$query);	
+						while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
+						{	
+							$current_record = $id_original.$quote.$page_location.$type;
+							$type_for_display=$type;
+
+							$conditions = "";
+							$other_all = "checked";
+							$referenceID = $fragment -> frag_id_to_ref_id($id_fragment);
+							$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
+							$theta_values = $write_output[0];
+							$spw_values = $write_output[1];
+							$firingrate_values = $write_output[2];
+							$other_values = $write_output[3];
+							$best_ranks_theta = $write_output[4];
+							$best_ranks_swr = $write_output[5];
+							$best_ranks_firingrate = $write_output[6];
+							$npage_theta = $write_output[7];
+							$npage_swr = $write_output[8];
+							$npage_firingrate = $write_output[9];
+							$npage_other = $write_output[10];
+							$all_vals = $write_output[11];									
+					      	$all_theta = ''; $all_swr = ''; $all_fr = ''; $all_other = '';
+							$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
+							$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
+							$other_frag = $all_vals[4];
+							$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+
+							$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
+					      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
+					      	$other_val = ''; $other_prop = '';
+					      	for ($i_t = 0; $i_t < count($npage_theta); $i_t++) {
+					      		if ($npage_theta[$i_t][0] == $id_neuron) {
+									$theta_val = $npage_theta[$i_t][1];
+									$theta_prop1 = $npage_theta[$i_t][2];
+									$theta_prop2 = $npage_theta[$i_t][3];
+									$theta_prop3 = $npage_theta[$i_t][4];
+									$swr_val = $npage_swr[$i_t][1];
+									$swr_prop1 = $npage_swr[$i_t][2];
+									$swr_prop2 = $npage_swr[$i_t][3];
+									$swr_prop3 = $npage_swr[$i_t][4];
+									$firingrate_val = $npage_firingrate[$i_t][1];
+									$firingrate_prop1 = $npage_firingrate[$i_t][2];
+									$firingrate_prop2 = $npage_firingrate[$i_t][3];
+									$firingrate_prop3 = $npage_firingrate[$i_t][4];
+									$other_val = $npage_other[$i_t][1];
+									$other_prop = $npage_other[$i_t][2];
+					      		}
+					      	}			
+
+					      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val");
+					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
+					      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
+
+					      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+					      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+				      				$hide_articles[$i] = false;
+				      			}
+				      		}
+
+							if ($show1 == 1)
+							{
+								$type_show  = "";
+								$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment ORDER BY type ASC";
+								$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
+								while(list($type) = mysqli_fetch_row($rs_type))
 								{
-									$type_show  = "";
-									$query_type = "SELECT distinct type FROM $name_temporary_table WHERE id_fragment = $id_fragment ORDER BY type ASC";
-									$rs_type = mysqli_query($GLOBALS['conn'],$query_type);	
-									while(list($type) = mysqli_fetch_row($rs_type))
-									{
-										$type_show  = $type_show . $type;
-									}	
-									$row_span=30;	
-									$original_id = $fragment -> getOriginal_id();
-									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
-									$attachment_obj -> retrive_by_referenceID($referenceID);
-									$attachment = $attachment_obj -> getName();
-									$attachment_type = $attachment_obj -> getType();
-									$link_figure="";									
-									$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
-									
-									if($attachment_type=="phases_figure"){
-										$link_figure = "attachment/phases/".$attachment_jpg;
-									}								
-									$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
-									$link_figure_pdf = "figure_pdf/".$attachment_pdf;				
-									$seg_1_text="";
-									$seg_2_text="";
-									print ($seg_1_text);
-									$neuron_id=$id_neuron;
-									$refID=$id_original;
-									//$parcel=$val_property;
-									$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
-									//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
-									
-									$conditions = "";
-									$other_all = "checked";
-									$referenceID = $fragment -> frag_id_to_ref_id($id_fragment);
-									$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
-									$theta_values = $write_output[0];
-									$spw_values = $write_output[1];
-									$firingrate_values = $write_output[2];
-									$other_values = $write_output[3];
-									$best_ranks_theta = $write_output[4];
-									$best_ranks_swr = $write_output[5];
-									$best_ranks_firingrate = $write_output[6];
-									$npage_theta = $write_output[7];
-									$npage_swr = $write_output[8];
-									$npage_firingrate = $write_output[9];
-									$npage_other = $write_output[10];
-									$all_vals = $write_output[11];									
-							      	$all_theta = ''; $all_swr = ''; $all_fr = ''; $all_other = '';
-									$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
-									$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
-									$other_frag = $all_vals[4];
-									$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-
-									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
-							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
-							      	$other_val = ''; $other_prop = '';
-							      	for ($i_t = 0; $i_t < count($npage_theta); $i_t++) {
-							      		if ($npage_theta[$i_t][0] == $id_neuron) {
-											$theta_val = $npage_theta[$i_t][1];
-											$theta_prop1 = $npage_theta[$i_t][2];
-											$theta_prop2 = $npage_theta[$i_t][3];
-											$theta_prop3 = $npage_theta[$i_t][4];
-											$swr_val = $npage_swr[$i_t][1];
-											$swr_prop1 = $npage_swr[$i_t][2];
-											$swr_prop2 = $npage_swr[$i_t][3];
-											$swr_prop3 = $npage_swr[$i_t][4];
-											$firingrate_val = $npage_firingrate[$i_t][1];
-											$firingrate_prop1 = $npage_firingrate[$i_t][2];
-											$firingrate_prop2 = $npage_firingrate[$i_t][3];
-											$firingrate_prop3 = $npage_firingrate[$i_t][4];
-											$other_val = $npage_other[$i_t][1];
-											$other_prop = $npage_other[$i_t][2];
-							      		}
-							      	}			
-
-							      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val");
-							      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
-							      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
-									
-							      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-							      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
-							      			//echo "val_property: ".$val_property."<br>";
-							      			$att_link = display_article($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
-							      		}
-							      	}
+									$type_show  = $type_show . $type;
+								}	
+								$row_span=30;	
+								$original_id = $fragment -> getOriginal_id();
+								$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
+								$attachment_obj -> retrive_by_referenceID($referenceID);
+								$attachment = $attachment_obj -> getName();
+								$attachment_type = $attachment_obj -> getType();
+								$link_figure="";									
+								$attachment_jpg = $attachment;//str_replace('jpg', 'jpeg', $attachment);
+								
+								if($attachment_type=="phases_figure"){
+									$link_figure = "attachment/phases/".$attachment_jpg;
 								}								
-							//}
-							//array_push($avoid_dups, $current_record);							
-							}	
-						}
+								$attachment_pdf = str_replace('jpg', 'pdf', $attachment);
+								$link_figure_pdf = "figure_pdf/".$attachment_pdf;				
+								$seg_1_text="";
+								$seg_2_text="";
+								print ($seg_1_text);
+								$neuron_id=$id_neuron;
+								$refID=$id_original;
+								$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
+								//echo "<br><br><br><br><br><br><br>array index: ".$array_index;
+								
+								
+								
+						      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+						      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+						      			//echo "val_property: ".$val_property."<br>";
+						      			//display_article($authors1, $show1, $PMID1, $issue1, $doi1, $page_in, $page_end, $title_temp, $name_show_only, $val_property, $id_neuron);
+						      			$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
+						      		}
+						      	}
+							}														
+						}	
+					}
 					// if error occurs while retriving evidences show error message
 					catch (Exception $e) {
 						print ("<br><font class='font12'>Error Occured while processing.</font><br><br>");
 					}						
 				} 
-				function display_article($row_span, $all_val, $curr_prop, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $val_desc) {
+				// hide any irrelevant articles
+				for ($i=0; $i<$n_id; $i++) {
+					/*$hide = true;
+					for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+						//echo " val_property ".$val_property."<br>";
+			      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+			      			//echo "test".$val_property;
+			      			$hide = false;
+			      		}
+			      	}*/
+			      	if ($hide_articles[$i] == true) {
+						echo "<script>document.getElementById('art_tbl$i').style='display:none';</script>";
+					}
+					//echo "<br>";
+				}
+				function display_article($authors1, $authors2, $publication1, $year1, $volume1, $issue_tot, $pages1, $string_pmid, $doi_tot, $show1, $PMID1, $issue1, $doi1, $page_in, $page_end, $title_temp, $name_show_only, $val_property, $id_neuron, $i) {
+					// TABLE OF THE ARTICLES: 
+					$first_author = NULL;
+					for ($yy=0; $yy<strlen($authors1); $yy++)
+					{
+						if ($authors1[$yy] != ',')
+							$first_author = $first_author.$authors1[$yy];
+						else
+							break;	
+					}
+					
+					print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' id='art_tbl$i' style='display:visible;'>");
+					
+					print ("
+						<tr>
+						<td width='10%' align='center'>
+						</td>
+						<td width='5%' align='center' class='table_neuron_page2' valign='center'>
+					");							
+					
+					if ($show1 == 0)
+					{
+						print ("<form action='property_page_phases.php' method='post' style='display:inline'>");
+						print ("<input type='submit' name='show_1' value=' ' class='show1' title='Show Evidence' alt='Show Evidence'>");
+						print ("<input type='hidden' name='start' value='$page_in' />");
+						print ("<input type='hidden' name='stop' value='$page_end' />");
+						print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+						//echo "name_show_only: $name_show_only, show1: $show1";
+						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+						print ("<input type='hidden' name='val_property' value='$val_property'>");
+						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
+						print ("</form>");
+					}
+					if ($show1 == 1)
+					{
+						print ("<form action='property_page_phases.php' method='post' style='display:inline' title='Close Evidence' alt='Close Evidence'>");
+						print ("<input type='submit' name='show_0' value=' ' class='show0'>");
+						print ("<input type='hidden' name='start' value='$page_in' />");
+						print ("<input type='hidden' name='stop' value='$page_end' />");
+						print ("<input type='hidden' name='title' value='$title_temp[$i]'>");
+						//echo "name_show_only: $name_show_only, show1: $show1";
+						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
+						print ("<input type='hidden' name='val_property' value='$val_property'>");
+						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
+						print ("</form>");
+					}	
+					if (strlen($PMID1) > 10 )
+					{									
+						$link2 = "<a href='$link_isbn$PMID1' target='_blank'>";
+						$string_pmid = "<strong>ISBN: </strong>".$link2;	
+					}
+					else
+					{
+						$value_link ='PMID: '.$PMID1;
+						$link2 = "<a href='http://www.ncbi.nlm.nih.gov/pubmed?term=$value_link' target='_blank'>";								
+						$string_pmid = "<strong>PMID: </strong>".$link2;			
+					}
+					
+					if ($issue1 != NULL)
+						$issue_tot = "($issue1),";
+					else
+						$issue_tot = "";
+						
+					if ($doi1 != NULL)
+						$doi_tot = "DOI: $doi1";
+					else
+						$doi_tot = "";							
+					
+					print ("
+						</td>							
+						<td align='left' width='85%' class='table_neuron_page2'>
+						
+						<font color='#000000'><strong>$title_temp[$i]</strong></font> <br>
+						$authors2 <br>
+						$publication1, $year1, $volume1 $issue_tot pages: $pages1 <br>
+						$string_pmid <font class='font13'>$PMID1</font></a>; $doi_tot
+						</td>	
+						</tr>																																		
+					</table>");
+				}
+				function display_quote($row_span, $all_val, $curr_prop, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $val_desc) {
 					echo "<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>";	
 			      	echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
 					echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Representitive selection: ".str_replace("<br>", " ", $curr_prop);
