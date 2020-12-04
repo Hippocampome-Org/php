@@ -150,6 +150,8 @@ $page = true;//$_REQUEST['page'];
 $other_all = "";
 $sub_show_only = $_SESSION['phases_sub_show_only']; 
 $name_show_only_article = $_SESSION['phases_name_show_only_article'];
+$val_type = "";
+if (isset($_REQUEST['val_type'])) {$val_type = $_REQUEST['val_type'];}
 
 $see_all = $_REQUEST['see_all']; 
 // open all evidences
@@ -727,8 +729,8 @@ function show_only_authors(link, start1, stop1)
 					$volume = $article -> getVolume();
 					$issue = $article -> getIssue();
 					// remove period in the title 
-					if ($title[$ui] == '.')
-						$title[$ui] = '';	
+					//if ($title[$ui] == '.')
+					//	$title[$ui] = '';	
 					// retrive the Author Position from ArticleAuthorRel
 					$articleauthorrel -> retrive_author_position($id_article);
 					$n_author = $articleauthorrel -> getN_author_id();
@@ -777,7 +779,7 @@ function show_only_authors(link, start1, stop1)
 				$query = "UPDATE $name_temporary_table SET show1 =  '0'";
 				$rs2 = mysqli_query($GLOBALS['conn'],$query);		
 			}
-			if ($_REQUEST['show_1']) //  ==> ON
+			if (isset($_REQUEST['show_1']) && $_REQUEST['show_1']) //  ==> ON
 			{
 				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 				$title_paper = $_REQUEST['title'];
@@ -788,7 +790,7 @@ function show_only_authors(link, start1, stop1)
 				$page_end = $_REQUEST['stop'];
 			}
 
-			if ($_REQUEST['show_0']) //  ==> OFF
+			if (isset($_REQUEST['show_0']) && $_REQUEST['show_0']) //  ==> OFF
 			{
 				$name_temporary_table = $_SESSION['phases_name_temporary_table'];
 				$title_paper = $_REQUEST['title'];
@@ -1214,20 +1216,18 @@ function show_only_authors(link, start1, stop1)
 							$rs = mysqli_query($GLOBALS['conn'],$query);	
 							while(list($id_fragment, $id_original, $quote, $page_location, $type) = mysqli_fetch_row($rs))
 							{	
-								/*
-								$no_records=False;
-								if ($id_fragment=='' && $id_original=='' && $quote=='' && $page_location=='' && $type=='') 
-								{
-									echo "Nothing found";
-								}
-								else echo "Found ".$id_fragment." ".$id_original." ".$quote." ".$page_location." ".$type;
-								*/
+								//$no_records=False;
+								//if ($id_fragment=='' && $id_original=='' && $quote=='' && $page_location=='' && $type=='') 
+								//{
+								//	echo "Nothing found";
+								//}
+								//else echo "Found ".$id_fragment." ".$id_original." ".$quote." ".$page_location." ".$type;
 								//$current_record = $id_fragment.$id_original.$quote.$page_location.$type;
 								$current_record = $id_original.$quote.$page_location.$type;
 								$type_for_display=$type;
 							//if (!in_array($current_record, $avoid_dups))
-							if (true)
-							{	
+							//if (true)
+							//{	
 								//$quote_count++;	
 								if ($show1 == 1)
 								{
@@ -1238,8 +1238,7 @@ function show_only_authors(link, start1, stop1)
 									{
 										$type_show  = $type_show . $type;
 									}	
-									$row_span=30;
-									print ("<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>");	
+									$row_span=30;	
 									$original_id = $fragment -> getOriginal_id();
 									$attachment_obj = new attachment_phases($class_attachment); // this clears prior attachment results
 									$attachment_obj -> retrive_by_referenceID($referenceID);
@@ -1282,6 +1281,7 @@ function show_only_authors(link, start1, stop1)
 									$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
 									$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
 									$other_frag = $all_vals[4];
+									$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 
 									$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
 							      	$swr_val = ''; $swr_prop1 = ''; $swr_prop2 = ''; $swr_prop3 = ''; 
@@ -1303,69 +1303,82 @@ function show_only_authors(link, start1, stop1)
 											$other_val = $npage_other[$i_t][1];
 											$other_prop = $npage_other[$i_t][2];
 							      		}
-							      	}				
-							      	if ($all_theta != "") {	
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Theta value(s): ".str_replace(",", ", ", $all_theta)."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
-									echo "</td></tr>";	
-									}
-									if ($all_swr != "") {	
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "SWR ratio value(s): ".str_replace(",", ", ", $all_swr)."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
-									echo "</td></tr>";
-									}
-									if ($all_fr != "") {	
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Firing rate value(s): ".str_replace(",", ", ", $all_fr)."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
-									echo "</td></tr>";
-									}
-									/*if ($all_other != "") {
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Other values: ".$all_other."; Representitive selection: ".str_replace("<br>", " ", $other_prop);
-									echo "</td></tr>";
-									}*/
-									if ($other_frag != "") {
-									echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-									echo "Other value(s): ".$other_frag;
-									echo "</td></tr>";
-									}
-									$download_icon='images/download_PNG.png';
-									$att_link=$link_figure;
+							      	}			
 
-									// view info
-									$lir = $fragment->eid_to_location_in_reference($id_fragment);
-									print ("
-									<tr>	
-										<td width='70%' class='table_neuron_page2' align='left'>
-											Page location: $lir
-										</td>
-										<td width='15%' align='center'>");	
-									print ("</td></tr>	
-									<tr>		
-										<td width='70%' class='table_neuron_page2' align='left'>
-											<em>$quote</em>");
-									print ($seg_2_text);
-									print("</td>
-										<td width='15%' class='table_neuron_page2' align='center'>");
-
-									if ($attachment_type=="phases_figure"&&$link_figure!='attachment/phases/')
-									{
-										print ("<a href='$link_figure' target='_blank'>");
-										print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
-										print ("</a>");
-									}	
-									else;
-									print("</td></tr>");
+							      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val");
+							      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
+							      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
+									
+							      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+							      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+							      			//echo "val_property: ".$val_property."<br>";
+							      			$att_link = display_article($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
+							      		}
+							      	}
 								}								
-							}
-							array_push($avoid_dups, $current_record);							
-						}	
-					}
+							//}
+							//array_push($avoid_dups, $current_record);							
+							}	
+						}
 					// if error occurs while retriving evidences show error message
 					catch (Exception $e) {
 						print ("<br><font class='font12'>Error Occured while processing.</font><br><br>");
 					}						
 				} 
+				function display_article($row_span, $all_val, $curr_prop, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $val_desc) {
+					echo "<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>";	
+			      	echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+					echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Representitive selection: ".str_replace("<br>", " ", $curr_prop);
+					echo "</td></tr>";	
+			      	/*if ($all_theta != "") {	
+					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+					echo "Theta value(s): ".str_replace(",", ", ", $all_theta)."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
+					echo "</td></tr>";	
+					}
+					if ($all_swr != "") {	
+					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+					echo "SWR ratio value(s): ".str_replace(",", ", ", $all_swr)."; Representitive selection: ".str_replace("<br>", " ", $swr_prop3);
+					echo "</td></tr>";
+					}
+					if ($all_fr != "") {	
+					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+					echo "Firing rate value(s): ".str_replace(",", ", ", $all_fr)."; Representitive selection: ".str_replace("<br>", " ", $firingrate_prop3);
+					echo "</td></tr>";
+					}
+					if ($other_frag != "") {
+					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
+					echo "Other value(s): ".$other_frag;
+					echo "</td></tr>";
+					}*/
+					$att_link=$link_figure;
+
+					// view info
+					$lir = $fragment->eid_to_location_in_reference($id_fragment);
+					print ("
+					<tr>	
+						<td width='70%' class='table_neuron_page2' align='left'>
+							Page location: $lir
+						</td>
+						<td width='15%' align='center'>");	
+					print ("</td></tr>	
+					<tr>		
+						<td width='70%' class='table_neuron_page2' align='left'>
+							<em>$quote</em>");
+					print ($seg_2_text);
+					print("</td>
+						<td width='15%' class='table_neuron_page2' align='center'>");
+
+					if ($attachment_type=="phases_figure"&&$link_figure!='attachment/phases/')
+					{
+						print ("<a href='$link_figure' target='_blank'>");
+						print ("<img src='$link_figure' border='0' width='80%' style='background-color:white;'>");
+						print ("</a>");
+					}	
+					else;
+					print("</td></tr>");
+
+					return $att_link;
+				}
 		?>
 			<!-- PAGINATION TABLE -->	
 				</table><table width="80%" border="0" cellspacing="2" cellpadding="0">
