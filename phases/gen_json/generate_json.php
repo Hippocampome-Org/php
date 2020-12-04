@@ -155,7 +155,7 @@
 		return $median;//." $sql2";
 	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property) {
 		/*
 			Return values for all relevant value columns.
 		*/
@@ -210,8 +210,10 @@
 			$gender = $rank_entry[2];
 			$rec = $rank_entry[3];
 			$behav = $rank_entry[4];
-			//if ($results[4] != "") { echo $other_all_group[$o_i]." ".$results[4]." "; }
-			$all_other = $all_other." ".$other_all_group[$o_i]." ".$results[4];
+			if ($results[4] != "" && $other_all_group[$o_i] == $val_property) {
+				$all_other = $all_other.$other_all_group[$o_i].": ".$results[4];
+				//echo "other_all_group $other_all_group[$o_i] val_property $val_property";
+			}
 
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
@@ -245,7 +247,7 @@
 						$low_rank_cond = $other_cond[$o_i];
 						$npage_entry_cond = str_replace("Representative selection: ", "", $low_rank_cond);
 						$npage_entry_cond = str_replace("\\n", "<br>", $npage_entry_cond);
-						$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
+						$all_other = $all_other.$low_rank_entry.": ".$other_entries[$o_i];
 					}
 					$o_vals_tot++;
 				}
@@ -300,7 +302,7 @@
 			if (!isset($conditions)) {
 				$conditions = '';
 			}
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all);
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$firingrate_values = $write_output[2];

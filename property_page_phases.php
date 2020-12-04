@@ -1147,7 +1147,7 @@ function show_only_authors(link, start1, stop1)
 							$conditions = "";
 							$other_all = "checked";
 							$referenceID = $fragment -> frag_id_to_ref_id($id_fragment);
-							$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all);
+							$write_output = retrieve_values($conn, $array_index, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_isbn, $referenceID, $other_all, $val_property);
 							$theta_values = $write_output[0];
 							$spw_values = $write_output[1];
 							$firingrate_values = $write_output[2];
@@ -1190,7 +1190,7 @@ function show_only_authors(link, start1, stop1)
 					      		}
 					      	}			
 
-					      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val", "$other_val");
+					      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other");
 					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
 					      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
 
