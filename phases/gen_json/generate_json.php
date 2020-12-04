@@ -210,7 +210,7 @@
 			$gender = $rank_entry[2];
 			$rec = $rank_entry[3];
 			$behav = $rank_entry[4];
-			if ($results[4] != "" && $other_all_group[$o_i] == $val_property) {
+			if ($results[4] != "" && ($val_property == $other_all_group[$o_i] || $val_property == "other" || $val_property == "")) {
 				$all_other = $all_other.$other_all_group[$o_i].": ".$results[4];
 				//echo "other_all_group $other_all_group[$o_i] val_property $val_property";
 			}

@@ -1191,7 +1191,7 @@ function show_only_authors(link, start1, stop1)
 					      	}			
 
 					      	$all_val_results = array("$theta_val", "$swr_val", "$firingrate_val", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other", "$all_other");
-					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop", "$other_prop");
+					      	$all_val_props = array("$theta_prop3", "$swr_prop3", "$firingrate_prop3", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag", "$other_frag");
 					      	$all_val_descs = array("Theta", "SWR ratio", "Firing rate", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other", "Other");
 
 					      	// test for hiding articles
@@ -1333,8 +1333,13 @@ function show_only_authors(link, start1, stop1)
 				function display_quote($row_span, $all_val, $curr_prop, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $val_desc) {
 					echo "<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>";	
 			      	echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
-					echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Representitive selection: ".str_replace("<br>", " ", $curr_prop);
-					echo "</td></tr>";	
+			      	if ($val_desc != "Other") {
+						echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Representitive selection: ".str_replace("<br>", " ", $curr_prop);	
+					}
+					else {
+						echo "Other value(s): ".$curr_prop;
+					}
+					echo "</td></tr>";
 			      	/*if ($all_theta != "") {	
 					echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
 					echo "Theta value(s): ".str_replace(",", ", ", $all_theta)."; Representitive selection: ".str_replace("<br>", " ", $theta_prop3);
