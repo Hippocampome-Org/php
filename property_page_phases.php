@@ -211,6 +211,7 @@ if (true)
 
 	$id_neuron = $_REQUEST['id_neuron'];
 	$val_property = $_REQUEST['val_property'];
+	$all_val_check = $_REQUEST['all_val_check'];
 	$color = $_REQUEST['color'];
 	
 	$ip_address = $_SERVER['REMOTE_ADDR'];
@@ -228,6 +229,7 @@ if (true)
 	//$val_property = str_replace('_', ':', $val_property);
 	$_SESSION['id_neuron'] = $id_neuron;
 	$_SESSION['val_property'] = $val_property;	
+	$_SESSION['all_val_check'] = $all_val_check;	
 	$_SESSION['color'] = $color;
 	$neuron_show_only_value="";
 	if(strstr(checkNeuronProperty($color),"axons"))
@@ -300,6 +302,7 @@ else
 	$flag = $_REQUEST['flag'];
 	$id_neuron = $_SESSION['id_neuron'];
 	$val_property = $_SESSION['val_property'];
+	$all_val_check = $_SESSION['all_val_check'];
 	$color = $_SESSION['color'];
 	if(!$_SESSION['phases_neuron_show_only_value']){
 		$neuron_show_only_value="";
@@ -866,13 +869,28 @@ function show_only_authors(link, start1, stop1)
 				<table width="80%" border="0" cellspacing="2" cellpadding="0">
 					<tr>		
 						<td width="25%" align="right">
-						<form action="property_page_phases.php" method="post" style="display:inline">
+						<form action="property_page_phases.php" method="post" name="art_options" id="art_options" style="display:inline">
 						<?php
 							if (isset($_REQUEST['sp_page'])) {
 								$sp_page=$_REQUEST['sp_page'];
 								echo "<input type='hidden' name='sp_page' value='$sp_page'>";
 							}
 						?>
+						<script>
+							function set_avt_check() {
+								let chk_val = document.getElementById("all_val_check").value;
+								if (chk_val == "") {
+									document.getElementById("all_val_check").value="checked";
+									document.getElementById("art_options").submit();
+								}
+								else {
+									document.getElementById("all_val_check").value="";
+									document.getElementById("art_options").submit();
+								}
+								//document.write(document.getElementById("all_val_check").value);// document.getElementById("all_val_check").value;
+							}
+						</script>
+						<span style="position:relative;float:left"><input type="checkbox" id="show_all_vt" name="show_all_vt" onclick="javascript:set_avt_check();" <?php if($all_val_check=="checked"){echo "checked";} ?>><font class="font2">&nbsp;Show All Value Types</font></input></span>
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start' value='<?php print $page_in; ?>' />
@@ -881,6 +899,7 @@ function show_only_authors(link, start1, stop1)
 						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
 						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
 						print ("<input type='hidden' name='val_property' value='$val_property'>");
+						print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
 						?>
 						</form>
 						</td>						
@@ -1064,7 +1083,10 @@ function show_only_authors(link, start1, stop1)
 								<OPTION VALUE='authors'>First Authors</OPTION>
 								</select>
 								<input type="hidden" name='order_ok' value="GO"  />
-								<?php print ("<input type='hidden' name='val_property' value='$val_property'>"); ?>
+								<?php 
+									print ("<input type='hidden' name='val_property' value='$val_property'>");
+									print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
+								?>
 								<?php
 								if (isset($_REQUEST['sp_page'])) {
 									$sp_page=$_REQUEST['sp_page'];
@@ -1198,7 +1220,6 @@ function show_only_authors(link, start1, stop1)
 
 					      	// test for hiding articles
 					      	for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-					      		//if (($val_property=="" || $val_property==$all_val_types[$i_vt] || in_array($val_property, $all_other_types)) && $all_val_results[$i_vt]!="") {
 					      		if (($val_property=="" || $val_property==$all_val_types[$i_vt] || ($val_property=="all_other" && in_array($all_val_types[$i_vt], $all_other_types))) && $all_val_results[$i_vt]!="") {
 				      				$hide_articles[$i] = false;
 				      			}
@@ -1233,26 +1254,37 @@ function show_only_authors(link, start1, stop1)
 								print ($seg_1_text);
 								$neuron_id=$id_neuron;
 								$refID=$id_original;
+								//echo "all_val_check|||||||||||||||||| ".$all_val_check." ".($all_val_check == "checked")."<br>";
 								
-								if ($val_property!="all_other") {
-								for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
-						      		if (($val_property=="" || $val_property==$all_val_types[$i_vt] || ($val_property=="all_other" && in_array($all_val_types[$i_vt], $all_other_types))) && $all_val_results[$i_vt]!="") {
-						      			echo $i_vt." ";
-						      			$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
-						      		}
+								if ($val_property!="all_other" && $all_val_check != "checked") {
+									for ($i_vt = 0; $i_vt < count($all_val_types); $i_vt++) {
+							      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+							      			display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
+							      		}
+							      	}
 						      	}
-						      	}
-						      	else {
-						      		for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
-						      			//echo $other_parsed[$i_of]."<br>";
+						      	else if ($all_val_check == "checked") {
+						      		for ($i_vt = 0; $i_vt < 3; $i_vt++) {
+							      		if (($val_property=="" || $val_property==$all_val_types[$i_vt]) && $all_val_results[$i_vt]!="") {
+							      			display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
+							      		}
+							      	}
+							      	for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
 						      			if (in_array($other_parsed[$i_of], $all_other_types)) {
 						      				$frag_desc = $other_parsed[$i_of];
 						      				$frag_entry = $other_parsed[$i_of].$other_parsed[$i_of+1].$other_parsed[$i_of+2];
-						      				//echo $frag_entry."<br>";
-						      				$att_link = display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
+						      				display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
 						      			}
 						      		}
-						      		//$att_link = display_quote($row_span, $all_val_results[$i_vt], $all_val_props[$i_vt], $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, $all_val_descs[$i_vt]);
+						      	}
+						      	else {
+						      		for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
+						      			if (in_array($other_parsed[$i_of], $all_other_types)) {
+						      				$frag_desc = $other_parsed[$i_of];
+						      				$frag_entry = $other_parsed[$i_of].$other_parsed[$i_of+1].$other_parsed[$i_of+2];
+						      				display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
+						      			}
+						      		}
 						      	}
 							}														
 						}	
@@ -1298,6 +1330,7 @@ function show_only_authors(link, start1, stop1)
 						//echo "name_show_only: $name_show_only, show1: $show1";
 						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
 						print ("<input type='hidden' name='val_property' value='$val_property'>");
+						print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
 						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
 						print ("</form>");
 					}
@@ -1311,6 +1344,7 @@ function show_only_authors(link, start1, stop1)
 						//echo "name_show_only: $name_show_only, show1: $show1";
 						print ("<input type='hidden' name='name_show_only' value='$name_show_only'>");
 						print ("<input type='hidden' name='val_property' value='$val_property'>");
+						print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
 						print ("<input type='hidden' name='id_neuron' value='$id_neuron'>");
 						print ("</form>");
 					}	
@@ -1384,8 +1418,6 @@ function show_only_authors(link, start1, stop1)
 					}	
 					else;
 					print("</td></tr>");
-
-					return $att_link;
 				}
 		?>
 			<!-- PAGINATION TABLE -->	
@@ -1437,6 +1469,7 @@ function show_only_authors(link, start1, stop1)
 									print ("<input type='submit' name='first_page' value=' << ' class='botton1'/>");
 									print ("<input type='submit' name='down' value=' < ' class='botton1'/>");
 									print ("<input type='hidden' name='val_property' value='$val_property'>");
+									print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
 									if (isset($_REQUEST['sp_page'])) {
 										$sp_page=$_REQUEST['sp_page'];
 										print ("<input type='hidden' name='sp_page' value='$sp_page'>");
@@ -1456,6 +1489,7 @@ function show_only_authors(link, start1, stop1)
 									print ("<input type='submit' name='up' value=' > ' class='botton1'/>");
 									print ("<input type='submit' name='last_page' value=' >> ' class='botton1'/>");
 									print ("<input type='hidden' name='val_property' value='$val_property'>");
+									print ("<input type='hidden' name='all_val_check' id='all_val_check' value='$all_val_check'>");
 									if (isset($_REQUEST['sp_page'])) {
 										$sp_page=$_REQUEST['sp_page'];
 										print ("<input type='hidden' name='sp_page' value='$sp_page'>");
