@@ -25,6 +25,10 @@ $page="main_page";
 //$_REQUEST['page']=$page;
 include("phases/gen_json/generate_json.php");
 
+$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+$all_other_types = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+$evi_page_descs = array("Theta", "SWR ratio", "Firing rate", "DS ratio", "Ripple", "Gamma", "Run stop ratio", "Epsilon", "Vrest", "Tau", "AP threshold", "fAHP", "APpeak trough");
+
 function checkNeuronProperty($color)
 {
 	$part="";
@@ -628,6 +632,18 @@ function show_only_authors(link, start1, stop1)
 				<td align="left" width="80%" class="table_neuron_page2">&nbsp;&nbsp;<strong>Hippocampome Neuron ID: <?php echo $id?></strong></td>
 			</tr>
 			<tr>
+				<td width="20%" align="right">&nbsp;</td>
+				<td align="left" width="80%" class="table_neuron_page2">&nbsp;<strong>
+				<?php 
+					for ($i_e = 0; $i_e < count($all_val_types); $i_e++) {
+						if ($val_property == $all_val_types[$i_e]) {
+							echo $evi_page_descs[$i_e];
+						}
+					}					
+				?>
+				</strong></td>
+			</tr>
+			<tr>
 				<td width="20%" align="right">
 				</td>
 			</tr>								
@@ -890,7 +906,7 @@ function show_only_authors(link, start1, stop1)
 								//document.write(document.getElementById("all_val_check").value);// document.getElementById("all_val_check").value;
 							}
 						</script>
-						<span style="position:relative;float:left"><input type="checkbox" id="show_all_vt" name="show_all_vt" onclick="javascript:set_avt_check();" <?php if($all_val_check=="checked"){echo "checked";} ?>><font class="font2">&nbsp;Show All Value Types</font></input></span>
+						<span style="position:relative;float:left;display:none;"><input type="checkbox" id="show_all_vt" name="show_all_vt" onclick="javascript:set_avt_check();" <?php if($all_val_check=="checked"){echo "checked";} ?>><font class="font2">&nbsp;Show All Value Types</font></input></span>
 						<input type="submit" name='see_all' value="Open All Evidence">
 						<input type="submit" name='see_all' value="Close All Evidence">
 						<input type="hidden" name='start' value='<?php print $page_in; ?>' />
@@ -1187,8 +1203,6 @@ function show_only_authors(link, start1, stop1)
 							$all_theta = $all_vals[0]; $all_swr = $all_vals[1]; 
 							$all_fr = $all_vals[2]; $all_other = $all_vals[3]; 
 							$other_frag = $all_vals[4];
-							$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-							$all_other_types = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 							$array_index=$fragment->neuron_id_to_array_index($id_neuron, $neuron_ids);
 
 							$theta_val = ''; $theta_prop1 = ''; $theta_prop2 = ''; $theta_prop3 = '';
