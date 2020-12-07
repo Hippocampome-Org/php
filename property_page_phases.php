@@ -639,7 +639,10 @@ function show_only_authors(link, start1, stop1)
 						if ($val_property == $all_val_types[$i_e]) {
 							echo $evi_page_descs[$i_e];
 						}
-					}					
+					}	
+					if ($val_property == "all_other") {
+						echo "Any values of Theta, SWR ratio, Firing rate, DS ratio, Ripple, Gamma, Run stop ratio, Epsilon, Vrest, Tau,<br>&nbsp;&nbsp;AP threshold, fAHP, or APpeak trough.";
+					}				
 				?>
 				</strong></td>
 			</tr>
