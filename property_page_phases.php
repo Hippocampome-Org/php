@@ -641,7 +641,7 @@ function show_only_authors(link, start1, stop1)
 						}
 					}	
 					if ($val_property == "all_other") {
-						echo "Any values of Theta, SWR ratio, Firing rate, DS ratio, Ripple, Gamma, Run stop ratio, Epsilon, Vrest, Tau,<br>&nbsp;&nbsp;AP threshold, fAHP, or APpeak trough.";
+						echo "Any values of DS ratio, Ripple, Gamma, Run stop ratio, Epsilon, Vrest, Tau, AP threshold, fAHP,<br>&nbsp;&nbsp;or APpeak trough.";
 					}				
 				?>
 				</strong></td>
