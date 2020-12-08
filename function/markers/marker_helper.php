@@ -4,7 +4,9 @@
 
 
 //$n_markers = 36;
-$n_markers = 98;
+$n_markers = 99;
+$n_columns = $n_markers + 3;
+
 
 // Name in alphabetic order for MARKERS: ************************************
 $name_markers = array(
@@ -105,7 +107,8 @@ $name_markers = array(
 		"94"=>"vGluT2",
 		"95"=>"VILIP",
 		"96"=>"Wfs1",
-		"97"=>"Y1"
+		"97"=>"Y1",
+		"98"=>"Y2"
 );
 
 
