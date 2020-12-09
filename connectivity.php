@@ -573,7 +573,8 @@ $(function(){
           return 'style="border-right:medium solid red;"';
        }
       },
-      {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_superficial_pyramidal_2223p', index:'ca1_superficial_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_deep_pyramidal_2223p', index:'ca1_deep_pyramidal_2223p', width:20,height:130,search:false,sortable:false},
       {name:'ca1_cajal_retzius_3000', index:'ca1_cajal_retzius_3000', width:20,height:130,search:false,sortable:false},
       {name:'ca1_radiatum_giant_2201', index:'ca1_radiatum_giant_2201', width:20,height:130,search:false,sortable:false},
       {name:'ca1_quadrilaminar_3333', index:'ca1_quadrilaminar_3333', width:20,height:150,search:false,sortable:false},
@@ -604,6 +605,7 @@ $(function(){
       {name:'ca1_ivy_0333', index:'ca1_ivy_0333', width:20,height:150,search:false,sortable:false},
       {name:'ca1_schaffer_coll_assoc_0322', index:'ca1_schaffer_coll_assoc_0322', width:20,height:150,search:false,sortable:false},
       {name:'ca1_or_proj_031_p', index:'ca1_or_proj_031_p', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_c_bistratified_0302', index:'ca1_c_bistratified_0302', width:20,height:150,search:false,sortable:false},
       {name:'ca1_radiatum_0300', index:'ca1_radiatum_0300', width:20,height:150,search:false,sortable:false},
       {name:'ca1_is_0221', index:'ca1_is_0221', width:20,height:150,search:false,sortable:false},
       {name:'ca1_is_1c_0203', index:'ca1_is_1c_0203', width:20,height:150,search:false,sortable:false},
@@ -658,8 +660,8 @@ $(function(){
       {name:'ec_pyramidal_like_III_023300', index:'ec_pyramidal_like_III_023300', width:20,height:150,search:false,sortable:false},
       {name:'ec_multiform_III_023000', index:'ec_multiform_III_023000', width:20,height:150,search:false,sortable:false} 
      ], 
-    rowNum:122,
-    rowList:[122],
+    rowNum:124,
+    rowList:[124],
     viewrecords: true, 
     gridview: true,
     jsonReader : {
