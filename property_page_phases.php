@@ -927,7 +927,7 @@ function show_only_authors(link, start1, stop1)
 				
 				<br />	
 				
-				<table width="80%" border="0" cellspacing="2" cellpadding="0">
+				<table width="80%" border="0" cellspacing="2" cellpadding="0" style="display:none;">
 				<tr>
 					<td width="25%" align="left">
 						<font class="font2">Show:</font> 
