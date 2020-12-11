@@ -696,6 +696,7 @@ function show_only_authors(link, start1, stop1)
 					for ($i1=0; $i1<$n_fragment_id; $i1++)
 					{
 						$fragment_id[$n_article] = $evidencefragmentrel -> getFragment_id_array($i1);
+						//$fragment_id[$n_article] = $evidence_id[$i];
 						$n_article = $n_article + 1;
 					}
 
@@ -721,6 +722,7 @@ function show_only_authors(link, start1, stop1)
 					{
 						$article -> retrive_by_pmid_isbn_and_page_number($pmid_isbn, $pmid_isbn_page);
 						$id_article= $article -> getID();
+						//echo $id_article."<br>";
 					}
 					else if ($pmid_isbn == 25375253) {
 						$article -> retrive_by_pmid(25375253);
@@ -732,12 +734,12 @@ function show_only_authors(link, start1, stop1)
 						$articleevidencerel -> retrive_article_id($evidence_id[$i]);
 						//echo $evidence_id[$i]."<br>";
 						$id_article = $articleevidencerel -> getArticle_id_array(0);
-						//echo $id_article."<br>";
+						echo $id_article."<br>";
 						// retrieve all information from article table by using article_id
 						$article -> retrive_by_id($id_article) ;
 					}
 					$title = $article -> getTitle();
-					//echo "title: $title";
+					//echo "<br>title: $title";
 					$publication = $article -> getPublication();
 					$year = $article -> getYear();
 					$pmid_isbn = $article -> getPmid_isbn(); 
@@ -1404,7 +1406,7 @@ function show_only_authors(link, start1, stop1)
 					echo "<table width='80%' border='0' cellspacing='2' cellpadding='5' style='display:table'><tr><td width='16%' rowspan='".$row_span."' align='right' valign='top' style='display:table-cell'></td>";	
 			      	echo "<tr><td width='70%' class='table_neuron_page2' align='left'>";	
 			      	if ($val_desc != "Other") {
-						echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Representitive selection: ".str_replace("<br>", " ", $curr_prop);	
+						echo "$val_desc value(s): ".str_replace(",", ", ", $all_val)."; Protocol: ".str_replace("<br>", " ", $curr_prop);	
 					}
 					else {
 						echo "Other value(s): ".$curr_prop;
