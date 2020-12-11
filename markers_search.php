@@ -8,7 +8,6 @@ require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.temporary_result_neurons.php');
-include("function/markers/marker_helper.php");
 $width1='25%';
 $width2='2%';
 $research = "";
@@ -420,12 +419,10 @@ $(function()
 			{name:'vGlut1',index:'vGlut1',width:15,search:false,sortable:false,hidden:true},
 			{name:'vGluT2',index:'vGluT2',width:15,search:false,sortable:false,hidden:true},
 			{name:'VILIP',index:'VILIP',width:15,search:false,sortable:false,hidden:true},
-			{name:'Wfs1',index:'Wfs1',width:15,search:false,sortable:false,hidden:true},
-			{name:'Y1',index:'Y1',width:15,search:false,sortable:false,hidden:true},
-			{name:'Y2',index:'Y2',width:15,search:false,sortable:false,hidden:true}	
+			{name:'Y1',index:'Y1',width:15,search:false,sortable:false,hidden:true}	
 		], 
-		rowNum:124,
-		rowList:[124],
+		rowNum:122,
+		rowList:[122],
 		viewrecords: true, 
 		gridview: true,
 		jsonReader :
@@ -463,12 +460,12 @@ $(function()
 		var myGrid = $('#nGrid');
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
-		for(var i=3;i<$n_markers;i++)
+		for(var i=3;i<=99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotateIE9");
 		} 
-		for(var i=23;i<$n_markers;i++)
+		for(var i=23;i<=99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("expandIE9");
@@ -480,7 +477,7 @@ $(function()
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
 		var htmlAttri =  "top: 105px !important";
-		for(var i=3;i<$n_markers;i++)
+		for(var i=3;i<=99;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotate");
@@ -494,21 +491,21 @@ $(function()
 			is_chrome = 0;
 		}
 		if (is_chrome) {
-			for(var i=23;i<$n_markers;i++)
+			for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandChrome");
 			}
 		}
 		else if (is_ie || is_ietrident || is_ieedge) {
-			for(var i=23;i<$n_markers;i++)
+			for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandIEOther");
 			}
 		}
 		else {
-		    for(var i=23;i<$n_markers;i++)
+		    for(var i=23;i<=99;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandOther");
@@ -586,7 +583,7 @@ $(function()
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
-			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
+			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Y1"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
@@ -600,7 +597,7 @@ $(function()
 		}
 		else {
 			myGrid.setGridWidth("722");
-			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
+			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Y1"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth("722");
