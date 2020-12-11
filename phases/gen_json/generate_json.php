@@ -55,7 +55,7 @@
 			$sql = $sql.$refid_condition;
 		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
-		//echo "<br><br><br><br><br><br><br><br>sql: ".$sql;
+		//echo "<br><br><br>sql: ".$sql;
 		//if ($col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br><br>";}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
