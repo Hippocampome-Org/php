@@ -458,17 +458,18 @@ $(function()
     		{startColumnName: 'a-act2', numberOfColumns: 4, titleText: '<b>Misc</b>'},
 		] 
 	});
+	let $n_columns = 102;
 	if(checkVersion()=="9")
 	{
 		var myGrid = $('#nGrid');
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
-		for(var i=3;i<$n_markers;i++)
+		for(var i=3;i<$n_columns;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotateIE9");
 		} 
-		for(var i=23;i<$n_markers;i++)
+		for(var i=23;i<$n_columns;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("expandIE9");
@@ -480,7 +481,7 @@ $(function()
 		var colModelVal = $("#nGrid").jqGrid('getGridParam','colModel');
 		var colModelName = "";
 		var htmlAttri =  "top: 105px !important";
-		for(var i=3;i<$n_markers;i++)
+		for(var i=3;i<$n_columns;i++)
 		{
 			colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 			$(colModelName).addClass("rotate");
@@ -494,21 +495,21 @@ $(function()
 			is_chrome = 0;
 		}
 		if (is_chrome) {
-			for(var i=23;i<$n_markers;i++)
+			for(var i=23;i<$n_columns;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandChrome");
 			}
 		}
 		else if (is_ie || is_ietrident || is_ieedge) {
-			for(var i=23;i<$n_markers;i++)
+			for(var i=23;i<$n_columns;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandIEOther");
 			}
 		}
 		else {
-		    for(var i=23;i<$n_markers;i++)
+		    for(var i=23;i<$n_columns;i++)
 			{
 				colModelName = "#jqgh_nGrid_"+colModelVal[i].name;
 				$(colModelName).addClass("expandOther");
