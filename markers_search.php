@@ -8,7 +8,6 @@ require_once('class/class.type.php');
 require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.temporary_result_neurons.php');
-include("function/markers/marker_helper.php");
 $width1='25%';
 $width2='2%';
 $research = "";
@@ -422,7 +421,7 @@ $(function()
 			{name:'VILIP',index:'VILIP',width:15,search:false,sortable:false,hidden:true},
 			{name:'Wfs1',index:'Wfs1',width:15,search:false,sortable:false,hidden:true},
 			{name:'Y1',index:'Y1',width:15,search:false,sortable:false,hidden:true},
-			{name:'Y2',index:'Y2',width:15,search:false,sortable:false,hidden:true}	
+			{name:'Y2',index:'Y2',width:15,search:false,sortable:false,hidden:true}
 		], 
 		rowNum:124,
 		rowList:[124],
