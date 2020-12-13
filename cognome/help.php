@@ -44,7 +44,8 @@
   <!-- main help descriptions -->
   <div class='article_details'>
   <u>Inclusion Criteria of Articles</u><br>
-  Articles that describe cognitive/behavioral functions with neural activity that occurs in the hippocampal formation. The activity must be described as a spiking neural network computational model.
+  Articles that describe cognitive/behavioral functions with neural activity that occurs in the hippocampal formation. The activity must be described as a spiking neural network computational model. Some form of a
+  neural network algorithm must be included in the modeling.
   </div>
   <br><div class='article_details'>
   <u>Subject</u><br>
