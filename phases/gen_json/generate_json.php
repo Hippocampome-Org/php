@@ -117,7 +117,19 @@
 				$count = $row['count'];
 			}
 		}
-		$entry_output = $entry_output."\"<center><span id='$col".$i."'><a href='property_page_phases.php?id_neuron=$neuron_id&val_property=$col' title='Range: [".$min_range.", ".$max_range."]\\nMeasurements: ".$count."\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."' target='_blank'>$median</a></span></center></div>\"";
+		$sql5 = "SELECT COUNT($col) AS measurements FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		if ($conditions != "") {
+			$sql5 = $sql5.$conditions;
+		}
+		$result = $conn->query($sql5);
+		if ($result->num_rows > 0) { 
+			while($row = $result->fetch_assoc()) {
+				$measurements = $row['measurements'];
+			}
+		}
+		$entry_output = $entry_output."\"<center><span id='$col".$i."'><a href='property_page_phases.php?id_neuron=$neuron_id&val_property=$col' title='Range: [".$min_range.", ".$max_range."]\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."\\nRepresentative value selected from ".$count." source";
+		if ($count > 1) {$entry_output = $entry_output."s";}
+		$entry_output = $entry_output."\\nTotal measurements: ".$measurements."' target='_blank'>$median</a></span></center></div>\"";
 		if ($no_endline == "true") {
 			$entry_output = $entry_output.",";
 		}

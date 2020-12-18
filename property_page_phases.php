@@ -734,7 +734,7 @@ function show_only_authors(link, start1, stop1)
 						$articleevidencerel -> retrive_article_id($evidence_id[$i]);
 						//echo $evidence_id[$i]."<br>";
 						$id_article = $articleevidencerel -> getArticle_id_array(0);
-						echo $id_article."<br>";
+						//echo $id_article."<br>";
 						// retrieve all information from article table by using article_id
 						$article -> retrive_by_id($id_article) ;
 					}
@@ -781,6 +781,7 @@ function show_only_authors(link, start1, stop1)
 					//if ($_SESSION['phases_name_temporary_table'] == NULL)
 					{
 						// Insert the data in the temporary table:	 
+						//echo "referenceID: $referenceID<br>";
 						insert_temporary($name_temporary_table, $fragment_id[$i], $original_id, $quote, $name_authors, $title, $publication, $year, $pmid_isbn, $pages, $page_location, '0', '0', $pmcid, $nihmsid, $doi, $open_access, $citation_count, $part1[$tt], $volume, $issue, $referenceID);
 					}
 				}
