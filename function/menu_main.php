@@ -26,30 +26,10 @@ session_start();
 			<li><a href="markers.php">Molecular markers</a></li>
             <li><a href="ephys.php">Membrane biophysics</a></li>
             <li><a href="connectivity.php">Connectivity</a></li>
-            <li><a href="synaptome_modeling.php">Synaptic physiology</a></li>
+            <li><a href="synaptome.php">Synaptic physiology</a></li>
 	        <li><a href="firing_patterns.php">Firing patterns</a></li>
 	        <li><a href="Izhikevich_model.php">Izhikevich models</a></li>
-	         <?php 
-            if ($permission != 1 && $_SESSION["sy"]==1) {
-          ?>
-          <li><a href="synapse_probabilities.php">Synapse probabilities</a></li>
-          <?php   
-            }
-          ?> 
-	        <?php 
-	          if ($permission != 1 && $_SESSION["cg"]==1) {
-	        ?>
-	        <li><a href="http://hc.22web.org">Cognome</a></li>
-	         <?php   
-	          }
-	        ?> 
-	          <?php 
-	          if ($permission != 1 && $_SESSION["sp"]==1) {
-	        ?>
-	        <li><a href="http://synapt.22web.org">Synaptome</a></li>
-	        <?php   
-	          }
-	        ?> 
+	        <li><a href="synapse_probabilities.php">Synapse probabilities</a></li> 
 		</ul></li>
 	
 		<li class="topmenu"><a href="search.php?searching=1" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/find.png" alt="" id="image_find"/>Search</span></a>
