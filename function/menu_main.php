@@ -70,7 +70,7 @@ session_start();
       		<ul>
        	 		<!-- <li><a href="">Pixel Counter Program</a></li> -->
         		<li><a href="connprob.php">Connection Probabilities</a></li>
-        		<li><a href="https://github.com/k1moradi/SynapseModelersWorkshop/archive/master.zip">Synapse Modelers</a></li>
+        		<!-- <li><a href="https://github.com/k1moradi/SynapseModelersWorkshop/archive/master.zip">Synapse Modelers</a></li> -->
         		<!-- <li><a href="">Liquid Junction Potential Calculator</a></li>
         		<li><a href="">Simulator</a></li>
         		<li><a href="">Post Synaptic Potential Responce</a></li> -->
