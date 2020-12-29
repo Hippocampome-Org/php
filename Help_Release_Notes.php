@@ -97,6 +97,357 @@ ul
 font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.8 (28 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.8 includes new browsable matrices for neurite lengths, somatic path distances, numbers of potential synapses, numbers of contacts, and connection probabilities.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1BE (14 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 577: [phases]: Add evidence page.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 575: [morphology] Neuron type morphology search results matrix is displaying a shift.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 570: [ephys] Update database with split of CA1 PCs.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 566: [ephys] Formally split CA1 PCs into Superficial and Deep neuron types.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1BD (12 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 585: [markers] The Markers matrix from the Neuron Type search results is not appearing at all on devur2.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 571: [connectivity] Update database with split of CA1 PCs.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 567: [connectivity] Formally split CA1 PCs into Superficial and Deep neuron types.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 563: [marker]: Update the markers for DG Granule, DG Mossy, CA2 PC, CA1 Superficial PC, and CA1 Deep PC.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1BC (10 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 583: [ephys] The protocol and page location information is not showing up for the ephys Evidence pages' measurement values.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1BB (09 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 584: [connectivity]: The number of columns and rows are not equal for the Connectivity matrix on devur2.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1BA (04 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 578: [phases] Add "dentate spike ratio" to the possibilities for the "Other" column in the main matrix.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AZ (03 Dec 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 580: [phases] Columns to appear in the new expanded main matrix.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AY (30 Nov 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 582: [morphology] Change C-Bistratified cells from supplemental status to active status.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 581: [markers]: The inference flags are not showing up in the markers matrix on devur2.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AX (24 Nov 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 579: [phases]: Add figures/tables to the attachment folder.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AW (09 Nov 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 574: [phases]: Add in vivo firing rates to the phases matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 569: [markers] Update database with split of CA1 PCs.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 565: [markers] Formally split CA1 PCs into Superficial and Deep neuron types.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AV (29 Oct 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 573: [morphology]: Get the CA1 Superficial and Deep PCs to show up in the morphology matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 568: [morphology] Update database with split of CA1 PCs.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 564: [morphology] Formally split CA1 PCs into Superficial and Deep neuron types.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 561: [phases] Add the check boxes to the main phases matrix.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 560: [phases] Add hover-over windows to the phases matrix values.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 559: [phases] Create the main phases matrix with values.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AU (28 Oct 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 572: [phases] create oscillation phases section of neuron page.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AT (18 Oct 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 562: [neurites] SD min and max values discrepency.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AS (12 Oct 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 558: [supertype] Change the Supertype of CA3 Mossy Fiber-Associated cells to be L-targeting.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AR (02 Oct 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 557: [neurites]: Match the number of significant digits between the Connection Probabilities tool results and the intermediate tables of the NxN matrices.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AQ (29 Sep 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 556: [neurites]: Correct how connection probabilities are summed across parcels for the NxN matrix and intermediate table.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AP (28 Sep 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 555: [neurites] Add standard deviations to the results from the Connection Probabilities tool.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AO (22 Sep 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 549: [neurites] Add hover-over windows to intermediate NxN tables.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AN (18 Sep 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 547: [neurites]: Propagate the errors (standard deviations) fully for the NxN matrices.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 541: [synaptome]: Re-format the matrix cells to be like the Connectivity matrix.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AM (09 Jul 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 546: [neurites]: Missing Evidence figures.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 545: [synaptome] Number of significant digits.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.7 R 1AL (02 Jul 2020):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 544: [neurites] Discrepancy between matrix and csv file values.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 542: [synaptome] Update the formatting of the hover over window.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 537: [synaptome]: Use small letters in subscripts in the "Model parameters" pull-down menu.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 536: [synaptome]: Add a link to the equations used for modeling to the hover over.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 535: [synaptome]: Add "4-state Tsodyks and Markram synapse model parameters" to hover over.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.7 R 1AK (25 Jun 2020):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span

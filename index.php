@@ -180,9 +180,9 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.7 - Released: 10/08/2019
+      v1.8 - Released: 12/28/2020
       <br>
-      23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
+      28,390 Pieces of Knowledge (PoK) and 36,090 Pieces of Evidence (PoE)
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -230,6 +230,13 @@ jQuery(document).ready(function() {
       <a href = "http://www.sciencedirect.com/science/article/pii/S073170851730794X">
       <i>Molecular fingerprinting of principal neurons in the rodent hippocampus: a neuroinformatics approach.</i></a>
       Journal of Pharmaceutical and Biomedical Analysis 2017 Sep 10;144:269-278; doi: 10.1016/j.jpba.2017.03.062.
+      <br><br>
+      The release of v1.4 on 08/15/2019 includes an additional 7,946 PoK, 8,486 PoE, and the ability to
+      access the Synapse Knowledge Base.
+      Reference: <b>Moradi and Ascoli, 2019</b>
+      <a href = "https://doi.org/10.1002/hipo.23148">
+      <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
+      Hippocampus 2020 Apr;30(4):314-331; doi: https://doi.org/10.1002/hipo.23148.
       </font>
 
       <br><br>
@@ -252,17 +259,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:30px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:70px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br><br>
-      The release of v1.4 on 08/15/2019 includes an additional 7,946 PoK, 8,486 PoE, and the ability to
-      access the Synapse Knowledge Base.
-      Reference: <b>Moradi and Ascoli, 2019</b>
-      <a href = "https://doi.org/10.1002/hipo.23148">
-      <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
-      Hippocampus 2020 Apr;30(4):314-331; doi: https://doi.org/10.1002/hipo.23148.
-      <br><br>
+      <br><br><br><br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
@@ -278,7 +278,7 @@ jQuery(document).ready(function() {
       <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
       Scientific Reports 2019 Nov 29;9(1):17915; doi: 10.1038/s41598-019-52611-w.
       <br><br>
-      <b>*NEW*</b> The release of v1.7 on 10/08/2019 includes Izhikevich models for most of the neuron types,
+      The release of v1.7 on 10/08/2019 includes Izhikevich models for most of the neuron types,
       downloadable parameter and CARLSim4-simulation files, and the ability to perform simulations of the firing
       patterns.
       Reference: <b>Venkadesh, et al., 2019</b>
@@ -286,6 +286,12 @@ jQuery(document).ready(function() {
       <i>Simple models of quantitative firing phenotypes in hippocampal neurons: comprehensive coverage of intrinsic
       diversity.</i></a>
       PLOS Computational Biology 2019 Oct 28;15(10):e1007462; doi: 10.1371/journal.pcbi.1007462.
+      <br><br>
+      <b>*NEW*</b> The release of v1.8 on 12/18/2020 includes an additional 5,152 PoK, 6,055 PoE, and new browsable matrices for neurite lengths, somatic path distances, numbers of potential synapses, numbers of contacts, and connection probabilities. 
+      Reference: <b>Tecuatl, et al., 2020</b>
+      <a href = "https://www.jneurosci.org/content/early/2020/12/16/JNEUROSCI.1193-20.2020">
+      <i>Comprehensive estimates of potential synaptic connections in local circuits of the rodent hippocampal formation by axonal-dendritic overlap.</i></a>
+      Journal of Neuroscience 2020; JN-RM-1193-20; doi: https://doi.org/10.1523/JNEUROSCI.1193-20.2020.
       </font>
     </td>
   </tr>
@@ -310,8 +316,8 @@ jQuery(document).ready(function() {
           <!-- <br /><p><?php echo $info; ?> -->
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
-          23,238 Pieces of Knowledge (PoK) and 30,035 Pieces of Evidence (PoE)
-          <br />Last Update: 25 Jun 2020 (<a href="Help_Release_Notes.php">v1.7 R 1AK</a>)</font>
+          28,390 Pieces of Knowledge (PoK) and 36,090 Pieces of Evidence (PoE)
+          <br />Last Update: 28 Dec 2020 (<a href="Help_Release_Notes.php">v1.8</a>)</font>
           <br />
         </div>
     </td>   
