@@ -147,9 +147,9 @@
 	function find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition, $lowest_frr) {
 		$median = "";
 		$sql2 = "SELECT CAST(AVG(pp.$col) AS DECIMAL(10,2)) as median_val FROM (SELECT p.$col, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.$col is NOT NULL AND p.$col!='' AND p.cellid=$neuron_id";
-		if ($lowest_rank != "") {
+		//if ($lowest_rank != "") {
 			$sql2 = $sql2." AND p.metadataRank=".$lowest_rank;
-		} 
+		//} 
 		if ($lowest_frr != "") {
 			$sql2 = $sql2." AND p.firingRateRank=".$lowest_frr;
 		}
@@ -157,6 +157,7 @@
 			$sql2 = $sql2.$refid_condition;
 		}
 		$sql2 = $sql2." ORDER BY CAST(p.$col AS DECIMAL(10,2))) as pp WHERE pp.row_number IN (FLOOR((@total_rows+1)/2))";
+		//echo "<br>".$sql2."<br>";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0) { 
 			while($row = $result->fetch_assoc()) {
