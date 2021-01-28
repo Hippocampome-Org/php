@@ -419,33 +419,23 @@ function HideShowColumns ()
     //window.location = "phases.php?species_check1=checked&age_check1=checked&sex_check1=checked&method_check1=checked&behavior_check1=checked&species_check2=checked&age_check2=checked&sex_check2=checked&method_check2=checked&behavior_check2=checked&sex_check3=checked&method_check3=checked&method_check4=checked&behavior_check4=checked&method_check5=checked&behavior_check5=checked&method_check6=checked&behavior_check7=checked&page=main_page";
     <?php
     $preferred_conditions = array();
-    //for ($i = 0; $i < count($neuron_ids); $i++) {
-      //for ($j = 0; $j < count($best_ranks_theta[0]); $j++) {
-      for ($j = 0; $j < count($best_ranks_theta); $j++) {
-        /*if (!in_array($best_ranks_theta[$i][$j], $preferred_conditions)) {
-          array_push($preferred_conditions, $best_ranks_theta[$i][$j]);
-        }
-        if (!in_array($best_ranks_swr[$i][$j], $preferred_conditions)) {
-          array_push($preferred_conditions, $best_ranks_swr[$i][$j]);
-        }
-        if (!in_array($best_ranks_firingrate[$i][$j], $preferred_conditions)) {
-          array_push($preferred_conditions, $best_ranks_firingrate[$i][$j]);
-        }*/
+    for ($j = 0; $j < count($best_ranks_theta); $j++) {
         if (!in_array($best_ranks_theta[$j], $preferred_conditions)) {
           array_push($preferred_conditions, $best_ranks_theta[$j]);
         }
+    }
+    for ($j = 0; $j < count($best_ranks_swr); $j++) {
         if (!in_array($best_ranks_swr[$j], $preferred_conditions)) {
           array_push($preferred_conditions, $best_ranks_swr[$j]);
         }
+    }
+    for ($j = 0; $j < count($best_ranks_firingrate); $j++) {
         if (!in_array($best_ranks_firingrate[$j], $preferred_conditions)) {
           array_push($preferred_conditions, $best_ranks_firingrate[$j]);
         }
-      }
-    //}
-    //echo "<br><br>best_ranks_theta:".count($best_ranks_theta)." swr:".count($best_ranks_swr)." fr:".count($best_ranks_firingrate)."\n";
+    }
     echo "window.location = \"phases.php?";
     for ($i = 0; $i < count($preferred_conditions); $i++) {
-      //echo "|$preferred_conditions[$i]|";
       $checkbox = value2cbox($preferred_conditions[$i], $checkbox_values, $checkbox_group);
       echo $checkbox."=checked&";
     }

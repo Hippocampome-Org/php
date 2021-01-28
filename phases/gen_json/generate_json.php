@@ -197,9 +197,7 @@
 		array_push($theta_values, $results[0]);
 		foreach ($results[2] as $rank_result) {
 			array_push($best_ranks_theta, $rank_result);
-			//echo "<br><br><br>best_ranks_theta:".$rank_result;
 		}
-		//array_push($best_ranks_theta[$i], $rank_result);
 		array_push($npage_theta, $results[3]);
 		$all_theta = $results[4];
 
@@ -209,7 +207,6 @@
 		foreach ($results[2] as $rank_result) {
 			array_push($best_ranks_swr, $rank_result);
 		}
-		//array_push($best_ranks_swr[$i], $rank_result);
 		array_push($npage_swr, $results[3]);
 		$all_swr = $results[4];
 
@@ -219,7 +216,6 @@
 		foreach ($results[2] as $rank_result) {
 			array_push($best_ranks_firingrate, $rank_result);
 		}
-		//array_push($best_ranks_firingrate[$i], $rank_result);
 		array_push($npage_firingrate, $results[3]);
 		$all_fr = $results[4];
 
