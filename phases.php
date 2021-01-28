@@ -497,7 +497,7 @@ function HideShowColumns ()
 
 <div class='title_area'>
   <form id='supertypeForm'>
-    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font><span style="position:relative;left:485px;"><font style='font-size:11px'>&nbsp;</font><input type="checkbox" name="other_all" value="checked" id="other_all" onclick="javascript:document.getElementById('supertypeForm').submit();" <?php is_checked("other_all") ?>/>&nbsp;All Other Values</span>
+    <font id= "title" class="font1">&nbsp;<span style="font-size:13px">&nbsp;</span>Browse Phases Matrix</font><span style="position:relative;left:570px;top:5px;border: 2px solid #98afc7; border-radius: 8px;"><font style='font-size:11px'>&nbsp;</font><input type="checkbox" name="other_all" value="checked" id="other_all" onclick="javascript:document.getElementById('supertypeForm').submit();" <?php is_checked("other_all") ?>/><font style='font-size:20px;font-family:arial;'>&nbsp;All Other Values&nbsp;</font></span>
     <br>
     <table style='width:1000px;font-family:arial;font-size:18px'>
     <tr><td style="width:131px">&nbsp;&nbsp;<u>Animal</u></td><td style="width:200px">&nbsp;&nbsp;<u>Age</u></td><td style="width:150px">&nbsp;&nbsp;<u>Sex</u></td><td style="width:250px">&nbsp;&nbsp;<u>Method</u></td><td style="width:450px">&nbsp;&nbsp;<u>Behavior</u></td></tr>
