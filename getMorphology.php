@@ -321,7 +321,7 @@ if($research!="1")
 	$type -> retrive_id();
 	$number_type = $type->getNumber_type();
 }
-$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
+$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(43)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the number of active neuron types to print each row in the data table
 {
@@ -432,35 +432,72 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 //	if (strpos($nickname, '(-)') == TRUE)
 	if ($excit_inhib == 'i')
 		$fontColor='#CC0000';
-	
-	$rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
-			getUrlForLink($id,$hippo['DG:SMo'],'DG_SMo',$hippo_color['DG:SMo']),
-			getUrlForLink($id,$hippo['DG:SMi'],'DG_SMi',$hippo_color['DG:SMi']),
-			getUrlForLink($id,$hippo['DG:SG'],'DG_SG',$hippo_color['DG:SG']),
-			getUrlForLink($id,$hippo['DG:H'],'DG_H',$hippo_color['DG:H']),
-			getUrlForLink($id,$hippo['CA3:SLM'],'CA3_SLM',$hippo_color['CA3:SLM']),
-			getUrlForLink($id,$hippo['CA3:SR'],'CA3_SR',$hippo_color['CA3:SR']),
-			getUrlForLink($id,$hippo['CA3:SL'],'CA3_SL',$hippo_color['CA3:SL']),
-			getUrlForLink($id,$hippo['CA3:SP'],'CA3_SP',$hippo_color['CA3:SP']),
-			getUrlForLink($id,$hippo['CA3:SO'],'CA3_SO',$hippo_color['CA3:SO']),
-			getUrlForLink($id,$hippo['CA2:SLM'],'CA2_SLM',$hippo_color['CA2:SLM']),
-			getUrlForLink($id,$hippo['CA2:SR'],'CA2_SR',$hippo_color['CA2:SR']),
-			getUrlForLink($id,$hippo['CA2:SP'],'CA2_SP',$hippo_color['CA2:SP']),
-			getUrlForLink($id,$hippo['CA2:SO'],'CA2_SO',$hippo_color['CA2:SO']),
-			getUrlForLink($id,$hippo['CA1:SLM'],'CA1_SLM',$hippo_color['CA1:SLM']),
-			getUrlForLink($id,$hippo['CA1:SR'],'CA1_SR',$hippo_color['CA1:SR']),
-			getUrlForLink($id,$hippo['CA1:SP'],'CA1_SP',$hippo_color['CA1:SP']),
-			getUrlForLink($id,$hippo['CA1:SO'],'CA1_SO',$hippo_color['CA1:SO']),
-			getUrlForLink($id,$hippo['SUB:SM'],'SUB_SM',$hippo_color['SUB:SM']),
-			getUrlForLink($id,$hippo['SUB:SP'],'SUB_SP',$hippo_color['SUB:SP']),
-			getUrlForLink($id,$hippo['SUB:PL'],'SUB_PL',$hippo_color['SUB:PL']),
-			getUrlForLink($id,$hippo['EC:I'],'EC_I',$hippo_color['EC:I']),
-			getUrlForLink($id,$hippo['EC:II'],'EC_II',$hippo_color['EC:II']),
-			getUrlForLink($id,$hippo['EC:III'],'EC_III',$hippo_color['EC:III']),
-			getUrlForLink($id,$hippo['EC:IV'],'EC_IV',$hippo_color['EC:IV']),
-			getUrlForLink($id,$hippo['EC:V'],'EC_V',$hippo_color['EC:V']),
-			getUrlForLink($id,$hippo['EC:VI'],'EC_VI',$hippo_color['EC:VI']),
-			);
+
+	if ($type->get_type_subtype($id) == 'subtype')
+	{
+		$fontColor='#000099';
+		if ($excit_inhib == 'i')
+			$fontColor='#CC5500';
+		$rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',"    ".'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
+				getUrlForLink($id,$hippo['DG:SMo'],'DG_SMo',$hippo_color['DG:SMo']),
+				getUrlForLink($id,$hippo['DG:SMi'],'DG_SMi',$hippo_color['DG:SMi']),
+				getUrlForLink($id,$hippo['DG:SG'],'DG_SG',$hippo_color['DG:SG']),
+				getUrlForLink($id,$hippo['DG:H'],'DG_H',$hippo_color['DG:H']),
+				getUrlForLink($id,$hippo['CA3:SLM'],'CA3_SLM',$hippo_color['CA3:SLM']),
+				getUrlForLink($id,$hippo['CA3:SR'],'CA3_SR',$hippo_color['CA3:SR']),
+				getUrlForLink($id,$hippo['CA3:SL'],'CA3_SL',$hippo_color['CA3:SL']),
+				getUrlForLink($id,$hippo['CA3:SP'],'CA3_SP',$hippo_color['CA3:SP']),
+				getUrlForLink($id,$hippo['CA3:SO'],'CA3_SO',$hippo_color['CA3:SO']),
+				getUrlForLink($id,$hippo['CA2:SLM'],'CA2_SLM',$hippo_color['CA2:SLM']),
+				getUrlForLink($id,$hippo['CA2:SR'],'CA2_SR',$hippo_color['CA2:SR']),
+				getUrlForLink($id,$hippo['CA2:SP'],'CA2_SP',$hippo_color['CA2:SP']),
+				getUrlForLink($id,$hippo['CA2:SO'],'CA2_SO',$hippo_color['CA2:SO']),
+				getUrlForLink($id,$hippo['CA1:SLM'],'CA1_SLM',$hippo_color['CA1:SLM']),
+				getUrlForLink($id,$hippo['CA1:SR'],'CA1_SR',$hippo_color['CA1:SR']),
+				getUrlForLink($id,$hippo['CA1:SP'],'CA1_SP',$hippo_color['CA1:SP']),
+				getUrlForLink($id,$hippo['CA1:SO'],'CA1_SO',$hippo_color['CA1:SO']),
+				getUrlForLink($id,$hippo['SUB:SM'],'SUB_SM',$hippo_color['SUB:SM']),
+				getUrlForLink($id,$hippo['SUB:SP'],'SUB_SP',$hippo_color['SUB:SP']),
+				getUrlForLink($id,$hippo['SUB:PL'],'SUB_PL',$hippo_color['SUB:PL']),
+				getUrlForLink($id,$hippo['EC:I'],'EC_I',$hippo_color['EC:I']),
+				getUrlForLink($id,$hippo['EC:II'],'EC_II',$hippo_color['EC:II']),
+				getUrlForLink($id,$hippo['EC:III'],'EC_III',$hippo_color['EC:III']),
+				getUrlForLink($id,$hippo['EC:IV'],'EC_IV',$hippo_color['EC:IV']),
+				getUrlForLink($id,$hippo['EC:V'],'EC_V',$hippo_color['EC:V']),
+				getUrlForLink($id,$hippo['EC:VI'],'EC_VI',$hippo_color['EC:VI']),
+				);
+	}
+	else
+	{
+		$rows[$i]['cell']=array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>','<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',$type->get_supertype($id),
+				getUrlForLink($id,$hippo['DG:SMo'],'DG_SMo',$hippo_color['DG:SMo']),
+				getUrlForLink($id,$hippo['DG:SMi'],'DG_SMi',$hippo_color['DG:SMi']),
+				getUrlForLink($id,$hippo['DG:SG'],'DG_SG',$hippo_color['DG:SG']),
+				getUrlForLink($id,$hippo['DG:H'],'DG_H',$hippo_color['DG:H']),
+				getUrlForLink($id,$hippo['CA3:SLM'],'CA3_SLM',$hippo_color['CA3:SLM']),
+				getUrlForLink($id,$hippo['CA3:SR'],'CA3_SR',$hippo_color['CA3:SR']),
+				getUrlForLink($id,$hippo['CA3:SL'],'CA3_SL',$hippo_color['CA3:SL']),
+				getUrlForLink($id,$hippo['CA3:SP'],'CA3_SP',$hippo_color['CA3:SP']),
+				getUrlForLink($id,$hippo['CA3:SO'],'CA3_SO',$hippo_color['CA3:SO']),
+				getUrlForLink($id,$hippo['CA2:SLM'],'CA2_SLM',$hippo_color['CA2:SLM']),
+				getUrlForLink($id,$hippo['CA2:SR'],'CA2_SR',$hippo_color['CA2:SR']),
+				getUrlForLink($id,$hippo['CA2:SP'],'CA2_SP',$hippo_color['CA2:SP']),
+				getUrlForLink($id,$hippo['CA2:SO'],'CA2_SO',$hippo_color['CA2:SO']),
+				getUrlForLink($id,$hippo['CA1:SLM'],'CA1_SLM',$hippo_color['CA1:SLM']),
+				getUrlForLink($id,$hippo['CA1:SR'],'CA1_SR',$hippo_color['CA1:SR']),
+				getUrlForLink($id,$hippo['CA1:SP'],'CA1_SP',$hippo_color['CA1:SP']),
+				getUrlForLink($id,$hippo['CA1:SO'],'CA1_SO',$hippo_color['CA1:SO']),
+				getUrlForLink($id,$hippo['SUB:SM'],'SUB_SM',$hippo_color['SUB:SM']),
+				getUrlForLink($id,$hippo['SUB:SP'],'SUB_SP',$hippo_color['SUB:SP']),
+				getUrlForLink($id,$hippo['SUB:PL'],'SUB_PL',$hippo_color['SUB:PL']),
+				getUrlForLink($id,$hippo['EC:I'],'EC_I',$hippo_color['EC:I']),
+				getUrlForLink($id,$hippo['EC:II'],'EC_II',$hippo_color['EC:II']),
+				getUrlForLink($id,$hippo['EC:III'],'EC_III',$hippo_color['EC:III']),
+				getUrlForLink($id,$hippo['EC:IV'],'EC_IV',$hippo_color['EC:IV']),
+				getUrlForLink($id,$hippo['EC:V'],'EC_V',$hippo_color['EC:V']),
+				getUrlForLink($id,$hippo['EC:VI'],'EC_VI',$hippo_color['EC:VI']),
+				);
+	}
 	$responce->rows = $rows;
 }
 

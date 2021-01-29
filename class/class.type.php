@@ -102,6 +102,17 @@ class type
 		return $supertype_value;
 	}
 
+	public function get_type_subtype($id){
+		$query = "SELECT type_subtype FROM Type WHERE id ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$type_subtype_value="";
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
+		{	
+			$type_subtype_value=$rows['type_subtype'];
+		}
+		return $type_subtype_value;
+	}
+
 	public function retrive_by_excit_inhib($pred)   // Retrive all data by excit_inhib
 	{
 		$table=$this->getName_table();
