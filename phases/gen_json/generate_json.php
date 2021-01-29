@@ -97,7 +97,7 @@
 		// find min and max
 		$sql4 = "SELECT MIN(CAST($col AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST($col AS DECIMAL (10 , 2 ))) AS max_range, COUNT($col) AS count FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		//if ($lowest_rank != "") {
-			$sql4 = $sql4." AND metadataRank=".$lowest_rank;
+			$sql4 = $sql4." AND metadataRank=\"".$lowest_rank."\"";
 		//}
 		if ($lowest_frr != "") {
 			$sql4 = $sql4." AND firingRateRank=".$lowest_frr;
@@ -145,10 +145,15 @@
 	}
 
 	function find_median($conn, $col, $neuron_id, $lowest_rank, $referenceID, $refid_condition, $lowest_frr) {
+		/*
+			Notes: do not include an if statement for lowest_rank because lack of a value for that should
+			filter out results, rather than being ignored. lowest_frr has an if statement because it is optional. The Phases table has a metadatarank for every row, and therefore the existance of lowest_frr is not required for filtering out unchecked conditions.
+		*/
+
 		$median = "";
 		$sql2 = "SELECT CAST(AVG(pp.$col) AS DECIMAL(10,2)) as median_val FROM (SELECT p.$col, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum FROM phases p, (SELECT @rownum:=0) r WHERE p.$col is NOT NULL AND p.$col!='' AND p.cellid=$neuron_id";
 		//if ($lowest_rank != "") {
-			$sql2 = $sql2." AND p.metadataRank=".$lowest_rank;
+			$sql2 = $sql2." AND p.metadataRank=\"".$lowest_rank."\"";
 		//} 
 		if ($lowest_frr != "") {
 			$sql2 = $sql2." AND p.firingRateRank=".$lowest_frr;
