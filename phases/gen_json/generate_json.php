@@ -96,9 +96,9 @@
 		//if ($neuron_ids[$i] == 2000) {echo "<br><br><br><br><br><br><br><br>sql: ".$sql2;}
 		// find min and max
 		$sql4 = "SELECT MIN(CAST($col AS DECIMAL (10 , 2 ))) AS min_range, MAX(CAST($col AS DECIMAL (10 , 2 ))) AS max_range, COUNT($col) AS count FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
-		if ($lowest_rank != "") {
+		//if ($lowest_rank != "") {
 			$sql4 = $sql4." AND metadataRank=".$lowest_rank;
-		}
+		//}
 		if ($lowest_frr != "") {
 			$sql4 = $sql4." AND firingRateRank=".$lowest_frr;
 		}
@@ -194,8 +194,9 @@
 
 		// theta
 		$results = value_collect($conn, $i, "theta", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
+		$results_nocond = value_collect($conn, $i, "theta", $neuron_id, "", $referenceID, $refid_condition, "true");
 		array_push($theta_values, $results[0]);
-		foreach ($results[2] as $rank_result) {
+		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_theta, $rank_result);
 		}
 		array_push($npage_theta, $results[3]);
@@ -203,8 +204,9 @@
 
 		// swr ratio
 		$results = value_collect($conn, $i, "swr_ratio", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
+		$results_nocond = value_collect($conn, $i, "swr_ratio", $neuron_id, "", $referenceID, $refid_condition, "true");
 		array_push($spw_values, $results[0]);
-		foreach ($results[2] as $rank_result) {
+		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_swr, $rank_result);
 		}
 		array_push($npage_swr, $results[3]);
@@ -212,8 +214,9 @@
 
 		// firing rate
 		$results = value_collect($conn, $i, "firingRate", $neuron_id, $conditions, $referenceID, $refid_condition, "true");
+		$results_nocond = value_collect($conn, $i, "firingRate", $neuron_id, "", $referenceID, $refid_condition, "true");
 		array_push($firingrate_values, $results[0]);
-		foreach ($results[2] as $rank_result) {
+		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_firingrate, $rank_result);
 		}
 		array_push($npage_firingrate, $results[3]);
