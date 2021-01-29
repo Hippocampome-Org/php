@@ -148,6 +148,8 @@
 		/*
 			Notes: do not include an if statement for lowest_rank because lack of a value for that should
 			filter out results, rather than being ignored. lowest_frr has an if statement because it is optional. The Phases table has a metadatarank for every row, and therefore the existance of lowest_frr is not required for filtering out unchecked conditions.
+			lowest_rank has quotes because it can contain an empty value, and in such as case without the
+			quotes the query would be broken.
 		*/
 
 		$median = "";
@@ -203,6 +205,7 @@
 		array_push($theta_values, $results[0]);
 		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_theta, $rank_result);
+			//echo "<br>$rank_result<br>";
 		}
 		array_push($npage_theta, $results[3]);
 		$all_theta = $results[4];
