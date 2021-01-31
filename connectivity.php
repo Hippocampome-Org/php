@@ -573,7 +573,8 @@ $(function(){
           return 'style="border-right:medium solid red;"';
        }
       },
-      {name:'ca1_superficial_pyramidal_2223p', index:'ca1_superficial_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_superficial_pyramidal_2223p', index:'ca1_superficial_pyramidal_2223p', width:20,height:130,search:false,sortable:false},
       {name:'ca1_deep_pyramidal_2223p', index:'ca1_deep_pyramidal_2223p', width:20,height:130,search:false,sortable:false},
       {name:'ca1_cajal_retzius_3000', index:'ca1_cajal_retzius_3000', width:20,height:130,search:false,sortable:false},
       {name:'ca1_radiatum_giant_2201', index:'ca1_radiatum_giant_2201', width:20,height:130,search:false,sortable:false},

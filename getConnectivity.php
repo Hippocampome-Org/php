@@ -235,7 +235,7 @@ $unknowncount =0;
 //$count123 = (object) array('knowncount' => $knowncount, 'hello' => $unknowncount);
 
 
-$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(40)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
+$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(43)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
 
 //The source query for Retriving the known and known non connections
@@ -450,10 +450,21 @@ for ($row=0; $row<$number_type; $row++) {
 						$hippo_nickname[$col] = $image;
 					}
 					// create connectivity matrix array
-					$hippo_array=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>');
-				    for($i=0; $i<$total_neurons; $i++){
-				      array_push($hippo_array,$hippo_nickname[$i]);
-				    }
+					if ($type->get_type_subtype($id_type_row) == 'subtype'){
+						$fontColor='#000099';
+						if ($excit_inhib == 'i')
+							$fontColor='#CC5500';
+						$hippo_array=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>',"    ".'&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>');
+					    for($i=0; $i<$total_neurons; $i++){
+					      	array_push($hippo_array,$hippo_nickname[$i]);
+					    }
+					}
+					else{ // type_subtype = 'type' OR type_subtype = 'None'
+						$hippo_array=array('&nbsp;<span style="color:'.$neuronColor[$subregion_type_row].'"><strong>'.$neuron[$subregion_type_row].'</strong></span>','&nbsp;<a href="neuron_page.php?id='.$id_type_row.'" target="blank" title="'.$name.'"><font color="'.$fontColor.'">'.$nickname_type_row.'</font></a>');
+					    for($i=0; $i<$total_neurons; $i++){
+					      	array_push($hippo_array,$hippo_nickname[$i]);
+					    }						
+					}
 				    $row=$actual_row;
 				    $rows[$row]['cell']=$hippo_array;
 				    $responce->rows = $rows;
