@@ -1217,7 +1217,7 @@ function show_only_authors(link, start1, stop1)
 					      	$other_val = ''; $other_prop = '';
 					      	for ($i_t = 0; $i_t < count($npage_theta); $i_t++) {
 					      		if ($npage_theta[$i_t][0] == $id_neuron) {
-									$theta_val = $npage_theta[$i_t][1];
+									$theta_val = $npage_theta[$i_t][5];
 									$theta_prop1 = $npage_theta[$i_t][2];
 									$theta_prop2 = $npage_theta[$i_t][3];
 									$theta_prop3 = $npage_theta[$i_t][4];

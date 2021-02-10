@@ -48,7 +48,12 @@
 		$val_frag = ''; $lowest_frr = ''; $all_val = ''; $error_val = ''; $error_type_desc = '';
 		$val_with_error = '';
 
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		//$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT $error_col) as error_val, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		if ($col == "run_stop_ratio") {
+			$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+
+		}
 		if ($conditions != "") {
 			$sql = $sql.$conditions;
 		}
@@ -56,7 +61,7 @@
 			$sql = $sql.$refid_condition;
 		}
 		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
-		#echo "<br><br><br>sql: ".$sql;
+		//echo "<br><br><br>sql: ".$sql;
 		//if ($col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br><br>";}
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) { 
@@ -209,8 +214,8 @@
 		$DS_ratio = ""; $Vrest = ""; $tau = ""; $APthresh = ""; $fAHP = ""; $APpeak_trough = "";
 		$values = array(); $best_ranks = array(); $npage = array(); $other_frag = ""; $val_frag = "";
 		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-		$error_cols = array("thetaError", "SWR_ratio", "firingRateError", "DS_ratioError", "epsilonError", "VrestError", "tauError", "APthreshError", "fAHP_Error", "APpeak_troughError");
-		$error_types = array("thetaErrorType", "SWR_ratioType", "firingRateErrorType", "DS_ratioErrorType", "epsilonErrorType", "VrestErrorType", "tauErrorType", "APthreshErrorType", "fAHP_ErrorType", "APpeak_troughErrorType");
+		$error_cols = array("thetaError", "SWR_ratioError", "firingRateError", "DS_ratioError", "rippleError", "gammaError", "run_stop_ratioError", "epsilonError", "VrestError", "tauError", "APthreshError", "fAHP_Error", "APpeak_troughError");
+		$error_types = array("thetaErrorType", "SWR_ratioErrorType", "firingRateErrorType", "DS_ratioErrorType", "rippleErrorType", "gammaErrorType", "run_stop_ratioErrorType", "epsilonErrorType", "VrestErrorType", "tauErrorType", "APthreshErrorType", "fAHP_ErrorType", "APpeak_troughErrorType");
 		$other_entries = array_fill(0, count($other_all_group), "");
 		$other_cond = array_fill(0, count($other_all_group), "");
 		$neuron_id = $neuron_ids[$i];
@@ -251,7 +256,7 @@
 		$entry_output = "";
 		$npage_entry_cond = "";
 		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+2)], $error_types[($o_i+2)]);
+			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)]);
 			$entry_output = $entry_output.$results[0];
 			$val_frag = $results[1];
 			$rank_entry = $results[2];
