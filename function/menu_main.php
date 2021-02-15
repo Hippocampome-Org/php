@@ -43,7 +43,7 @@ session_start();
           <?php 
             if ($permission != 1 && $devur2==1) {
           ?>
-          <li><a href="phases.php">Oscillation phases</a></li>
+          <li><a href="phases.php">In vivo recordings</a></li>
           <?php   
             }
           ?> 
