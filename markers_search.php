@@ -347,10 +347,12 @@ $(function()
 			{name:'AMIGO2',index:'AMIGO2',width:15,search:false,sortable:false,hidden:true},
 			{name:'AR-beta1',index:'AR-beta1',width:15,search:false,sortable:false,hidden:true},
 			{name:'AR-beta2',index:'AR-beta2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Astn2',index:'Astn2',width:15,search:false,sortable:false,hidden:true},
 			{name:'BDNF',index:'BDNF',width:15,search:false,sortable:false,hidden:true},
 			{name:'Bok',index:'Bok',width:15,search:false,sortable:false,hidden:true},
 			{name:'Caln',index:'Caln',width:15,search:false,sortable:false,hidden:true},
 			{name:'CaM',index:'CaM',width:15,search:false,sortable:false,hidden:true},
+			{name:'CaMKII_alpha',index:'CaMKII_alpha',width:15,search:false,sortable:false,hidden:true},
 			{name:'CGRP',index:'CGRP',width:15,search:false,sortable:false,hidden:true},
 			{name:'ChAT',index:'ChAT',width:15,search:false,sortable:false,hidden:true},
 			{name:'Chrna2',index:'Chrna2',width:15,search:false,sortable:false,hidden:true},
@@ -358,6 +360,7 @@ $(function()
 			{name:'Ctip2',index:'Ctip2',width:15,search:false,sortable:false,hidden:true},
 			{name:'Cx36',index:'Cx36',width:15,search:false,sortable:false,hidden:true},
 			{name:'CXCR4',index:'CXCR4',width:15,search:false,sortable:false,hidden:true},
+			{name:'Dcn',index:'Dcn',width:15,search:false,sortable:false,hidden:true},
 			{name:'Disc1',index:'Disc1',width:15,search:false,sortable:false,hidden:true},
 			{name:'DYN',index:'DYN',width:15,search:false,sortable:false,hidden:true},
 			{name:'EAAT3',index:'EAAT3',width:15,search:false,sortable:false,hidden:true},
@@ -382,8 +385,12 @@ $(function()
 			{name:'GluA3',index:'GluA3',width:15,search:false,sortable:false,hidden:true},
 			{name:'GluA4',index:'GluA4',width:15,search:false,sortable:false,hidden:true},
 			{name:'GlyT2',index:'GlyT2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Gpc3',index:'Gpc3',width:15,search:false,sortable:false,hidden:true},
+			{name:'Grp',index:'Grp',width:15,search:false,sortable:false,hidden:true},
+			{name:'Htr2c',index:'Htr2c',width:15,search:false,sortable:false,hidden:true},
 			{name:'Id-2',index:'Id-2',width:15,search:false,sortable:false,hidden:true},
 			{name:'Kv3_1',index:'Kv3_1',width:15,search:false,sortable:false,hidden:true},
+			{name:'Loc432748',index:'Loc432748',width:15,search:false,sortable:false,hidden:true},
 			{name:'Man1a',index:'Man1a',width:15,search:false,sortable:false,hidden:true},
 			{name:'Math-2',index:'Math-2',width:15,search:false,sortable:false,hidden:true},
 			{name:'mGluR1',index:'mGluR1',width:15,search:false,sortable:false,hidden:true},
@@ -399,20 +406,27 @@ $(function()
 			{name:'Mus1R',index:'Mus1R',width:15,search:false,sortable:false,hidden:true},
 			{name:'Mus3R',index:'Mus3R',width:15,search:false,sortable:false,hidden:true},
 			{name:'Mus4R',index:'Mus4R',width:15,search:false,sortable:false,hidden:true},
+			{name:'Ndst4',index:'Ndst4',width:15,search:false,sortable:false,hidden:true},
 			{name:'NECAB1',index:'NECAB1',width:15,search:false,sortable:false,hidden:true},
 			{name:'Neuropilin2',index:'Neuropilin2',width:15,search:false,sortable:false,hidden:true},
 			{name:'NKB',index:'NKB',width:15,search:false,sortable:false,hidden:true},
+			{name:'Nov',index:'Nov',width:15,search:false,sortable:false,hidden:true},
+			{name:'Nr3c2',index:'Nr3c2',width:15,search:false,sortable:false,hidden:true},
+			{name:'Nr4a1',index:'Nr4a1',width:15,search:false,sortable:false,hidden:true},
 			{name:'p-CREB',index:'p-CREB',width:15,search:false,sortable:false,hidden:true},
 			{name:'PCP4',index:'PCP4',width:15,search:false,sortable:false,hidden:true},
 			{name:'PPE',index:'PPE',width:15,search:false,sortable:false,hidden:true},
 			{name:'PPTA',index:'PPTA',width:15,search:false,sortable:false,hidden:true},
 			{name:'Prox1',index:'Prox1',width:15,search:false,sortable:false,hidden:true},
+			{name:'Prss12',index:'Prss12',width:15,search:false,sortable:false,hidden:true},
+			{name:'Prss23',index:'Prss23',width:15,search:false,sortable:false,hidden:true},
 			{name:'PSA-NCAM',index:'PSA-NCAM',width:15,search:false,sortable:false,hidden:true},
 			{name:'SATB1',index:'SATB1',width:15,search:false,sortable:false,hidden:true},
 			{name:'SATB2',index:'SATB2',width:15,search:false,sortable:false,hidden:true},
 			{name:'SCIP',index:'SCIP',width:15,search:false,sortable:false,hidden:true},
 			{name:'SPO',index:'SPO',width:15,search:false,sortable:false,hidden:true},
 			{name:'SubP',index:'SubP',width:15,search:false,sortable:false,hidden:true},
+			{name:'Tc1568100',index:'Tc1568100',width:15,search:false,sortable:false,hidden:true},
 			{name:'TH',index:'TH',width:15,search:false,sortable:false,hidden:true},
 			{name:'vAChT',index:'vAChT',width:15,search:false,sortable:false,hidden:true},
 			{name:'vGAT',index:'vGAT',width:15,search:false,sortable:false,hidden:true},
@@ -457,7 +471,7 @@ $(function()
     		{startColumnName: 'a-act2', numberOfColumns: 4, titleText: '<b>Misc</b>'},
 		] 
 	});
-	let $n_columns = 102;
+	let $n_columns = 116;
 	if(checkVersion()=="9")
 	{
 		var myGrid = $('#nGrid');
@@ -586,7 +600,7 @@ $(function()
 			myGrid.jqGrid('setGridParam', {autowidth: true});
 			//myGrid.jqGrid('setGridParam', {shrinkToFit: false});
 			myGrid.jqGrid('setGridParam', {scrollerbar: true});
-			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
+			myGrid.jqGrid('showCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","Astn2","BDNF","Bok","Caln","CaM","CaMKII_alpha","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Dcn","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Gpc3","Grp","Htr2c","Id-2","Kv3_1","Loc432748","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","Ndst4","NECAB1","Neuropilin2","NKB","Nov","Nr3c2","Nr4a1","p-CREB","PCP4","PPE","PPTA","Prox1","Prss12","Prss23","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","Tc1568100","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth(customWidth,false);
@@ -600,7 +614,7 @@ $(function()
 		}
 		else {
 			myGrid.setGridWidth("722");
-			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","BDNF","Bok","Caln","CaM","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Id-2","Kv3_1","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","NECAB1","Neuropilin2","NKB","p-CREB","PCP4","PPE","PPTA","Prox1","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
+			myGrid.jqGrid('hideCol', ["AChE","AMIGO2","AR-beta1","AR-beta2","Astn2","BDNF","Bok","Caln","CaM","CaMKII_alpha","CGRP","ChAT","Chrna2","CRF","Ctip2","Cx36","CXCR4","Dcn","Disc1","DYN","EAAT3","ErbB4","GABA-B1","GABAa_delta","GABAa_alpha2","GABAa_alpha3","GABAa_alpha4","GABAa_alpha5","GABAa_alpha6","GABAa_beta1","GABAa_beta2","GABAa_beta3","GABAa_gamma1","GABAa_gamma2","GAT-1","GAT-3","GluA1","GluA2","GluA2_3","GluA3","GluA4","GlyT2","Gpc3","Grp","Htr2c","Id-2","Kv3_1","Loc432748","Man1a","Math-2","mGluR1","mGluR2","mGluR2_3","mGluR3","mGluR4","mGluR5","mGluR5a","mGluR7a","mGluR8a","MOR","Mus1R","Mus3R","Mus4R","Ndst4","NECAB1","Neuropilin2","NKB","Nov","Nr3c2","Nr4a1","p-CREB","PCP4","PPE","PPTA","Prox1","Prss12","Prss23","PSA-NCAM","SATB1","SATB2","SCIP","SPO","SubP","Tc1568100","TH","vAChT","vGAT","vGlut1","vGluT2","VILIP","Wfs1","Y1","Y2"]);
 			$("#checkbox1").click(function() {
 				if ($("#checkbox1").is(':checked')) {
 					myGrid.setGridWidth("722");
