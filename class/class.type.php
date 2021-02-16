@@ -103,7 +103,9 @@ class type
 	}
 
 	public function get_type_subtype($id){
-		$query = "SELECT type_subtype FROM Type WHERE id ='$id'";
+		$table=$this->getName_table();
+
+		$query = "SELECT type_subtype FROM $table WHERE id ='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$type_subtype_value="";
 		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
