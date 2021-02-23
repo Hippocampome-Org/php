@@ -33,7 +33,7 @@ class fragment_phases
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, referenceID, cellID, location_in_reference, FTQ_ID, material_used, phase_parameter, phase_parameter_ID, authors, title, journal, year, PMID, pmid_isbn_page FROM $table WHERE id = '$id'";
-		//echo $query."<br>";
+		#echo $query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id, $referenceID, $cellID, $location_in_reference, $FTQ_ID, $material_used, $phase_parameter, $phase_parameter_ID, $authors, $title, $journal, $year, $PMID, $pmid_isbn_page) = mysqli_fetch_row($rs))
 		{	
@@ -381,6 +381,46 @@ class fragment_phases
 		}
 
 		return $ref_id;
+    }
+
+    public function type_id_to_article_ids($type_id) 
+    {
+    	$eid = '';
+    	$eids = array();
+    	$query = "SELECT DISTINCT Evidence_id FROM phases_evidence_type_rel WHERE Type_id = '$type_id';";
+		//echo $query."<br>";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($eid) = mysqli_fetch_row($rs))
+		{	    	
+			array_push($eids, $eid);
+			//echo " ".$eid."<br>";
+		}
+
+		$pmid = '';
+    	$pmids = array();
+    	for ($i = 0; $i < count($eids); $i++) {
+	    	$query = "SELECT pmid FROM phases_fragment where id = '$eids[$i]';";
+			//echo $query."<br>";
+			$rs = mysqli_query($GLOBALS['conn'],$query);
+			while(list($pmid) = mysqli_fetch_row($rs))
+			{	    	
+				array_push($pmids, $pmid);
+			}
+		}
+
+		$artid = '';
+    	$artids = array();
+    	for ($i = 0; $i < count($pmids); $i++) {
+	    	$query = "SELECT id FROM Article where pmid_isbn='$pmids[$i]';";
+			//echo $query."<br>";
+			$rs = mysqli_query($GLOBALS['conn'],$query);
+			while(list($artid) = mysqli_fetch_row($rs))
+			{	    	
+				array_push($artids, $artid);
+			}
+		}
+
+		return $artids;
     }
 
 }
