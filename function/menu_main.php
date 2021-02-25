@@ -70,7 +70,7 @@ session_start();
 	
 		</ul></li>
 	
-	     <li class="topmenu"><a style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/tools.ico" alt="" id="image_find"/>Tools</span></a>
+	     <li class="topmenu"><a href="tools.php" style="height:32px;line-height:32px;"><span><img src="function/menu_support_files/tools.ico" alt="" id="image_find"/>Tools</span></a>
       		<ul>
        	 		<!-- <li><a href="">Pixel Counter Program</a></li> -->
         		<li><a href="connprob.php">Connection Probabilities</a></li>
