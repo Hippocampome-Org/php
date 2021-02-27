@@ -290,7 +290,8 @@
 
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
-					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag."; Protocol: ".$results[3][4];
+					$protocol_nr = str_replace('<br>', ' ', $results[3][4]);
+					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag."; Protocol: ".$protocol_nr;
 				}
 
 				if ($o_i == (count($other_all_group) - 1)) {

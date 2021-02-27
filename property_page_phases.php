@@ -1296,7 +1296,7 @@ function show_only_authors(link, start1, stop1)
 							      	for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
 						      			if (in_array($other_parsed[$i_of], $all_other_types)) {
 						      				$frag_desc = $other_parsed[$i_of];
-						      				$frag_entry = $other_parsed[$i_of].$other_parsed[$i_of+1].$other_parsed[$i_of+2];
+						      				$frag_entry = $other_parsed[$i_of].":".$other_parsed[$i_of+1].":".$other_parsed[$i_of+2];
 						      				display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
 						      			}
 						      		}
@@ -1305,7 +1305,7 @@ function show_only_authors(link, start1, stop1)
 						      		for ($i_of = 0; $i_of < count($other_parsed); $i_of++) {
 						      			if (in_array($other_parsed[$i_of], $all_other_types)) {
 						      				$frag_desc = $other_parsed[$i_of];
-						      				$frag_entry = $other_parsed[$i_of].$other_parsed[$i_of+1].$other_parsed[$i_of+2];
+						      				$frag_entry = $other_parsed[$i_of].":".$other_parsed[$i_of+1].":".$other_parsed[$i_of+2];
 						      				display_quote($row_span, "", $frag_entry, $link_figure, $fragment, $id_fragment, $seg_2_text, $attachment_type, $quote, "Other");
 						      			}
 						      		}
