@@ -1221,15 +1221,18 @@ function show_only_authors(link, start1, stop1)
 									$theta_prop1 = $npage_theta[$i_t][2];
 									$theta_prop2 = $npage_theta[$i_t][3];
 									$theta_prop3 = $npage_theta[$i_t][4];
-									$swr_val = $npage_swr[$i_t][1];
+									//$swr_val = $npage_swr[$i_t][1];
+									$swr_val = $npage_swr[$i_t][5];
 									$swr_prop1 = $npage_swr[$i_t][2];
 									$swr_prop2 = $npage_swr[$i_t][3];
 									$swr_prop3 = $npage_swr[$i_t][4];
-									$firingrate_val = $npage_firingrate[$i_t][1];
+									//$firingrate_val = $npage_firingrate[$i_t][1];
+									$firingrate_val = $npage_firingrate[$i_t][5];
 									$firingrate_prop1 = $npage_firingrate[$i_t][2];
 									$firingrate_prop2 = $npage_firingrate[$i_t][3];
 									$firingrate_prop3 = $npage_firingrate[$i_t][4];
 									$other_val = $npage_other[$i_t][1];
+									//$other_val = $npage_other[$i_t][3];
 									$other_prop = $npage_other[$i_t][2];
 					      		}
 					      	}			

@@ -36,7 +36,7 @@
 		<center><button onclick=\"window.location.href = '?page=write_file';\" class='button'>Generate phases matrix json</button></center><br><hr>
 		";
 	}
-	function value_collect($conn, $i, $col, $neuron_id, $conditions, $referenceID, $refid_condition, $no_endline, $error_col, $error_type) {
+	function value_collect($conn, $i, $col, $neuron_id, $conditions, $referenceID, $refid_condition, $no_endline, $error_col, $error_type, $error_n_col) {
 		/*
 			return value and properties
 		*/
@@ -46,9 +46,9 @@
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$lowest_rank = ''; $lowest_rank_id = ''; $median = ''; $npage_entry = array();
 		$val_frag = ''; $lowest_frr = ''; $all_val = ''; $error_val = ''; $error_type_desc = '';
-		$val_with_error = '';
+		$val_with_error = ''; $error_val_n = '';
 
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_n_col) as error_val_n, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($col == "run_stop_ratio") {
 			$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 
@@ -77,6 +77,7 @@
 					$behav = $row['behavioralStatus'];
 					$rank = $row['metadataRank'];
 					$error_val = $row['error_val'];
+					$error_val_n = $row['error_val_n'];
 					$error_type_desc = $row['error_type'];
 					if ($val != '') {
 						$val_found = true;
@@ -141,17 +142,27 @@
 
 		$val_sep = explode(",", $val);
 		$error_val_sep = explode(",", $error_val);
+		$error_val_n_sep = explode(",", $error_val_n);
 		for ($v_i = 0; $v_i < count($val_sep); $v_i++) {
 			$separator = ", ";
 			if ($v_i == (count($val_sep) - 1)) {
 				$separator = "";
 			}
 			$error_desc = " ± ".$error_val_sep[$v_i];
+			if ($error_val_n_sep[$v_i] != "NA") {
+				$error_desc = $error_desc." (".$error_val_n_sep[$v_i].")";
+			}
 			if ($error_val_sep[$v_i] == "" || $error_val_sep[$v_i] == "0.0") {
 				$error_desc = "";
 			}
+
+			if (strcmp($val_sep[$v_i],"") !== 0 && (strcmp($error_val_n_sep[$v_i],"") == 0 || $error_val_n_sep[$v_i] == 1 || strcmp($error_val_n_sep[$v_i],"NA") == 0)) {
+				$error_desc = $error_desc." (1)";
+			}
+
 			$val_with_error = $val_with_error.$val_sep[$v_i].$error_desc.$separator;
 		}
+		//if ($val_with_error != "") {echo $neuron_id." ".$val_with_error."<br>";}
 
 		array_push($npage_entry, $neuron_id);
 		array_push($npage_entry, $median);
@@ -214,6 +225,7 @@
 		$values = array(); $best_ranks = array(); $npage = array(); $other_frag = ""; $val_frag = "";
 		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
 		$error_cols = array("thetaError", "SWR_ratioError", "firingRateError", "DS_ratioError", "rippleError", "gammaError", "run_stop_ratioError", "epsilonError", "VrestError", "tauError", "APthreshError", "fAHP_Error", "APpeak_troughError");
+		$error_n_cols = array("thetaN", "SWR_ratioN", "firingRateN", "DS_ratioN", "rippleN", "gammaN", "run_stop_ratioN", "epsilonN", "VrestN", "tauN", "APthreshN", "fAHP_N", "APpeak_troughN");
 		$error_types = array("thetaErrorType", "SWR_ratioErrorType", "firingRateErrorType", "DS_ratioErrorType", "rippleErrorType", "gammaErrorType", "run_stop_ratioErrorType", "epsilonErrorType", "VrestErrorType", "tauErrorType", "APthreshErrorType", "fAHP_ErrorType", "APpeak_troughErrorType");
 		$other_entries = array_fill(0, count($other_all_group), "");
 		$other_cond = array_fill(0, count($other_all_group), "");
@@ -221,8 +233,8 @@
 		//echo $neuron_ids." i: ".$i."<br>";
 
 		// theta
-		$results = value_collect($conn, $i, "theta", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[0], $error_types[0]);
-		$results_nocond = value_collect($conn, $i, "theta", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[0], $error_types[0]);
+		$results = value_collect($conn, $i, "theta", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[0], $error_types[0], $error_n_cols[0]);
+		$results_nocond = value_collect($conn, $i, "theta", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[0], $error_types[0], $error_n_cols[0]);
 		array_push($theta_values, $results[0]);
 		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_theta, $rank_result);
@@ -230,20 +242,22 @@
 		}
 		array_push($npage_theta, $results[3]);
 		$all_theta = $results[4];
+		//echo "<br>".$npage_theta[0][5];		
 
 		// swr ratio
-		$results = value_collect($conn, $i, "swr_ratio", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[1], $error_types[1]);
-		$results_nocond = value_collect($conn, $i, "swr_ratio", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[1], $error_types[1]);
+		$results = value_collect($conn, $i, "swr_ratio", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[1], $error_types[1], $error_n_cols[1]);
+		$results_nocond = value_collect($conn, $i, "swr_ratio", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[1], $error_types[1], $error_n_cols[1]);
 		array_push($spw_values, $results[0]);
 		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_swr, $rank_result);
 		}
 		array_push($npage_swr, $results[3]);
 		$all_swr = $results[4];
+		//echo "<br>".$npage_swr[0][5];		
 
 		// firing rate
-		$results = value_collect($conn, $i, "firingRate", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[2], $error_types[2]);
-		$results_nocond = value_collect($conn, $i, "firingRate", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[2], $error_types[2]);
+		$results = value_collect($conn, $i, "firingRate", $neuron_id, $conditions, $referenceID, $refid_condition, "true", $error_cols[2], $error_types[2], $error_n_cols[2]);
+		$results_nocond = value_collect($conn, $i, "firingRate", $neuron_id, "", $referenceID, $refid_condition, "true", $error_cols[2], $error_types[2], $error_n_cols[2]);
 		array_push($firingrate_values, $results[0]);
 		foreach ($results_nocond[2] as $rank_result) {
 			array_push($best_ranks_firingrate, $rank_result);
@@ -255,9 +269,12 @@
 		$entry_output = "";
 		$npage_entry_cond = "";
 		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
-			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)]);
+			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)], $error_n_cols[($o_i+3)]);
 			$entry_output = $entry_output.$results[0];
-			$val_frag = $results[1];
+			//$entry_output = $entry_output.$results[3];
+			//$val_frag = $results[1];
+			$val_frag = $results[3][5];//." ".$results[3][4];
+			//$val_frag = $results[3];
 			$rank_entry = $results[2];
 			$species = $rank_entry[0];
 			$agetype = $rank_entry[1];
@@ -273,7 +290,7 @@
 
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
-					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag;
+					$other_frag = $other_frag.$other_all_group[$o_i].": ".$val_frag."; Protocol: ".$results[3][4];
 				}
 
 				if ($o_i == (count($other_all_group) - 1)) {
@@ -337,6 +354,7 @@
 		array_push($all_vals, $all_fr);
 		array_push($all_vals, $all_other);
 		array_push($all_vals, $other_frag);
+		//echo "<br>other_frag: ".$other_frag;	
 
 		return array($theta_values, $spw_values, $firingrate_values, $other_values, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $all_vals);	
 	}
