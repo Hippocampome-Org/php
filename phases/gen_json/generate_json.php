@@ -156,7 +156,7 @@
 				$error_desc = "";
 			}
 
-			if (strcmp($val_sep[$v_i],"") !== 0 && (strcmp($error_val_n_sep[$v_i],"") == 0 || $error_val_n_sep[$v_i] == 1 || strcmp($error_val_n_sep[$v_i],"NA") == 0)) {
+			if ($col != "run_stop_ratio" && strcmp($val_sep[$v_i],"") !== 0 && (strcmp($error_val_n_sep[$v_i],"") == 0 || $error_val_n_sep[$v_i] == 1 || strcmp($error_val_n_sep[$v_i],"NA") == 0)) {
 				$error_desc = $error_desc." (1)";
 			}
 
