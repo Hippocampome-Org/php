@@ -406,7 +406,7 @@
 		$firingrate_col = 4;
 		$other_col = 5;
 		$new_row_col = 6;
-		$neuron_classes = 28;
+		$neuron_classes = 33;
 		$max_rows = 100000;
 		/* specify indices */
 		$neuron_group_cols = array(); // new file indexes
