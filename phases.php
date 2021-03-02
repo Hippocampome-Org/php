@@ -514,6 +514,9 @@ function HideShowColumns ()
     <span style='width:1000px'><input type='button' value='update' onclick='javascript:subform()' style='position:relative;left:410px' /></span>
     <input type="hidden" name="page" id="page" value="main_page" />
     <input type="hidden" name="row_select" id="row_select" value="<?php if(isset($_GET['row_select'])) {echo $_GET['row_select'];} ?>" />
+    <table style='width:1000px;font-family:arial;font-size:12px'>
+      <tr><td style="width:1000px">&nbsp;&nbsp;<br>The median value of the set of most relevant values for each neuron type in the matrix is shown. For even numbered sets, the lower value closest to the set’s center is <br> displayed, rather than the average of the two center values.<br><br></td>
+      </tr>
   </form>
 </div>
 
@@ -529,7 +532,7 @@ function HideShowColumns ()
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>  
   <tr>
     <td>
-		  <font class='font5'><strong>Legend:</strong> </font>&nbsp; &nbsp;
+		  <font class='font5'><strong>Legend:</strong> </font>
     </td>
 	   <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
 		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
@@ -539,8 +542,6 @@ function HideShowColumns ()
      <tr></tr>
       <tr>
         <td></td>
-        <td><font class='font5'>The median value of the set of most relevant values for each cell in the matrix is shown. A median function modification that is used<br> is the lower value closest to the set’s center, rather than average of two center values, is displayed for even numbered value sets.</font>
-    </td>
 		<tr>
 		</tr>
 	
