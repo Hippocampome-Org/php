@@ -180,9 +180,9 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.8 - Released: 12/28/2020
+      v1.9 - Released: 02/27/2021
       <br>
-      28,390 Pieces of Knowledge (PoK) and 36,090 Pieces of Evidence (PoE)
+      28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
       <br>
       <br>
       The Hippocampome is a curated knowledge base of the circuitry
@@ -259,10 +259,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:70px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:10px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br><br><br><br>
+      <br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
@@ -287,11 +287,17 @@ jQuery(document).ready(function() {
       diversity.</i></a>
       PLOS Computational Biology 2019 Oct 28;15(10):e1007462; doi: 10.1371/journal.pcbi.1007462.
       <br><br>
-      <b>*NEW*</b> The release of v1.8 on 12/18/2020 includes an additional 5,152 PoK, 6,055 PoE, and new browsable matrices for neurite lengths, somatic path distances, numbers of potential synapses, numbers of contacts, and connection probabilities. 
+      The release of v1.8 on 12/28/2020 includes an additional 5,152 PoK, 6,055 PoE, and new browsable matrices for neurite lengths, somatic path distances, numbers of potential synapses, numbers of contacts, and connection probabilities. 
       Reference: <b>Tecuatl, et al., 2020</b>
-      <a href = "https://www.jneurosci.org/content/early/2020/12/16/JNEUROSCI.1193-20.2020">
+      <a href = "https://www.jneurosci.org/content/41/8/1665">
       <i>Comprehensive estimates of potential synaptic connections in local circuits of the rodent hippocampal formation by axonal-dendritic overlap.</i></a>
-      Journal of Neuroscience 2020; JN-RM-1193-20; doi: https://doi.org/10.1523/JNEUROSCI.1193-20.2020.
+      Journal of Neuroscience 2021 Feb 24;41(8):1665-1683; doi: 10.1523/JNEUROSCI.1193-20.2020.
+      <br><br>
+      <b>*NEW*</b> The release of v1.9 on 02/27/2021 includes an additional 91 PoK, 768 PoE, and a new browsable matrix for in vivo recordings. 
+      Reference: <b>Sanchez-Aguilera, et al., 2021</b>
+      <a href = "">
+      <i>Rhythmic firing of hippocampal and entorhinal neurons in vivo: integrating single-cell phenotypes with circuit function.</i></a>
+      PLoS Biology submitted.
       </font>
     </td>
   </tr>
@@ -309,15 +315,15 @@ jQuery(document).ready(function() {
             portal was vetted using the "fair use" criteria defined in
             <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code,
             &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable
-            for reuse.  Except otherwise noted, this web portal is &copy; 2015-2020 by George Mason University, under a
+            for reuse.  Except otherwise noted, this web portal is &copy; 2015-2021 by George Mason University, under a
             <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons
             Attribution-ShareAlike [CC BY-SA] license</a>. 
 
           <!-- <br /><p><?php echo $info; ?> -->
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
-          28,390 Pieces of Knowledge (PoK) and 36,090 Pieces of Evidence (PoE)
-          <br />Last Update: 28 Dec 2020 (<a href="Help_Release_Notes.php">v1.8</a>)</font>
+          28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
+          <br />Last Update: 27 Feb 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
           <br />
         </div>
     </td>   
