@@ -21,4 +21,5 @@
 	$class_firing_pattern_rel='FiringPatternRel';
 	$class_izhmodels_model = 'izhmodels_single';
 	$class_phases_fragment='phases_fragment';
+	$class_synpro_fragment='SynproFragment';
 ?>

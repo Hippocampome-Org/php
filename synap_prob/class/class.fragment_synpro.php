@@ -465,7 +465,34 @@ class fragment_synpro
 
 		return $species;
     } 
-	
+
+    public function type_id_to_article_ids($type_id) 
+    {
+    	$eid = '';
+    	$eids = array();
+    	$query = "SELECT DISTINCT Evidence_id FROM SynproEvidencePropertyTypeRel WHERE Type_id = '$type_id';";
+		//echo $query."<br>";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($eid) = mysqli_fetch_row($rs))
+		{	    	
+			array_push($eids, $eid);
+			//echo " ".$eid."<br>";
+		}
+
+		$artid = '';
+    	$artids = array();
+    	for ($i = 0; $i < count($eids); $i++) {
+	    	$query = "SELECT Article_id FROM SynproArticleEvidenceRel where Evidence_id = '$eids[$i]';";
+			//echo $query."<br>";
+			$rs = mysqli_query($GLOBALS['conn'],$query);
+			while(list($artid) = mysqli_fetch_row($rs))
+			{	    	
+				array_push($artids, $artid);
+			}
+		}
+
+		return $artids;
+    }	
 }
 
 ?>
