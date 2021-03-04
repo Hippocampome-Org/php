@@ -13,6 +13,9 @@ require_once('class/class.property.php');
 require_once('class/class.evidencepropertyyperel.php');
 require_once('class/class.epdataevidencerel.php');
 require_once('class/class.epdata.php');
+require_once('class/class.evidenceevidencerel.php');
+require_once('class/class.evidencefragmentrel.php');
+require_once('class/class.fragment.php');
 require_once('class/class.temporary_result_neurons.php');
 
 function getUrlForLink($id,$img,$key,$color1)
@@ -192,6 +195,9 @@ else // not from search page --------------
 $property = new property($class_property);
 $evidencepropertyyperel = new evidencepropertyyperel($class_evidence_property_type_rel);
 $epdataevidencerel = new epdataevidencerel($class_epdataevidencerel);
+$evidenceevidencerel = new evidenceevidencerel($class_evidenceevidencerel);
+$evidencefragmentrel = new evidencefragmentrel($class_evidencefragmentrel);
+$fragment = new fragment ($class_fragment);
 $epdata = new epdata($class_epdata);
 
 //$hippo_select = $_SESSION['hippo_select'];
@@ -326,24 +332,61 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 					$epdata->retrive_all_information($epdata_id); // Retrieve all information for a given epdata
 					$rep_value = $epdata->getRep_value();
 					
+					// Borrowed from property_page_ephys.php ---------->
+					// with evidence_id1 it needs to have evidence_id2 that is used for the id_article
+					$evidenceevidencerel -> retrive_evidence2_id($evidence_id);
+					$evidence_id_2 = $evidenceevidencerel -> getEvidence2_id_array(0);
+		
+					// retrieve information about fragment: --------------
+					$evidencefragmentrel -> retrive_fragment_id_1($evidence_id_2);
+					$id_fragment = $evidencefragmentrel -> getFragment_id();
+					$fragment -> retrive_by_id($id_fragment);
+					$page_loc = $fragment -> getPage_location();
+					
+					// Extract page_location and protocol
+					$protoc = explode(",", $page_loc);
+					$page_location=$protoc[0];
+					
+					//$locationValue1[$i1] = str_replace(' ', '', $locationValue[$i1]);
+					//$location_protoc = explode(",", $locationValue1[$i1]);
+					//$location_protocol = $location_protoc[1];
+					//$location_animal = strpos($locationValue1[$i1],'mouse');					
+					
+					$protoc[1] = str_replace(' ', '', $protoc[1]);
+					$protoc_pieces = explode("|", $protoc[1]);
+					
+					if($location_protocol == 'patchelectrode' && $protoc_pieces[1] != 'p')
+					{
+						$protoc_pieces[1] = 'p';
+					}
+					if($location_animal != null && $protoc_pieces[0] != 'm')
+					{
+						$protoc_pieces[0] = 'm';
+					}
+					// <---------- Borrowed from property_page_ephys.php
+
+
 					$non_default_conditions_str = "";
 					if ($rep_value != NULL)
 					{
 						$nn_rep_value += 1;
 						
-						if (strpos($rep_value,'mice') !== false) {
+//						if (strpos($rep_value,'mice') !== false) {
+						if ($protoc_pieces[0] == 'm'){
 							$non_default_conditions_str = "(mice, ";
 						}
 						else {
 							$non_default_conditions_str = "(rats, ";
 						}
-						if (strpos($rep_value,'microelectrodes') !== false) {
+//						if (strpos($rep_value,'microelectrodes') !== false) {
+						if ($protoc_pieces[1] == 'e'){
 							$non_default_conditions_str = $non_default_conditions_str . "microelectrodes, ";
 						}
 						else {
 							$non_default_conditions_str = $non_default_conditions_str . "patch clamp, ";
 						}
-						if (strpos($rep_value,'room') !== false) {
+//						if (strpos($rep_value,'room') !== false) {
+						if ($protoc_pieces[3] == 'r'){
 							$non_default_conditions_str = $non_default_conditions_str . "room temp)";
 						}
 						else {
