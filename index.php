@@ -180,7 +180,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.9 - Released: 02/27/2021
+      v1.9 - Released: 03/04/2021
       <br>
       28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
       <br>
@@ -323,7 +323,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
-          <br />Last Update: 27 Feb 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
+          <br />Last Update: 04 Mar 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
           <br />
         </div>
     </td>   
