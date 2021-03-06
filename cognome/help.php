@@ -44,8 +44,7 @@
   <!-- main help descriptions -->
   <div class='article_details'>
   <u>Inclusion Criteria of Articles</u><br>
-  Articles that describe cognitive/behavioral functions with neural activity that occurs in the hippocampal formation. The activity must be described as a spiking neural network computational model. Some form of a
-  neural network algorithm must be included in the modeling. An original (not previously performed) simulation of the model must be included in the work.
+  Articles that describe spiking neural network or circuit computational models. The neural activity in the models must include the region of the hippocampal formation. Some form of a neural network algorithm must be included in the modeling. An original (not previously performed) simulation of the model must be included in the work.
   </div>
   <br><div class='article_details'>
   <u>Subject</u><br>
@@ -55,9 +54,7 @@
   <br><br><u>Study Property</u><br>
   This defines specific properties to include with work descriptions. Selecting all causes all properties to be included. This option is not fully implemented yet, selecting any option includes all properties at the current time. Work will be done to implement it more later.
   <br><br><u>Go Button</u><br>
-  Press this to update the results based on the options selection made.
-  <br><br><u>Notes</u><br>
-  The most content so far has been added to the spatial memory category. Try using that one to try the site out. Currently the dimensions are populated with sample data that does not reflect real knowledge. A purpose of this is to show the functionality of the site before the real data is entered in. The real data will be updated in the site on a consistent basis.</div>
+  Press this to update the results based on the options selection made.</div>
   <br><div class='article_details'>
   <u>Comments, Questions, and Thoughts?</u><br>
   Send them to nsutton2 &lpar;&#8219;&agrave;&tcaron;&rpar; gmu.edu.
