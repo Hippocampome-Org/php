@@ -25,9 +25,9 @@ $page="main_page";
 //$_REQUEST['page']=$page;
 include("phases/gen_json/generate_json.php");
 
-$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-$all_other_types = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-$evi_page_descs = array("Theta", "SWR ratio", "Firing rate", "DS ratio", "Ripple", "Gamma", "Run stop ratio", "Epsilon", "Vrest", "Tau", "AP threshold", "fAHP", "APpeak trough");
+$all_val_types = array("theta", "swr_ratio", "firingRate", "DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "firingRateNonBaseline", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+$all_other_types = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "firingRateNonBaseline", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+$evi_page_descs = array("Theta", "SWR ratio", "Firing rate", "DS ratio", "Ripple", "Gamma", "Run stop ratio", "Epsilon", "Firing rate non-baseline", "Vrest", "Tau", "AP threshold", "fAHP", "APpeak trough");
 
 function checkNeuronProperty($color)
 {
@@ -641,7 +641,7 @@ function show_only_authors(link, start1, stop1)
 						}
 					}	
 					if ($val_property == "all_other") {
-						echo "Any values of DS ratio, Ripple, Gamma, Run stop ratio, Epsilon, Vrest, Tau, AP threshold, fAHP,<br>&nbsp;&nbsp;or APpeak trough.";
+						echo "Any values of DS ratio, Ripple, Gamma, Run stop ratio, Epsilon, Firing rate non-baseline, Vrest, Tau,<br>&nbsp;&nbsp;AP threshold, fAHP, or APpeak trough.";
 					}				
 				?>
 				</strong></td>

@@ -69,7 +69,6 @@
 				if ($val_found == false) {
 					$id = $row['id'];
 					$val = $row['val'];
-					//if ($val != "" && $col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br>";}
 					$species = $row['species'];
 					$agetype = $row['agetype'];
 					$gender = $row['gender'];
@@ -211,8 +210,7 @@
 		/*
 			Return values for all relevant value columns.
 		*/
-		$entry_output = "";
-		$id = ''; $theta = ''; $swr_ratio = ''; $firingrate = ''; $other = '';
+		$entry_output = ""; $id = ''; $theta = ''; $swr_ratio = ''; $firingrate = ''; $other = '';
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$theta_found = false; $swr_found = false; $firingrate_found=false; $other_found = false;
@@ -272,10 +270,7 @@
 		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)], $error_n_cols[($o_i+3)]);
 			$entry_output = $entry_output.$results[0];
-			//$entry_output = $entry_output.$results[3];
-			//$val_frag = $results[1];
-			$val_frag = $results[3][5];//." ".$results[3][4];
-			//$val_frag = $results[3];
+			$val_frag = $results[3][5];
 			$rank_entry = $results[2];
 			$species = $rank_entry[0];
 			$agetype = $rank_entry[1];
@@ -284,8 +279,6 @@
 			$behav = $rank_entry[4];
 			if ($results[4] != "" && ($val_property == $other_all_group[$o_i] || $val_property == "all_other" || $val_property == "")) {
 				$all_other = $all_other.$other_all_group[$o_i].": ".$results[4];
-				//$all_other = $other_all_group[$o_i].": ".$results[4];
-				//echo "other_all_group $other_all_group[$o_i] val_property $val_property results[4] ".$results[4]." <br>";
 			}
 			//echo "other_all_group: $other_all_group[$o_i] val_property: $val_property<br>";
 
