@@ -48,9 +48,10 @@
 		$val_frag = ''; $lowest_frr = ''; $all_val = ''; $error_val = ''; $error_type_desc = '';
 		$val_with_error = ''; $error_val_n = '';
 
-		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_n_col) as error_val_n, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+		// return all matching values
+		$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT CAST($error_col AS DECIMAL (10 , 2 ))) as error_val, GROUP_CONCAT(DISTINCT $error_n_col) as error_val_n, GROUP_CONCAT(DISTINCT $error_type) as error_type, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRateNonBaseline"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($col == "run_stop_ratio") {
-			$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRate"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
+			$sql = "SELECT GROUP_CONCAT(DISTINCT id) as id, GROUP_CONCAT(DISTINCT CAST($col AS DECIMAL (10 , 2 ))) AS val, GROUP_CONCAT(DISTINCT species) as species, GROUP_CONCAT(DISTINCT agetype) as agetype, GROUP_CONCAT(DISTINCT gender) as gender, GROUP_CONCAT(DISTINCT recordingMethod) as recordingMethod, GROUP_CONCAT(DISTINCT behavioralStatus) as behavioralStatus, GROUP_CONCAT(DISTINCT metadataRank) as metadataRank";if($col=="firingRateNonBaseline"){$sql=$sql.", GROUP_CONCAT(DISTINCT firingRateRank) AS firingRateRank";}$sql=$sql." FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 
 		}
 		if ($conditions != "") {
@@ -59,7 +60,7 @@
 		if ($referenceID != "") {
 			$sql = $sql.$refid_condition;
 		}
-		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRate"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRate"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
+		$sql = $sql." GROUP BY species, agetype, gender, recordingMethod, behavioralStatus, metadatarank";if($col=="firingRateNonBaseline"){$sql=$sql.", firingRateRank";}if($referenceID!=""){$sql=$sql.", referenceID";}$sql=$sql." ORDER BY CAST(GROUP_CONCAT(DISTINCT CAST(metadataRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";if($col=="firingRateNonBaseline"){$sql=$sql.", CAST(GROUP_CONCAT(DISTINCT CAST(firingRateRank AS DECIMAL (10 , 2 ))) AS DECIMAL (10 , 2 ))";}
 		//echo "<br><br><br>sql: ".$sql;
 		//if ($col != "theta" && $col != "swr_ratio" && $col != "firingrate") {echo $sql."<br><br>";}
 		$result = $conn->query($sql);
@@ -89,7 +90,7 @@
 						$lowest_rank = $rank;
 						//echo "<br><br><br><br><br><br><br><br>sql: ".$lowest_rank;
 						$lowest_rank_id = $id;
-						if($col=="firingRate"){$lowest_frr=$row['firingRateRank'];}
+						if($col=="firingRateNonBaseline"){$lowest_frr=$row['firingRateRank'];}
 						//$all_other = $all_other." ".$low_rank_entry.": ".$other_entries[$o_i];
 					}
 				}
@@ -123,6 +124,7 @@
 				$count = $row['count'];
 			}
 		}
+		// return measurements
 		$sql5 = "SELECT COUNT($col) AS measurements FROM phases WHERE cellID = $neuron_id AND $col != \"\"";
 		if ($conditions != "") {
 			$sql5 = $sql5.$conditions;
@@ -133,6 +135,7 @@
 				$measurements = $row['measurements'];
 			}
 		}
+		// output html
 		$entry_output = $entry_output."\"<center><span id='$col".$i."'><a href='property_page_phases.php?id_neuron=$neuron_id&val_property=$col' title='Range: [".$min_range.", ".$max_range."]\\nRepresentative selection: ".$species.", ".$agetype.", ".$gender2.",\\n".$rec.", ".$behav."\\nRepresentative value selected from ".$count." source";
 		if ($count > 1) {$entry_output = $entry_output."s";}
 		$entry_output = $entry_output."\\nTotal measurements: ".$measurements."' target='_blank'>$median</a></span></center></div>\"";
@@ -158,9 +161,6 @@
 			if ($col != "run_stop_ratio" && strcmp($val_sep[$v_i],"") !== 0 && $error_val_n_sep[$v_i] == 1) {
 				$error_desc = $error_desc." (1)";
 			}
-			/*if ($col != "run_stop_ratio" && strcmp($val_sep[$v_i],"") !== 0 && (strcmp($error_val_n_sep[$v_i],"") == 0 || $error_val_n_sep[$v_i] == 1 || strcmp($error_val_n_sep[$v_i],"NA") == 0)) {
-				$error_desc = $error_desc." (1)";
-			}*/
 
 			$val_with_error = $val_with_error.$val_sep[$v_i].$error_desc.$separator;
 		}
@@ -216,7 +216,6 @@
 		$species = ''; $agetype = ''; $gender = ''; $rec = ''; $behav = '';
 		$min_range = ''; $max_range = ''; $count = ''; $gender2 = '';
 		$theta_found = false; $swr_found = false; $firingrate_found=false; $other_found = false;
-		$ripple = ''; $gamma = ''; $run_stop_ratio = ''; $epsilon = '';
 		$rank_entry_theta = array(); $rank_entry_swr = array(); $rank_entry_firingrate = array();
 		$lowest_rank = ''; $lowest_rank_id = ''; $lowest_swr_rank = ''; $lowest_swr_rank_id = '';
 		$lowest_firingrate_rank = ''; $lowest_firingrate_rank_id = '';
@@ -225,10 +224,10 @@
 		$refid_condition = " AND referenceID = \"\\\"$referenceID\\\"\"";
 		$DS_ratio = ""; $Vrest = ""; $tau = ""; $APthresh = ""; $fAHP = ""; $APpeak_trough = "";
 		$values = array(); $best_ranks = array(); $npage = array(); $other_frag = ""; $val_frag = "";
-		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
-		$error_cols = array("thetaError", "SWR_ratioError", "firingRateError", "DS_ratioError", "rippleError", "gammaError", "run_stop_ratioError", "epsilonError", "VrestError", "tauError", "APthreshError", "fAHP_Error", "APpeak_troughError");
-		$error_n_cols = array("thetaN", "SWR_ratioN", "firingRateN", "DS_ratioN", "rippleN", "gammaN", "run_stop_ratioN", "epsilonN", "VrestN", "tauN", "APthreshN", "fAHP_N", "APpeak_troughN");
-		$error_types = array("thetaErrorType", "SWR_ratioErrorType", "firingRateErrorType", "DS_ratioErrorType", "rippleErrorType", "gammaErrorType", "run_stop_ratioErrorType", "epsilonErrorType", "VrestErrorType", "tauErrorType", "APthreshErrorType", "fAHP_ErrorType", "APpeak_troughErrorType");
+		$other_all_group = array("DS_ratio", "ripple", "gamma", "run_stop_ratio", "epsilon", "firingRateNonBaseline", "Vrest", "tau", "APthresh", "fAHP", "APpeak_trough");
+		$error_cols = array("thetaError", "SWR_ratioError", "firingRateError", "DS_ratioError", "rippleError", "gammaError", "run_stop_ratioError", "epsilonError", "firingRateErrorNonBaseline", "VrestError", "tauError", "APthreshError", "fAHP_Error", "APpeak_troughError");
+		$error_n_cols = array("thetaN", "SWR_ratioN", "firingRateN", "DS_ratioN", "rippleN", "gammaN", "run_stop_ratioN", "epsilonN", "firingRateN_NonBaseline", "VrestN", "tauN", "APthreshN", "fAHP_N", "APpeak_troughN");
+		$error_types = array("thetaErrorType", "SWR_ratioErrorType", "firingRateErrorType", "DS_ratioErrorType", "rippleErrorType", "gammaErrorType", "run_stop_ratioErrorType", "epsilonErrorType", "firingRateErrorTypeNonBaseline", "VrestErrorType", "tauErrorType", "APthreshErrorType", "fAHP_ErrorType", "APpeak_troughErrorType");
 		$other_entries = array_fill(0, count($other_all_group), "");
 		$other_cond = array_fill(0, count($other_all_group), "");
 		$neuron_id = $neuron_ids[$i];
@@ -290,6 +289,7 @@
 			}
 			//echo "other_all_group: $other_all_group[$o_i] val_property: $val_property<br>";
 
+			/* other all toggle checked */
 			if ($other_all == "checked") {
 				if ($val_frag != "") {
 					$protocol_nr = str_replace('<br>', ' ', $results[3][4]);
@@ -307,7 +307,7 @@
 			$other_entries[$o_i] = $val_frag;
 			$other_cond[$o_i] = "Representative selection: ".$species.", ".$agetype.", ".$gender.",\\n".$rec.", ".$behav;
 		}
-		//echo "<br>";
+		/* other all toggle unchecked */
 		if ($other_all != "checked") {
 			$low_rank_entry = "";
 			$low_rank_cond = "";
@@ -345,6 +345,7 @@
 				$entry_output = "\"\"]},";
 			}
 		}
+		/* build output arrays */
 		array_push($other_values, $entry_output);
 		$npage_entry = array();
 		array_push($npage_entry, $neuron_id);
@@ -440,13 +441,6 @@
 
 		for ($i = 0; $i<$total_rows; $i++) {
 			if ($i==($total_rows-1)) {
-				/*$last_index = count($other_output[0])-1; // last line
-				if ($page=='write_file') {
-					fwrite($output_file, "\"".$other_output[0][$last_index]."\"]}]}"); 
-				}
-				if ($page=='main_page') {
-					$json_output_string = $json_output_string."\"".$other_output[0][$last_index]."\"]}]}";
-				}*/
 				if ($page=='write_file') {
 					fwrite($output_file, "\"\"]}]}"); 
 				}

@@ -228,7 +228,7 @@ $(function(){
     } */
     <?php
       if ($other_all=="checked") {
-        echo "colNames:['','Neuron Type','<a title=\\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\\'>Theta (deg)</a>','<a title=\\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\\'>SWR Ratio</a>','<span style=\\'position:relative;top:-10px;\\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>DS ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Ripple (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Gamma (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Run/stop ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Epsilon</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Vrest (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Tau (ms)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APthresh (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>fAHP (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APpeak-trough (ms)</a>']
+        echo "colNames:['','Neuron Type','<a title=\\'Phase-locking values with respect to the theta rhythm with a peak at zero degrees and calibrated to CA1 SP.\\'>Theta (deg)</a>','<a title=\\'Ratio of the firing rate during sharp wave ripples to the firing rate outside of SWR.\\'>SWR Ratio</a>','<span style=\\'position:relative;top:-10px;\\'>In Vivo<br>Firing Rate (Hz)</span>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>DS ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Ripple (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Gamma (deg)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Run/stop ratio</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Epsilon</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'><span style=\\'position:relative;top:-10px;\\'>Non-Baseline<br>Firing Rate (Hz)</span></a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Vrest (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>Tau (ms)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APthresh (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>fAHP (mV)</a>','<a title=\\'Miscellaneous secondary rhythm measurements.\\'>APpeak-trough (ms)</a>']
         ,colModel :[
          {name:'type', index:'type', width:50,sortable:false, cellattr: function (rowId, tv, rawObject, cm, rdata) {
               return 'id=\\'type' + rowId + \"\\'\";   
@@ -242,6 +242,7 @@ $(function(){
           {name:'Gamma', index:'Gamma', width:75,search:false,sortable:false},
           {name:'RunOrStop ratio', index:'RunOrStopratio', width:75,search:false,sortable:false},
           {name:'Epsilon', index:'Epsilon', width:75,search:false,sortable:false},
+          {name:'Non-baseline firing rate', index:'NonBaselineFiringRate', width:75,search:false,sortable:false},
           {name:'Vrest', index:'Vrest', width:75,search:false,sortable:false},
           {name:'Tau', index:'Tau', width:75,search:false,sortable:false},
           {name:'APthresh', index:'APthresh', width:75,search:false,sortable:false},
@@ -522,28 +523,28 @@ function HideShowColumns ()
 
 <div class='table_position' style='position:relative;top:355px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
-	<tr>
-		<td>
-			<table id="nGrid"></table>
-		</td>
-	</tr>
+  <tr>
+    <td>
+      <table id="nGrid"></table>
+    </td>
+  </tr>
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>  
   <tr>
     <td>
-		  <font class='font5'><strong>Legend:</strong> </font>
+      <font class='font5'><strong>Legend:</strong> </font>
     </td>
-	   <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
-		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
-		&nbsp; &nbsp; 
-		<td>
+     <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -->
+    <td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
+    &nbsp; &nbsp; 
+    <td>
     </td>
      <tr></tr>
       <tr>
         <td></td>
-		<tr>
-		</tr>
+    <tr>
+    </tr>
 	
 </table>
 
