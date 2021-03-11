@@ -55,7 +55,7 @@
 		array_push($behavior, "head-fixed awake");
 	}
 	if (isset($_REQUEST['behavior_check3']) && $_REQUEST['behavior_check3']=="checked") {
-		array_push($behavior, "REM sleep");
+		array_push($behavior, "sleep");
 	}
 	if (isset($_REQUEST['behavior_check4']) && $_REQUEST['behavior_check4']=="checked") {
 		array_push($behavior, "urethane");
@@ -78,7 +78,7 @@
 		$entry = "";
 		$male_flag = false;
 		$female_flag = false;
-		$rem_flag = false;
+		$sleep_flag = false;
 
 		for ($i = 0; $i < count($condition); $i++) {
 			if ($condition[$i]=="male") {
@@ -87,16 +87,16 @@
 			else if ($condition[$i]=="female") {
 				$female_flag = true;
 			}
-			else if ($condition[$i]=="REM sleep") {
-				$rem_flag = true;
+			else if ($condition[$i]=="sleep") {
+				$sleep_flag = true;
 			}
 
 			if (count($condition)==1) {
-				if ($condition[$i] != "REM sleep") {
+				if ($condition[$i] != "sleep") {
 					$entry = $entry." AND $cond_name = \"".$condition[$i]."\"";
 				}
 				else {
-					$entry = $entry." AND ($cond_name = \"".$condition[$i]."\" OR $cond_name = \"REM\")";
+					$entry = $entry." AND ($cond_name = \"".$condition[$i]."\" OR $cond_name = \"sleep\")";
 				}
 			}
 			else if ($i==0) {
@@ -106,8 +106,8 @@
 				if ($male_flag && $female_flag) {
 					$entry = $entry." OR $cond_name = \"male and female\"";
 				}
-				if ($rem_flag) {
-					$entry = $entry." OR $cond_name = \"REM\"";	
+				if ($sleep_flag) {
+					$entry = $entry." OR $cond_name = \"sleep\"";	
 				}
 
 				$entry = $entry." OR $cond_name = \"".$condition[$i]."\")";
