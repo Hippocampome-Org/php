@@ -206,7 +206,7 @@
 		return $median;//." $sql2";
 	}
 
-	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property) {
+	function retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property, $best_ranks_other) {
 		/*
 			Return values for all relevant value columns.
 		*/
@@ -269,6 +269,7 @@
 		$npage_entry_cond = "";
 		for ($o_i = 0; $o_i < count($other_all_group); $o_i++) {
 			$results = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, $conditions, $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)], $error_n_cols[($o_i+3)]);
+			$results_nocond = value_collect($conn, $i, $other_all_group[$o_i], $neuron_id, "", $referenceID, $refid_condition, "false", $error_cols[($o_i+3)], $error_types[($o_i+3)], $error_n_cols[($o_i+3)]);
 			$entry_output = $entry_output.$results[0];
 			$val_frag = $results[3][5];
 			$rank_entry = $results[2];
@@ -280,7 +281,12 @@
 			if ($results[4] != "" && ($val_property == $other_all_group[$o_i] || $val_property == "all_other" || $val_property == "")) {
 				$all_other = $all_other.$other_all_group[$o_i].": ".$results[4];
 			}
-			//echo "other_all_group: $other_all_group[$o_i] val_property: $val_property<br>";
+
+			// find conditions in other columns
+			foreach ($results_nocond[2] as $rank_result) {
+				array_push($best_ranks_other, $rank_result);
+			}
+			//echo "best_ranks_other: ".$other_all_group[$o_i]." ".count($best_ranks_other)."<br>";
 
 			/* other all toggle checked */
 			if ($other_all == "checked") {
@@ -353,7 +359,7 @@
 		array_push($all_vals, $other_frag);
 		//echo "<br>other_frag: ".$other_frag;	
 
-		return array($theta_values, $spw_values, $firingrate_values, $other_values, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $all_vals);	
+		return array($theta_values, $spw_values, $firingrate_values, $other_values, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $all_vals, $best_ranks_other);	
 	}
 
 	/*
@@ -373,7 +379,7 @@
 			if (!isset($conditions)) {
 				$conditions = '';
 			}
-			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property);
+			$write_output = retrieve_values($conn, $i, $theta_values, $spw_values, $firingrate_values, $other_values, $neuron_ids, $conditions, $best_ranks_theta, $best_ranks_swr, $best_ranks_firingrate, $npage_theta, $npage_swr, $npage_firingrate, $npage_other, $pmid_limit, $referenceID, $other_all, $val_property, $best_ranks_other);
 			$theta_values = $write_output[0];
 			$spw_values = $write_output[1];
 			$firingrate_values = $write_output[2];
@@ -381,6 +387,7 @@
 			$best_ranks_theta = $write_output[4];
 			$best_ranks_swr = $write_output[5];
 			$best_ranks_firingrate = $write_output[6];
+			$best_ranks_other = $write_output[12];
 			$npage_theta = $write_output[7];
 			$npage_swr = $write_output[8];
 			$npage_firingrate = $write_output[9];

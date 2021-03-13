@@ -21,6 +21,7 @@
 	$best_ranks_theta=array();
 	$best_ranks_swr=array();
 	$best_ranks_firingrate=array();
+	$best_ranks_other=array();
 
 	/*
 	Read from input files
