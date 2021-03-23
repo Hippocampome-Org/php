@@ -12,6 +12,16 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Synapse Modeling Tools</title>
 <script type="text/javascript" src="style/resolution.js"></script>
+<style>
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+th, td {
+  padding: 5px;
+  border: 1px solid black;
+}
+</style>
 </head>
 <body>
 
@@ -25,21 +35,29 @@ session_start();
 	<br>
 	<center><font class="font1"><u>Synapse Modeling Tools</u></font></center>
 </div>
-<div style="position:absolute; top:145px; left:30%;width:500px;">	
-	<span style='position:relative;top:10px'><span style='position:relative;left:23px'><font class="font7">The convergence of a four-state and a three-state formalism of a synaptic plasticity model in the <a href='https://senselab.med.yale.edu/modeldb/ShowModel?model=266934'>NEURON Simulation Environment</a></font></span>
-	<ul> 
-	<span style='position:relative;left:23px'><li><a href='#'><font class="font7"> Synapse Modeling Utility and Trace Reconstructor</font></a></li></span>
-	<br>
-	<li><a href='#'><font class="font7"> Program plus Digitized Traces and Optimization Results</font></a></li>
-	<br>
-	<li><a href='https://github.com/k1moradi/SynapseModelingUtility'><font class="font7"> GitHub page</font></a></li>
-	<br>
-	<li><a href="https://github.com/k1moradi/SynapseModelersWorkshop/archive/master.zip"><font class="font7"> Synapse Modelers</font></a>
-	</li>
-	<br>
-	<li><a href='https://github.com/k1moradi/MachineLearningSynapsePhysiology'><font class="font7"> Machine Learning Library and Preprocessed Data</font></a></li>
-	</span>
-	</ul>	
+<div style="position:absolute; top:145px; left:19%;width:775px;">	
+	<table>
+		<tr>
+			<td>Tools, model, or data</td>
+			<td>Direct download</td>
+			<td>External links</td>
+		</tr>
+		<tr>
+			<td>The convergence of a four-state and a three-state formalism of a synaptic plasticity model in the NEURON Simulation Environment.</td>
+			<td>[<a href="/general/synapse_modeling/NEURON_Model.zip">Hippocampome.org</a>]</td>
+			<td>[<a href="https://senselab.med.yale.edu/modeldb/ShowModel?model=266934">ModelDB</a>]</td>
+		</tr>
+		<tr>
+			<td>Synapse Modeling Utility/Trace Reconstructor plus digitized traces and parametric fitting results.</td>
+			<td>[<a href="/general/synapse_modeling/Modeling.rar">Hippocampome.org</a>]</td>
+			<td>[<a href="https://github.com/k1moradi/SynapseModelingUtility">GitHub</a>]</td>
+		</tr>
+		<tr>
+			<td>Machine Learning Library and preprocessed data.</td>
+			<td>[<a href="/general/synapse_modeling/MachineLearningSynapsePhysiology.zip">Hippocampome.org</a>]</td>
+			<td>[<a href="https://github.com/k1moradi/MachineLearningSynapsePhysiology">GitHub</a>]</td>
+		</tr>
+	</table>
 	<br />
 </div>
 </body>
