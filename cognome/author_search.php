@@ -41,7 +41,7 @@
     <?php
     include('mysql_connect.php'); 
 
-    mysqli_set_charset($conn,"utf8mb4");    
+    mysqli_set_charset($cog_conn,"utf8mb4");    
 
     $letters = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N',
       'O','P','Q','R','S','T','U','V','W','X','Y','Z');
@@ -105,7 +105,7 @@
       4=>"keyword");
     for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
       $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $j=1;
       if ($result->num_rows > 0) {       
         while($row = $result->fetch_assoc()) { 
@@ -161,13 +161,13 @@
         Output formatted reports on each article corresponding to the id
       */
       $author_id = $_GET['author_id'];
-      $sql = "SELECT author FROM natemsut_hctm.authors WHERE id = ".$author_id.";";
-      $author_name = $conn->query($sql)->fetch_assoc()['author'];
+      $sql = "SELECT author FROM $cog_database.authors WHERE id = ".$author_id.";";
+      $author_name = $cog_conn->query($sql)->fetch_assoc()['author'];
       echo "<center><u>".$author_name."</u></center></div><br>";
 
       $author_ids = array();
-      $sql = "SELECT article_id FROM natemsut_hctm.article_has_author WHERE author_name='".$author_name."';";
-      $result = $conn->query($sql);
+      $sql = "SELECT article_id FROM $cog_database.article_has_author WHERE author_name='".$author_name."';";
+      $result = $cog_conn->query($sql);
       if ($result->num_rows > 0) { 
         while($row = $result->fetch_assoc()) { 
           array_push($author_ids,$row['article_id']);
@@ -176,8 +176,8 @@
 
       $i=0;
       foreach ($author_ids as $id) {
-        $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification FROM natemsut_hctm.articles WHERE articles.id = ".$id.";";
-        $result = $conn->query($sql); 
+        $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification FROM $cog_database.articles WHERE articles.id = ".$id.";";
+        $result = $cog_conn->query($sql); 
         if ($result->num_rows > 0) { 
           while($row = $result->fetch_assoc()) {
             // abstract
@@ -223,8 +223,8 @@
       }
     }
     else {
-      $sql = "SELECT id, author FROM natemsut_hctm.authors;";
-      $result = $conn->query($sql); 
+      $sql = "SELECT id, author FROM $cog_database.authors;";
+      $result = $cog_conn->query($sql); 
       if ($result->num_rows > 0) { 
         while($row = $result->fetch_assoc()) {
           $author = $row["author"];
@@ -237,7 +237,7 @@
     }
     echo "</div>";
 
-    $conn->close();  
+    $cog_conn->close();  
 
     ?></div></div><br>
   </div>

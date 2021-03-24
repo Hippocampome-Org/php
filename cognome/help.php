@@ -67,7 +67,7 @@
   
   include('glossary.php');
 
-  $conn->close();
+  $cog_conn->close();
 
   ?></center></table>
 </div></div><br>

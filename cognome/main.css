@@ -114,10 +114,11 @@ input[type='checkbox'] {
     margin: 0;
     border: 1px solid #aaa;
     border-radius: 1em;
-    height:55px;
+    height:53px;
     position:absolute;
     right:2%;
-    top:.6em;
+    top:.58em;
+    z-index: 20;
 }
 .select-css::-ms-expand {
     display: none;

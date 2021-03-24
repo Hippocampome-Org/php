@@ -44,7 +44,7 @@ if (isset($_POST['username']) & isset($_POST['password'])) {
   //echo $_POST['username']."<br><br>".$_POST['password'];
   $sql = "SELECT AES_DECRYPT(`password`, '".$pass_enc_secret_key."') AS `password` FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
   //echo $sql;
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   if ($result->num_rows > 0) { 
     $pass_match = $result->fetch_assoc()['password'];
     if ($pass_match == $_POST['password']) {
@@ -71,7 +71,7 @@ if (isset($_POST['username']) & isset($_POST['password'])) {
 
   echo "</div><br><br>";  
   
-  $conn->close();
+  $cog_conn->close();
 
   ?>
 </div>

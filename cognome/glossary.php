@@ -27,7 +27,7 @@
     echo "<tr><td>Dimension Explanation:</td><td>".$dim_desc[$i]."</td></tr>";
     echo "<tr><td><center><u>ID</u></center></td><td><center><u>Description</u></center></td></tr>";
     $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $j=1;
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) { 

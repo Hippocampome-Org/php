@@ -81,7 +81,7 @@
     <br><span class='methods_topic'>Searching for More Keywords Like \"brian\" or \"nest\"</span>
     <br><br>";
 
-    $conn->close();  
+    $cog_conn->close();  
 
     ?></div></div><br>
   </div>

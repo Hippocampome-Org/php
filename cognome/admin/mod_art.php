@@ -38,8 +38,8 @@
 
   // add/modify/del options presented
   echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><form action='art_sub.php' method='POST'>Articles:&nbsp&nbsp<input type='button' value='  Add  ' onclick='toggleListDown()' style='height:30px;font-size:22px;position:relative;top:-2px;'>&nbsp&nbsp</input><input type='button' value='  Modify  ' onclick='toggleListUp()' style='height:30px;font-size:22px;position:relative;top:-2px;'></input>";
-  $sql = "SELECT * FROM natemsut_hctm.articles ORDER BY ID DESC;";
-  $result = $conn->query($sql);
+  $sql = "SELECT * FROM $cog_database.articles ORDER BY ID DESC;";
+  $result = $cog_conn->query($sql);
   $articles_group=array();
   $articles_ids_group=array();
   if ($result->num_rows > 0) { 
@@ -84,7 +84,7 @@
     window.location.replace('mod_art.php');
   }
   </script>";
-  $conn->close();
+  $cog_conn->close();
 
   /*
     Check for prior collected article details
@@ -97,12 +97,12 @@
 
   function setArtDetails($art_mod_id,$servername,$username,$password,$dbname) {
       // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);    
+    $cog_conn = new mysqli($servername, $username, $password, $dbname);    
       // Check connection
-    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); echo 'connection failed';}  
+    if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); echo 'connection failed';}  
 
-    $sql = "SELECT * FROM natemsut_hctm.articles WHERE ID=".$art_mod_id.";";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM $cog_database.articles WHERE ID=".$art_mod_id.";";
+    $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
     $title=$row["title"];
     $year=$row["year"];
@@ -117,7 +117,7 @@
     $authors=$row["authors"];
     $art_off_id=$row["official_id"];
 
-    $conn->close();
+    $cog_conn->close();
 
     return array($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id);
   }
@@ -126,9 +126,9 @@
     Import from pubmed
   */
   // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);    
+  $cog_conn = new mysqli($servername, $username, $password, $dbname);    
   // Check connection
-  if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }  
+  if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); }  
 
   echo "<br><div class='article_details'><center>
   <form action='#' method='POST'>
@@ -271,8 +271,8 @@
   </table>
   </div>";  
 
-  $sql = "SELECT MAX(id) FROM natemsut_hctm.articles;";
-  $result = $conn->query($sql);
+  $sql = "SELECT MAX(id) FROM $cog_database.articles;";
+  $result = $cog_conn->query($sql);
   $row = $result->fetch_assoc();
   if ($art_mod_id=='') {
     $new_art_numb = $row["MAX(id)"] + 1; // new article id number
@@ -292,12 +292,12 @@
   $sel_thy=array(); // theories
   $sel_kwd=array(); // keywords   
 
-  function chk_prop($sql, $conn, $col) {
+  function chk_prop($sql, $cog_conn, $col) {
     /*
       Collect array of existing article properties
     */
     $matches=array();
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) { 
       while($row = $result->fetch_assoc()) { 
         array_push($matches,$row[$col]);
@@ -327,43 +327,43 @@
   /* 
     Collect and display existing article properties 
   */
-  $tbl="natemsut_hctm.";     
+  $tbl="$cog_database.";     
   if ($art_mod_id!='') {   
     $col="subject_id";
     $sql="SELECT ".$col." FROM ".$tbl."article_has_subject WHERE article_id=".$art_mod_id;
-    $sel_sbj=chk_prop($sql, $conn, $col);
+    $sel_sbj=chk_prop($sql, $cog_conn, $col);
     //
     $col="detail_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_detail WHERE article_id=".$art_mod_id;
-    $sel_det=chk_prop($sql, $conn, $col);
+    $sel_det=chk_prop($sql, $cog_conn, $col);
     //
     $col="level_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_implmnt WHERE article_id=".$art_mod_id;
-    $sel_ipl=chk_prop($sql, $conn, $col);   
+    $sel_ipl=chk_prop($sql, $cog_conn, $col);   
     //
     $col="theory_id";      
     $sql="SELECT ".$col." FROM ".$tbl."article_has_theory WHERE article_id=".$art_mod_id;
-    $sel_thy=chk_prop($sql, $conn, $col);
+    $sel_thy=chk_prop($sql, $cog_conn, $col);
     //
     $col="keyword_id";      
     $sql="SELECT ".$col." FROM ".$tbl."article_has_keyword WHERE article_id=".$art_mod_id;
-    $sel_kwd=chk_prop($sql, $conn, $col);  
+    $sel_kwd=chk_prop($sql, $cog_conn, $col);  
     //
     $col="scale_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_scale WHERE article_id=".$art_mod_id;
-    $sel_scl=chk_prop($sql, $conn, $col);  
+    $sel_scl=chk_prop($sql, $cog_conn, $col);  
     //
     $col="region_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
-    $sel_rgn=chk_prop($sql, $conn, $col);   
+    $sel_rgn=chk_prop($sql, $cog_conn, $col);   
     //
     $col="neuron_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_neuron WHERE article_id=".$art_mod_id;
-    $sel_nrn=chk_prop($sql, $conn, $col);      
+    $sel_nrn=chk_prop($sql, $cog_conn, $col);      
     //
     $col="neuron_id";    
     $sql="SELECT ".$col." FROM ".$tbl."article_has_neuronfuzzy WHERE article_id=".$art_mod_id;
-    $sel_nrnfzy=chk_prop($sql, $conn, $col);          
+    $sel_nrnfzy=chk_prop($sql, $cog_conn, $col);          
   }
 
   $sel_nrntot = array();
@@ -374,14 +374,14 @@
   <center><u>Article Research Properties</u></center><br>
   <table>";
 
-  function display_property($conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
+  function display_property($cog_conn, $prop_desc, $but_desc, $tbl, $col, $select_group, $multi_sel) {
     echo "<tr><td style='min-width:350px;'>".$prop_desc."</td><td>";
     if ($but_desc == "Neuron") {
       $sel_nrn = $select_group[0];
       $sel_nrnfzy = $select_group[1];
       echo "<div style='width:400px;height:150px;overflow-y:scroll;line-height:20px;float:left;border:1px solid black;'><font style='font-size:18px;'><table>";
       $sql = "SELECT ".$col." FROM ".$tbl;
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $prop_group=array();  
       $i=0;
       if ($result->num_rows > 0) { 
@@ -403,7 +403,7 @@
     else if ($but_desc == "Subject" || $but_desc == "Region" || $but_desc == "Theory" || $but_desc == "Keyword") {
       echo "<div style='width:400px;height:150px;overflow-y:scroll;line-height:20px;float:left;border:1px solid black;'><font style='font-size:18px;'><table>";
       $sql = "SELECT ".$col." FROM ".$tbl;
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $prop_group=array();  
       $i=0;
       if ($result->num_rows > 0) { 
@@ -428,7 +428,7 @@
         echo "<option></option>";
       }
       $sql = "SELECT ".$col." FROM ".$tbl;
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $prop_group=array();  
       $i=0;
       if ($result->num_rows > 0) { 
@@ -454,43 +454,43 @@
   $evid_loc_h=40; // location textbox height
   $evid_des_h=100; // description textbox height
   if (isset($art_mod_id)) {
-  display_property($conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_sbj, true);
-  display_evidence($conn, "Subject", "Location", "sub_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Subject", "Description", "sub_desc", $evid_des_h, $art_mod_id);
+  display_property($cog_conn, 'Subjects:', 'Subject', 'subjects', 'subject', $sel_sbj, true);
+  display_evidence($cog_conn, "Subject", "Location", "sub_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Subject", "Description", "sub_desc", $evid_des_h, $art_mod_id);
   //
-  display_property($conn, 'Level of Detail:', 'Detail', 'details', 'detail_level', $sel_det, false);
-  display_evidence($conn, "Detail", "Location", "det_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Detail", "Description", "det_desc", $evid_des_h, $art_mod_id);  
+  display_property($cog_conn, 'Level of Detail:', 'Detail', 'details', 'detail_level', $sel_det, false);
+  display_evidence($cog_conn, "Detail", "Location", "det_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Detail", "Description", "det_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Network Scale:', 'Scale', 'network_scales', 'scale', $sel_scl, false);  
-  display_evidence($conn, "Scale", "Location", "scl_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Scale", "Description", "scl_desc", $evid_des_h, $art_mod_id);  
+  display_property($cog_conn, 'Network Scale:', 'Scale', 'network_scales', 'scale', $sel_scl, false);  
+  display_evidence($cog_conn, "Scale", "Location", "scl_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Scale", "Description", "scl_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Implementation Level:', 'Implementation', 'implementations', 'level', $sel_ipl, false);
-  display_evidence($conn, "Implementation", "Location", "impl_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Implementation", "Description", "impl_desc", $evid_des_h, $art_mod_id);  
+  display_property($cog_conn, 'Implementation Level:', 'Implementation', 'implementations', 'level', $sel_ipl, false);
+  display_evidence($cog_conn, "Implementation", "Location", "impl_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Implementation", "Description", "impl_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Anatomical Region:', 'Region', 'regions', 'region', $sel_rgn, true);
-  display_evidence($conn, "Region", "Location", "reg_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Region", "Description", "reg_desc", $evid_des_h, $art_mod_id);  
+  display_property($cog_conn, 'Anatomical Region:', 'Region', 'regions', 'region', $sel_rgn, true);
+  display_evidence($cog_conn, "Region", "Location", "reg_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Region", "Description", "reg_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Theories and Computational<br>Network Models:', 'Theory', 'theory_category', 'category', $sel_thy, true);
-  display_evidence($conn, "Theory or Computational<br>Network Model", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Theory or Computational<br>Network Model", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
+  display_property($cog_conn, 'Theories and Computational<br>Network Models:', 'Theory', 'theory_category', 'category', $sel_thy, true);
+  display_evidence($cog_conn, "Theory or Computational<br>Network Model", "Location", "thy_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Theory or Computational<br>Network Model", "Description", "thy_desc", $evid_des_h, $art_mod_id);  
   //
-  display_property($conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrntot, true);
-  display_evidence($conn, "Neuron", "Location", "nrn_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Neuron", "Description", "nrn_desc", $evid_des_h, $art_mod_id);
+  display_property($cog_conn, 'Neuron Types:', 'Neuron', 'neuron_types', 'neuron', $sel_nrntot, true);
+  display_evidence($cog_conn, "Neuron", "Location", "nrn_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Neuron", "Description", "nrn_desc", $evid_des_h, $art_mod_id);
   //
-  display_property($conn, 'Keywords:', 'Keyword', 'keywords', 'keyword', $sel_kwd, true);
-  display_evidence($conn, "Keyword", "Location", "kwd_loc", $evid_loc_h, $art_mod_id);
-  display_evidence($conn, "Keyword", "Description", "kwd_desc", $evid_des_h, $art_mod_id);
+  display_property($cog_conn, 'Keywords:', 'Keyword', 'keywords', 'keyword', $sel_kwd, true);
+  display_evidence($cog_conn, "Keyword", "Location", "kwd_loc", $evid_loc_h, $art_mod_id);
+  display_evidence($cog_conn, "Keyword", "Description", "kwd_desc", $evid_des_h, $art_mod_id);
   }
 
   echo "</table></div><br>";
   echo "<div class='article_details' style='position:fixed;bottom:10px;right:10px;'><span style='font-size:1.2em;'><input type='submit' value='  Submit  ' style='height:30px;font-size:22px;'></input></span></div>";
 
-  $conn->close();
+  $cog_conn->close();
 
   ?></center></table></form>
 </div></div><br>

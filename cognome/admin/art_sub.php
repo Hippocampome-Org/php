@@ -36,7 +36,7 @@
 
   if ($art_info_change) {
     // Check if article is existing one or new one
-    $result = $conn->query("SELECT ID FROM natemsut_hctm.articles WHERE ID=".$art_num);
+    $result = $cog_conn->query("SELECT ID FROM $cog_database.articles WHERE ID=".$art_num);
     if($result->num_rows == 0) { 
       // check for missing official id
       if($art_off_id == '') {
@@ -46,8 +46,8 @@
           exit();
       }
       // check for duplicate article
-      $sql = "SELECT official_id FROM natemsut_hctm.articles WHERE official_id=\"".$art_off_id."\";";
-      $result = $conn->query($sql);
+      $sql = "SELECT official_id FROM $cog_database.articles WHERE official_id=\"".$art_off_id."\";";
+      $result = $cog_conn->query($sql);
       if($result->num_rows == 0 && $_POST['citation'] != '') {
         // submit new article info
         include('submit_info.php');
@@ -81,6 +81,6 @@
       echo "<br><br></div>";
     }
   }
-  $conn->close();
+  $cog_conn->close();
   ?>
 </center></table></div></div><br></div></body></html>

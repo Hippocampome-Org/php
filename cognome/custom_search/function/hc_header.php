@@ -15,7 +15,7 @@ $_SESSION['fp']=0;
 $_SESSION['if']=0;
 $_SESSION['im']=0;
 $query = "SELECT permission FROM user WHERE id=2"; // id=2 is anonymous user
-$rs = mysqli_query($conn,$query);
+$rs = mysqli_query($cog_conn,$query);
 list($permission) = mysqli_fetch_row($rs);
 if ($permission == 1) { 
   $_SESSION['perm'] = 1;
@@ -29,7 +29,7 @@ $permission1 = $_SESSION['perm'];
 if ($_SESSION['perm'] == 0) {
   if (array_key_exists('password', $_REQUEST)) {
     $query = "SELECT permission FROM user WHERE password = '{$_REQUEST['password']}'";
-    $rs = mysqli_query($conn,$query);
+    $rs = mysqli_query($cog_conn,$query);
     while(list($permission) = mysqli_fetch_row($rs)) {
       if ($permission == 1) { 
         $permission1 = $permission;
@@ -38,21 +38,21 @@ if ($_SESSION['perm'] == 0) {
       else;
     }
       $query = "SELECT permission FROM user WHERE id=3";
-      $rs = mysqli_query($conn,$query);
+      $rs = mysqli_query($cog_conn,$query);
       while(list($permission) = mysqli_fetch_row($rs)) {
           if ($permission == 1) {
               $_SESSION['fp']=1;
           }
       }
       $query = "SELECT permission FROM user WHERE id=4";
-      $rs = mysqli_query($conn,$query);
+      $rs = mysqli_query($cog_conn,$query);
       while(list($permission) = mysqli_fetch_row($rs)) {
           if ($permission == 1) {
               $_SESSION['if']=1;
           }
       }
       $query = "SELECT permission FROM user WHERE id=5";
-      $rs = mysqli_query($conn,$query);
+      $rs = mysqli_query($cog_conn,$query);
       while(list($permission) = mysqli_fetch_row($rs)) {
           if ($permission == 1) {
               $_SESSION['im']=1;

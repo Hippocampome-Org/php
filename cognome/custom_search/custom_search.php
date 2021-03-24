@@ -139,8 +139,8 @@
     echo ">yes</option>";    
     echo "</select></center>";    
     echo "<div class='wrap-collabsible' id='choose_articles' style='width:90%;position:relative;left:5%;'><input id='choose_articles_list' class='toggle' type='checkbox'><label for='choose_articles_list' class='lbl-toggle'>Articles Availible</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;height:600px;overflow:auto;'>";
-    $sql = "SELECT * FROM natemsut_hctm.articles";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM $cog_database.articles";
+    $result = $cog_conn->query($sql);
     $articles_chosen=array();
     $articles_chosen_ids=array();
     $c_i = 1;

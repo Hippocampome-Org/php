@@ -7,31 +7,32 @@
   <link rel="stylesheet" type="text/css" href="main.css">
   <?php include('set_theme.php'); ?>
   <?php include('function/hc_header.php'); ?>
-  <?php $selected_db = $database; ?>
+  <?php $selected_db = $cog_database; ?>
 </head>
 <body>
   <?php include("function/hc_body.php"); ?> 
-  <div style="width:80%;position:relative;left:10%;">
   <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
+  <div style="width:80%;position:relative;left:10%;">
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML='General Statistics and Reporting';
+    document.getElementById('fix_title').style='width:80%;position:relative;left:10%;';
   </script>
   <!-- end of header -->   
 
   <center>
   <?php
-  include('mysql_connect.php');    
+  //include('mysql_connect.php');    
 
   /* Determine if article cutoff should occur with a starting max id
      and a ending max id. */
-  if ($_GET['only_evidence_anno']==true) {
+  if (isset($_GET['only_evidence_anno']) && $_GET['only_evidence_anno']==true) {
     $GLOBALS['art_cutoff_use'] = true;
   }
   $GLOBALS['art_start_cutoff'] = 117;
   $GLOBALS['art_end_cutoff'] = 313;
-  error_reporting(0);
+  //error_reporting(0);
 
   /*
   Glossary
@@ -76,7 +77,7 @@
   if ($GLOBALS['art_cutoff_use']==true) {
     $sql = $sql.$only_evi;
   }
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $article_count = $result->fetch_assoc();
   echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
   echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a><br><br>
@@ -87,18 +88,18 @@
   echo "<table cellspacing='5px' cellpadding='30px' style='font-size:20px;'><tr><th><u>Subject</u></th><th><u>Articles</u></th><th><u>Theories</u></th><th><u>Keywords</u></th><tr>";
 
   $sql = "SELECT COUNT(*) FROM $selected_db.subjects";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $row = $result->fetch_assoc();    
   $dim_count = $row["COUNT(*)"];   
   
   for($i=1;$i<$dim_count+1;$i++) {
     $sql = "SELECT subject FROM $selected_db.subjects WHERE id=".$i;
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
     $subj_names[$i]=$row["subject"];
   }
 
-  function find_subject_annos($i, $selected_db, $conn) {
+  function find_subject_annos($i, $selected_db, $cog_conn) {
     $sql = "SELECT subject FROM $selected_db.subjects WHERE id=".$i;
     $sql2 = "SELECT COUNT(*) FROM $selected_db.article_has_subject WHERE subject_id=".$i;
     $sql3 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
@@ -108,36 +109,36 @@
        $sql3 = $sql3.$only_evi_2;
        $sql4 = $sql4.$only_evi_2;
     }
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
-    $result2 = $conn->query($sql2);
+    $result2 = $cog_conn->query($sql2);
     $row2 = $result2->fetch_assoc();
-    $result3 = $conn->query($sql3);
+    $result3 = $cog_conn->query($sql3);
     $row3 = $result3->fetch_assoc();
-    $result4 = $conn->query($sql4);
+    $result4 = $cog_conn->query($sql4);
     $row4 = $result4->fetch_assoc();            
     echo "<tr><td>".$row["subject"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(*)"]."</center></td><td><center>".$row4["COUNT(*)"]."</center></td></tr>";
   }
   echo "<tr><td><center><u>Spatial Navigation and Memory</u></center></td></tr>";  
-  find_subject_annos(1, $selected_db, $conn);
+  find_subject_annos(1, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Non-spatial Learning and Memory</u></center></td></tr>";  
-  find_subject_annos(2, $selected_db, $conn);
-  find_subject_annos(6, $selected_db, $conn);
-  find_subject_annos(7, $selected_db, $conn);
-  find_subject_annos(8, $selected_db, $conn);
-  find_subject_annos(10, $selected_db, $conn);
-  find_subject_annos(11, $selected_db, $conn);
-  find_subject_annos(12, $selected_db, $conn);
-  find_subject_annos(14, $selected_db, $conn);
+  find_subject_annos(2, $selected_db, $cog_conn);
+  find_subject_annos(6, $selected_db, $cog_conn);
+  find_subject_annos(7, $selected_db, $cog_conn);
+  find_subject_annos(8, $selected_db, $cog_conn);
+  find_subject_annos(10, $selected_db, $cog_conn);
+  find_subject_annos(11, $selected_db, $cog_conn);
+  find_subject_annos(12, $selected_db, $cog_conn);
+  find_subject_annos(14, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Pattern Completion and Separation</u></center></td></tr>";  
-  find_subject_annos(5, $selected_db, $conn);
+  find_subject_annos(5, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Neurological Disorders</u></center></td></tr>";  
-  find_subject_annos(15, $selected_db, $conn);
-  find_subject_annos(16, $selected_db, $conn);
-  find_subject_annos(18, $selected_db, $conn);
+  find_subject_annos(15, $selected_db, $cog_conn);
+  find_subject_annos(16, $selected_db, $cog_conn);
+  find_subject_annos(18, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Other Models</u></center></td></tr>";  
-  find_subject_annos(3, $selected_db, $conn);
-  find_subject_annos(17, $selected_db, $conn);
+  find_subject_annos(3, $selected_db, $cog_conn);
+  find_subject_annos(17, $selected_db, $cog_conn);
   echo "</table></div>";
 
   /*
@@ -156,7 +157,7 @@
     6=>"article_has_scale");
 
   $sql = "SELECT COUNT(*) FROM $selected_db.dimensions";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $row = $result->fetch_assoc();    
   $dim_count = $row["COUNT(*)"];   
   for($i=1;$i<$dim_count+1;$i++) {
@@ -178,13 +179,13 @@
       $sql2 = $sql2.$only_evi_3;
       $sql3 = $sql3.$only_evi_3;
     }
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) {          
-        $result2 = $conn->query($sql2);
+        $result2 = $cog_conn->query($sql2);
         if ($result2->num_rows > 0) {       
           while($row2 = $result2->fetch_assoc()) { 
-            $result3 = $conn->query($sql3);
+            $result3 = $cog_conn->query($sql3);
             if ($result3->num_rows > 0) {       
               while($row3 = $result3->fetch_assoc()) {             
                 echo "<tr><td>".$row["dimension"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(DISTINCT article_id)"]."</center></td><tr>";
@@ -233,7 +234,7 @@
   echo "<br>Individual counts of a dimensions value annotations given a subject are listed. Each entry in the matrices<br>below contains the count value on the left and percentage within its group on the right.<br>";
 
   $sql = "SELECT COUNT(*) FROM $selected_db.subjects";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $row = $result->fetch_assoc();    
   $dim_count = $row["COUNT(*)"]; 
 
@@ -245,12 +246,12 @@
     for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
       echo "<th width='50px' style='word-wrap:break-word' class='reporting_table_head'><u>".$dim_name[$i][$j]."</u></th>";
     }    
-    disp_dim_arts($dim_name, $subj_names, $i, $j, "article_has_subject", $dim_tbl, "subject_id", $dim_id_names, "article_has_subject.article_id", $art_id_names, $conn, $selected_db);
+    disp_dim_arts($dim_name, $subj_names, $i, $j, "article_has_subject", $dim_tbl, "subject_id", $dim_id_names, "article_has_subject.article_id", $art_id_names, $cog_conn, $selected_db);
     echo "</th></tr>"; 
   }
   echo "</table>";  
 
-  function disp_dim_arts($dim_name, $subj_names, $i, $j, $subj_tbl, $dim_tbl, $subj_id_name, $dim_id_names, $subj_art_id, $art_id_names, $conn, $selected_db) {
+  function disp_dim_arts($dim_name, $subj_names, $i, $j, $subj_tbl, $dim_tbl, $subj_id_name, $dim_id_names, $subj_art_id, $art_id_names, $cog_conn, $selected_db) {
     for($k=1;$k<(sizeof($subj_names)+1);$k++) {
       echo "<tr width='300px' style='width:500px;'>";
       echo "<td width='50px' style='word-wrap:break-word' class='reporting_table_body'>".$subj_names[$k]."</td>";
@@ -265,7 +266,7 @@
         $art1 = $subj_art_id;
         $art2 = $art_id_names[$i];
 
-        dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, false, $selected_db);
+        dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $cog_conn, false, $selected_db);
       }
       echo "</tr>";      
     }   
@@ -281,12 +282,12 @@
       $id_val_2 = $j;
       $art1 = $subj_art_id;
       $art2 = $art_id_names[$i];
-      dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, true, $selected_db);
+      dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $cog_conn, true, $selected_db);
     }
     echo "</tr>";
   }
 
-  function dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $conn, $all_toggle, $selected_db) {
+  function dim_art_num($dim_name, $table1, $table2, $id_name_1, $id_name_2, $id_val_1, $id_val_2, $art1, $art2, $cog_conn, $all_toggle, $selected_db) {
     /*
       Number of articles given a subject and dimension value
 
@@ -313,7 +314,7 @@
         $sql = $sql.$only_evi_temp;        
       }
     }
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
     if ($all_toggle==false) {
       $dim_val = $row["COUNT(*)"];
@@ -324,7 +325,7 @@
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
         $sql = $sql.$only_evi_temp;        
       }
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $row2 = $result->fetch_assoc();
       $dim_val_total = $row2["COUNT(".$id_name_2.")"];
       /* avoid division by zero */
@@ -345,7 +346,7 @@
         $only_evi_temp = only_evi_adj($temp_tbl, $temp_col);
         $sql = $sql.$only_evi_temp;        
       }
-      $result = $conn->query($sql);
+      $result = $cog_conn->query($sql);
       $row2 = $result->fetch_assoc();
       $all_dim_val = $row2["COUNT(".$id_name_2.")"];
       /* avoid division by zero */
@@ -362,7 +363,7 @@
 
   echo "</div>";  
 
-  $conn->close();
+  $cog_conn->close();
 
   ?></center></table>
 </div></div><br>

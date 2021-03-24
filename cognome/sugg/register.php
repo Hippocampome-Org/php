@@ -58,10 +58,10 @@
     exit();    
   }
 
-  function reg_user($conn) {
+  function reg_user($cog_conn) {
     include('secret_key.php');
     $sql = "INSERT INTO `natemsut_cog_sug`.`accounts` (`username`, `password`, `real_name`, `email`, `affiliation`, `notes`) VALUES ('".$_POST['username']."', AES_ENCRYPT('".$_POST['password']."', '".$pass_enc_secret_key."'), '".$_POST['realname']."', '".$_POST['email']."', '".$_POST['affiliation']."', '".$_POST['notes']."');";
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
   }
 
   if (isset($_POST['user_submitted'])) {
@@ -79,7 +79,7 @@
       Check username duplicate
     */
     $sql = "SELECT username FROM natemsut_cog_sug.accounts WHERE username='".$_POST['username']."';";
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) { 
       reg_try_again("Duplicate username '".$_POST['username']."' detected. Please select another.");
     }
@@ -87,7 +87,7 @@
       Check email duplicate
     */
     $sql = "SELECT email FROM natemsut_cog_sug.accounts WHERE email='".$_POST['email']."';";
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) { 
       reg_try_again("Duplicate email '".$_POST['email']."' detected. Please select another.");
     }    
@@ -105,7 +105,7 @@
       reg_try_again("Password did not meet the length requirement of eight charactors. Please try again."); 
     }
 
-    reg_user($conn);
+    reg_user($cog_conn);
 
     echo "Registration of user: ".$_POST['username']." was successful.<br><br><a href='mod_art.php'>Return to suggest articles page.</a></center><br></div><br>";
     $_SESSION['user_login'] = $_POST['username'];    
@@ -132,7 +132,7 @@
 
   echo "</div><br><br><br>";   
 
-  $conn->close();
+  $cog_conn->close();
 
   ?>
 </div>

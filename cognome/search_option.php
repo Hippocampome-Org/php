@@ -1,9 +1,9 @@
 <?php
-  function search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch) {
+  function search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch) {
     echo "<span style='display: inline-block;'>&nbsp;".$prop_name.":
     <select name='".$row_name."' size='1' class='select-css'>";
     $sql = "SELECT ".$row_name." FROM ".$tbl_name;
-    $result = $conn->query($sql); 
+    $result = $cog_conn->query($sql); 
     $d_i=0;
     $selection_received=$_POST[$row_name];  
     if ($result->num_rows > 0) { 

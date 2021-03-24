@@ -3,12 +3,12 @@
 		Variables used to connect to database
         Add in variable values and save this as mysql_connect.php
 	*/
-    $servername = "";    
-    $username = "";
-    $password = "";    
-    $dbname = "";
+    $cog_servername = "";    
+    $cog_username = "";
+    $cog_password = "";    
+    $cog_dbname = "";
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);    
+    $cog_conn = new mysqli($cog_servername, $cog_username, $cog_password, $cog_dbname);    
     // Check connection
-    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+    if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); }
 ?>

@@ -16,7 +16,7 @@
     6=>"scale");
   for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
     $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $j=1;
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) { 

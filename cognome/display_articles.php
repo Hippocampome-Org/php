@@ -1,5 +1,5 @@
 <?php
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $i=0; 
   if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) { 

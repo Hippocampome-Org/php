@@ -38,10 +38,10 @@
   echo "
   <form action='#' method='POST' style='font-size:1em;'>
   <center>Select";
-  search_option($conn, $sql, "Subject", "subject", "subjects", "all_off");
+  search_option($cog_conn, $sql, "Subject", "subject", "subjects", "all_off");
   echo "<br>Sort By";
-  search_option($conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
-  search_option($conn, $sql, "Detail", "property", "properties", "all_off");  
+  search_option($cog_conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
+  search_option($cog_conn, $sql, "Detail", "property", "properties", "all_off");  
   echo "<span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Filter By:&nbsp<a href='?filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?filter=theory'><input type='button' class='light_bg select-css' value='theory'></a>&nbsp;<a href='?filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a><br>";
   if ($filter=='detail') {
     $prop_name = "Level of Detail";
@@ -52,7 +52,7 @@
     $all_switch = "all_off";
     $prop_value = $_POST[$row_name];
     echo "Filter Property -";
-    search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
+    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='implmnt') {
     $prop_name = "Implementation Level";
@@ -63,7 +63,7 @@
     $all_switch = "all_off";
     $prop_value = $_POST[$row_name];
     echo "Filter Property -";
-    search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
+    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='keyword') {
     $prop_name = "Keyword";
@@ -74,7 +74,7 @@
     $all_switch = "all_off";
     $prop_value = $_POST[$row_name];
     echo "Filter Property -";
-    search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
+    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   if ($filter=='theory') {
     $prop_name = "Theory";
@@ -85,7 +85,7 @@
     $all_switch = "all_off";
     $prop_value = $_POST[$row_name];
     echo "Filter Property -";
-    search_option($conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
+    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
   echo "<input type='hidden' name='form_submitted' value='1' />
   <br><span style='padding:20px'><input type='submit' value='   go   '  class='light_bg select-css'></span></span>
@@ -113,7 +113,7 @@
   // display articles based on the user's selection
   include('display_articles.php');
 
-  $conn->close();
+  $cog_conn->close();
 
   ?>
 </div>

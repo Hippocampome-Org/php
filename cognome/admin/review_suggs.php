@@ -35,14 +35,14 @@
   <?php
   include('mysql_connect.php');  
 
-  $orig_db = "natemsut_hctm";
+  $orig_db = $cog_database;
   $sugg_db = "natemsut_cog_sug";
 
   echo "<form name='register' id='register' action='register.php' method='POST'><center>";
 
   // search for recorded suggestions
   $sql = "SELECT * FROM $sugg_db.user_suggestions;";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   if ($result->num_rows > 0) { 
     while($row = $result->fetch_assoc()) { 
       $username = $row['username'];
@@ -53,7 +53,7 @@
       // get columns
       $all_cols = [];
       $sql_cols = "SHOW COLUMNS FROM $sugg_db.$tbl";
-      $result_cols = $conn->query($sql_cols);
+      $result_cols = $cog_conn->query($sql_cols);
       if ($result_cols->num_rows > 0) { 
         while($row_rslt = $result_cols->fetch_assoc()) { 
           array_push($all_cols, $row_rslt['Field']);
@@ -63,7 +63,7 @@
       // get sugg entries
       $sugg_entry = [];
       $sql2 = "SELECT * FROM $sugg_db.$tbl WHERE id=$id;";
-      $result2 = $conn->query($sql2);
+      $result2 = $cog_conn->query($sql2);
       if ($result2->num_rows > 0) {
         $row2 = $result2->fetch_assoc();
         foreach ($all_cols as $col_name) {
@@ -79,7 +79,7 @@
       // get orig entries
       $orig_entry = [];
       $sql2 = "SELECT * FROM $orig_db.$tbl WHERE id=$id;";
-      $result2 = $conn->query($sql2);
+      $result2 = $cog_conn->query($sql2);
       if ($result2->num_rows > 0) {
         $row2 = $result2->fetch_assoc();
         foreach ($all_cols as $col_name) {
@@ -114,7 +114,7 @@
             $current_val = $sugg_entry[$i];
             if ($current_col == 'article_id') {
               $sql = "SELECT title FROM $sugg_db.articles WHERE id=$current_val;";
-              $result = $conn->query($sql);
+              $result = $cog_conn->query($sql);
               if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 echo "<tr><td>Article Name:</td><td>".$row['title']."</td></tr>";
@@ -123,7 +123,7 @@
             }
             else if ($current_col == 'subject_id') {
               $sql = "SELECT subject FROM $sugg_db.subjects WHERE id=$current_val;";
-              $result = $conn->query($sql);
+              $result = $cog_conn->query($sql);
               if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 echo "<tr><td>Subject Added:</td><td>".$row['subject']."</td></tr>";
@@ -171,7 +171,7 @@
   }
   echo "</center></form><br>";   
 
-  $conn->close();
+  $cog_conn->close();
 
   ?>
 </div>

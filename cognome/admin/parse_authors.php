@@ -43,8 +43,8 @@
     $author_names=array();
     $author_art_ids=array();
     $author_names_unique=array();
-    $sql = "SELECT id, authors FROM natemsut_hctm.articles;";
-    $result = $conn->query($sql); 
+    $sql = "SELECT id, authors FROM $cog_database.articles;";
+    $result = $cog_conn->query($sql); 
     if ($result->num_rows > 0) { 
       while($row = $result->fetch_assoc()) { 
         $art_id = $row["id"];
@@ -66,15 +66,15 @@
       Export results to database
       set_charset is to avoid utf8 encoding issues
     */
-    mysqli_set_charset($conn,"utf8mb4");
+    mysqli_set_charset($cog_conn,"utf8mb4");
 
     /*
       Export article has author relations
     */
     $i=0;
     foreach ($author_names as $name){
-      $sql = "INSERT INTO `natemsut_hctm`.`article_has_author` (`article_id`, `author_name`) VALUES ('".$author_art_ids[$i]."', '".$author_names[$i]."');";
-      $result = $conn->query($sql);
+      $sql = "INSERT INTO `$cog_database`.`article_has_author` (`article_id`, `author_name`) VALUES ('".$author_art_ids[$i]."', '".$author_names[$i]."');";
+      $result = $cog_conn->query($sql);
       usleep(50000); #avoid overload
       $i++;
     }    
@@ -108,15 +108,15 @@
     $collator->sort($author_names_unique);
 
     foreach ($author_names_unique as $name){
-      $sql = "INSERT INTO `natemsut_hctm`.`authors` (`author`) VALUES ('".$name."');";
-      $result = $conn->query($sql);
+      $sql = "INSERT INTO `$cog_database`.`authors` (`author`) VALUES ('".$name."');";
+      $result = $cog_conn->query($sql);
       usleep(50000); #avoid overload
     }
     */
 
     echo "Successfully updated author names.";
 
-    $conn->close();  
+    $cog_conn->close();  
 
     ?></div></div><br>
   </div>

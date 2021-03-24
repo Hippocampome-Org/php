@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   // add/modify/del options presented
   echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><span style='height:10px'></span><span style='font-size:1.2em'>Welcome Back ".$_SESSION['user_login']."&nbsp&nbsp&nbsp<a href='login.php?logout=true' style='font-size:.7em'>logout?</a><br><span style='height:20px;padding:20px;'><br></span></span><form action='art_sub.php' method='POST'>Articles:&nbsp&nbsp<input type='button' value='  Add  ' onclick='toggleListDown()' style='height:30px;font-size:22px;position:relative;top:-2px;'>&nbsp&nbsp</input><input type='button' value='  Modify  ' onclick='toggleListUp()' style='height:30px;font-size:22px;position:relative;top:-2px;'></input><span style='height:10px'></span>";
   $sql = "SELECT * FROM natemsut_cog_sug.articles ORDER BY ID DESC;";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $articles_group=array();
   $articles_ids_group=array();
   if ($result->num_rows > 0) { 
@@ -96,7 +96,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
     window.location.replace('mod_art.php');
   }
   </script>";
-  $conn->close();
+  $cog_conn->close();
 
   /*
     Check for prior collected article details
@@ -108,12 +108,12 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
 
   function setArtDetails($art_mod_id,$servername,$username,$password,$dbname) {
       // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);    
+    $cog_conn = new mysqli($servername, $username, $password, $dbname);    
       // Check connection
-    if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); echo 'connection failed';}  
+    if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); echo 'connection failed';}  
 
     $sql = "SELECT * FROM natemsut_cog_sug.articles WHERE ID=".$art_mod_id.";";
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
     $title=$row["title"];
     $year=$row["year"];
@@ -128,7 +128,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
     $authors=$row["authors"];
     $art_off_id=$row["official_id"];
 
-    $conn->close();
+    $cog_conn->close();
 
     return array($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id);
   }
@@ -137,9 +137,9 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
     Import from pubmed
   */
   // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);    
+  $cog_conn = new mysqli($servername, $username, $password, $dbname);    
   // Check connection
-  if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }  
+  if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); }  
 
   echo "<br><div class='article_details'><center>
   <form action='#' method='POST'>
@@ -277,7 +277,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   </div>";  
 
   $sql = "SELECT MAX(id) FROM natemsut_cog_sug.articles;";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $row = $result->fetch_assoc();
   if ($art_mod_id=='') {
     $new_art_numb = $row["MAX(id)"] + 1; // new article id number
@@ -297,12 +297,12 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   $sel_thy=array(); // theories
   $sel_kwd=array(); // keywords   
 
-  function chk_prop($sql, $conn, $tbl) {
+  function chk_prop($sql, $cog_conn, $tbl) {
     /*
       Collect array of existing article properties
     */
     $matches=array();
-    $result = $conn->query($sql);
+    $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) { 
       while($row = $result->fetch_assoc()) { 
         array_push($matches,$row[$tbl]);
@@ -338,19 +338,19 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   if ($art_mod_id!='') {
     $sql="SELECT subject_id FROM natemsut_cog_sug.article_has_subject WHERE article_id=".$art_mod_id;
     $tbl="subject_id";
-    $sel_sbj=chk_prop($sql, $conn, $tbl);
+    $sel_sbj=chk_prop($sql, $cog_conn, $tbl);
     $sql="SELECT detail_id FROM natemsut_cog_sug.article_has_detail WHERE article_id=".$art_mod_id;
     $tbl="detail_id";
-    $sel_det=chk_prop($sql, $conn, $tbl);
+    $sel_det=chk_prop($sql, $cog_conn, $tbl);
     $sql="SELECT level_id FROM natemsut_cog_sug.article_has_implmnt WHERE article_id=".$art_mod_id;
     $tbl="level_id";
-    $sel_ipl=chk_prop($sql, $conn, $tbl);
+    $sel_ipl=chk_prop($sql, $cog_conn, $tbl);
     $sql="SELECT theory_id FROM natemsut_cog_sug.article_has_theory WHERE article_id=".$art_mod_id;
     $tbl="theory_id";
-    $sel_thy=chk_prop($sql, $conn, $tbl);
+    $sel_thy=chk_prop($sql, $cog_conn, $tbl);
     $sql="SELECT keyword_id FROM natemsut_cog_sug.article_has_keyword WHERE article_id=".$art_mod_id;
     $tbl="keyword_id";
-    $sel_kwd=chk_prop($sql, $conn, $tbl);            
+    $sel_kwd=chk_prop($sql, $cog_conn, $tbl);            
   }
 
   echo "<br><div class='article_details'>
@@ -359,7 +359,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   <table>  
   <tr><td style='min-width:350px;'>Subjects:</td><td><select name='subjects[]' size='5' multiple class='select-css' style='min-width:400px;'>";
   $sql = "SELECT subject FROM subjects";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $subjects_group=array();
   $i=0;
   if ($result->num_rows > 0) { 
@@ -377,7 +377,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   add_rem_buttons('Subject',$subjects_group);
   echo "</td></tr><tr><td style='min-width:350px;'>Level of Detail:</td><td><select name='details[]' size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'><option></option>";
   $sql = "SELECT detail_level FROM details";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $details_group=array();  
   $i=0;
   if ($result->num_rows > 0) { 
@@ -395,7 +395,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   add_rem_buttons('Detail',$details_group);
   echo "</td></tr><tr><td style='min-width:350px;'>Implementation Level:</td><td><center><select name='implmnts[]' size='1' class='select-css' style='min-width:500px;position:relative;top:-5px;'><option></option>";
   $sql = "SELECT level FROM implementations";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $implmnts_group=array();   
   $i=0;
   if ($result->num_rows > 0) { 
@@ -413,7 +413,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   add_rem_buttons('Implementation',$implmnts_group);
   echo "</center></td></tr><tr><td style='min-width:350px;'>Theories:</td><td style='min-width:450px;'><select name='theories[]' size='5' multiple class='select-css' style='min-width:400px;'>";
   $sql = "SELECT category FROM theory_category";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $theories_group=array();  
   $i=0;
   if ($result->num_rows > 0) { 
@@ -432,7 +432,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   echo "</td></tr>
   <tr><td style='min-width:350px;'>Keywords:</td><td><select name='keywords[]' size='5' multiple class='select-css' style='min-width:400px;'>";
   $sql = "SELECT keyword FROM keywords";
-  $result = $conn->query($sql);
+  $result = $cog_conn->query($sql);
   $keywords_group=array();    
   $i=0;
   if ($result->num_rows > 0) { 
@@ -452,7 +452,7 @@ if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == '') {
   echo "<div class='article_details'><center><form action='art_sub.php' method='POST'>
   <span style='font-size:1.2em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span></center></div>";
 
-  $conn->close();
+  $cog_conn->close();
 
   ?></center></table></form>
 </div></div><br>

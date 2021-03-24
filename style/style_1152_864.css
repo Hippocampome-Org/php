@@ -76,8 +76,9 @@ border:none;
 
 #menu_main_button_new_clr{
 	position:absolute; top: 25px; left: 500px;
-	width:600px;
+	width:450px;
 	border:none;
+	z-index:1;
 }
 
 /* Change with resolution ------------------------------------------------------------- */

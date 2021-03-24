@@ -9,17 +9,18 @@
 </head>
 <body>
   <?php include("function/hc_body.php"); ?>  
-  <div style="width:90%;position:relative;left:5%;">
   <br><br> 
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
+  <div style="width:90%;position:relative;left:5%;">
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML="<a href='index.php' style='text-decoration: none;color:black !important'><span class='title_section'>Hippocampus Region Models and Theories</span></a>";
+    document.getElementById('fix_title').style='width:90%;position:relative;left:5%;';
   </script>
   <!-- end of header -->  
 
   <?php
-  include('mysql_connect.php');     
+  //include('mysql_connect.php');     
 
   // retreive dimension names
   include('dimension_names.php');
@@ -32,11 +33,11 @@
   echo "
   <form action='#' method='POST' style='font-size:1em;'>
   <center>";
-  search_option($conn, $sql, "Subject", "subject", "subjects", "all_off");
+  search_option($cog_conn, $sql, "Subject", "subject", "subjects", "all_off");
   echo "&nbsp";
-  search_option($conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
+  search_option($cog_conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
   echo "&nbsp";
-  search_option($conn, $sql, "Detail", "property", "properties", "all_off"); 
+  search_option($cog_conn, $sql, "Detail", "property", "properties", "all_off"); 
   echo "<span style='display: inline-block;'>
   <input type='hidden' name='form_submitted' value='1' />
   &nbsp; &nbsp;<input type='submit' value='   go   '  class='select-css'></span>
@@ -51,7 +52,7 @@
   // display articles based on the user's selection
   include('display_articles.php');
 
-  $conn->close();
+  $cog_conn->close();
 
   ?>
 </div>
