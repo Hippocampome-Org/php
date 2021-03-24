@@ -1,5 +1,5 @@
 <?php
-  function add_property($tbl,$row_name,$add_prop,$cog_conn) {
+  function add_property($tbl,$row_name,$add_prop,$cog_conn,$cog_database) {
     /*
       Adds literature property
     */
@@ -17,7 +17,7 @@
     echo "<br><br></div>";
   }
 
-  function confirm_remove($tbl,$name,$rem_prop,$cog_conn) {     
+  function confirm_remove($tbl,$name,$rem_prop,$cog_conn,$cog_database) {     
     /*
       Confirms if property should be removed
     */
@@ -30,12 +30,12 @@
     &nbsp&nbsp&nbsp<form action='mod_art.php' method='POST'><input type='submit' value='  no  ' style='min-width:120px;min-height:40px;font-size:.9em;'/></form><br><br></div>";
   }
 
-  function remove_property($tbl,$name,$rem_prop,$cog_conn) {
+  function remove_property($tbl,$name,$rem_prop,$cog_conn,$cog_database) {
     /*
       Removes literature property
     */    
     if (!isset($_POST['confirm'])) {    
-      confirm_remove($tbl,$name,$rem_prop,$cog_conn);
+      confirm_remove($tbl,$name,$rem_prop,$cog_conn,$cog_database);
     }
     else if (isset($_POST['confirm']) && $_POST['confirm']== 'yes') {
       $prop_name = $_POST[$rem_prop];
@@ -50,7 +50,7 @@
     }
   }
 
-  function process_deletions($cog_conn,$art_num,$tbl,$col,$old_entry,$new_entry) {
+  function process_deletions($cog_conn,$art_num,$tbl,$col,$old_entry,$new_entry,$cog_database) {
     /*
       Create any deletion of values
     */
@@ -78,7 +78,7 @@
     }
   }
 
-  function process_additions($cog_conn,$art_num,$tbl,$col,$old_entry,$new_entry) {
+  function process_additions($cog_conn,$art_num,$tbl,$col,$old_entry,$new_entry,$cog_database) {
     /*
       Create any deletion of values
     */      
@@ -100,55 +100,55 @@
 
   // process research properties add/del or article del
   if (isset($_POST['remove_Article']) && $_POST['remove_Article']!= '') {
-    remove_property('articles','citation','remove_Article',$cog_conn);
+    remove_property('articles','citation','remove_Article',$cog_conn,$cog_database);
   }  
   else if (isset($_POST['add_Subject']) && $_POST['add_Subject']!= '') {
-    add_property('subjects','subject','add_Subject',$cog_conn);
+    add_property('subjects','subject','add_Subject',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Subject']) && $_POST['remove_Subject']!= '') {
-    remove_property('subjects','subject','remove_Subject',$cog_conn);    
+    remove_property('subjects','subject','remove_Subject',$cog_conn,$cog_database);    
   }  
   else if (isset($_POST['add_Detail']) && $_POST['add_Detail']!= '') {
-    add_property('details','detail_level','add_Detail',$cog_conn);
+    add_property('details','detail_level','add_Detail',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Detail']) && $_POST['remove_Detail']!= '') {
-    remove_property('details','detail_level','remove_Detail',$cog_conn);    
+    remove_property('details','detail_level','remove_Detail',$cog_conn,$cog_database);    
   }  
   else if (isset($_POST['add_Implementation']) && $_POST['add_Implementation']!= '') {
-    add_property('implementations','level','add_Implementation',$cog_conn);
+    add_property('implementations','level','add_Implementation',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Implementation']) && $_POST['remove_Implementation']!= '') {
-    remove_property('implementations','level','remove_Implementation',$cog_conn);
+    remove_property('implementations','level','remove_Implementation',$cog_conn,$cog_database);
   }
   else if (isset($_POST['add_Scale']) && $_POST['add_Scale']!= '') {
-    add_property('network_scales','scale','add_Scale',$cog_conn);
+    add_property('network_scales','scale','add_Scale',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Scale']) && $_POST['remove_Scale']!= '') {
-    remove_property('network_scales','scale','remove_Scale',$cog_conn);
+    remove_property('network_scales','scale','remove_Scale',$cog_conn,$cog_database);
   }    
   else if (isset($_POST['add_Region']) && $_POST['add_Region']!= '') {
-    add_property('regions','region','add_Region',$cog_conn);
+    add_property('regions','region','add_Region',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Region']) && $_POST['remove_Region']!= '') {
-    remove_property('regions','region','remove_Region',$cog_conn);
+    remove_property('regions','region','remove_Region',$cog_conn,$cog_database);
   }        
   else if (isset($_POST['add_Theory']) && $_POST['add_Theory']!= '') {
-    add_property('theory_category','category','add_Theory',$cog_conn);
+    add_property('theory_category','category','add_Theory',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Theory']) && $_POST['remove_Theory']!= '') {
-    remove_property('theory_category','category','remove_Theory',$cog_conn);
+    remove_property('theory_category','category','remove_Theory',$cog_conn,$cog_database);
   }  
   else if (isset($_POST['add_Neuron']) && $_POST['add_Neuron']!= '') {
-    add_property('neuron_types','neuron','add_Neuron',$cog_conn);
+    add_property('neuron_types','neuron','add_Neuron',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Neuron']) && $_POST['remove_Neuron']!= '') {
-    remove_property('neuron_types','neuron','remove_Neuron',$cog_conn);    
+    remove_property('neuron_types','neuron','remove_Neuron',$cog_conn,$cog_database);    
   }   
   else if (isset($_POST['add_Keyword']) && $_POST['add_Keyword']!= '') {
-    add_property('keywords','keyword','add_Keyword',$cog_conn);
+    add_property('keywords','keyword','add_Keyword',$cog_conn,$cog_database);
   }
   else if (isset($_POST['remove_Keyword']) && $_POST['remove_Keyword']!= '') {
-    remove_property('keywords','keyword','remove_Keyword',$cog_conn);    
+    remove_property('keywords','keyword','remove_Keyword',$cog_conn,$cog_database);    
   }        
   else {
     $art_info_change=true;

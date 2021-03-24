@@ -24,13 +24,14 @@
   </script>
 </head>
 <body>
-  <?php include("../function/hc_body.php"); ?>
-  <div style="width:90%;position:relative;left:5%;"> 
+  <?php include("../function/hc_body.php"); ?> 
     <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
+  <div style="width:90%;position:relative;left:5%;">
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML="<a href='login.php' style='text-decoration: none;color:black !important'><span class='title_section'>Please Log In or Register</span></a>";
+    document.getElementById('fix_title').style='width:90%;position:relative;left:5%;';
   </script>
   <!-- end of header -->
   

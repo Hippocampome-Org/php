@@ -30,25 +30,25 @@
       array_push($subjects, $i);
     }
   }
-  process_deletions($cog_conn,$art_num,'article_has_subject','subject_id',$sel_sbj,$subjects);
-  process_additions($cog_conn,$art_num,'article_has_subject','subject_id',$sel_sbj,$subjects); 
+  process_deletions($cog_conn,$art_num,'article_has_subject','subject_id',$sel_sbj,$subjects,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_subject','subject_id',$sel_sbj,$subjects,$cog_database); 
   // details
   if ($_POST['details']!='') {
     $det_lvl=$_POST['details'];
-    process_deletions($cog_conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl);
-    process_additions($cog_conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl); 
+    process_deletions($cog_conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl,$cog_database);
+    process_additions($cog_conn,$art_num,'article_has_detail','detail_id',$sel_det,$det_lvl,$cog_database); 
   }
   // implementations
   if ($_POST['implementations']!='') {
     $impl_lvl=$_POST['implementations'];
-    process_deletions($cog_conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl);
-    process_additions($cog_conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl);       
+    process_deletions($cog_conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl,$cog_database);
+    process_additions($cog_conn,$art_num,'article_has_implmnt','level_id',$sel_ipl,$impl_lvl,$cog_database);       
   }
   // scales
   if ($_POST['network_scales']!='') {
     $network_scale_update=$_POST['network_scales'];
-    process_deletions($cog_conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update);
-    process_additions($cog_conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update);       
+    process_deletions($cog_conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update,$cog_database);
+    process_additions($cog_conn,$art_num,'article_has_scale','scale_id',$sel_scl,$network_scale_update,$cog_database);       
   }  
   // neuron types
   $neuron_type_update = array();
@@ -61,10 +61,10 @@
       array_push($neuron_type_fuzzy_update, $i);
     }    
   }
-  process_deletions($cog_conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);
-  process_additions($cog_conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update);    
-  process_deletions($cog_conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update);
-  process_additions($cog_conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update);
+  process_deletions($cog_conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_neuron','neuron_id',$sel_nrn,$neuron_type_update,$cog_database);    
+  process_deletions($cog_conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_neuronfuzzy','neuron_id',$sel_nrnfzy,$neuron_type_fuzzy_update,$cog_database);
   // regions
   $regions_list = array();
   for ($i = 1; $i < $regions_count; $i++) {
@@ -72,8 +72,8 @@
       array_push($regions_list, $i);
     }
   }  
-  process_deletions($cog_conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list);
-  process_additions($cog_conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list);  
+  process_deletions($cog_conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_region','region_id',$sel_rgn,$regions_list,$cog_database);  
   // theories    
   $theories = array();
   for ($i = 1; $i < $theories_count; $i++) {
@@ -81,8 +81,8 @@
       array_push($theories, $i);
     }
   }   
-  process_deletions($cog_conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories);
-  process_additions($cog_conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories);    
+  process_deletions($cog_conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_theory','theory_id',$sel_thy,$theories,$cog_database);    
   // keywords
   $keywords = array();
   for ($i = 1; $i < $keywords_count; $i++) {
@@ -90,8 +90,8 @@
       array_push($keywords, $i);
     }
   }   
-  process_deletions($cog_conn,$art_num,'article_has_keyword','keyword_id',$sel_kwd,$keywords);
-  process_additions($cog_conn,$art_num,'article_has_keyword','keyword_id',$sel_kwd,$keywords);        
+  process_deletions($cog_conn,$art_num,'article_has_keyword','keyword_id',$sel_kwd,$keywords,$cog_database);
+  process_additions($cog_conn,$art_num,'article_has_keyword','keyword_id',$sel_kwd,$keywords,$cog_database);        
 
   // update evidence entries
   include('sub_evidence.php');

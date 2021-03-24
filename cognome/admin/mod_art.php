@@ -1,3 +1,4 @@
+<?php include ("../permission_check.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +25,18 @@
 </head>
 <body>
   <?php include("../function/hc_body.php"); ?>
-  <div style="width:90%;position:relative;left:5%;"> 
     <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
+  <div style="width:90%;position:relative;left:5%;">
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML="<a href='mod_art.php' style='text-decoration: none;color:black !important'><span class='title_section'>Update Articles Database</span></a>";
+    document.getElementById('fix_title').style='width:90%;position:relative;left:5%;';
   </script>
   <!-- end of header -->
   
   <?php
-  include('mysql_connect.php');  
+  //include('mysql_connect.php');  
 
   // add/modify/del options presented
   echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><form action='art_sub.php' method='POST'>Articles:&nbsp&nbsp<input type='button' value='  Add  ' onclick='toggleListDown()' style='height:30px;font-size:22px;position:relative;top:-2px;'>&nbsp&nbsp</input><input type='button' value='  Modify  ' onclick='toggleListUp()' style='height:30px;font-size:22px;position:relative;top:-2px;'></input>";
@@ -84,7 +86,7 @@
     window.location.replace('mod_art.php');
   }
   </script>";
-  $cog_conn->close();
+  //$cog_conn->close();
 
   /*
     Check for prior collected article details
@@ -92,14 +94,14 @@
   $art_mod_id = "";
   if (isset($_GET['art_mod_id'])) {
     $art_mod_id = $_GET['art_mod_id'];
-    list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = setArtDetails($art_mod_id,$servername,$username,$password,$dbname);
+    list($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id) = setArtDetails($art_mod_id,$cog_conn,$cog_database);
   }
 
-  function setArtDetails($art_mod_id,$servername,$username,$password,$dbname) {
+  function setArtDetails($art_mod_id,$cog_conn,$cog_database) {
       // Create connection
-    $cog_conn = new mysqli($servername, $username, $password, $dbname);    
+    //$cog_conn = new mysqli($servername, $username, $password, $dbname);    
       // Check connection
-    if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); echo 'connection failed';}  
+    //if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); echo 'connection failed';}  
 
     $sql = "SELECT * FROM $cog_database.articles WHERE ID=".$art_mod_id.";";
     $result = $cog_conn->query($sql);
@@ -117,7 +119,7 @@
     $authors=$row["authors"];
     $art_off_id=$row["official_id"];
 
-    $cog_conn->close();
+    //$cog_conn->close();
 
     return array($title, $year, $journal, $citation, $url, $abstract, $theory, $mod_meth, $cur_notes, $inc_qual, $authors, $art_off_id);
   }
@@ -126,13 +128,15 @@
     Import from pubmed
   */
   // Create connection
-  $cog_conn = new mysqli($servername, $username, $password, $dbname);    
+  //$cog_conn = new mysqli($servername, $username, $password, $dbname);    
   // Check connection
-  if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); }  
+  //if ($cog_conn->connect_error) { die("Connection failed: " . $cog_conn->connect_error); }  
 
   echo "<br><div class='article_details'><center>
   <form action='#' method='POST'>
-  Import from pubmed id:&nbsp;<textarea name='pubmed_id' style='max-width:200px;max-height:25px;font-size:22px;overflow:hidden;resize:none;position:relative;top:5px;'>".$_POST['pubmed_id']."</textarea>&nbsp;&nbsp;<button style='min-width:75px;min-height:25px;position:relative;top:-2px;font-size:22px;'>Import</button>&nbsp;&nbsp;&nbsp;&nbsp;E.g. 27870120</form><br>
+  Import from pubmed id:&nbsp;<textarea name='pubmed_id' style='max-width:200px;max-height:25px;font-size:22px;overflow:hidden;resize:none;position:relative;top:5px;'>";
+  if (isset($_POST['pubmed_id'])) {echo $_POST['pubmed_id'];}
+    echo "</textarea>&nbsp;&nbsp;<button style='min-width:75px;min-height:25px;position:relative;top:-2px;font-size:22px;'>Import</button>&nbsp;&nbsp;&nbsp;&nbsp;E.g. 27870120</form><br>
   <form action='art_sub.php' method='POST' target='iframe-form'>
   <span style='font-size:1em;'>Submit the Article to the Database: <input type='submit' value='  Submit  ' style='height:30px;font-size:22px;position:relative;top:-2px;'></input></span>
   <br><br>Submission Status:<iframe style='display:block;height:250px;width:600px;border-top:1px solid rgb(190,190,190);border-left:1px solid rgb(190,190,190);' name='iframe-form' scrolling='auto' src='no_sub.php'></iframe>";
@@ -144,55 +148,69 @@
 
   /* populate article data */
   // title
-  if ($title=='') {
-  $pattern='~.*ArticleTitle\>(.+)\<.*~';
-  $result = preg_match($pattern, $pubmed_html, $match);
-  $title = $match[1];
+  if (isset($title) && $title=='') {
+    $pattern='~.*ArticleTitle\>(.+)\<.*~';
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $title = $match[1];
+    }
   }
   // year
-  if ($year=='') {
-  $pattern='~.*PubDate\W+Year\>(.+)\<.*~';
-  $result = preg_match($pattern, $pubmed_html, $match);
-  $year = $match[1];
+  if (isset($year) && $year=='') {
+    $pattern='~.*PubDate\W+Year\>(.+)\<.*~';
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $year = $match[1];
+    }
   }
   // journal
-  if ($journal=='') {
-  $pattern='~.*JournalIssue\W+Title>(.+)\<.*~';
-  $result = preg_match($pattern, $pubmed_html, $match);
-  $journal = $match[1];
+  if (isset($journal) && $journal=='') {
+    $pattern='~.*JournalIssue\W+Title>(.+)\<.*~';
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $journal = $match[1];
+    }
   }
   // citation data
   // authors
-  if ($authors=='') {
+  if (isset($authors) && $authors=='') {
     $authors='';
     $lastname_pattern='~.*LastName>(.+)\<.*~';
     $firstinitials_pattern='~.*Initials>(.+)\<.*~';
-    $lastname_result = preg_match_all($lastname_pattern, $pubmed_html, $match_1,PREG_PATTERN_ORDER);
-    $firstinitials_result = preg_match_all($firstinitials_pattern, $pubmed_html, $match_2,PREG_PATTERN_ORDER);
-    for( $i = 0; $i<sizeof($match_1[0]); $i++ ) {
-      $authors=$authors.$match_1[1][$i].', '.$match_2[1][$i].'., ';
+    if ($pubmed_html != '') {
+      $lastname_result = preg_match_all($lastname_pattern, $pubmed_html, $match_1,PREG_PATTERN_ORDER);
+      $firstinitials_result = preg_match_all($firstinitials_pattern, $pubmed_html, $match_2,PREG_PATTERN_ORDER);
+      for( $i = 0; $i<sizeof($match_1[0]); $i++ ) {
+        $authors=$authors.$match_1[1][$i].', '.$match_2[1][$i].'., ';
+      }
     }
   }
   // volume
-  if ($volume=='') {
+  if (isset($volume) && $volume=='') {
     $pattern='~.*JournalIssue\W+Volume>(.+)\<.*~';
-    $result = preg_match($pattern, $pubmed_html, $match);
-    $volume = $match[1];  
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $volume = $match[1];  
+    }
   }
   // issue
-  if ($issue=='') {  
+  if (isset($issue) && $issue=='') {  
     $pattern='~.*JournalIssue\W+Issue>(.+)\<.*~';
-    $result = preg_match($pattern, $pubmed_html, $match);
-    $issue = $match[1];   
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $issue = $match[1];   
+    }
   }
   // pages
-  if ($pages=='') {  
+  if (isset($pages) && $pages=='') {  
     $pattern='~.*Pagination\W+MedlinePgn>(.+)\<.*~';
-    $result = preg_match($pattern, $pubmed_html, $match);
-    $pages = $match[1]; 
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $pages = $match[1]; 
+    }
   }
   // combine for citation 
-  if ($citation=='') {
+  if (isset($citation) && $citation=='') {
     if ($title != '') {
       $citation=$authors.$title.' ('.$year.') '.$journal.', '.$volume.' '.$issue.' '.$pages.'.';
     }
@@ -201,7 +219,7 @@
     }
   }
   // url
-  if ($url=='') {
+  if (isset($url) && $url=='') {
     if ($pubmed_id != '') {
       $url='https://www.ncbi.nlm.nih.gov/pubmed/'.$pubmed_id.'/';
     }
@@ -210,13 +228,15 @@
     }
   }
   // abstract
-  if ($abstract=='') {  
+  if (isset($abstract) && $abstract=='') {  
     $pattern='~.*AbstractText>(.+)\<.*~';
-    $result = preg_match($pattern, $pubmed_html, $match);
-    $abstract = $match[1];  
+    if ($pubmed_html != '') {
+      $result = preg_match($pattern, $pubmed_html, $match);
+      $abstract = $match[1];  
+    }
   }
   // official id
-  if ($pubmed_id != '') {
+  if (isset($pubmed_id) && $pubmed_id != '') {
     $art_off_id=$pubmed_id;
   }  
 
@@ -396,6 +416,7 @@
             $checked_fzy='checked';
           }
           echo "<tr><td style='width:85px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_p$i' id='neuron_p$i' style='display: inline;' $checked />&nbsp;proper</td><td style='width:75px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='neuron_f$i' id='neuron_f$i' style='display: inline;' $checked_fzy />&nbsp;fuzzy</td><td style='width:220px;border-bottom:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+          array_push($prop_group,$row[$col]);
         }
       }
       echo "</table></font></div>";
@@ -414,6 +435,7 @@
             $checked='checked';
           }
           echo "<tr><td style='width:25px;border-bottom:1px solid black;'>&nbsp;<input type='checkbox' name='$col$i' id='$col$i' style='display: inline;' $checked /></td><td style='width:375px;border-bottom:1px solid black;'>&nbsp;".$row[$col]."</td></tr>";
+          array_push($prop_group,$row[$col]);
         }
       }
       echo "</table></font></div>";

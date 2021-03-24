@@ -24,12 +24,13 @@
 </head>
 <body>
   <?php include("function/hc_body.php"); ?>
-  <div style="width:90%;position:relative;left:5%;"> 
     <br><br>
   <!-- start of header -->
   <?php echo file_get_contents('header.html'); ?>
+  <div style="width:90%;position:relative;left:5%;"> 
   <script type='text/javascript'>
     document.getElementById('header_title').innerHTML="<a href='mod_art.php' style='text-decoration: none;color:black !important'><span class='title_section'>Database Update Area</span></a>";
+    document.getElementById('fix_title').style='width:90%;position:relative;left:5%;';
   </script>
   <!-- end of header -->
 
