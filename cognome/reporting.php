@@ -80,8 +80,8 @@
   $result = $cog_conn->query($sql);
   $article_count = $result->fetch_assoc();
   echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
-  echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a><br><br>
-    Database version to use: <select name='param_1' size='1' style='height:25px;'><option value='core'>Core collection</option><option value='extended'>Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' />&nbsp;<font size=2>(Note: database switch not yet working)</font></div>";
+  /*echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a>";*/
+  echo "<br><br>Database version to use: <select name='param_1' size='1' style='height:25px;'><option value='core'>Core collection</option><option value='extended'>Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' />&nbsp;<font size=2>(Note: database switch not yet working)</font></div>";
 
   echo "<br><div class='article_details'><center><u>Subjects</u></center><br>";
 
