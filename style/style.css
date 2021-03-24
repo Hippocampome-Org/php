@@ -1,5 +1,5 @@
 body {
-	/*background-color:#FFFFFF;*/
+	background-color:#FFFFFF;
 	padding: 0;
 	margin: 0;
 }
@@ -82,9 +82,9 @@ border:none;
 
 #menu_main_button_new_clr{
 	position:absolute; top: 10px; left: 500px;
-	width:350px;
+	width:500px;
 	border:none;
-	z-index: 1;
+	z-index:1;
 }
 
 /* Change with resolution ------------------------------------------------------------- */
