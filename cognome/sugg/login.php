@@ -1,3 +1,4 @@
+<?php include ("../permission_check.php"); ?>
 <?php if (!session_id()) {session_start();} ?>
 <!DOCTYPE html>
 <html>
@@ -38,8 +39,9 @@
 
   <!-- check for redirect -->
 <?php
-include('mysql_connect.php');  
+//include('mysql_connect.php');  
 
+/*
 if (isset($_POST['username']) & isset($_POST['password'])) {
   include('secret_key.php');
   //echo $_POST['username']."<br><br>".$_POST['password'];
@@ -58,6 +60,7 @@ if (isset($_POST['username']) & isset($_POST['password'])) {
     }
   }    
 }
+*/
 ?>
   <?php
 
@@ -68,7 +71,13 @@ if (isset($_POST['username']) & isset($_POST['password'])) {
       echo "<br><span style='font-size:1.3em;'>Successfully logged out.</span>";
     }
   }
-  echo "<form action='login.php' method='POST'><br>Username &nbsp&nbsp<input type='text' name='username'></input><br><br>Password &nbsp&nbsp<input type='password' name='password'></input><br><br><input type='submit' value='Login' style='font-size:.9em;padding-top:5px;padding-bottom:5px;padding-left:20px;padding-right:20px;'></form><br><br><span style='font-size:1.3em'><a href='reset_pass.php'>Reset Password</a></span><br><span style='font-size:1.3em'><a href='register.php'>Register a New Account</a></span><br><br>";
+  echo "Note: this page is not currently availible for public use.<br>";
+  //echo "<form action='login.php' method='POST'>";
+  echo "<br>Username &nbsp&nbsp<input type='text' name='username'></input><br><br>Password &nbsp&nbsp<input type='password' name='password'></input><br><br><input type='submit' value='Login' style='font-size:.9em;padding-top:5px;padding-bottom:5px;padding-left:20px;padding-right:20px;'>";
+  //echo "</form>";
+  echo "<br><br><span style='font-size:1.3em'>";
+  //echo "<a href='reset_pass.php'>Reset Password</a></span><br><span style='font-size:1.3em'><a href='register.php'>Register a New Account</a></span><br><br>";
+  echo "<a href='#'>Reset Password</a></span><br><span style='font-size:1.3em'><a href='#'>Register a New Account</a></span><br><br>";
 
   echo "</div><br><br>";  
   
