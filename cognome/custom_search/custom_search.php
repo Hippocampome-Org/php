@@ -82,7 +82,7 @@
     $kwd_button_ids = array("subjects_btn", "level_btn", "scale_btn", "impl_btn", "region_btn", "theories_btn", "neurons_btn", "keywords_btn");
     $kwd_button_values = array("Subjects", "Detail Level", "Network Scale", "Implementation Level", "Region", "Theories", "Neuron Types", "Keywords");
 
-    echo "<div class='article_details'><form action='#' method='POST'><center><u><span style='font-size:24px;'>Enter Query</span></u><br><br><textarea name='search_query' id='search_query' style='width:600px;height:100px;font-size:18px;'>";
+    echo "<div class='article_details'><form action='#' method='POST'><center><u><span style='font-size:24px;'>Enter Query</span></u><br><br><span style='font-size:22px;'>Note: searching on this page is not yet enabled.<br>Searches will return no results until it is enabled.</span><br><br><textarea name='search_query' id='search_query' style='width:600px;height:100px;font-size:18px;'>";
     if (isset($_POST['search_query'])) {
       echo $_POST['search_query'];
     }
