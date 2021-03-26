@@ -148,92 +148,72 @@
 
   /* populate article data */
   // title
-  if (isset($title) && $title=='') {
-    $pattern='~.*ArticleTitle\>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $title = $match[1];
-    }
+  $pattern='~.*ArticleTitle\>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $title = $match[1];
   }
   // year
-  if (isset($year) && $year=='') {
-    $pattern='~.*PubDate\W+Year\>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $year = $match[1];
-    }
+  $pattern='~.*PubDate\W+Year\>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $year = $match[1];
   }
   // journal
-  if (isset($journal) && $journal=='') {
-    $pattern='~.*JournalIssue\W+Title>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $journal = $match[1];
-    }
+  $pattern='~.*JournalIssue\W+Title>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $journal = $match[1];
   }
   // citation data
   // authors
-  if (isset($authors) && $authors=='') {
-    $authors='';
-    $lastname_pattern='~.*LastName>(.+)\<.*~';
-    $firstinitials_pattern='~.*Initials>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $lastname_result = preg_match_all($lastname_pattern, $pubmed_html, $match_1,PREG_PATTERN_ORDER);
-      $firstinitials_result = preg_match_all($firstinitials_pattern, $pubmed_html, $match_2,PREG_PATTERN_ORDER);
-      for( $i = 0; $i<sizeof($match_1[0]); $i++ ) {
-        $authors=$authors.$match_1[1][$i].', '.$match_2[1][$i].'., ';
-      }
+  $authors='';
+  $lastname_pattern='~.*LastName>(.+)\<.*~';
+  $firstinitials_pattern='~.*Initials>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $lastname_result = preg_match_all($lastname_pattern, $pubmed_html, $match_1,PREG_PATTERN_ORDER);
+    $firstinitials_result = preg_match_all($firstinitials_pattern, $pubmed_html, $match_2,PREG_PATTERN_ORDER);
+    for( $i = 0; $i<sizeof($match_1[0]); $i++ ) {
+      $authors=$authors.$match_1[1][$i].', '.$match_2[1][$i].'., ';
     }
   }
   // volume
-  if (isset($volume) && $volume=='') {
-    $pattern='~.*JournalIssue\W+Volume>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $volume = $match[1];  
-    }
+  $pattern='~.*JournalIssue\W+Volume>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $volume = $match[1];  
   }
   // issue
-  if (isset($issue) && $issue=='') {  
-    $pattern='~.*JournalIssue\W+Issue>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $issue = $match[1];   
-    }
+  $pattern='~.*JournalIssue\W+Issue>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $issue = $match[1];   
   }
-  // pages
-  if (isset($pages) && $pages=='') {  
-    $pattern='~.*Pagination\W+MedlinePgn>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $pages = $match[1]; 
-    }
+  // pages  
+  $pattern='~.*Pagination\W+MedlinePgn>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $pages = $match[1]; 
   }
   // combine for citation 
-  if (isset($citation) && $citation=='') {
-    if ($title != '') {
-      $citation=$authors.$title.' ('.$year.') '.$journal.', '.$volume.' '.$issue.' '.$pages.'.';
-    }
-    else {
-      $citation='';
-    }
+  if ($title != '') {
+    $citation=$authors.$title.' ('.$year.') '.$journal.', '.$volume.' '.$issue.' '.$pages.'.';
+  }
+  else {
+    $citation='';
   }
   // url
-  if (isset($url) && $url=='') {
-    if ($pubmed_id != '') {
-      $url='https://www.ncbi.nlm.nih.gov/pubmed/'.$pubmed_id.'/';
-    }
-    else {
-      $url='';
-    }
+  if ($pubmed_id != '') {
+    $url='https://www.ncbi.nlm.nih.gov/pubmed/'.$pubmed_id.'/';
   }
-  // abstract
-  if (isset($abstract) && $abstract=='') {  
-    $pattern='~.*AbstractText>(.+)\<.*~';
-    if ($pubmed_html != '') {
-      $result = preg_match($pattern, $pubmed_html, $match);
-      $abstract = $match[1];  
-    }
+  else {
+    $url='';
+  }
+  // abstract  
+  $pattern='~.*AbstractText>(.+)\<.*~';
+  if ($pubmed_html != '') {
+    $result = preg_match($pattern, $pubmed_html, $match);
+    $abstract = $match[1];  
   }
   // official id
   if (isset($pubmed_id) && $pubmed_id != '') {
@@ -282,7 +262,7 @@
   <tr><td style='max-width:".$det_lbl_wth.";'>Citation:</td><td><textarea name='citation' style='min-width:100%;min-height:125px;font-size:22px;'>".$citation."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Url:</td><td><textarea name='url' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$url."</textarea><br>&nbsp;&nbsp;&nbsp;&nbsp;<a href='".find_pdf($dir, $art_mod_id)."' target='_blank'>Pdf</a>";
   echo "&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://scholar.google.com/scholar?hl=en&as_sdt=0%2C47&q=".str_replace(" ", "+", $title)."' target='_blank' id='scholar_link'>Google Scholar</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='?art_mod_id=".($_GET['art_mod_id']+1)."#scholar_link'>Next</a></td></tr>
-  <tr><td style='max-width:".$det_lbl_wth.";'>Authors:</td><td><textarea name='authors' style='min-width:100%;min-height:25px;font-size:22px;' id='url'>".$authors."</textarea></td></tr> 
+  <tr><td style='max-width:".$det_lbl_wth.";'>Authors:</td><td><textarea name='authors' style='min-width:100%;min-height:25px;font-size:22px;' id='authors'>".$authors."</textarea></td></tr> 
   <tr><td style='max-width:".$det_lbl_wth.";'>Abstract:</td><td><textarea name='abstract' style='min-width:100%;min-height:200px;font-size:22px;'>".$abstract."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Theory Notes:</td><td><textarea name='theory' style='min-width:100%;min-height:50px;font-size:22px;'>".$theory."</textarea></td></tr>
   <tr><td style='max-width:".$det_lbl_wth.";'>Modeling Methods:</td><td><textarea name='modeling_methods' style='min-width:100%;min-height:50px;font-size:22px;'>".$mod_meth."</textarea></td></tr>  
