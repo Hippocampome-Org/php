@@ -113,6 +113,11 @@
 			<li><a href='images/connectivity/DG_Circuit_Diagram.graffle.zip'><font class="font7"> Dentate Gyrus Circuit Diagram (source)</font></a></li>
 			</ul>			
 			
+			<font class='font1a'>Synapse Probabilities:</font> &nbsp; &nbsp;			
+			<ul>
+  			<li><a href='data/Bio-protocol_sample_files.zip'><font class="font7"> Bio-protocol sample files</font></a></li>
+			</ul>
+			
 			<font class='font1a'>Miscellaneous:</font> &nbsp; &nbsp;			
 			<ul>
   			<li><a href='Help_Known_Bug_List.php'><font class="font7"> Known Bugs and Issues</font></a></li>
