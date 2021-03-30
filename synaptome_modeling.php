@@ -594,6 +594,8 @@ echo "</select>";
 $final_synaptic_data_filename = $param5_value . '_P0_ISI50_' . $param4_value . '_Th350_' . $param2_value . '_' . $param3_value . '_' . $param1_value . '_Cli=4_gluconatei=0.zip';
 
 $final_synaptic_data_address = '../general/synapse_modeling/Final_Synaptic_Data/' . $final_synaptic_data_filename;
+
+$final_synaptic_data_address_default = '../general/synapse_modeling/Final_Synaptic_Data/Vh=-60_P0_ISI50_T22_Th350_Male_P14_Rat_Cli=4_gluconatei=0.zip';
 ?>
 
 <div class='table_position' style='position:relative;top:140px;'>
@@ -607,7 +609,9 @@ $final_synaptic_data_address = '../general/synapse_modeling/Final_Synaptic_Data/
         <td style="float:right"><!--a href='synap_prob/data/nops_values.csv'--><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/><!--/a--></td><td><span style='float:left'><font class='font5'>&nbsp;
           <?php
           if ($param5_value == ''){
-            echo 'Please click on Update';
+          ?>
+          <a href="<?php echo $final_synaptic_data_address_default ?>">Zipped CSV files</a>
+          <?php
           }else{
           ?>
           <a href="<?php echo $final_synaptic_data_address ?>">Zipped CSV files</a>
