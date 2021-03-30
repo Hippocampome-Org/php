@@ -590,6 +590,12 @@ echo "</select>";
 ?>
 </form>
 
+<?php
+$final_synaptic_data_filename = $param5_value . '_P0_ISI50_' . $param4_value . '_Th350_' . $param2_value . '_' . $param3_value . '_' . $param1_value . '_Cli=4_gluconatei=0.zip';
+
+$final_synaptic_data_address = '../general/synapse_modeling/Final_Synaptic_Data/' . $final_synaptic_data_filename;
+?>
+
 <div class='table_position' style='position:relative;top:140px;'>
 <table border="0" cellspacing="0" cellpadding="0" class="tabellauno">
 	<tr>
@@ -598,7 +604,15 @@ echo "</select>";
 		</td>
   <?php echo file_get_contents('synap_model/footer_1.php');?>
   <tr height="20">
-        <td style="float:right"><!--a href='synap_prob/data/nops_values.csv'--><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/><!--/a--></td><td><span style='float:left'><font class='font5'>&nbsp;To be added later</font></span></td> 
+        <td style="float:right"><!--a href='synap_prob/data/nops_values.csv'--><img id='csvCN' src='synap_prob/media/ExportCSV.png' width='30px' border='0'/><!--/a--></td><td><span style='float:left'><font class='font5'>&nbsp;
+          <?php
+          if ($param5_value == ''){
+            echo 'Please click on Update';
+          }else{
+          ?>
+          <a href="<?php echo $final_synaptic_data_address ?>">Zipped CSV files</a>
+          <?php } ?>
+        </font></span></td>
       </tr> 
 	<?php echo file_get_contents('synap_model/footer_2.php');?>
   </tr>
