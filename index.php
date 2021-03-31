@@ -180,7 +180,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.9 - Released: 03/04/2021
+      v1.9 - Released: 03/31/2021
       <br>
       28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
       <br>
@@ -262,7 +262,7 @@ jQuery(document).ready(function() {
     <td width="50%" style='vertical-align:top; padding-top:10px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br>
+      <br><br><br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
@@ -296,8 +296,8 @@ jQuery(document).ready(function() {
       <b>*NEW*</b> The release of v1.9 on 02/27/2021 includes an additional 91 PoK, 768 PoE, and a new browsable matrix for in vivo recordings. 
       Reference: <b>Sanchez-Aguilera, et al., 2021</b>
       <a href = "">
-      <i>Rhythmic firing of hippocampal and entorhinal neurons in vivo: integrating single-cell phenotypes with circuit function.</i></a>
-      PLoS Biology submitted.
+      <i>An update to Hippocampome.org by integrating single-cell phenotypes with circuit function in vivo.</i></a>
+      PLoS Biology in press.
       </font>
     </td>
   </tr>
@@ -323,7 +323,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
-          <br />Last Update: 04 Mar 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
+          <br />Last Update: 31 Mar 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
           <br />
         </div>
     </td>   
