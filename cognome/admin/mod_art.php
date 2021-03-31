@@ -167,7 +167,6 @@
   }
   // citation data
   // authors
-  $authors='';
   $lastname_pattern='~.*LastName>(.+)\<.*~';
   $firstinitials_pattern='~.*Initials>(.+)\<.*~';
   if ($pubmed_html != '') {
