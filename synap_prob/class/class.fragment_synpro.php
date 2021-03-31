@@ -320,7 +320,7 @@ class fragment_synpro
     	$subregion = Null;
 
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
-    	echo $query;
+    	#echo $query;
     	$rs = mysqli_query($GLOBALS['conn'],$query);
 		#$subregion = mysqli_fetch_row($rs)[0];
 		while(list($val_result) = mysqli_fetch_row($rs))
