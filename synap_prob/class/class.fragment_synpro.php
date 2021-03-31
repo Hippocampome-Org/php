@@ -32,7 +32,7 @@ class fragment_synpro
 		$table=$this->getName_table();
 		
 		$query = "SELECT id, original_id, quote, page_location, pmid_isbn, pmid_isbn_page, type, attachment, attachment_type, interpretation, interpretation_notes, linking_pmid_isbn, linking_pmid_isbn_page, linking_quote, linking_page_location FROM $table WHERE id = '$id'";
-		#echo $query;
+		//echo $query;
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		while(list($id, $original_id, $quote, $page_location, $pmid_isbn, $pmid_isbn_page, $type, $attachment, $attachment_type, $interpretation, $interpretation_notes, $linking_pmid_isbn, $linking_pmid_isbn_page, $linking_quote, $linking_page_location) = mysqli_fetch_row($rs))
 		{	
@@ -320,7 +320,7 @@ class fragment_synpro
     	$subregion = Null;
 
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
-    	#echo $query;
+    	//echo $query;
     	$rs = mysqli_query($GLOBALS['conn'],$query);
 		#$subregion = mysqli_fetch_row($rs)[0];
 		while(list($val_result) = mysqli_fetch_row($rs))
@@ -336,7 +336,7 @@ class fragment_synpro
     	#$subregion = Null;
 
     	$query = "SELECT subregion FROM SynproTypeTypeRel WHERE type_id=$neuron_id;";
-    	#echo $query;
+    	//echo $query;
     	$rs = mysqli_query($GLOBALS['conn'],$query);
 		#$subregion = mysqli_fetch_row($rs)[0];
 		while(list($val_result) = mysqli_fetch_row($rs))
@@ -431,7 +431,7 @@ class fragment_synpro
     	$somatic_distance=Null;
 		$query = "SELECT CAST(avg_path_length AS DECIMAL(10,2)) AS mpl FROM neurite_quantified WHERE unique_id=".$neuron_id." AND neurite_quantified.neurite='".$neurite."' AND reference_ID=".$refID." AND avg_path_length!='';";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		echo $query."<br>";
+		//echo $query."<br>";
 		while(list($mpl) = mysqli_fetch_row($rs))
 		{	    	
 			$somatic_distance = $mpl;

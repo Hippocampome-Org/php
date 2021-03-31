@@ -43,7 +43,7 @@ Date:   2020
 		$csv_output_file = $path_to_files."evi_prop_type_rel_results.csv";
 		$output_file = fopen($csv_output_file, 'w') or die("Can't open file.");
 
-		$sql = "SELECT distinct unique_ID, neurite, reference_ID FROM hippodevome.neurite_quantified;";
+		$sql = "SELECT distinct unique_ID, neurite, reference_ID FROM neurite_quantified;";
 		$result = $conn->query($sql);
 		$id = 0;
 		fwrite($output_file, "id,neuron_id,neurite_id,reference_id,frag_id,evi_id\n");
@@ -70,7 +70,7 @@ Date:   2020
 		$csv_output_file = $path_to_files."evi_source_target_rel_results.csv";
 		$output_file = fopen($csv_output_file, 'w') or die("Can't open file.");
 
-		$sql = "SELECT source_id, target_id, refIDs FROM hippodevome.number_of_contacts where refIDs!='';";
+		$sql = "SELECT source_id, target_id, refIDs FROM number_of_contacts where refIDs!='';";
 		$result = $conn->query($sql);
 		$id = 0;
 		fwrite($output_file, "id,source_id,target_id,reference_id,frag_id,evi_id\n");
