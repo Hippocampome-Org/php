@@ -1,5 +1,5 @@
-use cognome_core_conv;
-ALTER DATABASE cognome_core_conv CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+use cognome_core;
+ALTER DATABASE cognome_core CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE article_has_author CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE article_has_detail CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE article_has_implmnt CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;

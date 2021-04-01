@@ -1,1 +1,2 @@
-CREATE DATABASE cognome_core CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+DROP DATABASE cognome_core;
+CREATE DATABASE cognome_core DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;

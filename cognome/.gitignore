@@ -21,6 +21,8 @@ lit_rev/query_optimize/example
 lit_rev/query_optimize/manual_inspection
 lit_rev/query_results
 sugg/PHPMailer
+gen_cog_core/cognome_core.sql
+gen_cog_core/full_cognome.sql
 .DS_Store
 access_db.php
 .buildpath

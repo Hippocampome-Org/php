@@ -112,3 +112,12 @@ Coupled noisy spiking neurons as velocity-controlled oscillators in a model of g
 Recurrent network model for learning goal-directed sequences through reverse repla
 A Unified Dynamic Model for Learning, Replay, and Sharp-Wave/Ripples
 A model of episodic memory: mental time travel along encoded trajectories using grid cells
+Model-based spatial navigation in the hippocampus-ventral striatum circuit: A computational analysis
+Temporal frequency of subthreshold oscillations scales with entorhinal grid cell field spacing
+Axonal synapse sorting in medial entorhinal cortex
+A biologically inspired hierarchical goal directed navigation model
+Considerations arising from a complementary learning systems perspective on hippocampus and neocortex
+Can Grid Cell Ensembles Represent Multiple Spaces
+Spike-timing-dependent plasticity of inhibitory synapses in the entorhinal cortex
+Matching storage and recall: hippocampal spike timing-dependent plasticity and phase response curves
+Deciphering the Contribution of Oriens-Lacunosum
