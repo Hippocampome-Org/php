@@ -61,10 +61,9 @@
     <!-- end of header -->
 
     <?php
-    //$dir = "/home/natemsut/public_html/cognome/cognome/custom_search/literature/txt_ver/";
-    //$dir = "/var/www/html/cognome_articles_renamed/all/txt_ver/";
-    $dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
-    //$dir = "http://localhost/general/cognome_articles/txt_ver_full/"; // directory of literature in text file format  
+    $snippit_size = 100;
+    //$dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
+    $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/"; // directory of literature in text file format  
 
     if (isset($_GET['fileview'])) {
       $myFile = $_GET['fileview'];
@@ -110,10 +109,8 @@
       echo ">".$k_i."</option>";
     }
     echo "</select><br>";
-    #echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>";
     echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Number of articles to search:&nbsp;&nbsp;</span>";
     echo "<select name='articles_to_search' style='width:45px;height:30px;font-size:18px;'>";
-    #position:relative;top:5px;'>"; 
     $max_art =array("all",10,50,100);
     for ($a_i = 0; $a_i < sizeof($max_art); $a_i++) {
       echo "<option value='".$max_art[$a_i]."'";
@@ -190,7 +187,7 @@
         $articles_to_search = "all";
       }
 
-      $article_results = search_directory($dir, $articles_to_search, $max_matches, $query, $_POST['range']);
+      $article_results = search_directory($dir, $articles_to_search, $max_matches, $query, $_POST['range'], $snippit_size);
 
       echo "</div>";
     }

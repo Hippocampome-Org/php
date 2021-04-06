@@ -82,5 +82,5 @@
 	fclose($out_subevi);	
 	fclose($out_thr);	
 
-	echo "\n\nSQL files written.\n";
+	echo "\nSQL files written.\n";
 ?>

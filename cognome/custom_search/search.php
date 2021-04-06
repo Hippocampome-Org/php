@@ -26,7 +26,7 @@ function report_results($results_text, $total_results, $query, $articles_searche
 	echo "<script>update_overall('".$results_text."')</script>";	
 }
 
-function search_directory($dir, $articles_to_search, $max_matches, $query, $range) {
+function search_directory($dir, $articles_to_search, $max_matches, $query, $range, $snippit_size) {
 	global $tot_mch;
 	global $total_results;
 	$articles_searched = 0;
@@ -81,14 +81,14 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 			if ($range_search) {
 				#echo "stats: ".$art_file_id." ".$start_range." ".$end_range."<br><br>";
 				if ($art_file_id >= $start_range && $art_file_id <= $end_range) {
-					$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+					$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size);
 					$total_results = $results_group[0];
 					array_push($collection_results, $results_group[1]);
 					$articles_searched++;
 				}
 			}
 			else {
-    			$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query);
+    			$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size);
     			$total_results = $results_group[0];
     			array_push($collection_results, $results_group[1]);
     			$articles_searched++;
@@ -107,7 +107,7 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	return $article_results;
 }
 
-function search($file, $filename, $max_matches, $query) {
+function search($file, $filename, $max_matches, $query, $snippit_size) {
 	global $tot_mch;
 	global $total_results;
 	$matches_to_report = array();
@@ -133,7 +133,7 @@ function search($file, $filename, $max_matches, $query) {
 		// set patterns and remove leading or trailing whitespace type of chars
 		$pattern_keyterm = trim($query[$f_i]);
 		//$pattern = "/(.{1,500}[ -\(]".$pattern_keyterm."[\)s -].{1,500})/i"; // /i is case insensitive
-		$pattern = "/(.{1,10}[ -\(]".$pattern_keyterm."[\)s -].{1,10})/i"; // /i is case insensitive
+		$pattern = "/(.{1,2$snippit_size}[ -\(]".$pattern_keyterm."[\)s -].{1,$snippit_size})/i"; // /i is case insensitive
 		$num_matches = preg_match_all($pattern, $file_contents, $matches);
 
 		// update totals

@@ -1,7 +1,6 @@
 Last updated 03/24/21
 Nonrandom connectivity of the epileptic dentate gyrus predicts a major role for neuronal hubs in seizures
 Role of mossy fiber sprouting and mossy cell loss in hyperexcitability: a network model of the dentate gyrus incorporating cell types and axonal topography
-Velocity-Controlled Oscillators for Hippocampal Navigation on Spiking Neuromorphic Hardwar
 Conjunctive Representations in Learning and Memory: Principles of Cortical and Hippocampal Functio
 Computational influence of adult neurogenesis on memory encoding
 Shunting inhibition improves robustness of gamma oscillations in hippocampal interneuron networks by homogenizing firing rate
@@ -16,7 +15,8 @@ Vasoactive Intestinal Polypeptide-Expressing Interneurons in the Hippocampus Sup
 Low-intensity electrical stimulation affects network dynamics by modulating population rate and spike timing
 A mechanism for generation of long-range synchronous fast oscillations in the corte
 Mechanisms of sharp wave initiation and ripple generatio
-Analysis of gamma rhythms in the rat hippocampus in vitro and in vivoSymmetric spike timing-dependent plasticity at CA3-CA3 synapses optimizes storage and recall in autoassociative network
+Analysis of gamma rhythms in the rat hippocampus in vitro and in vivo
+Symmetric spike timing-dependent plasticity at CA3-CA3 synapses optimizes storage and recall in autoassociative network
 Epilepsy in small-world network
 Emergent Dynamics of Fast Ripples in the Epileptic Hippocampus
 Parvalbumin-positive basket cells differentiate among hippocampal pyramidal cells
@@ -25,24 +25,13 @@ Topological determinants of epileptogenesis in large-scale structural and functi
 Cellular mechanism of neuronal synchronization in epilepsy
 Decoupling through synchrony in neuronal circuits with propagation delays
 Rapid signaling at inhibitory synapses in a dentate gyrus interneuron networ
-Chaotic dynamics as a mechanism of rapid transition of hippocampal local field activity between theta and non-theta states
-Computer Modeling of Alzheimer's Disease-Simulations of Synaptic Plasticity and Memory in the CA3-CA1 Hippocampal Formation Microcircuit
-Hippocampal-Cortical Memory Trace Transfer and Reactivation Through Cell-Specific Stimulus and Spontaneous Background Noise
-Modeling of Brain-Like Concept Coding with Adulthood Neurogenesis in the Dentate Gyrus
-Network Activity Due to Topographic Organization of Schaffer Collaterals in a Large-Scale Model of Rat CA1
 A kernel-based method to calculate local field potentials from networks of spiking neurons
 Admittance Method for Estimating Local Field Potentials Generated in a Multi-Scale Neuron Model of the Hippocampus
 Volume-Conducted Origin of the Field Potential at the Lateral Habenula
 An uncertainty principle for neural coding: Conjugate representations of position and velocity are mapped onto firing rates and co-firing rates of neural spike trains
 Quantitative properties of a feedback circuit predict frequency-dependent pattern separation
-Spatiotemporally random and diverse grid cell spike patterns contribute to the transformation of grid cell to place cell in a neural network model
-Phase relations of theta oscillations in a computer model of the hippocampal CA1 field: Key role of Schaffer collaterals
 A diversity of interneurons and Hebbian plasticity facilitate rapid compressible learning in the hippocampu
 Disparate forms of heterogeneities and interactions among them drive channel decorrelation in the dentate gyrus: Degeneracy and dominance
-A model of cholinergic suppression of hippocampal ripples through disruption of balanced excitation/inhibition
-Impairment of Sharp-Wave Ripples in a Murine Model of Dravet Syndrome
-Modulating grid cell scale and intrinsic frequencies via slow high-threshold conductances: A simplified model
-Axonal Anatomy Optimizes Spatial Encoding in the Rat Entorhinal-Dentate System: A Computational Study
 Hippocampal Neurogenesis Reduces the Dimensionality of Sparsely Coded Representations to Enhance Memory Encoding
 A Proposed Mechanism for Spontaneous Transitions between Interictal and Ictal Activit
 A geometric attractor mechanism for self-organization of entorhinal grid module
@@ -62,7 +51,8 @@ GABAergic modulation of hippocampal population activity: sequence learning, plac
 Increased dentate gyrus excitability in neuroligin-2-deficient mice in viv
 High-frequency population oscillations are predicted to occur in hippocampal pyramidal neuronal networks interconnected by axoaxonal gap junctions
 Cellular correlate of assembly formation in oscillating hippocampal networks in vitro
-Pattern separation in the dentate gyrus: a role for the CA3 backprojectioOn the mechanism of the gamma -- beta frequency shift in neuronal oscillations induced in rat hippocampal slices by tetanic stimulation
+Pattern separation in the dentate gyrus: a role for the CA3 backprojectio
+On the mechanism of the gamma -- beta frequency shift in neuronal oscillations induced in rat hippocampal slices by tetanic stimulation
 Mnemonic functions for nonlinear dendritic integration in hippocampal pyramidal circuit
 Slow and fast inhibition and an H-current interact to create a theta rhythm in a model of CA1 interneuron network
 The spiking component of oscillatory extracellular potentials in the rat hippocampus
@@ -85,21 +75,19 @@ Can Neural Activity Propagate by Endogenous Electrical Field
 Gamma oscillation by synaptic inhibition in a hippocampal interneuronal network model
 Path integration and cognitive mapping in a continuous attractor neural network model
 Hippocampal theta rhythm and its coupling with gamma oscillations require fast inhibition onto parvalbumin-positive interneurons
-Feedback Inhibition Enables Theta-Nested Gamma Oscillations and Grid Firing FieldInterneuronal mechanisms of hippocampal theta oscillations in a full-scale model of the rodent CA1 circui
+Feedback Inhibition Enables Theta-Nested Gamma Oscillations and Grid Firing Field
+Interneuronal mechanisms of hippocampal theta oscillations in a full-scale model of the rodent CA1 circui
 A hybrid oscillatory interference/continuous attractor network model of grid cell firin
 FPGA implementation of hippocampal spiking network and its real-time simulation on dynamical neuromodulation of oscillation
 Role of mossy fiber sprouting and mossy cell loss in hyperexcitability: a network model of the dentate gyrus incorporating cell types and axonal topograph
 Encoding and retrieval in a model of the hippocampal CA1 microcircui
 Population dynamics and theta rhythm phase precession of hippocampal place cell firing: a spiking neuron mode
 A Model for Grid Firing and Theta-Nested Gamma Oscillations in Layer 2 of the Medial Entorhinal Cortex
-Velocity-Controlled Oscillators for Hippocampal Navigation on Spiking Neuromorphic Hardware
 The Generation of Time in the Hippocampal Memory System
 Fast synaptic inhibition promotes synchronized gamma oscillations in hippocampal interneuron networks
-Regulation of gamma-frequency oscillation by feedforward inhibition: A computational modeling study
 A neural microcircuit model for a scalable scale-invariant representation of tim
 Fast and flexible sequence induction in spiking neural networks via rapid excitability change
 Accurate path integration in continuous attractor network models of grid cell
-Synaptic mechanisms of pattern completion in the hippocampal CA3 network
 Environmental boundaries as an error correction mechanism for grid cell
 Phase precession and variable spatial scaling in a periodic attractor map model of medial entorhinal grid cells with realistic after-spike dynamics
 A novel pyramidal cell type promotes sharp-wave synchronization in the hippocampus
@@ -121,3 +109,4 @@ Can Grid Cell Ensembles Represent Multiple Spaces
 Spike-timing-dependent plasticity of inhibitory synapses in the entorhinal cortex
 Matching storage and recall: hippocampal spike timing-dependent plasticity and phase response curves
 Deciphering the Contribution of Oriens-Lacunosum
+Model of the origin of rhythmic population oscillations in the hippocampal slice
