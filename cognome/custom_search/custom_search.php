@@ -61,7 +61,7 @@
     <!-- end of header -->
 
     <?php
-    $snippit_size = 100;
+    $snippit_size = 50;
     //$dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
     $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/"; // directory of literature in text file format  
 
@@ -137,7 +137,7 @@
     echo ">yes</option>";    
     echo "</select></center>";    
     echo "<div class='wrap-collabsible' id='choose_articles' style='width:90%;position:relative;left:5%;'><input id='choose_articles_list' class='toggle' type='checkbox'><label for='choose_articles_list' class='lbl-toggle'>Articles Availible</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;height:600px;overflow:auto;'>";
-    $sql = "SELECT * FROM $cog_database.articles";
+    $sql = "SELECT * FROM $cog_database.articles ORDER BY id";
     $result = $cog_conn->query($sql);
     $articles_chosen=array();
     $articles_chosen_ids=array();

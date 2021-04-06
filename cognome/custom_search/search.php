@@ -36,15 +36,16 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	$range_search=false;
 	if ($range != '') {
 		$range_search=true;
-		$range_parsed = preg_split("/-/i", $range);
+		$range_parsed = preg_split("/-/i", v);
 		if (count($range_parsed) == 1) {
 			$start_range=$range;
 			$end_range=$range;
+			echo "Article searched: ".$range."<br><br>";
 		}
 		else if (count($range_parsed) == 2) {
 			$start_range=$range_parsed[0];
 			$end_range=$range_parsed[1];
-			echo "range found: ".$start_range."\t".$end_range."<br><br>";
+			echo "Range used: ".$start_range."\t".$end_range."<br><br>";
 		}
 	}
 
@@ -71,8 +72,10 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	}
 	closedir($handle);
 	sort($articles_list); #, SORT_STRING
-	/*foreach($articles_list as $art_print) {
-    	echo $art_print." ";
+	/*$s_i = 1;
+	foreach($articles_list as $art_print) {
+    	echo "sorted articles: #$s_i ".$art_print."<br>";
+    	$s_i = $s_i + 1;
 	}*/
 
 	for ($i = 0; $i < count($articles_list); $i++) {
