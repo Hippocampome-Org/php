@@ -205,6 +205,9 @@
   if ($pubmed_id != '') {
     $url='https://www.ncbi.nlm.nih.gov/pubmed/'.$pubmed_id.'/';
   }
+  else if ($url != '') {
+    # do not change if value exists
+  }
   else {
     $url='';
   }
