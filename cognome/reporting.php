@@ -221,10 +221,62 @@
     4=>"article_has_keyword.article_id",
     5=>"article_has_region.article_id",
     6=>"article_has_scale.article_id");
+  echo "</div><div style='max-width:80%;position:relative;left:10%;'>";
+  echo "<br><center><div class='article_details'><center><u>Articles with Dimension Values</u></center>";
+  echo "<br>Individual counts of a dimension's value annotations are listed.<br>";
+
+  for($i=1;$i<(sizeof($dim_name)+1);$i++) {
+    echo "<br><center><font style='font-size:20px;'>".$dim_heading[$i]."</font></center>";
+    echo "<table width='500px' class='reporting_table'>";
+    //echo "<tr width='150px' style='width:150px;'><th><br><u>".$dim_heading[$i]."</u><br><br></th><th></th></tr>";
+    echo "<tr width='150px' style='width:150px;padding:5px;'><th class='reporting_table_head'>Property</th><th class='reporting_table_head' style='padding:5px;'>Count</th></tr>";
+
+    // total
+    $prp_tot = '';
+    $sql="SELECT COUNT(*) FROM $selected_db.".$prp_tbl[$i];
+    $result = $cog_conn->query($sql);
+    if ($result->num_rows > 0) {       
+        while($row = $result->fetch_assoc()) {   
+          $prp_tot = $row['COUNT(*)'];
+        }
+    }
+
+    for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
+      echo "<tr class='reporting_table_head'><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'>".$dim_name[$i][$j]."</td><td width='35px' style='width:35px;padding:5px;' class='reporting_table_head'>";
+
+      $sql_ids = "SELECT id FROM $selected_db.".$all_dims[$i];
+      //echo $sql_ids."<br>";
+      $result = $cog_conn->query($sql_ids);   
+      $dim_col_ids = array();
+      if ($result->num_rows > 0) {       
+          while($row = $result->fetch_assoc()) {   
+            array_push($dim_col_ids, $row["id"]);
+            //echo $row["id"]."<br>";
+          }
+      }
+
+      $sql="SELECT COUNT(*) FROM $selected_db.".$prp_tbl[$i]." WHERE ".$prp_col[$i]."=".$dim_col_ids[$j-1];
+      $result = $cog_conn->query($sql);
+      if ($result->num_rows > 0) {       
+          while($row = $result->fetch_assoc()) {   
+            $prp_cnt = $row['COUNT(*)'];
+            $prp_pct = number_format(($prp_cnt/$prp_tot)*100, 2, '.', '');
+            echo "<center><table style='width:75px;font-size:14px;'><tr><td style='border:0px;'>$prp_cnt&nbsp;&nbsp;&nbsp;</td><td style='border:0px;'>&nbsp;&nbsp;&nbsp;($prp_pct%)</td></tr></table></center>";
+          }
+      }
+      echo "</td></tr>";
+    }    
+    echo "<tr width='150px' style='width:150px;' class='reporting_table_head'><td class='reporting_table_head' style='padding:5px;'>All</td><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'><center>$prp_tot</center></td></tr></table>";
+  }
+  echo "</div></center>";    
+
+  /*
+    Section reporting dimension values on a per subject basis.
+  */
 
   echo "</div><div style='min-width:1700px;position:relative;left:10%;'>";
   echo "<br><center><div class='article_details'><center><u>Articles with Dimension Values</u></center>";
-  echo "<br>Individual counts of a dimensions value annotations given a subject are listed. Each entry in the matrices<br>below contains the count value on the left and percentage within its group on the right.<br>";
+  echo "<br>Individual counts of a dimensions value annotations given a subject are listed. Each entry in the matrices<br>below contains the count value on the left and percentage within its group on the right. These values are<br>different than the ones above that are not grouped by subject because each article can have multiple<br>subject annotations.<br>"; 
 
   echo "<br><table width='400px' class='reporting_table'>";
   for($i=1;$i<(sizeof($dim_name)+1);$i++) {

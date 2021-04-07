@@ -14,6 +14,20 @@
     4=>"keyword",
     5=>"region",
     6=>"scale");
+  $prp_tbl=array(
+    1=>"article_has_detail",
+    2=>"article_has_implmnt",
+    3=>"article_has_theory",
+    4=>"article_has_keyword",
+    5=>"article_has_region",
+    6=>"article_has_scale");
+  $prp_col=array(
+    1=>"detail_id",
+    2=>"level_id",
+    3=>"theory_id",
+    4=>"keyword_id",
+    5=>"region_id",
+    6=>"scale_id");
   $dim_desc=array(
     1=>"The detail level dimension provides the type of simulation model used in the work. The level of biological abstractness of the model can be infered from its
     core equations, without extensions to its complexity. The model included in the work at the lowest level is annotated as this property's value.",
