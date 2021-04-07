@@ -47,7 +47,12 @@ mysql -h $ADDR -u $USER -p$PASS $DB < remove_subjects_evi.sql &&
 mysql -h $ADDR -u $USER -p$PASS $DB < remove_theories.sql &&
 
 echo "" && # new line
+echo "Updating properties" &&
+mysql -h $ADDR -u $USER -p$PASS $DB < update_properties.sql &&
+
+echo "" && # new line
 echo "Exporting Cognome Core" &&
 mysqldump -h $ADDR -u $USER -p$PASS $DB > $DB_EXPORT &&
 
-echo "Completed"
+echo "" && # new line
+echo "Processing completed"

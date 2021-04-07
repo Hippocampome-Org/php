@@ -344,21 +344,21 @@
 
     echo "<br><div class='article_details' style='".$show_art_prop."'>
     <center><u>Article Research Properties</u><br><br><table style='min-width:100%'>";
-    properties_included('Subjects',3,'subject','subjects',$sel_sbj,$cog_conn,'multiple','Subjects Included','Subjects Not Included',$cog_database); 
+    properties_included('Subjects',3,'subject','subjects',$sel_sbj,$cog_conn,'multiple','Subjects Annotated','Subjects Not Annotated',$cog_database); 
     show_evidence("sub", "Subjects", $sub_evid_loc, $sub_evid_des);
-    properties_included('Level of Detail',1,'detail_level','details',$sel_det,$cog_conn,'single','Minimum Level of Detail Included','Other Levels of Detail',$cog_database);
+    properties_included('Level of Detail',1,'detail_level','details',$sel_det,$cog_conn,'single','Minimum Level of Detail Annotated','Other Levels of Detail',$cog_database);
     show_evidence("det", "Level of Detail", $det_evid_loc, $det_evid_des); 
-    properties_included('Network Scale',1,'scale','network_scales',$sel_scl,$cog_conn,'single','Network Scale Included','Other Network Scales',$cog_database);
+    properties_included('Network Scale',1,'scale','network_scales',$sel_scl,$cog_conn,'single','Network Scale Annotated','Other Network Scales',$cog_database);
     show_evidence("scl", "Network Scale", $scl_evid_loc, $scl_evid_des);
-    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$cog_conn,'single','Minimum Implementation Level Included','Other Implementation Levels',$cog_database); 
+    properties_included('Implementation Level',1,'level','implementations',$sel_ipl,$cog_conn,'single','Minimum Implementation Level Annotated','Other Implementation Levels',$cog_database); 
     show_evidence("impl", "Implementation Level", $impl_evid_loc, $impl_evid_des);
-    properties_included('Anatomical Region',3,'region','regions',$sel_rgn,$cog_conn,'multiple','Anatomical Regions Included','Other Anatomical Regions',$cog_database); 
+    properties_included('Anatomical Region',3,'region','regions',$sel_rgn,$cog_conn,'multiple','Anatomical Regions Annotated','Other Anatomical Regions',$cog_database); 
     show_evidence("rgn", "Anatomical Region", $rgn_evid_loc, $rgn_evid_des);   
-    properties_included('Theories and Computational<br>Network Models',3,'category','theory_category',$sel_thy,$cog_conn,'multiple','Theories Included','Theories Not Included',$cog_database);    
+    properties_included('Theories and Computational<br>Network Models',3,'category','theory_category',$sel_thy,$cog_conn,'multiple','Theories Annotated','Theories Not Annotated',$cog_database);    
     show_evidence("thy", "Theories and Computational<br>Network Models", $thy_evid_loc, $thy_evid_des);
-    properties_included('Neuron Types',3,'neuron','neuron_types',$sel_nrn,$cog_conn,'multiple','Neuron Types Included','Neuron Types Not Included',$cog_database);    
+    properties_included('Neuron Types',3,'neuron','neuron_types',$sel_nrn,$cog_conn,'multiple','Neuron Types Annotated','Neuron Types Not Annotated',$cog_database);    
     show_evidence("nrn", "Neuron Types", $nrn_evid_loc, $nrn_evid_des);    
-    properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$cog_conn,'multiple','Keywords Included','Keywords Not Included',$cog_database);
+    properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$cog_conn,'multiple','Keywords Annotated','Keywords Not Annotated',$cog_database);
     show_evidence("kwd", "Keywords", $kwd_evid_loc, $kwd_evid_des);
     echo "</table></div><br>";
 
