@@ -29,6 +29,6 @@ DELETE FROM subjects WHERE (`id` = '10');
 DELETE FROM subjects WHERE (`id` = '9');
 DELETE FROM subjects WHERE (`id` = '4');
 
-DELETE FROM article_has_region WHERE (`id` = '7');
-DELETE FROM article_has_region WHERE (`id` = '8');
-DELETE FROM article_has_region WHERE (`id` = '9');
+DELETE FROM article_has_region WHERE (`region_id` = '7');
+DELETE FROM article_has_region WHERE (`region_id` = '8');
+DELETE FROM article_has_region WHERE (`region_id` = '9');
