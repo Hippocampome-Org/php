@@ -55,15 +55,11 @@
   This defines specific properties to include with work descriptions. Selecting all causes all properties to be included. This option is not fully implemented yet, selecting any option includes all properties at the current time. Work will be done to implement it more later.
   <br><br><u>Go Button</u><br>
   Press this to update the results based on the options selection made.</div>
-  <br><div class='article_details'>
-  <u>Comments, Questions, and Thoughts?</u><br>
-  Send them to nsutton2 &lpar;&#8219;&agrave;&tcaron;&rpar; gmu.edu.
-  </div>  
 
   <?php
   include('mysql_connect.php');    
 
-  echo "<br><div class='article_details' style='min-width:500px;'><center><u>Glossary</u></center><br><center><table style='font-size:0.8em;'>";
+  echo "<br><div class='article_details' style='min-width:500px;'><center><u>Glossary</u><br><font style='font-size:16px;'>Click the <img src='info.gif' title='annotation methods description' style='position:relative;top:1px;height:14px;width:14px;'> buttons below for additional descriptions.</font></center><br><center><table style='font-size:0.8em;'>";
   
   include('glossary.php');
 
