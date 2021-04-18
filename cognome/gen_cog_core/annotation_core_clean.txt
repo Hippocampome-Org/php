@@ -2,7 +2,6 @@ Last updated 03/24/21
 Nonrandom connectivity of the epileptic dentate gyrus predicts a major role for neuronal hubs in seizures
 Role of mossy fiber sprouting and mossy cell loss in hyperexcitability: a network model of the dentate gyrus incorporating cell types and axonal topography
 Conjunctive Representations in Learning and Memory: Principles of Cortical and Hippocampal Functio
-Computational influence of adult neurogenesis on memory encoding
 Shunting inhibition improves robustness of gamma oscillations in hippocampal interneuron networks by homogenizing firing rate
 Intrinsic and network rhythmogenesis in a reduced Traub model for CA3 neurons
 NMDA-dependent modulation of CA1 local circuit inhibition
@@ -25,8 +24,6 @@ Topological determinants of epileptogenesis in large-scale structural and functi
 Cellular mechanism of neuronal synchronization in epilepsy
 Decoupling through synchrony in neuronal circuits with propagation delays
 Rapid signaling at inhibitory synapses in a dentate gyrus interneuron networ
-A kernel-based method to calculate local field potentials from networks of spiking neurons
-Admittance Method for Estimating Local Field Potentials Generated in a Multi-Scale Neuron Model of the Hippocampus
 Volume-Conducted Origin of the Field Potential at the Lateral Habenula
 An uncertainty principle for neural coding: Conjugate representations of position and velocity are mapped onto firing rates and co-firing rates of neural spike trains
 Quantitative properties of a feedback circuit predict frequency-dependent pattern separation

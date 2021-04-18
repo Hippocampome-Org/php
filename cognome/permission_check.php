@@ -13,7 +13,7 @@ if ($perm == NULL) {
 		}
 	}
 	if ($anonymous == 0) {
-		header("Location:../error1.html");
+		//header("Location:../error1.html");
 	}
 }
 ?>

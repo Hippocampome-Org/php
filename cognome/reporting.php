@@ -101,10 +101,23 @@
   }
 
   function find_subject_annos($i, $selected_db, $cog_conn) {
-    $sql = "SELECT subject FROM $selected_db.subjects WHERE id=".$i;
-    $sql2 = "SELECT COUNT(*) FROM $selected_db.article_has_subject WHERE subject_id=".$i;
-    $sql3 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_theory WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_theory.article_id";
-    $sql4 = "SELECT COUNT(*) FROM $selected_db.article_has_subject, article_has_keyword WHERE article_has_subject.subject_id=".$i." AND article_has_subject.article_id=article_has_keyword.article_id";
+    $or_state1 = "";
+    $or_state2 = "";
+    $or_state3 = "";
+    $or_name = "";
+    $i2 = $i;
+    if ($i == "1 also 11" && !(strcmp("$i", "1") == 0)) {
+      //echo "i: ".$i."<br>".strcmp("$i", "1");
+      $or_state1 = " OR id = 11";
+      $or_state2 = " OR subject_id = 11";
+      $or_state3 = " OR article_has_subject.subject_id = 11";
+      $or_name = " or episodic_memory";
+      $i2 = 1;
+    }
+    $sql = "SELECT subject FROM $selected_db.subjects WHERE (id=".$i2.$or_state1.")";
+    $sql2 = "SELECT COUNT(distinct article_has_subject.article_id) FROM $selected_db.article_has_subject WHERE (subject_id=".$i2.$or_state2.")";
+    $sql3 = "SELECT COUNT(distinct article_has_subject.article_id) FROM $selected_db.article_has_subject, article_has_theory WHERE (article_has_subject.subject_id=".$i2.$or_state3.") AND article_has_subject.article_id=article_has_theory.article_id";
+    $sql4 = "SELECT COUNT(distinct article_has_subject.article_id) FROM $selected_db.article_has_subject, article_has_keyword WHERE (article_has_subject.subject_id=".$i2.$or_state3.") AND article_has_subject.article_id=article_has_keyword.article_id";
     $result = $cog_conn->query($sql);
     $row = $result->fetch_assoc();
     $result2 = $cog_conn->query($sql2);
@@ -113,18 +126,18 @@
     $row3 = $result3->fetch_assoc();
     $result4 = $cog_conn->query($sql4);
     $row4 = $result4->fetch_assoc();            
-    echo "<tr><td>".$row["subject"]."</td><td><center>".$row2["COUNT(*)"]."</center></td><td><center>".$row3["COUNT(*)"]."</center></td><td><center>".$row4["COUNT(*)"]."</center></td></tr>";
+    echo "<tr><td>".$row["subject"].$or_name."</td><td><center>".$row2["COUNT(distinct article_has_subject.article_id)"]."</center></td><td><center>".$row3["COUNT(distinct article_has_subject.article_id)"]."</center></td><td><center>".$row4["COUNT(distinct article_has_subject.article_id)"]."</center></td></tr>";
   }
-  echo "<tr><td><center><u>Spatial Navigation and Memory</u></center></td></tr>";  
+  echo "<tr><td><center><u>Spatial Navigation or Episodic Memory</u></center></td></tr>";  
   find_subject_annos(1, $selected_db, $cog_conn);
-  echo "<tr><td><br><center><u>Non-spatial Learning and Memory</u></center></td></tr>";  
-  find_subject_annos(2, $selected_db, $cog_conn);
-  find_subject_annos(6, $selected_db, $cog_conn);
-  find_subject_annos(7, $selected_db, $cog_conn);
-  find_subject_annos(8, $selected_db, $cog_conn);
-  find_subject_annos(11, $selected_db, $cog_conn);
+  find_subject_annos(11, $selected_db, $cog_conn);  
+  find_subject_annos("1 also 11", $selected_db, $cog_conn); 
+  echo "<tr><td><br><center><u>Other Learning and Memory Types</u></center></td></tr>";  
   find_subject_annos(12, $selected_db, $cog_conn);
+  find_subject_annos(6, $selected_db, $cog_conn);
   find_subject_annos(14, $selected_db, $cog_conn);
+  find_subject_annos(2, $selected_db, $cog_conn);
+  find_subject_annos(7, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Pattern Completion and Separation</u></center></td></tr>";  
   find_subject_annos(5, $selected_db, $cog_conn);
   echo "<tr><td><br><center><u>Neurological Disorders</u></center></td></tr>";  

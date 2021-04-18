@@ -300,7 +300,7 @@
     }       
 
     function show_evidence($id, $desc, $e_loc, $e_des) {
-      $table = "<table style='min-width:100%;'><tr><td style='min-width:200px;'>Location:&nbsp;&nbsp;&nbsp;&nbsp;</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".$e_loc."</label></td></tr><tr><td style='min-width:200px;'>Description:</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".$e_des."</label></td></tr></table>";
+      $table = "<table style='min-width:100%;'><tr><td style='min-width:200px;'>Location:&nbsp;&nbsp;&nbsp;&nbsp;</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".$e_loc."</label></td></tr><tr><td style='min-width:200px;'>Description:</td><td class='browse_table'><label name='title' style='min-width:100%;min-height:50px;font-size:22px;'>".str_replace("\n", "<br>", $e_des)."</label></td></tr></table>";
       echo "<tr><td></td><td class='browse_table_2'><div class='wrap-collabsible' id='evid_collap_".$id."'><input id='evid_".$id."' class='toggle' type='checkbox'><label for='evid_".$id."' class='lbl-toggle'>Evidence of ".$desc."</label><div class='collapsible-content'><div class='content-inner' style='font-size:22px;'>".$table."</div></div></input></div></td></tr>";      
     }
 
@@ -337,6 +337,10 @@
       $sql="SELECT ".$col." FROM ".$tbl."article_has_neuron WHERE article_id=".$art_mod_id;
       $sel_nrn=chk_prop($sql, $cog_conn, $col);      
       //
+      $col="neuron_id";    
+      $sql="SELECT ".$col." FROM ".$tbl."article_has_neuronfuzzy WHERE article_id=".$art_mod_id;
+      $sel_nrn_fzy=chk_prop($sql, $cog_conn, $col); 
+      //
       $col="region_id";    
       $sql="SELECT ".$col." FROM ".$tbl."article_has_region WHERE article_id=".$art_mod_id;
       $sel_rgn=chk_prop($sql, $cog_conn, $col);                 
@@ -356,8 +360,9 @@
     show_evidence("rgn", "Anatomical Region", $rgn_evid_loc, $rgn_evid_des);   
     properties_included('Theories and Computational<br>Network Models',3,'category','theory_category',$sel_thy,$cog_conn,'multiple','Theories Annotated','Theories Not Annotated',$cog_database);    
     show_evidence("thy", "Theories and Computational<br>Network Models", $thy_evid_loc, $thy_evid_des);
-    properties_included('Neuron Types',3,'neuron','neuron_types',$sel_nrn,$cog_conn,'multiple','Neuron Types Annotated','Neuron Types Not Annotated',$cog_database);    
-    show_evidence("nrn", "Neuron Types", $nrn_evid_loc, $nrn_evid_des);    
+    properties_included('Neuron Types',3,'neuron','neuron_types',$sel_nrn,$cog_conn,'multiple','Neuron Types Annotated','Neuron Types Not Annotated',$cog_database);   
+    properties_included('Fuzzy Neuron Types',3,'neuron','neuron_types',$sel_nrn_fzy,$cog_conn,'multiple','Fuzzy Neuron Types Annotated','Fuzzy Neuron Types Not Annotated',$cog_database);  
+    show_evidence("nrn", "Neuron Types (Normal and Fuzzy)", $nrn_evid_loc, $nrn_evid_des);    
     properties_included('Keywords',3,'keyword','keywords',$sel_kwd,$cog_conn,'multiple','Keywords Annotated','Keywords Not Annotated',$cog_database);
     show_evidence("kwd", "Keywords", $kwd_evid_loc, $kwd_evid_des);
     echo "</table></div><br>";

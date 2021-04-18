@@ -22,7 +22,7 @@
         document.getElementsByName('search_query')[0].value += ', '
       }
       if (id == "subjects_btn") {
-        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, association memory, associative memories, autoassociative, autoassociation, heteroassociative, heteroassociation, time cell, delayed conditioning, pattern completion, pattern separation, long term memory, long term memories, long-term memory, long-term memories, consolidation, reinforcement learning, visual memory, visual memories, auditory, tactile, taste, smell, recognition memory, recognition memories, episodic, semantic memory, semantic memories, working memory, working memories, epilepsy, schizophrenia';
+        document.getElementsByName('search_query')[0].value += 'spatial memory, spatial memories, associative memory, associative memories, association memory, associative memories, autoassociative, autoassociation, heteroassociative, heteroassociation, time cell, delayed conditioning, pattern completion, pattern separation, long term memory, long term memories, long-term memory, long-term memories, consolidation, reinforcement learning, visual memory, visual memories, auditory, tactile, taste, smell, recognition memory, recognition memories, episodic, semantic memory, semantic memories, working memory, working memories, short-term memory, short-term memories, short term memory, short term memories, epilepsy, schizophrenia, Alzheimer';
       }
       else if (id == "level_btn") {
         document.getElementsByName('search_query')[0].value += 'Hodgkin-Huxley, Hodgkin Huxley, Izhikevich, Integrate-and-fire, Integrate and fire, Mean field, Abstract cognition, Spike response, Firing rate';
@@ -61,7 +61,7 @@
     <!-- end of header -->
 
     <?php
-    $snippit_size = 50;
+    $snippit_size = 400;
     //$dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
     $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/"; // directory of literature in text file format  
 
