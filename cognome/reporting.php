@@ -166,9 +166,6 @@
 
   $sql = "SELECT id FROM $selected_db.dimensions";
   $result = $cog_conn->query($sql);
-  //$row = $result->fetch_assoc();    
-  //$row = $result->fetch_assoc();    
-  /*$dim_count = $row["COUNT(*)"];*/
   $dim_ids = array();
   if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) {   
@@ -176,7 +173,6 @@
       }
   }   
   
-  //for($i=1;$i<$dim_count+1;$i++) {
   foreach ($dim_ids as $i) {
     $sql = "SELECT dimension FROM $selected_db.dimensions WHERE id=".$i;
     $sql2 = "SELECT COUNT(*) FROM $selected_db.".$dim_tbl[$i];
@@ -218,14 +214,16 @@
     3=>"theory_id",
     4=>"keyword_id",
     5=>"region_id",
-    6=>"scale_id");  
+    6=>"scale_id",
+    7=>"neuron_id");
   $dim_heading=array(
     1=>"Levels of Detail",
     2=>"Implementation Levels",
     3=>"Theory Categories",
     4=>"Keywords",
     5=>"Anatomical Regions",
-    6=>"Network Scales");
+    6=>"Network Scales",
+    7=>"Neuron Types");
 
   $art_id_names=array(
     1=>"article_has_detail.article_id",
@@ -233,7 +231,8 @@
     3=>"article_has_theory.article_id",
     4=>"article_has_keyword.article_id",
     5=>"article_has_region.article_id",
-    6=>"article_has_scale.article_id");
+    6=>"article_has_scale.article_id",
+    7=>"article_has_neuron.article_id");
   echo "</div><div style='max-width:80%;position:relative;left:10%;'>";
   echo "<br><center><div class='article_details'><center><u>Articles with Dimension Values</u></center>";
   echo "<br>Individual counts of a dimension's value annotations are listed.<br>";
@@ -242,7 +241,11 @@
     echo "<br><center><font style='font-size:20px;'>".$dim_heading[$i]."</font></center>";
     echo "<table width='500px' class='reporting_table'>";
     //echo "<tr width='150px' style='width:150px;'><th><br><u>".$dim_heading[$i]."</u><br><br></th><th></th></tr>";
-    echo "<tr width='150px' style='width:150px;padding:5px;'><th class='reporting_table_head'>Property</th><th class='reporting_table_head' style='padding:5px;'>Count</th></tr>";
+    echo "<tr width='150px' style='width:150px;padding:5px;'><th class='reporting_table_head'>Property</th><th class='reporting_table_head' style='padding:5px;'>Count</th>";
+    if ($i == 7) {
+      echo "<th class='reporting_table_head' style='padding:5px;'>Count (fuzzy)</th><th class='reporting_table_head' style='padding:5px;'>Count (normal + fuzzy)</th>";
+    }
+    echo "</tr>";
 
     // total
     $prp_tot = '';
@@ -253,9 +256,19 @@
           $prp_tot = $row['COUNT(*)'];
         }
     }
+    // total fuzzy
+    $prp_totfzy = '';
+    $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuronfuzzy";
+    $result = $cog_conn->query($sql);
+    if ($result->num_rows > 0) {       
+        while($row = $result->fetch_assoc()) {   
+          $prp_totfzy = $row['COUNT(*)'];
+        }
+    }
+    $prp_totcomb = ($prp_tot+$prp_totfzy); // normal and fuzzy
 
     for($j=1;$j<(sizeof($dim_name[$i])+1);$j++) {
-      echo "<tr class='reporting_table_head'><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'>".$dim_name[$i][$j]."</td><td width='35px' style='width:35px;padding:5px;' class='reporting_table_head'>";
+      echo "<tr class='reporting_table_head'><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'>".$dim_name[$i][$j]."</td>";
 
       $sql_ids = "SELECT id FROM $selected_db.".$all_dims[$i];
       //echo $sql_ids."<br>";
@@ -274,13 +287,65 @@
           while($row = $result->fetch_assoc()) {   
             $prp_cnt = $row['COUNT(*)'];
             $prp_pct = number_format(($prp_cnt/$prp_tot)*100, 2, '.', '');
-            echo "<center><table style='width:75px;font-size:14px;'><tr><td style='border:0px;'>$prp_cnt&nbsp;&nbsp;&nbsp;</td><td style='border:0px;'>&nbsp;&nbsp;&nbsp;($prp_pct%)</td></tr></table></center>";
+            echo "<td width='35px' style='width:35px;padding:5px;' class='reporting_table_head'><center><table style='width:75px;font-size:14px;'><tr><td style='border:0px;'>$prp_cnt&nbsp;&nbsp;&nbsp;</td><td style='border:0px;'>&nbsp;&nbsp;&nbsp;($prp_pct%)</td></tr></table></center></td>";
           }
       }
-      echo "</td></tr>";
+      if ($i == 7) {
+        $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuronfuzzy WHERE neuron_id=".$dim_col_ids[$j-1];
+        //echo $sql."<br>";
+        $result = $cog_conn->query($sql);
+        if ($result->num_rows > 0) {       
+            while($row = $result->fetch_assoc()) {   
+              $prp_cntfzy = $row['COUNT(*)'];
+              $prp_pctfzy = number_format(($prp_cntfzy/$prp_totfzy)*100, 2, '.', '');
+              //echo "<td>test</td>";
+              echo "<td width='35px' style='width:35px;padding:5px;' class='reporting_table_head'><center><table style='width:75px;font-size:14px;'><tr><td style='border:0px;'>$prp_cntfzy&nbsp;&nbsp;&nbsp;</td><td style='border:0px;'>&nbsp;&nbsp;&nbsp;($prp_pctfzy%)</td></tr></table></center></td>";
+              $prp_pctcomb = number_format((($prp_cnt+$prp_cntfzy)/$prp_totcomb)*100, 2, '.', '');
+              //echo "<td>test</td>";
+              echo "<td width='35px' style='width:35px;padding:5px;' class='reporting_table_head'><center><table style='width:75px;font-size:14px;'><tr><td style='border:0px;'>".($prp_cnt+$prp_cntfzy)."&nbsp;&nbsp;&nbsp;</td><td style='border:0px;'>&nbsp;&nbsp;&nbsp;($prp_pctcomb%)</td></tr></table></center></td>";
+            }
+        }
+      }
+      echo "</tr>";
     }    
-    echo "<tr width='150px' style='width:150px;' class='reporting_table_head'><td class='reporting_table_head' style='padding:5px;'>All</td><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'><center>$prp_tot</center></td></tr></table>";
+    echo "<tr width='150px' style='width:150px;' class='reporting_table_head'><td class='reporting_table_head' style='padding:5px;'>All</td><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'><center>$prp_tot</center></td>";
+    if ($i == 7) {
+      echo "<td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'><center>$prp_totfzy</center></td><td width='75px' style='width:75px;padding:5px;' class='reporting_table_head'><center>".$prp_totcomb."</center></td>";
+    }
+    echo "</tr></table>";
   }
+  /*
+    Neuron types by subregion
+  */
+  $subregions = array("Dentate Gyrus", "Cornu Ammonis 1", "Cornu Ammonis 2", "Cornu Ammonis 3", "Subiculum", "Entorhinal Cortex");
+  $sub_range_min = array(1, 19, 44, 49, 89, 92);
+  $sub_range_max = array(18, 43, 48, 88, 91, 122);
+
+  echo "<br><font style='font-size:20px;'>Neuron Types by Subregion</font><table width='500px' class='reporting_table'>";
+  echo "<tr width='150px' style='width:150px;padding:5px;'><th class='reporting_table_head'>Subregion</th><th class='reporting_table_head' style='padding:5px;'>Count (normal + fuzzy)</th></tr>";
+
+  for ($i = 0; $i < count($subregions); $i++) {
+    $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuron WHERE neuron_id>=".$sub_range_min[$i]." AND neuron_id<=".$sub_range_max[$i];
+    $result = $cog_conn->query($sql);
+    if ($result->num_rows > 0) {       
+      while($row = $result->fetch_assoc()) {   
+        $subreg_cnt = $row['COUNT(*)'];
+      }
+    }
+    $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuronfuzzy WHERE neuron_id>=".$sub_range_min[$i]." AND neuron_id<=".$sub_range_max[$i];
+    $result = $cog_conn->query($sql);
+    if ($result->num_rows > 0) {       
+      while($row = $result->fetch_assoc()) {   
+        $subreg_cntfzy = $row['COUNT(*)'];
+      }
+    }
+
+    $sub_pctcomb = number_format((($subreg_cnt+$subreg_cntfzy)/$prp_totcomb)*100, 2, '.', '');
+
+    echo "<tr width='150px' style='width:150px;padding:5px;'><td class='reporting_table_head'><center>".$subregions[$i]."</center></td><td class='reporting_table_head' style='padding:5px;'><center><table style='width:100px;font-size:14px;'><tr><td style='border:0px;width:50px;font-size:17px;'>".($subreg_cnt+$subreg_cntfzy)."</td><td style='border:0px;width:50px;font-size:17px;'>(".$sub_pctcomb."%)</td></tr></table></center></td></tr>";
+  }
+
+  echo "</table>";
   echo "</div></center>";    
 
   /*

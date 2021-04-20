@@ -1,7 +1,7 @@
 <?php
 
 echo "<center><font style='font-size:24px'><u>Subject Entities</u></font></center><span style='font-size:16px;'><br></span>";
-echo sec_start("Spatial memory", "spm_dim", "unchecked");
+echo sec_start("Spatial memory or navigation", "spm_dim", "unchecked");
 echo "
 This subject is annotated when spatial cognition in the form of memories of spatial understanding or navigation is described as a part of an article's simulation methods. A subject simply traveling through a defined spatial environment may be insufficient evidence toward annotating this subject. Acceptable evidence toward annotating this subject includes descriptions of a study focusing on investigating the cognitive process of a rodent developing memories of spatial knowledge, e.g., how to navigate a maze.
 ";
@@ -9,22 +9,22 @@ echo $sec_end;
 
 echo sec_start("Episodic memory", "epi_dim", "unchecked");
 echo "
-An annotation is made of this subject when the article specifically states that episodic memory was studied. The presence of spatial memory as a subject does not automatically apply as evidence toward the inclusion of this subject. The article needs to specifically make a point of stating that episodic
-memory was a focus of the study for this subject to be annotated. Simply having a sequence of events occur and having the model learn from that is not sufficient evidence of this subject. One reason for that is to help avoid spatial memory annotations automatically causing episodic memory annotations, given that a large amount of spatial memory experimentation can involve remembering sequences. This annotation approach helps make the subjects distinct from each other.
+An annotation is made of this subject when the article specifically states that episodic memory was studied. The presence of spatial memory as a subject does not automatically apply as evidence toward the inclusion of this subject. The article needs to specifically make a point of stating that episodic memory was a focus of the study for this subject to be annotated. Simply having a sequence of events occur and having the model learn from that is not sufficient evidence of this subject. One reason for that is to help avoid spatial memory annotations automatically causing episodic memory annotations, given that a large amount of spatial memory experimentation can involve remembering sequences. This annotation approach helps make the subjects distinct from each other.
 ";
 echo $sec_end;
 
 echo sec_start("Semantic memory", "sem_dim", "unchecked");
 echo "
-The definition of semantic memory used for annotations is: “‘Semantic memory’ refers to a major division of long-term memory that includes knowledge of facts, events, ideas, and concepts.” [1]. For the purposes of annotations, learning information that can lead to long-term memories is an acceptable topic that can be a part of this subject. Therefore, the subject of long-term memory does not need to be annotated every time this subject is annotated. A requirement is that the article needs to specifically state that a focus of the research was on investigating the properties of semantic memory itself, not only that learning facts or ideas where present in a task that was included in the experimental methods.
+The definition of semantic memory used for annotations is: “‘Semantic memory’ refers to a major division of long-term memory that includes knowledge of facts, events, ideas, and concepts.” (Martin, A., 2009). For the purposes of annotations, learning information that can lead to long-term memories is an acceptable topic that can be a part of this subject. Therefore, the subject of long-term memory does not need to be annotated every time this subject is annotated. A requirement is that the article needs to specifically state that a focus of the research was on investigating the properties of semantic memory itself, not only that learning facts or ideas where present in a task that was included in the experimental methods.
 <br><br>
 An example is that a rat can be performing a test that involves recognizing object for a food reward. The objects are interpreted as ideas and it can be presumed that eventually the rat may commit them to long-term memory but the simulation does not need to simulate the process of forming long-term memories (as opposed to recent ones) in order for this subject to be annotated. In this example, the ability for the rat to store information that will represent semantic memories is specifically analyzed in the research, and therefore in general this is acceptable evidence of this subject.
 <br><br>
 A distinction is made with this memory type compared to episodic memory. While this memory type represents remembering individual facts and ideas separate from the context of a sequence of events, episodic memory is annotated instead of this then episodes or sequences of events are stored in memory.
 <br><br>
-The presence of pattern learning, as in pattern completion and separation does not automatically apply was evidence toward annotating this subject. Patterns could be episodic sequences or fact knowledge. Unless an article specifies what the content of patterns are in a simulation, to distinguish between episodic and semantic memory, a type of memory is not assumed.
+The presence of pattern learning, as in pattern completion and separation does not automatically apply was evidence toward annotating this subject. Patterns could be episodic sequences or fact knowledge. Unless an article specifies what the content of simulated patterns are, to distinguish between episodic and semantic memory, a type of memory is not assumed.
 <br><br>
-Reference: [1] Martin, A. (2009). Semantic Memory. In L. R. Squire (Ed.), Encyclopedia of Neuroscience (pp. 561–566). Academic Press. https://doi.org/10.1016/B978-008045046-9.00786-5
+<u>References</u>
+<br>Martin, A. (2009). Semantic Memory. In L. R. Squire (Ed.), Encyclopedia of Neuroscience (pp. 561–566). Academic Press. https://doi.org/10.1016/B978-008045046-9.00786-5
 ";
 echo $sec_end;
 
@@ -49,19 +49,26 @@ Evidence that qualifies as supporting this subject annotation is if an article d
 <br><br>
 In general, a description of the formation of a memory that an object has significance is not necessarily sufficient as evidence toward annotation of this subject. More specifically, a subject learning that an object has value or relevance in an experiment does not automatically count as evidence of this subject. A form of evidence that would count toward the annotation of this subject is a study’s methods explicitly stating that investigations were made into the dynamics changing over a course of an experiment of how associations between objects were learned, saved as memories, and applied toward a rodent’s goals. To contribute toward evidence supporting annotation of this subject, a simulation’s methods should describe a specific emphasis on the investigation of creating associative memories.
 <br><br>
-Given the definition of autoassociative memory as “effectively, a pattern can be recalled or recognized because of associations formed between its parts.” [1]. In other words, a pattern that is able to be recalled from only matching a limited portion of that pattern. This is interpreted as a separate concept as associative memory and therefore the presence of autoassociative memory is not necessarily evidence of associative memory.
+Given the definition of autoassociative memory as “effectively, a pattern can be recalled or recognized because of associations formed between its parts.” (Rolls, E. T., 2015). In other words, a pattern that is able to be recalled from only matching a limited portion of that pattern. This is interpreted as a separate concept as associative memory and therefore the presence of autoassociative memory is not necessarily evidence of associative memory.
 <br><br>
-[1] Rolls, E. T. (2015). Chapter 2—Diluted connectivity in pattern association networks facilitates the recall of information from the hippocampus to the neocortex. In S. O’Mara & M. Tsanov (Eds.), Progress in Brain Research (Vol. 219, pp. 21–43). Elsevier. 
+<u>References</u>
+<br>Rolls, E. T. (2015). Chapter 2—Diluted connectivity in pattern association networks facilitates the recall of information from the hippocampus to the neocortex. In S. O’Mara & M. Tsanov (Eds.), Progress in Brain Research (Vol. 219, pp. 21–43). Elsevier. https://doi.org/10.1016/bs.pbr.2015.03.007
 ";
 echo $sec_end;
 
 echo sec_start("Reinforcement learning", "ril_dim", "unchecked");
 echo "
 This subject is annotated when a simulation specifically describes that synaptic weights were changed based on a reinforcement learning mechanism. Simply having a subject learn behavior based on a reward is not necessarily sufficient evidence to annotate this subject. The article must explicitly describe that learning occurred through synapse training from a reinforcement process based on neurons meeting or not meeting a goal objective.
+<br><br>
+An example of a reinforcement learning algorithm is one that reinforces behavior through discrete values of synapse strengthening when a reward is encountered. Alternatively, when a reward is not encountered a “punishment” is signaled through synaptic depression. Competition among neurons, e.g., lateral connections within a layer, can also cause only a certain number of neurons that had the strongest response when a reward was encountered to be reinforced with synaptic strengthening. The other neurons have synaptic depression. This creates specialization among neurons that designates them for different purposes. Some general sources of more information and examples can be found in (Hu, J., et al., 2020) and (Gupta, A., Long, L. N., 2007).
+<br><br>
+<u>References</u>
+<br>Hu, J.; Niu, H.; Carrasco, J.; Lennox, B.; Arvin, F. (2020). Voronoi-Based Multi-Robot Autonomous Exploration in Unknown Environments via Deep Reinforcement Learning. IEEE Transactions on Vehicular Technology. 69 (12): 14413-14423.
+<br>Gupta, A., & Long, L. N. (2007). Character recognition using spiking neural networks. In 2007 International Joint Conference on Neural Networks (pp. 53-58). IEEE.
 ";
 echo $sec_end;
 
-echo sec_start("Pattern completion and separation", "pcs_dim", "unchecked");
+echo sec_start("Pattern completion or separation", "pcs_dim", "unchecked");
 echo "
 Evidence that supports the annotation of this subject includes descriptions of a simulation recreating the neural processes involved in pattern completion and separation (PCS). The article needs to have a focus of its work on investigating PCS. The article needs to specifically include in its writing that neural activity representing completion of patterns or separation of patterns was simulated. It can not only be inferred that PCS occurred, the article needs to directly state that PCS was studied in its work.
 ";
@@ -77,6 +84,12 @@ echo $sec_end;
 echo sec_start("Schizophrenia", "scz_dim", "unchecked");
 echo "
 Since Schizophrenia may not be directly modeled in the hippocampus in a variety of cases, if an article specifically states its study included analyzing the effects of its simulation on Schizophrenia then that is evidence toward an annotation of this subject. In other words, not only modeling Schizophrenia processes, but also the effects of modeled neural activity on the disorder is acceptable evidence.
+";
+echo $sec_end;
+
+echo sec_start("Alzheimer’s disease", "alz_dim", "unchecked");
+echo "
+Since Alzheimer’s disease may not be directly modeled in the hippocampus in a variety of cases, if an article specifically states its study included analyzing the effects of its simulation on Alzheimer’s disease then that is evidence toward an annotation of this subject. In other words, not only modeling Alzheimer’s disease processes, but also the effects of modeled neural activity on the disorder is acceptable evidence.
 ";
 echo $sec_end;
 
