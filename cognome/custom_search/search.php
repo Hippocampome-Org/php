@@ -136,7 +136,7 @@ function search($file, $filename, $max_matches, $query, $snippit_size) {
 		// set patterns and remove leading or trailing whitespace type of chars
 		$pattern_keyterm = trim($query[$f_i]);
 		//$pattern = "/(.{1,500}[ -\(]".$pattern_keyterm."[\)s -].{1,500})/i"; // /i is case insensitive
-		$pattern = "/(.{1,$snippit_size}[ -\(]".$pattern_keyterm."[\)s -].{1,$snippit_size})/i"; // /i is case insensitive
+		$pattern = "/(.{1,$snippit_size}[ -\('.,]".$pattern_keyterm."['?.,\)s -].{1,$snippit_size})/i"; // /i is case insensitive
 		$num_matches = preg_match_all($pattern, $file_contents, $matches);
 
 		// update totals
@@ -159,7 +159,7 @@ function search($file, $filename, $max_matches, $query, $snippit_size) {
 			// Report matches
 			for ($i = 0; $i < $match_limit; $i++) {
 				$replacement = "<font style='color:blue'>".$pattern_keyterm."</font>";
-				$match = preg_replace('/[ -]('.$pattern_keyterm.')[s -]/i', ' '.$replacement.' ', $matches[0][$i]);
+				$match = preg_replace('/[ (.,-]('.$pattern_keyterm.')[s?.,) -]/i', ' '.$replacement.' ', $matches[0][$i]);
 				echo $match."<br><br>";
 				$tot_mch++;
 			}

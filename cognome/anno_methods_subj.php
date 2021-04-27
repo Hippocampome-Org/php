@@ -77,7 +77,7 @@ echo $sec_end;
 
 echo sec_start("Epilepsy", "epy_dim", "unchecked");
 echo "
-Epileptic activity can be complex to simulate, and therefore studies that specifically describe their simulations are informative about Epilepsy, even if they don’t directly simulate Epilepsy, are acceptable. For example, if an article simulated a neural property that was described as increasing the chance of Epilepsy, even if Epilepsy itself was not simulated in the article, that article is still acceptable for annotation of this subject. The article must directly state in writing the presence of a connection between its work and Epilepsy, rather than the connection only being implied without writing stating the connection.
+Epileptic activity can be complex to simulate, and therefore studies that specifically describe their simulations are informative about Epilepsy, even if they don’t directly simulate Epilepsy, are acceptable. For example, if an article simulated a neural property that was described as increasing the chance of Epilepsy, even if Epilepsy itself was not simulated in the article, that article is still acceptable for annotation of this subject. The article must directly state in writing the presence of a connection between its work and Epilepsy, rather than the connection only being implied without writing stating the connection. In addition to an article stating descriptions with the term Epilepsy, descriptions of simulation connections to epileptic, epileptiform, or seizure activities are terms that can count as evidence for this subject.
 ";
 echo $sec_end;
 

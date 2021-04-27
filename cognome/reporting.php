@@ -317,15 +317,25 @@
   /*
     Neuron types by subregion
   */
-  $subregions = array("Dentate Gyrus", "Cornu Ammonis 1", "Cornu Ammonis 2", "Cornu Ammonis 3", "Subiculum", "Entorhinal Cortex");
-  $sub_range_min = array(1, 19, 44, 49, 89, 92);
-  $sub_range_max = array(18, 43, 48, 88, 91, 122);
+  $subregions = array("Dentate Gyrus", "Cornu Ammonis 1", "Cornu Ammonis 2", "Cornu Ammonis 3", "Subiculum", "Entorhinal Cortex LI", "Entorhinal Cortex LII", "Entorhinal Cortex LIII", "Entorhinal Cortex LIV", "Entorhinal Cortex LV", "Entorhinal Cortex LVI");
+  $sub_range_min = array(1, 19, 44, 49, 89, 92, 94, 98, 107, 109, 114);
+  $sub_range_max = array(18, 43, 48, 88, 91, 93, 97, 106, 108, 113, 114);
+  $or_cond = "";
 
   echo "<br><font style='font-size:20px;'>Neuron Types by Subregion</font><table width='500px' class='reporting_table'>";
   echo "<tr width='150px' style='width:150px;padding:5px;'><th class='reporting_table_head'>Subregion</th><th class='reporting_table_head' style='padding:5px;'>Count (normal + fuzzy)</th></tr>";
 
   for ($i = 0; $i < count($subregions); $i++) {
-    $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuron WHERE neuron_id>=".$sub_range_min[$i]." AND neuron_id<=".$sub_range_max[$i];
+    if ($i == 6) {
+      // EC LII
+      $or_cond = " OR neuron_id=115 OR neuron_id=116 OR neuron_id=117";
+    }
+    if ($i == 6) {
+      // EC LIII
+      $or_cond = " OR neuron_id=118 OR neuron_id=119 OR neuron_id=120 OR neuron_id=121 OR neuron_id=122";
+    }
+
+    $sql="SELECT COUNT(*) FROM $selected_db.article_has_neuron WHERE (neuron_id>=".$sub_range_min[$i]." AND neuron_id<=".$sub_range_max[$i].")".$or_cond;
     $result = $cog_conn->query($sql);
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) {   
