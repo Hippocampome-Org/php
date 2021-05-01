@@ -56,6 +56,15 @@
   <br><br><u>Go Button</u><br>
   Press this to update the results based on the options selection made.</div>
 
+  <br><div class='article_details'>
+  <u>Core collection design</u><br>
+  Details about how the core collection was constructed are included here.
+  <br><br><u>Keyword selection</u><br>
+  The list of keywords that the optimization software used for creating literature database queries are provided here.
+  <br><a href="db_methods.php?disp=short_kwds">Short version of keywords</a>
+  <br><a href="db_methods.php?disp=long_kwds">Long version of keywords</a>
+  </div>
+
   <?php
   include('mysql_connect.php');    
 
