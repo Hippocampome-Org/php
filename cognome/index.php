@@ -20,8 +20,6 @@
   <!-- end of header -->  
 
   <?php
-  //include('mysql_connect.php');     
-
   // retreive dimension names
   include('dimension_names.php');
 
@@ -33,9 +31,9 @@
   echo "
   <form action='#' method='POST' style='font-size:1em;'>
   <center>";
-  search_option($cog_conn, $sql, "Subject dimension", "subject", "subjects", "all_off");
+  search_option($cog_conn, $sql, "Subject dimension", "subject", "subjects", "all_on");
   echo "&nbsp";
-  search_option($cog_conn, $sql, "Other dimension", "dimension", "dimensions", "all_off");
+  search_option($cog_conn, $sql, "Other dimension", "dimension", "dimensions", "all_on");
   echo "&nbsp";
   search_option($cog_conn, $sql, "Detail", "property", "properties", "all_off"); 
   echo "<span style='display: inline-block;'>
@@ -47,17 +45,65 @@
   include('get_dimension.php');
 
   if ($subject_desc != "" || $dim_desc != "" || $prop_desc != "") {
-    echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>Filtered by Subject: ".$subject_desc."; Sorted by: ".$dim_desc." and ";
-    if ($prop_desc == "All") {
-      echo "All Article Details";
+    echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>";
+    if ($subject != 0) {
+      echo "Filtered by Subject: ".$subject_desc;
     }
-    else {
+    if ($subject != 0 && ($dimension != 0 || $property != 1)) {
+      echo "; ";
+    }
+    if ($dimension != 0 || $property != 1) {
+      echo "Sorted by: ";
+    }
+    if ($dimension != 0) {
+      echo $dim_desc;
+    }
+    if ($dimension != 0 && $property != 1) {
+      echo " and ";
+    }    
+    if ($property != 1) {
       echo $prop_desc;
     }
-    echo ".</div></center>";
+    if ($subject != 0 || $dimension != 0 || $property != 1) {
+      echo ".";
+    }
+    echo "</div></center>";
   }
   echo "<br>";
-  $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
+
+  /*
+    Build query
+  */
+  $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ";
+  if ($dimension != 0) {
+    $sql = $sql.$dim_relation.".".$dim_id.", ";
+  }
+  $sql = $sql."articles.".$prop_id." FROM articles, article_has_subject";
+  if ($dimension != 0) {
+    $sql = $sql.", ".$dim_relation;
+  }
+  $sql = $sql." WHERE ";
+  if ($subject != 0) {
+    $sql = $sql."article_has_subject.`subject_id` = ".$subject." AND ";
+  }
+  if ($dimension != 0) {
+    $sql = $sql.$dim_relation.".`".$article_id."` = articles.id AND ";
+  }
+  $sql = $sql."article_has_subject.article_id = articles.id";
+  if ($dimension != 0 || $property != 1) {
+    // set order by conditions
+    // only proceeds if selections are not set to "all"
+    $sql = $sql." ORDER BY ";
+    if ($dimension != 0) {
+      $sql = $sql.$dim_relation.".`".$dim_id."` ASC";
+    }
+    if ($dimension != 0 && $property != 1) {
+      $sql = $sql." , ";
+    }
+    if ($property != 1) {
+      $sql = $sql."`articles`.`".$prop_id."` DESC";
+    }
+  } 
   //echo $sql;
 
   // display articles based on the user's selection

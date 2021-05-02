@@ -78,5 +78,10 @@
     case 11: $subject_desc = 'Episodic Memory'; break;
     case 12: $subject_desc = 'Semantic Memory'; break;
     case 13: $subject_desc = 'Data for Modeling'; break;
+    case 14: $subject_desc = 'Working or Short-term Memory'; break;
+    case 15: $subject_desc = 'Epilepsy'; break;
+    case 16: $subject_desc = 'Schizophrenia'; break;
+    case 17: $subject_desc = 'Other'; break;
+    case 18: $subject_desc = 'Alzheimer\'s Disease'; break;
   }  
 ?>
