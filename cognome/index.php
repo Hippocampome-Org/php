@@ -33,9 +33,9 @@
   echo "
   <form action='#' method='POST' style='font-size:1em;'>
   <center>";
-  search_option($cog_conn, $sql, "Subject", "subject", "subjects", "all_off");
+  search_option($cog_conn, $sql, "Subject dimension", "subject", "subjects", "all_off");
   echo "&nbsp";
-  search_option($cog_conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
+  search_option($cog_conn, $sql, "Other dimension", "dimension", "dimensions", "all_off");
   echo "&nbsp";
   search_option($cog_conn, $sql, "Detail", "property", "properties", "all_off"); 
   echo "<span style='display: inline-block;'>
@@ -46,8 +46,19 @@
   // check for user's dimension selection
   include('get_dimension.php');
 
-  echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>Sorted by: ".$dim_desc."</div></center><br>";
+  if ($subject_desc != "" || $dim_desc != "" || $prop_desc != "") {
+    echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>Filtered by Subject: ".$subject_desc."; Sorted by: ".$dim_desc." and ";
+    if ($prop_desc == "All") {
+      echo "All Article Details";
+    }
+    else {
+      echo $prop_desc;
+    }
+    echo ".</div></center>";
+  }
+  echo "<br>";
   $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
+  //echo $sql;
 
   // display articles based on the user's selection
   include('display_articles.php');

@@ -9,6 +9,7 @@
   }
   $dim_id = '';
   $dim_desc = '';
+  $subject_desc = '';
   $dim_relation = '';
   $article_id = 'article_id';
   switch($dimension) {
@@ -19,14 +20,20 @@
     $dim_desc = 'Level of Implementation';
     $dim_relation = 'article_has_implmnt'; break;
     case 3: $dim_id = 'theory_id';
-    $dim_desc = 'Theory'; 
+    $dim_desc = 'Theory or Network Algorithm'; 
     $dim_relation = 'article_has_theory'; break;
     case 4: $dim_id = 'keyword_id'; 
     $dim_desc = 'Keyword';
     $dim_relation = 'article_has_keyword'; break;
-    case 5: $dim_id = 'theory_id_1'; 
-    $dim_desc = 'Theory Competition';
-    $dim_relation = 'theory_has_competition'; break;    
+    case 5: $dim_id = 'region_id'; 
+    $dim_desc = 'Anatomical Region';
+    $dim_relation = 'article_has_region'; break;    
+    case 6: $dim_id = 'scale_id'; 
+    $dim_desc = 'Simulation Scale';
+    $dim_relation = 'article_has_scale'; break;    
+    case 7: $dim_id = 'neuron_id'; 
+    $dim_desc = 'Neuron Type';
+    $dim_relation = 'article_has_neuron'; break;  
   }
   switch($property) {
     case 1: $prop_id = 'id'; 
@@ -56,5 +63,20 @@
     case 9: $prop_id = 'citation'; 
     $prop_desc = 'Citation';
     $prop_relation = 'articles'; break;       
+  }  
+  switch($subject) {
+    case 1: $subject_desc = 'Spatial Memory or Navigation'; break;
+    case 2: $subject_desc = 'Associative Memory'; break;
+    case 3: $subject_desc = 'Time Cells or Timekeeping'; break;
+    case 4: $subject_desc = 'Delayed Conditioning'; break;
+    case 5: $subject_desc = 'Pattern Completion or Separation'; break;
+    case 6: $subject_desc = 'Long-term Memory or Consolidation'; break;
+    case 7: $subject_desc = 'Reinforcement Learning'; break;
+    case 8: $subject_desc = 'Sensory Specific Memory'; break;
+    case 9: $subject_desc = 'High-performance Computing'; break;
+    case 10: $subject_desc = 'Recognition Memory'; break;
+    case 11: $subject_desc = 'Episodic Memory'; break;
+    case 12: $subject_desc = 'Semantic Memory'; break;
+    case 13: $subject_desc = 'Data for Modeling'; break;
   }  
 ?>
