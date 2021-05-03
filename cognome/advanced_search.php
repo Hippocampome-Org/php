@@ -42,7 +42,7 @@
   <form action='#' method='POST' style='font-size:1em;'>
   <center>";
   search_option($cog_conn, $sql, "First filter: subject dimension", "subject", "subjects", "all_on");
-  echo "<br><span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Second filter: dimension entity:&nbsp<a href='?second_filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?second_filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?second_filter=theory'><input type='button' class='light_bg select-css' value='theory'></a>&nbsp;<a href='?second_filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a></span>"; 
+  echo "<br><span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Second filter: dimension entity:&nbsp<a href='?second_filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?second_filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?second_filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a><br><a href='?second_filter=theory'><input type='button' class='light_bg select-css' value='theory or network algorithm'></a>&nbsp;<a href='?second_filter=scale'><input type='button' class='light_bg select-css' value='simulation scale'></a>&nbsp;<a href='?second_filter=neuron'><input type='button' class='light_bg select-css' value='neuron types'></a>&nbsp;<a href='?second_filter=region'><input type='button' class='light_bg select-css' value='anatomical region'></a></span>"; 
   function entity_options($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row, $all_switch, $description) {
     echo $description;
     search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
@@ -61,8 +61,20 @@
     list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "keyword", "keyword", "keywords", "article_has_keyword", "keyword_id", $all_switch, $description);
     $prop_value = $_POST[$row_name];
   }
+  if ($second_filter=='region') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "anatomical region", "region", "regions", "article_has_region", "region_id", $all_switch, $description);
+    $prop_value = $_POST[$row_name];
+  }
+  if ($second_filter=='scale') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "simulation scale", "scale", "network_scales", "article_has_scale", "scale_id", $all_switch, $description);
+    $prop_value = $_POST[$row_name];
+  }
+  if ($second_filter=='neuron') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "neuron type", "neuron", "neuron_types", "article_has_neuron", "neuron_id", $all_switch, $description);
+    $prop_value = $_POST[$row_name];
+  }
   if ($second_filter=='theory') {
-    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "theory", "category", "theory_category", "article_has_theory", "theory_id", $all_switch, $description);
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "theory or network algorithm", "category", "theory_category", "article_has_theory", "theory_id", $all_switch, $description);
     $prop_value = $_POST[$row_name];
   }
   echo "<br>Sort:";
@@ -78,10 +90,24 @@
   if ($subject_desc != "" || $dim_desc != "" || $prop_desc != "") {
     echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>";
     if ($subject != 0) {
-      echo "Filtered by Subject: ".$subject_desc;
+      echo "First Filter: Subject: ".$subject_desc;
     }
-    if ($subject != 0 && ($dimension != 0 || $property != 1)) {
-      echo "; ";
+    if ($subject != 0 && $prop_name != "" && $prop_ent_desc != "") {
+      echo ";<br>";
+    }
+    if ($prop_name != "" && $prop_ent_desc != "") {
+      echo "Second Filter: ";
+      if ($prop_name == "level of detail") {
+        echo "Level of Detail";
+      }
+      else if ($prop_name == "theory or network algorithm") {
+        echo "Theory or Network Algorithm";
+      }
+      else {echo ucwords($prop_name);}
+      echo ": ".$prop_ent_desc;
+    }
+    if (($subject != 0 || ($prop_name != "" && $prop_ent_desc != "")) && ($dimension != 0 || $property != 1)) {
+      echo ";<br>";
     }
     if ($dimension != 0 || $property != 1) {
       echo "Sorted by: ";

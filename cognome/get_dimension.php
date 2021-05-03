@@ -2,6 +2,7 @@
   $subject = 1;
   $dimension = 1;
   $property = 1;
+  $prop_ent_desc = "";
   if ($_POST['form_submitted']=='1') {
     $subject = $_POST['subject'];
     $dimension = $_POST['dimension'];
@@ -83,5 +84,15 @@
     case 16: $subject_desc = 'Schizophrenia'; break;
     case 17: $subject_desc = 'Other'; break;
     case 18: $subject_desc = 'Alzheimer\'s Disease'; break;
-  }  
+  }    
+  if (isset($prop_value)) {
+    // collect dimension entity name
+    $sql = "SELECT $row_name FROM $tbl_name WHERE id = $prop_value;";
+    $result = $cog_conn->query($sql); 
+    if ($result->num_rows > 0) { 
+      while($row = $result->fetch_assoc()) { 
+        $prop_ent_desc = $row[$row_name];
+      }
+    }
+  }
 ?>
