@@ -29,65 +29,45 @@
     generate article results
     the dimension search bar is created here
   */
+  $description  = "<br>Filter property -";
+  $all_switch = "all_off";
   $prop_value = ''; $row_name = ''; $tbl_name = '';
-  $filter = 'no filter';
-  if (isset($_GET['filter'])) {
-    $filter = $_GET['filter'];
+  $second_filter = 'no filter';
+  if (isset($_GET['second_filter'])) {
+    $second_filter = $_GET['second_filter'];
   }
 
   include('search_option.php');    
   echo "
   <form action='#' method='POST' style='font-size:1em;'>
-  <center>Select";
-  search_option($cog_conn, $sql, "Subject", "subject", "subjects", "all_off");
-  echo "<br>Sort By";
-  search_option($cog_conn, $sql, "Dimension", "dimension", "dimensions", "all_off");
-  search_option($cog_conn, $sql, "Detail", "property", "properties", "all_off");  
-  echo "<span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Filter By:&nbsp<a href='?filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?filter=theory'><input type='button' class='light_bg select-css' value='theory'></a>&nbsp;<a href='?filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a><br>";
-  if ($filter=='detail') {
-    $prop_name = "Level of Detail";
-    $row_name = "detail_level";
-    $tbl_name = "details";
-    $prop_relation_tbl = "article_has_detail";
-    $prop_relation_row = "detail_id";
-    $all_switch = "all_off";
-    $prop_value = $_POST[$row_name];
-    echo "Filter Property -";
+  <center>";
+  search_option($cog_conn, $sql, "First filter: subject dimension", "subject", "subjects", "all_on");
+  echo "<br><span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Second filter: dimension entity:&nbsp<a href='?second_filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?second_filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?second_filter=theory'><input type='button' class='light_bg select-css' value='theory'></a>&nbsp;<a href='?second_filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a></span>"; 
+  function entity_options($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row, $all_switch, $description) {
+    echo $description;
     search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
+
+    return array($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row);
   }
-  if ($filter=='implmnt') {
-    $prop_name = "Implementation Level";
-    $row_name = "level";
-    $tbl_name = "implementations";
-    $prop_relation_tbl = "article_has_implmnt";
-    $prop_relation_row = "level_id";
-    $all_switch = "all_off";
+  if ($second_filter=='detail') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "level of detail", "detail_level", "details", "article_has_detail", "detail_id", $all_switch, $description);
     $prop_value = $_POST[$row_name];
-    echo "Filter Property -";
-    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
-  if ($filter=='keyword') {
-    $prop_name = "Keyword";
-    $row_name = "keyword";
-    $tbl_name = "keywords";
-    $prop_relation_tbl = "article_has_keyword";
-    $prop_relation_row = "keyword_id";
-    $all_switch = "all_off";
+  if ($second_filter=='implmnt') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "implementation level", "level", "implementations", "article_has_implmnt", "level_id", $all_switch, $description);
     $prop_value = $_POST[$row_name];
-    echo "Filter Property -";
-    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
-  if ($filter=='theory') {
-    $prop_name = "Theory";
-    $row_name = "category";
-    $tbl_name = "theory_category";
-    $prop_relation_tbl = "article_has_theory";
-    $prop_relation_row = "theory_id";
-    $all_switch = "all_off";
+  if ($second_filter=='keyword') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "keyword", "keyword", "keywords", "article_has_keyword", "keyword_id", $all_switch, $description);
     $prop_value = $_POST[$row_name];
-    echo "Filter Property -";
-    search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);
   }
+  if ($second_filter=='theory') {
+    list($prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row) = entity_options($cog_conn, $sql, "theory", "category", "theory_category", "article_has_theory", "theory_id", $all_switch, $description);
+    $prop_value = $_POST[$row_name];
+  }
+  echo "<br>Sort:";
+  search_option($cog_conn, $sql, "dimension", "dimension", "dimensions", "all_on");
+  search_option($cog_conn, $sql, "detail", "property", "properties", "all_off"); 
   echo "<input type='hidden' name='form_submitted' value='1' />
   <br><span style='padding:20px'><input type='submit' value='   go   '  class='light_bg select-css'></span></span>
   </center></form><br>";
@@ -95,8 +75,34 @@
   // check for user's dimension selection
   include('get_dimension.php');
 
-  echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>Sorted by: ".$dim_desc."</div></center><br>";
-  if ($filter == 'no filter' | $prop_value == '') {
+  if ($subject_desc != "" || $dim_desc != "" || $prop_desc != "") {
+    echo "<center><div style='font-size:1em;display: inline-block;text-align: center;margin: 0 auto;'>";
+    if ($subject != 0) {
+      echo "Filtered by Subject: ".$subject_desc;
+    }
+    if ($subject != 0 && ($dimension != 0 || $property != 1)) {
+      echo "; ";
+    }
+    if ($dimension != 0 || $property != 1) {
+      echo "Sorted by: ";
+    }
+    if ($dimension != 0) {
+      echo $dim_desc;
+    }
+    if ($dimension != 0 && $property != 1) {
+      echo " and ";
+    }    
+    if ($property != 1) {
+      echo $prop_desc;
+    }
+    if ($subject != 0 || $dimension != 0 || $property != 1) {
+      echo ".";
+    }
+    echo "</div></center>";
+  }
+  echo "<br>";
+
+  if ($second_filter == 'no filter' | $prop_value == '') {
     $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
   }
   else {
@@ -110,6 +116,56 @@
     }
     $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ".$dim_relation.".".$dim_id.", articles.".$prop_id." FROM articles, article_has_subject, ".$dim_relation.$prop_relation." WHERE article_has_subject.`subject_id` = ".$subject." AND ".$dim_relation.".`".$article_id."` = articles.id AND article_has_subject.article_id = articles.id AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join." ORDER BY ".$dim_relation.".`".$dim_id."`, `articles`.`".$prop_id."` DESC;";
   }
+
+  /*
+    Build query
+  */
+  $prop_relation = '';
+  $prop_tbl_join = '';
+  if (($prop_value != "" || $second_filter != 'no filter')) {
+    $prop_relation = $prop_relation_tbl;
+    $prop_tbl_join = " AND ".$prop_relation_tbl.".article_id = articles.id";
+  }
+  $sql = "SELECT DISTINCT articles.id, articles.url, articles.citation, articles.theory, articles.modeling_methods, articles.abstract, articles.curation_notes, articles.inclusion_qualification, ";
+  if ($dimension != 0) {
+    $sql = $sql.$dim_relation.".".$dim_id.", ";
+  }
+  if (($prop_value != "" || $second_filter != 'no filter')) {
+    $sql = $sql.$prop_relation.".".$prop_relation_row.", ";
+  }
+  $sql = $sql."articles.".$prop_id." FROM articles, article_has_subject";
+  if ($dimension != 0) {
+    $sql = $sql.", ".$dim_relation;
+  }
+  if (($prop_value != "" || $second_filter != 'no filter') && ($dim_relation != $prop_relation_tbl)) {
+    $sql = $sql.", ".$prop_relation;
+  }
+  $sql = $sql." WHERE ";
+  if ($subject != 0) {
+    $sql = $sql."article_has_subject.`subject_id` = ".$subject." AND ";
+  }
+  if ($dimension != 0) {
+    $sql = $sql.$dim_relation.".`".$article_id."` = articles.id AND ";
+  }
+  $sql = $sql."article_has_subject.article_id = articles.id";
+  if (($prop_value != "" || $second_filter != 'no filter')) {
+    $sql = $sql." AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join;
+  }
+  if ($dimension != 0 || $property != 1) {
+    // set order by conditions
+    // only proceeds if selections are not set to "all"
+    $sql = $sql." ORDER BY ";
+    if ($dimension != 0) {
+      $sql = $sql.$dim_relation.".`".$dim_id."` ASC";
+    }
+    if ($dimension != 0 && $property != 1) {
+      $sql = $sql." , ";
+    }
+    if ($property != 1) {
+      $sql = $sql."`articles`.`".$prop_id."` DESC";
+    }
+  } 
+  //echo $sql;
 
   // display articles based on the user's selection
   include('display_articles.php');

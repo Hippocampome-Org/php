@@ -11,7 +11,7 @@
       $i++;      
       echo "<u>Citation</u>: " . $row["citation"];
       if ($row["url"] != "") {
-        "<br><u>Url</u>: <a href='".$row["url"]."'>" . $row["url"]."</a> ";
+        echo "<br><u>Url</u>: <a href='".$row["url"]."'>" . $row["url"]."</a> ";
       }
       if ($dim_id != "") {
         echo "<br><u>".$dim_desc."</u>: ".$row[$dim_id].". Dimension type description: ".$dim_type_desc.".";
