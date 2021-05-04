@@ -75,7 +75,7 @@
       $sql = $sql."article_has_neuronfuzzy.neuron_id, ";
     }
   }
-  if ($second_filter_active) {
+  if ($second_filter_entity_sel) {
     $sql = $sql.$prop_relation.".".$prop_relation_row.", ";
   }
   $sql = $sql."articles.".$prop_id." FROM articles, article_has_subject";
@@ -85,7 +85,7 @@
       $sql = $sql.", article_has_neuronfuzzy";
     }
   }
-  if ($second_filter_active && ($dim_relation != $prop_relation_tbl)) {
+  if ($second_filter_entity_sel && ($dim_relation != $prop_relation_tbl)) {
     $sql = $sql.", ".$prop_relation;
   }
   $sql = $sql." WHERE ";
@@ -99,7 +99,7 @@
     }
   }
   $sql = $sql."article_has_subject.article_id = articles.id";
-  if ($second_filter_active) {
+  if ($second_filter_entity_sel) {
     if ($dimension == $neuron_types_id) {
       $sql = $sql." AND (".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value." OR article_has_neuronfuzzy.neuron_id = ".$prop_value.")".$prop_tbl_join;
     }
