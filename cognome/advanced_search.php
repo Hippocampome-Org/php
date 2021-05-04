@@ -4,6 +4,12 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title id="title_id">Hippocampus Region Models and Theories</title>
   <link rel="stylesheet" type="text/css" href="main.css">
+  <script>
+    function set_second_filter($selection) {
+      document.getElementById('second_filter').value = $selection;
+      document.forms["search_options"].submit();
+    }
+  </script>
   <?php include('set_theme.php'); ?>
   <?php include('function/hc_header.php'); ?>
 </head>
@@ -33,16 +39,23 @@
   $all_switch = "all_off";
   $prop_value = ''; $row_name = ''; $tbl_name = '';
   $second_filter = 'no filter';
-  if (isset($_GET['second_filter'])) {
-    $second_filter = $_GET['second_filter'];
+  if (isset($_REQUEST['second_filter'])) {
+    $second_filter = $_REQUEST['second_filter'];
   }
 
   include('search_option.php');    
   echo "
-  <form action='#' method='POST' style='font-size:1em;'>
+  <form name='search_options' action='#' method='POST' style='font-size:1em;'>
   <center>";
   search_option($cog_conn, $sql, "First filter: subject dimension", "subject", "subjects", "all_on");
-  echo "<br><span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>Second filter: dimension entity:&nbsp<a href='?second_filter=detail'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='?second_filter=implmnt'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='?second_filter=keyword'><input type='button' class='light_bg select-css' value='keyword'></a><br><a href='?second_filter=theory'><input type='button' class='light_bg select-css' value='theory or network algorithm'></a>&nbsp;<a href='?second_filter=scale'><input type='button' class='light_bg select-css' value='simulation scale'></a>&nbsp;<a href='?second_filter=neuron'><input type='button' class='light_bg select-css' value='neuron types'></a>&nbsp;<a href='?second_filter=region'><input type='button' class='light_bg select-css' value='anatomical region'></a></span>"; 
+  echo "<br><span style='display: inline-block;' style='a {text-decoration:none important!;};text-decoration:none important!;'>
+  Second filter: dimension entity:&nbsp<a href='javascript:set_second_filter(\"detail\")'><input type='button' class='light_bg select-css' value='level of detail'></a>&nbsp;<a href='javascript:set_second_filter(\"implmnt\")'><input type='button' class='light_bg select-css' value='implementation level'></a>&nbsp;<a href='javascript:set_second_filter(\"keyword\")'><input type='button' class='light_bg select-css' value='keyword'></a><br><a href='javascript:set_second_filter(\"theory\")'><input type='button' class='light_bg select-css' value='theory or network algorithm'></a>&nbsp;<a href='javascript:set_second_filter(\"scale\")'><input type='button' class='light_bg select-css' value='simulation scale'></a>&nbsp;<a href='javascript:set_second_filter(\"neuron\")'><input type='button' class='light_bg select-css' value='neuron types'></a>&nbsp;<a href='javascript:set_second_filter(\"region\")'><input type='button' class='light_bg select-css' value='anatomical region'>
+  <input type='hidden' name='second_filter' id='second_filter'";
+  if (isset($_REQUEST['second_filter'])) {
+    echo " value='".$_REQUEST['second_filter']."'";
+  }
+  echo " />";
+  echo "</a></span>"; 
   function entity_options($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $prop_relation_tbl, $prop_relation_row, $all_switch, $description) {
     echo $description;
     search_option($cog_conn, $sql, $prop_name, $row_name, $tbl_name, $all_switch);

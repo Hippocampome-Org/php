@@ -117,3 +117,8 @@ DELETE FROM details WHERE (`id` = '4');
 DELETE FROM theory_category WHERE (`id` = '5');
 
 DELETE FROM network_scales WHERE (`id` = '9');
+
+INSERT INTO article_has_neuron (`article_id`, `neuron_id`) VALUES ('421', '123');
+
+UPDATE evidence_of_neurons SET `evidence_position` = 'pg 2', `evidence_description` = 'pg 2: The simulated network, reduced to include only the essential details necessary to study interneuronal interactions, did not include descriptions of excitatory pyramidal cells, thought to be important for long-range but not local synchrony, multicompartmental representations of interneurons, or y-aminobutyric acid type B (GABA_B)-mediated effects. Fig. 2a shows spike trains, in raster form, from such a network of 50 GABA_A, slow and 50 GABA_A, fast cells.\r\n
+Note: The simulation containing GABA_A slow and fast interneurons in CA1 was interpreted as including potentially any interneuron. That judgement was made due to the knowledge that all GABAergic synapses have GABA_A receptors as the postsynaptic target. All CA1 interneurons listed in the hippocampome have GABAergic synapses. Therefore, no specific neuron type was annotated.' WHERE (`article_id` = '421');

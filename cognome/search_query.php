@@ -100,7 +100,12 @@
   }
   $sql = $sql."article_has_subject.article_id = articles.id";
   if ($second_filter_active) {
-    $sql = $sql." AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join;
+    if ($dimension == $neuron_types_id) {
+      $sql = $sql." AND (".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value." OR article_has_neuronfuzzy.neuron_id = ".$prop_value.")".$prop_tbl_join;
+    }
+    else {
+      $sql = $sql." AND ".$prop_relation_tbl.".".$prop_relation_row." = ".$prop_value.$prop_tbl_join;
+    }
   }
   if ($dimension != 0 || $property != 1) {
     // set order by conditions
