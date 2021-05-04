@@ -16,33 +16,19 @@
   <?php echo file_get_contents('header.html'); ?>
   <div style="width:80%;position:relative;left:10%;">
   <script type='text/javascript'>
-    document.getElementById('header_title').innerHTML='General Statistics and Reporting';
+    document.getElementById('header_title').innerHTML='<a href=\'reporting.php\' style=\'text-decoration:none\'>General Statistics and Reporting</a>';
     document.getElementById('fix_title').style='width:80%;position:relative;left:10%;';
   </script>
   <!-- end of header -->   
 
   <center>
   <?php
-  //include('mysql_connect.php');    
-
   /*
   Glossary
   */
   echo "<div class='article_details' style='min-width:500px;'><div class='wrap-collabsible' id='art_select'><input id='collapsible1' class='toggle' type='checkbox'><label for='collapsible1' class='lbl-toggle'>Glossary:</label><div class='collapsible-content'><div class='content-inner' style='height:600px;overflow: auto;'><center><span style='font-size:30px'><u>Glossary</u></span></center><br>";
   
-    echo "<center><table>";/*<table style='font-size:0.8em;'>";*/
-  
-  // Collect dimension names
-  /*$dim_tbl=array(
-    1=>"details",
-    2=>"implementations",
-    3=>"theory_category",
-    4=>"keywords");
-  $dim_col=array(
-    1=>"detail_level",
-    2=>"level",
-    3=>"category",
-    4=>"keyword");*/
+  echo "<center><table>";
   
   include('glossary.php'); 
   echo "<tr></tr></table><br><br></div></input></div></div></div>";   
@@ -69,9 +55,27 @@
   $sql = "SELECT COUNT(*) FROM $selected_db.articles";
   $result = $cog_conn->query($sql);
   $article_count = $result->fetch_assoc();
-  echo "<br><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
-  /*echo "<br><br><a href='reporting.php' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>statistics on all articles</a>&nbsp&nbsp<a href='reporting.php?only_evidence_anno=true' style='background-color:lightgrey;border-radius: 20px;border:1px solid black;text-decoration: none;' class='button_padding'>only articles with evidence annotations</a>";*/
-  echo "<br><br>Database version to use: <select name='param_1' size='1' style='height:25px;'><option value='core'>Core collection</option><option value='extended'>Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' />&nbsp;<font size=2>(Note: database switch not yet working)</font></div>";
+  echo "<br><form name='db_selection' action='#' method='POST'><div class='article_details'>Total number of articles: ".$article_count["COUNT(*)"];
+  if (isset($_REQUEST['active_db'])) {
+    $active_db = $_REQUEST['active_db'];
+  }
+  else if (isset($_SESSION['active_db'])) {
+    $active_db = $_SESSION['active_db'];
+  }
+  else {
+    $active_db = "core";
+  }
+  echo "<br><br>Database version to use: <select name='active_db' size='1' style='height:25px;'><option value='core' ";
+  if ($active_db == "core") {
+    echo "selected";
+    $_SESSION['active_db'] = "core"; // note: session already started in access_db.php
+  }
+  echo ">Core collection</option><option value='extended' ";
+  if ($active_db == "extended") {
+    echo "selected";
+    $_SESSION['active_db'] = "extended";
+  }
+  echo ">Extended collection</option></select>&nbsp;&nbsp;<input type='submit' value='Update' style='height:25px;width:75px;font-size:14px;' /></div></form>";
 
   echo "<br><div class='article_details'><center><u>Subjects</u></center><br>";
 

@@ -30,3 +30,22 @@ include("../function/icon.html");
 <?php include ("../function/title.php"); ?>
 <?php include('../function/menu_main.php'); ?>
 <link rel="stylesheet" href="../function/menu_support_files/menu_main_style.css" type="text/css" />
+
+<?php
+	if (isset($_SESSION['active_db']) || isset($_REQUEST['active_db'])) {
+    	if (isset($_REQUEST['active_db'])) {
+		    $active_db = $_REQUEST['active_db'];
+		}
+		else if (isset($_SESSION['active_db'])) {
+		    $active_db = $_SESSION['active_db'];
+		}
+
+    	if ($active_db == "core") {
+		    $cog_database = "cognome_core";
+		}
+		else if ($active_db == "extended") {
+			$cog_database = "cognome";
+		}
+		$cog_conn = mysqli_connect($cog_servername, $cog_username, $cog_password, $cog_database);   		
+  	}
+?>
