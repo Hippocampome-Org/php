@@ -104,8 +104,6 @@ AND	title not like concat("%","A model of episodic memory: mental time travel al
 AND	title not like concat("%","Model-based spatial navigation in the hippocampus-ventral striatum circuit: A computational analysis","%")
 AND	title not like concat("%","Temporal frequency of subthreshold oscillations scales with entorhinal grid cell field spacing","%")
 AND	title not like concat("%","Axonal synapse sorting in medial entorhinal cortex","%")
-AND	title not like concat("%","A biologically inspired hierarchical goal directed navigation model","%")
-AND	id != '435'
 AND	title not like concat("%","Can Grid Cell Ensembles Represent Multiple Spaces","%")
 AND	title not like concat("%","Spike-timing-dependent plasticity of inhibitory synapses in the entorhinal cortex","%")
 AND	title not like concat("%","Matching storage and recall: hippocampal spike timing-dependent plasticity and phase response curves","%")

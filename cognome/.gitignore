@@ -25,6 +25,7 @@ gen_cog_core/cognome_core.sql
 gen_cog_core/full_cognome.sql
 gen_cog_core/export_cog/cognome_mysql_utf8.sql
 gen_cog_core/export_cog/cognome.sql
+custom_search/secret_key.php
 .DS_Store
 access_db.php
 .buildpath

@@ -80,9 +80,6 @@ DELETE FROM article_has_neuronfuzzy WHERE (`neuron_id` = '133');
 DELETE FROM article_has_neuronfuzzy WHERE (`neuron_id` = '134');
 DELETE FROM article_has_neuronfuzzy WHERE (`neuron_id` = '135');
 
-DELETE FROM article_has_subject WHERE (`article_id` = '435' AND `subject_id` = '8');
-UPDATE evidence_of_subjects SET `evidence_description` = 'pg 4: This form of encoding, which we call sparse, random, conjunctive coding, produces sparsification directly through the choice of (a); it\r\nproduces separation effects comparable to values of R in the range of about 3-5, with smaller values of a corresponding to larger values of R.\r\npg 6: Because of the random relationship, the association between these patterns must be learned; but\r\nbecause it must be learned, it provides a potential locus for\r\ninterference among memory traces.\r\nNote: The recognition of letters was interpreted as sematic memory.' WHERE (`article_id` = '435');
-
 INSERT INTO article_has_neuron (`article_id`, `neuron_id`) VALUES ('204', '123');
 UPDATE evidence_of_neurons SET `evidence_position` = 'N/A', `evidence_description` = 'N/A' WHERE (`article_id` = '204');
 
@@ -122,3 +119,11 @@ INSERT INTO article_has_neuron (`article_id`, `neuron_id`) VALUES ('421', '123')
 
 UPDATE evidence_of_neurons SET `evidence_position` = 'pg 2', `evidence_description` = 'pg 2: The simulated network, reduced to include only the essential details necessary to study interneuronal interactions, did not include descriptions of excitatory pyramidal cells, thought to be important for long-range but not local synchrony, multicompartmental representations of interneurons, or y-aminobutyric acid type B (GABA_B)-mediated effects. Fig. 2a shows spike trains, in raster form, from such a network of 50 GABA_A, slow and 50 GABA_A, fast cells.\r\n
 Note: The simulation containing GABA_A slow and fast interneurons in CA1 was interpreted as including potentially any interneuron. That judgement was made due to the knowledge that all GABAergic synapses have GABA_A receptors as the postsynaptic target. All CA1 interneurons listed in the hippocampome have GABAergic synapses. Therefore, no specific neuron type was annotated.' WHERE (`article_id` = '421');
+
+DELETE FROM article_has_subject WHERE (`article_id` = '435' AND `subject_id` = '8');
+UPDATE evidence_of_subjects SET `evidence_description` = 'pg 4: This form of encoding, which we call sparse, random, conjunctive coding, produces sparsification directly through the choice of (a); it produces separation effects comparable to values of R in the range of about 3-5, with smaller values of a corresponding to larger values of R.\r\nNote: this is evidence of pattern separation.\r\npg 6: Because of the random relationship, the association between these patterns must be learned; but because it must be learned, it provides a potential locus for interference among memory traces.\r\npg 4: To explore this distinction, we introduce an example domain consisting of pixel arrays representing character strings.\r\nNote: this is evidence of associative memory.\r\nNote: The recognition of letters was interpreted as semantic memory.\r\npg 3: Additional goals arise within our theory, due to the focus on a long-term involvement of the hippocampal system in reinstatement and consolidation of memories...The return connections must optimize the reinstatement of the original pattern in the neocortex, given the information retained in the representation in EC.\r\nNote: the reinstatement processes in the model relating to consolidation was evidence for annotating consolidation as a subject.' WHERE (`article_id` = '435');
+
+INSERT INTO article_has_neuron (`article_id`, `neuron_id`) VALUES ('435', '123');
+
+UPDATE evidence_of_neurons SET `evidence_position` = 'pg 5', `evidence_description` = 'pg 5: Continuing with our example, the pixel representation corresponds approximately 1 to the representation in neocortical association areas; the stroke representation corresponds approximately to the representation in EC; and a conjunctive encoding applied to that corresponds approximately to the representation in area CA3.\r\n
+Note: specific neuron types were not described with the first simulation in the article and therefore no specific neuron types were annotated here.' WHERE (`article_id` = '435');

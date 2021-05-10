@@ -32,12 +32,21 @@ include("../function/icon.html");
 <link rel="stylesheet" href="../function/menu_support_files/menu_main_style.css" type="text/css" />
 
 <?php
+	// server should keep session data for maximum time availible
+	// ini_set('session.gc_maxlifetime', 65535);
+	// each client should remember their session id for maximum time availible
+	// session_set_cookie_params(65535); 
+	//
+	// TODO: try to get session timeout set before session started, because setting it 
+	// afterward is not an option
+
 	if (isset($_SESSION['active_db']) || isset($_REQUEST['active_db'])) {
     	if (isset($_REQUEST['active_db'])) {
 		    $active_db = $_REQUEST['active_db'];
 		}
 		else if (isset($_SESSION['active_db'])) {
 		    $active_db = $_SESSION['active_db'];
+		    $_SESSION['active_db'] = $active_db; // keep session variable alive (avoid timeout) by setting it here.
 		}
 
     	if ($active_db == "core") {

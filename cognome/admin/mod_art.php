@@ -36,7 +36,10 @@
   <!-- end of header -->
   
   <?php
-  //include('mysql_connect.php');  
+  //include('mysql_connect.php'); 
+
+  $cog_database = "cognome"; // always use full database on this page
+  $cog_conn = mysqli_connect($cog_servername, $cog_username, $cog_password, $cog_database); 
 
   // add/modify/del options presented
   echo "<div class='article_details' style='text-align: center;margin: 0 auto;padding: .4rem;font-size:1em;'><form action='art_sub.php' method='POST'>Articles:&nbsp&nbsp<input type='button' value='  Add  ' onclick='toggleListDown()' style='height:30px;font-size:22px;position:relative;top:-2px;'>&nbsp&nbsp</input><input type='button' value='  Modify  ' onclick='toggleListUp()' style='height:30px;font-size:22px;position:relative;top:-2px;'></input>";
