@@ -4,6 +4,8 @@
 	Reference: https://www.alibabacloud.com/blog/how-to-work-with-blob-in-mysql-database-hosted-on-alibaba-cloud_594270
 */
 
+include('secret_key.php');
+
 $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/";
 
 // open connection
@@ -19,13 +21,14 @@ if (!mysqli_query($articles_conn, $sql)) {
 	echo mysqli_error($articles_conn);
 }
 
-function insert_article($articles_conn, $filename, $dir) {
+function insert_article($articles_conn, $filename, $dir, $art_text_secret_key) {
 	// insert article text into db
 	$article_text = mysqli_real_escape_string($articles_conn, file_get_contents($dir.$filename));
 	$article_id = ltrim($filename, "0");
 	$article_id = str_replace(".txt", "", "$article_id");
 
-	$sql= "INSERT INTO article_text (article_id, article_text) VALUES ('$article_id','$article_text')";
+	$sql= "INSERT INTO article_text (article_id, article_text) VALUES ('$article_id', AES_ENCRYPT(\"".$article_text."\", \"".$art_text_secret_key."\"))";
+	//echo $sql."<br>";
 
 	if (!mysqli_query($articles_conn,$sql)) {
 		echo mysqli_error($articles_conn);
@@ -46,19 +49,18 @@ closedir($handle);
 sort($articles);
 
 foreach ($articles as $filename) {
-	insert_article($articles_conn, $filename, $dir);
+	insert_article($articles_conn, $filename, $dir, $art_text_secret_key);
 }
 
 // example article text
-$show_example = true;
+$show_example = false;
 if ($show_example) {
-	include('secret_key.php');
 	$max_text_size = 1000000000;
-	$sql = "SELECT SUBSTRING(article_text,1,".$max_text_size.") FROM article_text WHERE article_id = 8;";
+	$sql = "SELECT SUBSTRING(AES_DECRYPT(article_text,'".$art_text_secret_key."'),1,".$max_text_size.") FROM article_text WHERE article_id = 8;";
 	$result = $cog_conn->query($sql);
 	if ($result->num_rows > 0) {       
 	  while($row = $result->fetch_assoc()) {  
-	  	echo $row["SUBSTRING(article_text,1,".$max_text_size.")"];
+	  	echo $row["SUBSTRING(AES_DECRYPT(article_text,'".$art_text_secret_key."'),1,".$max_text_size.")"];
 	  }
 	}
 }
