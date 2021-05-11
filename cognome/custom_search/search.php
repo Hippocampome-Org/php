@@ -199,7 +199,7 @@ function search($cog_conn, $file, $filename, $max_matches, $query, $snippit_size
 		    	echo "<div class='wrap-collabsible' id='art_select'><input id='collapsible_srch_".$tot_mch."' class='toggle' type='checkbox'><label for='collapsible_srch_".$tot_mch."' class='lbl-toggle'>".$num_matches." matches for keyterm: \"".$pattern_keyterm."\"</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;max-height: 550px;overflow: auto;'>";
 		    }
 			else {
-				echo "<div style='background-color:#dedede;'><span style='font-size:22px;position:relative;left:33px;top:-4px;font-family:arial;'>$num_matches matches for keyterm: \""."test"."\"";
+				echo "<div style='background-color:#dedede;'><span style='font-size:22px;position:relative;left:33px;top:-4px;font-family:arial;'>$num_matches matches for keyterm: \"".$pattern_keyterm."\"";
 			}
 
 			if ($show_snippits == true) {
