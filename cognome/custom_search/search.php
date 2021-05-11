@@ -28,7 +28,7 @@ function report_results($results_text, $total_results, $query, $articles_searche
 	return $results_text;
 }
 
-function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $range, $snippit_size, $art_text_secret_key) {
+function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $range, $snippit_size, $art_text_secret_key, $show_snippits, $cog_database) {
 	global $tot_mch;
 	global $total_results;
 	$articles_searched = 0;
@@ -76,7 +76,7 @@ function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $q
 	closedir($handle);
 	sort($articles_list); #, SORT_STRING */
 
-	$sql = "SELECT filename FROM article_text;";
+	$sql = "SELECT filename FROM $cog_database.article_text;";
 	$result = $cog_conn->query($sql);
 	if ($result->num_rows > 0) {       
 	  while($row = $result->fetch_assoc()) {  
@@ -96,14 +96,14 @@ function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $q
 			if ($range_search) {
 				#echo "stats: ".$art_file_id." ".$start_range." ".$end_range."<br><br>";
 				if ($art_file_id >= $start_range && $art_file_id <= $end_range) {
-					$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits);
+					$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits, $cog_database);
 					$total_results = $results_group[0];
 					array_push($collection_results, $results_group[1]);
 					$articles_searched++;
 				}
 			}
 			else {
-    			$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits);
+    			$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits, $cog_database);
     			$total_results = $results_group[0];
     			array_push($collection_results, $results_group[1]);
     			$articles_searched++;
@@ -122,12 +122,12 @@ function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $q
 	return $article_results;
 }
 
-function get_article_text($cog_conn, $filename, $art_text_secret_key) {
+function get_article_text($cog_conn, $filename, $art_text_secret_key, $cog_database) {
 	$max_text_size = 1000000000;
 	$article_text = "";
 	$decrypted_column = "SUBSTRING(AES_DECRYPT(article_text,'".$art_text_secret_key."'),1,".$max_text_size.")";
 
-	$sql = "SELECT $decrypted_column FROM article_text WHERE filename = \"$filename\";";
+	$sql = "SELECT $decrypted_column FROM $cog_database.article_text WHERE filename = \"$filename\";";
 	$result = $cog_conn->query($sql);
 	if ($result->num_rows > 0) {       
 	  while($row = $result->fetch_assoc()) {  
@@ -138,18 +138,20 @@ function get_article_text($cog_conn, $filename, $art_text_secret_key) {
 	return $article_text;
 }
 
-function search($cog_conn, $file, $filename, $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits) {
+function search($cog_conn, $file, $filename, $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits, $cog_database) {
 	global $tot_mch;
 	global $total_results;
 	$matches_to_report = array();
 
 	// set file details
-	echo "<br><center><font style='font-size:20px;'>File: ";
+	echo "<br><center><font style='font-size:20px;'>";
 	if ($show_snippits == true) {
-		echo "<a href='?fileview=".$file."' target='_blank'>".$filename."</a>";
+		echo "File: <a href='?fileview=".$file."' target='_blank'>".$filename."</a>";
 	}
 	else {
-		echo "<u>".$filename."</u>";		
+		$article_id = ltrim($filename, "0");
+		$article_id = str_replace(".txt", "", "$article_id");
+		echo "<a href='../browse.php?art_id=$article_id'>File ID: $article_id</a>";		
 	}
 	echo "</font></center><br>";
 	/*echo "<br><center><font style='font-size:20px;'>File: <a href='/general/cognome_articles/".substr($filename, 0, -4)."''>".substr($filename, 0, -4)."</a></font></center><br>";*/
@@ -157,7 +159,7 @@ function search($cog_conn, $file, $filename, $max_matches, $query, $snippit_size
 	$fh = fopen($myFile, 'r');
 	$file_contents = fread($fh, filesize($myFile));
 	fclose($fh);*/
-	$file_contents = get_article_text($cog_conn, $filename, $art_text_secret_key);
+	$file_contents = get_article_text($cog_conn, $filename, $art_text_secret_key, $cog_database);
 
 	$file_contents2 = preg_replace('/\n/', '<br>', $file_contents); // remove newlines
 

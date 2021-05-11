@@ -64,6 +64,7 @@
     <?php
     $show_snippits = false;
     $snippit_size = 400;
+    $cog_database = "cognome_core"; // for the current time, restrict search to cognome core
     //$dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
     $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/"; // directory of literature in text file format  
 
@@ -131,7 +132,7 @@
       }
       echo ">".$max_art[$a_i]."</option>";
     }
-    echo "</select>";
+    echo "</select><br><span style='font-size:22px;position:relative;font-family:arial;'>Currently only core collection articles are searchable here.</span>";
     if ($show_snippits == true) {
       echo "&nbsp;&nbsp;<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Save results to file:&nbsp;&nbsp;</span><select name='save_to_file' style='width:55px;height:30px;font-size:18px;'>";
       echo "<option value='no' ";
@@ -198,7 +199,7 @@
         $articles_to_search = "all";
       }
 
-      $article_results = search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $_POST['range'], $snippit_size, $art_text_secret_key);
+      $article_results = search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $_POST['range'], $snippit_size, $art_text_secret_key, $show_snippits, $cog_database);
 
       echo "</div>";
     }
