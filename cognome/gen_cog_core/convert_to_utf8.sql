@@ -11,6 +11,7 @@ ALTER TABLE article_has_scale CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode
 ALTER TABLE article_has_subject CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE article_has_theory CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE articles CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER TABLE article_text CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE authors CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE counters_db_id CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 ALTER TABLE details CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;

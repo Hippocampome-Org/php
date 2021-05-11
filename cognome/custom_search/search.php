@@ -24,19 +24,22 @@ function report_results($results_text, $total_results, $query, $articles_searche
 	}
 	$results_text = $results_text."<br>".$articles_searched." total articles searched";
 	echo "<script>update_overall('".$results_text."')</script>";	
+
+	return $results_text;
 }
 
-function search_directory($dir, $articles_to_search, $max_matches, $query, $range, $snippit_size) {
+function search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $range, $snippit_size, $art_text_secret_key) {
 	global $tot_mch;
 	global $total_results;
 	$articles_searched = 0;
 	$articles_processed = 0;
 	$collection_results = array();
+	$results_text = "";
 
 	$range_search=false;
 	if ($range != '') {
 		$range_search=true;
-		$range_parsed = preg_split("/-/i", v);
+		$range_parsed = preg_split("/-/i", $range);
 		if (count($range_parsed) == 1) {
 			$start_range=$range;
 			$end_range=$range;
@@ -45,7 +48,7 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 		else if (count($range_parsed) == 2) {
 			$start_range=$range_parsed[0];
 			$end_range=$range_parsed[1];
-			echo "Range used: ".$start_range."\t".$end_range."<br><br>";
+			echo "Range used: ".$start_range." - ".$end_range."<br><br>";
 		}
 	}
 
@@ -63,7 +66,7 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 
 	$articles_list=array();
 	// run directory search
-	if ($handle = opendir($dir)) {
+	/*if ($handle = opendir($dir)) {
 	    while ($file = readdir($handle)) {
 	    	if ($file != "." && $file != "..") {
 	    		array_push($articles_list,$file);
@@ -71,7 +74,16 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 	    }
 	}
 	closedir($handle);
-	sort($articles_list); #, SORT_STRING
+	sort($articles_list); #, SORT_STRING */
+
+	$sql = "SELECT filename FROM article_text;";
+	$result = $cog_conn->query($sql);
+	if ($result->num_rows > 0) {       
+	  while($row = $result->fetch_assoc()) {  
+	  	array_push($articles_list,$row['filename']);
+	  }
+	}
+
 	/*$s_i = 1;
 	foreach($articles_list as $art_print) {
     	echo "sorted articles: #$s_i ".$art_print."<br>";
@@ -84,14 +96,14 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
 			if ($range_search) {
 				#echo "stats: ".$art_file_id." ".$start_range." ".$end_range."<br><br>";
 				if ($art_file_id >= $start_range && $art_file_id <= $end_range) {
-					$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size);
+					$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits);
 					$total_results = $results_group[0];
 					array_push($collection_results, $results_group[1]);
 					$articles_searched++;
 				}
 			}
 			else {
-    			$results_group = search($dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size);
+    			$results_group = search($cog_conn, $dir.$articles_list[$i], $articles_list[$i], $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits);
     			$total_results = $results_group[0];
     			array_push($collection_results, $results_group[1]);
     			$articles_searched++;
@@ -100,34 +112,61 @@ function search_directory($dir, $articles_to_search, $max_matches, $query, $rang
     	}
 
     	if ($articles_searched < 25 || $articles_searched == 50 || $articles_searched == 100 || $articles_searched == 150 || $articles_searched == 200 || $articles_searched == 250) {
-    		report_results($results_text, $total_results, $query, $articles_searched);
+    		$results_text = report_results($results_text, $total_results, $query, $articles_searched);
     	}
 	}
 
-	report_results($results_text, $total_results, $query, $articles_searched);
+	$results_text = report_results($results_text, $total_results, $query, $articles_searched);
 
 	$article_results = array($articles_list, $collection_results);
 	return $article_results;
 }
 
-function search($file, $filename, $max_matches, $query, $snippit_size) {
+function get_article_text($cog_conn, $filename, $art_text_secret_key) {
+	$max_text_size = 1000000000;
+	$article_text = "";
+	$decrypted_column = "SUBSTRING(AES_DECRYPT(article_text,'".$art_text_secret_key."'),1,".$max_text_size.")";
+
+	$sql = "SELECT $decrypted_column FROM article_text WHERE filename = \"$filename\";";
+	$result = $cog_conn->query($sql);
+	if ($result->num_rows > 0) {       
+	  while($row = $result->fetch_assoc()) {  
+	  	$article_text = $row[$decrypted_column];
+	  }
+	}
+
+	return $article_text;
+}
+
+function search($cog_conn, $file, $filename, $max_matches, $query, $snippit_size, $art_text_secret_key, $show_snippits) {
 	global $tot_mch;
 	global $total_results;
 	$matches_to_report = array();
 
 	// set file details
-	echo "<br><center><font style='font-size:20px;'>File: <a href='?fileview=".$file."' target='_blank'>".$filename."</a></font></center><br>";
+	echo "<br><center><font style='font-size:20px;'>File: ";
+	if ($show_snippits == true) {
+		echo "<a href='?fileview=".$file."' target='_blank'>".$filename."</a>";
+	}
+	else {
+		echo "<u>".$filename."</u>";		
+	}
+	echo "</font></center><br>";
 	/*echo "<br><center><font style='font-size:20px;'>File: <a href='/general/cognome_articles/".substr($filename, 0, -4)."''>".substr($filename, 0, -4)."</a></font></center><br>";*/
-	$myFile = $file;
+	/*$myFile = $file;
 	$fh = fopen($myFile, 'r');
 	$file_contents = fread($fh, filesize($myFile));
-	fclose($fh);
+	fclose($fh);*/
+	$file_contents = get_article_text($cog_conn, $filename, $art_text_secret_key);
 
 	$file_contents2 = preg_replace('/\n/', '<br>', $file_contents); // remove newlines
 
-	echo "<div class='wrap-collabsible' id='art_select'><input id='collapsible_srch_".$tot_mch."' class='toggle' type='checkbox'><label for='collapsible_srch_".$tot_mch."' class='lbl-toggle'>First lines in the file</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;'>";
-	echo "<div style='background-color:#dedede;padding:20px;'><center><span style='font-size:16px;'>".substr($file_contents2, 0, 400)."</span></center></div><br>";
-	echo "</div></input></div></div>";
+	if ($show_snippits == true) {
+		echo "<div class='wrap-collabsible' id='art_select'><input id='collapsible_srch_".$tot_mch."' class='toggle' type='checkbox'><label for='collapsible_srch_".$tot_mch."' class='lbl-toggle'>First lines in the file</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;'>";
+		echo "<div style='background-color:#dedede;padding:20px;'><center><span style='font-size:16px;'>".substr($file_contents2, 0, 400)."</span></center></div><br>";
+		echo "</div></input></div></div>";
+	}
+
 	$tot_mch++;
 
 	$file_contents = preg_replace('/\n/', ' ', $file_contents); // remove newlines	
@@ -154,17 +193,27 @@ function search($file, $filename, $max_matches, $query, $snippit_size) {
 		}
 
 		if ($num_matches > 0) {
-		    echo "<div class='wrap-collabsible' id='art_select'><input id='collapsible_srch_".$tot_mch."' class='toggle' type='checkbox'><label for='collapsible_srch_".$tot_mch."' class='lbl-toggle'>".$num_matches." matches for keyterm: \"".$pattern_keyterm."\"</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;max-height: 550px;overflow: auto;'>";
-
-			// Report matches
-			for ($i = 0; $i < $match_limit; $i++) {
-				$replacement = "<font style='color:blue'>".$pattern_keyterm."</font>";
-				$match = preg_replace('/[ (.,-]('.$pattern_keyterm.')[s?.,) -]/i', ' '.$replacement.' ', $matches[0][$i]);
-				echo $match."<br><br>";
-				$tot_mch++;
+			if ($show_snippits == true) {
+		    	echo "<div class='wrap-collabsible' id='art_select'><input id='collapsible_srch_".$tot_mch."' class='toggle' type='checkbox'><label for='collapsible_srch_".$tot_mch."' class='lbl-toggle'>".$num_matches." matches for keyterm: \"".$pattern_keyterm."\"</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;max-height: 550px;overflow: auto;'>";
+		    }
+			else {
+				echo "<div style='background-color:#dedede;'><span style='font-size:22px;position:relative;left:33px;top:-4px;font-family:arial;'>$num_matches matches for keyterm: \""."test"."\"";
 			}
 
-			echo "</div></input></div></div>";	
+			if ($show_snippits == true) {
+				// Report matches
+				for ($i = 0; $i < $match_limit; $i++) {
+					$replacement = "<font style='color:blue'>".$pattern_keyterm."</font>";
+					$match = preg_replace('/[ (.,-]('.$pattern_keyterm.')[s?.,) -]/i', ' '.$replacement.' ', $matches[0][$i]);
+					echo $match."<br><br>";
+					$tot_mch++;
+				}
+
+				echo "</div></input></div></div>";	
+			}
+			else {
+				echo "</span></div>";		
+			}
 		}
 		else {
 			echo "<div style='background-color:#dedede;'><span style='font-size:22px;position:relative;left:33px;top:-4px;font-family:arial;'>0 matches for keyterm: \"".$pattern_keyterm."\"</span></div>";

@@ -8,6 +8,7 @@
   <?php include('set_theme.php'); ?>
   <?php include('function/hc_header.php'); ?>
   <?php ini_set('max_execution_time', '600'); ?>
+  <?php include('secret_key.php'); ?>
   <script type="text/javascript">
     function toggle_vis(elem_name) {
       var elem = document.getElementById(elem_name);
@@ -61,6 +62,7 @@
     <!-- end of header -->
 
     <?php
+    $show_snippits = false;
     $snippit_size = 400;
     //$dir = "/var/www/html/cognome/php/cognome/lit_rev/query_optimize/dataset/";
     $dir = "/var/www/html/cognome_articles_renamed/core_collection/txt_ver_rnm/"; // directory of literature in text file format  
@@ -81,19 +83,23 @@
     $kwd_button_ids = array("subjects_btn", "level_btn", "scale_btn", "impl_btn", "region_btn", "theories_btn", "neurons_btn", "keywords_btn");
     $kwd_button_values = array("Subjects", "Detail Level", "Network Scale", "Implementation Level", "Region", "Theories", "Neuron Types", "Keywords");
 
-    echo "<div class='article_details'><form action='#' method='POST'><center><u><span style='font-size:24px;'>Enter Query</span></u><br><br><span style='font-size:22px;'>Note: searching on this page is not yet enabled.<br>Searches will return no results until it is enabled.</span><br><br><textarea name='search_query' id='search_query' style='width:600px;height:100px;font-size:18px;'>";
+    echo "<div class='article_details'><form action='#' method='POST'><center><u><span style='font-size:24px;'>Enter Query</span></u><br><br><textarea name='search_query' id='search_query' style='width:600px;height:100px;font-size:18px;'>";
     if (isset($_POST['search_query'])) {
       echo $_POST['search_query'];
     }
     echo"</textarea><br>";
     echo "<div class='wrap-collabsible' id='art_select' style='width:550px;'><input id='instructions' class='toggle' type='checkbox'><label for='instructions' class='lbl-toggle'>Instructions</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;'>";
-    echo "Enter search into text area and seperate search terms with the comma symbol ','. For example: \"grid cells, place cells\". Set the max keyterm results dropdown to select the maximum number of results to return per keyword.";
+    echo "Enter search into text area and seperate search terms with the comma symbol ','. For example: \"grid cells, place cells\".";
+    if ($show_snippits == true) {
+      echo " Set the max keyterm results dropdown to select the maximum number of results to return per keyword.";
+    }
     echo "</div></input></div></div>";
     echo "<div class='wrap-collabsible' id='kwd_select_dropdown' style='width:550px;'><input id='kwd_select' class='toggle' type='checkbox'><label for='kwd_select' class='lbl-toggle'>Load Keywords</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;'>";
     for ($b_i = 0; $b_i < count($kwd_button_ids); $b_i++) {
       make_button($kwd_button_ids[$b_i], $kwd_button_values[$b_i]);
     }
     echo "</div></input></div></div>";    
+    if ($show_snippits == true) {
     echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Max keyterm text sample results:&nbsp;&nbsp;</span>";
     echo "<select name='max_keyterm_results' style='width:45px;height:30px;font-size:18px;position:relative;top:5px;'>";    
     for ($k_i = 1; $k_i <= 20; $k_i++) {
@@ -109,6 +115,7 @@
       echo ">".$k_i."</option>";
     }
     echo "</select><br>";
+    }
     echo "<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Number of articles to search:&nbsp;&nbsp;</span>";
     echo "<select name='articles_to_search' style='width:45px;height:30px;font-size:18px;'>";
     $max_art =array("all",10,50,100);
@@ -124,18 +131,22 @@
       }
       echo ">".$max_art[$a_i]."</option>";
     }
-    echo "</select>&nbsp;&nbsp;<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Save results to file:&nbsp;&nbsp;</span><select name='save_to_file' style='width:55px;height:30px;font-size:18px;'>";
-    echo "<option value='no' ";
-    if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='no') {
-      echo "selected";
+    echo "</select>";
+    if ($show_snippits == true) {
+      echo "&nbsp;&nbsp;<span style='font-size:22px;position:relative;top:4px;font-family:arial;'>Save results to file:&nbsp;&nbsp;</span><select name='save_to_file' style='width:55px;height:30px;font-size:18px;'>";
+      echo "<option value='no' ";
+      if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='no') {
+        echo "selected";
+      }
+      echo ">no</option>";
+      echo "<option value='yes' ";
+      if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='yes') {
+        echo "selected";
+      }
+      echo ">yes</option>";    
+      echo "</select>";
     }
-    echo ">no</option>";
-    echo "<option value='yes' ";
-    if (isset($_REQUEST['save_to_file']) && $_REQUEST['save_to_file']=='yes') {
-      echo "selected";
-    }
-    echo ">yes</option>";    
-    echo "</select></center>";    
+    echo "</center>";    
     echo "<div class='wrap-collabsible' id='choose_articles' style='width:90%;position:relative;left:5%;'><input id='choose_articles_list' class='toggle' type='checkbox'><label for='choose_articles_list' class='lbl-toggle'>Articles Availible</label><div class='collapsible-content'><div class='content-inner' style='font-size:18px;height:600px;overflow:auto;'>";
     $sql = "SELECT * FROM $cog_database.articles ORDER BY id";
     $result = $cog_conn->query($sql);
@@ -157,7 +168,7 @@
     }      
     echo "</div></input></div></div>";    
     echo "<center>";
-    echo "<label style='font-family:arial;font-size:22px;'>Select article or range to search:</label>&nbsp&nbsp<input type='text' name='range' style='width:100px;height:25px;font-size:18px' value='";
+    echo "<label style='font-family:arial;font-size:22px;'>Enter article or range of articles to search (leave<br>this blank to search all articles):</label>&nbsp&nbsp<input type='text' name='range' style='width:100px;height:25px;font-size:18px' value='";
     if (isset($_REQUEST["range"])) {
       echo $_REQUEST["range"];
     }
@@ -187,7 +198,7 @@
         $articles_to_search = "all";
       }
 
-      $article_results = search_directory($dir, $articles_to_search, $max_matches, $query, $_POST['range'], $snippit_size);
+      $article_results = search_directory($cog_conn, $dir, $articles_to_search, $max_matches, $query, $_POST['range'], $snippit_size, $art_text_secret_key);
 
       echo "</div>";
     }

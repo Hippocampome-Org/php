@@ -27,7 +27,7 @@ function insert_article($articles_conn, $filename, $dir, $art_text_secret_key) {
 	$article_id = ltrim($filename, "0");
 	$article_id = str_replace(".txt", "", "$article_id");
 
-	$sql= "INSERT INTO article_text (article_id, article_text) VALUES ('$article_id', AES_ENCRYPT(\"".$article_text."\", \"".$art_text_secret_key."\"))";
+	$sql= "INSERT INTO article_text (article_id, article_text, filename) VALUES ('$article_id', AES_ENCRYPT(\"".$article_text."\", \"".$art_text_secret_key."\"), '$filename')";
 	//echo $sql."<br>";
 
 	if (!mysqli_query($articles_conn,$sql)) {
