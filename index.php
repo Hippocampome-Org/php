@@ -262,7 +262,7 @@ jQuery(document).ready(function() {
     <td width="50%" style='vertical-align:top; padding-top:10px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br><br><br>
+      <br><br>
       The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
       expression inferences in the knowledge base.
       Reference: <b>White, et al., 2019</b>
@@ -295,9 +295,9 @@ jQuery(document).ready(function() {
       <br><br>
       <b>*NEW*</b> The release of v1.9 on 02/27/2021 includes an additional 91 PoK, 768 PoE, and a new browsable matrix for in vivo recordings. 
       Reference: <b>Sanchez-Aguilera, et al., 2021</b>
-      <a href = "">
+      <a href = "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3001213">
       <i>An update to Hippocampome.org by integrating single-cell phenotypes with circuit function in vivo.</i></a>
-      PLoS Biology in press.
+      PLoS Biology 2021 May 6;19(5):e3001213; doi: 10.1371/journal.pbio.3001213.
       </font>
     </td>
   </tr>
@@ -307,6 +307,7 @@ jQuery(document).ready(function() {
         <!--      <div class='version'> -->
         <div class='version2'>
           <!--  <a href='http://peg.gd/2yN' target="_blank">http://peg.gd/2yN</a> -->
+		  <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" href="https://twitter.com/Hippocampome?ref_src=twsrc%5Etfw">Tweets by Hippocampome</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <hr class='hr2'/>
           <font class='font3' color='#000000'>
           <a href="Help_Terms_of_Use.php">Terms of Use</a>
@@ -323,7 +324,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
-          <br />Last Update: 31 Mar 2021 (<a href="Help_Release_Notes.php">v1.9</a>)</font>
+          <br />Last Update: 30 Apr 2021 (<a href="Help_Release_Notes.php">v1.9 R 1B</a>)</font>
           <br />
         </div>
     </td>   
