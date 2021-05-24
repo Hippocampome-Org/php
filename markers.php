@@ -595,8 +595,8 @@ $(function()
 			{name:'Y1',index:'Y1',width:15,search:false,sortable:false,hidden:true},
 			{name:'Y2',index:'Y2',width:15,search:false,sortable:false,hidden:true}
 		],
-		rowNum: 124,
-		rowList:[124],
+		rowNum: 125,
+		rowList:[125],
 		viewrecords: true,
 		gridview: true,
 		jsonReader:
