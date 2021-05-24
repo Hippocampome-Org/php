@@ -486,8 +486,8 @@ $(function(){
       {name:'ec_pyramidal_like_III_023300', index:'ec_pyramidal_like_III_023300', width:20,height:150,search:false,sortable:false},
       {name:'ec_multiform_III_023000', index:'ec_multiform_III_023000', width:20,height:150,search:false,sortable:false} 
      ], 
-    rowNum:122,
-    rowList:[122],
+    rowNum:125,
+    rowList:[125],
     viewrecords: true, 
     gridview: true,
     jsonReader : {
