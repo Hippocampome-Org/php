@@ -247,8 +247,8 @@ $(function()
 			{name:'TSWBNASP', index:'TSWBNASP', width:15,height:50,search:false,sortable:false},
 			{name:'TSWBSLN', index:'TSWBSLN', width:15,height:50,search:false,sortable:false}
 			], 
-		rowNum: 122,
-		rowList:[122],
+		rowNum: 125,
+		rowList:[125],
 		viewrecords: true, 
 		gridview: true,
 		jsonReader:
