@@ -385,8 +385,8 @@ $(function(){
  	], 
     //multiselect: true,
    /* pager: '#pager',*/
-    rowNum:122,
-    rowList:[122],
+    rowNum:125,
+    rowList:[125],
    /*  sortname: 'invid',
     sortorder: 'desc',*/
     viewrecords: true, 
