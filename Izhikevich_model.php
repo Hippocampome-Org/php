@@ -334,8 +334,8 @@ $(function(){
 ,{name:'P2', index:'P2', width:75, search:false,sortable:false,hidden: true}
 	], 
    
-    rowNum:122,
-    rowList:[122],
+    rowNum:125,
+    rowList:[125],
   
     viewrecords: true, 
     gridview: true,
