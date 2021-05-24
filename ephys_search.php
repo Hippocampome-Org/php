@@ -164,8 +164,8 @@ $(function(){
       {name:'SlowAhp', index:'SlowAhp', width:75,height:150,search:false,sortable:false},
       {name:'Sagratio', index:'CR', width:75,height:150,search:false,sortable:false}
     ], 
-   	rowNum:122,
-    rowList:[122],
+   	rowNum:125,
+    rowList:[125],
     viewrecords: true, 
     gridview: true,
     jsonReader : {
