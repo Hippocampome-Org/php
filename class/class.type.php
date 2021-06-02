@@ -91,8 +91,42 @@ class type
 			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}
+
+	public function get_counts($id){
+		$query = "SELECT counts FROM Counts WHERE unique_ID ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$counts_value="";
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
+		{	
+			$counts_value=$rows['counts'];
+		}
+		return $counts_value;
+	}
+
+	public function get_lower_bound($id){
+		$query = "SELECT lower_bound FROM Counts WHERE unique_ID ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$lower_bound_value="";
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
+		{	
+			$lower_bound_value=$rows['lower_bound'];
+		}
+		return $lower_bound_value;
+	}
+
+	public function get_upper_bound($id){
+		$query = "SELECT upper_bound FROM Counts WHERE unique_ID ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$upper_bound_value="";
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
+		{	
+			$upper_bound_value=$rows['upper_bound'];
+		}
+		return $upper_bound_value;
+	}
+
 	public function get_supertype($id){
-		$query = "SELECT supertype FROM Type WHERE id ='$id'";
+		$query = "SELECT supertype FROM phases WHERE cellID ='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$supertype_value="";
 		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
