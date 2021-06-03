@@ -499,7 +499,7 @@ function HideShowColumns ()
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <?php include ("function/icon.html"); ?>
-<title>Izhikevich Matrix Mockup</title>
+<title>Izhikevich Matrix</title>
 <script type="text/javascript" src="style/resolution.js"></script>
 </head>
 
