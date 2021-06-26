@@ -33,20 +33,19 @@
     <br><br>
     <!-- start of header -->
     <?php echo file_get_contents('header.html'); ?>
+    <div style="width:90%;position:relative;left:5%;"> 
     <script type='text/javascript'>
       document.getElementById('header_title').innerHTML="<a href='author_search.php' style='text-decoration: none;color:black !important'><span class='title_section'>Search by Author</span></a>";
+      document.getElementById('fix_title').style='width:90%;position:relative;left:5%;';
     </script>
     <!-- end of header -->
 
     <?php
-    include('mysql_connect.php'); 
-
-    mysqli_set_charset($cog_conn,"utf8mb4");    
 
     $letters = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N',
       'O','P','Q','R','S','T','U','V','W','X','Y','Z');
 
-    //$letter_patterns = array('/$[A].*/');
+    $letter_patterns = array('/$[A].*/');
     $letter_patterns=array(
     'A'=>'/^[Aa].*/',
     'B'=>'/^[Bb].*/',
@@ -82,65 +81,6 @@
       $letter = 'A';
     }
 
-    $dimensions = 2; // not yet including theory competition
-    $dim_id = '';
-    $dim_desc = '';
-    $dim_relation = '';
-
-    $dim_row=array(
-      1=>"detail_id",
-      2=>"level_id",
-      3=>"theory_id",
-      4=>"keyword_id");
-    // Collect dimension names
-    $dim_tbl=array(
-      1=>"details",
-      2=>"implementations",
-      3=>"theory_category",
-      4=>"keywords");
-    $dim_col=array(
-      1=>"detail_level",
-      2=>"level",
-      3=>"category",
-      4=>"keyword");
-    for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
-      $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
-      $result = $cog_conn->query($sql);
-      $j=1;
-      if ($result->num_rows > 0) {       
-        while($row = $result->fetch_assoc()) { 
-          $dim_name[$i][$j]=$row[$dim_col[$i]];
-          $j++;
-        }
-      } 
-    }    
-
-    function report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc) {
-        echo "<br><u>".$dim_desc."</u>: ".$dim_val.". Dimension type description: ".$dim_type_desc.".";
-    }
-
-    function set_dim($dimension, $dim_val, $dim_name) {
-      $dim_type_desc=$dim_name[$dimension][$dim_val];
-
-      switch($dimension) {
-        case 1: $dim_id = 'detail_id'; 
-        $dim_desc = 'Level of Detail';
-        report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc); break;
-        case 2: $dim_id = 'level_id'; 
-        $dim_desc = 'Level of Implementation';
-        report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc); break;
-        case 3: $dim_id = 'theory_id';
-        $dim_desc = 'Theory'; 
-        report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc); break;
-        case 4: $dim_id = 'keyword_id'; 
-        $dim_desc = 'Keyword';
-        report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc); break;
-        case 5: $dim_id = 'theory_id_1'; 
-        $dim_desc = 'Theory Competition';
-        report_dim($dim_id, $dim_desc, $dim_val, $dim_type_desc); break;
-      }
-    }
-
     function alink($first_letter) {
       echo "<a href='?letter=".$first_letter."'>".$first_letter."</a>&nbsp";
     }
@@ -155,14 +95,19 @@
     echo "<br><div class='article_details'>";
 
     if (isset($_GET['author_id'])) {
-      /*
-        Find author name
-        Get article ids that incldue the author
-        Output formatted reports on each article corresponding to the id
-      */
+      //
+      //  Find author name
+      //  Get article ids that incldue the author
+      //  Output formatted reports on each article corresponding to the id
+      //
       $author_id = $_GET['author_id'];
       $sql = "SELECT author FROM $cog_database.authors WHERE id = ".$author_id.";";
-      $author_name = $cog_conn->query($sql)->fetch_assoc()['author'];
+      $result = $cog_conn->query($sql);
+      if ($result->num_rows > 0) { 
+        while($row = $result->fetch_assoc()) { 
+          $author_name = $row['author'];
+        }
+      }
       echo "<center><u>".$author_name."</u></center></div><br>";
 
       $author_ids = array();
@@ -188,13 +133,7 @@
             // citation
             echo "<u>Citation</u>: " . $row["citation"].
             "<br><u>Url</u>: <a href='".$row["url"]."'>" . $row["url"].
-            "</a>";
-            // dimensions
-            /*
-            for ($dim_id=1;$dim_id<=$dimensions;$dim_id++) {
-              set_dim($dim_id,$row[$dim_row[$dim_id]],$dim_name);
-            }
-            */
+            "</a>";            
             // full details
             echo "<span style='float:right;font-size:18px;'><a href='browse.php?art_id=".$row["id"]."'>Full Details</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>";
             // theory notes
@@ -236,8 +175,6 @@
       }   
     }
     echo "</div>";
-
-    $cog_conn->close();  
 
     ?></div></div><br>
   </div>
