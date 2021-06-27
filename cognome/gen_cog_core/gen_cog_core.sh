@@ -24,6 +24,8 @@ rm $FULL_DB_EXPORT &&
 
 echo "" && # new line
 echo "Converting to MySQL UTF8 format" &&
+# note: I have been manually text replacing utf8mb4 with utf8 in cognome_core.sql
+# because this conversion isn't working correctly for some reason.
 mysql -h $ADDR -u $USER -p$PASS $DB < convert_to_utf8.sql &&
 
 echo "" && # new line
@@ -45,6 +47,11 @@ mysql -h $ADDR -u $USER -p$PASS $DB < remove_scales.sql &&
 mysql -h $ADDR -u $USER -p$PASS $DB < remove_subjects.sql &&
 mysql -h $ADDR -u $USER -p$PASS $DB < remove_subjects_evi.sql &&
 mysql -h $ADDR -u $USER -p$PASS $DB < remove_theories.sql &&
+
+echo "" && # new line
+echo "Updating author search data" &&
+mysql -h $ADDR -u $USER -p$PASS $DB < truncate_author_tables.sql &&
+php parse_authors.php &&
 
 echo "" && # new line
 echo "Updating properties" &&

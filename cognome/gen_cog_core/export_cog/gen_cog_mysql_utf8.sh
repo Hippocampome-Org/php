@@ -27,6 +27,11 @@ mysql -h $ADDR -u $USER -p$PASS $DB_MYSQL_UTF8 < $FULL_DB_EXPORT &&
 rm $FULL_DB_EXPORT &&
 
 echo "" && # new line
+echo "Updating author search data" &&
+mysql -h $ADDR -u $USER -p$PASS $DB < truncate_author_tables.sql &&
+php parse_authors.php &&
+
+echo "" && # new line
 echo "Converting to MySQL UTF8 format" &&
 mysql -h $ADDR -u $USER -p$PASS $DB_MYSQL_UTF8 < convert_to_utf8.sql &&
 
