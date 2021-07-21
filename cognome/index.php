@@ -1,4 +1,4 @@
-<?php include ("permission_check.php"); ?>
+<?php include ("../permission_check.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
