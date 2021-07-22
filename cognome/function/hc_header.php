@@ -27,6 +27,7 @@ margin: -25px 0 0 -25px;
 <?php
 include("../function/icon.html");
 ?>
+<?php $menuaddr = "../" ?>
 <?php include ("../function/title.php"); ?>
 <?php include('../function/menu_main.php'); ?>
 <link rel="stylesheet" href="../function/menu_support_files/menu_main_style.css" type="text/css" />
