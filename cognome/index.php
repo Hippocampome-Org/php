@@ -1,3 +1,4 @@
+<?php include ("../access_db.php"); ?>
 <?php include ("../permission_check.php"); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

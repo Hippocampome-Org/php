@@ -1,4 +1,5 @@
 <?php
+include ("../access_db.php");
 include ("access_db.php");
 $perm = $_SESSION['perm'];
 if ($perm == NULL) {
