@@ -180,7 +180,7 @@ jQuery(document).ready(function() {
       </font>
       <BR>
       <font class='font2' color='#000000'>
-      v1.9 - Released: 03/31/2021
+      v1.10 - Released: 08/03/2021
       <br>
       28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
       <br>
@@ -237,6 +237,14 @@ jQuery(document).ready(function() {
       <a href = "https://doi.org/10.1002/hipo.23148">
       <i>A comprehensive knowledge base of synaptic electrophysiology in the rodent hippocampal formation.</i></a>
       Hippocampus 2020 Apr;30(4):314-331; doi: https://doi.org/10.1002/hipo.23148.
+      <br><br>
+      The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
+      expression inferences in the knowledge base.
+      Reference: <b>White, et al., 2019</b>
+      <a href = "https://onlinelibrary.wiley.com/doi/full/10.1002/hipo.23165">
+      <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
+      Relational Inferences.</i></a>
+      Hippocampus 2020 May;30(5):472-487; doi: 10.1002/hipo.23165.
       </font>
 
       <br><br>
@@ -259,18 +267,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:10px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:85px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-      <br><br>
-      The release of v1.5 on 09/06/2019 includes an additional 830 PoK, 77 PoE, and relational
-      expression inferences in the knowledge base.
-      Reference: <b>White, et al., 2019</b>
-      <a href = "https://onlinelibrary.wiley.com/doi/full/10.1002/hipo.23165">
-      <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
-      Relational Inferences.</i></a>
-      Hippocampus 2020 May;30(5):472-487; doi: 10.1002/hipo.23165.
-      <br><br>
+      <br><br><br><br>
       The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
       phenotypes in the knowledge base.
       Reference: <b>Komendantov, et al., 2019</b>
@@ -293,13 +293,13 @@ jQuery(document).ready(function() {
       <i>Comprehensive estimates of potential synaptic connections in local circuits of the rodent hippocampal formation by axonal-dendritic overlap.</i></a>
       Journal of Neuroscience 2021 Feb 24;41(8):1665-1683; doi: 10.1523/JNEUROSCI.1193-20.2020.
       <br><br>
-      <b>*NEW*</b> The release of v1.9 on 02/27/2021 includes an additional 91 PoK, 768 PoE, and a new browsable matrix for in vivo recordings. 
+      The release of v1.9 on 02/27/2021 includes an additional 91 PoK, 768 PoE, and a new browsable matrix for in vivo recordings. 
       Reference: <b>Sanchez-Aguilera, et al., 2021</b>
       <a href = "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3001213">
       <i>An update to Hippocampome.org by integrating single-cell phenotypes with circuit function in vivo.</i></a>
       PLoS Biology 2021 May 6;19(5):e3001213; doi: 10.1371/journal.pbio.3001213.
       <br><br>
-      <b>*NEW*</b> The release of v1.10 on 08/03/2021 includes the Cognome, a literature review and knowledge base of spiking neural circuit and network simulations of the hippocampal formation.
+      <b>*NEW*</b> The release of v1.10 on 08/03/2021 includes the Cognome, a literature review and knowledge base of spiking neural circuit and network simulations of the hippocampal formation. 
       Reference: <b>Sutton and Ascoli, 2021</b>
       <a href = "https://www.sciencedirect.com/science/article/abs/pii/S1389041721000589">
       <i>Spiking neural network models of hippocampal functions: A web-accessible survey of simulations, modeling methods, and underlying theories.</i></a>
@@ -330,7 +330,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
-          <br />Last Update: 30 Apr 2021 (<a href="Help_Release_Notes.php">v1.9 R 1B</a>)</font>
+          <br />Last Update: 03 Aug 2021 (<a href="Help_Release_Notes.php">v1.10</a>)</font>
           <br />
         </div>
     </td>   
