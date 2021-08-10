@@ -7,7 +7,8 @@
     4=>"keywords",
     5=>"regions",
     6=>"network_scales",
-    7=>"neuron_types");
+    7=>"neuron_types",
+    8=>"subjects");
   $dim_col=array(
     1=>"detail_level",
     2=>"level",
@@ -15,7 +16,8 @@
     4=>"keyword",
     5=>"region",
     6=>"scale",
-    7=>"neuron");
+    7=>"neuron",
+    8=>"subject");
   for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
     $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
     $result = $cog_conn->query($sql);

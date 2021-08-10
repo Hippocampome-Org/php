@@ -79,7 +79,7 @@
     $sql = $sql.$prop_relation.".".$prop_relation_row.", ";
   }
   $sql = $sql."articles.".$prop_id." FROM articles, article_has_subject";
-  if ($dimension != 0) {
+  if ($dimension != 0 && $dimension != 8) {
     $sql = $sql.", ".$dim_relation;
     if ($dimension == $neuron_types_id) {
       $sql = $sql.", article_has_neuronfuzzy";

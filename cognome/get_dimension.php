@@ -34,7 +34,10 @@
     $dim_relation = 'article_has_scale'; break;    
     case 7: $dim_id = 'neuron_id'; 
     $dim_desc = 'Neuron Type';
-    $dim_relation = 'article_has_neuron'; break;  
+    $dim_relation = 'article_has_neuron'; break; 
+    case 8: $dim_id = 'subject_id'; 
+    $dim_desc = 'Subject';
+    $dim_relation = 'article_has_subject'; break; 
   }
   switch($property) {
     case 1: $prop_id = 'id'; 
