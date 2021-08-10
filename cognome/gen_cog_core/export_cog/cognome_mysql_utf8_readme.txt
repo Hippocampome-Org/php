@@ -8,6 +8,6 @@ script by entering them into the command line. It is suspected that some text in
 material is causing an issue with utf8.
 
 3. Manual text replacement in the cognome_core.sql file is needed with:
-utf8mb3 --> uft8
-utf8mb4 --> uft8
+utf8mb3 --> utf8
+utf8mb4 --> utf8
 utf8_unicode_ci --> utf8_general_ci
