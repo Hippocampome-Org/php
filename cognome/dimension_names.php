@@ -19,12 +19,12 @@
     7=>"neuron",
     8=>"subject");
   for($i=1;$i<(sizeof($dim_tbl)+1);$i++) {
-    $sql = "SELECT ".$dim_col[$i]." FROM ".$dim_tbl[$i];
+    $sql = "SELECT ".$dim_col[$i].", id FROM ".$dim_tbl[$i];
     $result = $cog_conn->query($sql);
-    $j=1;
+    $j=1; // $j may be obsolete and could be inspected for removal
     if ($result->num_rows > 0) {       
       while($row = $result->fetch_assoc()) { 
-        $dim_name[$i][$j]=$row[$dim_col[$i]];
+        $dim_name[$i][$row["id"]]=$row[$dim_col[$i]];
         $j++;
       }
     } 
