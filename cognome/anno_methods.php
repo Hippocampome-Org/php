@@ -130,6 +130,18 @@ The theory or computational network algorithm dimension includes which theories 
 Requirement: there are no minimum number of entities of this dimension that are needed to be annotated for articles to be accepted into the core collection.
 ";
 echo $sec_end;
+echo sec_start("Theta Phase Precession:", "tpp_dim", "unchecked");
+echo "
+A definition of phase precession used for annotations is the process in which the times of spikes firing by individual neurons occurs progressively earlier in relation to the phase of an oscillatory rhythm with each successive rhythm cycle [1, 2]. The annotation of theta phase precession (TPP) is made when phase precession is simulated with a theta rhythm as the rhythm connected to it. 
+<br><br>
+Based on descriptions of the oscillatory interference model by Burgess et al. in the article on that work, any work that includes a simulation based on that model is understood to contain TPP [3]. This is unless the article explicitly describes that TPP was not simulated in the implementation of the Burgess et al. model. Evidence toward this annotation choice is in the quote \"One aspect of the model deserves further scrutiny. The linear interference patterns, whose product generates grid cell firing, result from modulation of the difference between dendritic and somatic oscillators by the cosine of running direction. Each linear pattern shows the familiar phase precession relative to theta (assumed to reflect the somatic oscillator, i.e. from late phase to earlier phases) as the rat runs in the ‘preferred direction.’\" [3]. The inclusion of TPP activity in the interference processing as described in the quote is evidence toward the annotation choice.
+<br><br>
+References:
+<br>[1] https://en.wikipedia.org/wiki/Phase_precession
+<br>[2] Maurer, A. P., Cowen, S. L., Burke, S. N., Barnes, C. A., & McNaughton, B. L. (2006). Organization of hippocampal cell assemblies based on theta phase precession. Hippocampus, 16(9), 785–794. https://doi.org/10.1002/hipo.20202
+<br>[3] Burgess, N., Barry, C., & O’Keefe, J. (2007). An oscillatory interference model of grid cell firing. Hippocampus, 17(9), 801–812. https://doi.org/10.1002/hipo.20327
+";
+echo $sec_end;
 }
 
 
