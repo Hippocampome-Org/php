@@ -302,7 +302,7 @@ jQuery(document).ready(function() {
       <b>*NEW*</b> The release of v1.10 on 08/03/2021 includes the Cognome, a literature review and knowledge base of spiking neural circuit and network simulations of the hippocampal formation. 
       Reference: <b>Sutton and Ascoli, 2021</b>
       <a href = "https://www.sciencedirect.com/science/article/abs/pii/S1389041721000589">
-      <i>Spiking neural network models of hippocampal functions: A web-accessible survey of simulations, modeling methods, and underlying theories.</i></a>
+      <i>Spiking neural networks and hippocampal function: A web-accessible survey of simulations, modeling methods, and underlying theories.</i></a>
       Cognitive Systems Research 2021 (in press).
       </font>
     </td>
