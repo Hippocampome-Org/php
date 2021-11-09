@@ -152,6 +152,19 @@ class type
 		return $type_subtype_value;
 	}
 
+	public function retrieve_name_derivation($id){
+		$table=$this->getName_table();
+
+		$query = "SELECT explanatory_notes FROM Type WHERE id ='$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$explanatory_notes="";
+		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
+		{	
+			$explanatory_notes=$rows['explanatory_notes'];
+		}
+		return $explanatory_notes;
+	}
+
 	public function retrive_by_excit_inhib($pred)   // Retrive all data by excit_inhib
 	{
 		$table=$this->getName_table();
