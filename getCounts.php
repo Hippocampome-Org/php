@@ -237,61 +237,41 @@ for($i = 0; $i<$number_type; $i++)
 	elseif ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 
-	$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
-//	$rows[$i]['cell'][1] = '<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
-	$rows[$i]['cell'][1] = '<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
-	if ($optimum == 0){
-		$rows[$i]['cell'][2] = '';
-	}else{
-/*
-		$outputStr = '<span class="'.$span_class_str.'"><a href="property_page_ephys.php?id_ephys='.$id_ephys2[$param_str].'&id_neuron='.$id_type.'&ep='.$param_str.'&page=1" target="_blank" class="'.$color_unvetted.'">' . $gt_str . $formatted_value;
-		
-		// print hover box
-		//$print_str = $formatted_value . ' &plusmn; ' . $error_ephys2[$param_str] . ' ' . $units;
-		if ($error_ephys2[$param_str] != 0) {
-			$print_str = '&plusmn;' . $error_ephys2[$param_str] . ' ' . $units;
-		}
-		$print_str = $print_str . ' ' . $protocol_ephys2[$param_str];
-		
-		$outputStr.='<span class="' . $span_class_str . '">' . $print_str . '&#013;';
-		$outputStr.='Measurements: ' . $tot_n1_ephys2[$param_str] . ' &#013;';
-		$outputStr.='Representative value selected from ' . $nn_ephys2[$param_str] . ' source';
-		if ($nn_ephys2[$param_str] > 1) {
-			$outputStr.='s';
-		}
-		//if ($protocol_ephys2[$param_str] != '') {
-		//	$outputStr.='&#013;' . $protocol_ephys2[$param_str];
-		//}
-		//else {
-		//	$outputStr.='default conditions';
-		//}
-		$outputStr.='</span></a></span>';
-*/
-		$rows[$i]['cell'][2] = '<span class="link_left font4"><a href = "property_page_counts.php?id_neuron='.$id.'&val_property=counts" target="_blank">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';		
-//		$rows[$i]['cell'][2] = '<span class="link_left font4"><a href = "property_page_counts.php?id_neuron='.$id.'&val_property=counts" target="_blank" title="'.$name.'">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';		
-//		$rows[$i]['cell'][2] = '<span class="link_left font4"><a href = "property_page_counts.php?id_neuron='.$id.'" target="_blank" title="'.$name.'">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';		
-	}
-	if ($optimum == 0){
-		$rows[$i]['cell'][3] = '';
-	}else{
-//		$rows[$i]['cell'][3] = '<span class="link_left font4"><a href = "#">'.round($optimum*0.41).'<span class = "link_left">&#10;['.round($lower_bound*0.41).', '.round($upper_bound*0.41).']</span></a></span>';		
-		$rows[$i]['cell'][3] = '<span class="link_left font4">'.round($optimum*0.41).'</span>';		
-	}
-
-	for($j = 0; $j<count($izhmodelsmodelArray); $j++)
+	if ($type->get_type_subtype($id) == 'subtype')
 	{
-/*		if($mean[$izhmodelsmodelArray[$j]] == -99999)
-		{
-			$rows[$i]['cell'][$j+2] = '';
+		$fontColor='#000099';
+		if ($excit_inhib == 'i')
+			$fontColor='#CC5500';
 
+		$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
+		$rows[$i]['cell'][1] = "    ".'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
+		if ($optimum == 0){
+			$rows[$i]['cell'][2] = '';
+		}else{
+			$rows[$i]['cell'][2] = '<span class="link_left font4"><a href = "property_page_counts.php?id_neuron='.$id.'&val_property=counts" target="_blank">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';		
 		}
-		else
-		{*/
-//			$rows[$i]['cell'][$j+2] = '<span class="link_left font4"><a href = "#">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';
-
-//		}
+		if ($optimum == 0){
+			$rows[$i]['cell'][3] = '';
+		}else{
+			$rows[$i]['cell'][3] = '<span class="link_left font4">'.round($optimum*0.41).'</span>';		
+		}
 	}
-
+	else
+	{
+		$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
+		$rows[$i]['cell'][1] = '<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
+		if ($optimum == 0){
+			$rows[$i]['cell'][2] = '';
+		}else{
+			$rows[$i]['cell'][2] = '<span class="link_left font4"><a href = "property_page_counts.php?id_neuron='.$id.'&val_property=counts" target="_blank">'.$optimum.'<span class = "link_left">&#10;['.$lower_bound.', '.$upper_bound.']</span></a></span>';		
+		}
+		if ($optimum == 0){
+			$rows[$i]['cell'][3] = '';
+		}else{
+			$rows[$i]['cell'][3] = '<span class="link_left font4">'.round($optimum*0.41).'</span>';		
+		}
+	}
+	
 	$responce->rows = $rows;
 }
 ?>
