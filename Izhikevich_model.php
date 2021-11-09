@@ -536,14 +536,7 @@ function HideShowColumns ()
 		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font></td>
 		&nbsp; &nbsp; 
 		<td><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
-     <tr></tr>
-      <tr>
-        <td></td>
-        <td>
-        <font class='font5'><strong> V 0.75 alpha</td>
-    </td>
-		<tr>
-		</tr>
+  </tr>
 	
 </table>
 </div>

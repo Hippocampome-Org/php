@@ -230,20 +230,46 @@ for($i = 0; $i<$number_type; $i++)
 	elseif ($excit_inhib == 'i')
 		$fontColor='#CC0000';
 
-	$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
-	$rows[$i]['cell'][1] = '<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
-
-	for($j = 0; $j<count($izhmodelsmodelArray); $j++)
+	if ($type->get_type_subtype($id) == 'subtype')
 	{
-		if($mean[$izhmodelsmodelArray[$j]] == -99999)
-		{
-			$rows[$i]['cell'][$j+2] = '';
+		$fontColor='#000099';
+		if ($excit_inhib == 'i')
+			$fontColor='#CC5500';
+	
+		$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
+		$rows[$i]['cell'][1] = "    ".'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
 
+		for($j = 0; $j<count($izhmodelsmodelArray); $j++)
+		{
+			if($mean[$izhmodelsmodelArray[$j]] == -99999)
+			{
+				$rows[$i]['cell'][$j+2] = '';
+
+			}
+			else
+			{
+				$rows[$i]['cell'][$j+2] = '<span class="link_left font4"><a href = "#">'.$mean[$izhmodelsmodelArray[$j]].'<span class = "link_left">&#10;('.$min[$izhmodelsmodelArray[$j]].') To ('.$max[$izhmodelsmodelArray[$j]].')</span></a></span>';
+
+			}
 		}
-		else
-		{
-			$rows[$i]['cell'][$j+2] = '<span class="link_left font4"><a href = "#">'.$mean[$izhmodelsmodelArray[$j]].'<span class = "link_left">&#10;('.$min[$izhmodelsmodelArray[$j]].') To ('.$max[$izhmodelsmodelArray[$j]].')</span></a></span>';
+	}
+	else
+	{
+	$rows[$i]['cell'][0] = '<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>';
+		$rows[$i]['cell'][1] = '<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$nickname.'"'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>';
 
+		for($j = 0; $j<count($izhmodelsmodelArray); $j++)
+		{
+			if($mean[$izhmodelsmodelArray[$j]] == -99999)
+			{
+				$rows[$i]['cell'][$j+2] = '';
+
+			}
+			else
+			{
+				$rows[$i]['cell'][$j+2] = '<span class="link_left font4"><a href = "#">'.$mean[$izhmodelsmodelArray[$j]].'<span class = "link_left">&#10;('.$min[$izhmodelsmodelArray[$j]].') To ('.$max[$izhmodelsmodelArray[$j]].')</span></a></span>';
+
+			}
 		}
 	}
 
