@@ -37,6 +37,10 @@ class property
     {
 		$table=$this->getName_table();
 	
+		print($part);
+		print($rel);
+		print($val);
+
 		// flag = 1 use by part and val:
 		if ($flag ==1 )
 		{

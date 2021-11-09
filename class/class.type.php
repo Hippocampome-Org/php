@@ -72,6 +72,7 @@ class type
 			$this->setExcit_Inhib($excit_inhib);
 		}	
 	}
+
 	public function retrieve_by_id($id)   // Retrieve all data by ID
 	{
 		$table=$this->getName_table();	
@@ -125,8 +126,10 @@ class type
 		return $upper_bound_value;
 	}
 
-	public function get_supertype($id){
-		$query = "SELECT supertype FROM phases WHERE cellID ='$id'";
+	public function retrieve_supertype($id){
+		$table=$this->getName_table();
+
+		$query = "SELECT supertype FROM Type WHERE id ='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$supertype_value="";
 		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
@@ -170,26 +173,6 @@ class type
 		
 		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
-		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
-		{	
-			$this->setId($id);
-			$this->setDt($dt);
-			$this->setName($name);
-			$this->setNickname($nickname);
-			$this->setExcit_Inhib($excit_inhib);
-			$this->setStatus($status);
-			$this->setPosition($position);
-			$this->setSubregion($subregion);
-		}	
-	}
-
-	public function retrieve_by_id_active($id)   // Retrieve all data by ID
-	{
-		$table=$this->getName_table();	
-		
-		$query = "SELECT id, position, dt, name, nickname,excit_inhib, status, subregion FROM $table WHERE id = '$id' AND status = 'active'";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		$this->setStatus('');
 		while(list($id, $position, $dt, $name, $nickname,$excit_inhib, $status, $subregion) = mysqli_fetch_row($rs))
 		{	
 			$this->setId($id);
@@ -374,7 +357,8 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     {
 		  $this->_excit_inhib = $var;
     }	
-		public function setId($var)
+	
+	public function setId($var)
     {
 		  $this->_id = $var;
     }	
@@ -440,8 +424,6 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		  $this->_nickname_neuron = $val;
     }
 	
- 	
-	
 	// GET ++++++++++++++++++++++++++++++++++++++	  
     public function getID_array($i)
     {
@@ -463,10 +445,11 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		return $this->_excit_inhib;
     }
     
-	 public function getId()
+	public function getId()
     {
     	return $this->_id;
     }
+
     public function getDt()
     {
     	return $this->_dt;
@@ -477,7 +460,7 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     	return $this->_name;
     }		
 
-		   public function getStatus()
+	public function getStatus()
     {
     	return $this->_status;
     }		
@@ -504,11 +487,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 
 //---------------------new get methods------------------------------------------------------------
 	 
-	 public function getN_id()
+	public function getN_id()
     {
     	return $this->_n_id;
     }
-	 public function getName_neuron_array($i)
+	
+	public function getName_neuron_array($i)
     {
     	return $this->_name_neuron_array[$i];
     }	
@@ -518,20 +502,19 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     	return $this->_id_namearray[$i];
     }	
 
-public function getName_neuron()
+	public function getName_neuron()
     {
     	return $this->_name_neuron;
     }	
 	
-	 public function getNickname_neuron_array($i)
+	public function getNickname_neuron_array($i)
     {
     	return $this->_nickname_neuron_array[$i];
     }
-   public function getNickname_neuron()
+    public function getNickname_neuron()
     {
     	return $this->_nickname_neuron;
     }	
 	
- 
 }
 ?>
