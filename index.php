@@ -330,7 +330,7 @@ jQuery(document).ready(function() {
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
           28,481 Pieces of Knowledge (PoK) and 36,858 Pieces of Evidence (PoE)
-          <br />Last Update: 03 Aug 2021 (<a href="Help_Release_Notes.php">v1.10</a>)</font>
+          <br />Last Update: 11 Nov 2021 (<a href="Help_Release_Notes.php">v1.10 R 1C</a>)</font>
           <br />
         </div>
     </td>   
