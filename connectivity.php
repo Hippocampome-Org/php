@@ -1,14 +1,14 @@
 <?php
   include ("permission_check.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="style/resolution.js"></script>
 <link rel="stylesheet" href="function/menu_support_files/menu_main_style.css" type="text/css" />
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 
@@ -317,7 +317,7 @@ checkVersion();
 
 </script>
 <script src="jqGrid-4/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="jqGrid-4/js/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script src="jqGrid-4/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 
@@ -534,7 +534,7 @@ $(function(){
           {
              return 'style="border-right:medium solid red;"';
           }},
-      {name:'ca3_pyramidal_a_b_23223p', index:'ca3_pyramidal_a_b_23223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca3_pyramidal_a_b_23223p', index:'ca3_pyramidal_a_b_23223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ca3_pyramidal_c_03223p', index:'ca3_pyramidal_c_03223p', width:20,height:130,search:false,sortable:false},
       {name:'ca3_ca3_granule_22100', index:'ca3_ca3_granule_22100', width:20,height:150,search:false,sortable:false},
       {name:'ca3_radiatum_giant_22010', index:'ca3_radiatum_giant_22010', width:20,height:150,search:false,sortable:false},
@@ -573,7 +573,7 @@ $(function(){
           return 'style="border-right:medium solid red;"';
        }
       },
-      {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_pyramidal_2223p', index:'ca1_pyramidal_2223p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ca1_superficial_pyramidal_2223p', index:'ca1_superficial_pyramidal_2223p', width:20,height:130,search:false,sortable:false},
       {name:'ca1_deep_pyramidal_2223p', index:'ca1_deep_pyramidal_2223p', width:20,height:130,search:false,sortable:false},
       {name:'ca1_cajal_retzius_3000', index:'ca1_cajal_retzius_3000', width:20,height:130,search:false,sortable:false},
@@ -594,7 +594,7 @@ $(function(){
       {name:'ca1_axo_axonic_2232', index:'ca1_axo_axonic_2232', width:20,height:150,search:false,sortable:false},
       {name:'ca1_interneuron_spec_4_2223', index:'ca1_interneuron_spec_4_2223', width:20,height:150,search:false,sortable:false},
       {name:'ca1_interneuron_spec_2_2100', index:'ca1_interneuron_spec_2_2100', width:20,height:150,search:false,sortable:false},
-      {name:'ca1_interneuron_spec_3_2003', index:'ca1_interneuron_spec_3_2003', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ca1_interneuron_spec_3_2003', index:'ca1_interneuron_spec_3_2003', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ca1_lm_r_1300', index:'ca1_lm_r_1300', width:20,height:130,search:false,sortable:false},
       {name:'ca1_p_lm_1202', index:'ca1_p_lm_1202', width:20,height:150,search:false,sortable:false},
       {name:'ca1_back_proj_1133p', index:'ca1_back_proj_1133p', width:20,height:150,search:false,sortable:false},
@@ -629,11 +629,11 @@ $(function(){
          return 'style="border-right:medium solid red;"';
        }
       },
-	  {name:'ec_pyramidal_II_333000p', index:'ec_pyramidal_II_333000p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+	  {name:'ec_pyramidal_II_333000p', index:'ec_pyramidal_II_333000p', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ec_bipolar_V_331131p', index:'ec_bipolar_V_331131p', width:20,height:130,search:false,sortable:false},
       {name:'ec_stellate_II_331111p', index:'ec_stellate_II_331111p', width:20,height:150,search:false,sortable:false},
       {name:'ec_fan_II_331000p', index:'ec_fan_II_331000p', width:20,height:150,search:false,sortable:false},
-      {name:'ec_medial_pyramidal_III_313300', index:'ec_medial_pyramidal_III_313300', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ec_medial_pyramidal_III_313300', index:'ec_medial_pyramidal_III_313300', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ec_lateral_pyramidal_III_233310', index:'ec_lateral_pyramidal_III_233310', width:20,height:130,search:false,sortable:false},
       {name:'ec_pyramidal_II_233111', index:'ec_pyramidal_II_233111', width:20,height:150,search:false,sortable:false},
       {name:'ec_multiform_II_231000', index:'ec_multiform_II_231000', width:20,height:150,search:false,sortable:false},
@@ -651,7 +651,7 @@ $(function(){
       {name:'ec_multipolar_V_001331', index:'ec_multipolar_V_001331', width:20,height:150,search:false,sortable:false},
       {name:'ec_multipolar_VI_001331', index:'ec_multipolar_VI_001331', width:20,height:150,search:false,sortable:false},
       {name:'ec_multipolar_V_000333p', index:'ec_multipolar_V_000333p', width:20,height:150,search:false,sortable:false},
-      {name:'ec_pyramidal_VI_000023', index:'ec_pyramidal_VI_000023', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'http://goodle.com', addParam: '&action=edit'}},
+      {name:'ec_pyramidal_VI_000023', index:'ec_pyramidal_VI_000023', width:20,height:130,search:false,sortable:false,formatoptions:{baseLinkUrl:'https://goodle.com', addParam: '&action=edit'}},
       {name:'ec_superficial_inhib_III_333000', index:'ec_superficial_inhib_III_333000', width:20,height:130,search:false,sortable:false},
       {name:'ec_multipolar_inhib_III_233000', index:'ec_multipolar_inhib_III_233000', width:20,height:150,search:false,sortable:false},
       {name:'ec_basket_II_230000', index:'ec_basket_II_230000', width:20,height:150,search:false,sortable:false},
