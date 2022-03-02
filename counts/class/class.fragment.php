@@ -125,28 +125,6 @@ class fragment_counts
 		return $strain_value;
 	}
 
-	public function retrieve_sex($id){
-		$query = "SELECT sex FROM counts_fragment WHERE id ='$id'";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		$sex_value="";
-		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
-		{	
-			$sex_value=$rows['sex'];
-		}
-		return $sex_value;
-	}
-
-	public function retrieve_age_weight($id){
-		$query = "SELECT age_weight FROM counts_fragment WHERE id ='$id'";
-		$rs = mysqli_query($GLOBALS['conn'],$query);
-		$age_weight_value="";
-		while($rows=mysqli_fetch_array($rs, MYSQLI_ASSOC))
-		{	
-			$age_weight_value=$rows['age_weight'];
-		}
-		return $age_weight_value;
-	}
-
 	public function retrieve_equation($id){
 		$query = "SELECT measurement_equation FROM counts_fragment WHERE id ='$id'";
 		$rs = mysqli_query($GLOBALS['conn'],$query);

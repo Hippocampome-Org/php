@@ -40,7 +40,7 @@ class articleevidencerel_counts
 
 		//$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id' AND Evidence_id>17505";
 		//$query = "SELECT DISTINCT article_id FROM $table WHERE Evidence_id = '$evidence_id'";
-		$query = "SELECT PMID FROM counts_fragment WHERE id='$evidence_id';";
+		$query = "SELECT pmid FROM counts_fragment WHERE id='$evidence_id';";
 		//echo $query."<br>";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
