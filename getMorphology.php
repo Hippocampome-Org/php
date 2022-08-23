@@ -505,7 +505,7 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 /*Legend  for $pot_conn_array
 0-blank
 1-axon
-2-dedrites
+2-dendrites
 3-axon and Dendrite
 4-soma present
 */
@@ -577,19 +577,21 @@ $index=0;
 if (!$result_pc_and_somapcl_flag) {
     print("<p>Error occured in Listing Connectivity Records.</p>");
 }
-// store pc and soma pcl flag values for each type in pc_flag and soma_pcl_flag_array.
-// mec_lec and is flag-related code has been commented out 03/26/2020 DWW
-while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQLI_ASSOC))
-{
-    $pc_flag = $row['pc_flag'];
-    $soma_pcl_flag=$row['soma_pcl_flag'];
-//    $mec_lec_flag = $row['mec_lec_flag'];
-//    $is_flag = $row['is_flag'];
-    $pc_flag_array[$index]=$pc_flag;
-    $soma_pcl_flag_array[$index]=$soma_pcl_flag;
-//    $mec_lec_flag_array[$index]=$mec_lec_flag;
-//    $is_flag_array[$index] = $is_flag;
-    $index++;   
+else {
+	// store pc and soma pcl flag values for each type in pc_flag and soma_pcl_flag_array.
+	// mec_lec and is flag-related code has been commented out 03/26/2020 DWW
+	while($row=mysqli_fetch_array($result_pc_and_somapcl_flag, MYSQLI_ASSOC))
+	{
+    	$pc_flag = $row['pc_flag'];
+    	$soma_pcl_flag=$row['soma_pcl_flag'];
+	//    $mec_lec_flag = $row['mec_lec_flag'];
+	//    $is_flag = $row['is_flag'];
+    	$pc_flag_array[$index]=$pc_flag;
+    	$soma_pcl_flag_array[$index]=$soma_pcl_flag;
+	//    $mec_lec_flag_array[$index]=$mec_lec_flag;
+	//    $is_flag_array[$index] = $is_flag;
+    	$index++;   
+	}
 }
 
 // @nmsutton This is where a new query of TypeTypeRel accessing connection_status needs to be written
@@ -645,27 +647,27 @@ for ($i = 0; $i < $number_type; $i++) {
 						    $potn_conn_neuron_pcl[$i][$k]=$data;
 						}
 					}
-					if ($i == $k && ($pot_conn_array[$i][$j] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$i][$j] == AXONS_DENDRITES_SOMA_PRESENT)) {
-						if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
-							$pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
+					// if ($i == $k && ($pot_conn_array[$i][$j] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$i][$j] == AXONS_DENDRITES_SOMA_PRESENT)) {
+					// 	if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
+					// 		$pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
 
-							// Link code
-						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
-						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
-						    P_INHIBITORY_CONN;
-						    $potn_conn_neuron_pcl[$i][$k]=$data;
+					// 		// Link code
+					// 	    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+					// 	    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+					// 	    P_INHIBITORY_CONN;
+					// 	    $potn_conn_neuron_pcl[$i][$k]=$data;
 
-						} else if ($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
-							$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
+					// 	} else if ($excit_inhib == "e" && $pon_conn_display_array[$i][$k]==0) {
+					// 		$pon_conn_display_array[$i][$k] = P_EXCITATORY_CONN; //black
 
-							// Link code
-						    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
-						    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
-						    P_EXCITATORY_CONN;
-						    $potn_conn_neuron_pcl[$i][$k]=$data;
+					// 		// Link code
+					// 	    $data=$type->getID_array($i).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$i][$j]].",".
+					// 	    $type->getID_array($k).",".str_replace(":","_",$col_array[$j]).",".$color_map[$pot_conn_array[$k][$src_column]].",".
+					// 	    P_EXCITATORY_CONN;
+					// 	    $potn_conn_neuron_pcl[$i][$k]=$data;
 
-						}
-					}
+					// 	}
+					// }
 				}
 			}
 			/*
@@ -689,7 +691,7 @@ for ($i = 0; $i < $number_type; $i++) {
 		    if ($pot_conn_array[$i][$src_column] == AXONS_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_DENDRITES_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_SOMA_PRESENT || $pot_conn_array[$i][$src_column] == AXONS_DENDRITES_SOMA_PRESENT) { 
 		        for ($k = 0; $k < $number_type; $k++) {
 		            if ($pot_conn_array[$k][$src_column] == ONLY_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == DENDRITES_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_SOMA_PRESENT || $pot_conn_array[$k][$src_column] == AXONS_DENDRITES_SOMA_PRESENT) {
-						if ($excit_inhib == "i" && $pon_conn_display_array[$i][$k]==0) {
+						if ($pon_conn_display_array[$i][$k]==0) {
 						  $pon_conn_display_array[$i][$k] = P_INHIBITORY_CONN; //gray
 
 						  // Link code
@@ -738,31 +740,31 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
 }
 
 /* @nmsutton This is the section of code that needs to be rewritten to access the connection_status variable*/
- for ($row_index = 0; $row_index < $number_type; $row_index++) {
-    //$row_value = $mec_lec_flag_array[$row_index];
-    //$is_row_value = $is_flag_array[$row_index];
-    $row_id = $type->getID_array($row_index);
-    for ($col_index = 0; $col_index < $number_type; $col_index++) {
-    	//$col_value = $mec_lec_flag_array[$col_index];
-    	//$is_col_value = $is_flag_array[$col_index];
-        $col_id = $type->getID_array($col_index);
-        if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
-        	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
-        }
-        if ($connection_status_array[$row_id][$col_id]=='negative') {
-			$pon_conn_display_array[$row_index][$col_index] = 0;//NO_CONNECTION;
-			//echo "<br>".$row_id." ".$col_id;
-		}
-		//echo "<br>".$connection_status_array[$row_id][$col_id];
-        /*
-    	if($row_value*$col_value==-1){
-            $pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
-	    }
-	    if($is_row_value==1 && $is_col_value==-1){
-	    	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;    
-	    }
-	    */
-    }
+ // for ($row_index = 0; $row_index < $number_type; $row_index++) {
+ //    //$row_value = $mec_lec_flag_array[$row_index];
+ //    //$is_row_value = $is_flag_array[$row_index];
+ //    $row_id = $type->getID_array($row_index);
+ //    for ($col_index = 0; $col_index < $number_type; $col_index++) {
+ //    	//$col_value = $mec_lec_flag_array[$col_index];
+ //    	//$is_col_value = $is_flag_array[$col_index];
+ //        $col_id = $type->getID_array($col_index);
+ //        if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
+ //        	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
+ //        }
+ //        if ($connection_status_array[$row_id][$col_id]=='negative') {
+	// 		$pon_conn_display_array[$row_index][$col_index] = 0;//NO_CONNECTION;
+	// 		//echo "<br>".$row_id." ".$col_id;
+	// 	}
+	// 	//echo "<br>".$connection_status_array[$row_id][$col_id];
+ //        /*
+ //    	if($row_value*$col_value==-1){
+ //            $pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
+	//     }
+	//     if($is_row_value==1 && $is_col_value==-1){
+	//     	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;    
+	//     }
+	//     */
+ //  }
 }
 
 
