@@ -10,6 +10,7 @@ class type
 	private $_excit_inhib;
 	private $_status;
 	private $_number_type;
+	private $_number_subregion_type;
 	private $_id_array;	
 	private $_position;
 	private $_notes;
@@ -20,6 +21,8 @@ class type
 	private $_nickname_neuron_array;
 	private $_name_neuron;
 	private $_nickname_neuron;
+	private $_v2p0;
+
 	function __construct ($name)
 	{
 		$this->_name_table = $name;
@@ -29,7 +32,7 @@ class type
     {
 		$table=$this->getName_table();	
 	
-		$query = "SELECT id FROM $table WHERE status = 'active' ORDER BY position ASC";
+		$query = "SELECT id FROM $table WHERE status = 'active' AND v2p0 = '0' ORDER BY position ASC";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
@@ -38,6 +41,22 @@ class type
 			$n = $n + 1;
 		}
 		$this->setNumber_type($n);
+	}
+	
+	
+	public function retrieve_id_by_subregion($subregion) // Retrive the data from table: 'TYPE' by ID (only with STATUS = active):
+    {
+		$table=$this->getName_table();	
+	
+		$query = "SELECT id FROM $table WHERE status = 'active' AND subregion = '$subregion'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		$n=0;
+		while(list($id) = mysqli_fetch_row($rs))
+		{	
+//			$this->setID_array($id, $n);
+			$n = $n + 1;
+		}
+		$this->setNumber_subregion_type($n);
 	}
 	
 	
@@ -90,6 +109,18 @@ class type
 			$this->setPosition($position);
 			$this->setSubregion($subregion);
 			$this->setExcit_Inhib($excit_inhib);
+		}	
+	}
+
+	public function retrieve_v2p0_by_id($id)
+	{
+		$table=$this->getName_table();	
+		
+		$query = "SELECT v2p0 FROM $table WHERE id = '$id'";
+		$rs = mysqli_query($GLOBALS['conn'],$query);
+		while(list($v2p0) = mysqli_fetch_row($rs))
+		{	
+			$this->setV2p0($v2p0);
 		}	
 	}
 
@@ -357,6 +388,11 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
 		  $this->_number_type = $n;
     }		
 	
+ 	public function setNumber_subregion_type($n)
+    {
+		  $this->_number_subregion_type = $n;
+    }		
+	
  	public function setID_array($var, $n)
     {
 		  $this->_id_array[$n] = $var;
@@ -405,6 +441,12 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     {
 		  $this->_subregion = $var;
     }
+
+	public function setV2p0($var)
+    {
+		  $this->_v2p0 = $var;
+    }	
+	
 //----------------new setmethods------------------
 	
 	public function setN_id($var)
@@ -446,6 +488,11 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     public function getNumber_type()
     {
     	return $this->_number_type;
+    }	
+	
+    public function getNumber_subregion_type()
+    {
+    	return $this->_number_subregion_type;
     }	
 	
     public function getNickname()
@@ -496,6 +543,11 @@ public function retrive_nickname()   // Retrieve all the nicknames in the table 
     public function getSubregion()
     {
     	return $this->_subregion;
+    }	
+
+    public function getV2p0()
+    {
+    	return $this->_v2p0;
     }	
 
 //---------------------new get methods------------------------------------------------------------
