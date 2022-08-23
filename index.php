@@ -180,9 +180,9 @@ jQuery(document).ready(function() {
       </font>
         <BR>
         <font class='font2' color='#000000'>
-        v1.11 - Released: 03/01/2022
+        v1.12 - Released: 05/05/2022
         <br>
-        28,602 Pieces of Knowledge (PoK) and 37,509 Pieces of Evidence (PoE)
+        527,802 Pieces of Knowledge (PoK) & 46,004 Pieces of Evidence (PoE)
         <br>
         <br>
         The Hippocampome is a curated knowledge base of the circuitry
@@ -245,6 +245,13 @@ jQuery(document).ready(function() {
         <i>Molecular Expression Profiles of Morphologically Defined Hippocampal Neuron Types: Empirical Evidence and
         Relational Inferences.</i></a>
         Hippocampus 2020 May;30(5):472-487; doi: 10.1002/hipo.23165.
+        <br><br>
+        The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
+        phenotypes in the knowledge base.
+        Reference: <b>Komendantov, et al., 2019</b>
+        <a href = "https://www.nature.com/articles/s41598-019-52611-w">
+        <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
+        Scientific Reports 2019 Nov 29;9(1):17915; doi: 10.1038/s41598-019-52611-w.
       </font>
 
       <br><br>
@@ -267,17 +274,10 @@ jQuery(document).ready(function() {
       <br>
     </td>
 
-    <td width="50%" style='vertical-align:top; padding-top:0px; padding-left:50px'>
+    <td width="50%" style='vertical-align:top; padding-top:50px; padding-left:50px'>
       <img src='images/brain6.png' width='450px' id="image_brain"/>
       <font class='font2' color='#000000'>
-        <br><br>
-        The release of v1.6 on 09/20/2019 includes an additional 3,640 PoK, 187 PoE, and firing pattern
-        phenotypes in the knowledge base.
-        Reference: <b>Komendantov, et al., 2019</b>
-        <a href = "https://www.nature.com/articles/s41598-019-52611-w">
-        <i>Quantitative firing pattern phenotyping of hippocampal neuron type.</i></a>
-        Scientific Reports 2019 Nov 29;9(1):17915; doi: 10.1038/s41598-019-52611-w.
-        <br><br>
+        <br><br><br>
         The release of v1.7 on 10/08/2019 includes Izhikevich models for most of the neuron types,
         downloadable parameter and CARLSim4-simulation files, and the ability to perform simulations of the firing
         patterns.
@@ -305,11 +305,17 @@ jQuery(document).ready(function() {
         <i>Spiking neural networks and hippocampal function: A web-accessible survey of simulations, modeling methods, and underlying theories.</i></a>
         Cognitive Systems Research 2021 70:80-92. doi: 10.1016/j.cogsys.2021.07.008.
         <br><br>
-        <b>*NEW*</b> The release of v1.11 on 03/01/2022 includes 121 PoK, 651 PoE, and a new browsable matrix of neuron type census values for rat and mouse. 
+        The release of v1.11 on 03/01/2022 includes 121 PoK, 651 PoE, and a new browsable matrix of neuron type census values for rat and mouse. 
         Reference: <b>Attili et al., 2022</b>
-        <a href = "https://www.biorxiv.org/content/10.1101/2021.09.20.460986v1">
+        <a href = "https://onlinelibrary.wiley.com/doi/10.1111/ejn.15639">
         <i>Quantification of neuron types in the rodent hippocampal formation by data mining and numerical optimization.</i></a>
-        European Journal of Neuroscience 2022 (in press).
+        European Journal of Neuroscience 2022 55:1724-1741. doi: 10.1111/ejn.15639.
+        <br><br>
+        <b>*NEW*</b> The release of v1.12 on 05/05/2022 includes 499,200 PoK, 8,495 PoE, and new browsable matrices of synaptic physiology parameter values for combinations of species, sex, age, temperature, and recording mode. 
+        Reference: <b>Moradi et al., 2022</b>
+        <a href = "https://www.nature.com/articles/s42003-022-03329-5">
+        <i>Normalized unitary synaptic signaling of the hippocampus and entorhinal cortex predicted by deep learning of experimental recordings.</i></a>
+        Communications Biology 2022 5(418):1-19. doi: 10.1038/s42003-022-03329-5.
       </font>
     </td>
   </tr>
@@ -335,8 +341,8 @@ jQuery(document).ready(function() {
           <!-- <br /><p><?php echo $info; ?> -->
           <br /><p><?php $webpage_id_number = 1; include('report_hits.php'); ?>
           <br>
-          28,602 Pieces of Knowledge (PoK) and 37,509 Pieces of Evidence (PoE)
-          <br />Last Update: 01 Mar 2022 (<a href="Help_Release_Notes.php">v1.11</a>)</font>
+          527,802 Pieces of Knowledge (PoK) and 46,004 Pieces of Evidence (PoE)
+          <br />Last Update: 05 May 2022 (<a href="Help_Release_Notes.php">v1.12</a>)</font>
           <br />
         </div>
     </td>   
