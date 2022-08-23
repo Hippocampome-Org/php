@@ -28,7 +28,7 @@ function getUrlForLink($id,$img,$key,$color1)
 	return ($url);
 }
 
-function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2)
+function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $id_type, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2)
 {
 	include("function/ephys_unit_table.php");
 	include("function/ephys_num_decimals_table.php");
@@ -58,6 +58,12 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 	if ($error_ephys2[$param_str] != 0) {
 		$error_ephys2[$param_str] = number_format($error_ephys2[$param_str], $num_decimals,".","");
 	}
+	if ($value1_ephys2[$param_str] != 0) {
+		$value1_ephys2[$param_str] = number_format($value1_ephys2[$param_str], $num_decimals,".","");
+	}
+	if ($value2_ephys2[$param_str] != 0) {
+		$value2_ephys2[$param_str] = number_format($value2_ephys2[$param_str], $num_decimals,".","");
+	}
 	if ($param_str == 'sag_ratio') {
 		$span_class_str = 'link_right';
 	}
@@ -74,7 +80,14 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 		
 		// print hover box
 		//$print_str = $formatted_value . ' &plusmn; ' . $error_ephys2[$param_str] . ' ' . $units;
-		if ($error_ephys2[$param_str] != 0) {
+//		$print_str = '&plusmn;' . $value1_ephys2[$param_str] . ' ' . $units;
+		if ($error_ephys2[$param_str] == NULL) {
+			$print_str = ' [' . $value1_ephys2[$param_str] . ', ' . $value2_ephys2[$param_str] . '] ' . $units;
+			if ($value2_ephys2[$param_str] == NULL) {
+				$print_str = ' ' . $units;
+			}
+		}
+		else if ($error_ephys2[$param_str] != 0) {
 			$print_str = '&plusmn;' . $error_ephys2[$param_str] . ' ' . $units;
 		}
 		$print_str = $print_str . ' ' . $protocol_ephys2[$param_str];
@@ -117,7 +130,7 @@ else
 // get how many rows we want to have into the grid - rowNum parameter in the grid
 if (!isset($_GET['rows']))
 {
-	$limit = 122;
+	$limit = 176;
 }
 else
 {
@@ -250,9 +263,23 @@ if ($research != "1")
 	//$type->retieve_ordered_List($start,$limit);
 	$type->retrive_id();
 	$number_type = $type->getNumber_type();
+
+	$type -> retrieve_id_by_subregion('DG');
+	$nDG = $type->getNumber_subregion_type();
+	$type -> retrieve_id_by_subregion('CA3');
+	$nCA3 = $type->getNumber_subregion_type();
+	$type -> retrieve_id_by_subregion('CA2');
+	$nCA2 = $type->getNumber_subregion_type();
+	$type -> retrieve_id_by_subregion('CA1');
+	$nCA1 = $type->getNumber_subregion_type();
+	$type -> retrieve_id_by_subregion('Sub');
+	$nSub = $type->getNumber_subregion_type();
+	$type -> retrieve_id_by_subregion('EC');
+	$nEC = $type->getNumber_subregion_type();
 }
-$neuron = array("DG"=>'DG(18)',"CA3"=>'CA3(25)',"CA3c"=>'CA3(25)',"CA2"=>'CA2(5)',"CA1"=>'CA1(42)',"SUB"=>'SUB(3)',"EC"=>'EC(31)');
-$neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"SUB"=>'#FFCC33',"EC"=>'#336633');
+$neuron = array("DG"=>'DG('.$nDG.')',"CA3"=>'CA3('.$nCA3.')',"CA3c"=>'CA3('.$nCA3.')',"CA2"=>'CA2('.$nCA2.')',"CA1"=>'CA1('.$nCA1.')',"Sub"=>'Sub('.$nSub.')',"EC"=>'EC('.$nEC.')');
+//$neuron = array("DG"=>'DG(36)',"CA3"=>'CA3(35)',"CA3c"=>'CA3(35)',"CA2"=>'CA2(5)',"CA1"=>'CA1(60)',"Sub"=>'Sub(7)',"EC"=>'EC(33)');
+$neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"Sub"=>'#FFCC33',"EC"=>'#336633');
 $ephys = array("0"=>"Vrest", "1"=>"Rin","2"=>"tm","3"=>"Vthresh", "4"=>"fast_AHP",
 		"5" =>"AP_ampl", "6" =>"AP_width", "7" =>"max_fr", "8" =>"slow_AHP", "9" =>"sag_ratio");
 for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the number of active neuron types to print each row in the data table
@@ -365,6 +392,11 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 					}
 					// <---------- Borrowed from property_page_ephys.php
 
+					$value1 = $epdata->getValue1(); // Retrieve value 1 for a give epdata id
+					$value2 = $epdata->getValue2(); // Retrieve value 2 for a give epdata id
+					$error = $epdata->getError(); // Retrieve error value for a given epdata id
+					$gt_value = $epdata->getGt_value();
+					$std_sem = $epdata->getStd_sem();
 
 					$non_default_conditions_str = "";
 					if ($rep_value != NULL)
@@ -393,11 +425,11 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							$non_default_conditions_str = $non_default_conditions_str . "body temp)";
 						}
 
-						$value1 = $epdata->getValue1(); // Retrieve value 1 for a give epdata id
-						$value2 = $epdata->getValue2(); // Retrieve value 2 for a give epdata id
-						$error = $epdata->getError(); // Retrieve error value for a given epdata id
-						$gt_value = $epdata->getGt_value();
-						$std_sem = $epdata->getStd_sem();
+						// $value1 = $epdata->getValue1(); // Retrieve value 1 for a give epdata id
+						// $value2 = $epdata->getValue2(); // Retrieve value 2 for a give epdata id
+						// $error = $epdata->getError(); // Retrieve error value for a given epdata id
+						// $gt_value = $epdata->getGt_value();
+						// $std_sem = $epdata->getStd_sem();
 						
 						
 						if ($value2) // if value 2 is set
@@ -438,16 +470,20 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 							if ($std_sem == 'sem') {
 								$representative_error = $error*sqrt($n_measurement);
 							}
+							elseif ($std_sem == 'range' OR $std_sem == 'single_value') {
+								$representative_error = NULL;
+							}
 							else {
 								$representative_error = $error;
 							}
 							
 							$max_n_statistics_strng = $representative_error;
-							
+
 							if ($gt_value != NULL) {
 								$max_gt_flag = 1;
 							}
-							else {
+							else{
+
 								$max_gt_flag = 0;
 							}
 							
@@ -490,7 +526,8 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 				$protocol_ephys2[$name_epys] = $max_n_non_default_conditions_str;
 				$error_ephys2[$name_epys] = $max_n_statistics_strng;
 				$gt_ephys2[$name_epys] = $max_gt_flag;
-				
+				$value1_ephys2[$name_epys] = $value1;
+				$value2_ephys2[$name_epys] = $value2;
 				//$nn_ephys2[$name_epys] = $nn_rep_value; // Store the n measurement for each header name
 				//$tot_n1_ephys2[$name_epys] = $tot_n; // Store the total for each header name
 				/*$weighted_std_ephys2[$name_epys] = $weighted_std; // Store the weighted standard deviation 
@@ -532,19 +569,19 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 		if ($excit_inhib == 'i')
 			$fontColor='#CC5500';
 		$rows[$i]['cell'] =
-			array(	'<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
+			array('<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
 				"    ".'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 				'<span style="color:black">'.$neurite_pattern_new.'</span>',
-				print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2) 
+				print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2) 
 	  		); 
 	}
 	else
@@ -553,16 +590,16 @@ for ($i=0; $i<$number_type; $i++) //$number_type // Here he determines the numbe
 			array(	'<span style="color:'.$neuronColor[$subregion].'"><strong>'.$neuron[$subregion].'</strong></span>',
 				'<a href="neuron_page.php?id='.$id.'" target="blank" title="'.$type->getName().'"><font color="'.$fontColor.'">'.$nickname.'</font></a>',
 				'<span style="color:black">'.$neurite_pattern_new.'</span>',
-				print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2),
-	  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2) 
+				print_ephys_value_and_hover('Vrest'    , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('Rin'      , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('tm'       , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('Vthresh'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('fast_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('AP_ampl'  , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('AP_width' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('max_fr'   , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('slow_AHP' , $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2),
+	  			print_ephys_value_and_hover('sag_ratio', $i, $number_type, $id_ephys2, $id, $unvetted_ephys2, $ephys2, $nn_ephys2, $tot_n1_ephys2, $error_ephys2, $protocol_ephys2, $gt_ephys2, $value1_ephys2, $value2_ephys2) 
 	  		); 
 	}
 	$responce->rows = $rows;
