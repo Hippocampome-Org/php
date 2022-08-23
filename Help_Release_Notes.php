@@ -99,12 +99,62 @@ font-family:"Arial","sans-serif"'>Release Notes:</span></u></b></p>
 </BR>
 
 <p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.12 (05 May 2022):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.12 includes new browsable matrices of synaptic physiology parameter values for combinations of species, sex, age, temperature, and recording mode.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.11 R 1A (24 Mar 2022):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 685: [search]: Remove "Original Firing Pattern" search option from the v1.0 Search menu.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
 font-family:"Arial","sans-serif"'>v1.11 (01 Mar 2022):</span></p>
 
 <p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
 style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>*NEW* The release of v1.11 includes a new browsable matrix of neuron type census values for rat and mouse.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.10 R 1G (24 Feb 2022):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 681: [https] The v1.0 and v2.0 matrices in the connectivity and synapse probability pages do not load properly.
+</span></p>
+
+</BR>
+
+<p class=MsoNormal><span style='font-size:16.0pt;line-height:115%;
+font-family:"Arial","sans-serif"'>v1.10 R 1F (21 Feb 2022):</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 679: [neuron page]: On v1.0 Neuron pages add "N/A" when the ModelDB PMID is zero.
+</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-.25in'><span
+style='font-size:14.0pt;line-height:115%;font-family:Symbol'>&#8226;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:14.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Fixed Issue 677: [neuron page]: Remove second negative markers section on the v1.0 Neuron pages.
 </span></p>
 
 </BR>
