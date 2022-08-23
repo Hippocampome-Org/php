@@ -51,7 +51,9 @@ session_start();
 	
 			<li><a href="<?php echo $menuaddr ?>find_author.php?searching=1">Author</a></li>
 			<li><a href="<?php echo $menuaddr ?>find_neuron_name.php?searching=1">Neuron Name/Synonym</a></li>
+<!--
 			<li><a href="<?php echo $menuaddr ?>find_neuron_fp.php?searching=1">Original Firing Pattern</a></li>
+-->
 			<li><a href="<?php echo $menuaddr ?>find_neuron_term.php?searching=1">Neuron Term (Neuron ID)</a></li>
 			<li class="subfirst"><a href="<?php echo $menuaddr ?>search.php?searching=1">Neuron Type</a></li>
 			<li><a href="<?php echo $menuaddr ?>find_pmid.php?searching=1">PMID/ISBN</a></li>
@@ -63,10 +65,10 @@ session_start();
       		<ul>
        	 		<!-- <li><a href="">Pixel Counter Program</a></li> -->
         		<li><a href="<?php echo $menuaddr ?>connprob.php">Connection Probabilities</a></li>
-        		<li><a href="https://github.com/k1moradi/SynapseModelersWorkshop/archive/master.zip">Synapse Modelers</a></li>
+        		<li><a href="smtools.php">Synapse Modeling</a></li>
         		<!-- <li><a href="">Liquid Junction Potential Calculator</a></li>
         		<li><a href="">Simulator</a></li>
-        		<li><a href="">Post Synaptic Potential Responce</a></li> -->
+        		<li><a href="">Post Synaptic Potential Response</a></li> -->
       		</ul>
     	</li>
 		<li class="toplast"><a href="<?php echo $menuaddr ?>help.php" style="height:32px;line-height:32px;"><img src="<?php echo $menuaddr ?>function/menu_support_files/help.png" alt=""/>Help</a>
