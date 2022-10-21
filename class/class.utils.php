@@ -15,7 +15,8 @@ class utils {
 	
 	public function setHeader($tableName)
 	{
-		$query = "select id,subregion,nickname from ".$tableName." where status ='active' and v2p0 = '0' order by position";
+		// $query = "select id,subregion,nickname from ".$tableName." where status ='active' and v2p0 = '0' order by position";
+		$query = "select id,subregion,nickname from ".$tableName." where status ='active' order by position";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$str = "'&nbsp;','<div id=\"frmCntr\">FROM</div><div id=\"toCntr\" class=\"rotate\">TO</div>'";
 		while(list($id,$subregion,$nickname) = mysqli_fetch_row($rs))
