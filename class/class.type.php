@@ -32,7 +32,7 @@ class type
     {
 		$table=$this->getName_table();	
 	
-		$query = "SELECT id FROM $table WHERE status = 'active' AND v2p0 = '0' ORDER BY position ASC";
+		$query = "SELECT id FROM $table WHERE status = 'active' ORDER BY position ASC";
 		$rs = mysqli_query($GLOBALS['conn'],$query);
 		$n=0;
 		while(list($id) = mysqli_fetch_row($rs))
