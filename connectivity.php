@@ -605,6 +605,7 @@ $(function(){
       {name:'ca1_bistratified_0333', index:'ca1_bistratified_0333', width:20,height:150,search:false,sortable:false},
       {name:'ca1_ivy_0333', index:'ca1_ivy_0333', width:20,height:150,search:false,sortable:false},
       {name:'ca1_schaffer_coll_assoc_0322', index:'ca1_schaffer_coll_assoc_0322', width:20,height:150,search:false,sortable:false},
+      {name:'ca1_c_bistratified_0302', index:'ca1_c_bistratified_0302', width:20,height:150,search:false,sortable:false},
       {name:'ca1_or_proj_031_p', index:'ca1_or_proj_031_p', width:20,height:150,search:false,sortable:false},
       {name:'ca1_radiatum_0300', index:'ca1_radiatum_0300', width:20,height:150,search:false,sortable:false},
       {name:'ca1_is_0221', index:'ca1_is_0221', width:20,height:150,search:false,sortable:false},
