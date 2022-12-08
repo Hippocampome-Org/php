@@ -11,6 +11,7 @@
 
 
 <head>
+<link rel="shortcut icon" href="#">
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="plotlyjs/plotly-latest.min.js"></script>
 </head>
