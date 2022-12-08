@@ -519,8 +519,19 @@ include ("function/menu_main.php");
 	</tr>
 </table>
 
+	<table width="50%" border="0" cellspacing="0" style="border-width:10px; border-color:white">
+		<tr>
+			<td width="10%"><font class='font5'><strong>Legend:</strong></font></td>
+			<td width="50%"><font class='font5'>colored # indicates number of pattern occurrences in reference(s)</font></td>
+			<td><font class='font5'>&nbsp;</font></td>
+		</tr>
+		<tr>
+			<td width="10%"><font class='font5' ><strong></strong></font></td>
+			<td width="50%"><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font>&emsp;<font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
+		</tr>
+	</table>
 
-<table width="50%" border="0" cellspacing="0" style="border-width:10px; border-color:white">
+<!-- <table width="50%" border="0" cellspacing="0" style="border-width:10px; border-color:white">
 	<tr>
 		<td><font class='font5' style="width=20%;"><strong>Legend:</strong></font></td>
 		<td><font class='font5' style="width=40%"># of pattern occurences in reference(s)</font></td>
@@ -537,7 +548,7 @@ include ("function/menu_main.php");
 		<td style="height:100%; width:5%;"><font class='font5'>4</font></td>	
 	</tr>
 </table>
-</div>
+ --></div>
 <div class="title_area_par">
 	<form id="myform">
 		<font class="font1"> Browse Firing Pattern Parameters Matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>   
@@ -567,13 +578,13 @@ include ("function/menu_main.php");
 		</td>
 	</tr>
 </table>	
-<table width="100%" border="0" cellspacing="0" style="border-width:10px; border-color:white">
+<!-- <table width="100%" border="0" cellspacing="0" style="border-width:10px; border-color:white">
 	<tr>
 		<td width="10%"><font class='font5' ><strong>Legend:</strong></font></td>
 		<td width="20%"><font face="Verdana, Arial, Helvetica, sans-serif" color="#339900" size="2"> +/green: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Excitatory</font></td>
 		<td width="20%"><font face="Verdana, Arial, Helvetica, sans-serif" color="#CC0000" size="2"> -/red: </font> <font face="Verdana, Arial, Helvetica, sans-serif" size="2"> Inhibitory</font></td>
 	</tr>
 </table>
-</div>
+ --></div>
 </body>
 </html>
