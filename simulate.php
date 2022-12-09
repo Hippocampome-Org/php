@@ -177,7 +177,8 @@ try {
 <script type="text/javascript">
  
 var dropDownValues;
-
+var refrac=2000;
+var refrac_c=0;
 
 var k=<?php echo $_GET["paramK"]; ?>;//1.2833102565689956;
 var a=<?php echo $_GET["paramA"]; ?>;//0.006380990562354527;
@@ -208,16 +209,18 @@ function modelSelected() {
  
 //# input current
  
- k=document.getElementById("input_k").value;
- a=document.getElementById("input_a").value;
- b=document.getElementById("input_b").value;
- d=document.getElementById("input_d").value;
- Cm=document.getElementById("input_Cm").value;
- vr=document.getElementById("input_vr").value;
- vt=document.getElementById("input_vt").value;
- vmin=document.getElementById("input_vmin").value;
- vpeak=document.getElementById("input_vpeak").value;
+	 k=parseFloat(document.getElementById("input_k").value);
+	 a=parseFloat(document.getElementById("input_a").value);
+	 b=parseFloat(document.getElementById("input_b").value);
+	 d=parseFloat(document.getElementById("input_d").value);
+	 Cm=parseFloat(document.getElementById("input_Cm").value);
+	 vr=parseFloat(document.getElementById("input_vr").value);
+	 vt=parseFloat(document.getElementById("input_vt").value);
+	 vmin=parseFloat(document.getElementById("input_vmin").value);
+	 vpeak=parseFloat(document.getElementById("input_vpeak").value);
 }
+
+
 
 
 var xs = new Array();
@@ -283,7 +286,7 @@ var derives2 = function(x, y, inputCurrent) {
 	
 	if(y[0]>vpeak) {
 		//console.log("WARNING"+y[0]);
-		// y[0]=vmin;
+		//y[0]=vmin;
 		y[1]+=d;
 	}
 
@@ -306,8 +309,7 @@ var init_refrac_c = 0;
 function calculate(inputCurrent,startIndex,endIndex) {
 	//console.log("TEST RANDOM="+inputCurrent);
 	
-	refrac = document.getElementById("input_refrac").value;//2000;
-	refrac_c = document.getElementById("input_refrac_c").value;//0;
+
 	
 	if(!refrac) {
 		refrac = init_refrac;
@@ -388,15 +390,18 @@ function calculate(inputCurrent,startIndex,endIndex) {
 function runPLOT() {
 	clearPLOT();
 	
-	 k=document.getElementById("input_k").value;
-	 a=document.getElementById("input_a").value;
-	 b=document.getElementById("input_b").value;
-	 d=document.getElementById("input_d").value;
-	 Cm=document.getElementById("input_Cm").value;
-	 vr=document.getElementById("input_vr").value;
-	 vt=document.getElementById("input_vt").value;
-	 vmin=document.getElementById("input_vmin").value;
-	 vpeak=document.getElementById("input_vpeak").value;
+     refrac = parseFloat(document.getElementById("input_refrac").value);//2000;
+	 refrac_c = parseFloat(document.getElementById("input_refrac_c").value);//0;
+	
+	 k=parseFloat(document.getElementById("input_k").value);
+	 a=parseFloat(document.getElementById("input_a").value);
+	 b=parseFloat(document.getElementById("input_b").value);
+	 d=parseFloat(document.getElementById("input_d").value);
+	 Cm=parseFloat(document.getElementById("input_Cm").value);
+	 vr=parseFloat(document.getElementById("input_vr").value);
+	 vt=parseFloat(document.getElementById("input_vt").value);
+	 vmin=parseFloat(document.getElementById("input_vmin").value);
+	 vpeak=parseFloat(document.getElementById("input_vpeak").value);
 	
 	TESTER = document.getElementById("plotlyDiv");
 	
