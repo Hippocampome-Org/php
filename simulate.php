@@ -27,7 +27,6 @@ try {
   $output = json_decode($jsonStr, true);
  
   
-  $doc = new DOMDocument();
   echo '<b>Neuron Types:</b>&nbsp;&nbsp;<select name="modelIz" id="modelIz" onchange="modelSelected()">';
   //$output2 = $output["rows"];
   foreach($output["rows"] as $obj){
