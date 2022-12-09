@@ -21,7 +21,7 @@
 
 <?php
 
-
+try {
   
   $jsonStr = $_SESSION['Izhikevich_model'];
   $output = json_decode($jsonStr, true);
@@ -127,6 +127,10 @@
   echo '</select>';
   //echo '</pre>';
 
+
+  } catch (Exception $e) {
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+  }
 ?>
 
 
