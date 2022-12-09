@@ -28,6 +28,7 @@ try {
  
   
   echo '<b>Neuron Types:</b>&nbsp;&nbsp;<select name="modelIz" id="modelIz" onchange="modelSelected()">';
+  echo '<option value="">------------------------------------------------------------</option>';
   //$output2 = $output["rows"];
   foreach($output["rows"] as $obj){
 	   
@@ -109,8 +110,9 @@ try {
 	   $values = strip_tags($values);
 	   $values = trim(preg_replace("/&#?[a-z0-9]+;/i","",$values));
 	   
-	   
+	   $name = preg_replace("/\([0-9]+\)/i","",$name);
 	   //echo $values;
+
 	   if( strcmp("", trim($obj['cell']['2'])) !== 0 && strcmp("", trim($obj['cell']['3'])) !== 0 && strcmp("", trim($obj['cell']['4'])) !== 0 &&
 		strcmp("", trim($obj['cell']['5'])) !== 0 && strcmp("", trim($obj['cell']['6'])) !== 0 && strcmp("", trim($obj['cell']['7'])) !== 0 &&
 		strcmp("", trim($obj['cell']['8'])) !== 0 && strcmp("", trim($obj['cell']['9'])) !== 0) {
