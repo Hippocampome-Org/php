@@ -196,6 +196,7 @@ function modelSelected() {
  var fromDropDown=true;
  var val=document.getElementById("modelIz").value;
  dropDownValues = val.split(" ");
+ //alert("split="+dropDownValues)
  
  document.getElementById("input_k").value=dropDownValues[0];
  document.getElementById("input_a").value=dropDownValues[1];
@@ -204,8 +205,8 @@ function modelSelected() {
  document.getElementById("input_Cm").value=dropDownValues[4];
  document.getElementById("input_vr").value=dropDownValues[5];
  document.getElementById("input_vt").value=dropDownValues[6];
- document.getElementById("input_vmin").value=dropDownValues[7];
- document.getElementById("input_vpeak").value=dropDownValues[8];
+ document.getElementById("input_vpeak").value=dropDownValues[7];
+ document.getElementById("input_vmin").value=dropDownValues[8];
  
 //# input current
  
@@ -216,8 +217,8 @@ function modelSelected() {
 	 Cm=parseFloat(document.getElementById("input_Cm").value);
 	 vr=parseFloat(document.getElementById("input_vr").value);
 	 vt=parseFloat(document.getElementById("input_vt").value);
-	 vmin=parseFloat(document.getElementById("input_vmin").value);
-	 vpeak=parseFloat(document.getElementById("input_vpeak").value);
+	 vmin=parseFloat(document.getElementById("input_vpeak").value);
+	 vpeak=parseFloat(document.getElementById("input_vmin").value);
 }
 
 
@@ -239,6 +240,7 @@ var v0=vr;
 var u0=0;
 
 function rk4(index,x, y, dx, derivs, inputCurrent) {
+		
  
 		
 		//console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>x="+x+"|y="+y);
@@ -402,6 +404,8 @@ function runPLOT() {
 	 vt=parseFloat(document.getElementById("input_vt").value);
 	 vmin=parseFloat(document.getElementById("input_vmin").value);
 	 vpeak=parseFloat(document.getElementById("input_vpeak").value);
+	 
+	 //alert("k="+k+"|a="+a+"|b="+b+"|d="+d+"|Cm="+Cm+"|vr="+vr+"|vt="+vt+"|vmin="+vmin+"|vpeak="+vpeak);
 	
 	TESTER = document.getElementById("plotlyDiv");
 	
@@ -419,8 +423,8 @@ function runPLOT() {
 	var x = [];
 	var y = [];
 	
-	////console.log(JSON.stringify(xs));
-	////console.log(JSON.stringify(ys));
+	//console.log(JSON.stringify(xs));
+	//console.log(JSON.stringify(ys));
 	
 	data = [{ x: xs, y: ys }];
 	
