@@ -527,7 +527,7 @@ function HideShowColumns ()
 	</tr>
 </table>
 
-<div style="position: fixed; top: 35%; right: 15%; width: 300px; border: 3px solid #73AD21;"><a href="simulate.php">Izhikevich Simulator</a></div>
+<div style="position: fixed; top: 30%; right: 15%; width: 300px;"><a href="simulate.php">Izhikevich Simulator</a></div>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>  
   <tr>
