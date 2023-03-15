@@ -20,6 +20,7 @@
 <tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td><tr>
 <tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td><tr>
 <tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td><tr>
+<tr><td><b>Add 2000ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" /></td><tr>
 </table>
 <button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>&nbsp;
 <button type="button" id="dataButton" style="visibility:hidden;" onclick="downloadData();">Download Data</button>
@@ -39,7 +40,7 @@
 
 <script type="text/javascript">
 
-
+var refactoryPeriodEnabled = false;
 
 var xs = new Array();
 var ys = new Array();
@@ -116,6 +117,9 @@ var derives2 = function(x, y, inputCurrent) {
 	
 	if(y[0]>vpeak) {
 		//console.log("WARNING"+y[0]);
+		if(refactoryPeriodEnabled === false) {
+			y[0]=vmin;
+		}
 		// y[0]=vmin;
 		y[1]+=d;
 	}
@@ -125,16 +129,19 @@ var derives2 = function(x, y, inputCurrent) {
     return dydx;
 }
 
+
 var xStart = 0.0;
 var yStart = [v0, u0];
+
  
 var   x1 = 0.0;
 var    step = 0.001;
 var    steps = 0;
 var    maxSteps = 1000001;
 
-var refrac = 2000;
-var refrac_c = 0;
+
+
+
 
 function calculate(inputCurrent,startIndex,endIndex) {
 	//console.log("TEST RANDOM="+inputCurrent);
@@ -172,13 +179,18 @@ function calculate(inputCurrent,startIndex,endIndex) {
 		//console.log("STEP+++++++>>"+steps);
 	 
 		var returnedVal = rk4(steps,xStart, yStart, step, derives2, inputCurrent);
-
-		if (returnedVal[0] >= vpeak) {
-			refrac_c = refrac;
-		}
-		if (refrac_c > 0) {
-			refrac_c -= 1;
-			returnedVal[0] = vmin;
+		
+		if(refactoryPeriodEnabled === true) {
+			var refrac = 2000;
+			var refrac_c = 0;
+			
+			if (returnedVal[0] >= vpeak) {
+				refrac_c = refrac;
+			}
+			if (refrac_c > 0) {
+				refrac_c -= 1;
+				returnedVal[0] = vmin;
+			}
 		}
 
 		//y=v_prev;
@@ -209,6 +221,7 @@ function calculate(inputCurrent,startIndex,endIndex) {
 
 function runPLOT() {
 	clearPLOT();
+	refactoryPeriodEnabled = document.getElementById("refactoryPeriod").checked;
 	
 	TESTER = document.getElementById("plotlyDiv");
 	
