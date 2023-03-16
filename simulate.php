@@ -17,11 +17,14 @@
 
 <body>
 <table>
-<tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td><tr>
-<tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td><tr>
-<tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td><tr>
-<tr><td><b>Add 2000ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" /></td><tr>
+<tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td></tr>
+<tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td></tr>
+<tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td></tr>
+<tr><td><b>Add 2000ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" onchange="showWarning(this)"/></td></tr>
 </table>
+<div id="warningDiv" style="color:red; visibility: hidden;"><b>Caution: a refractory period was not originally part of the Izhikevich model formulation.</b></div><br/>
+
+
 <button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>&nbsp;
 <button type="button" id="dataButton" style="visibility:hidden;" onclick="downloadData();">Download Data</button>
  
@@ -39,6 +42,16 @@
 <br/>
 
 <script type="text/javascript">
+
+
+function showWarning(checkboxElem) {
+  var warningDiv = document.getElementById("warningDiv");
+  if (checkboxElem.checked) {
+    warningDiv.style.visibility='visible';
+  } else {
+    warningDiv.style.visibility='hidden';
+  }
+}
 
 var refactoryPeriodEnabled = false;
 
