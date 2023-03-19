@@ -1822,7 +1822,8 @@ WHERE
 			$paramVmin[$i] = $rawizhmodelsmodelArray[$i]->getVmin();
 			
 			$paramG = "";
-			$simulationScript = "simulate.php";
+			//$simulationScript = "simulate.php";
+			$simulationScript = "simulate2.php";
 			if($type->getName()=='CA1 (i)1102 O-LMR' || $type->getName()=='CA1 (i)0103 Oriens-Bistratified') {
 				$simulationScript="simulate2comp.php";
 			}
