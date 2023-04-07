@@ -50,6 +50,7 @@ jQuery(document).ready(function() {
     url: 'load_matrix_session_connectivity.php',
     success: function() {}
   });
+  /*
   $.ajax({
     type: 'GET',
     cache: false,
@@ -57,6 +58,7 @@ jQuery(document).ready(function() {
     url: 'load_all_izhikevich_cells_json_only.php',
     success: function() {}
   });
+  */
   $.ajax({
 		type: 'GET',
 		cache: false,

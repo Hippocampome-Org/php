@@ -143,6 +143,13 @@ jQuery(document).ready(function() {
     url: 'load_matrix_session_firing_parameter.php',
     success: function() {}
   });
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_all_izhikevich_cells_json_only.php',
+    success: function() {}
+  });
   $('div#menu_main_button_new_clr').css('display','block');
 });
 </script>

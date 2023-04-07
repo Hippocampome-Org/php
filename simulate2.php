@@ -101,7 +101,7 @@ try {
 <table>
 <tr><td><b>Refractory Period Parameters:</b></td><td></td></tr>
 <tr><td><b>refrac</b></td><td><input value="2000" id="input_refrac" type="text"/></td></tr>
-<tr><td><b>refrac_c</b></td><td><input value="0" id="input_refrac_c" type="text"/></td></tr>
+<!--<tr><td><b>refrac_c</b></td><td><input value="0" id="input_refrac_c" type="text"/></td></tr>-->
 </table>
 <br/><br/>
 <b style="color:red;">Caution: a refractory period was not originally part of the Izhikevich model formulation.</b>
@@ -207,7 +207,20 @@ function modelSelected() {
 	
 	
 	for (let i = 0; i < globalJSON[key].length; i++) {
-		console.log(globalJSON[key][i]['id']);
+		console.log("DEBUG_HERE:----------------------------->"+globalJSON[key][i]['id']);
+		  
+		if(i===0) {
+			 document.getElementById("input_k").value=globalJSON[key][i]["k"];
+			 document.getElementById("input_a").value=globalJSON[key][i]["a"];
+			 document.getElementById("input_b").value=globalJSON[key][i]["b"];
+			 document.getElementById("input_d").value=globalJSON[key][i]["d"];
+			 document.getElementById("input_Cm").value=globalJSON[key][i]["C"];
+			 document.getElementById("input_vr").value=globalJSON[key][i]["Vr"];
+			 document.getElementById("input_vt").value=globalJSON[key][i]["Vt"];
+			 document.getElementById("input_vpeak").value=globalJSON[key][i]["Vpeak"];
+			 document.getElementById("input_vmin").value=globalJSON[key][i]["Vmin"];
+		}
+		
 		var option = document.createElement("option");
 		option.text = key+" SUB TYPE "+(i+1);
 		option.value = JSON.stringify(globalJSON[key][i]);
@@ -380,7 +393,7 @@ function runPLOT() {
 	refactoryPeriodEnabled = document.getElementById("refactoryPeriod").checked;
 	
      refrac = parseFloat(document.getElementById("input_refrac").value);//2000;
-	 refrac_c = parseFloat(document.getElementById("input_refrac_c").value);//0;
+	 refrac_c = 0;//parseFloat(document.getElementById("input_refrac_c").value);//0;
 	
 	 k=parseFloat(document.getElementById("input_k").value);
 	 a=parseFloat(document.getElementById("input_a").value);
