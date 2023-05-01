@@ -11,154 +11,21 @@
 
 
 <head>
-<link rel="shortcut icon" href="#">
 <meta http-equiv="Content-Type" content="text/html" />
 <script type="text/javascript" src="plotlyjs/plotly-latest.min.js"></script>
 </head>
 
-
 <body>
-
-<?php
-
-try {
-  
-  $jsonStr = $_SESSION['Izhikevich_model'];
-  $output = json_decode($jsonStr, true);
- 
-  
-  echo '<b>Neuron Types:</b>&nbsp;&nbsp;<select name="modelIz" id="modelIz" onchange="modelSelected()">';
-  echo '<option value="">------------------------------------------------------------</option>';
-  //$output2 = $output["rows"];
-  foreach($output["rows"] as $obj){
-	   
-       $name = $obj['cell'][0];
-	   $name = trim(strip_tags($name));
-	
-	
-	   $type = $obj['cell']['1'];
-	   preg_match('/>[^<>]+<\/font>/', $type, $matches);
-	   $type = trim(str_replace(">","",$matches[0]));
-	   $type = str_replace("</font","",$type);
-	   
-	   $k=$obj['cell']['2'];
-	   $k=strip_tags($k);
-	   $k = explode("(",$k);
-	   $k = trim($k[0]);
-
-		
-	   $a=$obj['cell']['3'];
-	   $a=strip_tags($a);
-	   $a = explode("(",$a);
-	   $a = trim($a[0]);
-
-		
-		
-	   $b=$obj['cell']['4'];
-	   $b=strip_tags($b);
-	   $b = explode("(",$b);
-	   $b = trim($b[0]);
-
-		
-		
-	   $d=$obj['cell']['5'];
-	   $d=strip_tags($d);
-	   $d = explode("(",$d);
-	   $d = trim($d[0]);
-
-		
-		
-	   $C=$obj['cell']['6'];
-	   $C=strip_tags($C);
-	   $C = explode("(",$C);
-	   $C = trim($C[0]);
-
-		
-	   $Vr=$obj['cell']['7'];
-	   $Vr=strip_tags($Vr);
-	   $Vr = explode("(",$Vr);
-	   $Vr = trim($Vr[0]);
-
-		
-	   $Vt=$obj['cell']['8'];
-	   $Vt=strip_tags($Vt);
-	   $Vt = explode("(",$Vt);
-	   $Vt = trim($Vt[0]);
-
-		
-		
-	   $Vpeak=$obj['cell']['9'];
-	   $Vpeak=strip_tags($Vpeak);
-	   $Vpeak = explode("(",$Vpeak);
-	   $Vpeak = trim($Vpeak[0]);
-
-		
-		
-		
-	   $Vmin=$obj['cell']['10'];
-	   $Vmin=strip_tags($Vmin);
-	   $Vmin = explode("(",$Vmin);
-	   $Vmin = trim($Vmin[0]);
-
-	    
-	   $tmp = "$name $type";
-	   $tmp = preg_replace("/&#?[a-z0-9]{2,8};/i","",$tmp); 
-
-	   $cleaneduprow =  trim(preg_replace('/\s\s+/', '', $tmp));
-	   
-	   $values = "$k $a $b $d $C $Vr $Vt $Vpeak $Vmin";
-	   $values = strip_tags($values);
-	   $values = trim(preg_replace("/&#?[a-z0-9]+;/i","",$values));
-	   
-	   $name = preg_replace("/\([0-9]+\)/i","",$name);
-	   //echo $values;
-
-	   if( strcmp("", trim($obj['cell']['2'])) !== 0 && strcmp("", trim($obj['cell']['3'])) !== 0 && strcmp("", trim($obj['cell']['4'])) !== 0 &&
-		strcmp("", trim($obj['cell']['5'])) !== 0 && strcmp("", trim($obj['cell']['6'])) !== 0 && strcmp("", trim($obj['cell']['7'])) !== 0 &&
-		strcmp("", trim($obj['cell']['8'])) !== 0 && strcmp("", trim($obj['cell']['9'])) !== 0) {
-		   echo '<option value="'.$values.'">';
-		   echo  $name." ".$type;
-		   echo  '</option>';
-	   }
-	    
-	   //echo '<br/>';
-  }
-  
-  
-  echo '</select>';
-  //echo '</pre>';
-
-
-  } catch (Exception $e) {
-		echo 'Caught exception: ',  $e->getMessage(), "\n";
-  }
-?>
-
-
 <table>
-<tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td><tr>
-<tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td><tr>
-<tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td><tr>
-<tr><td></td><td></td><tr>
-<tr><td></td><td></td><tr>
-<tr><td><b>Model Parameters:</b></td><td></td><tr>
-<tr><td><b>Parameter k</b></td><td><input value="<?php echo $_GET["paramK"]; ?>" id="input_k" type="text"/></tr>
-<tr><td><b>Parameter a</b></td><td><input value="<?php echo $_GET["paramA"]; ?>" id="input_a" type="text"/></tr>
-<tr><td><b>Parameter b</b></td><td><input value="<?php echo $_GET["paramB"]; ?>" id="input_b" type="text"/></tr>
-<tr><td><b>Parameter d</b></td><td><input value="<?php echo $_GET["paramD"]; ?>" id="input_d" type="text"/></tr>
-<tr><td><b>Parameter Cm</b></td><td><input value="<?php echo $_GET["paramC"]; ?>" id="input_Cm" type="text"/></tr>
-<tr><td><b>Parameter vr</b></td><td><input value="<?php echo $_GET["paramVr"]; ?>" id="input_vr" type="text"/></tr>
-<tr><td><b>Parameter vt</b></td><td><input value="<?php echo $_GET["paramVt"]; ?>" id="input_vt" type="text"/></tr>
-<tr><td><b>Parameter vmin</b></td><td><input value="<?php echo $_GET["paramVmin"]; ?>" id="input_vmin" type="text"/></tr>
-<tr><td><b>Parameter vpeak</b></td><td><input value="<?php echo $_GET["paramVpeak"]; ?>" id="input_vpeak" type="text"/></tr>
-<tr><td></td><td></td><tr>
-<tr><td></td><td></td><tr>
-<tr><td><b>Refractory Period Parameters:</b></td><td></td><tr>
-<tr><td><b>refrac</b></td><td><input value="2000" id="input_refrac" type="text"/></tr>
-<tr><td><b>refrac_c</b></td><td><input value="0" id="input_refrac_c" type="text"/></tr>
+<tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td></tr>
+<tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td></tr>
+<tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td></tr>
+<tr><td><b>Add 2000ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" onchange="showWarning(this)"/></td></tr>
 </table>
+<div id="warningDiv" style="color:red; visibility: hidden;"><b>Caution: a refractory period was not originally part of the Izhikevich model formulation.</b></div><br/>
+
+
 <button type="button" id="simulateButton"  onclick="runPLOT();">Simulate Model</button>&nbsp;
-<button type="button" id="clearButton"  onclick="clearPLOT();">Clear</button>&nbsp;
 <button type="button" id="dataButton" style="visibility:hidden;" onclick="downloadData();">Download Data</button>
  
 <br/>
@@ -175,11 +42,25 @@ try {
 <br/>
 
 <script type="text/javascript">
- 
-var dropDownValues;
-var refrac=2000;
-var refrac_c=0;
 
+
+function showWarning(checkboxElem) {
+  var warningDiv = document.getElementById("warningDiv");
+  if (checkboxElem.checked) {
+    warningDiv.style.visibility='visible';
+  } else {
+    warningDiv.style.visibility='hidden';
+  }
+}
+
+var refactoryPeriodEnabled = false;
+
+var xs = new Array();
+var ys = new Array();
+var global = new Array();
+var data = new Array();
+
+//# model parameters
 var k=<?php echo $_GET["paramK"]; ?>;//1.2833102565689956;
 var a=<?php echo $_GET["paramA"]; ?>;//0.006380990562354527;
 var b=<?php echo $_GET["paramB"]; ?>;//57.941038132372135;
@@ -189,47 +70,9 @@ var vr=<?php echo $_GET["paramVr"]; ?>;//-59.006040705399336;
 var vt=<?php echo $_GET["paramVt"]; ?>;//-50.53342176093605;
 var vmin=<?php echo $_GET["paramVmin"]; ?>;//-56.97945472527379;
 var vpeak=<?php echo $_GET["paramVpeak"]; ?>;//0.5706428111684687;
-
-
-function modelSelected() {
- clearPLOT();
- var fromDropDown=true;
- var val=document.getElementById("modelIz").value;
- dropDownValues = val.split(" ");
- //alert("split="+dropDownValues)
- 
- document.getElementById("input_k").value=dropDownValues[0];
- document.getElementById("input_a").value=dropDownValues[1];
- document.getElementById("input_b").value=dropDownValues[2];
- document.getElementById("input_d").value=dropDownValues[3];
- document.getElementById("input_Cm").value=dropDownValues[4];
- document.getElementById("input_vr").value=dropDownValues[5];
- document.getElementById("input_vt").value=dropDownValues[6];
- document.getElementById("input_vpeak").value=dropDownValues[7];
- document.getElementById("input_vmin").value=dropDownValues[8];
  
 //# input current
  
-	 k=parseFloat(document.getElementById("input_k").value);
-	 a=parseFloat(document.getElementById("input_a").value);
-	 b=parseFloat(document.getElementById("input_b").value);
-	 d=parseFloat(document.getElementById("input_d").value);
-	 Cm=parseFloat(document.getElementById("input_Cm").value);
-	 vr=parseFloat(document.getElementById("input_vr").value);
-	 vt=parseFloat(document.getElementById("input_vt").value);
-	 vmin=parseFloat(document.getElementById("input_vpeak").value);
-	 vpeak=parseFloat(document.getElementById("input_vmin").value);
-}
-
-
-
-
-var xs = new Array();
-var ys = new Array();
-var global = new Array();
-var data = new Array();
-
-
 
 //# model definition
 
@@ -240,7 +83,6 @@ var v0=vr;
 var u0=0;
 
 function rk4(index,x, y, dx, derivs, inputCurrent) {
-		
  
 		
 		//console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>x="+x+"|y="+y);
@@ -288,7 +130,10 @@ var derives2 = function(x, y, inputCurrent) {
 	
 	if(y[0]>vpeak) {
 		//console.log("WARNING"+y[0]);
-		//y[0]=vmin;
+		if(refactoryPeriodEnabled === false) {
+			y[0]=vmin;
+		}
+		// y[0]=vmin;
 		y[1]+=d;
 	}
 
@@ -297,29 +142,22 @@ var derives2 = function(x, y, inputCurrent) {
     return dydx;
 }
 
+
 var xStart = 0.0;
 var yStart = [v0, u0];
+
  
 var   x1 = 0.0;
 var    step = 0.001;
 var    steps = 0;
 var    maxSteps = 1000001;
 
-var init_refrac = 2000;
-var init_refrac_c = 0;
+
+
+
 
 function calculate(inputCurrent,startIndex,endIndex) {
 	//console.log("TEST RANDOM="+inputCurrent);
-	
-
-	
-	if(!refrac) {
-		refrac = init_refrac;
-	}
-	
-	if(!refrac_c) {
-		refrac_c = init_refrac_c;
-	}
 	
 	var savedInputCurrent = inputCurrent;
 	
@@ -354,13 +192,18 @@ function calculate(inputCurrent,startIndex,endIndex) {
 		//console.log("STEP+++++++>>"+steps);
 	 
 		var returnedVal = rk4(steps,xStart, yStart, step, derives2, inputCurrent);
-
-		if (returnedVal[0] >= vpeak) {
-			refrac_c = refrac;
-		}
-		if (refrac_c > 0) {
-			refrac_c -= 1;
-			returnedVal[0] = vmin;
+		
+		if(refactoryPeriodEnabled === true) {
+			var refrac = 2000;
+			var refrac_c = 0;
+			
+			if (returnedVal[0] >= vpeak) {
+				refrac_c = refrac;
+			}
+			if (refrac_c > 0) {
+				refrac_c -= 1;
+				returnedVal[0] = vmin;
+			}
 		}
 
 		//y=v_prev;
@@ -391,21 +234,7 @@ function calculate(inputCurrent,startIndex,endIndex) {
 
 function runPLOT() {
 	clearPLOT();
-	
-     refrac = parseFloat(document.getElementById("input_refrac").value);//2000;
-	 refrac_c = parseFloat(document.getElementById("input_refrac_c").value);//0;
-	
-	 k=parseFloat(document.getElementById("input_k").value);
-	 a=parseFloat(document.getElementById("input_a").value);
-	 b=parseFloat(document.getElementById("input_b").value);
-	 d=parseFloat(document.getElementById("input_d").value);
-	 Cm=parseFloat(document.getElementById("input_Cm").value);
-	 vr=parseFloat(document.getElementById("input_vr").value);
-	 vt=parseFloat(document.getElementById("input_vt").value);
-	 vmin=parseFloat(document.getElementById("input_vmin").value);
-	 vpeak=parseFloat(document.getElementById("input_vpeak").value);
-	 
-	 //alert("k="+k+"|a="+a+"|b="+b+"|d="+d+"|Cm="+Cm+"|vr="+vr+"|vt="+vt+"|vmin="+vmin+"|vpeak="+vpeak);
+	refactoryPeriodEnabled = document.getElementById("refactoryPeriod").checked;
 	
 	TESTER = document.getElementById("plotlyDiv");
 	
@@ -423,8 +252,8 @@ function runPLOT() {
 	var x = [];
 	var y = [];
 	
-	//console.log(JSON.stringify(xs));
-	//console.log(JSON.stringify(ys));
+	////console.log(JSON.stringify(xs));
+	////console.log(JSON.stringify(ys));
 	
 	data = [{ x: xs, y: ys }];
 	
@@ -522,7 +351,25 @@ function downloadData() {
 </script>
 
  
+ 
+  
+  <!-- TODO: 
+  When we click on simulate ask user to input:
+  
+  1)Input Current, Duration of Input current in ms, 
+  Optional, Dellay we have that already in commented block
+  
+  2) Two compartmental models to be added for 2 type of nerves PSTUT and TSTUT.NASP
+  
+  3) Store spike array (when we reset equation)
+  	if(y[0]>vpeak) {
+		//console.log("WARNING"+y[0]);
+		y[0]=vmin;
+		y[1]+=d;
+	}
 
+  
+  -->
 
 </body>
 </html>
