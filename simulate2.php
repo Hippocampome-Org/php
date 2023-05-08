@@ -100,7 +100,7 @@ try {
 <div id="warningDiv" style="visibility: hidden;">
 <table>
 <tr><td><b>Refractory Period Parameters:</b></td><td></td></tr>
-<tr><td><b>refrac</b></td><td><input value="2000" id="input_refrac" type="text"/></td></tr>
+<tr><td><b>refrac</b></td><td><input value="1" id="input_refrac" type="text"/></td></tr>
 <!--<tr><td><b>refrac_c</b></td><td><input value="0" id="input_refrac_c" type="text"/></td></tr>-->
 </table>
 <br/><br/>
@@ -141,7 +141,7 @@ var refactoryPeriodEnabled = false;
 var globalJSON = <?php echo $_SESSION['Izhikevich_model_json_only']; ?>
  
 var dropDownValues;
-var refrac=2000;
+var refrac=1;
 var refrac_c=0;
 
  
@@ -165,11 +165,11 @@ function subModelSelected() {
 		val = JSON.parse(document.getElementById("modelIzSub").value);
 	} catch(ex) {
 		val = JSON.parse(atob(document.getElementById("modelIzSub").value));
-		//alert(val)
+		//alert(val);
 	}
-	console.log(">>>>>"+val.id);
-	console.log(">>>>>"+val.k);
-	console.log(JSON.stringify(val));
+	//console.log(">>>>>"+val.id);//Add log logic here
+	//console.log(">>>>>"+val.k);//Add log logic here
+	//console.log(JSON.stringify(val));//Add log logic here
 	
 	 document.getElementById("input_k").value=val.k;
 	 document.getElementById("input_a").value=val.a;
@@ -207,7 +207,7 @@ function modelSelected() {
 	
 	
 	for (let i = 0; i < globalJSON[key].length; i++) {
-		console.log("DEBUG_HERE:----------------------------->"+globalJSON[key][i]['id']);
+		//console.log("DEBUG_HERE:----------------------------->"+globalJSON[key][i]['id']);//Add log logic here
 		  
 		if(i===0) {
 			 document.getElementById("input_k").value=globalJSON[key][i]["k"];
@@ -337,13 +337,13 @@ var    step = 0.001;
 var    steps = 0;
 var    maxSteps = 1000001;
 
-var init_refrac = 2000;
+var init_refrac = 1000;
 var init_refrac_c = 0;
 
 function calculate(inputCurrent,startIndex,endIndex) {
 	if(refactoryPeriodEnabled === true) {
 		if(!refrac) {
-			refrac = init_refrac;
+			refrac = refrac*init_refrac + 1000;
 		}
 		
 		if(!refrac_c) {
