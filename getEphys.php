@@ -81,6 +81,7 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 		// print hover box
 		//$print_str = $formatted_value . ' &plusmn; ' . $error_ephys2[$param_str] . ' ' . $units;
 //		$print_str = '&plusmn;' . $value1_ephys2[$param_str] . ' ' . $units;
+		// $print_str = '&plusmn;' . $value1_ephys2[$param_str] . ' ' . $units . $value2_ephys2[$param_str];
 		if ($error_ephys2[$param_str] == NULL) {
 			$print_str = ' [' . $value1_ephys2[$param_str] . ', ' . $value2_ephys2[$param_str] . '] ' . $units;
 			if ($value2_ephys2[$param_str] == NULL) {
@@ -88,13 +89,16 @@ function print_ephys_value_and_hover($param_str, $i, $number_type, $id_ephys2, $
 			}
 		}
 		else if ($error_ephys2[$param_str] != 0) {
-			$print_str = '&plusmn;' . $error_ephys2[$param_str] . ' ' . $units;
+			// $print_str = '&plusmn;' . $error_ephys2[$param_str] . ' ' . $units;
+			$print_str = '&plusmn;' . $value1_ephys2[$param_str] . ' ' . $units . $value2_ephys2[$param_str];
 		}
 		$print_str = $print_str . ' ' . $protocol_ephys2[$param_str];
 		
 		$outputStr.='<span class="' . $span_class_str . '">' . $print_str . '&#013;';
 		$outputStr.='Measurements: ' . $tot_n1_ephys2[$param_str] . ' &#013;';
 		$outputStr.='Representative value selected from ' . $nn_ephys2[$param_str] . ' source';
+		// $outputStr.='Measurements: ' . $value1_ephys2[$param_str] . ' &#013;';
+		// $outputStr.='Representative value selected from ' . $value2_ephys2[$param_str] . ' source';
 		if ($nn_ephys2[$param_str] > 1) {
 			$outputStr.='s';
 		}
@@ -264,21 +268,21 @@ if ($research != "1")
 	$type->retrive_id();
 	$number_type = $type->getNumber_type();
 
-	$type -> retrieve_id_by_subregion('DG');
-	$nDG = $type->getNumber_subregion_type();
-	$type -> retrieve_id_by_subregion('CA3');
-	$nCA3 = $type->getNumber_subregion_type();
-	$type -> retrieve_id_by_subregion('CA2');
-	$nCA2 = $type->getNumber_subregion_type();
-	$type -> retrieve_id_by_subregion('CA1');
-	$nCA1 = $type->getNumber_subregion_type();
-	$type -> retrieve_id_by_subregion('Sub');
-	$nSub = $type->getNumber_subregion_type();
-	$type -> retrieve_id_by_subregion('EC');
-	$nEC = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('DG');
+	// $nDG = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('CA3');
+	// $nCA3 = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('CA2');
+	// $nCA2 = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('CA1');
+	// $nCA1 = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('Sub');
+	// $nSub = $type->getNumber_subregion_type();
+	// $type -> retrieve_id_by_subregion('EC');
+	// $nEC = $type->getNumber_subregion_type();
 }
-$neuron = array("DG"=>'DG('.$nDG.')',"CA3"=>'CA3('.$nCA3.')',"CA3c"=>'CA3('.$nCA3.')',"CA2"=>'CA2('.$nCA2.')',"CA1"=>'CA1('.$nCA1.')',"Sub"=>'Sub('.$nSub.')',"EC"=>'EC('.$nEC.')');
-//$neuron = array("DG"=>'DG(36)',"CA3"=>'CA3(35)',"CA3c"=>'CA3(35)',"CA2"=>'CA2(5)',"CA1"=>'CA1(60)',"Sub"=>'Sub(7)',"EC"=>'EC(33)');
+// $neuron = array("DG"=>'DG('.$nDG.')',"CA3"=>'CA3('.$nCA3.')',"CA3c"=>'CA3('.$nCA3.')',"CA2"=>'CA2('.$nCA2.')',"CA1"=>'CA1('.$nCA1.')',"Sub"=>'Sub('.$nSub.')',"EC"=>'EC('.$nEC.')');
+$neuron = array("DG"=>'DG(36)',"CA3"=>'CA3(35)',"CA3c"=>'CA3(35)',"CA2"=>'CA2(5)',"CA1"=>'CA1(60)',"Sub"=>'Sub(7)',"EC"=>'EC(33)');
 $neuronColor = array("DG"=>'#770000',"CA3"=>'#C08181',"CA3c"=>'#C08181',"CA2"=>'#FFCC00',"CA1"=>'#FF6103',"Sub"=>'#FFCC33',"EC"=>'#336633');
 $ephys = array("0"=>"Vrest", "1"=>"Rin","2"=>"tm","3"=>"Vthresh", "4"=>"fast_AHP",
 		"5" =>"AP_ampl", "6" =>"AP_width", "7" =>"max_fr", "8" =>"slow_AHP", "9" =>"sag_ratio");
