@@ -332,7 +332,7 @@ jQuery(document).ready(function() {
         <!--      <div class='version'> -->
         <div class='version2'>
           <!--  <a href='http://peg.gd/2yN' target="_blank">http://peg.gd/2yN</a> -->
-		  <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" href="https://twitter.com/Hippocampome?ref_src=twsrc%5Etfw">Tweets by Hippocampome</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    		  <!-- <a class="twitter-timeline" data-lang="en" data-width="400" data-height="500" data-theme="light" href="https://twitter.com/Hippocampome?ref_src=twsrc%5Etfw">Tweets by Hippocampome</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
           <hr class='hr2'/>
           <font class='font3' color='#000000'>
           <a href="Help_Terms_of_Use.php">Terms of Use</a>
@@ -341,7 +341,7 @@ jQuery(document).ready(function() {
             portal was vetted using the "fair use" criteria defined in
             <a href="http://www.copyright.gov/title17/92chap1.html#107" target="_blank">Title 17 of the U.S. Code,
             &sect; 107</a>. This content, cited throughout this portal, may be protected by Copyright Law and unavailable
-            for reuse.  Except otherwise noted, this web portal is &copy; 2015-2022 by George Mason University, under a
+            for reuse.  Except otherwise noted, this web portal is &copy; 2015-2023 by George Mason University, under a
             <a href =' http://creativecommons.org/licenses/by-sa/3.0/' target="_blank">Creative Commons
             Attribution-ShareAlike [CC BY-SA] license</a>. 
 
