@@ -85,7 +85,7 @@ $(document).ready(function(){
       var id;
       var knownConnection=[];
       var index=0;
-      for(var row=1;row<=122;row++){
+      for(var row=1;row<=125;row++){
         trs = $("#"+row);
         tds = trs.find("td");
         var name=$(tds[1]).text().trim();
@@ -96,10 +96,10 @@ $(document).ready(function(){
         neuronId[row-1]=id_val;
       }
 
-      for(var row=1;row<=122;row++){
+      for(var row=1;row<=125;row++){
         trs = $("#"+row);
         tds = trs.find("td");
-        for(var column=2;column<124;column++){
+        for(var column=2;column<127;column++){
             link = $(tds[column]).find("div");
             if(link.length!=0){
               var image=$(link[0]).find("img");
@@ -798,7 +798,7 @@ $(function(){
         <td colspan="2" style="text-align:center"><font class='font7'>Download</font></td>
       </tr>
       <tr height="20">
-        <td style="text-align:center"><a href="#"><img id="csvCN" src='images/ExportCSV.png' width="30px" border="0"/></a></td>
+        <td style="text-align:center"><a href="data/Netlist.csv"><img id="csvCN" src='images/ExportCSV.png' width="30px" border="0"/></a></td>
         <td><font class='font5'>Netlist</font></td>
         <td></font></td> 
         <!--td align="right"><font class='font5'><p id="cle2"></p></font></td-->
