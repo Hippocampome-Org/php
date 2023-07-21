@@ -4028,7 +4028,7 @@ style='color:blue'>vrest</span>&lt;0))</p>
 <h1>API access</h1>
 
 <p class=MsoNormal>The link <a
-href="http://hippocampome.org/csv2db/search_engine_json.php?query_str=">http://hippocampome.org/csv2db/search_engine_json.php?query_str=</a>
+href="http://hippocampome.org/php/search_engine_json.php?query_str=">http://hippocampome.org/php/search_engine_json.php?query_str=</a>
 behaves like an API. You need to put your query after “=” sign. For example,
 the URL</p>
 
@@ -4039,7 +4039,7 @@ the URL</p>
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
   normal'><a
-  href="http://hippocampome.org/csv2db/search_engine_json.php?query_str=">http://hippocampome.org/csv2db/search_engine_json.php?query_str=</a>Connection:(Presynaptic:(Neurotransmitter:Inhibitory
+  href="http://hippocampome.org/php/search_engine_json.php?query_str=">http://hippocampome.org/php/search_engine_json.php?query_str=</a>Connection:(Presynaptic:(Neurotransmitter:Inhibitory
   AND Morphology:(Axons:CA3:??1?? OR Soma:CA3:??1??)), Postsynaptic:(Morphology:(Soma:DG:??1?)
   AND Name:Granule))</p>
   </td>

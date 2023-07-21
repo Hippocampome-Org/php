@@ -50,6 +50,15 @@ jQuery(document).ready(function() {
     url: 'load_matrix_session_connectivity.php',
     success: function() {}
   });
+  /*
+  $.ajax({
+    type: 'GET',
+    cache: false,
+    contentType: 'application/json; charset=utf-8',
+    url: 'load_all_izhikevich_cells_json_only.php',
+    success: function() {}
+  });
+  */
   $.ajax({
 		type: 'GET',
 		cache: false,
@@ -526,6 +535,9 @@ function HideShowColumns ()
 		</td>
 	</tr>
 </table>
+
+<div style="position: fixed; top: 30%; right: 15%; width: 300px; border: 3px solid #73AD21;"><a href="simulate2.php">Izhikevich Simulator</a></div>
+<!--Used to be: --> <!-- <a href="simulate.php">Izhikevich Simulator</a> -->
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class='body_table'>  
   <tr>
