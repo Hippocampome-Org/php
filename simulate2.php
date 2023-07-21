@@ -100,7 +100,7 @@ try {
 <div id="warningDiv" style="visibility: hidden;">
 <table>
 <tr><td><b>Refractory Period Parameters:</b></td><td></td></tr>
-<tr><td><b>refrac</b></td><td><input value="1" id="input_refrac" type="text"/></td></tr>
+<tr><td><b>refractory period (ms)</b></td><td><input value="1" id="input_refrac" type="text"/></td></tr>
 <!--<tr><td><b>refrac_c</b></td><td><input value="0" id="input_refrac_c" type="text"/></td></tr>-->
 </table>
 <br/><br/>

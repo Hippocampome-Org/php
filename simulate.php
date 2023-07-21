@@ -20,7 +20,7 @@
 <tr><td><b>Input Current (pA):</b></td><td><input type="text" id="inputCurrentText" /></td></tr>
 <tr><td><b>Start time (ms):</b></td><td><input type="text" id="inputStartTimeText" /></td></tr>
 <tr><td><b>End time (ms):</b></td><td><input type="text" id="inputEndTimeText" /></td></tr>
-<tr><td><b>Add 2000ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" onchange="showWarning(this)"/></td></tr>
+<tr><td><b>Add a 1 ms Refactory Period:</b></td><td><input id="refactoryPeriod" type="checkbox" onchange="showWarning(this)"/></td></tr>
 </table>
 <div id="warningDiv" style="color:red; visibility: hidden;"><b>Caution: a refractory period was not originally part of the Izhikevich model formulation.</b></div><br/>
 
@@ -81,9 +81,21 @@ var vpeak=<?php echo $_GET["paramVpeak"]; ?>;//0.5706428111684687;
 //# initial condition
 var v0=vr;
 var u0=0;
-
+var refrac = 1000;
+// var refrac_c = 0;
+var spk_tDiff = 0;
+var lastSpikeTime = -1;
+	
 function rk4(index,x, y, dx, derivs, inputCurrent) {
  
+		spk_tDiff = index - lastSpikeTime;
+	if (lastSpikeTime != -1 && spk_tDiff < refrac && y[0] >= vt && y[0] < vpeak)
+	{
+		y[0] = y[0];
+		y[1] = y[1];
+	}
+	else 
+	{
 		
 		//console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>x="+x+"|y="+y);
 		if(index===0) {
@@ -113,14 +125,13 @@ function rk4(index,x, y, dx, derivs, inputCurrent) {
             y[i] += dx / 6 * (_k1[i] + 2 * _k2[i] + 2 * _k3[i] + _k4[i]);
         }
 		x += dx;
-
+	}
         return y;
 }
 
 var derives2 = function(x, y, inputCurrent) {
     var dydx = [];
 
-	
 	//console.log("INPUT CURRENT>>>>>>>"+inputCurrent);
  
 	dydx[0] = (k*(y[0]-vr)*(y[0]-vt)-y[1]+inputCurrent)/Cm;
@@ -128,13 +139,21 @@ var derives2 = function(x, y, inputCurrent) {
 	
 	dydx[1] = a*(b*(y[0]-vr) - y[1]);
 	
-	if(y[0]>vpeak) {
+	if (y[0] >= vpeak) {
 		//console.log("WARNING"+y[0]);
-		if(refactoryPeriodEnabled === false) {
-			y[0]=vmin;
+		if (refactoryPeriodEnabled === false) {
+			y[0] = vmin;
+			y[1] += d;
+		} else { // (refactoryPeriodEnabled === true)
+			// if (refrac_c <= 0) {
+			// 	refrac_c = refrac;
+				lastSpikeTime = steps;
+				y[0] = vmin;
+				y[1] += d;
+			// } else { // (refrac_c > 0)
+			// 	// y[0] = vpeak;
+			// }
 		}
-		// y[0]=vmin;
-		y[1]+=d;
 	}
 
 	//console.log("returned============================>"+dydx);
@@ -163,6 +182,9 @@ function calculate(inputCurrent,startIndex,endIndex) {
 	
 	var endTimeIndex =parseFloat(document.getElementById("inputEndTimeText").value);
 	
+			// var refrac = 2000;
+			// var refrac_c = 0;
+
 	maxSteps=Math.ceil((endTimeIndex/step)+100001);
 	
 	
@@ -193,18 +215,26 @@ function calculate(inputCurrent,startIndex,endIndex) {
 	 
 		var returnedVal = rk4(steps,xStart, yStart, step, derives2, inputCurrent);
 		
-		if(refactoryPeriodEnabled === true) {
-			var refrac = 2000;
-			var refrac_c = 0;
+		// if(refactoryPeriodEnabled === true) {
+		// 	// var refrac = 2000;
+		// 	// var refrac_c = 0;
 			
-			if (returnedVal[0] >= vpeak) {
-				refrac_c = refrac;
-			}
-			if (refrac_c > 0) {
-				refrac_c -= 1;
-				returnedVal[0] = vmin;
-			}
-		}
+		// 	if (returnedVal[0] >= vpeak) {
+		// 		if (refrac_c <= 0) {
+		// 			refrac_c = refrac;
+		// 			returnedVal[0] = vmin;
+		// 		} else {
+		// 			returnedVal[0] = vpeak;
+		// 		}
+
+		// 		//else { // (refrac_c > 0)
+		// 		// 	refrac_c -= 1;
+		// 		// // returnedVal[0] = vmin;
+		// 		// }
+		// 	}
+		// }
+
+		// refrac_c -= 1;
 
 		//y=v_prev;
 	 
