@@ -748,13 +748,14 @@ for ($row_index = 0; $row_index < $number_type; $row_index++) {
     	//$col_value = $mec_lec_flag_array[$col_index];
     	//$is_col_value = $is_flag_array[$col_index];
         $col_id = $type->getID_array($col_index);
-        if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
-        	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
-        }
+        // Removed 07/17/2023, since the reasoning behind the exceptions is no longer evident
+        // if(($row_id==4056&&$col_id==4036)||($row_id==4056&&$col_id==4078)||($row_id==4031&&$col_id==4036)||($row_id==4031&&$col_id==4078)){
+        // 	$pon_conn_display_array[$row_index][$col_index]=NO_CONNECTION;
+        // }
         if ($connection_status_array[$row_id][$col_id]=='negative') {
-			$pon_conn_display_array[$row_index][$col_index] = 0;//NO_CONNECTION;
-			//echo "<br>".$row_id." ".$col_id;
-		}
+					$pon_conn_display_array[$row_index][$col_index] = 0;//NO_CONNECTION;
+				//echo "<br>".$row_id." ".$col_id;
+				}
 		//echo "<br>".$connection_status_array[$row_id][$col_id];
         /*
     	if($row_value*$col_value==-1){
